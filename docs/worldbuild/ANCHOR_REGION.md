@@ -570,14 +570,34 @@ the resentment (even the claim's own hand may not draw); the timbers tightened
 grounds the fair's barges and buys the beam's grudge; the setting held pinches
 the paper's payment through the toll's thin season. The residue: the notch,
 the road's word, the steward's grief read as the feud's second theft. The
-probe's missing links — three first-exposure substrate gaps, recorded, not
-routed (the separate-track law): the water level (no runtime flow state — the
-phases carry no head; the setting verb's landed read mints the LAW, never
-the PRESENT — `read_stair`, iter-167), the setting verb (the reading at the
-stair COMMITTED iter-167 — the `read_stair` hinge minting `the_step_law`,
-the `read_pole` precedent's third instance; the wet step's current standing
-stays authored), and the hatch gate (the wattle is prose — the verb-gate
-boundary's honest answer, `WORLD_AUTHORING.md` §8).
+probe's missing links — three first-exposure substrate gaps, recorded
+iter-164 and ANSWERED iter-275 (the §6.2 fill row, the owner's execution
+order's fourth row — PRESENT / HATCH / NOTCH over the EXISTING account
+substrate, the iter-273 family, never a new water primitive): the water
+level's PRESENT now LIVE STATE — the fifth kind `step` stocked on the keeper
+(the timbers' setting in the pool's hand, seeded three the working head) +
+the door `set_the_timbers` (the TIGHTENING alone armed: consume, the
+solvency gate step at least three — the FLOOR LAW in the gate's own
+arithmetic, the first rung the drought's own never the hand's; the
+loosening stays authored, the price's recovery an authored future season —
+the freightvol law's own shape; the fourth rung never a setting, the rise's
+own committed text); the reading at the stair (`read_stair`, iter-167)
+mints the LAW, the keeper's stock carries the PRESENT — the two surfaces
+meeting at the reader. The NOTCH landed its honest half — the sixth kind
+`notch` on the beam's hand (the tally staff's carrier, the count opening
+at zero, the past sequence authored in the gloss) + the door `cut_the_notch`
+(the reckoning at the weighing day, the acceptance form the reprice
+precedent's own shape); the HONEST GAP recorded never routed: the notch's
+lawful condition — the dry band standing — a TWO-SIDED band condition the
+closed gate vocabulary cannot express (at-least reads floors, never
+ceilings, never exact values — measured: the door fires at the working
+head, the band law stays prose), the row's first missing causal leg and a
+named candidate for the I0 witness's substrate-limitation inventory. The
+hatch gate HELD AS PROSE (the verb-gate boundary's honest answer,
+`WORLD_AUTHORING.md` §8 — the wattle's thrower-open form has no single
+holder, the over-authoring the boundary refuses); the breach's social half
+already lives (the run's claim riding the beam's talk, the committed rumor
+channel).
 
 **The humor probe (the generator form, WORLD_TESTS §3).** The cheapest safe
 joke, market day at the beam in a dry band: "Four steps on the stair, and the
@@ -1022,27 +1042,41 @@ call); the knowledge row `the_paper_repriced` (the re-priced terms
 public as the standing was, the witnesses exact, the knows gloss
 carrying the squeeze's own causal row — the withhold answered, the
 debt climbing while the bloom stays unweighed); unarmed by doctrine,
-zero core, `tests/test_repricing.py` the claim packet. The row's
-measured FORK, honestly recorded (the re-weigh's SALE — the heap's
-drain): the account resolver's ACTOR-SIDE GRAMMAR WALL — the
-transfer's from-side is always the intent actor, the heap's ledger
-stocks loc_crofts (a location), and a location can only ever be a
-TO-side; the drain door is NOT authorable as pure pack data over the
-closed verb set. The owner's fork, never silently resolved: (a) the
-buyer's price-door (the coin walking to the camp's ledger, the
-ledger's drain a named residue), (b) the heap's re-seating onto the
-master (REJECTED by the record: the withhold's ledger SITE is
-semantic — "banked at the crofts where the tally's notches record
-it", the rs-10 line's own anchor — and the re-pinning corpus price
-the committed witnesses' own law), (c) the substrate extension (a
-location-side drain verb — a core change, R3+, the owner's call).
-The TAG TRANSFER (the tally-stick's handing-over) measured at its
-own boundary: the mechanics ALREADY ride the drop+take pair (the
-carrier-availability law's own family — the drop lays the badge down
-uncarried, the take re-carries it; no give-verb exists, none owed);
-the crews' recognition mint stays no committed surface (iter-185's
-law unchanged — the paper walks, the badge follows when the camp
-speaks). CANONICAL since iter-189
+zero core, `tests/test_repricing.py` the claim packet. CANONICAL since iter-273
+(settlement — the §6.4 fill row's fork RESOLVED through the owner's
+generalized transaction synthesis, never the A/B/C pick): the
+account substrate's FOURTH VERB `settle` — the multi-leg transaction
+over EXPLICIT owners through the same canon door (the initiator not
+implicitly any leg's owner: a location, a group, an institution's
+chest may own the resource an action consumes when another actor
+initiates; every leg its own from/to/kind/amount, the endpoints nouns
+or declared entities declaring the stock; every leg its own solvency
+gate, the account_at_least HOLDER form; every leg landing in ONE
+atomic `account_settled` event, one net state change per touched
+account) — and the re-weigh's SALE armed over it: the door
+`sell_bloom`, the withhold's release (ONE load walked to the beam's
+receiving stock — loc_malby's bloom, the freight's terminus made a
+stock — for THREE coin the load, the gross nine's own price, paid
+from the guild's chest into the CAMP'S LEDGER — loc_crofts' coin,
+banked where the tally's notches record it, the rs-10 anchor's own
+site; the heap never re-seated, the fork's option (b) rejection
+honored; the master initiates, the parties the legs' own holders;
+repeatable while the heap stands and the chest covers — the
+compounding the world's own arithmetic, never a clock); the
+witnesses (same_location, exact) learn `the_bloom_sold`; unarmed by
+doctrine, `tests/test_settlement.py` the claim packet (the grammar
+wall measured first — the closed verbs' from-side always the intent
+actor, a location only ever a TO-side, the crafted transfer probe
+refused at the actor's own gate while the heap stands full). The same
+mechanism later serves tolls, settlements, withdrawals, wages,
+institutional stock movement — the owner's class law, never a
+per-case verb. The TAG TRANSFER (the tally-stick's handing-over)
+measured at its own boundary: the mechanics ALREADY ride the drop+take
+pair (the carrier-availability law's own family — the drop lays the
+badge down uncarried, the take re-carries it; no give-verb exists,
+none owed); the crews' recognition mint stays no committed surface
+(iter-185's law unchanged — the paper walks, the badge follows when
+the camp speaks). CANONICAL since iter-189
 (charcoalpaper — the owner's W5-decomposition call, finding 2: the
 standing debt an upstream world gap): the outstanding principal
 itself (the third account kind `paper`, sixteen on the master — the
@@ -1067,7 +1101,7 @@ the meaning distribution's own unfinished band, §7.1's form — the
 W5 gate: one clean biography probe over the canonical standing debt
 before any new candidate, `WORLD_TESTS.md` §9's W5 entry).
 
-### 6.5 The market as a carrier assembly (WORKING — the fifth authored meso unit, iter-263; the embodiment legs LANDED iter-264; the render conditional LANDED iter-265 — every §6.5 row closed except the move release, the owner's future row)
+### 6.5 The market as a carrier assembly (WORKING — the fifth authored meso unit, iter-263; the embodiment legs LANDED iter-264; the render conditional LANDED iter-265; the MOVE RELEASE LANDED iter-274 — every §6.5 row closed)
 
 The J-1 row's honest shape after the carrier-or-surface discrimination
 (D-239): the Malby market was never "a tale-level institution needing a
@@ -1083,14 +1117,24 @@ owner's embodiment call over §6.5, zero core change):
   `market_mourns` with the prop trigger `loc_malby.destroyed == true`, seeded
   by the wait action's hooks (the murmur family's own site — the ignite
   resolver mints no action hooks, the committed packs' honest boundary). The
-  INTENT PICK (the owner's own question, answered by authorship): the RAMBLE
-  release — the keeper of the weighbeam does not leave the ashes (her spine:
-  the feud burned her mother's stall; her need: the son's bond covered by the
-  market's paper); her honest response is grief made audible, the family
-  rhyme with `wilmot_grief_ramble`. The move release stays the owner's future
-  row — its measured price (talks 287→2, the 1→208 council pile-up off the
-  cold-frozen fear — the B2 catch-up semantics, a log pile, not a story beat)
-  is on the iter-263 record. The TRIGGER-ONLY LAW (the landing's own find): a
+  INTENT PICK re-authored iter-274 (the owner's execution order opening the
+  move-release row): the MOVE release — the keeper of the weighbeam LEAVES
+  the ashes for the keep (her need was the market's paper, the son's bond
+  covered by the stalls — the fire took the coverage with the stalls, the
+  beam has no keeper where the stall row is ash; the watch's post the
+  widow's own road, the tally staff riding with her — the carried-item
+  contract). The ramble was iter-264's authored pick (grief made audible,
+  the `wilmot_grief_ramble` rhyme); the departure is the grief answering
+  with feet — the market's SOCIAL FUNCTION dying with its carrier, the
+  measured price HONESTLY PAID and re-measured on the committed form
+  (iter-274, the composition witness: the talks collapse 287→2, the rumors
+  25→2, the council pile-up 1→208 — one live council plus the 207-event B2
+  catch-up pile at the year crossing t=525335 off the cold-frozen fear, the
+  known one-tick pile shape of iter-261's 86-checks family; the vigil's
+  hearer sets carrying the departure's own footprint — the first vigil
+  minted WITHOUT her, the rotation's windows moved with the cascade). A
+  living world is not a loud one: the world reads quieter because its
+  talker left — the honest liveness shape. The TRIGGER-ONLY LAW (the landing's own find): a
   triggered hook stays quiet-path eligible by construction, and a weight-0
   ambient hook would mourn a STANDING market (measured: the smoke witness
   leaked a spurious ramble before the option gate) — the drama-2 OPTION

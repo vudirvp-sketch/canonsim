@@ -136,6 +136,13 @@ TRAIT_TEST: Final = "trait_held"
 #: writer-side vocabulary; the import would cycle economy -> intent
 #: -> fold). A missing stock IS a failed gate (the honest answer,
 #: never an error — you cannot spend what does not exist).
+#: iter-273 (the §6.4 SALE synthesis): the HOLDER form — the gate may
+#: name an EXPLICIT entity id (`holder`) instead of the noun, the
+#: settle legs' from-side gates over existing holders (a location, a
+#: group, an institution's chest) whose stocks the noun grammar
+#: cannot reach; the lint cross-checks the holder names a declared
+#: entity declaring the kind's account, and the noun vocabulary
+#: stays closed (exactly one of noun/holder per gate).
 ACCOUNT_TEST: Final = "account_at_least"
 
 #: The tick-windowed precondition family — tests whose truth reads a
@@ -580,17 +587,21 @@ def _test_trait_held(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
 
 
 def _test_account_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
-    """The intent door's account test (res-1): the noun entity's
+    """The intent door's account test (res-1): the holder entity's
     `account.<kind>` stock is at least `value` — a projection read at
     the caller's own tick (the door at entry, the OCC re-check at
     completion — a spent-down stock between accept and completion is
-    the re-check's own soft rejection). A missing stock fails the
-    gate (an entity that declares no account of the kind holds
-    nothing of it — never an error, the `relation_at_least` family's
-    own shape)."""
-    level = ctx.projection[ctx.entity(cond["noun"])].get(
-        f"account.{cond['kind']}"
+    the re-check's own soft rejection). The holder is the NOUN form's
+    resolved entity, or — iter-273's holder form — the EXPLICIT entity
+    id the gate names directly (the settle legs' from-side over
+    existing holders the noun grammar cannot reach; the noun
+    vocabulary stays closed). A missing stock fails the gate (an
+    entity that declares no account of the kind holds nothing of it —
+    never an error, the `relation_at_least` family's own shape)."""
+    entity = (
+        cond["holder"] if "holder" in cond else ctx.entity(cond["noun"])
     )
+    level = ctx.projection[entity].get(f"account.{cond['kind']}")
     return isinstance(level, int) and not isinstance(level, bool) and level >= cond["value"]
 
 
@@ -666,7 +677,10 @@ def first_failing(
         if test is None:
             raise RunnerError(f"unknown precondition test {cond['test']!r}")
         if not test(ctx, cond):
-            return f"{cond['noun']}.{cond['test']}"
+            # iter-273: the holder form's rejections name the explicit
+            # holder (the noun grammar's own string, one vocabulary)
+            name = cond.get("noun") or cond.get("holder", "?")
+            return f"{name}.{cond['test']}"
     return None
 
 

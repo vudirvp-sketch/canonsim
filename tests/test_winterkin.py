@@ -195,11 +195,13 @@ def test_the_armed_census() -> None:
                  "the_names_kept"):
         assert line in rules["importance"]["story_critical_events"]
     # the budget's honest re-declares: the cast at twelve, the ceiling
-    # widened for the crafted-successor twin, the templates at 75
+    # widened for the crafted-successor twin; iter-273 (settlement)
+    # re-declared the ceiling 75 -> 80 (the settle line) — the
+    # winterkin's own claim unchanged (its lines inside every ceiling)
     assert len(pack.entities["npcs"]) == 12
     assert rules["budget"]["npcs"] == {"min": 7, "max": 13}
-    assert rules["budget"]["templates"]["max"] == 75
-    assert len(pack.templates["events"]) == 75
+    assert rules["budget"]["templates"]["max"] == 80
+    assert len(pack.templates["events"]) == 76
 
 
 # -- the formation walk (the C03 triple, live) -----------------------------------

@@ -79,17 +79,21 @@ SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding=
 PROVINCE = load_pack(REPO / "content" / "province_pack")
 SCRIPT = load_playscript(REPO / "tests" / "playscripts" / "province_composition.json")
 
-#: The measured surface at HEAD (iter-264 — the §6.5 embodiment
-#: legs: the market_mourns director hook (+1 ramble, +1 autonomous
-#: resolution), the council/vigil knowledge blocks (+1 briefing
-#: transfer — the t=6120 rotation carrying the vigil tokens), and the
-#: mourns rumor cascade (+3: the arsonist runner carrying the
-#: mistress's grief to the road, the I3b arm's measured shape
-#: reproduced on the committed forms). Re-pin only together with a
+#: The measured surface at HEAD (iter-274 — the §6.5 move release:
+#: the intent pick re-authored from the ramble to the DEPARTURE, the
+#: owner's row at its measured iter-263 price HONESTLY PAID — the
+#: mistress leaves the ashes for the keep at t=4593 (the staff
+#: riding), the market's social function dying with its carrier: the
+#: talks collapse 287→2, the rumors 25→2, the council pile-up 1→208
+#: (one live council + the 207-event B2 catch-up pile at the year
+#: crossing t=525335, the cold-frozen fear above the guild bar — the
+#: known one-tick pile shape, iter-261's 86-checks family), the
+#: autonomous resolutions 384→306, the event total 2376→2269 — the
+#: collapse outweighs the pile). Re-pin only together with a
 #: legitimate pack or engine change that explains the move.
-EVENT_COUNT: int = 2376
-AUTONOMOUS_RESOLUTIONS: int = 384  # 383 accepted + 1 rejected
-TALK_COUNT: int = 287
+EVENT_COUNT: int = 2269
+AUTONOMOUS_RESOLUTIONS: int = 306  # 305 accepted + 1 rejected
+TALK_COUNT: int = 2
 VIGIL_COUNT: int = 4
 
 
@@ -263,10 +267,20 @@ def test_the_market_fire_tips_the_guild(
     else."""
     events, _ = witness
     councils = _of(events, "guild_councils")
-    assert len(councils) == 1
-    assert councils[0].actor == "grp_river_guild"
-    assert councils[0].provenance["cause_intent"] == "faction_0000"
-    assert councils[0].provenance["assignment_tick"] < councils[0].t
+    # iter-274: the departure's own price — the live council (t=4175,
+    # the fear spiked past the bar) plus the 207-event B2 catch-up
+    # pile at the year crossing (t=525335), the fear frozen cold at
+    # the keep above the guild bar, the known one-tick pile shape
+    assert len(councils) == 208
+    assert all(c.actor == "grp_river_guild" for c in councils)
+    assert all(
+        c.provenance["cause_intent"] == "faction_0000" for c in councils
+    )
+    live = next(c for c in councils if c.t < 500000)
+    assert live.t == 4175
+    assert live.provenance["assignment_tick"] < live.t
+    pile = [c for c in councils if c.t == 525335]
+    assert len(pile) == 207  # the catch-up: origins spread, one landing
 
 
 def test_both_fires_open_the_families_deadband(
@@ -357,18 +371,20 @@ def test_the_world_stays_causally_loud_through_the_year(
     witness: tuple[list[EventRecord], Any],
 ) -> None:
     """The declared-pressure oracle (§13's first candidate): through
-    the 519000-tick idle the world is NEVER causally silent — the
-    mistress's trust-gated talk urgency alone realizes 287 times, the
-    watch rotates 730 times with 6 briefings (iter-264: the vigil
-    tokens' transfer joins the stack), 25 rumors walk (iter-264: the
-    mourns cascade — the arsonist runner carrying the mistress's grief
-    token to the road, 22 → 25, the I3b arm's shape reproduced on the
-    committed forms), and the run's total shape is the measured 2376
-    events (the embodiment legs' +5: the mourns ramble, the three
-    rumor tellings, the briefing). The urgency families that stay
-    silent on this route are the LOD's structural scoping (the
-    weirstair/crofts NPCs never enter the ticking zones), never
-    spurious silence."""
+    the 519000-tick idle the world is NEVER causally silent — and
+    iter-274's departure makes the oracle's own honest shape: the
+    mistress's trust-gated talk urgency realizes TWICE (the burnout
+    at t=3573 ends the market's social life; the departure at t=4593
+    buries it — the carrier gone, the talks 287→2), the watch still
+    rotates 730 times with 7 briefings, TWO rumors walk (the cascade
+    thinned with its hub), and the run's total shape is the measured
+    2269 events (the talks' collapse outweighing the council pile).
+    The urgency families that stay silent on this route are the LOD's
+    structural scoping (the weirstair/crofts NPCs never enter the
+    ticking zones), never spurious silence — and the mistress's own
+    silence after the departure is the DEPARTURE'S, never spurious:
+    the world reads quieter because its talker left, the honest
+    liveness shape (a living world is not a loud one)."""
     events, result = witness
     assert result.event_count == EVENT_COUNT
     talks = _of(events, "talk")
@@ -377,9 +393,10 @@ def test_the_world_stays_causally_loud_through_the_year(
     assert all(
         t.provenance["cause_intent"] == "urgency_0004" for t in talks
     )
+    assert all(t.t < 3573 for t in talks)  # the burnout ends the market's life
     assert len(_of(events, "watch_change")) == 730
-    assert len(_of(events, "knowledge_transfer")) == 6
-    assert len(_of(events, "rumor_told")) == 25
+    assert len(_of(events, "knowledge_transfer")) == 7
+    assert len(_of(events, "rumor_told")) == 2
 
 
 # -- the persistence oracles (§12's relations) ---------------------------------
@@ -431,9 +448,10 @@ def test_every_autonomous_resolution_carries_both_times(
 ) -> None:
     """The B3 discipline over the composition corpus: EVERY autonomous
     resolution (accepted and rejected alike) carries `assignment_tick`
-    with origin ≤ realization; the measured surface is 383 resolutions
-    — and no player or world event ever carries the field (the field
-    is the autonomous door's own)."""
+    with origin ≤ realization; the measured surface is 305 resolutions
+    (iter-274: the departure's collapse — the talks and the cascade
+    gone with the carrier) — and no player or world event ever
+    carries the field (the field is the autonomous door's own)."""
     events, _ = witness
     autonomous = [e for e in events if _is_autonomous(e)]
     assert len(autonomous) == AUTONOMOUS_RESOLUTIONS
@@ -450,20 +468,22 @@ def test_the_deferral_latency_surface(
 ) -> None:
     """The two-times surface over the integrated run: every autonomous
     resolution is deferred (min latency 7 — the door+duration floor,
-    never zero), the max is the year-scale 518861, and the talks' real
-    origins span the whole year [1800, 523440] while their realizations
-    pile into the landing windows — the B2 clustering, now measured on
-    a composition run, not just the stress witness."""
+    never zero), the max is the year-scale 517055 (iter-274: the
+    council pile's own catch-up, the origins spread to 517680 with
+    the one-tick landing), and the two remaining talks' real origins
+    sit early [1800, 2520] — the burnout at t=3573 ends the talk
+    family's window before the year turns, the departure's own
+    footprint on the two-times surface."""
     events, _ = witness
     latencies = [
         e.t - e.provenance["assignment_tick"]
         for e in events if _is_autonomous(e)
     ]
     assert min(latencies) == 7
-    assert max(latencies) == 518861
+    assert max(latencies) == 517055
     talks = _of(events, "talk")
     origins = [t.provenance["assignment_tick"] for t in talks]
-    assert (min(origins), max(origins)) == (1800, 523440)
+    assert (min(origins), max(origins)) == (1800, 2520)
 
 
 def test_the_occ_miss_is_a_recorded_fact(

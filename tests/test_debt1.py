@@ -216,7 +216,8 @@ def test_the_armed_census() -> None:
     # iter-189 (charcoalpaper) again (paper — the outstanding's own
     # kind) — the crossing's coin claims still pinned by their own kind
     # iter-272 (floodpaper): the fourth kind — the §6.1 fill row's arming
-    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
+        "step", "notch"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
             for f in economy["flows"]
             if f["id"] in ("the_toll_nets", "the_guild_collects")] == [
@@ -228,11 +229,15 @@ def test_the_armed_census() -> None:
     # armed on the toll-taker — the paper twenty, debt-1's authored
     # arithmetic (the borrowed punt twelve + the stores eight) now live
     # account state; the thin coin surplus unchanged
-    assert ketta["accounts"] == {"coin": 2, "floodpaper": 20}
+    assert ketta["accounts"] == {"coin": 2, "floodpaper": 20,
+                                 "step": 3}  # iter-275: the timbers' setting
     malby = next(
         loc for loc in pack.entities["locations"] if loc["id"] == CHEST
     )
-    assert malby["accounts"] == {"coin": 40}
+    # iter-273 (settlement): the beam's receiving stock joins the chest
+    # — the sale's bloom terminus (the freight's other side); the
+    # chest's coin claim unchanged
+    assert malby["accounts"] == {"coin": 40, "bloom": 0}
     guild = next(g for g in pack.entities["groups"] if g["id"] == GUILD)
     assert "accounts" not in guild  # the group-stock lint gap, recorded
     # the verb line (the lint's closure law) + the story listing;
@@ -252,11 +257,12 @@ def test_the_budget_redeclares_the_template_ceiling() -> None:
     and the budget carries the re-declared ceiling with its note (65 at
     debt-1; 70 at charcoalpaper, iter-189 — the lifecycle doors' two
     verb lines; 75 at the winter kin, iter-203 — the heartbreak
-    station's eight tale lines)."""
+    station's eight tale lines; 80 at settlement, iter-273 — the
+    settle line, the fourth verb's corpus price)."""
     pack = load_pack(PACK_DIR)
     budget = pack.rules["budget"]["templates"]
     assert budget["min"] <= len(pack.templates["events"]) <= budget["max"]
-    assert budget["max"] == 75
+    assert budget["max"] == 80
 
 
 # -- the committed year band (the real cadence) ----------------------------------

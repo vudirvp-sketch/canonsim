@@ -7,7 +7,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-from core.economy import VERB_EVENT_TYPES
+from core.economy import SETTLE_EVENT, VERB_EVENT_TYPES
 from core.intent import (
     ACCOUNT_TEST,
     ECHO_TEST,
@@ -386,9 +386,11 @@ class ActionsLint:
     def _account_block(self, intent: str, action: Mapping[str, Any]) -> None:
         """The optional account block (res-1, the economy substrate):
         the action-declared verb/kind/amount the `account` resolver
-        executes — the player-scaled arm of the three verbs through the
-        canon door. The status_effects/balance precedent owns the shape
-        law: the block lives beside its action, only its resolver
+        executes — the player-scaled arm of the economy's verbs through
+        the canon door (the SETTLE form, iter-273, declares LEGS over
+        explicit owners instead — the §6.4 SALE synthesis, its own
+        shape law below). The status_effects/balance precedent owns the
+        shape law: the block lives beside its action, only its resolver
         consumes it. TWO cross-checks beyond the shape: the pack's
         `events.success` must RESTATE the verb's engine constant (the
         emitted type is the engine's — the build's naming pass; the
@@ -419,6 +421,9 @@ class ActionsLint:
             f"{where}.verb {verb!r} is not in the closed vocabulary "
             f"{sorted(VERB_EVENT_TYPES)}",
         )
+        if verb == "settle":
+            self._account_settle_block(intent, action, block, where)
+            return
         unknown = sorted(set(block) - {"verb", "kind", "amount"})
         if unknown:
             raise PackError(
@@ -474,6 +479,139 @@ class ActionsLint:
                 f"amount (>= {block['amount']}) — a lower gate passes "
                 "insolvent attempts to the commit gate's loud refusal",
             )
+
+    def _account_settle_block(
+        self, intent: str, action: Mapping[str, Any],
+        block: Mapping[str, Any], where: str,
+    ) -> None:
+        """The settle form (iter-273, the §6.4 SALE synthesis — the
+        owner's generalized transaction: the initiator is not
+        implicitly the owner of every resource consumed): the block
+        declares LEGS over explicit owners instead of the single
+        kind/amount, through the same canon door — no second
+        transaction engine. Every leg: the closed key set
+        from/to/kind/amount, the kind in the economy vocabulary, the
+        amount a positive integer, the from/to one of the nouns
+        actor/target or a DECLARED entity declaring the leg's kind (the
+        flow-endpoint law's own shape — a leg into an undeclared stock
+        is a pack bug, never a materialization), and a PER-LEG
+        solvency gate in the action's requires: the account_at_least
+        precondition naming the leg's from-side (the noun form for
+        actor/target refs, the HOLDER form for explicit ids) with
+        value >= the leg's amount — the KI#15 family's own law, one
+        gate per leg, refuse at load what would crash at the commit
+        gate mid-run."""
+        unknown = sorted(set(block) - {"verb", "legs"})
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the settle form's "
+                "closed vocabulary: verb | legs — each leg carries its "
+                "own from/to/kind/amount)"
+            )
+        legs = block.get("legs")
+        _require(
+            isinstance(legs, list) and bool(legs),
+            f"{where}.legs must be a non-empty list of leg objects "
+            "(from | to | kind | amount — the transaction's own parties)",
+        )
+        economy = self._data["rules.json"].get("economy")
+        vocabulary = (
+            economy.get("accounts") if isinstance(economy, Mapping) else None
+        )
+        declared: dict[str, set[str]] = {}
+        for category in (
+            "locations", "npcs", "ambient_entities", "items", "groups",
+        ):
+            for record in self._data["entities.json"].get(category, ()):
+                accounts = record.get("accounts")
+                if isinstance(accounts, Mapping):
+                    declared[record["id"]] = set(accounts)
+        for index, leg in enumerate(legs):
+            leg_where = f"{where}.legs[{index}]"
+            _require(
+                isinstance(leg, Mapping),
+                f"{leg_where}: must be an object (from | to | kind | amount)",
+            )
+            leg_unknown = sorted(set(leg) - {"from", "to", "kind", "amount"})
+            if leg_unknown:
+                raise PackError(
+                    f"{leg_where}: unknown keys {leg_unknown} (the closed "
+                    "vocabulary: from | to | kind | amount)"
+                )
+            _require(
+                isinstance(vocabulary, list) and leg.get("kind") in vocabulary,
+                f"{leg_where}.kind {leg.get('kind')!r} is not in the "
+                "economy.accounts vocabulary (the substrate moves only "
+                "declared stocks — the pairing law)",
+            )
+            _require(
+                _is_int(leg.get("amount")) and leg["amount"] >= 1,
+                f"{leg_where}.amount must be an integer >= 1 (a zero "
+                "amount is dead data — the vacuity law)",
+            )
+            _require(
+                leg["from"] != leg["to"],
+                f"{leg_where}: from and to are the same holder — a "
+                "self-leg is a no-op loop, dead data",
+            )
+            for endpoint in ("from", "to"):
+                ref = leg[endpoint]
+                if ref in ("actor", "target"):
+                    continue  # the noun refs — the door's own resolution
+                holds = declared.get(ref)
+                _require(
+                    holds is not None,
+                    f"{leg_where}.{endpoint} {ref!r} is not a declared "
+                    "entity (the nouns actor/target resolve through the "
+                    "intent; anything else is an explicit entity id)",
+                )
+                assert holds is not None  # the require above
+                _require(
+                    leg["kind"] in holds,
+                    f"{leg_where}.{endpoint} {ref!r} declares no account "
+                    f"of kind {leg['kind']!r} — a leg into an undeclared "
+                    "stock is a pack bug, never a materialization (the "
+                    "flow-endpoint law's own shape)",
+                )
+            ref = leg["from"]
+            gate = next(
+                (
+                    cond for cond in action.get("requires", ())
+                    if isinstance(cond, Mapping)
+                    and cond.get("test") == ACCOUNT_TEST
+                    and cond.get("kind") == leg["kind"]
+                    and (
+                        cond.get("noun") == ref
+                        if ref in ("actor", "target")
+                        else cond.get("holder") == ref
+                    )
+                ),
+                None,
+            )
+            _require(
+                gate is not None,
+                f"{leg_where}: the leg declares no account_at_least "
+                f"solvency gate on its from-side {ref!r} for kind "
+                f"{leg['kind']!r} — an ungated leg would underflow at "
+                "the commit gate (author the precondition: the noun form "
+                "for actor/target refs, the holder form for explicit ids; "
+                "the door rejects insolvent attempts softly, attempts "
+                "are facts)",
+            )
+            assert gate is not None  # the require above
+            _require(
+                _is_int(gate.get("value")) and gate["value"] >= leg["amount"],
+                f"{leg_where}: the solvency gate's value must cover the "
+                f"amount (>= {leg['amount']}) — a lower gate passes "
+                "insolvent attempts to the commit gate's loud refusal",
+            )
+        _require(
+            action.get("events", {}).get("success") == SETTLE_EVENT,
+            f"{where}: events.success must restate the settle verb's "
+            f"engine constant {SETTLE_EVENT!r} (the emitted type is the "
+            "engine's, the naming pass; the restatement is the "
+            "cross-check and carries the template closure)",
+        )
 
 
     def _status_effects(self, intent: str, action: Mapping[str, Any]) -> None:

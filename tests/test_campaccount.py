@@ -221,7 +221,8 @@ def test_the_armed_census() -> None:
     # test_charcoalpaper.py the row's own packet)
     # iter-272 (floodpaper — the crossing's own paper, the §6.1 fill row)
     # widened the vocabulary again; campaccount's own claim unchanged
-    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
+        "step", "notch"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
             for f in economy["flows"]
             if f["kind"] == "coin"] == [

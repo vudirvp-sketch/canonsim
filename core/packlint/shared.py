@@ -197,7 +197,16 @@ def lint_account_cond(
     and `value` a non-negative integer — the door reads only declared
     stocks, a kind outside the vocabulary is a dead gate (the
     echo_at_least axis family: dead vocabulary is refused at load,
-    never silently always-False)."""
+    never silently always-False).
+
+    iter-273 (the §6.4 SALE synthesis): the HOLDER form — the gate may
+    name an EXPLICIT entity id (`holder`) instead of the noun, the
+    settle legs' from-side gates over existing holders the closed
+    noun grammar cannot reach. Exactly one of noun/holder per gate
+    (both is ambiguous, neither is no gate); the holder must name a
+    declared entity that DECLARES the kind's account (the flow-
+    endpoint cross-check's own law — a gate on an undeclared stock is
+    dead data)."""
     economy = data["rules.json"].get("economy")
     vocabulary = (
         economy.get("accounts") if isinstance(economy, Mapping) else None
@@ -212,6 +221,37 @@ def lint_account_cond(
         _is_int(cond.get("value")) and cond["value"] >= 0,
         f"{where}: precondition account_at_least value must be a "
         "non-negative integer",
+    )
+    if "holder" not in cond:
+        return  # the noun form — the door's own resolution
+    _require(
+        "noun" not in cond,
+        f"{where}: precondition account_at_least carries both 'noun' and "
+        "'holder' — exactly one holder naming form per gate (the noun "
+        "resolves through the intent, the holder names the entity)",
+    )
+    declared: dict[str, set[str]] = {}
+    for category in (
+        "locations", "npcs", "ambient_entities", "items", "groups",
+    ):
+        for record in data["entities.json"].get(category, ()):
+            accounts = record.get("accounts")
+            if isinstance(accounts, Mapping):
+                declared[record["id"]] = set(accounts)
+    holder = cond["holder"]
+    holds = declared.get(holder)
+    _require(
+        holds is not None,
+        f"{where}: precondition account_at_least holder {holder!r} is "
+        "not a declared entity",
+    )
+    assert holds is not None  # the require above
+    _require(
+        cond["kind"] in holds,
+        f"{where}: precondition account_at_least holder {holder!r} "
+        f"declares no account of kind {cond['kind']!r} — a gate on an "
+        "undeclared stock is dead data (the flow-endpoint law's own "
+        "shape)",
     )
 
 

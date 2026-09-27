@@ -1829,6 +1829,186 @@ day t=14400 — + the purity pin); the owner's RU report:
 embodiment rows are now COMPLETE (the move release the owner's future
 row, its price on the iter-263 record).
 
+### CONFIRMED — The settlement: the §6.4 SALE fork resolved through the generalized account transaction (2026-09-27, iter-273, the owner's synthesis decision over the iter-271 fork)
+
+The owner's decision: the observed fork was evidence the account
+grammar was too narrow for the authored world model — the correct
+response SYNTHESIS, never the A/B/C pick (no price-door-with-residue,
+no heap re-seating, no per-case drain verb). The cheapest
+discriminating test RUN FIRST and pinned in the witness: the closed
+verbs' from-side is ALWAYS the intent actor (the census — the
+single-stock block carries no endpoint keys at all), the playscript
+grammar pins actors to pack NPCs (a location initiator refused LOUD),
+and the crafted transfer probe over the heap is refused SOFTLY at the
+ACTOR's own solvency gate while the heap stands full at the master's
+feet — the limitation genuinely in the GRAMMAR, never in pack
+authoring or action routing. The smallest generic extension that
+removes the CLASS: the FOURTH VERB `settle` — the account block's
+LEGS form (`from`/`to` naming the nouns actor/target or EXPLICIT
+entity ids declaring the stock, the flow-endpoint law's own shape;
+per-leg `kind` + `amount`), the per-leg solvency gates (the
+`account_at_least` HOLDER form for explicit ids — the noun vocabulary
+stays closed, exactly one of noun/holder per gate, the lint's
+cross-check refusing a holder naming a stockless entity), and ONE
+atomic `account_settled` event per transaction (the outcome carrying
+the RESOLVED legs, one NET state change per touched account in
+first-touch order — the commit gate's floor the net, no chained
+intermediates). No second transaction engine: the intent door, the
+resolver registry, the commit gate and the fold all unchanged in
+shape; the same mechanism later serves tolls, settlements,
+withdrawals, wages, institutional stock movement (the owner's class
+law — the crafted buyer's purchase, the owner's own example, pinned
+in the witness over the same verb with the noun-ref legs and both
+gate forms in one door). The §6.4 arming: the re-weigh's SALE
+`sell_bloom` — the withhold's release, ONE load walked to the beam's
+receiving stock (loc_malby bloom, the freight's terminus made a
+stock) for THREE coin the load (the gross nine's own price) paid from
+the guild's chest into the CAMP'S LEDGER (loc_crofts coin — banked
+where the tally's notches record it, the rs-10 anchor's site, the
+heap never re-seated), the master initiating, the parties the legs'
+own holders; repeatable while the heap stands and the chest covers
+(the compounding the world's own arithmetic). Measured (seed 42, the
+macro-480 twin): the sale's ONE event with four net changes (the heap
+6→5, the beam's stock 0→1, the chest 44→41, the ledger 0→3 — one
+crossing en route banked the heap and the chest first), the beam's
+witnesses (the keeper of the weighbeam among them) learning
+`the_bloom_sold` exact, the tale carrying the settle line with the
+bloom gloss riding the leg slot (rs-2's boundary, the legs' own
+form), the compounding heap 6→5→4→3 with the ledger 0→3→6→9, the
+empty heap and the thin chest refused SOFTLY with the failed tests
+naming the HOLDERS, the lint refusing every malformed leg shape at
+load (the KI#15 family), the golden corpus byte-identical (the door
+unarmed by doctrine — zero corpus price), the twin deterministic.
+The witness: `tests/test_settlement.py` (the grammar wall + the
+census + the sale + the compounding + the refusals + the class pin +
+the corpus laws — 11 tests) + the substrate arms in
+`tests/test_economy.py` (the settle end-to-end + the settle lint
+refusals); the owner's RU report:
+`docs/iterations/iter-273-settlement-report.md`.
+
+### CONFIRMED — The move release: the keeper leaves the ashes, the market's social function dies with its carrier (2026-09-27, iter-274, the owner's execution order opening §6.5's last row at its measured iter-263 price)
+
+The intent pick re-authored (pure pack data, zero core): the
+`market_mourns` director hook now releases the MOVE — Maren leaves
+the burned market for the keep (the authored reason: her need was the
+market's paper, the son's bond covered by the stalls; the fire took
+the coverage with the stalls, the beam has no keeper where the stall
+row is ash — the tally staff riding with her, the carried-item
+contract reproduced from the iter-263 injection). The measured price
+HONESTLY PAID and re-measured on the committed form (the composition
+witness, seed 42): the talks collapse 287→2 (both before the burnout
+t=3573 — the carrier gone, the social function dead), the rumors
+25→2, the autonomous resolutions 384→306, the event total 2376→2269
+(the collapse outweighs the pile), the council count 1→208 (one live
+council at t=4175 plus the 207-event B2 catch-up pile at the year
+crossing t=525335 — the fear frozen cold at the keep above the guild
+bar, the known one-tick pile shape of iter-261's 86-checks family,
+honestly carried), the max deferral latency 518861→517055, the
+vigil's hearer sets carrying the departure's own footprint (the
+first vigil minted WITHOUT her; the rotation's windows moved with the
+cascade — the marketlegs witness: the first vigil's vague hearers the
+corporal + the crowd, the later pair the sergeant + the crowd). The
+no-leak law re-measured (the option gate: a standing market never
+mourns); the dropped tally still materializes (the observe family's
+lazy canon birth, the sergeant's scan — the ramble's own draw gone,
+the stream's birth remaining); the smoke corpus byte-untouched (the
+release never fires in its window — zero corpus price); the twins
+deterministic. The honest liveness shape named: a living world is not
+a loud one — the world reads quieter because its talker left. The
+witness: `tests/test_marketlegs.py` (the re-authored release test +
+the re-pinned census/vigil) + `tests/test_p1_composition.py` (the
+re-measured surface); the owner's RU report:
+`docs/iterations/iter-274-moverelease-report.md`.
+
+### CONFIRMED — The stepbench row: PRESENT and NOTCH as live account state, HATCH held as prose, the two-sided band gap measured (2026-09-27, iter-275, the owner's execution order's fourth row)
+
+The §6.2 fill row landed over the EXISTING account substrate (the
+iter-273 family — never a new water primitive): PRESENT — the fifth
+kind `step` on the keeper (the timbers' setting in the pool's hand,
+seeded three the working head) with the door `set_the_timbers` (the
+TIGHTENING alone armed: consume, the solvency gate step at least
+three — the FLOOR LAW in the gate's own arithmetic: the tightening
+only from the working head, the first rung the drought's own, never
+the hand's; the loosening stays authored — the price's recovery an
+authored future season, the freightvol law's own shape; the fourth
+rung never a setting, the rise's own committed text); the reading at
+the stair (read_stair, iter-167) mints the LAW, the keeper's stock
+carries the PRESENT — the two surfaces meeting at the reader. NOTCH —
+the sixth kind `notch` on the beam's hand (the tally staff's carrier,
+seeded zero, the past sequence authored in the gloss) with the door
+`cut_the_notch` (the reckoning at the weighing day, the acceptance
+form the reprice precedent's own shape). Measured (seed 42, the
+macro-480 twin): the tightening 3→2 with the living line the witness
+(the second hand at the weirstair learning the_timbers_set exact) and
+the tale carrying the timbers' line with the kind's own gloss; the
+floor refused softly at the low band (the gate's own arithmetic — the
+first rung unreachable by the hand); the notch 0→1 with the market's
+witnesses and the reckoning's line; THE GAP MEASURED: the notch door
+FIRES at the working head — the notch's lawful condition (the dry
+band standing) is a TWO-SIDED band condition the closed gate
+vocabulary cannot express (at-least reads floors, never ceilings,
+never exact values) — the band law stays prose, the row's first
+missing causal leg and a named candidate for the I0 witness's
+substrate-limitation inventory. HATCH HELD AS PROSE (the verb-gate
+boundary, iter-266's own law): the wattle's thrower-open form has no
+single holder, the over-authoring the boundary refuses; the breach's
+social half already lives (the run's claim riding the beam's talk).
+The corpus byte-identical (both doors unarmed by doctrine — zero
+corpus price); the twins deterministic. The witness:
+`tests/test_stepbench.py` (7 tests); the owner's RU report:
+`docs/iterations/iter-275-stepbench-report.md`.
+
+### CONFIRMED — The I0 World Ignition Witness: the moving meso over a perturbed route edge, the five-leg chain measured on existing primitives (2026-09-27, iter-276, the owner's world-liveness direction, the execution order's fifth row)
+
+The FIRST world-liveness proof, built per the owner's own spec from
+existing primitives: ONE ordinary recurring moving meso over THREE
+locations and THREE cycles — the camp's freight loop (the crofts'
+heap → the keep → Malby's beam), carrying PEOPLE/ROLES (the master,
+the seat's hand), MATERIAL STOCK (the heap, the camp's ledger, the
+beam's receiving stock, the guild's chest), KNOWLEDGE
+(the_bloom_sold), CLAIMS/OBLIGATIONS (the paper sixteen) — with
+EXACTLY ONE route edge perturbed (the keep↔Malby road closed, the
+drowned ford made a standing condition; the divergence-probe form,
+one pack-data edge between two runs of the same script). THE CHAIN,
+MEASURED (seed 42, the macro-480 twins): the EXCLUSION realized
+(run B: the master's six outbound moves refused at the adjacency
+gate — Malby unreachable from the crofts by the map's own shape, no
+reroute exists — and his six sales refused downstream at the
+geography gate); the DIVERGENCE total (run A: six sales, the ledger
+18, the beam's stock 6, the record minted; run B: zero sales, both
+stocks at zero, the record never minted); the RESPONSE the actor's
+own (the repeated attempts every cycle, the rejections as facts —
+the honest boundary: the substrate's response repertoire at the
+crofts is the attempts, no autonomous reroute or adaptation door);
+the RESIDUE persistent (the ledger and the beam's stock — the road's
+own memory — divergent through the final crossing); the CHANGED
+NEXT-CYCLE CONDITION measured both ways (A's punctuated rhythm —
+each sitting faces a higher pile, 6/14/20, the banks outpacing the
+sales; B's monotone climb — the withhold deepening against the
+closed road, every attempt facing a bigger pile and the same
+refusal). THE FOUR TIMELINES, the owner's own sentence made
+measurable: people fail (the twelve rejections) while the material
+keeps arriving (the withhold banking at EVERY crossing in BOTH runs
+— the flow grammar's no-conditional-cadence law, the aggregate arm
+blind to the road), the knowledge never mints where the sale never
+happened, and the obligations stand untouched (the paper sixteen in
+both runs — the guild's paper outlives the ford): never forced to
+synchronize. THE EPISTEMIC SILENCE measured: the rejections mint no
+knowledge records — the camp knows the road only through its own
+attempts. THE VERDICT: the existing substrate EXPRESSES the whole
+chain — no new runtime machinery promoted (the owner's law: only on
+a concrete, repeated, substrate-level limitation). The I0
+substrate-limitation inventory, named candidates awaiting
+repetition: (a) the edge closure itself is not a world event (no
+runtime route writer — the perturbation authored between runs; the
+authored seasonal fords-drown hold has no runtime surface), (b) the
+two-sided band condition (iter-275's gap — the gate vocabulary
+reads floors, never ceilings), (c) the response repertoire's thin
+floor (the attempts only — no reroute, no adaptation door, none owed
+until a consumer names itself). The witness:
+`tests/test_ignition.py` (7 tests); the owner's RU report:
+`docs/iterations/iter-276-ignition-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

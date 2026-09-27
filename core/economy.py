@@ -3,14 +3,20 @@ split's core half, D-175 (1)): the ACCOUNT primitive — a named
 non-negative INTEGER stock bound to a canon entity id (any kind the pack
 declares it on: npc, location, group — the owner-agnostic form; the
 level rides `state_changes` as `account.<kind>`, the position family's
-own shape) — plus the THREE VERBS through the canon door:
+own shape) — plus the FOUR VERBS through the canon door:
 
 - **source** — declared units enter an account (the world mints);
 - **transfer** — units move between two accounts;
-- **consume** — units leave to a declared sink.
+- **consume** — units leave to a declared sink;
+- **settle** — a MULTI-LEG transaction over EXPLICIT owners (iter-273,
+  the owner's §6.4 SALE synthesis: the initiator is not implicitly
+  the owner of every resource consumed — a location, group or other
+  existing holder may own a leg's stock while another actor initiates;
+  all legs land as ONE atomic canonical event, the per-leg solvency
+  gates the door's own soft arm).
 
 The event type names are the build's naming pass (INV-3-clean:
-account/source/transfer/consume are mechanic words, pinned by the
+account/source/transfer/consume/settle are mechanic words, pinned by the
 stoplist self-check). The ECONOMY stays PACK DATA (the row's own law):
 the resource graph — which account kinds exist, source/sink/flow
 declarations with amounts and cadences, price formulas — lives in
@@ -64,6 +70,8 @@ __all__ = [
     "ACCOUNT_PREFIX",
     "CONSUME_EVENT",
     "ECONOMY_BLOCK",
+    "LEG_KEYS",
+    "SETTLE_EVENT",
     "SOURCE_EVENT",
     "TRANSFER_EVENT",
     "VERB_EVENT_TYPES",
@@ -118,26 +126,47 @@ ACCOUNT_GLOSS_BLOCK: Final = "account_kinds"
 #: The constant lives HERE for the same one-spelling reason as above.
 FLOW_GLOSS_BLOCK: Final = "flow_glosses"
 
-#: The three verbs' event types — the build's naming pass (INV-3-clean
-#: mechanic words; the armed pack's templates carry the lines, the
-#: lint's closure family). Actor/target/state_changes per verb:
-#: source — actor WORLD, target the account entity, one gain; transfer
-#: — actor the from-entity, target the to-entity, one loss + one gain;
-#: consume — actor the entity, no target, one loss.
+#: The three single-stock verbs' event types — the build's naming pass
+#: (INV-3-clean mechanic words; the armed pack's templates carry the
+#: lines, the lint's closure family). Actor/target/state_changes per
+#: verb: source — actor WORLD, target the account entity, one gain;
+#: transfer — actor the from-entity, target the to-entity, one loss +
+#: one gain; consume — actor the entity, no target, one loss.
 SOURCE_EVENT: Final = "account_sourced"
 TRANSFER_EVENT: Final = "account_transferred"
 CONSUME_EVENT: Final = "account_consumed"
+
+#: The settle verb's event type (iter-273, the §6.4 SALE synthesis):
+#: ONE atomic canonical event carrying every leg's state changes —
+#: actor the INITIATOR (never implicitly any leg's owner), target the
+#: intent's own target (may be None — the legs name their parties),
+#: the outcome carrying the resolved legs, one net state change per
+#: touched account. The same mechanism serves sales, tolls,
+#: settlements, withdrawals, wages — any ordinary resource
+#: relationship between existing holders (the owner's class law:
+#: never a per-case verb).
+SETTLE_EVENT: Final = "account_settled"
 
 VERB_EVENT_TYPES: Final[Mapping[str, str]] = {
     "source": SOURCE_EVENT,
     "transfer": TRANSFER_EVENT,
     "consume": CONSUME_EVENT,
+    "settle": SETTLE_EVENT,
 }
 
 #: The flow declaration's closed key set (the lint owns the load-time
 #: contract; this is the engine-side mirror the docs cite — one owner
 #: per shape, the lint the authority).
 FLOW_KEYS: Final = ("id", "verb", "kind", "amount", "every", "from", "to")
+
+#: The settle leg's closed key set (iter-273): `from`/`to` name the
+#: leg's owners — the nouns `actor`/`target` resolve through the
+#: intent, any other value is an EXPLICIT entity id (the lint's
+#: cross-check: a declared entity declaring the leg's kind — the flow
+#: endpoint precedent); `kind` an economy.accounts kind; `amount` a
+#: positive integer. The lint (`core/packlint/actions.py`) owns the
+#: load-time contract; this mirror is the docs' single citation.
+LEG_KEYS: Final = ("from", "to", "kind", "amount")
 
 
 class EconomyError(ValueError):

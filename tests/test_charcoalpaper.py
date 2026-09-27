@@ -173,9 +173,11 @@ def test_the_armed_census() -> None:
     the tale's), the budget's honest re-declare."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
-    # iter-272 (floodpaper): the fourth kind — the crossing's flood paper;
+    # iter-275 (stepbench): the step + notch kinds — the bench's own
+# rows (the vocabulary now six); iter-272 (floodpaper): the fourth kind;
     # charcoalpaper's own claim (the camp's paper 16) unchanged
-    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
+        "step", "notch"]
     # no flow touches the paper — the no-amortization law is structural
     assert not [f for f in economy["flows"] if f["kind"] == "paper"]
     master = next(n for n in pack.entities["npcs"] if n["id"] == MASTER)
@@ -218,10 +220,12 @@ def test_the_armed_census() -> None:
     )
     for event_type in (WALK_EVENT, FALL_EVENT):
         assert event_type in pack.rules["importance"]["story_critical_events"]
-    # iter-203 (winterkin): the ceiling re-declared again (70 -> 75)
-    # — the heartbreak's eight tale lines; charcoalpaper's own claim
-    # unchanged (its two verb lines still inside every ceiling since)
-    assert pack.rules["budget"]["templates"]["max"] == 75
+    # iter-203 (winterkin): the ceiling re-declared (70 -> 75, the
+    # heartbreak's eight tale lines); iter-273 (settlement): 75 -> 80
+    # (the settle line, the fourth verb's corpus price) —
+    # charcoalpaper's own claim unchanged (its two verb lines still
+    # inside every ceiling since)
+    assert pack.rules["budget"]["templates"]["max"] == 80
 
 
 def test_the_standing_state_and_its_bindings() -> None:

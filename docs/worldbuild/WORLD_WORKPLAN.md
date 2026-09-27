@@ -443,82 +443,74 @@ the glm blind re-reading n=2 convergent — the shave placed BEFORE the
 tale's events, the arc's chain restored, the iter-201/202 failure
 modes gone; `WORLD_TESTS.md` §9's W5 entry's iter-268 record the
 landing's owner, `tests/test_shavememory.py` the witness). The
-live band's return + the heartbreak recheck since LANDED (iter-269 —
-the standing order's third row: the reading kit re-established and
-delivered, both packages regenerated deterministically at seed 42, the
-re-weigh package carrying both just-landed surfaces, the heartbreak
-package byte-stable; the glm n=2 heartbreak recheck — the opened half
-2/2, the lost-future half 1/2 at the strict bar, the divergence's
-class the owner's reading's own datum (the iter-206/208 records
-standing); the runner + the kit + the transcripts outside the repo,
-Rule 9). The owner's live reading since RECEIVED and SCORED (iter-270 —
-the blind answers delivered in the chat 2026-09-27, the convergence
-assessment against the pre-set bars, the live band's fresh n=1):
-every station bar MET at the live band, the strict heartbreak pair
-CARRIED (the lost-future half and the opened half both read — the
-rs-7/8 clauses exactly), rs-9's causal row and rs-10's dated chain
-both carried in full (the iter-208 datum closed — the standing
-noticed and its reasons and consequences carried), the humor's
-position-dependence explicit, the 40/80 echo consumed naturally in
-reading (the iter-266 disposition's own prediction observed live);
-the heartbreak divergence's class RESOLVED per the pre-set rule — the
-glm recheck's lost-future miss was the LLM band's own reader-class
-variance, never a surface regression (the package byte-stable) and
-never the reconstructed question form (the same questions carried the
-pair at the live band); the live band's return row CLOSED (both
-just-landed surfaces read together, never separated). The station's
-standing order after the reading: the embodiment fill-list (§6.4 →
+live band's return + the heartbreak recheck since LANDED (iter-269)
+and the owner's live reading RECEIVED and SCORED (iter-270 — every
+station bar MET at the live band, the strict heartbreak pair CARRIED,
+rs-9's causal row + rs-10's dated chain carried in full, the
+divergence's class RESOLVED: the glm recheck's miss the LLM band's
+own reader-class variance; the full records in `WORLD_TESTS.md` §9's
+W5 entry, their single owner). The station's standing order after the
+reading: the embodiment fill-list (§6.4 →
 §6.1 → §6.5 → §6.2; §6.3 REMOVED — its probe completed iter-204..210,
 ANCHOR_REGION §6.3's row synced) → W6.
 
 The §6.4 fill row's first landing since (iter-271, repricing — the
-fill-list's front row: FACTOR NEGOTIATION armed as the guild's
-SQUEEZE, the honest residue "the renegotiation stays authored"
-closed): the door `reprice_paper` over the account resolver's
-player-scaled arm — pure pack data, zero core, the charcoalpaper
-precedent family's fourth door (the squeeze's two sourced onto the
-standing terms, the withheld margin's own number; the standing-terms
-gate + the receiving-stock gate; the knowledge row the_paper_repriced
-public; unarmed by doctrine — zero corpus price, the golden corpus
-byte-identical); the factor stays gateless as an entity (the beat
-rides the seat's acceptance-door, the guild's agency the terms
-themselves; the runner's own re-pricing power a future row's own
-call). The row's measured FORK recorded, never silently resolved
-(the re-weigh's SALE — the heap's drain): the account resolver's
-ACTOR-SIDE GRAMMAR WALL (the transfer's from-side always the intent
-actor, the heap's ledger a location — a location only ever a
-TO-side; the drain not authorable as pure pack data) — the owner's
-fork: (a) the buyer's price-door with the drain a named residue, (b)
-the heap's re-seating (REJECTED by the record: the ledger's site is
-semantic, the rs-10 anchor, + the corpus price), (c) a location-side
-drain verb (a core change, R3+). The TAG TRANSFER measured at its
-own boundary: the drop+take pair already carries the mechanics; the
-crews' recognition mint stays no committed surface (iter-185's law).
-The station's standing order after the landing: the owner's fork
-call on §6.4's SALE remainder + §6.1 → §6.5 → §6.2 → W6.
+renegotiation door landed, the SALE fork honestly recorded; the full
+record in `WORLD_TESTS.md` §9's W5 entry and the iter-271 report —
+the single owners).
 
-The §6.1 fill row since LANDED (iter-272, floodpaper — the
-fill-list's second row: the crossing household's carrier
-strengthened, the paper representation → the holder → the inherited
-obligation → the later settlement, NOT a new debt primitive): the
-FOURTH kind floodpaper (the flood winter's own paper, its own dated
-chain — never the camp's starved winter) stocked on the toll-taker
-(the paper twenty) + the receiving stock on the second hand; the
-four lifecycle doors settle_paper / render_toll / pass_paper /
-buy_punt over the account resolver's player-scaled arm — pure pack
-data, zero core, the charcoalpaper precedent's family; ONE COIN TWO
-CLAIMS made doors (the punt's twelve and the settlement's twenty on
-the same thin surplus); the punt fund's terminus closed (the flow
-vocabulary's no-terminus residue); the measured evidence: the twin's
-fall refused early / landed covered, the coupling measured, the
-inheritance walked to the line, the golden corpus byte-identical
-(zero corpus price), the twin deterministic (seed 42;
-tests/test_floodpaper.py the claim packet — 9 tests; the four census
-re-pins). Honest residues: the punt's item-birth (the parked st-5
-door), a dedicated boatyard entity (a future row's own call). The
-station's standing order after the landing: §6.4's SALE fork (the
-owner's call) → §6.5 (the move-release, the owner's future row at
-its iter-263 price) → §6.2 → W6.
+The §6.1 fill row since LANDED (iter-272, floodpaper — the crossing's
+flood debt to its full lifecycle over the account resolver's arm; the
+full record in `WORLD_TESTS.md` §9 and the iter-272 report — the
+single owners).
+
+The I0 WORLD IGNITION WITNESS since RUN and CONFIRMED (iter-276,
+ignition — the owner's world-liveness direction, the execution
+order's fifth row: the moving meso over the perturbed keep-Malby
+edge, the five-leg chain measured on existing primitives — the
+exclusion, the divergence, the response (the attempts), the residue,
+the changed next-cycle condition; the four timelines diverging never
+synchronized; the substrate-limitation inventory opened with three
+named candidates — the no-runtime-route-writer, the two-sided band,
+the response floor — none yet repeated, no machinery promoted; the
+record in `WORLD_TESTS.md` §9, the single owner). The §6.2 fill row
+since LANDED (iter-275, stepbench — the owner's
+execution order's fourth row, the fill-list's LAST embodiment row:
+PRESENT / HATCH / NOTCH over the existing account substrate — the
+step kind on the keeper + the tightening door with the floor law in
+the gate's own arithmetic; the notch kind on the beam's hand + the
+reckoning door; the hatch held as prose by the verb-gate boundary;
+the two-sided band gap measured and named — the I0 inventory's first
+candidate). The §6.5 move release since LANDED (iter-274, moverelease — the
+owner's execution order's third row, the embodiment fill-list's third
+row: the intent pick re-authored from the ramble to the DEPARTURE at
+its measured iter-263 price, honestly paid — the talks 287→2, the
+rumors 25→2, the council pile 1→208, the world reading quieter
+because its talker left: the honest liveness shape, a living world is
+not a loud one; the smoke corpus untouched — the release never fires
+in its window; the re-measured surface pinned in the composition
+witness). The §6.4 SALE fork since RESOLVED (iter-273, settlement — the owner's
+synthesis decision: the fork was evidence the account grammar was too
+narrow for the authored world model, the correct response SYNTHESIS,
+never the A/B/C pick): the account substrate's FOURTH VERB `settle`
+— the multi-leg transaction over EXPLICIT owners through the same
+canon door (the initiator not implicitly any leg's owner; per-leg
+endpoints, per-leg HOLDER-form solvency gates, ONE atomic
+account_settled event) — and the re-weigh's sale `sell_bloom` armed
+over it (the withhold's release: one load walked to the beam's
+receiving stock for three coin the load banked at the crofts' own
+ledger, the rs-10 anchor's site; the grammar wall measured FIRST in
+the witness — the closed verbs' from-side always the intent actor,
+the crafted transfer probe refused at the actor's gate while the heap
+stands full). The same mechanism serves the class beyond the sale
+(the buyer-initiated purchase pinned with the owner's own example);
+no second transaction engine. The station's standing order after the
+landing (the owner's 2026-09-27 execution order): the I0 witness
+RUN and CONFIRMED (iter-276 — no new machinery promoted, the
+inventory's candidates awaiting repetition) → W6 genre under the
+resulting evidence (a failed genre test identifies the missing world
+substrate rather than triggering plot writing — the station's own
+law).
 
 ## 8. W6 — Genre tests
 

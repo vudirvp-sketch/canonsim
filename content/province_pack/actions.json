@@ -1480,6 +1480,204 @@
       "notes": "the paper's RENEGOTIATION (iter-271, the §6.4 fill row's first landing — the W5 disposition's honest residue 'the renegotiation stays authored (the guild's re-pricing — the factor gateless, no committed surface)' closed at the account band): the guild's SQUEEZE as live arithmetic — the paper climbing two on the seat (the withheld margin's own number, the coupled liabilities' answer: the camp holds two loads off the beam, the guild prices two paper onto the debt; ONE SALE, TWO CLAIMS' escalation rung). The door's convention, honestly named: the seat re-prices its OWN terms — the actor and the target one hand (the master's acceptance; the source mints to the actor, the line's subject the target, so the discipline is identity — the witness drives them the same), the FACTOR stays gateless as an entity (the guild's agency carried by the terms themselves, the chest's arithmetic the mirror; the runner's own re-pricing power — the audit's arm turned on the master — a future row's own call, never this door). THE STANDING-TERMS GATE is the door's own law: paper at least sixteen on the actor — the renegotiation fires only against the standing debt (a fallen paper has no terms to re-price, refused softly — attempts are facts), and the squeeze may repeat while the terms stand (the debt's compounding the coupled liabilities' own escalation, honest, unchecked by design — the world's arithmetic, never a clock). The reconciliation's DOWN-arm (the tally read moving the terms toward honesty — the shave's margin returned) is the door's own counterfactual, the owner's future row; this door lands the guild's authored direction: the squeeze. The geography is STAGING, never a gate (the paper is an instrument — the guild's word reaches the seat wherever the road finds him; the tale stages the beat at the beam, the errand's own route). UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it. The witnesses (same_location, exact) learn the_paper_repriced — the re-priced terms public as the standing was, the vale reading the squeeze in the same breath as the debt it lands on."
     },
     {
+      "intent": "sell_bloom",
+      "label": "sell the withhold at the beam",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_settled"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "test": "account_at_least",
+          "holder": "loc_crofts",
+          "kind": "bloom",
+          "value": 1
+        },
+        {
+          "test": "account_at_least",
+          "holder": "loc_malby",
+          "kind": "coin",
+          "value": 3
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {
+            "from": "loc_crofts",
+            "to": "loc_malby",
+            "kind": "bloom",
+            "amount": 1
+          },
+          {
+            "from": "loc_malby",
+            "to": "loc_crofts",
+            "kind": "coin",
+            "amount": 3
+          }
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_bloom_sold"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the re-weigh's SALE (iter-273, the §6.4 fill row's fork RESOLVED through the owner's generalized transaction synthesis — never the price-door-with-residue, never the heap's re-seating, never a location-side drain verb): the withhold's RELEASE as a two-legged settlement over the account resolver's settle arm — ONE load of the heap walked to the beam's receiving stock (bloom loc_crofts to loc_malby, the freight's terminus made a stock) and the price THREE coin the load (campaccount's own arithmetic: the gross nine at three the load) paid from the guild's chest into the CAMP'S LEDGER (coin loc_malby to loc_crofts — banked at the crofts where the tally's notches record it, the rs-10 anchor's own site; the fork's option (b) rejection honored: the heap never re-seated, the ledger's site semantic). The MASTER initiates (the seat's door — the weighing question his own: the bloom brought to the beam or held); the parties are the legs' own holders — the crofts and the market's chest, neither of them the initiator: the owner's class law made arithmetic (a location, an institution's chest, an existing holder may own the resource an action consumes when another actor initiates). The per-leg solvency gates (the HOLDER form — the heap's own gate, the chest's own gate) die softly at the door: attempts are facts. The geography gate rides the render_fund form (the sale at the beam — the target the market town, the master present); the price stays AUTHORED (three the load, never a derived function — the beam's price is the shave's own surface, Maren's flaw, the freightvol law unchanged). Repeatable while the heap stands and the chest covers — the drain the world's own compounding, never a clock (the squeeze's own law). The witnesses (same_location, exact) learn the_bloom_sold — the withhold's release public as its standing was. UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it."
+    },
+    {
+      "intent": "set_the_timbers",
+      "label": "set the timbers to the low band",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_consumed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_weirstair"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "step",
+          "value": 3
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "consume",
+        "kind": "step",
+        "amount": 1
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_timbers_set"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the §6.2 PRESENT leg's door (iter-275, the fill row's third member — the step bench's carrier strengthened through the EXISTING account resolver, never a new water primitive): the re-setting at the season's turn, the TIGHTENING alone armed — the standing quarrel's own direction (the late long_light pressing the second step, the vale's argument made arithmetic: the working head consumed down to the low band). The FLOOR LAW in the gate's own arithmetic: the solvency gate step >= 3 — the tightening only FROM the working head; at the low band the gate refuses softly (the first rung the drought's own, never the hand's — 'never set but by a drought the vale survives, and never unnotched'). The LOOSENING stays authored (the price's recovery an authored future season — the freightvol law's own shape: the flow carries the standing direction, the relief a future row); the FOURTH rung never a setting (the rise's own committed text — the high_water line IS the fourth step). The geography honest: the timbers at the water, the setting at the stair (the render_fund form). The witnesses (same_location, exact) learn the_timbers_set — the standing re-made public as the reading at the stair mints the law. UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it."
+    },
+    {
+      "intent": "cut_the_notch",
+      "label": "cut the dry year's notch",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_sourced"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "npc_marketmistress_01"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "source",
+        "kind": "notch",
+        "amount": 1
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_dry_year_notched"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the §6.2 NOTCH leg's door (iter-275, the fill row's third member): the beam's reckoning — the dry year's notch cut at the weighing day, the tally staff's count climbing by the beam's own hand (the source verb minting to the actor, the market mistress the run's hand — the weighbeam and the tally staff one carrier). The door's convention, honestly named (the reprice_paper precedent's own form): the beam accepts its OWN reckoning — the actor and the target one hand (the mistress's acceptance; the source mints to the actor, the line's subject the target, so the discipline is identity); the geography STAGING never a gate (the tally an instrument — the reckoning wherever the weighing day finds the beam's hand; the tale stages the beat at the beam, the staff's own route). The HONEST GAP, recorded never routed: the notch's lawful condition is the DRY BAND standing (the second step) — a TWO-SIDED band condition the closed gate vocabulary cannot express (account_at_least reads floors, never ceilings, never exact values: the gate cannot read 'the step at the low band'); the door lands with the acceptance form alone, the band law stays AUTHORED in these notes — the row's first missing causal leg, a named candidate for the I0 witness's substrate-limitation inventory. The witnesses (same_location, exact) learn the_dry_year_notched — the count public as the weighing day's own record. UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it."
+    },
+    {
       "intent": "settle_paper",
       "label": "settle",
       "resolver": "account",

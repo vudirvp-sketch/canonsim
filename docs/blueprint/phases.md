@@ -4361,6 +4361,176 @@ fill-list's second row):**
   call). 2493+9 + ruff + docguard + topology --check clean. The
   owner's RU report: `docs/iterations/iter-272-floodpaper-report.md`.
 
+**The iter-273 settlement record (R3, the §6.4 fill row's fork
+RESOLVED through the owner's generalized transaction synthesis — the
+cross-boundary substrate change the owner's decision demanded, the
+PCC record riding this row per AGENTS §2.9 with the DECISIONS.md file
+at its 30/30 cap, the collapse only the owner's call):**
+
+- **[PCC: intent=** resolve the §6.4 SALE (the heap's drain) by
+  extending the generic account/transaction substrate so the
+  initiator of an action is not implicitly the owner of every
+  resource it consumes — the owner's class law (locations, groups,
+  institutions, chests may own consumed stock), never a per-case
+  verb; **invariants=** INV-1 (one canonical event per transaction,
+  the fold unchanged), INV-2 (first-touch construction order, no
+  draws), INV-3 (settle/legs/holder/account_settled stoplist-clean),
+  INV-5 (the log append-only; the underflow floor's loud arm the
+  net); **delta=** `core/economy.py` (SETTLE_EVENT + the fourth verb
+  + LEG_KEYS), `core/resolvers.py` (the settle branch: legs
+  resolved, net aggregated per touched account, ONE atomic
+  Resolution), `core/intent.py` (the account gate's HOLDER form +
+  the rejection naming), `core/packlint/actions.py` (the settle
+  block's shape law + the per-leg gate requirement),
+  `core/packlint/shared.py` (the holder cross-check),
+  `render/chronicle.py` (the legs' indexed read surface — kinds
+  glossed, ids displayed); **verification=** the discriminating test
+  run first (the grammar wall measured: the closed verbs' from-side
+  always the intent actor + the npc-only actor grammar + the crafted
+  transfer probe refused at the actor's gate while the heap stands),
+  then the witness `tests/test_settlement.py` (11 tests) + the
+  substrate arms `tests/test_economy.py` (the settle end-to-end + 11
+  lint refusals), the golden corpus byte-identical (the door unarmed
+  by doctrine), the twin deterministic; 2506+9 + ruff + docguard +
+  topology --check clean; **provenance=** the owner's 2026-09-27
+  synthesis decision (the fork dissolved, never the A/B/C pick), the
+  iter-271 fork record the measured input; **runtime=** zero new
+  runtime dependencies, zero scheduler/queue/commit changes — the
+  intent door, the resolver registry and the fold unchanged in
+  shape, no second transaction engine.]
+- **The arming.** The re-weigh's SALE `sell_bloom`: the withhold's
+  release — ONE load of the heap walked to the beam's receiving
+  stock (loc_malby bloom 0, the freight's terminus made a stock) for
+  THREE coin the load (the gross nine's own price, campaccount's
+  arithmetic) paid from the guild's chest into the CAMP'S LEDGER
+  (loc_crofts coin 0 — banked where the tally's notches record it,
+  the rs-10 anchor's site; the heap never re-seated, the fork's
+  option (b) rejection honored); the master initiates, the geography
+  the render_fund form (the sale at the beam); repeatable while the
+  heap stands and the chest covers (the compounding the world's own
+  arithmetic); the witnesses learn `the_bloom_sold` exact; the
+  settle line + the knows gloss + the story-critical listing + the
+  budget's honest re-declare (75 → 80).
+- **The class pin.** The crafted buyer's purchase (the owner's own
+  example — the buyer pays coin, the crofts surrender bloom, the
+  buyer receives bloom, the crofts receive coin) over the SAME verb:
+  the noun-ref legs and both gate forms in one door, one atomic
+  event — the mechanism serves sales, tolls, settlements,
+  withdrawals, wages, institutional stock movement without a second
+  engine.
+- **The evidence.** The sale's ONE event with four net changes (the
+  heap 6→5, the beam 0→1, the chest 44→41, the ledger 0→3), the
+  beam's witnesses holding the_bloom_sold, the tale carrying the
+  settle line with the bloom gloss riding the leg slot, the
+  compounding heap 6→5→4→3 / ledger 0→3→6→9, the empty heap and the
+  thin chest refused softly naming the HOLDERS, the lint refusing
+  every malformed leg shape at load, the corpus byte-identical, the
+  twin deterministic. The owner's RU report:
+  `docs/iterations/iter-273-settlement-report.md`.
+
+**The iter-274 moverelease record (R2 — the §6.5 fill row, the
+owner's 2026-09-27 execution order opening the move-release row at
+its measured iter-263 price):**
+
+- **The arming.** Pure pack data, zero core: the `market_mourns`
+  director hook's intent pick re-authored from the ramble to the
+  DEPARTURE — `{"kind": "move", "target": "loc_keep"}` (the authored
+  reason: her need was the market's paper, the son's bond covered by
+  the stalls; the fire took the coverage with the stalls — the beam
+  has no keeper where the stall row is ash, the watch's post the
+  widow's own road; the tally staff riding with her, the carried-item
+  contract). The option gate (the trigger-only law) and the hook's
+  ambient law unchanged — the no-leak arm re-measured.
+- **The price, honestly paid and re-measured on the committed form**
+  (the composition witness, seed 42): the talks 287→2 (both before
+  the burnout), the rumors 25→2, the autonomous resolutions 384→306,
+  the event total 2376→2269, the council count 1→208 (the live
+  council + the 207-event B2 catch-up pile at t=525335 — the known
+  one-tick pile shape, iter-261's family), the max deferral
+  518861→517055, the vigil hearer sets carrying the departure's
+  footprint. The honest liveness shape named: a living world is not a
+  loud one. The smoke corpus byte-untouched (the release never fires
+  in its window — zero corpus price); the twins deterministic.
+- **The re-pins.** `tests/test_marketlegs.py` (the census intent
+  block, the release test re-authored to the move, the vigil sets)
+  + `tests/test_p1_composition.py` (the measured surface: 2269 /
+  306 / 2 talks / 2 rumors / 7 briefings / the council shape / the
+  deferral surface). 2506+9 + ruff + docguard + topology --check
+  clean. The owner's RU report:
+  `docs/iterations/iter-274-moverelease-report.md`.
+
+**The iter-275 stepbench record (R2 — the §6.2 fill row, the owner's
+execution order's fourth row: PRESENT / HATCH / NOTCH over the
+existing account substrate, the iter-273 family):**
+
+- **PRESENT.** The fifth kind `step` on the keeper (the timbers'
+  setting in the pool's hand, seeded three the working head) + the
+  door `set_the_timbers` (the TIGHTENING alone armed: consume, the
+  solvency gate step >= 3 — the FLOOR LAW in the gate's own
+  arithmetic: the first rung the drought's own, never the hand's;
+  the loosening stays authored — the price's recovery an authored
+  future season, the freightvol law's own shape; the fourth rung
+  never a setting, the rise's own committed text). The reading at
+  the stair (read_stair, iter-167) mints the LAW, the stock carries
+  the PRESENT.
+- **NOTCH (the honest half).** The sixth kind `notch` on the beam's
+  hand (the tally staff's carrier, seeded zero) + the door
+  `cut_the_notch` (the reckoning at the weighing day, the acceptance
+  form the reprice precedent's own shape). THE GAP MEASURED: the
+  notch's lawful condition — the dry band standing — a TWO-SIDED band
+  condition the closed gate vocabulary cannot express (at-least reads
+  floors, never ceilings, never exact values); the band law stays
+  prose, the row's first missing causal leg and a named candidate
+  for the I0 witness's substrate-limitation inventory.
+- **HATCH (held as prose).** The verb-gate boundary (iter-266's own
+  law): the wattle's thrower-open form has no single holder — the
+  over-authoring the boundary refuses; the breach's social half
+  already lives (the run's claim riding the beam's talk).
+- **The evidence.** The tightening 3→2 with the living line the
+  witness; the floor refused softly at the low band; the notch 0→1
+  with the market's witnesses; the notch FIRING at the working head
+  (the gap measured); the corpus byte-identical (both doors unarmed);
+  the twins deterministic. The five census re-pins (the six-kind
+  vocabulary + the keeper's stock). 2513+9 + ruff + docguard +
+  topology --check clean. The owner's RU report:
+  `docs/iterations/iter-275-stepbench-report.md`.
+
+**The iter-276 ignition record (R2 — the I0 World Ignition Witness,
+the owner's world-liveness direction, the execution order's fifth
+row: the first moving-meso proof over existing primitives):**
+
+- **The form.** One ordinary recurring moving meso — the camp's
+  freight loop over three locations (the crofts' heap, the keep,
+  Malby's beam) and three cycles, carrying people/roles (the
+  master), material stock (the heap, the ledger, the beam's stock,
+  the chest), knowledge (the_bloom_sold) and claims (the paper
+  sixteen); exactly one route edge perturbed (the keep↔Malby road
+  closed — the divergence-probe form, one pack-data edge between two
+  runs of the same script; zero core, the committed pack untouched).
+- **The chain, measured (seed 42).** The exclusion (run B's six
+  outbound moves refused at the adjacency gate, the six sales
+  refused at the geography gate — Malby unreachable, no reroute);
+  the divergence (six sales / the ledger 18 / the beam 6 / the
+  record minted vs zero / zero / zero / never); the response (the
+  repeated attempts, the rejections as facts — the repertoire's
+  honest floor); the residue (the ledger and the beam's stock — the
+  road's own memory); the changed next-cycle condition (A's
+  punctuated pile 6/14/20 vs B's monotone climb, every attempt
+  facing a bigger pile and the same refusal). The four timelines —
+  the owner's own sentence made measurable: people fail, the
+  material keeps arriving (the withhold banking at every crossing in
+  both runs — the flow grammar blind to the road), the knowledge
+  never mints where the sale never happened, the obligations stand.
+  The epistemic silence measured (the rejections mint no knowledge).
+- **The verdict.** The substrate expresses the whole chain; no new
+  runtime machinery promoted. The I0 substrate-limitation inventory
+  opened with three named candidates awaiting repetition: (a) no
+  runtime route writer (the edge closure not a world event), (b) the
+  two-sided band condition (iter-275's gap), (c) the response
+  repertoire's floor (the attempts only). 2520+9 + ruff + docguard +
+  topology --check clean. The owner's RU report:
+  `docs/iterations/iter-276-ignition-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

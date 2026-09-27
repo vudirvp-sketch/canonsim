@@ -23,6 +23,7 @@ from typing import TYPE_CHECKING, Any, Callable, Final
 from core.detail import materialize_scene_detail, materialized_fields
 from core.economy import (
     CONSUME_EVENT,
+    SETTLE_EVENT,
     SOURCE_EVENT,
     TRANSFER_EVENT,
 )
@@ -659,29 +660,54 @@ def _stock_or_loud(
     return level
 
 
+def _leg_entity(ref: str, intent: IntentData) -> str:
+    """The settle leg's owner reference (iter-273, the §6.4 SALE
+    synthesis): the nouns `actor`/`target` resolve through the intent;
+    any other value is an EXPLICIT entity id the lint already
+    cross-checked (a declared entity declaring the leg's kind — the
+    flow-endpoint precedent). The initiator is never implicitly a
+    leg's owner: the transaction's parties are the legs' own from/to,
+    the actor only initiates."""
+    if ref == "actor":
+        return intent.actor
+    if ref == "target":
+        if intent.target is None:
+            raise RunnerError(
+                "the account settle leg references 'target' without a "
+                "target"
+            )
+        return intent.target
+    return ref
+
+
 def _account(
     pack: Pack, projection: Projection, bank: RngBank, intent: IntentData,
     action: Mapping[str, Any], check: CheckResult | None, tick: int,
 ) -> Resolution:
     """The account resolver (res-1): the action-declared `account`
     block names the verb, the kind and the amount — the player-scaled
-    arm of the economy's three verbs through the canon door. The event
-    TYPE is the verb's engine constant (the build's naming pass,
-    INV-3-clean); the pack's `events.success` restates it as the
-    load-time cross-check (the lint refuses a mismatch — the template
-    closure then covers the verb line, the arming corpus price). A
-    failed opposed check rides the pack's own failure type (no state
-    change — the attempt is a fact, the stock untouched). The stock
-    reads are LIVE at completion (KI#13: `from` is never hardcoded);
-    an underflow here is unreachable by construction — the
+    arm of the economy's verbs through the canon door (the settle
+    form, iter-273, declares LEGS over explicit owners instead — the
+    initiator is not implicitly any leg's owner). The event TYPE is
+    the verb's engine constant (the build's naming pass, INV-3-clean);
+    the pack's `events.success` restates it as the load-time
+    cross-check (the lint refuses a mismatch — the template closure
+    then covers the verb line, the arming corpus price). A failed
+    opposed check rides the pack's own failure type (no state change
+    — the attempt is a fact, the stock untouched). The stock reads
+    are LIVE at completion (KI#13: `from` is never hardcoded); an
+    underflow here is unreachable by construction — the
     `account_at_least` precondition (required by the lint for
-    transfer/consume, re-run by the OCC re-check when the projection
-    moved) rejects the insolvent attempt at the door, and the
-    `_commit` gate's floor is the net (D3's loud arm)."""
+    transfer/consume and for every settle leg, re-run by the OCC
+    re-check when the projection moved) rejects the insolvent attempt
+    at the door, and the `_commit` gate's floor is the net (D3's loud
+    arm)."""
     config = action["account"]
     verb = config["verb"]
-    kind = config["kind"]
-    amount = config["amount"]
+    # the settle form declares LEGS instead (each leg its own kind and
+    # amount — the top-level keys stay the single-stock verbs' shape)
+    kind = config.get("kind")
+    amount = config.get("amount")
     prop = f"account.{kind}"
     branch = _branch(check, action)
     if branch != "success":
@@ -691,9 +717,10 @@ def _account(
             knowledge=_knowledge(action, branch, pack, projection, intent, tick),
             hooks=_hooks(action, branch),
         )
-    outcome: dict[str, Any] = {
-        "check": _check_outcome(check), "kind": kind, "amount": amount,
-    }
+    outcome: dict[str, Any] = {"check": _check_outcome(check)}
+    if verb != "settle":
+        outcome["kind"] = kind
+        outcome["amount"] = amount
     if verb == "source":
         # the world mints to the actor (a found coin, a harvest) — a
         # source can never underflow, no solvency gate exists
@@ -735,6 +762,11 @@ def _account(
                 ),
             ),
         )
+    if verb == "settle":
+        # iter-273: the multi-leg transaction over explicit owners — the
+        # initiator is not implicitly any leg's owner (the §6.4 SALE
+        # synthesis; the resolution half in _settle below)
+        return _settle(pack, projection, intent, action, outcome, tick)
     # consume — the lint closes the verb vocabulary
     level = _stock_or_loud(projection, intent.actor, kind)
     return Resolution(
@@ -749,6 +781,61 @@ def _account(
                 from_=level, to_=level - amount,
             ),
         ),
+    )
+
+
+def _settle(
+    pack: Pack, projection: Projection, intent: IntentData,
+    action: Mapping[str, Any], outcome: dict[str, Any], tick: int,
+) -> Resolution:
+    """The settle verb's resolution half (iter-273, the §6.4 SALE
+    synthesis): the legs name their own from/to (nouns or explicit
+    entity ids), the initiator only initiates. Every leg lands in ONE
+    atomic canonical event; the per-leg solvency gates (the
+    lint-required account_at_least preconditions, the holder form for
+    explicit ids) reject insolvent attempts SOFTLY at the door — the
+    reads here are live at completion (KI#13's law), the aggregation
+    ONE net state change per touched account (the commit gate's
+    progressive semantics never sees a chained intermediate)."""
+    legs = action["account"]["legs"]
+    resolved_legs: list[dict[str, Any]] = []
+    order: list[tuple[str, str]] = []  # first-touch — construction order (INV-2)
+    net: dict[tuple[str, str], int] = {}
+    for leg in legs:
+        src = _leg_entity(leg["from"], intent)
+        dst = _leg_entity(leg["to"], intent)
+        leg_kind = leg["kind"]
+        # both endpoints must hold declared stocks (the lint pinned the
+        # explicit ids at load; the noun endpoints ride the door's gates —
+        # this is the loud author-bug backstop, _stock_or_loud's own law)
+        _stock_or_loud(projection, src, leg_kind)
+        _stock_or_loud(projection, dst, leg_kind)
+        for endpoint in (src, dst):
+            if (endpoint, leg_kind) not in net:
+                net[(endpoint, leg_kind)] = 0
+                order.append((endpoint, leg_kind))
+        net[(src, leg_kind)] -= leg["amount"]
+        net[(dst, leg_kind)] += leg["amount"]
+        resolved_legs.append({
+            "from": src, "to": dst, "kind": leg_kind,
+            "amount": leg["amount"],
+        })
+    changes: list[StateChange] = []
+    for entity, leg_kind in order:
+        level = _stock_or_loud(projection, entity, leg_kind)
+        changes.append(
+            StateChange(
+                entity=entity, prop=f"account.{leg_kind}",
+                from_=level, to_=level + net[(entity, leg_kind)],
+            )
+        )
+    return Resolution(
+        event_type=SETTLE_EVENT,
+        outcome={**outcome, "legs": resolved_legs},
+        knowledge=_knowledge(
+            action, "success", pack, projection, intent, tick
+        ),
+        state_changes=tuple(changes),
     )
 
 

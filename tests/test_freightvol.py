@@ -219,7 +219,8 @@ def test_the_armed_census() -> None:
     # outstanding's own kind, the standing state's row)
     # iter-272 (floodpaper): the fourth kind; freightvol's own claim
     # (the bloom ledger) unchanged
-    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
+        "step", "notch"]
     assert [(f["id"], f["verb"], f["kind"], f["to"], f["amount"],
              f["every"]) for f in economy["flows"]
             if f["kind"] == "bloom"] == [
@@ -228,15 +229,28 @@ def test_the_armed_census() -> None:
     crofts = next(
         loc for loc in pack.entities["locations"] if loc["id"] == CROFTS
     )
-    assert crofts["accounts"] == {"bloom": 4}
-    # the DRAIN door still un-armed — no player-scaled verb moves the
-    # bloom heap (the paper's lifecycle doors exist since iter-189,
-    # charcoalpaper — but the re-weigh's SALE, the held loads walked to
-    # the beam, remains a future row's own call: the withhold's drain)
-    assert not [
+    # iter-273 (settlement): the camp's ledger joins the heap — the
+    # sale's coin terminus, seeded zero (the heap's own claim unchanged)
+    assert crofts["accounts"] == {"bloom": 4, "coin": 0}
+    # the DRAIN door ARMED since iter-273 (settlement — the §6.4 fork
+    # resolved through the owner's generalized transaction synthesis):
+    # the re-weigh's sale `sell_bloom`, the settle verb's two legs (the
+    # load walked to the beam's receiving stock, the price banked at
+    # the camp's ledger) — the heap's drain a live player-scaled door
+    # now, the withhold's release at three coin the load
+    drain = next(
         a for a in pack.data["actions.json"]["actions"]
-        if "account" in a and a["account"]["kind"] == "bloom"
-    ]
+        if a["intent"] == "sell_bloom"
+    )
+    assert drain["account"] == {
+        "verb": "settle",
+        "legs": [
+            {"from": CROFTS, "to": "loc_malby", "kind": "bloom",
+             "amount": 1},
+            {"from": "loc_malby", "to": CROFTS, "kind": "coin",
+             "amount": 3},
+        ],
+    }
     # the template reused, the story listing already carries the
     # verb; rs-4 (iter-199): the same line, now carrying the flow
     # gloss tail (the conditional — the take template's own form)
@@ -406,7 +420,9 @@ def test_the_heaps_level_is_the_arterys_thinning(tmp_path: Path) -> None:
     assert sim.projection[KETTA]["account.coin"] == 10  # 2 + 2x4
     assert sim.projection[CHEST]["account.coin"] == 56  # 40 + 4x4
     # the heap's margin never touches the coin funds — the kinds' law
-    assert sim.projection[CROFTS].get("account.coin") is None
+    # (iter-273: the camp's ledger exists now, seeded zero — the flows
+    # never touch it; only the sale's price leg lands there)
+    assert sim.projection[CROFTS]["account.coin"] == 0
     assert sim.projection[MASTER].get("account.bloom") is None
     sim.close()
 

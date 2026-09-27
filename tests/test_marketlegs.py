@@ -10,14 +10,20 @@ KI#87/campaccount precedent class):
   trigger reads `loc_malby.destroyed`; the seed rides the wait
   action's hooks (the murmur family's own site — the ignite resolver
   mints no action hooks, iter-263's §D boundary). THE INTENT PICK
-  (the owner's authoring question): the RAMBLE release, not the move
-  — the keeper of the weighbeam does not leave the ashes (her spine:
-  the feud burned her mother's stall; her need: the son's bond
-  covered by the market's paper); her honest response is grief made
-  audible, the family rhyme with wilmot_grief_ramble. The move
-  release stays the owner's future row — its measured price (talks
-  287→2, the 1→208 council pile-up off the cold-frozen fear) is on
-  the iter-263 record.
+  re-authored iter-274 (the owner's execution order opening the
+  move-release row): the MOVE release — the keeper of the weighbeam
+  LEAVES the ashes for the keep (her need was the market's paper, the
+  son's bond covered by the stalls — the fire took the coverage with
+  the stalls, the beam has no keeper where the stall row is ash; the
+  watch's post the widow's own road). The ramble was iter-264's
+  authored pick (grief made audible, the wilmot_grief_ramble rhyme);
+  the departure is the grief answering with feet — the market's
+  social function dying with its carrier, the measured price HONESTLY
+  PAID (iter-263's I3a prediction, re-measured on the committed form
+  in the composition witness: the talks collapse to 2, the rumors to
+  2, the council pile-up 1→208 off the cold-frozen fear — the B2
+  catch-up semantics through the faction door, the known one-tick
+  pile shape).
 - **The option gate** (the trigger-only law): a triggered hook stays
   quiet-path eligible by construction, and a weight-0 ambient hook
   would mourn a STANDING market — the drama-2 option layer carries
@@ -46,26 +52,27 @@ KI#87/campaccount precedent class):
 The claim packet (TEST_PLAN §9):
 
 - Claim: the market's READER legs land as pure pack data — the
-  director reads the burnout (the mourns ramble, canon-birthing the
-  scene's residue), the door gates the commerce on the fire layer,
+  director reads the burnout (the mourns departure, the carrier
+  leaving the ashes with her staff), the door gates the commerce on
+  the fire layer,
   the institutions' acts mint their witnesses' records, and the
   watch-briefing carries the trade's token (the institutional
   memory consumer) — zero core, zero new primitives.
 - Lens(es): the changed-next-decision unit (who simulates
-  differently — a burned market now ANSWERS: the mistress mourns
-  audibly, the buyers' door refuses, the towns hold the barring and
-  the blood price as records); the boundary lens (the trigger-only
+  differently — a burned market now ANSWERS: the mistress departs
+  for the keep, the buyers' door refuses, the towns hold the barring
+  and the blood price as records); the boundary lens (the trigger-only
   law — the option gate; the unarmed trade — the parse grammar's
   own verb, never an autonomous driver).
 - Prism: the committed-pack census (the hook, the blocks, the gates,
   the purse); the minimal integrated witness below (all four legs,
   one route); the no-leak arm (a standing market never mourns).
 - Oracle: the event-log scans (the account transfers, the rejection's
-  failed_test, the ramble's materialization, the knowledge records'
+  failed_test, the move's carried staff, the knowledge records'
   holders/fidelity, the briefing's token), the projection reads, the
   byte-identical twin.
-- Falsifier: a Maren ramble before the burnout (the quiet-path leak
-  — the option gate broken); the trade accepted after the burnout
+- Falsifier: a Maren departure before the burnout (the quiet-path
+  leak — the option gate broken); the trade accepted after the burnout
   (the fire layer's irreversibility broken); the council/vigil
   events carrying no records (the KI#103 family's dead data); the
   purse minting stock from nothing (the underflow gate bypassed).
@@ -174,7 +181,9 @@ def test_the_embodiment_census() -> None:
     assert mourns["weight"] == 0 and mourns["first_time_only"] is True
     assert mourns["channel"] == "ambient"
     assert mourns["target_npc"] == MAREN
-    assert mourns["intent"] == {"kind": "ramble"}
+    # iter-274: the intent pick re-authored — the departure (the owner's
+    # move-release row), the ramble's replacement
+    assert mourns["intent"] == {"kind": "move", "target": "loc_keep"}
     prop = {
         "kind": "prop", "of": CHEST, "path": "destroyed",
         "comparator": "equals", "value": True,
@@ -305,32 +314,39 @@ def test_the_trade_door_closes_with_the_stalls(
 def test_the_mourns_release_reads_the_ashes(
     witness: list[EventRecord],
 ) -> None:
-    """The reader the burnout lacked: the mistress's grief, released
-    by the director the beat after the seed finds the ashes — the
-    RAMBLE release (the authored pick, the family's fourth murmur),
-    the co-located hearers minted (the duty pair's rotation has the
-    sergeant at the post; the runner had already walked for Thornmill
-    — the window's own honest shape). The scene's residue itself —
-    the dropped tally under the stall row — is the observe family's
-    LAZY canon birth on the market's own stream: in this witness the
-    sergeant's post-burnout scan drew it first (t=1153, three ticks
-    past the burnout); in the composition witness the mourns ramble
-    drew it itself — first-commit-wins on the same stream, the value
-    identical (INV-2: the draw is the stream's, never the observer's)."""
+    """The reader the burnout lacked, iter-274's re-authored pick: the
+    mistress's DEPARTURE, released by the director after the seed
+    finds the ashes — the MOVE release (the keeper leaves the ashes
+    for the keep, the grief answering with feet), the tally staff
+    riding with her (the carried-item contract, iter-263's measured
+    shape reproduced on the committed form), and the ramble GONE (the
+    release replaced, never doubled — first_time_only's own law). The
+    scene's residue — the dropped tally under the stall row — still
+    materializes: the observe family's LAZY canon birth on the
+    market's own stream, the sergeant's post-burnout scan drawing it
+    first in this witness (t=1153, three ticks past the burnout) —
+    the ramble's own draw is gone, the stream's birth remains
+    (INV-2: the draw is the stream's, never the observer's)."""
     events = witness
     market_burnout = next(
         b for b in _of(events, "location_burned_out") if b.target == CHEST
     )
-    mourns = [e for e in _of(events, "ramble") if e.actor == MAREN]
+    # the departure: one move, director-caused, after the burnout
+    mourns = [
+        e for e in _of(events, "move") if e.actor == MAREN
+        and e.provenance["cause_intent"].startswith("director_")
+    ]
     assert len(mourns) == 1, "one mourns per run (first_time_only)"
-    ramble = mourns[0]
-    assert ramble.provenance["cause_intent"].startswith("director_")
-    assert ramble.t > market_burnout.t
-    assert ramble.outcome["location"] == CHEST
-    assert _records(ramble) == {
-        SERGEANT: ("rambling_by_npc_marketmistress_01", "vague"),
-        CROWD: ("rambling_by_npc_marketmistress_01", "vague"),
+    departure = mourns[0]
+    assert departure.t == 3252 and departure.t > market_burnout.t
+    assert departure.target == "loc_keep"
+    assert _changes(departure) == {
+        (MAREN, "position"): (CHEST, "loc_keep"),
+        ("tally_staff_01", "position"): (CHEST, "loc_keep"),
     }
+    # the ramble replaced, never doubled
+    assert not [e for e in _of(events, "ramble") if e.actor == MAREN]
+    # the scene's residue: the lazy birth still lands on the stream
     projection = fold(events, initial_projection(load_pack(PACK_DIR).entities))
     assert projection[CHEST]["under_stall_row"] == "dropped_tally"
     assert projection[CHEST]["destroyed"] is True
@@ -368,10 +384,14 @@ def test_the_vigil_mints_the_blood_price(
 ) -> None:
     """The families' public act likewise: Thornmill hears the blood
     price spoken (partial — the runner stands there, the steward
-    beside him), Malby through the market walls (vague). The deadband
-    pile-up (three vigils at the landing tick, the composition's own
-    known shape) each carry the same witness set — the residue is the
-    ACT's, minted per event, never once per run."""
+    beside him), Malby through the market walls (vague). iter-274's
+    departure footprint ON the hearer sets: the first vigil (t=3255,
+    two ticks past Maren's move) mints WITHOUT her — she is at the
+    keep now, not through the market walls — and with the CORPORAL on
+    the post (the rotation's window moved with the cascade); the
+    later pair (t=4274) carries the SERGEANT back (the rotation's
+    own rhythm). The residue is the ACT's, minted per event at the
+    hearers' live positions, never once per run."""
     events = witness
     vigils = _of(events, "wergeld_vigil")
     assert len(vigils) == 3  # the deadband's landing pile at this window
@@ -379,15 +399,24 @@ def test_the_vigil_mints_the_blood_price(
     assert all(
         v.provenance["cause_intent"] == "faction_0001" for v in vigils
     )
-    expected = {
+    first = {
+        "pc_01": ("the_blood_price_spoken", "partial"),
+        STEWARD: ("the_blood_price_spoken", "partial"),
+        CORPORAL: ("the_blood_price_spoken", "vague"),
+        CROWD: ("the_blood_price_spoken", "vague"),
+    }
+    later = {
         "pc_01": ("the_blood_price_spoken", "partial"),
         STEWARD: ("the_blood_price_spoken", "partial"),
         SERGEANT: ("the_blood_price_spoken", "vague"),
-        MAREN: ("the_blood_price_spoken", "vague"),
         CROWD: ("the_blood_price_spoken", "vague"),
     }
+    by_tick = {}
     for vigil in vigils:
-        assert _records(vigil) == expected
+        by_tick.setdefault(vigil.t, []).append(vigil)
+    assert _records(by_tick[3254][0]) == first  # the departure's own window
+    for vigil in by_tick[4274]:
+        assert _records(vigil) == later
 
 
 def test_the_briefing_carries_the_trade_token(

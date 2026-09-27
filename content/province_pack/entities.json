@@ -70,9 +70,10 @@
         "lit": true
       },
       "accounts": {
-        "coin": 40
+        "coin": 40,
+        "bloom": 0
       },
-      "notes": "the bank market on the navigable Sarrow — the seed settlement's continuity (the v0.1 tavern/street/market cluster grown into a town, D-130's polygon); the duty post of the watch pair, the crowd listener lives here; the stall row the market's fire exposure. debt-1 (iter-162): the coin account is the GUILD'S CHEST at the weighbeam — the flood paper's take landing here each year (the grim till's location form; the group entity takes no stock, the finding recorded here and in economy.notes; economy.notes owns the fold's arithmetic)"
+      "notes": "the bank market on the navigable Sarrow — the seed settlement's continuity (the v0.1 tavern/street/market cluster grown into a town, D-130's polygon); the duty post of the watch pair, the crowd listener lives here; the stall row the market's fire exposure. debt-1 (iter-162): the coin account is the GUILD'S CHEST at the weighbeam — the flood paper's take landing here each year (the grim till's location form; the group entity takes no stock, the finding recorded here and in economy.notes; economy.notes owns the fold's arithmetic) iter-273 (settlement): the bloom stock is the BEAM'S RECEIVING END — the walked loads' terminus (the freight's other side, the honest no-entity form: the market receives the sold load while the chest pays the price; the sale's bloom leg lands here, the price leg at the crofts' own ledger)"
     },
     {
       "id": "loc_crofts",
@@ -88,9 +89,10 @@
         "bloom_heap"
       ],
       "accounts": {
-        "bloom": 4
+        "bloom": 4,
+        "coin": 0
       },
-      "notes": "Garrick's camp — the charcoal stacks are the province's worst fire trap (the smelting camp is a standing hazard by design, mid-grim); the estranged half of the province (the cultures row's hill folk — name-1 profiles ride the follow-up slice); freightvol (iter-187): the bloom account is the HEAP's own ledger — the withhold's held margin (the tally's PRESENT count, the notches' own subject: the read mints the WORD, the ledger carries the volume — two loads a year banked while the price stays fallen, the artery thinner by the same; economy.notes owns the arithmetic — the burn five, the sold three, the held two; the heap's drain the re-weigh's own door, un-armed)"
+      "notes": "Garrick's camp — the charcoal stacks are the province's worst fire trap (the smelting camp is a standing hazard by design, mid-grim); the estranged half of the province (the cultures row's hill folk — name-1 profiles ride the follow-up slice); freightvol (iter-187): the bloom account is the HEAP's own ledger — the withhold's held margin (the tally's PRESENT count, the notches' own subject: the read mints the WORD, the ledger carries the volume — two loads a year banked while the price stays fallen, the artery thinner by the same; economy.notes owns the arithmetic — the burn five, the sold three, the held two; the heap's drain the re-weigh's own door, un-armed) iter-273 (settlement): the coin stock is the CAMP'S LEDGER — the sale's price banked where the tally's notches record it (the rs-10 anchor's own site; the master's fund stays his own thin stock — the withdrawal to the fund a future row's own door, never this one's)"
     },
     {
       "id": "loc_thornmill",
@@ -177,9 +179,10 @@
       "carries": [],
       "accounts": {
         "coin": 2,
-        "floodpaper": 20
+        "floodpaper": 20,
+        "step": 3
       },
-      "notes": "the crossing's toll-keeper — the spine's flaw rides the coerce urgency entry (AP-8's consuming rule: the double toll when a rich-seeming traveler crosses); the punt pole the family's last tool (items). debt-1 (iter-162): the coin account is the household's THIN SURPLUS — the year's net after the guild's standing take (economy.notes owns the fold's arithmetic; the punt fund's climb toward the authored twelve, Dellan's claim on the same coin) floodpaper (iter-272, the §6.1 fill row — the crossing's carrier strengthened: the paper representation → the holder → the inherited obligation → the later settlement, the charcoalpaper precedent's own family, NOT a new debt primitive): the flood debt's OUTSTANDING as live account state — the FOURTH kind `floodpaper` (the flood winter's own paper: the borrowed punt twelve + the stranded season's stores eight, the shelter law's cost through the winter after the flood — never the camp's starved winter, its own dated chain in the kind's gloss); the stock's entity the TOLL-TAKER (the debt's holder-side seat at the crossing, the drowned generation's debt the living hand's now); the lifecycle doors settle_paper / render_toll / pass_paper / buy_punt (actions.json) — the fall against the covered fund, the collection's walk to the chest, the inheritance to the second hand's receiving stock, the punt's purchase at the market town; ONE COIN, TWO CLAIMS made doors: the settlement's twenty and the punt's twelve drawing on the same thin surplus (the household's own engine, §6.1's unit)."
+      "notes": "the crossing's toll-keeper — the spine's flaw rides the coerce urgency entry (AP-8's consuming rule: the double toll when a rich-seeming traveler crosses); the punt pole the family's last tool (items). debt-1 (iter-162): the coin account is the household's THIN SURPLUS — the year's net after the guild's standing take (economy.notes owns the fold's arithmetic; the punt fund's climb toward the authored twelve, Dellan's claim on the same coin) floodpaper (iter-272, the §6.1 fill row — the crossing's carrier strengthened: the paper representation → the holder → the inherited obligation → the later settlement, the charcoalpaper precedent's own family, NOT a new debt primitive): the flood debt's OUTSTANDING as live account state — the FOURTH kind `floodpaper` (the flood winter's own paper: the borrowed punt twelve + the stranded season's stores eight, the shelter law's cost through the winter after the flood — never the camp's starved winter, its own dated chain in the kind's gloss); the stock's entity the TOLL-TAKER (the debt's holder-side seat at the crossing, the drowned generation's debt the living hand's now); the lifecycle doors settle_paper / render_toll / pass_paper / buy_punt (actions.json) — the fall against the covered fund, the collection's walk to the chest, the inheritance to the second hand's receiving stock, the punt's purchase at the market town; ONE COIN, TWO CLAIMS made doors: the settlement's twenty and the punt's twelve drawing on the same thin surplus (the household's own engine, §6.1's unit). iter-275 (stepbench, the §6.2 fill row's PRESENT leg): the step stock is the TIMBERS' SETTING in the keeper's hand — the standing head as live account state (three the working head, the long_light default; two the low band's standing, the vale's standing quarrel; one the drought floor — the drought's own, never the hand's; four the rise — the flood's committed line, never a setting at all). The reading at the stair (read_stair, iter-167) mints the LAW; the PRESENT now rides the keeper's stock — the two surfaces meeting at the reader."
     },
     {
       "id": "npc_secondhand_01",
@@ -334,7 +337,10 @@
       "carries": [
         "tally_staff_01"
       ],
-      "notes": "the wealth node's voice — the spine's flaw rides the talk urgency entry (AP-8: the well-reputed stranger gets her small talk, the scales tilt for old coin); the storm murmur hook's target (weather-1's seeded consequence, the market watching the rain eat the stalls)"
+      "notes": "the wealth node's voice — the spine's flaw rides the talk urgency entry (AP-8: the well-reputed stranger gets her small talk, the scales tilt for old coin); the storm murmur hook's target (weather-1's seeded consequence, the market watching the rain eat the stalls) iter-275 (stepbench, the §6.2 fill row's NOTCH leg): the notch stock is the TALLY STAFF'S COUNT — the dry years' sequence in wood, the beam's reckoning cut at the weighing day (the count opens at the canonical present, the past sequence authored in the kind's gloss; the market's keep-peace stick that also keeps the count — the §6.2 carrier record's own reading)",
+      "accounts": {
+        "notch": 0
+      }
     },
     {
       "id": "npc_smelter_01",

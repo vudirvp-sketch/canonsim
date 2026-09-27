@@ -1,73 +1,36 @@
-Iteration: iter-272 (`floodpaper` — the §6.1 fill row, the W5
-  disposition iter-266's fill-list second row: PAPER DEBT / PUNT
-  BUYOUT / DEBT INHERITANCE, «усилить carrier: paper representation
-  → holder → inherited obligation → later settlement; НЕ новый
-  debt-примитив»): the crossing household's flood debt brought to
-  its full lifecycle over the account resolver's player-scaled arm —
-  pure pack data, zero core, the charcoalpaper precedent's family
-  applied to the crossing: the FOURTH account kind `floodpaper`
-  (the flood winter's own paper — the borrowed punt twelve + the
-  stranded season's stores eight, the shelter law's cost; its own
-  dated chain in the kind's gloss, never the camp's starved winter —
-  the two papers one chest, two winters, the estrangement's own
-  pair) stocked on the toll-taker (the debt's holder-side seat: the
-  drowned generation's debt the living hand's now) + the RECEIVING
-  stock on the second hand (floodpaper 0, the inheritance's
-  existence gate); the four lifecycle doors: settle_paper (the FALL,
-  the covered-fund gate coin 20), render_toll (the COLLECTION, the
-  geography gate at the chest), pass_paper (the INHERITANCE — the
-  iter-160 trace's TRANSFER rung, the drowned generation's open
-  question, ANSWERED: the debt walking to the living line, the pole
-  and the paper one inheritance, the crossing's anti-freeze answer
-  the LINE, deliberately not the camp's craft-seat), buy_punt (the
-  PUNT'S PURCHASE — the punt fund's terminus, the flow vocabulary's
-  no-terminus residue closed; the boatyard's purse the market's
-  location ledger, the honest no-entity form); ONE COIN, TWO CLAIMS
-  made doors (the settlement's twenty and the punt's twelve drawing
-  on the same thin surplus — the punt spent first leaves the fall
-  refused until the toll re-climbs, the household's own engine now
-  player-scale); the knows rows the_floodpaper_fell /
-  the_paper_inherited / the_punt_bought; the measured evidence: the
-  twin's floodpaper standing at 20 through the crossings while the
-  fund climbs (the no-amortization law live state), the fall refused
-  early at the fund 2 / landing when covered (the witnesses holding
-  the_floodpaper_fell, the tale carrying both reckoning lines with
-  the kind's own flood-winter gloss), the coupling measured (the
-  punt walked at the fund 14, the fall then refused at 2), the
-  inheritance walked to the second hand with the stockless target
-  refused softly, the golden corpus byte-identical (zero corpus
-  price — the stocks seed silently, the doors unarmed by doctrine),
-  the twin deterministic; the owner's RU report at
-  docs/iterations/iter-272-floodpaper-report.md
+Iteration: iter-276 (`ignition` — the I0 World Ignition Witness,
+  the owner's world-liveness direction, the execution order's fifth
+  row: the FIRST moving-meso proof over existing primitives): the
+  camp's freight loop over three locations and three cycles, one
+  route edge perturbed (the keep-Malby road closed), the five-leg
+  chain measured — the exclusion, the divergence, the response (the
+  attempts), the residue, the changed next-cycle condition; the four
+  timelines diverging never synchronized (people fail, material
+  arrives, knowledge never mints, obligations stand); the verdict:
+  the substrate expresses the chain, no machinery promoted; the
+  limitation inventory opened (the route writer, the two-sided band,
+  the response floor); the owner's RU report at
+  docs/iterations/iter-276-ignition-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2493 passed + 9 skipped, ruff clean, docguard clean, topology
+2520 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-27 ·
-Scope: content/province_pack/{entities.json (Ketta's floodpaper 20 +
-  Dellan's receiving stock + the notes), rules.json (the fourth kind
-  + the economy notes' floodpaper row), actions.json (the four
-  lifecycle doors), templates.json (the kind's gloss + the three
-  knows rows)}, tests/{test_floodpaper.py (new, the witness — 9
-  tests, the claim packet), test_campaccount.py, test_charcoalpaper.py,
-  test_debt1.py, test_freightvol.py (the four census re-pins, the
-  deliberate act the pinning law names)}, docs/{worldbuild/
-  WORLD_TESTS.md (§9 the iter-272 record), worldbuild/WORLD_WORKPLAN.md
-  (§7 the fill-list advanced), worldbuild/ANCHOR_REGION.md (§6.1 the
-  floodpaper row), blueprint/phases.md (§6 the iter-272 record),
-  TASKS.md (the ledger, iter-262 evicted), iterations/
-  iter-272-floodpaper-report.md (new, the owner's RU deliverable)},
-  STATUS.md, worklog.md (iter-262 evicted) — 14 paths (R2 — one kind
-  + two stocks + four doors + the glosses + the witness + the
-  re-pins + the docs; zero core, zero canon change, the LOG
+Scope: tests/test_ignition.py (new, the witness — 7 tests, the claim
+  packet), docs/{worldbuild/WORLD_TESTS.md (§9 the I0 record, the
+  single owner), worldbuild/WORLD_WORKPLAN.md (§7 the standing order
+  advanced to W6), blueprint/phases.md (§6 the iter-276 record),
+  TASKS.md (the ledger, iter-266 evicted), iterations/
+  iter-276-ignition-report.md (new, the owner's RU deliverable)},
+  STATUS.md, worklog.md (iter-266 evicted) — 8 paths (R2 — the
+  crafted twin pair; zero core, zero pack, zero canon change, the LOG
   untouched, zero corpus price)
-Track A: the §6.1 fill row LANDED (the crossing's carrier
-  strengthened — the paper representation, the holder, the
-  inheritance, the settlement, the punt's terminus); the order
-  continues: §6.4's SALE fork (the owner's call) → §6.5
-  (move-release) → §6.2 (present / hatch / notch) → W6 genre. The
-  ssi family COMPLETE except ssi-5, owner-gated.
+Track A: the I0 witness RUN and CONFIRMED (the first world-liveness
+  proof; no machinery promoted, the inventory's candidates awaiting
+  repetition); the order continues: W6 genre under the resulting
+  evidence (the owner's call — a new station). The ssi family
+  COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -128,7 +91,40 @@ Track A: the §6.1 fill row LANDED (the crossing's carrier
 
 ## Next step
 
-**iter-272 DONE: the §6.1 fill row (the fill-list's second row —
+**iter-276 DONE: the I0 World Ignition Witness (the five-leg chain
+  measured on existing primitives over the perturbed keep-Malby
+  edge; the four timelines diverging never synchronized; the verdict
+  — the substrate expresses the chain, no machinery promoted; the
+  limitation inventory opened with three named candidates).**
+  2520+9. The owner's RU report:
+  docs/iterations/iter-276-ignition-report.md.
+iter-275 DONE: the §6.2 fill row (PRESENT + NOTCH as live account
+  state, HATCH held as prose, the two-sided band gap measured and
+  named — the I0 inventory's first candidate; the embodiment
+  fill-list now CLOSED).
+  2513+9. The owner's RU report:
+  docs/iterations/iter-275-stepbench-report.md.
+iter-274 DONE: the §6.5 move release (the owner's row at its
+  measured price — the mourns intent pick re-authored to the
+  departure; the talks 287→2, the council pile 1→208, the honest
+  liveness shape: a living world is not a loud one; the smoke corpus
+  untouched; the surface re-measured and pinned).
+  2506+9. The owner's RU report:
+  docs/iterations/iter-274-moverelease-report.md.
+iter-273 DONE: the §6.4 SALE fork resolved through the owner's
+  generalized transaction synthesis (the fourth verb `settle` — the
+  multi-leg transaction over explicit owners; the re-weigh's sale
+  `sell_bloom` armed — the withhold's release, one load walked to
+  the beam's receiving stock for three coin banked at the crofts'
+  own ledger; the grammar wall measured first: the closed verbs'
+  from-side always the intent actor, the crafted transfer probe
+  refused at the actor's gate while the heap stands full; the class
+  pinned with the buyer's purchase — the owner's own example, one
+  atomic event over the same verb; the corpus byte-identical, the
+  twin deterministic; the R3 PCC record rides phases.md §6).
+  2506+9. The owner's RU report:
+  docs/iterations/iter-273-settlement-report.md.
+iter-272 DONE: the §6.1 fill row (the fill-list's second row —
   the crossing's carrier strengthened): the flood debt's full
   lifecycle over the account resolver's player-scaled arm — pure
   pack data, zero core, the charcoalpaper precedent's family applied
@@ -157,7 +153,7 @@ Track A: the §6.1 fill row LANDED (the crossing's carrier
   residues: the punt's item-birth rides the parked st-5 door; a
   dedicated boatyard entity a future row's own call. 2493+9 + ruff +
   docguard + topology --check clean. The owner's RU report:
-  docs/iterations/iter-272-floodpaper-report.md.**
+  docs/iterations/iter-272-floodpaper-report.md.
 Next: §6.4's SALE fork (the owner's call on the grammar wall) →
   §6.5 (the move-release, the owner's future row at its iter-263
   price) → §6.2 (present / hatch / notch) → W6 genre.

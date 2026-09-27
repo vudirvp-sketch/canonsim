@@ -56,6 +56,7 @@ from core.economy import (
     CONSUME_EVENT,
     ECONOMY_BLOCK,
     FLOW_GLOSS_BLOCK,
+    SETTLE_EVENT,
     SOURCE_EVENT,
     TRANSFER_EVENT,
     VERB_EVENT_TYPES,
@@ -84,9 +85,11 @@ DRUNK = "npc_drunk_01"
 TAVERN = "loc_tavern"
 
 #: The crafted arming's account stocks (the entity-declared `accounts`
-#: mappings — the seeding under test).
+#: mappings — the seeding under test). iter-273: the player carries a
+#: grain stock too — the settle fixture's receiving end (the buyer's
+#: purchased goods land on a declared stock, never a mint from nowhere).
 DEFAULT_ACCOUNTS: dict[str, dict[str, int]] = {
-    PLAYER: {"coin": 10},
+    PLAYER: {"coin": 10, "grain": 0},
     BARKEEP: {"coin": 5, "grain": 0},
     DRUNK: {"coin": 30},
     TAVERN: {"coin": 0, "grain": 4},
@@ -170,10 +173,50 @@ FIND_ACTION: dict[str, Any] = {
              "to the actor)",
 }
 
+#: iter-273 (settlement, the §6.4 SALE synthesis): the player-scaled
+#: SETTLE door — the multi-leg transaction over explicit owners. The
+#: crafted shape is the class's own grammar in one door: a coin leg FROM
+#: THE ACTOR (the noun ref, the noun-form gate) and a grain leg FROM THE
+#: TAVERN'S STOCK to the actor (the explicit-id ref, the HOLDER-form
+#: gate) — the initiator buys the tavern's grain off its declared stock,
+#: the closed three verbs' wall (a location's stock is only ever a
+#: TO-side) measured in the same fixture's own terms.
+SETTLE_ACTION: dict[str, Any] = {
+    "intent": "buy_grain", "label": "buy_grain", "resolver": "account",
+    "ticks": 5,
+    "events": {"success": SETTLE_EVENT},
+    "requires": [
+        {"test": "account_at_least", "noun": "actor", "kind": "coin",
+         "value": 2},
+        {"test": "account_at_least", "holder": TAVERN, "kind": "grain",
+         "value": 2},
+    ],
+    "fields": [],
+    "account": {
+        "verb": "settle",
+        "legs": [
+            {"from": "actor", "to": TAVERN, "kind": "coin", "amount": 2},
+            {"from": TAVERN, "to": "actor", "kind": "grain",
+             "amount": 2},
+        ],
+    },
+    "knowledge": {
+        "success": [
+            {"who": "actor", "channel": "saw", "fidelity": "exact",
+             "knows": "bought_grain"},
+        ]
+    },
+    "notes": "iter-273 fixture: the player-scaled settle (the explicit-"
+             "owner transaction — the initiator not implicitly any leg's "
+             "owner)",
+}
+
 VERB_TEMPLATES: dict[str, str] = {
     SOURCE_EVENT: "The {target} gains {amount} {kind}.",
     TRANSFER_EVENT: "{actor} gives {amount} {kind} to {target}.",
     CONSUME_EVENT: "{actor} spends {amount} {kind}.",
+    SETTLE_EVENT: "{actor} settles at {target}: {leg_0_amount} "
+                  "{leg_0_kind} for {leg_1_amount} {leg_1_kind}.",
 }
 
 
@@ -233,12 +276,28 @@ def economy_pack(
         )
     templates = data["templates.json"]
     for event_type, line in VERB_TEMPLATES.items():
+        if event_type == SETTLE_EVENT:
+            continue  # the settle line rides only the settle-armed twins
         if verb_lines:
             templates["events"][event_type] = line
         else:
             templates["events"].pop(event_type, None)
     if mutate is not None:
         mutate(data)
+    # the settle line LAST — after the mutation, so it rides only the
+    # settle-armed twins (the dead-vocabulary law: every line needs an
+    # emission site; a refusal test appending the settle door by
+    # mutation gets its line, a twin without the door never carries it)
+    settle_armed = any(
+        isinstance(a.get("account"), dict)
+        and a["account"].get("verb") == "settle"
+        for a in data["actions.json"]["actions"]
+    )
+    if settle_armed:
+        if verb_lines:
+            templates["events"][SETTLE_EVENT] = VERB_TEMPLATES[SETTLE_EVENT]
+        else:
+            templates["events"].pop(SETTLE_EVENT, None)
     for file_name, payload in data.items():
         (target / file_name).write_text(
             json.dumps(payload, indent=2), encoding="utf-8"
@@ -467,10 +526,10 @@ def test_the_new_names_are_inv3_clean() -> None:
     assert spec is not None and spec.loader is not None
     spec.loader.exec_module(module)
     words = (
-        "account", "source", "transfer", "consume", "economy", "flow",
-        "price", "stock", "verb", "amount",
+        "account", "source", "transfer", "consume", "settle", "economy",
+        "flow", "price", "stock", "verb", "amount", "legs", "holder",
         "account_sourced", "account_transferred", "account_consumed",
-        "account_at_least",
+        "account_settled", "account_at_least",
     )
     banned = module._segment_pattern
     collisions = [
@@ -662,6 +721,73 @@ def test_the_account_action_lint_refusals(tmp_path: Path) -> None:
         wrong_resolver, bad_restatement, no_gate, low_gate, dead_gate_kind,
     ):
         _refusal(tmp_path, f"act_{mutate.__name__}", mutate)
+
+
+def test_the_settle_lint_refusals(tmp_path: Path) -> None:
+    """iter-273: the settle form's own contract, refused at load (the
+    KI#15 family — what would crash or silently no-op at completion
+    fails HERE instead): the closed block vocabulary (verb | legs), the
+    closed leg vocabulary (from | to | kind | amount), the per-leg
+    endpoint cross-check (a declared entity declaring the leg's kind —
+    the flow-endpoint law's own shape), the per-leg solvency gate
+    (the noun form for actor/target refs, the HOLDER form for explicit
+    ids, its value covering the amount), the self-leg no-op, the
+    events.success restatement, and the holder gate's own cross-check
+    (a holder naming a stockless entity is dead data)."""
+    def _settle(data: dict) -> dict:
+        action = next(
+            (a for a in data["actions.json"]["actions"]
+             if a["intent"] == "buy_grain"),
+            None,
+        )
+        if action is None:
+            action = json.loads(json.dumps(SETTLE_ACTION))
+            data["actions.json"]["actions"].append(action)
+        return action
+
+    def block_unknown_key(data: dict) -> None:
+        _settle(data)["account"]["kind"] = "coin"
+
+    def leg_unknown_key(data: dict) -> None:
+        _settle(data)["account"]["legs"][0]["flow"] = "x"
+
+    def undeclared_endpoint(data: dict) -> None:
+        _settle(data)["account"]["legs"][1]["from"] = "loc_street"
+
+    def undeclared_stock(data: dict) -> None:
+        # the tavern's stock exists but not for COIN on the grain leg:
+        # swap the grain leg's kind to coin, whose tavern stock exists —
+        # instead break the ENDPOINT: the drunk declares no grain stock
+        _settle(data)["account"]["legs"][1]["from"] = DRUNK
+
+    def no_leg_gate(data: dict) -> None:
+        action = _settle(data)
+        action["requires"] = [action["requires"][0]]  # drops the holder gate
+
+    def low_leg_gate(data: dict) -> None:
+        _settle(data)["requires"][1]["value"] = 1  # below the leg's amount 2
+
+    def noun_and_holder(data: dict) -> None:
+        _settle(data)["requires"][1]["noun"] = "actor"  # both naming forms
+
+    def self_leg(data: dict) -> None:
+        _settle(data)["account"]["legs"][0]["to"] = "actor"
+
+    def bad_restatement(data: dict) -> None:
+        _settle(data)["events"]["success"] = "grain_bought"
+
+    def zero_amount(data: dict) -> None:
+        _settle(data)["account"]["legs"][0]["amount"] = 0
+
+    def empty_legs(data: dict) -> None:
+        _settle(data)["account"]["legs"] = []
+
+    for mutate in (
+        block_unknown_key, leg_unknown_key, undeclared_endpoint,
+        undeclared_stock, no_leg_gate, low_leg_gate, noun_and_holder,
+        self_leg, bad_restatement, zero_amount, empty_legs,
+    ):
+        _refusal(tmp_path, f"settle_{mutate.__name__}", mutate)
 
 
 # -- the run laws (the crafted armed pack) --------------------------------------
@@ -967,6 +1093,65 @@ def test_the_discrete_verbs_end_to_end(tmp_path: Path) -> None:
         StateChange(PLAYER, account_prop("coin"), 5, 9),
     )
     assert _final_levels(events, PLAYER)["coin"] == 9
+
+
+def test_the_settle_verb_end_to_end(tmp_path: Path) -> None:
+    """iter-273 (settlement, the §6.4 SALE synthesis): the fourth verb
+    through the canon door — the buyer-initiated purchase over the
+    tavern's declared grain stock, the class's own grammar in one door
+    (a coin leg from the ACTOR — the noun ref; a grain leg from the
+    TAVERN — the explicit-id ref; neither leg's owner implicitly the
+    initiator's other resources). ONE atomic event: the outcome
+    carrying the RESOLVED legs, one net state change per touched
+    account, the knowledge record minted, the levels conserved (the
+    legs' declared amounts the replay's own oracle)."""
+    steps = [
+        {"intent": "buy_grain", "target": TAVERN},
+        {"intent": "wait", "ticks": 10},
+    ]
+    pack = economy_pack(
+        tmp_path, "settle_e2e",
+        extra_actions=(GIVE_ACTION, SPEND_ACTION, FIND_ACTION,
+                       SETTLE_ACTION),
+    )
+    log, _ = _run(tmp_path, pack, 42, steps, "settle_e2e")
+    events = _events(log)
+    settle = _by_type(events, SETTLE_EVENT)[0]
+    assert settle.actor == PLAYER and settle.target == TAVERN
+    # the outcome's legs are the RESOLVED parties (the nouns became ids)
+    assert settle.outcome["legs"] == [
+        {"from": PLAYER, "to": TAVERN, "kind": "coin", "amount": 2},
+        {"from": TAVERN, "to": PLAYER, "kind": "grain", "amount": 2},
+    ]
+    # one NET change per touched account, first-touch order (leg order)
+    assert settle.state_changes == (
+        StateChange(PLAYER, account_prop("coin"), 10, 8),
+        StateChange(TAVERN, account_prop("coin"), 0, 2),
+        StateChange(TAVERN, account_prop("grain"), 4, 2),
+        StateChange(PLAYER, account_prop("grain"), 0, 2),
+    )
+    knows = {record.who: record.knows for record in settle.knowledge}
+    assert knows == {PLAYER: "bought_grain"}
+    # the conservation oracle's settle arm: every leg's amount matches
+    # its from-side loss and to-side gain across the whole log
+    for event in events:
+        if event.type != SETTLE_EVENT:
+            continue
+        for leg in event.outcome["legs"]:
+            losses = [
+                change for change in event.state_changes
+                if change.entity == leg["from"]
+                and change.prop == account_prop(leg["kind"])
+            ]
+            gains = [
+                change for change in event.state_changes
+                if change.entity == leg["to"]
+                and change.prop == account_prop(leg["kind"])
+            ]
+            assert losses and losses[0].from_ - losses[0].to_ == leg["amount"]
+            assert gains and gains[0].to_ - gains[0].from_ == leg["amount"]
+    assert _final_levels(events, PLAYER)["grain"] == 2
+    assert _final_levels(events, TAVERN)["grain"] == 2
 
 
 # -- the §9 falsifier pins (the minimal test forms) -----------------------------

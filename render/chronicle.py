@@ -244,6 +244,25 @@ def _event_context(
             gloss_flow(pack.templates, flow)
             if isinstance(flow, str) else ""
         )
+        # iter-273 (the settle legs' read surface): a verb event whose
+        # outcome carries LEGS (the multi-leg transaction over explicit
+        # owners) exposes each leg as INDEXED slots leg_<i>_<key> — the
+        # kinds mapped through the SAME rs-2 boundary (the meaning rides
+        # every account line), the entity refs displayed fold-first
+        # (name-1's law, the generic outcome loop's own mapping). The
+        # raw list never reaches a slot: an authored line binds the
+        # legs it knows its door carries, one template per event type.
+        legs = outcome.get("legs")
+        if isinstance(legs, list):
+            for index, leg in enumerate(legs):
+                if not isinstance(leg, Mapping):
+                    continue
+                for key, value in leg.items():
+                    if key == "kind" and isinstance(value, str):
+                        value = gloss_account_kind(pack.templates, value)
+                    else:
+                        value = _display_if_entity(pack, positions, value)
+                    context[f"leg_{index}_{key}"] = value
     # rs-9 (iter-267, the runner-grudge discovery surface's rendering
     # half): the hold's CONTENT rides the KNOWS boundary — the secret
     # IS a knowledge token (the read-hinge mint), and rs-1's law is one

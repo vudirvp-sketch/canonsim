@@ -102,12 +102,15 @@
     "kinmark_claimed": "{actor} claims the kin notch at {location} — the flood-year guest's son at the crossing his father wintered at, the proof shown where the road can hear.",
     "the_edge_answers": "The old edge answers at {location} — the toll-taker's house holding the drowned generation's notch, the recognition the claim completes, the crossing's table open to the claimant's line from this day.",
     "the_names_kept": "{actor} says the drowned generation's names at {location} — the flood year's dead kept by name outside the bloodline, their own futures the flood took down with them, the line, the duties and the holdings that were to be theirs, the grief given its second holder.",
-    "the_house_answers": "The toll-taker's house answers at {location} — the winter's board eaten against the debt, the notch's own count kept, the edge standing both ways."
+    "the_house_answers": "The toll-taker's house answers at {location} — the winter's board eaten against the debt, the notch's own count kept, the edge standing both ways.",
+    "account_settled": "{actor} settles at {target}: {leg_0_amount} {leg_0_kind} for {leg_1_amount} {leg_1_kind}."
   },
   "account_kinds": {
     "paper": "paper owed to the guild's chest at Malby since the starved winter",
     "bloom": "bloom kept off the weighbeam since the guild factor shaved the camp's weight two seasons back and the camp starved that winter — the withhold's own ledger",
-    "floodpaper": "paper owed to the guild's chest at Malby since the winter after the flood — the borrowed punt and the stranded season's stores, the shelter law's cost"
+    "floodpaper": "paper owed to the guild's chest at Malby since the winter after the flood — the borrowed punt and the stranded season's stores, the shelter law's cost",
+    "step": "step at the weir stair — the standing head named by the stair's wet step, the timbers' setting in the keeper's hand (three the working head, two the low band's standing, one the drought floor the drought's own)",
+    "notch": "notch on the tally staff — the dry years' sequence in wood, the beam's reckoning cut at the weighing day"
   },
   "flow_glosses": {
     "the_toll_nets": "the toll's net surplus, the punt fund climbing toward the punt's twelve",
@@ -146,6 +149,9 @@
     "the_paper_repriced": "the guild re-priced the paper at the reckoning — the squeeze answering the withhold: two more paper owed for the loads kept off the weighbeam, the debt climbing while the bloom stays unweighed",
     "the_floodpaper_fell": "the flood paper fell at the reckoning — the crossing clear, the toll its own again",
     "the_paper_inherited": "the flood paper walked to the second hand — the drowned generation's debt the living line's now, the pole and the paper one inheritance",
-    "the_punt_bought": "the punt bought back at Malby — the fund's twelve walked to the boatyard's town, the family's boat coming home to the stair"
+    "the_punt_bought": "the punt bought back at Malby — the fund's twelve walked to the boatyard's town, the family's boat coming home to the stair",
+    "the_bloom_sold": "the withhold sold at the beam — the bloom held back since the shave finally walked to the weighbeam, the price banked at the crofts where the tally's notches record it",
+    "the_timbers_set": "the timbers set to the low band at the weir stair — the pool held for the crossing, the race at its trickle, the run light: the standing quarrel made arithmetic, the second step's own argument",
+    "the_dry_year_notched": "the dry year's notch cut at the weighing day — the tally staff's count climbing, the beam's memory of the thin season, the grounding year weighed light"
   }
 }

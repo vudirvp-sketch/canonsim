@@ -155,11 +155,13 @@ def test_the_armed_census() -> None:
     it)."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
-    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
+        "step", "notch"]
     # no flow touches the flood paper — the no-amortization law again
     assert not [f for f in economy["flows"] if f["kind"] == "floodpaper"]
     ketta = next(n for n in pack.entities["npcs"] if n["id"] == KETTA)
-    assert ketta["accounts"] == {"coin": 2, "floodpaper": FLOOD_PAPER}
+    assert ketta["accounts"] == {"coin": 2, "floodpaper": FLOOD_PAPER,
+                                 "step": 3}  # iter-275: the timbers' setting
     dellan = next(n for n in pack.entities["npcs"] if n["id"] == DELLAN)
     assert dellan["accounts"] == {"floodpaper": 0}
     actions = {a["intent"]: a for a in pack.data["actions.json"]["actions"]}
