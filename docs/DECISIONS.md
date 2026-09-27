@@ -224,3 +224,39 @@ Disposition CONFIRMED (the §6.5 embodiment rows COMPLETE; the move
 release the owner's future row at its iter-263 price; the owner's RU
 report docs/iterations/iter-265-render-conditional-report.md carries
 the world-track orientation the same call asked for).
+
+### D-242 — iter-277 · worldcontext (R0)
+
+The owner's world-track archive-ingestion call: the external
+`WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip` (a derived navigation
+bundle, its own audit pin iter-272 @ `8ec6442`) is ingested ONCE and
+reconciled — never copied into current truth. Decision: (a) the
+durable result is a NEW compact surface,
+`docs/worldbuild/WORLD_TRACK_AGENT_CONTEXT.md` — identity, the
+non-negotiable causal rules, the canon/LLM/player boundary (the
+project model SIMULATOR→CANON, LLM→INTERFACE, PLAYER→CANONICAL
+ACTOR, WORLD→AUTONOMOUS, NARRATIVE→READ-SIDE), the worldbuilding
+boundary, the proven substrate, the evidence conclusions, the open
+hypotheses, the deferred mechanisms, the W-stage boundary, navigation,
+anti-patterns — the worldbuild README's step-0 entry; (b) the pack is
+preserved verbatim as historical/bootstrap evidence at
+`docs/worldbuild/archive/` (the md5-pinned zip + a provenance README
+applying the legacy-archive law: open only for its unique retains —
+the caravan dossier, the probe contracts, the dormant-regime cards,
+the intake crosswalk — never re-ingested, never a second source);
+(c) the work boundary recorded per the owner's directive: W1–W4
+closed historical foundation, W5 gate met / evidence retained, W6 the
+current execution stage, W7 after W6, W8 after W7 — no old stage
+reopened without fresh regression evidence. Why: the owner's final
+requirement — the repository alone must carry enough durable context
+that a future agent continues the world track without the zip
+re-uploaded; repository code/tests/STATUS/TASKS/owner docs stay
+authoritative for current state (the pack's snapshot is four
+iterations behind — its "open W5 residuals" all landed iter-266..276;
+its I0 proposal is CONFIRMED evidence since iter-276). Consequence:
+world-track agents enter at the context doc, then the named owners;
+the pack's claims never override an owner; KI#106 (the ledger's
+duplicated squash-landing rows) closed in the same iteration; Class
+DOC-ADMISSION (R0 — zero code, zero pack, zero canon change);
+verification 2520+9 + ruff + docguard + topology --check clean; the
+owner's RU report docs/iterations/iter-277-worldcontext-report.md.

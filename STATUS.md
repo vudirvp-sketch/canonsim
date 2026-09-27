@@ -1,35 +1,39 @@
-Iteration: iter-276 (`ignition` — the I0 World Ignition Witness,
-  the owner's world-liveness direction, the execution order's fifth
-  row: the FIRST moving-meso proof over existing primitives): the
-  camp's freight loop over three locations and three cycles, one
-  route edge perturbed (the keep-Malby road closed), the five-leg
-  chain measured — the exclusion, the divergence, the response (the
-  attempts), the residue, the changed next-cycle condition; the four
-  timelines diverging never synchronized (people fail, material
-  arrives, knowledge never mints, obligations stand); the verdict:
-  the substrate expresses the chain, no machinery promoted; the
-  limitation inventory opened (the route writer, the two-sided band,
-  the response floor); the owner's RU report at
-  docs/iterations/iter-276-ignition-report.md
+Iteration: iter-277 (`worldcontext` — the owner's world-track
+  archive-ingestion call: the external WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip
+  fully ingested and reconciled into the repo's persistent agent-facing
+  documentation, never merely summarized): every pack claim classified
+  against HEAD (the pack pins iter-272 — four iterations behind), the
+  durable compact surface created
+  (docs/worldbuild/WORLD_TRACK_AGENT_CONTEXT.md), the pack preserved
+  verbatim as historical/bootstrap evidence
+  (docs/worldbuild/archive/), the W-boundary recorded (W1–W4 closed
+  historical foundation, W5 gate met / evidence retained, W6 the
+  current execution stage, W7 after W6, W8 after W7); KI#106 found
+  and closed (the TASKS ledger's duplicated iter-276/275 rows); the
+  owner's RU report at docs/iterations/iter-277-worldcontext-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2520 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
-Date: 2026-09-27 ·
-Scope: tests/test_ignition.py (new, the witness — 7 tests, the claim
-  packet), docs/{worldbuild/WORLD_TESTS.md (§9 the I0 record, the
-  single owner), worldbuild/WORLD_WORKPLAN.md (§7 the standing order
-  advanced to W6), blueprint/phases.md (§6 the iter-276 record),
-  TASKS.md (the ledger, iter-266 evicted), iterations/
-  iter-276-ignition-report.md (new, the owner's RU deliverable)},
-  STATUS.md, worklog.md (iter-266 evicted) — 8 paths (R2 — the
-  crafted twin pair; zero core, zero pack, zero canon change, the LOG
-  untouched, zero corpus price)
-Track A: the I0 witness RUN and CONFIRMED (the first world-liveness
-  proof; no machinery promoted, the inventory's candidates awaiting
-  repetition); the order continues: W6 genre under the resulting
-  evidence (the owner's call — a new station). The ssi family
+Date: 2026-09-28 ·
+Scope: docs/{worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (new, the
+  durable compact surface), worldbuild/archive/README.md (new, the
+  provenance fence) + archive/WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip
+  (new, the preserved pack, md5-pinned), worldbuild/README.md (the
+  read order + the ownership row + the archive fence),
+  AGENT_NAVIGATION.md (§1 the 11-file worldbuild row),
+  blueprint/phases.md (§6 the iter-277 record), TASKS.md (the ledger,
+  the duplicates collapsed per KI#106), DECISIONS.md (D-242),
+  iterations/iter-277-worldcontext-report.md (new, the owner's RU
+  deliverable)}, STATUS.md, worklog.md — 11 paths (R0, doc-only —
+  the ingestion task inherently spans the new surface + its syncs;
+  zero code, zero pack, zero canon change, the LOG untouched, zero
+  corpus price)
+Track A: the world-track bootstrap pack INGESTED and RECONCILED —
+  the durable agent context stands on its own (a future agent never
+  needs the zip re-uploaded); the order continues: W6 genre under the
+  resulting evidence (the owner's call — a new station). The ssi family
   COMPLETE except ssi-5, owner-gated.
 
 
@@ -61,6 +65,7 @@ Track A: the I0 witness RUN and CONFIRMED (the first world-liveness
 
 - KI#104 · docs/TASKS.md's iteration ledger jumped iter-267 → iter-258 (the iter-268 row never landed; the iter-268 report + worklog claimed "the ledger, iter-258 evicted") · CLOSED iter-269 (the row restored from the iter-268 records + iter-269's row added, the tail re-capped at 10)
 - KI#105 · the committed HEAD red: iter-268's claimed re-pin of tests/test_accountgloss.py never landed in commit 8ec6442 — the suite failed 2 tests (the old bloom gloss pinned against the pack's rs-10 dated row) · CLOSED iter-269 (the pin re-landed to the dated gloss — iter-268's own recorded intent, the re-pins' third witness)
+- KI#106 · docs/TASKS.md's iteration ledger carried byte-identical duplicate rows for iter-276 and iter-275 (the four-iteration squash landing's artifact — two pairs of doubled lines at the 10-cap) · CLOSED iter-277 (the duplicates collapsed; the tail now 9 unique rows, within the cap)
 
 ## FAQ / Pitfalls
 
@@ -91,11 +96,25 @@ Track A: the I0 witness RUN and CONFIRMED (the first world-liveness
 
 ## Next step
 
-**iter-276 DONE: the I0 World Ignition Witness (the five-leg chain
+**iter-277 DONE: the world-track archive ingestion (the owner's call:
+  the external WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip fully ingested
+  and reconciled, the durable agent context created, the pack
+  preserved as historical/bootstrap evidence — a future agent never
+  needs the zip re-uploaded; KI#106 found and closed; the W-boundary
+  recorded: W1–W4 closed historical foundation, W5 gate met /
+  evidence retained, W6 the current execution stage, W7 after W6,
+  W8 after W7).**
+  2520+9. The owner's RU report:
+  docs/iterations/iter-277-worldcontext-report.md.
+Next: W6 genre under the resulting evidence (the owner's call — a
+  new station; a failed genre test identifies the missing world
+  substrate, never triggers plot writing).
+Active KIs: KI#104, KI#105, KI#106 (all CLOSED).
+iter-276 DONE: the I0 World Ignition Witness (the five-leg chain
   measured on existing primitives over the perturbed keep-Malby
   edge; the four timelines diverging never synchronized; the verdict
   — the substrate expresses the chain, no machinery promoted; the
-  limitation inventory opened with three named candidates).**
+  limitation inventory opened with three named candidates).
   2520+9. The owner's RU report:
   docs/iterations/iter-276-ignition-report.md.
 iter-275 DONE: the §6.2 fill row (PRESENT + NOTCH as live account

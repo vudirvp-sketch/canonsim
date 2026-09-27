@@ -4531,6 +4531,45 @@ row: the first moving-meso proof over existing primitives):**
   topology --check clean. The owner's RU report:
   `docs/iterations/iter-276-ignition-report.md`.
 
+**The iter-277 worldcontext record (R0, doc-only — the owner's
+world-track archive-ingestion call: the external
+`WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip` fully ingested and
+reconciled, never merely summarized):**
+
+- **The form.** The pack (an external derived navigation bundle, its
+  own audit pin iter-272 @ `8ec6442`, md5
+  `2799d124168c303fe800c44b5bc1c1f3`) read in full against HEAD
+  `55fd4a2` (iter-276); every claim classified — canonical doctrine
+  (already owned by AGENTS/VISION/worldbuild owners), current
+  implementation truth (checked against code/tests/STATUS/TASKS — the
+  pack is four iterations behind: the W5 fill rows, the iter-266
+  dispositions, rs-9/rs-10, the settlement verb, stepbench, and the I0
+  witness all postdate its snapshot), historical evidence (D-236–D-240,
+  retained as evidence, never reopened), hypothesis (the frontier
+  synthesis candidates — PROPOSAL, unpromoted), deferred (B1, the
+  dormant regimes, the standing rows), owner-gated (D-236, the
+  promotion gate, W6 entry), and closed (W1–W4, the phase ladder).
+- **The durable result.** `docs/worldbuild/WORLD_TRACK_AGENT_CONTEXT.md`
+  (new, the compact surface: identity, the non-negotiable rules, the
+  canon/LLM/player boundary, the worldbuilding boundary, the proven
+  substrate, the evidence conclusions, the open hypotheses, the
+  deferred mechanisms, the W-stage boundary with W6 the current
+  execution stage, navigation, anti-patterns) — a future agent needs
+  the pack never re-uploaded. The pack preserved verbatim as historical
+  evidence at `docs/worldbuild/archive/` (the zip + its provenance
+  README, the legacy-archive law applied: open only for what it
+  uniquely retains — the caravan dossier, the probe contracts, the
+  regime cards, the intake crosswalk).
+- **The sync.** The worldbuild README (read order + ownership + the
+  archive fence), AGENT_NAVIGATION §1 (the 11-file row), the W-boundary
+  recorded per the owner's directive: W1–W4 closed historical
+  foundation; W5 gate met / evidence retained; W6 current execution
+  stage; W7 after W6; W8 after W7 — no old stage reopened without fresh
+  regression evidence. 2520+9 + ruff + docguard + topology --check
+  clean (zero code, zero pack, zero canon change, the LOG untouched).
+  The owner's RU report:
+  `docs/iterations/iter-277-worldcontext-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -18,6 +18,10 @@ updated.
 
 Normal worldbuilding work:
 
+0. `WORLD_TRACK_AGENT_CONTEXT.md` — the durable compact agent context
+   (identity, boundaries, proven substrate, stage/gate, navigation) — the
+   entry surface for an agent resuming the world track; it navigates, it
+   never replaces the owners below.
 1. `WORLD_KERNEL.md` — current world identity, hard laws, scope, and open questions.
 2. The relevant domain owner — `RESONANCE.md`, `LIFE_PERSONHOOD.md`, `PEOPLES.md`, or `CULTURES_CIVILIZATION.md`.
 3. `ANCHOR_REGION.md` — current human-scale integration surface and causal map.
@@ -27,6 +31,10 @@ Normal worldbuilding work:
 
 Do **not** load the legacy source archive by default. Open it only to recover
 provenance, inspect a disputed passage, or deliberately re-run old research.
+The same law governs `archive/` — the preserved world-track bootstrap pack
+(`WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip`, ingested iter-277): historical
+evidence only, never re-ingested wholesale (its provenance fence:
+`archive/README.md`).
 
 ## Information ownership
 
@@ -41,6 +49,7 @@ provenance, inspect a disputed passage, or deliberately re-run old research.
 | `ANCHOR_REGION.md` | Sarrow Vale integration, causal map, meso frontier | world-wide canon |
 | `WORLD_TESTS.md` | test definitions and evidence | new canon decisions without a test/research disposition |
 | `WORLD_WORKPLAN.md` | current frontier, routing, next deliverables | historical transcript |
+| `WORLD_TRACK_AGENT_CONTEXT.md` | the world-track agent context: identity, boundaries, proven substrate, stage/gate, navigation, anti-patterns | owner content — it navigates and reconciles, never restates; history (the archive/ record stays in `archive/README.md`) |
 
 ## Status vocabulary
 
