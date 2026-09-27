@@ -493,9 +493,7 @@ The station's standing order after the landing (the owner's
 2026-09-27 execution order): the I0 witness
 RUN and CONFIRMED (iter-276 — no new machinery promoted, the
 inventory's candidates awaiting repetition) → W6 genre under the
-resulting evidence (a failed genre test identifies the missing world
-substrate rather than triggering plot writing — the station's own
-law).
+resulting evidence (the §8 station law).
 
 ## 8. W6 — Genre tests
 
@@ -531,12 +529,21 @@ POLITICS 2/3 (the balance-move assembly a named RENDERING_GAP — the
 causal row rides the scene card, outside the kit form), the free
 readings diverging materially across the same pack's two packages
 (the hypothesis's divergence half carried; the genre labels extract
-under directed frames, not free namings). The owner's LIVE band
-(their own reading of the delivered kit) and W7 remain owner-routed.
+under directed frames, not free namings). The band's LIVE half
+landed (iter-280 — the owner's blind Q1–Q5 in the chat, then the
+preset reveal; the iter-270 livescored precedent's form): the same
+frames at the band level, the SAME two legs failing at both bands
+(the night form, the balance-move assembly — the two RENDERING_GAPs
+double-confirmed, closed as named gaps); the A3 objective leg the
+one cross-band divergence (the LLM n=2 carry against the live miss
+— reader-class variance, the iter-270 mirror); the free namings
+again divergent across the pack's two packages. The reading band
+COMPLETE (LLM n=2 + live n=1), the reading-side PARTIALLY
+CONFIRMED at both bands; W7 and the two gap routings owner-routed.
 The full records: `WORLD_TESTS.md` §9's W6 entry; the witnesses
 `tests/test_genre.py` + the delivered kit; the owner's RU reports
-`docs/iterations/iter-278-genre-report.md` and
-`docs/iterations/iter-279-genreread-report.md`.
+`docs/iterations/iter-278-genre-report.md`,
+`iter-279-genreread-report.md` + `iter-280-liveread-report.md`.
 
 ## 9. W7 — Negative / compression tests
 

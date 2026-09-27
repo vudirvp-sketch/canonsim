@@ -4676,6 +4676,79 @@ repo, Rule 9 — the runner, the kit, the transcripts):**
   the LOG untouched, zero corpus price). The owner's RU report:
   `docs/iterations/iter-279-genreread-report.md`.
 
+**The iter-280 liveread record (R0, doc-only — the W6 reading
+band's LIVE half, the owner's «продолжай работу над задачами
+класса мирового трека, делай то, что логичнее и правильнее сейчас
+сделать, а не потом» continuation call; the reading arrived in the
+chat — zero repo-side experiment, the kit and the transcripts stay
+outside the repo, Rule 9):**
+
+- **The form.** The owner's blind reading of the delivered iter-279
+  kit (Q1–Q5 answered in the chat BEFORE audit_preset.md was
+  opened), then the preset reveal carrying the owner's own scoring —
+  this iteration verifies that scoring against the pre-set bars and
+  records the convergence resolution: the iter-270 livescored
+  precedent's exact form (a received reading scored, never
+  re-asked; the blind form is the measurement's own accuracy).
+- **The measurement.** Live band n=1 — MYSTERY 3/3 MET (M1 the
+  hidden shave, M2 the deliberate tally read, M3 the
+  knowledge-as-leverage: FULL cross-band convergence with the LLM
+  band's 3/3). ADVENTURE: A1/A4 MET; A2 PARTIAL (the road's toll
+  carried — the live token fatigue 0→70 against the LLM band's
+  road-toll, the same half — the NIGHT form missed); A3 MISSED at
+  the bar (the obtained half carried — the shave knowledge + the
+  leverage over Garrick; the goal half refused as «not given
+  explicitly»: the too-literal criterion against the bar's
+  reconstruct-through-the-causal-path rule). POLITICS: P1/P2 MET
+  (the differential table assembled — the guild's economic barring
+  against the families' ritual vigil, the watch's rotation,
+  Maren's distrust); P3 PARTIAL at the strict bar (the climb
+  16→20 + the public rituals carried; the standing-terms
+  persistence, the intermediate 16→18→20, and the repriced row's
+  public retainment missed).
+- **The convergence resolution.** The standing question (does the
+  live reader extract the same frames as the converged LLM
+  readings?) answered YES at the band level — and the SAME two legs
+  fail at BOTH bands (the night form; the balance-move assembly),
+  now missed by three independent readings across two reader
+  classes: the two iter-279 RENDERING_GAPs DOUBLE-CONFIRMED, closed
+  as named gaps (the live band did not rescue them; no prose
+  edited, no pack change, no machinery promoted — the station's
+  law held). The ONE cross-band leg divergence (A3) classified as
+  the LIVE band's reader-class variance — the mirror of iter-270's
+  resolution (there the glm recheck's miss was the LLM band's own;
+  here the live miss stands against the LLM band's n=2 carry) —
+  the material carries the form; the honest extraction-strength
+  datum recorded: the mystery contour reader-forced (every reading
+  at both bands), the adventure objective reader-optional (LLM
+  2/2, live 0/1). The FREE band: the two packages again read
+  materially differently (the journey: travel vignette + economic
+  mystery + coercion; the politics: institutional + disaster +
+  debt + feud-ritual) — the divergence half carried at BOTH bands,
+  the genre-matrix labels again never the free namings. The
+  RENDERING_GAP/SUBSTRATE_GAP discrimination law STANDING (the
+  owner's own closing note, recorded verbatim in the report): a
+  reading miss never proves a substrate lack — the deterministic
+  band (iter-278) carries the night form and the terms'
+  persistence; first separate form-loss-at-reading from
+  form-absence-in-material.
+- **The verdict.** The W6 READING BAND COMPLETE (LLM n=2 + live
+  n=1); the hypothesis's reading-side PARTIALLY CONFIRMED at both
+  bands; the station's remaining rows owner-routed — W7 and the two
+  RENDERING_GAP routings as future rows.
+- **The sync.** WORLD_TESTS §9 (the W6 entry's live-half record),
+  WORLD_WORKPLAN §8 (+ a D-024 cruft pass: the §7 law-restatement
+  collapsed to the §8 pointer, the cap held at 599/600),
+  WORLD_TRACK_AGENT_CONTEXT §9, TASKS (the ledger, iter-270
+  evicted), STATUS (+ the §5 mandatory KI cleanup: KI#104/105
+  closed iter-269 and KI#106 closed iter-277 deleted — the
+  standing debt paid, the records live in git + the TASKS ledger),
+  worklog (iter-270 evicted), the iter-280 report (new, the owner's
+  RU deliverable) — 7 paths. 2530+9 + ruff + docguard +
+  topology --check clean (R0 — doc-only; zero code, zero pack,
+  zero canon change, the LOG untouched, zero corpus price). The
+  owner's RU report: `docs/iterations/iter-280-liveread-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -314,9 +314,19 @@ assembly — the reading form's own bands, never prose-fixed), the
 free readings diverging materially across the same pack's packages
 (the hypothesis's divergence half carried at the free band; the
 genre shapes extract under directed frames). The record:
-`WORLD_TESTS.md` §9's W6 entry. The owner's LIVE band (their own
-reading of the delivered kit — the convergence question, fresh n=1)
-and W7 remain owner-routed rows.
+`WORLD_TESTS.md` §9's W6 entry. W6's second row is COMPLETE
+(iter-280 — the LIVE half landed: the owner's blind Q1–Q5 received
+in the chat, then the preset reveal with their own scoring, verified
+against the pre-set bars): the same frames extracted at the band
+level, the SAME two legs failing at both bands (the night form and
+the balance-move assembly — the two RENDERING_GAPs double-confirmed,
+closed as named gaps, never prose-fixed), the A3 objective leg the
+one cross-band divergence (the live miss against the LLM band's n=2
+carry — reader-class variance, the iter-270 mirror), the free
+namings again divergent across the same pack's two packages. The
+reading-side PARTIALLY CONFIRMED at both bands; W7 and the two gap
+routings owner-routed rows. The owner's RU report:
+`docs/iterations/iter-280-liveread-report.md`.
 
 ## 10. Navigation (the authoritative owners)
 

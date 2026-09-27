@@ -1,26 +1,30 @@
-Iteration: iter-279 (`genreread` — the owner's «продолжай работу над
-  задачами класса world track, делай то что логичнее и правильнее
-  сейчас сделать а не потом» call: the W6 READING BAND's LLM half —
-  the current station's open row, the recorded W5 form; the live band
-  stays the owner's): the reading kit built over the COMMITTED pack
-  (zero core, zero pack change, the LOG untouched, zero corpus
-  price; the runner + the kit + the transcripts outside the repo,
-  Rule 9; byte-identical regeneration) — TWO one-history packages
-  (the JOURNEY seed 42 carrying adventure + mystery together; the
-  POLITICS seed 2 carrying the differential institutional answer +
-  the squeeze: the two fires, the grief at each, the guild's
-  council, the families' two vigils, the paper 16→18→20 public);
-  the pre-set audit written BEFORE any reading (the isolation law);
-  the blind glm readings n=2 per question, fresh session each —
-  MYSTERY 3/3 convergent, ADVENTURE 3/4 (the night form a named
-  RENDERING_GAP — the reading form never surfaces the unlit
-  crofts), POLITICS 2/3 (the balance-move assembly a named
-  RENDERING_GAP — the causal row rides the scene card, outside the
-  W5 kit form), the free readings diverging materially across the
-  same pack's two packages (the hypothesis's divergence half
-  carried; the genre shapes extract under directed frames); the
-  owner's live band OPEN (the kit delivered with Q1–Q5 + the bars);
-  the owner's RU report at docs/iterations/iter-279-genreread-report.md
+Iteration: iter-280 (`liveread` — the owner's «продолжай работу над
+  задачами класса мирового трека, делай то, что логичнее и
+  правильнее сейчас сделать, а не потом» continuation call: the W6
+  READING BAND's LIVE half — the station's open row, the iter-270
+  livescored precedent's exact form): the owner's blind Q1–Q5 of
+  the delivered iter-279 kit received in the chat BEFORE
+  audit_preset.md, then the preset reveal with the owner's own
+  scoring — this iteration verified that scoring against the
+  pre-set bars and resolved the standing convergence question —
+  MYSTERY 3/3 at the live band (full cross-band convergence with
+  the LLM 3/3), the SAME two legs failing at BOTH bands (the night
+  form, the balance-move assembly — three independent readings
+  across two reader classes: the two RENDERING_GAPs
+  DOUBLE-CONFIRMED, closed as named gaps, never prose-fixed), the
+  A3 objective leg the ONE cross-band divergence (the live miss
+  against the LLM band's n=2 carry — reader-class variance, the
+  iter-270 mirror; the material carries the form), the free
+  namings again divergent across the same pack's two packages (the
+  divergence half carried at both bands), the
+  RENDERING_GAP/SUBSTRATE_GAP discrimination law standing (a
+  reading miss never proves a substrate lack); the W6 READING BAND
+  COMPLETE (LLM n=2 + live n=1), the reading-side PARTIALLY
+  CONFIRMED at both bands; the owner's RU report at
+  docs/iterations/iter-280-liveread-report.md; the §5 mandatory KI
+  cleanup paid in the same edit (KI#104/105 closed iter-269,
+  KI#106 closed iter-277 — deleted, the records live in git + the
+  TASKS ledger)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
@@ -28,19 +32,22 @@ Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-28 ·
 Scope: docs/{worldbuild/WORLD_TESTS.md (§9 the W6 entry's
-  reading-band record), worldbuild/WORLD_WORKPLAN.md (§8 the second
-  row's LLM half), worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 the
-  stage's standing state), blueprint/phases.md (§6 the iter-279
-  record), TASKS.md (the ledger, iter-269 evicted),
-  iterations/iter-279-genreread-report.md (new, the owner's RU
-  deliverable)}, STATUS.md, worklog.md — 8 paths (R0, doc-only in
-  the repo — the experiment itself ran outside; zero code, zero
-  pack, zero canon change, the LOG untouched, zero corpus price)
-Track A: W6's reading band — the LLM half measured (the kit
-  delivered, the blind readings scored against the pre-set bars,
-  two RENDERING_GAPs named never fixed); the owner's LIVE band (the
-  kit in the owner's hands, the convergence question) and W7
-  owner-routed. The ssi family COMPLETE except ssi-5, owner-gated.
+  live-half record), worldbuild/WORLD_WORKPLAN.md (§8 + a D-024
+  cruft pass in §7 — the station-law restatement collapsed to the
+  §8 pointer, the cap held 599/600), worldbuild/
+  WORLD_TRACK_AGENT_CONTEXT.md (§9 the stage's standing state),
+  blueprint/phases.md (§6 the iter-280 record), TASKS.md (the
+  ledger, iter-270 evicted), iterations/iter-280-liveread-report.md
+  (new, the owner's RU deliverable)}, STATUS.md (+ the §5 KI
+  cleanup), worklog.md (iter-270 evicted) — 8 paths (R0, doc-only;
+  zero code, zero pack, zero canon change, the LOG untouched, zero
+  corpus price)
+Track A: W6's reading band COMPLETE — both halves measured (the
+  LLM half iter-279, the live half iter-280): the same frames
+  extracted at the band level, the same two legs failing both bands
+  (the two RENDERING_GAPs double-confirmed, named never fixed); W7
+  and the two gap routings owner-routed. The ssi family COMPLETE
+  except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -69,9 +76,10 @@ Track A: W6's reading band — the LLM half measured (the kit
 
 ## Active KIs
 
-- KI#104 · docs/TASKS.md's iteration ledger jumped iter-267 → iter-258 (the iter-268 row never landed; the iter-268 report + worklog claimed "the ledger, iter-258 evicted") · CLOSED iter-269 (the row restored from the iter-268 records + iter-269's row added, the tail re-capped at 10)
-- KI#105 · the committed HEAD red: iter-268's claimed re-pin of tests/test_accountgloss.py never landed in commit 8ec6442 — the suite failed 2 tests (the old bloom gloss pinned against the pack's rs-10 dated row) · CLOSED iter-269 (the pin re-landed to the dated gloss — iter-268's own recorded intent, the re-pins' third witness)
-- KI#106 · docs/TASKS.md's iteration ledger carried byte-identical duplicate rows for iter-276 and iter-275 (the four-iteration squash landing's artifact — two pairs of doubled lines at the 10-cap) · CLOSED iter-277 (the duplicates collapsed; the tail now 9 unique rows, within the cap)
+(none — the §5 mandatory cleanup paid at iter-280: KI#104/KI#105
+(closed iter-269) and KI#106 (closed iter-277) deleted after
+passing the 2-iteration mark; the close records live in git, the
+TASKS ledger, and the owning iteration reports)
 
 ## FAQ / Pitfalls
 
@@ -102,7 +110,36 @@ Track A: W6's reading band — the LLM half measured (the kit
 
 ## Next step
 
-**iter-279 DONE: the W6 reading band's LLM half (the owner's
+**iter-280 DONE: the W6 reading band's LIVE half (the owner's
+  «продолжай работу над задачами класса мирового трека, делай то,
+  что логичнее и правильнее сейчас сделать, а не потом»
+  continuation call — the station's open row, the iter-270
+  livescored precedent's form): the owner's blind Q1–Q5 of the
+  delivered kit received in the chat, then the preset reveal —
+  the scoring verified against the pre-set bars: MYSTERY 3/3 at
+  the live band (full cross-band convergence with the LLM 3/3),
+  ADVENTURE A1/A4 MET + A2 partial + A3 missed, POLITICS P1/P2
+  MET + P3 partial at the strict bar — the SAME two legs failing
+  at BOTH bands (the night form, the balance-move assembly — the
+  two RENDERING_GAPs DOUBLE-CONFIRMED, closed as named gaps),
+  the A3 objective the ONE cross-band divergence (the live miss
+  against the LLM n=2 carry — reader-class variance, the
+  iter-270 mirror), the free namings again divergent across the
+  same pack's packages (the divergence half carried at both
+  bands), the extraction-strength datum recorded (the mystery
+  contour reader-forced, the adventure objective
+  reader-optional).** The W6 READING BAND COMPLETE (LLM n=2 +
+  live n=1), the reading-side PARTIALLY CONFIRMED at both bands;
+  the §5 KI cleanup paid (KI#104/105/106 deleted).
+  2530+9. The owner's RU report:
+  docs/iterations/iter-280-liveread-report.md.
+Next: the W6 station's remaining rows, owner-routed — W7
+(negative / compression tests) and/or the two double-confirmed
+RENDERING_GAP routings (the night risk form, the balance-move
+assembly) as future rows on the owner's call.
+Active KIs: none (KI#104/105/106 deleted at iter-280's §5
+mandatory cleanup).
+iter-279 DONE: the W6 reading band's LLM half (the owner's
   «продолжай работу над задачами класса world track, делай то что
   логичнее и правильнее сейчас сделать а не потом» call — the
   current station's open row, the recorded W5 form): the reading
@@ -114,15 +151,9 @@ Track A: W6's reading band — the LLM half measured (the kit
   ADVENTURE 3/4, POLITICS 2/3 (two RENDERING_GAPs named, never
   fixed: the night risk form, the balance-move assembly), the free
   readings diverging materially across the same pack's packages
-  (the W6 hypothesis's divergence half carried at the free band).**
+  (the W6 hypothesis's divergence half carried at the free band).
   2530+9. The owner's RU report:
   docs/iterations/iter-279-genreread-report.md.
-Next: the W6 station's remaining rows, owner-routed — the owner's
-LIVE band (their own blind reading of the delivered kit — Q1–Q5
-before audit_preset.md; the convergence question, fresh n=1)
-and/or W7 (negative / compression tests); the two named
-RENDERING_GAPs future rows on the owner's call.
-Active KIs: KI#104, KI#105, KI#106 (all CLOSED).
 iter-278 DONE: the W6 genre matrix's first row (the owner's
   «открывай задачу по W6» call — the station's law held: a failed
   genre test identifies the missing world substrate, never triggers

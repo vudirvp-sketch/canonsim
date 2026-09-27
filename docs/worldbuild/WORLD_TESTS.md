@@ -2135,9 +2135,63 @@ register leads the spontaneous vocabulary; the shapes extract under
 the directed questions). VERDICT: the reading-side PARTIALLY
 CONFIRMED at the LLM band — two RENDERING_GAPs named, never fixed
 (no prose edited, no pack change, no machinery), the same-package
-law held. The owner's live band OPEN (the kit delivered:
-READING_INSTRUCTIONS.md Q1–Q5, the bars in audit_preset.md); the
-owner's RU report: `docs/iterations/iter-279-genreread-report.md`.
+law held. The owner's RU report:
+`docs/iterations/iter-279-genreread-report.md`.
+
+**The reading band's LIVE half (iter-280, the owner's «продолжай
+работу над задачами класса мирового трека» continuation call — the
+band's closing row; the owner's blind Q1–Q5 received in the chat
+before audit_preset.md, then the preset reveal with the owner's own
+scoring, this iteration verifying that scoring against the pre-set
+bars — the iter-270 livescored precedent's exact form, zero repo-side
+experiment, R0):** MEASURED at the live band n=1 — MYSTERY met 3/3
+(M1 the hidden shave, M2 the deliberate tally read, M3 the
+knowledge-as-leverage: full cross-band convergence with the LLM
+band's 3/3); ADVENTURE A1/A4 MET, A2 PARTIAL (the road's toll
+carried — the live token the fatigue 0→70 against the LLM band's
+road-toll, the same half; the NIGHT form missed), A3 MISSED at the
+bar (the obtained half carried — the shave knowledge + the leverage
+over Garrick — the goal half refused as «not given explicitly», the
+too-literal criterion against the bar's
+reconstruct-through-the-causal-path rule); POLITICS P1/P2 MET (the
+differential table assembled: the guild's economic barring against
+the families' ritual vigil, the watch's rotation, Maren's distrust),
+P3 PARTIAL at the strict bar (the climb 16→20 and the public rituals
+carried; the standing-terms persistence, the intermediate 16→18→20,
+and the repriced row's public retainment missed). CONVERGENCE
+ANSWERED at the band level: the live reader extracts the same frames
+as the converged LLM readings, and the SAME two legs fail at BOTH
+bands — the night form and the balance-move assembly, now missed by
+three independent readings across two reader classes — the two
+RENDERING_GAPs DOUBLE-CONFIRMED, closed as named gaps (the live band
+did not rescue them; no prose edited, no pack change, no machinery
+promoted, the station's law held). The ONE cross-band leg divergence
+(A3) classified as the LIVE band's reader-class variance — the mirror
+of iter-270's resolution (there the glm recheck's miss was the LLM
+band's own; here the live miss stands against the LLM band's n=2
+carry) — the material carries the form, the miss is a reader-policy
+shape; the honest extraction-strength datum recorded: the mystery
+contour is reader-forced (every reading at both bands extracts it),
+the adventure objective reader-optional (LLM 2/2, live 0/1). The
+FREE band at the live reader: the two packages again read materially
+differently (the journey: travel vignette + social/economic mystery
++ coercion drama; the politics: institutional/factional + disaster
+aftermath + economic/debt + historical-feud ritual) — the W6
+hypothesis's divergence half carried at BOTH bands, and the
+genre-matrix labels again never the free namings. The
+RENDERING_GAP/SUBSTRATE_GAP discrimination law STANDING (the owner's
+own closing note, recorded): the deterministic band carries both
+forms (iter-278's night arrival at the unlit crofts; the repricing's
+terms persisting public) while the reading form loses them — a
+reading miss never proves a substrate lack; first separate
+form-loss-at-reading from form-absence-in-material, and the audit
+preset's own pre-warning (A1/A4/M2 may live in entity records and
+briefs, not the tale line) is the law's standing instance. VERDICT:
+the W6 READING BAND COMPLETE (the LLM half n=2 + the live half n=1),
+the hypothesis's reading-side PARTIALLY CONFIRMED at both bands; the
+station's remaining rows owner-routed — W7 and the two RENDERING_GAP
+routings as future rows. The owner's RU report:
+`docs/iterations/iter-280-liveread-report.md`.
 
 ## 10. Test result vocabulary
 
