@@ -25,7 +25,7 @@ from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any, Final
 
-from core.clock import Clock
+from core.clock import Clock, phase_of_tick
 from core.economy import (
     ACCOUNT_GLOSS_BLOCK,
     ACCOUNT_PREFIX,
@@ -159,6 +159,19 @@ class _Positions:
             for prop, value in props.items()
         }
 
+    def site_props(self, site_id: str) -> dict[str, Any]:
+        """ONE site's props as `site.<prop>` dotted keys (iter-281, the
+        W6 night-form surface): the same fold `location_slots()` reads,
+        scoped to the event's own site — a GENERIC line (the move, any
+        actor's any destination) can condition on the site it lands at
+        without naming the location id in the template. Same raw values,
+        same condition-only law; an unknown site answers empty (a
+        foreign log renders dry, `location_slots()`'s own tolerance)."""
+        site = self._sites.get(site_id)
+        if not site:
+            return {}
+        return {f"site.{prop}": value for prop, value in site.items()}
+
     def location_of(self, entity_id: str) -> str:
         return self._where.get(entity_id, "")
 
@@ -221,6 +234,19 @@ def _event_context(
     # Dotted keys can never collide with the outcome's snake_case
     # vocabulary — the update's placement names the precedence.
     context.update(positions.location_slots())
+    # iter-281 (the W6 night-form surface, the double-confirmed
+    # RENDERING_GAP (a) routing): TWO more read-side condition
+    # namespaces over the same law — the event's own phase as a
+    # per-phase boolean `phase.<id>` (the pack's declared phase ids,
+    # built from phase_of_tick — the rules-level twin, never a Clock
+    # instance; only the CURRENT phase's key present, True) and the
+    # event site's own props as `site.<prop>` (the fold's event-scoped
+    # view — a generic line conditions on the site it lands at). The
+    # substrate carried both all along (the acquisition rule's
+    # phase_in/unless_flag is the same data); the reading form lost
+    # them — the gap's diagnosis, never a runtime primitive.
+    context[f"phase.{phase_of_tick(pack.rules['time'], event.t)}"] = True
+    context.update(positions.site_props(location_id))
     # rs-2 (the account-kind gloss boundary): the account verbs' `kind`
     # slot maps through the pack's table BEFORE the generic outcome
     # loop can land the raw word — the kind's meaning rides every

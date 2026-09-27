@@ -11,6 +11,7 @@
   "scene_card": "{location_name}: {present_names}",
   "fallback": "(t {t}) {event_type}: {actor} → {target}",
   "symbols": {
+    "night_arrival": "{site.lit? — arriving after dark, the yards lit.| — the walk landing after dark, the yards unlit.}",
     "flame_take": [
       "Flame takes to {location}.",
       "Fire catches at {location}."
@@ -24,7 +25,7 @@
     "look_around": "{actor} takes in {location}.",
     "examine": "{actor} examines {target}.",
     "examine_failed": "{actor} squints at {target}, unsure what to make of it.",
-    "move": "{actor} takes the road to {target_location}.",
+    "move": "{actor} takes the road to {target_location}{phase.night?#night_arrival#|.}",
     "talk": "{actor} talks with {target}.",
     "talk_rebuffed": "{target} gives {actor} the cold shoulder.",
     "wait": "{actor} waits.",
@@ -92,7 +93,7 @@
     "high_water_rises": "Day {day}: the river rises — the lower fords drown, the punt men charge double.",
     "long_light_turns": "Day {day}: the long light — the crofts green to the moor's edge, the road dry and fast.",
     "first_frost_turns": "Day {day}: first frost on the weir stair — the road hardens, the trade slows.",
-    "account_sourced": "{target} comes by {amount} {kind} at the year's reckoning{flow? — {flow}}.",
+    "account_sourced": "{target} comes by {amount} {kind} at the year's reckoning{flow? — {flow}}{knows? — {knows}}.",
     "account_transferred": "{actor} passes {amount} {kind} to {target}.",
     "account_consumed": "{actor} is rid of {amount} {kind}.",
     "board_shared": "{actor} shares the winter's board with {target} at {location} — the shelter law's meal, the stores eaten against the debt.",
@@ -146,12 +147,12 @@
     "the_guild_bars_the_stalls": "the guild barred the stalls",
     "the_blood_price_spoken": "the blood price spoken aloud again",
     "the_camps_word": "the camp's word: the honest count cut in the tally; the guild factor shaved the camp's weight two seasons back and the camp starved that winter, and the bloom has sat off the weighbeam since",
-    "the_paper_repriced": "the guild re-priced the paper at the reckoning — the squeeze answering the withhold: two more paper owed for the loads kept off the weighbeam, the debt climbing while the bloom stays unweighed",
+    "the_paper_repriced": "the guild's squeeze answering the withhold: the loads kept off the weighbeam priced onto the standing terms, the debt climbing while the bloom stays unweighed",
     "the_floodpaper_fell": "the flood paper fell at the reckoning — the crossing clear, the toll its own again",
     "the_paper_inherited": "the flood paper walked to the second hand — the drowned generation's debt the living line's now, the pole and the paper one inheritance",
     "the_punt_bought": "the punt bought back at Malby — the fund's twelve walked to the boatyard's town, the family's boat coming home to the stair",
     "the_bloom_sold": "the withhold sold at the beam — the bloom held back since the shave finally walked to the weighbeam, the price banked at the crofts where the tally's notches record it",
     "the_timbers_set": "the timbers set to the low band at the weir stair — the pool held for the crossing, the race at its trickle, the run light: the standing quarrel made arithmetic, the second step's own argument",
-    "the_dry_year_notched": "the dry year's notch cut at the weighing day — the tally staff's count climbing, the beam's memory of the thin season, the grounding year weighed light"
+    "the_dry_year_notched": "the count climbing, the beam's memory of the thin season, the grounding year weighed light"
   }
 }

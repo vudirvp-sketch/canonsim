@@ -243,10 +243,13 @@ def test_the_armed_census() -> None:
     # the verb line (the lint's closure law) + the story listing;
     # rs-4 (iter-199): the verb line gains the flow-gloss tail — the
     # banking lines carry their flows' meanings (the conditional stays
-    # dry for unglossed flows and door-minted events)
+    # dry for unglossed flows and door-minted events); iter-281 (the W6
+    # gap (b) routing): the KNOWS tail — an account event that mints
+    # knowledge carries its witnessed row on the line (rs-9's own
+    # shape; the flow events carry no knowledge and render dry)
     assert pack.templates["events"][SOURCE_EVENT] == (
         "{target} comes by {amount} {kind} at the year's reckoning"
-        "{flow? — {flow}}."
+        "{flow? — {flow}}{knows? — {knows}}."
     )
     assert SOURCE_EVENT in pack.rules["importance"]["story_critical_events"]
 

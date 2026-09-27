@@ -176,12 +176,14 @@ def test_the_armed_census() -> None:
     assert block[0]["who"] == "same_location"
     assert block[0]["except"] == ["actor"]
     assert block[0]["knows"] == "the_paper_repriced"
-    # the knows gloss rides rs-1's one table (the squeeze's own prose)
+    # the knows gloss rides rs-1's one table (the squeeze's own prose —
+    # iter-281: re-authored as the account line's KNOWS TAIL, the W6
+    # gap (b) routing: the guild's agency + the answer-to-withhold +
+    # the standing terms + the climb, one row every consumer)
     assert pack.templates["knows"]["the_paper_repriced"] == (
-        "the guild re-priced the paper at the reckoning — the squeeze "
-        "answering the withhold: two more paper owed for the loads kept "
-        "off the weighbeam, the debt climbing while the bloom stays "
-        "unweighed"
+        "the guild's squeeze answering the withhold: the loads kept off "
+        "the weighbeam priced onto the standing terms, the debt climbing "
+        "while the bloom stays unweighed"
     )
     # the source event is already story-critical (tune-1's law — the
     # reckoning is a story beat of this pack; the squeeze's line rides
@@ -251,11 +253,17 @@ def test_the_squeeze_lands_on_the_standing_terms(tmp_path: Path) -> None:
     assert sim.projection[MASTER]["account.coin"] == 3 + 3 * len(crossings)
     sim.close()
     # the tale carries the squeeze's line — the kind's own gloss riding
-    # the growth (the starved winter's anchor on the climbed debt)
+    # the growth (the starved winter's anchor on the climbed debt), and
+    # iter-281 (the W6 gap (b) routing): the KNOWS TAIL — the event's
+    # own witnessed row riding the same line through rs-1's boundary,
+    # the guild's agency and the standing terms in the reader's material
     tale = render_chronicle(events, pack, seed=42)
     assert (
         "Garrick comes by 2 paper owed to the guild's chest at Malby "
-        "since the starved winter at the year's reckoning." in tale
+        "since the starved winter at the year's reckoning — the guild's "
+        "squeeze answering the withhold: the loads kept off the weighbeam "
+        "priced onto the standing terms, the debt climbing while the "
+        "bloom stays unweighed." in tale
     )
 
 

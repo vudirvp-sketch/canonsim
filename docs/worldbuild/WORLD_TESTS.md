@@ -2193,6 +2193,68 @@ station's remaining rows owner-routed — W7 and the two RENDERING_GAP
 routings as future rows. The owner's RU report:
 `docs/iterations/iter-280-liveread-report.md`.
 
+**The two gap ROUTINGS landed and re-measured (iter-281, the owner's
+«продолжай работу над задачами класса мирового трека, делай то, что
+логичнее и правильнее сейчас сделать, а не потом» delegated call over
+iter-280 §F — the two double-confirmed RENDERING_GAPs as the
+station's own remaining rows; W7 stays "after W6", the station order
+held):** the repair class per the classification law — a RENDERING
+surface, never prose, never a gate, never machinery (the rejected
+knob law respected: the moves stay low-importance, the T7 gate
+untouched). GAP (a) THE NIGHT RISK FORM: two read-side condition
+namespaces over the iter-265 law (`render/chronicle.py` — the event's
+own phase as per-phase booleans `phase.<id>` via `phase_of_tick`, and
+the event site's props as `site.<prop>`, the location fold's
+event-scoped view) + the move line's night arm
+(`templates.json` — `{phase.night?#night_arrival#|.}`, the SYMBOL
+indirection carrying the composed night+lit condition: the engine's
+conditional partition splits at the first `|`, so the inner
+lit/unlit branch rides a symbol expanded after the outer choice — the
+existing machinery, zero engine change). GAP (b) THE BALANCE-MOVE
+ASSEMBLY: the account line's KNOWS TAIL — `{knows? — {knows}}` on
+`account_sourced` (rs-9's `{secret?}` tail's own shape: an account
+event that mints knowledge carries its witnessed row on the line
+through rs-1's boundary — the reprice and notch doors; the flow
+events carry no knowledge and render dry), the_paper_repriced
+re-authored as the tail (the guild's agency + the answer-to-withhold
++ the standing terms + the climb), the_dry_year_notched
+de-redundantized against its kind gloss. Zero canon, zero core, the
+LOG untouched, the golden corpus byte-identical (the templates never
+enter the log — the witness `tests/test_gaproutes.py`, 10 tests, the
+claim packet; the pins updated: repricing/stepbench/debt1/
+campaccount/freightvol). THE RE-MEASURE (the blind glm n=2 per
+question, fresh sessions, the bars never shown, the same directed
+frames over the regenerated kit — byte-identical on the double
+build; the kit delivered as the sandbox attachment with the preset,
+the owner's live re-read the owner's own next beat): ADVENTURE
+4/4 n=2 — A2's NIGHT FORM extracted and quoted by BOTH readings
+(the prior band: absent from the material, missed by three readings
+across two bands — GAP (a) CLOSED at the re-measure); MYSTERY 3/3
+n=2 (no regression — the strongest contour untouched); POLITICS
+P1/P2 MET n=2, P3 PARTIAL at the strict bar but MATERIALLY IMPROVED:
+the guild's AGENCY over the repricing carried n=2 (the prior band's
+single agency misread eliminated), the causal row (the squeeze
+answering the withhold) quoted in full by both readings — GAP (b)'s
+NAMED LEGS CLOSED; the honest residuals, named never prose-fixed:
+the intermediate 16→18→20 arithmetic not explicitly assembled by
+either reading (the numbers all on the surfaces — the opening
+record's 16, the two squeeze lines, the close's 20 — a
+reader-synthesis residual, the discrimination law's mirror: a
+reading miss with the form present is reader variance, never a
+rendering gap), the decisive-move slot still taken by the fires
+(both readings — an honest pick: the fires ARE a balance move), the
+repriced row's public retention not explicit. The FREE namings
+again divergent across the same pack's two packages (tragedy only
+for the politics, the travelogue/journey only for the journey —
+n=2 convergent per package; the genre-matrix labels again never the
+free namings) — the divergence half carried at the re-measure.
+VERDICT: the two routings LANDED, both gaps' named legs CLOSED at
+the LLM re-measure band; the reading-side now CONFIRMED at the
+improved band (the two prior double-confirmed misses repaired at
+their bars); W6's own rows COMPLETE — W7 the owner's explicit call.
+The owner's RU report:
+`docs/iterations/iter-281-gaproutes-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

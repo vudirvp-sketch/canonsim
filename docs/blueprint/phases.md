@@ -4749,6 +4749,123 @@ outside the repo, Rule 9):**
   zero canon change, the LOG untouched, zero corpus price). The
   owner's RU report: `docs/iterations/iter-280-liveread-report.md`.
 
+**The iter-281 gaproutes record (R2 — the W6 station's two
+double-confirmed RENDERING_GAP routings, the owner's «продолжай
+работу над задачами класса мирового трека, делай то, что логичнее
+и правильнее сейчас сделать, а не потом» delegated call over
+iter-280 §F; W7 stays "after W6" — the station order held, the
+iter-279 argument):**
+
+- **The repair class.** A RENDERING surface per the classification
+  law — never prose, never a gate, never machinery. The rejected
+  knob law respected: the moves stay low-importance, the T7 tale
+  gate untouched (the night form lives on the records surface, the
+  entity views — the kit's own surface, never the tale line).
+- **GAP (a) — the night risk form (ADVENTURE A2's night half).**
+  Two read-side condition namespaces over the iter-265 law
+  (`render/chronicle.py`): the event's own phase as per-phase
+  booleans `phase.<id>` (via `phase_of_tick`, the rules-level twin
+  — only the current phase's key present, True) and the event
+  site's props as `site.<prop>` (`_Positions.site_props` — the
+  location fold's event-scoped view: a GENERIC line conditions on
+  the site it lands at, no location id named in the template —
+  the crofts' absent `lit` flag reads falsy, the keep's True reads
+  truthy, the raw-truthiness law). The move line's night arm
+  (`templates.json`): `{phase.night?#night_arrival#|.}` — the
+  SYMBOL indirection carries the composed night+lit condition (the
+  engine's conditional partition splits at the first `|`, so the
+  inner lit/unlit branch rides a symbol expanded recursively AFTER
+  the outer choice — the existing machinery, zero engine change;
+  the arms: lit "— arriving after dark, the yards lit.", unlit
+  "— the walk landing after dark, the yards unlit.", day plain).
+- **GAP (b) — the balance-move assembly (POLITICS P3).** The
+  account line's KNOWS TAIL: `{knows? — {knows}}` on
+  `account_sourced` — rs-9's `{secret? — {secret}}` tail's own
+  shape: an account event that mints knowledge (the reprice and
+  notch doors — the only two; the flow events carry no knowledge)
+  carries its witnessed row on the line through rs-1's boundary,
+  one table every consumer (the tale, the entity views' history).
+  the_paper_repriced re-authored as the tail (the guild's agency +
+  the answer-to-withhold + the loads priced onto the STANDING
+  TERMS + the climb — the amount already in the line's head, the
+  reckoning already in its middle); the_dry_year_notched
+  de-redundantized against its kind gloss (what the notching DOES:
+  the count climbing, the beam's memory, the grounding year —
+  never a restatement of the staff/wood/weighing-day the kind
+  gloss already carries).
+- **The witness.** `tests/test_gaproutes.py` (10 tests, the claim
+  packet): the mechanism census (the scratch pack's re-voiced wait
+  line reading phase.*/site.* — the seed, the advance, the foreign
+  tolerance), the symbol-indirection shape pin, the journey
+  integration arm (seed 42: the day arrival plain + the night
+  arrival at the unlit crofts carrying the form — both in the
+  records), the tale-gate arm ("takes the road" never in the
+  tale), the lit-night arm (the keep after dark — the honest
+  complement), the squeeze arm (the tailed line ×2 in the tale and
+  the master's records + the standing 20 + the raw token never
+  leaking), the pure-function arm, the golden-corpus arm (the
+  smoke regen byte-identical — the templates never enter the log).
+  The pins updated: test_repricing (the squeeze line + the census
+  gloss), test_stepbench (the notch line + the census gloss),
+  test_debt1/test_campaccount/test_freightvol (the census template
+  form).
+- **The re-measure (the second half, outside the repo, Rule 9).**
+  The kit regenerated in the iter-279 form over the FIXED pack
+  (the JOURNEY package seed 42: 43 events, tale 25 lines — the
+  prior kit's exact shape; the POLITICS package seed 2: 96 events,
+  tale 58 lines — the tale line count matching), byte-identical on
+  the double build; the same directed frames (Q1–Q5), the blind
+  glm readings n=2 per question, fresh sessions, the bars never
+  shown. MEASURED: ADVENTURE 4/4 n=2 — A2's NIGHT FORM extracted
+  and quoted by BOTH readings ("the risk of traveling in
+  darkness", both night lines quoted incl. the return's) — GAP (a)
+  CLOSED at the re-measure (the prior band: absent from the
+  material, missed by three readings across two bands). MYSTERY
+  3/3 n=2 — no regression (the strongest contour untouched).
+  POLITICS P1/P2 MET n=2; P3 PARTIAL at the strict bar but
+  materially improved: the guild's AGENCY carried n=2 (the prior
+  band's single agency misread — "Garrick comes by" read as
+  Garrick's own doing — eliminated), the causal row (the squeeze
+  answering the withhold, the loads priced onto the standing
+  terms) quoted in full by both readings — GAP (b)'s named legs
+  CLOSED. The honest residuals, named never prose-fixed: the
+  intermediate 16→18→20 arithmetic not explicitly assembled by
+  either reading (the numbers all on the surfaces — the opening
+  record's 16, the two squeeze lines, the close's 20 — a
+  reader-synthesis residual; the discrimination law's mirror: a
+  reading miss with the form present is reader variance, never a
+  rendering gap); the decisive-move slot still taken by the fires
+  (both readings — an honest pick: the fires ARE a balance move);
+  the repriced row's public retention not explicit. The FREE
+  namings again divergent across the same pack's two packages
+  (tragedy only for the politics, the travelogue/journey only for
+  the journey, n=2 convergent per package; the genre-matrix labels
+  again never the free namings) — the divergence half carried.
+- **The verdict.** The two routings LANDED; both gaps' named legs
+  CLOSED at the LLM re-measure band; the reading-side now CONFIRMED
+  at the improved band (the two prior double-confirmed misses
+  repaired at their bars); W6's own rows COMPLETE — W7 the owner's
+  explicit call. The kit + the preset delivered as the sandbox
+  attachment (the owner's live re-read the owner's own next beat,
+  the iter-270/280 precedent's form).
+- **The paths.** render/chronicle.py, content/province_pack/
+  templates.json, tests/{test_gaproutes.py (new), test_repricing.py,
+  test_stepbench.py, test_debt1.py, test_campaccount.py,
+  test_freightvol.py}, docs/{worldbuild/WORLD_TESTS.md (§9 the W6
+  entry's re-measure record), worldbuild/WORLD_WORKPLAN.md (§8 + a
+  D-024 cruft pass, cap held 600/600), worldbuild/
+  WORLD_TRACK_AGENT_CONTEXT.md (§5 the rs-11/rs-12 row + §9),
+  blueprint/phases.md (§6 this record), TASKS.md (the ledger,
+  iter-271 evicted), iterations/iter-281-gaproutes-report.md (new,
+  the owner's RU deliverable)}, STATUS.md, worklog.md (iter-271
+  evicted) — 14 paths (the soft-limit breach the scope's own note:
+  the two routings + the re-measure one task, the census re-pins
+  the template change's own blast radius). 2540+9 + ruff +
+  docguard + topology --check clean (R2 — read-side only; zero
+  canon, the LOG untouched, the golden corpus byte-identical, zero
+  corpus price). The owner's RU report:
+  `docs/iterations/iter-281-gaproutes-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

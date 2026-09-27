@@ -1,52 +1,63 @@
-Iteration: iter-280 (`liveread` — the owner's «продолжай работу над
+Iteration: iter-281 (`gaproutes` — the owner's «продолжай работу над
   задачами класса мирового трека, делай то, что логичнее и
-  правильнее сейчас сделать, а не потом» continuation call: the W6
-  READING BAND's LIVE half — the station's open row, the iter-270
-  livescored precedent's exact form): the owner's blind Q1–Q5 of
-  the delivered iter-279 kit received in the chat BEFORE
-  audit_preset.md, then the preset reveal with the owner's own
-  scoring — this iteration verified that scoring against the
-  pre-set bars and resolved the standing convergence question —
-  MYSTERY 3/3 at the live band (full cross-band convergence with
-  the LLM 3/3), the SAME two legs failing at BOTH bands (the night
-  form, the balance-move assembly — three independent readings
-  across two reader classes: the two RENDERING_GAPs
-  DOUBLE-CONFIRMED, closed as named gaps, never prose-fixed), the
-  A3 objective leg the ONE cross-band divergence (the live miss
-  against the LLM band's n=2 carry — reader-class variance, the
-  iter-270 mirror; the material carries the form), the free
-  namings again divergent across the same pack's two packages (the
-  divergence half carried at both bands), the
-  RENDERING_GAP/SUBSTRATE_GAP discrimination law standing (a
-  reading miss never proves a substrate lack); the W6 READING BAND
-  COMPLETE (LLM n=2 + live n=1), the reading-side PARTIALLY
-  CONFIRMED at both bands; the owner's RU report at
-  docs/iterations/iter-280-liveread-report.md; the §5 mandatory KI
-  cleanup paid in the same edit (KI#104/105 closed iter-269,
-  KI#106 closed iter-277 — deleted, the records live in git + the
-  TASKS ledger)
+  правильнее сейчас сделать, а не потом» delegated call over
+  iter-280 §F: the W6 station's own remaining rows — the two
+  double-confirmed RENDERING_GAP routings; W7 stays "after W6",
+  the station order held): both gaps closed READ-SIDE per the
+  classification law (never prose, never a gate, never machinery —
+  the T7 tale gate untouched, the night form living on the records
+  surface) — the NIGHT RISK FORM via two condition namespaces over
+  the iter-265 law (phase.<id> + site.<prop>, render/chronicle.py)
+  + the move line's symbol-indirected night arm; the BALANCE-MOVE
+  ASSEMBLY via the account line's KNOWS TAIL ({knows? — {knows}} on
+  account_sourced, rs-9's own shape) + the two glosses re-authored
+  (the_paper_repriced as the tail — the guild's agency + the
+  answer-to-withhold + the standing terms + the climb;
+  the_dry_year_notched de-redundantized); zero canon, zero core,
+  the LOG untouched, the golden corpus byte-identical. The
+  RE-MEASURE: the kit regenerated in the iter-279 form over the
+  fixed pack (byte-identical on the double build), the blind glm
+  readings n=2 per question, fresh sessions, the bars never shown —
+  ADVENTURE 4/4 n=2 (the night form extracted and quoted by BOTH
+  readings — GAP (a) CLOSED), MYSTERY 3/3 n=2 (no regression),
+  POLITICS P1/P2 MET n=2 + P3 materially improved (the guild's
+  agency n=2, the causal row quoted in full n=2 — GAP (b)'s named
+  legs CLOSED; the honest residuals: the intermediate arithmetic
+  unassembled though all numbers sit on the surfaces, the
+  decisive-move slot still the fires, the public retention not
+  explicit); the free namings again divergent — the reading-side
+  now CONFIRMED at the improved band; W6's own rows COMPLETE — W7
+  the owner's explicit call; the owner's RU report at
+  docs/iterations/iter-281-gaproutes-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2530 passed + 9 skipped, ruff clean, docguard clean, topology
+2540 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-28 ·
-Scope: docs/{worldbuild/WORLD_TESTS.md (§9 the W6 entry's
-  live-half record), worldbuild/WORLD_WORKPLAN.md (§8 + a D-024
-  cruft pass in §7 — the station-law restatement collapsed to the
-  §8 pointer, the cap held 599/600), worldbuild/
-  WORLD_TRACK_AGENT_CONTEXT.md (§9 the stage's standing state),
-  blueprint/phases.md (§6 the iter-280 record), TASKS.md (the
-  ledger, iter-270 evicted), iterations/iter-280-liveread-report.md
-  (new, the owner's RU deliverable)}, STATUS.md (+ the §5 KI
-  cleanup), worklog.md (iter-270 evicted) — 8 paths (R0, doc-only;
-  zero code, zero pack, zero canon change, the LOG untouched, zero
-  corpus price)
-Track A: W6's reading band COMPLETE — both halves measured (the
-  LLM half iter-279, the live half iter-280): the same frames
-  extracted at the band level, the same two legs failing both bands
-  (the two RENDERING_GAPs double-confirmed, named never fixed); W7
-  and the two gap routings owner-routed. The ssi family COMPLETE
+Scope: render/chronicle.py (the phase.*/site.* condition
+  namespaces), content/province_pack/templates.json (the move
+  line's night arm + the account line's knows tail + the two
+  glosses + the night_arrival symbol), tests/{test_gaproutes.py
+  (new — the witness, 10 tests, the claim packet), test_repricing.py,
+  test_stepbench.py, test_debt1.py, test_campaccount.py,
+  test_freightvol.py (the pins)}, docs/{worldbuild/WORLD_TESTS.md
+  (§9 the W6 entry's re-measure record), worldbuild/
+  WORLD_WORKPLAN.md (§8 + a D-024 cruft pass, the cap held
+  600/600), worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§5 the
+  rs-11/rs-12 row + §9), blueprint/phases.md (§6 the iter-281
+  record), TASKS.md (the ledger, iter-271 evicted),
+  iterations/iter-281-gaproutes-report.md (new, the owner's RU
+  deliverable)}, STATUS.md, worklog.md (iter-271 evicted) — 14
+  paths (R2 — read-side only; zero canon change, the LOG
+  untouched, zero corpus price; the soft-limit breach the scope's
+  own note: the two routings + the re-measure one task, the census
+  re-pins the template change's own blast radius)
+Track A: W6's rows COMPLETE — the reading band (iter-279/280)
+  plus the two gap ROUTINGS landed and re-measured (iter-281): both
+  gaps' named legs closed at the LLM re-measure band, the
+  reading-side CONFIRMED at the improved band; W7 the owner's
+  explicit call. The ssi family COMPLETE
   except ssi-5, owner-gated.
 
 
@@ -110,27 +121,26 @@ TASKS ledger, and the owning iteration reports)
 
 ## Next step
 
-**iter-280 DONE: the W6 reading band's LIVE half (the owner's
-  «продолжай работу над задачами класса мирового трека, делай то,
-  что логичнее и правильнее сейчас сделать, а не потом»
-  continuation call — the station's open row, the iter-270
-  livescored precedent's form): the owner's blind Q1–Q5 of the
-  delivered kit received in the chat, then the preset reveal —
-  the scoring verified against the pre-set bars: MYSTERY 3/3 at
-  the live band (full cross-band convergence with the LLM 3/3),
-  ADVENTURE A1/A4 MET + A2 partial + A3 missed, POLITICS P1/P2
-  MET + P3 partial at the strict bar — the SAME two legs failing
-  at BOTH bands (the night form, the balance-move assembly — the
-  two RENDERING_GAPs DOUBLE-CONFIRMED, closed as named gaps),
-  the A3 objective the ONE cross-band divergence (the live miss
-  against the LLM n=2 carry — reader-class variance, the
-  iter-270 mirror), the free namings again divergent across the
-  same pack's packages (the divergence half carried at both
-  bands), the extraction-strength datum recorded (the mystery
-  contour reader-forced, the adventure objective
-  reader-optional).** The W6 READING BAND COMPLETE (LLM n=2 +
-  live n=1), the reading-side PARTIALLY CONFIRMED at both bands;
-  the §5 KI cleanup paid (KI#104/105/106 deleted).
+**iter-281 DONE: the two double-confirmed RENDERING_GAP routings
+  (the owner's delegated continuation call over iter-280 §F — the
+  W6 station's own remaining rows; W7 stays "after W6"): both gaps
+  closed read-side (the night form via phase.*/site.* + the
+  symbol-indirected move arm; the balance-move's causal row via
+  the account line's knows tail + the re-authored glosses) and
+  RE-MEASURED blind n=2 over the regenerated kit (byte-identical
+  double build): ADVENTURE 4/4 (the night form extracted and
+  quoted by both readings — GAP (a) CLOSED), MYSTERY 3/3 (no
+  regression), POLITICS P1/P2 MET + P3 materially improved (the
+  guild's agency n=2, the causal row quoted n=2 — GAP (b)'s named
+  legs CLOSED; the honest residuals: the intermediate arithmetic
+  unassembled though all numbers sit on the surfaces, the
+  decisive-move slot still the fires, the public retention not
+  explicit), the free namings again divergent — the reading-side
+  CONFIRMED at the improved band. W6's own rows COMPLETE.
+Next: W7 (negative / compression tests) — the owner's explicit
+  call; the owner's LIVE re-read of the re-measured kit (the
+  sandbox attachment) the owner's own optional next beat, the
+  iter-270/280 precedent's form.
   2530+9. The owner's RU report:
   docs/iterations/iter-280-liveread-report.md.
 Next: the W6 station's remaining rows, owner-routed — W7

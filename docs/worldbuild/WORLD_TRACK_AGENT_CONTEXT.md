@@ -150,10 +150,15 @@ iter-276 (HEAD `55fd4a2`):
   transaction over explicit owners (settlement) — PRESENT/NOTCH account
   kinds (stepbench). Zero core debt primitives; anti-arbitrage spread
   preserved (D-191).
-- **Reader surfaces that carry canon** — the rs-1..rs-10 family: account
+- **Reader surfaces that carry canon** — the rs-1..rs-12 family: account
   glosses, flow glosses, the runner's grudge causal row (rs-9), the
-  shave's dated temporal chain (rs-10) — read-side lines carrying
-  pack-authored causal rows through the knows boundary, never new canon.
+  shave's dated temporal chain (rs-10), the move line's night form
+  (rs-11, iter-281: `phase.<id>`/`site.<prop>` condition keys + the
+  symbol-indirected night arm), the account line's knows tail
+  (rs-12, iter-281: `{knows? — {knows}}` on account_sourced — the
+  witnessed row riding the line, rs-9's own shape) — read-side lines
+  carrying pack-authored causal rows through the knows boundary,
+  never new canon.
 - **Composition** — one 2371-event run, 16 relational oracles, six
   interacting causal families crossing end-to-end, a calendar-year and
   macro-economic witness (D-237, `tests/test_p1_composition.py`).
@@ -326,7 +331,21 @@ carry — reader-class variance, the iter-270 mirror), the free
 namings again divergent across the same pack's two packages. The
 reading-side PARTIALLY CONFIRMED at both bands; W7 and the two gap
 routings owner-routed rows. The owner's RU report:
-`docs/iterations/iter-280-liveread-report.md`.
+`docs/iterations/iter-280-liveread-report.md`. The two gap ROUTINGS
+since LANDED and been RE-MEASURED (iter-281, the owner's delegated
+continuation call — the repair class held: rendering surfaces only,
+the T7 gate untouched, zero canon): the night form (rs-11) and the
+balance-move's causal row (rs-12), the blind re-measure n=2 —
+ADVENTURE 4/4 (the night form extracted and quoted by both readings,
+GAP (a) CLOSED), MYSTERY 3/3 (no regression), POLITICS P3 materially
+improved (the guild's agency n=2, the causal row quoted n=2 — GAP
+(b)'s named legs closed; the honest residuals: the intermediate
+arithmetic unassembled though all numbers sit on the surfaces, the
+decisive-move slot still the fires, the public retention not
+explicit); the free namings again divergent. The reading-side now
+CONFIRMED at the improved band; W6's own rows COMPLETE — W7 the
+owner's explicit call. The owner's RU report:
+`docs/iterations/iter-281-gaproutes-report.md`.
 
 ## 10. Navigation (the authoritative owners)
 

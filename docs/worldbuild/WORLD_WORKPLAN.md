@@ -506,44 +506,45 @@ trigger immediate plot writing.
 
 The station's FIRST ROW landed (iter-278, the owner's «открывай
 задачу по W6» call): the matrix's SUBSTRATE-SIDE measured at the
-deterministic band on the SAME committed package (zero core, zero
-pack change, zero corpus price) — adventure, mystery and politics
-confirmed at their named bands (the journey's four legs + the
-world's own refusal; the silent world + the revelation-as-door; the
-triangle's differential answer + the squeeze's persisting terms),
-the four carried genres citing their W5 evidence, the census pinning
-all seven surfaces. The honest boundaries named, never routed: the
-authored edge closure (the I0 route-writer candidate —
-SUBSTRATE_GAP, awaiting repetition); the mystery's one-fact/one-path/
-one-revelation band; the player's re-pricing power (iter-271's
-residue). The station's SECOND ROW's LLM half landed (iter-279, the
-owner's «продолжай работу над задачами класса world track» call):
-the reading band in the recorded W5 form — the kit over the
-committed pack (the journey package seed 42 carrying adventure +
-mystery in ONE history; the politics package seed 2 carrying the
-differential answer + the squeeze in ONE history), the pre-set
-audit before any reading, the blind glm readings n=2 per question —
-MYSTERY 3/3 convergent, ADVENTURE 3/4 (the night form a named
-RENDERING_GAP — the reading form never surfaces the unlit crofts),
-POLITICS 2/3 (the balance-move assembly a named RENDERING_GAP — the
-causal row rides the scene card, outside the kit form), the free
-readings diverging materially across the same pack's two packages
-(the hypothesis's divergence half carried; the genre labels extract
-under directed frames, not free namings). The band's LIVE half
-landed (iter-280 — the owner's blind Q1–Q5 in the chat, then the
-preset reveal; the iter-270 livescored precedent's form): the same
-frames at the band level, the SAME two legs failing at both bands
-(the night form, the balance-move assembly — the two RENDERING_GAPs
-double-confirmed, closed as named gaps); the A3 objective leg the
-one cross-band divergence (the LLM n=2 carry against the live miss
-— reader-class variance, the iter-270 mirror); the free namings
-again divergent across the pack's two packages. The reading band
-COMPLETE (LLM n=2 + live n=1), the reading-side PARTIALLY
-CONFIRMED at both bands; W7 and the two gap routings owner-routed.
-The full records: `WORLD_TESTS.md` §9's W6 entry; the witnesses
-`tests/test_genre.py` + the delivered kit; the owner's RU reports
-`docs/iterations/iter-278-genre-report.md`,
-`iter-279-genreread-report.md` + `iter-280-liveread-report.md`.
+deterministic band on the SAME committed package — adventure, mystery
+and politics confirmed at their named bands, the four carried genres citing
+their W5 evidence, the census pinning all seven surfaces; the honest boundaries named, never routed (the authored edge closure —
+the I0 route-writer candidate, a SUBSTRATE_GAP awaiting repetition;
+the mystery's one-fact/one-path/one-revelation band; the player's
+re-pricing power, iter-271's residue). The READING BAND landed in
+both halves (iter-279 LLM n=2 + iter-280 live n=1, the recorded W5
+form: the pre-set audit before any reading, the blind readings, the
+bars never shown): MYSTERY 3/3 convergent at both bands; ADVENTURE
+A2's night form and POLITICS P3's balance-move assembly failing at
+BOTH bands — the two RENDERING_GAPs double-confirmed, closed as
+named gaps; the A3 objective the one cross-band divergence
+(reader-class variance, the iter-270 mirror); the free namings
+divergent across the same pack's two packages at both bands (the
+hypothesis's divergence half carried) — the reading-side PARTIALLY
+CONFIRMED at both bands. The two gap ROUTINGS since LANDED and been
+RE-MEASURED (iter-281, the owner's delegated continuation call over
+iter-280 §F — the §8 station law held, the T7 gate untouched): the
+night form via two read-side condition namespaces over the iter-265
+law (`phase.<id>` + `site.<prop>`) + the move line's night arm (the
+symbol indirection, zero engine change); the balance-move's causal
+row via the account line's KNOWS TAIL (`{knows? — {knows}}` on
+account_sourced, rs-9's own shape) + the two glosses re-authored
+(the_paper_repriced as the tail, the_dry_year_notched
+de-redundantized). The blind re-measure n=2 over the regenerated
+kit (byte-identical on the double build): ADVENTURE 4/4 — the night
+form extracted and quoted by both readings, GAP (a) CLOSED; MYSTERY
+3/3, no regression; POLITICS P1/P2 MET + P3 materially improved at
+the strict bar — the guild's agency
+carried n=2, the causal row quoted in full n=2, GAP (b)'s named legs
+CLOSED (the honest residuals: the intermediate arithmetic unassembled
+though all numbers sit on the surfaces; the decisive-move slot still
+the fires; the public retention not explicit); the free namings again
+divergent. The reading-side now CONFIRMED at the improved band; W6's
+own rows COMPLETE — W7 the owner's explicit call. The full records:
+`WORLD_TESTS.md` §9's W6 entry; the witnesses `tests/test_genre.py`
++ `tests/test_gaproutes.py` + the delivered kits; the owner's RU
+reports iter-278..281 (`docs/iterations/iter-278-genre-report.md` …
+`iter-281-gaproutes-report.md`).
 
 ## 9. W7 — Negative / compression tests
 

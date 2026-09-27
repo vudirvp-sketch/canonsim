@@ -238,10 +238,12 @@ def test_the_armed_census() -> None:
     assert "camp_tally_01" in master["carries"]
     # the template reused — no new line shape, the zero-template
     # price; rs-4 (iter-199): the same line, now carrying the flow
-    # gloss tail (the conditional — the take template's own form)
+    # gloss tail (the conditional — the take template's own form);
+    # iter-281 (the W6 gap (b) routing): the KNOWS tail beside it (an
+    # account event that mints knowledge carries its row, rs-9's shape)
     assert pack.templates["events"][SOURCE_EVENT] == (
         "{target} comes by {amount} {kind} at the year's reckoning"
-        "{flow? — {flow}}."
+        "{flow? — {flow}}{knows? — {knows}}."
     )
     assert SOURCE_EVENT in pack.rules["importance"]["story_critical_events"]
 

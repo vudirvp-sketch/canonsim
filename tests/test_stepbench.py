@@ -224,8 +224,7 @@ def test_the_armed_census() -> None:
         "argument"
     )
     assert pack.templates["knows"]["the_dry_year_notched"] == (
-        "the dry year's notch cut at the weighing day — the tally staff's "
-        "count climbing, the beam's memory of the thin season, the "
+        "the count climbing, the beam's memory of the thin season, the "
         "grounding year weighed light"
     )
     # UNARMED by doctrine: no urgency entry names either door
@@ -347,10 +346,15 @@ def test_the_notch_cut_at_the_weighing_day(tmp_path: Path) -> None:
     assert sim.projection[BEAM]["account.notch"] == 1
     sim.close()
     tale = render_chronicle(events, pack, seed=42)
+    # iter-281 (the W6 gap (b) routing's family consequence): the notch
+    # line gains the KNOWS TAIL — the witnessed row riding the account
+    # line through rs-1's boundary; the gloss re-authored to COMPLEMENT
+    # the kind's own gloss (what the notching DOES, never a restatement)
     assert (
         "Maren comes by 1 notch on the tally staff — the dry years' "
         "sequence in wood, the beam's reckoning cut at the weighing day "
-        "at the year's reckoning." in tale
+        "at the year's reckoning — the count climbing, the beam's memory "
+        "of the thin season, the grounding year weighed light." in tale
     )
 
 
