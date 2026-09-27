@@ -217,7 +217,9 @@ def test_the_armed_census() -> None:
     economy = pack.rules["economy"]
     # iter-189 (charcoalpaper) widens the vocabulary again (paper — the
     # outstanding's own kind, the standing state's row)
-    assert economy["accounts"] == ["coin", "bloom", "paper"]
+    # iter-272 (floodpaper): the fourth kind; freightvol's own claim
+    # (the bloom ledger) unchanged
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
     assert [(f["id"], f["verb"], f["kind"], f["to"], f["amount"],
              f["every"]) for f in economy["flows"]
             if f["kind"] == "bloom"] == [

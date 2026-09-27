@@ -4239,6 +4239,128 @@ LANDED, the W5 disposition's LIVE RETURN / HEARTBREAK RECHECK):**
   ruff + docguard + topology --check clean. The owner's RU report:
   `docs/iterations/iter-269-livereturn-report.md`.
 
+**The iter-270 livescored record (R0 — the standing order's third
+row's own next beat, the owner's live reading scored):**
+
+- **The reading.** The owner's blind answers to the delivered kit's
+  Q1–Q8, delivered in the chat 2026-09-27 (the live band's fresh
+  n=1) — the convergence assessment run against the pre-set bars
+  (the isolation law: the audit written BEFORE any reading, iter-269).
+- **The finding.** Every station bar MET at the live band, the strict
+  heartbreak pair CARRIED: the biography bars exact (the standing
+  named, the creditor named, the discharge's direction correct — rid
+  of the 16 paper, the 16 coin walked to Malby, the debt dated from
+  the starved winter); the withhold-as-answer bar hit (the heap 18 as
+  "the withhold's own ledger — while the paper obligation is still
+  paid"); the humor bar hit with the position-dependence EXPLICIT at
+  the live band (the dry mechanism-grounded irony extracted unaided,
+  the authored taboo respected, the knowing/outsider split in the
+  reading's own words); rs-9's causal row carried in full (standing →
+  the remembered incident → the why — the iter-208 human datum
+  closed); rs-10's dated chain carried in full (the shave two seasons
+  back and first, the starved winter between, the withhold and the
+  settlement the present consequences); the heartbreak pair — the
+  lost-future half (the dead as the futures' own holders, the rs-8
+  re-subjectivation read exactly) and the opened half (the rs-7 clause
+  quoted exactly) both carried n=1; the 40/80 echo consumed naturally
+  in reading (the iter-266 disposition's own prediction observed
+  live).
+- **The resolution.** The heartbreak divergence's class RESOLVED per
+  the pre-set rule (the iter-269 record's own law: where the owner's
+  reading carries the pair, the divergence was the LLM band's own
+  variance) — the glm recheck's lost-future miss was the reader-class
+  variance, never a surface regression (excluded — the package
+  byte-stable) and never the reconstructed question form (the same
+  Q1–Q8 carried the pair at the live band). The heartbreak station's
+  human band MET on the fresh kit; the live band's return row CLOSED
+  (both just-landed surfaces read together). Zero code, zero pack,
+  zero canon. 2478+9 + ruff + docguard + topology --check clean. The
+  owner's RU report: `docs/iterations/iter-270-livescored-report.md`.
+
+**The iter-271 repricing record (R2 — the §6.4 fill row's first
+landing, the fill-list's front row):**
+
+- **The door.** `reprice_paper` — the paper's renegotiation as the
+  guild's SQUEEZE over the account resolver's player-scaled arm
+  (pure pack data, zero core, the charcoalpaper family's fourth
+  door): the source verb sourcing two paper onto the standing terms
+  (the withheld margin's own number — the coupled liabilities'
+  answer: the camp holds two loads off the beam, the guild prices two
+  paper onto the debt), the STANDING-TERMS gate (paper ≥ 16 on the
+  actor — a fallen paper has no terms to re-price, refused softly),
+  the RECEIVING-STOCK gate on the target (the pass_the_seat form),
+  the squeeze repeatable while the terms stand (the compounding the
+  world's own arithmetic, never a clock), the geography STAGING
+  never a gate (the paper an instrument), the knowledge row
+  `the_paper_repriced` public to the witnesses exact — the knows
+  gloss carrying the squeeze's causal row. The factor stays gateless
+  as an entity: the beat rides the seat's acceptance-door, the
+  guild's agency carried by the terms themselves; the runner's own
+  re-pricing power a future row's own call. The honest residue "the
+  renegotiation stays authored" CLOSED.
+- **The fork (the re-weigh's SALE — the heap's drain).** The account
+  resolver's ACTOR-SIDE GRAMMAR WALL, measured: the transfer's
+  from-side is always the intent actor; the heap's ledger stocks
+  loc_crofts, a location — and a location can only ever be a TO-side.
+  The drain door is NOT authorable as pure pack data over the closed
+  verb set. The owner's fork, never silently resolved: (a) the
+  buyer's price-door with the ledger's drain a named residue, (b) the
+  heap's re-seating onto the master (REJECTED by the record: the
+  withhold's ledger site is semantic — "banked at the crofts where
+  the tally's notches record it", the rs-10 line's own anchor — plus
+  the re-pinning corpus price), (c) the substrate extension (a
+  location-side drain verb — a core change, R3+).
+- **The tag's boundary.** The TAG TRANSFER (the tally-stick's
+  handing-over): the mechanics already ride the drop+take pair (the
+  carrier-availability law's family — the drop lays the badge down
+  uncarried, the take re-carries it; no give-verb exists, none owed);
+  the crews' recognition mint stays no committed surface (iter-185's
+  law unchanged).
+- **The evidence.** The twin's paper 16→18→20 across two squeezes
+  with the market's witnesses holding the_paper_repriced; the tale
+  carrying the squeeze's line with the kind's own gloss; the fallen
+  world + the stockless target refused softly; the golden corpus
+  byte-identical (zero corpus price); the twin deterministic
+  (`tests/test_repricing.py` the claim packet — 6 tests). 2484+9 +
+  ruff + docguard + topology --check clean. The owner's RU report:
+  `docs/iterations/iter-271-repricing-report.md`.
+
+**The iter-272 floodpaper record (R2 — the §6.1 fill row, the
+fill-list's second row):**
+
+- **The arming.** The crossing household's flood debt brought to its
+  full lifecycle over the account resolver's player-scaled arm —
+  pure pack data, zero core, the charcoalpaper precedent's family:
+  the FOURTH kind `floodpaper` (the flood winter's own paper — the
+  borrowed punt twelve + the stranded season's stores eight; its own
+  dated chain in the kind's gloss, never the camp's starved winter)
+  stocked on the toll-taker; the RECEIVING stock on the second hand
+  (the inheritance's existence gate); the four doors `settle_paper`
+  (the FALL, the covered-fund gate), `render_toll` (the COLLECTION,
+  the geography gate at the chest), `pass_paper` (the INHERITANCE —
+  the iter-160 trace's TRANSFER rung, the drowned generation's open
+  question, answered: the debt walking to the living line, the pole
+  and the paper one inheritance), `buy_punt` (the PUNT'S PURCHASE —
+  the punt fund's terminus, the flow vocabulary's no-terminus
+  residue closed).
+- **The coupling.** ONE COIN, TWO CLAIMS made doors: the
+  settlement's twenty and the punt's twelve drawing on the same thin
+  surplus — the punt spent first leaves the fall refused until the
+  toll re-climbs (§6.1's own engine, now player-scale).
+- **The evidence.** The twin's floodpaper standing at 20 through the
+  crossings (the no-amortization law live state); the fall refused
+  early / landing covered with the witnesses holding
+  the_floodpaper_fell and the tale carrying both reckoning lines
+  with the flood-winter gloss; the coupling measured; the inheritance
+  walked to the line with the stockless target refused softly; the
+  golden corpus byte-identical (zero corpus price); the twin
+  deterministic (`tests/test_floodpaper.py` the claim packet — 9
+  tests; the four census re-pins: campaccount / charcoalpaper /
+  debt1 / freightvol). Honest residues: the punt's item-birth (the
+  parked st-5 door), a dedicated boatyard entity (a future row's own
+  call). 2493+9 + ruff + docguard + topology --check clean. The
+  owner's RU report: `docs/iterations/iter-272-floodpaper-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

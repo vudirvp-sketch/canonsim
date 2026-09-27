@@ -215,7 +215,8 @@ def test_the_armed_census() -> None:
     # iter-187 (freightvol) widens the kind vocabulary (bloom joins),
     # iter-189 (charcoalpaper) again (paper — the outstanding's own
     # kind) — the crossing's coin claims still pinned by their own kind
-    assert economy["accounts"] == ["coin", "bloom", "paper"]
+    # iter-272 (floodpaper): the fourth kind — the §6.1 fill row's arming
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
             for f in economy["flows"]
             if f["id"] in ("the_toll_nets", "the_guild_collects")] == [
@@ -223,7 +224,11 @@ def test_the_armed_census() -> None:
         ("the_guild_collects", "source", CHEST, 4, 1),
     ]
     ketta = next(n for n in pack.entities["npcs"] if n["id"] == KETTA)
-    assert ketta["accounts"] == {"coin": 2}
+    # iter-272 (floodpaper, the §6.1 fill row): the flood debt's outstanding
+    # armed on the toll-taker — the paper twenty, debt-1's authored
+    # arithmetic (the borrowed punt twelve + the stores eight) now live
+    # account state; the thin coin surplus unchanged
+    assert ketta["accounts"] == {"coin": 2, "floodpaper": 20}
     malby = next(
         loc for loc in pack.entities["locations"] if loc["id"] == CHEST
     )

@@ -219,7 +219,9 @@ def test_the_armed_census() -> None:
     # iter-189 (charcoalpaper) widens the vocabulary again (paper — the
     # outstanding's own kind, the standing state's row — tests/
     # test_charcoalpaper.py the row's own packet)
-    assert economy["accounts"] == ["coin", "bloom", "paper"]
+    # iter-272 (floodpaper — the crossing's own paper, the §6.1 fill row)
+    # widened the vocabulary again; campaccount's own claim unchanged
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
             for f in economy["flows"]
             if f["kind"] == "coin"] == [

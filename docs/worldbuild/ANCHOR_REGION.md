@@ -421,7 +421,42 @@ guild-holder, the credit winter, the household's year, the debt's lifecycle
 (the iter-160 trace above), and the debt's own standing arithmetic (the
 paper twenty, the punt twelve — the arming's notes their mirror); the
 flow's movement armed iter-162 (debt-1: the accounts + the two folded
-flows, `tests/test_debt1.py`).
+flows, `tests/test_debt1.py`). CANONICAL since iter-272 (floodpaper —
+the §6.1 fill row, the W5 disposition iter-266's fill-list second row:
+PAPER DEBT / PUNT BUYOUT / DEBT INHERITANCE, «усилить carrier: paper
+representation → holder → inherited obligation → later settlement; НЕ
+новый debt-примитив»): the flood debt's OUTSTANDING as live account
+state — the FOURTH kind `floodpaper` (the flood winter's own paper:
+the borrowed punt twelve + the stranded season's stores eight, the
+shelter law's cost; its own dated chain in the kind's gloss, never
+the camp's starved winter — the two papers one chest, two winters,
+the estrangement's own pair) stocked on the toll-taker (the debt's
+holder-side seat: the drowned generation's debt the living hand's
+now), the RECEIVING stock on the second hand (floodpaper 0 — the
+inheritance's existence gate); the four lifecycle doors over the
+account resolver's player-scaled arm, the charcoalpaper precedent's
+own family — `settle_paper` (the FALL, the covered-fund gate coin 20:
+the paper only falls against the fund that covers it) +
+`render_toll` (the COLLECTION, the geography gate at the chest) +
+`pass_paper` (the INHERITANCE — the TRANSFER rung's open question
+answered: the debt walking to the living line, the pole and the
+paper one inheritance, the crossing's anti-freeze answer the LINE,
+deliberately not the camp's craft-seat) + `buy_punt` (the PUNT'S
+PURCHASE, the punt fund's terminus — the flow vocabulary's
+no-terminus residue closed; the boatyard's purse the market's
+location ledger, the honest no-entity form); ONE COIN, TWO CLAIMS
+made doors (the settlement's twenty and the punt's twelve drawing on
+the same thin surplus — the punt spent first leaves the fall refused
+until the toll re-climbs, the household's own engine now
+player-scale); the knows rows the_floodpaper_fell /
+the_paper_inherited / the_punt_bought (the fall public, the
+inheritance witnessed, the punt's word — the crossing's own voice);
+unarmed by doctrine, zero core, `tests/test_floodpaper.py` the claim
+packet. Honest residues: the punt's own item-birth rides the parked
+entity-birth door (the st-5 family — no committed mechanism births
+the boat; the purchase's canonical fact the coin's walk + the
+witnesses' word); a dedicated boatyard entity a future row's own
+call.
 
 ### 6.2 The step bench (WORKING — the second authored meso unit, iter-164)
 
@@ -962,11 +997,52 @@ the linger beat's annual aggregate); the tally's PRESENT COUNT as
 account state, the heap's level the artery's thinning (E⇄H's material
 edge); the heap's drain the un-armed player-scaled door —
 `tests/test_freightvol.py` the claim packet).
-Authored here (WORKING): the renegotiation (the guild's re-pricing
-of the paper — the factor's own beat, gateless, no committed
-surface), the re-weigh's sale (the heap's drain — the un-armed
-door's own beat), the coupled liabilities (the estrangement's engine),
-the belief's mechanism, the crews' roles. CANONICAL since iter-189
+Authored here (WORKING): the re-weigh's sale (the heap's drain — the
+§6.4 fill row's measured FORK, the iter-271 record below), the
+coupled liabilities (the estrangement's engine),
+the belief's mechanism, the crews' roles. CANONICAL since iter-271
+(repricing — the §6.4 fill row's first landing, the W5 disposition
+iter-266's fill-list front row: FACTOR NEGOTIATION armed as the
+guild's SQUEEZE, the honest residue "the renegotiation stays
+authored" closed): the renegotiation door `reprice_paper` (the
+source verb's player-scaled arm — the squeeze's two minted onto the
+standing terms, the withheld margin's own number: the camp holds two
+loads off the beam, the guild prices two paper onto the debt, ONE
+SALE TWO CLAIMS' escalation rung; the STANDING-TERMS gate paper ≥ 16
+on the actor — a fallen paper has no terms to re-price, refused
+softly; the RECEIVING-STOCK gate on the target, the pass_the_seat
+form; the squeeze may repeat while the terms stand — the compounding
+the world's own arithmetic, never a clock; the geography STAGING
+never a gate — the paper an instrument, the guild's word reaching
+the seat wherever the road finds him); the factor stays GATELESS as
+an entity (the beat rides the seat's acceptance-door, the guild's
+agency carried by the terms themselves; the runner's own re-pricing
+power — the audit's arm turned on the master — a future row's own
+call); the knowledge row `the_paper_repriced` (the re-priced terms
+public as the standing was, the witnesses exact, the knows gloss
+carrying the squeeze's own causal row — the withhold answered, the
+debt climbing while the bloom stays unweighed); unarmed by doctrine,
+zero core, `tests/test_repricing.py` the claim packet. The row's
+measured FORK, honestly recorded (the re-weigh's SALE — the heap's
+drain): the account resolver's ACTOR-SIDE GRAMMAR WALL — the
+transfer's from-side is always the intent actor, the heap's ledger
+stocks loc_crofts (a location), and a location can only ever be a
+TO-side; the drain door is NOT authorable as pure pack data over the
+closed verb set. The owner's fork, never silently resolved: (a) the
+buyer's price-door (the coin walking to the camp's ledger, the
+ledger's drain a named residue), (b) the heap's re-seating onto the
+master (REJECTED by the record: the withhold's ledger SITE is
+semantic — "banked at the crofts where the tally's notches record
+it", the rs-10 line's own anchor — and the re-pinning corpus price
+the committed witnesses' own law), (c) the substrate extension (a
+location-side drain verb — a core change, R3+, the owner's call).
+The TAG TRANSFER (the tally-stick's handing-over) measured at its
+own boundary: the mechanics ALREADY ride the drop+take pair (the
+carrier-availability law's own family — the drop lays the badge down
+uncarried, the take re-carries it; no give-verb exists, none owed);
+the crews' recognition mint stays no committed surface (iter-185's
+law unchanged — the paper walks, the badge follows when the camp
+speaks). CANONICAL since iter-189
 (charcoalpaper — the owner's W5-decomposition call, finding 2: the
 standing debt an upstream world gap): the outstanding principal
 itself (the third account kind `paper`, sixteen on the master — the

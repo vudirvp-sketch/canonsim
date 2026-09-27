@@ -176,9 +176,10 @@
       },
       "carries": [],
       "accounts": {
-        "coin": 2
+        "coin": 2,
+        "floodpaper": 20
       },
-      "notes": "the crossing's toll-keeper — the spine's flaw rides the coerce urgency entry (AP-8's consuming rule: the double toll when a rich-seeming traveler crosses); the punt pole the family's last tool (items). debt-1 (iter-162): the coin account is the household's THIN SURPLUS — the year's net after the guild's standing take (economy.notes owns the fold's arithmetic; the punt fund's climb toward the authored twelve, Dellan's claim on the same coin)"
+      "notes": "the crossing's toll-keeper — the spine's flaw rides the coerce urgency entry (AP-8's consuming rule: the double toll when a rich-seeming traveler crosses); the punt pole the family's last tool (items). debt-1 (iter-162): the coin account is the household's THIN SURPLUS — the year's net after the guild's standing take (economy.notes owns the fold's arithmetic; the punt fund's climb toward the authored twelve, Dellan's claim on the same coin) floodpaper (iter-272, the §6.1 fill row — the crossing's carrier strengthened: the paper representation → the holder → the inherited obligation → the later settlement, the charcoalpaper precedent's own family, NOT a new debt primitive): the flood debt's OUTSTANDING as live account state — the FOURTH kind `floodpaper` (the flood winter's own paper: the borrowed punt twelve + the stranded season's stores eight, the shelter law's cost through the winter after the flood — never the camp's starved winter, its own dated chain in the kind's gloss); the stock's entity the TOLL-TAKER (the debt's holder-side seat at the crossing, the drowned generation's debt the living hand's now); the lifecycle doors settle_paper / render_toll / pass_paper / buy_punt (actions.json) — the fall against the covered fund, the collection's walk to the chest, the inheritance to the second hand's receiving stock, the punt's purchase at the market town; ONE COIN, TWO CLAIMS made doors: the settlement's twenty and the punt's twelve drawing on the same thin surplus (the household's own engine, §6.1's unit)."
     },
     {
       "id": "npc_secondhand_01",
@@ -219,7 +220,10 @@
       "carries": [
         "punt_pole_01"
       ],
-      "notes": "the crossing household's grown second hand — ANCHOR_REGION §6.1's first meso unit, the pack embodiment §9 names the engineering side's own (companion-1 + tune-3's arming, iter-157): the pole is two-handed work, one on the water (Ketta's stair), one on the rope (this hand's road leg — the road-side urgency entry IS the rope side's beat). The pair map: kin trust with the toll-taker, a working acquaintance with the runner (the crossing vouches for the road). The spine shares the household's flood cause; the flaw is the road-leg beat's own bend (AP-8: the entry's flaw key consumes it). The no-teleport law: every leg an ordinary move intent through the door — the autonomous road-leg hop when co-located, the paired mode B steps beyond it; lag is a legal world state."
+      "accounts": {
+        "floodpaper": 0
+      },
+      "notes": "the crossing household's grown second hand — ANCHOR_REGION §6.1's first meso unit, the pack embodiment §9 names the engineering side's own (companion-1 + tune-3's arming, iter-157): the pole is two-handed work, one on the water (Ketta's stair), one on the rope (this hand's road leg — the road-side urgency entry IS the rope side's beat). The pair map: kin trust with the toll-taker, a working acquaintance with the runner (the crossing vouches for the road). The spine shares the household's flood cause; the flaw is the road-leg beat's own bend (AP-8: the entry's flaw key consumes it). The no-teleport law: every leg an ordinary move intent through the door — the autonomous road-leg hop when co-located, the paired mode B steps beyond it; lag is a legal world state. floodpaper (iter-272, the §6.1 fill row): the INHERITANCE's receiving stock declared at zero — the value-0 existence gate's form (pass_the_seat's own law): the drowned generation's open question answered at the door, the debt walking to the second hand's line (the pole already his — the pair completed: the tool and the obligation one inheritance)."
     },
     {
       "id": "npc_sergeant_01",

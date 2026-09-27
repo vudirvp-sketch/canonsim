@@ -1420,6 +1420,290 @@
       "notes": "the market's own COMMERCE (iter-264, the §6.5 embodiment legs — the J-1 trade door landed, the state-to-economy reader): a purchase at the stalls, the buyer's coin walking to the chest at the weighbeam (render_fund's own shape — the transfer's receiving stock the guild's chest, debt-1's location form). THE STALL GATE is the door's own law: spot_available over the fire layer reads the same layer grammar the arson door reads — the commerce closes with the stalls BY CONSTRUCTION (a burned-out Malby refuses the trade softly at the door, attempts are facts; the spots stay in the burning state through the burnout, so the closure never reopens — the irreversibility the fire layer already owns). The honest scale: two coin — the toll's own number, half the guild's yearly take at the chest. UNARMED by doctrine (the census's UNREALIZED band until a witness exercises it): no urgency entry, no faction door — the player's parse verb, the factor's runner buying at the stalls with the house purse (pc_01's coin six). The witnesses see the coin change hands (partial — the market's own people, never the guild's books: the tale's line and the chest's stock the surface, render_fund's own law)."
     },
     {
+      "intent": "reprice_paper",
+      "label": "re-price the terms",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_sourced"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 0
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 16
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "source",
+        "kind": "paper",
+        "amount": 2
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_paper_repriced"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the paper's RENEGOTIATION (iter-271, the §6.4 fill row's first landing — the W5 disposition's honest residue 'the renegotiation stays authored (the guild's re-pricing — the factor gateless, no committed surface)' closed at the account band): the guild's SQUEEZE as live arithmetic — the paper climbing two on the seat (the withheld margin's own number, the coupled liabilities' answer: the camp holds two loads off the beam, the guild prices two paper onto the debt; ONE SALE, TWO CLAIMS' escalation rung). The door's convention, honestly named: the seat re-prices its OWN terms — the actor and the target one hand (the master's acceptance; the source mints to the actor, the line's subject the target, so the discipline is identity — the witness drives them the same), the FACTOR stays gateless as an entity (the guild's agency carried by the terms themselves, the chest's arithmetic the mirror; the runner's own re-pricing power — the audit's arm turned on the master — a future row's own call, never this door). THE STANDING-TERMS GATE is the door's own law: paper at least sixteen on the actor — the renegotiation fires only against the standing debt (a fallen paper has no terms to re-price, refused softly — attempts are facts), and the squeeze may repeat while the terms stand (the debt's compounding the coupled liabilities' own escalation, honest, unchecked by design — the world's arithmetic, never a clock). The reconciliation's DOWN-arm (the tally read moving the terms toward honesty — the shave's margin returned) is the door's own counterfactual, the owner's future row; this door lands the guild's authored direction: the squeeze. The geography is STAGING, never a gate (the paper is an instrument — the guild's word reaches the seat wherever the road finds him; the tale stages the beat at the beam, the errand's own route). UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it. The witnesses (same_location, exact) learn the_paper_repriced — the re-priced terms public as the standing was, the vale reading the squeeze in the same breath as the debt it lands on."
+    },
+    {
+      "intent": "settle_paper",
+      "label": "settle",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_consumed"
+      },
+      "requires": [
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "floodpaper",
+          "value": 20
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 20
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "consume",
+        "kind": "floodpaper",
+        "amount": 20
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_floodpaper_fell"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the flood paper's FALL (iter-272, the §6.1 fill row — the crossing's later settlement, the charcoalpaper precedent's reckoning applied to the flood debt): the strong honest season's fund covering the paper, the paper consumed at the reckoning — the crossing clear, the toll its own again. THE COVERED-FUND GATE is the fall's own law (reckon_paper's form): coin 20 on the actor means the paper only falls against a fund that covers it — an uncovered fall would be the debt dying of want, refused softly at the door (attempts are facts); the punt's purchase drawing on the same fund first leaves the fall refused until the surplus re-climbs — ONE COIN, TWO CLAIMS as live door law, the household's own engine. The witnesses (same_location, exact) learn the_floodpaper_fell — the crossing's clearance public as its standing was. The event is story-critical (the account listing's own law). UNARMED by doctrine: no urgency entry, no faction door."
+    },
+    {
+      "intent": "render_toll",
+      "label": "render",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 20
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 20
+      },
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the toll fund's COLLECTION (iter-272, the §6.1 fill row — the clearance's second half, render_fund's form at the crossing): the fund renders to the chest — the toll-taker walking her covered coin to the guild's home at Malby (the weighbeam's town, the flood paper's own street). The geography gate (same_location at loc_malby, the field_in pin) holds the honest walk: the fund travels with the toll-taker to the chest. No knowledge block — the guild's own books need no witness (render_fund's own law); the fall's beat (settle_paper) carried the word. The two-beat reckoning is the substrate's honest no-transaction form (one verb, one event) — the reversed order leaves the over-payment state (the fund walked, the paper standing), lawful, never scripted."
+    },
+    {
+      "intent": "pass_paper",
+      "label": "pass the paper",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "floodpaper",
+          "value": 20
+        },
+        {
+          "noun": "target",
+          "test": "account_at_least",
+          "kind": "floodpaper",
+          "value": 0
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "floodpaper",
+        "amount": 20
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_paper_inherited"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the debt's INHERITANCE (iter-272, the §6.1 fill row — the drowned generation's open question answered, the pass_the_seat precedent at the crossing): the flood paper walks to the second hand's declared receiving stock — the debt riding the living line, the pole and the paper one inheritance (the tool already his hand's, the obligation joining it). The receiving-stock gate (account_at_least floodpaper 0 on the target — the value-0 form, the stock's EXISTENCE gate) refuses a target that declares no floodpaper stock SOFTLY (the KI#15 family's door shape); the committed receiving end is npc_secondhand_01 (the crossing's own second hand — the family's line, not the camp's seat: the crossing's answer to the anti-freeze law is the LINE, deliberately not repeated as the camp's craft-seat). The witnesses learn the_paper_inherited. UNARMED by doctrine."
+    },
+    {
+      "intent": "buy_punt",
+      "label": "buy the punt",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 12
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 12
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_punt_bought"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the punt's PURCHASE (iter-272, the §6.1 fill row — the punt fund's terminus, the flow vocabulary's no-terminus residue closed): the fund's twelve walked to the boatyard's town — the coin landing at Malby's market ledger (the honest no-entity form for the boatyard's purse: the market's location account, render_toll's own destination shape; a dedicated boatyard entity a future row's own call, never this door's need). THE COVERED-FUND GATE: coin 12 on the actor — the purchase only against the fund that covers it, refused softly otherwise. ONE COIN, TWO CLAIMS at the household's own scale: the punt's twelve and the settlement's twenty drawing on the same thin surplus — Dellan's need fed first leaves the fall refused until the toll re-climbs (the coupling §6.1's unit was authored FOR, now player-scale). The witnesses (same_location, exact) learn the_punt_bought — the household's word, the punt bought back. HONEST RESIDUE: the punt's own item-birth rides the parked entity-birth door (the st-5 family — no committed mechanism births the boat; the purchase's canonical fact is the coin's walk + the witnesses' word, the pole's pair gaining its boat when a future row opens the birth door). UNARMED by doctrine."
+    },
+    {
       "intent": "share_board",
       "label": "share the board",
       "resolver": "converse",

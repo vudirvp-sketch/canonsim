@@ -1503,6 +1503,166 @@ owner's call). The station's standing order after the landing: the
 owner's live reading of the delivered kit → the embodiment fill-list
 (§6.4 → §6.1 → §6.5 → §6.2) → W6.
 
+The owner's live reading RECEIVED and SCORED (iter-270, the standing
+order's third row's own next beat — the blind answers delivered in the
+chat 2026-09-27, the convergence assessment against the pre-set bars,
+the live band's fresh n=1): every station bar MET at the live band,
+the strict heartbreak pair CARRIED. Package 1 (the re-weigh): the
+biography bars hit exactly (the standing named — 16 paper to the
+guild's chest at Malby, the debt dated from the starved winter; the
+discharge's direction correct — rid of the 16 paper, the 16 coin
+walked to Malby, the collection's geography read), the
+withhold-as-answer bar hit (the heap 18 read as the camp's response to
+a tilted weighing system, "effectively becoming the withhold's own
+ledger — while the paper obligation is still paid" — the rs-6
+answer-frame and the rs-10 row's own phrase both read), the humor bar
+hit with the position-dependence EXPLICIT at the live band ("a dry,
+mechanism-grounded irony" of "withhold / beam / honest count"
+extracted unaided, the authored taboo respected — "not from the
+starvation or the original cheating themselves", the knowing/outsider
+split named in the reading's own words), rs-9's causal row carried in
+full (the hold read as standing → the remembered incident → the why —
+"the camp's word about the dishonest weighing... the guild factor
+shaved the camp's weight → the camp starved that winter → the camp
+kept bloom off the weighbeam afterward. That history gives the runner
+leverage" — the iter-208 human datum CLOSED on the live band: the
+standing noticed AND its reasons and consequences carried), rs-10's
+dated chain carried in full ("two seasons earlier... the
+under-weighing happened first; the camp then suffered the starved
+winter. The current tale takes place afterward and shows the
+continuing consequences" — the shave before, the winter between, the
+withhold and the settlement the present consequences; the iter-201/202
+failure modes gone at the live band too). Package 2 (the heartbreak):
+the strict pair CARRIED n=1 — the lost-future half ("they lost not
+only their lives but the futures they would have carried: their line,
+duties, holdings, and the people they were still going to become" +
+"the drowned generation's own futures are permanently gone" — the dead
+as the futures' own holders, the rs-8 re-subjectivation read exactly)
+and the opened half ("the crossing's table is open to the claimant's
+line from this day" — the rs-7 clause quoted exactly), the
+memory/recognition/world-specificity halves carried (the kin claim
+through the old crossing mark, the line recognized, the names carried
+forward "by someone who remains"), and the 40/80 echo consumed
+naturally in reading ("the kin relation recorded for Ketta changes
+from 40 to 80... new relational leverage around Ketta" — the iter-266
+disposition's own prediction observed live: canonically present,
+available to a downstream consumer, never forced). The divergence's
+class RESOLVED by the pre-set rule (the iter-269 record's own law:
+where the owner's reading carries the pair, the divergence was the LLM
+band's own variance) — the glm recheck's lost-future miss was the
+reader-class variance (the free-answer sampling flipping a half across
+sessions), never a surface regression (already excluded — the package
+byte-stable) and never the reconstructed question form (the same Q1–Q8
+carried the pair at the live band). The heartbreak station's human
+band now MET on the fresh kit (the iter-208 n=1 and the iter-270 fresh
+n=1 both MET, the iter-206 n=2 LLM record standing); the live band's
+return row CLOSED — the owner read BOTH just-landed surfaces together
+(rs-9 + rs-10 in the one re-weigh package), never separated from them,
+the W5 disposition's own parenthetical answered. The station's
+standing order after the reading: the embodiment fill-list (§6.4 →
+§6.1 → §6.5 → §6.2) → W6.
+
+The §6.4 fill row's first landing (iter-271, repricing — the W5
+disposition iter-266's fill-list front row, FACTOR NEGOTIATION + the
+honest residues SALE and TAG TRANSFER): the paper's RENEGOTIATION
+armed as the guild's SQUEEZE over the account resolver's
+player-scaled arm — pure pack data, zero core, the charcoalpaper
+precedent family's fourth door `reprice_paper` (the source verb
+sourcing the squeeze's two onto the standing terms: the withheld
+margin's own number, the coupled liabilities' answer — the camp
+holds two loads off the beam, the guild prices two paper onto the
+debt; the STANDING-TERMS gate paper ≥ 16 on the actor — a fallen
+paper has no terms to re-price, refused softly, attempts facts; the
+RECEIVING-STOCK gate on the target, the pass_the_seat form; the
+squeeze may repeat while the terms stand — the compounding the
+world's own arithmetic, never a clock; the geography STAGING never
+a gate — the paper an instrument, the guild's word reaching the seat
+wherever the road finds him; the knowledge row the_paper_repriced
+public to the witnesses exact, the knows gloss carrying the squeeze's
+own causal row — the withhold answered, the debt climbing while the
+bloom stays unweighed; unarmed by doctrine — no urgency entry, no
+hook, the census's UNREALIZED band until a witness exercises it); the
+factor stays GATELESS as an entity (the beat rides the seat's
+acceptance-door, the guild's agency carried by the terms themselves;
+the runner's own re-pricing power a future row's own call) — the
+honest residue "the renegotiation stays authored" CLOSED. The row's
+measured FORK, honestly recorded (the re-weigh's SALE — the heap's
+drain): the account resolver's ACTOR-SIDE GRAMMAR WALL — the
+transfer's from-side is always the intent actor, the heap's ledger
+stocks loc_crofts (a location), and a location can only ever be a
+TO-side; the drain door is NOT authorable as pure pack data over the
+closed verb set — the owner's fork, never silently resolved: (a) the
+buyer's price-door with the ledger's drain a named residue, (b) the
+heap's re-seating onto the master (REJECTED by the record: the
+withhold's ledger SITE is semantic — "banked at the crofts where the
+tally's notches record it", the rs-10 line's own anchor — and the
+re-pinning corpus price the committed witnesses' own law), (c) the
+substrate extension (a location-side drain verb — a core change,
+R3+, the owner's call). The TAG TRANSFER measured at its own
+boundary: the mechanics ALREADY ride the drop+take pair (the
+carrier-availability law's own family; no give-verb exists, none
+owed); the crews' recognition mint stays no committed surface
+(iter-185's law unchanged). The measured evidence: the twin's paper
+climbing 16→18→20 across two squeezes with the market's witnesses
+holding the_paper_repriced, the tale carrying the squeeze's line
+with the kind's own gloss (the starved winter's anchor riding the
+growth), the fallen world refused softly, the stockless target
+refused softly, the golden corpus byte-identical (zero corpus
+price), the twin deterministic (seed 42;
+`tests/test_repricing.py` the claim packet — 6 tests). The station's
+standing order after the landing: §6.4's remainder rides the owner's
+fork call (the SALE) + the tag's recognition row; the fill-list
+continues §6.1 → §6.5 → §6.2 → W6.
+
+The §6.1 fill row LANDED (iter-272, floodpaper — the fill-list's
+second row, the W5 disposition iter-266's order: PAPER DEBT / PUNT
+BUYOUT / DEBT INHERITANCE, «усилить carrier: paper representation →
+holder → inherited obligation → later settlement; НЕ новый
+debt-примитив»): the crossing household's flood debt brought to its
+full lifecycle over the account resolver's player-scaled arm — pure
+pack data, zero core, the charcoalpaper precedent's family applied
+to the crossing. The FOURTH account kind `floodpaper` (the flood
+winter's own paper — the borrowed punt twelve + the stranded
+season's stores eight, the shelter law's cost; its own dated chain
+in the kind's gloss, never the camp's starved winter — the two
+papers one chest, two winters, the estrangement's own pair) stocked
+on the toll-taker (the debt's holder-side seat: the drowned
+generation's debt the living hand's now) + the RECEIVING stock on
+the second hand (floodpaper 0, the inheritance's existence gate);
+the four lifecycle doors: settle_paper (the FALL, the covered-fund
+gate coin 20 — the paper only falls against the fund that covers
+it), render_toll (the COLLECTION, the geography gate at the chest),
+pass_paper (the INHERITANCE — the iter-160 trace's TRANSFER rung,
+"the drowned generation's open question", ANSWERED: the debt walking
+to the living line, the pole and the paper one inheritance, the
+crossing's anti-freeze answer the LINE, deliberately not the camp's
+craft-seat), buy_punt (the PUNT'S PURCHASE — the punt fund's
+terminus, the flow vocabulary's no-terminus residue closed; the
+boatyard's purse the market's location ledger, the honest no-entity
+form); ONE COIN, TWO CLAIMS made doors (the settlement's twenty and
+the punt's twelve drawing on the same thin surplus — the punt spent
+first leaves the fall refused until the toll re-climbs, §6.1's own
+engine now player-scale); the knows rows the_floodpaper_fell /
+the_paper_inherited / the_punt_bought. The measured evidence: the
+twin's floodpaper standing at 20 through the crossings while the
+fund climbs (the no-amortization law live state); the fall refused
+early at the fund 2, landing when covered (the witnesses holding
+the_floodpaper_fell, the tale carrying both reckoning lines with
+the kind's own flood-winter gloss); the coupling measured (the punt
+walked at the fund 14, the fall then refused at 2); the inheritance
+walked to the second hand with the stockless target refused softly;
+the golden corpus byte-identical (zero corpus price — the stocks
+seed silently, the doors unarmed by doctrine); the twin
+deterministic (seed 42; `tests/test_floodpaper.py` the claim packet
+— 9 tests; the four census re-pins: campaccount / charcoalpaper /
+debt1 / freightvol, the deliberate act the pinning law names).
+Honest residues: the punt's own item-birth rides the parked
+entity-birth door (the st-5 family — the purchase's canonical fact
+the coin's walk + the witnesses' word); a dedicated boatyard entity
+a future row's own call. The station's standing order after the
+landing: §6.4's SALE fork (the owner's call) + §6.5 (the
+move-release) → §6.2 → W6.
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the

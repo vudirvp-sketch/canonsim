@@ -173,7 +173,9 @@ def test_the_armed_census() -> None:
     the tale's), the budget's honest re-declare."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
-    assert economy["accounts"] == ["coin", "bloom", "paper"]
+    # iter-272 (floodpaper): the fourth kind — the crossing's flood paper;
+    # charcoalpaper's own claim (the camp's paper 16) unchanged
+    assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper"]
     # no flow touches the paper — the no-amortization law is structural
     assert not [f for f in economy["flows"] if f["kind"] == "paper"]
     master = next(n for n in pack.entities["npcs"] if n["id"] == MASTER)

@@ -106,7 +106,8 @@
   },
   "account_kinds": {
     "paper": "paper owed to the guild's chest at Malby since the starved winter",
-    "bloom": "bloom kept off the weighbeam since the guild factor shaved the camp's weight two seasons back and the camp starved that winter — the withhold's own ledger"
+    "bloom": "bloom kept off the weighbeam since the guild factor shaved the camp's weight two seasons back and the camp starved that winter — the withhold's own ledger",
+    "floodpaper": "paper owed to the guild's chest at Malby since the winter after the flood — the borrowed punt and the stranded season's stores, the shelter law's cost"
   },
   "flow_glosses": {
     "the_toll_nets": "the toll's net surplus, the punt fund climbing toward the punt's twelve",
@@ -141,6 +142,10 @@
     "coin_changed_hands_at_{location}": "coin changed hands at {location}",
     "the_guild_bars_the_stalls": "the guild barred the stalls",
     "the_blood_price_spoken": "the blood price spoken aloud again",
-    "the_camps_word": "the camp's word: the honest count cut in the tally; the guild factor shaved the camp's weight two seasons back and the camp starved that winter, and the bloom has sat off the weighbeam since"
+    "the_camps_word": "the camp's word: the honest count cut in the tally; the guild factor shaved the camp's weight two seasons back and the camp starved that winter, and the bloom has sat off the weighbeam since",
+    "the_paper_repriced": "the guild re-priced the paper at the reckoning — the squeeze answering the withhold: two more paper owed for the loads kept off the weighbeam, the debt climbing while the bloom stays unweighed",
+    "the_floodpaper_fell": "the flood paper fell at the reckoning — the crossing clear, the toll its own again",
+    "the_paper_inherited": "the flood paper walked to the second hand — the drowned generation's debt the living line's now, the pole and the paper one inheritance",
+    "the_punt_bought": "the punt bought back at Malby — the fund's twelve walked to the boatyard's town, the family's boat coming home to the stair"
   }
 }

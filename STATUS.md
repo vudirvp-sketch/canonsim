@@ -1,58 +1,73 @@
-Iteration: iter-269 (`livereturn` — the standing order's third row, the
-  W5 owner disposition iter-266's LIVE RETURN / HEARTBREAK RECHECK row:
-  «живая полоса не отделяется от только что внесённых изменений» — the
-  human band reading both just-landed surfaces together): the reading
-  kit re-established and DELIVERED — the two packages regenerated
-  deterministically at seed 42 over the CURRENT committed pack (the
-  runner + the kit outside the repo, Rule 9), the re-weigh package now
-  carrying BOTH just-landed surfaces (rs-9's hold line + rs-10's dated
-  withhold line; every recorded substance shape hit exactly: the
-  night-arm read t=1112 partial, the fall t=2824, the collection
-  t=2826, seven crossings, the close paper 0 / coin 8 / fatigue 98,
-  the heap 18, the runner among the fall's witnesses, the tale 90
-  lines — the iter-268 reconstruction's own honest count;
-  byte-identical on regeneration) and the heartbreak package
-  byte-stable against the recorded form (43 events, the tale 24 lines,
-  the fail-then-pass reads, rs-7/8's lines, the dry holds); the
-  pre-set author audit written BEFORE any reading (the isolation law
-  — the station bars + the two new rows' bars); the HEARTBREAK RECHECK
-  — the glm blind reading n=2 over the heartbreak package: the opened
-  half 2/2, the lost-future half 1/2 (reading 1 carrying the rs-8
-  clause's own semantics; reading 2 in the iter-204 remembered-dead
-  mode), the strict n=2 pair NOT met — the divergence's class
-  UNRESOLVED (the reader-class variance vs the reconstructed question
-  form; a surface regression EXCLUDED — the package byte-stable), the
-  iter-206 n=2 and iter-208 n=1 records STAND, no fix attempted (the
-  anti-probe-shopping law); KI#104 + KI#105 found and closed (the
-  iter-268 landing's two missed files: the TASKS ledger row + the
-  test_accountgloss re-pin — the committed HEAD was red); the owner's
-  RU report at
-  docs/iterations/iter-269-livereturn-report.md
+Iteration: iter-272 (`floodpaper` — the §6.1 fill row, the W5
+  disposition iter-266's fill-list second row: PAPER DEBT / PUNT
+  BUYOUT / DEBT INHERITANCE, «усилить carrier: paper representation
+  → holder → inherited obligation → later settlement; НЕ новый
+  debt-примитив»): the crossing household's flood debt brought to
+  its full lifecycle over the account resolver's player-scaled arm —
+  pure pack data, zero core, the charcoalpaper precedent's family
+  applied to the crossing: the FOURTH account kind `floodpaper`
+  (the flood winter's own paper — the borrowed punt twelve + the
+  stranded season's stores eight, the shelter law's cost; its own
+  dated chain in the kind's gloss, never the camp's starved winter —
+  the two papers one chest, two winters, the estrangement's own
+  pair) stocked on the toll-taker (the debt's holder-side seat: the
+  drowned generation's debt the living hand's now) + the RECEIVING
+  stock on the second hand (floodpaper 0, the inheritance's
+  existence gate); the four lifecycle doors: settle_paper (the FALL,
+  the covered-fund gate coin 20), render_toll (the COLLECTION, the
+  geography gate at the chest), pass_paper (the INHERITANCE — the
+  iter-160 trace's TRANSFER rung, the drowned generation's open
+  question, ANSWERED: the debt walking to the living line, the pole
+  and the paper one inheritance, the crossing's anti-freeze answer
+  the LINE, deliberately not the camp's craft-seat), buy_punt (the
+  PUNT'S PURCHASE — the punt fund's terminus, the flow vocabulary's
+  no-terminus residue closed; the boatyard's purse the market's
+  location ledger, the honest no-entity form); ONE COIN, TWO CLAIMS
+  made doors (the settlement's twenty and the punt's twelve drawing
+  on the same thin surplus — the punt spent first leaves the fall
+  refused until the toll re-climbs, the household's own engine now
+  player-scale); the knows rows the_floodpaper_fell /
+  the_paper_inherited / the_punt_bought; the measured evidence: the
+  twin's floodpaper standing at 20 through the crossings while the
+  fund climbs (the no-amortization law live state), the fall refused
+  early at the fund 2 / landing when covered (the witnesses holding
+  the_floodpaper_fell, the tale carrying both reckoning lines with
+  the kind's own flood-winter gloss), the coupling measured (the
+  punt walked at the fund 14, the fall then refused at 2), the
+  inheritance walked to the second hand with the stockless target
+  refused softly, the golden corpus byte-identical (zero corpus
+  price — the stocks seed silently, the doors unarmed by doctrine),
+  the twin deterministic; the owner's RU report at
+  docs/iterations/iter-272-floodpaper-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2478 passed + 9 skipped, ruff clean, docguard clean, topology
+2493 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-27 ·
-Scope: tests/test_accountgloss.py (the rs-10 re-pin re-landed
-  per KI#105 — iter-268's own recorded intent, its commit missed the
-  file), docs/{worldbuild/WORLD_TESTS.md (§9 the W5 entry's iter-269
-  record), worldbuild/WORLD_WORKPLAN.md (§7 the standing order
-  advanced), worldbuild/ANCHOR_REGION.md (§6.3 the live-band's-return
-  line synced), blueprint/phases.md (§6 the iter-269 record),
-  TASKS.md (the ledger: iter-268's row restored per KI#104 + the
-  iter-269 row, the tail re-capped),
-  iterations/iter-269-livereturn-report.md (new, the owner's RU
-  deliverable)}, STATUS.md, worklog.md (iter-259 evicted) — 9 paths
-  (R2 — the re-pin's completion (one test constant, the iter-268
-  intent) + the instrument + the docs; zero pack, zero canon; the
-  kit + the runner + the transcripts outside the repo, Rule 9)
-Track A: the live band's return DELIVERED (the standing order's third
-  row — the kit in the owner's hands, the convergence assessment the
-  owner's reading away); the order continues: the owner's live reading
-  of the delivered kit → the embodiment fill-list rows (§6.4 → §6.1 →
-  §6.5 → §6.2; §6.3 removed) → W6 genre. The ssi family COMPLETE
-  except ssi-5, owner-gated.
+Scope: content/province_pack/{entities.json (Ketta's floodpaper 20 +
+  Dellan's receiving stock + the notes), rules.json (the fourth kind
+  + the economy notes' floodpaper row), actions.json (the four
+  lifecycle doors), templates.json (the kind's gloss + the three
+  knows rows)}, tests/{test_floodpaper.py (new, the witness — 9
+  tests, the claim packet), test_campaccount.py, test_charcoalpaper.py,
+  test_debt1.py, test_freightvol.py (the four census re-pins, the
+  deliberate act the pinning law names)}, docs/{worldbuild/
+  WORLD_TESTS.md (§9 the iter-272 record), worldbuild/WORLD_WORKPLAN.md
+  (§7 the fill-list advanced), worldbuild/ANCHOR_REGION.md (§6.1 the
+  floodpaper row), blueprint/phases.md (§6 the iter-272 record),
+  TASKS.md (the ledger, iter-262 evicted), iterations/
+  iter-272-floodpaper-report.md (new, the owner's RU deliverable)},
+  STATUS.md, worklog.md (iter-262 evicted) — 14 paths (R2 — one kind
+  + two stocks + four doors + the glosses + the witness + the
+  re-pins + the docs; zero core, zero canon change, the LOG
+  untouched, zero corpus price)
+Track A: the §6.1 fill row LANDED (the crossing's carrier
+  strengthened — the paper representation, the holder, the
+  inheritance, the settlement, the punt's terminus); the order
+  continues: §6.4's SALE fork (the owner's call) → §6.5
+  (move-release) → §6.2 (present / hatch / notch) → W6 genre. The
+  ssi family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -113,55 +128,103 @@ Track A: the live band's return DELIVERED (the standing order's third
 
 ## Next step
 
-**iter-269 DONE: the live band's return + the heartbreak recheck (the
+**iter-272 DONE: the §6.1 fill row (the fill-list's second row —
+  the crossing's carrier strengthened): the flood debt's full
+  lifecycle over the account resolver's player-scaled arm — pure
+  pack data, zero core, the charcoalpaper precedent's family applied
+  to the crossing. The FOURTH kind floodpaper (the flood winter's
+  own paper — the borrowed punt twelve + the stranded season's
+  stores eight, the shelter law's cost; its own dated chain in the
+  kind's gloss, never the camp's starved winter) stocked on the
+  toll-taker (the paper twenty, the drowned generation's debt the
+  living hand's now) + the receiving stock on the second hand (the
+  inheritance's existence gate); the four doors: settle_paper (the
+  FALL, the covered-fund gate), render_toll (the COLLECTION, the
+  geography gate at the chest), pass_paper (the INHERITANCE — the
+  drowned generation's open question ANSWERED: the debt walking to
+  the living line, the pole and the paper one inheritance), buy_punt
+  (the PUNT'S PURCHASE, the punt fund's terminus — the flow
+  vocabulary's no-terminus residue closed); ONE COIN, TWO CLAIMS
+  made doors (the punt's twelve and the settlement's twenty on the
+  same thin surplus — the punt spent first leaves the fall refused).
+  Measured: the fall refused early / landed covered with the
+  witnesses holding the_floodpaper_fell and the tale carrying both
+  reckoning lines with the flood-winter gloss; the coupling
+  measured; the inheritance walked to the line with the stockless
+  target refused softly; the golden corpus byte-identical (zero
+  corpus price); the twin deterministic; the four census re-pins
+  (campaccount / charcoalpaper / debt1 / freightvol). Honest
+  residues: the punt's item-birth rides the parked st-5 door; a
+  dedicated boatyard entity a future row's own call. 2493+9 + ruff +
+  docguard + topology --check clean. The owner's RU report:
+  docs/iterations/iter-272-floodpaper-report.md.**
+Next: §6.4's SALE fork (the owner's call on the grammar wall) →
+  §6.5 (the move-release, the owner's future row at its iter-263
+  price) → §6.2 (present / hatch / notch) → W6 genre.
+Active KIs: KI#104, KI#105 (both CLOSED iter-269).
+iter-271 DONE: the §6.4 fill row's first landing (the fill-list's
+  front row — FACTOR NEGOTIATION armed, the SALE forked to the
+  owner, the TAG measured at its boundary): the paper's RENEGOTIATION
+  as the guild's SQUEEZE over the account resolver's player-scaled
+  arm — the door reprice_paper (the squeeze's two sourced onto the
+  standing terms, the withheld margin's own number; the
+  standing-terms gate; the receiving-stock gate; the knowledge row
+  the_paper_repriced public; the compounding lawful while the terms
+  stand); the factor stays gateless as an entity (the beat rides the
+  seat's acceptance-door); the honest residue "the renegotiation
+  stays authored" CLOSED; the measured FORK recorded (the SALE — the
+  heap's drain): the account resolver's ACTOR-SIDE GRAMMAR WALL (a
+  location's stock is only ever a TO-side — the drain not authorable
+  as pure pack data; the owner's fork (a) the price-door (b) the
+  re-seating REJECTED (c) a location-side drain verb R3+); the TAG
+  TRANSFER at its boundary (the drop+take pair carries the
+  mechanics, the recognition mint stays un-armed). 2484+9 + ruff +
+  docguard + topology --check clean. The owner's RU report:
+  docs/iterations/iter-271-repricing-report.md.**
+iter-270 DONE: the owner's live reading of the delivered kit RECEIVED
+  and SCORED (the standing order's third row's own next beat — the
+  blind answers in the chat, the convergence assessment against the
+  pre-set bars, the live band's fresh n=1): every station bar MET at
+  the live band, the strict heartbreak pair CARRIED (the lost-future
+  half — the rs-8 re-subjectivation read exactly; the opened half —
+  the rs-7 clause quoted exactly), rs-9's causal row + rs-10's dated
+  chain both carried in full (the iter-208 human datum closed), the
+  humor's position-dependence explicit, the 40/80 echo consumed
+  naturally in reading; the heartbreak divergence's class RESOLVED
+  per the pre-set rule — the glm recheck's miss was the LLM band's
+  own reader-class variance, never a surface regression and never the
+  question form; the heartbreak human band MET on the fresh kit; the
+  live band's return row CLOSED (both just-landed surfaces read
+  together). 2478+9 + ruff + docguard + topology --check clean. The
+  owner's RU report: docs/iterations/iter-270-livescored-report.md.**
+iter-269 DONE: the live band's return + the heartbreak recheck (the
   standing order's third row) DELIVERED — the reading kit re-established
   over the CURRENT committed pack and handed to the owner: both
   packages regenerated deterministically at seed 42, byte-identical on
   regeneration, the re-weigh package now carrying BOTH just-landed
-  surfaces (rs-9's hold line — "the factor's runner now holds something
-  over Garrick — the camp's word: the honest count cut in the tally;
-  the guild factor shaved the camp's weight two seasons back and the
-  camp starved that winter, and the bloom has sat off the weighbeam
-  since" — and rs-10's dated withhold line, the dated chain riding
-  every crossing) with EVERY recorded substance shape hit exactly (the
-  night read t=1112 partial, the fall t=2824, the collection t=2826,
-  seven crossings, the close paper 0 / coin 8 / fatigue 98, the heap
-  18, the runner among the fall's witnesses, the tale 90 lines — the
-  iter-268 reconstruction's own honest count); the heartbreak package
+  surfaces (rs-9's hold line + rs-10's dated withhold line) with EVERY
+  recorded substance shape hit exactly (the night read t=1112 partial,
+  the fall t=2824, the collection t=2826, seven crossings, the close
+  paper 0 / coin 8 / fatigue 98, the heap 18, the runner among the
+  fall's witnesses, the tale 90 lines); the heartbreak package
   byte-stable against the recorded form (43 events, the tale 24 lines,
-  rs-7/8's lines, the dry holds — the_winter_kin unglossed, the
-  leverage lines unchanged through rs-9's boundary extension); the
-  briefs' cut points reconstructed to the natural mirror of the
-  recorded form (the honest note — the original wording died with its
-  session, Rule 9); the pre-set author audit written BEFORE any
-  reading (the isolation law) — the station bars + the TWO NEW ROWS'
-  bars (rs-9's causal row: the hold's line read as standing → the
-  remembered incident → the why; rs-10's dated chain: the shave placed
-  before the tale's events, the winter between, the withhold the
-  present consequence); the HEARTBREAK RECHECK — the glm blind reading
-  n=2 over the heartbreak package: the opened half 2/2 (the crossing's
-  table open to the claimant's line, both readings), the lost-future
-  half 1/2 (reading 1: "their lost futures and the duties that were to
-  have been theirs" — the rs-8 clause's own semantics; reading 2: the
-  drowned as "guests who had wintered there and were lost in the
-  flood" — the iter-204 remembered-dead mode), the strict n=2 pair NOT
-  met — the divergence's class UNRESOLVED between the reader-class
-  variance (glm's free-answer sampling flipping a half across
-  sessions) and the reconstructed question form (the original outside
-  the repo, Rule 9); a surface regression EXCLUDED (the package
-  byte-stable, every recorded shape hit); the iter-206 n=2 MET and
-  iter-208 n=1 human MET records STAND; no fix attempted (NEVER
-  "improve the prose"; the same measurement re-run until it passes is
-  probe-shopping — the anti-loop law); the kit + the runner + the
-  transcripts outside the repo (Rule 9). 2478+9 + ruff + docguard +
-  topology --check clean. The owner's RU report:
+  rs-7/8's lines, the dry holds); the briefs' cut points reconstructed
+  to the natural mirror of the recorded form (the honest note — the
+  original wording died with its session, Rule 9); the pre-set author
+  audit written BEFORE any reading (the isolation law) — the station
+  bars + the TWO NEW ROWS' bars; the HEARTBREAK RECHECK — the glm
+  blind reading n=2 over the heartbreak package: the opened half 2/2,
+  the lost-future half 1/2 (reading 1 carrying the rs-8 clause's own
+  semantics; reading 2 in the iter-204 remembered-dead mode), the
+  strict n=2 pair NOT met — the divergence's class UNRESOLVED between
+  the reader-class variance and the reconstructed question form; a
+  surface regression EXCLUDED (the package byte-stable); the iter-206
+  n=2 MET and iter-208 n=1 human MET records STAND; no fix attempted
+  (NEVER "improve the prose"; the same measurement re-run until it
+  passes is probe-shopping — the anti-loop law); the kit + the runner
+  + the transcripts outside the repo (Rule 9). 2478+9 + ruff + docguard
+  + topology --check clean. The owner's RU report:
   docs/iterations/iter-269-livereturn-report.md.**
-Next: the owner's live reading of the delivered kit (the blind answers
-  in the chat — the convergence assessment against the pre-set bars,
-  the live band's fresh n=1, the heartbreak divergence's class
-  resolving on the reading) → the embodiment fill-list rows (§6.4 →
-  §6.1 → §6.5 → §6.2; §6.3 removed) → W6 genre.
-Active KIs: KI#104, KI#105 (both CLOSED iter-269).
 iter-268 DONE: the shave's temporal surface (the standing order's
   second row, the W5 owner disposition's ADD TEMPORAL SURFACE call)
   LANDED read-side — the withhold's own line carrying the dated chain:
@@ -234,107 +297,28 @@ iter-267 DONE: the runner's grudge discovery surface (the standing
   brief's own law). 2470+9 + ruff + docguard + topology --check
   clean. The owner's RU report:
   docs/iterations/iter-267-runner-grudge-surface-report.md.**
-iter-266 DONE: the W5 owner decisions (the owner's 2026-09-27
-  dispositions call over the standing W5 decision points) LANDED as
-  the owning docs' decision records — zero code, zero pack, zero
-  canon; the residue list SPLIT by disposition: the fail-then-pass
-  reading + the 40/80 asymmetry CLOSE AS RESIDUE (deliberate
-  unresolved discovery residues, never technical debt; DO NOT
-  DELETE, DO NOT EXPLAIN BY DEFAULT; the 40/80 canonically present,
-  available to downstream consumers, never forced into the reader
-  path), the runner's grudge → ADD DISCOVERY SURFACE (the minimal
-  causal row: standing → the remembered incident → why the grudge
-  exists — the live band's iter-208 datum the tipping evidence), the
-  shave's temporal placement → ADD TEMPORAL SURFACE (the dated-memory
-  row: earlier season → hunger winter → the event → present
-  consequence — the temporal anchor the causal chain's own loss);
-  the fill-list re-ordered (runner → shave → the live band's return +
-  the heartbreak recheck → §6.4 → §6.1 → §6.5 → §6.2 → W6) with
-  §6.3 REMOVED (its probe completed iter-204..210, the ANCHOR_REGION
-  row synced — the doc drift closed); the decision standard recorded
-  as standing law (a surface never owed merely because two LLM
-  readings and one human reader failed to assemble a link — the kept
-  residues stand deliberately: the world may be causally coherent
-  without being fully solved). 2461+9 + ruff + docguard + topology
-  --check clean. The owner's RU report (the corrected world-track
-  orientation's P0 split):
-  docs/iterations/iter-266-w5-owner-decisions-report.md.**
-iter-265 DONE: the render conditional (the owner's «можешь закрыть
-"рендер-условную строку (последняя нога §6.5)" и можно переходить на
-world track» call closing the iter-263 verdict's last owner-gated
-embodiment row) LANDED read-side, zero core, zero runtime bytes — the
-renderer's LOCATION FOLD (render/chronicle.py::_Positions: every
-location's prop state, seeded from the declared flags + accounts —
-initial_projection's honest mirror — advanced by each event's
-location writes, tolerant last-write-wins, a READER never a truth
-test) exposing the tracked props as DOTTED conditional keys
-`<location_id>.<prop>` (raw values; a plain {slot} rejects the dotted
-name — a CONDITION surface, never prose); the authored line
-market_opens' own arm `{loc_malby.destroyed?…|…}` (the market day
-passes over the burned stall row; the day still counted — the
-calendar's legibility the surface BY LAW, the grammar closed per
-C1/C2); the measured evidence: the composition witness 2376 events
-byte-identical to the committed expectation (a template changes NO
-runtime byte — the golden fixtures untouched), 36 market days all
-after the burnout t=3573, 36 ashes lines, 0 standing lines — the
-falsifier DEAD; the witness tests/test_render_conditional.py (the
-census through the real load_pack — the scratch probe re-voicing the
-wait line, a new event type being dead vocabulary the lint refuses;
-the two integration arms, one day two worlds, the same first market
-day t=14400; the purity pin). The §6.5 embodiment rows COMPLETE (the
-move release the owner's future row at its iter-263 price). 2461+9 +
-ruff + docguard + topology --check clean. The owner's RU report (with
-the world-track orientation): docs/iterations/iter-265-render-conditional-report.md.**
-iter-264 DONE: the §6.5 embodiment legs (the owner's «продолжай
-работы по embodiment-ногам §6.5» call opening the iter-263 owner-gated
-rows) LANDED as pure pack data, zero core — the mourns hook
-`market_mourns` (the prop trigger loc_malby.destroyed, the wait
-seeding, the INTENT PICK = the RAMBLE release — the fourth murmur,
-the spine's rhyme; the move release the owner's future row), the
-TRIGGER-ONLY LAW (the option layer's gate closing the quiet-path leak
-a triggered weight-0 ambient hook carries by construction — measured
-on the smoke witness, fixed in the same iteration), the trade verb
-`trade_at_market` (the spot_available/account gates over the fire
-layer — the commerce closes with the stalls by construction; unarmed
-by doctrine, the runner's purse the walking stock), the council/vigil
-knowledge blocks (the public acts' honest residue; the world
-answering through the smoke-degraded fidelity); the composition
-deltas exactly the iter-263 I2/I3b predictions on the committed
-forms (+1 ramble, +3 rumors 22→25, +1 briefing transfer); the
-witness tests/test_marketlegs.py (the four legs + the no-leak arm +
-the twin); the province golden's exact 3-line regen. The render
-conditional (the tale contradiction on the ashes) is the ONE
-remaining §6.5 owner-gated row. 2455+9 + ruff + docguard + topology
---check clean. The owner's RU report:
-docs/iterations/iter-264-market-legs-report.md.**
-iter-263 DONE: the carrier-or-surface discrimination over the
-owner's question (which authored institutions in Sarrow Vale should
-be canonical carriers of world change, which intentionally remain
-narrative surfaces — and can a minimal world-track experiment
-distinguish the cases without a new runtime primitive) — YES, the
-three-move probe (the reader audit → the ablation arm → the injection
-arm, WORLD_TESTS §7's third member; the lint part of the instrument,
-determinism twin-verified, zero core/pack changes): the verdict
-PER-LEG never per-institution — the market carries all four bands
-(the material leg a live carrier: its ablation diverges the whole
-year; the economic leg a render-read state carrier; the social leg
-live; the calendar line a surface BY CONSTRUCTION — the consumer
-routes closed, measured twice), the epistemic band named and measured
-(the council/vigil knowledge legs: the watch-briefing transfer
-consumer live; the novelty-gradient honest boundary), the
-market-mourns prop trigger measured both ways (the move release
-massive — talks 287→2, the council pile-up 1→208 off the cold-frozen
-fear; the ramble release minimal-but-material), four expressibility
-boundaries named (none needing a new primitive), the J-rows re-framed
-by measurement (J-1 decomposed to the READER legs, the unit ANCHOR
-§6.5; J-2's remainder confirmed; J-3 closed). 2445+9 + ruff +
-docguard + topology --check clean. The owner's RU report:
-docs/iterations/iter-263-carrier-surface-report.md.**
-iter-262 DONE: the composition-bottleneck diagnosis — the twin-fold
-causal-inertness test, J-1 re-framed (the market-as-meso-carrier
-world-track row), KI#103 fixed (the `wait` resolver's knowledge
-minting), J-3 closed (the decay-catchup-before-rolls law). 2445+9.
-The owner's RU report: docs/iterations/iter-262-diagnosis-report.md.
+iter-266 DONE: the W5 owner decisions LANDED as the owning docs' decision records (zero code/pack/canon) — the residue list SPLIT by disposition (fail-then-pass + 40/80 CLOSE AS RESIDUE; the runner's grudge ADD DISCOVERY SURFACE; the shave's timing ADD TEMPORAL SURFACE), the fill-list re-ordered (§6.4 → §6.1 → §6.5 → §6.2 → W6, §6.3 REMOVED), the decision standard recorded as standing law. 2461+9. The owner's RU report: docs/iterations/iter-266-w5-owner-decisions-report.md.
+iter-265 DONE: the render conditional (the §6.5 row's last leg) LANDED read-side, zero core — the renderer's location fold (the DOTTED conditional keys) + the market line's own arm; the falsifier dead (36 ashes lines, 0 standing). 2461+9. The owner's RU report: docs/iterations/iter-265-render-conditional-report.md.
+iter-264 DONE: the §6.5 embodiment legs LANDED as pure pack data,
+zero core — the mourns hook market_mourns (the prop trigger, the
+RAMBLE intent pick, the TRIGGER-ONLY law's option gate), the trade
+verb trade_at_market (the stall gate closing the commerce with the
+burned market by construction), the council/vigil knowledge blocks;
+the composition deltas exactly the iter-263 predictions; the witness
+tests/test_marketlegs.py. 2455+9. The owner's RU report:
+docs/iterations/iter-264-market-legs-report.md.
+iter-263 DONE: the carrier-or-surface discrimination over the owner's
+question — the three-move probe (the reader audit → the ablation arm →
+the injection arm, WORLD_TESTS §7's third member; zero core/pack
+changes): the verdict PER-LEG never per-institution (the market
+carries all four bands; the calendar line a surface BY CONSTRUCTION),
+the epistemic band named and measured, the market-mourns prop trigger
+measured both ways (the move release massive, the ramble
+minimal-but-material — §6.5's move-release price), four
+expressibility boundaries named, the J-rows re-framed by measurement.
+2445+9. The owner's RU report:
+docs/iterations/iter-263-carrier-surface-report.md.
+iter-262 DONE: the composition-bottleneck diagnosis — the twin-fold causal-inertness test, J-1 re-framed, KI#103 fixed (the wait resolver's knowledge minting), J-3 closed. 2445+9. The owner's RU report: docs/iterations/iter-262-diagnosis-report.md.
 iter-261 DONE: the composition question over the parked intake-40
 P1 set — P1-1 the Province integrated witness (16 relational-oracle
 tests over one 2371-event run), P1-10 the timing witness (mechanics.py
