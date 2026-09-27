@@ -4619,6 +4619,63 @@ triggers plot writing):**
   topology --check clean. The owner's RU report:
   `docs/iterations/iter-278-genre-report.md`.
 
+**The iter-279 genreread record (R0, doc-only in the repo — the W6
+reading band's LLM half, the owner's «продолжай работу над задачами
+класса world track, делай то что логичнее и правильнее сейчас
+сделать а не потом» call; the experiment itself ran outside the
+repo, Rule 9 — the runner, the kit, the transcripts):**
+
+- **The form.** The reading kit over the COMMITTED pack in the
+  recorded W5 form (iter-207): each package = the tale + the key
+  actor's records (opening/close) + the site's close record + three
+  briefs at the natural cut mirrors (crisis / the actor's crisis /
+  the close; the brief cut points reconstructed to the natural
+  mirrors, the iter-269 honest-note family). TWO packages: the
+  JOURNEY (seed 42, the iter-278 JOURNEY chain — one history
+  carrying the adventure AND the mystery chains) and the POLITICS
+  (seed 2, the both-fires road merged with the master's walk and
+  squeeze — one history carrying the differential institutional
+  answer AND the balance-moving move: 103 events, the keep + Malby
+  fires, the grief waking at each, the guild's council, the
+  families' two vigils, the paper 16→18→20, the repriced row
+  public). The kit regenerates byte-identical (the double run).
+- **The isolation law held.** The pre-set audit (the genre bars
+  restated in reading form — a separate kit artifact) written
+  BEFORE any reading; the blind readings glm n=2 per question, a
+  fresh session per reading, the bars never shown; the questions
+  name the frame, never the pass bar (the W5 form).
+- **The measurement.** MYSTERY met 3/3 legs n=2 convergent (the
+  hidden fact, the deliberate tally read as the discovery path, the
+  revelation as the difference between the landed corner and the
+  dead door). ADVENTURE 3/4 legs n=2 (the departure, the objective,
+  the changed return — one reading carrying the moved pair's
+  numbers; the risk leg's road-toll half carried, the NIGHT form
+  absent from the material — RENDERING_GAP named: the unlit crofts
+  a substrate fact the reading form never surfaces; the moves
+  low-importance by the T7 law, no gate raised). POLITICS 2/3 n=2
+  (the interests and the differential contrast extracted cleanly;
+  the balance-moving move NOT assembled at the strict bar — the
+  climb quoted by both readings, the permanence slot taken by the
+  burnout, the agency misread once — RENDERING_GAP named: the
+  squeeze's causal row rides the scene card's knows gloss, a
+  surface outside the W5 kit form). The FREE-genre band: the two
+  packages of the same pack read materially differently (tragedy
+  named only for the politics; the economic/character frames only
+  for the journey) — the W6 hypothesis's divergence half carried;
+  the genre-matrix labels are not the free namings (the chronicle
+  register leads; the shapes extract under directed frames).
+- **The verdict.** The W6 hypothesis's reading-side PARTIALLY
+  CONFIRMED at the LLM band; two RENDERING_GAPs named, never fixed
+  (no prose edited, no pack change, no machinery promoted — the
+  station's law held); the owner's LIVE band OPEN (the kit
+  delivered with READING_INSTRUCTIONS.md Q1–Q5 + audit_preset.md).
+- **The sync.** WORLD_TESTS §9 (the W6 entry's reading-band
+  record), WORLD_WORKPLAN §8, WORLD_TRACK_AGENT_CONTEXT §9, TASKS
+  (the ledger), STATUS, worklog. 2530+9 + ruff + docguard +
+  topology --check clean (zero code, zero pack, zero canon change,
+  the LOG untouched, zero corpus price). The owner's RU report:
+  `docs/iterations/iter-279-genreread-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

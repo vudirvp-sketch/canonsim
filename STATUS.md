@@ -1,44 +1,46 @@
-Iteration: iter-278 (`genre` — the owner's «открывай задачу по W6»
-  call: the W6 genre matrix's FIRST ROW, the station's law held — a
-  failed genre test identifies the missing world substrate, never
-  triggers plot writing; no test failed at its named band): the
-  matrix run on the SAME canonical package at the deterministic
-  band — the committed province_pack untouched, zero core, zero pack
-  change, the LOG untouched, zero corpus price; ADVENTURE measured
-  (the tally journey's four legs + the hard-risk arm: the closed
-  artery refusing the journey, the fork's two returns diverging),
-  MYSTERY measured (the registered secret never volunteered — the
-  silent world; the revelation IS the door — the fork's corner
-  landing only through the discovery), POLITICS measured (the same
-  fire pressure tipping the guild / the garrison / the families at
-  the pinned seeds + the squeeze moving the standing terms public,
-  persisting); the four carried genres cite their W5 evidence, the
-  census pins all seven genres' committed surfaces; the honest
-  boundaries classified (the authored edge closure — SUBSTRATE_GAP,
-  the I0 inventory's candidate; the mystery's band; the player's
-  re-pricing power — iter-271's residue; the reading band
-  owner-routed); the witness tests/test_genre.py (10 tests); the
-  owner's RU report at docs/iterations/iter-278-genre-report.md
+Iteration: iter-279 (`genreread` — the owner's «продолжай работу над
+  задачами класса world track, делай то что логичнее и правильнее
+  сейчас сделать а не потом» call: the W6 READING BAND's LLM half —
+  the current station's open row, the recorded W5 form; the live band
+  stays the owner's): the reading kit built over the COMMITTED pack
+  (zero core, zero pack change, the LOG untouched, zero corpus
+  price; the runner + the kit + the transcripts outside the repo,
+  Rule 9; byte-identical regeneration) — TWO one-history packages
+  (the JOURNEY seed 42 carrying adventure + mystery together; the
+  POLITICS seed 2 carrying the differential institutional answer +
+  the squeeze: the two fires, the grief at each, the guild's
+  council, the families' two vigils, the paper 16→18→20 public);
+  the pre-set audit written BEFORE any reading (the isolation law);
+  the blind glm readings n=2 per question, fresh session each —
+  MYSTERY 3/3 convergent, ADVENTURE 3/4 (the night form a named
+  RENDERING_GAP — the reading form never surfaces the unlit
+  crofts), POLITICS 2/3 (the balance-move assembly a named
+  RENDERING_GAP — the causal row rides the scene card, outside the
+  W5 kit form), the free readings diverging materially across the
+  same pack's two packages (the hypothesis's divergence half
+  carried; the genre shapes extract under directed frames); the
+  owner's live band OPEN (the kit delivered with Q1–Q5 + the bars);
+  the owner's RU report at docs/iterations/iter-279-genreread-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2530 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-28 ·
-Scope: tests/test_genre.py (new, the W6 witness — 10 tests, the
-  claim packet), docs/{worldbuild/WORLD_TESTS.md (§9 the W6 record),
-  worldbuild/WORLD_WORKPLAN.md (§8 the first row + the next rows
-  owner-routed), worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 the
-  stage's standing state), blueprint/phases.md (§6 the iter-278
-  record), TASKS.md (the ledger), iterations/iter-278-genre-report.md
-  (new, the owner's RU deliverable)}, STATUS.md, worklog.md — 9 paths
-  (R2 — the crafted runs + the docs; zero core, zero pack, zero canon
-  change, the LOG untouched, zero corpus price)
-Track A: W6 OPENED — the genre matrix's substrate-side measured
-  (adventure / mystery / politics confirmed at the deterministic
-  band; the four carried genres cited); the station's next rows
-  owner-routed (the reading band — the W5 human/LLM form — and/or
-  W7). The ssi family COMPLETE except ssi-5, owner-gated.
+Scope: docs/{worldbuild/WORLD_TESTS.md (§9 the W6 entry's
+  reading-band record), worldbuild/WORLD_WORKPLAN.md (§8 the second
+  row's LLM half), worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 the
+  stage's standing state), blueprint/phases.md (§6 the iter-279
+  record), TASKS.md (the ledger, iter-269 evicted),
+  iterations/iter-279-genreread-report.md (new, the owner's RU
+  deliverable)}, STATUS.md, worklog.md — 8 paths (R0, doc-only in
+  the repo — the experiment itself ran outside; zero code, zero
+  pack, zero canon change, the LOG untouched, zero corpus price)
+Track A: W6's reading band — the LLM half measured (the kit
+  delivered, the blind readings scored against the pre-set bars,
+  two RENDERING_GAPs named never fixed); the owner's LIVE band (the
+  kit in the owner's hands, the convergence question) and W7
+  owner-routed. The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -100,7 +102,28 @@ Track A: W6 OPENED — the genre matrix's substrate-side measured
 
 ## Next step
 
-**iter-278 DONE: the W6 genre matrix's first row (the owner's
+**iter-279 DONE: the W6 reading band's LLM half (the owner's
+  «продолжай работу над задачами класса world track, делай то что
+  логичнее и правильнее сейчас сделать а не потом» call — the
+  current station's open row, the recorded W5 form): the reading
+  kit delivered over the committed pack — two one-history packages
+  (the JOURNEY seed 42 carrying adventure + mystery together; the
+  POLITICS seed 2 carrying the differential institutional answer +
+  the squeeze), the pre-set audit written before any reading, the
+  blind glm readings n=2 per question — MYSTERY 3/3 convergent,
+  ADVENTURE 3/4, POLITICS 2/3 (two RENDERING_GAPs named, never
+  fixed: the night risk form, the balance-move assembly), the free
+  readings diverging materially across the same pack's packages
+  (the W6 hypothesis's divergence half carried at the free band).**
+  2530+9. The owner's RU report:
+  docs/iterations/iter-279-genreread-report.md.
+Next: the W6 station's remaining rows, owner-routed — the owner's
+LIVE band (their own blind reading of the delivered kit — Q1–Q5
+before audit_preset.md; the convergence question, fresh n=1)
+and/or W7 (negative / compression tests); the two named
+RENDERING_GAPs future rows on the owner's call.
+Active KIs: KI#104, KI#105, KI#106 (all CLOSED).
+iter-278 DONE: the W6 genre matrix's first row (the owner's
   «открывай задачу по W6» call — the station's law held: a failed
   genre test identifies the missing world substrate, never triggers
   plot writing; no test failed at its named band): the matrix's
@@ -113,13 +136,9 @@ Track A: W6 OPENED — the genre matrix's substrate-side measured
   route-writer candidate, SUBSTRATE_GAP awaiting repetition; the
   mystery's one-fact/one-path/one-revelation band; the player's
   re-pricing power — iter-271's residue; the READING band
-  owner-routed).**
+  owner-routed).
   2530+9. The owner's RU report:
   docs/iterations/iter-278-genre-report.md.
-Next: the W6 station's next rows, owner-routed — the reading band
-(the genres as lived readings over delivered packages, the W5
-human/LLM form) and/or W7 (negative / compression tests).
-Active KIs: KI#104, KI#105, KI#106 (all CLOSED).
 iter-277 DONE: the world-track archive ingestion (the owner's call:
   the external WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip fully ingested
   and reconciled, the durable agent context created, the pack

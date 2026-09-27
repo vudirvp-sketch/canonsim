@@ -467,45 +467,30 @@ single owners).
 The I0 WORLD IGNITION WITNESS since RUN and CONFIRMED (iter-276,
 ignition — the owner's world-liveness direction, the execution
 order's fifth row: the moving meso over the perturbed keep-Malby
-edge, the five-leg chain measured on existing primitives — the
-exclusion, the divergence, the response (the attempts), the residue,
-the changed next-cycle condition; the four timelines diverging never
-synchronized; the substrate-limitation inventory opened with three
-named candidates — the no-runtime-route-writer, the two-sided band,
-the response floor — none yet repeated, no machinery promoted; the
-record in `WORLD_TESTS.md` §9, the single owner). The §6.2 fill row
-since LANDED (iter-275, stepbench — the owner's
-execution order's fourth row, the fill-list's LAST embodiment row:
-PRESENT / HATCH / NOTCH over the existing account substrate — the
-step kind on the keeper + the tightening door with the floor law in
-the gate's own arithmetic; the notch kind on the beam's hand + the
-reckoning door; the hatch held as prose by the verb-gate boundary;
-the two-sided band gap measured and named — the I0 inventory's first
-candidate). The §6.5 move release since LANDED (iter-274, moverelease — the
-owner's execution order's third row, the embodiment fill-list's third
-row: the intent pick re-authored from the ramble to the DEPARTURE at
-its measured iter-263 price, honestly paid — the talks 287→2, the
-rumors 25→2, the council pile 1→208, the world reading quieter
-because its talker left: the honest liveness shape, a living world is
-not a loud one; the smoke corpus untouched — the release never fires
-in its window; the re-measured surface pinned in the composition
-witness). The §6.4 SALE fork since RESOLVED (iter-273, settlement — the owner's
-synthesis decision: the fork was evidence the account grammar was too
-narrow for the authored world model, the correct response SYNTHESIS,
-never the A/B/C pick): the account substrate's FOURTH VERB `settle`
+edge, the five-leg chain measured on existing primitives; the
+four timelines diverging never synchronized; the
+substrate-limitation inventory opened with three named candidates,
+none yet repeated, no machinery promoted; the record in
+`WORLD_TESTS.md` §9, the single owner). The §6.2 fill row since
+LANDED (iter-275, stepbench — PRESENT / HATCH / NOTCH over the
+existing account substrate, the two-sided band gap measured and
+named as the I0 inventory's first candidate; the record in
+`WORLD_TESTS.md` §9 and the iter-275 report — the single owners).
+The §6.5 move release since LANDED (iter-274, moverelease — the
+departure at its measured iter-263 price, honestly paid; the honest
+liveness shape: a living world is not a loud one; the smoke corpus
+untouched; the record in `WORLD_TESTS.md` §9 and the iter-274
+report — the single owners). The §6.4 SALE fork since RESOLVED
+(iter-273, settlement — the owner's synthesis decision: the account
+grammar was too narrow for the authored world model, the correct
+response SYNTHESIS, never the A/B/C pick): the FOURTH VERB `settle`
 — the multi-leg transaction over EXPLICIT owners through the same
-canon door (the initiator not implicitly any leg's owner; per-leg
-endpoints, per-leg HOLDER-form solvency gates, ONE atomic
-account_settled event) — and the re-weigh's sale `sell_bloom` armed
-over it (the withhold's release: one load walked to the beam's
-receiving stock for three coin the load banked at the crofts' own
-ledger, the rs-10 anchor's site; the grammar wall measured FIRST in
-the witness — the closed verbs' from-side always the intent actor,
-the crafted transfer probe refused at the actor's gate while the heap
-stands full). The same mechanism serves the class beyond the sale
-(the buyer-initiated purchase pinned with the owner's own example);
-no second transaction engine. The station's standing order after the
-landing (the owner's 2026-09-27 execution order): the I0 witness
+canon door, the sale `sell_bloom` armed over it, the grammar wall
+measured FIRST in the witness, the class pinned with the owner's
+own example; no second transaction engine; the record in
+`WORLD_TESTS.md` §9 and the iter-273 report — the single owners.
+The station's standing order after the landing (the owner's
+2026-09-27 execution order): the I0 witness
 RUN and CONFIRMED (iter-276 — no new machinery promoted, the
 inventory's candidates awaiting repetition) → W6 genre under the
 resulting evidence (a failed genre test identifies the missing world
@@ -521,30 +506,37 @@ Use the same region and pressure network to test:
 A failed genre test should identify the missing world substrate rather than
 trigger immediate plot writing.
 
-The station's FIRST ROW landed (iter-278, the owner's «открывай задачу
-по W6» call): the matrix's SUBSTRATE-SIDE measured at the deterministic
-band on the SAME committed package (zero core, zero pack change, zero
-corpus price) — adventure (the tally journey's four legs: the departure,
-the night risk, the objective, the changed return — plus the hard-risk
-arm, the closed artery refusing the journey outright, the fork's two
-returns diverging), mystery (the registered secret never volunteered:
-the silent world measured; the revelation IS the door — the fork's
-coerce landing only through the discovery), politics (the same fire
-pressure tipping the guild, the garrison and — only when both elders
-wake — the families, at the arms' pinned seeds; plus the squeeze: the
-terms 16→18→20, public, persisting). The four carried genres cite
-their W5 evidence (biography iter-191; comedy/tragedy iter-194/206/
-208/209/270; relationship drama the winter-kin line) — the census pins
-their committed surfaces. The honest boundaries named, never routed:
-the hard-risk arm rides the authored edge closure (the I0 inventory's
-route-writer candidate — SUBSTRATE_GAP, awaiting repetition); the
-mystery's band is one fact / one path / one revelation; the player's
-own re-pricing power stays iter-271's recorded residue; the READING
-band (the W5 human/LLM form) owner-routed. The full record:
-`WORLD_TESTS.md` §9's W6 entry; the witness `tests/test_genre.py`; the
-owner's RU report `docs/iterations/iter-278-genre-report.md`. The
-station's next rows, owner-routed: the reading band (the W5 human/LLM
-form) and/or W7 (negative / compression tests).
+The station's FIRST ROW landed (iter-278, the owner's «открывай
+задачу по W6» call): the matrix's SUBSTRATE-SIDE measured at the
+deterministic band on the SAME committed package (zero core, zero
+pack change, zero corpus price) — adventure, mystery and politics
+confirmed at their named bands (the journey's four legs + the
+world's own refusal; the silent world + the revelation-as-door; the
+triangle's differential answer + the squeeze's persisting terms),
+the four carried genres citing their W5 evidence, the census pinning
+all seven surfaces. The honest boundaries named, never routed: the
+authored edge closure (the I0 route-writer candidate —
+SUBSTRATE_GAP, awaiting repetition); the mystery's one-fact/one-path/
+one-revelation band; the player's re-pricing power (iter-271's
+residue). The station's SECOND ROW's LLM half landed (iter-279, the
+owner's «продолжай работу над задачами класса world track» call):
+the reading band in the recorded W5 form — the kit over the
+committed pack (the journey package seed 42 carrying adventure +
+mystery in ONE history; the politics package seed 2 carrying the
+differential answer + the squeeze in ONE history), the pre-set
+audit before any reading, the blind glm readings n=2 per question —
+MYSTERY 3/3 convergent, ADVENTURE 3/4 (the night form a named
+RENDERING_GAP — the reading form never surfaces the unlit crofts),
+POLITICS 2/3 (the balance-move assembly a named RENDERING_GAP — the
+causal row rides the scene card, outside the kit form), the free
+readings diverging materially across the same pack's two packages
+(the hypothesis's divergence half carried; the genre labels extract
+under directed frames, not free namings). The owner's LIVE band
+(their own reading of the delivered kit) and W7 remain owner-routed.
+The full records: `WORLD_TESTS.md` §9's W6 entry; the witnesses
+`tests/test_genre.py` + the delivered kit; the owner's RU reports
+`docs/iterations/iter-278-genre-report.md` and
+`docs/iterations/iter-279-genreread-report.md`.
 
 ## 9. W7 — Negative / compression tests
 

@@ -303,9 +303,20 @@ new station — entered on the owner's explicit call.
 W6's first row landed (iter-278): the matrix's SUBSTRATE-SIDE
 measured at the deterministic band — adventure, mystery and politics
 measured over the same committed package (the four carried genres
-cite their W5 evidence; the census pins all seven genres' surfaces);
-the reading band (the W5 human/LLM form) and W7 remain owner-routed
-rows. The record: `WORLD_TESTS.md` §9's W6 entry.
+cite their W5 evidence; the census pins all seven genres' surfaces).
+W6's second row, its LLM half, landed (iter-279): the READING BAND
+in the W5 form — the kit delivered over the committed pack (two
+packages, each carrying its genres' chains in one history), the
+pre-set audit before any reading, the blind glm readings n=2 —
+MYSTERY 3/3 convergent, ADVENTURE 3/4 and POLITICS 2/3 (two
+RENDERING_GAPs named: the night risk form and the balance-move
+assembly — the reading form's own bands, never prose-fixed), the
+free readings diverging materially across the same pack's packages
+(the hypothesis's divergence half carried at the free band; the
+genre shapes extract under directed frames). The record:
+`WORLD_TESTS.md` §9's W6 entry. The owner's LIVE band (their own
+reading of the delivered kit — the convergence question, fresh n=1)
+and W7 remain owner-routed rows.
 
 ## 10. Navigation (the authoritative owners)
 

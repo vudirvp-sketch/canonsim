@@ -2086,6 +2086,59 @@ never claimed here. No plot written, no machinery promoted, no pack
 change. The witness: `tests/test_genre.py` (10 tests); the owner's
 RU report: `docs/iterations/iter-278-genre-report.md`.
 
+**The reading band's LLM half (iter-279, the owner's «продолжай
+работу над задачами класса world track» call — the station's second
+row, its agent side; the live band stays the owner's):** the reading
+kit built over the COMMITTED pack in the recorded W5 form (iter-207:
+each package = the tale + the key actor's records (opening/close) +
+the site's close record + three briefs at the natural cut mirrors;
+the runner + the kit + the transcripts outside the repo, Rule 9;
+byte-identical on the double regeneration). TWO packages: the
+JOURNEY package (seed 42, the iter-278 JOURNEY chain — one history
+carrying the adventure AND the mystery chains together) and the
+POLITICS package (seed 2, the both-fires road merged with the
+master's walk and squeeze — one history carrying the differential
+institutional answer AND the balance-moving move: the keep + Malby
+fires, the grief waking at each, the guild's council, the families'
+two vigils, the paper 16→18→20 at the burned market, the repriced
+row public). The pre-set audit written BEFORE any reading (the
+isolation law — the iter-278 genre shapes restated as reading bars,
+a separate kit artifact); the blind readings glm n=2 per question,
+a fresh session per reading, the bars never shown. MEASURED:
+MYSTERY met 3/3 n=2 convergent (the hidden fact named — the shaved
+weight; the discovery path the deliberate tally read, never "told";
+the revelation's weight the landed corner against the dead door);
+ADVENTURE 3/4 legs n=2 (the departure, the objective, the changed
+return — one reading carrying the moved pair's own numbers; the
+risk leg's road-toll half carried by both, the NIGHT form absent
+from the material itself — RENDERING_GAP named: the unlit crofts a
+substrate fact the reading form never surfaces, the moves
+low-importance by the T7 law, no gate raised, the rejected knob
+law); POLITICS 2/3 n=2 (the competing interests and the
+differential contrast extracted cleanly — the guild's economic
+barring against the families' ritual vigil, named as different by
+both readings; the balance-moving move NOT assembled at the strict
+bar — the climb visible and quoted in both, the permanence slot
+taken by the burnout, the agency misread once — RENDERING_GAP
+named: the causal row rides the scene card's knows gloss, a surface
+outside the W5 kit form; the delta-form tale line + the bare
+recalled-facts token + the records' totals never assemble the
+standing-terms move unaided). The FREE-genre band: the two packages
+of the same pack read materially differently (the journey read as
+historical drama + political intrigue + economic tension +
+character narrative; the politics as chronicle + tragedy +
+political drama — tragedy named only for the politics, the
+economic/character frames only for the journey) — the W6
+hypothesis's divergence half carried at the free band; the
+genre-matrix labels are NOT the free namings (the chronicle
+register leads the spontaneous vocabulary; the shapes extract under
+the directed questions). VERDICT: the reading-side PARTIALLY
+CONFIRMED at the LLM band — two RENDERING_GAPs named, never fixed
+(no prose edited, no pack change, no machinery), the same-package
+law held. The owner's live band OPEN (the kit delivered:
+READING_INSTRUCTIONS.md Q1–Q5, the bars in audit_preset.md); the
+owner's RU report: `docs/iterations/iter-279-genreread-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:
