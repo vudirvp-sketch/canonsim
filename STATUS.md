@@ -1,56 +1,42 @@
-Iteration: iter-265 (`render-conditional` — the owner's call: «можешь
-  закрыть "рендер-условную строку (последняя нога §6.5)" и можно
-  переходить на world track» — the iter-263 verdict's last owner-gated
-  embodiment row CLOSED): the tale contradiction on the ashes closed
-  READ-SIDE — the renderer's LOCATION FOLD (render/chronicle.py::
-  _Positions carrying every location's prop state: seeded from the
-  declared flags + accounts — initial_projection's honest mirror —
-  advanced by each event's location writes, tolerant last-write-wins,
-  a READER never a truth test) exposing the tracked props as DOTTED
-  conditional keys <location_id>.<prop> (raw values, the ink truthiness
-  law; a plain {slot} rejects the dotted name at the snake_case law —
-  a CONDITION surface, never prose); the authored line market_opens'
-  own arm {loc_malby.destroyed?…|…} (the market day passes over the
-  burned stall row, the ashes where the trade stood; the day still
-  counted — the calendar's legibility the surface BY LAW, the grammar
-  closed per C1/C2); the measured evidence: the composition witness
-  2376 events byte-identical to the committed expectation (a template
-  changes NO runtime byte — the golden fixtures untouched, no regen
-  owed), 36 market days all after the burnout t=3573, 36 ashes lines,
-  0 standing lines — the falsifier DEAD; the witness
-  tests/test_render_conditional.py (6 tests: the mechanism census
-  through the real load_pack — the scratch probe re-voicing the wait
-  line, a new event type being dead vocabulary the lint refuses; the
-  two integration arms, one day two worlds, the same first market day
-  t=14400; the purity pin); the §6.5 embodiment rows COMPLETE (the
-  move release the owner's future row at its iter-263 price); the
-  owner's RU report at docs/iterations/iter-265-render-conditional-report.md
-  (carrying the world-track orientation the same call asked for)
+Iteration: iter-266 (`w5-owner-decisions` — the owner's 2026-09-27
+  dispositions call over the standing W5 decision points: the residue
+  list SPLIT by disposition — the fail-then-pass reading + the 40/80
+  asymmetry CLOSE AS RESIDUE (deliberate unresolved discovery
+  residues, never technical debt; DO NOT DELETE, DO NOT EXPLAIN BY
+  DEFAULT; the 40/80 canonically present, available to downstream
+  consumers, never forced into the reader path), the runner's grudge
+  → ADD DISCOVERY SURFACE (the minimal causal row: standing → the
+  remembered incident → why the grudge exists), the shave's temporal
+  placement → ADD TEMPORAL SURFACE (the dated-memory row,
+  WORLD_AUTHORING §8's own ladder requirement); the fill-list
+  re-ordered with §6.3 REMOVED (its probe completed iter-204..210,
+  the ANCHOR_REGION row synced — the doc drift closed); the one
+  undifferentiated "finish owner decisions" orientation row retired):
+  zero code, zero pack, zero canon — the decision record landed in
+  the owning docs, the owner's RU report at
+  docs/iterations/iter-266-w5-owner-decisions-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2461 passed + 9 skipped, ruff clean, docguard clean, topology
 --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-09-27 ·
-Scope: render/chronicle.py (the location fold + the dotted read
-  surface), content/province_pack/templates.json (the market line's
-  own arm + the meta clause), tests/test_render_conditional.py (new,
-  the witness), docs/{iterations/iter-265-render-conditional-report.md
-  (new, the owner's RU deliverable + the world-track orientation),
-  worldbuild/ANCHOR_REGION.md (§6.5 the row LANDED — the unit's
-  embodiment rows COMPLETE), worldbuild/WORLD_TESTS.md (§9 the
-  CONFIRMED record), blueprint/phases.md (§6 the iter-265 record),
-  TASKS.md (the ledger, iter-255 evicted), DECISIONS.md (D-241)},
-  STATUS.md, worklog.md (iter-255 evicted) — 11 paths; R2 (D-241): the
-  renderer's read surface + one pack template + the witness + the
-  mandated doc syncs (the soft-limit breach the scope's own note, the
-  iter-264 family's shape)
-Track A: the §6.5 embodiment rows COMPLETE (iter-264 the legs, iter-265
-  the render conditional — the move release the owner's future row);
-  the owner's named next focus: the WORLD TRACK (the orientation in
-  the iter-265 report §D — the W5 owner decisions, the embodiment fill
-  list, W6 genre, the region move, the fenced set). The ssi family
-  COMPLETE except ssi-5, owner-gated.
+Scope: docs/{worldbuild/WORLD_WORKPLAN.md (§7 the dispositions
+  record), worldbuild/WORLD_TESTS.md (§9 the W5 entry's decision
+  record), worldbuild/ANCHOR_REGION.md (§6.3 the fill row synced —
+  the drift fix), iterations/iter-266-w5-owner-decisions-report.md
+  (new, the owner's RU deliverable — the corrected world-track P0
+  split), iterations/iter-265-render-conditional-report.md (§D item 1
+  the superseding note), blueprint/phases.md (§6 the iter-266 record),
+  TASKS.md (the ledger, iter-256 evicted)}, STATUS.md, worklog.md
+  (iter-256 evicted) — 9 paths (R0 — doc-only, the owner's fresh
+  call, zero code/pack/canon; the doc-sync family's shape)
+Track A: the W5 owner decisions LANDED (the station's standing points
+  closed by disposition); the owner's standing order: the runner
+  discovery surface → the shave temporal surface → the live band's
+  return + the heartbreak recheck → the embodiment fill-list rows
+  (§6.4 → §6.1 → §6.5 → §6.2; §6.3 removed) → W6 genre. The ssi
+  family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -110,7 +96,32 @@ Track A: the §6.5 embodiment rows COMPLETE (iter-264 the legs, iter-265
 
 ## Next step
 
-**iter-265 DONE: the render conditional (the owner's «можешь закрыть
+**iter-266 DONE: the W5 owner decisions (the owner's 2026-09-27
+  dispositions call over the standing W5 decision points) LANDED as
+  the owning docs' decision records — zero code, zero pack, zero
+  canon; the residue list SPLIT by disposition: the fail-then-pass
+  reading + the 40/80 asymmetry CLOSE AS RESIDUE (deliberate
+  unresolved discovery residues, never technical debt; DO NOT
+  DELETE, DO NOT EXPLAIN BY DEFAULT; the 40/80 canonically present,
+  available to downstream consumers, never forced into the reader
+  path), the runner's grudge → ADD DISCOVERY SURFACE (the minimal
+  causal row: standing → the remembered incident → why the grudge
+  exists — the live band's iter-208 datum the tipping evidence), the
+  shave's temporal placement → ADD TEMPORAL SURFACE (the dated-memory
+  row: earlier season → hunger winter → the event → present
+  consequence — the temporal anchor the causal chain's own loss);
+  the fill-list re-ordered (runner → shave → the live band's return +
+  the heartbreak recheck → §6.4 → §6.1 → §6.5 → §6.2 → W6) with
+  §6.3 REMOVED (its probe completed iter-204..210, the ANCHOR_REGION
+  row synced — the doc drift closed); the decision standard recorded
+  as standing law (a surface never owed merely because two LLM
+  readings and one human reader failed to assemble a link — the kept
+  residues stand deliberately: the world may be causally coherent
+  without being fully solved). 2461+9 + ruff + docguard + topology
+  --check clean. The owner's RU report (the corrected world-track
+  orientation's P0 split):
+  docs/iterations/iter-266-w5-owner-decisions-report.md.**
+iter-265 DONE: the render conditional (the owner's «можешь закрыть
 "рендер-условную строку (последняя нога §6.5)" и можно переходить на
 world track» call closing the iter-263 verdict's last owner-gated
 embodiment row) LANDED read-side, zero core, zero runtime bytes — the
@@ -233,9 +244,14 @@ iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
    scope); (J-2 remainder) the knowledge blocks LANDED (the tokens
    minting, the watch-briefing and rumor-cascade consumers live, the
    cascade measured 22→25); (J-3) CLOSED — no row. THE WORLD TRACK
-   after iter-265 — the owner's named next focus: the orientation in
-   the iter-265 report §D (the W5 owner decisions, the embodiment
-   fill list, W6 genre, the region move, the fenced set). ssi-5
+   after iter-266 — the W5 owner decisions LANDED (the dispositions
+   record: WORKPLAN §7 + WORLD_TESTS §9's W5 entry + the iter-266
+   report's corrected P0 split); the owner's standing order: the
+   runner discovery surface → the shave temporal surface → the live
+   band's return + the heartbreak recheck → the embodiment fill-list
+   rows (§6.4 → §6.1 → §6.5 → §6.2; §6.3 removed — its probe
+   completed iter-204..210) → then W6 genre, the region move, the
+   fenced set. ssi-5
    stays owner-gated (the N018 evidence law). The owner-side cleanup
    standing from D-230's third card: delete the doubled
    `workbench/workbench/runtime/` tree locally (safe — the iter-246
@@ -262,8 +278,11 @@ iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
    tail) or the 27B as the one-model candidate (the §1 sweet spot,
    both doors) — the owner's choice (round 5's 12B + round 6's 9B
    data: §13.1; bg-9's mapping-drift datum rides the same decision).
-4. The standing frames: the embodiment options, the debt-1 residues,
-   the re-weigh's SALE, the shave's temporal placement, the SoW
-   horizon (bg-6, owner-deferred — long-parked per the owner's
+4. The standing frames: the embodiment options (§6.4 → §6.1 → §6.5 →
+   §6.2 per the owner's 2026-09-27 order; §6.3 closed iter-204..210,
+   its fill row removed), the debt-1 residues, the re-weigh's SALE,
+   the runner's grudge surface (the standing order's first surface),
+   the shave's temporal surface (the standing order's second), the
+   SoW horizon (bg-6, owner-deferred — long-parked per the owner's
    2026-09-21 call). New rows enter on the owner's call only.
 

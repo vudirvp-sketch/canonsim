@@ -4042,6 +4042,43 @@ owner-gated embodiment row):**
   (with the world-track orientation the owner's «можно переходить на
   world track» call asked for).
 
+**The iter-266 W5-owner-decisions record (R0, doc-only — the owner's
+2026-09-27 dispositions call over the standing W5 decision points,
+the one undifferentiated "finish owner decisions" orientation row
+retired):**
+
+- **The dispositions.** The W5 residue list SPLIT by disposition:
+  CLOSE AS RESIDUE — the fail-then-pass reading and the 40/80
+  asymmetry (deliberate unresolved discovery residues, never technical
+  debt; DO NOT DELETE, DO NOT EXPLAIN BY DEFAULT; the 40/80
+  canonically present and available to downstream consumers, never
+  forced into the reader path); ADD DISCOVERY SURFACE — the runner's
+  grudge (the minimal causal surface: standing → the remembered
+  incident → why the grudge exists, never the biography — the live
+  band's iter-208 datum the tipping evidence); ADD TEMPORAL SURFACE —
+  the shave's temporal placement (the dated-memory row, the residue
+  ladder's own EVENT → RESIDUE → later consequence requiring the
+  historical states' transition, WORLD_AUTHORING §8).
+- **The fill-list re-order (the owner's standing sequence).** The
+  runner surface → the shave temporal surface → the live band's return
+  + the heartbreak recheck → §6.4 (factor negotiation + the SALE +
+  the guild roles + the tag transfer) → §6.1 (the paper debt / the
+  punt buyout / the debt inheritance — the carrier strengthened,
+  never a new debt primitive) → §6.5 (the move release) → §6.2
+  (PRESENT / hatch / notch — last, its two risk layers: the
+  present-state persistence + the verb gate) → W6. §6.3 REMOVED from
+  the fill-list: its probe completed iter-204..210, the ANCHOR_REGION
+  §6.3 row synced (the doc drift closed), the remaining material =
+  the W5 residue dispositions + the live band, never pack data.
+- **The decision standard (the owner's caveat, standing law).** A
+  surface is never owed merely because two LLM readings and one human
+  reader failed to assemble a link; the two kept residues stand
+  deliberately — the world may be causally coherent without being
+  fully solved. Zero code, zero pack, zero canon; the records:
+  WORKPLAN §7 + WORLD_TESTS §9's W5 entry + the owner's RU report at
+  `docs/iterations/iter-266-w5-owner-decisions-report.md` (carrying
+  the corrected world-track orientation's P0 split).
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -737,9 +737,14 @@ return's carrier: `npc_winterkin_01` (Tork, the flood-year guest's son
 — a named hill stranger in the crofts' tongue, genesis at the crofts;
 the corpus price paid deliberately: the son hears the wergeld count,
 the murmur's knowledge line the iter-157 precedent's own class).
-`tests/test_winterkin.py` the claim packet. Authored here (WORKING):
-the lived return itself (the probe's run — the station's next beat,
-the surface it reads now committed).
+`tests/test_winterkin.py` the claim packet. The lived return itself
+RAN as the station's beat (iter-204..210 — the heartbreak probe's full
+arc: the run, the rendering fix, the re-subjectivation, the human live
+band, the confound resolved; the records in WORLD_TESTS §9's W5 entry)
+— the §6.3 fill row COMPLETE and REMOVED from the fill-list (the
+owner's 2026-09-27 dispositions call: the remaining §6.3 material =
+the W5 residue dispositions, landed iter-266, + the live band's
+return — never new pack data).
 
 ### 6.4 The charcoal camp (WORKING — the camp's meso half, the fourth authored unit, iter-184)
 

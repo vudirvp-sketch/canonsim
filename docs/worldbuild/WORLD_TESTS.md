@@ -1309,6 +1309,46 @@ discovery-path residues STAND unchanged (the fail-then-pass, the
 40/80 asymmetry, the runner's grudge story — the owner's standing
 prescription, each its own surface's question, never a default).
 
+The owner's W5 DISPOSITIONS landed (iter-266, the 2026-09-27 call
+over the standing decision points — the residue list SPLIT by
+disposition, the standing order the same call's; the record's owners:
+WORKPLAN §7 + this entry): CLOSE AS RESIDUE — the fail-then-pass
+reading and the 40/80 asymmetry (deliberate unresolved discovery
+residues, never technical debt; DO NOT DELETE, DO NOT EXPLAIN BY
+DEFAULT; the 40/80 stays canonically present, available to downstream
+consumers, never forced into the reader path — the world may stay
+causally coherent without being fully excavated by any one reader; a
+surface owed only on proof a present state needs the first failure /
+the asymmetry understood, none on record — a future agency/kinship
+row may consume the asymmetry naturally, never a gloss or table on
+demand). ADD DISCOVERY SURFACE — the runner's grudge (the minimal
+causal surface only: standing → the remembered incident → why the
+grudge exists, never the biography; the live band's iter-208 datum
+tipping it — the standing noticed by the human reading, its reasons
+and consequences carried nowhere, the
+standing-renders-story-doesn't residue's own genuine gap: the canon
+holds the causal arc, the reader surface loses its transfer standing
+→ history → consequence). ADD TEMPORAL SURFACE — the shave's temporal
+placement (the dated-memory row: the chain earlier season → hunger
+winter → the event → present consequence, currently read as present
+unfairness with the temporal anchor lost — the arc's assembly's
+remaining half per the iter-201/202 records; the residue ladder's
+EVENT → RESIDUE → later consequence needing the historical states'
+transition, WORLD_AUTHORING §8). The decision standard recorded with
+them (the owner's own caveat, standing law for any future residue
+row): a surface is never owed merely because two LLM readings and one
+human reader failed to assemble a link — the runner row carries the
+extra datum (the live reader already hooked on the standing), the
+shave row the structural loss (the temporal position itself); the two
+kept residues stand deliberately (the world causally coherent without
+being fully solved — different knowledges making different lawful
+decisions, never every relation auto-rendered as a reader hint). The
+station's standing order after the decisions: the runner surface →
+the shave temporal surface → the live band's return + the heartbreak
+recheck → the embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2; §6.3
+removed from the fill-list — its probe completed iter-204..210, the
+ANCHOR_REGION row synced) → W6.
+
 ### OPEN — Ancient Network back-propagation
 
 Can the modern regional map be explained by a coherent ancient network plus the

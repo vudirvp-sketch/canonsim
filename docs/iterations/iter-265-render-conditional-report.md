@@ -108,6 +108,13 @@ rs-семья почек рендера, human live band); W6 (жанровые 
    fail-then-pass, история злости раннера) и временная посадка
    shave (запись iter-202). Это авторские решения, агент их не
    принимает по закону трека.
+   **Обновление iter-266 (2026-09-27):** развилки этого пункта
+   закрыты решениями владельца — fail-then-pass и 40/80 = CLOSE AS
+   RESIDUE; злость раннера = ADD DISCOVERY SURFACE; посадка shave =
+   ADD TEMPORAL SURFACE. Ориентация world track ниже по списку
+   (§6.3 из fill-list удалён — проба завершена iter-204..210).
+   Записи: WORLD_WORKPLAN §7, WORLD_TESTS §9 (W5-entry), отчёт
+   iter-266.
 2. **Embodiment fill-list** (дёшево, прецедентный класс campaccount,
    чистые pack-данные): падение бумаги и выкуп пунта + наследование
    долга (§6.1), PRESENT степенного закона + люк + notch record

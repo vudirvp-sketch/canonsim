@@ -404,12 +404,36 @@ withhold/bloom frame, never the same debt fund; the iter-208
 divergence the free-answer form's artifact, the human band's covering
 bar joining the LLM band's — no renderer/prose/pack change, no new
 probe on the question; WORLD_TESTS §9's W5 entry's iter-210 record).
-The standing decision points for the owner: the discovery-path
-residues standing at both bands (the fail-then-pass, the 40/80
-asymmetry, the runner's grudge story — each its own surface's
-question, never a default, the owner's standing prescription); and the
-arc's assembly's remaining half (the shave's temporal placement —
-WORLD_TESTS §9's W5 entry's iter-202 record).
+The standing decision points are DECIDED (the owner's 2026-09-27
+dispositions call over the iter-265 report §D's orientation — the
+full record in `WORLD_TESTS.md` §9's W5 entry; the owner's RU
+deliverable `docs/iterations/iter-266-w5-owner-decisions-report.md`):
+the W5 residue list SPLITS by disposition, never one undifferentiated
+fill. CLOSE AS RESIDUE — the fail-then-pass reading and the 40/80
+asymmetry: deliberate unresolved discovery residues, never technical
+debt (DO NOT DELETE, DO NOT EXPLAIN BY DEFAULT; the 40/80 stays
+canonically present, available to downstream consumers, never forced
+into the reader path — the world may stay causally coherent without
+being fully excavated; a surface would be owed only on proof the
+reader must know the first failure / the asymmetry to understand a
+present state, and none is on record — a later agency/kinship row may
+consume the asymmetry naturally, never a gloss on demand). ADD
+DISCOVERY SURFACE — the runner's grudge story: the minimal causal
+surface only (standing → the remembered incident → why the grudge
+exists), never the biography; the live band's own datum tipping it
+(iter-208: the standing noticed, its reasons and consequences carried
+nowhere — a genuine discovery-path gap, never "the reader missed a
+detail"). ADD TEMPORAL SURFACE — the shave's temporal placement: the
+dated-memory row (the chain earlier season → hunger winter → the
+event → present consequence, currently read as present unfairness with
+the temporal anchor lost — the arc's assembly's remaining half, the
+iter-201/202 measured open row; the residue ladder's own EVENT →
+RESIDUE → CARRIER → HOLDER rungs, `WORLD_AUTHORING.md` §8, requiring
+the transition between historical states). The station's standing
+order after the decisions: the runner surface → the shave temporal
+surface → the live band's return + the heartbreak recheck → the
+embodiment fill-list (§6.4 → §6.1 → §6.5 → §6.2; §6.3 REMOVED — its
+probe completed iter-204..210, ANCHOR_REGION §6.3's row synced) → W6.
 
 ## 8. W6 — Genre tests
 
