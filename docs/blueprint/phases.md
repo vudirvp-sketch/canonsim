@@ -5034,6 +5034,76 @@ limitation. No plot written, no machinery promoted, no pack change.
   the golden corpus byte-identical, zero corpus price). The owner's
   RU report: `docs/iterations/iter-283-negative-report.md`.
 
+**The iter-284 negread record (R0, doc-only in the repo — the W7
+reading band's LLM half, the owner's «продолжай работу над задачами
+класса мирового трека, W7» continuation call — the station's second
+row, its agent side; the live band stays the owner's; the experiment
+itself outside the repo, Rule 9 — the runner, the kit, the
+transcripts).** The reading kit in the recorded W5 form (iter-207)
+over the COMMITTED pack + the three iter-283 twins: FIVE packages
+with neutral names — world_a (the committed pack, the compressed
+mourning carrier: the composition script's own chain, both fires +
+the final wait 20000, the tale at the W5 form's readable scale),
+world_b (the no-mourns twin, the same script/seed), world_c (the
+committed pack, the crafted JOURNEY seed 42), world_d (the no-word
+twin), world_e (the no-settle twin over the mourning carrier — the
+null control); each package = the tale + the key actor's
+opening/close records + the site's close record + three briefs at
+the natural cut mirrors (mode A / mode B in the named actor's voice
+/ mode A at the close); byte-identical on the double regeneration;
+A/E's tale + records + site byte-identical, the briefs differing by
+exactly one active_options line (`sell_bloom`). The pre-set audit
+written BEFORE any reading (the isolation law — the battery's
+measured facts restated as seven reading bars). THE PROTOCOL ERROR
+AND THE HONEST FIX: the first two blind sessions ran while the
+preset still sat inside the kit directory — both readers
+transparently disclosed opening it; the pair DISCARDED as formal
+evidence, the preset staged OUT, two FRESH clean sessions run — the
+formal n=2 (the pilot's convergence with the clean pair recorded as
+the robustness datum, never the measurement). MEASURED at the LLM
+band n=2, the bars never shown: Q1 MET convergent (the disappearance
+differential's both halves — the departure + the social voice);
+Q2 MET convergent (the carrier per world, the fear axis 43/0);
+Q3 MET convergent (the trade — the voice rode the person; the market
+CHANGED not dead, the dead reading refused by both); Q4 MET n=2 (the
+families' vigils identical 3=3 — the disable test's core); Q5 MET
+convergent (C's lever + landed coercion with the pair axes 25/75
+against D's inert knowledge + the refusal; the institutional cause
+declared beyond the readable surface by both readers unprompted);
+Q6 MET convergent — the invisible door's FULL catch (the histories
+identical AND the `sell_bloom` vocabulary line named by both — the
+D-108 law at the reading band); Q7 free (the namings divergent
+across the two readings of the same material, the differential
+shapes convergent). THE READERS' OWN DISCOVERY: the disappearance's
+footprint WIDER than the deterministic census — the wait-band ripple
+(A's waits medium / B's low: the importance rule's per_far_hook
+term, the committed wait action's TWO success hooks against the
+twin's ONE at the medium threshold 2 — the seeding law's shadow over
+every wait's score), the watch-briefing ripple (7/6
+knowledge_transfers), the records' memory entanglement — canonical
+differences the iter-283 census never enumerated, found from the
+read material alone, the mechanism verified post-hoc against the
+pack data. VERDICT: the reading band CONFIRMED at the LLM band n=2 —
+every pre-set bar met, the station's law held (no prose edited, no
+gate raised, no machinery promoted, no pack change, the LOG
+untouched, zero corpus price). The honest boundaries: the refusal's
+institutional cause beyond the readable surface (named, never
+routed); the talks' volume riding the low-importance tale band (the
+talk half legible in the actor records); the Q4 classification
+variance (reader-side).
+- **The paths.** docs/{worldbuild/WORLD_TESTS.md (§9 the W7
+  reading-band entry), worldbuild/WORLD_WORKPLAN.md (§9 the second
+  row + the first-row record compressed to the single-owner pointer,
+  the cap held), worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 the
+  station state), blueprint/phases.md (§6 this record), TASKS.md
+  (the ledger, iter-274 evicted), iterations/iter-284-negread-report.md
+  (new, the owner's RU deliverable)}, STATUS.md, worklog.md
+  (iter-274 evicted) — 8 paths. 2550+9 + ruff + docguard + topology
+  --check clean (R0 — doc-only in the repo; zero code, zero pack,
+  zero canon change, the LOG untouched, the golden corpus
+  byte-identical, zero corpus price). The owner's RU report:
+  `docs/iterations/iter-284-negread-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

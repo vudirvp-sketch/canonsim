@@ -122,31 +122,53 @@ TASKS ledger, and the owning iteration reports)
 
 ## Next step
 
-**iter-283 DONE: the W7 station's first row (the owner's
-  «продолжай работу над задачами класса мирового трека, W7 открывай
-  если больше ничего не осталось» call — W6 complete at both bands,
-  no open row remained; the eight-question battery + the compression
-  test on the same committed package, R2): the negative-space
-  census (why not universal), the lint's measured refusals (who
-  resists), the disappearance battery's three arms (what if it
-  disappears — settle gone: the calm run byte-identical + the
-  grammar wall returned; the mourning gone: the departure dead, the
-  market loud again — iter-274's price inverted arm for arm —, the
-  other families untouched; the word unregistered: the fact
-  survives, the door dies), and the compression inventory (who
-  profits): no decorative material at the measured band, the pack
-  compressed; the honest boundaries classified (the
-  reachability-BY-CONSTRUCTION band; the unglossed literals the
-  documented dry fallback; the ungarrisoned window the composition
-  witness's own limitation).
-Next: the W7 station's next rows — the owner's call: (a) the
-  negative questions' reading band (the battery's answers as
-  readings), (b) further majors' disappearance arms (the meso
-  units' own rows), or (c) W8 (integration readiness) when the
-  owner calls the station complete.
+**iter-284 DONE: the W7 reading band's LLM half (the owner's
+  «продолжай работу над задачами класса мирового трека, W7»
+  continuation call — the station's second row, its agent side; the
+  experiment outside the repo, Rule 9; R0 doc-only in the repo): the
+  battery's answers as blind readings over the same battery's own
+  twins.** The reading kit in the W5 form — five packages over the
+  committed pack + the three iter-283 twins (the compressed mourning
+  carrier seed 2: committed / no-mourns / no-settle null control;
+  the crafted JOURNEY seed 42: committed / no-word), byte-identical
+  on the double regeneration; the pre-set audit BEFORE any reading.
+  One protocol error honestly fixed: the first blind pair ran while
+  the preset sat inside the kit dir (both readers disclosed opening
+  it) — discarded, the preset staged out, two FRESH clean sessions
+  run — the formal n=2. MEASURED: every pre-set bar MET — the
+  departure (Maren to the keep in A, stays in B), the carrier (her
+  fear 43 vs 0), the trade (the voice rode the person — the market
+  CHANGED not dead), the families' disable test (the vigils 3=3),
+  the dead door (C's lever + landed coercion vs D's inert knowledge
+  + the refusal), the invisible door's FULL catch (the histories
+  identical AND the sell_bloom vocabulary line named by both — the
+  D-108 law at the reading band); the free namings divergent (the
+  free-band law reproduced). THE READERS' OWN DISCOVERY: the
+  disappearance's footprint is WIDER than the deterministic census —
+  the wait-band ripple (A's waits medium, B's low: the importance
+  rule's per_far_hook term — the committed wait action carries TWO
+  success hooks against the twin's ONE; the seeding law's shadow),
+  the watch-briefing ripple (7/6), the records' memory entanglement
+  — verified post-hoc against the pack data. VERDICT: the reading
+  band CONFIRMED at the LLM band n=2; the station's law held.
+Next: the W7 station's next rows — the owner's call: (a) the LIVE
+  reading band (iter-284's kit in the owner's hands — the
+  convergence the owner's own beat), (b) further majors'
+  disappearance arms (the meso units' own rows), or (c) W8
+  (integration readiness) when the owner calls the station complete.
 Active KIs: none.
   2550+9. The owner's RU report:
-  docs/iterations/iter-283-negative-report.md.
+  docs/iterations/iter-284-negread-report.md.
+iter-283 DONE: the W7 station's first row (the owner's «W7 открывай
+  если больше ничего не осталось» call): the eight-question battery
+  + the compression test on the same committed package — the
+  negative-space census, the lint's measured refusals, the
+  disappearance battery's three arms (settle / mourning / word), the
+  reachability inventory: no decorative material at the measured
+  band, the pack compressed; the honest boundaries classified (the
+  reachability-by-construction band; the unglossed literals the
+  documented dry fallback; the ungarrisoned window the composition
+  witness's own limitation). The witness tests/test_negative.py.
 iter-281 DONE: the two double-confirmed RENDERING_GAP routings
   (the owner's delegated continuation call over iter-280 §F — the
   W6 station's own remaining rows; W7 stays "after W6"): both gaps

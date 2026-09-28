@@ -514,33 +514,31 @@ For any new major capability, regime or institution:
 Then run the compression test and remove or merge decorative material.
 
 The station's first row LANDED (iter-283, the owner's «W7 открывай
-если больше ничего не осталось» call — W6 complete at both bands, no
-open row remained; the record: `WORLD_TESTS.md` §9's W7 entry — the
-single owner; the witness `tests/test_negative.py`): the
-eight-question battery run on the SAME committed package — the
-negative-space census (why not universal: the closed gate
-vocabulary, the no-leak option gate, the deadband, the tale gate,
-the fixed subjects); the lint's measured refusals (who resists: the
-empty registry and the unseeded hook both refuse at load); the
-disappearance battery's three arms (what if it disappears: settle
-gone → the calm run byte-identical + the grammar wall returned; the
-mourning gone → the departure dead, the market loud again
-(iter-274's price inverted arm for arm), the other families
-untouched; the word unregistered → the fact survives, the door
-dies); the compression test's reachability inventory (who profits:
-all 76 event templates producible by construction, every meaning
-surface declared/referenced, the four unreferenced entity ids each
-carrying their own canonical door, the census's «0 consumerless»
-cited) — VERDICT: no decorative material at the measured band, the
-pack compressed. The honest boundaries: the band is
-reachability-BY-CONSTRUCTION (an unfired surface is
-possibility-space, never decoration — the doors stay); the unglossed
-literals ride the documented dry fallback; the ungarrisoned window
-the composition witness's own recorded limitation. The admission
-evidence cited to its owners, never re-derived. The station's next
-rows — the owner's call: the reading band of the negative questions,
-further majors (the meso units' own disappearance arms), or W8 when
-the owner calls the station complete.
+если больше ничего не осталось» call; the record `WORLD_TESTS.md`
+§9's W7 entry — the single owner; the witness `tests/test_negative.py`):
+the eight-question battery + the compression test on the SAME
+committed package — the negative-space census, the lint's measured
+refusals, the disappearance battery's three arms (settle / mourning /
+word), the reachability inventory: no decorative material at the
+measured band, the pack compressed; the honest boundaries classified.
+The station's SECOND row LANDED (iter-284, the owner's «продолжай
+работу над задачами класса мирового трека, W7» continuation call —
+the reading band's agent half; the record `WORLD_TESTS.md` §9's W7
+entry): the battery's answers as BLIND READINGS over the same
+battery's own twins — the reading kit in the recorded W5 form (five
+packages over the committed pack + the three twins, byte-identical
+regeneration, the preset before any reading), the clean n=2
+(measured after one discarded contaminated pilot pair — the honest
+protocol fix), every pre-set bar MET (the departure, the carrier, the
+trade, the families' disable test, the dead door, the invisible
+door's vocabulary catch), the free namings divergent — the reading
+band CONFIRMED at the LLM band; the readers' own discovery: the
+disappearance's footprint wider than the deterministic census (the
+wait-band ripple, the watch-briefing ripple). The station's next
+rows — the owner's call: the LIVE reading band (the owner's half of
+iter-284's kit — the convergence the owner's own beat), further
+majors' disappearance arms (the meso units' own rows), or W8 when the
+owner calls the station complete.
 
 ## 10. W8 — Integration readiness
 

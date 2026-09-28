@@ -2407,6 +2407,94 @@ limitation, never a missing mechanic. No plot written, no machinery
 promoted, no pack change. The owner's RU report:
 `docs/iterations/iter-283-negative-report.md`.
 
+### CONFIRMED — The W7 reading band's LLM half: the negative questions as blind readings over the same battery's twins (2026-09-28, iter-284, the owner's «продолжай работу над задачами класса мирового трека, W7» continuation call — the station's second row, its agent side; the live band stays the owner's)
+
+The reading kit built over the COMMITTED pack + the three iter-283
+twins in the recorded W5 form (iter-207: each package = the tale + the
+key actor's records (opening/close) + the site's close record + three
+briefs at the natural cut mirrors — mode A at the crisis, mode B in
+the named actor's own voice at the second cut, mode A at the close;
+the runner + the kit + the transcripts outside the repo, Rule 9;
+byte-identical on the double regeneration). FIVE packages, neutral
+names: world_a (the committed pack, the compressed mourning carrier —
+the composition script's own chain, both fires + the final wait
+20000, the tale at the W5 form's readable scale), world_b (the
+no-mourns twin, the same script/seed), world_c (the committed pack,
+the crafted JOURNEY seed 42 — the tally read + the coercion hinge),
+world_d (the no-word twin), world_e (the no-settle twin over the
+mourning carrier — the null control). The pre-set audit written
+BEFORE any reading (the isolation law — the iter-283 battery's
+measured facts restated as seven reading bars). THE PROTOCOL ERROR
+AND THE HONEST FIX: the first two blind sessions ran while the preset
+still sat inside the kit directory — both readers transparently
+disclosed opening it; the pair DISCARDED as formal evidence (the bars
+formally visible — the measurement cannot ride contaminated
+sessions), the preset staged OUT, two FRESH clean sessions run over
+the clean kit — the formal n=2 (the pilot pair's material convergence
+with the clean pair recorded as the differential's robustness datum —
+four independent readings, two protocol runs — never the
+measurement). MEASURED at the LLM band n=2, the bars never shown:
+**Q1 MET convergent** — the disappearance differential's BOTH halves
+(the departure: «Maren takes the road to the half-pay keep» in A
+against her staying at Malby in B, her close record's position the
+clean surface; the social voice: A's market silent with the 12-line
+council pile against B's living rumor channel — councils 12 against
+1, rumors 2 against 11); **Q2 MET convergent** — the carrier per
+world (A: Maren, the market's own talker, carrying the grief to the
+keep, her fear persisting at 43; B: no carrier, the fear decaying to
+0, the market talking on); **Q3 MET convergent** — the trade (the
+market's voice rode the PERSON never the place; the quiet the grief's
+price; the market CHANGED, not dead — the dead-market reading
+explicitly refused by both); **Q4 MET n=2** — the disable test's core
+(the old families' wergeld vigils identical 3=3 in both tales,
+neither reading claiming a ritual difference); **Q5 MET convergent**
+— the dead door's both halves (C: the lever minted «now holds
+something over Garrick» + the coercion landed, the pair axes trust
+25 / fear 75; D: the knowledge minted but inert — no lever, the
+coercion refused «impossible here», the pair axes absent) — with the
+institutional cause (the registry) honestly declared beyond the
+readable surface BY BOTH READERS unprompted; **Q6 MET convergent —
+the invisible door's FULL catch**: the histories identical AND the
+`sell_bloom` vocabulary line named by both readings (the D-108 law
+at the reading band: the unused door invisible in the tale and the
+records, legible ONLY in the briefs' action vocabulary — and that
+surface itself reader-legible under the directed frame); **Q7 free**
+— the namings divergent across the two readings of the same material
+(the free-band law reproduced: institutional procedural against
+low-feudal tragedy, village rumor-drama against dark comedy,
+blackmail tale against ledger-western) while the differential shapes
+converge (A/B «the same world, different social afterlife»; C/D «the
+same world, one divergent mechanism, opposite fates»). **THE READERS'
+OWN DISCOVERY (beyond the bars, both clean readings): the
+disappearance's footprint is WIDER than the deterministic census** —
+the wait-band ripple (A's tale renders the runner's five waits, B's
+renders none, though the wait events exist in both logs — the
+post-hoc verification: the importance rule's per_far_hook term, the
+committed wait action carrying TWO success hooks [wilmot_grief_ramble,
+market_mourns] against the twin's ONE, the score 2 against 1 at the
+medium threshold 2 — the seeding law's own shadow: the hook's seeding
+reference rides EVERY wait's importance score, so the honest removal
+— the hook AND its seed together — drops the whole wait family below
+the tale gate), the watch-briefing ripple (7 against 6
+knowledge_transfers, the t=5400 briefing in A only), and the
+records' memory entanglement (the vigils + the runner's return
+entering Maren's record in B only) — canonical event-level
+differences the iter-283 census never enumerated, found from the
+read material alone. VERDICT: **the reading band CONFIRMED at the
+LLM band n=2** — every pre-set bar met, the station's law held (no
+prose edited, no gate raised, no machinery promoted, no pack change,
+the LOG untouched, zero corpus price). The honest boundaries: the
+refusal's institutional cause beyond the readable surface (named,
+never routed — a rendering route a future row's owner call); the
+talks' volume riding the low-importance tale band (the T7 gate
+family — the talk half legible in the actor records, the tale
+carrying the rumor half); the Q4 classification variance (one reading
+classing the guild's council pile as a separate institution —
+reader-side, the vigils bar itself carried n=2). The owner's live
+half: the kit delivered with the questions and the sealed preset —
+the convergence the owner's own next beat. The owner's RU report:
+`docs/iterations/iter-284-negread-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

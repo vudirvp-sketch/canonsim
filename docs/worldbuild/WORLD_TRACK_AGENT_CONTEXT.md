@@ -318,25 +318,30 @@ major capability, regime or institution ask the eight questions —
 why possible / why not universal / what does it replace / what does
 it make harder / who profits / who resists / who remembers / what if
 it disappears — then run the compression test and remove or merge
-decorative material. The first row LANDED (iter-283, the witness
-`tests/test_negative.py`, the record `WORLD_TESTS.md` §9's W7
-entry): the negative-space census (the closed gate vocabulary, the
-no-leak option gate, the deadband, the tale gate, the fixed
-subjects), the lint's measured refusals (the empty registry, the
-unseeded hook), the disappearance battery's three arms (settle gone
-→ the calm run byte-identical + the grammar wall returned; the
-mourning gone → the departure dead, the market loud again —
-iter-274's price inverted —, the other families untouched; the word
-unregistered → the fact survives, the door dies), and the
-compression inventory (all 76 event templates producible by
-construction, every meaning surface declared, the census's «0
-consumerless») — VERDICT: no decorative material at the measured
-band; an unfired surface is possibility-space (the doors stay),
-never decoration. The station's next rows — the owner's call: the
-negative questions' reading band, further majors' disappearance
-arms, or W8 (integration readiness) when the owner calls the
-station complete. The owner's RU report:
-`docs/iterations/iter-283-negative-report.md`.
+decorative material. The first row LANDED (iter-283: the battery +
+the compression test on the committed package — the witness
+`tests/test_negative.py`, the record `WORLD_TESTS.md` §9's W7 entry
+— no decorative material at the measured band; an unfired surface is
+possibility-space, the doors stay). The SECOND row LANDED (iter-284,
+the owner's «продолжай работу над задачами класса мирового трека,
+W7» continuation call — the reading band's LLM half): the battery's
+answers as BLIND READINGS over the same battery's twins — the kit
+in the W5 form (five packages, the committed pack + the three
+twins), the pre-set audit before any reading, the clean n=2 after
+one discarded contaminated pilot pair (the preset's protocol error
+honestly fixed: the preset never rides the kit dir during the
+readings), every bar MET (the departure / the carrier / the trade /
+the families' disable test / the dead door / the invisible door's
+vocabulary catch — `sell_bloom` named by both readings), the free
+namings divergent — the reading band CONFIRMED at the LLM band; the
+readers' own discovery: the disappearance's footprint wider than
+the deterministic census (the wait-band ripple via the importance
+rule's far-hook term; the watch-briefing ripple). The station's next
+rows — the owner's call: the LIVE reading band (the owner's half of
+iter-284's kit — the convergence the owner's own beat), further
+majors' disappearance arms, or W8 (integration readiness) when the
+owner calls the station complete. The owner's RU report:
+`docs/iterations/iter-284-negread-report.md`.
 
 W6's row-by-row landing history (iter-278 the substrate side;
 iter-279/280 the reading band's LLM and live halves; iter-281 the two
