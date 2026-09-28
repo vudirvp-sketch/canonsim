@@ -260,3 +260,45 @@ duplicated squash-landing rows) closed in the same iteration; Class
 DOC-ADMISSION (R0 — zero code, zero pack, zero canon change);
 verification 2520+9 + ruff + docguard + topology --check clean; the
 owner's RU report docs/iterations/iter-277-worldcontext-report.md.
+
+### D-243 — iter-288 · frontendweb (R0)
+
+The owner's frontend-web pack ingestion call (the tmpfiles delivery
+of `CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip` + the «выполняй»
+execution order over the reported ingestion plan): the external
+implementation-contract pack (52 files; its own ground-truth pin
+iter-269..272 @ `cd84069`, a dirty-tree checkpoint) is ingested ONCE
+and reconciled — never copied into current truth. Decision: (a) the
+binding distillation is a NEW law surface, `docs/FRONTEND_WEB_LAW.md`
+(the D-214 pattern — the pack's 16 normative web contracts compacted:
+the S0 skeleton gate, the POST /op seam law, dual-read LIVE≠HISTORY,
+the connection budget/focused-tab stream policy, browser runtime
+bounds, surface modules, the web-side effective-state closure, the
+tooling floor); (b) the durable web-track context
+`docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md` + the directory
+index — the worldcontext precedent's form; (c) the pack preserved
+verbatim at `docs/frontendweb/archive/` (the md5-pinned zip + a
+provenance README applying the legacy-archive law: open only for its
+unique retains — the full normative set, the V5.2 sources, the
+ground-truth snapshot, the Redot transfer notes — never re-ingested,
+never a second source); (d) the owner-gated boundary recorded, never
+silently reconciled: the pack's Redot-freeze half of the stack
+decision (the migration Phase 0 + the §18 re-homing family) stays the
+owner's D-row — active Redot routing untouched; the top-level
+`frontend/` tree (§8 stop & confirm) and the `frontend-1` S0 row both
+parked owner-gated. Why: the repository must carry the web-frontend
+law durably without the zip re-uploaded (the iter-277 requirement's
+same form), while the seams the pack binds were verified LIVE against
+HEAD `ae2fa3d` (workbench/ zero-diff since the pack's pin — every
+gateway claim checked in workbench/api/{transport,gateway,contract}.py;
+no React present — the pack contracts the ADDITION, not a migration
+of existing code); repo-ground-truth/ deliberately NOT landed (the
+live repo is the truth at zero diff). Consequence: web-frontend
+agents enter at the context doc → FRONTEND_WEB_LAW.md → the named
+owners; the pack's claims never override an owner; the S0 build
+cannot start before the owner's frontend-1 call + the two boundary
+calls above; the invariant envelope unchanged (INV-4: the browser is
+a gateway client over the existing loopback transport). Class
+DOC-ADMISSION (R0 — zero code, zero pack, zero canon change);
+verification 2556+9 + ruff + docguard + topology --check clean; the
+owner's RU report docs/iterations/iter-288-frontendweb-report.md.

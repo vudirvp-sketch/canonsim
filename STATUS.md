@@ -1,59 +1,49 @@
-Iteration: iter-287 (`readiness` — the W8 station's FIRST row, the
-  owner's «продолжай работу над задачами класса мирового трека. w8
-  можешь начинать делать» call: the station ENTERED on the owner's
-  explicit call; R0 doc-only — the audit consumes the accumulated
-  evidence, it never re-measures): the seven-criteria
-  integration-readiness audit (WORLD_WORKPLAN §10) — every
-  criterion cited to its standing owner, every gap named where the
-  evidence is thinner than the claim; the full record
-  `WORLD_TESTS.md` §9's W8 entry (the single owner). (1) the
-  authored causal substrate MET (ANCHOR_REGION §5's eight-loop mesh
-  + D-237's composition; the gap: the meaning layer thinner than
-  the mechanical, one region); (2) a demonstrated meso unit MET
-  (§6.1–6.5's five, three CONFIRMED / two PARTIALLY — the band
-  honesty carried); (3) pack-primitive representability MET
-  (D-240/D-191 + the iter-283 compression inventory + rs-1..rs-13;
-  the named gaps: the I0 inventory's three unpromoted candidates,
-  the second region unwitnessed); (4) the ordinary event's
-  persistent human-scale consequence MET (the I0 witness + the
-  exit criterion met four times; the gap: the one-year persistence
-  band, the perturbation authored between runs); (5) explicit
-  knowledge asymmetry MET (WORLD_AUTHORING §9's doctrine + the
-  zero-leak blind suite + the measured witnesses; the gap: the
-  influence-boundary check rides review, not an oracle); (6)
-  world-specific material outside the core MET, executable (INV-3;
-  no gap at the measured band); (7) the proven-vs-hypothetical
-  distinction MET (§10's vocabulary + the PROPOSAL fence; the gap:
-  the reading bands' evidence documentary). VERDICT: all seven
-  carry standing evidence at the measured band — the world track
-  READY for the broader implementation handoff, the named gaps
-  riding the handoff as its honest boundary list. Zero code, zero
-  pack, zero canon change, the LOG untouched; the owner's RU
-  report at docs/iterations/iter-287-readiness-report.md
+Iteration: iter-288 (`frontendweb` — the frontend-web pack ingestion,
+  the owner's tmpfiles delivery of
+  CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip + the «выполняй»
+  execution order over the reported plan; R0 doc-only): the external
+  implementation-contract pack (52 files, its own ground-truth pin
+  `cd84069` — a dirty-tree checkpoint) read in full in its own S0
+  read order and reconciled against HEAD — every gateway seam claim
+  VERIFIED LIVE (workbench/ zero-diff since the pack's pin; `POST
+  /op` + the session.* family + app.status + the envelopes in
+  workbench/api), no React present (the pack contracts the ADDITION
+  of the first web client). Landed: docs/FRONTEND_WEB_LAW.md (the
+  binding distillation — the S0 gate, the seam law, dual-read, the
+  connection budget, browser runtime, surface modules, the
+  effective-state closure, the tooling floor; D-243),
+  docs/frontendweb/ (the index + the durable
+  FRONTEND_WEB_AGENT_CONTEXT.md + archive/ the verbatim md5-pinned
+  pack), the frontend-1 S0 row parked owner-gated; the Redot-freeze
+  half of the pack's stack decision OWNER-GATED — active Redot
+  routing untouched (AGENTS §11, never silently reconciled). Zero
+  code, zero pack, zero canon change, the LOG untouched; the owner's
+  RU report at docs/iterations/iter-288-frontendweb-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
 2556 passed + 9 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; the standing suite
-  with the namedroute witness; one doc-only iteration since)
+  --check clean (Python 3.12.14, the env pin; the standing suite;
+  two doc-only iterations since)
   ·
-Date: 2026-09-28 ·
-Scope: docs/{worldbuild/WORLD_TESTS.md (§9 the W8 audit entry — the
-  single owner), worldbuild/WORLD_WORKPLAN.md (§10 the first-row
-  record + a D-024 cruft pass over the §7/§8/§9 record tails,
-  593/600), worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 + the
-  W-stage block), blueprint/phases.md (§6 the iter-287 record),
-  TASKS.md (the ledger, iter-277 evicted), iterations/
-  iter-287-readiness-report.md (new, the owner's RU deliverable)},
-  STATUS.md, worklog.md (iter-277 evicted) — 8 paths (R0 —
-  doc-only; zero code, zero pack, zero canon change, the LOG
-  untouched, zero corpus price)
-Track A: W8 the CURRENT EXECUTION STAGE — the FIRST row LANDED
-  iter-287 (the seven-criteria readiness audit: all seven MET at
-  the measured band, the world track READY for the broader
-  implementation handoff, the named gaps the handoff's honest
-  boundary list); the station's remaining rows the owner's call.
-  The ssi family COMPLETE except ssi-5, owner-gated.
+Date: 2026-09-29 ·
+Scope: docs/{FRONTEND_WEB_LAW.md (new), frontendweb/README.md (new),
+  frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (new),
+  frontendweb/archive/README.md (new),
+  frontendweb/archive/CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip
+  (new, verbatim), DECISIONS.md (D-243), AGENT_NAVIGATION.md (the §1
+  + §2 + §3 rows), FRONTEND_UIUX_LAW.md (the routing delta),
+  blueprint/phases.md (§6 the iter-288 record), TASKS.md (the
+  frontend-1 row + a D-024 cruft pass over mech-2's tail + the
+  ledger, iter-278 evicted), iterations/iter-288-frontendweb-report.md
+  (new, the owner's RU deliverable)}, STATUS.md, worklog.md (iter-278
+  evicted) — 13 paths (R0 — doc-only; zero code, zero pack, zero
+  canon change, the LOG untouched, zero corpus price)
+Track A: the web-frontend track OPENED at the ingestion band — S0 NOT
+  STARTED (the four criteria, FRONTEND_WEB_LAW §2; the owner's next
+  calls: the Redot-freeze D-row, the top-level frontend/ tree, the
+  frontend-1 opening). The world track: W8's remaining rows the
+  owner's call. The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -116,34 +106,28 @@ owning iteration reports)
 
 ## Next step
 
-**iter-287 DONE: the W8 station's first row (the owner's «w8
-  можешь начинать делать» call — the seven-criteria
-  integration-readiness audit; R0 doc-only, the audit consumed
-  the accumulated evidence, nothing re-measured).** All seven
-  criteria MET at the measured band — the authored substrate
-  (the §5 mesh + D-237; gap: the meaning layer thinner than the
-  mechanical, one region); a demonstrated meso unit (§6.1–6.5's
-  five, three CONFIRMED / two PARTIALLY — the band honesty
-  carried); pack-primitive representability (D-240/D-191 + the
-  compression inventory + rs-1..rs-13; gaps: the three unpromoted
-  I0 candidates, the second region unwitnessed); the ordinary
-  event's persistent consequence (the I0 witness + the exit
-  criterion met four times; gap: the one-year persistence band,
-  the perturbation authored between runs); explicit knowledge
-  asymmetry (the §9 doctrine + the zero-leak suite; gap: the
-  influence check rides review, not an oracle); world-specific
-  material outside the core (INV-3, executable — no gap); the
-  proven-vs-hypothetical distinction (§10's vocabulary + the
-  PROPOSAL fence; gap: the reading bands documentary). VERDICT:
-  the track READY for the broader implementation handoff at the
-  measured band — the gaps ride the handoff as its honest
-  boundary list.
-Next: the owner's call — the handoff's first consumer (the §11
-  expansion rule's second region vs the standing engineering
-  rows), any named gap's closing, or the handoff inventory
-  package once the consumer is named.
+**iter-288 DONE: the frontend-web pack ingestion (the owner's
+  tmpfiles delivery of CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip
+  + the «выполняй» execution order over the reported plan; R0
+  doc-only).** The pack read in full in its own S0 read order and
+  reconciled against HEAD: every gateway seam claim verified live
+  (workbench/ zero-diff since the pack's pin `cd84069`; POST /op,
+  the session.* family, app.status, the envelopes), no React
+  present — the pack contracts the ADDITION. Landed:
+  docs/FRONTEND_WEB_LAW.md the binding distillation (D-243 — the
+  D-214 pattern), docs/frontendweb/ the durable track surface (the
+  index + FRONTEND_WEB_AGENT_CONTEXT.md the durable context +
+  archive/ the verbatim md5-pinned pack), the frontend-1 S0 row
+  parked owner-gated; the Redot-freeze authority tension preserved
+  for the owner (AGENTS §11 — never silently reconciled).
+Next: the owner's call — the three web-track gates in order: the
+  Redot-freeze D-row (the pack's migration Phase 0 + the §18
+  re-homing family), the top-level `frontend/` tree placement (§8
+  stop & confirm), then the frontend-1 opening (the S0 skeleton,
+  FRONTEND_WEB_LAW §2); the world track's handoff consumer and W8's
+  remaining rows stay the owner's parallel calls.
 Active KIs: none. The suite green (2556+9). The owner's RU
-  report: docs/iterations/iter-287-readiness-report.md.
+  report: docs/iterations/iter-288-frontendweb-report.md.
 iter-286 DONE: the W7 station's fourth row (the owner's «точечный
   и быстрый (read-side only)» call — the named-boundary rendering
   route, iter-284/285's boundary (a); the same call conditionally

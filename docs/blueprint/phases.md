@@ -5235,6 +5235,37 @@ details live in WORLD_TESTS §9, the single owner — the workplan
 593/600). The owner's RU report:
 `docs/iterations/iter-287-readiness-report.md`.
 
+**The iter-288 frontendweb record (R0, doc-only — the owner's
+frontend-web pack ingestion call: the tmpfiles delivery of
+`CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip` + the «выполняй»
+execution order over the reported ingestion plan).** The external
+implementation-contract pack (52 files, its own ground-truth pin
+`cd84069` — a dirty-tree checkpoint of the iter-269..272 era) read
+in full in its own S0 read order and reconciled against HEAD
+`ae2fa3d`: every gateway seam claim verified live (workbench/
+zero-diff cd84069→HEAD — all 15 intervening iterations world-track;
+`POST /op` + the session.* family + `app.status` + the envelopes
+checked in workbench/api/{transport,gateway,contract}.py); no React
+present at HEAD — the pack contracts the ADDITION of the first web
+client. Landed: (a) `docs/FRONTEND_WEB_LAW.md` the binding
+distillation (the D-214 pattern; the pack's 16 normative contracts
+— the S0 gate, the seam law, dual-read, the connection budget,
+browser runtime, surface modules, the effective-state closure, the
+tooling floor); (b) `docs/frontendweb/` the web-track surface (the
+index + `FRONTEND_WEB_AGENT_CONTEXT.md` the durable context — the
+worldcontext precedent's form); (c) the pack preserved verbatim at
+`docs/frontendweb/archive/` (md5 `85bb5e1c4faff7a1833fb5ca5c668395`,
+288315 bytes, the pack's own verify_pack.py OK; the provenance
+README + the never-re-ingest fence); (d) the owner-gated boundary
+recorded (D-243): the pack's Redot-freeze half (the migration
+Phase 0 + the §18 re-homing family) — active Redot routing
+UNTOUCHED; the top-level `frontend/` tree (§8 stop & confirm); the
+`frontend-1` S0 row parked in TASKS.md. repo-ground-truth/
+deliberately NOT landed (the live repo is the truth at zero diff).
+Zero code, zero pack, zero canon change, the LOG untouched, zero
+corpus price. The owner's RU report:
+`docs/iterations/iter-288-frontendweb-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -14,7 +14,11 @@
 > responsive/DPI, or verification routes HERE first. The VISUAL subset
 > (token taxonomy, color law, per-surface state matrix, transplantation)
 > stays with `docs/VISUAL_SYSTEM_UI.md` (D-211); engine facts with
-> `docs/REDOT_ENGINE_INDEX.md` (D-207); application/runtime contracts
+> `docs/REDOT_ENGINE_INDEX.md` (D-207); web-frontend implementation
+> law (the React/browser client: the stack's active half, the S0
+> skeleton gate, the gateway seam, dual-read, the connection budget,
+> surface modules) with `docs/FRONTEND_WEB_LAW.md` (iter-288, D-243);
+> application/runtime contracts
 > (operations, lifecycles, identity, deadlines, streaming, persistence,
 > inference policy) with `docs/WORKBENCH_APP_LAW.md`; Observatory
 > analytical semantics (planes, query families, run identity, the
