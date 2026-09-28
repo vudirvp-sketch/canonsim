@@ -2495,6 +2495,107 @@ half: the kit delivered with the questions and the sealed preset —
 the convergence the owner's own next beat. The owner's RU report:
 `docs/iterations/iter-284-negread-report.md`.
 
+### CONFIRMED — The W7 reading band's live half: the owner's blind reading of the negative battery's kit received and scored — the reading band CONFIRMED at BOTH bands, the ripple footprint caught by the live reader (2026-09-28, iter-285, the owner's «продолжай работу над задачами класса мирового трека» continuation call with the live reading delivered in the chat — the station's third row, its live side; the iter-270/280/282 precedent's exact form)
+
+The owner's blind Q1–Q7 over the iter-284 kit arrived in the chat
+(the answers written BEFORE the preset reveal — the owner's own
+statement; then the owner's own post-preset scoring, the honest
+self-check form: each answer checked against its bar, the deviations
+named by the owner himself; «промахи сверяются, а не переспрашиваются»
+— the standing law held, nothing re-asked). The live reader's
+instrument included a package-by-package line `diff` — a legitimate
+material-level read (the kit's files ARE the read surface; the bars
+stayed closed until after the answers); a band-method divergence
+from the LLM band's pure package reading, recorded as the instrument
+difference, the blindness unaffected. MEASURED at the live band n=1,
+every pre-set bar MET: **Q1 MET** — the disappearance differential's
+both halves (the departure: «Maren takes the road to the half-pay
+keep» in A against «at: Malby» in B, the close records' positions,
+the move line present in A's brief_cut2_voice only; the social
+voice: B's nine talk/rumor_told pairs at t 26337–26341 — seven
+rumors retold, twice disbelieved — against A's silent market with
+the guild's council pile, the owner's own count 11 councils at
+t 26335 + 1 at t 4175 = 12 against B's 1, convergent with the
+census's 12/1); **Q2 MET** — the carrier per world (A: Maren, the
+market's own talker, leaving for the keep — the FIRST burned place
+— ending at fatigue 100 / fear 43 / suspicion 70, her last fire-talk
+t 3456 refusing the runner, the market voice silent after it, only
+the guild; B: no carrier, the fear decaying to 0 through the drift
+records at t 6480/6840/7560, the market talking on one-voiced);
+**Q3 MET** — the trade (the quiet world exchanged the carrier's
+PRESENCE — Maren absent from A's brief_final present_entities, only
+the runner, Ferra and the queue; her fear 43 left unresolved, the
+person-to-person rumor exchange lost; the market NOT dead but
+CHANGED — «не мёртв, а изменён», the dead reading refused; the
+voice passed from a person to the institution: the guild's 12
+councils, the queue and the corporal in place, the guard rotations
+on); **Q4 MET** — the disable test's core (the wergeld vigils 3=3
+in both tales, no ritual difference claimed — the lines cited, the
+brief_finals' the_blood_price_spoken t 5975 and the steward's
+rambling t 5976 identical in both); **Q5 MET** — the dead door's
+both halves (C: the lever minted «now holds something over
+Garrick» + leverage_gained + the coercion landed at t 1515 («the
+hold is spent») + the pair axes trust 25 / fear 75, the lever's
+one-shot nature named; D: the knowledge minted but inert, the
+refusal «impossible here» (intent_rejected), the pair axes absent)
+— with the institutional cause honestly declared beyond the readable
+surface unprompted, PLUS the live band's own sharpenings: the coerce
+verb present in BOTH action vocabularies (the block sits at the
+intent/knowledge level, never the grammar level), the two mechanisms
+(no lever vs a coerce ban) indistinguishable from the material,
+coin 6=6 (no material gain); **Q6 MET — the invisible door's FULL
+catch**: the histories byte-identical (the owner's diff empty over
+tale / actor / site) AND the `sell_bloom` vocabulary line named with
+exact references (the three briefs' action lists, 38 verbs against
+37, never used in any log) — the D-108 law carried at the live band:
+the unused door invisible in the tale and the records, legible ONLY
+in the briefs' possibility vocabulary; **Q7 free** — the namings
+divergent from BOTH LLM readings' lexicons (A: a cold elegiac
+procedural drama of two fires; B: a wary, ghost-adjacent rumor
+chronicle — «город не разошёлся, а шепчется»; C: dry and
+transactional; D: knowledge without power — «сделка против
+бессилия»; E: A's twin differing by one verb) while the
+differential shapes converge (A/B «карта и события общие, форма
+после пожара разная» — the LLM band's own «the same world,
+different social afterlife»; C/D the same
+one-mechanism-opposite-fates shape) — the free-band law reproduced
+ACROSS READER CLASSES. **THE CONVERGENCE QUESTION — the station's
+declared bit (iter-284 §G) — RESOLVED YES:** the live reader
+extracts the same forms as the converged LLM readings (every bar's
+content convergent, the same quotes, the same counts), AND — the
+specific open question — catches the ripples: ALL THREE of the
+blind readers' discoveries found in the BLIND half from the material
+alone (the wait-band ripple: A's five «the factor's runner waits»;
+the watch-briefing ripple: the extra «Ferra briefs Osgar (vague)»;
+the records' memory entanglement: the vigils + the runner's return
+entering Maren's record in B only) — the disappearance's-footprint
+finding now measured at BOTH bands. The owner's self-audit's Q4 note
+(«эти мелочи я, вероятно, переоценил») RECLASSIFIED in this record:
+the items are the canonical event-level ripple differences beyond
+the census (per the iter-284 record itself) — a discovery, never a
+Q4 overreach; the Q4 bar (the vigils 3=3) carried clean. The honest
+boundaries: the live band n=1 (the standing honesty, iter-270/280/
+282); the Q3 soft-form leg — the bar's person-vs-place thesis
+circled (the presence exchange, the person→institution voice) but
+never pronounced verbatim, the owner's own «формулировка мягче, чем
+надо» — reader-form variance, never prose-fixed; the intentional-
+exchange conclusion honestly refused (not derivable from the
+material — a live-band sharpening of the bar's own causal frame);
+the kit README's one-scenario framing imprecise for C/D (the
+owner's own catch: the README claims one scenario for all five
+worlds while the measured facts carry two slices — C/D the JOURNEY
+seed 42, A/B/E the seed-2 mourning carrier — the repo's own records
+already carry the correct per-package facts; a kit-side
+documentation imprecision outside the repo, Rule 9 — no repo state
+touched, no KI; any future kit build's README must name the two
+slices). VERDICT: **the W7 reading band CONFIRMED at BOTH bands
+(LLM n=2 + live n=1); the convergence carried; the ripple footprint
+measured at both bands** — the station's law held (no prose edited,
+no gate raised, no machinery promoted, no pack change, the LOG
+untouched, zero corpus price). The station's next rows — the
+owner's call. The owner's RU report:
+`docs/iterations/iter-285-neglive-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

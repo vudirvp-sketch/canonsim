@@ -513,32 +513,32 @@ For any new major capability, regime or institution:
 
 Then run the compression test and remove or merge decorative material.
 
-The station's first row LANDED (iter-283, the owner's «W7 открывай
-если больше ничего не осталось» call; the record `WORLD_TESTS.md`
-§9's W7 entry — the single owner; the witness `tests/test_negative.py`):
-the eight-question battery + the compression test on the SAME
-committed package — the negative-space census, the lint's measured
-refusals, the disappearance battery's three arms (settle / mourning /
-word), the reachability inventory: no decorative material at the
-measured band, the pack compressed; the honest boundaries classified.
-The station's SECOND row LANDED (iter-284, the owner's «продолжай
-работу над задачами класса мирового трека, W7» continuation call —
-the reading band's agent half; the record `WORLD_TESTS.md` §9's W7
-entry): the battery's answers as BLIND READINGS over the same
-battery's own twins — the reading kit in the recorded W5 form (five
-packages over the committed pack + the three twins, byte-identical
-regeneration, the preset before any reading), the clean n=2
-(measured after one discarded contaminated pilot pair — the honest
-protocol fix), every pre-set bar MET (the departure, the carrier, the
-trade, the families' disable test, the dead door, the invisible
-door's vocabulary catch), the free namings divergent — the reading
-band CONFIRMED at the LLM band; the readers' own discovery: the
-disappearance's footprint wider than the deterministic census (the
-wait-band ripple, the watch-briefing ripple). The station's next
-rows — the owner's call: the LIVE reading band (the owner's half of
-iter-284's kit — the convergence the owner's own beat), further
-majors' disappearance arms (the meso units' own rows), or W8 when the
-owner calls the station complete.
+The station's rows, in order (the full records: `WORLD_TESTS.md`
+§9's W7 entries — the single owner; the owner's RU reports
+iter-283..285): the FIRST row LANDED (iter-283, the owner's «W7
+открывай если больше ничего не осталось» call) — the battery + the
+compression test on the same committed package (the negative-space
+census, the lint's measured refusals, the disappearance battery's
+three arms, the reachability inventory: no decorative material at
+the measured band; the witness `tests/test_negative.py`); the SECOND
+row LANDED (iter-284, the reading band's LLM half) — the battery's
+answers as blind readings over the same battery's twins (the W5-form
+kit, five packages; the preset before any reading; the clean n=2
+after one discarded contaminated pilot; every bar met — the
+departure, the carrier, the trade, the vigils 3=3, the dead door,
+the invisible door's `sell_bloom` catch; the free namings divergent;
+the readers' own discovery: the disappearance's footprint wider than
+the deterministic census); the THIRD row LANDED (iter-285, the LIVE
+half, the owner's own blind reading received and scored against the
+same preset, the iter-270/280/282 form): every bar MET n=1 with the
+same quotes and counts, the convergence with the LLM band's forms
+carried, ALL THREE ripples (the wait-band, the watch-briefing, the
+records' entanglement) caught in the blind half — the reading band
+CONFIRMED at BOTH bands (LLM n=2 + live n=1). The station's next
+rows — the owner's call: further majors' disappearance arms (the
+meso units' own rows), the named-boundary rendering route (the
+refusal's institutional cause, iter-284's boundary (a)), or W8
+(integration readiness) when the owner calls the station complete.
 
 ## 10. W8 — Integration readiness
 

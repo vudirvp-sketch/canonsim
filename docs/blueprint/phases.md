@@ -5104,6 +5104,53 @@ variance (reader-side).
   byte-identical, zero corpus price). The owner's RU report:
   `docs/iterations/iter-284-negread-report.md`.
 
+**The iter-285 neglive record (R0, doc-only — the W7 reading band's
+LIVE half, the owner's «продолжай работу над задачами класса
+мирового трека» continuation call with the live reading delivered in
+the chat; the iter-270/280/282 precedent's exact form — the blind
+Q1–Q7 before the preset reveal, then the owner's own post-preset
+scoring, this iteration verifying it against the standing
+iter-284 preset).** MEASURED at the live band n=1: every pre-set
+bar MET — Q1 both halves (the departure quoted verbatim + the
+social voice: the councils 12/1 with the owner's own 11×t26335 +
+1×t4175 count, B's nine talk/rumor_told pairs, seven rumors, two
+disbeliefs), Q2 the carrier per world (Maren to the keep with her
+fear persisting at 43 / no carrier with the fear decaying to 0 —
+plus the live band's own epistemic note: no «grief» variable in the
+files, the carrier an interpretation over fear/fatigue/movement),
+Q3 the trade (the presence exchanged — Maren absent from A's
+brief_final present_entities; the market «не мёртв, а изменён»,
+the dead reading refused; the voice passed from a person to the
+institution; the intentional-exchange conclusion honestly refused),
+Q4 the vigils 3=3 (no ritual difference claimed), Q5 the dead
+door's both halves + the honest boundary declared unprompted (plus
+the live band's sharpenings: the coerce verb present in both
+vocabularies — the block at the intent level, never the grammar
+level; the two mechanisms indistinguishable; coin 6=6), Q6 the
+invisible door's FULL catch (the histories byte-identical by the
+owner's own diff AND `sell_bloom` named with exact references —
+38 verbs against 37, never used), Q7 free (the namings divergent
+from BOTH LLM readings' lexicons while the differential shapes
+converge — the free-band law reproduced across reader classes).
+THE CONVERGENCE QUESTION (the station's declared bit, iter-284 §G)
+RESOLVED YES: the same forms extracted as the converged LLM
+readings, AND all three ripples (the wait-band, the
+watch-briefing, the records' entanglement) caught in the blind
+half — the disappearance's-footprint finding now measured at BOTH
+bands. The honest boundaries: the live band n=1; the Q3 soft-form
+leg (the person-vs-place thesis circled, never pronounced
+verbatim — the owner's own «формулировка мягче, чем надо»;
+reader-form variance, never prose-fixed); the kit README's
+one-scenario framing imprecise for C/D (the owner's catch —
+kit-side, outside the repo, Rule 9; the repo's records carry the
+correct two-slice facts). VERDICT: **the W7 reading band CONFIRMED
+at BOTH bands (LLM n=2 + live n=1)**. KI#107 found and closed
+(STATUS.md's rolling header left one iteration stale by iter-284's
+Next-step-only edit — the header now iter-285). Zero code, zero
+pack, zero canon change, the LOG untouched, the golden corpus
+byte-identical, zero corpus price. The owner's RU report:
+`docs/iterations/iter-285-neglive-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

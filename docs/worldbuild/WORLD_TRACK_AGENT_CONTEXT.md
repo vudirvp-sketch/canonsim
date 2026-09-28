@@ -296,7 +296,9 @@ W6     = COMPLETE at both bands (the substrate row, the reading band
          both halves, the gap routings + the re-measure, the live
          re-read — do not reopen without fresh regression evidence)
 W7     = CURRENT EXECUTION STAGE — negative / compression tests
-         (the first row landed, iter-283)
+         (three rows landed, iter-283/284/285: the battery, the
+         reading band's LLM half, the live half — the reading band
+         CONFIRMED at both bands)
 W8     = after W7 (integration readiness)
 ```
 
@@ -318,30 +320,30 @@ major capability, regime or institution ask the eight questions —
 why possible / why not universal / what does it replace / what does
 it make harder / who profits / who resists / who remembers / what if
 it disappears — then run the compression test and remove or merge
-decorative material. The first row LANDED (iter-283: the battery +
-the compression test on the committed package — the witness
-`tests/test_negative.py`, the record `WORLD_TESTS.md` §9's W7 entry
-— no decorative material at the measured band; an unfired surface is
-possibility-space, the doors stay). The SECOND row LANDED (iter-284,
-the owner's «продолжай работу над задачами класса мирового трека,
-W7» continuation call — the reading band's LLM half): the battery's
-answers as BLIND READINGS over the same battery's twins — the kit
-in the W5 form (five packages, the committed pack + the three
-twins), the pre-set audit before any reading, the clean n=2 after
-one discarded contaminated pilot pair (the preset's protocol error
-honestly fixed: the preset never rides the kit dir during the
-readings), every bar MET (the departure / the carrier / the trade /
-the families' disable test / the dead door / the invisible door's
-vocabulary catch — `sell_bloom` named by both readings), the free
-namings divergent — the reading band CONFIRMED at the LLM band; the
-readers' own discovery: the disappearance's footprint wider than
-the deterministic census (the wait-band ripple via the importance
-rule's far-hook term; the watch-briefing ripple). The station's next
-rows — the owner's call: the LIVE reading band (the owner's half of
-iter-284's kit — the convergence the owner's own beat), further
-majors' disappearance arms, or W8 (integration readiness) when the
+decorative material. Three rows LANDED, in order (every row's full
+record `WORLD_TESTS.md` §9's W7 entries — the single owner): the
+first (iter-283: the battery + the compression test on the committed
+package — the witness `tests/test_negative.py`; no decorative
+material at the measured band; an unfired surface is
+possibility-space, the doors stay); the second (iter-284, the
+reading band's LLM half: the battery's answers as blind readings
+over the same battery's twins — the W5-form kit, the pre-set audit
+before any reading, the clean n=2 after one discarded contaminated
+pilot pair, every bar MET including the invisible door's
+`sell_bloom` catch, the free namings divergent; the readers' own
+discovery: the disappearance's footprint wider than the deterministic
+census); the third (iter-285, the LIVE half, the owner's own blind
+reading received and scored against the same preset): every bar MET
+n=1, the convergence with the LLM band's forms carried, ALL THREE
+ripples (the wait-band, the watch-briefing, the records'
+entanglement) caught in the blind half — **the reading band CONFIRMED
+at BOTH bands (LLM n=2 + live n=1); the ripple footprint measured at
+both bands**. The station's next rows — the owner's call: further
+majors' disappearance arms (the meso units' own rows), the
+named-boundary rendering route (the refusal's institutional cause,
+iter-284's boundary (a)), or W8 (integration readiness) when the
 owner calls the station complete. The owner's RU report:
-`docs/iterations/iter-284-negread-report.md`.
+`docs/iterations/iter-285-neglive-report.md`.
 
 W6's row-by-row landing history (iter-278 the substrate side;
 iter-279/280 the reading band's LLM and live halves; iter-281 the two
