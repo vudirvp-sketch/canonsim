@@ -34,6 +34,7 @@ from core.economy import (
     is_account_prop,
 )
 from core.fold import Projection, fold, initial_projection
+from core.intent import REJECTION_BOUNDARY_BLOCK, REJECTION_EVENT
 from core.log import IMPORTANCE_ORDER as _IMPORTANCE_ORDER
 from core.log import EventRecord, read_log
 from core.pack import Pack
@@ -48,6 +49,7 @@ __all__ = [
     "gloss_account_kind",
     "gloss_flow",
     "gloss_knows",
+    "gloss_rejection_boundary",
     "render_chronicle",
     "render_entity_view",
     "render_scene_card",
@@ -303,6 +305,22 @@ def _event_context(
     if isinstance(secret, str) and secret:
         glossed = gloss_knows(glosses, pack, positions, secret)
         context["secret"] = glossed if glossed != secret else ""
+    # rs-13 (iter-286, the W7 named-boundary rendering route over
+    # iter-284's boundary (a)): the refusal's INSTITUTIONAL cause rides
+    # the boundary slot — the failed test's GATE glossed through the
+    # pack's table BEFORE the generic outcome loop can land the raw
+    # machine token (the rs-2/rs-4 precedence: the boundary lands
+    # first, the loop's `if key not in context` keeps it). Unglossed
+    # "" — the line's conditional tail renders nothing, the standing
+    # refusal form byte-identical (the dry fallback law). Scoped to the
+    # rejection family: only the door's own event carries a
+    # failed_test; every consumer (the tale's gated line, the entity
+    # view's ungated record) reads the one slot through the one
+    # template — rs-1's one-boundary law.
+    if event.type == REJECTION_EVENT:
+        context["boundary"] = gloss_rejection_boundary(
+            pack.templates, outcome.get("failed_test")
+        )
     # The promotion door (iter-11, D-054): a texture-path take carries the
     # mediator-resolved reference in its outcome and NO canon target — the
     # take templates branch on {target} and render the promoted slot noun.
@@ -469,6 +487,30 @@ def gloss_flow(templates: Mapping[str, Any], flow: str) -> str:
     if not isinstance(table, Mapping):
         return ""
     gloss = table.get(flow)
+    if not isinstance(gloss, str) or not gloss:
+        return ""
+    return gloss
+
+
+def gloss_rejection_boundary(templates: Mapping[str, Any], failed_test: Any) -> str:
+    """The named-boundary gloss (rs-13, iter-286 — the W7 named-boundary
+    rendering route over iter-284's boundary (a)): one rejection's
+    `failed_test` token mapped to the reader prose naming the refusal's
+    INSTITUTIONAL cause — the authority the refusing gate speaks for —
+    through the pack's `rejection_boundaries` table keyed by the GATE
+    name (the token's last dot segment; the noun/holder prefix is the
+    door's own machinery, never the reader's). A gate with no entry
+    returns EMPTY — the flow-gloss family's fallback law: the unglossed
+    refusal renders its standing line UNCHANGED (the raw machine token
+    never reaching the reader), and a foreign log's gates are not the
+    renderer's to invent. A malformed row is inert data here — the
+    load-time lint owns the refusal."""
+    if not isinstance(failed_test, str) or not failed_test:
+        return ""
+    table = templates.get(REJECTION_BOUNDARY_BLOCK)
+    if not isinstance(table, Mapping):
+        return ""
+    gloss = table.get(failed_test.rsplit(".", 1)[-1])
     if not isinstance(gloss, str) or not gloss:
         return ""
     return gloss

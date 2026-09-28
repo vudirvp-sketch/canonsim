@@ -5151,6 +5151,54 @@ pack, zero canon change, the LOG untouched, the golden corpus
 byte-identical, zero corpus price. The owner's RU report:
 `docs/iterations/iter-285-neglive-report.md`.
 
+**The iter-286 namedroute record (R2 — the W7 station's FOURTH row,
+the owner's «точечный и быстрый (read-side only)» call over
+iter-284/285's boundary (a): the refusal's institutional cause as a
+rendering row; the same call conditionally declining the
+disappearance-battery extension and opening W8 — both conditions
+resolved).** THE ROUTE (rs-13, the gloss-boundary family's thirteenth
+member, the rs-2/rs-4 precedents' own shape — zero canon, zero gate,
+zero machinery, the LOG untouched by construction): the pack table
+`templates.json::rejection_boundaries` (GATE name -> the reader prose
+naming the refusing authority; `leverage_over` -> «no minted word to
+lean on» — the registry as the leverage authority), glossed at ONE
+boundary (`render/chronicle.py::gloss_rejection_boundary` — the
+failed_test's gate segment; an unglossed gate answers EMPTY, the
+flow-gloss fallback law) and landed as the `boundary` slot BEFORE the
+generic outcome loop (the rs-2/rs-4 precedence); the province
+`intent_rejected` line carries the rs-12-form conditional tail
+`{boundary? — {boundary}}` — every consumer (the tale's gated line,
+the entity view's ungated record) through the one template; the
+block-name constant's single owner `core/intent.py`
+(REJECTION_BOUNDARY_BLOCK — D-024, one constant, the lint and the
+renderer import it); the load-time lint owns the refusal
+(`core/packlint/actions.py::_templates` — the vacuity law at the
+door: a gloss for a gate this pack's `requires` never arms is dead
+data, the armed union the vocabulary). MEASURED (the witness
+`tests/test_namedroute.py`, 6 tests): the no-word twin's runner
+record renders «tries to coerce — impossible here — no minted word to
+lean on» — the Q5 boundary CLOSED at the readable surface (the
+committed package's record carries the hold minted and spent — the
+discrimination now a PROSE fact); the unglossed gates render the
+standing line UNCHANGED (the golden corpus's own move-refusal); the
+tale gate UNTOUCHED (the refusal never enters the tale — the boundary
+rides the RECORDS surface); the unarmed twin loads and renders the
+standing line (the table optional, the other packs' bytes untouched);
+the lint refuses the dead rows (the never-armed gate, the unknown
+gate, the empty and non-string glosses); the golden corpus
+byte-identical. THE OWNER'S TWO DISPOSITIONS, both resolved: (1) the
+disappearance-battery extension to the remaining majors — NO (the
+meso units' drivers already pass the anchor's disable test,
+ANCHOR_REGION §5's own record; the battery's three arms answered NEW
+capability questions — no uncovered capability remains; re-measuring
+carried evidence is the polishing the owner's criterion declines; the
+row stays available for a NEW major's own arm); (2) W8 (integration
+readiness) OPENED on the owner's conditional call («если нет, то и w8
+открыть») — the W7 station COMPLETE (four rows: iter-283/284/285/286),
+W8's first row the seven-criteria readiness audit (WORLD_WORKPLAN
+§10). Zero canon change, the LOG untouched, zero corpus price. The
+owner's RU report: `docs/iterations/iter-286-namedroute-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

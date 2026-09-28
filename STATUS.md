@@ -1,68 +1,65 @@
-Iteration: iter-285 (`neglive` — the W7 reading band's LIVE half,
-  the owner's «продолжай работу над задачами класса мирового трека»
-  continuation call with the live reading delivered in the chat: the
-  blind Q1–Q7 over the iter-284 kit BEFORE the preset reveal, then
-  the owner's own post-preset scoring — this iteration verifying it
-  against the standing preset, the iter-270/280/282 precedent's
-  exact form, R0 doc-only): every pre-set bar MET at the live band
-  n=1 — Q1 both halves (the departure «Maren takes the road to the
-  half-pay keep» in A against «at: Malby» in B + the social voice:
-  the councils 12/1, B's nine talk/rumor_told pairs with seven
-  rumors and two disbeliefs), Q2 the carrier per world (Maren's
-  fear persisting at 43 / the fear decaying to 0, the market
-  talking on; the live band's own epistemic note: no «grief»
-  variable in the files — the carrier an interpretation over
-  fear/fatigue/movement), Q3 the trade (the presence exchanged —
-  Maren absent from A's brief_final present_entities; the market
-  «не мёртв, а изменён», the dead reading refused; the voice passed
-  from a person to the institution; the intentional-exchange
-  conclusion honestly refused), Q4 the wergeld vigils 3=3, Q5 the
-  dead door's both halves with the institutional cause declared
-  beyond the readable surface unprompted (the live band's
-  sharpenings: the coerce verb present in BOTH vocabularies — the
-  block at the intent level; the mechanisms indistinguishable;
-  coin 6=6), Q6 the invisible door's FULL catch (the histories
-  byte-identical AND `sell_bloom` named with exact references — 38
-  verbs against 37, never used), Q7 free (the namings divergent
-  from both LLM readings' lexicons while the differential shapes
-  converge). THE CONVERGENCE QUESTION (iter-284 §G) RESOLVED YES —
-  the same forms as the converged LLM readings AND all three
-  ripples (the wait-band, the watch-briefing, the records'
-  entanglement) caught in the blind half: the disappearance's
-  footprint measured at BOTH bands; the W7 reading band CONFIRMED
-  at BOTH bands (LLM n=2 + live n=1). The honest boundaries: the
-  live band n=1; the Q3 soft-form leg (the person-vs-place thesis
-  circled, never pronounced verbatim — reader-form variance, never
-  prose-fixed); the kit README's one-scenario framing imprecise
-  for C/D (the owner's catch — kit-side, outside the repo, Rule 9).
-  KI#107 found and closed (this file's rolling header left one
-  iteration stale by iter-284's Next-step-only edit). No prose
-  edited, no gate raised, no machinery promoted, no pack change;
-  the owner's RU report at
-  docs/iterations/iter-285-neglive-report.md
+Iteration: iter-286 (`namedroute` — the W7 station's FOURTH row, the
+  owner's «точечный и быстрый (read-side only)» call over iter-284/285's
+  boundary (a): the refusal's institutional cause as a rendering row;
+  the same call conditionally declining the disappearance-battery
+  extension and opening W8 — both conditions resolved, R2 read-side
+  only): rs-13, the gloss-boundary family's thirteenth member — the
+  pack table `templates.json::rejection_boundaries` (GATE name -> the
+  reader prose naming the refusing authority; `leverage_over` -> «no
+  minted word to lean on» — the registry as the leverage authority),
+  glossed at ONE boundary
+  (`render/chronicle.py::gloss_rejection_boundary` — the failed_test's
+  gate segment; an unglossed gate answers EMPTY, the flow-gloss
+  fallback law) and landed as the `boundary` slot BEFORE the generic
+  outcome loop; the province `intent_rejected` line carries the
+  rs-12-form conditional tail `{boundary? — {boundary}}` — every
+  consumer (the tale's gated line, the entity view's ungated record)
+  through the one template; the constant's single owner
+  `core/intent.py` (REJECTION_BOUNDARY_BLOCK); the armed-gate vacuity
+  lint at `core/packlint/actions.py::_templates`. MEASURED (the
+  witness `tests/test_namedroute.py`, 6 tests): the no-word twin's
+  runner record renders «tries to coerce — impossible here — no
+  minted word to lean on» — the Q5 boundary CLOSED at the readable
+  surface (C's record carries the hold minted and spent — the
+  discrimination now a PROSE fact); the unglossed gates render the
+  standing line UNCHANGED (the golden corpus's own move-refusal); the
+  tale gate UNTOUCHED (the boundary rides the RECORDS surface); the
+  unarmed twin loads and renders the standing line; the lint refuses
+  the dead rows; the golden corpus byte-identical. THE OWNER'S TWO
+  DISPOSITIONS, both resolved: the disappearance-battery extension to
+  the remaining majors — NO (the meso units' drivers already pass the
+  anchor's disable test, ANCHOR_REGION §5; no uncovered capability
+  remains — further arms would re-measure carried evidence; the row
+  stays available for a NEW major's own arm); W8 (integration
+  readiness) OPENED on the conditional call — the W7 station
+  COMPLETE (four rows: iter-283/284/285/286). No gate raised, no
+  machinery promoted, the LOG untouched; the owner's RU report at
+  docs/iterations/iter-286-namedroute-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2550 passed + 9 skipped, ruff clean, docguard clean, topology
---check clean (Python 3.12.14, the env pin) ·
+2556 passed + 8 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; the standing 2550+9
+  with the sandbox's one-skip variance and the launcher test's one
+  load-flake — clean standalone and on the re-run; +6 the
+  namedroute witness) ·
 Date: 2026-09-28 ·
-Scope: docs/{worldbuild/WORLD_TESTS.md (§9 the W7 live-half
-  entry — the single owner), worldbuild/WORLD_WORKPLAN.md (§9 the
-  three rows, the cap held 588/600), worldbuild/
-  WORLD_TRACK_AGENT_CONTEXT.md (§9 + the W-stage block),
-  blueprint/phases.md (§6 the iter-285 record), TASKS.md (the
-  ledger, iter-275 evicted), iterations/iter-285-neglive-report.md
-  (new, the owner's RU deliverable)}, STATUS.md, worklog.md
-  (iter-275 evicted) — 8 paths (R0 — doc-only; zero code, zero
-  pack, zero canon change, the LOG untouched, the golden corpus
-  byte-identical, zero corpus price)
-Track A: W7 the CURRENT EXECUTION STAGE — three rows landed
-  (iter-283/284/285: the battery, the reading band's LLM half, the
-  live half — the reading band CONFIRMED at both bands); the
-  station's next rows the owner's call (further majors'
-  disappearance arms, the named-boundary rendering route, or W8
-  when the owner calls the station complete). The ssi
-  family COMPLETE except ssi-5, owner-gated.
+Scope: render/chronicle.py, core/intent.py, core/packlint/actions.py,
+  content/province_pack/templates.json, tests/test_namedroute.py (new
+  — the W7 fourth-row witness), docs/{worldbuild/WORLD_TESTS.md (§9
+  the named-boundary entry + the two dispositions), worldbuild/
+  WORLD_WORKPLAN.md (§9 the fourth row + §10 W8 OPENED, 598/600),
+  worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 + the W-stage block),
+  blueprint/phases.md (§6 the iter-286 record), TASKS.md (the ledger,
+  iter-276 evicted), iterations/iter-286-namedroute-report.md (new,
+  the owner's RU deliverable)}, STATUS.md, worklog.md (iter-276
+  evicted) — 13 paths (R2 — read-side only; zero canon change, the
+  LOG untouched, the golden corpus byte-identical, zero corpus price)
+Track A: W8 the CURRENT EXECUTION STAGE — OPENED iter-286 on the
+  owner's conditional call, the W7 station COMPLETE (four rows:
+  iter-283/284/285/286); W8's first row the seven-criteria readiness
+  audit (WORLD_WORKPLAN §10). The ssi family COMPLETE except ssi-5,
+  owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -91,13 +88,10 @@ Track A: W7 the CURRENT EXECUTION STAGE — three rows landed
 
 ## Active KIs
 
-- KI#107 · STATUS.md's rolling header left one iteration stale (iter-284's edit updated only the
-  Next-step block) · 2026-09-28 · CLOSED iter-285 (fixed in the same pass; deletes at the next §5 cleanup)
-
-(prior: the §5 mandatory cleanup paid at iter-280 — KI#104/KI#105
-(closed iter-269) and KI#106 (closed iter-277) deleted after
-passing the 2-iteration mark; the close records live in git, the
-TASKS ledger, and the owning iteration reports)
+(none — the §5 mandatory cleanup paid at iter-286: KI#107, closed
+iter-285, deleted; the prior cleanups at iter-280 (KI#104/KI#105/
+KI#106) and the close records live in git, the TASKS ledger, and the
+owning iteration reports)
 
 ## FAQ / Pitfalls
 
@@ -128,42 +122,45 @@ TASKS ledger, and the owning iteration reports)
 
 ## Next step
 
-**iter-285 DONE: the W7 reading band's LIVE half (the owner's
-  «продолжай работу над задачами класса мирового трека»
-  continuation call — the owner's blind Q1–Q7 over the iter-284 kit
-  received in the chat BEFORE the preset reveal, then the owner's
-  own post-preset scoring, this iteration verifying it against the
-  standing preset; the iter-270/280/282 precedent's exact form; R0
-  doc-only).** MEASURED at the live band n=1: every pre-set bar MET
-  — the departure (both halves, the quote verbatim, the councils
-  12/1), the carrier (the fear axis 43/0 + the live band's own
-  epistemic note: no «grief» variable, the carrier an
-  interpretation over fear/fatigue/movement), the trade (the
-  presence exchanged, the market CHANGED not dead — «не мёртв, а
-  изменён», the voice person→institution; the conscious exchange
-  honestly refused), the families' disable test (the vigils 3=3),
-  the dead door (both halves + the honest boundary self-declared +
-  the sharpenings: the coerce verb present in both vocabularies —
-  the block at the intent level; coin 6=6), the invisible door's
-  FULL catch (the histories byte-identical by the owner's own diff
-  AND the sell_bloom line named — 38/37 verbs, never used); the
-  free namings divergent from both LLM readings' lexicons while the
-  differential shapes converge. THE CONVERGENCE QUESTION (iter-284
-  §G) RESOLVED YES — and ALL THREE ripples (the wait-band, the
-  watch-briefing, the records' entanglement) caught in the BLIND
-  half: the disappearance's footprint measured at BOTH bands.
-  VERDICT: the W7 reading band CONFIRMED at BOTH bands (LLM n=2 +
-  live n=1). KI#107 found and closed (the rolling header left one
-  iteration stale by iter-284's Next-step-only edit).
-Next: the W7 station's next rows — the owner's call: (a) further
-  majors' disappearance arms (the meso units' own rows: the
-  crossing, the step bench, the winter kin, the camp), (b) the
-  named-boundary rendering route (the refusal's institutional
-  cause — iter-284's boundary (a)), or (c) W8 (integration
-  readiness) when the owner calls the station complete.
-Active KIs: KI#107 (closed iter-285 — deletes at the next cleanup).
-  2550+9. The owner's RU report:
-  docs/iterations/iter-285-neglive-report.md.
+**iter-286 DONE: the W7 station's fourth row (the owner's «точечный
+  и быстрый (read-side only)» call — the named-boundary rendering
+  route, iter-284/285's boundary (a); the same call conditionally
+  declining the disappearance-battery extension and opening W8,
+  both conditions resolved; R2 read-side only).** rs-13 — the pack
+  table `rejection_boundaries` (the refusing authority's prose per
+  gate; `leverage_over` -> «no minted word to lean on»), the ONE
+  gloss boundary (`gloss_rejection_boundary` — the failed_test's
+  gate segment, unglossed EMPTY), the `boundary` slot before the
+  outcome loop, the `intent_rejected` line's rs-12-form conditional
+  tail, the armed-gate vacuity lint. MEASURED (the witness
+  tests/test_namedroute.py, 6 tests): the no-word twin's runner
+  record renders «tries to coerce — impossible here — no minted
+  word to lean on» — the Q5 boundary CLOSED at the readable surface
+  (C's record: the hold minted and spent — the discrimination now
+  a PROSE fact); the unglossed gates byte-stable (the golden
+  corpus's own refusal); the tale gate UNTOUCHED (the boundary
+  rides the records surface); the unarmed twin loads; the lint
+  refuses the dead rows; the golden corpus byte-identical. The
+  owner's two dispositions: the battery extension NO (the meso
+  units' drivers already pass the anchor's disable test — further
+  arms would re-measure carried evidence; the row stays available
+  for a NEW major's own arm); W8 OPENED — the W7 station COMPLETE
+  (four rows: iter-283/284/285/286).
+Next: W8's first row — the seven-criteria integration-readiness
+  audit (WORLD_WORKPLAN §10): each criterion cited to its standing
+  owner, the gaps named where the evidence is thinner than the
+  claim; never a re-measure — the audit consumes the accumulated
+  evidence.
+Active KIs: none (the §5 cleanup paid: KI#107 deleted). The suite
+  green (the standing 2550+9; +6 the witness). The owner's RU
+  report: docs/iterations/iter-286-namedroute-report.md.
+iter-285 DONE: the W7 reading band's LIVE half (the owner's blind
+  Q1–Q7 over the iter-284 kit received and scored against the
+  standing preset, the iter-270/280/282 precedent's form): every
+  pre-set bar MET n=1, the convergence question resolved yes — all
+  three ripples caught in the blind half; the reading band
+  CONFIRMED at BOTH bands (LLM n=2 + live n=1). The owner's RU
+  report: docs/iterations/iter-285-neglive-report.md.
 iter-284 DONE: the W7 reading band's LLM half (the battery's
   answers as blind readings over the same battery's twins — the
   W5-form kit of five packages, the preset before any reading, the

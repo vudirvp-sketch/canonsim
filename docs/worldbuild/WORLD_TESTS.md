@@ -2596,6 +2596,66 @@ untouched, zero corpus price). The station's next rows — the
 owner's call. The owner's RU report:
 `docs/iterations/iter-285-neglive-report.md`.
 
+### CONFIRMED — The W7 named-boundary rendering route: the refusal's institutional cause landed read-side (rs-13) — the station's fourth row; the battery-extension disposition NO; W8 OPENED (2026-09-28, iter-286, the owner's «точечный и быстрый (read-side only)» call over iter-284/285's boundary (a), the disappearance-battery extension conditionally declined and W8 conditionally opened — both conditions resolved by the same call)
+
+The route (the reading band's own honest boundary, declared by all
+three W7 readers unprompted — the refusal's institutional cause beyond
+the readable surface, the two mechanisms «no lever» against «a coerce
+ban» indistinguishable from the material): rs-13, the gloss-boundary
+family's thirteenth member, the rs-2/rs-4 precedents' own shape — a
+pack table `templates.json::rejection_boundaries` (GATE name -> the
+reader prose naming the refusing authority; `leverage_over` -> «no
+minted word to lean on» — the registry as the leverage authority, the
+coerce family's own lean/hold register), glossed at ONE boundary
+(`render/chronicle.py::gloss_rejection_boundary` — the failed_test's
+gate segment, the noun/holder prefix the door's own machinery; an
+unglossed gate answers EMPTY, the flow-gloss fallback law: the raw
+machine token never reaching the reader) and landed as the `boundary`
+slot BEFORE the generic outcome loop (the rs-2/rs-4 precedence); the
+province `intent_rejected` line carries the rs-12-form conditional
+tail `{boundary? — {boundary}}` — every consumer (the tale's gated
+line, the entity view's ungated record) through the one template,
+rs-1's one-boundary law. The load-time lint owns the refusal (the
+vacuity law at the door: a gloss for a gate this pack's `requires`
+never arms is dead data — the armed union the vocabulary,
+`core/packlint/actions.py::_templates`). MEASURED (the witness
+`tests/test_namedroute.py`, 6 tests): the no-word twin's runner record
+renders «tries to coerce — impossible here — no minted word to lean
+on» — the Q5 boundary CLOSED at the readable surface (the
+discrimination now a PROSE fact: the committed package's record
+carries the hold minted and spent — «now holds something over
+Garrick … / leans on Garrick — the hold is spent» — the twin's the
+refusal with its cause; the raw failed_test token never leaks); the
+unglossed gates render the standing line UNCHANGED (the golden
+corpus's own move-refusal byte-stable); the tale gate UNTOUCHED (the
+refusal is low-importance canon, the medium gate keeps it out of the
+tale — the boundary rides the RECORDS surface, the surface the W7
+kit's readers actually read); the unarmed twin loads and renders the
+standing line (the table optional, the other packs' bytes untouched);
+the lint refuses the dead rows (the never-armed gate, the unknown
+gate, the empty and non-string glosses); the golden corpus
+byte-identical (zero canon, zero corpus price). The station's law
+held: no prose edited, no gate raised, no machinery promoted, the LOG
+untouched.
+
+THE OWNER'S TWO DISPOSITIONS riding the same call, both resolved:
+(1) the disappearance-battery extension to the remaining majors —
+answered NO by the owner's own criterion («глобально поможет проекту,
+а не допиливание»): the meso units' drivers already pass the anchor's
+disable test (ANCHOR_REGION §5's own record — eight loops, remove one
+unique driver, the others survive; the battery's three arms answered
+NEW capability questions — the verb, the hook, the registry — and no
+uncovered capability remains), so further arms would re-measure
+carried evidence; the row STAYS AVAILABLE for a NEW major's own arm
+(the station law's own form: the battery fires per new capability,
+never as backlog); (2) W8 (integration readiness) OPENED on the
+owner's conditional call — W7's station rows complete (four landed:
+the battery iter-283, the LLM half iter-284, the live half iter-285,
+the named-boundary route iter-286); W8's first row (the
+seven-criteria readiness audit, WORLD_WORKPLAN §10) the declared
+next. The owner's RU report:
+`docs/iterations/iter-286-namedroute-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

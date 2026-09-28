@@ -14,6 +14,7 @@ from core.intent import (
     EDGE_TICKS,
     LEVERAGE_TEST,
     PRECONDITION_TESTS,
+    REJECTION_BOUNDARY_BLOCK,
     REJECTION_EVENT,
     TRAIT_TEST,
     needs_target,
@@ -661,3 +662,44 @@ class ActionsLint:
                 bool(_SNAKE_CASE.match(event_type)),
                 f"template event type {event_type!r} is not snake_case",
             )
+        # rs-13 (iter-286, the W7 named-boundary rendering route): the
+        # rejection-boundary table — GATE name -> the institutional
+        # cause's reader prose, rendered verbatim at the refusal line's
+        # conditional tail. OPTIONAL (the dry fallback law: an unglossed
+        # gate renders the standing refusal line unchanged, the
+        # unarmed packs' bytes untouched); when present: an object
+        # whose keys sit in THIS pack's armed gate vocabulary — the
+        # union of the canon and texture `requires` tests (a gloss for
+        # a gate this pack's door can never refuse at is dead data, the
+        # vacuity law — rs-2's own shape, one granularity at the door)
+        # and whose values are non-empty strings (the refusal line
+        # renders the prose VERBATIM).
+        boundary_table = templates.get(REJECTION_BOUNDARY_BLOCK)
+        if boundary_table is not None:
+            where = f"templates.json::{REJECTION_BOUNDARY_BLOCK}"
+            _require(
+                isinstance(boundary_table, Mapping),
+                f"{where} must be an object (gate name -> reader prose)",
+            )
+            armed: set[str] = set()
+            for action in self._data["actions.json"]["actions"]:
+                for cond in action.get("requires", ()):
+                    if isinstance(cond, Mapping):
+                        armed.add(cond.get("test"))
+                texture = action.get("texture")
+                if isinstance(texture, Mapping):
+                    for cond in texture.get("requires", ()):
+                        if isinstance(cond, Mapping):
+                            armed.add(cond.get("test"))
+            for gate, gloss in boundary_table.items():
+                _require(
+                    gate in armed,
+                    f"{where}: the gate {gate!r} is not armed by any action's "
+                    "requires — a gloss for a gate this pack's door can never "
+                    "refuse at is dead data (the vacuity law)",
+                )
+                _require(
+                    isinstance(gloss, str) and bool(gloss.strip()),
+                    f"{where}: the {gate!r} gloss must be a non-empty string "
+                    "— the refusal line renders it verbatim",
+                )

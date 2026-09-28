@@ -515,30 +515,34 @@ Then run the compression test and remove or merge decorative material.
 
 The station's rows, in order (the full records: `WORLD_TESTS.md`
 §9's W7 entries — the single owner; the owner's RU reports
-iter-283..285): the FIRST row LANDED (iter-283, the owner's «W7
+iter-283..286): the FIRST row LANDED (iter-283, the owner's «W7
 открывай если больше ничего не осталось» call) — the battery + the
 compression test on the same committed package (the negative-space
 census, the lint's measured refusals, the disappearance battery's
 three arms, the reachability inventory: no decorative material at
 the measured band; the witness `tests/test_negative.py`); the SECOND
-row LANDED (iter-284, the reading band's LLM half) — the battery's
-answers as blind readings over the same battery's twins (the W5-form
-kit, five packages; the preset before any reading; the clean n=2
-after one discarded contaminated pilot; every bar met — the
-departure, the carrier, the trade, the vigils 3=3, the dead door,
-the invisible door's `sell_bloom` catch; the free namings divergent;
-the readers' own discovery: the disappearance's footprint wider than
-the deterministic census); the THIRD row LANDED (iter-285, the LIVE
-half, the owner's own blind reading received and scored against the
-same preset, the iter-270/280/282 form): every bar MET n=1 with the
-same quotes and counts, the convergence with the LLM band's forms
-carried, ALL THREE ripples (the wait-band, the watch-briefing, the
-records' entanglement) caught in the blind half — the reading band
-CONFIRMED at BOTH bands (LLM n=2 + live n=1). The station's next
-rows — the owner's call: further majors' disappearance arms (the
-meso units' own rows), the named-boundary rendering route (the
-refusal's institutional cause, iter-284's boundary (a)), or W8
-(integration readiness) when the owner calls the station complete.
+row LANDED (iter-284, the reading band's LLM half — the battery's
+answers as blind readings over the same battery's twins, the clean
+n=2 after one discarded contaminated pilot; every bar met, the free
+namings divergent, the readers' own discovery: the disappearance's
+footprint wider than the deterministic census); the THIRD row LANDED
+(iter-285, the LIVE half — the owner's own blind reading scored
+against the standing preset, the iter-270/280/282 form): every bar
+MET n=1, ALL THREE ripples caught in the blind half — the reading
+band CONFIRMED at BOTH bands (LLM n=2 + live n=1); the FOURTH row
+LANDED (iter-286, the owner's «точечный и быстрый (read-side only)»
+call — the named-boundary rendering route, iter-284/285's boundary
+(a)): the refusal's institutional cause as a read-side rendering row
+(rs-13, the gloss-boundary family — the pack table
+`rejection_boundaries`, the `boundary` slot, the `intent_rejected`
+line's conditional tail, the armed-gate vacuity lint; the witness
+`tests/test_namedroute.py`). The owner's two dispositions on the same
+call, both resolved: the disappearance-battery extension to the
+remaining majors answered NO (the meso units' drivers already pass
+the anchor's disable test — re-measuring carried evidence is
+polishing, the owner's own criterion; the row stays available for a
+NEW major's own arm), and W8 OPENED on the conditional call — the W7
+station COMPLETE (four rows landed: iter-283/284/285/286).
 
 ## 10. W8 — Integration readiness
 
@@ -552,6 +556,14 @@ The world track is ready for a broader implementation handoff when:
 5. knowledge asymmetry is explicit;
 6. world-specific material remains outside engine core ontology;
 7. the tests distinguish what is proven from what remains hypothetical.
+
+W8 OPENED (iter-286, the owner's conditional call — «если нет, то и w8
+открыть»): the station's first row is the seven-criteria readiness
+audit — each criterion cited to its standing owner (the composition
+witness, the meso records, the substrate-limitation inventory), the
+gaps named where a criterion's evidence is thinner than its claim.
+Never a re-measure: the audit consumes the accumulated evidence, it
+does not reproduce it.
 
 ## 11. Expansion rule
 

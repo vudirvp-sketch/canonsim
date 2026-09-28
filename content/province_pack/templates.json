@@ -48,7 +48,7 @@
     "arson": "{actor} sets a fire in {location}.",
     "flee": "{actor} runs.",
     "flee_caught": "{actor} is caught.",
-    "intent_rejected": "{actor} tries to {action_label} — impossible here.",
+    "intent_rejected": "{actor} tries to {action_label} — impossible here{boundary? — {boundary}}.",
     "fire_started": "#flame_take# #smoke_sign#",
     "fire_spread": [
       "The fire spreads within {location}.",
@@ -118,6 +118,9 @@
     "the_guild_collects": "the guild's standing take, the flood paper's service at the chest",
     "the_bloom_nets": "the honest year's surplus, the debt fund climbing toward the paper sixteen",
     "the_withhold_banks": "the camp's answer to a tilted beam: unweighable at it, the paper still paid"
+  },
+  "rejection_boundaries": {
+    "leverage_over": "no minted word to lean on"
   },
   "knows": {
     "scene_{location}": "the lay of {location}",

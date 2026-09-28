@@ -75,6 +75,8 @@ __all__ = [
     "needs_target",
     "occ_breaking_cause",
     "pack_importance",
+    "REJECTION_BOUNDARY_BLOCK",
+    "REJECTION_EVENT",
     "requires_for",
     "resolve_knowledge",
     "run_check",
@@ -85,6 +87,21 @@ __all__ = [
 ]
 
 REJECTION_EVENT: Final = "intent_rejected"  # pack vocabulary (lint-checked)
+
+#: `templates.json::rejection_boundaries` — the named-boundary table
+#: (rs-13, iter-286, the W7 named-boundary rendering route over
+#: iter-284's boundary (a)): precondition GATE name -> the reader prose
+#: naming the refusal's INSTITUTIONAL cause — which authority the
+#: refusing gate speaks for (`leverage_over`'s own row: the registry as
+#: the leverage authority, the minted word). The pack owns the words;
+#: the renderer owns the mapping
+#: (`render/chronicle.py::gloss_rejection_boundary`, the rs-2/rs-4
+#: family's own shape); the pack lint owns the refusal
+#: (`core/packlint/actions.py::_templates` — a gloss for a gate this
+#: pack never arms is dead data, the vacuity law). The block name's
+#: single owner is HERE, the rejection's own module, so the lint and
+#: the renderer import one constant (D-024) — never a second copy.
+REJECTION_BOUNDARY_BLOCK: Final = "rejection_boundaries"
 
 #: The action `ticks` mode whose duration is the TRAVEL EDGE PRICE
 #: (st-6a, D-116 (5) — travel as a separate action, never a weighted

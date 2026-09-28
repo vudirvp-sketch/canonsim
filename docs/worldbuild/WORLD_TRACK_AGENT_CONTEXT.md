@@ -284,7 +284,7 @@ in this section is PROPOSAL unless an owner document promotes it.
 
 ## 9. Current W-stage and gate
 
-The standing work boundary after iter-276 (the owner's execution order;
+The standing work boundary after iter-286 (the owner's execution order;
 `WORLD_WORKPLAN.md` §7 the owner):
 
 ```text
@@ -295,11 +295,12 @@ W5     = gate met / evidence retained (the dispositions landed, the
 W6     = COMPLETE at both bands (the substrate row, the reading band
          both halves, the gap routings + the re-measure, the live
          re-read — do not reopen without fresh regression evidence)
-W7     = CURRENT EXECUTION STAGE — negative / compression tests
-         (three rows landed, iter-283/284/285: the battery, the
-         reading band's LLM half, the live half — the reading band
-         CONFIRMED at both bands)
-W8     = after W7 (integration readiness)
+W7     = COMPLETE (four rows landed, iter-283/284/285/286: the battery,
+         the reading band's LLM half, the live half — the reading band
+         CONFIRMED at both bands — and the named-boundary route)
+W8     = CURRENT EXECUTION STAGE — integration readiness (opened
+         iter-286 on the owner's conditional call; the first row —
+         the seven-criteria readiness audit)
 ```
 
 W6's station law: run the genre matrix
@@ -320,30 +321,28 @@ major capability, regime or institution ask the eight questions —
 why possible / why not universal / what does it replace / what does
 it make harder / who profits / who resists / who remembers / what if
 it disappears — then run the compression test and remove or merge
-decorative material. Three rows LANDED, in order (every row's full
+decorative material. Four rows LANDED, in order (every row's full
 record `WORLD_TESTS.md` §9's W7 entries — the single owner): the
-first (iter-283: the battery + the compression test on the committed
-package — the witness `tests/test_negative.py`; no decorative
-material at the measured band; an unfired surface is
-possibility-space, the doors stay); the second (iter-284, the
-reading band's LLM half: the battery's answers as blind readings
-over the same battery's twins — the W5-form kit, the pre-set audit
-before any reading, the clean n=2 after one discarded contaminated
-pilot pair, every bar MET including the invisible door's
-`sell_bloom` catch, the free namings divergent; the readers' own
-discovery: the disappearance's footprint wider than the deterministic
-census); the third (iter-285, the LIVE half, the owner's own blind
-reading received and scored against the same preset): every bar MET
-n=1, the convergence with the LLM band's forms carried, ALL THREE
-ripples (the wait-band, the watch-briefing, the records'
-entanglement) caught in the blind half — **the reading band CONFIRMED
-at BOTH bands (LLM n=2 + live n=1); the ripple footprint measured at
-both bands**. The station's next rows — the owner's call: further
-majors' disappearance arms (the meso units' own rows), the
-named-boundary rendering route (the refusal's institutional cause,
-iter-284's boundary (a)), or W8 (integration readiness) when the
-owner calls the station complete. The owner's RU report:
-`docs/iterations/iter-285-neglive-report.md`.
+battery + the compression test (iter-283 — no decorative material at
+the measured band; an unfired surface is possibility-space, the doors
+stay); the reading band's LLM half (iter-284 — the battery's answers
+as blind readings over the same battery's twins, every bar MET, the
+readers' own discovery: the disappearance's footprint wider than the
+deterministic census); the LIVE half (iter-285 — the owner's own
+blind reading scored against the standing preset, every bar MET n=1,
+all three ripples caught in the blind half: **the reading band
+CONFIRMED at BOTH bands, the ripple footprint measured at both
+bands**); the named-boundary rendering route (iter-286, the owner's
+«точечный и быстрый (read-side only)» call — iter-284/285's boundary
+(a) routed read-side: rs-13, the refusal's institutional cause on
+the records surface, `tests/test_namedroute.py` the witness). The
+owner's two dispositions on the same call, both resolved: the
+disappearance-battery extension to the remaining majors answered NO
+(the meso units' drivers already pass the anchor's disable test —
+re-measuring carried evidence is polishing; the row stays available
+for a NEW major's own arm), and W8 OPENED on the conditional call
+(«если нет, то и w8 открыть»). The owner's RU report:
+`docs/iterations/iter-286-namedroute-report.md`.
 
 W6's row-by-row landing history (iter-278 the substrate side;
 iter-279/280 the reading band's LLM and live halves; iter-281 the two
