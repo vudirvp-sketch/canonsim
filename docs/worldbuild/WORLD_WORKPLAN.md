@@ -379,80 +379,57 @@ the LLM band), the opened half 2/2, the station PARTIALLY CONFIRMED
 human live band's INSTRUMENT has since been re-established and
 DELIVERED (iter-207 — the owner's option (б) call firing STATUS Next
 step item 1: the two packages regenerated deterministically at seed
-42, byte-identical, every recorded substance shape hit — the record
-in `WORLD_TESTS.md` §9's W5 entry; the reading kit + the pre-set
-author audit handed to the owner as the sandbox deliverable). The
-HUMAN READING has since been RECEIVED and SCORED (iter-208 — the
-owner's chat delivery of the three blind answers: the convergence
+42, byte-identical, every recorded substance shape hit). The HUMAN
+READING since RECEIVED and SCORED (iter-208 — the convergence
 assessment against the pre-set bars CONVERGENT at every mandatory
 bar, n=1 — the single divergence the covering's fund-frame, the
 reading's humor halves beyond the LLM band's own with the
-surface-unequal confound named — the record in `WORLD_TESTS.md` §9's
-W5 entry). The humor's surface-unequal confound since RESOLVED
-(iter-209 — the owner's continuation call: the LLM humor re-measure on
-the rs-6 surface extracted the withhold-riding joke class n=2, the
-bands equalized — WORLD_TESTS §9's W5 entry's iter-209 record); the
-direct coverage probe kit DELIVERED (iter-209 — the covering's
-fund-frame divergence: the direct question over the same package, the
-pre-set separation audit, the reading the owner's side in chat) and
+surface-unequal confound named). The humor's surface-unequal
+confound since RESOLVED (iter-209 — the LLM humor re-measure on the
+rs-6 surface extracted the withhold-riding joke class n=2, the bands
+equalized); the direct coverage probe kit DELIVERED (iter-209) and
 its READING since RECEIVED and CLOSED (iter-210 — the NOT-PROBED
 branch: the fund-frame present directly on the readable surface and
-extracted under the direct question, the +3 coin the material's own
-year's surplus climbing as the debt fund toward the paper sixteen;
-the smelt-crofts +2 bloom a different material flow — rs-6's
-withhold/bloom frame, never the same debt fund; the iter-208
-divergence the free-answer form's artifact, the human band's covering
-bar joining the LLM band's — no renderer/prose/pack change, no new
-probe on the question; WORLD_TESTS §9's W5 entry's iter-210 record).
-The standing decision points are DECIDED (the owner's 2026-09-27
-dispositions call over the iter-265 report §D's orientation — the
-full record in `WORLD_TESTS.md` §9's W5 entry; the owner's RU
-deliverable `docs/iterations/iter-266-w5-owner-decisions-report.md`):
-the W5 residue list SPLITS by disposition, never one undifferentiated
-fill. CLOSE AS RESIDUE — the fail-then-pass reading and the 40/80
+extracted under the direct question, the iter-208 divergence the
+free-answer form's artifact, the human band's covering bar joining
+the LLM band's — no renderer/prose/pack change). The standing
+decision points are DECIDED (the owner's 2026-09-27 dispositions
+call over the iter-265 report §D's orientation — the full record in
+`WORLD_TESTS.md` §9's W5 entry; the owner's RU deliverable
+`docs/iterations/iter-266-w5-owner-decisions-report.md`): the W5
+residue list SPLITS by disposition, never one undifferentiated fill.
+CLOSE AS RESIDUE — the fail-then-pass reading and the 40/80
 asymmetry: deliberate unresolved discovery residues, never technical
 debt (DO NOT DELETE, DO NOT EXPLAIN BY DEFAULT; the 40/80 stays
 canonically present, available to downstream consumers, never forced
-into the reader path — the world may stay causally coherent without
-being fully excavated; a surface would be owed only on proof the
+into the reader path — a surface would be owed only on proof the
 reader must know the first failure / the asymmetry to understand a
-present state, and none is on record — a later agency/kinship row may
-consume the asymmetry naturally, never a gloss on demand). ADD
-DISCOVERY SURFACE — the runner's grudge story: the minimal causal
-surface only (standing → the remembered incident → why the grudge
-exists), never the biography; the live band's own datum tipping it
-(iter-208: the standing noticed, its reasons and consequences carried
-nowhere — a genuine discovery-path gap, never "the reader missed a
-detail"). ADD TEMPORAL SURFACE — the shave's temporal placement: the
-dated-memory row (the chain earlier season → hunger winter → the
-event → present consequence, currently read as present unfairness with
-the temporal anchor lost — the arc's assembly's remaining half, the
-iter-201/202 measured open row; the residue ladder's own EVENT →
-RESIDUE → CARRIER → HOLDER rungs, `WORLD_AUTHORING.md` §8, requiring
-the transition between historical states). The runner surface since
-LANDED (iter-267 — the ADD DISCOVERY SURFACE row: the hold's line
-carrying the pack-authored causal row through the knows boundary, the
-mechanism rs-9; `WORLD_TESTS.md` §9's W5 entry's iter-267 record the
-landing's owner, `tests/test_grudgesurface.py` the witness). The shave
-temporal surface since LANDED (iter-268 — the ADD TEMPORAL SURFACE
-row: the withhold's own line carrying the dated chain — the shave
-"two seasons back", the starved winter between, the withhold's own
-ledger the present tail — through the same kind row rs-3 authored and
-rs-5 re-authored, the mechanism rs-10 the rs-5 precedent's own form;
-the glm blind re-reading n=2 convergent — the shave placed BEFORE the
-tale's events, the arc's chain restored, the iter-201/202 failure
-modes gone; `WORLD_TESTS.md` §9's W5 entry's iter-268 record the
-landing's owner, `tests/test_shavememory.py` the witness). The
-live band's return + the heartbreak recheck since LANDED (iter-269)
-and the owner's live reading RECEIVED and SCORED (iter-270 — every
-station bar MET at the live band, the strict heartbreak pair CARRIED,
-rs-9's causal row + rs-10's dated chain carried in full, the
-divergence's class RESOLVED: the glm recheck's miss the LLM band's
-own reader-class variance; the full records in `WORLD_TESTS.md` §9's
-W5 entry, their single owner). The station's standing order after the
-reading: the embodiment fill-list (§6.4 →
-§6.1 → §6.5 → §6.2; §6.3 REMOVED — its probe completed iter-204..210,
-ANCHOR_REGION §6.3's row synced) → W6.
+present state, and none is on record). ADD DISCOVERY SURFACE — the
+runner's grudge story: the minimal causal surface only (standing →
+the remembered incident → why the grudge exists), never the
+biography. ADD TEMPORAL SURFACE — the shave's temporal placement:
+the dated-memory row (the chain earlier season → hunger winter →
+the event → present consequence — the arc's assembly's remaining
+half, the iter-201/202 measured open row; the residue ladder's own
+EVENT → RESIDUE → CARRIER → HOLDER rungs, `WORLD_AUTHORING.md` §8).
+The runner surface since LANDED (iter-267 — the hold's line carrying
+the pack-authored causal row through the knows boundary, the
+mechanism rs-9; `tests/test_grudgesurface.py` the witness). The
+shave temporal surface since LANDED (iter-268 — the withhold's own
+line carrying the dated chain, the mechanism rs-10 the rs-5
+precedent's own form; the glm blind re-reading n=2 convergent, the
+iter-201/202 failure modes gone; `tests/test_shavememory.py` the
+witness). The live band's return + the heartbreak recheck since
+LANDED (iter-269) and the owner's live reading RECEIVED and SCORED
+(iter-270 — every station bar MET at the live band, the strict
+heartbreak pair CARRIED, rs-9's causal row + rs-10's dated chain
+carried in full, the divergence's class RESOLVED: the glm recheck's
+miss the LLM band's own reader-class variance). The station's
+standing order after the reading: the embodiment fill-list (§6.4 →
+§6.1 → §6.5 → §6.2; §6.3 REMOVED — its probe completed
+iter-204..210, ANCHOR_REGION §6.3's row synced) → W6. (Every
+landing's full record: `WORLD_TESTS.md` §9's W5 entry — the single
+owner.)
 
 The §6.4 fill row's first landing since (iter-271, repricing — the
 renegotiation door landed, the SALE fork honestly recorded; the full
@@ -510,40 +487,23 @@ The station's rows all LANDED, in order (the full records:
 reports iter-278..282): the SUBSTRATE-SIDE measured at the
 deterministic band (iter-278 — adventure, mystery, politics
 confirmed at their named bands on the same committed package; the
-four carried genres citing their W5 evidence; the honest boundaries
-named, never routed); the READING BAND in both halves (iter-279 LLM
-n=2 + iter-280 live n=1, the recorded W5 form): mystery 3/3
-convergent at both bands; the night form and the balance-move
-assembly failing at BOTH bands (the two RENDERING_GAPs
-double-confirmed); the A3 objective the one cross-band divergence
-(reader-class variance, the iter-270 mirror); the free namings
-divergent — the reading-side PARTIALLY CONFIRMED at both bands; the
-two gap ROUTINGS landed read-side and re-measured blind n=2
-(iter-281 — zero canon, the T7 gate untouched, the mechanism's
-record in WORLD_TESTS §9): adventure 4/4, the night form quoted by
-both readings (GAP (a) closed), mystery 3/3, politics P3 materially
-improved (the guild's agency and the causal row carried n=2 — GAP
-(b)'s named legs closed; the honest residuals named never
-prose-fixed) — the reading-side CONFIRMED at the improved band; the
-owner's LIVE RE-READ of the re-measured kit received and scored
-(iter-282, the iter-270/280 precedent's form — the blind answers in
-the chat before the preset reveal, R0 doc-only): adventure 4/4 —
-the night form quoted verbatim (GAP (a) closed at BOTH bands: 0/3
-readings at the unfixed kit → 3/3 at the fixed kit) and the A3
-objective reconstructed through the causal path (the iter-280 live
-miss flipped — reader-policy variance, the material unchanged);
-mystery 3/3 — the fourth consecutive full carry, the contour
-reader-forced (six readings across both bands and both kit
-versions); politics P1 PARTIAL (the market's people not isolated as
-a standing interest — the live breadth variance against the LLM
-band's P1 MET n=2), P2 MET, P3 PARTIAL at the strict bar in the SAME
-shape as the LLM band (the named legs closed at both bands; the same
-residual set — the climb quoted 16→20 without the intermediate 18,
-the decisive-move slot the fires, the standing terms and the public
-retention unfixed: reader-synthesis residuals, never prose-fixed);
-the free namings again divergent, the genre-matrix labels never the
-free namings — the reading-side CONFIRMED at BOTH bands over the
-fixed material; W6 COMPLETE — W7 the owner's explicit call.
+four carried genres citing their W5 evidence); the READING BAND in
+both halves (iter-279 LLM n=2 + iter-280 live n=1): mystery 3/3
+convergent at both bands, the two RENDERING_GAPs double-confirmed,
+the A3 objective the one cross-band divergence (reader-class
+variance) — PARTIALLY CONFIRMED; the two gap ROUTINGS landed
+read-side and re-measured blind n=2 (iter-281 — zero canon, the
+mechanism's record in WORLD_TESTS §9): adventure 4/4 (GAP (a)
+closed), mystery 3/3, politics P3 materially improved (GAP (b)'s
+named legs closed) — CONFIRMED at the improved band; the owner's
+LIVE RE-READ of the re-measured kit received and scored (iter-282,
+R0 doc-only): adventure 4/4 (the night form quoted verbatim — GAP
+(a) closed at BOTH bands; the A3 objective reconstructed — the
+iter-280 miss flipped), mystery 3/3 (the fourth consecutive carry),
+politics P1 PARTIAL / P2 MET / P3 PARTIAL in the LLM band's own
+shape (the same reader-synthesis residuals, never prose-fixed) —
+CONFIRMED at BOTH bands; W6 COMPLETE — W7 the owner's explicit
+call.
 
 ## 9. W7 — Negative / compression tests
 
@@ -552,6 +512,35 @@ For any new major capability, regime or institution:
 `why possible? why not universal? what does it replace? what does it make harder? who profits? who resists? who remembers? what if it disappears?`
 
 Then run the compression test and remove or merge decorative material.
+
+The station's first row LANDED (iter-283, the owner's «W7 открывай
+если больше ничего не осталось» call — W6 complete at both bands, no
+open row remained; the record: `WORLD_TESTS.md` §9's W7 entry — the
+single owner; the witness `tests/test_negative.py`): the
+eight-question battery run on the SAME committed package — the
+negative-space census (why not universal: the closed gate
+vocabulary, the no-leak option gate, the deadband, the tale gate,
+the fixed subjects); the lint's measured refusals (who resists: the
+empty registry and the unseeded hook both refuse at load); the
+disappearance battery's three arms (what if it disappears: settle
+gone → the calm run byte-identical + the grammar wall returned; the
+mourning gone → the departure dead, the market loud again
+(iter-274's price inverted arm for arm), the other families
+untouched; the word unregistered → the fact survives, the door
+dies); the compression test's reachability inventory (who profits:
+all 76 event templates producible by construction, every meaning
+surface declared/referenced, the four unreferenced entity ids each
+carrying their own canonical door, the census's «0 consumerless»
+cited) — VERDICT: no decorative material at the measured band, the
+pack compressed. The honest boundaries: the band is
+reachability-BY-CONSTRUCTION (an unfired surface is
+possibility-space, never decoration — the doors stay); the unglossed
+literals ride the documented dry fallback; the ungarrisoned window
+the composition witness's own recorded limitation. The admission
+evidence cited to its owners, never re-derived. The station's next
+rows — the owner's call: the reading band of the negative questions,
+further majors (the meso units' own disappearance arms), or W8 when
+the owner calls the station complete.
 
 ## 10. W8 — Integration readiness
 

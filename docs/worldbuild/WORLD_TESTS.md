@@ -2338,6 +2338,75 @@ substrate row iter-278, the reading band iter-279/280, the routings
 owner's explicit call. The owner's RU report:
 `docs/iterations/iter-282-liveconfirm-report.md`.
 
+### CONFIRMED — The W7 negative/compression battery's first row: the disappearance arms and the reachability inventory over the same canonical package (2026-09-28, iter-283, the owner's «продолжай работу над задачами класса мирового трека, W7 открывай если больше ничего не осталось» call — the station's first row)
+
+The eight-question battery (WORLD_WORKPLAN §9: `why possible? why not
+universal? what does it replace? what does it make harder? who
+profits? who resists? who remembers? what if it disappears?`) run on
+the SAME committed package — zero core, zero pack change, the LOG
+untouched, zero corpus price; the witness `tests/test_negative.py`
+(10 tests, the claim packet in the docstring). The admission
+evidence (why possible / what it replaced / what it made harder) is
+CITED to its owners (the grammar wall iter-273, the measured door
+iter-263, iter-274's price — D-024, never re-derived); the measured
+rows: **WHY NOT UNIVERSAL** — the negative-space census over the
+committed shapes (the closed gate vocabulary: exactly one of
+noun/holder per account gate; the no-leak option gate: the only
+world where the mourning releases on ANY path is the world where the
+trigger already fires; the families' deadband: threshold 50 over
+trigger 40; the tale gate: min_importance medium; the fixed secret
+subjects: the literal vocabulary the only legal surface; D-238's
+calendar cited, never re-measured); **WHO RESISTS** — the lint's own
+refusals, measured: an EMPTY secrets registry refuses at load (the
+leverage authority is structural) and a hook removed without its
+seeding reference refuses at load (the seeding law — the declared
+consequence would silently never fire); **WHAT IF IT DISAPPEARS** —
+the disappearance battery, three arms over pack-data twins (the
+divergence-probe form): (a) settle gone → the calm composition run
+BYTE-IDENTICAL (2269=2269, the D-108 both-arms law at the capability
+scale — an unused door costs nothing) and the buyer's purchase probe
+refused at the GRAMMAR level (RunnerError — the iter-273 wall
+returned in its hardest form: the world cannot even express the
+transfer); (b) the mourning gone (the hook AND its seed removed
+together, the loading band) → the departure never fires (the
+mistress's moves 1→0, her end position keep→Malby), the market's
+social surface stays loud (talks 2→287, rumors 2→22, the council
+208→1 — iter-274's measured price inverted arm for arm, the
+carrier's footprint), while the other families survive the disable
+test (the feud's vigils 4=4, the macro arm's sourced 4=4 — the
+mourning was never their driver; totals 2269→2372); (c) the word
+unregistered (the registry's third key removed) → the read STILL
+mints the knowledge exact (the fact survives — the write is the
+action's own) but zero levers and the coerce refused at
+actor.leverage_over (the door dies — the registry IS the leverage
+authority: the difference between a hidden fact and a usable one);
+**WHO PROFITS / THE COMPRESSION TEST** — the reachability inventory:
+all 76 event templates producible by construction (an action's event
+type, a structural rules declaration, a group's own macro/condense
+arming, or the intent door); every account-kind gloss, flow gloss
+and symbol declared/referenced; every knows-table entry matchable by
+a mintable token; the four entity ids no other data references each
+carry their own canonical door (the lamp the corpus's arson
+instrument, the traffic group its macro_event arming, the jug its
+use_effect on an axis with three named consumers — the perception
+modifier, the rumor teller penalty, the scene-card marker —, the
+sack its flammability); the census's own «0 consumerless» cited (the
+cov-1 instrument's row). VERDICT: **no decorative material at the
+measured band** — the pack is compressed (every landing carried its
+consumer from birth, the honest-re-declare law's own record). The
+honest boundaries, classified: (a) the compression band is
+reachability-BY-CONSTRUCTION — a surface that never fired in a
+recorded run is NOT decorative (the UNREALIZED action surface is
+possibility-space, the player's doors — the anti-pattern law: the
+doors exist even unopened); (b) the unglossed mintable literals
+(the_flood_story, the_winter_kin, the failure-path tokens) ride the
+documented dry fallback — the honest family law, a READING-side
+shape never touched here; (c) the ungarrisoned window (0 patrols in
+both mourning arms) is the composition witness's own recorded
+limitation, never a missing mechanic. No plot written, no machinery
+promoted, no pack change. The owner's RU report:
+`docs/iterations/iter-283-negative-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

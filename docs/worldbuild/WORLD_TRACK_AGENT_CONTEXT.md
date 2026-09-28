@@ -292,8 +292,11 @@ W1–W4 = closed historical foundation (kernel, domains, anchor A1–A3,
          causal mesh, the meso working set — do not reopen)
 W5     = gate met / evidence retained (the dispositions landed, the
          fill-list closed, the live band scored, I0 confirmed)
-W6     = CURRENT EXECUTION STAGE — genre tests
-W7     = after W6 (negative / compression tests)
+W6     = COMPLETE at both bands (the substrate row, the reading band
+         both halves, the gap routings + the re-measure, the live
+         re-read — do not reopen without fresh regression evidence)
+W7     = CURRENT EXECUTION STAGE — negative / compression tests
+         (the first row landed, iter-283)
 W8     = after W7 (integration readiness)
 ```
 
@@ -305,65 +308,42 @@ failure by the §6 vocabulary before any response. Do not restart a
 closed stage unless fresh evidence demonstrates a regression. W6 is a
 new station — entered on the owner's explicit call.
 
-W6's first row landed (iter-278): the matrix's SUBSTRATE-SIDE
-measured at the deterministic band — adventure, mystery and politics
-measured over the same committed package (the four carried genres
-cite their W5 evidence; the census pins all seven genres' surfaces).
-W6's second row, its LLM half, landed (iter-279): the READING BAND
-in the W5 form — the kit delivered over the committed pack (two
-packages, each carrying its genres' chains in one history), the
-pre-set audit before any reading, the blind glm readings n=2 —
-MYSTERY 3/3 convergent, ADVENTURE 3/4 and POLITICS 2/3 (two
-RENDERING_GAPs named: the night risk form and the balance-move
-assembly — the reading form's own bands, never prose-fixed), the
-free readings diverging materially across the same pack's packages
-(the hypothesis's divergence half carried at the free band; the
-genre shapes extract under directed frames). The record:
-`WORLD_TESTS.md` §9's W6 entry. W6's second row is COMPLETE
-(iter-280 — the LIVE half landed: the owner's blind Q1–Q5 received
-in the chat, then the preset reveal with their own scoring, verified
-against the pre-set bars): the same frames extracted at the band
-level, the SAME two legs failing at both bands (the night form and
-the balance-move assembly — the two RENDERING_GAPs double-confirmed,
-closed as named gaps, never prose-fixed), the A3 objective leg the
-one cross-band divergence (the live miss against the LLM band's n=2
-carry — reader-class variance, the iter-270 mirror), the free
-namings again divergent across the same pack's two packages. The
-reading-side PARTIALLY CONFIRMED at both bands; W7 and the two gap
-routings owner-routed rows. The owner's RU report:
-`docs/iterations/iter-280-liveread-report.md`. The two gap ROUTINGS
-since LANDED and been RE-MEASURED (iter-281, the owner's delegated
-continuation call — the repair class held: rendering surfaces only,
-the T7 gate untouched, zero canon): the night form (rs-11) and the
-balance-move's causal row (rs-12), the blind re-measure n=2 —
-ADVENTURE 4/4 (the night form extracted and quoted by both readings,
-GAP (a) CLOSED), MYSTERY 3/3 (no regression), POLITICS P3 materially
-improved (the guild's agency n=2, the causal row quoted n=2 — GAP
-(b)'s named legs closed; the honest residuals: the intermediate
-arithmetic unassembled though all numbers sit on the surfaces, the
-decisive-move slot still the fires, the public retention not
-explicit); the free namings again divergent. The reading-side now
-CONFIRMED at the improved band; W6's own rows COMPLETE — W7 the
-owner's explicit call. The owner's RU report:
-`docs/iterations/iter-281-gaproutes-report.md`. The owner's LIVE
-RE-READ of the re-measured kit since RECEIVED and SCORED (iter-282,
-the iter-270/280 precedent's form — the reading band's closing half
-over the FIXED material, R0 doc-only, the blind answers before the
-preset reveal): adventure 4/4 — the night form quoted verbatim (GAP
-(a) closed at BOTH bands: 0/3 readings at the unfixed kit → 3/3 at
-the fixed kit) and the A3 objective reconstructed through the causal
-path (the iter-280 live miss flipped — reader-policy variance, the
-material unchanged); mystery 3/3 — the fourth consecutive full
-carry, the contour reader-forced (six readings across both bands and
-both kit versions); politics P1 PARTIAL (the market's people not
-isolated — the live breadth variance against the LLM band's P1 MET
-n=2), P2 MET, P3 PARTIAL at the strict bar in the SAME shape as the
-LLM band (the named legs closed at both bands; the same residual set
-— reader-synthesis residuals, never prose-fixed); the free namings
-again divergent, the genre-matrix labels never the free namings.
-The reading-side CONFIRMED at BOTH bands over the fixed material; W6
-COMPLETE at both bands — W7 the owner's explicit call. The owner's
-RU report: `docs/iterations/iter-282-liveconfirm-report.md`.
+W6 COMPLETE at both bands (the substrate row iter-278, the reading
+band iter-279/280, the routings + the re-measure iter-281, the live
+re-read iter-282 — every row's record `WORLD_TESTS.md` §9's W6
+entry, the single owner). W7 ENTERED on the owner's explicit call
+(iter-283, «W7 открывай если больше ничего не осталось» — no W6 row
+remained). W7's station law (`WORLD_WORKPLAN.md` §9): for any new
+major capability, regime or institution ask the eight questions —
+why possible / why not universal / what does it replace / what does
+it make harder / who profits / who resists / who remembers / what if
+it disappears — then run the compression test and remove or merge
+decorative material. The first row LANDED (iter-283, the witness
+`tests/test_negative.py`, the record `WORLD_TESTS.md` §9's W7
+entry): the negative-space census (the closed gate vocabulary, the
+no-leak option gate, the deadband, the tale gate, the fixed
+subjects), the lint's measured refusals (the empty registry, the
+unseeded hook), the disappearance battery's three arms (settle gone
+→ the calm run byte-identical + the grammar wall returned; the
+mourning gone → the departure dead, the market loud again —
+iter-274's price inverted —, the other families untouched; the word
+unregistered → the fact survives, the door dies), and the
+compression inventory (all 76 event templates producible by
+construction, every meaning surface declared, the census's «0
+consumerless») — VERDICT: no decorative material at the measured
+band; an unfired surface is possibility-space (the doors stay),
+never decoration. The station's next rows — the owner's call: the
+negative questions' reading band, further majors' disappearance
+arms, or W8 (integration readiness) when the owner calls the
+station complete. The owner's RU report:
+`docs/iterations/iter-283-negative-report.md`.
+
+W6's row-by-row landing history (iter-278 the substrate side;
+iter-279/280 the reading band's LLM and live halves; iter-281 the two
+gap routings + the blind re-measure; iter-282 the owner's live
+re-read over the fixed material): every row's full record lives in
+`WORLD_TESTS.md` §9's W6 entry — the single owner (D-024: the
+verdicts above carry the state; the history is not restated here).
 
 ## 10. Navigation (the authoritative owners)
 

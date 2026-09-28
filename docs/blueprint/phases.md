@@ -4957,6 +4957,83 @@ precedent's exact form, zero repo-side experiment):**
   untouched, zero corpus price). The owner's RU report:
   `docs/iterations/iter-282-liveconfirm-report.md`.
 
+**The iter-283 negative record (R2 — the W7 station's first row, the
+owner's «продолжай работу над задачами класса мирового трека, W7
+открывай если больше ничего не осталось» call: W6 complete at both
+bands, no open row remained — the station order held, the station
+ENTERED on the owner's explicit call).** The eight-question battery
+(WORLD_WORKPLAN §9) run on the SAME committed package — zero core,
+zero pack change, the LOG untouched, zero corpus price; the witness
+`tests/test_negative.py` (10 tests, the claim packet in the
+docstring). The scope: the three majors the world track landed with
+committed consumers and honest deterministic instruments — the
+account substrate's fourth verb `settle` (iter-273), the market's
+mourning hook `market_mourns` (iter-264/274), the secrets/leverage
+registry (the mystery's substrate). The admission evidence (why
+possible / what it replaced / what it made harder) CITED to its
+owners (D-024 — the grammar wall iter-273, the measured door
+iter-263, iter-274's price), never re-derived. MEASURED: the
+negative-space census (why not universal — the closed gate
+vocabulary: exactly one of noun/holder per account gate; the
+no-leak option gate: the option's availability gate the SAME prop
+read as the hook trigger; the families' deadband: threshold 50 over
+trigger 40; the tale gate: min_importance medium; the fixed secret
+subjects; D-238's calendar cited never re-measured); the lint's
+measured refusals (who resists — an EMPTY registry and an unseeded
+hook both refuse at load: the capability's structural floor); the
+disappearance battery's three arms over pack-data twins (what if it
+disappears): (a) settle gone → the calm composition run
+BYTE-IDENTICAL (2269=2269 — the D-108 both-arms law at the
+capability scale: an unused door costs nothing) + the buyer's
+purchase probe refused at the GRAMMAR level (RunnerError — the
+iter-273 wall returned in its hardest form: the world cannot even
+express the transfer); (b) the mourning gone (the hook AND its seed
+removed together — the loading band the two lint refusals measured)
+→ the departure never fires (the mistress's moves 1→0, her end
+keep→Malby), the market's social surface stays loud (talks 2→287,
+rumors 2→22, the council 208→1 — iter-274's measured price inverted
+arm for arm, the carrier's footprint), the other families surviving
+the disable test (the feud's vigils 4=4, the macro arm's sourced
+4=4; totals 2269→2372); (c) the word unregistered (the registry's
+third key removed) → the read STILL mints the knowledge exact (the
+fact survives — the write is the action's own) but zero levers and
+the coerce refused at actor.leverage_over (the door dies — the
+registry IS the leverage authority); the compression test's
+reachability inventory (who profits): all 76 event templates
+producible by construction (an action's event type, a structural
+rules declaration, a group's own macro/condense arming, or the
+intent door), every account-kind gloss / flow gloss / symbol
+declared or referenced, every knows-table entry matchable by a
+mintable token, the four entity ids no other data references each
+carrying their own canonical door (the lamp the corpus's instrument,
+the traffic group its macro_event arming, the jug its use_effect on
+an axis with three named consumers, the sack its flammability), the
+census's «0 consumerless» cited (the cov-1 instrument's row).
+VERDICT: no decorative material at the measured band — the pack
+compressed. The honest boundaries classified: the band is
+reachability-BY-CONSTRUCTION (an unfired surface is
+possibility-space — the player's doors stay, the anti-pattern law);
+the unglossed mintable literals (the_flood_story, the_winter_kin,
+the failure-path tokens) ride the documented dry fallback (a
+reading-side shape, never touched); the ungarrisoned window (0
+patrols both mourning arms) the composition witness's own recorded
+limitation. No plot written, no machinery promoted, no pack change.
+- **The paths.** tests/test_negative.py (new — the W7 witness, 10
+  tests), docs/{worldbuild/WORLD_TESTS.md (§9 the W7 entry),
+  worldbuild/WORLD_WORKPLAN.md (§9 the first row + a D-024 cruft
+  pass over the W5/W6 record tails — the per-row verdicts + the
+  single-owner pointers, the cap held 588/600),
+  worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 the station state +
+  the W6 history compressed to the single-owner pointer),
+  blueprint/phases.md (§6 this record), TASKS.md (the ledger,
+  iter-273 evicted), iterations/iter-283-negative-report.md (new,
+  the owner's RU deliverable)}, STATUS.md, worklog.md (iter-273
+  evicted) — 9 paths. 2550+9 + ruff + docguard + topology --check
+  clean (R2 — the crafted twin pairs + the static inventories + the
+  docs; zero core, zero pack, zero canon change, the LOG untouched,
+  the golden corpus byte-identical, zero corpus price). The owner's
+  RU report: `docs/iterations/iter-283-negative-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with
