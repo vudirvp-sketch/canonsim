@@ -4866,6 +4866,97 @@ iter-279 argument):**
   corpus price). The owner's RU report:
   `docs/iterations/iter-281-gaproutes-report.md`.
 
+**The iter-282 liveconfirm record (R0, doc-only — the W6 reading
+band's live half over the FIXED material, the owner's «продолжай
+работу над задачами класса мирового трека» continuation call; the
+owner's blind Q1–Q5 received in the chat before the preset reveal,
+then the preset with the owner's own scoring, this iteration
+verifying that scoring against the pre-set bars — the iter-270/280
+precedent's exact form, zero repo-side experiment):**
+
+- **The reading received.** The owner's live re-read of the
+  iter-281 re-measured kit (the sandbox attachment): the blind
+  answers to Q1–Q5 over both packages (JOURNEY + POLITICS) written
+  before the preset was opened, then the owner's own honest
+  self-scoring against the bars — the isolation law held per the
+  owner's own sequence.
+- **ADVENTURE 4/4 at the live band.** A1 the departure (the route's
+  own ticks); A2 the risk FULL — both halves: the road's toll (the
+  fatigue 0→70) AND the NIGHT FORM quoted verbatim, both night lines
+  — GAP (a) closed at the LIVE band (0/3 readings at the unfixed
+  kit → 3/3 at the fixed kit: the routing's measured effect at both
+  bands); A3 the objective reconstructed through the causal path per
+  the bar's own rule — the iter-280 live miss FLIPPED to MET
+  (reader-policy variance on materially unchanged A3 material, the
+  mirror's mirror of iter-270); A4 the changed return (the fatigue
+  as the physical trace, «the hold is spent» as the spent lever, the
+  static 50/50/6 as the contrast — the change functional, never
+  status).
+- **MYSTERY 3/3 — the fourth consecutive full carry.** Six
+  independent readings across both bands and both kit versions
+  extract the contour whole (the hidden shave, the deliberate tally
+  read outside any dialogue with the holder, the knowledge as the
+  landed corner against the dead door, the pair's own numbers) —
+  the contour reader-forced, the strongest standing extraction
+  datum.
+- **POLITICS P1 PARTIAL / P2 MET / P3 PARTIAL at the strict bar —
+  the SAME shape as the LLM re-measure band.** P1: the interests
+  core carried (the camp/Garrick, the guild, the old families, the
+  watch), the market's people NOT isolated as a standing interest
+  (the live breadth variance against the LLM band's P1 MET n=2;
+  iter-280's live reading had carried it via Maren — reader-side,
+  never prose-fixed). P2: the differential table assembled AS
+  different (the watch's alarm, the guild's administrative barring,
+  the families' ritual vigil). P3: the named legs CLOSED at the
+  live band too (the guild's AGENCY carried — the squeeze never
+  misread as Garrick's doing; the causal row quoted in full, riding
+  rs-12's knows tail, the account line's own surface — GAP (b)'s
+  named legs closed at BOTH bands), the honest residual set
+  REPRODUCING one-for-one (the climb quoted «16→20» without the
+  intermediate 18 — the record's two +2 increments at t4767/t4769,
+  all the numbers on the surfaces; the decisive-move slot taken by
+  the fires — the same honest pick as both LLM readings; the
+  standing terms present inside the quoted row but never separately
+  fixed; the public retention not explicit) — reader-synthesis
+  residuals, never prose-fixed (the discrimination law standing:
+  the form present, the assembly the reader's own).
+- **The free band.** The namings again divergent across the same
+  pack's two packages (noir-blackmail / labor drama / errand-quest
+  against diversionary drama / debt strife / blood-feud chronicle),
+  the genre-matrix labels again never the free namings (the owner's
+  own explicit note) — the divergence half carried at the live band
+  over the fixed material; the free namings also varying between
+  the two live readings of the same package (the free band's known
+  reader-policy shape, recorded as is).
+- **The honest notes.** The delivery wrinkle recorded: the iter-281
+  kit attachment did not re-carry audit_preset.md (the owner's own
+  observation — «there are only the packages themselves and the
+  instructions»); the reveal rode the standing iter-279 preset (the
+  same pre-set bars, unchanged by the routings; the blind sequence
+  held per the owner's own statement) — iter-281 §G's «с пресетом»
+  claim corrected by this record; a kit-side delivery wrinkle, zero
+  repo state affected (the kit lives outside the repo, Rule 9; not
+  a repo bug, no KI). The live band stays n=1 (the iter-270/280
+  honesty). No prose edited, no pack change, no gate raised, no
+  machinery promoted — the station's law held.
+- **The verdict.** The reading-side CONFIRMED at BOTH bands over
+  the fixed material; W6 COMPLETE at both bands (the substrate row
+  iter-278, the reading band iter-279/280, the routings + the LLM
+  re-measure iter-281, the live re-read iter-282) — W7 the owner's
+  explicit call.
+- **The paths.** docs/{worldbuild/WORLD_TESTS.md (§9 the W6 entry's
+  live re-read record), worldbuild/WORLD_WORKPLAN.md (§8 + a D-024
+  cruft pass — the record tail compressed to the per-row verdicts +
+  the single-owner pointer, the cap held 599/600),
+  worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9), blueprint/phases.md
+  (§6 this record), TASKS.md (the ledger, iter-272 evicted),
+  iterations/iter-282-liveconfirm-report.md (new, the owner's RU
+  deliverable)}, STATUS.md, worklog.md (iter-272 evicted) — 8
+  paths. 2540+9 + ruff + docguard + topology --check clean (R0 —
+  doc-only; zero code, zero pack, zero canon change, the LOG
+  untouched, zero corpus price). The owner's RU report:
+  `docs/iterations/iter-282-liveconfirm-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -345,7 +345,25 @@ decisive-move slot still the fires, the public retention not
 explicit); the free namings again divergent. The reading-side now
 CONFIRMED at the improved band; W6's own rows COMPLETE — W7 the
 owner's explicit call. The owner's RU report:
-`docs/iterations/iter-281-gaproutes-report.md`.
+`docs/iterations/iter-281-gaproutes-report.md`. The owner's LIVE
+RE-READ of the re-measured kit since RECEIVED and SCORED (iter-282,
+the iter-270/280 precedent's form — the reading band's closing half
+over the FIXED material, R0 doc-only, the blind answers before the
+preset reveal): adventure 4/4 — the night form quoted verbatim (GAP
+(a) closed at BOTH bands: 0/3 readings at the unfixed kit → 3/3 at
+the fixed kit) and the A3 objective reconstructed through the causal
+path (the iter-280 live miss flipped — reader-policy variance, the
+material unchanged); mystery 3/3 — the fourth consecutive full
+carry, the contour reader-forced (six readings across both bands and
+both kit versions); politics P1 PARTIAL (the market's people not
+isolated — the live breadth variance against the LLM band's P1 MET
+n=2), P2 MET, P3 PARTIAL at the strict bar in the SAME shape as the
+LLM band (the named legs closed at both bands; the same residual set
+— reader-synthesis residuals, never prose-fixed); the free namings
+again divergent, the genre-matrix labels never the free namings.
+The reading-side CONFIRMED at BOTH bands over the fixed material; W6
+COMPLETE at both bands — W7 the owner's explicit call. The owner's
+RU report: `docs/iterations/iter-282-liveconfirm-report.md`.
 
 ## 10. Navigation (the authoritative owners)
 

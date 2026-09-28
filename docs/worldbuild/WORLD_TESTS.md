@@ -2255,6 +2255,89 @@ their bars); W6's own rows COMPLETE — W7 the owner's explicit call.
 The owner's RU report:
 `docs/iterations/iter-281-gaproutes-report.md`.
 
+**The owner's LIVE RE-READ of the re-measured kit received and
+scored (iter-282, the owner's «продолжай работу над задачами класса
+мирового трека» continuation call — the reading band's closing half
+over the FIXED material, the iter-270/280 precedent's exact form;
+the owner's blind Q1–Q5 arrived in the chat before the preset
+reveal, then the preset with the owner's own scoring, this
+iteration verifying that scoring against the pre-set bars — zero
+repo-side experiment, R0):** MEASURED at the live band n=1 over the
+iter-281 kit — ADVENTURE met 4/4 (A1 the departure with the route's
+own ticks; A2 the risk FULL — both halves: the road's toll (the
+fatigue 0→70) AND the NIGHT FORM quoted verbatim, both night lines
+(«the walk landing after dark, the yards unlit») — GAP (a) closed
+at the LIVE band too, the routing's measured effect at both bands:
+0/3 readings at the unfixed kit → 3/3 at the fixed kit; A3 the
+objective reconstructed through the causal path (the tally read →
+the word → the lever → the corner) per the bar's own
+reconstruct-through-the-causal-path rule — the iter-280 live miss
+FLIPPED to MET, reader-policy variance on materially unchanged A3
+material, the mirror's mirror of iter-270; A4 the changed return —
+the fatigue as the physical trace, «the hold is spent» as the spent
+lever, the static 50/50/6 as the contrast, the change functional
+never status); MYSTERY met 3/3 (M1 the shaved weight, M2 the
+deliberate tally read «outside any dialogue with the secret's
+holder», M3 the knowledge → leverage → coercion with the pair's own
+numbers trust 25 / fear 75 — the FOURTH consecutive full carry: six
+independent readings across both bands and both kit versions, the
+contour reader-forced, the strongest standing extraction datum);
+POLITICS P1 PARTIAL (the interests core carried — the camp/Garrick,
+the guild, the old families, the watch — but the market's people
+NOT isolated as a standing interest, the market read only through
+Malby as a location: the live breadth variance against the LLM
+band's P1 MET n=2; iter-280's live reading had carried it via
+Maren — reader-side, never prose-fixed), P2 MET (the differential
+table assembled AS different: the watch's alarm, the guild's
+administrative barring «bars the stalls and puts their heads
+together», the families' ritual wergeld vigil), P3 PARTIAL at the
+strict bar in the SAME shape as the LLM re-measure band — the named
+legs CLOSED at the live band too (the guild's AGENCY carried, the
+squeeze never misread as Garrick's doing; the causal row quoted in
+full — «the guild's squeeze answering the withhold: the loads kept
+off the weighbeam priced onto the standing terms, the debt climbing
+while the bloom stays unweighed» — riding rs-12's knows tail, the
+account line's own surface: GAP (b)'s named legs closed at BOTH
+bands), the honest residual set REPRODUCING one-for-one (the climb
+quoted «16→20» without the intermediate 18 — the record's two
+separate +2 increments at t4767/t4769, all the numbers on the
+surfaces; the decisive-move slot taken by the fires — the same
+honest pick as both LLM readings; the standing terms present inside
+the quoted row but never separately fixed; the public retention not
+explicit — reader-synthesis residuals, never prose-fixed, the
+discrimination law standing: the form present, the assembly the
+reader's own). The FREE band: the two packages again read
+materially differently (the journey: нуар-шантаж / трудовая драма /
+камерный квест-поручение; the politics: диверсионно-политическая
+драма / долговая распря / кровно-родовая хроника — the owner's own
+framing recorded: JOURNEY a private lever-locked episode, POLITICS a
+public institutionally-resonant crisis with long-horizon countable
+consequences, the difference itself the measured datum per the FREE
+rule) and the genre-matrix labels again never the free namings (the
+owner's own explicit note) — the divergence half carried at the
+live band over the fixed material (the free namings also varying
+between the two live readings of the same package — the free
+band's known reader-policy shape, recorded as is). The
+extraction-strength datum updated: the mystery contour
+reader-forced 6/6; the adventure objective reader-optional (LLM
+2/2 + 2/2, live 0/1 → 1/1 — the variance now measured in both
+directions on the live side); the night form and the balance-move's
+named legs 3/3 at the fixed kit (0/3 and the single agency misread
+at the unfixed) — the routings' measured effect at both bands. An
+honest delivery note recorded: the iter-281 kit attachment did not
+re-carry audit_preset.md (the owner's own observation); the reveal
+rode the standing iter-279 preset — the same pre-set bars,
+unchanged by the routings; the blind sequence held per the owner's
+own statement (the answers written before the preset was opened);
+iter-281 §G's «с пресетом» claim corrected here — a kit-side
+delivery wrinkle, zero repo state affected (the kit lives outside
+the repo, Rule 9). VERDICT: the reading-side CONFIRMED at BOTH
+bands over the fixed material; W6 COMPLETE at both bands (the
+substrate row iter-278, the reading band iter-279/280, the routings
++ the LLM re-measure iter-281, the live re-read iter-282) — W7 the
+owner's explicit call. The owner's RU report:
+`docs/iterations/iter-282-liveconfirm-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:
