@@ -1,65 +1,59 @@
-Iteration: iter-286 (`namedroute` — the W7 station's FOURTH row, the
-  owner's «точечный и быстрый (read-side only)» call over iter-284/285's
-  boundary (a): the refusal's institutional cause as a rendering row;
-  the same call conditionally declining the disappearance-battery
-  extension and opening W8 — both conditions resolved, R2 read-side
-  only): rs-13, the gloss-boundary family's thirteenth member — the
-  pack table `templates.json::rejection_boundaries` (GATE name -> the
-  reader prose naming the refusing authority; `leverage_over` -> «no
-  minted word to lean on» — the registry as the leverage authority),
-  glossed at ONE boundary
-  (`render/chronicle.py::gloss_rejection_boundary` — the failed_test's
-  gate segment; an unglossed gate answers EMPTY, the flow-gloss
-  fallback law) and landed as the `boundary` slot BEFORE the generic
-  outcome loop; the province `intent_rejected` line carries the
-  rs-12-form conditional tail `{boundary? — {boundary}}` — every
-  consumer (the tale's gated line, the entity view's ungated record)
-  through the one template; the constant's single owner
-  `core/intent.py` (REJECTION_BOUNDARY_BLOCK); the armed-gate vacuity
-  lint at `core/packlint/actions.py::_templates`. MEASURED (the
-  witness `tests/test_namedroute.py`, 6 tests): the no-word twin's
-  runner record renders «tries to coerce — impossible here — no
-  minted word to lean on» — the Q5 boundary CLOSED at the readable
-  surface (C's record carries the hold minted and spent — the
-  discrimination now a PROSE fact); the unglossed gates render the
-  standing line UNCHANGED (the golden corpus's own move-refusal); the
-  tale gate UNTOUCHED (the boundary rides the RECORDS surface); the
-  unarmed twin loads and renders the standing line; the lint refuses
-  the dead rows; the golden corpus byte-identical. THE OWNER'S TWO
-  DISPOSITIONS, both resolved: the disappearance-battery extension to
-  the remaining majors — NO (the meso units' drivers already pass the
-  anchor's disable test, ANCHOR_REGION §5; no uncovered capability
-  remains — further arms would re-measure carried evidence; the row
-  stays available for a NEW major's own arm); W8 (integration
-  readiness) OPENED on the conditional call — the W7 station
-  COMPLETE (four rows: iter-283/284/285/286). No gate raised, no
-  machinery promoted, the LOG untouched; the owner's RU report at
-  docs/iterations/iter-286-namedroute-report.md
+Iteration: iter-287 (`readiness` — the W8 station's FIRST row, the
+  owner's «продолжай работу над задачами класса мирового трека. w8
+  можешь начинать делать» call: the station ENTERED on the owner's
+  explicit call; R0 doc-only — the audit consumes the accumulated
+  evidence, it never re-measures): the seven-criteria
+  integration-readiness audit (WORLD_WORKPLAN §10) — every
+  criterion cited to its standing owner, every gap named where the
+  evidence is thinner than the claim; the full record
+  `WORLD_TESTS.md` §9's W8 entry (the single owner). (1) the
+  authored causal substrate MET (ANCHOR_REGION §5's eight-loop mesh
+  + D-237's composition; the gap: the meaning layer thinner than
+  the mechanical, one region); (2) a demonstrated meso unit MET
+  (§6.1–6.5's five, three CONFIRMED / two PARTIALLY — the band
+  honesty carried); (3) pack-primitive representability MET
+  (D-240/D-191 + the iter-283 compression inventory + rs-1..rs-13;
+  the named gaps: the I0 inventory's three unpromoted candidates,
+  the second region unwitnessed); (4) the ordinary event's
+  persistent human-scale consequence MET (the I0 witness + the
+  exit criterion met four times; the gap: the one-year persistence
+  band, the perturbation authored between runs); (5) explicit
+  knowledge asymmetry MET (WORLD_AUTHORING §9's doctrine + the
+  zero-leak blind suite + the measured witnesses; the gap: the
+  influence-boundary check rides review, not an oracle); (6)
+  world-specific material outside the core MET, executable (INV-3;
+  no gap at the measured band); (7) the proven-vs-hypothetical
+  distinction MET (§10's vocabulary + the PROPOSAL fence; the gap:
+  the reading bands' evidence documentary). VERDICT: all seven
+  carry standing evidence at the measured band — the world track
+  READY for the broader implementation handoff, the named gaps
+  riding the handoff as its honest boundary list. Zero code, zero
+  pack, zero canon change, the LOG untouched; the owner's RU
+  report at docs/iterations/iter-287-readiness-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2556 passed + 8 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; the standing 2550+9
-  with the sandbox's one-skip variance and the launcher test's one
-  load-flake — clean standalone and on the re-run; +6 the
-  namedroute witness) ·
+2556 passed + 9 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; the standing suite
+  with the namedroute witness; one doc-only iteration since)
+  ·
 Date: 2026-09-28 ·
-Scope: render/chronicle.py, core/intent.py, core/packlint/actions.py,
-  content/province_pack/templates.json, tests/test_namedroute.py (new
-  — the W7 fourth-row witness), docs/{worldbuild/WORLD_TESTS.md (§9
-  the named-boundary entry + the two dispositions), worldbuild/
-  WORLD_WORKPLAN.md (§9 the fourth row + §10 W8 OPENED, 598/600),
-  worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 + the W-stage block),
-  blueprint/phases.md (§6 the iter-286 record), TASKS.md (the ledger,
-  iter-276 evicted), iterations/iter-286-namedroute-report.md (new,
-  the owner's RU deliverable)}, STATUS.md, worklog.md (iter-276
-  evicted) — 13 paths (R2 — read-side only; zero canon change, the
-  LOG untouched, the golden corpus byte-identical, zero corpus price)
-Track A: W8 the CURRENT EXECUTION STAGE — OPENED iter-286 on the
-  owner's conditional call, the W7 station COMPLETE (four rows:
-  iter-283/284/285/286); W8's first row the seven-criteria readiness
-  audit (WORLD_WORKPLAN §10). The ssi family COMPLETE except ssi-5,
-  owner-gated.
+Scope: docs/{worldbuild/WORLD_TESTS.md (§9 the W8 audit entry — the
+  single owner), worldbuild/WORLD_WORKPLAN.md (§10 the first-row
+  record + a D-024 cruft pass over the §7/§8/§9 record tails,
+  593/600), worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§9 + the
+  W-stage block), blueprint/phases.md (§6 the iter-287 record),
+  TASKS.md (the ledger, iter-277 evicted), iterations/
+  iter-287-readiness-report.md (new, the owner's RU deliverable)},
+  STATUS.md, worklog.md (iter-277 evicted) — 8 paths (R0 —
+  doc-only; zero code, zero pack, zero canon change, the LOG
+  untouched, zero corpus price)
+Track A: W8 the CURRENT EXECUTION STAGE — the FIRST row LANDED
+  iter-287 (the seven-criteria readiness audit: all seven MET at
+  the measured band, the world track READY for the broader
+  implementation handoff, the named gaps the handoff's honest
+  boundary list); the station's remaining rows the owner's call.
+  The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -122,38 +116,49 @@ owning iteration reports)
 
 ## Next step
 
-**iter-286 DONE: the W7 station's fourth row (the owner's «точечный
+**iter-287 DONE: the W8 station's first row (the owner's «w8
+  можешь начинать делать» call — the seven-criteria
+  integration-readiness audit; R0 doc-only, the audit consumed
+  the accumulated evidence, nothing re-measured).** All seven
+  criteria MET at the measured band — the authored substrate
+  (the §5 mesh + D-237; gap: the meaning layer thinner than the
+  mechanical, one region); a demonstrated meso unit (§6.1–6.5's
+  five, three CONFIRMED / two PARTIALLY — the band honesty
+  carried); pack-primitive representability (D-240/D-191 + the
+  compression inventory + rs-1..rs-13; gaps: the three unpromoted
+  I0 candidates, the second region unwitnessed); the ordinary
+  event's persistent consequence (the I0 witness + the exit
+  criterion met four times; gap: the one-year persistence band,
+  the perturbation authored between runs); explicit knowledge
+  asymmetry (the §9 doctrine + the zero-leak suite; gap: the
+  influence check rides review, not an oracle); world-specific
+  material outside the core (INV-3, executable — no gap); the
+  proven-vs-hypothetical distinction (§10's vocabulary + the
+  PROPOSAL fence; gap: the reading bands documentary). VERDICT:
+  the track READY for the broader implementation handoff at the
+  measured band — the gaps ride the handoff as its honest
+  boundary list.
+Next: the owner's call — the handoff's first consumer (the §11
+  expansion rule's second region vs the standing engineering
+  rows), any named gap's closing, or the handoff inventory
+  package once the consumer is named.
+Active KIs: none. The suite green (2556+9). The owner's RU
+  report: docs/iterations/iter-287-readiness-report.md.
+iter-286 DONE: the W7 station's fourth row (the owner's «точечный
   и быстрый (read-side only)» call — the named-boundary rendering
   route, iter-284/285's boundary (a); the same call conditionally
   declining the disappearance-battery extension and opening W8,
-  both conditions resolved; R2 read-side only).** rs-13 — the pack
-  table `rejection_boundaries` (the refusing authority's prose per
-  gate; `leverage_over` -> «no minted word to lean on»), the ONE
-  gloss boundary (`gloss_rejection_boundary` — the failed_test's
-  gate segment, unglossed EMPTY), the `boundary` slot before the
-  outcome loop, the `intent_rejected` line's rs-12-form conditional
-  tail, the armed-gate vacuity lint. MEASURED (the witness
-  tests/test_namedroute.py, 6 tests): the no-word twin's runner
-  record renders «tries to coerce — impossible here — no minted
-  word to lean on» — the Q5 boundary CLOSED at the readable surface
-  (C's record: the hold minted and spent — the discrimination now
-  a PROSE fact); the unglossed gates byte-stable (the golden
-  corpus's own refusal); the tale gate UNTOUCHED (the boundary
-  rides the records surface); the unarmed twin loads; the lint
-  refuses the dead rows; the golden corpus byte-identical. The
-  owner's two dispositions: the battery extension NO (the meso
-  units' drivers already pass the anchor's disable test — further
-  arms would re-measure carried evidence; the row stays available
-  for a NEW major's own arm); W8 OPENED — the W7 station COMPLETE
-  (four rows: iter-283/284/285/286).
-Next: W8's first row — the seven-criteria integration-readiness
-  audit (WORLD_WORKPLAN §10): each criterion cited to its standing
-  owner, the gaps named where the evidence is thinner than the
-  claim; never a re-measure — the audit consumes the accumulated
-  evidence.
-Active KIs: none (the §5 cleanup paid: KI#107 deleted). The suite
-  green (the standing 2550+9; +6 the witness). The owner's RU
-  report: docs/iterations/iter-286-namedroute-report.md.
+  both conditions resolved; R2 read-side only): rs-13 — the pack
+  table rejection_boundaries (leverage_over -> «no minted word to
+  lean on»), the ONE gloss boundary, the boundary slot before the
+  outcome loop, the intent_rejected line's conditional tail, the
+  armed-gate vacuity lint; MEASURED (tests/test_namedroute.py, 6
+  tests): the no-word twin's record renders «tries to coerce —
+  impossible here — no minted word to lean on» — the Q5 boundary
+  CLOSED at the readable surface; the unglossed gates byte-stable,
+  the tale gate untouched, the golden corpus byte-identical. W8
+  OPENED — the W7 station COMPLETE (iter-283/284/285/286). The
+  owner's RU report: docs/iterations/iter-286-namedroute-report.md.
 iter-285 DONE: the W7 reading band's LIVE half (the owner's blind
   Q1–Q7 over the iter-284 kit received and scored against the
   standing preset, the iter-270/280/282 precedent's form): every

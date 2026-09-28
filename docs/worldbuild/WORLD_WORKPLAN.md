@@ -431,43 +431,30 @@ iter-204..210, ANCHOR_REGION §6.3's row synced) → W6. (Every
 landing's full record: `WORLD_TESTS.md` §9's W5 entry — the single
 owner.)
 
-The §6.4 fill row's first landing since (iter-271, repricing — the
-renegotiation door landed, the SALE fork honestly recorded; the full
-record in `WORLD_TESTS.md` §9's W5 entry and the iter-271 report —
-the single owners).
-
-The §6.1 fill row since LANDED (iter-272, floodpaper — the crossing's
-flood debt to its full lifecycle over the account resolver's arm; the
-full record in `WORLD_TESTS.md` §9 and the iter-272 report — the
-single owners).
-
-The I0 WORLD IGNITION WITNESS since RUN and CONFIRMED (iter-276,
-ignition — the owner's world-liveness direction, the execution
-order's fifth row: the moving meso over the perturbed keep-Malby
-edge, the five-leg chain measured on existing primitives; the
-four timelines diverging never synchronized; the
-substrate-limitation inventory opened with three named candidates,
-none yet repeated, no machinery promoted; the record in
-`WORLD_TESTS.md` §9, the single owner). The §6.2 fill row since
-LANDED (iter-275, stepbench — PRESENT / HATCH / NOTCH over the
-existing account substrate, the two-sided band gap measured and
-named as the I0 inventory's first candidate; the record in
-`WORLD_TESTS.md` §9 and the iter-275 report — the single owners).
-The §6.5 move release since LANDED (iter-274, moverelease — the
-departure at its measured iter-263 price, honestly paid; the honest
-liveness shape: a living world is not a loud one; the smoke corpus
-untouched; the record in `WORLD_TESTS.md` §9 and the iter-274
-report — the single owners). The §6.4 SALE fork since RESOLVED
-(iter-273, settlement — the owner's synthesis decision: the account
-grammar was too narrow for the authored world model, the correct
-response SYNTHESIS, never the A/B/C pick): the FOURTH VERB `settle`
-— the multi-leg transaction over EXPLICIT owners through the same
-canon door, the sale `sell_bloom` armed over it, the grammar wall
-measured FIRST in the witness, the class pinned with the owner's
-own example; no second transaction engine; the record in
-`WORLD_TESTS.md` §9 and the iter-273 report — the single owners.
-The station's standing order after the landing (the owner's
-2026-09-27 execution order): the I0 witness
+The fill rows since LANDED (each with its full record in
+`WORLD_TESTS.md` §9 and its own iteration report — the single
+owners): the §6.4 repricing (iter-271 — the renegotiation door
+landed, the SALE fork honestly recorded); the §6.1 floodpaper
+(iter-272 — the crossing's flood debt to its full lifecycle over
+the account resolver's arm); the §6.5 move release (iter-274,
+moverelease — the departure at its measured iter-263 price,
+honestly paid; a living world is not a loud one; the smoke corpus
+untouched); the §6.2 stepbench (iter-275 — PRESENT / HATCH / NOTCH
+over the existing account substrate, the two-sided band gap
+measured and named as the I0 inventory's first candidate); the
+§6.4 SALE fork RESOLVED (iter-273, settlement — the owner's
+synthesis decision, never the A/B/C pick: the FOURTH VERB
+`settle`, the multi-leg transaction over EXPLICIT owners through
+the same canon door, the sale `sell_bloom` armed over it, the
+grammar wall measured FIRST; no second transaction engine). The
+I0 WORLD IGNITION WITNESS since RUN and CONFIRMED (iter-276 —
+the owner's world-liveness direction, the execution order's fifth
+row: the moving meso over the perturbed keep-Malby edge, the
+five-leg chain measured on existing primitives; the four
+timelines diverging never synchronized; the substrate-limitation
+inventory opened with three named candidates, none yet repeated,
+no machinery promoted). The station's standing order after the
+landing (the owner's 2026-09-27 execution order): the I0 witness
 RUN and CONFIRMED (iter-276 — no new machinery promoted, the
 inventory's candidates awaiting repetition) → W6 genre under the
 resulting evidence (the §8 station law).
@@ -484,24 +471,17 @@ trigger immediate plot writing.
 The station's rows all LANDED, in order (the full records:
 `WORLD_TESTS.md` §9's W6 entry — the single owner; the witnesses
 `tests/test_genre.py` + `tests/test_gaproutes.py`; the owner's RU
-reports iter-278..282): the SUBSTRATE-SIDE measured at the
-deterministic band (iter-278 — adventure, mystery, politics
-confirmed at their named bands on the same committed package; the
-four carried genres citing their W5 evidence); the READING BAND in
-both halves (iter-279 LLM n=2 + iter-280 live n=1): mystery 3/3
+reports iter-278..282): the substrate side measured at the
+deterministic band (iter-278 — adventure/mystery/politics at their
+named bands, the four carried genres citing W5); the reading band
+both halves (iter-279 LLM n=2 + iter-280 live n=1) — mystery
 convergent at both bands, the two RENDERING_GAPs double-confirmed,
 the A3 objective the one cross-band divergence (reader-class
-variance) — PARTIALLY CONFIRMED; the two gap ROUTINGS landed
-read-side and re-measured blind n=2 (iter-281 — zero canon, the
-mechanism's record in WORLD_TESTS §9): adventure 4/4 (GAP (a)
-closed), mystery 3/3, politics P3 materially improved (GAP (b)'s
-named legs closed) — CONFIRMED at the improved band; the owner's
-LIVE RE-READ of the re-measured kit received and scored (iter-282,
-R0 doc-only): adventure 4/4 (the night form quoted verbatim — GAP
-(a) closed at BOTH bands; the A3 objective reconstructed — the
-iter-280 miss flipped), mystery 3/3 (the fourth consecutive carry),
-politics P1 PARTIAL / P2 MET / P3 PARTIAL in the LLM band's own
-shape (the same reader-synthesis residuals, never prose-fixed) —
+variance) — PARTIALLY CONFIRMED; the gap routings + the blind
+re-measure (iter-281 — adventure 4/4, mystery 3/3, politics P3
+materially improved) and the owner's live re-read (iter-282 —
+adventure 4/4, mystery 3/3, politics P1 partial / P2 met / P3
+partial, the reader-synthesis residuals never prose-fixed) —
 CONFIRMED at BOTH bands; W6 COMPLETE — W7 the owner's explicit
 call.
 
@@ -515,34 +495,23 @@ Then run the compression test and remove or merge decorative material.
 
 The station's rows, in order (the full records: `WORLD_TESTS.md`
 §9's W7 entries — the single owner; the owner's RU reports
-iter-283..286): the FIRST row LANDED (iter-283, the owner's «W7
-открывай если больше ничего не осталось» call) — the battery + the
-compression test on the same committed package (the negative-space
-census, the lint's measured refusals, the disappearance battery's
-three arms, the reachability inventory: no decorative material at
-the measured band; the witness `tests/test_negative.py`); the SECOND
-row LANDED (iter-284, the reading band's LLM half — the battery's
-answers as blind readings over the same battery's twins, the clean
-n=2 after one discarded contaminated pilot; every bar met, the free
-namings divergent, the readers' own discovery: the disappearance's
-footprint wider than the deterministic census); the THIRD row LANDED
-(iter-285, the LIVE half — the owner's own blind reading scored
-against the standing preset, the iter-270/280/282 form): every bar
-MET n=1, ALL THREE ripples caught in the blind half — the reading
-band CONFIRMED at BOTH bands (LLM n=2 + live n=1); the FOURTH row
-LANDED (iter-286, the owner's «точечный и быстрый (read-side only)»
-call — the named-boundary rendering route, iter-284/285's boundary
-(a)): the refusal's institutional cause as a read-side rendering row
-(rs-13, the gloss-boundary family — the pack table
-`rejection_boundaries`, the `boundary` slot, the `intent_rejected`
-line's conditional tail, the armed-gate vacuity lint; the witness
-`tests/test_namedroute.py`). The owner's two dispositions on the same
-call, both resolved: the disappearance-battery extension to the
-remaining majors answered NO (the meso units' drivers already pass
-the anchor's disable test — re-measuring carried evidence is
-polishing, the owner's own criterion; the row stays available for a
-NEW major's own arm), and W8 OPENED on the conditional call — the W7
-station COMPLETE (four rows landed: iter-283/284/285/286).
+iter-283..286): the battery + the compression test (iter-283, the
+owner's «W7 открывай если больше ничего не осталось» call — the
+census, the lint's refusals, the disappearance battery's three
+arms, the reachability inventory: no decorative material at the
+measured band; `tests/test_negative.py`); the reading band's LLM
+half (iter-284 — the battery as blind readings over its own twins,
+clean n=2, every bar met, the readers' own discovery: the footprint
+wider than the census) and the LIVE half (iter-285 — the owner's
+own blind reading, every bar MET n=1, all three ripples caught) —
+the reading band CONFIRMED at BOTH bands; the named-boundary
+rendering route (iter-286, the owner's «точечный и быстрый
+(read-side only)» call — rs-13, the refusal's institutional cause
+read-side; `tests/test_namedroute.py`). The owner's two
+dispositions on the same call, both resolved: the battery extension
+to the remaining majors NO (the disable test already carried — the
+row stays for a NEW major's own arm), W8 OPENED on the conditional
+call — the W7 station COMPLETE (four rows: iter-283/284/285/286).
 
 ## 10. W8 — Integration readiness
 
@@ -564,6 +533,32 @@ witness, the meso records, the substrate-limitation inventory), the
 gaps named where a criterion's evidence is thinner than its claim.
 Never a re-measure: the audit consumes the accumulated evidence, it
 does not reproduce it.
+
+The station's first row LANDED (iter-287, the owner's «w8 можешь
+начинать делать» call — the station ENTERED on the owner's explicit
+call; R0 doc-only — the audit consumed the accumulated evidence,
+nothing re-measured; the full record `WORLD_TESTS.md` §9's W8 entry
+— the single owner; the owner's RU report iter-287): all seven
+criteria MET at the measured band — the authored causal substrate
+(ANCHOR_REGION §5's mesh + D-237's composition; gap: the meaning
+layer thinner than the mechanical, one region); a demonstrated meso
+unit (§6.1–6.5's five, three CONFIRMED / two PARTIALLY — the band
+honesty carried); pack-primitive representability (D-240/D-191 +
+the iter-283 compression inventory + rs-1..rs-13; the named gaps:
+the I0 inventory's three unpromoted candidates, the second region
+unwitnessed); the ordinary event's persistent human-scale
+consequence (the I0 witness + the exit criterion met four times;
+gap: the one-year persistence band, the perturbation authored
+between runs); explicit knowledge asymmetry (the §9 doctrine + the
+zero-leak blind suite + the measured witnesses; gap: the
+influence-boundary check rides review, not an oracle); world-
+specific material outside the core (INV-3, executable — no gap at
+the measured band); the proven-vs-hypothetical distinction (§10's
+vocabulary + the PROPOSAL fence; gap: the reading bands'
+evidence documentary, never CI-replayable). VERDICT: the track
+READY for the broader implementation handoff at the measured band —
+the named gaps ride the handoff as its honest boundary list, never
+as unknowns. The station's remaining rows: the owner's call.
 
 ## 11. Expansion rule
 

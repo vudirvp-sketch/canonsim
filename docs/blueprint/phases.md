@@ -5199,6 +5199,42 @@ W8's first row the seven-criteria readiness audit (WORLD_WORKPLAN
 §10). Zero canon change, the LOG untouched, zero corpus price. The
 owner's RU report: `docs/iterations/iter-286-namedroute-report.md`.
 
+**The iter-287 readiness record (R0, doc-only — the W8 station's
+FIRST row, the owner's «продолжай работу над задачами класса
+мирового трека. w8 можешь начинать делать» call: the station
+ENTERED on the owner's explicit call).** The seven-criteria
+integration-readiness audit (WORLD_WORKPLAN §10) — the audit
+consumes the accumulated evidence, it never re-measures; the full
+record `WORLD_TESTS.md` §9's W8 entry (the single owner): (1) the
+authored causal substrate MET (ANCHOR_REGION §5's eight-loop mesh,
+the disable test, D-237's composition; the gap: the meaning layer
+thinner than the mechanical, one region); (2) a demonstrated meso
+unit MET (§6.1–6.5's five, three CONFIRMED / two PARTIALLY — the
+band honesty carried); (3) pack-primitive representability MET
+(D-240/D-191 + the iter-283 compression inventory + rs-1..rs-13;
+the named gaps: the I0 inventory's three unpromoted candidates,
+the second region unwitnessed); (4) the ordinary event's persistent
+human-scale consequence MET (the I0 witness's five-leg chain + the
+exit criterion met four times; the gap: the one-year persistence
+band, the perturbation authored between runs); (5) explicit
+knowledge asymmetry MET (WORLD_AUTHORING §9's doctrine + the
+zero-leak blind suite + the measured witnesses; the gap: the
+influence-boundary check rides review, not an oracle); (6)
+world-specific material outside the core MET, executable (INV-3's
+stoplist test; the track's zero-core record; no gap at the measured
+band); (7) the proven-vs-hypothetical distinction MET (§10's
+status vocabulary + the witness/test separation + the PROPOSAL
+fence; the gap: the reading bands' evidence documentary, never
+CI-replayable). VERDICT: all seven criteria carry standing evidence
+at the measured band — the world track READY for the broader
+implementation handoff, the named gaps riding the handoff as its
+honest boundary list, never as unknowns. Zero code, zero pack,
+zero canon change, the LOG untouched, zero corpus price; a D-024
+cruft pass over the workplan's §7/§8/§9 record tails (the per-row
+details live in WORLD_TESTS §9, the single owner — the workplan
+593/600). The owner's RU report:
+`docs/iterations/iter-287-readiness-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

@@ -2656,6 +2656,149 @@ seven-criteria readiness audit, WORLD_WORKPLAN §10) the declared
 next. The owner's RU report:
 `docs/iterations/iter-286-namedroute-report.md`.
 
+### CONFIRMED — The W8 readiness audit: the seven integration-readiness criteria, each cited to its standing owner, the gaps named (2026-09-28, iter-287, the owner's «продолжай работу над задачами класса мирового трека. w8 можешь начинать делать» call — the station ENTERED on the owner's explicit call; R0 doc-only: the audit consumes the accumulated evidence, it never re-measures)
+
+The station's first row (WORLD_WORKPLAN §10): the world track's
+readiness for a broader implementation handoff audited against the
+seven criteria — every criterion CITED to its standing owner
+(D-024: the audit navigates, it never restates), every gap named
+where the evidence is thinner than the claim. The instrument is
+the accumulated record itself — these §9 entries, ANCHOR_REGION's
+tables, the standing witnesses, the D-ledger. Zero code, zero
+pack, zero canon change, the LOG untouched, zero corpus price.
+
+**Criterion 1 — the anchor has an authored causal substrate: MET.**
+The owner: `ANCHOR_REGION.md` §5 — the causal mesh, eight audited
+loops A–H, each passing the disable test (remove one unique
+driver; the others survive), thirteen named interlock edges, the
+band split honest (A–D committed; E committed at its beats with
+the paper authored and the flow armed iter-162; F/G/H authored
+over committed gauges). The composition evidence: D-237
+(`tests/test_p1_composition.py` — 16 relational oracles, six
+interacting families crossing end-to-end on one run). THE NAMED
+GAP: the human-meaning layer is thinner than the mechanical layer
+(the workplan §2's own standing assessment; the meaning frontier
+carries one measured slice + the W5 human band); and the mesh is
+ONE region at the measured seeds — cross-region consequences are
+ANCHOR_REGION §8's own NOT-YET-PROVEN row.
+
+**Criterion 2 — at least one meso unit is demonstrated: MET.**
+The owner: `ANCHOR_REGION.md` §6.1–6.5 — five authored meso units
+(the crossing household, the step bench, the winter kin, the
+charcoal camp, the market as a carrier assembly), each with its
+implementation witness (`tests/test_poleseed.py`,
+`test_stepread.py`, `test_tallyread.py`, `test_campaccount.py`,
+`test_freightvol.py`). The band honesty carried: the crossing
+household CONFIRMED through the full stack (iter-160); the winter
+kin CONFIRMED (iter-165); the market assembly CONFIRMED with
+every §6.5 row closed (iter-263/264/265/274); the step bench and
+the camp's meso half PARTIALLY CONFIRMED at their authored bands
+(iter-164/184) with their named residuals standing. THE NAMED GAP:
+"demonstrated" is band-true, never uniformly closed — two of the
+five units carry PARTIALLY verdicts, and the full
+household-economics layer is §8's own unproven row.
+
+**Criterion 3 — major content representable by existing pack
+primitives, or a named justified capability gap: MET.** The
+owners: D-240 (the market embodiment — carrier leg + explicit
+consumer + pack-only embodiment, zero core change), D-191 (the
+account/economy arm — pure pack data over the account resolver,
+zero core debt primitives), the W7 compression inventory (iter-283:
+all 76 event templates producible by construction, every meaning
+surface declared, the census's «0 consumerless»), and the
+read-side family rs-1..rs-13 (every rendering gap closed pack-side
+or render-side, never machinery). The named capability gaps stand
+NAMED and JUSTIFIED, unpromoted behind the runtime-promotion gate:
+the I0 substrate-limitation inventory's three candidates — (a) no
+runtime route writer, (b) the two-sided band condition, (c) the
+response repertoire's floor. THE NAMED GAP: representability is
+demonstrated for the ANCHOR's own families; a second region's
+major content (the mountain/industrial candidate, workplan §11)
+has no representability witness yet, and none of the three
+candidates has yet repeated with a real consumer.
+
+**Criterion 4 — at least one ordinary event reaches a persistent
+human-scale consequence: MET.** The owners: the I0 World Ignition
+Witness (iter-276, `tests/test_ignition.py` — the camp's freight
+loop, one ordinary recurring moving meso; ONE route edge
+perturbed; the five-leg chain measured: exclusion → divergence →
+response → residue → changed next-cycle condition; the four
+timelines diverging, the paper sixteen outliving the ford) and the
+anchor exit criterion (`ANCHOR_REGION.md` §9 — one disruption
+followed through the whole chain, MET four times: the flood year,
+the dry band, the stranded season, the shave). THE NAMED GAP:
+persistence is measured within one calendar year's span (the
+year-later vigil re-fire off decay-0 residue — D-237's Loop B —
+is the longest measured persistence); multi-year residue
+accumulation and the full life-course are not yet walked at the
+world band; and the I0 perturbation itself was authored between
+runs (the inventory's candidate (a) — the world cannot yet close
+its own road).
+
+**Criterion 5 — knowledge asymmetry is explicit: MET.** The
+owners: the doctrine (`WORLD_AUTHORING.md` §9 — TRUTH / WITNESS /
+KNOWLEDGE / BELIEF / INTERPRETATION / NARRATION per important
+fact; false beliefs that change decisions, never mystery text)
+and the executable boundary: the blind-NPC leak suite
+(`tests/test_blind.py` — the zero-leak law over the perception
+surfaces; the `knower` query parameter IS known_by, D-088). The
+measured witnesses: the watch-briefing transfer (D-237 — the
+suspicion stack carried to the relief who never co-located with
+any act), the epistemic silence (I0 — the rejections mint no
+knowledge records; the camp knows the road only through its own
+attempts), the registry authority (iter-283's word-unregistered
+arm — the fact survives, the door dies), and the knows-boundary
+reader surfaces (rs-9/rs-12/rs-13 — causal rows crossing to the
+reader through the knows boundary only). THE NAMED GAP: the
+influence-boundary check (fix the public surface, swap the hidden
+other-state, require the same authorized result) rides REVIEW,
+not an executable oracle — the law standing
+(`WORLD_TRACK_AGENT_CONTEXT.md` §2), the instrument the reviewer's
+discipline.
+
+**Criterion 6 — world-specific material remains outside engine
+core ontology: MET, executable.** The owner: INV-3 (the
+content/code split — the grep stoplist test, segment-matched over
+`core/` + `sim/` + `brief/`). The world track's own record is the
+second witness: W5/W6/W7 to date landed ZERO core change — every
+mechanism pack-side (D-240's pattern), every rendering row
+render-side (rs-1..rs-13); the track's one core touch (iter-286's
+`REJECTION_BOUNDARY_BLOCK`) a mechanism-name constant,
+stoplist-clean. THE NAMED GAP: none at the measured band — the
+one criterion of the seven carried by an executable invariant
+rather than by evidence bands.
+
+**Criterion 7 — the tests distinguish what is proven from what
+remains hypothetical: MET.** The owners: this document's §10 (the
+closed status vocabulary — CONFIRMED / PARTIALLY CONFIRMED /
+REJECTED / UNRESOLVED / DEFERRED, never numeric scores), the
+witness/test separation (every §9 record names its instrument:
+the deterministic witnesses executable in `tests/`, the reading
+bands' verdicts documentary with their presets and transcripts
+outside the repo per Rule 9), the PROPOSAL fence
+(`WORLD_TRACK_AGENT_CONTEXT.md` §7 — every unpromoted candidate
+explicitly a proposal), and the honest-boundary classifications
+riding every record (iter-283's (a)/(b)/(c), iter-286's (a)–(d)).
+§8's own law stands: these results are evidence about the current
+implementation, never proof that the broader world is complete.
+THE NAMED GAP: the reading bands' evidence (LLM n=2, live n=1) is
+documentary — the transcripts cannot replay in CI; the vocabulary
+carries the uncertainty, the records carry the provenance.
+
+THE VERDICT: **all seven criteria carry standing evidence at the
+measured band — the world track is READY for the broader
+implementation handoff**, the named gaps riding the handoff as its
+honest boundary list (what the next implementer inherits as NAMED
+limitations, never as unknowns): the meaning-layer thinness, the
+two PARTIALLY meso units, the three unpromoted candidates, the
+one-year persistence band, the review-time influence check, the
+documentary reading bands. The audit consumed the accumulated
+evidence; nothing was re-measured. The station's remaining rows
+are the owner's call (the open question the handoff's first
+consumer — the workplan §11's expansion rule or the standing
+engineering rows, never this track's to pick). The owner's RU
+report: `docs/iterations/iter-287-readiness-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

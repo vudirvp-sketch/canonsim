@@ -284,7 +284,7 @@ in this section is PROPOSAL unless an owner document promotes it.
 
 ## 9. Current W-stage and gate
 
-The standing work boundary after iter-286 (the owner's execution order;
+The standing work boundary after iter-287 (the owner's execution order;
 `WORLD_WORKPLAN.md` §7 the owner):
 
 ```text
@@ -300,7 +300,9 @@ W7     = COMPLETE (four rows landed, iter-283/284/285/286: the battery,
          CONFIRMED at both bands — and the named-boundary route)
 W8     = CURRENT EXECUTION STAGE — integration readiness (opened
          iter-286 on the owner's conditional call; the first row —
-         the seven-criteria readiness audit)
+         the seven-criteria readiness audit — LANDED iter-287:
+         all seven criteria MET at the measured band, the gaps
+         named; the remaining rows the owner's call)
 ```
 
 W6's station law: run the genre matrix
@@ -343,6 +345,33 @@ re-measuring carried evidence is polishing; the row stays available
 for a NEW major's own arm), and W8 OPENED on the conditional call
 («если нет, то и w8 открыть»). The owner's RU report:
 `docs/iterations/iter-286-namedroute-report.md`.
+
+W8's first row LANDED (iter-287, the owner's «w8 можешь начинать
+делать» call — the station ENTERED on the owner's explicit call;
+R0 doc-only: the audit consumed the accumulated evidence, nothing
+re-measured): the seven-criteria readiness audit — every criterion
+cited to its standing owner, every gap named where the evidence is
+thinner than the claim (the full record `WORLD_TESTS.md` §9's W8
+entry — the single owner). All seven MET at the measured band: the
+authored causal substrate (ANCHOR_REGION §5's mesh + D-237's
+composition), a demonstrated meso unit (§6.1–6.5's five, three
+CONFIRMED / two PARTIALLY — the band honesty carried),
+pack-primitive representability (D-240/D-191 + the iter-283
+compression inventory + the rs-1..rs-13 family; the I0 inventory's
+three candidates the named unpromoted gaps), the ordinary event's
+persistent human-scale consequence (the I0 witness + the exit
+criterion met four times), explicit knowledge asymmetry (the §9
+doctrine + the zero-leak blind suite + the measured witnesses),
+world-specific material outside the core (INV-3, executable), the
+proven-vs-hypothetical distinction (§10's vocabulary + the
+PROPOSAL fence). VERDICT: the track READY for the broader
+implementation handoff at the measured band — the named gaps (the
+meaning-layer thinness, the two PARTIALLY meso units, the three
+unpromoted candidates, the one-year persistence band, the
+review-time influence check, the documentary reading bands) ride
+the handoff as its honest boundary list, never as unknowns. The
+station's remaining rows: the owner's call. The owner's RU report:
+`docs/iterations/iter-287-readiness-report.md`.
 
 W6's row-by-row landing history (iter-278 the substrate side;
 iter-279/280 the reading band's LLM and live halves; iter-281 the two
