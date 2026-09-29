@@ -1,61 +1,59 @@
-Iteration: iter-290 (`redot-removal` — the owner's «удаляй redot»
-  call, the «вовсе отказываемся» half of the D-244 directive; R3):
-  D-245 — the frozen tree DELETED (workbench/presentation/redot/ the
-  10 files + docs/REDOT_ENGINE_INDEX.md + scripts/visual_proof.py +
-  the three proof/contract packets + "Workbench Setup.bat"; 16 paths,
-  recovery: git history + the verbatim pack at
-  docs/frontendweb/archive/), the zero-command launcher RE-POINTED to
-  the web client (npm over PATH, the first-run npm install,
-  GATEWAY_TARGET the observed bind URL forwarded — the Vite proxy
-  target, --no-frontend the gateway-only form, the POSIX session/
-  group teardown — npm's sh→vite grandchildren die with the tree,
-  never orphaned; the pack's §16 gate discharged by the deletion
-  itself: the frozen target no longer exists), test_workbench_launch
-  rewritten (10 tests), the routing sync (AGENT_NAVIGATION, README,
-  FRONTEND_WEB_LAW, CONTRACTS §5, the law banners, frontendweb,
-  SSI_TOPOLOGY, docguard/topology docstrings, .gitignore). 2529
-  passed + 1 skipped + the live full-stack proof (the proxy
-  round-trip app.status, SIGINT → exit 0, zero orphans); ONE
-  cumulative archive over e6789cf carrying the unapplied iter-289
-  (supersedes its delivery); the RU report at
-  docs/iterations/iter-290-redot-removal-report.md
+Iteration: iter-293 (`frontendweb` — the post-S0 continuation,
+  the owner's «можешь продолжать работу по фронтенду» delegated call
+  over STATUS Next step's named order — the tooling floor first; R2,
+  frontend-local additive tests): the tooling floor's FIRST ROW
+  landed — the frontend architecture guard
+  (`frontend/tests/architecture/guard.test.ts`, 8 tests,
+  FRONTEND_WEB_LAW §11's dependency-boundary check as the backend
+  `test_architecture.py`'s parity form; AGENTS §2.8's
+  existing-mechanism-first — the existing vitest suite, ZERO new
+  dependencies; dependency-cruiser/eslint-boundaries and the
+  Playwright-class multi-tab smoke stay parked rows, each its own
+  admission): R1 `fetch(` ONLY in the typed gateway client (the one
+  transport adapter — INV-4's client-side mirror), R2 no
+  XMLHttpRequest/EventSource/WebSocket/serviceWorker before their
+  gateway contracts (the §5 stream admission), R3 no browser
+  storage as truth (localStorage/sessionStorage/BroadcastChannel/
+  indexedDB/caches — §6), R4 `src/api/**` imports nothing upward,
+  R5 no cross-feature imports, R6 features couple to state only via
+  `import type`, R7 the ONE composition root, R8 src never imports
+  tests; the scans are CALL-FORM patterns so law-restating
+  docstrings never false-positive; MUTATION-VERIFIED (a localStorage
+  probe and a cross-feature import probe both caught red with
+  file+line, green again after removal — the freshly adopted
+  method's claim→falsifier discipline applied the same session);
+  54 vitest green (46+8) + tsc + the production build; the
+  frontend README's Verify/gate-list synced, the agent-context
+  stage map's POST-S0 row updated; the RU report at
+  docs/iterations/iter-293-frontendweb-report.md
+
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2529 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; the standing suite;
-  zero Python semantics change this iteration — the launcher
-  rework + comments only)
+  zero Python change — the frontend stack: 54 vitest + tsc + build,
+  the 8 new guard tests riding npm test)
   ·
 Date: 2026-09-29 ·
-Scope: deleted 16 paths (workbench/presentation/redot/ ×10,
-  docs/REDOT_ENGINE_INDEX.md, scripts/visual_proof.py,
-  tests/{test_visual_proof,test_shell_proof,test_shell_contract}.py,
-  "Workbench Setup.bat"), scripts/workbench_launch.py (the re-point),
-  Workbench.bat, tests/test_workbench_launch.py (rewritten),
-  tests/test_workbench_app.py (the launcher test re-pointed),
-  tests/test_managed_backend.py (a docstring), workbench/{scene_ir,
-  application/clock, application/inference/__init__,
-  platform/llama_process}.py + scripts/{workbench_app, docguard,
-  topology}.py (comments/entries/docstrings), .gitignore, docs/
-  {DECISIONS.md (D-245), AGENT_NAVIGATION.md, CONTRACTS.md,
-  FRONTEND_WEB_LAW.md, WORKBENCH_APP_LAW.md,
-  LLAMA_CPP_INFERENCE_CONTROL_LAW.md, VISUAL_SYSTEM_UI.md,
-  FRONTEND_UIUX_LAW.md, WORLD_PRESENTATION_LAW.md, SSI_TOPOLOGY.md,
-  TASKS.md (the ledger, iter-280 evicted, 593/600), frontendweb/
-  {README.md, FRONTEND_WEB_AGENT_CONTEXT.md}, frontend/README.md,
-  iterations/iter-290-redot-removal-report.md (new)}, README.md,
-  STATUS.md, worklog.md (iter-280 evicted) — 16 deleted + 65
-  changed/created paths (the cumulative delta carries the unapplied
-  iter-289; R3 — cross-boundary removal; zero canon change, the LOG
-  untouched, zero corpus price)
+Scope: frontend/tests/architecture/guard.test.ts (new — the 8-rule
+  guard), frontend/README.md (the Verify section + the gate list),
+  docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map's
+  POST-S0 row), docs/TASKS.md (the ledger, iter-283 evicted),
+  STATUS.md, worklog.md (iter-283 evicted),
+  docs/iterations/iter-293-frontendweb-report.md (new) — 7 paths
+  (R2 — frontend-local additive tests; zero Python change, zero
+  canon change, the LOG untouched, zero corpus price)
 Track A: the web-frontend track — S0 LANDED, awaiting the owner's
-  green review; the Redot era CLOSED (D-245 — the web client is the
-  only presentation consumer; the standing boundaries: SSE/
-  WebSocket, Tauri, PWA — each its own admission). The world track:
-  W8's remaining rows the owner's call. The ssi family COMPLETE
-  except ssi-5, owner-gated.
+  green review; the Redot era now CLOSED IN TREE as well as in docs
+  (D-245 complete); the design-research method adopted for the
+  track's visual/interface rows (D-246 — method, never authority);
+  the tooling floor's first row LANDED (iter-293 — the
+  architecture guard riding npm test);
+  the standing boundaries: SSE/WebSocket, Tauri, PWA — each its own
+  admission. The world track: W8's remaining rows the owner's call.
+  The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -84,10 +82,7 @@ Track A: the web-frontend track — S0 LANDED, awaiting the owner's
 
 ## Active KIs
 
-(none — the §5 mandatory cleanup paid at iter-286: KI#107, closed
-iter-285, deleted; the prior cleanups at iter-280 (KI#104/KI#105/
-KI#106) and the close records live in git, the TASKS ledger, and the
-owning iteration reports)
+- KI#108 · the iter-290 delta applied owner-side without its 16 DELETED_PATHS (the Redot tree/index/proof packets stayed tracked while every doc said deleted; docguard + the stale shell-contract red) · 2026-09-29 · CLOSED iter-291 (the deletions landed, 2529+1 again; root cause: the git-block `git rm` lines not executed — KI#55's mirror)
 
 ## FAQ / Pitfalls
 
@@ -95,8 +90,8 @@ owning iteration reports)
 > restated their named owners (doc-3). The operational recipes live in
 > TECH_NOTES §14 (live-session) + §15 (corpus-regen).
 
-- - **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
-- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); engine/API questions route through docs/REDOT_ENGINE_INDEX.md (D-207); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again; every llama.cpp inference-control question (chips, scopes, AUTO, the sampler chain, relations, effective state, presets/recipes, capability versioning, the extra_args hatch) routes through docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md FIRST (D-219, inf-1 — the semantic core in workbench/application/inference/ (the package since ssi-4); the profile store IS the §19.1 BASE PROFILE layer; the launch settings own DEPLOYMENT only after the one-way migration; chat's BASE temperature resolves through the resolver; the raw extra_args hatch never shadows a semantic control); every SSI / risk-class / proof-carrying-change / ssi-phase question routes through docs/ssi/SSI_OVERLAY.md FIRST (D-222, ssi-2 — the block matrix + the rule subset + the phase ladder; the risk ladder's binding home AGENTS §2.9); every topology / module-ownership / co-change / god-object / read-seam question routes through docs/SSI_TOPOLOGY.md FIRST (D-224, ssi-3 — the 82-module map + the audit verdicts + the phase consequences; scripts/topology.py the instrument).**
+- **Read-side folds (echo/traits) never feed entropy/channel inputs (L6/EPIST-1, iter-46/55); the intent door is the only legal path** — DIRECTOR_SPEC §4; the one legal render: BRIEF_SPEC §3.5.
+- **Every visual/UI row routes through docs/VISUAL_SYSTEM_UI.md FIRST (the surface-driven grammar, the token taxonomy, the state matrix, the §8 report; mechanisms not looks; the effective-state evidence law wins over quiet chrome) + its §11 companion routing (accessibility/keyboard/reduced-motion/responsive/localization — binding on every visual row, never silently dropped) — VISUAL_SYSTEM_UI §0/§6/§11 (admitted iter-229, D-211); every frontend INTERACTION/IA/selection/epistemic/accessibility/localization/responsive/Observatory question routes through docs/FRONTEND_UIUX_LAW.md FIRST (the interaction law owner, admitted iter-233, D-214); Redot/Godot engine questions route to the archived pack's reference docs (D-245 — the index deleted, never a repo file again); application/runtime contracts (operations/lifecycles/identity/deadlines/streaming/persistence/inference) through docs/WORKBENCH_APP_LAW.md; Observatory analytical semantics (planes/World Question/query families/run identity/promotion gate) through docs/OBSERVATORY_LAW.md; world presentation/Scene IR/assets/LOD/degradation through docs/WORLD_PRESENTATION_LAW.md — all three D-218/iter-237, the v5.2 corpus re-homed, the external docs never needed again; every llama.cpp inference-control question (chips, scopes, AUTO, the sampler chain, relations, effective state, presets/recipes, capability versioning, the extra_args hatch) routes through docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md FIRST (D-219, inf-1 — the semantic core in workbench/application/inference/ (the package since ssi-4); the profile store IS the §19.1 BASE PROFILE layer; the launch settings own DEPLOYMENT only after the one-way migration; chat's BASE temperature resolves through the resolver; the raw extra_args hatch never shadows a semantic control); every SSI / risk-class / proof-carrying-change / ssi-phase question routes through docs/ssi/SSI_OVERLAY.md FIRST (D-222, ssi-2 — the block matrix + the rule subset + the phase ladder; the risk ladder's binding home AGENTS §2.9); every topology / module-ownership / co-change / god-object / read-seam question routes through docs/SSI_TOPOLOGY.md FIRST (D-224, ssi-3 — the 82-module map + the audit verdicts + the phase consequences; scripts/topology.py the instrument).**
 - **Chronicle conditionals read FLAT context keys and, since iter-265, the location fold's DOTTED state keys (`loc_malby.destroyed` — the §6.5 render conditional's surface: seeded flags/accounts + event writes, tolerant, a reader never a truth test); a checked action's verdict is NESTED (`outcome.check.passed`, iter-43) — `render/tracery.py` + `render/chronicle.py`; validator verdicts follow CURRENT canon never the anchor (iter-9; invented = contradicted, unmodeled = insufficient_data) — VALIDATION_SPEC §4–§5.**
 - **Crossings fire in tick order (co-occurring: the coarsest clock first — macro → rotation → beat); director/urgencies ride the INTENT door, reactions the COMMIT door (D-037/38/39)** — BRIEF_SPEC §3.2/§3.3; KI#17 (git).
 - **System passes scan the whole projection, never the seeding events (KI#16); the decay baseline = the last axis-changing event's tick via the (entity, prop) → tick index (KI#19, D-050)** — D-050's record.
@@ -117,23 +112,48 @@ owning iteration reports)
 
 ## Next step
 
-**iter-290 DONE: redot-removal (the owner's «удаляй redot» call; R3).
-  D-245 — the frozen tree DELETED (16 paths; recovery: git history +
-  the verbatim pack at docs/frontendweb/archive/), the zero-command
-  launcher RE-POINTED to the web client (npm over PATH, the first-run
-  npm install, GATEWAY_TARGET the observed bind URL, the POSIX group
-  teardown; the pack's §16 gate discharged by the deletion itself),
-  the routing sync across the laws/NAV/README; 2529+1 + ruff +
-  docguard + topology --check clean + the live full-stack proof; ONE
-  cumulative archive over e6789cf carrying the unapplied iter-289
-  (supersedes its delivery).**
-Next: the owner's calls — the S0-green review (the four iter-289
-criteria), then the post-S0 gates (the streaming admission, the
-tooling floor's CI rows, the acceptance matrix), the DECISIONS
-collapse (36→30, the owner's call), and the world track's parallel
-rows.
-Active KIs: none. The suite green (2529+1). The owner's RU
-  report: docs/iterations/iter-290-redot-removal-report.md.
+**iter-293 DONE: frontendweb (the owner's «можешь продолжать работу
+  по фронтенду» call; R2, additive tests).** The tooling floor's
+  first row — the frontend architecture guard (8 tests riding npm
+  test): fetch only in the typed client, no second transport before
+  its gateway contract, no browser storage as truth, api purity, no
+  cross-feature imports, state coupling type-only, the ONE
+  composition root, the test seam; mutation-verified (both probes
+  caught with file+line); 54 vitest + tsc + build green; zero new
+  dependencies (dependency-cruiser/Playwright parked rows).
+Next: the owner's calls — the streaming admission (the SSE gateway
+  contract first — a backend row, its own iteration), the Phase 3
+  vertical slice (shell/nav, Chat/Inference, Settings, Observatory
+  entry), the acceptance matrix, the DECISIONS collapse (36→30, the
+  owner's call), and the world track's parallel rows.
+Active KIs: KI#108 CLOSED iter-291 (the record above). The suite
+  green (2529+1; the frontend 54). The owner's RU report:
+  docs/iterations/iter-293-frontendweb-report.md.
+iter-292 DONE: methoddoc (the owner's tmpfiles v3 delivery + the
+  «определись что перенимаем и куда» call; R0, doc-only).** D-246 —
+  the design-research & mechanism-transfer method adopted as METHOD,
+  never authority: the verbatim original archived (md5-pinned, the
+  read-only-copy class), the durable residue distilled as the agent
+  context's §9 (the five mechanisms + the depth ladder + the gates +
+  VIS-0..3 + the transfer-record form), the doc's own §34
+  rejections made CanonSim's (no parallel authority, no global
+  Reference Lock, no novelty quota, no pixel-perfect gate); zero
+  code, the product owners untouched.
+Active KIs: none new. The suite green (2529+1). The owner's RU
+  report: docs/iterations/iter-292-methoddoc-report.md.
+iter-291 DONE: redotfix (KI#108 — the half-applied iter-290 delta;
+  R3, the completion of the RECORDED D-245).** The owner-side
+  application landed the 65 changed/created paths but never executed
+  the 16 deletions — the repo claimed Redot deleted while the tree,
+  the index, the proof packets, and the Setup .bat stayed tracked
+  (docguard red on the 1462-line index, the stale shell-contract pin
+  red). Fixed: the 16 paths removed, the suite back to the claimed
+  2529+1, docguard clean; the one stale live-routing FAQ half synced
+  to the archived-pack form; the law-body residue (UIUX §0's diagram
+  row, WPL §14/§15 mentions) named for the owner, never silently
+  rewritten.
+Active KIs: KI#108 CLOSED iter-291. The suite green (2529+1). The
+  owner's RU report: docs/iterations/iter-291-redotfix-report.md.
 iter-288 DONE: the frontend-web pack ingestion (the owner's
   tmpfiles delivery of CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip
   + the «выполняй» execution order over the reported plan; R0

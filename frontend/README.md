@@ -48,9 +48,25 @@ together, installs on the first run, and opens the browser) — or
 
 ```
 npm run typecheck   # tsc --noEmit
-npm test            # vitest run (unit + contract + integration)
+npm test            # vitest run (unit + contract + integration + architecture)
 npm run build       # typecheck + the production build
 ```
+
+The architecture guard (`tests/architecture/guard.test.ts`) is the
+tooling floor's first landed row (FRONTEND_WEB_LAW §11's
+dependency-boundary check, the backend `test_architecture.py`'s
+parity form): it enforces, as executable law — fetch ONLY in the
+typed gateway client (the one transport adapter); no
+XMLHttpRequest/EventSource/WebSocket/serviceWorker before their
+gateway contracts (the stream admission); no browser storage as
+truth (localStorage/sessionStorage/BroadcastChannel/indexedDB/
+caches); `src/api/**` imports nothing upward; no cross-feature
+imports; features couple to state only via `import type`; one
+composition root; src never imports tests. A violation is a red
+test naming the file and line — never silent drift. The heavier
+instruments named by the law (dependency-cruiser / eslint-
+boundaries, the Playwright-class multi-tab smoke) stay parked rows,
+each its own admission (AGENTS §2.8: the existing suite first).
 
 The contract tests run against the committed fixtures
 (`tests/fixtures/*.json`) — captured from the live gateway code
@@ -87,5 +103,6 @@ re-runnable from `tests/test_gateway.py`'s own patterns).
 
 SSE/WebSocket; the layout manifest / surface registry; the full
 Observatory suite; PWA offline packaging; Tauri 2; V5.2 polish;
-JSON-Schema-driven settings; dependency-cruiser CI (recommended
-immediately after S0 green).
+JSON-Schema-driven settings; the CI rows (dependency-cruiser CI,
+the Playwright smoke — post-S0 admissions; the architecture guard
+itself rides `npm test` and IS landed).

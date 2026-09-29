@@ -13,6 +13,7 @@
 | Artifact | What it is |
 |---|---|
 | `CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip` | the external frontend-web agent implementation pack v1.3 (52 files: the 16 normative docs + the repo-ground-truth snapshot + the source-workbench V5.2/Redot historical tree + the legacy-redot reference + the integrity checks), uploaded by the owner 2026-09-29 as the web-frontend implementation contract |
+| `canonsim_design_research_and_mechanism_transfer_method_v3.md` | the external design-research & mechanism-transfer method v3 (the Refero-derived method adapted to CanonSim — the observation/mechanism/transfer-boundary/target-envelope/falsifier discipline for visual & interface research rows), uploaded by the owner 2026-09-29; adopted as METHOD (never authority) at iter-292, D-246 — the distilled method row lives in `../FRONTEND_WEB_AGENT_CONTEXT.md` §9 |
 
 ## Provenance
 
@@ -35,6 +36,27 @@
   `docs/blueprint/phases.md` §6 (the iter-288 record), distilled
   into `../FRONTEND_WEB_AGENT_CONTEXT.md`, and bound as law in
   `docs/FRONTEND_WEB_LAW.md` (D-243).
+
+### The method document (the second artifact)
+
+- **Source**: owner upload (tmpfiles.org, 2026-09-29,
+  `wrA8w8af6fMy`; the host copy expires — this file is the durable
+  preservation).
+- **Integrity**: md5 `8816154ab270cedad200535068b5ddd1`, sha256
+  `e897097f8346b37465f32a16f65bc3c026f1f83dd82b1ccae1ef171144c2f72d`,
+  44645 bytes, 1851 lines.
+- **Ingested**: iter-292 against HEAD
+  `abfd48c11dfc66faff22032c675cb20d1bcfe313` (iter-290 as
+  delivered). The adoption verdict — what was taken (the five core
+  mechanisms, the risk-based depth ladder, the compact transfer
+  record, VIS-0..3, the anti-averaging/anti-slop gates), what was
+  rejected (the document's own §34 list: no parallel Refero
+  authority, no global Reference Lock, no novelty quota, no
+  pixel-perfect gates), and where the durable residue lives
+  (`../FRONTEND_WEB_AGENT_CONTEXT.md` §9, the web-track agent
+  context) — is recorded in `docs/DECISIONS.md` D-246 and the
+  iter-292 report. The document's own status line holds: research /
+  proposal, non-binding — method, never product law.
 
 ## What the pack uniquely retains (open only for these)
 

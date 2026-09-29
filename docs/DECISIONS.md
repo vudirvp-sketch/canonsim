@@ -471,3 +471,39 @@ recovery=git history]
 references it; authority_absence=wb-10's owner fix list is superseded
 by the web re-point (this row); historical=the one-time folder picker
 for the external Redot binary; recovery=git history]
+
+
+### D-246 — iter-292 · methoddoc (R0, doc-only) — the design-research
+& mechanism-transfer method v3 adopted as METHOD, never authority
+
+The owner's 2026-09-29 tmpfiles delivery of
+`canonsim_design_research_and_mechanism_transfer_method_v3.md` (the
+Refero-derived design-research discipline adapted to CanonSim) + the
+«изучи и определись что перенимаем и куда» delegation call. Adopted
+per the document's own constraints (its §1/§31 routing): the verbatim
+original preserved at
+`docs/frontendweb/archive/canonsim_design_research_and_mechanism_
+transfer_method_v3.md` (md5 8816154ab270cedad200535068b5ddd1, 1851
+lines, the read-only-copy allowlist entry in docguard); the durable
+residue distilled as §9 of
+`docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md` (the web-track agent
+context — the single carrier): the five core mechanisms (observation
+before interpretation; mechanism not appearance; the transfer
+boundary; the target envelope; claim→falsifier→evidence), the
+risk-based depth ladder, the anti-averaging/anti-slop gates, the
+VIS-0..3 visual classification, the §27 compact transfer record
+riding the owning iteration's report. Rejected — the document's own
+§34 list, now CanonSim's: no parallel Refero authority/tree/registry,
+no global Reference Lock document, no separate decision ledger, no
+novelty quota, no mandatory research ritual or query counts, no
+pixel-perfect visual gate (the target envelope wins), no Refero
+runtime dependency, no donor palettes/tokens/components as CanonSim
+tokens. Why: the method closes a real recurring gap (external
+references silently becoming authority or averaging into AI-slop)
+using existing carriers only — zero new law documents, zero code,
+the product owners untouched (INV-1..5 all held; the pack-family
+precedents: iter-288's ingest-distill-archive form, ssi-2's
+read-only-copy form). Verification: docguard clean (the allowlist
+entry + the caps), ruff clean, the standing suite untouched
+(2529+1); rollback=delete the archive file + the §9 row + the
+allowlist entry.

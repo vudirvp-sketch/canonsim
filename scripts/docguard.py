@@ -121,6 +121,13 @@ ALLOWLIST: dict[str, str] = {
         "(ssi-2/D-222): the external package verbatim, never edited "
         "in-repo, the overlay (SSI_OVERLAY.md) the only authored file; "
         "the docs/blueprint/phases.md research-archive precedent (§6.1)",
+    "docs/frontendweb/archive/canonsim_design_research_and_mechanism_transfer_method_v3.md":
+        "the design-research & mechanism-transfer method v3 — the "
+        "READ-ONLY verbatim preservation of the owner's 2026-09-29 "
+        "external delivery (iter-292/D-246): the external method "
+        "document never edited in-repo, the distilled method row the "
+        "authored surface (FRONTEND_WEB_AGENT_CONTEXT.md §9); the "
+        "ssi read-only-copy + archive-zip precedents (§6.1)",
     "docs/ssi/software-semantic-integrity-unified-v2.md":
         "the prior canonical supplement retained for traceability — the "
         "READ-ONLY reference copy (ssi-2/D-222), the same §6.1 class as "

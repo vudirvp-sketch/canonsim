@@ -2,7 +2,10 @@
 
 > The web-frontend track surface: the durable agent context + the
 > preserved pack archive. Created iter-288 (D-243) by ingesting the
-> owner's external `CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip`.
+> owner's external `CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip`;
+> the design-research & mechanism-transfer method v3 joined the
+> archive at iter-292 (D-246 — the method row distilled into the
+> agent context §9).
 
 ## Purpose
 
@@ -16,7 +19,8 @@ authoritative everywhere (the pack's own routing law).
 
 0. `FRONTEND_WEB_AGENT_CONTEXT.md` — the durable compact agent
    context (identity, the reconciliation verdicts, the owner-gated
-   boundary, the stage map, navigation, anti-patterns) — the entry
+   boundary, the stage map, navigation, anti-patterns, the
+   design-research method §9) — the entry
    surface for an agent resuming the web track; it navigates, it
    never replaces the owners.
 1. `docs/FRONTEND_WEB_LAW.md` — the binding web-frontend
@@ -35,8 +39,8 @@ Do **not** load the archive by default; its provenance fence is
 
 | Surface | Owns | Does not own |
 |---|---|---|
-| `FRONTEND_WEB_AGENT_CONTEXT.md` | the web-track agent context: identity, the reconciliation verdicts, the owner-gated boundary list, the stage map, navigation, anti-patterns | owner content — it navigates and reconciles, never restates; history (the archive record stays in `archive/README.md`) |
-| `archive/` | the preserved pack: verbatim evidence, provenance, the unique retains | anything current — never re-ingested, never a second source |
+| `FRONTEND_WEB_AGENT_CONTEXT.md` | the web-track agent context: identity, the reconciliation verdicts, the owner-gated boundary list, the stage map, navigation, anti-patterns, the design-research method row (§9) | owner content — it navigates and reconciles, never restates; history (the archive record stays in `archive/README.md`) |
+| `archive/` | the preserved pack + the verbatim method document: evidence, provenance, the unique retains | anything current — never re-ingested, never a second source |
 
 ## Current stage
 

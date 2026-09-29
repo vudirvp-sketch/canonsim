@@ -2,11 +2,14 @@
 
 > What an agent needs repeatedly when working the web-frontend track:
 > identity, non-negotiable rules, the reconciliation verdicts, the
-> owner-gated boundary, the stage map, navigation, anti-patterns.
+> owner-gated boundary, the stage map, navigation, anti-patterns,
+> the design-research method.
 > Bootstrap source: `CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip`
 > (external implementation-contract pack, ingested iter-288) —
 > preserved verbatim as historical evidence in `archive/`, never
-> re-ingested wholesale. The binding distilled law is
+> re-ingested wholesale. Second source: the design-research &
+> mechanism-transfer method v3 (ingested iter-292, D-246 — §9).
+> The binding distilled law is
 > `docs/FRONTEND_WEB_LAW.md` (D-243); this file navigates and
 > reconciles — it never restates an owner (D-024). Update it only
 > when the stage, a boundary, or a verdict changes — never as a
@@ -120,9 +123,17 @@ S0 LANDED      — iter-289, DONE (the four criteria evidenced: the
                  the load note — the report
                  docs/iterations/iter-289-frontendweb-report.md;
                  S0-green confirmation the owner's review call)
-POST-S0        — the full acceptance matrix + the streaming
-                 admission + the tooling floor (each its own
-                 admission)
+METHOD ROW     — iter-292, DONE (D-246: the design-research &
+                 mechanism-transfer method adopted for visual/
+                 interface research rows — §9 below; method, never
+                 authority)
+POST-S0        — the tooling floor's first row LANDED (iter-293: the
+                 architecture guard — the dependency-boundary row as
+                 tests/test_architecture's parity form, riding npm
+                 test); the standing gates each its own admission:
+                 the streaming admission, the acceptance matrix, the
+                 tooling floor's remaining rows (the CI wiring, the
+                 Playwright-class multi-tab smoke)
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the
                  owner's call
@@ -166,3 +177,68 @@ MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
   own discipline).
 - Do not treat this file or the archive as a second source of truth;
   one fact has one owner — link it.
+
+## 9. The design-research & mechanism-transfer method (iter-292, D-246)
+
+> The owner's 2026-09-29 delivery: the external method document v3
+> (the Refero-derived design-research discipline, adapted to
+> CanonSim), preserved verbatim at
+> `archive/canonsim_design_research_and_mechanism_transfer_method_v3.md`
+> (md5-pinned). Adopted as METHOD, never authority: it disciplines
+> HOW the track's visual/interface research rows are researched,
+> transferred, and proven — it defines no product law, no visual
+> identity, no runtime semantics, no proof authority. Product
+> questions stay with their §7 owners; external references inform,
+> CanonSim law decides.
+
+The binding core — five mechanisms, applied when an external
+reference materially influences a design decision:
+
+1. **Observation before interpretation.** Extract the observable
+   evidence first (a stable action region, subordinate metadata,
+   a non-colour state channel); adjectives ("cleaner", "premium",
+   "modern") describe preference, never evidence.
+2. **Mechanism, not appearance.** Every material donor pattern
+   answers: what happens, why it works in the donor, what problem
+   it solves, which donor assumptions are non-portable, which
+   CanonSim invariant survives, which existing owner/carrier
+   implements it, how transfer success is falsified. The portable
+   unit is mechanism + function + boundary — never palette, page
+   anatomy, or component shape.
+3. **The transfer boundary.** State what STOPS at the donor
+   boundary (navigation model, labels, styling, framework,
+   vocabulary, architecture). Only the justified mechanism crosses.
+4. **The target envelope.** A reference frame is an exemplar, not a
+   pixel-perfect command: MUST PRESERVE (hierarchy, density
+   relationship, semantic accent role, state visibility,
+   selection/focus treatment, epistemic distinctions) vs MAY VARY
+   (text length, item count, dynamic data, geometry under
+   DPI/locale, supported viewport adaptation). The envelope must
+   survive Cyrillic, long labels, loading/stale/failed states,
+   multi-tab — visual proof compares against the envelope, never
+   blind pixels.
+5. **Claim → falsifier → evidence.** A material design proposition
+   carries a claim, a falsifier (the observation that would disprove
+   it), evidence in distinct classes (static / runtime / task /
+   performance — one never impersonates another), and a disposition
+   (KEEP | MODIFY | BOUND | DEFER | REJECT).
+
+The gates: research depth scales with risk (direct build → light →
+standard → deep — never a ritual quota; an approved target means
+bounded direct build); references are never averaged into a generic
+centroid (one primary direction, bounded secondaries); the
+anti-slop questions fire on non-trivial choices (what real CanonSim
+property motivates this? which invariant does it express? would the
+identity survive removing the decoration?); VIS-0..3 classify
+visual defects (visual classification only, never a replacement
+for the project's P0–P4); a material transfer leaves the compact
+record (the archive document's §27 template: TASK / OWNER / SOURCE
+/ OBSERVATION / MECHANISM / FUNCTION / TRANSFER BOUNDARY / CANONSIM
+INVARIANT / NATIVE CARRIER / ADAPTATION / TARGET ENVELOPE / COST /
+FALSIFIER / PROOF / DISPOSITION / DURABLE RESIDUE ROUTING) in the
+owning iteration's report; durable residue routes into the existing
+§7 owners. The document's own §34 rejections are CanonSim's: no
+parallel Refero tree or registry, no global Reference Lock, no
+novelty quota, no mandatory multi-source ritual, no pixel-perfect
+gate, no Refero runtime dependency — the method is valuable
+precisely because it never becomes a second product system.
