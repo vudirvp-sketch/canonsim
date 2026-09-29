@@ -18,7 +18,7 @@ place the sanctioned surfaces meet) — and serves the loopback HTTP
 binding the frontend talks to:
 
 ```text
-Redot shell (POST /op)  ->  LoopbackHttpTransport  ->  Gateway
+Web client (POST /op)  ->  LoopbackHttpTransport  ->  Gateway
      -> chat.send / run.get / run.cancel / model.*     ->  BackendPort
      -> model.fetch (the injected platform fetcher)       (ATTACHED: the
                         operator's process, D-192's D1
@@ -89,7 +89,8 @@ Usage (the owner's live forms):
     # <repo>/workbench/runtime/models (auto-created) +
     # <repo>/workbench/runtime/settings.json + MANAGED spawns with
     # the persisted/CLI launch settings — the one-command form is
-    # scripts/workbench_launch.py (the gateway + Redot together).
+    # scripts/workbench_launch.py (the gateway + the web frontend
+    # together).
 """
 
 from __future__ import annotations
@@ -136,9 +137,8 @@ from workbench.platform.llama_process import (  # noqa: E402
 )
 from workbench.platform.model_fetch import HttpModelFetcher  # noqa: E402
 
-#: The loopback serve defaults (the frontend's committed project
-#: setting matches: workbench/presentation/redot/project.godot —
-#: canonism_workbench/gateway/url).
+#: The loopback serve defaults (the web client's committed proxy
+#: target matches: frontend/vite.config.ts's GATEWAY_TARGET default).
 DEFAULT_HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
 

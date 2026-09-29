@@ -1,0 +1,8 @@
+{
+  "operation_id": "4deb2302464f4f0b7babd042de8874672a37b14c9d65394db945532585c76fb4",
+  "rejection": "DUPLICATE_REQUEST",
+  "result": {
+    "reason": "the idempotency key is already bound to a different request (the conflicting reuse)"
+  },
+  "status": "REJECTED"
+}

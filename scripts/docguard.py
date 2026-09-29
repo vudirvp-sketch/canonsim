@@ -86,15 +86,6 @@ ALLOWLIST: dict[str, str] = {
         "§8/§8.5/§9) — substance-dense at the ceiling; the intake-34 "
         "empty-ablation line pushed the full stack over (cruft pass "
         "run: no filler found)",
-    "docs/REDOT_ENGINE_INDEX.md":
-        "the Redot engine reference index (iter-225, D-207) — the "
-        "version firewall + the routing map for every engine/API/UI/"
-        "networking/performance/export touch on the Redot surface; "
-        "dense substance (the link catalog + the class routing + the "
-        "networking/remote patterns + the proof checklists); the §6.1 "
-        "cruft pass done at admission (the external changelog cut, the "
-        "seams reconciled to the landed wb surface) — worklog iter-225 "
-        "the record",
     "docs/FRONTEND_UIUX_LAW.md":
         "the frontend UI/UX law (iter-233, D-214) — the distilled "
         "binding form of the owner's Ultimate Frontend/UI/UX/Visual "

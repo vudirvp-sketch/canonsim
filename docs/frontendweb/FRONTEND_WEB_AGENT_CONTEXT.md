@@ -61,7 +61,7 @@ the Redot shell before it, never a fourth network surface.
 | "No React/Vite frontend present in the repo" | TRUE at HEAD — the pack is the implementation contract for ADDING the first web client |
 | Execution/artifact/Scene-IR/Observatory seams: operation/execution identity, deadlines, cooperative cancellation, truthful UNKNOWN, `ExecutionArtifact`, `workbench/scene_ir.py`, `workbench/observatory_read.py` (bounded windows, event-id cursors) | VERIFIED LIVE (the wb row family, `docs/CONTRACTS.md` §5; `docs/WORKBENCH_APP_LAW.md` / `OBSERVATORY_LAW.md` the owners) |
 | The web laws: S0 gate, dual-read, connection budget, surface modules, browser runtime, effective-state closure, tooling floor | NEW LAW SURFACES — distilled into `docs/FRONTEND_WEB_LAW.md` (D-243); they bind the future web client and change nothing existing |
-| The stack decision: React+TS+Vite+Web/PWA-first; Tauri optional; Redot FROZEN+archived | The pack's DECIDED claim; repo-side: the active-path half recorded as the web track's direction; the REDOT-FREEZE half OWNER-GATED (§5 — the one authority tension) |
+| The stack decision: React+TS+Vite+Web/PWA-first; Tauri optional; Redot FROZEN+archived | LANDED — D-244 (the owner's 2026-09-29 call): the freeze + the frontend-1 opening + the `frontend/` tree admission, all three §5 boundaries resolved; the S0-minimal §18 re-homing done (REDOT_ENGINE_INDEX/AGENT_NAVIGATION/README); CLOSED by DELETION at iter-290/D-245 (the owner's «удаляй redot» call: the tree + its index + its proof packets removed, the launcher re-pointed to the web dev server) |
 | `repo-ground-truth/` (the pinned snapshot tree) | NOT LANDED — the live repo is the truth at zero diff; a landed copy would be a second source |
 | `source-workbench/` V5.2 + `legacy-redot-reference/` | stay inside the archive zip — external-by-law (the D-200/D-218 family), provenance only |
 
@@ -82,46 +82,50 @@ README/changelogs v1.1→v1.3 carry the pack's own evolution (v1.3
 added the S0 gate, the dual-read law, the connection budget, the
 tooling floor, the optional P1 config).
 
-## 5. The owner-gated boundary (the honest list)
+## 5. The standing boundaries (post-D-244)
 
-1. **The Redot freeze + archive** (the pack's §17, the migration
-   Phase 0) — the ONE authority tension: the pack freezes Redot; the
-   repo's active law (`docs/REDOT_ENGINE_INDEX.md`, the AGENT_
-   NAVIGATION routing) still routes engine/frontend work through
-   Redot, and `workbench/presentation/redot/` is the live Workbench
-   frontend. Per `AGENTS.md` §11: never silently reconciled — the
-   freeze lands only as the owner's D-row, and the pack's own §18
-   re-homing family (FRONTEND_UIUX_LAW / REDOT_ENGINE_INDEX /
-   AGENT_NAVIGATION / README / launcher re-routing) is migration
-   Phase 1, AFTER the freeze call. Until then no Redot file is
-   touched — and S0 itself excludes Redot changes, so the tension
-   never blocks S0.
-2. **The top-level `frontend/` tree** (the pack's §13 recommended
-   structure — app/components/features/scene/state/api/design-system/
-   tests) — a new top-level directory = `AGENTS.md` §8 stop &
-   confirm.
-3. **The `frontend-1` opening** (the S0 build) — the parked
-   `docs/TASKS.md` standing row; the gate is `FRONTEND_WEB_LAW.md`
-   §2; opens only after (1) and (2).
-4. **Later gates** (each its own admission, never silent): SSE/
-   WebSocket (the §5 admission order), a SharedWorker transport,
-   Tauri 2, PWA packaging, the layout manifest/Capabilities screen
-   (optional P1), the tooling floor's CI rows.
+1. ~~**The Redot freeze + archive**~~ — RESOLVED: D-244 (the owner's
+   2026-09-29 call «redot замораживаем, а возможно и вовсе
+   отказываемся => делаем и работаем по [the pack]»), then CLOSED by
+   DELETION at iter-290/D-245 (the owner's «удаляй redot» call): the
+   tree, the engine index, the proof/contract packets, and the Setup
+   launcher removed; the launcher re-pointed to the web dev server
+   (the pack's §16 gate discharged by the deletion itself — a frozen
+   target no longer exists); recovery: git history + the archive.
+2. ~~**The top-level `frontend/` tree**~~ — RESOLVED: admitted by the
+   same call (the pack's §13 structure; AGENTS §8 satisfied by the
+   owner's explicit work-per-the-pack directive). LANDED at
+   `frontend/` (iter-289).
+3. ~~**The `frontend-1` opening**~~ — RESOLVED: the S0 build landed
+   iter-289 (the four criteria; the evidence in
+   `docs/iterations/iter-289-frontendweb-report.md`).
+4. **Still gated** (each its own admission, never silent):
+   SSE/WebSocket (the §5
+   admission order), a SharedWorker transport, Tauri 2, PWA
+   packaging, the layout manifest/Capabilities screen (optional
+   P1), the tooling floor's CI rows.
 
 ## 6. The stage map
 
 ```text
 PACK INGESTED  — iter-288, DONE (this surface + the law + the archive)
-S0 NOT STARTED — the walking skeleton: the four criteria
-                 (typed gateway client; virtualized LIVE Trajectory
-                 ≥10k; two independent POST-only tabs; the load note)
-                 opens on the owner's frontend-1 call, AFTER §5's
-                 (1)+(2)
+REDOT FROZEN   — iter-289, DONE (D-244: the freeze + the §18
+                 S0-minimal re-homing + the frontend/ admission)
+REDOT DELETED  — iter-290, DONE (D-245: the tree + its index + its
+                 proof packets removed; the launcher re-pointed to
+                 the web dev server; recovery: git history)
+S0 LANDED      — iter-289, DONE (the four criteria evidenced: the
+                 typed gateway client, the virtualized LIVE
+                 Trajectory ≥10k, two independent POST-only tabs,
+                 the load note — the report
+                 docs/iterations/iter-289-frontendweb-report.md;
+                 S0-green confirmation the owner's review call)
 POST-S0        — the full acceptance matrix + the streaming
-                 admission + the tooling floor
-MIGRATION      — the pack's Phase 0..6 sequence (freeze → re-home →
-                 foundation → slice → world → remote/PWA → optional
-                 Tauri), each phase the owner's call
+                 admission + the tooling floor (each its own
+                 admission)
+MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
+                 remote/PWA → optional Tauri), each phase the
+                 owner's call
 ```
 
 ## 7. Navigation (the authoritative owners)
@@ -135,7 +139,6 @@ MIGRATION      — the pack's Phase 0..6 sequence (freeze → re-home →
 | Observatory analytical semantics | `docs/OBSERVATORY_LAW.md` |
 | Scene IR / world presentation / degradation | `docs/WORLD_PRESENTATION_LAW.md` |
 | inference-control semantics | `docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md` |
-| engine facts (Redot — historical/reference) | `docs/REDOT_ENGINE_INDEX.md` |
 | ownership / topology | `docs/SSI_TOPOLOGY.md` |
 | the pack's full contracts (only when a seam needs them) | `archive/…/docs/` — the pack's own `AGENT_READ_ORDER.md` governs depth |
 

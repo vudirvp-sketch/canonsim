@@ -96,6 +96,18 @@
 > `docs/WORLD_PRESENTATION_LAW.md`. The external originals stay with the
 > owner — no repo work requires them anymore.
 >
+> **Redot half DELETED (iter-290/D-245 — the owner's «удаляй redot»
+> call):** `workbench/presentation/redot/`, `scripts/visual_proof.py`,
+> the Redot proof/contract packets (`tests/test_visual_proof.py`,
+> `tests/test_shell_proof.py`, `tests/test_shell_contract.py`), the
+> engine index (`docs/REDOT_ENGINE_INDEX.md`), and `Workbench
+> Setup.bat` are removed; the launcher re-pointed to the web dev
+> server (D-245). The landing notes below stay as the historical
+> record — the Python half (scene IR, gateway, operations, platform)
+> is untouched and the web client (`frontend/`, D-244) is the active
+> consumer. Recovery: git history + the verbatim pack at
+> `docs/frontendweb/archive/`.
+>
 > **wb-1 LANDED (iter-215 the Python half + iter-216 the Redot half):**
 > the seam chain proven end to end — the tavern and province fixtures
 > composed and captured, the double-run PNG byte-diff CONFIRMED (the D4

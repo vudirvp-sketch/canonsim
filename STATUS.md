@@ -1,49 +1,61 @@
-Iteration: iter-288 (`frontendweb` — the frontend-web pack ingestion,
-  the owner's tmpfiles delivery of
-  CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip + the «выполняй»
-  execution order over the reported plan; R0 doc-only): the external
-  implementation-contract pack (52 files, its own ground-truth pin
-  `cd84069` — a dirty-tree checkpoint) read in full in its own S0
-  read order and reconciled against HEAD — every gateway seam claim
-  VERIFIED LIVE (workbench/ zero-diff since the pack's pin; `POST
-  /op` + the session.* family + app.status + the envelopes in
-  workbench/api), no React present (the pack contracts the ADDITION
-  of the first web client). Landed: docs/FRONTEND_WEB_LAW.md (the
-  binding distillation — the S0 gate, the seam law, dual-read, the
-  connection budget, browser runtime, surface modules, the
-  effective-state closure, the tooling floor; D-243),
-  docs/frontendweb/ (the index + the durable
-  FRONTEND_WEB_AGENT_CONTEXT.md + archive/ the verbatim md5-pinned
-  pack), the frontend-1 S0 row parked owner-gated; the Redot-freeze
-  half of the pack's stack decision OWNER-GATED — active Redot
-  routing untouched (AGENTS §11, never silently reconciled). Zero
-  code, zero pack, zero canon change, the LOG untouched; the owner's
-  RU report at docs/iterations/iter-288-frontendweb-report.md
+Iteration: iter-290 (`redot-removal` — the owner's «удаляй redot»
+  call, the «вовсе отказываемся» half of the D-244 directive; R3):
+  D-245 — the frozen tree DELETED (workbench/presentation/redot/ the
+  10 files + docs/REDOT_ENGINE_INDEX.md + scripts/visual_proof.py +
+  the three proof/contract packets + "Workbench Setup.bat"; 16 paths,
+  recovery: git history + the verbatim pack at
+  docs/frontendweb/archive/), the zero-command launcher RE-POINTED to
+  the web client (npm over PATH, the first-run npm install,
+  GATEWAY_TARGET the observed bind URL forwarded — the Vite proxy
+  target, --no-frontend the gateway-only form, the POSIX session/
+  group teardown — npm's sh→vite grandchildren die with the tree,
+  never orphaned; the pack's §16 gate discharged by the deletion
+  itself: the frozen target no longer exists), test_workbench_launch
+  rewritten (10 tests), the routing sync (AGENT_NAVIGATION, README,
+  FRONTEND_WEB_LAW, CONTRACTS §5, the law banners, frontendweb,
+  SSI_TOPOLOGY, docguard/topology docstrings, .gitignore). 2529
+  passed + 1 skipped + the live full-stack proof (the proxy
+  round-trip app.status, SIGINT → exit 0, zero orphans); ONE
+  cumulative archive over e6789cf carrying the unapplied iter-289
+  (supersedes its delivery); the RU report at
+  docs/iterations/iter-290-redot-removal-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
-  backlog + the world track + the SoW horizon, ROADMAP §2/§6) ·
-2556 passed + 9 skipped, ruff clean, docguard clean, topology
+  backlog + the web-frontend track + the world track + the SoW
+  horizon, ROADMAP §2/§6) ·
+2529 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; the standing suite;
-  two doc-only iterations since)
+  zero Python semantics change this iteration — the launcher
+  rework + comments only)
   ·
 Date: 2026-09-29 ·
-Scope: docs/{FRONTEND_WEB_LAW.md (new), frontendweb/README.md (new),
-  frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (new),
-  frontendweb/archive/README.md (new),
-  frontendweb/archive/CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip
-  (new, verbatim), DECISIONS.md (D-243), AGENT_NAVIGATION.md (the §1
-  + §2 + §3 rows), FRONTEND_UIUX_LAW.md (the routing delta),
-  blueprint/phases.md (§6 the iter-288 record), TASKS.md (the
-  frontend-1 row + a D-024 cruft pass over mech-2's tail + the
-  ledger, iter-278 evicted), iterations/iter-288-frontendweb-report.md
-  (new, the owner's RU deliverable)}, STATUS.md, worklog.md (iter-278
-  evicted) — 13 paths (R0 — doc-only; zero code, zero pack, zero
-  canon change, the LOG untouched, zero corpus price)
-Track A: the web-frontend track OPENED at the ingestion band — S0 NOT
-  STARTED (the four criteria, FRONTEND_WEB_LAW §2; the owner's next
-  calls: the Redot-freeze D-row, the top-level frontend/ tree, the
-  frontend-1 opening). The world track: W8's remaining rows the
-  owner's call. The ssi family COMPLETE except ssi-5, owner-gated.
+Scope: deleted 16 paths (workbench/presentation/redot/ ×10,
+  docs/REDOT_ENGINE_INDEX.md, scripts/visual_proof.py,
+  tests/{test_visual_proof,test_shell_proof,test_shell_contract}.py,
+  "Workbench Setup.bat"), scripts/workbench_launch.py (the re-point),
+  Workbench.bat, tests/test_workbench_launch.py (rewritten),
+  tests/test_workbench_app.py (the launcher test re-pointed),
+  tests/test_managed_backend.py (a docstring), workbench/{scene_ir,
+  application/clock, application/inference/__init__,
+  platform/llama_process}.py + scripts/{workbench_app, docguard,
+  topology}.py (comments/entries/docstrings), .gitignore, docs/
+  {DECISIONS.md (D-245), AGENT_NAVIGATION.md, CONTRACTS.md,
+  FRONTEND_WEB_LAW.md, WORKBENCH_APP_LAW.md,
+  LLAMA_CPP_INFERENCE_CONTROL_LAW.md, VISUAL_SYSTEM_UI.md,
+  FRONTEND_UIUX_LAW.md, WORLD_PRESENTATION_LAW.md, SSI_TOPOLOGY.md,
+  TASKS.md (the ledger, iter-280 evicted, 593/600), frontendweb/
+  {README.md, FRONTEND_WEB_AGENT_CONTEXT.md}, frontend/README.md,
+  iterations/iter-290-redot-removal-report.md (new)}, README.md,
+  STATUS.md, worklog.md (iter-280 evicted) — 16 deleted + 65
+  changed/created paths (the cumulative delta carries the unapplied
+  iter-289; R3 — cross-boundary removal; zero canon change, the LOG
+  untouched, zero corpus price)
+Track A: the web-frontend track — S0 LANDED, awaiting the owner's
+  green review; the Redot era CLOSED (D-245 — the web client is the
+  only presentation consumer; the standing boundaries: SSE/
+  WebSocket, Tauri, PWA — each its own admission). The world track:
+  W8's remaining rows the owner's call. The ssi family COMPLETE
+  except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -99,14 +111,30 @@ owning iteration reports)
 - **The cap laws: substance over line count — filler cut always; named systems/field lists/enum values/verdicts never cut to fit; a breach triggers a cruft pass first** — AGENTS §6/§6.1; enforced by `scripts/docguard.py`.
 - **The read-side layers are pure: render rebuilds the RngBank from the header seed; the assembler zero-RNG over (log, ledger) (D-049); retrieval a pure fold, `knower` IS known_by (D-088); and the scene ledger: commit → retire_contradicted → sync_scene → assemble → narrator → apply_delta (auto-syncs; re-asserting terminal states = laundering, refused); the ledger dies with its session (D-139)** — BRIEF_SPEC §2/§3.3.
 - **The STATUS tests-count line feeds the digest's regex: `N passed + M skipped, ruff clean` — one line, comma-free from the counts to `ruff clean` (parenthetical caveats go AFTER `docguard clean`), else the digest reads `(unparsed)`** — `scripts/digest.py` `_TESTS_RE`.
-- **The Workbench runtime layout + the local model flow (wb-9/D-208 + wb-10): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud), `launcher.json` (the launcher's own persisted Redot pick); the zero-command entry is `Workbench.bat` at the repo ROOT (double-click; the Redot FOLDER resolves its engine exe — the persisted pick, then REDOT_EXE, then the Desktop-shaped auto-scan, then the native folder picker once; `Workbench Setup.bat` re-picks; `scripts/workbench_launch.py` the same chain for the command form — run it from the repo ROOT, inside scripts/ the path doubles); a model ARRIVES by the native picker — the OS file/folder dialog hands ABSOLUTE paths to the gateway's `model.import` run (a local copy: `.part` + atomic rename, live progress, cooperative cancel — NO network, INV-4 untouched; the URL fetch stays the collapsed advanced row); `model.list`'s document carries `models_root` (the open-folder answer, never a local guess); `scripts/workbench_app.py` alone serves the gateway with MANAGED the default; the launcher's forwarded URL is the ROOT (scheme://host:port — the banner's `/op` route STRIPPED, KI#98/iter-238: gateway_client.gd owns the route and appends `/op` itself; a route inside the forwarded value doubles to /op/op → 404, the dead-session chain)** — the modules' own docstrings + CONTRACTS §5's wb-10 note
-- **The iter-232 laws: a cooperative-cancellation TEST never calls checkpoint() once and prays — the single call races the main thread's run.cancel dispatch (a fast runner's worker passes through, the "unreachable" guard closes the run FAILED; the sandbox stays green on scheduling luck while CI goes red — KI#95, three-form verified: sandbox, forced fast worker, delayed cancel); poll the checkpoint (the work contract's own lock-free observation surface — run.cancel is never starved) bounded until the cancellation lands, an absent cancel fails LOUDLY; discovery lists never freeze behind one-shot success latches — every surface entry re-scans (KI#96: the owner's hand-dropped GGUF must appear on the next Models entry; the wb-11 re-arm lesson generalizes from FAILURE to staleness — a "requested once" flag guarding the happy path is the bug, not the guard); and a theme re-pin is VALUES-ONLY — every token name, size and pin survives the palette swap (theme@0.4/D-213: the owner's OLED call over the external brief's "never pure black" doctrine — the neutral near-black ramp + the ONE teal accent, 21 WCAG contrast pairs measured)** — tests/test_model_fetch.py `_SlowFetcher.fetch` + shell.gd `_refresh_models` + test_shell_contract.py (the latch ban + the base/accent pins), iter-232
-- **GDScript has NO implicit string-literal concatenation — two adjacent literals across lines are a Python-ism that refuses the whole file at parse (KI#91, iter-224's five sites); one literal per line; `static func tr(` is likewise a parse refusal (Object's native signature — the strings.gd resolver is `lookup`, iter-234); every user-facing string rides the `_tr` boundary (strings.gd en/ru, LAW §17 — a new literal in shell.gd fails the boundary scan); and any Redot/Godot engine question routes FIRST through `docs/REDOT_ENGINE_INDEX.md` (Redot 26.2 LTS pinned, Godot docs secondary cross-reference only; Redot 26.2 has NO `HTTPServer` — the app gateway stays Python-side; route to the smallest section, never read whole)** — test_shell_contract.py's adjacent-literal ban + the index §0/§21, D-207
-- **The chat follow law (iter-230): read the scrollbar's max AFTER a frame — the autowrapped labels size late, reading it at call_deferred time is the short-scroll bug; TWEEN the bar's float `value` (never the int `scroll_vertical` jump); gate on near-bottom (SCROLL_FOLLOW_SLOP_PX) so a reader deep in history is never yanked; the late-layout re-settle stays bounded to ONE pass** — shell.gd `_scroll_to_bottom_smooth` (the owner's «не происходит плавной прокрутки вниз» call, the LM Studio/Discord follow mechanism)
+- **The Workbench runtime layout + the local model flow (wb-9/D-208 + wb-10, re-pointed D-245): `workbench/runtime/` is the gitignored root — `models/` (the MODELS_ASSETS folder, auto-created), `llama.cpp/` (the drop folder; the launcher discovers llama-server.exe at its root or one folder deep, then PATH), `settings.json` (the persisted launch settings — corrupt/foreign-schema refuses loud); the zero-command entry is `Workbench.bat` at the repo ROOT (double-click; needs Python 3.11+ and Node.js LTS on PATH — the launcher resolves npm itself, runs `npm install` on the first run, and forwards the OBSERVED bind URL as `GATEWAY_TARGET` — the Vite proxy target, never a divergent committed default; `scripts/workbench_launch.py` the command form — run it from the repo ROOT, inside scripts/ the path doubles; `--no-frontend` the gateway-only form); a model ARRIVES by the native picker — the OS file/folder dialog hands ABSOLUTE paths to the gateway's `model.import` run (a local copy: `.part` + atomic rename, live progress, cooperative cancel — NO network, INV-4 untouched; the URL fetch stays the collapsed advanced row); `model.list`'s document carries `models_root` (the open-folder answer, never a local guess); `scripts/workbench_app.py` alone serves the gateway with MANAGED the default; the forwarded value is the ROOT (scheme://host:port — the banner's `/op` route STRIPPED, KI#98/iter-238: the client owns the route and appends `/op` itself; a route inside the forwarded value doubles to /op/op → 404, the dead-session chain); the web child runs in its own POSIX session — the teardown killpg's the whole tree, a bare SIGINT-to-npm would orphan npm's sh→vite grandchildren (the iter-290 live-proven defect)** — the modules' own docstrings + CONTRACTS §5's wb-10 note + the launcher docstring
+- **The iter-232 laws: a cooperative-cancellation TEST never calls checkpoint() once and prays — the single call races the main thread's run.cancel dispatch (a fast runner's worker passes through, the "unreachable" guard closes the run FAILED; the sandbox stays green on scheduling luck while CI goes red — KI#95, three-form verified: sandbox, forced fast worker, delayed cancel); poll the checkpoint (the work contract's own lock-free observation surface — run.cancel is never starved) bounded until the cancellation lands, an absent cancel fails LOUDLY; discovery lists never freeze behind one-shot success latches — every surface entry re-scans (KI#96: the owner's hand-dropped GGUF must appear on the next Models entry; the wb-11 re-arm lesson generalizes from FAILURE to staleness — a "requested once" flag guarding the happy path is the bug, not the guard)** — tests/test_model_fetch.py `_SlowFetcher.fetch` + the web client's surfaces inherit the same laws, iter-232
+- **The deleted Redot era (D-245 — the .gd tree + its proof packets + the engine index removed; recovery: git history + docs/frontendweb/archive/): its GDScript lessons are HISTORICAL now — the adjacent-literal refusal (KI#91), the `static func tr(` parse refusal (the strings.gd `lookup` boundary), the chat follow law (scrollbar max read AFTER a frame, the near-bottom gate), the values-only theme re-pin — carried forward as PRINCIPLES for the web client (one boundary per concern, late-layout reads after a frame, tokens swapped values-only), never as live routing; a Redot/Godot engine question today routes to the archived pack's reference docs, not to any repo file**
 
 ## Next step
 
-**iter-288 DONE: the frontend-web pack ingestion (the owner's
+**iter-290 DONE: redot-removal (the owner's «удаляй redot» call; R3).
+  D-245 — the frozen tree DELETED (16 paths; recovery: git history +
+  the verbatim pack at docs/frontendweb/archive/), the zero-command
+  launcher RE-POINTED to the web client (npm over PATH, the first-run
+  npm install, GATEWAY_TARGET the observed bind URL, the POSIX group
+  teardown; the pack's §16 gate discharged by the deletion itself),
+  the routing sync across the laws/NAV/README; 2529+1 + ruff +
+  docguard + topology --check clean + the live full-stack proof; ONE
+  cumulative archive over e6789cf carrying the unapplied iter-289
+  (supersedes its delivery).**
+Next: the owner's calls — the S0-green review (the four iter-289
+criteria), then the post-S0 gates (the streaming admission, the
+tooling floor's CI rows, the acceptance matrix), the DECISIONS
+collapse (36→30, the owner's call), and the world track's parallel
+rows.
+Active KIs: none. The suite green (2529+1). The owner's RU
+  report: docs/iterations/iter-290-redot-removal-report.md.
+iter-288 DONE: the frontend-web pack ingestion (the owner's
   tmpfiles delivery of CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip
   + the «выполняй» execution order over the reported plan; R0
   doc-only).** The pack read in full in its own S0 read order and

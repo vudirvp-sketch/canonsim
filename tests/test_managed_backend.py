@@ -31,8 +31,8 @@ the mechanics):
 The stand-in server (tests/_managed_fake_server.py) is spawned
 through the command lead `[sys.executable, script]` — the REAL
 process mechanics (no monkey-patching); the wire shapes stay the
-stub contract's own. No Redot binary is needed here (the frontend
-half's committed-file contract rides test_shell_contract.py).
+stub contract's own. No browser is needed here (the web client's
+own contract rides frontend/tests).
 """
 
 from __future__ import annotations

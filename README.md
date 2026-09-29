@@ -45,9 +45,11 @@ INV-4's one-module form).
 1. `AGENTS.md` — the law: invariants, iteration protocol, caps, git safety.
 2. `docs/AGENT_NAVIGATION.md` — reading gradient + where things are.
 3. `docs/TASKS.md` — what to do next, with acceptance criteria.
-4. `docs/REDOT_ENGINE_INDEX.md` — the Redot/Godot engine reference routing:
-   any frontend/engine/networking work starts here (Redot 26.2 LTS pinned,
-   Godot secondary; route first, never read whole).
+4. `docs/FRONTEND_WEB_LAW.md` — the ACTIVE frontend path (React + TS +
+   Vite, Web/PWA-first; the S0 skeleton gate; entry surface
+   `docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md`). The Redot tree is
+   DELETED (D-245, the owner's «удаляй redot» call) — the git history
+   + the archived agent pack preserve the reference material.
 
 Humans: `docs/VISION.md` for the why; `docs/MVP_SCOPE.md` for the phase-0 tech
 spec. Everything here is written for agents first — dense, tabular, no prose
@@ -67,7 +69,8 @@ padding.
 | `content/` | the five packs — setting as data (tavern, road, province, grim, pressure), loaded + linted by `core/pack.py` (the admission gate; lint bodies in `core/packlint/`) |
 | `core/` | the engine (stdlib-only, D-012; engine-agnostic — INV-4): the event-sourced kernel (log, queue, loop, fold), the RngBank, the knowledge/director/world/social stacks, economy, intent + resolvers, metrics, pack |
 | `render/` | the deterministic renderer: the tracery grammar engine (cosmetic stream) + the chronicle/entity views (pure functions of the log) |
-| `workbench/` | the Workbench family (wb rows, CONTRACTS §5, D-200): the Python half — the renderer-neutral Visual Scene IR + the read model + `application/` the application-operations skeleton (app §32 step 1: identity/artifact/directories/clock) + `api/` the inbound gateway (app §32 step 4, wb-4/D-201: the §8 envelopes + the socket-free dispatch core + `transport.py` the loopback HTTP binding — INV-4's second sanctioned network module, one per direction) + `application/operations/` the application operations (app §32 steps 5+7, wb-5/D-202 + wb-6/D-203: the §11 lifecycles + the §12 deadline/cancellation + the run registry + the model-discovery family (`model.fetch` the URL arrival + `model.import` the LOCAL native-picker arrival — wb-10/D-209, no network) + the §6.1 composition root — the run/model families registered on the gateway + the backend family over the injected llama.cpp port — chat.send + model.load/unload + model.states) + `platform/` the OS mechanics (wb-8/D-205: the managed llama-server's process row — spawn/observe/graceful-stop, the injected readiness probe; wb-9/D-208: + `model_fetch.py` the outbound model-assets fetch — INV-4's third sanctioned network surface, owner-gated) + `application/settings.py` (wb-9: the launch-settings store + the backend.settings operations) — and `presentation/redot/` the pinned Redot 26.2 LTS project (the application shell + the semantic-token theme (theme@0.3) + the live chat circuit's typed gateway client + the Models surface — discovery/load/unload over the gateway, the native-picker local import (Add local models…/Add folder… over the OS dialogs), the collapsed URL-fetch advanced row, `--managed` spawning llama-server on the first Load; the engine binary resolved by the launcher's folder-aware chain — exe, release folder, the persisted pick, the auto-scan, or the one-time picker); the live stack's app-gateway `scripts/workbench_app.py` (wb-7 + wb-8 + wb-9: the gateway + the operations + the injected llama.cpp backend port + the launch-settings store + the injected fetcher, served on loopback — the frontend dials the gateway only; MANAGED the default = the launcher owns the llama-server process, spawning it on the first model.load; the runtime layout workbench/runtime/{models,llama.cpp,settings.json,launcher.json} gitignored) + `scripts/workbench_launch.py` the ZERO-COMMAND launcher (wb-9 + wb-10: the gateway + the Redot frontend together — the bind-line watch, the bind URL forwarded to the child, the honest two-child shutdown; `Workbench.bat`/`Workbench Setup.bat` at the repo root are the double-click entries) |
+| `frontend/` | the ACTIVE web client (frontend-1, D-244): React + TypeScript + Vite, Web/PWA-first — the S0 walking skeleton over the existing loopback gateway (`POST /op`, INV-4 untouched: the browser is a gateway client, never a fourth network surface; typed runtime-validated payloads, the virtualized LIVE Trajectory tail, per-tab independent clients; POST-only — no SSE/WebSocket in S0; dev serves via the Vite proxy to `127.0.0.1:8765`) |
+| `workbench/` | the Workbench family (wb rows, CONTRACTS §5, D-200): the Python half — the renderer-neutral Visual Scene IR + the read model + `application/` the application-operations skeleton (app §32 step 1: identity/artifact/directories/clock) + `api/` the inbound gateway (app §32 step 4, wb-4/D-201: the §8 envelopes + the socket-free dispatch core + `transport.py` the loopback HTTP binding — INV-4's second sanctioned network module, one per direction) + `application/operations/` the application operations (app §32 steps 5+7, wb-5/D-202 + wb-6/D-203: the §11 lifecycles + the §12 deadline/cancellation + the run registry + the model-discovery family (`model.fetch` the URL arrival + `model.import` the LOCAL native-picker arrival — wb-10/D-209, no network) + the §6.1 composition root — the run/model families registered on the gateway + the backend family over the injected llama.cpp port — chat.send + model.load/unload + model.states) + `platform/` the OS mechanics (wb-8/D-205: the managed llama-server's process row — spawn/observe/graceful-stop, the injected readiness probe; wb-9/D-208: + `model_fetch.py` the outbound model-assets fetch — INV-4's third sanctioned network surface, owner-gated) + `application/settings.py` (wb-9: the launch-settings store + the backend.settings operations); the live stack's app-gateway `scripts/workbench_app.py` (wb-7 + wb-8 + wb-9: the gateway + the operations + the injected llama.cpp backend port + the launch-settings store + the injected fetcher, served on loopback — the frontend dials the gateway only; MANAGED the default = the launcher owns the llama-server process, spawning it on the first model.load; the runtime layout workbench/runtime/{models,llama.cpp,settings.json} gitignored) + `scripts/workbench_launch.py` the ZERO-COMMAND launcher (wb-9 + wb-10, re-pointed to the web client at D-245: the gateway + the Vite dev server together — npm resolved over PATH, the first-run npm install, the observed bind URL forwarded as GATEWAY_TARGET, the honest two-child shutdown; `Workbench.bat` at the repo root is the double-click entry; the Redot presentation tree DELETED at D-245 — recovery: git history) |
 | `brief/` | the mediator circuit (LLM-free engine side): assembler, scene ledger, validator, mediator, the mode-C parser boundary + its GBNF serialization, scan, since |
 | `cli/` | the play interface: batch `play`/`chronicle`/`state`/`replay` + the interactive session with the narrator door, `--resume`, `--pack`, `--engine` (the runtime engine as the doors' operator — the adapter the repo's outbound network module; the inbound sibling workbench/api/transport.py, D-201) |
 | `scripts/` | operator tooling (CLI-class, D-046): the harnesses (balance/profile/worldgen), the offline builders (chronicle/checkpoint), pack tools (scaffold/doctor), digest, docguard, the `df_*` track-B tools |
@@ -84,13 +87,27 @@ ruff check .
 The Workbench (the owner's zero-command form — no console needed):
 
 double-click **`Workbench.bat`** at the repo root (the gateway + the
-Redot frontend together; the Redot folder is asked for ONCE, then
-remembered; `Workbench Setup.bat` re-picks it). The command forms:
+web frontend together; needs Python 3.11+ and Node.js LTS on PATH —
+the first run installs the web client's dependencies by itself, and
+the browser opens on its own). The command forms:
 
 ```
-python scripts/workbench_launch.py            # from the repo ROOT
-python scripts/workbench_launch.py --no-redot  # the gateway alone
-python scripts/workbench_app.py                # the app-gateway alone
+python scripts/workbench_launch.py                 # from the repo ROOT
+python scripts/workbench_launch.py --no-frontend  # the gateway alone
+python scripts/workbench_app.py                    # the app-gateway alone
+```
+
+The ACTIVE web frontend (frontend-1, D-244 — React + TS + Vite; the
+Redot tree deleted at D-245): `Workbench.bat` starts both halves —
+the gateway + the Vite dev server — and opens the browser; by hand:
+start the gateway (`python scripts/workbench_app.py` — default bind
+`http://127.0.0.1:8765/op`), then:
+
+```
+cd frontend
+npm install
+npm run dev        # the Vite dev server; its /gateway proxy dials
+                   # the loopback gateway (POST /op only in S0)
 ```
 
 Play the slice (no LLM anywhere):

@@ -13,8 +13,7 @@
 > first. Interaction/UI → `docs/FRONTEND_UIUX_LAW.md` (D-214); visual
 > tokens/chrome → `docs/VISUAL_SYSTEM_UI.md` (D-211); world presentation /
 > Scene IR / assets → `docs/WORLD_PRESENTATION_LAW.md` (D-218); Observatory
-> analytical semantics → `docs/OBSERVATORY_LAW.md` (D-218); engine facts →
-> `docs/REDOT_ENGINE_INDEX.md` (D-207). `AGENTS.md`, active `STATUS.md`,
+> analytical semantics → `docs/OBSERVATORY_LAW.md` (D-218). `AGENTS.md`, active `STATUS.md`,
 > CanonSim owning specs and `docs/DECISIONS.md` remain HIGHER authority.
 >
 > **Honesty law:** each section carries its CURRENT state —
@@ -582,7 +581,7 @@ second backend client or semantics implementation.
 
 ## 23. Shared seam with the frontend companion
 
-### 23.1 Redot runtime contract `[LANDED — CONTRACTS D1/D2 + REDOT_ENGINE_INDEX own the details]`
+### 23.1 Redot runtime contract `[DELETED at iter-290/D-245 — the owner's «удаляй redot» call; the record below is the historical contract; recovery: git history + docs/frontendweb/archive/]`
 
 Redot 26.2 LTS (`redot-26.2-stable`) pinned; project root
 `workbench/presentation/redot/`; GDScript; Compatibility renderer for

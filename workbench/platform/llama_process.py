@@ -45,8 +45,9 @@ server surface):
 --jinja             the model's own chat template (the Gemma-class
                     requirement — without it the server's generic
                     template mangles the turns)
---no-webui          no browser UI on the loopback port (the Redot
-                    shell is the only intended client)
+--no-webui          no browser UI on the loopback port (the
+                    Workbench web client is the only intended
+                    client)
 ```
 
 The sampler default flags (wb-9, the owner's «сэмплеры всякие» call —

@@ -1,0 +1,14 @@
+{
+  "operation_id": "5e817e073aacd28006439d0b8e77fbe014c3cce47beb6fa80127a0a61db80064",
+  "result": {
+    "attached": false,
+    "created_observed_at": 1000000.0,
+    "event_sequence": 1,
+    "revision": 0,
+    "session_id": "d9dcca4f7314f1c9adfe66602eb9b8c85830ec8c1561175a7a497876be18007f"
+  },
+  "revision": 0,
+  "sequence": 1,
+  "session_id": "d9dcca4f7314f1c9adfe66602eb9b8c85830ec8c1561175a7a497876be18007f",
+  "status": "OK"
+}

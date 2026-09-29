@@ -302,3 +302,172 @@ a gateway client over the existing loopback transport). Class
 DOC-ADMISSION (R0 — zero code, zero pack, zero canon change);
 verification 2556+9 + ruff + docguard + topology --check clean; the
 owner's RU report docs/iterations/iter-288-frontendweb-report.md.
+
+### D-244 — iter-289 · frontendweb (R4) [PCC: intent=freeze Redot as
+historical/reference and open the web-frontend track per the ingested
+pack v1.3 (the frontend-1 S0 build); invariants=INV-4 unchanged — the
+browser dials the EXISTING loopback POST /op, no fourth network surface;
+no second engine/bus/authority in React (FRONTEND_WEB_LAW §0/§13);
+INV-1/2/3 untouched, zero canon change; delta=the Redot freeze landed
+as standing law (the pack's §17 After-freeze list: no new Redot
+features/redesign/parity/semantic logic/contracts) + the S0-minimal
+§18 re-homing (REDOT_ENGINE_INDEX historical header, AGENT_NAVIGATION
+web-first routing, README) + the top-level frontend/ tree admitted
+(additive React+TS+Vite, zero Python change; §8 satisfied by the
+owner's pack directive); verification=the standing suite green with
+zero Python touched + the S0 build's own gates (tsc, vitest over
+live-gateway fixtures, vite build, the live round-trip evidenced in
+the iter-289 report); provenance=the owner's 2026-09-29 chat call
+«redot замораживаем, а возможно и вовсе отказываемся => делаем и
+работаем по canonsim_frontend_web_agent_pack_final_v1_3.zip» + the
+pack's §17/§18/§19 + FRONTEND_WEB_LAW §14 (D-243's distillation);
+runtime=the browser client runs in dev via the Vite proxy to the
+loopback gateway 127.0.0.1:8765; the Redot tree untouched and still
+launchable; zero runtime change on the Python side]
+
+The owner's Redot-freeze + frontend-1 opening call (2026-09-29): both
+owner-gated boundaries of FRONTEND_WEB_AGENT_CONTEXT §5 resolved in
+one directive — «redot замораживаем, а возможно и вовсе отказываемся
+=> делаем и работаем по [the pack]». Decision: (a) **Redot FROZEN**
+(the pack's Phase 0): no new Redot features, redesign, parity work,
+semantic logic, or Redot-specific contracts; the tree stays in place
+untouched as reference (the physical archive move / deletion stays a
+FUTURE owner call — S0's own scope list excludes Redot changes and
+deletion); (b) the **top-level `frontend/` tree admitted** (the §8
+stop & confirm satisfied by the owner's explicit work-per-the-pack
+directive; the pack's §13 recommended structure, exact names flexible,
+boundary ownership not); (c) **frontend-1 OPENED** (the S0 walking
+skeleton per FRONTEND_WEB_LAW §2's four criteria — the typed validated
+POST /op client, the virtualized LIVE Trajectory ≥10k, two
+independent POST-only tabs, the load note); (d) the §18 re-homing
+family lands at its S0-minimal set (REDOT_ENGINE_INDEX marked
+historical/reference-only, AGENT_NAVIGATION routes active frontend
+work to the web docs first, README stops presenting Redot as the
+active frontend) — the launcher `.bat` re-routing deliberately
+DEFERRED per the pack's §16 (only after the web slice has an accepted
+local serving path); WORKBENCH_APP_LAW/WORLD_PRESENTATION_LAW
+re-homing deferred to their owning phases (3/4). Why: AGENTS §11
+satisfied the honest way — the one authority tension recorded at
+D-243 is resolved BY the owner's own row, never silently reconciled;
+the pack's §17 After-freeze law and §19 sequence are the standing
+migration order. Consequence: the web track is ACTIVE — build forward
+only on React+TS+Vite; Redot carries no new work and stays runnable
+via the existing launcher (its --no-redot form unchanged); the
+SKELETON's out-of-scope list (no SSE, no manifest, no Redot change,
+no V5.2 reading) binds until S0 green. Class FRONTEND-TRACK (R4 —
+authority/routing + top-level structure; zero canon change, the LOG
+untouched, zero corpus price); verification: the standing suite
+2556+9 + ruff + docguard + topology --check clean (Python side
+untouched) + the frontend gates green (tsc/vitest/build) + the live
+round-trip + the 10k virtualization + the two-tab evidence in
+docs/iterations/iter-289-frontendweb-report.md; the owner's RU report
+docs/iterations/iter-289-frontendweb-report.md.
+
+### D-245 — iter-290 · redot-removal (R3) [PCC: intent=delete the frozen
+Redot presentation layer per the owner's «удаляй redot» call and
+re-point the zero-command launcher to the web dev server (the pack's
+§16 launcher row + §18 transfer matrix); invariants=INV-1/2/3
+untouched — zero Python semantics change, the LOG untouched, zero
+canon change, zero corpus price; INV-4 unchanged — the web child dials
+through the Vite dev proxy over the EXISTING loopback binding, the
+launcher only spawns processes and opens no socket (scripts/ stays
+network-free); INV-5 untouched — no log or fixture deleted;
+delta=16 files deleted (workbench/presentation/redot/ the 10-file
+tree, docs/REDOT_ENGINE_INDEX.md, scripts/visual_proof.py,
+tests/test_visual_proof.py, tests/test_shell_proof.py,
+tests/test_shell_contract.py, "Workbench Setup.bat") + the launcher
+rework (the Redot resolution chain out — the exe scan, the persisted
+pick, the Desktop auto-scan, the tk picker; npm over PATH, the
+first-run npm install, the GATEWAY_TARGET forward of the observed
+bind URL, --no-frontend the honest gateway-only form, the POSIX
+session/group teardown) + tests/test_workbench_launch.py rewritten
+(10 tests) + the routing sync (AGENT_NAVIGATION, README,
+FRONTEND_WEB_LAW, CONTRACTS §5, the law banners, frontendweb context,
+SSI_TOPOLOGY, docguard/topology docstrings, .gitignore);
+verification=2529 passed + 1 skipped + ruff clean + docguard clean +
+topology --check clean + the live launcher proof (the full stack over
+a free port: the observed bind URL forwarded as GATEWAY_TARGET, Vite
+ready in ~150ms, the proxy round-trip POST /gateway/op app.status
+answered by the real gateway, SIGINT → exit 0, both children honestly
+stopped, zero orphaned processes); provenance=the owner's 2026-09-29
+chat call «удаляй redot, архив выше я еще не скачивал и не пушил его
+если что» (the iter-289 delta still unapplied ⇒ ONE cumulative
+archive over the same base e6789cf) + D-244's freeze + the pack v1.3;
+runtime=Workbench.bat = the gateway + npm run dev (the first run
+installs, --open raises the browser; npm absent → the honest manual
+note, the gateway still serves); rollback=git revert of the deletion
+commit — the tree recovers from git history, the reference material
+additionally preserved at docs/frontendweb/archive/]
+
+The owner's deletion call (2026-09-29): «удаляй redot» — the
+«вовсе отказываемся» half of the D-244 directive, executed. Decision:
+(a) **the frozen tree DELETED** — workbench/presentation/redot/ (10
+files) with its engine index, its REDOT_EXE proof runner
+(scripts/visual_proof.py), its three proof/contract packets, and the
+Setup launcher (the --pick-redot resolution chain has no target
+anymore); (b) **the zero-command launcher RE-POINTED** (wb-10's law
+preserved): the gateway + `npm run dev` together, npm resolved over
+PATH (the external toolchain, one resolution point — the CONTRACTS
+§5 D1 pattern), the first-run `npm install` automatic (the owner's
+«не должен вводить команды чтобы запустить или скачать что-либо»),
+the OBSERVED bind URL forwarded as GATEWAY_TARGET (the Vite proxy
+target — never a divergent committed default), `--open` raising the
+browser, the POSIX group teardown (npm's sh→vite grandchildren die
+with the session, never orphaned — the live-proven defect fixed
+in-iteration), and the pack's §16 gate (re-route only after an
+accepted local serving path) DISCHARGED by the deletion itself: the
+frozen target the deferral protected no longer exists, a broken
+launcher was the only alternative; (c) **one cumulative archive**
+over the same base e6789cf — the owner has not applied the iter-289
+delta, so this archive carries BOTH iterations' content and
+supersedes the iter-289 delivery; (d) the law/doc sync at its
+routing-minimal set (NAV rows, README, the FRONTEND_WEB_LAW scope
+fence, CONTRACTS §5's deletion banner, the law banners' engine-facts
+pointers, the frontendweb context §5/§6) — the deep law-body
+re-homing stays deferred to phases 3/4 per D-244's own text. Why:
+the owner's explicit call IS the authority (AGENTS §11 resolved by
+the owner's row, never silently); the pack's §18 transfer matrix named
+the launcher re-home and the Redot-tests reduction as migration
+obligations; leaving the launcher pointed at a deleted tree was the
+one dishonest state. Consequence: the Redot era is CLOSED — the web
+client (frontend/, D-244) is the only presentation consumer; the
+reference material lives in git history + the verbatim pack archive;
+the DECISIONS row count (36) sits over the 30 cap pending the owner's
+collapse call (D-034/D-185's law). The deletion cards (SSI-N020):
+
+[GC: target=workbench/presentation/redot/ (10 files);
+consumer_absence=the iter-290 full-tree scan: no Python imports (.gd
+is not importable), the only consumers were the launcher (reworked
+the same iteration), the proof packets (deleted the same iteration),
+and the routing docs (re-pointed the same iteration);
+authority_absence=D-244's freeze already removed the active-frontend
+authority; the owner's «удаляй redot» call is the explicit decision;
+historical=the wb family's presentation layer (D-200, iter-215..234;
+frozen D-244) — the pack v1.3 moved the active frontend to
+React/TS/Vite; recovery=git history (committed through e6789cf) +
+docs/frontendweb/archive/ (the pack's legacy-redot-reference/ and the
+REDOT reference docs)]
+
+[GC: target=docs/REDOT_ENGINE_INDEX.md; consumer_absence=every citing
+surface re-pointed the same iteration (AGENT_NAVIGATION §1/§2/§6, the
+law banners, docguard's allowlist entry, README); authority_absence=
+its own D-244 banner declared it non-routing engine-facts reference
+for the frozen tree; historical=the version firewall (D-207, iter-225)
+indexing the deleted tree; recovery=git history + the pack archive's
+CANONSIM_REDOT_GODOT_AGENT_REFERENCE_INDEX.md]
+
+[GC: target=scripts/visual_proof.py + tests/test_visual_proof.py +
+tests/test_shell_proof.py + tests/test_shell_contract.py;
+consumer_absence=the packets' only subject is the deleted tree (the
+REDOT_EXE-gated pair skips in CI by law D6; test_shell_contract pins
+the deleted committed files); authority_absence=CONTRACTS §5 D1/D6
+keyed the toolchain and the proofs to the deleted project;
+historical=the wb-1/wb-2 proof family (iter-215..217) — the web-side
+visual proof rides the pack's §10/§11 tooling floor (post-S0);
+recovery=git history]
+
+[GC: target="Workbench Setup.bat"; consumer_absence=its only function
+(--pick-redot) fed the deleted resolution chain — nothing else
+references it; authority_absence=wb-10's owner fix list is superseded
+by the web re-point (this row); historical=the one-time folder picker
+for the external Redot binary; recovery=git history]

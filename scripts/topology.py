@@ -28,9 +28,10 @@ instruments' charters); INV-2 discipline (sorted iteration everywhere,
 stdlib only — no third-party imports, D-012's envelope).
 
 The map's scope: Python modules under core/ and workbench/ (the
-strangler targets are all Python; the Redot .gd presentation layer is
-out of the map — its law owners are VISUAL_SYSTEM_UI/FRONTEND_UIUX_
-LAW, documented in the map's §0). Reads may reference any in-repo
+strangler targets are all Python; the web client's frontend/ tree and
+the deleted Redot .gd layer are out of the map — the frontend's law
+owners are FRONTEND_WEB_LAW/FRONTEND_UIUX_LAW/VISUAL_SYSTEM_UI,
+documented in the map's §0). Reads may reference any in-repo
 module (sim/, brief/, render/, cli/ included — they carry NAV §1
 owners, no map rows of their own).
 """

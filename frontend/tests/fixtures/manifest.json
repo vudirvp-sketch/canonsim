@@ -1,0 +1,17 @@
+{
+  "captured": "2026-09-29, iter-289 (BASE_COMMIT e6789cf)",
+  "fixtures": [
+    "app_status_ok",
+    "session_attach_ok",
+    "session_attach_stale_revision",
+    "session_create_duplicate_request",
+    "session_create_ok",
+    "session_events_ok",
+    "session_events_resync_required",
+    "session_events_unknown_argument",
+    "session_get_domain_rejected",
+    "session_get_ok"
+  ],
+  "gateway_schema_identity": "canon_workbench_gateway@0.1",
+  "source": "the live gateway code, in-process dispatch (parity-law byte form)"
+}

@@ -1,0 +1,35 @@
+{
+  "operation_id": "8ca2f325949fc7eca665807a5d54d3a1cb2e80675aad931676f9c025ac2e086a",
+  "result": {
+    "events": [
+      {
+        "event_id": "2bf772694722489783e61ed12351e16141ebd40dc14e19ffd28cd7afad5ef3fa",
+        "event_type": "SESSION_CREATED",
+        "observed_at": 1000000.0,
+        "operation_id": "4e1d8f16d8cfb8fd5fab5a9f43ea1742b8ab91536e7fd769ff4994e597262b29",
+        "payload": {
+          "created_observed_at": 1000000.0
+        },
+        "sequence": 1,
+        "session_id": "d9dcca4f7314f1c9adfe66602eb9b8c85830ec8c1561175a7a497876be18007f"
+      },
+      {
+        "event_id": "7ffd67806c663381a8e314bff9ae7c13e0f31ac98548e40ce3ac11138b9c05bd",
+        "event_type": "SESSION_ATTACHED",
+        "observed_at": 1000000.0,
+        "operation_id": "3187038636b72b0918dddbb37cb5dde41f2cc9bd753b6ca450e85afdaaac3cf9",
+        "payload": {
+          "label": "fixture-attach",
+          "observed_at": 1000000.0
+        },
+        "sequence": 2,
+        "session_id": "d9dcca4f7314f1c9adfe66602eb9b8c85830ec8c1561175a7a497876be18007f"
+      }
+    ],
+    "last_sequence": 2
+  },
+  "revision": 1,
+  "sequence": 2,
+  "session_id": "d9dcca4f7314f1c9adfe66602eb9b8c85830ec8c1561175a7a497876be18007f",
+  "status": "OK"
+}

@@ -24,7 +24,7 @@ RAW CAPABILITY      the runtime's own surface (existence/syntax/
                     the AUTHORITY (never this module)
 SEMANTIC CONTROL    THIS package — identity, human name, category,
                     kind, scope, relations, effective state
-UI REPRESENTATION   workbench/presentation/redot — a projection,
+UI REPRESENTATION   frontend/ (the web client) — a projection,
                     never the semantic authority
 ```
 

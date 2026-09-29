@@ -1,0 +1,18 @@
+{
+  "operation_id": "aeefd325cf155ecd568ae253233c46f8b7b1ef660e88848a5a6a548933991b64",
+  "result": {
+    "auth_required": false,
+    "contract": "canon_workbench_gateway@0.1",
+    "exposure": "LOOPBACK",
+    "operations": [
+      "app.status",
+      "session.attach",
+      "session.create",
+      "session.detach",
+      "session.events",
+      "session.get"
+    ],
+    "service": "canonsim-workbench-gateway"
+  },
+  "status": "OK"
+}

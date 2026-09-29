@@ -22,13 +22,18 @@
 > `VISUAL_SYSTEM_UI.md`; application/runtime ownership →
 > `WORKBENCH_APP_LAW.md`; Observatory semantics → `OBSERVATORY_LAW.md`;
 > Scene IR/world presentation → `WORLD_PRESENTATION_LAW.md`; inference
-> control semantics → `LLAMA_CPP_INFERENCE_CONTROL_LAW.md`; engine
-> facts (Redot — historical/reference) → `REDOT_ENGINE_INDEX.md`.
-> **Scope fence:** the Redot-freeze half of the pack's stack decision
-> is owner-gated and NOT yet repo law
-> (`docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md` §5) — until the
-> owner's call, active Redot routing stays as-is and this law binds
-> the web client being ADDED, never a replacement mandate.
+> control semantics → `LLAMA_CPP_INFERENCE_CONTROL_LAW.md`.
+> **Scope fence:** the Redot-freeze half of the pack's stack
+> decision LANDED as D-244 (the owner's 2026-09-29 «redot
+> замораживаем» call), then CLOSED by DELETION at iter-290/D-245
+> (the owner's 2026-09-29 «удаляй redot» call — the tree, its
+> engine index, its proof/contract packets, and the Setup launcher
+> removed; the launcher re-pointed to the web dev server, the
+> pack's §16 gate discharged by the deletion itself — a frozen
+> target no longer exists; recovery: git history + the verbatim
+> pack at `docs/frontendweb/archive/`). This law now
+> binds the ACTIVE web client at `frontend/` (frontend-1, the S0
+> gate §2).
 
 ## 0. Status
 
@@ -39,6 +44,8 @@
 - Not yet in the repo: no `frontend/` tree, no React dependency, no
   node tooling — this law binds what gets BUILT; it changes nothing
   existing. The `frontend-1` TASKS row (the S0 build) is owner-gated.
+  [LANDED iter-289, D-244: the `frontend/` tree exists — the S0
+  skeleton; this §0's "not yet" lines are the pre-D-244 record]
 - Core rule (the pack's §1): semantics stay in CanonSim/Python;
   presentation and interaction stay downstream, typed, replaceable,
   non-authoritative. The React client is never a second simulator,
@@ -397,9 +404,10 @@ live repository remains authoritative over this law's snapshot.
 ## 14. The migration sequence (all phases owner-gated)
 
 ```text
-Phase 0 — freeze Redot + archive cleanly (the owner's D-row; the
-          §18 re-homing family: FRONTEND_UIUX_LAW/REDOT_ENGINE_INDEX/
-          AGENT_NAVIGATION/README/launcher re-routing — AFTER the call)
+Phase 0 — freeze Redot + archive cleanly (DONE — D-244 the freeze,
+          D-245 the owner's «удаляй redot» deletion: the tree removed,
+          the launcher re-pointed to the web dev server; recovery:
+          git history)
 Phase 1 — re-home the laws (Redot → historical/reference-only)
 Phase 2 — frontend foundation (the S0-class client: shell, typed
           gateway client, runtime validation, state models, design
@@ -415,8 +423,9 @@ Phase 6 — optional Tauri 2 (thin shell, web stays fully functional)
 ```
 
 The final agent rule (the pack's, binding): build forward only on
-React + TS + Vite + Web/PWA-first; treat Redot as archived reference
-only after the owner's freeze call; preserve CanonSim, the Workbench
+React + TS + Vite + Web/PWA-first; treat Redot as deleted history
+(D-245 — the reference material lives in git history and the
+archived pack); preserve CanonSim, the Workbench
 application/gateway, typed contracts, renderer-neutral Visual Scene
 IR, execution/provenance identity, and read-side analytical
 contracts as the stable backbone; never create a second semantic

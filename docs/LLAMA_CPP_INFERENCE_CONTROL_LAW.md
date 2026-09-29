@@ -15,8 +15,7 @@
 > extra_args hatch — routes HERE first. Application composition →
 > `docs/WORKBENCH_APP_LAW.md` (§19 owns the composition chain);
 > interaction → `docs/FRONTEND_UIUX_LAW.md`; visual treatment →
-> `docs/VISUAL_SYSTEM_UI.md`; Redot facts →
-> `docs/REDOT_ENGINE_INDEX.md`; implementation order →
+> `docs/VISUAL_SYSTEM_UI.md`; implementation order →
 > `docs/TASKS.md`. `AGENTS.md`, `STATUS.md`, `DECISIONS.md` remain
 > HIGHER authority.
 >

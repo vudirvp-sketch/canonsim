@@ -3,7 +3,8 @@
 
 What this is: a typed, deterministic, engine-independent document that
 describes ONE scene's visual composition from CanonSim semantic
-products. Redot (or any future renderer) consumes it; nothing in it
+products. The presentation client (any renderer — the web frontend
+now) consumes it; nothing in it
 may leak renderer types (no Node/Texture/UID as identity), and the
 semantic statuses are never silently collapsed — UNKNOWN never becomes
 ABSENT, HIDDEN never becomes ABSENT, VISUAL never becomes CANONICAL.
@@ -228,8 +229,8 @@ class Scene:
 
 
 def instance_from_mapping(data: Mapping[str, Any]) -> Instance:
-    """Parse one instance mapping (the Redot side's JSON round-trip
-    check; strict — an unknown field is a schema drift, loud)."""
+    """Parse one instance mapping (the presentation side's JSON
+    round-trip check; strict — an unknown field is a schema drift, loud)."""
     known = set(Instance.__dataclass_fields__)
     unknown = set(data) - known
     if unknown:

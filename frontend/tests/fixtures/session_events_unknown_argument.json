@@ -1,0 +1,8 @@
+{
+  "operation_id": "93b1b8419ae3dde2995ef86a2d0b9860b0c4e585342736d7b191ce6e3f20e3d8",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "session.events: unknown argument(s) ['bogus_argument']"
+  },
+  "status": "REJECTED"
+}

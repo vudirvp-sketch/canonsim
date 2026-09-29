@@ -10,9 +10,7 @@
 > binding form every visual row obeys. Admission: iter-229, D-211.
 >
 > **Routing law:** every visual/UI question on the Workbench surface
-> routes HERE first; every engine/API question routes through
-> `docs/REDOT_ENGINE_INDEX.md` (D-207) — the two indexes are
-> complementary, never overlapping. Interaction/IA/selection/epistemic
+> routes HERE first. Interaction/IA/selection/epistemic
 > law: `docs/FRONTEND_UIUX_LAW.md` (D-214); application contracts:
 > `docs/WORKBENCH_APP_LAW.md`; Observatory semantics: `docs/OBSERVATORY_LAW.md`;
 > world presentation (the world-side visual layer):
@@ -75,10 +73,12 @@ task — never maximum information per pixel.
 
 ## 2. The token taxonomy (one source of truth: the theme)
 
-Every visual decision routes through the semantic token set —
-`workbench/presentation/redot/themes/workbench_theme.tres` stays the
-single source (§10's existing law). The token names follow the role
-taxonomy:
+Every visual decision routes through the semantic token set (the
+taxonomy below — §10's existing law). The deleted Redot theme file
+`workbench/presentation/redot/themes/workbench_theme.tres` was the
+first carrier (D-245 — recovery: git history); the web client
+carries its own token form going forward. The token names follow the
+role taxonomy:
 
 ```text
 CANVAS            background_base

@@ -1,0 +1,8 @@
+{
+  "operation_id": "7487c2bacb70117e51412fe75d583d9eb30128393dbab082ffc3a9dc3bb857bd",
+  "rejection": "STALE_REVISION",
+  "result": {
+    "reason": "expected revision 999 != current 1 \u2014 a stale writer cannot mutate newer state"
+  },
+  "status": "REJECTED"
+}

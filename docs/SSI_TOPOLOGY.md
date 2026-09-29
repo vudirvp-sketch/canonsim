@@ -73,9 +73,11 @@
   plus the `dyn` marker; the full event-type enumeration lives at its
   standing owners (EVENT_SCHEMA.md + the pack JSONs), never here.
 - **Scope**: Python modules under `core/` and `workbench/` (the
-  strangler targets are all Python). OUT of the map: the Redot `.gd`
-  presentation layer (law owners VISUAL_SYSTEM_UI/FRONTEND_UIUX_LAW),
-  and `sim/`/`brief/`/`render/`/`cli/` (NAV §1 owners; no map rows —
+  strangler targets are all Python). OUT of the map: the web
+  client's `frontend/` tree (law owners FRONTEND_WEB_LAW/
+  FRONTEND_UIUX_LAW/VISUAL_SYSTEM_UI) and the Redot `.gd` layer
+  DELETED at iter-290/D-245 (recovery: git history), and
+  `sim/`/`brief/`/`render/`/`cli/` (NAV §1 owners; no map rows —
   they appear only inside `reads` cells). `__init__.py` rows are
   inventory-closure rows (N002's pattern at file granularity).
 

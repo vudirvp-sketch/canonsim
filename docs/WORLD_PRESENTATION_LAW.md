@@ -14,8 +14,7 @@
 > beyond the landed identity closure, composition, assets, manifests,
 > LOD, camera layers, maps, backgrounds, effects, degradation, visual
 > performance — routes HERE first. Interaction/UI → FRONTEND_UIUX_LAW;
-> chrome tokens/typography → VISUAL_SYSTEM_UI; engine facts/API →
-> REDOT_ENGINE_INDEX; application operations → WORKBENCH_APP_LAW;
+> chrome tokens/typography → VISUAL_SYSTEM_UI; application operations → WORKBENCH_APP_LAW;
 > analytical semantics → OBSERVATORY_LAW. The seam's identity/determinism
 > contracts stay `docs/CONTRACTS.md` §5 D2/D4/D5 (wb-1's landed form);
 > this law extends them, never re-states them as a competing owner.

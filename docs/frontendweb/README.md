@@ -40,5 +40,8 @@ Do **not** load the archive by default; its provenance fence is
 
 ## Current stage
 
-**S0 NOT STARTED.** The stage map and the owner-gated opening
-conditions: `FRONTEND_WEB_AGENT_CONTEXT.md` §6.
+**S0 LANDED (iter-289, D-244) — awaiting the owner's green review.**
+The Redot tree DELETED at iter-290/D-245 (the owner's «удаляй redot»
+call — the launcher re-pointed to the web dev server). The standing
+boundary list (the later gates):
+`FRONTEND_WEB_AGENT_CONTEXT.md` §5.

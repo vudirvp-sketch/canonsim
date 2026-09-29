@@ -1,8 +1,8 @@
 @echo off
 rem CanonSim Workbench - the ZERO-COMMAND launcher.
-rem Double-click me: the gateway + the Redot frontend start together.
-rem The Redot folder is asked for ONCE (a folder picker), then
-rem remembered in workbench\runtime\launcher.json - no commands, ever.
+rem Double-click me: the gateway + the web frontend start together.
+rem Needs Python 3.11+ and Node.js LTS on PATH (npm); the first run
+rem installs the web client's dependencies by itself - no commands, ever.
 setlocal
 cd /d "%~dp0"
 where python >nul 2>nul

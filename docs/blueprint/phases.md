@@ -5266,6 +5266,58 @@ Zero code, zero pack, zero canon change, the LOG untouched, zero
 corpus price. The owner's RU report:
 `docs/iterations/iter-288-frontendweb-report.md`.
 
+**The iter-289 frontendweb record (R4 — the owner's Redot-freeze +
+frontend-1 opening call: «redot замораживаем, а возможно и вовсе
+отказываемся => делаем и работаем по
+canonsim_frontend_web_agent_pack_final_v1_3.zip» — both §5
+boundaries of the web-track context resolved in one directive).**
+D-244: (a) Redot FROZEN historical/reference — the pack's §17
+After-freeze law (no new features/redesign/parity/semantic logic/
+contracts); the tree stays in place untouched, still launchable
+via the existing launcher; the physical archive move + the
+deletion/abandonment question stay FUTURE owner calls (S0's own
+scope list excludes Redot changes/deletion); (b) the §18 re-homing
+family landed at its S0-minimal set — REDOT_ENGINE_INDEX.md's frozen
+banner, AGENT_NAVIGATION.md's web-first routing + the frozen rows
+(§1/§2/§3), README.md's frontend half (the web client the active
+path, the frozen tree marked); the launcher `.bat` re-routing
+deliberately DEFERRED per the pack's §16 (only after the web slice
+has an accepted local serving path); WORKBENCH_APP_LAW/
+WORLD_PRESENTATION_LAW re-homing deferred to phases 3/4; (c) the
+top-level `frontend/` tree admitted (§8 satisfied by the owner's
+work-per-the-pack directive) + **frontend-1 LANDED** — the S0
+walking skeleton over the existing loopback gateway, zero Python
+change, INV-4 untouched: React 19 + TypeScript 5.8 + Vite 7 +
+zod 4, the typed `POST /op` client (every payload
+unknown→runtime-validated; the closed vocabularies + the backend's
+own OK/no-rejection law mirrored in the schema refine; the four
+outcome lanes DELIVERED-OK / DELIVERED-nonOK / TRANSPORT /
+MISMATCH; G4 no-retry — the client retries nothing); the Trajectory
+surface (pure-function windowing + VirtualList — 10_301 rows → 21
+mounted DOM nodes; the semantic-sequence cursor; event-id
+selection; the RESYNC_REQUIRED re-read adapter; the LIVE session
+tail labelled volatile, never durable history; the bounded 50k
+buffer); per-tab session state (each tab its own client_request_id
+→ its own deterministic session; zero localStorage/sessionStorage/
+BroadcastChannel); the S0-1 probes (DOMAIN_REJECTED bogus session /
+STALE_REVISION CAS miss / DUPLICATE_REQUEST key reuse — rendered
+verbatim, never collapsed); the S0-4 load probe (real
+session.attach CAS pairs). Verification: tsc clean, 46 vitest green
+(unit windowing + contract validators/client over the 10
+live-gateway fixtures — in-process dispatch, the parity law's byte
+form — + the jsdom integration proofs), the production build green;
+the standing suite 2556+9 + ruff + docguard + topology --check
+clean (zero Python change). The live evidence (8 screenshots, the
+evidence pack delivered with the delta archive): three honest
+rejection probes; 300 real ops at 120.9 ops/s (600 POST
+round-trips, the UI interactive throughout); RESYNC_REQUIRED after
+the retention roll (256-event FIFO, the banner + the re-read);
+10k+ rows virtualized (21 mounted, 10ms deep-jump paint, 12MB JS
+heap); two+ independent tabs (distinct session ids, zero storage, a
+third tab clean). Zero canon change, the LOG untouched, zero corpus
+price. The owner's RU report + the S0-4 load note:
+`docs/iterations/iter-289-frontendweb-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

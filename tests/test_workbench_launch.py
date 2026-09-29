@@ -1,30 +1,30 @@
-"""wb-10's claim packet — the zero-command launcher
-(`scripts/workbench_launch.py`, the owner's 2026-09-25 fix list:
-«редот у меня такой …\\Redot_v26.2-stable_windows_win64 … где найти
-redot.exe и как его подключить?» + the reported TypeError + the
-zero-command law).
+"""iter-290's claim packet — the zero-command launcher re-pointed to
+the web client (`scripts/workbench_launch.py`, the owner's 2026-09-29
+«удаляй redot» call; D-245 deleted the frozen Redot tree WITH the
+launcher's old frontend half).
 
 What this packet claims (TEST_PLAN §9's claim form — the EFFECT, not
 the mechanics):
 
 1. THE SPAWN ITSELF: the REAL launcher process starts the REAL
-   gateway child, observes the bind line, and shuts both down on
-   Ctrl+C — the owner-reported `Popen.__init__() got an unexpected
-   keyword argument 'buffering'` crash is pinned dead forever (the
-   spawn refuses before any bind without `bufsize`).
-2. THE FOLDER RESOLUTION: a Redot RELEASE FOLDER resolves to the
-   engine executable inside it (the owner's exact layout:
-   Redot_v26.2-stable_windows_win64/ with
-   redot.windows.editor.x86_64.exe) — root level AND one folder deep,
-   the known names in preference order, the sorted-glob fallback.
-3. THE CHAIN: the explicit forms pass verbatim (strict — the spawn's
-   own loud error); the persisted pick falls through when stale.
-4. THE AUTO-SCAN: a Redot folder on the Desktop-shaped roots is found
-   with zero configuration (the owner's actual machine layout).
-5. THE PERSISTED PICK: launcher.json saves atomically and loads back;
-   a corrupt file is loud on the console but never a brick.
-6. THE BIND-URL PARSE: the gateway's own bind line yields the URL the
-   Redot child is told to dial (never a divergent default).
+   gateway child, observes the bind line, reports the honest
+   gateway-only note under `--no-frontend`, and shuts down on
+   Ctrl+C (the wb-10 owner-reported `Popen.__init__() got an
+   unexpected keyword argument 'buffering'` crash stays dead —
+   KI#93's no-host-PYTHONUNBUFFERED law included).
+2. THE NPM RESOLUTION: npm resolves over PATH; an empty PATH is
+   the honest None — never a guess, never a shell.
+3. THE INSTALL CHECK: `frontend/node_modules` present/absent
+   decides the first-run `npm install` step.
+4. THE GATEWAY_TARGET FORWARD: the web child's env carries the
+   OBSERVED bind URL (the Vite proxy target — never a divergent
+   committed default); an empty URL forwards nothing and Vite's own
+   committed default target stands.
+5. THE BIND-URL PARSE: the gateway's own bind line yields the ROOT
+   the proxy expects (never the /op endpoint — KI#98's doubled-route
+   death), and the REAL gateway's root actually serves POST /op.
+6. THE CLI FORMS: `--no-frontend` parses; the bare `--` separator
+   is stripped before the gateway child's parser sees it.
 """
 
 from __future__ import annotations
@@ -47,13 +47,10 @@ sys.path.insert(0, str(REPO / "scripts"))
 
 from workbench_launch import (  # noqa: E402
     _gateway_url_from_bind_line,
-    auto_discover_redot,
-    common_scan_roots,
-    load_launcher_settings,
+    frontend_env,
+    needs_install,
     parse_args,
-    redot_exe_in_folder,
-    resolve_redot_path,
-    save_launcher_settings,
+    resolve_npm,
 )
 
 
@@ -63,28 +60,17 @@ def _free_port() -> int:
         return int(probe.getsockname()[1])
 
 
-def _fake_release(root: Path, name: str = "Redot_v26.2-stable_windows_win64"):
-    """The owner's actual layout: a Redot release folder on a desktop,
-    the engine executable at its root (the exact binary name)."""
-    folder = root / name
-    folder.mkdir(parents=True)
-    engine = folder / "redot.windows.editor.x86_64.exe"
-    engine.write_bytes(b"#!/bin/sh\nexit 0\n")
-    engine.chmod(0o755)
-    return folder, engine
-
-
 # ----------------------------------------------- 1. the spawn itself
 
 
 def test_the_real_launcher_spawns_and_stops_the_gateway() -> None:
-    """THE owner-reported crash, pinned dead: the launcher's gateway
+    """The owner-reported crash, pinned dead: the launcher's gateway
     child (Popen with the line-buffered pipe) must CONSTRUCT and reach
     the bind line — `buffering` (not a Popen keyword) refused the
     spawn before anything served. Then SIGINT stops the session.
     KI#93: the whole chain must stream WITHOUT the host's
-    PYTHONUNBUFFERED (CI and the owner's machines never set it — the
-    sandbox's global PYTHONUNBUFFERED=1 masked three red CI
+    PYTHONUNBUFFERED (CI and the owner's machines never set it —
+    the sandbox's global PYTHONUNBUFFERED=1 masked three red CI
     iterations), so this spawn strips it: the launcher owns the
     buffering itself (the gateway child rides `-u`, the supervisor
     line-buffers its own stdout)."""
@@ -93,7 +79,7 @@ def test_the_real_launcher_spawns_and_stops_the_gateway() -> None:
         [
             sys.executable,
             str(REPO / "scripts" / "workbench_launch.py"),
-            "--no-redot",
+            "--no-frontend",
             "--",
             "--no-backend",
             "--port",
@@ -130,8 +116,8 @@ def test_the_real_launcher_spawns_and_stops_the_gateway() -> None:
             "the bind line must ride the forwarded gateway output"
         )
         assert any(
-            "no Redot executable resolved" in line for line in lines
-        ), "the honest no-redot note (never a fake 'launched')"
+            "the web child skipped (--no-frontend" in line for line in lines
+        ), "the honest gateway-only note (never a fake 'launched')"
         process.send_signal(signal.SIGINT)
         process.wait(timeout=30.0)
         assert process.returncode == 0, "\n".join(lines[-20:])
@@ -141,128 +127,66 @@ def test_the_real_launcher_spawns_and_stops_the_gateway() -> None:
             process.wait(timeout=10.0)
 
 
-# --------------------------------------- 2. the folder resolution
+# ------------------------------------ 2. the npm resolution (D-245)
 
 
-def test_a_release_folder_resolves_the_engine_executable(
-    tmp_path: Path,
+def test_npm_resolves_over_path(
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """The owner's exact form: --redot-exe <the release FOLDER> finds
-    redot.windows.editor.x86_64.exe inside it — never 'where is
-    redot.exe?' again."""
-    folder, engine = _fake_release(tmp_path)
-    assert redot_exe_in_folder(folder) == engine
-    assert resolve_redot_path(str(folder)) == str(engine)
+    """npm is found over the operator's PATH — the one resolution
+    point (the CONTRACTS §5 D1 pattern; never a hardcoded path)."""
+    npm = resolve_npm()
+    if npm is None:  # a CI image without node: the honest skip
+        return
+    assert Path(npm).is_absolute() and Path(npm).exists()
 
 
-def test_a_nested_release_folder_resolves_one_level_deep(
-    tmp_path: Path,
+def test_an_empty_path_is_the_honest_none(
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
-    """A release unpacked into a subfolder (one level deep) resolves
-    too — the deterministic sorted walk."""
-    outer = tmp_path / "Redot_v26.2-stable_windows_win64"
-    outer.mkdir()
-    nested = outer / "unpacked"
-    nested.mkdir()
-    engine = nested / "redot.windows.editor.x86_64.exe"
-    engine.write_bytes(b"engine")
-    engine.chmod(0o755)
-    assert redot_exe_in_folder(outer) == engine
+    """No npm on PATH is the honest None — the launcher then prints
+    the manual note and keeps serving the gateway; never a guess,
+    never a shell fallback."""
+    monkeypatch.setenv("PATH", "")
+    assert resolve_npm() is None
 
 
-def test_the_known_name_wins_over_the_sorted_glob(tmp_path: Path) -> None:
-    """The preference order: the known engine names beat any other
-    redot* executable the folder happens to carry."""
-    folder = tmp_path / "Redot_folder"
-    folder.mkdir()
-    other = folder / "aaa-redot-tool.exe"
-    other.write_bytes(b"tool")
-    other.chmod(0o755)
-    engine = folder / "redot.windows.editor.x86_64.exe"
-    engine.write_bytes(b"engine")
-    engine.chmod(0o755)
-    assert redot_exe_in_folder(folder) == engine
+def test_a_missing_node_modules_means_install(tmp_path: Path) -> None:
+    """The first-run check: an absent dependency tree installs before
+    the dev server runs (the zero-command law — the operator never
+    types `npm install`)."""
+    assert needs_install(tmp_path) is True
+    (tmp_path / "node_modules").mkdir()
+    assert needs_install(tmp_path) is False
 
 
-def test_an_empty_folder_resolves_none(tmp_path: Path) -> None:
-    """A folder with no Redot executable is the honest skip (loud on
-    the console), never a guess."""
-    empty = tmp_path / "empty"
-    empty.mkdir()
-    assert redot_exe_in_folder(empty) is None
-    assert resolve_redot_path(str(empty)) is None
+# --------------------------------- 3. the GATEWAY_TARGET forward
 
 
-def test_the_strict_and_recovery_forms(tmp_path: Path) -> None:
-    """An explicit .exe passes verbatim; the STRICT form (the CLI
-    argument) passes a nonexistent path verbatim too (the spawn's own
-    loud error); the non-strict form (the persisted pick) skips it."""
-    engine = tmp_path / "redot.windows.editor.x86_64.exe"
-    engine.write_bytes(b"engine")
-    engine.chmod(0o755)
-    assert resolve_redot_path(str(engine)) == str(engine)
-    assert resolve_redot_path(
-        "C:/nowhere/Redot.exe", strict=True
-    ) == "C:/nowhere/Redot.exe"
-    assert resolve_redot_path("C:/nowhere/Redot.exe") is None
+def test_the_child_env_carries_the_observed_url() -> None:
+    """The OBSERVED bind URL is the Vite proxy target — the web
+    child dials the gateway the launcher actually started (never a
+    divergent committed default when `-- --port` moves the bind)."""
+    env = frontend_env({"PATH": "/bin"}, "http://127.0.0.1:9000")
+    assert env == {"PATH": "/bin", "GATEWAY_TARGET": "http://127.0.0.1:9000"}
 
 
-# ------------------------------------------------- 3. the auto-scan
+def test_an_unparsed_bind_forwards_nothing() -> None:
+    """An empty URL (no parseable bind line) forwards NO variable —
+    Vite's own committed default target stands; the launcher never
+    invents a URL."""
+    env = frontend_env({"PATH": "/bin"}, "")
+    assert env == {"PATH": "/bin"}
 
 
-def test_the_auto_scan_finds_a_desktop_redot(tmp_path: Path) -> None:
-    """The owner's machine layout, zero configuration: a Redot release
-    folder inside a Desktop-shaped root is discovered; non-Redot
-    folders and missing roots are skipped."""
-    desktop = tmp_path / "Desktop"
-    desktop.mkdir()
-    _folder, engine = _fake_release(desktop)
-    (desktop / "SomethingElse").mkdir()
-    assert auto_discover_redot([desktop]) == str(engine)
-    empty_root = tmp_path / "Other"
-    empty_root.mkdir()
-    assert auto_discover_redot([empty_root]) is None
-
-
-def test_the_common_roots_skip_missing_children(tmp_path: Path) -> None:
-    (tmp_path / "Desktop").mkdir()
-    roots = common_scan_roots(tmp_path)
-    assert roots == [tmp_path / "Desktop"]
-
-
-# ------------------------------------------ 4. the persisted pick
-
-
-def test_the_persisted_pick_roundtrips(tmp_path: Path) -> None:
-    path = tmp_path / "launcher.json"
-    save_launcher_settings("D:/Tools/Redot/redot.exe", path)
-    assert load_launcher_settings(path) == {
-        "redot_exe": "D:/Tools/Redot/redot.exe"
-    }
-    # the atomic write leaves no .tmp residue
-    assert not path.with_suffix(".json.tmp").exists()
-
-
-def test_a_corrupt_pick_is_loud_but_never_a_brick(
-    tmp_path: Path, capsys: pytest.CaptureFixture[str]
-) -> None:
-    path = tmp_path / "launcher.json"
-    path.write_text("{not json", encoding="utf-8")
-    assert load_launcher_settings(path) == {}
-    assert "unreadable" in capsys.readouterr().out
-    path.write_text(json.dumps(["a", "list"]), encoding="utf-8")
-    assert load_launcher_settings(path) == {}
-    assert "not a JSON object" in capsys.readouterr().out
-
-
-# ------------------------------------------ 5. the bind-line parse
+# ------------------------------------------ 4. the bind-line parse
 
 
 def test_the_bind_line_yields_the_gateway_url() -> None:
     # KI#98: the REAL banner carries the transport's full ENDPOINT
     # (transport.url — the /op route included, the wb-4 shape); the
-    # forwarded value is the ROOT the Redot client appends its own
-    # "/op" to (gateway_client.gd's route law) — never the endpoint.
+    # forwarded value is the ROOT the Vite proxy targets — never the
+    # endpoint.
     assert _gateway_url_from_bind_line(
         "CanonSim Workbench — loopback gateway http://127.0.0.1:8765/op"
     ) == "http://127.0.0.1:8765"
@@ -278,15 +202,13 @@ def test_the_bind_line_yields_the_gateway_url() -> None:
 def test_the_forwarded_root_serves_the_clients_route() -> None:
     """KI#98's end-to-end pin: the REAL gateway process's own bind
     line (the banner workbench_app prints — transport.url, route
-    INCLUDED), parsed by the launcher's parse, plus the Redot
-    client's route law (base + "/op", gateway_client.gd), must
-    SERVE. The iter-227 forward shipped the endpoint as the base and
-    every shell request landed on /op/op — HTTP 404, app.status
-    dead, session.create never dispatched, the Models manager's
-    buttons never enabled (the owner's «проводник не открывается /
-    модели не обнаруживаются» report, three misdiagnosed rounds).
-    This pin kills the whole class: banner shape, route, or parse
-    drift all go RED here."""
+    INCLUDED), parsed by the launcher's parse, must SERVE the route
+    the clients dial (the Vite proxy forwards to the root; the web
+    client's gateway adapter appends its own route). The iter-227
+    forward shipped the endpoint as the base and every request
+    landed on /op/op — HTTP 404, app.status dead. This pin kills the
+    whole class: banner shape, route, or parse drift all go RED
+    here."""
     port = _free_port()
     process = subprocess.Popen(
         [
@@ -346,12 +268,19 @@ def test_the_forwarded_root_serves_the_clients_route() -> None:
             process.wait(timeout=10.0)
 
 
-# ------------------------------------------------- 6. the CLI forms
+# ------------------------------------------------- 5. the CLI forms
 
 
-def test_the_pick_redot_flag_parses() -> None:
-    args = parse_args(["--pick-redot"])
-    assert args.pick_redot is True
-    assert args.no_redot is False
-    quiet = parse_args(["--no-redot"])
-    assert quiet.no_redot is True and quiet.pick_redot is False
+def test_the_no_frontend_flag_parses() -> None:
+    args = parse_args(["--no-frontend"])
+    assert args.no_frontend is True
+    assert args.gateway_args == []
+
+
+def test_the_bare_separator_is_stripped_for_the_gateway() -> None:
+    """The operator's `-- --port 9000` form: the separator is OURS —
+    workbench_app's parser has no positional args, a bare "--" is
+    its own loud refusal (the latent wb-9 bug, fixed with wb-10)."""
+    args = parse_args(["--", "--port", "9000"])
+    assert args.gateway_args == ["--port", "9000"]
+    assert args.no_frontend is False

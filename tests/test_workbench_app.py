@@ -35,9 +35,9 @@ the mechanics):
    app.status over the wire; chat.send against the LIVE stub
    llama-server observed to its truthful terminal COMPLETED.
 
-No Redot binary is needed here (the Redot half's committed-file
-contract rides test_shell_contract.py; its gated proof rides
-test_shell_proof.py).
+No browser is needed here (the web client's own contract rides
+frontend/tests; the launcher's claim packet rides
+test_workbench_launch.py).
 """
 
 from __future__ import annotations
@@ -90,8 +90,9 @@ def _over_http(url: str, document: dict[str, object]) -> dict[str, object]:
 def _await_terminal(
     url: str, session: str, execution_id: str, tries: int = 200
 ) -> dict[str, object]:
-    """The honest caller's poll (§8 identity-then-poll — the Redot
-    shell's own form; the live-events row delivers streaming later)."""
+    """The honest caller's poll (§8 identity-then-poll — the web
+    client's own POST-only form; the live-events row delivers
+    streaming later)."""
     for _ in range(tries):
         document = _over_http(
             url,
@@ -329,52 +330,14 @@ def test_the_launcher_bootstrap_creates_the_runtime_layout(
     assert bootstrap_runtime_layout(tmp_path) == []
 
 
-def test_the_launcher_resolves_the_redot_exe(monkeypatch: pytest.MonkeyPatch) -> None:
-    """wb-10's resolution chain (the tuple contract: the executable +
-    the origin note). The auto-scan is pinned to an empty root list —
-    the environment's own Desktop must never leak into the claim."""
-    import os
-
-    import workbench_launch
-    from workbench_launch import resolve_redot_exe
-
-    monkeypatch.setattr(workbench_launch, "auto_discover_redot", lambda: None)
-    try:
-        os.environ.pop("REDOT_EXE", None)
-        assert resolve_redot_exe(None) == (None, "no resolution")
-        assert resolve_redot_exe("  ") == (None, "no resolution")
-        # the CLI form is strict: verbatim even when the path is
-        # absent — the spawn's own loud error, never second-guessed
-        resolved, origin = resolve_redot_exe("C:/Redot/Redot.exe")
-        assert resolved == "C:/Redot/Redot.exe"
-        assert origin == "the --redot-exe argument"
-        os.environ["REDOT_EXE"] = "C:/env/Redot.exe"
-        resolved, origin = resolve_redot_exe(None)
-        assert resolved == "C:/env/Redot.exe"
-        assert origin == "the REDOT_EXE environment variable"
-        resolved, origin = resolve_redot_exe("C:/cli/Redot.exe")
-        assert resolved == "C:/cli/Redot.exe"
-        assert origin == "the --redot-exe argument"
-        # a stale non-strict value (the persisted pick) falls through
-        os.environ.pop("REDOT_EXE", None)
-        monkeypatch.setattr(
-            workbench_launch, "auto_discover_redot", lambda: "D:/found/redot.exe"
-        )
-        resolved, origin = resolve_redot_exe(None, persisted="gone/redot.exe")
-        assert resolved == "D:/found/redot.exe"
-        assert "auto-scan" in origin
-    finally:
-        os.environ.pop("REDOT_EXE", None)
-
-
 def test_the_launcher_passes_the_gateway_args_through() -> None:
     from workbench_launch import parse_args as parse_launch_args
 
     args = parse_launch_args(["--port", "9000"])
     assert args.gateway_args == ["--port", "9000"]
-    assert args.no_redot is False
-    quiet = parse_launch_args(["--no-redot"])
-    assert quiet.no_redot is True and quiet.gateway_args == []
+    assert args.no_frontend is False
+    quiet = parse_launch_args(["--no-frontend"])
+    assert quiet.no_frontend is True and quiet.gateway_args == []
     # the "--" separator is OURS: stripped before the child's own
     # parser sees it (the latent wb-9 bug — a bare "--" was the
     # gateway's own loud argparse refusal, wb-10's fix)

@@ -32,7 +32,7 @@ The other two domains are named and NOT provided:
   artifact module imports nothing from here, and its byte-identical
   rebuild is the executable proof);
 - UI_ANIMATION — visual-only time belongs to the presentation side
-  (the Redot project's own clocks), never to application policy.
+  (the web client's own clocks), never to application policy.
 
 `AppClock` is injectable: the composition root (§6.1) wires the
 stdlib providers (the defaults); tests wire deterministic doubles —
