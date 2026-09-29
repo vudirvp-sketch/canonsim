@@ -1,9 +1,10 @@
-# CanonSim Workbench — the web client (frontend-1, S0)
+# CanonSim Workbench — the web client (frontend-1)
 
 The ACTIVE frontend path (D-244: the owner's 2026-09-29 freeze+open
 call; the Redot tree deleted at D-245 — the owner's «удаляй redot»
 call). React + TypeScript + Vite, Web/PWA-first — the S0 walking
-skeleton over the existing loopback gateway. The law:
+skeleton over the existing loopback gateway, now grown into
+Phase 3's first row (the Shell + the Session lifecycle). The law:
 `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
 `docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md`).
 
@@ -76,10 +77,19 @@ sandbox-side capture script lives outside the repo per AGENTS §7
 Rule 9; the fixtures' shape is the contract, the capture is
 re-runnable from `tests/test_gateway.py`'s own patterns).
 
-## The S0 surfaces
+## The surfaces (the Shell era — Phase 3, row 1)
+
+The composition root mounts the **Shell** (`src/features/shell/`):
+the pane registry + the switch. **Only the active pane mounts** —
+a switch unmounts the previous surface and drops its local
+presentation state (a live-tail buffer, a probe list); the
+gateway remains the only truth, and a remounted surface re-reads
+its evidence — possibly via RESYNC, never silently. The active
+pane id is the shell's allowed local UI state (§7's allowance).
 
 | Surface | What it proves |
 |---|---|
+| Session (lifecycle) | the lease closure over the existing ops: attach under the CAS revision guard, detach under the lease guard — REQUESTED → ACCEPTED/REJECTED → EFFECTIVE → OBSERVED, never collapsed; STALE_REVISION/LEASE_EXPIRED verbatim with the gateway's own reason; G4 — no auto-retry, a fresh `client_request_id` per explicit attempt |
 | Gateway (status) | the `app.status` round-trip + the honest rejection probes (DOMAIN_REJECTED / STALE_REVISION / DUPLICATE_REQUEST) — the DELIVERED/TRANSPORT/MISMATCH lanes never collapse |
 | Load probe | drives real `session.attach` ops (the CAS loop) — the S0-4 measurement instrument |
 | Trajectory | the LIVE session tail (`session.events`): virtualized ≥10k rows (only the window mounts), the semantic-sequence cursor, event-id selection, RESYNC_REQUIRED handled honestly, the LIVE label (volatile tail, never durable history) |

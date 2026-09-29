@@ -1,59 +1,63 @@
-Iteration: iter-293 (`frontendweb` — the post-S0 continuation,
-  the owner's «можешь продолжать работу по фронтенду» delegated call
-  over STATUS Next step's named order — the tooling floor first; R2,
-  frontend-local additive tests): the tooling floor's FIRST ROW
-  landed — the frontend architecture guard
-  (`frontend/tests/architecture/guard.test.ts`, 8 tests,
-  FRONTEND_WEB_LAW §11's dependency-boundary check as the backend
-  `test_architecture.py`'s parity form; AGENTS §2.8's
-  existing-mechanism-first — the existing vitest suite, ZERO new
-  dependencies; dependency-cruiser/eslint-boundaries and the
-  Playwright-class multi-tab smoke stay parked rows, each its own
-  admission): R1 `fetch(` ONLY in the typed gateway client (the one
-  transport adapter — INV-4's client-side mirror), R2 no
-  XMLHttpRequest/EventSource/WebSocket/serviceWorker before their
-  gateway contracts (the §5 stream admission), R3 no browser
-  storage as truth (localStorage/sessionStorage/BroadcastChannel/
-  indexedDB/caches — §6), R4 `src/api/**` imports nothing upward,
-  R5 no cross-feature imports, R6 features couple to state only via
-  `import type`, R7 the ONE composition root, R8 src never imports
-  tests; the scans are CALL-FORM patterns so law-restating
-  docstrings never false-positive; MUTATION-VERIFIED (a localStorage
-  probe and a cross-feature import probe both caught red with
-  file+line, green again after removal — the freshly adopted
-  method's claim→falsifier discipline applied the same session);
-  54 vitest green (46+8) + tsc + the production build; the
-  frontend README's Verify/gate-list synced, the agent-context
-  stage map's POST-S0 row updated; the RU report at
-  docs/iterations/iter-293-frontendweb-report.md
+Iteration: iter-294 (`shell` — Phase 3's FIRST ROW, the owner's
+  «продолжай работы по фронтенду, над теми частями что логичнее всего
+  сейчас провести» delegated call; R2 frontend-local + KI#109's
+  recorded-deletion completion): the SHELL/NAV + the SESSION
+  LIFECYCLE surface landed over the EXISTING six gateway ops (zero
+  new routes, zero Python change): `features/shell/Shell.tsx` the
+  navigation surface (the pane registry, ONLY the active pane
+  mounts — boundedness; a switch drops the pane's local
+  presentation state, the gateway stays the truth),
+  `features/session-lifecycle/{useSessionLease,SessionLifecycle}`
+  the lease lifecycle (attach under the CAS revision guard, detach
+  under the lease guard; the honest closure REQUESTED ->
+  ACCEPTED/REJECTED -> EFFECTIVE -> OBSERVED, never collapsed; G4
+  no-retry — a fresh client_request_id per explicit attempt;
+  STALE_REVISION/LEASE_EXPIRED rendered verbatim with the gateway's
+  own reason); the composition root mounts the four panes (Session,
+  Gateway, Load probe, Trajectory); 5 new integration tests on the
+  live-captured fixtures; the LIVE smoke against the real gateway
+  (attach OK rev 1 lease 30s -> the OBSERVED re-read attached=true
+  -> the stale writer REJECTED STALE_REVISION verbatim -> detach OK
+  rev 2 -> the released-lease detach REJECTED LEASE_EXPIRED) — and
+  the discovery that the remaining Phase 3 surfaces (Chat/Inference,
+  Settings, Observatory entry) are NOT backend-blocked (the app
+  gateway's vocabulary already carries model.*/inference.*/
+  chat.send/observatory.*/run.*/backend.settings); the RU report at
+  docs/iterations/iter-294-frontendweb-report.md
 
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2529 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; the standing suite;
-  zero Python change — the frontend stack: 54 vitest + tsc + build,
-  the 8 new guard tests riding npm test)
+  --check clean (Python 3.12.14, the env pin; the standing suite
+  RESTORED after KI#109's completion — the fresh clone entered red;
+  zero Python change — the frontend stack: 59 vitest + tsc + build)
   ·
 Date: 2026-09-29 ·
-Scope: frontend/tests/architecture/guard.test.ts (new — the 8-rule
-  guard), frontend/README.md (the Verify section + the gate list),
-  docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map's
-  POST-S0 row), docs/TASKS.md (the ledger, iter-283 evicted),
-  STATUS.md, worklog.md (iter-283 evicted),
-  docs/iterations/iter-293-frontendweb-report.md (new) — 7 paths
-  (R2 — frontend-local additive tests; zero Python change, zero
-  canon change, the LOG untouched, zero corpus price)
-Track A: the web-frontend track — S0 LANDED, awaiting the owner's
-  green review; the Redot era now CLOSED IN TREE as well as in docs
-  (D-245 complete); the design-research method adopted for the
-  track's visual/interface rows (D-246 — method, never authority);
-  the tooling floor's first row LANDED (iter-293 — the
-  architecture guard riding npm test);
-  the standing boundaries: SSE/WebSocket, Tauri, PWA — each its own
-  admission. The world track: W8's remaining rows the owner's call.
-  The ssi family COMPLETE except ssi-5, owner-gated.
+Scope: frontend/src/features/shell/Shell.tsx (new),
+  frontend/src/features/session-lifecycle/{useSessionLease.ts,
+  SessionLifecycle.tsx} (new),
+  frontend/tests/integration/SessionLifecycle.test.tsx (new),
+  frontend/src/app/composition/{App.tsx, styles.css} (the root
+  mounts the Shell), frontend/README.md (the surfaces table),
+  docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
+  docs/TASKS.md (the ledger, iter-284 evicted), STATUS.md (KI#109),
+  worklog.md (iter-284 evicted),
+  docs/iterations/iter-294-frontendweb-report.md (new) + the 16
+  KI#109 deleted paths (the recorded D-245 list) — 11
+  changed/created + 16 deleted (R2 — frontend-local; zero Python
+  change, zero canon change, the LOG untouched, zero corpus price)
+Track A: the web-frontend track — S0 LANDED; the tooling floor's
+  first row LANDED (iter-293); Phase 3's first row LANDED (iter-294
+  — the shell + the session lifecycle); the remaining Phase 3
+  surfaces (Chat/Inference, Settings, Observatory entry) NOT
+  backend-blocked — their ops already live at the app gateway (the
+  iter-294 smoke's enumeration), each its own contract-mirror +
+  surface iteration; the standing boundaries: SSE/WebSocket, Tauri,
+  PWA — each its own admission. The world track: W8's remaining
+  rows the owner's call. The ssi family COMPLETE except ssi-5,
+  owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -82,7 +86,7 @@ Track A: the web-frontend track — S0 LANDED, awaiting the owner's
 
 ## Active KIs
 
-- KI#108 · the iter-290 delta applied owner-side without its 16 DELETED_PATHS (the Redot tree/index/proof packets stayed tracked while every doc said deleted; docguard + the stale shell-contract red) · 2026-09-29 · CLOSED iter-291 (the deletions landed, 2529+1 again; root cause: the git-block `git rm` lines not executed — KI#55's mirror)
+- KI#109 · the GitHub mirror at HEAD `6c614ce` carries iter-291..293's docs WITHOUT the 16 recorded D-245 deletions (a fresh clone: docguard red on the 1462-line index + the stale shell-contract red; the owner's local tree has them — the mirror never received the deletions in any commit) · 2026-09-29 · CLOSED iter-294 (the 16 paths re-executed in the sandbox, the suite 2529+1 again; the delta carries them in DELETED_PATHS, the owner-side git block lists them for the mirror)
 
 ## FAQ / Pitfalls
 
@@ -112,23 +116,29 @@ Track A: the web-frontend track — S0 LANDED, awaiting the owner's
 
 ## Next step
 
-**iter-293 DONE: frontendweb (the owner's «можешь продолжать работу
-  по фронтенду» call; R2, additive tests).** The tooling floor's
-  first row — the frontend architecture guard (8 tests riding npm
-  test): fetch only in the typed client, no second transport before
-  its gateway contract, no browser storage as truth, api purity, no
-  cross-feature imports, state coupling type-only, the ONE
-  composition root, the test seam; mutation-verified (both probes
-  caught with file+line); 54 vitest + tsc + build green; zero new
-  dependencies (dependency-cruiser/Playwright parked rows).
-Next: the owner's calls — the streaming admission (the SSE gateway
-  contract first — a backend row, its own iteration), the Phase 3
-  vertical slice (shell/nav, Chat/Inference, Settings, Observatory
-  entry), the acceptance matrix, the DECISIONS collapse (36→30, the
-  owner's call), and the world track's parallel rows.
-Active KIs: KI#108 CLOSED iter-291 (the record above). The suite
-  green (2529+1; the frontend 54). The owner's RU report:
-  docs/iterations/iter-293-frontendweb-report.md.
+**iter-294 DONE: shell (Phase 3's first row, the owner's
+  «продолжай работы по фронтенду, над теми частями что логичнее
+  всего сейчас провести» call; R2 frontend-local + KI#109).** The
+  SHELL/NAV + the SESSION LIFECYCLE surface over the existing six
+  ops: only the active pane mounts (boundedness); the lease closure
+  REQUESTED→ACCEPTED/REJECTED→EFFECTIVE→OBSERVED, G4 no-retry,
+  STALE_REVISION/LEASE_EXPIRED verbatim; 59 vitest + tsc + build +
+  the live smoke (attach/detach/stale/expired against the real
+  gateway); KI#109 closed (the mirror's 16 missed D-245 deletions
+  re-executed, 2529+1 restored). DISCOVERED: the remaining Phase 3
+  surfaces are NOT backend-blocked — the app gateway's vocabulary
+  already carries model.*/inference.*/chat.send/observatory.*/
+  run.*/backend.settings.
+Next: the owner's calls — the Phase 3 continuation rows (each its
+  own iteration: the Chat/Inference contract mirror + surface, the
+  Settings mirror, the Observatory entry mirror — the ops are live,
+  the client mirrors are the work), the streaming admission (SSE —
+  the backend gateway contract first), the acceptance matrix, the
+  DECISIONS collapse (36→30, the owner's call), and the world
+  track's parallel rows.
+Active KIs: KI#109 CLOSED iter-294 (the record above). The suite
+  green (2529+1; the frontend 59). The owner's RU report:
+  docs/iterations/iter-294-frontendweb-report.md.
 iter-292 DONE: methoddoc (the owner's tmpfiles v3 delivery + the
   «определись что перенимаем и куда» call; R0, doc-only).** D-246 —
   the design-research & mechanism-transfer method adopted as METHOD,
@@ -154,28 +164,7 @@ iter-291 DONE: redotfix (KI#108 — the half-applied iter-290 delta;
   rewritten.
 Active KIs: KI#108 CLOSED iter-291. The suite green (2529+1). The
   owner's RU report: docs/iterations/iter-291-redotfix-report.md.
-iter-288 DONE: the frontend-web pack ingestion (the owner's
-  tmpfiles delivery of CANONSIM_FRONTEND_WEB_AGENT_PACK_FINAL_v1_3.zip
-  + the «выполняй» execution order over the reported plan; R0
-  doc-only).** The pack read in full in its own S0 read order and
-  reconciled against HEAD: every gateway seam claim verified live
-  (workbench/ zero-diff since the pack's pin `cd84069`; POST /op,
-  the session.* family, app.status, the envelopes), no React
-  present — the pack contracts the ADDITION. Landed:
-  docs/FRONTEND_WEB_LAW.md the binding distillation (D-243 — the
-  D-214 pattern), docs/frontendweb/ the durable track surface (the
-  index + FRONTEND_WEB_AGENT_CONTEXT.md the durable context +
-  archive/ the verbatim md5-pinned pack), the frontend-1 S0 row
-  parked owner-gated; the Redot-freeze authority tension preserved
-  for the owner (AGENTS §11 — never silently reconciled).
-Next: the owner's call — the three web-track gates in order: the
-  Redot-freeze D-row (the pack's migration Phase 0 + the §18
-  re-homing family), the top-level `frontend/` tree placement (§8
-  stop & confirm), then the frontend-1 opening (the S0 skeleton,
-  FRONTEND_WEB_LAW §2); the world track's handoff consumer and W8's
-  remaining rows stay the owner's parallel calls.
-Active KIs: none. The suite green (2556+9). The owner's RU
-  report: docs/iterations/iter-288-frontendweb-report.md.
+
 iter-286 DONE: the W7 station's fourth row (the owner's «точечный
   и быстрый (read-side only)» call — the named-boundary rendering
   route, iter-284/285's boundary (a); the same call conditionally

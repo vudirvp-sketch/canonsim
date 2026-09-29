@@ -202,6 +202,42 @@ select {
   color: var(--muted);
 }
 
+/* The shell (Phase 3's navigation surface): the pane registry + the
+   one active pane. Only the active pane mounts (boundedness). */
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.shell-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.shell-tab {
+  font-size: 0.9rem;
+  padding: 5px 14px;
+}
+.shell-tab-active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.shell-nav-note {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-left: auto;
+  max-width: 340px;
+  text-align: right;
+}
+.shell-pane {
+  min-height: 120px;
+}
+.banner-accepted {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .empty,
 .empty-inspector {
   color: var(--muted);

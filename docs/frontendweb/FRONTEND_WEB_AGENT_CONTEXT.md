@@ -134,6 +134,20 @@ POST-S0        — the tooling floor's first row LANDED (iter-293: the
                  the streaming admission, the acceptance matrix, the
                  tooling floor's remaining rows (the CI wiring, the
                  Playwright-class multi-tab smoke)
+PHASE 3        — the first row LANDED (iter-294, the owner's
+                 «продолжай работы по фронтенду» delegated call: the
+                 SHELL/NAV + the SESSION LIFECYCLE surface over the
+                 existing six ops — the honest closure REQUESTED ->
+                 ACCEPTED/REJECTED -> EFFECTIVE -> OBSERVED, G4
+                 no-retry, only the active pane mounts; 59 vitest +
+                 tsc + build + the live smoke against the real
+                 gateway); the remaining slices (Chat/Inference,
+                 Settings, Observatory entry) NOT backend-blocked —
+                 their ops already live at the app gateway's
+                 vocabulary (model.*/inference.*/chat.send/
+                 observatory.*/run.*/backend.settings — the iter-294
+                 smoke's enumeration), each its own contract-mirror +
+                 surface iteration, owner-gated
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the
                  owner's call

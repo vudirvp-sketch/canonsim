@@ -1,10 +1,12 @@
 /**
- * The S0 composition root — ONE root, one wiring site (the
+ * The composition root — ONE root, one wiring site (the
  * surface-module law). It owns nothing semantic: it mounts the
  * tab's session client state (`useTabSession`), the context strip
- * (the honest identity/freshness line), and the two S0 surfaces
- * (Gateway status; the Trajectory live tail). Every surface below
- * this root reaches the gateway ONLY through the typed client.
+ * (the honest identity/freshness line), and the SHELL (Phase 3's
+ * navigation surface) with the registered panes — the session
+ * lifecycle (the lease closure), the gateway status, the S0-4 load
+ * probe, and the Trajectory live tail. Every surface below this
+ * root reaches the gateway ONLY through the typed client.
  *
  * The op-driver (the S0-4 load probe) is also wired here: it
  * drives REAL `session.attach` ops against the gateway (the CAS
@@ -17,6 +19,9 @@ import { useCallback, useState } from "react";
 import type { ReactNode } from "react";
 
 import { GatewayStatus } from "../../features/gateway-status/GatewayStatus.tsx";
+import { SessionLifecycle } from "../../features/session-lifecycle/SessionLifecycle.tsx";
+import { Shell } from "../../features/shell/Shell.tsx";
+import type { ShellPane } from "../../features/shell/Shell.tsx";
 import { Trajectory } from "../../features/trajectory/Trajectory.tsx";
 import { useTabSession } from "../../state/session/useTabSession.ts";
 
@@ -66,11 +71,78 @@ export function App(): ReactNode {
     [session, driving],
   );
 
+  const panes: readonly ShellPane[] = [
+    {
+      id: "session",
+      label: "Session",
+      hint: "the lease lifecycle — attach under the CAS guard, detach under the lease guard, the honest closure",
+      element: (
+        <SessionLifecycle
+          client={session.client}
+          sessionId={session.sessionId}
+          document={session.document}
+          refreshDocument={session.refreshDocument}
+        />
+      ),
+    },
+    {
+      id: "gateway",
+      label: "Gateway",
+      hint: "the app.status round-trip + the honest rejection probes",
+      element: <GatewayStatus client={session.client} sessionId={session.sessionId} />,
+    },
+    {
+      id: "probe",
+      label: "Load probe",
+      hint: "drives real session.attach ops (the CAS loop) — the S0-4 measurement instrument",
+      element: (
+        <div className="surface" aria-label="Load probe">
+          <header className="surface-header">
+            <h2>Load probe (S0-4)</h2>
+            <p className="surface-note">
+              drives real <code>session.attach</code> ops (CAS loop) — the Python-side load stand-in;
+              no llama.cpp model present in this environment (that band is declared, not faked)
+            </p>
+          </header>
+          <div className="controls">
+            <button onClick={() => void driveOps(50)} disabled={session.sessionId === null || driving}>
+              drive 50 ops
+            </button>
+            <button onClick={() => void driveOps(300)} disabled={session.sessionId === null || driving}>
+              drive 300 ops (rolls the 256-event retention)
+            </button>
+          </div>
+          {driving ? <p className="empty">driving…</p> : null}
+          {driveReport !== null ? (
+            <dl className="status-grid">
+              <dt>ops</dt>
+              <dd>{String(driveReport.ops)}</dd>
+              <dt>wall</dt>
+              <dd>{`${String(driveReport.seconds)} s`}</dd>
+              <dt>observed</dt>
+              <dd>{`${driveReport.opsPerSecond} ops/s (attach+get pairs)`}</dd>
+              <dt>at</dt>
+              <dd>{driveReport.at}</dd>
+            </dl>
+          ) : (
+            <p className="empty-inspector">not run yet</p>
+          )}
+        </div>
+      ),
+    },
+    {
+      id: "trajectory",
+      label: "Trajectory",
+      hint: "the LIVE session tail (virtualized) — volatile, never durable history",
+      element: <Trajectory client={session.client} sessionId={session.sessionId} />,
+    },
+  ];
+
   return (
     <div className="app">
       <header className="app-header">
         <h1>
-          CanonSim Workbench <span className="tag">S0 skeleton</span>
+          CanonSim Workbench <span className="tag">phase-3 slice</span>
         </h1>
         <p className="app-note">
           the browser is an untrusted presentation client — semantics stay in CanonSim/Python; this tab
@@ -105,43 +177,7 @@ export function App(): ReactNode {
         ) : null}
       </header>
 
-      <div className="columns">
-        <GatewayStatus client={session.client} sessionId={session.sessionId} className="surface" />
-        <div className="surface" aria-label="Load probe">
-          <header className="surface-header">
-            <h2>Load probe (S0-4)</h2>
-            <p className="surface-note">
-              drives real <code>session.attach</code> ops (CAS loop) — the Python-side load stand-in;
-              no llama.cpp model present in this environment (that band is declared, not faked)
-            </p>
-          </header>
-          <div className="controls">
-            <button onClick={() => void driveOps(50)} disabled={session.sessionId === null || driving}>
-              drive 50 ops
-            </button>
-            <button onClick={() => void driveOps(300)} disabled={session.sessionId === null || driving}>
-              drive 300 ops (rolls the 256-event retention)
-            </button>
-          </div>
-          {driving ? <p className="empty">driving…</p> : null}
-          {driveReport !== null ? (
-            <dl className="status-grid">
-              <dt>ops</dt>
-              <dd>{String(driveReport.ops)}</dd>
-              <dt>wall</dt>
-              <dd>{`${String(driveReport.seconds)} s`}</dd>
-              <dt>observed</dt>
-              <dd>{`${driveReport.opsPerSecond} ops/s (attach+get pairs)`}</dd>
-              <dt>at</dt>
-              <dd>{driveReport.at}</dd>
-            </dl>
-          ) : (
-            <p className="empty-inspector">not run yet</p>
-          )}
-        </div>
-      </div>
-
-      <Trajectory client={session.client} sessionId={session.sessionId} />
+      <Shell panes={panes} initialPaneId="session" />
     </div>
   );
 }
