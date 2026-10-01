@@ -1,0 +1,76 @@
+{
+  "operation_id": "93b1b8419ae3dde2995ef86a2d0b9860b0c4e585342736d7b191ce6e3f20e3d8",
+  "result": {
+    "artifact": {
+      "artifact_schema_identity": "canon_execution_artifact@0.1",
+      "backend_identity": null,
+      "capability_snapshot": null,
+      "diagnostics": [],
+      "execution_id": "22c51eb6a676dcbaf454a79127d0400013b364821172d1bdf75c58cad23ebaf4",
+      "frozen_inputs": [
+        [
+          "deadline_seconds",
+          "60.0"
+        ],
+        [
+          "logical_name",
+          "probe-model.gguf"
+        ],
+        [
+          "work",
+          "model.digest"
+        ]
+      ],
+      "inference_config": null,
+      "model_identity": null,
+      "operation_id": "929ba80ff7205eaf7fcf8a3bacb0025b986fee1eb4364bf62867fe064c25f226",
+      "pack_schema_identity": null,
+      "prompt_identity": null,
+      "protocol_identity": null,
+      "replay_of": null,
+      "reproducibility_scope": "SEMANTIC",
+      "request_digest": "54a81a08a0df17603d6f4000d9fe39ad8a0c7f245ae6ccdc0677d22a7353b25b",
+      "runtime_identity": null,
+      "seed": null,
+      "status": "COMPLETED",
+      "tool_authority_state": null
+    },
+    "deadline": {
+      "deadline_monotonic": 2092.573079815,
+      "started_monotonic": 2032.573079815
+    },
+    "diagnostics": [],
+    "execution_id": "22c51eb6a676dcbaf454a79127d0400013b364821172d1bdf75c58cad23ebaf4",
+    "failure_type": null,
+    "frozen_inputs": [
+      [
+        "deadline_seconds",
+        "60.0"
+      ],
+      [
+        "logical_name",
+        "probe-model.gguf"
+      ],
+      [
+        "work",
+        "model.digest"
+      ]
+    ],
+    "operation_id": "929ba80ff7205eaf7fcf8a3bacb0025b986fee1eb4364bf62867fe064c25f226",
+    "progress": null,
+    "request_digest": "54a81a08a0df17603d6f4000d9fe39ad8a0c7f245ae6ccdc0677d22a7353b25b",
+    "result": {
+      "chunks": 1,
+      "content_digest": "c8d4919ad5f8bc8851ca3fc1dda35c181bdc44e2ebe56cd0db4af0d7a0446ea2",
+      "logical_name": "probe-model.gguf",
+      "size_bytes": 58
+    },
+    "state": "COMPLETED",
+    "terminal": true,
+    "work": "model.digest"
+  },
+  "revision": 0,
+  "sequence": 3,
+  "session_id": "c61c24fcb2b587ebf70042e023af2b91c1faf3d488da8e3b4b66bf2501af4f12",
+  "status": "OK"
+}

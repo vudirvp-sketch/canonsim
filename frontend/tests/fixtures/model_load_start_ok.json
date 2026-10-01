@@ -1,0 +1,14 @@
+{
+  "operation_id": "32dd740841282e864ee8b5f7638079f63ea970d37aa275ac243e70f30f602e42",
+  "result": {
+    "deadline_seconds": 330.0,
+    "execution_id": "20649469b006c5057ce2d4dd6aa826fa26acc8e9b2fc4832e6c4f386858ecb47",
+    "logical_name": "probe-model.gguf",
+    "state": "STARTING",
+    "work": "model.load"
+  },
+  "revision": 0,
+  "sequence": 2,
+  "session_id": "c61c24fcb2b587ebf70042e023af2b91c1faf3d488da8e3b4b66bf2501af4f12",
+  "status": "OK"
+}

@@ -374,6 +374,99 @@ export const modelStatesResultSchema = z.strictObject({
   active: z.string().nullable(),
 });
 
+// ------------------------------------------- models (the surface's own row)
+
+/**
+ * `run.start` result — the ADMISSION identity (the registry's own
+ * echo of the admitted work kind + the execution id + the resolved
+ * deadline). Strict over the handler's own three-field answer; `work`
+ * stays a string (the registry's full kind vocabulary is
+ * backend-owned, never re-encoded here).
+ */
+export const runStartResultSchema = z.strictObject({
+  execution_id: nonEmptyString,
+  work: nonEmptyString,
+  deadline_seconds: finiteFloat,
+});
+
+/**
+ * `model.load` / `model.unload` result — the two handlers' shared
+ * ADMISSION shape, strict: the state is STARTING at admission by the
+ * handlers' own law (the ladder's fast walk already happened; the
+ * minutes-class port call rides the worker thread — `run.get` is the
+ * observation path, never a second blocking call).
+ */
+export const modelDispatchResultSchema = z.strictObject({
+  deadline_seconds: finiteFloat,
+  execution_id: nonEmptyString,
+  logical_name: nonEmptyString,
+  state: z.literal("STARTING"),
+  work: z.enum(["model.load", "model.unload"]),
+});
+
+/** The fetch run's live PROGRESS document (the consumer-depth narrow
+ * over the generic run document's loose `progress` record). */
+export const modelFetchProgressSchema = z.strictObject({
+  downloaded_bytes: nonNegativeInt,
+  logical_name: nonEmptyString,
+  total_bytes: nonNegativeInt.nullable(),
+});
+
+/** The import run's live PROGRESS document (the per-chunk report). */
+export const modelImportProgressSchema = z.strictObject({
+  logical_name: nonEmptyString,
+  file_index: nonNegativeInt,
+  file_count: positiveInt,
+  copied_bytes: nonNegativeInt,
+  total_bytes: nonNegativeInt,
+});
+
+/** The fetch run's OBSERVED result at COMPLETED. */
+export const modelFetchResultSchema = z.strictObject({
+  location: z.string(),
+  logical_name: nonEmptyString,
+  size_bytes: nonNegativeInt,
+  url: z.string(),
+});
+
+/** The import run's OBSERVED result at COMPLETED (the landed files +
+ * the count — the count is the list's own length, never a second
+ * truth). */
+export const modelImportResultSchema = z.strictObject({
+  imported: z.array(
+    z.strictObject({
+      logical_name: nonEmptyString,
+      size_bytes: nonNegativeInt,
+    }),
+  ),
+  count: positiveInt,
+});
+
+/** The digest run's OBSERVED result at COMPLETED (the §9 strong
+ * identity the run computed). */
+export const modelDigestResultSchema = z.strictObject({
+  chunks: nonNegativeInt,
+  content_digest: nonEmptyString,
+  logical_name: nonEmptyString,
+  size_bytes: nonNegativeInt,
+});
+
+/** The load run's OBSERVED result at COMPLETED (`reply` is the
+ * backend's own document — backend-owned DATA, loose by law). */
+export const modelLoadResultSchema = z.strictObject({
+  logical_name: nonEmptyString,
+  location: z.string(),
+  reply: z.record(z.string(), z.unknown()),
+  state: z.literal("ACTIVE"),
+});
+
+/** The unload run's OBSERVED result at COMPLETED. */
+export const modelUnloadResultSchema = z.strictObject({
+  logical_name: nonEmptyString,
+  reply: z.record(z.string(), z.unknown()),
+  state: z.literal("EVICTED"),
+});
+
 // --------------------------------------------------------------- inference
 
 /**

@@ -164,6 +164,10 @@ APP
 │   ├── Inference (the generation-control workspace — the AI family
 │   │   adjacent, right behind Chat; its own surface, never a
 │   │   Settings subsection — the inf-1 split)
+│   ├── Models (the model family's mirror — the RESOURCES group's
+│   │   head: discovery, arrival (fetch/import), the §20 load
+│   │   ladder; the AI family's resource, right behind its
+│   │   converse/control pair)
 │   ├── Trajectory — LIVE
 │   ├── Observatory — HISTORY
 │   └── Settings (pinned at the rail's end)

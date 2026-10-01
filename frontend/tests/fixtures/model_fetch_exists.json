@@ -1,0 +1,8 @@
+{
+  "operation_id": "db9bfa2f4cdea36a398e5fe5013df1f408358280381bba74e054c32a601934ab",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "model.fetch: 'probe-model.gguf' already exists in the models directory \u2014 pass logical_name to fetch under a different name, or remove the file first"
+  },
+  "status": "REJECTED"
+}

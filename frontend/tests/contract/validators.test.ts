@@ -25,14 +25,23 @@ import {
   inferencePresetSchema,
   inferenceReadResultSchema,
   launchSettingsDocumentSchema,
+  modelDigestResultSchema,
+  modelDispatchResultSchema,
+  modelFetchProgressSchema,
+  modelFetchResultSchema,
+  modelImportProgressSchema,
+  modelImportResultSchema,
   modelListResultSchema,
+  modelLoadResultSchema,
   modelStatesResultSchema,
+  modelUnloadResultSchema,
   observatoryEventRowSchema,
   observatoryReadResultSchema,
   observatoryRunsResultSchema,
   responseDocumentSchema,
   runCancelResultSchema,
   runDocumentSchema,
+  runStartResultSchema,
   sessionDocumentSchema,
   sessionEventsResultSchema,
   validateResponseDocument,
@@ -42,6 +51,8 @@ import {
   INFERENCE_SCOPES,
   INFERENCE_STATES,
   INFERENCE_VALUE_TYPES,
+  MODEL_STATES,
+  MODEL_WORK_KINDS,
 } from "../../src/api/gateway/contracts.ts";
 
 const FIXTURES = join(dirname(fileURLToPath(import.meta.url)), "..", "fixtures");
@@ -770,5 +781,247 @@ describe("the inference-workspace corrupted variants are REJECTED (the closed-do
     const corrupted = structuredClone(document);
     corrupted.result.controls[0]!["step"] = Number.NaN;
     expect(() => inferenceControlSchema.parse(corrupted.result.controls[0])).toThrow();
+  });
+});
+
+/* ------------------------------------------------------------------ */
+/* The Models row's contract rows (iter-300)                            */
+/* ------------------------------------------------------------------ */
+
+describe("the models-row fixtures validate (the OK family)", () => {
+  it("model_load_start_ok — the shared load/unload admission shape (STARTING at dispatch)", () => {
+    const document = fixture("model_load_start_ok");
+    expect(responseDocumentSchema.parse(document).status).toBe("OK");
+    const admission = modelDispatchResultSchema.parse(
+      (document as { result: unknown }).result,
+    );
+    expect(admission.state).toBe("STARTING");
+    expect(admission.work).toBe("model.load");
+    expect(admission.logical_name).toBe("probe-model.gguf");
+    expect(admission.deadline_seconds).toBe(330);
+    expect(admission.execution_id).toMatch(/^[0-9a-f]{16,}$/);
+  });
+
+  it("model_load_run_failed — the honest failure band (no llama-server; the §10 freeze rides)", () => {
+    const document = fixture("model_load_run_failed");
+    expect(responseDocumentSchema.parse(document).status).toBe("OK");
+    const run = runDocumentSchema.parse((document as { result: unknown }).result);
+    expect(run.state).toBe("FAILED");
+    expect(run.terminal).toBe(true);
+    expect(run.work).toBe("model.load");
+    expect(run.result).toBeNull();
+    expect(run.failure_type).toBe("_ManagedError");
+    // the observed cause rides the diagnostics verbatim (§21)
+    expect(run.diagnostics.join(" ")).toContain("cannot spawn 'llama-server'");
+    const keys = run.frozen_inputs.map((pair) => pair[0]);
+    expect(keys).toContain("logical_name");
+  });
+
+  it("model_states_selected — the ladder truth after the failed load (SELECTED, re-load legal)", () => {
+    const document = fixture("model_states_selected");
+    const states = modelStatesResultSchema.parse((document as { result: unknown }).result);
+    expect(states.active).toBeNull();
+    expect(states.states["probe-model.gguf"]).toBe("SELECTED");
+  });
+
+  it("model_digest_start_ok — the run.start admission over the closed three-field shape", () => {
+    const document = fixture("model_digest_start_ok");
+    expect(responseDocumentSchema.parse(document).status).toBe("OK");
+    const admission = runStartResultSchema.parse((document as { result: unknown }).result);
+    expect(admission.work).toBe("model.digest");
+    expect(admission.execution_id).toMatch(/^[0-9a-f]{16,}$/);
+    expect(admission.deadline_seconds).toBe(60);
+  });
+
+  it("model_digest_run_completed — the §9 strong identity the run computed (real sha256)", () => {
+    const document = fixture("model_digest_run_completed");
+    const run = runDocumentSchema.parse((document as { result: unknown }).result);
+    expect(run.state).toBe("COMPLETED");
+    expect(run.work).toBe("model.digest");
+    const digest = modelDigestResultSchema.parse(run.result);
+    expect(digest.logical_name).toBe("probe-model.gguf");
+    expect(digest.chunks).toBe(1);
+    // the digest verified against hashlib at capture time (the
+    // manifest's own evidence law) — the shape pins it here.
+    expect(digest.content_digest).toMatch(/^[0-9a-f]{64}$/);
+  });
+
+  it("model_import_start_ok / model_import_run_completed — the local arrival as a run", () => {
+    const startDocument = fixture("model_import_start_ok");
+    const admission = runStartResultSchema.parse(
+      (startDocument as { result: unknown }).result,
+    );
+    expect(admission.work).toBe("model.import");
+    expect(admission.deadline_seconds).toBe(3600);
+
+    const terminalDocument = fixture("model_import_run_completed");
+    const run = runDocumentSchema.parse((terminalDocument as { result: unknown }).result);
+    expect(run.state).toBe("COMPLETED");
+    expect(run.work).toBe("model.import");
+    // the live progress shape validates (the per-chunk report)
+    const progress = modelImportProgressSchema.parse(run.progress);
+    expect(progress.file_count).toBe(1);
+    expect(progress.file_index).toBe(0);
+    expect(progress.copied_bytes).toBe(progress.total_bytes);
+    // the landed list + the count
+    const result = modelImportResultSchema.parse(run.result);
+    expect(result.count).toBe(1);
+    expect(result.imported[0]!.logical_name).toBe("second-model.gguf");
+    // the §10 freeze serializes the path list as ONE JSON string
+    const frozen = new Map(run.frozen_inputs);
+    expect(String(frozen.get("paths"))).toContain("second-model.gguf");
+  });
+
+  it("model_list_after_import — the landed file rides the NEXT scan + the digest on the entry", () => {
+    const document = fixture("model_list_after_import");
+    const scan = modelListResultSchema.parse((document as { result: unknown }).result);
+    expect(scan.directory_state).toBe("OK");
+    const names = scan.models.map((entry) => entry.logical_name);
+    expect(names).toContain("probe-model.gguf");
+    expect(names).toContain("second-model.gguf");
+    // the digest run's effect: the strong identity rides the entry
+    const probe = scan.models.find((entry) => entry.logical_name === "probe-model.gguf");
+    expect(probe?.content_digest).toMatch(/^[0-9a-f]{64}$/);
+    const second = scan.models.find((entry) => entry.logical_name === "second-model.gguf");
+    expect(second?.content_digest).toBeNull();
+  });
+
+  it("the mirrored vocabularies are the closed sets (the registry's own)", () => {
+    expect(MODEL_STATES.length).toBe(9);
+    expect(MODEL_STATES).toContain("EVICTED");
+    expect(MODEL_WORK_KINDS).toEqual(["model.fetch", "model.import", "model.digest"]);
+  });
+});
+
+describe("the models-row rejection fixtures (the honest loud lanes)", () => {
+  it("model_unload_not_active — the ladder's own gate verbatim", () => {
+    const response = validateResponseDocument(fixture("model_unload_not_active"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("is not ACTIVE (state: 'SELECTED')");
+    expect(String(response.result?.["reason"])).toContain("nothing active to unload");
+  });
+
+  it("model_fetch_exists — the admission gate BEFORE any network (normalize is pure)", () => {
+    const response = validateResponseDocument(fixture("model_fetch_exists"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("already exists in the models directory");
+  });
+
+  it("model_import_relative_path — the §16 absolute-path law verbatim", () => {
+    const response = validateResponseDocument(fixture("model_import_relative_path"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("is relative");
+    expect(String(response.result?.["reason"])).toContain("requires absolute paths");
+  });
+});
+
+describe("the models-row corrupted variants are REJECTED (the closed-document law)", () => {
+  it("a load admission with a fabricated state fails (STARTING is the handler's own constant)", () => {
+    const document = fixture("model_load_start_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["state"] = "RUNNING";
+    expect(() => modelDispatchResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("an unload admission echoed over a foreign work name fails (the two-op closed set)", () => {
+    const document = fixture("model_load_start_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["work"] = "model.reload";
+    expect(() => modelDispatchResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a run.start admission missing the deadline fails", () => {
+    const document = fixture("model_digest_start_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    delete corrupted.result["deadline_seconds"];
+    expect(() => runStartResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a fetch progress with a negative downloaded counter fails", () => {
+    expect(() =>
+      modelFetchProgressSchema.parse({
+        downloaded_bytes: -1,
+        logical_name: "m.gguf",
+        total_bytes: 100,
+      }),
+    ).toThrow();
+  });
+
+  it("a fetch progress with a string total fails (the total is a number or null — never a guess)", () => {
+    expect(() =>
+      modelFetchProgressSchema.parse({
+        downloaded_bytes: 1,
+        logical_name: "m.gguf",
+        total_bytes: "unknown",
+      }),
+    ).toThrow();
+  });
+
+  it("an import progress with a zero file_count fails (a frozen list is never empty)", () => {
+    expect(() =>
+      modelImportProgressSchema.parse({
+        logical_name: "m.gguf",
+        file_index: 0,
+        file_count: 0,
+        copied_bytes: 0,
+        total_bytes: 10,
+      }),
+    ).toThrow();
+  });
+
+  it("an import result with a count that is not the list's own member count still validates the SHAPE (the count is backend-owned)", () => {
+    // the shape law: count is a positive int; the list's length is
+    // the backend's own truth, never re-derived here.
+    expect(() =>
+      modelImportResultSchema.parse({ imported: [], count: 1 }),
+    ).not.toThrow();
+  });
+
+  it("a load result with a fabricated state fails (ACTIVE is the observed landing)", () => {
+    expect(() =>
+      modelLoadResultSchema.parse({
+        logical_name: "m.gguf",
+        location: "/x/m.gguf",
+        reply: {},
+        state: "LOADED",
+      }),
+    ).toThrow();
+  });
+
+  it("an unload result with an unknown member fails (the closed shape)", () => {
+    expect(() =>
+      modelUnloadResultSchema.parse({
+        logical_name: "m.gguf",
+        reply: {},
+        state: "EVICTED",
+        exit_code: 0,
+      }),
+    ).toThrow();
+  });
+
+  it("a digest result with a non-hex content_digest still validates the SHAPE (the hex pin is the fixture's, not the schema's)", () => {
+    // the schema's own law: a non-empty string; the 64-hex pin rides
+    // the captured fixture (the capture verified it against hashlib).
+    expect(() =>
+      modelDigestResultSchema.parse({
+        chunks: 1,
+        content_digest: "not-hex-but-present",
+        logical_name: "m.gguf",
+        size_bytes: 1,
+      }),
+    ).not.toThrow();
+  });
+
+  it("a fetch result missing the source URL fails (the provenance member is the law)", () => {
+    expect(() =>
+      modelFetchResultSchema.parse({
+        location: "/x/m.gguf",
+        logical_name: "m.gguf",
+        size_bytes: 10,
+      }),
+    ).toThrow();
   });
 });

@@ -49,54 +49,62 @@ Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   horizon, ROADMAP §2/§6) ·
 2529 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; zero Python change
-  this iteration — the frontend stack: 174 vitest + tsc + build +
-  the live gateway smoke 11/11 over the served composition: the
-  full document 85/9/4/15, the partial update accepted + persisted,
-  the pin accepted with the profile values untouched, the
-  unknown-field/partial-chain rejections verbatim, the idempotent
-  duplicate true) ·
+  this iteration — the frontend stack: 214 vitest + tsc + build +
+  the live gateway smoke 24/24 over the served composition: the op
+  vocabulary, the discovery scan, the load band FAILED→SELECTED
+  with the observed cause verbatim, the unload gate, the digest
+  round-trip (the real sha256), the import round-trip (the bytes
+  landed + the NEXT scan seeing both files + the digest riding the
+  entry), the fetch admission rejection BEFORE any network, the
+  relative-path rejection, the idempotent duplicate true) ·
 Date: 2026-10-01 ·
 Scope: frontend/src/api/gateway/{contracts,validators,client}.ts
-  (the Inference-row mirror: the INFERENCE_STATES/KINDS/
-  VALUE_TYPES/SCOPES vocabularies, the control/chain/preset/
-  category documents, the workspace document + the update's closed
-  partial changes; the seam's inferenceDocument/inferenceUpdate
-  with the projection), frontend/src/features/inference/
-  {useInference.ts, Inference.tsx} (new — the workspace), frontend/
-  src/app/composition/App.tsx (the Inference route right behind
-  Chat), frontend/src/app/composition/styles.css (the workspace
-  rows/chain/categories/control rows — the state chips as
-  STATE-class token mappings, zero raw literals), frontend/tests/
-  fixtures/{inference_update_ok, inference_update_unknown_field,
-  inference_update_bad_type, inference_update_bad_chain}.json +
+  (the Models-row mirror: MODEL_WORK_KINDS + the per-kind CLOSED
+  run.start argument sets, the shared model.load/model.unload
+  admission shape, the fetch/import progress documents + the five
+  per-work results at the consumer depth; the seam's modelLoad/
+  modelUnload/runStart with the arguments closed AT the seam),
+  frontend/src/features/models/{useModels.ts, Models.tsx} (new —
+  the model family's mirror: the §20 ladder rows, the arrival
+  pane, the ONE-run lane), frontend/src/app/composition/App.tsx
+  (the Models route right behind Inference), frontend/src/app/
+  composition/styles.css (the discovery rows/arrival forms/run
+  lane — the MODEL-ladder chips as STATE-class token mappings,
+  zero raw literals), frontend/tests/fixtures/{model_load_start_ok,
+  model_load_run_failed, model_states_selected,
+  model_unload_not_active, model_digest_start_ok,
+  model_digest_run_completed, model_import_start_ok,
+  model_import_run_completed, model_list_after_import,
+  model_fetch_exists, model_import_relative_path}.json +
   manifest.json (new), frontend/tests/contract/validators.test.ts
-  (the workspace-row contract rows), frontend/tests/integration/
-  Inference.test.tsx (new — 14 rows), frontend/tests/integration/
-  Shell.test.tsx (the rail label + the Inference mount row),
+  (the models-row contract rows), frontend/tests/integration/
+  Models.test.tsx (new — 17 rows), frontend/tests/integration/
+  Shell.test.tsx (the rail label + the Models mount row),
   docs/FRONTEND_UIUX_LAW.md (§2.1's canonical IA tree gains the
-  Inference row), docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md
-  (the stage map), docs/TASKS.md (the ledger, iter-288 evicted),
-  STATUS.md (the header), worklog.md (iter-289 evicted),
-  docs/iterations/iter-299-frontendweb-report.md (new),
-  frontend/README.md (the Inference surface row) — 22 changed/
-  created (14 modified + 8 created; R2 — frontend-local; zero
+  Models row), docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md
+  (the stage map), docs/TASKS.md (the ledger, iter-290 evicted),
+  STATUS.md (the header), worklog.md (iter-290 evicted),
+  docs/iterations/iter-300-frontendweb-report.md (new),
+  frontend/README.md (the Models surface row) — 29 changed/
+  created (14 modified + 15 created; R2 — frontend-local; zero
   Python change, zero canon change, the LOG untouched, zero corpus
   price)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1 visual floor LANDED (iter-293/297); Phase 3's
-  FIVE rows LANDED (iter-294/295/296/298/299: shell/lifecycle,
-  observatory, settings, chat, inference) + the IA REPAIR LANDED
-  (iter-297, D-247); the chat row's COMPLETED band is owner-side (a
-  loaded llama.cpp model — this environment honestly closes only
-  the admission/FAILED/REJECTED lanes, captured verbatim); the
-  next frontend rows the owner's call: the Models surface (the
-  family's load/unload/import mirror), the Settings secondary nav,
-  the streaming admission (SSE — the backend gateway contract
-  first), the acceptance matrix, the DECISIONS collapse (the
-  owner's call); the standing boundaries: SSE/WebSocket, Tauri,
-  PWA — each its own admission. The world track: W8's remaining
-  rows the owner's call. The ssi family COMPLETE except ssi-5,
-  owner-gated.
+  SIX rows LANDED (iter-294/295/296/298/299/300: shell/lifecycle,
+  observatory, settings, chat, inference, models) + the IA REPAIR
+  LANDED (iter-297, D-247); the chat row's COMPLETED band and the
+  models row's ACTIVE/EVICTED bands are owner-side (a loaded
+  llama.cpp model — this environment honestly closes the
+  admission/FAILED/REJECTED/SELECTED-rest lanes, captured verbatim;
+  the import/digest bands closed FULLY live); the next frontend
+  rows the owner's call: the Settings secondary nav, the streaming
+  admission (SSE — the backend gateway contract first), the
+  acceptance matrix, the DECISIONS collapse (the owner's call);
+  the standing boundaries: SSE/WebSocket, Tauri, PWA — each its
+  own admission (the import form's native file/folder picker rides
+  the Tauri row). The world track: W8's remaining rows the owner's
+  call. The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)

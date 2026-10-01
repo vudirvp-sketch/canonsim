@@ -225,12 +225,36 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  answer); Inference right behind Chat in the rail
                  (§2.1's canonical IA tree); 174 vitest + the 11/11
                  live smoke + 4 live-captured update fixtures); the
-                 next rows the owner's call: the Models surface (the
-                 family's load/unload/import mirror), the Settings
-                 secondary nav, the streaming admission (SSE — the
-                 backend gateway contract first), the acceptance
-                 matrix, the DECISIONS collapse (the owner's call);
-                 each its own iteration
+                 sixth row LANDED (iter-300, the owner's «продолжай
+                 работу над фронтендом» delegated call: the MODELS
+                 ENTRY — the model family's mirror over the existing
+                 model.list/model.states READs + model.load/
+                 model.unload (the §20 loading half as RUNS) +
+                 run.start's three model work kinds (model.fetch/
+                 model.import/model.digest — identity-then-poll with
+                 live progress) observed through run.get/run.cancel:
+                 the §20 ladder law rendered (the row's chip is
+                 model.states's own answer per name — a discovery
+                 entry never proves the ladder; the ACTIVE slot is
+                 the load-state owner's), the arrival pane (the fetch
+                 form over the pure-string normalize gate; the import
+                 form's honest web shape — ABSOLUTE paths as text, the
+                 native picker the Tauri row's own concern), the §9
+                 strong-identity affordance as the digest RUN (the
+                 honest long arm — cancellable, observable; the
+                 synchronous model.inspect stays a backend surface),
+                 the terminal-triggered exactly-ONE context re-read
+                 (the OBSERVED baseline, never polling), G4 fresh
+                 keys + no blind retry, ONE run at a time; Models in
+                 the rail right behind Inference (§2.1's canonical IA
+                 tree — the RESOURCES group's head); 214 vitest +
+                 the 24/24 live smoke over the served composition +
+                 11 live-captured fixtures); the next rows the
+                 owner's call: the Settings secondary nav, the
+                 streaming admission (SSE — the backend gateway
+                 contract first), the acceptance matrix, the
+                 DECISIONS collapse (the owner's call); each its own
+                 iteration
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the
                  owner's call

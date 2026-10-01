@@ -27,13 +27,16 @@ import type {
   InferenceReadResult,
   InferenceUpdateChanges,
   LaunchSettingsDocument,
+  ModelDispatchResult,
   ModelListResult,
+  ModelRunStartInput,
   ModelStatesResult,
   ObservatoryReadResult,
   ObservatoryRunsResult,
   RequestEnvelope,
   RunCancelResult,
   RunDocument,
+  RunStartResult,
   SessionAttachResult,
   SessionCreateResult,
   SessionDocument,
@@ -44,12 +47,14 @@ import {
   backendSettingsResultSchema,
   inferenceDocumentSchema,
   inferenceReadResultSchema,
+  modelDispatchResultSchema,
   modelListResultSchema,
   modelStatesResultSchema,
   observatoryReadResultSchema,
   observatoryRunsResultSchema,
   runCancelResultSchema,
   runDocumentSchema,
+  runStartResultSchema,
   chatSendResultSchema,
   sessionAttachResultSchema,
   sessionCreateResultSchema,
@@ -400,6 +405,89 @@ export class GatewayClient {
   async modelStates(): Promise<DispatchResult<ModelStatesResult>> {
     const dispatch = await this.postOp({ operation: "model.states" });
     return narrow(dispatch, modelStatesResultSchema, "model.states");
+  }
+
+  /**
+   * `model.load` — §20's loading half as a RUN (MUTATION,
+   * session-scoped): the fast dispatch walks the ladder to SELECTED
+   * and answers the execution identity — the minutes-class port call
+   * (the managed spawn or the attached load) rides the worker
+   * thread; `run.get` is the observation path. One explicit attempt
+   * with a FRESH idempotency key (G4 — no blind retry); the ladder's
+   * own admission gates (not discovered / already ACTIVE / FAILED
+   * terminal / the single slot occupied / already loading) answer
+   * DOMAIN_REJECTED with the observed cause — rendered verbatim,
+   * never coerced.
+   */
+  async modelLoad(input: {
+    readonly sessionId: string;
+    readonly clientRequestId: string;
+    readonly logicalName: string;
+  }): Promise<DispatchResult<ModelDispatchResult>> {
+    const dispatch = await this.postOp({
+      operation: "model.load",
+      arguments: { logical_name: input.logicalName },
+      session_id: input.sessionId,
+      client_request_id: input.clientRequestId,
+    });
+    return narrow(dispatch, modelDispatchResultSchema, "model.load");
+  }
+
+  /**
+   * `model.unload` — §20's unload half as a RUN (MUTATION,
+   * session-scoped): the graceful stop / attached unload rides the
+   * worker thread — ACTIVE → EVICTED observed on the run's terminal.
+   * The admission gate (not ACTIVE) answers DOMAIN_REJECTED with the
+   * observed state — rendered verbatim. A fresh idempotency key per
+   * explicit attempt (G4).
+   */
+  async modelUnload(input: {
+    readonly sessionId: string;
+    readonly clientRequestId: string;
+    readonly logicalName: string;
+  }): Promise<DispatchResult<ModelDispatchResult>> {
+    const dispatch = await this.postOp({
+      operation: "model.unload",
+      arguments: { logical_name: input.logicalName },
+      session_id: input.sessionId,
+      client_request_id: input.clientRequestId,
+    });
+    return narrow(dispatch, modelDispatchResultSchema, "model.unload");
+  }
+
+  /**
+   * `run.start` — the model family's work-kind ADMISSION (MUTATION,
+   * session-scoped): the per-kind argument sets are CLOSED at this
+   * seam (fetch: url + optional logical_name; import: the absolute
+   * path list; digest: the logical name) — a foreign key or a wrong
+   * type is the work kind's own DOMAIN_REJECTED, rendered verbatim.
+   * The answer is the execution identity; `run.get` is the
+   * observation path (live progress rides the run document). A fresh
+   * idempotency key per explicit attempt (G4).
+   */
+  async runStart(input: {
+    readonly sessionId: string;
+    readonly clientRequestId: string;
+    readonly start: ModelRunStartInput;
+  }): Promise<DispatchResult<RunStartResult>> {
+    const argumentsFor: Record<string, unknown> = (() => {
+      if (input.start.work === "model.fetch") {
+        return input.start.logicalName === undefined
+          ? { url: input.start.url }
+          : { url: input.start.url, logical_name: input.start.logicalName };
+      }
+      if (input.start.work === "model.import") {
+        return { paths: [...input.start.paths] };
+      }
+      return { logical_name: input.start.logicalName };
+    })();
+    const dispatch = await this.postOp({
+      operation: "run.start",
+      arguments: { work: input.start.work, arguments: argumentsFor },
+      session_id: input.sessionId,
+      client_request_id: input.clientRequestId,
+    });
+    return narrow(dispatch, runStartResultSchema, "run.start");
   }
 
   /**

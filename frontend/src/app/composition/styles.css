@@ -964,3 +964,120 @@ button.probe {
   overflow-wrap: anywhere;
 }
 
+/* The Models surface (the model family's mirror) — the §20 discovery
+   rows (the ladder chips are STATE-class mappings over the existing
+   token set: the ladder's own vocabulary, never a second interactive
+   accent), the arrival forms, and the ONE run's closure lane. */
+.models-arrival {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 860px) {
+  .models-arrival {
+    grid-template-columns: 1fr;
+  }
+}
+.models-arrival-form {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.models-arrival-form h3 {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.models-arrival-form textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 64px;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.84rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.models-arrival-form .settings-field input {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.86rem;
+}
+.models-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.models-row {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.models-row-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.models-name {
+  font-weight: 600;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+.models-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.models-digest {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+/* The §20 MODEL ladder's own vocabulary as STATE-class token
+   mappings — the honest matrix, never decorative color: the ACTIVE
+   resting truth carries the LIVE accent; the walked/loading states
+   carry the CONFIG hue; FAILED is the error channel; the untouched
+   discovery states stay muted. */
+.state-ladder-active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.state-ladder-selected,
+.state-ladder-loading,
+.state-ladder-loaded,
+.state-ladder-validated {
+  color: var(--config);
+  border-color: var(--config);
+}
+.state-ladder-failed {
+  color: var(--error);
+  border-color: var(--error);
+}
+.state-ladder-discovered,
+.state-ladder-unloading,
+.state-ladder-evicted {
+  color: var(--muted);
+}
+.models-run {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+

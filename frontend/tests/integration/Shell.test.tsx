@@ -212,7 +212,7 @@ describe("the composition root's registry split (the IA acceptance floor)", () =
     const labels = within(rail)
       .getAllByRole("button")
       .map((button) => button.textContent);
-    expect(labels).toEqual(["Chat", "Inference", "Trajectory", "Observatory", "Settings", "Diagnostics"]);
+    expect(labels).toEqual(["Chat", "Inference", "Models", "Trajectory", "Observatory", "Settings", "Diagnostics"]);
     // The proof instruments are NOT rail items.
     for (const forbidden of ["Session lifecycle", "Gateway", "Load probe"]) {
       expect(within(rail).queryByRole("button", { name: forbidden })).toBeNull();
@@ -324,6 +324,31 @@ describe("the composition root's registry split (the IA acceptance floor)", () =
     await waitFor(() => {
       // The workspace's one session-free READ dispatched.
       expect(callsOf(fetchMock).some((body) => body["operation"] === "inference.read")).toBe(true);
+    });
+    // Exactly one workspace the whole time.
+    expect(screen.getAllByTestId("active-workspace")).toHaveLength(1);
+  });
+
+  it("the Models product route mounts its surface (the model family's two context READs, right behind Inference)", async () => {
+    const fetchMock = gatewayRouter(APP_OPS);
+    vi.stubGlobal("fetch", fetchMock);
+    render(<App />);
+
+    await waitFor(() => {
+      // session.create answered: the id is a real id, never "creating…" / "—".
+      expect(screen.getByTestId("session-id").textContent).toMatch(/^[0-9a-f]{16,}$/);
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Models" }));
+    await waitFor(() => {
+      expect(
+        screen.getByRole("region", { name: /Models — the model family/i }),
+      ).toBeTruthy();
+    });
+    await waitFor(() => {
+      // The surface's two session-free context READs dispatched.
+      expect(callsOf(fetchMock).some((body) => body["operation"] === "model.list")).toBe(true);
+      expect(callsOf(fetchMock).some((body) => body["operation"] === "model.states")).toBe(true);
     });
     // Exactly one workspace the whole time.
     expect(screen.getAllByTestId("active-workspace")).toHaveLength(1);

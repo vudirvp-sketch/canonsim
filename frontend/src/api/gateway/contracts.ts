@@ -471,6 +471,153 @@ export interface ModelStatesResult {
   readonly active: string | null;
 }
 
+// ------------------------------------------- models (the surface's own row)
+
+/**
+ * The run kinds the Models surface starts over `run.start` — the
+ * closed set of the app composition's model-family work kinds
+ * (`compose_workbench_operations`'s own wiring: digest + import
+ * unconditionally, fetch with the injected fetcher). The registry's
+ * FULL kind vocabulary stays backend-owned — this is the surface's
+ * consumed slice, never a re-encoding of the registry.
+ */
+export const MODEL_WORK_KINDS = [
+  "model.fetch",
+  "model.import",
+  "model.digest",
+] as const;
+export type ModelWorkKind = (typeof MODEL_WORK_KINDS)[number];
+
+/**
+ * `run.start`'s per-kind ARGUMENT sets — the closed forms the three
+ * model work kinds' own `validate_arguments` gates admit (mirrored
+ * per kind; a foreign key or a wrong type is the backend's own
+ * DOMAIN_REJECTED, rendered verbatim — never client-coerced).
+ */
+export type ModelRunStartInput =
+  | {
+      readonly work: "model.fetch";
+      /** a direct http(s) URL, a huggingface.co URL, or the hf:repo/file shorthand */
+      readonly url: string;
+      /** absent = the URL's own derived file name */
+      readonly logicalName?: string;
+    }
+  | {
+      readonly work: "model.import";
+      /** ABSOLUTE file paths (the web form's honest input — the native picker is the Tauri row's own concern) */
+      readonly paths: readonly string[];
+    }
+  | {
+      readonly work: "model.digest";
+      readonly logicalName: string;
+    };
+
+/**
+ * `run.start` result — the ADMISSION identity over any work kind
+ * (§8's long-running law: identity returns immediately; `run.get` is
+ * the observation path). `work` is the registry's own echo (any
+ * registered kind — the mirror never re-encodes the registry's full
+ * vocabulary; the surface's own starts are the three above).
+ */
+export interface RunStartResult {
+  readonly execution_id: string;
+  readonly work: string;
+  readonly deadline_seconds: number;
+}
+
+/**
+ * `model.load` / `model.unload` result — the shared ADMISSION shape
+ * (the two handlers' own identical form): the ladder's fast dispatch
+ * walks to SELECTED (load) / checks ACTIVE (unload), admits the
+ * minutes-class run, and answers the execution identity — the port
+ * call itself rides the worker thread (`run.get` is the poll path).
+ */
+export interface ModelDispatchResult {
+  readonly deadline_seconds: number;
+  readonly execution_id: string;
+  readonly logical_name: string;
+  readonly state: "STARTING";
+  readonly work: "model.load" | "model.unload";
+}
+
+/**
+ * The fetch run's live PROGRESS document (the fetcher's own report
+ * shape, mirrored closed at the consumer depth): `total_bytes` is
+ * null when the wire does not name the size (streamed answers) — the
+ * percentage line renders honestly absent, never a guessed total.
+ */
+export interface ModelFetchProgress {
+  readonly downloaded_bytes: number;
+  readonly logical_name: string;
+  readonly total_bytes: number | null;
+}
+
+/**
+ * The import run's live PROGRESS document (the per-chunk report: the
+ * file's index within the frozen path list, the copied bytes of the
+ * CURRENT file, and its total — a multi-GB copy stays cancellable
+ * and observable, never a frozen UI).
+ */
+export interface ModelImportProgress {
+  readonly logical_name: string;
+  readonly file_index: number;
+  readonly file_count: number;
+  readonly copied_bytes: number;
+  readonly total_bytes: number;
+}
+
+/** The fetch run's OBSERVED result at COMPLETED — the landed file
+ * (the atomic rename already happened; the NEXT discovery scan sees
+ * it) + the source URL, verbatim. */
+export interface ModelFetchResult {
+  readonly location: string;
+  readonly logical_name: string;
+  readonly size_bytes: number;
+  readonly url: string;
+}
+
+/** One landed local file (the import run's honest per-file truth). */
+export interface ModelImportedFile {
+  readonly logical_name: string;
+  readonly size_bytes: number;
+}
+
+/** The import run's OBSERVED result at COMPLETED — the landed files
+ * (an interrupted import leaves the ALREADY-LANDED files real; the
+ * run's terminal tells the truth about the rest). */
+export interface ModelImportResult {
+  readonly imported: readonly ModelImportedFile[];
+  readonly count: number;
+}
+
+/** The digest run's OBSERVED result at COMPLETED — the §9 strong
+ * identity the run computed (also recorded into the registry: the
+ * NEXT model.list carries it on the entry). */
+export interface ModelDigestResult {
+  readonly chunks: number;
+  readonly content_digest: string;
+  readonly logical_name: string;
+  readonly size_bytes: number;
+}
+
+/** The load run's OBSERVED result at COMPLETED — the backend's own
+ * reply document (the managed spawn's command or the attached load's
+ * answer) rides verbatim; `reply` is backend-owned DATA. */
+export interface ModelLoadResult {
+  readonly logical_name: string;
+  readonly location: string;
+  readonly reply: Readonly<Record<string, unknown>>;
+  readonly state: "ACTIVE";
+}
+
+/** The unload run's OBSERVED result at COMPLETED — the graceful
+ * stop's own answer, verbatim. */
+export interface ModelUnloadResult {
+  readonly logical_name: string;
+  readonly reply: Readonly<Record<string, unknown>>;
+  readonly state: "EVICTED";
+}
+
 // --------------------------------------------------------------- inference
 
 /** The compact projection's own control slice — the fields the CHAT

@@ -1,0 +1,26 @@
+{
+  "operation_id": "404dbb7e009782e2b7d831fff0f0a2b89092cc3cea6e26a2b740da12a8e9ee93",
+  "result": {
+    "directory_state": "OK",
+    "models": [
+      {
+        "content_digest": "c8d4919ad5f8bc8851ca3fc1dda35c181bdc44e2ebe56cd0db4af0d7a0446ea2",
+        "location": "/home/z/my-project/capture-roots/models300/models/probe-model.gguf",
+        "logical_name": "probe-model.gguf",
+        "mtime_ns": 1790868474332295941,
+        "size_bytes": 58,
+        "state": "DISCOVERED"
+      },
+      {
+        "content_digest": null,
+        "location": "/home/z/my-project/capture-roots/models300/models/second-model.gguf",
+        "logical_name": "second-model.gguf",
+        "mtime_ns": 1790868474387296180,
+        "size_bytes": 67,
+        "state": "DISCOVERED"
+      }
+    ],
+    "models_root": "/home/z/my-project/capture-roots/models300/models"
+  },
+  "status": "OK"
+}
