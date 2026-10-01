@@ -1,70 +1,72 @@
-Iteration: iter-296 (`settings` — Phase 3's THIRD ROW, the owner's
-  «продолжай работы по фронтенду, над теми частями что логичнее всего
-  сейчас провести а не откладывать» delegated call; R2
-  frontend-local — of the two remaining surfaces the one whose FULL
-  honest proof band is reachable in this environment,
-  Chat/Inference needing a loaded llama.cpp model): the SETTINGS
-  ENTRY landed over the EXISTING backend.settings READ +
-  backend.settings.update closed partial MUTATION (zero new routes,
-  zero Python change) — the CONFIG world: the contract mirror
-  (contracts/validators/client — the closed three-field set,
-  applies: "next-spawn" as a literal, strict zod: a fourth field, a
-  wrong type, a foreign applies, a non-string preview are all
-  MISMATCH; backendSettings/backendSettingsUpdate — ONLY the
-  changed fields on the wire, a fresh idempotency key per explicit
-  attempt), `features/settings/{useSettings,Settings}` the §8
-  closure rendered as stages over a real PERSISTED store (the draft
-  a REQUEST — the DRAFT marker, never an effective-state claim; on
-  ACCEPTED the returned document the new OBSERVED baseline, the
-  draft reconciles to the SERVER's answer; the closed set's
-  verbatim DOMAIN_REJECTED lanes with the draft preserved; G4
-  no-retry; no polling — ONE mount READ; the blue CONFIG channel),
-  the root mounts the sixth pane; 5 live-captured fixtures + 11
-  contract rows + 7 integration tests; the LIVE smoke 15/15 against
-  the real app gateway (the READ + preview + managed_live, the
-  UPDATE accepted, the PERSISTED settings.json schema/2 evidence,
-  the verbatim rejections, the duplicate replay) + the live browser
-  closure evidence; the RU report at
-  docs/iterations/iter-296-frontendweb-report.md
+Iteration: iter-297 (`ia` — the IA REPAIR over the external IA verdict, the
+  owner's 2026-10-01 «вперед реализовывай и приступай к работе, делай
+  так как наиболее качественно и логично/обоснованно» call; R2
+  frontend-local — D-247, the verdict processed per the D-246 method:
+  observations verified true at HEAD, prescriptions reconciled with
+  standing law): the REGISTRY SPLIT landed — the composition root
+  splits ProductRoute from DiagnosticSurface BEFORE the shell sees
+  anything; the shell renders a vertical product rail (Trajectory
+  LIVE / Observatory HISTORY / Settings pinned) + ONE subdued
+  Diagnostics entry whose workspace carries the secondary nav
+  (Session lifecycle / Gateway / Load probe — the proof instruments
+  honestly parked, never deleted); `new session` moved from the
+  product chrome to the Session surface; the architecture essays out
+  of the chrome (the identity strip's honest STATE labels stay —
+  VISUAL_SYSTEM_UI §0.3); the navigation contract amended into
+  FRONTEND_UIUX_LAW §2.1 (the canonical app IA + the visual
+  acceptance floor); the floor EXECUTABLE — the Shell/App vitest
+  rows (rail content, diagnostics isolation, exactly one workspace,
+  prose absence) + the architecture guard's V1 raw-color scan, which
+  caught and closed a STANDING 9-hex-literal violation from
+  iter-289..296 (tokenized: --row-divider / --row-hover /
+  --row-selected-live / --row-selected-history / --text-mono /
+  --border-strong); the reconciled verdict conflicts: Settings'
+  secondary nav excludes Inference/LLM (the inf-1 split stands),
+  Trajectory stays a product route (the dual-read pair's LIVE half),
+  the LIVE/HISTORY/CONFIG channel hues stand as STATE-class tokens,
+  never second accents
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2529 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; zero Python change
-  this iteration — the frontend stack: 78 vitest + tsc + build)
-  ·
+  this iteration — the frontend stack: 108 vitest + tsc + build + the
+  live gateway round-trip + the live browser closure: rail = exactly
+  the 4 approved entries, zero console errors, 2 screenshots) ·
 Date: 2026-10-01 ·
-Scope: frontend/src/api/gateway/{contracts.ts, validators.ts,
-  client.ts} (the settings contract mirror),
-  frontend/src/features/settings/{useSettings.ts, Settings.tsx}
-  (new), frontend/src/app/composition/{App.tsx, styles.css} (the
-  sixth pane + the CONFIG channel), frontend/tests/fixtures/
-  {backend_settings_read_ok, backend_settings_update_ok,
-  backend_settings_update_unknown_field,
-  backend_settings_update_bad_type,
-  backend_settings_read_unknown_argument}.json (new,
-  live-captured) + manifest.json, frontend/tests/contract/
-  validators.test.ts (11 rows), frontend/tests/integration/
-  Settings.test.tsx (new, 7 tests), frontend/README.md,
-  docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
-  docs/TASKS.md (the ledger, iter-286 evicted), STATUS.md (the
-  header), worklog.md (iter-286 evicted),
-  docs/iterations/iter-296-frontendweb-report.md (new) — 16
-  changed/created (R2 — frontend-local; zero Python change, zero
-  canon change, the LOG untouched, zero corpus price)
+Scope: frontend/src/features/shell/Shell.tsx (the registry split:
+  ProductRoute/DiagnosticSurface + the rail + the diagnostics
+  secondary nav), frontend/src/app/composition/App.tsx (the split
+  registries + the chrome cleanup), frontend/src/app/composition/
+  styles.css (the vertical rail layout + the tokenized row set),
+  frontend/src/features/session-lifecycle/SessionLifecycle.tsx (the
+  new-session action's honest home), frontend/tests/integration/
+  Shell.test.tsx (new — 12 rows: the shell mechanism + the
+  composition root's IA floor), frontend/tests/integration/
+  SessionLifecycle.test.tsx (the recreate prop), frontend/tests/
+  architecture/guard.test.ts (the V1 visual floor row),
+  docs/FRONTEND_UIUX_LAW.md (§2.1 the navigation contract),
+  docs/DECISIONS.md (D-247), docs/frontendweb/
+  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
+  docs/TASKS.md (the ledger, iter-288 evicted), STATUS.md (the
+  header), worklog.md (iter-288 evicted),
+  docs/iterations/iter-297-frontendweb-report.md (new),
+  frontend/README.md (the shell description) — 15 changed/created
+  (R2 — frontend-local; zero Python change, zero canon change, the
+  LOG untouched, zero corpus price)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
-  first row LANDED (iter-293); Phase 3's first THREE rows LANDED
-  (iter-294 the shell + the session lifecycle; iter-295 the
-  Observatory HISTORY entry — the dual-read law's second world;
-  iter-296 the Settings CONFIG entry — §8's closure over a real
-  persisted store); the remaining Phase 3 surface (Chat/Inference)
-  NOT backend-blocked — its ops already live at the app gateway (the
-  iter-294 smoke's enumeration), its own contract-mirror + surface
-  iteration; the standing boundaries: SSE/WebSocket, Tauri, PWA —
-  each its own admission. The world track: W8's
-  remaining rows the owner's call. The ssi family COMPLETE except
-  ssi-5, owner-gated.
+  first row + the V1 visual floor LANDED (iter-293/297); Phase 3's
+  first three rows LANDED (iter-294/295/296) + the IA REPAIR LANDED
+  (iter-297, D-247: the product/diagnostic registry split, the
+  vertical rail, the navigation contract in FRONTEND_UIUX_LAW §2.1);
+  the remaining Phase 3 surface (Chat/Inference) NOT backend-blocked
+  — its ops already live at the app gateway (the iter-294 smoke's
+  enumeration), its own contract-mirror + surface iteration, into
+  the now-correct rail at the head; the standing boundaries:
+  SSE/WebSocket, Tauri, PWA — each its own admission. The world
+  track: W8's remaining rows the owner's call. The ssi family
+  COMPLETE except ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)

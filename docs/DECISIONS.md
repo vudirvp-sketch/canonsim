@@ -507,3 +507,51 @@ read-only-copy form). Verification: docguard clean (the allowlist
 entry + the caps), ruff clean, the standing suite untouched
 (2529+1); rollback=delete the archive file + the §9 row + the
 allowlist entry.
+
+
+### D-247 — iter-297 · ia (R2 frontend-local) — the shell/IA repair:
+the navigation contract (product routes ≠ diagnostic surfaces)
+
+The owner's 2026-10-01 «вперед реализовывай, делай так как наиболее
+качественно и логично/обоснованно» call over the external IA verdict
+(the design-review delivery). Processed per the D-246 method: the
+verdict's code-level observations verified TRUE at HEAD deda444 (the
+rail was `panes.map(...)` — a feature directory, §2's own named
+failure mode; the Session/Gateway/Load-probe proof surfaces were
+product peers; engineering prose rode the product chrome; the nav was
+a horizontal tab row); its prescriptions adopted only where they
+reconcile with standing law. Landed: the composition root splits
+`ProductRoute` from `DiagnosticSurface` BEFORE the shell sees
+anything (App.tsx); the shell renders a vertical product rail
+(Trajectory LIVE / Observatory HISTORY / Settings pinned) + ONE
+subdued Diagnostics entry whose workspace carries the secondary nav
+(Session lifecycle / Gateway / Load probe — the proof instruments,
+honestly parked, never deleted); the `new session` lifecycle action
+moved from the product chrome to the Session surface; the
+architecture essays left the chrome (the identity strip's honest
+STATE labels stay — VISUAL_SYSTEM_UI §0.3, evidence over calm); the
+IA contract + canonical app tree amended into FRONTEND_UIUX_LAW
+§2.1 (the verdict's own documentation route); the acceptance floor
+is executable — the Shell/App vitest rows (rail content, the
+diagnostics isolation, one workspace, the prose absence) + the
+guard's V1 raw-color scan, which caught and closed a STANDING
+violation (9 raw hex literals from iter-289..296, now named tokens:
+--row-divider/--row-hover/--row-selected-live/--row-selected-history/
+--text-mono/--border-strong). Reconciled conflicts (the verdict
+verbatim would have violated standing law): Settings' secondary nav
+excludes Inference/LLM sections — the inf-1 Settings ≠ Inference
+Control split stands (inference controls are a separate surface);
+Trajectory stays a product route (the dual-read pair's LIVE half,
+FRONTEND_WEB_LAW §4 — the verdict's IA omitted it); the
+LIVE/HISTORY/CONFIG channel hues stand as STATE-class tokens, never
+second accents (the one-interactive-accent law untouched). Why: the
+contract layer was proven but the composition layer never existed —
+Chat would otherwise have landed as pane #7 atop a broken IA; the
+repair is frontend-local, zero Python, INV-1..5 untouched.
+Verification: 108 vitest (=96+12) + tsc + build + the live gateway
+round-trip (app.status / session.create / backend.settings / the
+honest chat.send DOMAIN_REJECTED lane) + the live browser closure
+(rail = exactly the 4 approved entries; the diagnostics secondary
+nav renders behind the entry; zero console errors; 2 screenshots);
+2529+1 pytest + ruff + topology --check clean (zero Python change);
+rollback=git revert (the pane form is one commit away).

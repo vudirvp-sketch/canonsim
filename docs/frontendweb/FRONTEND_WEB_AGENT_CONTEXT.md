@@ -162,7 +162,18 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  verbatim, the compiled command preview read-only,
                  the verbatim DOMAIN_REJECTED lanes; 96 vitest + the
                  15/15 live smoke + the live browser closure
-                 evidence); the remaining slice (Chat/Inference) NOT
+                 evidence); the IA REPAIR LANDED (iter-297, the
+                 owner's «вперед реализовывай» call over the external
+                 IA verdict, D-247: the registry SPLIT — ProductRoute
+                 ≠ DiagnosticSurface, the vertical product rail +
+                 the subdued Diagnostics entry with its own secondary
+                 nav, the prose out of the product chrome, the
+                 navigation contract amended into FRONTEND_UIUX_LAW
+                 §2.1, the acceptance floor executable (the Shell/App
+                 vitest rows + the guard's V1 raw-color scan, which
+                 closed a standing 9-literal violation by tokenizing
+                 it); 108 vitest + the live gateway/browser closure);
+                 the remaining slice (Chat/Inference) NOT
                  backend-blocked — its ops already live at the app
                  gateway's vocabulary (model.*/inference.*/chat.send,
                  the iter-294 smoke's enumeration), its own

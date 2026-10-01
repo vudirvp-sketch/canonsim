@@ -1,13 +1,18 @@
 /**
  * The composition root — ONE root, one wiring site (the
- * surface-module law). It owns nothing semantic: it mounts the
- * tab's session client state (`useTabSession`), the context strip
- * (the honest identity/freshness line), and the SHELL (Phase 3's
- * navigation surface) with the registered panes — the session
- * lifecycle (the lease closure), the gateway status, the S0-4 load
- * probe, the Trajectory live tail, and the Observatory history (the
- * dual-read pair). Every surface below this root reaches the gateway
- * ONLY through the typed client.
+ * surface-module law). It owns nothing semantic: it mounts the tab's
+ * session client state (`useTabSession`), the identity strip (the
+ * honest identity/freshness line — §9's context strip), and the SHELL
+ * with the SPLIT registries (iter-297 / D-247, the IA repair —
+ * FRONTEND_UIUX_LAW §2.1):
+ * - PRODUCT ROUTES (the rail): the Trajectory LIVE tail, the
+ *   Observatory HISTORY world, the Settings CONFIG world — the
+ *   approved user-facing intents;
+ * - DIAGNOSTIC SURFACES (behind the Diagnostics entry): the session
+ *   lifecycle, the gateway status probes, the S0-4 load probe — the
+ *   proof instruments, never product navigation peers.
+ * Every surface below this root reaches the gateway ONLY through the
+ * typed client.
  *
  * The op-driver (the S0-4 load probe) is also wired here: it
  * drives REAL `session.attach` ops against the gateway (the CAS
@@ -16,11 +21,11 @@
  * side" stand-in for the load note (no llama.cpp model is present
  * in this environment; that band is declared, not faked).
  *
- * The Observatory pane is session-free (its two READ ops are not
+ * The Observatory route is session-free (its two READ ops are not
  * session-scoped) — the HISTORY world needs no lease, exactly as
- * the durable read-side's own law. The Settings pane is the CONFIG
+ * the durable read-side's own law. The Settings route is the CONFIG
  * world: its READ is session-free, its closed partial UPDATE is
- * session-scoped (the pane honestly disables the Save without a
+ * session-scoped (the route honestly disables the Save without a
  * session — §8's closure over the store's own persisted document).
  */
 import { useCallback, useState } from "react";
@@ -31,7 +36,7 @@ import { Observatory } from "../../features/observatory/Observatory.tsx";
 import { Settings } from "../../features/settings/Settings.tsx";
 import { SessionLifecycle } from "../../features/session-lifecycle/SessionLifecycle.tsx";
 import { Shell } from "../../features/shell/Shell.tsx";
-import type { ShellPane } from "../../features/shell/Shell.tsx";
+import type { DiagnosticSurface, ProductRoute } from "../../features/shell/Shell.tsx";
 import { Trajectory } from "../../features/trajectory/Trajectory.tsx";
 import { useTabSession } from "../../state/session/useTabSession.ts";
 
@@ -81,10 +86,35 @@ export function App(): ReactNode {
     [session, driving],
   );
 
-  const panes: readonly ShellPane[] = [
+  // THE REGISTRY SPLIT (§2.1's law): product intents and diagnostic
+  // instruments are separate registries — the shell never sees a
+  // feature list, only the approved routes (+ the diagnostics entry).
+  const routes: readonly ProductRoute[] = [
+    {
+      id: "trajectory",
+      label: "Trajectory",
+      hint: "Live events of the current session — the volatile tail, never durable history",
+      element: <Trajectory client={session.client} sessionId={session.sessionId} />,
+    },
+    {
+      id: "observatory",
+      label: "Observatory",
+      hint: "Committed run history — bounded windows over the archived logs",
+      element: <Observatory client={session.client} />,
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      hint: "Launch configuration — persisted, effective at the next spawn",
+      pinned: true,
+      element: <Settings client={session.client} sessionId={session.sessionId} />,
+    },
+  ];
+
+  const diagnostics: readonly DiagnosticSurface[] = [
     {
       id: "session",
-      label: "Session",
+      label: "Session lifecycle",
       hint: "the lease lifecycle — attach under the CAS guard, detach under the lease guard, the honest closure",
       element: (
         <SessionLifecycle
@@ -92,6 +122,7 @@ export function App(): ReactNode {
           sessionId={session.sessionId}
           document={session.document}
           refreshDocument={session.refreshDocument}
+          recreateSession={session.recreateSession}
         />
       ),
     },
@@ -140,56 +171,33 @@ export function App(): ReactNode {
         </div>
       ),
     },
-    {
-      id: "trajectory",
-      label: "Trajectory",
-      hint: "the LIVE session tail (virtualized) — volatile, never durable history",
-      element: <Trajectory client={session.client} sessionId={session.sessionId} />,
-    },
-    {
-      id: "observatory",
-      label: "Observatory",
-      hint: "the HISTORY world — bounded windows over committed logs; the dual-read pair of the Trajectory pane",
-      element: <Observatory client={session.client} />,
-    },
-    {
-      id: "settings",
-      label: "Settings",
-      hint: "the launch-settings CONFIG world — the closed partial save, effective at the next spawn (§8's closure over a real store)",
-      element: <Settings client={session.client} sessionId={session.sessionId} />,
-    },
   ];
 
   return (
     <div className="app">
       <header className="app-header">
-        <h1>
-          CanonSim Workbench <span className="tag">phase-3 slice</span>
-        </h1>
-        <p className="app-note">
-          the browser is an untrusted presentation client — semantics stay in CanonSim/Python; this tab
-          is one independent gateway client (no cross-tab store, no browser storage as truth)
-        </p>
-        <div className="strip">
-          <span>
-            session{" "}
-            <code data-testid="session-id">
-              {session.creating ? "creating…" : (session.sessionId ?? short(session.createError ?? "—", 20))}
-            </code>
-          </span>
-          <span>
-            rev <code>{String(session.document?.revision ?? "—")}</code>
-          </span>
-          <span>
-            seq <code>{String(session.document?.event_sequence ?? "—")}</code>
-          </span>
-          <span className={`freshness freshness-${session.freshness.toLowerCase()}`}>
-            {session.freshness}
-          </span>
-          <button onClick={session.recreateSession}>new session</button>
-          <button onClick={() => void session.refreshDocument()} disabled={session.sessionId === null}>
-            refresh session.get
-          </button>
+        <div className="app-header-row">
+          <h1>CanonSim Workbench</h1>
+          <div className="strip">
+            <span>
+              session{" "}
+              <code data-testid="session-id">
+                {session.creating ? "creating…" : (session.sessionId ?? short(session.createError ?? "—", 20))}
+              </code>
+            </span>
+            <span>
+              rev <code>{String(session.document?.revision ?? "—")}</code>
+            </span>
+            <span>
+              seq <code>{String(session.document?.event_sequence ?? "—")}</code>
+            </span>
+            <span className={`freshness freshness-${session.freshness.toLowerCase()}`}>
+              {session.freshness}
+            </span>
+            <button onClick={() => void session.refreshDocument()} disabled={session.sessionId === null}>
+              refresh
+            </button>
+          </div>
         </div>
         {session.createError !== null ? (
           <p className="banner banner-error" role="alert">
@@ -199,7 +207,7 @@ export function App(): ReactNode {
         ) : null}
       </header>
 
-      <Shell panes={panes} initialPaneId="session" />
+      <Shell routes={routes} diagnostics={diagnostics} initialRouteId="trajectory" />
     </div>
   );
 }

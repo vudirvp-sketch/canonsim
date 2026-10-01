@@ -16,6 +16,17 @@
   /* The CONFIG channel (the Settings world): a calm blue distinct
      from the LIVE teal, the HISTORY violet, and the warn amber. */
   --config: #7aa2f7;
+  /* Row mechanics (iter-297, the visual floor's first tokenized set —
+     raw literals are forbidden outside :root, VISUAL_SYSTEM_UI §2):
+     the channel-tinted selection backgrounds are DIMMED forms of the
+     dual-read channel hues (STATE-class rows, never a second
+     interactive accent), the rest is the neutral ramp. */
+  --row-divider: #202832;
+  --row-hover: #232c37;
+  --row-selected-live: #1d3a37;
+  --row-selected-history: #2b2640;
+  --text-mono: #b8c4cf;
+  --border-strong: #3d4a58;
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   font-size: 14px;
 }
@@ -63,18 +74,38 @@ select {
 }
 
 .app {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px 20px 60px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
-.app-header h1 {
-  font-size: 1.25rem;
-  margin: 0 0 4px;
+/* The product chrome (iter-297/D-247): one compact header row — the
+   identity strip's honest state labels stay (VISUAL_SYSTEM_UI §0.3:
+   evidence never hidden for visual calm); engineering prose does not. */
+.app-header {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
 }
-.app-note,
+.app-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+.app-header-row h1 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+.app-header-row .strip {
+  margin-left: auto;
+}
+.app-header .banner {
+  margin: 0;
+}
 .surface-note {
   color: var(--muted);
   margin: 2px 0 6px;
@@ -224,35 +255,103 @@ select {
   color: var(--muted);
 }
 
-/* The shell (Phase 3's navigation surface): the pane registry + the
-   one active pane. Only the active pane mounts (boundedness). */
+/* The shell (iter-297/D-247, the IA repair): a vertical product rail
+   + ONE active workspace. The rail carries ONLY approved product
+   routes (FRONTEND_UIUX_LAW §2.1) + the subdued Diagnostics entry —
+   never a feature directory. Only the active surface mounts
+   (boundedness). */
 .shell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.shell-rail {
+  flex: none;
+  width: 216px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 2px;
+  padding: 12px 8px;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+  overflow-y: auto;
 }
-.shell-nav {
+.shell-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 4px 4px 0;
+  background: transparent;
+  padding: 7px 10px;
+  font: inherit;
+  color: var(--text);
+}
+.shell-item:hover:not(:disabled) {
+  border-color: transparent;
+  background: var(--surface-2);
+}
+.shell-item-active {
+  border-left-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface-2);
+}
+/* The pinned product route (Settings) rides the rail's end. */
+.shell-item-pinned {
+  margin-top: auto;
+}
+/* The Diagnostics entry — subdued by law: muted, separated, never a
+   product peer. The proof instruments live behind it. */
+.shell-item-diagnostics {
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  border-left: 2px solid transparent;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.shell-item-diagnostics:hover:not(:disabled) {
+  color: var(--text);
+}
+.shell-item-diagnostics-open {
+  border-left-color: var(--muted);
+  color: var(--text);
+  background: var(--surface-2);
+}
+.shell-workspace {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 16px 20px 48px;
+}
+.shell-pane {
+  max-width: 980px;
+  margin: 0 auto;
+  min-height: 120px;
+}
+/* The diagnostics area: its own secondary navigation (never the
+   primary rail) + the active diagnostic surface. */
+.diagnostics {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.diagnostics-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  align-items: center;
+  margin: 0 0 12px;
 }
-.shell-tab {
-  font-size: 0.9rem;
-  padding: 5px 14px;
-}
-.shell-tab-active {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.shell-nav-note {
+.diag-tab {
+  font-size: 0.85rem;
+  padding: 4px 12px;
   color: var(--muted);
-  font-size: 0.78rem;
-  margin-left: auto;
-  max-width: 340px;
-  text-align: right;
 }
-.shell-pane {
+.diag-tab-active {
+  border-color: var(--muted);
+  color: var(--text);
+}
+.diagnostics-pane {
   min-height: 120px;
 }
 .banner-accepted {
@@ -280,16 +379,16 @@ select {
   padding: 0 10px;
   height: 100%;
   font-size: 0.84rem;
-  border-bottom: 1px solid #202832;
+  border-bottom: 1px solid var(--row-divider);
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
 }
 .trow:hover {
-  background: #232c37;
+  background: var(--row-hover);
 }
 .trow-selected {
-  background: #1d3a37;
+  background: var(--row-selected-live);
   outline: 1px solid var(--accent);
 }
 .trow-synthetic .cell-type,
@@ -322,7 +421,7 @@ select {
   margin: 0;
   padding: 10px;
   font-size: 0.8rem;
-  color: #b8c4cf;
+  color: var(--text-mono);
 }
 
 .probe-panel {
@@ -402,16 +501,16 @@ select {
   align-items: center;
   padding: 3px 10px;
   font-size: 0.84rem;
-  border-bottom: 1px solid #202832;
+  border-bottom: 1px solid var(--row-divider);
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
 }
 .orow:hover {
-  background: #232c37;
+  background: var(--row-hover);
 }
 .orow-selected {
-  background: #2b2640;
+  background: var(--row-selected-history);
   outline: 1px solid var(--history);
 }
 .orow-high .cell-type,
@@ -469,7 +568,7 @@ select {
   color: var(--warn);
 }
 button.probe {
-  border-color: #3d4a58;
+  border-color: var(--border-strong);
 }
 
 /* The Settings surface (the CONFIG world) — the closed three-field
@@ -513,7 +612,7 @@ button.probe {
   overflow: auto;
   font-family: "SFMono-Regular", Consolas, monospace;
   font-size: 0.78rem;
-  color: #b8c4cf;
+  color: var(--text-mono);
   white-space: pre-wrap;
   word-break: break-all;
 }

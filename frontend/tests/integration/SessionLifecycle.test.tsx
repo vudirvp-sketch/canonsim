@@ -92,9 +92,10 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-function mountSurface(fetchImpl: typeof fetch): { readonly refreshDocument: ReturnType<typeof vi.fn> } {
+function mountSurface(fetchImpl: typeof fetch): { readonly refreshDocument: ReturnType<typeof vi.fn>; readonly recreateSession: ReturnType<typeof vi.fn> } {
   vi.stubGlobal("fetch", fetchImpl);
   const refreshDocument = vi.fn().mockResolvedValue(undefined);
+  const recreateSession = vi.fn();
   const client = new GatewayClient();
   render(
     <SessionLifecycle
@@ -102,9 +103,10 @@ function mountSurface(fetchImpl: typeof fetch): { readonly refreshDocument: Retu
       sessionId={SESSION_ID}
       document={OBSERVED}
       refreshDocument={refreshDocument}
+      recreateSession={recreateSession}
     />,
   );
-  return { refreshDocument };
+  return { refreshDocument, recreateSession };
 }
 
 describe("the session-lifecycle surface (Phase 3, row 1)", () => {

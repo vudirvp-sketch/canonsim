@@ -123,6 +123,64 @@ hierarchy, selection, focus, keyboard traversal, restoration, and
 overflow/collapse behavior (a flat catalog of 12–20 equally prominent
 destinations is the failure mode).
 
+### 2.1 The navigation contract (iter-297, D-247 — the shell/IA repair)
+
+The Workbench shell splits its registries BEFORE navigation exists
+(the composition root owns the split; the shell sees only its result):
+
+```text
+PRODUCT ROUTE        an approved user-facing intent — the rail's
+                     ONLY content (Trajectory, Observatory, Settings;
+                     Chat lands as its own surface row at the rail's head)
+DIAGNOSTIC SURFACE   proof/instrumentation (gateway probes, session
+                     lifecycle, load probes) — NEVER a rail peer: it
+                     lives behind ONE subdued Diagnostics entry, with
+                     its own secondary navigation inside the workspace
+```
+
+Binding lines (the composition root enforces them; the vitest
+product-IA rows pin them):
+
+```text
+PRIMARY NAVIGATION exposes only approved user-facing product intents.
+A first-class surface is not automatically a top-level navigation item.
+Diagnostic/proof/instrumentation surfaces never enter primary navigation.
+The feature/pane registry is never the primary navigation registry.
+Settings owns the rail's end (pinned); its secondary navigation is its
+own surface's concern — the inf-1 Settings ≠ Inference Control split
+stands (inference controls are a separate surface, never a Settings
+subsection).
+```
+
+Canonical app IA (the binding shape):
+
+```text
+APP
+├── chrome — the identity strip (session · revision · freshness:
+│   §9's context evidence; the honest STATE labels stay, engineering
+│   prose does not — VISUAL_SYSTEM_UI §0.3, evidence over calm)
+├── Primary navigation (the vertical rail)
+│   ├── Chat (the next Phase 3 row)
+│   ├── Trajectory — LIVE
+│   ├── Observatory — HISTORY
+│   └── Settings (pinned at the rail's end)
+└── Active workspace — exactly ONE visible surface
+    └── Diagnostics (the subdued entry)
+        ├── Session lifecycle
+        ├── Gateway
+        └── Load probe
+```
+
+Visual acceptance floor (the DOM-level half is executable — the vitest
+Shell/App rows + the architecture guard's V1 raw-color scan; the rest
+is review): the rail is vertical; only approved routes appear there;
+Settings is present and pinned; diagnostic labels never appear in the
+rail; exactly one active workspace renders; the identity strip carries
+the honest state; no engineering prose in the product chrome; no raw
+colors outside tokens; one interactive accent (the dual-read channel
+hues — LIVE/HISTORY/CONFIG — are STATE-class tokens, never second
+accents).
+
 ## 3. The analytical workspace grammar
 
 Conceptual regions — semantic ROLES, not mandatory permanent panels;

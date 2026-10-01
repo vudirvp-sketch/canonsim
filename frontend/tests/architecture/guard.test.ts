@@ -246,3 +246,28 @@ describe("R8 — the test seam: src never imports from tests", () => {
     expect(violations).toEqual([]);
   });
 });
+
+describe("V1 — the visual floor: color literals live only in the token root (VISUAL_SYSTEM_UI §2/§3)", () => {
+  it("styles.css: no raw hex/rgb colors outside :root (a color is a token, never a literal)", () => {
+    const cssPath = join(SRC, "app", "composition", "styles.css");
+    const css = readFileSync(cssPath, "utf8");
+    const rootStart = css.indexOf(":root");
+    expect(rootStart).toBeGreaterThanOrEqual(0);
+    const rootEnd = css.indexOf("}", rootStart);
+    // The token set itself MAY name colors (that is the one source of truth).
+    const literal = /#[0-9a-fA-F]{3,8}\b|rgba?\(/g;
+    const chunks: readonly (readonly [string, string])[] = [
+      ["before :root", css.slice(0, rootStart)],
+      ["after :root", css.slice(rootEnd + 1)],
+    ];
+    const violations: string[] = [];
+    for (const [where, chunk] of chunks) {
+      const hits = chunk.match(literal);
+      if (hits !== null) {
+        violations.push(`${cssPath} ${where}: ${hits.join(", ")}`);
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+

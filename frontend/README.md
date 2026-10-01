@@ -6,7 +6,10 @@ call). React + TypeScript + Vite, Web/PWA-first — the S0 walking
 skeleton over the existing loopback gateway, now grown into
 Phase 3's first three rows (the Shell + the Session lifecycle; the
 Observatory HISTORY entry — the dual-read law's second world; the
-Settings CONFIG entry — the §8 closure over a real persisted store).
+Settings CONFIG entry — the §8 closure over a real persisted store)
++ the IA REPAIR (iter-297, D-247: the product/diagnostic registry
+split — a vertical product rail + the subdued Diagnostics entry,
+FRONTEND_UIUX_LAW §2.1's navigation contract).
 The law: `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
 `docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md`).
 
@@ -65,7 +68,11 @@ gateway contracts (the stream admission); no browser storage as
 truth (localStorage/sessionStorage/BroadcastChannel/indexedDB/
 caches); `src/api/**` imports nothing upward; no cross-feature
 imports; features couple to state only via `import type`; one
-composition root; src never imports tests. A violation is a red
+composition root; src never imports tests; **V1 — the visual floor
+(iter-297): no raw color literals outside the `:root` token set**
+(a color is a named token, never a hex in a rule — VISUAL_SYSTEM_UI
+§2/§3; the scan caught and closed a standing 9-literal violation).
+A violation is a red
 test naming the file and line — never silent drift. The heavier
 instruments named by the law (dependency-cruiser / eslint-
 boundaries, the Playwright-class multi-tab smoke) stay parked rows,
@@ -79,15 +86,26 @@ sandbox-side capture script lives outside the repo per AGENTS §7
 Rule 9; the fixtures' shape is the contract, the capture is
 re-runnable from `tests/test_gateway.py`'s own patterns).
 
-## The surfaces (the Shell era — Phase 3, rows 1–3)
+## The surfaces (the rail era — Phase 3 rows 1–3 + the IA repair)
 
-The composition root mounts the **Shell** (`src/features/shell/`):
-the pane registry + the switch. **Only the active pane mounts** —
+The composition root mounts the **Shell** (`src/features/shell/`)
+with the SPLIT registries (iter-297, D-247 — FRONTEND_UIUX_LAW
+§2.1): `ProductRoute` (the rail's only content: Trajectory LIVE,
+Observatory HISTORY, Settings pinned at the rail's end) and
+`DiagnosticSurface` (behind ONE subdued Diagnostics entry, its own
+secondary nav inside the workspace — Session lifecycle / Gateway /
+Load probe, the proof instruments, never product peers). The rail
+is a navigation instrument, never a feature directory: a
+first-class surface is not automatically a navigation item.
+
+**Only the active surface mounts** —
 a switch unmounts the previous surface and drops its local
 presentation state (a live-tail buffer, a probe list); the
 gateway remains the only truth, and a remounted surface re-reads
 its evidence — possibly via RESYNC, never silently. The active
-pane id is the shell's allowed local UI state (§7's allowance).
+focus is the shell's allowed local UI state (§7's allowance).
+
+The product routes (the rail):
 
 | Surface | What it proves |
 |---|---|

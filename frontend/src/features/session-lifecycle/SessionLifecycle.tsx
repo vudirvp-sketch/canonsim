@@ -17,6 +17,10 @@
  * - G4: no auto-retry. STALE_REVISION / LEASE_EXPIRED render with
  *   the reason and the explicit retry affordance; the retry mints a
  *   fresh request identity (the user's decision, never the client's).
+ * - `new session` (the root's recreate path, iter-297/D-247: the
+ *   lifecycle action moved out of the product chrome and home here)
+ *   mints a FRESH tab session identity — the old session's lease is
+ *   left to expire server-side, never silently detached.
  */
 import type { ReactNode } from "react";
 
@@ -32,6 +36,9 @@ export interface SessionLifecycleProps {
   readonly document: SessionDocument | null;
   /** the root's read path — called after each ACCEPTED effect (the OBSERVED stage). */
   readonly refreshDocument: () => Promise<void>;
+  /** the root's recreate path — mints a fresh tab session identity (the
+   * lifecycle action's honest home since iter-297: out of the product chrome). */
+  readonly recreateSession: () => void;
   readonly className?: string;
 }
 
@@ -96,6 +103,9 @@ export function SessionLifecycle(props: SessionLifecycleProps): ReactNode {
         </button>
         <button onClick={() => void props.refreshDocument()} disabled={props.sessionId === null}>
           refresh session.get
+        </button>
+        <button onClick={props.recreateSession} disabled={lifecycle.busy !== null}>
+          new session
         </button>
       </div>
 
