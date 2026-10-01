@@ -1,110 +1,90 @@
-Iteration: iter-299 (`inference` — Phase 3's FIFTH ROW, the owner's
-  «продолжай работу над фронтендом» delegated call; R2
-  frontend-local — the Inference row named by STATUS's own next-row
-  order): the INFERENCE ENTRY landed over the EXISTING
-  inference.read/inference.update ops (zero Python change) — the
-  generation-control WORKSPACE (LLAMA_CPP_INFERENCE_CONTROL_LAW's
-  full surface, FRONTEND_UIUX_LAW §21.2's regions): the contract
-  mirror one depth deeper than Chat's compact slice (the resolver's
-  own 19-field control document, the closed STATES/KINDS/
-  VALUE_TYPES/SCOPES vocabularies, the 9-member chain document, the
-  transparent presets, the categories with counts; the seam's
-  inferenceDocument()/inferenceUpdate() — the loose wire form at the
-  unconsumed depth, the projection keeping `profile`'s raw values
-  vocabulary and `request_layer` OUT of the surfaces); the SURFACE
-  (features/inference/{useInference,Inference}): the preset row (the
-  TRANSPARENT diff preview BEFORE the apply; the apply a PLAIN
-  update carrying the preset's values verbatim, guarded on a CLEAN
-  draft — a preset never silently modifies out-of-scope settings),
-  the SEARCH over name/flag/category (a match is an explicit ask —
-  it shows the advanced rows; the cleared search restores the
-  disclosures), the PINNED quick-access strip (reveals, never second
-  editors; a pin/unpin its OWN dispatch over the workspace section,
-  never a profile edit), the collapsible categories with honest
-  counts (the six general-chat families open by default; an
-  all-advanced family opens with the honest note, never a silent
-  blank), the advanced rung, the ordered sampler chain (membership
-  a DRAFT edit — the Save carries the WHOLE 9-member document), the
-  compiled preview read-only behind its own disclosure; the editors
-  DATA-DRIVEN over the read document's own value_type/forms/limits
-  metadata (int/float → number, bool → checkbox, enum → select over
-  forms, text → text, gpu_layers → the auto/all/explicit composite;
-  an entry that is not a legal explicit value yet disables the Save
-  — never clamped); every row renders the OBSERVED state + the
-  resolver's reasons verbatim (§7: configured-but-ineffective stays
-  VISIBLE) + the §4 defaults ladder side by side (baseline ·
-  upstream); §8's closure over the persisted profile store (the
-  Save sends ONLY the changed keys with a fresh idempotency key —
-  G4; on ACCEPTED the returned document the new OBSERVED baseline,
-  the draft reconciles to the SERVER's answer; applies: next-spawn
-  verbatim; no polling); Inference rides the rail right behind Chat
-  (§2.1's canonical IA tree, amended); 4 live-captured fixtures
-  (the in-process parity form over the real composition with
-  throwaway roots — the accepted partial temperature 0.65 + top_k
-  20 landing verbatim, the unknown-field/bad-type/partial-chain
-  rejections loud)
+Iteration: iter-301 (`settings-nav` — Phase 3's SEVENTH ROW, the
+  owner's «продолжай работу над фронтендом» delegated call; R2
+  frontend-local — the Settings secondary-nav row named by STATUS's
+  own next-row order, the external IA verdict's step 5 reconciled
+  with inf-1 by the D-246 method): the SETTINGS SECONDARY NAV
+  landed — the surface's own sections over REAL DOCUMENTS only
+  (never a feature directory; zero new routes, zero Python change):
+  DEPLOYMENT (the launch-settings store unchanged — the three-field
+  draft form, the §8 closure, the compiled preview; the verdict's
+  "Advanced" DISSOLVES into the document: extra_args is the same
+  store's raw escape hatch, §19's disclosure law — one document,
+  one draft, one Save carrying only the delta) | ABOUT (NEW — the
+  gateway's own identity document read-only over the EXISTING
+  session-free app.status; the verdict's "General" re-scoped to
+  what exists: no invented editable preferences, the closed
+  three-field set the store's own law; the probe console stays in
+  Diagnostics — identity here, proof there); APPEARANCE a NAMED
+  standing boundary (no persisted appearance store exists, browser
+  storage is never truth — the guard's R3; an in-memory preference
+  would die on remount), never a fabricated empty section; inf-1
+  STANDS (the pointer renders: the generation controls live in the
+  Inference surface, never a Settings subsection); the CONTAINER
+  owns the settings state — the DRAFT's owner is the SURFACE, a
+  section switch never drops the user's unsaved REQUEST (pinned by
+  an integration row + falsified live in the browser); only the
+  active section mounts (a remounted About re-reads its evidence;
+  the settings mount READ stays ONE per surface — the section
+  switches never re-read it); the secondary nav is the surface's
+  own concern (§2.1 — the Diagnostics area's in-workspace tab
+  precedent, mirrored: the section-tab strip, the CONFIG token on
+  the active tab, aria-current, keyboard-native buttons)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2529 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; zero Python change
-  this iteration — the frontend stack: 214 vitest + tsc + build +
-  the live gateway smoke 24/24 over the served composition: the op
-  vocabulary, the discovery scan, the load band FAILED→SELECTED
-  with the observed cause verbatim, the unload gate, the digest
-  round-trip (the real sha256), the import round-trip (the bytes
-  landed + the NEXT scan seeing both files + the digest riding the
-  entry), the fetch admission rejection BEFORE any network, the
-  relative-path rejection, the idempotent duplicate true) ·
-Date: 2026-10-01 ·
-Scope: frontend/src/api/gateway/{contracts,validators,client}.ts
-  (the Models-row mirror: MODEL_WORK_KINDS + the per-kind CLOSED
-  run.start argument sets, the shared model.load/model.unload
-  admission shape, the fetch/import progress documents + the five
-  per-work results at the consumer depth; the seam's modelLoad/
-  modelUnload/runStart with the arguments closed AT the seam),
-  frontend/src/features/models/{useModels.ts, Models.tsx} (new —
-  the model family's mirror: the §20 ladder rows, the arrival
-  pane, the ONE-run lane), frontend/src/app/composition/App.tsx
-  (the Models route right behind Inference), frontend/src/app/
-  composition/styles.css (the discovery rows/arrival forms/run
-  lane — the MODEL-ladder chips as STATE-class token mappings,
-  zero raw literals), frontend/tests/fixtures/{model_load_start_ok,
-  model_load_run_failed, model_states_selected,
-  model_unload_not_active, model_digest_start_ok,
-  model_digest_run_completed, model_import_start_ok,
-  model_import_run_completed, model_list_after_import,
-  model_fetch_exists, model_import_relative_path}.json +
-  manifest.json (new), frontend/tests/contract/validators.test.ts
-  (the models-row contract rows), frontend/tests/integration/
-  Models.test.tsx (new — 17 rows), frontend/tests/integration/
-  Shell.test.tsx (the rail label + the Models mount row),
-  docs/FRONTEND_UIUX_LAW.md (§2.1's canonical IA tree gains the
-  Models row), docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md
-  (the stage map), docs/TASKS.md (the ledger, iter-290 evicted),
-  STATUS.md (the header), worklog.md (iter-290 evicted),
-  docs/iterations/iter-300-frontendweb-report.md (new),
-  frontend/README.md (the Models surface row) — 29 changed/
-  created (14 modified + 15 created; R2 — frontend-local; zero
-  Python change, zero canon change, the LOG untouched, zero corpus
-  price)
+  this iteration — the frontend stack: 221 vitest + tsc + build +
+  the live gateway smoke 38/38 over the served composition: the
+  full 21-operation identity registry, the settings family, the
+  persisted schema/2 evidence on disk, the closed-set rejections
+  verbatim, the idempotent duplicate) + the live browser closure
+  (the secondary nav rendering, the About identity over the live
+  stack, the DRAFT surviving the section round-trip, zero console
+  errors) ·
+Date: 2026-10-02 ·
+Scope: frontend/src/features/settings/Settings.tsx (the container +
+  the secondary nav + the Deployment section extraction — the
+  draft-survival law), frontend/src/features/settings/
+  SettingsAbout.tsx (new — the About section over app.status), 
+  frontend/src/app/composition/styles.css (the settings-sections
+  strip + the section-tab tokens — zero raw literals, the V1 scan
+  green), frontend/tests/fixtures/app_status_composition.json +
+  manifest.json (new — the FULL 21-operation registry captured
+  in-process over the real composition, throwaway roots),
+  frontend/tests/integration/Settings.test.tsx (7 new rows: the
+  nav's closed section set, the About identity read's wire law +
+  verbatim rendering, the DRAFT-survival falsifier, the remount
+  re-read, the TRANSPORT/MISMATCH lanes, the inf-1 pointer),
+  docs/FRONTEND_UIUX_LAW.md (§2.1's tree + binding lines — the
+  Settings secondary-nav law), docs/frontendweb/
+  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map), docs/TASKS.md
+  (the ledger, iter-291 evicted), STATUS.md (the header + the §5
+  cleanup: KI#109 deleted — closed iter-294, its substance verified
+  resolved at the current mirror HEAD),
+  worklog.md (iter-291 evicted, one in one out),
+  frontend/README.md (the Settings surface row),
+  docs/iterations/iter-301-frontendweb-report.md (new) — 13
+  changed/created (10 modified + 3 created; R2 — frontend-local;
+  zero Python change, zero canon change, the LOG untouched, zero
+  corpus price)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1 visual floor LANDED (iter-293/297); Phase 3's
-  SIX rows LANDED (iter-294/295/296/298/299/300: shell/lifecycle,
-  observatory, settings, chat, inference, models) + the IA REPAIR
-  LANDED (iter-297, D-247); the chat row's COMPLETED band and the
-  models row's ACTIVE/EVICTED bands are owner-side (a loaded
-  llama.cpp model — this environment honestly closes the
-  admission/FAILED/REJECTED/SELECTED-rest lanes, captured verbatim;
-  the import/digest bands closed FULLY live); the next frontend
-  rows the owner's call: the Settings secondary nav, the streaming
-  admission (SSE — the backend gateway contract first), the
-  acceptance matrix, the DECISIONS collapse (the owner's call);
-  the standing boundaries: SSE/WebSocket, Tauri, PWA — each its
-  own admission (the import form's native file/folder picker rides
-  the Tauri row). The world track: W8's remaining rows the owner's
-  call. The ssi family COMPLETE except ssi-5, owner-gated.
+  SEVEN rows LANDED (iter-294/295/296/298/299/300/301: shell/
+  lifecycle, observatory, settings, chat, inference, models, the
+  settings secondary nav) + the IA REPAIR LANDED (iter-297, D-247);
+  the chat row's COMPLETED band and the models row's ACTIVE/EVICTED
+  bands are owner-side (a loaded llama.cpp model); the next
+  frontend rows the owner's call: the streaming admission (SSE —
+  the backend gateway contract first), the acceptance matrix, the
+  DECISIONS collapse (the owner's call); the standing boundaries:
+  SSE/WebSocket, Tauri, PWA, the Settings Appearance section (no
+  persisted store) — each its own admission (the import form's
+  native file/folder picker rides the Tauri row). The world track:
+  W8's remaining rows the owner's call. The ssi family COMPLETE
+  except ssi-5, owner-gated.
+
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -133,7 +113,10 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Active KIs
 
-- KI#109 · the GitHub mirror at HEAD `6c614ce` carries iter-291..293's docs WITHOUT the 16 recorded D-245 deletions (a fresh clone: docguard red on the 1462-line index + the stale shell-contract red; the owner's local tree has them — the mirror never received the deletions in any commit) · 2026-09-29 · CLOSED iter-294 (the 16 paths re-executed in the sandbox, the suite 2529+1 again; the delta carries them in DELETED_PATHS, the owner-side git block lists them for the mirror)
+(none — KI#109 deleted at the iter-301 §5 cleanup: closed iter-294,
+  seven iterations past the 2-iteration deletion rule; its substance
+  verified resolved at the current mirror HEAD — the 16 D-245
+  deletions all present, the architecture suite green)
 
 ## FAQ / Pitfalls
 

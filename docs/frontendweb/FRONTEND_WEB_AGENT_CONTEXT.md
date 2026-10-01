@@ -249,12 +249,29 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  the rail right behind Inference (§2.1's canonical IA
                  tree — the RESOURCES group's head); 214 vitest +
                  the 24/24 live smoke over the served composition +
-                 11 live-captured fixtures); the next rows the
-                 owner's call: the Settings secondary nav, the
-                 streaming admission (SSE — the backend gateway
-                 contract first), the acceptance matrix, the
-                 DECISIONS collapse (the owner's call); each its own
-                 iteration
+                 11 live-captured fixtures); the SEVENTH row LANDED
+                 (iter-301, the owner's «продолжай работу над
+                 фронтендом» delegated call: the SETTINGS SECONDARY
+                 NAV — the surface's own sections over real documents
+                 only, the verdict's step 5 reconciled with inf-1 by
+                 the D-246 method: Deployment (the launch-settings
+                 store; the raw extra_args hatch dissolves into the
+                 document — §19's disclosure law) | About (the
+                 gateway's own identity read-only over the EXISTING
+                 app.status; the verdict's "General" re-scoped to
+                 what exists — the probe console stays in
+                 Diagnostics: identity here, proof there);
+                 Appearance a NAMED standing boundary (no persisted
+                 appearance store, browser storage never truth — the
+                 guard's R3), never a fabricated empty section; the
+                 DRAFT's owner the SURFACE (the container's hook) —
+                 a section switch never drops the unsaved REQUEST,
+                 falsified live in the browser; 221 vitest + the
+                 38/38 live smoke + the browser closure); the next
+                 rows the owner's call: the streaming admission (SSE
+                 — the backend gateway contract first), the
+                 acceptance matrix, the DECISIONS collapse (the
+                 owner's call); each its own iteration
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the
                  owner's call

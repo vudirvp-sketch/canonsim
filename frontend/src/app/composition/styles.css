@@ -573,6 +573,30 @@ button.probe {
 
 /* The Settings surface (the CONFIG world) — the closed three-field
    draft form + the read-only compiled command preview. */
+/* The secondary navigation (iter-301): the surface's own concern
+   (§2.1) — the Diagnostics area's in-workspace tab precedent,
+   mirrored; the active section renders below, the inactive one
+   unmounts (the mounting discipline). */
+.settings-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+}
+.section-tab {
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  color: var(--muted);
+}
+.section-tab-active {
+  border-color: var(--config);
+  color: var(--text);
+}
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 .settings-form {
   display: flex;
   flex-direction: column;

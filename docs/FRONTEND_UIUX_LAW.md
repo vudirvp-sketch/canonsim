@@ -150,6 +150,9 @@ Settings owns the rail's end (pinned); its secondary navigation is its
 own surface's concern — the inf-1 Settings ≠ Inference Control split
 stands (inference controls are a separate surface, never a Settings
 subsection).
+A Settings section exists only over a live document (real content,
+never a placeholder); the draft's owner is the SURFACE — a section
+switch never drops the user's unsaved REQUEST.
 ```
 
 Canonical app IA (the binding shape):
@@ -170,7 +173,14 @@ APP
 │   │   converse/control pair)
 │   ├── Trajectory — LIVE
 │   ├── Observatory — HISTORY
-│   └── Settings (pinned at the rail's end)
+│   └── Settings (pinned at the rail's end; its own secondary
+│       navigation inside the surface — iter-301: Deployment | About,
+│       each section over a live document: the launch-settings store
+│       / the gateway identity read-only; Appearance is a NAMED
+│       standing boundary — no persisted appearance store exists and
+│       browser storage is never truth; the raw extra_args hatch
+│       dissolves into the Deployment document — disclosure layers
+│       are not semantic classes, §19)
 └── Active workspace — exactly ONE visible surface
     └── Diagnostics (the subdued entry)
         ├── Session lifecycle

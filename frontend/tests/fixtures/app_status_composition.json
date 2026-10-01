@@ -1,0 +1,33 @@
+{
+  "operation_id": "aeefd325cf155ecd568ae253233c46f8b7b1ef660e88848a5a6a548933991b64",
+  "result": {
+    "auth_required": false,
+    "contract": "canon_workbench_gateway@0.1",
+    "exposure": "LOOPBACK",
+    "operations": [
+      "app.status",
+      "backend.settings",
+      "backend.settings.update",
+      "chat.send",
+      "inference.read",
+      "inference.update",
+      "model.inspect",
+      "model.list",
+      "model.load",
+      "model.states",
+      "model.unload",
+      "observatory.read",
+      "observatory.runs",
+      "run.cancel",
+      "run.get",
+      "run.start",
+      "session.attach",
+      "session.create",
+      "session.detach",
+      "session.events",
+      "session.get"
+    ],
+    "service": "canonsim-workbench-gateway"
+  },
+  "status": "OK"
+}

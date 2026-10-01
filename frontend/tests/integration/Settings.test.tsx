@@ -1,9 +1,10 @@
 /**
- * The Settings integration proof (Phase 3's third row), in the
- * browser-less band (jsdom + testing-library; the live evidence rides
- * the iteration report): the CONFIG world over the two EXISTING
- * gateway ops — the session-free READ and the session-scoped closed
- * partial UPDATE.
+ * The Settings integration proof (Phase 3's third row; iter-301 adds
+ * the SECONDARY NAV rows), in the browser-less band (jsdom +
+ * testing-library; the live evidence rides the iteration report):
+ * the CONFIG world over the two EXISTING gateway ops — the
+ * session-free READ and the session-scoped closed partial UPDATE —
+ * now carrying its own sections (Deployment | About).
  *
  * What is pinned here (each row a law):
  * - the mount fires EXACTLY ONE READ (backend.settings, no arguments,
@@ -26,6 +27,26 @@
  * - a transport failure renders TRANSPORT with its own lane — never
  *   "rejected" — and the honest UNKNOWN note for a possibly-sent
  *   mutation.
+ *
+ * The secondary-nav rows (iter-301 — the verdict's step 5 reconciled
+ * with inf-1 by the D-246 method):
+ * - the nav carries EXACTLY the two approved sections (Deployment |
+ *   About — real content only, never a feature directory: Appearance
+ *   is a named boundary, Advanced dissolves into the document);
+ * - Deployment is the default section; the About pane is absent
+ *   until asked;
+ * - switching to About mounts the About section with ONE identity
+ *   READ (app.status — no arguments, no session) and does NOT
+ *   re-read the settings document (the container owns the read);
+ * - the About identity renders the gateway's own document VERBATIM
+ *   (service/contract/exposure/auth + the full operation registry);
+ * - the DRAFT SURVIVES a section switch (the draft's owner is the
+ *   SURFACE, never the form section — the forbidden collapse: a
+ *   section switch dropping the user's REQUEST in flight);
+ * - the About lanes stay honest: TRANSPORT renders with the explicit
+ *   re-read note, never "rejected"; MISMATCH reports, never coerces;
+ * - a remounted About re-reads its evidence (the mounting
+ *   discipline), and the identity never polls.
  */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -276,5 +297,206 @@ describe("the Settings surface (Phase 3, row 3 — the CONFIG world)", () => {
     expect(banner.textContent).toContain("no blind retry");
     // The draft is preserved — the reconciliation is the user's.
     expect(screen.getByTestId("settings-dirty").textContent).toContain("DRAFT");
+  });
+});
+
+describe("the Settings secondary navigation (iter-301 — the verdict's step 5, reconciled with inf-1)", () => {
+  it("carries EXACTLY the two approved sections; Deployment is the default; About is absent until asked", async () => {
+    const fetchMock = vi.fn().mockResolvedValueOnce(json(fixture("backend_settings_read_ok")));
+    mountSettings(fetchMock);
+
+    const nav = screen.getByRole("navigation", { name: "Settings sections" });
+    const tabs = [...nav.querySelectorAll("button")].map((button) => button.textContent);
+    expect(tabs).toEqual(["Deployment", "About"]);
+
+    // Deployment is active (aria-current); the About pane is absent.
+    expect(screen.getByRole("button", { name: "Deployment" }).getAttribute("aria-current")).toBe("page");
+    expect(screen.getByRole("button", { name: "About" }).getAttribute("aria-current")).toBeNull();
+    expect(screen.queryByTestId("about-identity")).toBeNull();
+    // The Deployment document is live (the closed form).
+    await waitFor(() => {
+      expect(screen.getByLabelText(/llama_server_exe/i)).toBeTruthy();
+    });
+    // The mount read is the SETTINGS read only — About never dispatched.
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(callsOf(fetchMock)[0]!["operation"]).toBe("backend.settings");
+  });
+
+  it("switching to About: ONE identity READ (no arguments, no session); the settings document is NOT re-read; the identity renders VERBATIM", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(json(fixture("backend_settings_read_ok")))
+      .mockResolvedValueOnce(json(fixture("app_status_composition")));
+    mountSettings(fetchMock);
+
+    await waitFor(() => {
+      expect(screen.getByLabelText(/llama_server_exe/i)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "About" }));
+
+    const identity = await screen.findByTestId("about-identity");
+    expect(identity.textContent).toContain("canonsim-workbench-gateway");
+    expect(identity.textContent).toContain("canon_workbench_gateway@0.1");
+    expect(identity.textContent).toContain("LOOPBACK");
+    expect(identity.textContent).toContain("not required (loopback)");
+    // The full registry, verbatim: the honest count + the chips
+    // (the model work kinds ride run.start, never the registry).
+    expect(screen.getByTestId("about-operations-count").textContent).toBe("21 registered");
+    expect(identity.textContent).toContain("chat.send");
+    expect(identity.textContent).toContain("model.load");
+    expect(identity.textContent).toContain("observatory.read");
+
+    // The wire law: app.status carried NO arguments and NO session;
+    // the settings document was NOT re-read (the container's one
+    // mount read is still the only backend.settings dispatch).
+    const calls = callsOf(fetchMock);
+    const statusCalls = calls.filter((body) => body["operation"] === "app.status");
+    expect(statusCalls.length).toBe(1);
+    expect(statusCalls[0]!["arguments"]).toBeUndefined();
+    expect(statusCalls[0]!["session_id"]).toBeUndefined();
+    expect(calls.filter((body) => body["operation"] === "backend.settings").length).toBe(1);
+
+    // The Deployment form is unmounted (the mounting discipline —
+    // only the active section renders).
+    expect(screen.queryByLabelText(/llama_server_exe/i)).toBeNull();
+    // No polling: the identity does not change under the reader.
+    await new Promise((resolve) => setTimeout(resolve, 40));
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it("the DRAFT SURVIVES a section switch (the draft's owner is the SURFACE, never the form section)", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(json(fixture("backend_settings_read_ok")))
+      .mockResolvedValueOnce(json(fixture("app_status_composition")));
+    mountSettings(fetchMock);
+
+    await waitFor(() => {
+      expect(screen.getByLabelText(/no_webui/i)).toBeTruthy();
+    });
+
+    // The REQUEST in flight: a draft edit, unsaved.
+    fireEvent.click(screen.getByLabelText(/no_webui/i));
+    expect(screen.getByTestId("settings-dirty").textContent).toContain("DRAFT");
+
+    // Away to About and back.
+    fireEvent.click(screen.getByRole("button", { name: "About" }));
+    await screen.findByTestId("about-identity");
+    fireEvent.click(screen.getByRole("button", { name: "Deployment" }));
+
+    // The forbidden collapse, falsified: the section switch never
+    // dropped the user's REQUEST — the draft is intact, the save
+    // still armed.
+    await waitFor(() => {
+      expect(screen.getByTestId("settings-dirty").textContent).toContain("DRAFT");
+    });
+    expect((screen.getByLabelText(/no_webui/i) as HTMLInputElement).checked).toBe(false);
+    expect(screen.getByRole("button", { name: "save changes" }).hasAttribute("disabled")).toBe(false);
+
+    // The settings document was read exactly ONCE (the container's
+    // mount read; the section switches never re-read it) — and the
+    // identity read exactly once (one About mount).
+    expect(callsOf(fetchMock).filter((body) => body["operation"] === "backend.settings").length).toBe(1);
+    expect(callsOf(fetchMock).filter((body) => body["operation"] === "app.status").length).toBe(1);
+  });
+
+  it("a remounted About re-reads its evidence (the mounting discipline); the identity never polls", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(json(fixture("backend_settings_read_ok")))
+      .mockResolvedValueOnce(json(fixture("app_status_composition")))
+      .mockResolvedValueOnce(json(fixture("app_status_composition")));
+    mountSettings(fetchMock);
+
+    await waitFor(() => {
+      expect(screen.getByLabelText(/llama_server_exe/i)).toBeTruthy();
+    });
+
+    // About → Deployment → About: the second About mount re-reads
+    // (a remounted section re-reads its evidence — never a cache).
+    fireEvent.click(screen.getByRole("button", { name: "About" }));
+    await screen.findByTestId("about-identity");
+    fireEvent.click(screen.getByRole("button", { name: "Deployment" }));
+    await waitFor(() => {
+      expect(screen.getByLabelText(/llama_server_exe/i)).toBeTruthy();
+    });
+    fireEvent.click(screen.getByRole("button", { name: "About" }));
+    await screen.findByTestId("about-identity");
+
+    expect(callsOf(fetchMock).filter((body) => body["operation"] === "app.status").length).toBe(2);
+    // No polling: the count stays.
+    await new Promise((resolve) => setTimeout(resolve, 40));
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+  });
+
+  it("the About TRANSPORT lane: the honest re-read note, never 'rejected'", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(json(fixture("backend_settings_read_ok")))
+      .mockRejectedValueOnce(new TypeError("fetch failed"));
+    mountSettings(fetchMock);
+
+    await waitFor(() => {
+      expect(screen.getByLabelText(/llama_server_exe/i)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "About" }));
+
+    const banner = await screen.findByRole("alert");
+    expect(banner.textContent).toContain("identity read TRANSPORT");
+    expect(banner.textContent).toContain("the re-read is your explicit retry");
+    // G4: no auto-retry — the dispatch count stays.
+    await new Promise((resolve) => setTimeout(resolve, 40));
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+  });
+
+  it("the About MISMATCH lane: reported, never coerced (a fabricated identity document is a contract violation)", async () => {
+    // A response envelope whose result misses `service` — the
+    // strict schema rejects it at the client boundary (§3's law:
+    // unknown/missing keys are contract violations, not noise).
+    const mismatch = {
+      operation_id: "mismatch-probe",
+      result: {
+        contract: "canon_workbench_gateway@0.1",
+        exposure: "LOOPBACK",
+        auth_required: false,
+        operations: ["app.status"],
+      },
+      status: "OK",
+    };
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(json(fixture("backend_settings_read_ok")))
+      .mockResolvedValueOnce(json(mismatch));
+    mountSettings(fetchMock);
+
+    await waitFor(() => {
+      expect(screen.getByLabelText(/llama_server_exe/i)).toBeTruthy();
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "About" }));
+
+    const banner = await screen.findByRole("alert");
+    expect(banner.textContent).toContain("identity read CONTRACT MISMATCH");
+    expect(banner.textContent).toContain("reported, never coerced");
+    // The fabricated document never rendered.
+    expect(screen.queryByTestId("about-identity")).toBeNull();
+  });
+
+  it("the inf-1 pointer renders: the generation controls live in the Inference surface, never a Settings subsection", async () => {
+    const fetchMock = vi.fn().mockResolvedValueOnce(json(fixture("backend_settings_read_ok")));
+    mountSettings(fetchMock);
+
+    await waitFor(() => {
+      expect(screen.getByTestId("settings-inf1-note").textContent).toContain("Inference");
+    });
+    expect(screen.getByTestId("settings-inf1-note").textContent).toContain("Settings ≠ Inference Control");
+    // And no Inference subsection ever appears in the section nav.
+    const tabs = [
+      ...screen.getByRole("navigation", { name: "Settings sections" }).querySelectorAll("button"),
+    ].map((button) => button.textContent);
+    expect(tabs).not.toContain("Inference");
+    expect(tabs).not.toContain("Appearance");
   });
 });
