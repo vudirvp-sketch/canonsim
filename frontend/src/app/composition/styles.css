@@ -13,6 +13,9 @@
   /* The HISTORY channel (dual-read): a violet distinct from the LIVE
      teal accent and from the warn amber. */
   --history: #a78bfa;
+  /* The CONFIG channel (the Settings world): a calm blue distinct
+     from the LIVE teal, the HISTORY violet, and the warn amber. */
+  --config: #7aa2f7;
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   font-size: 14px;
 }
@@ -95,6 +98,12 @@ select {
 .tag-history {
   color: var(--history);
   border-color: var(--history);
+}
+/* The CONFIG world's own channel: the persisted user-configuration
+   surfaces (Settings) — distinct from LIVE and HISTORY. */
+.tag-config {
+  color: var(--config);
+  border-color: var(--config);
 }
 .freshness-history {
   color: var(--history);
@@ -461,4 +470,50 @@ select {
 }
 button.probe {
   border-color: #3d4a58;
+}
+
+/* The Settings surface (the CONFIG world) — the closed three-field
+   draft form + the read-only compiled command preview. */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.settings-field input[type="text"] {
+  width: 100%;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.86rem;
+}
+.settings-label {
+  font-size: 0.84rem;
+  color: var(--text);
+}
+.settings-label em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: 0.78rem;
+}
+.preview-block h3 {
+  margin: 6px 0 2px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.command-preview {
+  margin: 0;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  max-height: 180px;
+  overflow: auto;
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 0.78rem;
+  color: #b8c4cf;
+  white-space: pre-wrap;
+  word-break: break-all;
 }

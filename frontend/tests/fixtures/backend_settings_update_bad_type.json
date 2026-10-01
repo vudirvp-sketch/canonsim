@@ -1,0 +1,8 @@
+{
+  "operation_id": "2c854aa9cfc67d0cd733246434bd0b233727590a8338da21de391ea4e80247ec",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "backend.settings.update: no_webui 'yes' must be a bool"
+  },
+  "status": "REJECTED"
+}

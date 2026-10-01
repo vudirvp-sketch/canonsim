@@ -150,13 +150,23 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  window, the context strip's identity line, NO DATA /
                  NO MATCH / stale-cursor / TRANSPORT distinct, no
                  polling; 78 vitest + the 8/8 live smoke over a real
-                 CLI-generated run); the remaining slices
-                 (Chat/Inference, Settings) NOT backend-blocked —
-                 their ops already live at the app gateway's
-                 vocabulary (model.*/inference.*/chat.send/
-                 backend.settings — the iter-294 smoke's
-                 enumeration), each its own contract-mirror +
-                 surface iteration, owner-gated
+                 CLI-generated run); the third row LANDED (iter-296,
+                 the same delegated call: the SETTINGS ENTRY — the
+                 CONFIG world over the existing backend.settings
+                 READ + backend.settings.update closed partial
+                 MUTATION — §8's closure over a real persisted
+                 store: the draft a REQUEST never an effective-state
+                 claim, the Save ONLY the changed fields with a
+                 fresh idempotency key (G4), the returned document
+                 the new OBSERVED baseline, applies: next-spawn
+                 verbatim, the compiled command preview read-only,
+                 the verbatim DOMAIN_REJECTED lanes; 96 vitest + the
+                 15/15 live smoke + the live browser closure
+                 evidence); the remaining slice (Chat/Inference) NOT
+                 backend-blocked — its ops already live at the app
+                 gateway's vocabulary (model.*/inference.*/chat.send,
+                 the iter-294 smoke's enumeration), its own
+                 contract-mirror + surface iteration, owner-gated
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the
                  owner's call

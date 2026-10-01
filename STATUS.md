@@ -1,31 +1,31 @@
-Iteration: iter-295 (`observatory` — Phase 3's SECOND ROW, the
-  owner's «продолжай работы по фронтенду, над теми частями что
-  логичнее всего сейчас провести» repeated delegated call; R2
-  frontend-local): the OBSERVATORY ENTRY landed over the EXISTING
-  observatory.runs/observatory.read READ ops (zero new routes,
-  zero Python change) — the dual-read law §4's missing HISTORY
-  half: the contract mirror (contracts/validators/client — the
-  runs/window/row types, the CANON_VIEW/CANONICAL vocabularies,
-  strict zod with recursive-JSON from/to and KEY PRESENCE
-  enforced), `features/observatory/{useObservatory,Observatory}`
-  the HISTORY surface (the discovery scan with the per-run honest
-  degradation pair; ONE bounded window at a time — the event-id
-  cursor, next_after forward pagination that REPLACES the window,
-  never an accumulating buffer; the context strip's identity line
-  run/seed/pack/profile/authority/total; NO DATA ≠ NO MATCH ≠
-  stale-cursor ≠ TRANSPORT ≠ MISMATCH rendered distinct; G4 — the
-  re-read from the head the user's explicit decision; no polling:
-  durable evidence, every read explicit; the violet HISTORY
-  channel distinct from the LIVE teal); the root mounts the fifth
-  pane (the Trajectory/Observatory dual-read pair); 6 live-captured
-  fixtures (the CLI-generated run run_125_0, 56 events) + 8
-  integration + 11 contract rows; the LIVE smoke 8/8 against the
-  real app gateway (the listing, the head window 50/56
-  next_after=ev_0049, the forward window to the end, limit
-  honored, NO MATCH verbatim, stale cursor verbatim, the closed
-  argument set); the RU report at
-  docs/iterations/iter-295-frontendweb-report.md
-
+Iteration: iter-296 (`settings` — Phase 3's THIRD ROW, the owner's
+  «продолжай работы по фронтенду, над теми частями что логичнее всего
+  сейчас провести а не откладывать» delegated call; R2
+  frontend-local — of the two remaining surfaces the one whose FULL
+  honest proof band is reachable in this environment,
+  Chat/Inference needing a loaded llama.cpp model): the SETTINGS
+  ENTRY landed over the EXISTING backend.settings READ +
+  backend.settings.update closed partial MUTATION (zero new routes,
+  zero Python change) — the CONFIG world: the contract mirror
+  (contracts/validators/client — the closed three-field set,
+  applies: "next-spawn" as a literal, strict zod: a fourth field, a
+  wrong type, a foreign applies, a non-string preview are all
+  MISMATCH; backendSettings/backendSettingsUpdate — ONLY the
+  changed fields on the wire, a fresh idempotency key per explicit
+  attempt), `features/settings/{useSettings,Settings}` the §8
+  closure rendered as stages over a real PERSISTED store (the draft
+  a REQUEST — the DRAFT marker, never an effective-state claim; on
+  ACCEPTED the returned document the new OBSERVED baseline, the
+  draft reconciles to the SERVER's answer; the closed set's
+  verbatim DOMAIN_REJECTED lanes with the draft preserved; G4
+  no-retry; no polling — ONE mount READ; the blue CONFIG channel),
+  the root mounts the sixth pane; 5 live-captured fixtures + 11
+  contract rows + 7 integration tests; the LIVE smoke 15/15 against
+  the real app gateway (the READ + preview + managed_live, the
+  UPDATE accepted, the PERSISTED settings.json schema/2 evidence,
+  the verbatim rejections, the duplicate replay) + the live browser
+  closure evidence; the RU report at
+  docs/iterations/iter-296-frontendweb-report.md
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
@@ -34,34 +34,35 @@ Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   --check clean (Python 3.12.14, the env pin; zero Python change
   this iteration — the frontend stack: 78 vitest + tsc + build)
   ·
-Date: 2026-09-29 ·
+Date: 2026-10-01 ·
 Scope: frontend/src/api/gateway/{contracts.ts, validators.ts,
-  client.ts} (the observatory contract mirror),
-  frontend/src/features/observatory/{useObservatory.ts,
-  Observatory.tsx} (new), frontend/src/app/composition/{App.tsx,
-  styles.css} (the fifth pane), frontend/tests/fixtures/
-  {observatory_runs_ok, observatory_read_ok,
-  observatory_read_tail, observatory_read_no_match,
-  observatory_read_stale_cursor,
-  observatory_read_unknown_argument}.json (new, live-captured) +
-  manifest.json, frontend/tests/contract/validators.test.ts,
-  frontend/tests/integration/Observatory.test.tsx (new),
-  frontend/README.md, docs/frontendweb/
-  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map), docs/TASKS.md
-  (the ledger, iter-285 evicted), STATUS.md (the header),
-  worklog.md (iter-285 evicted),
-  docs/iterations/iter-295-frontendweb-report.md (new) — 15
+  client.ts} (the settings contract mirror),
+  frontend/src/features/settings/{useSettings.ts, Settings.tsx}
+  (new), frontend/src/app/composition/{App.tsx, styles.css} (the
+  sixth pane + the CONFIG channel), frontend/tests/fixtures/
+  {backend_settings_read_ok, backend_settings_update_ok,
+  backend_settings_update_unknown_field,
+  backend_settings_update_bad_type,
+  backend_settings_read_unknown_argument}.json (new,
+  live-captured) + manifest.json, frontend/tests/contract/
+  validators.test.ts (11 rows), frontend/tests/integration/
+  Settings.test.tsx (new, 7 tests), frontend/README.md,
+  docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
+  docs/TASKS.md (the ledger, iter-286 evicted), STATUS.md (the
+  header), worklog.md (iter-286 evicted),
+  docs/iterations/iter-296-frontendweb-report.md (new) — 16
   changed/created (R2 — frontend-local; zero Python change, zero
   canon change, the LOG untouched, zero corpus price)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
-  first row LANDED (iter-293); Phase 3's first TWO rows LANDED
+  first row LANDED (iter-293); Phase 3's first THREE rows LANDED
   (iter-294 the shell + the session lifecycle; iter-295 the
-  Observatory HISTORY entry — the dual-read law's second world);
-  the remaining Phase 3 surfaces (Chat/Inference, Settings) NOT
-  backend-blocked — their ops already live at the app gateway (the
-  iter-294 smoke's enumeration), each its own contract-mirror +
-  surface iteration; the standing boundaries: SSE/WebSocket,
-  Tauri, PWA — each its own admission. The world track: W8's
+  Observatory HISTORY entry — the dual-read law's second world;
+  iter-296 the Settings CONFIG entry — §8's closure over a real
+  persisted store); the remaining Phase 3 surface (Chat/Inference)
+  NOT backend-blocked — its ops already live at the app gateway (the
+  iter-294 smoke's enumeration), its own contract-mirror + surface
+  iteration; the standing boundaries: SSE/WebSocket, Tauri, PWA —
+  each its own admission. The world track: W8's
   remaining rows the owner's call. The ssi family COMPLETE except
   ssi-5, owner-gated.
 

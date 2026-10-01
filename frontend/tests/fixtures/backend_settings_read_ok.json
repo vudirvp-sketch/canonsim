@@ -1,0 +1,14 @@
+{
+  "operation_id": "aeefd325cf155ecd568ae253233c46f8b7b1ef660e88848a5a6a548933991b64",
+  "result": {
+    "applies": "next-spawn",
+    "command_preview": "llama-server -m <model.gguf> --host 127.0.0.1 --port 8080 -c 8192 -n -1 --keep 0 -t -1 -tb -1 -b 2048 -ub 512 -ngl 999 -fa on --fit on -mg 0 -sm layer --cache-type-k f16 --cache-type-v f16 --kv-offload --kv-unified --cache-ram 8192 --cache-reuse 0 --load-mode auto --warmup --repack --n-cpu-moe 0 --n-cpu-ffn 0 --temp 0.8 --top-k 40 --top-p 0.95 --min-p 0.05 --typical 1.0 --top-nsigma -1.0 --repeat-penalty 1.1 --repeat-last-n 64 --presence-penalty 0.0 --frequency-penalty 0.0 --dry-multiplier 0.0 --dry-base 1.75 --dry-allowed-length 2 --dry-penalty-last-n 64 --xtc-probability 0.0 --xtc-threshold 0.1 --mirostat 0 --mirostat-lr 0.1 --mirostat-ent 5.0 --dynatemp-range 0.0 --dynatemp-exp 1.0 --adaptive-target -1.0 --adaptive-decay 0.9 -s -1 --samplers penalties;dry;top_n_sigma;top_k;typ_p;top_p;min_p;xtc;temperature --jinja -rea auto --reasoning-format auto --reasoning-effort default --reasoning-budget -1 --prefill-assistant -np -1 -cb --no-context-shift --cache-prompt --no-log-jsonl --no-perf --rope-freq-base 0.0 --rope-freq-scale 0.0 --yarn-orig-ctx 0 --yarn-ext-factor -1.0 --yarn-attn-factor -1.0 --yarn-beta-fast -1.0 --yarn-beta-slow -1.0 -a <logical_name> --no-webui",
+    "managed_live": false,
+    "settings": {
+      "extra_args": "",
+      "llama_server_exe": "",
+      "no_webui": true
+    }
+  },
+  "status": "OK"
+}

@@ -1,7 +1,12 @@
 {
-  "captured": "2026-09-29, iter-289 (BASE_COMMIT e6789cf); observatory.* added iter-295 (BASE_COMMIT e9efe5b)",
+  "captured": "2026-09-29, iter-289 (BASE_COMMIT e6789cf); observatory.* added iter-295 (BASE_COMMIT e9efe5b); backend.settings.* added iter-296 (BASE_COMMIT cd1cdf6)",
   "fixtures": [
     "app_status_ok",
+    "backend_settings_read_ok",
+    "backend_settings_read_unknown_argument",
+    "backend_settings_update_bad_type",
+    "backend_settings_update_ok",
+    "backend_settings_update_unknown_field",
     "observatory_read_no_match",
     "observatory_read_ok",
     "observatory_read_stale_cursor",
@@ -19,5 +24,5 @@
     "session_get_ok"
   ],
   "gateway_schema_identity": "canon_workbench_gateway@0.1",
-  "source": "the live gateway code, in-process dispatch (parity-law byte form); the observatory fixtures over the day1_full playscript run run_125_0 (56 events, seed 125, tavern_pack@0.1) generated in-session by the CLI"
+  "source": "the live gateway code, in-process dispatch (parity-law byte form); the observatory fixtures over the day1_full playscript run run_125_0 (56 events, seed 125, tavern_pack@0.1) generated in-session by the CLI; the backend.settings fixtures over the real composition (throwaway USER_CONFIG paths, the store's own persisted schema/2 document as the live evidence)"
 }

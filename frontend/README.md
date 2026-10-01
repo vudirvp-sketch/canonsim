@@ -4,9 +4,10 @@ The ACTIVE frontend path (D-244: the owner's 2026-09-29 freeze+open
 call; the Redot tree deleted at D-245 — the owner's «удаляй redot»
 call). React + TypeScript + Vite, Web/PWA-first — the S0 walking
 skeleton over the existing loopback gateway, now grown into
-Phase 3's first two rows (the Shell + the Session lifecycle; the
-Observatory HISTORY entry — the dual-read law's second world). The
-law: `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
+Phase 3's first three rows (the Shell + the Session lifecycle; the
+Observatory HISTORY entry — the dual-read law's second world; the
+Settings CONFIG entry — the §8 closure over a real persisted store).
+The law: `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
 `docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md`).
 
 ## What this is (and is not)
@@ -78,7 +79,7 @@ sandbox-side capture script lives outside the repo per AGENTS §7
 Rule 9; the fixtures' shape is the contract, the capture is
 re-runnable from `tests/test_gateway.py`'s own patterns).
 
-## The surfaces (the Shell era — Phase 3, rows 1–2)
+## The surfaces (the Shell era — Phase 3, rows 1–3)
 
 The composition root mounts the **Shell** (`src/features/shell/`):
 the pane registry + the switch. **Only the active pane mounts** —
@@ -95,6 +96,7 @@ pane id is the shell's allowed local UI state (§7's allowance).
 | Load probe | drives real `session.attach` ops (the CAS loop) — the S0-4 measurement instrument |
 | Trajectory | the LIVE session tail (`session.events`): virtualized ≥10k rows (only the window mounts), the semantic-sequence cursor, event-id selection, RESYNC_REQUIRED handled honestly, the LIVE label (volatile tail, never durable history) |
 | Observatory | the HISTORY world (`observatory.runs`/`observatory.read`): the dual-read law's second half — the discovery scan, ONE bounded window at a time (the event-id cursor, `next_after` forward pagination that REPLACES the window, never an accumulating buffer), the context strip's identity line (seed/pack/CANON_VIEW/CANONICAL), event-id selection over the SAME document, NO DATA ≠ NO MATCH ≠ stale cursor ≠ TRANSPORT rendered distinct, no polling (durable evidence; every read explicit) |
+| Settings | the CONFIG world (`backend.settings`/`backend.settings.update`): the §8 closure over a real persisted store — the draft is a REQUEST (never `input.value === EFFECTIVE`), the Save sends ONLY the changed fields with a fresh idempotency key (G4), the returned document is the new OBSERVED baseline (the draft reconciles to the server's answer), `applies: next-spawn` rendered verbatim (a LIVE server keeps its flags), the compiled command preview read-only, the closed three-field set with verbatim DOMAIN_REJECTED lanes, no polling (one mount READ) |
 
 ## The laws this tree lives by
 
@@ -119,7 +121,8 @@ pane id is the shell's allowed local UI state (§7's allowance).
 SSE/WebSocket; the layout manifest / surface registry; the full
 Observatory analytical suite (compare/graphs/cross-run — the ENTRY
 row has landed: the runs scan + the bounded window); PWA offline
-packaging; Tauri 2; V5.2 polish; JSON-Schema-driven settings; the
+packaging; Tauri 2; V5.2 polish; JSON-Schema-driven settings (the
+Settings ENTRY row has landed over the store's own closed document); the
 CI rows (dependency-cruiser CI, the Playwright smoke — post-S0
 admissions; the architecture guard itself rides `npm test` and IS
 landed).

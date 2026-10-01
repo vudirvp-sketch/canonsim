@@ -1,0 +1,8 @@
+{
+  "operation_id": "ed427af157ec0ff286d2a02d2c71fe6751b51af66392795f654273fe4b7b1ece",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "backend.settings.update: unknown field(s) ['threads'] (closed set: ['llama_server_exe', 'no_webui', 'extra_args'])"
+  },
+  "status": "REJECTED"
+}

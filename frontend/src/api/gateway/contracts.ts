@@ -251,3 +251,53 @@ export interface ObservatoryReadResult {
     readonly next_after: string | null;
   };
 }
+
+// ----------------------------------------------------------------- settings
+
+/**
+ * The launch-settings DEPLOYMENT field set — the closed set
+ * (`workbench/application/settings.py`'s own `_FIELDS`, mirrored).
+ * The semantic generation controls live in the inference profile
+ * store (inf-1's Settings ≠ Inference Control split) — this mirror
+ * never invents a fourth field.
+ */
+export const SETTINGS_FIELDS = [
+  "llama_server_exe",
+  "no_webui",
+  "extra_args",
+] as const;
+export type SettingsField = (typeof SETTINGS_FIELDS)[number];
+
+/**
+ * The persisted settings document — the wire form of the store's
+ * `LaunchSettings`. `llama_server_exe` is a PREFERENCE ("" =
+ * auto-discovery — the composition root owns the resolution and the
+ * preview shows the effective command), `extra_args` the RAW
+ * compatibility/debug escape hatch (the law's §13 — duplicate flag
+ * ownership against the semantic layer rejects loudly at the compile
+ * step, never a silent merge).
+ */
+export interface LaunchSettingsDocument {
+  readonly llama_server_exe: string;
+  readonly no_webui: boolean;
+  readonly extra_args: string;
+}
+
+/**
+ * `backend.settings` / `backend.settings.update` result — the SAME
+ * document shape (the update returns the new current): the effective
+ * settings, the managed backend's liveness, the honest applies
+ * constant (the store's own law: a saved update is EFFECTIVE at the
+ * NEXT managed spawn — a LIVE server keeps its flags until
+ * unloaded), and the composition root's compiled command preview
+ * (the §18 EFFECTIVE display). `note` rides only when the managed
+ * server is live — rendered verbatim, never fabricated client-side.
+ */
+export interface BackendSettingsResult {
+  readonly settings: LaunchSettingsDocument;
+  readonly managed_live: boolean;
+  readonly applies: "next-spawn";
+  readonly command_preview: string | null;
+  /** rides only when the managed server is live (verbatim). */
+  readonly note?: string | undefined;
+}

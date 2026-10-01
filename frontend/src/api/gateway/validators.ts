@@ -207,6 +207,34 @@ export const observatoryReadResultSchema = z.strictObject({
   }),
 });
 
+// ----------------------------------------------------------------- settings
+
+/**
+ * The launch-settings document — the closed field set, each field its
+ * own closed type (the backend's `_validate_field` law, mirrored: a
+ * wrong type is rejected loud, never clamped; an unknown key is a
+ * contract mismatch, exactly as the store treats it).
+ */
+export const launchSettingsDocumentSchema = z.strictObject({
+  llama_server_exe: z.string(),
+  no_webui: z.boolean(),
+  extra_args: z.string(),
+});
+
+/**
+ * `backend.settings` / `backend.settings.update` result — the store's
+ * own document: settings + the managed liveness + the applies
+ * constant (a literal, never a client guess) + the composition's
+ * command preview (string | null); the note rides only when live.
+ */
+export const backendSettingsResultSchema = z.strictObject({
+  settings: launchSettingsDocumentSchema,
+  managed_live: z.boolean(),
+  applies: z.literal("next-spawn"),
+  command_preview: z.string().nullable(),
+  note: z.string().optional(),
+});
+
 /** The transport-level 4xx JSON error (the delivery half's shape). */
 export const transportErrorSchema = z.strictObject({
   error: nonEmptyString,

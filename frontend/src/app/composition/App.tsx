@@ -5,8 +5,9 @@
  * (the honest identity/freshness line), and the SHELL (Phase 3's
  * navigation surface) with the registered panes — the session
  * lifecycle (the lease closure), the gateway status, the S0-4 load
- * probe, and the Trajectory live tail. Every surface below this
- * root reaches the gateway ONLY through the typed client.
+ * probe, the Trajectory live tail, and the Observatory history (the
+ * dual-read pair). Every surface below this root reaches the gateway
+ * ONLY through the typed client.
  *
  * The op-driver (the S0-4 load probe) is also wired here: it
  * drives REAL `session.attach` ops against the gateway (the CAS
@@ -17,13 +18,17 @@
  *
  * The Observatory pane is session-free (its two READ ops are not
  * session-scoped) — the HISTORY world needs no lease, exactly as
- * the durable read-side's own law.
+ * the durable read-side's own law. The Settings pane is the CONFIG
+ * world: its READ is session-free, its closed partial UPDATE is
+ * session-scoped (the pane honestly disables the Save without a
+ * session — §8's closure over the store's own persisted document).
  */
 import { useCallback, useState } from "react";
 import type { ReactNode } from "react";
 
 import { GatewayStatus } from "../../features/gateway-status/GatewayStatus.tsx";
 import { Observatory } from "../../features/observatory/Observatory.tsx";
+import { Settings } from "../../features/settings/Settings.tsx";
 import { SessionLifecycle } from "../../features/session-lifecycle/SessionLifecycle.tsx";
 import { Shell } from "../../features/shell/Shell.tsx";
 import type { ShellPane } from "../../features/shell/Shell.tsx";
@@ -146,6 +151,12 @@ export function App(): ReactNode {
       label: "Observatory",
       hint: "the HISTORY world — bounded windows over committed logs; the dual-read pair of the Trajectory pane",
       element: <Observatory client={session.client} />,
+    },
+    {
+      id: "settings",
+      label: "Settings",
+      hint: "the launch-settings CONFIG world — the closed partial save, effective at the next spawn (§8's closure over a real store)",
+      element: <Settings client={session.client} sessionId={session.sessionId} />,
     },
   ];
 

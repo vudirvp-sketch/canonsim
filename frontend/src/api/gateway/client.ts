@@ -20,6 +20,8 @@
  */
 import type {
   AppStatusResult,
+  BackendSettingsResult,
+  LaunchSettingsDocument,
   ObservatoryReadResult,
   ObservatoryRunsResult,
   RequestEnvelope,
@@ -30,6 +32,7 @@ import type {
 } from "./contracts.ts";
 import {
   appStatusResultSchema,
+  backendSettingsResultSchema,
   observatoryReadResultSchema,
   observatoryRunsResultSchema,
   sessionAttachResultSchema,
@@ -237,6 +240,47 @@ export class GatewayClient {
       arguments: readArguments,
     });
     return narrow(dispatch, observatoryReadResultSchema, "observatory.read");
+  }
+
+  /**
+   * `backend.settings` — the launch-settings READ (session-free, no
+   * arguments): the effective DEPLOYMENT document + the managed
+   * backend's liveness + the composition's command preview. The
+   * store's own truth — the surface never infers effective state
+   * from widget values (§8).
+   */
+  async backendSettings(): Promise<DispatchResult<BackendSettingsResult>> {
+    const dispatch = await this.postOp({ operation: "backend.settings" });
+    return narrow(dispatch, backendSettingsResultSchema, "backend.settings");
+  }
+
+  /**
+   * `backend.settings.update` — the closed partial UPDATE (MUTATION,
+   * session-scoped): only the CHANGED fields ride the wire (absent
+   * fields unchanged — the store's own partial law); a fresh
+   * `client_request_id` per explicit attempt (G4 — no blind retry,
+   * the idempotency key is the caller's decision); the returned
+   * document is the new current (the caller's evidence, never a
+   * guess about the file). A domain violation (unknown field / wrong
+   * type) is a DELIVERED REJECTED with the observed cause — rendered
+   * verbatim, never coerced.
+   */
+  async backendSettingsUpdate(input: {
+    readonly sessionId: string;
+    readonly clientRequestId: string;
+    readonly changes: Partial<LaunchSettingsDocument>;
+  }): Promise<DispatchResult<BackendSettingsResult>> {
+    const dispatch = await this.postOp({
+      operation: "backend.settings.update",
+      arguments: input.changes as Record<string, unknown>,
+      session_id: input.sessionId,
+      client_request_id: input.clientRequestId,
+    });
+    return narrow(
+      dispatch,
+      backendSettingsResultSchema,
+      "backend.settings.update",
+    );
   }
 }
 

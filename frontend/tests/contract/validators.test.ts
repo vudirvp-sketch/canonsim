@@ -14,7 +14,9 @@ import { describe, expect, it } from "vitest";
 
 import {
   appStatusResultSchema,
+  backendSettingsResultSchema,
   eventEnvelopeSchema,
+  launchSettingsDocumentSchema,
   observatoryEventRowSchema,
   observatoryReadResultSchema,
   observatoryRunsResultSchema,
@@ -103,6 +105,28 @@ describe("the live-gateway fixtures validate (the OK family)", () => {
     // rides after=ev_0050, never a row index.
     expect(parsed.window.after).toBe("ev_0050");
   });
+
+  it("backend_settings_read_ok — the store's defaults document (the CONFIG world's entry)", () => {
+    const document = fixture("backend_settings_read_ok") as { result: unknown };
+    const parsed = backendSettingsResultSchema.parse(document.result);
+    expect(parsed.settings.llama_server_exe).toBe("");
+    expect(parsed.settings.no_webui).toBe(true);
+    expect(parsed.settings.extra_args).toBe("");
+    expect(parsed.managed_live).toBe(false);
+    expect(parsed.applies).toBe("next-spawn");
+    expect(typeof parsed.command_preview).toBe("string");
+    expect(parsed.command_preview).toContain("llama-server");
+  });
+
+  it("backend_settings_update_ok — the accepted partial becomes the new current", () => {
+    const document = fixture("backend_settings_update_ok") as { result: unknown };
+    const parsed = backendSettingsResultSchema.parse(document.result);
+    // The OBSERVED state after the save: the store's own answer, never
+    // the client's projection of its draft.
+    expect(parsed.settings.no_webui).toBe(false);
+    expect(parsed.settings.llama_server_exe).toBe("");
+    expect(parsed.applies).toBe("next-spawn");
+  });
 });
 
 describe("the live-gateway fixtures validate (the honest rejection family)", () => {
@@ -148,6 +172,30 @@ describe("the live-gateway fixtures validate (the honest rejection family)", () 
     const response = validateResponseDocument(fixture("observatory_read_unknown_argument"));
     expect(response.status).toBe("REJECTED");
     expect(response.rejection).toBe("DOMAIN_REJECTED");
+  });
+
+  it("backend_settings_update_unknown_field — the closed set's loud rejection", () => {
+    const response = validateResponseDocument(fixture("backend_settings_update_unknown_field"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("unknown field(s) ['threads']");
+    expect(String(response.result?.["reason"])).toContain(
+      "closed set: ['llama_server_exe', 'no_webui', 'extra_args']",
+    );
+  });
+
+  it("backend_settings_update_bad_type — the wrong type is never clamped", () => {
+    const response = validateResponseDocument(fixture("backend_settings_update_bad_type"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("no_webui 'yes' must be a bool");
+  });
+
+  it("backend_settings_read_unknown_argument — the READ takes no arguments", () => {
+    const response = validateResponseDocument(fixture("backend_settings_read_unknown_argument"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("takes no arguments");
   });
 });
 
@@ -267,5 +315,48 @@ describe("the closed-document law (corrupted variants are rejected)", () => {
     const corrupted = structuredClone(document);
     (corrupted.result["window"] as Record<string, unknown>)["next_after"] = 0;
     expect(() => observatoryReadResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a fourth settings field fails (the closed set is three)", () => {
+    const corrupted = {
+      llama_server_exe: "",
+      no_webui: true,
+      extra_args: "",
+      threads: 4,
+    };
+    expect(() => launchSettingsDocumentSchema.parse(corrupted)).toThrow();
+  });
+
+  it("a missing settings member fails (presence is the closed set's law)", () => {
+    const corrupted = { llama_server_exe: "", extra_args: "" };
+    expect(() => launchSettingsDocumentSchema.parse(corrupted)).toThrow();
+  });
+
+  it("a wrong-typed no_webui in the RESULT fails (never clamped client-side)", () => {
+    const document = fixture("backend_settings_read_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    (corrupted.result["settings"] as Record<string, unknown>)["no_webui"] = "yes";
+    expect(() => backendSettingsResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a foreign applies value fails (next-spawn is the store's only constant)", () => {
+    const document = fixture("backend_settings_read_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["applies"] = "immediate";
+    expect(() => backendSettingsResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a non-string non-null command_preview fails", () => {
+    const document = fixture("backend_settings_read_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["command_preview"] = 5;
+    expect(() => backendSettingsResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("an unknown top-level settings-document key fails", () => {
+    const document = fixture("backend_settings_read_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["preview"] = "a second preview key";
+    expect(() => backendSettingsResultSchema.parse(corrupted.result)).toThrow();
   });
 });
