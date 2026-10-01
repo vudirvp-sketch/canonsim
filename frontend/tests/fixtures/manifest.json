@@ -1,7 +1,13 @@
 {
-  "captured": "2026-09-29, iter-289 (BASE_COMMIT e6789cf)",
+  "captured": "2026-09-29, iter-289 (BASE_COMMIT e6789cf); observatory.* added iter-295 (BASE_COMMIT e9efe5b)",
   "fixtures": [
     "app_status_ok",
+    "observatory_read_no_match",
+    "observatory_read_ok",
+    "observatory_read_stale_cursor",
+    "observatory_read_tail",
+    "observatory_read_unknown_argument",
+    "observatory_runs_ok",
     "session_attach_ok",
     "session_attach_stale_revision",
     "session_create_duplicate_request",
@@ -13,5 +19,5 @@
     "session_get_ok"
   ],
   "gateway_schema_identity": "canon_workbench_gateway@0.1",
-  "source": "the live gateway code, in-process dispatch (parity-law byte form)"
+  "source": "the live gateway code, in-process dispatch (parity-law byte form); the observatory fixtures over the day1_full playscript run run_125_0 (56 events, seed 125, tavern_pack@0.1) generated in-session by the CLI"
 }

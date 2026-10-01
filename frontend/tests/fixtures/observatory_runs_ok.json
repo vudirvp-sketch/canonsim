@@ -1,0 +1,19 @@
+{
+  "operation_id": "aeefd325cf155ecd568ae253233c46f8b7b1ef660e88848a5a6a548933991b64",
+  "status": "OK",
+  "result": {
+    "runs_root": "logs",
+    "runs": [
+      {
+        "name": "run_125_0",
+        "size_bytes": 29364,
+        "header": {
+          "seed": 125,
+          "pack": "tavern_pack@0.1",
+          "schema_version": "0.3"
+        },
+        "error": null
+      }
+    ]
+  }
+}

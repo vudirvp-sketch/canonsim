@@ -13,8 +13,11 @@ import { z } from "zod";
 
 import {
   DISPATCH_STATUSES,
+  EVENT_IMPORTANCES,
   EVENT_TYPES,
   EXPOSURES,
+  OBSERVATORY_AUTHORITIES,
+  OBSERVATORY_PROFILES,
   REJECTIONS,
 } from "./contracts.ts";
 
@@ -122,6 +125,87 @@ export const sessionEventsResultSchema = z.union([
   replayShape,
   resyncShape,
 ]);
+
+// --------------------------------------------------------------- observatory
+
+/** Any JSON value — `from`/`to` are "any type" by the event schema's
+ * own law; the recursive form requires the KEY present (a missing
+ * member is a contract mismatch, never a silent undefined). */
+const jsonValue: z.ZodType<unknown> = z.lazy(() =>
+  z.union([
+    z.string(),
+    z.number(),
+    z.boolean(),
+    z.null(),
+    z.array(jsonValue),
+    z.record(z.string(), jsonValue),
+  ]),
+);
+
+/** One discovered run's header — the listing's cheap arm. */
+const observatoryRunHeaderSchema = z.strictObject({
+  seed: z.number(),
+  pack: nonEmptyString,
+  schema_version: nonEmptyString,
+});
+
+/** The discovery scan's entry — the honest degradation pair. */
+export const observatoryRunEntrySchema = z.strictObject({
+  name: nonEmptyString,
+  size_bytes: nonNegativeInt,
+  header: observatoryRunHeaderSchema.nullable(),
+  error: z.string().nullable(),
+});
+
+/** `observatory.runs` result — the discovery scan. */
+export const observatoryRunsResultSchema = z.strictObject({
+  runs_root: z.string(),
+  runs: z.array(observatoryRunEntrySchema),
+});
+
+/** One state change's bounded projection. */
+const observatoryStateChangeSchema = z.strictObject({
+  entity: nonEmptyString,
+  prop: nonEmptyString,
+  from: jsonValue,
+  to: jsonValue,
+});
+
+/** One committed event's bounded row — the HISTORY evidence. */
+export const observatoryEventRowSchema = z.strictObject({
+  id: nonEmptyString,
+  t: nonNegativeInt,
+  type: nonEmptyString,
+  actor: nonEmptyString,
+  kind: nonEmptyString,
+  importance: z.enum(EVENT_IMPORTANCES),
+  cause: z.string().nullable(),
+  authority: z.enum(OBSERVATORY_AUTHORITIES),
+  state_changes: z.array(observatoryStateChangeSchema),
+  knowledge_count: nonNegativeInt,
+  provenance: z.record(z.string(), z.unknown()),
+});
+
+/** `observatory.read` result — one run's bounded event window. */
+export const observatoryReadResultSchema = z.strictObject({
+  run: nonEmptyString,
+  header: z.strictObject({
+    schema_version: nonEmptyString,
+    seed: z.number(),
+    python: nonEmptyString,
+    commit: nonEmptyString,
+    pack: nonEmptyString,
+  }),
+  profile: z.enum(OBSERVATORY_PROFILES),
+  authority: z.enum(OBSERVATORY_AUTHORITIES),
+  total_events: nonNegativeInt,
+  window: z.strictObject({
+    after: z.string(),
+    limit: positiveInt,
+    events: z.array(observatoryEventRowSchema),
+    next_after: z.string().nullable(),
+  }),
+});
 
 /** The transport-level 4xx JSON error (the delivery half's shape). */
 export const transportErrorSchema = z.strictObject({

@@ -10,6 +10,9 @@
   --warn: #f0b541;
   --error: #f0716b;
   --synthetic: #7c8fa6;
+  /* The HISTORY channel (dual-read): a violet distinct from the LIVE
+     teal accent and from the warn amber. */
+  --history: #a78bfa;
   font-family: "Inter", "Segoe UI", system-ui, sans-serif;
   font-size: 14px;
 }
@@ -86,6 +89,16 @@ select {
 .tag-live {
   color: var(--accent);
   border-color: var(--accent);
+}
+/* The HISTORY world's own channel (dual-read §4): a distinct hue
+   from the LIVE teal — never a shared "data" color. */
+.tag-history {
+  color: var(--history);
+  border-color: var(--history);
+}
+.freshness-history {
+  color: var(--history);
+  border-color: var(--history);
 }
 
 .strip {
@@ -306,6 +319,116 @@ select {
 .probe-panel {
   border-top: 1px solid var(--line);
   padding-top: 8px;
+}
+
+/* The Observatory surface (the HISTORY world) — the runs discovery
+   list + the bounded event window's own table shape. */
+.runs-block h3 {
+  margin: 4px 0 2px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.runs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.runs-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.86rem;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+.runs-row:hover {
+  border-color: var(--history);
+}
+.runs-open {
+  padding: 2px 10px;
+  font-size: 0.8rem;
+}
+.runs-name {
+  font-family: "SFMono-Regular", Consolas, monospace;
+  color: var(--history);
+}
+.runs-meta {
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.runs-error {
+  color: var(--warn);
+}
+.orow-header {
+  display: grid;
+  grid-template-columns: 54px 168px 158px 1fr 64px 120px;
+  gap: 10px;
+  padding: 0 10px;
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.orow-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  max-height: 420px;
+  overflow: auto;
+}
+.orow {
+  display: grid;
+  grid-template-columns: 54px 168px 158px 1fr 64px 120px;
+  gap: 10px;
+  align-items: center;
+  padding: 3px 10px;
+  font-size: 0.84rem;
+  border-bottom: 1px solid #202832;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.orow:hover {
+  background: #232c37;
+}
+.orow-selected {
+  background: #2b2640;
+  outline: 1px solid var(--history);
+}
+.orow-high .cell-type,
+.orow-high .cell-kind {
+  color: var(--warn);
+}
+.cell-kind {
+  color: var(--text);
+}
+.cell-actor {
+  color: var(--muted);
+}
+.cell-imp {
+  font-size: 0.74rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-align: center;
+  color: var(--muted);
+}
+.cell-imp-high {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+.controls-note {
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 .probe-list {
   list-style: none;

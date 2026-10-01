@@ -147,3 +147,107 @@ export type SessionEventsResult =
       readonly retained_from: number;
       readonly snapshot: SessionDocument;
     };
+
+// --------------------------------------------------------------- observatory
+
+/**
+ * §14's authority axis as the read model serves it — the closed set
+ * the CANONICAL member owns today (the perception/assurance profiles
+ * are later rows over their own read models, never fabricated here).
+ */
+export const OBSERVATORY_AUTHORITIES = ["CANONICAL"] as const;
+export type ObservatoryAuthority = (typeof OBSERVATORY_AUTHORITIES)[number];
+
+/** The reading profile vocabulary — the canon member is the only
+ * honest value for a direct committed-log read. */
+export const OBSERVATORY_PROFILES = ["CANON_VIEW"] as const;
+export type ObservatoryProfile = (typeof OBSERVATORY_PROFILES)[number];
+
+/** The event importance vocabulary (`schemas/event.schema.json`'s own
+ * enum — the pack rule computes it, tune-1/D-059). */
+export const EVENT_IMPORTANCES = ["low", "medium", "high"] as const;
+export type EventImportance = (typeof EVENT_IMPORTANCES)[number];
+
+/** One discovered run's parsed header (or null — a corrupt first line
+ * never fails the whole listing; the per-run error rides alongside). */
+export interface ObservatoryRunHeader {
+  readonly seed: number;
+  readonly pack: string;
+  readonly schema_version: string;
+}
+
+/** One `*.jsonl` run in the discovery scan — the honest degradation
+ * pair: `header` XOR `error` (a blank/corrupt/unreadable first line
+ * is the run's own observed error, never a raised listing). */
+export interface ObservatoryRunEntry {
+  readonly name: string;
+  readonly size_bytes: number;
+  readonly header: ObservatoryRunHeader | null;
+  readonly error: string | null;
+}
+
+/** `observatory.runs` result — the discovery scan (READ, no arguments). */
+export interface ObservatoryRunsResult {
+  readonly runs_root: string;
+  readonly runs: readonly ObservatoryRunEntry[];
+}
+
+/** One state change's bounded projection — `from`/`to` are JSON
+ * values of any type (the event schema's own law). */
+export interface ObservatoryStateChange {
+  readonly entity: string;
+  readonly prop: string;
+  readonly from: unknown;
+  readonly to: unknown;
+}
+
+/**
+ * One committed event's bounded projection — the HISTORY row (LAW
+ * §5.1: the selection consumes this SAME document; no second
+ * per-event op). `id` is the semantic identity (the cursor AND the
+ * selection key — never a row index); `cause` is declared DATA, never
+ * an implied causal conclusion.
+ */
+export interface ObservatoryEventRow {
+  readonly id: string;
+  readonly t: number;
+  readonly type: string;
+  readonly actor: string;
+  readonly kind: string;
+  readonly importance: EventImportance;
+  readonly cause: string | null;
+  readonly authority: ObservatoryAuthority;
+  readonly state_changes: readonly ObservatoryStateChange[];
+  readonly knowledge_count: number;
+  readonly provenance: Readonly<Record<string, unknown>>;
+}
+
+/** The read window's committed-log header (content truths only). */
+export interface ObservatoryReadHeader {
+  readonly schema_version: string;
+  readonly seed: number;
+  readonly python: string;
+  readonly commit: string;
+  readonly pack: string;
+}
+
+/**
+ * `observatory.read` result — ONE run's bounded event window (READ,
+ * `{run, after?, limit?}`): the cursor is an event id (the semantic
+ * identity), the window is bounded (default 50, cap 200 — the
+ * backend's own ceiling), `next_after` is the forward pagination
+ * token or null at the run's end.
+ */
+export interface ObservatoryReadResult {
+  readonly run: string;
+  readonly header: ObservatoryReadHeader;
+  readonly profile: ObservatoryProfile;
+  readonly authority: ObservatoryAuthority;
+  readonly total_events: number;
+  readonly window: {
+    readonly after: string;
+    readonly limit: number;
+    readonly events: readonly ObservatoryEventRow[];
+    readonly next_after: string | null;
+  };
+}

@@ -1,0 +1,8 @@
+{
+  "operation_id": "f17f377d012f67ed9d883e79e38f07b6ed4028a248e9dcf998c1ff9b3be70e8b",
+  "status": "REJECTED",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "observatory.read: observatory: no run 'run_ghost' in the runs root (NO MATCH \u2014 the run does not exist)"
+  }
+}

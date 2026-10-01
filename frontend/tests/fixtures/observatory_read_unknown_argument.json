@@ -1,0 +1,8 @@
+{
+  "operation_id": "579fd505fb01a2c93a7d99534b3ea8a13476cc9f7c656fb4b963dd3328fa1620",
+  "status": "REJECTED",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "observatory.read: unknown argument(s) ['bogus'] (closed set: ['after', 'limit', 'run'])"
+  }
+}

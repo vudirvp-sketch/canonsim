@@ -141,12 +141,21 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  ACCEPTED/REJECTED -> EFFECTIVE -> OBSERVED, G4
                  no-retry, only the active pane mounts; 59 vitest +
                  tsc + build + the live smoke against the real
-                 gateway); the remaining slices (Chat/Inference,
-                 Settings, Observatory entry) NOT backend-blocked —
+                 gateway); the second row LANDED (iter-295, the same
+                 delegated call: the OBSERVATORY ENTRY — the HISTORY
+                 half of the dual-read law §4, over the existing
+                 observatory.runs/read READ ops — the discovery scan,
+                 ONE bounded window at a time with the event-id
+                 cursor + next_after pagination that REPLACES the
+                 window, the context strip's identity line, NO DATA /
+                 NO MATCH / stale-cursor / TRANSPORT distinct, no
+                 polling; 78 vitest + the 8/8 live smoke over a real
+                 CLI-generated run); the remaining slices
+                 (Chat/Inference, Settings) NOT backend-blocked —
                  their ops already live at the app gateway's
                  vocabulary (model.*/inference.*/chat.send/
-                 observatory.*/run.*/backend.settings — the iter-294
-                 smoke's enumeration), each its own contract-mirror +
+                 backend.settings — the iter-294 smoke's
+                 enumeration), each its own contract-mirror +
                  surface iteration, owner-gated
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the

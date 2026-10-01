@@ -1,63 +1,69 @@
-Iteration: iter-294 (`shell` — Phase 3's FIRST ROW, the owner's
-  «продолжай работы по фронтенду, над теми частями что логичнее всего
-  сейчас провести» delegated call; R2 frontend-local + KI#109's
-  recorded-deletion completion): the SHELL/NAV + the SESSION
-  LIFECYCLE surface landed over the EXISTING six gateway ops (zero
-  new routes, zero Python change): `features/shell/Shell.tsx` the
-  navigation surface (the pane registry, ONLY the active pane
-  mounts — boundedness; a switch drops the pane's local
-  presentation state, the gateway stays the truth),
-  `features/session-lifecycle/{useSessionLease,SessionLifecycle}`
-  the lease lifecycle (attach under the CAS revision guard, detach
-  under the lease guard; the honest closure REQUESTED ->
-  ACCEPTED/REJECTED -> EFFECTIVE -> OBSERVED, never collapsed; G4
-  no-retry — a fresh client_request_id per explicit attempt;
-  STALE_REVISION/LEASE_EXPIRED rendered verbatim with the gateway's
-  own reason); the composition root mounts the four panes (Session,
-  Gateway, Load probe, Trajectory); 5 new integration tests on the
-  live-captured fixtures; the LIVE smoke against the real gateway
-  (attach OK rev 1 lease 30s -> the OBSERVED re-read attached=true
-  -> the stale writer REJECTED STALE_REVISION verbatim -> detach OK
-  rev 2 -> the released-lease detach REJECTED LEASE_EXPIRED) — and
-  the discovery that the remaining Phase 3 surfaces (Chat/Inference,
-  Settings, Observatory entry) are NOT backend-blocked (the app
-  gateway's vocabulary already carries model.*/inference.*/
-  chat.send/observatory.*/run.*/backend.settings); the RU report at
-  docs/iterations/iter-294-frontendweb-report.md
+Iteration: iter-295 (`observatory` — Phase 3's SECOND ROW, the
+  owner's «продолжай работы по фронтенду, над теми частями что
+  логичнее всего сейчас провести» repeated delegated call; R2
+  frontend-local): the OBSERVATORY ENTRY landed over the EXISTING
+  observatory.runs/observatory.read READ ops (zero new routes,
+  zero Python change) — the dual-read law §4's missing HISTORY
+  half: the contract mirror (contracts/validators/client — the
+  runs/window/row types, the CANON_VIEW/CANONICAL vocabularies,
+  strict zod with recursive-JSON from/to and KEY PRESENCE
+  enforced), `features/observatory/{useObservatory,Observatory}`
+  the HISTORY surface (the discovery scan with the per-run honest
+  degradation pair; ONE bounded window at a time — the event-id
+  cursor, next_after forward pagination that REPLACES the window,
+  never an accumulating buffer; the context strip's identity line
+  run/seed/pack/profile/authority/total; NO DATA ≠ NO MATCH ≠
+  stale-cursor ≠ TRANSPORT ≠ MISMATCH rendered distinct; G4 — the
+  re-read from the head the user's explicit decision; no polling:
+  durable evidence, every read explicit; the violet HISTORY
+  channel distinct from the LIVE teal); the root mounts the fifth
+  pane (the Trajectory/Observatory dual-read pair); 6 live-captured
+  fixtures (the CLI-generated run run_125_0, 56 events) + 8
+  integration + 11 contract rows; the LIVE smoke 8/8 against the
+  real app gateway (the listing, the head window 50/56
+  next_after=ev_0049, the forward window to the end, limit
+  honored, NO MATCH verbatim, stale cursor verbatim, the closed
+  argument set); the RU report at
+  docs/iterations/iter-295-frontendweb-report.md
 
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2529 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; the standing suite
-  RESTORED after KI#109's completion — the fresh clone entered red;
-  zero Python change — the frontend stack: 59 vitest + tsc + build)
+  --check clean (Python 3.12.14, the env pin; zero Python change
+  this iteration — the frontend stack: 78 vitest + tsc + build)
   ·
 Date: 2026-09-29 ·
-Scope: frontend/src/features/shell/Shell.tsx (new),
-  frontend/src/features/session-lifecycle/{useSessionLease.ts,
-  SessionLifecycle.tsx} (new),
-  frontend/tests/integration/SessionLifecycle.test.tsx (new),
-  frontend/src/app/composition/{App.tsx, styles.css} (the root
-  mounts the Shell), frontend/README.md (the surfaces table),
-  docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
-  docs/TASKS.md (the ledger, iter-284 evicted), STATUS.md (KI#109),
-  worklog.md (iter-284 evicted),
-  docs/iterations/iter-294-frontendweb-report.md (new) + the 16
-  KI#109 deleted paths (the recorded D-245 list) — 11
-  changed/created + 16 deleted (R2 — frontend-local; zero Python
-  change, zero canon change, the LOG untouched, zero corpus price)
+Scope: frontend/src/api/gateway/{contracts.ts, validators.ts,
+  client.ts} (the observatory contract mirror),
+  frontend/src/features/observatory/{useObservatory.ts,
+  Observatory.tsx} (new), frontend/src/app/composition/{App.tsx,
+  styles.css} (the fifth pane), frontend/tests/fixtures/
+  {observatory_runs_ok, observatory_read_ok,
+  observatory_read_tail, observatory_read_no_match,
+  observatory_read_stale_cursor,
+  observatory_read_unknown_argument}.json (new, live-captured) +
+  manifest.json, frontend/tests/contract/validators.test.ts,
+  frontend/tests/integration/Observatory.test.tsx (new),
+  frontend/README.md, docs/frontendweb/
+  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map), docs/TASKS.md
+  (the ledger, iter-285 evicted), STATUS.md (the header),
+  worklog.md (iter-285 evicted),
+  docs/iterations/iter-295-frontendweb-report.md (new) — 15
+  changed/created (R2 — frontend-local; zero Python change, zero
+  canon change, the LOG untouched, zero corpus price)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
-  first row LANDED (iter-293); Phase 3's first row LANDED (iter-294
-  — the shell + the session lifecycle); the remaining Phase 3
-  surfaces (Chat/Inference, Settings, Observatory entry) NOT
+  first row LANDED (iter-293); Phase 3's first TWO rows LANDED
+  (iter-294 the shell + the session lifecycle; iter-295 the
+  Observatory HISTORY entry — the dual-read law's second world);
+  the remaining Phase 3 surfaces (Chat/Inference, Settings) NOT
   backend-blocked — their ops already live at the app gateway (the
   iter-294 smoke's enumeration), each its own contract-mirror +
-  surface iteration; the standing boundaries: SSE/WebSocket, Tauri,
-  PWA — each its own admission. The world track: W8's remaining
-  rows the owner's call. The ssi family COMPLETE except ssi-5,
-  owner-gated.
+  surface iteration; the standing boundaries: SSE/WebSocket,
+  Tauri, PWA — each its own admission. The world track: W8's
+  remaining rows the owner's call. The ssi family COMPLETE except
+  ssi-5, owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
@@ -116,7 +122,29 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-294 DONE: shell (Phase 3's first row, the owner's
+**iter-295 DONE: observatory (Phase 3's second row, the owner's
+  «продолжай работы по фронтенду» repeated call; R2
+  frontend-local).** The dual-read law's HISTORY half landed over
+  the existing observatory.runs/read READ ops: ONE bounded window
+  at a time (the event-id cursor, next_after pagination that
+  REPLACES the window), the context strip's identity line, NO
+  DATA/NO MATCH/stale-cursor/TRANSPORT distinct, no polling; 78
+  vitest + tsc + build + the live smoke 8/8 over a real
+  CLI-generated run (run_125_0, 56 events, the head window 50/56,
+  the forward window to the end, NO MATCH and the stale cursor
+  verbatim).
+Next: the owner's calls — the Phase 3 continuation rows (each its
+  own iteration: the Chat/Inference contract mirror + surface —
+  needs a loaded model for the full band, the Settings mirror —
+  the backend.settings family, both ops live at the app gateway),
+  the streaming admission (SSE — the backend gateway contract
+  first), the acceptance matrix, the DECISIONS collapse (36→30, the
+  owner's call), and the world track's parallel rows.
+Active KIs: KI#109 CLOSED iter-294 (the record above — deleted at
+  the next STATUS-touching iteration per §5). The suite green
+  (2529+1; the frontend 78). The owner's RU report:
+  docs/iterations/iter-295-frontendweb-report.md.
+iter-294 DONE: shell (Phase 3's first row, the owner's
   «продолжай работы по фронтенду, над теми частями что логичнее
   всего сейчас провести» call; R2 frontend-local + KI#109).** The
   SHELL/NAV + the SESSION LIFECYCLE surface over the existing six
@@ -125,20 +153,7 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
   STALE_REVISION/LEASE_EXPIRED verbatim; 59 vitest + tsc + build +
   the live smoke (attach/detach/stale/expired against the real
   gateway); KI#109 closed (the mirror's 16 missed D-245 deletions
-  re-executed, 2529+1 restored). DISCOVERED: the remaining Phase 3
-  surfaces are NOT backend-blocked — the app gateway's vocabulary
-  already carries model.*/inference.*/chat.send/observatory.*/
-  run.*/backend.settings.
-Next: the owner's calls — the Phase 3 continuation rows (each its
-  own iteration: the Chat/Inference contract mirror + surface, the
-  Settings mirror, the Observatory entry mirror — the ops are live,
-  the client mirrors are the work), the streaming admission (SSE —
-  the backend gateway contract first), the acceptance matrix, the
-  DECISIONS collapse (36→30, the owner's call), and the world
-  track's parallel rows.
-Active KIs: KI#109 CLOSED iter-294 (the record above). The suite
-  green (2529+1; the frontend 59). The owner's RU report:
-  docs/iterations/iter-294-frontendweb-report.md.
+  re-executed, 2529+1 restored).
 iter-292 DONE: methoddoc (the owner's tmpfiles v3 delivery + the
   «определись что перенимаем и куда» call; R0, doc-only).** D-246 —
   the design-research & mechanism-transfer method adopted as METHOD,

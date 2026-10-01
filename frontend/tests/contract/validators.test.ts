@@ -15,6 +15,9 @@ import { describe, expect, it } from "vitest";
 import {
   appStatusResultSchema,
   eventEnvelopeSchema,
+  observatoryEventRowSchema,
+  observatoryReadResultSchema,
+  observatoryRunsResultSchema,
   responseDocumentSchema,
   sessionDocumentSchema,
   sessionEventsResultSchema,
@@ -67,6 +70,39 @@ describe("the live-gateway fixtures validate (the OK family)", () => {
     expect(parsed).not.toHaveProperty("events");
     expect(parsed).toHaveProperty("resync", "RESYNC_REQUIRED");
   });
+
+  it("observatory_runs_ok — the discovery scan (the HISTORY world's entry)", () => {
+    const document = fixture("observatory_runs_ok") as { result: unknown };
+    const parsed = observatoryRunsResultSchema.parse(document.result);
+    expect(parsed.runs.length).toBe(1);
+    expect(parsed.runs[0]!.name).toBe("run_125_0");
+    expect(parsed.runs[0]!.header?.seed).toBe(125);
+    expect(parsed.runs[0]!.error).toBeNull();
+  });
+
+  it("observatory_read_ok — the first bounded window (50 of 56, next_after rides)", () => {
+    const document = fixture("observatory_read_ok") as { result: unknown };
+    const parsed = observatoryReadResultSchema.parse(document.result);
+    expect(parsed.profile).toBe("CANON_VIEW");
+    expect(parsed.authority).toBe("CANONICAL");
+    expect(parsed.total_events).toBe(56);
+    expect(parsed.window.after).toBe("");
+    expect(parsed.window.events.length).toBe(50);
+    expect(parsed.window.next_after).toBe("ev_0049");
+    for (const row of parsed.window.events) {
+      expect(() => observatoryEventRowSchema.parse(row)).not.toThrow();
+    }
+  });
+
+  it("observatory_read_tail — the terminal window (next_after null at the run's end)", () => {
+    const document = fixture("observatory_read_tail") as { result: unknown };
+    const parsed = observatoryReadResultSchema.parse(document.result);
+    expect(parsed.window.events.length).toBe(5);
+    expect(parsed.window.next_after).toBeNull();
+    // The event-id cursor is the semantic identity: the tail window
+    // rides after=ev_0050, never a row index.
+    expect(parsed.window.after).toBe("ev_0050");
+  });
 });
 
 describe("the live-gateway fixtures validate (the honest rejection family)", () => {
@@ -91,6 +127,25 @@ describe("the live-gateway fixtures validate (the honest rejection family)", () 
 
   it("session_events_unknown_argument", () => {
     const response = validateResponseDocument(fixture("session_events_unknown_argument"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+  });
+
+  it("observatory_read_no_match — the honest NO MATCH verdict", () => {
+    const response = validateResponseDocument(fixture("observatory_read_no_match"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(response.result?.["reason"]).toContain("NO MATCH");
+  });
+
+  it("observatory_read_stale_cursor — the loud stale-cursor verdict", () => {
+    const response = validateResponseDocument(fixture("observatory_read_stale_cursor"));
+    expect(response.status).toBe("REJECTED");
+    expect(String(response.result?.["reason"])).toContain("stale cursor");
+  });
+
+  it("observatory_read_unknown_argument", () => {
+    const response = validateResponseDocument(fixture("observatory_read_unknown_argument"));
     expect(response.status).toBe("REJECTED");
     expect(response.rejection).toBe("DOMAIN_REJECTED");
   });
@@ -169,5 +224,48 @@ describe("the closed-document law (corrupted variants are rejected)", () => {
     const corrupted = structuredClone(document);
     corrupted.result.events[0]!["extra"] = 1;
     expect(() => sessionEventsResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("an observatory row with an unknown key fails", () => {
+    const document = fixture("observatory_read_ok") as {
+      result: { window: { events: Array<Record<string, unknown>> } };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.window.events[0]!["extra"] = 1;
+    expect(() => observatoryReadResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a state change with a MISSING from/to member fails (presence is the law)", () => {
+    const document = fixture("observatory_read_ok") as {
+      result: { window: { events: Array<Record<string, unknown>> } };
+    };
+    const corrupted = structuredClone(document);
+    delete (corrupted.result.window.events[0]!["state_changes"] as Array<Record<string, unknown>>)[0]!["from"];
+    expect(() => observatoryReadResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a foreign importance enum member fails", () => {
+    const document = fixture("observatory_read_ok") as {
+      result: { window: { events: Array<Record<string, unknown>> } };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.window.events[0]!["importance"] = "CRITICAL";
+    expect(() => observatoryReadResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a foreign authority member fails (CANONICAL is the read model's only member)", () => {
+    const document = fixture("observatory_read_ok") as {
+      result: { window: { events: Array<Record<string, unknown>> } };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.window.events[0]!["authority"] = "DERIVED";
+    expect(() => observatoryReadResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a non-string next_after fails (null is the terminal form, never 0)", () => {
+    const document = fixture("observatory_read_tail") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    (corrupted.result["window"] as Record<string, unknown>)["next_after"] = 0;
+    expect(() => observatoryReadResultSchema.parse(corrupted.result)).toThrow();
   });
 });

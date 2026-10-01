@@ -20,6 +20,8 @@
  */
 import type {
   AppStatusResult,
+  ObservatoryReadResult,
+  ObservatoryRunsResult,
   RequestEnvelope,
   SessionAttachResult,
   SessionCreateResult,
@@ -28,6 +30,8 @@ import type {
 } from "./contracts.ts";
 import {
   appStatusResultSchema,
+  observatoryReadResultSchema,
+  observatoryRunsResultSchema,
   sessionAttachResultSchema,
   sessionCreateResultSchema,
   sessionDetachResultSchema,
@@ -194,6 +198,45 @@ export class GatewayClient {
       return { ...narrowed, result: classifyEvents(narrowed.result) };
     }
     return narrowed;
+  }
+
+  /**
+   * `observatory.runs` — the HISTORY discovery scan (READ, no
+   * arguments, no session): the committed runs over the canonical
+   * logs root. The durable world's entry point — never mixed with
+   * the LIVE session tail's cursors (the dual-read law, §4).
+   */
+  async observatoryRuns(): Promise<DispatchResult<ObservatoryRunsResult>> {
+    const dispatch = await this.postOp({ operation: "observatory.runs" });
+    return narrow(dispatch, observatoryRunsResultSchema, "observatory.runs");
+  }
+
+  /**
+   * `observatory.read` — ONE run's bounded HISTORY window (READ,
+   * `{run, after?, limit?}`). The cursor is an event id (the semantic
+   * identity — never a row index); the backend bounds the window
+   * (default 50, cap 200) and answers `next_after` for forward
+   * pagination. A domain violation (NO MATCH / stale cursor / corrupt
+   * log / bad limit) is a DELIVERED REJECTED with the observed cause —
+   * rendered verbatim, never fabricated into an empty window.
+   */
+  async observatoryRead(input: {
+    readonly run: string;
+    readonly after?: string;
+    readonly limit?: number;
+  }): Promise<DispatchResult<ObservatoryReadResult>> {
+    const readArguments: Record<string, unknown> = { run: input.run };
+    if (input.after !== undefined) {
+      readArguments["after"] = input.after;
+    }
+    if (input.limit !== undefined) {
+      readArguments["limit"] = input.limit;
+    }
+    const dispatch = await this.postOp({
+      operation: "observatory.read",
+      arguments: readArguments,
+    });
+    return narrow(dispatch, observatoryReadResultSchema, "observatory.read");
   }
 }
 

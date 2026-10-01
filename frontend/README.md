@@ -4,8 +4,9 @@ The ACTIVE frontend path (D-244: the owner's 2026-09-29 freeze+open
 call; the Redot tree deleted at D-245 — the owner's «удаляй redot»
 call). React + TypeScript + Vite, Web/PWA-first — the S0 walking
 skeleton over the existing loopback gateway, now grown into
-Phase 3's first row (the Shell + the Session lifecycle). The law:
-`docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
+Phase 3's first two rows (the Shell + the Session lifecycle; the
+Observatory HISTORY entry — the dual-read law's second world). The
+law: `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
 `docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md`).
 
 ## What this is (and is not)
@@ -77,7 +78,7 @@ sandbox-side capture script lives outside the repo per AGENTS §7
 Rule 9; the fixtures' shape is the contract, the capture is
 re-runnable from `tests/test_gateway.py`'s own patterns).
 
-## The surfaces (the Shell era — Phase 3, row 1)
+## The surfaces (the Shell era — Phase 3, rows 1–2)
 
 The composition root mounts the **Shell** (`src/features/shell/`):
 the pane registry + the switch. **Only the active pane mounts** —
@@ -93,6 +94,7 @@ pane id is the shell's allowed local UI state (§7's allowance).
 | Gateway (status) | the `app.status` round-trip + the honest rejection probes (DOMAIN_REJECTED / STALE_REVISION / DUPLICATE_REQUEST) — the DELIVERED/TRANSPORT/MISMATCH lanes never collapse |
 | Load probe | drives real `session.attach` ops (the CAS loop) — the S0-4 measurement instrument |
 | Trajectory | the LIVE session tail (`session.events`): virtualized ≥10k rows (only the window mounts), the semantic-sequence cursor, event-id selection, RESYNC_REQUIRED handled honestly, the LIVE label (volatile tail, never durable history) |
+| Observatory | the HISTORY world (`observatory.runs`/`observatory.read`): the dual-read law's second half — the discovery scan, ONE bounded window at a time (the event-id cursor, `next_after` forward pagination that REPLACES the window, never an accumulating buffer), the context strip's identity line (seed/pack/CANON_VIEW/CANONICAL), event-id selection over the SAME document, NO DATA ≠ NO MATCH ≠ stale cursor ≠ TRANSPORT rendered distinct, no polling (durable evidence; every read explicit) |
 
 ## The laws this tree lives by
 
@@ -102,7 +104,10 @@ pane id is the shell's allowed local UI state (§7's allowance).
 - The client auto-retries nothing (G4): UNKNOWN and transport
   ambiguity stay honest; a retry is an explicit user action.
 - The live tail buffer is bounded (50k rows): presentation window,
-  never a client-side log; durable history is the Observatory's.
+  never a client-side log; durable history is the Observatory's —
+  and the Observatory pane holds ONE bounded window (≤ the backend's
+  200-row cap) at a time, the forward pagination replacing it, the
+  event-id cursor never mixed with the LIVE sequence cursor.
 - One composition root (`src/app/composition/`); surfaces reach
   the gateway only through the typed client; the transport adapter
   is the only place `fetch` exists.
@@ -112,7 +117,9 @@ pane id is the shell's allowed local UI state (§7's allowance).
 ## Not in S0 (the gate list)
 
 SSE/WebSocket; the layout manifest / surface registry; the full
-Observatory suite; PWA offline packaging; Tauri 2; V5.2 polish;
-JSON-Schema-driven settings; the CI rows (dependency-cruiser CI,
-the Playwright smoke — post-S0 admissions; the architecture guard
-itself rides `npm test` and IS landed).
+Observatory analytical suite (compare/graphs/cross-run — the ENTRY
+row has landed: the runs scan + the bounded window); PWA offline
+packaging; Tauri 2; V5.2 polish; JSON-Schema-driven settings; the
+CI rows (dependency-cruiser CI, the Playwright smoke — post-S0
+admissions; the architecture guard itself rides `npm test` and IS
+landed).

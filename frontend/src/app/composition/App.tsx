@@ -14,11 +14,16 @@
  * observed ops/s — the honest "simulation/LLM active on the Python
  * side" stand-in for the load note (no llama.cpp model is present
  * in this environment; that band is declared, not faked).
+ *
+ * The Observatory pane is session-free (its two READ ops are not
+ * session-scoped) — the HISTORY world needs no lease, exactly as
+ * the durable read-side's own law.
  */
 import { useCallback, useState } from "react";
 import type { ReactNode } from "react";
 
 import { GatewayStatus } from "../../features/gateway-status/GatewayStatus.tsx";
+import { Observatory } from "../../features/observatory/Observatory.tsx";
 import { SessionLifecycle } from "../../features/session-lifecycle/SessionLifecycle.tsx";
 import { Shell } from "../../features/shell/Shell.tsx";
 import type { ShellPane } from "../../features/shell/Shell.tsx";
@@ -135,6 +140,12 @@ export function App(): ReactNode {
       label: "Trajectory",
       hint: "the LIVE session tail (virtualized) — volatile, never durable history",
       element: <Trajectory client={session.client} sessionId={session.sessionId} />,
+    },
+    {
+      id: "observatory",
+      label: "Observatory",
+      hint: "the HISTORY world — bounded windows over committed logs; the dual-read pair of the Trajectory pane",
+      element: <Observatory client={session.client} />,
     },
   ];
 

@@ -1,0 +1,1111 @@
+{
+  "operation_id": "5e817e073aacd28006439d0b8e77fbe014c3cce47beb6fa80127a0a61db80064",
+  "status": "OK",
+  "result": {
+    "run": "run_125_0",
+    "header": {
+      "schema_version": "0.3",
+      "seed": 125,
+      "python": "3.12.14",
+      "commit": "e9efe5b",
+      "pack": "tavern_pack@0.1"
+    },
+    "profile": "CANON_VIEW",
+    "authority": "CANONICAL",
+    "total_events": 56,
+    "window": {
+      "after": "",
+      "limit": 50,
+      "events": [
+        {
+          "id": "ev_0000",
+          "t": 0,
+          "type": "world_history",
+          "actor": "world",
+          "kind": "world_formed",
+          "importance": "medium",
+          "cause": null,
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "loc_tavern",
+              "prop": "terrain",
+              "from": null,
+              "to": "hills"
+            },
+            {
+              "entity": "loc_tavern",
+              "prop": "world_region",
+              "from": null,
+              "to": "region_01"
+            },
+            {
+              "entity": "loc_street",
+              "prop": "near_river",
+              "from": null,
+              "to": false
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "worldgen": true
+          }
+        },
+        {
+          "id": "ev_0001",
+          "t": 0,
+          "type": "world_history",
+          "actor": "world",
+          "kind": "pact_signed",
+          "importance": "medium",
+          "cause": "ev_0000",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "worldgen": true
+          }
+        },
+        {
+          "id": "ev_0002",
+          "t": 0,
+          "type": "world_history",
+          "actor": "world",
+          "kind": "war_fought",
+          "importance": "medium",
+          "cause": "ev_0001",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "worldgen": true
+          }
+        },
+        {
+          "id": "ev_0003",
+          "t": 0,
+          "type": "world_history",
+          "actor": "world",
+          "kind": "lineage_ended",
+          "importance": "medium",
+          "cause": "ev_0002",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "worldgen": true
+          }
+        },
+        {
+          "id": "ev_0004",
+          "t": 0,
+          "type": "world_history",
+          "actor": "world",
+          "kind": "settlement_founded",
+          "importance": "medium",
+          "cause": "ev_0002",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "worldgen": true
+          }
+        },
+        {
+          "id": "ev_0005",
+          "t": 4,
+          "type": "move",
+          "actor": "pc_01",
+          "kind": "move",
+          "importance": "low",
+          "cause": "ev_0004",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "pc_01",
+              "prop": "position",
+              "from": "loc_street",
+              "to": "loc_tavern"
+            }
+          ],
+          "knowledge_count": 12,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "intent_0000"
+          }
+        },
+        {
+          "id": "ev_0006",
+          "t": 6,
+          "type": "take",
+          "actor": "pc_01",
+          "kind": "take",
+          "importance": "medium",
+          "cause": "ev_0005",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "oil_lamp_01",
+              "prop": "carrier",
+              "from": null,
+              "to": "pc_01"
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "intent_0001"
+          }
+        },
+        {
+          "id": "ev_0007",
+          "t": 9,
+          "type": "pickpocket_failed",
+          "actor": "pc_01",
+          "kind": "pickpocket_failed",
+          "importance": "high",
+          "cause": "ev_0006",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 8,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "intent_0002"
+          }
+        },
+        {
+          "id": "ev_0008",
+          "t": 9,
+          "type": "suspicion_changed",
+          "actor": "npc_guard_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 0,
+              "to": 25
+            },
+            {
+              "entity": "pc_01",
+              "prop": "crime_status",
+              "from": "unknown",
+              "to": "suspect"
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0009",
+          "t": 9,
+          "type": "suspicion_changed",
+          "actor": "npc_barkeep_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_barkeep_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 0,
+              "to": 25
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0010",
+          "t": 9,
+          "type": "suspicion_changed",
+          "actor": "npc_drunk_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_drunk_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 0,
+              "to": 25
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0011",
+          "t": 9,
+          "type": "suspicion_changed",
+          "actor": "npc_maid_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_maid_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 0,
+              "to": 25
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0012",
+          "t": 9,
+          "type": "suspicion_changed",
+          "actor": "npc_guard_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 25,
+              "to": 35
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0013",
+          "t": 9,
+          "type": "suspicion_changed",
+          "actor": "npc_barkeep_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_barkeep_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 25,
+              "to": 35
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0014",
+          "t": 9,
+          "type": "suspicion_changed",
+          "actor": "npc_drunk_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_drunk_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 25,
+              "to": 35
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0015",
+          "t": 9,
+          "type": "suspicion_changed",
+          "actor": "npc_maid_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_maid_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 25,
+              "to": 35
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0016",
+          "t": 9,
+          "type": "leverage_gained",
+          "actor": "npc_guard_01",
+          "kind": "leverage_gained",
+          "importance": "medium",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0017",
+          "t": 9,
+          "type": "leverage_gained",
+          "actor": "npc_barkeep_01",
+          "kind": "leverage_gained",
+          "importance": "medium",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0018",
+          "t": 9,
+          "type": "leverage_gained",
+          "actor": "npc_drunk_01",
+          "kind": "leverage_gained",
+          "importance": "medium",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0019",
+          "t": 9,
+          "type": "leverage_gained",
+          "actor": "npc_maid_01",
+          "kind": "leverage_gained",
+          "importance": "medium",
+          "cause": "ev_0007",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0020",
+          "t": 12,
+          "type": "steal",
+          "actor": "pc_01",
+          "kind": "steal",
+          "importance": "medium",
+          "cause": "ev_0019",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "purse_01",
+              "prop": "carrier",
+              "from": "npc_guard_01",
+              "to": "pc_01"
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "intent_0003"
+          }
+        },
+        {
+          "id": "ev_0021",
+          "t": 360,
+          "type": "watch_change",
+          "actor": "world",
+          "kind": "watch_change",
+          "importance": "medium",
+          "cause": "ev_0020",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_01",
+              "prop": "position",
+              "from": "loc_tavern",
+              "to": "loc_guardroom"
+            },
+            {
+              "entity": "npc_guard_02",
+              "prop": "position",
+              "from": "loc_guardroom",
+              "to": "loc_tavern"
+            },
+            {
+              "entity": "npc_guard_01",
+              "prop": "status.fatigue",
+              "from": 10,
+              "to": 0
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0022",
+          "t": 360,
+          "type": "expectation_violation",
+          "actor": "npc_guard_01",
+          "kind": "expectation_violation",
+          "importance": "medium",
+          "cause": "ev_0020",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 1,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0023",
+          "t": 360,
+          "type": "suspicion_changed",
+          "actor": "npc_guard_01",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0022",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 35,
+              "to": 55
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0024",
+          "t": 360,
+          "type": "knowledge_transfer",
+          "actor": "npc_guard_01",
+          "kind": "knowledge_transfer",
+          "importance": "medium",
+          "cause": "ev_0021",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 4,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0025",
+          "t": 360,
+          "type": "suspicion_changed",
+          "actor": "npc_guard_02",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0024",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_02",
+              "prop": "pair.pc_01.suspicion",
+              "from": 0,
+              "to": 25
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0026",
+          "t": 360,
+          "type": "suspicion_changed",
+          "actor": "npc_guard_02",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0024",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_02",
+              "prop": "pair.pc_01.suspicion",
+              "from": 25,
+              "to": 35
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0027",
+          "t": 360,
+          "type": "suspicion_changed",
+          "actor": "npc_guard_02",
+          "kind": "suspicion_changed",
+          "importance": "low",
+          "cause": "ev_0024",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_02",
+              "prop": "pair.pc_01.suspicion",
+              "from": 35,
+              "to": 55
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0028",
+          "t": 360,
+          "type": "leverage_gained",
+          "actor": "npc_guard_02",
+          "kind": "leverage_gained",
+          "importance": "medium",
+          "cause": "ev_0024",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0029",
+          "t": 360,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0028",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "pc_01",
+              "prop": "status.fatigue",
+              "from": 0,
+              "to": 10
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0030",
+          "t": 360,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0029",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_02",
+              "prop": "status.fatigue",
+              "from": 0,
+              "to": 10
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0031",
+          "t": 360,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0030",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_barkeep_01",
+              "prop": "status.fatigue",
+              "from": 10,
+              "to": 20
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0032",
+          "t": 360,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0031",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_drunk_01",
+              "prop": "status.fatigue",
+              "from": 0,
+              "to": 10
+            },
+            {
+              "entity": "npc_drunk_01",
+              "prop": "status.intoxication",
+              "from": 50,
+              "to": 40
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0033",
+          "t": 360,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0032",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_maid_01",
+              "prop": "status.fatigue",
+              "from": 20,
+              "to": 30
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0034",
+          "t": 720,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0033",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "pc_01",
+              "prop": "status.fatigue",
+              "from": 10,
+              "to": 20
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0035",
+          "t": 720,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0034",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_02",
+              "prop": "status.fatigue",
+              "from": 10,
+              "to": 20
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0036",
+          "t": 720,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0035",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_barkeep_01",
+              "prop": "status.fatigue",
+              "from": 20,
+              "to": 30
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0037",
+          "t": 720,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0036",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_drunk_01",
+              "prop": "status.fatigue",
+              "from": 10,
+              "to": 20
+            },
+            {
+              "entity": "npc_drunk_01",
+              "prop": "status.intoxication",
+              "from": 40,
+              "to": 30
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0038",
+          "t": 720,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0037",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_maid_01",
+              "prop": "status.fatigue",
+              "from": 30,
+              "to": 40
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0039",
+          "t": 732,
+          "type": "wait",
+          "actor": "pc_01",
+          "kind": "wait",
+          "importance": "low",
+          "cause": "ev_0038",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "intent_0004"
+          }
+        },
+        {
+          "id": "ev_0040",
+          "t": 732,
+          "type": "intent_rejected",
+          "actor": "npc_drunk_01",
+          "kind": "intent_rejected",
+          "importance": "low",
+          "cause": "ev_0039",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "urgency_0000",
+            "assignment_tick": 720
+          }
+        },
+        {
+          "id": "ev_0041",
+          "t": 733,
+          "type": "look_around",
+          "actor": "npc_guard_02",
+          "kind": "look_around",
+          "importance": "low",
+          "cause": "ev_0040",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "loc_tavern",
+              "prop": "under_bench",
+              "from": null,
+              "to": "old_cloak"
+            },
+            {
+              "entity": "loc_tavern",
+              "prop": "behind_barrel",
+              "from": null,
+              "to": "lost_ring"
+            }
+          ],
+          "knowledge_count": 1,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "urgency_0004",
+            "assignment_tick": 360
+          }
+        },
+        {
+          "id": "ev_0042",
+          "t": 733,
+          "type": "look_around",
+          "actor": "npc_guard_02",
+          "kind": "look_around",
+          "importance": "low",
+          "cause": "ev_0041",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 1,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "urgency_0004",
+            "assignment_tick": 720
+          }
+        },
+        {
+          "id": "ev_0043",
+          "t": 734,
+          "type": "document_check_failed",
+          "actor": "npc_guard_02",
+          "kind": "document_check_failed",
+          "importance": "medium",
+          "cause": "ev_0042",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 4,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "director_0000",
+            "cause_hook": "possible_document_check_relief",
+            "assignment_tick": 360
+          }
+        },
+        {
+          "id": "ev_0044",
+          "t": 734,
+          "type": "crowd_wary",
+          "actor": "world",
+          "kind": "crowd_wary",
+          "importance": "medium",
+          "cause": "ev_0043",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_barkeep_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 35,
+              "to": 40
+            },
+            {
+              "entity": "npc_drunk_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 35,
+              "to": 40
+            },
+            {
+              "entity": "npc_maid_01",
+              "prop": "pair.pc_01.suspicion",
+              "from": 35,
+              "to": 40
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0045",
+          "t": 734,
+          "type": "move",
+          "actor": "pc_01",
+          "kind": "move",
+          "importance": "low",
+          "cause": "ev_0044",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "pc_01",
+              "prop": "position",
+              "from": "loc_tavern",
+              "to": "loc_backyard"
+            },
+            {
+              "entity": "oil_lamp_01",
+              "prop": "position",
+              "from": "loc_tavern",
+              "to": "loc_backyard"
+            },
+            {
+              "entity": "purse_01",
+              "prop": "position",
+              "from": "loc_tavern",
+              "to": "loc_backyard"
+            }
+          ],
+          "knowledge_count": 5,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "intent_0005"
+          }
+        },
+        {
+          "id": "ev_0046",
+          "t": 735,
+          "type": "drop_break",
+          "actor": "pc_01",
+          "kind": "drop_break",
+          "importance": "medium",
+          "cause": "ev_0045",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "oil_lamp_01",
+              "prop": "carrier",
+              "from": "pc_01",
+              "to": null
+            },
+            {
+              "entity": "oil_lamp_01",
+              "prop": "condition",
+              "from": null,
+              "to": "broken"
+            }
+          ],
+          "knowledge_count": 4,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "intent_0006"
+          }
+        },
+        {
+          "id": "ev_0047",
+          "t": 735,
+          "type": "fire_started",
+          "actor": "world",
+          "kind": "fire_started",
+          "importance": "high",
+          "cause": "ev_0046",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "loc_backyard",
+              "prop": "fire.back_wall",
+              "from": null,
+              "to": "burning"
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0048",
+          "t": 736,
+          "type": "fire_spread",
+          "actor": "world",
+          "kind": "fire_spread",
+          "importance": "high",
+          "cause": "ev_0047",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "loc_backyard",
+              "prop": "fire.woodpile",
+              "from": null,
+              "to": "burning"
+            }
+          ],
+          "knowledge_count": 1,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0049",
+          "t": 745,
+          "type": "smoke_rising",
+          "actor": "world",
+          "kind": "smoke_rising",
+          "importance": "medium",
+          "cause": "ev_0047",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "loc_backyard",
+              "prop": "smoke",
+              "from": null,
+              "to": true
+            }
+          ],
+          "knowledge_count": 1,
+          "provenance": {
+            "seed": 125
+          }
+        }
+      ],
+      "next_after": "ev_0049"
+    }
+  }
+}
