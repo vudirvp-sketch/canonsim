@@ -15,12 +15,19 @@ import { describe, expect, it } from "vitest";
 import {
   appStatusResultSchema,
   backendSettingsResultSchema,
+  chatCompletionResultSchema,
+  chatSendResultSchema,
   eventEnvelopeSchema,
+  inferenceReadResultSchema,
   launchSettingsDocumentSchema,
+  modelListResultSchema,
+  modelStatesResultSchema,
   observatoryEventRowSchema,
   observatoryReadResultSchema,
   observatoryRunsResultSchema,
   responseDocumentSchema,
+  runCancelResultSchema,
+  runDocumentSchema,
   sessionDocumentSchema,
   sessionEventsResultSchema,
   validateResponseDocument,
@@ -358,5 +365,182 @@ describe("the closed-document law (corrupted variants are rejected)", () => {
     const corrupted = structuredClone(document);
     corrupted.result["preview"] = "a second preview key";
     expect(() => backendSettingsResultSchema.parse(corrupted.result)).toThrow();
+  });
+});
+
+/* ------------------------------------------------------------------ */
+/* The Chat row's contract rows (iter-298)                             */
+/* ------------------------------------------------------------------ */
+
+describe("the chat-row fixtures validate (the OK family)", () => {
+  it("chat_send_ok — the admission identity (STARTING, never the completion)", () => {
+    const document = fixture("chat_send_ok");
+    expect(responseDocumentSchema.parse(document).status).toBe("OK");
+    const admission = chatSendResultSchema.parse(
+      (document as { result: unknown }).result,
+    );
+    expect(admission.state).toBe("STARTING");
+    expect(admission.work).toBe("chat.completion");
+    expect(admission.execution_id).toMatch(/^[0-9a-f]{16,}$/);
+  });
+
+  it("run_get_failed — the honest failure band (the envelope validates; the work's result stays null)", () => {
+    const document = fixture("run_get_failed");
+    expect(responseDocumentSchema.parse(document).status).toBe("OK");
+    const run = runDocumentSchema.parse((document as { result: unknown }).result);
+    expect(run.state).toBe("FAILED");
+    expect(run.terminal).toBe(true);
+    expect(run.result).toBeNull();
+    expect(run.failure_type).toBe("EngineError");
+    expect(run.diagnostics.length).toBeGreaterThan(0);
+    // The §10 freeze rides the run document as stringified pairs.
+    const keys = run.frozen_inputs.map((pair) => pair[0]);
+    expect(keys).toContain("messages");
+    expect(keys).toContain("temperature");
+  });
+
+  it("run_cancel_terminal — the observed outcome over the closed vocabulary", () => {
+    const document = fixture("run_cancel_terminal");
+    expect(responseDocumentSchema.parse(document).status).toBe("OK");
+    const cancel = runCancelResultSchema.parse((document as { result: unknown }).result);
+    expect(cancel.cancellation).toBe("FAILED_TO_CANCEL");
+  });
+
+  it("model_list_ok — the §20 scan's entry shape (a real on-disk file)", () => {
+    const document = fixture("model_list_ok");
+    const scan = modelListResultSchema.parse((document as { result: unknown }).result);
+    expect(scan.directory_state).toBe("OK");
+    expect(scan.models.length).toBe(1);
+    expect(scan.models[0]!.state).toBe("DISCOVERED");
+    expect(scan.models[0]!.content_digest).toBeNull();
+    expect(scan.models_root).toContain("models");
+  });
+
+  it("model_states_ok — the empty load-state view (nothing touched)", () => {
+    const document = fixture("model_states_ok");
+    const states = modelStatesResultSchema.parse((document as { result: unknown }).result);
+    expect(states.active).toBeNull();
+    expect(Object.keys(states.states).length).toBe(0);
+  });
+
+  it("inference_read_ok — the compact projection's slice validates over the FULL live document", () => {
+    const document = fixture("inference_read_ok");
+    const projection = inferenceReadResultSchema.parse((document as { result: unknown }).result);
+    expect(projection.profile_name).toBe("Baseline");
+    expect(projection.applies).toBe("next-spawn");
+    expect(projection.managed_live).toBe(false);
+    expect(projection.controls.length).toBeGreaterThan(10);
+    const temperature = projection.controls.find((control) => control.id === "sampling.temperature");
+    expect(temperature?.value).toBe(0.8);
+    expect(temperature?.state).toBe("EFFECTIVE");
+    expect(temperature?.source).toBe("profile");
+    // The vocabulary members ride the wire unconsumed (the loose
+    // form's own law — present on the captured document, never
+    // re-encoded by the mirror).
+    const raw = (document as { result: Record<string, unknown> }).result;
+    expect(raw["compiled_preview"]).toContain("llama-server");
+    expect(Array.isArray(raw["presets"])).toBe(true);
+  });
+});
+
+describe("the chat-row corrupted variants are REJECTED (the closed-document law)", () => {
+  it("a well-formed completion validates first (the reference shape)", () => {
+    expect(() =>
+      chatCompletionResultSchema.parse({
+        content: "x",
+        finish_reason: "stop",
+        backend: { model: null, build: null },
+        requested: { max_tokens: 512, temperature: null },
+        effective: { max_tokens: 512, temperature: 0.8 },
+      }),
+    ).not.toThrow();
+  });
+
+  it("a run document with a foreign EXECUTION state fails", () => {
+    const document = fixture("run_get_failed") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["state"] = "FINISHED";
+    expect(() => runDocumentSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a run document with a non-tuple frozen input fails", () => {
+    const document = fixture("run_get_failed") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["frozen_inputs"] = { messages: "[]" };
+    expect(() => runDocumentSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a run document missing the deadline block fails (presence is the law)", () => {
+    const document = fixture("run_get_failed") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    delete corrupted.result["deadline"];
+    expect(() => runDocumentSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a chat completion with a wrong-typed requested temperature fails", () => {
+    const completion = {
+      content: "hello",
+      finish_reason: "stop",
+      backend: { model: "m.gguf", build: "b1" },
+      requested: { max_tokens: 512, temperature: "0.8" },
+      effective: { max_tokens: 512, temperature: 0.8 },
+    };
+    expect(() => chatCompletionResultSchema.parse(completion)).toThrow();
+  });
+
+  it("a chat completion with an unknown member fails (the closed result shape)", () => {
+    const completion = {
+      content: "hello",
+      finish_reason: "stop",
+      backend: { model: "m.gguf", build: "b1" },
+      requested: { max_tokens: 512, temperature: null },
+      effective: { max_tokens: 512, temperature: 0.8 },
+      usage: { tokens: 12 },
+    };
+    expect(() => chatCompletionResultSchema.parse(completion)).toThrow();
+  });
+
+  it("a chat send answer with a fabricated state fails (STARTING is the admission's own constant)", () => {
+    const document = fixture("chat_send_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["state"] = "COMPLETED";
+    expect(() => chatSendResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a model.list entry with a foreign directory_state fails", () => {
+    const document = fixture("model_list_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["directory_state"] = "CORRUPT";
+    expect(() => modelListResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a model.states view with a foreign MODEL state fails", () => {
+    const document = fixture("model_states_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["states"] = { "m.gguf": "LOADINGGG" };
+    expect(() => modelStatesResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("an inference.read document missing the controls array fails (the consumed slice is closed)", () => {
+    const document = fixture("inference_read_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    delete corrupted.result["controls"];
+    expect(() => inferenceReadResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("an inference.read control entry missing its identity fails", () => {
+    const document = fixture("inference_read_ok") as {
+      result: { controls: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    delete corrupted.result.controls[0]!["id"];
+    expect(() => inferenceReadResultSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a run.cancel answer with a foreign outcome fails", () => {
+    const document = fixture("run_cancel_terminal") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    corrupted.result["cancellation"] = "CANCELED_ALREADY";
+    expect(() => runCancelResultSchema.parse(corrupted.result)).toThrow();
   });
 });

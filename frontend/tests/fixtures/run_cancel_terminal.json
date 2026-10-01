@@ -1,0 +1,11 @@
+{
+  "operation_id": "ac59e2b8bdfde819300eb4568aad2eecb6bf5b991531b3656a4f88c8e4101745",
+  "result": {
+    "cancellation": "FAILED_TO_CANCEL",
+    "execution_id": "83fbd6e9838945b4cbbcab43894f9e688d09dbc2fcb1be479456076e257c1a0e"
+  },
+  "revision": 0,
+  "sequence": 3,
+  "session_id": "8cf04348409ff7c1c01d6647f5cc6c40b7805858d2c4e04142632710a30160ab",
+  "status": "OK"
+}

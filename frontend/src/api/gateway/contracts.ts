@@ -301,3 +301,208 @@ export interface BackendSettingsResult {
   /** rides only when the managed server is live (verbatim). */
   readonly note?: string | undefined;
 }
+
+// -------------------------------------------------------------------- chat
+
+/** chat.send's message roles — the closed set (`backend.py`'s own
+ * CHAT_ROLES, mirrored). */
+export const CHAT_ROLES = ["system", "user", "assistant"] as const;
+export type ChatRole = (typeof CHAT_ROLES)[number];
+
+/** One chat message — exactly `{role, content}` (the closed shape
+ * the backend validates member-by-member). */
+export interface ChatMessage {
+  readonly role: ChatRole;
+  readonly content: string;
+}
+
+/** The run family's EXECUTION ladder — the closed state set
+ * (`lifecycles.py`'s EXECUTION_STATES, mirrored; the run registry
+ * owns the transitions, the client only ever renders the observed
+ * state — never a locally computed successor). */
+export const EXECUTION_STATES = [
+  "ADMITTED",
+  "STARTING",
+  "RUNNING",
+  "COMPLETING",
+  "COMPLETED",
+  "FAILED",
+  "CANCEL_REQUESTED",
+  "CANCELED",
+  "FAILED_TO_CANCEL",
+  "UNKNOWN",
+] as const;
+export type ExecutionState = (typeof EXECUTION_STATES)[number];
+
+/** `run.cancel`'s outcome vocabulary — the closed set (§12.3's
+ * truthful cancellation request: a REQUEST that may already be
+ * answered, already terminal, or past its last checkpoint). */
+export const CANCELLATION_OUTCOMES = [
+  "CANCEL_REQUESTED",
+  "CANCELED",
+  "FAILED_TO_CANCEL",
+] as const;
+export type CancellationOutcome = (typeof CANCELLATION_OUTCOMES)[number];
+
+/** `chat.send` result — the ADMISSION identity (§8's long-running
+ * law: identity returns immediately; `run.get` is the observation
+ * path, never a second blocking call). */
+export interface ChatSendResult {
+  readonly deadline_seconds: number;
+  readonly execution_id: string;
+  readonly state: "STARTING";
+  readonly work: "chat.completion";
+}
+
+/**
+ * The OBSERVED backend identity — the props probe's two honest
+ * shapes: the identity (model path + build) or the failed probe's
+ * "unavailable" note (a failed probe never kills the chat —
+ * readiness is not identity evidence).
+ */
+export type ChatBackendIdentity =
+  | { readonly model: string | null; readonly build: unknown }
+  | { readonly probe: "unavailable"; readonly detail: string };
+
+/**
+ * The chat completion's OBSERVED result (the run document's `result`
+ * at COMPLETED) — §19.1's REQUESTED/EFFECTIVE pair rides it: the
+ * `requested.temperature` is null where the call resolved through
+ * the profile's BASE layer (the honest provenance, never guessed).
+ */
+export interface ChatCompletionResult {
+  readonly content: string;
+  readonly finish_reason: string;
+  readonly backend: ChatBackendIdentity;
+  readonly requested: {
+    readonly max_tokens: number;
+    readonly temperature: number | null;
+  };
+  readonly effective: {
+    readonly max_tokens: number;
+    readonly temperature: number;
+  };
+}
+
+/**
+ * One run document — `run.get`'s result (the work-kind-GENERIC
+ * envelope: state/terminal/frozen inputs/deadline/progress/
+ * diagnostics/artifact). The `result` member's shape is the WORK's
+ * own (a chat completion, a model load, a digest) — the generic
+ * mirror keeps it a closed record here; the chat surface narrows
+ * chat.completion results through its own validator at the consumer.
+ */
+export interface RunDocument {
+  readonly execution_id: string;
+  readonly operation_id: string;
+  readonly work: string;
+  readonly state: ExecutionState;
+  readonly terminal: boolean;
+  readonly frozen_inputs: readonly (readonly [string, string])[];
+  readonly request_digest: string;
+  readonly deadline: {
+    readonly started_monotonic: number;
+    readonly deadline_monotonic: number;
+  };
+  readonly progress: Readonly<Record<string, unknown>> | null;
+  readonly result: Readonly<Record<string, unknown>> | null;
+  readonly failure_type: string | null;
+  readonly diagnostics: readonly string[];
+  readonly artifact: Readonly<Record<string, unknown>> | null;
+}
+
+/** `run.cancel` result — the cancellation REQUEST's observed outcome
+ * (never itself a completion; §3's seam law). */
+export interface RunCancelResult {
+  readonly execution_id: string;
+  readonly cancellation: CancellationOutcome;
+}
+
+// ------------------------------------------------------------------ models
+
+/** The Model ladder — the closed state set (`lifecycles.py`'s
+ * MODEL_STATES, mirrored; §8: a file on disk proves nothing,
+ * SELECTED must not claim LOADED). */
+export const MODEL_STATES = [
+  "DISCOVERED",
+  "VALIDATED",
+  "SELECTED",
+  "LOADING",
+  "LOADED",
+  "ACTIVE",
+  "UNLOADING",
+  "EVICTED",
+  "FAILED",
+] as const;
+export type ModelState = (typeof MODEL_STATES)[number];
+
+/** `model.list`'s directory classification — the closed pair
+ * (`models.py`'s own constants; the CORRUPT form raises, never
+ * rides the document). */
+export const MODEL_DIRECTORY_STATES = ["OK", "MISSING"] as const;
+export type ModelDirectoryState = (typeof MODEL_DIRECTORY_STATES)[number];
+
+/** One discovered model — the §20 scan's entry (the strong identity
+ * is null until computed; the cheap fingerprint is the screen,
+ * never the correctness identity). */
+export interface ModelListEntry {
+  readonly logical_name: string;
+  readonly location: string;
+  readonly size_bytes: number;
+  readonly mtime_ns: number;
+  readonly content_digest: string | null;
+  readonly state: "DISCOVERED";
+}
+
+/** `model.list` result — the discovery scan (READ, no arguments):
+ * the directory classification + the entries + the folder itself
+ * (the open-folder answer, never a local guess — wb-10). */
+export interface ModelListResult {
+  readonly directory_state: ModelDirectoryState;
+  readonly models: readonly ModelListEntry[];
+  readonly models_root: string;
+}
+
+/** `model.states` result — the Model-lifecycle read view (§11's
+ * MACHINE as the load-state owner serves it): the per-model states
+ * + the ACTIVE slot (at most one — the slot is single). */
+export interface ModelStatesResult {
+  readonly states: Readonly<Record<string, ModelState>>;
+  readonly active: string | null;
+}
+
+// --------------------------------------------------------------- inference
+
+/** The compact projection's own control slice — the fields the CHAT
+ * surface reads from one control document (id/value/state/source).
+ * The control vocabulary itself (85 controls, their flags, notes,
+ * forms) is backend-owned DATA — the UI never re-encodes it (§21.2:
+ * the data-driven law); the Inference surface's own row mirrors the
+ * depth IT consumes. */
+export interface InferenceControlSlice {
+  readonly id: string;
+  readonly value: unknown;
+  readonly state: string;
+  readonly source: string;
+}
+
+/**
+ * `inference.read` result — the Chat-side COMPACT projection
+ * (§21.2: Chat carries only a compact contextual projection of the
+ * inference state + the link; the full control depth lives in the
+ * Inference surface, never here). The validated members are exactly
+ * what the projection renders: the profile's name, the controls
+ * array (each entry's identity/effective value/state/source), the
+ * applies constant, the managed liveness, and the pinned ids. The
+ * document's REMAINING members (profile, presets, categories, the
+ * sampler chain, the compiled preview) ride the wire unconsumed —
+ * validating their depth would re-encode the vocabulary the law
+ * forbids the UI to own.
+ */
+export interface InferenceReadResult {
+  readonly profile_name: string;
+  readonly controls: readonly InferenceControlSlice[];
+  readonly applies: "next-spawn";
+  readonly managed_live: boolean;
+  readonly pinned: readonly string[];
+}

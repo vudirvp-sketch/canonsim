@@ -1,0 +1,8 @@
+{
+  "operation_id": "76cf1c473a2ffa34263ca8b41097f6e66741ff3aef53f3ae1e836570449d721a",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "chat.send: messages[0] must be exactly {role, content}"
+  },
+  "status": "REJECTED"
+}

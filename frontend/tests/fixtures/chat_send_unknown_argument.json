@@ -1,0 +1,8 @@
+{
+  "operation_id": "6675f516b9fc836695afad1bf2a1ae147625bf97a38dcbca0c4bdf7e351fbbd8",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "chat.send: unknown argument(s) ['top_p'] (closed set: ['deadline_seconds', 'messages', 'max_tokens', 'temperature'])"
+  },
+  "status": "REJECTED"
+}

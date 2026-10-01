@@ -21,10 +21,17 @@
 import type {
   AppStatusResult,
   BackendSettingsResult,
+  ChatMessage,
+  ChatSendResult,
+  InferenceReadResult,
   LaunchSettingsDocument,
+  ModelListResult,
+  ModelStatesResult,
   ObservatoryReadResult,
   ObservatoryRunsResult,
   RequestEnvelope,
+  RunCancelResult,
+  RunDocument,
   SessionAttachResult,
   SessionCreateResult,
   SessionDocument,
@@ -33,8 +40,14 @@ import type {
 import {
   appStatusResultSchema,
   backendSettingsResultSchema,
+  inferenceReadResultSchema,
+  modelListResultSchema,
+  modelStatesResultSchema,
   observatoryReadResultSchema,
   observatoryRunsResultSchema,
+  runCancelResultSchema,
+  runDocumentSchema,
+  chatSendResultSchema,
   sessionAttachResultSchema,
   sessionCreateResultSchema,
   sessionDetachResultSchema,
@@ -282,6 +295,152 @@ export class GatewayClient {
       "backend.settings.update",
     );
   }
+
+  /**
+   * `chat.send` — the chat completion's ADMISSION (MUTATION,
+   * session-scoped): the closed argument set is
+   * messages/temperature/max_tokens (an absent temperature resolves
+   * through the inference profile's BASE layer — the composition's
+   * own law, never a client guess); one dispatch with a FRESH
+   * idempotency key (G4 — no blind retry); the answer is the
+   * execution identity, never the completion itself (`run.get` is
+   * the observation path).
+   */
+  async chatSend(input: {
+    readonly sessionId: string;
+    readonly clientRequestId: string;
+    readonly messages: readonly ChatMessage[];
+    readonly temperature?: number;
+    readonly maxTokens?: number;
+  }): Promise<DispatchResult<ChatSendResult>> {
+    const chatArguments: Record<string, unknown> = {
+      messages: input.messages.map((message) => ({
+        role: message.role,
+        content: message.content,
+      })),
+    };
+    if (input.temperature !== undefined) {
+      chatArguments["temperature"] = input.temperature;
+    }
+    if (input.maxTokens !== undefined) {
+      chatArguments["max_tokens"] = input.maxTokens;
+    }
+    const dispatch = await this.postOp({
+      operation: "chat.send",
+      arguments: chatArguments,
+      session_id: input.sessionId,
+      client_request_id: input.clientRequestId,
+    });
+    return narrow(dispatch, chatSendResultSchema, "chat.send");
+  }
+
+  /**
+   * `run.get` — the execution's live/terminal document (READ,
+   * session-scoped, `{execution_id}`): the observation path for a
+   * chat completion (and every other run kind — the envelope is
+   * work-generic). The state/terminal pair is the registry's own
+   * truth; a domain violation (unknown execution / foreign session)
+   * is a DELIVERED REJECTED with the observed cause.
+   */
+  async runGet(input: {
+    readonly sessionId: string;
+    readonly executionId: string;
+  }): Promise<DispatchResult<RunDocument>> {
+    const dispatch = await this.postOp({
+      operation: "run.get",
+      arguments: { execution_id: input.executionId },
+      session_id: input.sessionId,
+    });
+    return narrow(dispatch, runDocumentSchema, "run.get");
+  }
+
+  /**
+   * `run.cancel` — the truthful cancellation REQUEST (MUTATION,
+   * session-scoped): the outcome is the observed answer
+   * (CANCEL_REQUESTED / CANCELED / FAILED_TO_CANCEL — a request is
+   * never a completion); a fresh idempotency key per explicit
+   * attempt (G4).
+   */
+  async runCancel(input: {
+    readonly sessionId: string;
+    readonly executionId: string;
+    readonly clientRequestId: string;
+  }): Promise<DispatchResult<RunCancelResult>> {
+    const dispatch = await this.postOp({
+      operation: "run.cancel",
+      arguments: { execution_id: input.executionId },
+      session_id: input.sessionId,
+      client_request_id: input.clientRequestId,
+    });
+    return narrow(dispatch, runCancelResultSchema, "run.cancel");
+  }
+
+  /**
+   * `model.list` — the §20 discovery scan (READ, session-free, no
+   * arguments): the directory classification + the discovered
+   * entries + the MODELS_ASSETS folder itself. The scan never
+   * validates the bytes — a discovered file proves nothing beyond
+   * its cheap fingerprint (§8's model-lifecycle law).
+   */
+  async modelList(): Promise<DispatchResult<ModelListResult>> {
+    const dispatch = await this.postOp({ operation: "model.list" });
+    return narrow(dispatch, modelListResultSchema, "model.list");
+  }
+
+  /**
+   * `model.states` — the Model-lifecycle read view (READ,
+   * session-free, no arguments): the per-model states over the
+   * closed MODEL ladder + the ACTIVE slot. The Chat header's model
+   * line reads THIS document — never a discovery guess (selected ≠
+   * loaded ≠ active).
+   */
+  async modelStates(): Promise<DispatchResult<ModelStatesResult>> {
+    const dispatch = await this.postOp({ operation: "model.states" });
+    return narrow(dispatch, modelStatesResultSchema, "model.states");
+  }
+
+  /**
+   * `inference.read` — the resolved inference-control document
+   * (READ, session-free, no arguments), consumed here ONLY as the
+   * Chat side's COMPACT contextual projection (§21.2: the profile's
+   * name, the per-control effective value/state/source, the applies
+   * constant, the managed liveness, the pinned ids). The full
+   * control depth stays behind the seam — the vocabulary is
+   * backend-owned data the UI never re-encodes; the Inference
+   * surface's own row mirrors the depth it consumes.
+   */
+  async inferenceRead(): Promise<DispatchResult<InferenceReadResult>> {
+    const dispatch = await this.postOp({ operation: "inference.read" });
+    const narrowed = narrow(
+      dispatch,
+      inferenceReadResultSchema,
+      "inference.read",
+    );
+    if (narrowed.transport === "DELIVERED" && narrowed.status === "OK") {
+      return { ...narrowed, result: projectInference(narrowed.result) };
+    }
+    return narrowed;
+  }
+}
+
+/** The compact projection at the seam: the consumed members pass
+ * through, the vocabulary members stay behind (the parsed loose
+ * document's index signature never leaks into a surface). */
+function projectInference(
+  parsed: z.infer<typeof inferenceReadResultSchema>,
+): InferenceReadResult {
+  return {
+    profile_name: parsed.profile_name,
+    controls: parsed.controls.map((control) => ({
+      id: control.id,
+      value: control.value,
+      state: control.state,
+      source: control.source,
+    })),
+    applies: parsed.applies,
+    managed_live: parsed.managed_live,
+    pinned: parsed.pinned,
+  };
 }
 
 /** REPLAY | RESYNC_REQUIRED — the discriminated form (§13). */

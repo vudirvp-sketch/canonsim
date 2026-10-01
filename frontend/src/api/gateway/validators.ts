@@ -12,10 +12,15 @@
 import { z } from "zod";
 
 import {
+  CANCELLATION_OUTCOMES,
+  CHAT_ROLES,
   DISPATCH_STATUSES,
   EVENT_IMPORTANCES,
   EVENT_TYPES,
   EXPOSURES,
+  EXECUTION_STATES,
+  MODEL_DIRECTORY_STATES,
+  MODEL_STATES,
   OBSERVATORY_AUTHORITIES,
   OBSERVATORY_PROFILES,
   REJECTIONS,
@@ -239,6 +244,159 @@ export const backendSettingsResultSchema = z.strictObject({
 export const transportErrorSchema = z.strictObject({
   error: nonEmptyString,
   path: z.string().optional(),
+});
+
+// -------------------------------------------------------------------- chat
+
+/** One chat message — exactly `{role, content}` over the closed role
+ * set (the backend's member-by-member validation, mirrored). */
+export const chatMessageSchema = z.strictObject({
+  role: z.enum(CHAT_ROLES),
+  content: nonEmptyString,
+});
+
+/** `chat.send` result — the admission identity (the state is
+ * STARTING at admission by the handler's own law; the observation
+ * path is run.get, never a second blocking call). */
+export const chatSendResultSchema = z.strictObject({
+  deadline_seconds: finiteFloat,
+  execution_id: nonEmptyString,
+  state: z.literal("STARTING"),
+  work: z.literal("chat.completion"),
+});
+
+/** The backend identity probe's two honest shapes (a failed probe is
+ * the honest "unavailable" note — never a fabricated identity). */
+const chatBackendIdentitySchema = z.union([
+  z.strictObject({
+    model: z.string().nullable(),
+    build: z.unknown(),
+  }),
+  z.strictObject({
+    probe: z.literal("unavailable"),
+    detail: nonEmptyString,
+  }),
+]);
+
+/**
+ * The chat completion's OBSERVED result — the run document's
+ * `result` at COMPLETED, narrowed at the chat consumer (the generic
+ * run mirror keeps `result` a closed record; THIS is the chat work's
+ * own closed shape): content + finish_reason + the backend identity
+ * + §19.1's REQUESTED/EFFECTIVE pair (requested.temperature is null
+ * where the call resolved through the profile's BASE layer).
+ */
+export const chatCompletionResultSchema = z.strictObject({
+  content: z.string(),
+  finish_reason: nonEmptyString,
+  backend: chatBackendIdentitySchema,
+  requested: z.strictObject({
+    max_tokens: z.number().int().min(1),
+    temperature: finiteFloat.nullable(),
+  }),
+  effective: z.strictObject({
+    max_tokens: z.number().int().min(1),
+    temperature: finiteFloat,
+  }),
+});
+
+/** One frozen input pair — `[key, value]` (the §10 freeze is a
+ * stringified pair list on the run document, by the registry's own
+ * serialization law). */
+const frozenInputSchema = z.tuple([nonEmptyString, z.string()]);
+
+/**
+ * One run document — `run.get`'s result, the work-kind-generic
+ * envelope. Strict over the envelope's own members (a renamed/typed
+ * member is a mismatch); `result` stays a closed record — the WORK
+ * narrows it (the chat completion through its own schema above).
+ */
+export const runDocumentSchema = z.strictObject({
+  execution_id: nonEmptyString,
+  operation_id: nonEmptyString,
+  work: nonEmptyString,
+  state: z.enum(EXECUTION_STATES),
+  terminal: z.boolean(),
+  frozen_inputs: z.array(frozenInputSchema),
+  request_digest: nonEmptyString,
+  deadline: z.strictObject({
+    started_monotonic: finiteFloat,
+    deadline_monotonic: finiteFloat,
+  }),
+  progress: z.record(z.string(), z.unknown()).nullable(),
+  result: z.record(z.string(), z.unknown()).nullable(),
+  failure_type: z.string().nullable(),
+  diagnostics: z.array(z.string()),
+  artifact: z.record(z.string(), z.unknown()).nullable(),
+});
+
+/** `run.cancel` result — the cancellation REQUEST's observed outcome
+ * (the closed §12.3 vocabulary; never itself a completion). */
+export const runCancelResultSchema = z.strictObject({
+  execution_id: nonEmptyString,
+  cancellation: z.enum(CANCELLATION_OUTCOMES),
+});
+
+// ------------------------------------------------------------------ models
+
+/** One discovered model — the §20 scan's entry (the state is
+ * DISCOVERED at discovery by the registry's own law). `mtime_ns`
+ * is a finite NUMBER, not `.int()`: the nanosecond epoch exceeds
+ * JS's safe-integer range (zod's own law) — the field is the
+ * registry's cheap FINGERPRINT, opaque to the client, never
+ * arithmetic. */
+export const modelListEntrySchema = z.strictObject({
+  logical_name: nonEmptyString,
+  location: z.string(),
+  size_bytes: nonNegativeInt,
+  mtime_ns: finiteFloat,
+  content_digest: z.string().nullable(),
+  state: z.literal("DISCOVERED"),
+});
+
+/** `model.list` result — the discovery scan over the MODELS_ASSETS
+ * root (the CORRUPT form raises at the backend, never rides the
+ * document — the closed pair is OK | MISSING). */
+export const modelListResultSchema = z.strictObject({
+  directory_state: z.enum(MODEL_DIRECTORY_STATES),
+  models: z.array(modelListEntrySchema),
+  models_root: z.string(),
+});
+
+/** `model.states` result — the Model-lifecycle read view: the
+ * per-model states over the closed MODEL ladder + the ACTIVE slot. */
+export const modelStatesResultSchema = z.strictObject({
+  states: z.record(z.string(), z.enum(MODEL_STATES)),
+  active: z.string().nullable(),
+});
+
+// --------------------------------------------------------------- inference
+
+/**
+ * `inference.read` result — the Chat-side COMPACT projection's own
+ * slice. The members the projection RENDERS are validated closed
+ * (profile_name / controls / applies / managed_live / pinned); the
+ * document's remaining members (profile, presets, categories, the
+ * sampler chain, the compiled preview) ride the wire UNCONSUMED —
+ * `looseObject` is the deliberate form, the data-driven law's own
+ * shape (§21.2: the UI never re-encodes the control vocabulary; the
+ * Inference surface's own row mirrors the depth IT consumes). Each
+ * control entry validates its identity/effective value/state/source
+ * — the fields the projection reads — and no more.
+ */
+export const inferenceReadResultSchema = z.looseObject({
+  profile_name: nonEmptyString,
+  controls: z.array(
+    z.looseObject({
+      id: nonEmptyString,
+      value: z.unknown(),
+      state: nonEmptyString,
+      source: nonEmptyString,
+    }),
+  ),
+  applies: z.literal("next-spawn"),
+  managed_live: z.boolean(),
+  pinned: z.array(nonEmptyString),
 });
 
 /** The validated response plus its dispatch outcome — the client's

@@ -173,11 +173,33 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  vitest rows + the guard's V1 raw-color scan, which
                  closed a standing 9-literal violation by tokenizing
                  it); 108 vitest + the live gateway/browser closure);
-                 the remaining slice (Chat/Inference) NOT
-                 backend-blocked — its ops already live at the app
-                 gateway's vocabulary (model.*/inference.*/chat.send,
-                 the iter-294 smoke's enumeration), its own
-                 contract-mirror + surface iteration, owner-gated
+                 the fourth row LANDED (iter-298, the owner's
+                 «продолжай работу над фронтендом» delegated call:
+                 the CHAT ENTRY — the conversation world over the
+                 existing chat.send/run.get/run.cancel run family +
+                 model.list/model.states (the header's model line)
+                 + inference.read (the §21.2 COMPACT contextual
+                 projection — the effective temperature the next
+                 send resolves from; the unconsumed control depth
+                 loose-typed, the vocabulary never re-encoded);
+                 header/viewport/composer/status, the transcript
+                 per-surface VOLATILE (chat history is not canon),
+                 the REQUESTED/EFFECTIVE provenance line per turn,
+                 the near-bottom follow law, the call-local
+                 overrides explicitly surfaced, the BOUNDED 700ms
+                 poll loop (dead at terminal/TRANSPORT/unmount, the
+                 re-poll explicit — G4), the messages-context rule
+                 (only admitted turns + completed replies ride the
+                 next send), every lane verbatim; Chat at the rail's
+                 HEAD; 139 vitest + the 16/16 live smoke + the live
+                 browser closure; the COMPLETED band owner-side — a
+                 loaded llama.cpp model, this environment closes the
+                 admission/FAILED/REJECTED lanes verbatim, never a
+                 fabricated completion); the next rows the owner's
+                 call: the Inference surface (inf-2's workspace
+                 regions), the Models surface (the family's load/
+                 unload/import mirror), the Settings secondary nav,
+                 each its own iteration
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the
                  owner's call

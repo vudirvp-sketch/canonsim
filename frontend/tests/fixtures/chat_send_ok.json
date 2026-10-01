@@ -1,0 +1,13 @@
+{
+  "operation_id": "cf7c85fbd1b4e7b47e8d6b44181b9f1a02bd020efc56323af14406454cce6691",
+  "result": {
+    "deadline_seconds": 120.0,
+    "execution_id": "83fbd6e9838945b4cbbcab43894f9e688d09dbc2fcb1be479456076e257c1a0e",
+    "state": "STARTING",
+    "work": "chat.completion"
+  },
+  "revision": 0,
+  "sequence": 2,
+  "session_id": "8cf04348409ff7c1c01d6647f5cc6c40b7805858d2c4e04142632710a30160ab",
+  "status": "OK"
+}

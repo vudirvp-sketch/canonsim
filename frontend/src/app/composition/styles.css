@@ -616,3 +616,97 @@ button.probe {
   white-space: pre-wrap;
   word-break: break-all;
 }
+
+/* The Chat surface (the conversation world) — the bounded viewport
+   (the near-bottom follow law rides it), the turn bubbles (neutral
+   tokens only: the chat carries no second accent — the channel hues
+   are the dual-read STATE classes), and the composer. */
+.chat-viewport {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  min-height: 220px;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chat-turn {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.chat-bubble {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 10px;
+  max-width: 86%;
+}
+.chat-bubble-user {
+  align-self: flex-end;
+  background: var(--surface);
+  border-right: 2px solid var(--border-strong);
+}
+.chat-bubble-assistant {
+  align-self: flex-start;
+  background: var(--surface);
+  border-left: 2px solid var(--border-strong);
+}
+.chat-role {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+}
+.chat-content {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.chat-provenance {
+  margin: 6px 0 0;
+  font-size: 0.74rem;
+  color: var(--muted);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+.chat-lane {
+  font-size: 0.84rem;
+}
+.chat-lane .empty {
+  margin: 2px 0;
+}
+.chat-repoll {
+  margin-left: 10px;
+  font-size: 0.78rem;
+}
+.chat-composer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chat-composer textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 64px;
+  font: inherit;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.chat-overrides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 860px) {
+  .chat-overrides {
+    grid-template-columns: 1fr;
+  }
+}

@@ -191,10 +191,13 @@ const APP_OPS: Record<string, unknown> = {
   "backend.settings": fixture("backend_settings_read_ok"),
   "observatory.runs": fixture("observatory_runs_ok"),
   "observatory.read": fixture("observatory_read_ok"),
+  "model.list": fixture("model_list_ok"),
+  "model.states": fixture("model_states_ok"),
+  "inference.read": fixture("inference_read_ok"),
 };
 
 describe("the composition root's registry split (the IA acceptance floor)", () => {
-  it("the rail carries exactly the approved routes — diagnostics never appear as rail peers", async () => {
+  it("the rail carries exactly the approved routes — Chat at the HEAD; diagnostics never appear as rail peers", async () => {
     const fetchMock = gatewayRouter(APP_OPS);
     vi.stubGlobal("fetch", fetchMock);
     render(<App />);
@@ -209,7 +212,7 @@ describe("the composition root's registry split (the IA acceptance floor)", () =
     const labels = within(rail)
       .getAllByRole("button")
       .map((button) => button.textContent);
-    expect(labels).toEqual(["Trajectory", "Observatory", "Settings", "Diagnostics"]);
+    expect(labels).toEqual(["Chat", "Trajectory", "Observatory", "Settings", "Diagnostics"]);
     // The proof instruments are NOT rail items.
     for (const forbidden of ["Session lifecycle", "Gateway", "Load probe"]) {
       expect(within(rail).queryByRole("button", { name: forbidden })).toBeNull();
@@ -273,6 +276,30 @@ describe("the composition root's registry split (the IA acceptance floor)", () =
     });
     await waitFor(() => {
       expect(callsOf(fetchMock).some((body) => body["operation"] === "backend.settings")).toBe(true);
+    });
+    // Exactly one workspace the whole time.
+    expect(screen.getAllByTestId("active-workspace")).toHaveLength(1);
+  });
+
+  it("the Chat product route mounts its surface (the conversation world's three context READs)", async () => {
+    const fetchMock = gatewayRouter(APP_OPS);
+    vi.stubGlobal("fetch", fetchMock);
+    render(<App />);
+
+    await waitFor(() => {
+      // session.create answered: the id is a real id, never "creating…" / "—".
+      expect(screen.getByTestId("session-id").textContent).toMatch(/^[0-9a-f]{16,}$/);
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Chat" }));
+    await waitFor(() => {
+      expect(screen.getByRole("region", { name: /Chat — the conversation world/i })).toBeTruthy();
+    });
+    await waitFor(() => {
+      // The header's three session-free context READs dispatched.
+      expect(callsOf(fetchMock).some((body) => body["operation"] === "model.list")).toBe(true);
+      expect(callsOf(fetchMock).some((body) => body["operation"] === "model.states")).toBe(true);
+      expect(callsOf(fetchMock).some((body) => body["operation"] === "inference.read")).toBe(true);
     });
     // Exactly one workspace the whole time.
     expect(screen.getAllByTestId("active-workspace")).toHaveLength(1);
