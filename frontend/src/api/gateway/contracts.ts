@@ -506,3 +506,154 @@ export interface InferenceReadResult {
   readonly managed_live: boolean;
   readonly pinned: readonly string[];
 }
+
+// --------------------------------------------- inference (the workspace row)
+
+/**
+ * The resolved-state vocabulary — the closed set (`resolver.py`'s own
+ * STATES, mirrored; LLAMA_CPP_INFERENCE_CONTROL_LAW §7 owns the
+ * semantics: configured-but-ineffective controls stay VISIBLE with
+ * their reason, never hidden).
+ */
+export const INFERENCE_STATES = [
+  "EFFECTIVE",
+  "AUTO",
+  "INACTIVE",
+  "INEFFECTIVE",
+  "CONFLICT",
+  "RISK",
+  "EXPERIMENTAL",
+  "UNCLASSIFIED",
+  "LEGACY",
+  "REMOVED",
+] as const;
+export type InferenceState = (typeof INFERENCE_STATES)[number];
+
+/** The control kinds — the closed minimum set (the LAW §3's own). */
+export const INFERENCE_KINDS = ["value", "mode", "toggle", "chain", "display"] as const;
+export type InferenceKind = (typeof INFERENCE_KINDS)[number];
+
+/** The editor's value types — the closed set (`library.py`'s own;
+ * the DATA-DRIVEN law: the editors build over the control's own
+ * value_type/forms/limits metadata, the UI never re-encodes the
+ * vocabulary). */
+export const INFERENCE_VALUE_TYPES = ["int", "float", "bool", "enum", "text", "gpu_layers"] as const;
+export type InferenceValueType = (typeof INFERENCE_VALUE_TYPES)[number];
+
+/** The scope model — the closed set (the LAW §5's own). */
+export const INFERENCE_SCOPES = ["spawn", "request", "spawn+request"] as const;
+export type InferenceScope = (typeof INFERENCE_SCOPES)[number];
+
+/**
+ * One control's RESOLVED document — the resolver's own field set
+ * (`resolve()`'s control_document, mirrored closed). `value`,
+ * `baseline`, and `upstream_default` stay `unknown`: they are JSON
+ * scalars whose per-control forms are backend-owned DATA (§21.2's
+ * data-driven law) — the editors dispatch over the metadata fields,
+ * never over a re-encoded value vocabulary.
+ */
+export interface InferenceControlDocument {
+  readonly id: string;
+  readonly name: string;
+  readonly category: string;
+  readonly kind: InferenceKind;
+  readonly scope: InferenceScope;
+  readonly flag: string;
+  readonly field: string;
+  readonly value: unknown;
+  readonly value_doc: string;
+  readonly value_type: InferenceValueType;
+  readonly forms: readonly string[];
+  readonly minimum: number | null;
+  readonly maximum: number | null;
+  readonly step: number;
+  readonly advanced: boolean;
+  readonly source: string;
+  readonly state: InferenceState;
+  readonly reasons: readonly string[];
+  readonly baseline: unknown;
+  readonly upstream_default: unknown;
+  readonly notes: readonly string[];
+}
+
+/** One sampler-chain member's resolved document (the LAW §11: the
+ * ordered first-class object; membership and value are SEPARATE
+ * concerns — `enabled=false` removes the member from the emitted
+ * chain while its value family stays configured). */
+export interface InferenceChainMember {
+  readonly id: string;
+  readonly name: string;
+  readonly enabled: boolean;
+  readonly order: number;
+  readonly value: unknown;
+  readonly state: InferenceState;
+  readonly reasons: readonly string[];
+}
+
+/** One preset's transparent document (the LAW §14: a concrete
+ * STARTING POINT applying as a plain update — the `values` keys are
+ * the backend's own field vocabulary, loose by the data-driven law). */
+export interface InferencePreset {
+  readonly id: string;
+  readonly name: string;
+  readonly description: string;
+  readonly values: Readonly<Record<string, unknown>>;
+}
+
+/** One category's honest count (the LAW §16: every family its own
+ * category, never one "advanced parameters" bucket). */
+export interface InferenceCategory {
+  readonly id: string;
+  readonly controls: number;
+}
+
+/**
+ * The chain membership on the wire — the profile document's own
+ * `{id, enabled}` form (the whole 9-member document; the LAW §11:
+ * the chain validation accepts only the WHOLE document, a partial
+ * edit refuses loud).
+ */
+export interface InferenceProfileChainItem {
+  readonly id: string;
+  readonly enabled: boolean;
+}
+
+/**
+ * `inference.read` result — the Inference WORKSPACE's own full
+ * projection (§21.2: the full control depth lives HERE, never in
+ * Chat). The seam drops the unconsumed members (`profile`'s raw
+ * values vocabulary, `request_layer`) at the projection — the
+ * surfaces never see a loose index signature; the values the
+ * editors read ride the per-control `value` fields (the validated
+ * depth).
+ */
+export interface InferenceDocument {
+  readonly profile_name: string;
+  readonly categories: readonly InferenceCategory[];
+  readonly controls: readonly InferenceControlDocument[];
+  readonly sampler_chain: readonly InferenceChainMember[];
+  readonly chain_order: readonly string[];
+  readonly deterministic: boolean;
+  readonly presets: readonly InferencePreset[];
+  readonly pinned: readonly string[];
+  readonly managed_live: boolean;
+  readonly applies: "next-spawn";
+  readonly compiled_preview: string | null;
+  /** rides only when the managed server is live (verbatim). */
+  readonly note?: string | undefined;
+}
+
+/**
+ * `inference.update`'s closed partial document — the store's own law
+ * (`store.py`: `name` / `sampler_chain` / `pinned` / the value
+ * fields; absent fields unchanged). The VALUE-field keys are
+ * backend-owned data (the 85-control vocabulary, never re-encoded
+ * here) — they ride the `values` record, and only the CHANGED keys
+ * enter it (the partial law, the Settings row's own form).
+ */
+export interface InferenceUpdateChanges {
+  readonly name?: string;
+  readonly sampler_chain?: readonly InferenceProfileChainItem[];
+  readonly pinned?: readonly string[];
+  readonly values?: Readonly<Record<string, unknown>>;
+}

@@ -1,0 +1,8 @@
+{
+  "operation_id": "39fbd07b8402b63da27866ad3d2c0e192c16ecc2afd5d268d6ef8b25a5f2ded8",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "inference.update: unknown field(s) ['bogus_flag'] (closed set: ['repack', 'grammar', 'n_predict', 'cache_type_k', 'yarn_orig_ctx', 'min_p', 'prefill_assistant', 'rope_freq_base', 'reasoning_effort', 'reasoning_format', 'yarn_attn_factor', 'gpu_layers', 'log_jsonl', 'n_cpu_moe', 'seed', 'n_cpu_ffn', 'metrics', 'dry_allowed_length', 'split_mode', 'yarn_ext_factor', 'sampler_chain', 'cpu_moe', 'rope_scaling', 'ignore_eos', 'keep', 'reasoning', 'fit', 'json_schema', 'yarn_beta_slow', 'batch_size', 'parallel', 'warmup', 'mirostat_lr', 'override_tensor', 'xtc_threshold', 'embedding', 'adaptive_target', 'cont_batching', 'threads', 'mirostat_ent', 'ubatch_size', 'dry_multiplier', 'perf', 'top_p', 'context_shift', 'repeat_penalty', 'temperature', 'cache_ram', 'top_n_sigma', 'cache_prompt', 'kv_offload', 'cache_reuse', 'main_gpu', 'mmproj', 'tensor_split', 'flash_attention', 'xtc_probability', 'spec_type', 'typical', 'logit_bias', 'dry_base', 'adaptive_decay', 'top_k', 'pinned', 'threads_batch', 'load_mode', 'cache_type_v', 'presence_penalty', 'dynatemp_exp', 'chat_template_custom', 'spec_draft_model', 'dry_penalty_last_n', 'mirostat', 'yarn_beta_fast', 'dry_sequence_breaker', 'kv_unified', 'repeat_last_n', 'reasoning_budget', 'name', 'rope_freq_scale', 'context', 'frequency_penalty', 'dynatemp_range', 'chat_template', 'swa_full', 'numa', 'lora', 'check_tensors'])"
+  },
+  "status": "REJECTED"
+}

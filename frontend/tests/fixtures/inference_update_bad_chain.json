@@ -1,0 +1,8 @@
+{
+  "operation_id": "044aaa0edad032dc26dc89ce5e2f556fd930ed7087033ac4f7267ded4caaa4c1",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "inference.update: sampler_chain is missing member(s) ['dry', 'min_p', 'penalties', 'temperature', 'top_n_sigma', 'top_p', 'typ_p', 'xtc'] \u2014 membership is the whole set, never a partial document"
+  },
+  "status": "REJECTED"
+}

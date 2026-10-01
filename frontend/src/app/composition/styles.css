@@ -710,3 +710,257 @@ button.probe {
     grid-template-columns: 1fr;
   }
 }
+
+/* The Inference surface (the generation-control workspace) — the
+   workspace rows (preset / search+advanced / pinned / preview), the
+   chain region, the collapsible categories, and the control rows.
+   Neutral tokens only: the state chips are STATE-class mappings over
+   the existing token set (the resolver's own vocabulary — never a
+   second interactive accent, VISUAL_SYSTEM_UI §2/§3). */
+.workspace-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+.workspace-row input[type="search"] {
+  flex: 1 1 260px;
+}
+.strip-edit input {
+  width: 11em;
+  padding: 1px 6px;
+}
+.strip-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+.preset-preview {
+  flex-basis: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  padding: 8px 10px;
+}
+.preset-description {
+  margin: 0 0 6px;
+  color: var(--muted);
+  font-size: 0.86rem;
+}
+.preset-diff {
+  margin: 0 0 8px;
+  padding-left: 18px;
+  font-size: 0.86rem;
+}
+.preset-diff li {
+  margin: 2px 0;
+  overflow-wrap: anywhere;
+}
+.pinned-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+.pinned-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.pinned-reveal {
+  border: none;
+  border-radius: 999px 0 0 999px;
+  background: transparent;
+  padding: 2px 10px;
+  font-size: 0.82rem;
+}
+.pinned-unpin {
+  border: none;
+  border-radius: 0 999px 999px 0;
+  background: transparent;
+  padding: 2px 8px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.chain-region {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  padding: 8px 10px;
+  margin: 10px 0;
+}
+.chain-region h3 {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+.chain-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.chain-member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--row-divider);
+}
+.chain-member:last-child {
+  border-bottom: none;
+}
+.chain-member-draft {
+  background: var(--row-hover);
+  border-radius: 4px;
+  padding: 4px 6px;
+}
+.chain-order {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+.inference-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+.category-section {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+}
+.category-toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: 6px 6px 0 0;
+  padding: 7px 10px;
+}
+.category-toggle:hover:not(:disabled) {
+  border-color: transparent;
+  background: var(--row-hover);
+}
+.category-title {
+  font-weight: 600;
+}
+.category-count {
+  color: var(--muted);
+  font-size: 0.78rem;
+  margin-left: 6px;
+}
+.control-row {
+  border-top: 1px solid var(--row-divider);
+  padding: 7px 10px 8px 34px;
+  position: relative;
+}
+.control-row-draft {
+  background: var(--row-hover);
+}
+.control-row-revealed {
+  background: var(--row-selected-live);
+  border-radius: 4px;
+}
+.control-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+.control-name {
+  font-weight: 600;
+}
+.control-flag {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.pin-button {
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 0 4px;
+  font-size: 0.9rem;
+}
+.pin-button[aria-pressed="true"] {
+  color: var(--config);
+}
+.control-state {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+/* The resolver's state vocabulary as STATE-class token mappings —
+   the honest matrix, never decorative color. */
+.state-effective {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.state-auto {
+  color: var(--config);
+  border-color: var(--config);
+}
+.state-inactive {
+  color: var(--muted);
+}
+.state-ineffective,
+.state-risk,
+.state-experimental {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+.state-conflict {
+  color: var(--error);
+  border-color: var(--error);
+}
+.state-unclassified,
+.state-legacy,
+.state-removed {
+  color: var(--synthetic);
+  border-color: var(--synthetic);
+}
+.control-doc {
+  margin: 3px 0 5px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.control-editor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.control-editor input[type="number"],
+.control-editor input[type="text"] {
+  width: 11em;
+}
+.gpu-layers-editor {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.control-reasons {
+  margin: 5px 0 0;
+  padding-left: 16px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.control-reasons li {
+  margin: 1px 0;
+  overflow-wrap: anywhere;
+}
+

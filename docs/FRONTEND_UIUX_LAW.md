@@ -160,7 +160,10 @@ APP
 │   §9's context evidence; the honest STATE labels stay, engineering
 │   prose does not — VISUAL_SYSTEM_UI §0.3, evidence over calm)
 ├── Primary navigation (the vertical rail)
-│   ├── Chat (the next Phase 3 row)
+│   ├── Chat (the conversation world — the rail's HEAD)
+│   ├── Inference (the generation-control workspace — the AI family
+│   │   adjacent, right behind Chat; its own surface, never a
+│   │   Settings subsection — the inf-1 split)
 │   ├── Trajectory — LIVE
 │   ├── Observatory — HISTORY
 │   └── Settings (pinned at the rail's end)

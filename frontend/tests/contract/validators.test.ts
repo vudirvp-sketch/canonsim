@@ -18,6 +18,11 @@ import {
   chatCompletionResultSchema,
   chatSendResultSchema,
   eventEnvelopeSchema,
+  inferenceCategorySchema,
+  inferenceChainMemberSchema,
+  inferenceControlSchema,
+  inferenceDocumentSchema,
+  inferencePresetSchema,
   inferenceReadResultSchema,
   launchSettingsDocumentSchema,
   modelListResultSchema,
@@ -32,6 +37,12 @@ import {
   sessionEventsResultSchema,
   validateResponseDocument,
 } from "../../src/api/gateway/validators.ts";
+import {
+  INFERENCE_KINDS,
+  INFERENCE_SCOPES,
+  INFERENCE_STATES,
+  INFERENCE_VALUE_TYPES,
+} from "../../src/api/gateway/contracts.ts";
 
 const FIXTURES = join(dirname(fileURLToPath(import.meta.url)), "..", "fixtures");
 
@@ -542,5 +553,222 @@ describe("the chat-row corrupted variants are REJECTED (the closed-document law)
     const corrupted = structuredClone(document);
     corrupted.result["cancellation"] = "CANCELED_ALREADY";
     expect(() => runCancelResultSchema.parse(corrupted.result)).toThrow();
+  });
+});
+
+/* ------------------------------------------------------------------ */
+/* The Inference workspace row's contract rows (iter-299)             */
+/* ------------------------------------------------------------------ */
+
+describe("the inference-workspace fixtures validate (the OK family)", () => {
+  it("inference_update_ok — the full workspace document validates at the depth the surface consumes", () => {
+    const document = fixture("inference_update_ok");
+    expect(responseDocumentSchema.parse(document).status).toBe("OK");
+    const workspace = inferenceDocumentSchema.parse(
+      (document as { result: unknown }).result,
+    );
+    // the OBSERVED state after the accepted partial — the resolver's
+    // own answer, never the client's projection of its draft.
+    const temperature = workspace.controls.find((c) => c.id === "sampling.temperature");
+    expect(temperature?.value).toBe(0.65);
+    expect(temperature?.state).toBe("EFFECTIVE");
+    const topK = workspace.controls.find((c) => c.id === "sampling.top_k");
+    expect(topK?.value).toBe(20);
+    expect(workspace.profile_name).toBe("Baseline");
+    expect(workspace.applies).toBe("next-spawn");
+    expect(workspace.managed_live).toBe(false);
+    expect(workspace.controls.length).toBe(85);
+    expect(workspace.sampler_chain.length).toBe(9);
+    expect(workspace.chain_order.length).toBe(9);
+    expect(workspace.presets.length).toBe(4);
+    expect(workspace.categories.length).toBe(15);
+    expect(workspace.pinned).toEqual([]);
+    expect(workspace.compiled_preview).toContain("llama-server");
+  });
+
+  it("the control metadata depth validates closed (the data-driven editors' own law)", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { controls: Array<Record<string, unknown>> };
+    };
+    const gpuLayers = document.result.controls.find(
+      (control) => control["id"] === "device.gpu_layers",
+    );
+    expect(gpuLayers).toBeDefined();
+    const parsed = inferenceControlSchema.parse(gpuLayers);
+    expect(parsed.kind).toBe("mode");
+    expect(parsed.value_type).toBe("gpu_layers");
+    expect(parsed.forms).toEqual(["auto", "all"]);
+    expect(parsed.minimum).toBeNull();
+    expect(parsed.maximum).toBe(999);
+    expect(parsed.flag).toBe("-ngl");
+    expect(parsed.field).toBe("gpu_layers");
+    // every control in the document validates against the mirror
+    for (const control of document.result.controls) {
+      expect(() => inferenceControlSchema.parse(control)).not.toThrow();
+    }
+  });
+
+  it("the chain document — 9 ordered members, every member exactly once", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { sampler_chain: Array<Record<string, unknown>> };
+    };
+    for (const member of document.result.sampler_chain) {
+      expect(() => inferenceChainMemberSchema.parse(member)).not.toThrow();
+    }
+    const ids = document.result.sampler_chain.map(
+      (member) => String(member["id"]),
+    );
+    expect(new Set(ids).size).toBe(9);
+    expect(ids[0]).toBe("penalties");
+    expect(ids[8]).toBe("temperature");
+  });
+
+  it("the preset document validates (the transparent partial — the values loose by the data-driven law)", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { presets: Array<Record<string, unknown>> };
+    };
+    for (const preset of document.result.presets) {
+      const parsed = inferencePresetSchema.parse(preset);
+      expect(Object.keys(parsed.values).length).toBeGreaterThan(0);
+    }
+  });
+
+  it("the mirrored vocabularies are the closed sets (the resolver/library's own)", () => {
+    expect(INFERENCE_STATES.length).toBe(10);
+    expect(INFERENCE_STATES).toContain("INEFFECTIVE");
+    expect(INFERENCE_KINDS).toEqual(["value", "mode", "toggle", "chain", "display"]);
+    expect(INFERENCE_VALUE_TYPES.length).toBe(6);
+    expect(INFERENCE_SCOPES).toEqual(["spawn", "request", "spawn+request"]);
+  });
+});
+
+describe("the inference-workspace rejection fixtures (the honest loud lanes)", () => {
+  it("inference_update_unknown_field — the closed set's own reason verbatim", () => {
+    const response = validateResponseDocument(fixture("inference_update_unknown_field"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("unknown field(s) ['bogus_flag']");
+    expect(String(response.result?.["reason"])).toContain("closed set:");
+  });
+
+  it("inference_update_bad_type — the wrong type is never clamped", () => {
+    const response = validateResponseDocument(fixture("inference_update_bad_type"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("temperature 'hot' must be a number in [0, 2]");
+  });
+
+  it("inference_update_bad_chain — a partial chain edit refuses LOUD (the whole-set law)", () => {
+    const response = validateResponseDocument(fixture("inference_update_bad_chain"));
+    expect(response.status).toBe("REJECTED");
+    expect(response.rejection).toBe("DOMAIN_REJECTED");
+    expect(String(response.result?.["reason"])).toContain("sampler_chain");
+    expect(String(response.result?.["reason"])).toContain("missing member");
+  });
+});
+
+describe("the inference-workspace corrupted variants are REJECTED (the closed-document law)", () => {
+  it("a control with a foreign kind fails", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { controls: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.controls[0]!["kind"] = "slider";
+    expect(() => inferenceControlSchema.parse(corrupted.result.controls[0])).toThrow();
+  });
+
+  it("a control with a foreign state fails (the resolver's closed vocabulary)", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { controls: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.controls[0]!["state"] = "INVALID";
+    expect(() => inferenceControlSchema.parse(corrupted.result.controls[0])).toThrow();
+  });
+
+  it("a control with a foreign value_type fails (the editors' dispatch vocabulary)", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { controls: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.controls[0]!["value_type"] = "percentage";
+    expect(() => inferenceControlSchema.parse(corrupted.result.controls[0])).toThrow();
+  });
+
+  it("a control with an UNKNOWN extra member fails (the resolver's field set is closed)", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { controls: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.controls[0]!["tooltip"] = "extra";
+    expect(() => inferenceControlSchema.parse(corrupted.result.controls[0])).toThrow();
+  });
+
+  it("a control with a non-string reasons entry fails (the reason is the §7 law)", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { controls: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    const mirostat = corrupted.result.controls.find(
+      (control) => control["id"] === "sampling.mirostat",
+    );
+    (mirostat as Record<string, unknown>)["reasons"] = [42];
+    expect(() => inferenceControlSchema.parse(mirostat)).toThrow();
+  });
+
+  it("a chain member with a foreign state fails", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { sampler_chain: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.sampler_chain[0]!["state"] = "BYPASS";
+    expect(() => inferenceChainMemberSchema.parse(corrupted.result.sampler_chain[0])).toThrow();
+  });
+
+  it("a chain member with a negative order fails", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { sampler_chain: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.sampler_chain[0]!["order"] = -1;
+    expect(() => inferenceChainMemberSchema.parse(corrupted.result.sampler_chain[0])).toThrow();
+  });
+
+  it("the document missing the sampler_chain fails (the consumed depth is closed)", () => {
+    const document = fixture("inference_update_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    delete corrupted.result["sampler_chain"];
+    expect(() => inferenceDocumentSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("the document missing the deterministic flag fails", () => {
+    const document = fixture("inference_update_ok") as { result: Record<string, unknown> };
+    const corrupted = structuredClone(document);
+    delete corrupted.result["deterministic"];
+    expect(() => inferenceDocumentSchema.parse(corrupted.result)).toThrow();
+  });
+
+  it("a preset values list (never a record) fails", () => {
+    const preset = {
+      id: "p",
+      name: "P",
+      description: "d",
+      values: ["temperature", 0.8],
+    };
+    expect(() => inferencePresetSchema.parse(preset)).toThrow();
+  });
+
+  it("a category with a zero count fails (every category carries controls)", () => {
+    const category = { id: "empty", controls: 0 };
+    expect(() => inferenceCategorySchema.parse(category)).toThrow();
+  });
+
+  it("a control with a non-finite step fails", () => {
+    const document = fixture("inference_update_ok") as {
+      result: { controls: Array<Record<string, unknown>> };
+    };
+    const corrupted = structuredClone(document);
+    corrupted.result.controls[0]!["step"] = Number.NaN;
+    expect(() => inferenceControlSchema.parse(corrupted.result.controls[0])).toThrow();
   });
 });

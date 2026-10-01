@@ -23,7 +23,9 @@ import type {
   BackendSettingsResult,
   ChatMessage,
   ChatSendResult,
+  InferenceDocument,
   InferenceReadResult,
+  InferenceUpdateChanges,
   LaunchSettingsDocument,
   ModelListResult,
   ModelStatesResult,
@@ -40,6 +42,7 @@ import type {
 import {
   appStatusResultSchema,
   backendSettingsResultSchema,
+  inferenceDocumentSchema,
   inferenceReadResultSchema,
   modelListResultSchema,
   modelStatesResultSchema,
@@ -421,6 +424,78 @@ export class GatewayClient {
     }
     return narrowed;
   }
+
+  /**
+   * `inference.read` — the Inference WORKSPACE's own full document
+   * (READ, session-free, no arguments): the control metadata depth
+   * the data-driven editors build over (§21.2 — each control's own
+   * kind/forms/limits; the UI never re-encodes the vocabulary), the
+   * ordered sampler chain, the transparent presets, the categories
+   * with honest counts, the pinned ids, and the compiled preview
+   * (the technical artifact, read-only). The seam's projection
+   * DROPS the unconsumed members (`profile`'s raw values vocabulary,
+   * `request_layer`) — no loose index signature reaches a surface.
+   */
+  async inferenceDocument(): Promise<DispatchResult<InferenceDocument>> {
+    const dispatch = await this.postOp({ operation: "inference.read" });
+    const narrowed = narrow(
+      dispatch,
+      inferenceDocumentSchema,
+      "inference.read",
+    );
+    if (narrowed.transport === "DELIVERED" && narrowed.status === "OK") {
+      return { ...narrowed, result: projectInferenceDocument(narrowed.result) };
+    }
+    return narrowed;
+  }
+
+  /**
+   * `inference.update` — the closed partial UPDATE over the semantic
+   * profile (MUTATION, session-scoped): absent fields unchanged (the
+   * store's own partial law — ONLY the changed keys ride the wire);
+   * `pinned` routes to the WORKSPACE section (its own concern, never
+   * a profile value); a fresh `client_request_id` per explicit
+   * attempt (G4 — no blind retry); the returned document is the new
+   * current (the caller's evidence, never a guess about the file). A
+   * domain violation (unknown field / wrong type / a partial chain)
+   * is a DELIVERED REJECTED with the observed cause — rendered
+   * verbatim, never coerced.
+   */
+  async inferenceUpdate(input: {
+    readonly sessionId: string;
+    readonly clientRequestId: string;
+    readonly changes: InferenceUpdateChanges;
+  }): Promise<DispatchResult<InferenceDocument>> {
+    const updateArguments: Record<string, unknown> = {
+      ...(input.changes.values as Record<string, unknown> | undefined),
+    };
+    if (input.changes.name !== undefined) {
+      updateArguments["name"] = input.changes.name;
+    }
+    if (input.changes.sampler_chain !== undefined) {
+      updateArguments["sampler_chain"] = input.changes.sampler_chain.map(
+        (item) => ({ id: item.id, enabled: item.enabled }),
+      );
+    }
+    if (input.changes.pinned !== undefined) {
+      updateArguments["pinned"] = [...input.changes.pinned];
+    }
+    const dispatch = await this.postOp({
+      operation: "inference.update",
+      arguments: updateArguments,
+      session_id: input.sessionId,
+      client_request_id: input.clientRequestId,
+    });
+    const narrowed = narrow(
+      dispatch,
+      inferenceDocumentSchema,
+      "inference.update",
+    );
+    if (narrowed.transport === "DELIVERED" && narrowed.status === "OK") {
+      return { ...narrowed, result: projectInferenceDocument(narrowed.result) };
+    }
+    return narrowed;
+  }
 }
 
 /** The compact projection at the seam: the consumed members pass
@@ -440,6 +515,68 @@ function projectInference(
     applies: parsed.applies,
     managed_live: parsed.managed_live,
     pinned: parsed.pinned,
+  };
+}
+
+/** The WORKSPACE projection at the seam: the consumed depth passes
+ * through closed (every member re-picked by name), the unconsumed
+ * members (`profile`'s raw values vocabulary, `request_layer`) stay
+ * behind — the surfaces never see the loose index signature the
+ * data-driven law keeps at the wire. */
+function projectInferenceDocument(
+  parsed: z.infer<typeof inferenceDocumentSchema>,
+): InferenceDocument {
+  return {
+    profile_name: parsed.profile_name,
+    categories: parsed.categories.map((category) => ({
+      id: category.id,
+      controls: category.controls,
+    })),
+    controls: parsed.controls.map((control) => ({
+      id: control.id,
+      name: control.name,
+      category: control.category,
+      kind: control.kind,
+      scope: control.scope,
+      flag: control.flag,
+      field: control.field,
+      value: control.value,
+      value_doc: control.value_doc,
+      value_type: control.value_type,
+      forms: [...control.forms],
+      minimum: control.minimum,
+      maximum: control.maximum,
+      step: control.step,
+      advanced: control.advanced,
+      source: control.source,
+      state: control.state,
+      reasons: [...control.reasons],
+      baseline: control.baseline,
+      upstream_default: control.upstream_default,
+      notes: [...control.notes],
+    })),
+    sampler_chain: parsed.sampler_chain.map((member) => ({
+      id: member.id,
+      name: member.name,
+      enabled: member.enabled,
+      order: member.order,
+      value: member.value,
+      state: member.state,
+      reasons: [...member.reasons],
+    })),
+    chain_order: [...parsed.chain_order],
+    deterministic: parsed.deterministic,
+    presets: parsed.presets.map((preset) => ({
+      id: preset.id,
+      name: preset.name,
+      description: preset.description,
+      values: preset.values,
+    })),
+    pinned: [...parsed.pinned],
+    managed_live: parsed.managed_live,
+    applies: parsed.applies,
+    compiled_preview: parsed.compiled_preview,
+    note: parsed.note,
   };
 }
 

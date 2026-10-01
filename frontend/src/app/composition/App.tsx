@@ -7,8 +7,11 @@
  * FRONTEND_UIUX_LAW §2.1):
  * - PRODUCT ROUTES (the rail): Chat at the rail's HEAD (the
  *   conversation world — iter-298, Phase 3's fourth row), the
- *   Trajectory LIVE tail, the Observatory HISTORY world, the
- *   Settings CONFIG world — the approved user-facing intents;
+ *   Inference control workspace right behind it (iter-299, Phase
+ *   3's fifth row — the AI family adjacent: converse → control the
+ *   generation), the Trajectory LIVE tail, the Observatory HISTORY
+ *   world, the Settings CONFIG world — the approved user-facing
+ *   intents;
  * - DIAGNOSTIC SURFACES (behind the Diagnostics entry): the session
  *   lifecycle, the gateway status probes, the S0-4 load probe — the
  *   proof instruments, never product navigation peers.
@@ -38,6 +41,7 @@ import type { ReactNode } from "react";
 
 import { Chat } from "../../features/chat/Chat.tsx";
 import { GatewayStatus } from "../../features/gateway-status/GatewayStatus.tsx";
+import { Inference } from "../../features/inference/Inference.tsx";
 import { Observatory } from "../../features/observatory/Observatory.tsx";
 import { Settings } from "../../features/settings/Settings.tsx";
 import { SessionLifecycle } from "../../features/session-lifecycle/SessionLifecycle.tsx";
@@ -95,13 +99,20 @@ export function App(): ReactNode {
   // THE REGISTRY SPLIT (§2.1's law): product intents and diagnostic
   // instruments are separate registries — the shell never sees a
   // feature list, only the approved routes (+ the diagnostics entry).
-  // Chat rides the rail's HEAD (§2.1's canonical IA tree).
+  // Chat rides the rail's HEAD (§2.1's canonical IA tree); Inference
+  // sits right behind it (the AI family adjacent).
   const routes: readonly ProductRoute[] = [
     {
       id: "chat",
       label: "Chat",
       hint: "Converse with the loaded model — every turn an honest run",
       element: <Chat client={session.client} sessionId={session.sessionId} />,
+    },
+    {
+      id: "inference",
+      label: "Inference",
+      hint: "The generation-control workspace — chips, the sampler chain, the effective state",
+      element: <Inference client={session.client} sessionId={session.sessionId} />,
     },
     {
       id: "trajectory",

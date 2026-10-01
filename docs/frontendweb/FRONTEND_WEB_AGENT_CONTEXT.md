@@ -195,10 +195,41 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  browser closure; the COMPLETED band owner-side — a
                  loaded llama.cpp model, this environment closes the
                  admission/FAILED/REJECTED lanes verbatim, never a
-                 fabricated completion); the next rows the owner's
-                 call: the Inference surface (inf-2's workspace
-                 regions), the Models surface (the family's load/
-                 unload/import mirror), the Settings secondary nav,
+                 fabricated completion); the fifth row LANDED
+                 (iter-299, the owner's «продолжай работу над
+                 фронтендом» delegated call: the INFERENCE ENTRY —
+                 the generation-control WORKSPACE over the existing
+                 inference.read/inference.update ops (the §21.2
+                 regions: the preset row with the TRANSPARENT diff
+                 preview + the clean-draft guard, the SEARCH over
+                 name/flag/category — a match is an explicit ask
+                 that shows the advanced rows, the PINNED
+                 quick-access strip of reveals (a pin/unpin its own
+                 dispatch over the workspace section, never a profile
+                 edit), the collapsible categories with honest
+                 counts (the six general-chat families open by
+                 default, an all-advanced family opens with the
+                 honest note), the advanced rung, the ordered
+                 9-member sampler chain (membership a DRAFT edit —
+                 the Save carries the WHOLE document), the compiled
+                 preview read-only); the DATA-DRIVEN editors over the
+                 read document's own value_type/forms/limits
+                 metadata (the UI never re-encodes the vocabulary);
+                 every row renders the OBSERVED state + the
+                 resolver's reasons verbatim + the §4 defaults
+                 ladder side by side; §8's closure over the persisted
+                 profile store (the Save sends ONLY the changed keys,
+                 a fresh idempotency key per attempt — G4; on
+                 ACCEPTED the returned document the new OBSERVED
+                 baseline, the draft reconciles to the SERVER's
+                 answer); Inference right behind Chat in the rail
+                 (§2.1's canonical IA tree); 174 vitest + the 11/11
+                 live smoke + 4 live-captured update fixtures); the
+                 next rows the owner's call: the Models surface (the
+                 family's load/unload/import mirror), the Settings
+                 secondary nav, the streaming admission (SSE — the
+                 backend gateway contract first), the acceptance
+                 matrix, the DECISIONS collapse (the owner's call);
                  each its own iteration
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the

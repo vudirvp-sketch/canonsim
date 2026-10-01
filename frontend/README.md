@@ -4,13 +4,14 @@ The ACTIVE frontend path (D-244: the owner's 2026-09-29 freeze+open
 call; the Redot tree deleted at D-245 — the owner's «удаляй redot»
 call). React + TypeScript + Vite, Web/PWA-first — the S0 walking
 skeleton over the existing loopback gateway, now grown into
-Phase 3's four rows (the Shell + the Session lifecycle; the
+Phase 3's five rows (the Shell + the Session lifecycle; the
 Observatory HISTORY entry — the dual-read law's second world; the
 Settings CONFIG entry — the §8 closure over a real persisted store;
-the CHAT entry — the conversation world over the run family)
-+ the IA REPAIR (iter-297, D-247: the product/diagnostic registry
-split — a vertical product rail + the subdued Diagnostics entry,
-FRONTEND_UIUX_LAW §2.1's navigation contract).
+the CHAT entry — the conversation world over the run family; the
+INFERENCE entry — the generation-control workspace over the profile
+store) + the IA REPAIR (iter-297, D-247: the product/diagnostic
+registry split — a vertical product rail + the subdued Diagnostics
+entry, FRONTEND_UIUX_LAW §2.1's navigation contract).
 The law: `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
 `docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md`).
 
@@ -87,17 +88,18 @@ sandbox-side capture script lives outside the repo per AGENTS §7
 Rule 9; the fixtures' shape is the contract, the capture is
 re-runnable from `tests/test_gateway.py`'s own patterns).
 
-## The surfaces (the rail era — Phase 3 rows 1–4 + the IA repair)
+## The surfaces (the rail era — Phase 3 rows 1–5 + the IA repair)
 
 The composition root mounts the **Shell** (`src/features/shell/`)
 with the SPLIT registries (iter-297, D-247 — FRONTEND_UIUX_LAW
 §2.1): `ProductRoute` (the rail's only content: Chat at the HEAD,
-Trajectory LIVE, Observatory HISTORY, Settings pinned at the rail's
-end) and `DiagnosticSurface` (behind ONE subdued Diagnostics entry,
-its own secondary nav inside the workspace — Session lifecycle /
-Gateway / Load probe, the proof instruments, never product peers).
-The rail is a navigation instrument, never a feature directory: a
-first-class surface is not automatically a navigation item.
+the Inference control workspace right behind it, Trajectory LIVE,
+Observatory HISTORY, Settings pinned at the rail's end) and
+`DiagnosticSurface` (behind ONE subdued Diagnostics entry, its own
+secondary nav inside the workspace — Session lifecycle / Gateway /
+Load probe, the proof instruments, never product peers). The rail is
+a navigation instrument, never a feature directory: a first-class
+surface is not automatically a navigation item.
 
 **Only the active surface mounts** —
 a switch unmounts the previous surface and drops its local
@@ -115,6 +117,7 @@ The product routes (the rail):
 | Load probe | drives real `session.attach` ops (the CAS loop) — the S0-4 measurement instrument |
 | Trajectory | the LIVE session tail (`session.events`): virtualized ≥10k rows (only the window mounts), the semantic-sequence cursor, event-id selection, RESYNC_REQUIRED handled honestly, the LIVE label (volatile tail, never durable history) |
 | Chat | the conversation world (`chat.send` → `run.get` → `run.cancel` + the header's `model.list`/`model.states` + the `inference.read` compact projection): every turn an honest RUN — the admission answer is STARTING (never the completion), the bounded 700ms observation loop (dead at terminal/TRANSPORT/unmount, the re-poll explicit), the transcript per-surface VOLATILE (chat history is not canon — unmount drops it like every surface's local buffer), the REQUESTED/EFFECTIVE provenance line per turn, the near-bottom follow law, the call-local overrides explicitly surfaced (never hidden samplers), the messages-context rule (only admitted turns + completed replies ride the next send), every lane verbatim (FAILED with the observed diagnostics; CANCELED/FAILED_TO_CANCEL as the terminal truth past a cancel); the COMPLETED band needs a loaded model — owner-side, declared never faked |
+| Inference | the generation-control WORKSPACE (`inference.read` + `inference.update` — the full control depth, never Chat's compact projection): the §21.2 regions — the preset row (a TRANSPARENT diff preview BEFORE the apply, the apply a plain update guarded on a CLEAN draft), the search over name/flag/category (a match is an explicit ask — it shows the advanced rows), the pinned quick-access strip (reveals, never second editors; a pin/unpin its own dispatch over the workspace section), the collapsible categories with honest counts (the six general-chat families open by default), the advanced rung, the ordered 9-member sampler chain (membership a DRAFT edit — the Save carries the WHOLE document, never a partial edit), the compiled preview read-only; the editors are DATA-DRIVEN over the read document's own value_type/forms/limits metadata (the UI never re-encodes the vocabulary — a new control lands by the server's document alone); every row renders the OBSERVED state + the resolver's reasons verbatim (configured-but-ineffective stays VISIBLE) + the §4 defaults ladder (baseline · upstream side by side); §8's closure over the persisted profile store — the Save sends ONLY the changed keys with a fresh idempotency key (G4), on ACCEPTED the returned document is the new OBSERVED baseline (the draft reconciles to the SERVER's answer), `applies: next-spawn` verbatim, no polling |
 | Observatory | the HISTORY world (`observatory.runs`/`observatory.read`): the dual-read law's second half — the discovery scan, ONE bounded window at a time (the event-id cursor, `next_after` forward pagination that REPLACES the window, never an accumulating buffer), the context strip's identity line (seed/pack/CANON_VIEW/CANONICAL), event-id selection over the SAME document, NO DATA ≠ NO MATCH ≠ stale cursor ≠ TRANSPORT rendered distinct, no polling (durable evidence; every read explicit) |
 | Settings | the CONFIG world (`backend.settings`/`backend.settings.update`): the §8 closure over a real persisted store — the draft is a REQUEST (never `input.value === EFFECTIVE`), the Save sends ONLY the changed fields with a fresh idempotency key (G4), the returned document is the new OBSERVED baseline (the draft reconciles to the server's answer), `applies: next-spawn` rendered verbatim (a LIVE server keeps its flags), the compiled command preview read-only, the closed three-field set with verbatim DOMAIN_REJECTED lanes, no polling (one mount READ) |
 

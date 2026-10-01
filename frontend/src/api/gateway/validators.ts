@@ -19,6 +19,10 @@ import {
   EVENT_TYPES,
   EXPOSURES,
   EXECUTION_STATES,
+  INFERENCE_KINDS,
+  INFERENCE_SCOPES,
+  INFERENCE_STATES,
+  INFERENCE_VALUE_TYPES,
   MODEL_DIRECTORY_STATES,
   MODEL_STATES,
   OBSERVATORY_AUTHORITIES,
@@ -397,6 +401,93 @@ export const inferenceReadResultSchema = z.looseObject({
   applies: z.literal("next-spawn"),
   managed_live: z.boolean(),
   pinned: z.array(nonEmptyString),
+});
+
+// ------------------------------------------- inference (the workspace row)
+
+/**
+ * One control's RESOLVED document — the resolver's own closed field
+ * set, strict: a renamed member, a foreign kind/state/value_type, or
+ * a non-string reasons entry is a CONTRACT MISMATCH, exactly as the
+ * backend's own document law treats it. `value`/`baseline`/
+ * `upstream_default` stay `z.unknown()` — the per-control value
+ * forms are backend-owned DATA (§21.2's data-driven law: the UI
+ * never re-encodes the vocabulary; the editors dispatch over the
+ * metadata fields, never over a value enum).
+ */
+export const inferenceControlSchema = z.strictObject({
+  id: nonEmptyString,
+  name: nonEmptyString,
+  category: nonEmptyString,
+  kind: z.enum(INFERENCE_KINDS),
+  scope: z.enum(INFERENCE_SCOPES),
+  flag: nonEmptyString,
+  field: nonEmptyString,
+  value: z.unknown(),
+  value_doc: nonEmptyString,
+  value_type: z.enum(INFERENCE_VALUE_TYPES),
+  forms: z.array(nonEmptyString),
+  minimum: finiteFloat.nullable(),
+  maximum: finiteFloat.nullable(),
+  step: finiteFloat,
+  advanced: z.boolean(),
+  source: nonEmptyString,
+  state: z.enum(INFERENCE_STATES),
+  reasons: z.array(nonEmptyString),
+  baseline: z.unknown(),
+  upstream_default: z.unknown(),
+  notes: z.array(nonEmptyString),
+});
+
+/** One sampler-chain member's resolved document (the ordered
+ * first-class object; the value rides unknown — backend data). */
+export const inferenceChainMemberSchema = z.strictObject({
+  id: nonEmptyString,
+  name: nonEmptyString,
+  enabled: z.boolean(),
+  order: nonNegativeInt,
+  value: z.unknown(),
+  state: z.enum(INFERENCE_STATES),
+  reasons: z.array(nonEmptyString),
+});
+
+/** One preset's transparent document (the values record is the
+ * backend's own field vocabulary — loose by the data-driven law). */
+export const inferencePresetSchema = z.strictObject({
+  id: nonEmptyString,
+  name: nonEmptyString,
+  description: nonEmptyString,
+  values: z.record(z.string(), z.unknown()),
+});
+
+/** One category's honest count. */
+export const inferenceCategorySchema = z.strictObject({
+  id: nonEmptyString,
+  controls: positiveInt,
+});
+
+/**
+ * The Inference WORKSPACE's own full document — the depth the
+ * surface consumes, validated closed over the resolver's own field
+ * set. The wire document carries MORE (`profile`'s raw values
+ * vocabulary, `request_layer`) — `looseObject` is the deliberate
+ * form (the same law as the Chat-side compact slice, one depth
+ * deeper), and the seam's projection DROPS the unconsumed members
+ * so no loose index signature ever reaches a surface.
+ */
+export const inferenceDocumentSchema = z.looseObject({
+  profile_name: nonEmptyString,
+  categories: z.array(inferenceCategorySchema),
+  controls: z.array(inferenceControlSchema),
+  sampler_chain: z.array(inferenceChainMemberSchema),
+  chain_order: z.array(nonEmptyString),
+  deterministic: z.boolean(),
+  presets: z.array(inferencePresetSchema),
+  pinned: z.array(nonEmptyString),
+  managed_live: z.boolean(),
+  applies: z.literal("next-spawn"),
+  compiled_preview: z.string().nullable(),
+  note: nonEmptyString.optional(),
 });
 
 /** The validated response plus its dispatch outcome — the client's

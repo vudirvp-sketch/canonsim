@@ -1,85 +1,102 @@
-Iteration: iter-298 (`chat` — Phase 3's FOURTH ROW, the owner's
+Iteration: iter-299 (`inference` — Phase 3's FIFTH ROW, the owner's
   «продолжай работу над фронтендом» delegated call; R2
-  frontend-local — the Chat row named by iter-297's own Next): the
-  CHAT ENTRY landed over the EXISTING run-family ops (zero Python
-  change) — the contract mirror for `chat.send` (the admission:
-  STARTING + the execution identity, never the completion) +
-  `run.get`/`run.cancel` (the bounded observation / the truthful
-  stop) + `model.list`/`model.states` (the header's model line —
-  the load-state truth, never a discovery guess) + `inference.read`
-  (the COMPACT contextual projection, §21.2: the effective
-  temperature the next send resolves from — loose-typed at the
-  unconsumed depth, the data-driven law's own form, the control
-  vocabulary never re-encoded); the SURFACE — header / viewport /
-  composer / status (iter-297's named shape): the transcript as
-  per-surface presentation state (volatile by law — unmount drops
-  it, chat history is not canon), per-exchange identity + the
-  REQUESTED/EFFECTIVE provenance line, the near-bottom follow law
-  (the reader's position wins; the scroll settles after a frame),
-  the composer's call-local overrides (explicitly surfaced, never
-  hidden samplers), Enter/Shift+Enter, the ONE-run-at-a-time guard,
-  the BOUNDED poll loop (fixed 700ms cadence, dead at terminal /
-  TRANSPORT / unmount — the re-poll the user's explicit action),
-  the messages-context rule (only admitted user turns + completed
-  replies ride the next send — a possibly-never-sent turn stays
-  out), every lane verbatim (FAILED with the observed diagnostics;
-  the CANCELED/FAILED_TO_CANCEL terminal truth past a cancel); Chat
-  rides the rail's HEAD (§2.1's canonical IA tree — pinned by the
-  Shell rows); 10 live-captured fixtures (the in-process parity
-  form: the honest FAILED band captured against the real
-  composition, no llama-server — EngineError verbatim, never a
-  fabricated completion)
+  frontend-local — the Inference row named by STATUS's own next-row
+  order): the INFERENCE ENTRY landed over the EXISTING
+  inference.read/inference.update ops (zero Python change) — the
+  generation-control WORKSPACE (LLAMA_CPP_INFERENCE_CONTROL_LAW's
+  full surface, FRONTEND_UIUX_LAW §21.2's regions): the contract
+  mirror one depth deeper than Chat's compact slice (the resolver's
+  own 19-field control document, the closed STATES/KINDS/
+  VALUE_TYPES/SCOPES vocabularies, the 9-member chain document, the
+  transparent presets, the categories with counts; the seam's
+  inferenceDocument()/inferenceUpdate() — the loose wire form at the
+  unconsumed depth, the projection keeping `profile`'s raw values
+  vocabulary and `request_layer` OUT of the surfaces); the SURFACE
+  (features/inference/{useInference,Inference}): the preset row (the
+  TRANSPARENT diff preview BEFORE the apply; the apply a PLAIN
+  update carrying the preset's values verbatim, guarded on a CLEAN
+  draft — a preset never silently modifies out-of-scope settings),
+  the SEARCH over name/flag/category (a match is an explicit ask —
+  it shows the advanced rows; the cleared search restores the
+  disclosures), the PINNED quick-access strip (reveals, never second
+  editors; a pin/unpin its OWN dispatch over the workspace section,
+  never a profile edit), the collapsible categories with honest
+  counts (the six general-chat families open by default; an
+  all-advanced family opens with the honest note, never a silent
+  blank), the advanced rung, the ordered sampler chain (membership
+  a DRAFT edit — the Save carries the WHOLE 9-member document), the
+  compiled preview read-only behind its own disclosure; the editors
+  DATA-DRIVEN over the read document's own value_type/forms/limits
+  metadata (int/float → number, bool → checkbox, enum → select over
+  forms, text → text, gpu_layers → the auto/all/explicit composite;
+  an entry that is not a legal explicit value yet disables the Save
+  — never clamped); every row renders the OBSERVED state + the
+  resolver's reasons verbatim (§7: configured-but-ineffective stays
+  VISIBLE) + the §4 defaults ladder side by side (baseline ·
+  upstream); §8's closure over the persisted profile store (the
+  Save sends ONLY the changed keys with a fresh idempotency key —
+  G4; on ACCEPTED the returned document the new OBSERVED baseline,
+  the draft reconciles to the SERVER's answer; applies: next-spawn
+  verbatim; no polling); Inference rides the rail right behind Chat
+  (§2.1's canonical IA tree, amended); 4 live-captured fixtures
+  (the in-process parity form over the real composition with
+  throwaway roots — the accepted partial temperature 0.65 + top_k
+  20 landing verbatim, the unknown-field/bad-type/partial-chain
+  rejections loud)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2529 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; zero Python change
-  this iteration — the frontend stack: 139 vitest + tsc + build +
-  the live gateway smoke 16/16 + the live browser closure: Chat at
-  the rail's head, two live sends → the honest FAILED band with the
-  verbatim diagnostics, the unmount discipline, zero console
-  errors, 3 screenshots) ·
+  this iteration — the frontend stack: 174 vitest + tsc + build +
+  the live gateway smoke 11/11 over the served composition: the
+  full document 85/9/4/15, the partial update accepted + persisted,
+  the pin accepted with the profile values untouched, the
+  unknown-field/partial-chain rejections verbatim, the idempotent
+  duplicate true) ·
 Date: 2026-10-01 ·
 Scope: frontend/src/api/gateway/{contracts,validators,client}.ts
-  (the Chat-row mirror: CHAT_ROLES, the EXECUTION ladder, the
-  CANCELLATION outcomes, the run document, the model scan/states,
-  the compact inference projection + the seam's projectInference),
-  frontend/src/features/chat/{useChat.ts, Chat.tsx} (new — the
-  conversation world), frontend/src/app/composition/App.tsx (the
-  Chat route at the rail's head), frontend/src/app/composition/
-  styles.css (the chat viewport/bubbles/composer — neutral tokens
-  only, no second accent), frontend/tests/fixtures/{chat_send_ok,
-  chat_send_unknown_argument, chat_send_bad_messages,
-  chat_send_no_session, run_get_failed, run_get_no_match,
-  run_cancel_terminal, model_list_ok, model_states_ok,
-  inference_read_ok}.json + manifest.json (new), frontend/tests/
-  contract/validators.test.ts (the Chat-row contract rows),
-  frontend/tests/integration/Chat.test.tsx (new — 12 rows),
-  frontend/tests/integration/Shell.test.tsx (the rail labels + the
-  Chat mount row), docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md
-  (the stage map), docs/TASKS.md (the ledger, iter-287 evicted),
-  STATUS.md (the header), worklog.md (iter-288 evicted),
-  docs/iterations/iter-298-frontendweb-report.md (new),
-  frontend/README.md (the Chat surface row) — 27 changed/created
-  (13 modified + 14 created; R2 — frontend-local; zero Python change,
-  zero canon change, the LOG untouched, zero corpus price)
+  (the Inference-row mirror: the INFERENCE_STATES/KINDS/
+  VALUE_TYPES/SCOPES vocabularies, the control/chain/preset/
+  category documents, the workspace document + the update's closed
+  partial changes; the seam's inferenceDocument/inferenceUpdate
+  with the projection), frontend/src/features/inference/
+  {useInference.ts, Inference.tsx} (new — the workspace), frontend/
+  src/app/composition/App.tsx (the Inference route right behind
+  Chat), frontend/src/app/composition/styles.css (the workspace
+  rows/chain/categories/control rows — the state chips as
+  STATE-class token mappings, zero raw literals), frontend/tests/
+  fixtures/{inference_update_ok, inference_update_unknown_field,
+  inference_update_bad_type, inference_update_bad_chain}.json +
+  manifest.json (new), frontend/tests/contract/validators.test.ts
+  (the workspace-row contract rows), frontend/tests/integration/
+  Inference.test.tsx (new — 14 rows), frontend/tests/integration/
+  Shell.test.tsx (the rail label + the Inference mount row),
+  docs/FRONTEND_UIUX_LAW.md (§2.1's canonical IA tree gains the
+  Inference row), docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md
+  (the stage map), docs/TASKS.md (the ledger, iter-288 evicted),
+  STATUS.md (the header), worklog.md (iter-289 evicted),
+  docs/iterations/iter-299-frontendweb-report.md (new),
+  frontend/README.md (the Inference surface row) — 22 changed/
+  created (14 modified + 8 created; R2 — frontend-local; zero
+  Python change, zero canon change, the LOG untouched, zero corpus
+  price)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1 visual floor LANDED (iter-293/297); Phase 3's
-  FOUR rows LANDED (iter-294/295/296/298: shell/lifecycle,
-  observatory, settings, chat) + the IA REPAIR LANDED (iter-297,
-  D-247); the chat row's COMPLETED band is owner-side (a loaded
-  llama.cpp model — this environment honestly closes only the
-  admission/FAILED/REJECTED lanes, captured verbatim); the next
-  frontend rows the owner's call: the Inference surface (the
-  control workspace — inf-2's regions), the Models surface
-  (load/unload/import — the family's remaining mirror), the
-  Settings secondary nav, the streaming admission (SSE — the
-  backend gateway contract first), the acceptance matrix, the
-  DECISIONS collapse (the owner's call); the standing boundaries:
-  SSE/WebSocket, Tauri, PWA — each its own admission. The world
-  track: W8's remaining rows the owner's call. The ssi family
-  COMPLETE except ssi-5, owner-gated.
+  FIVE rows LANDED (iter-294/295/296/298/299: shell/lifecycle,
+  observatory, settings, chat, inference) + the IA REPAIR LANDED
+  (iter-297, D-247); the chat row's COMPLETED band is owner-side (a
+  loaded llama.cpp model — this environment honestly closes only
+  the admission/FAILED/REJECTED lanes, captured verbatim); the
+  next frontend rows the owner's call: the Models surface (the
+  family's load/unload/import mirror), the Settings secondary nav,
+  the streaming admission (SSE — the backend gateway contract
+  first), the acceptance matrix, the DECISIONS collapse (the
+  owner's call); the standing boundaries: SSE/WebSocket, Tauri,
+  PWA — each its own admission. The world track: W8's remaining
+  rows the owner's call. The ssi family COMPLETE except ssi-5,
+  owner-gated.
 
 
 ## Invariants (one line each — full rules in AGENTS.md §4)

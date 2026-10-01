@@ -212,7 +212,7 @@ describe("the composition root's registry split (the IA acceptance floor)", () =
     const labels = within(rail)
       .getAllByRole("button")
       .map((button) => button.textContent);
-    expect(labels).toEqual(["Chat", "Trajectory", "Observatory", "Settings", "Diagnostics"]);
+    expect(labels).toEqual(["Chat", "Inference", "Trajectory", "Observatory", "Settings", "Diagnostics"]);
     // The proof instruments are NOT rail items.
     for (const forbidden of ["Session lifecycle", "Gateway", "Load probe"]) {
       expect(within(rail).queryByRole("button", { name: forbidden })).toBeNull();
@@ -299,6 +299,30 @@ describe("the composition root's registry split (the IA acceptance floor)", () =
       // The header's three session-free context READs dispatched.
       expect(callsOf(fetchMock).some((body) => body["operation"] === "model.list")).toBe(true);
       expect(callsOf(fetchMock).some((body) => body["operation"] === "model.states")).toBe(true);
+      expect(callsOf(fetchMock).some((body) => body["operation"] === "inference.read")).toBe(true);
+    });
+    // Exactly one workspace the whole time.
+    expect(screen.getAllByTestId("active-workspace")).toHaveLength(1);
+  });
+
+  it("the Inference product route mounts its workspace (the control document's READ, right behind Chat)", async () => {
+    const fetchMock = gatewayRouter(APP_OPS);
+    vi.stubGlobal("fetch", fetchMock);
+    render(<App />);
+
+    await waitFor(() => {
+      // session.create answered: the id is a real id, never "creating…" / "—".
+      expect(screen.getByTestId("session-id").textContent).toMatch(/^[0-9a-f]{16,}$/);
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: "Inference" }));
+    await waitFor(() => {
+      expect(
+        screen.getByRole("region", { name: /Inference — the generation-control workspace/i }),
+      ).toBeTruthy();
+    });
+    await waitFor(() => {
+      // The workspace's one session-free READ dispatched.
       expect(callsOf(fetchMock).some((body) => body["operation"] === "inference.read")).toBe(true);
     });
     // Exactly one workspace the whole time.

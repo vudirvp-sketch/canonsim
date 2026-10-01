@@ -1,0 +1,8 @@
+{
+  "operation_id": "abf4793e3db3a350b20ffb2e9f062bc91fa155a4acfff37675f82bc5104ed6b6",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "inference.update: temperature 'hot' must be a number in [0, 2]"
+  },
+  "status": "REJECTED"
+}

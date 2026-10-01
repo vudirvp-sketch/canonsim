@@ -1,5 +1,5 @@
 {
-  "captured": "2026-09-29, iter-289 (BASE_COMMIT e6789cf); observatory.* added iter-295 (BASE_COMMIT e9efe5b); backend.settings.* added iter-296 (BASE_COMMIT cd1cdf6); chat.*/run.*/model.*/inference.* added iter-298 (BASE_COMMIT d40c1df)",
+  "captured": "2026-09-29, iter-289 (BASE_COMMIT e6789cf); observatory.* added iter-295 (BASE_COMMIT e9efe5b); backend.settings.* added iter-296 (BASE_COMMIT cd1cdf6); chat.*/run.*/model.*/inference.* added iter-298 (BASE_COMMIT d40c1df); inference.update.* added iter-299 (BASE_COMMIT bbd92de)",
   "fixtures": [
     "app_status_ok",
     "backend_settings_read_ok",
@@ -12,6 +12,10 @@
     "chat_send_ok",
     "chat_send_unknown_argument",
     "inference_read_ok",
+    "inference_update_bad_chain",
+    "inference_update_bad_type",
+    "inference_update_ok",
+    "inference_update_unknown_field",
     "model_list_ok",
     "model_states_ok",
     "observatory_read_no_match",
@@ -34,5 +38,5 @@
     "session_get_ok"
   ],
   "gateway_schema_identity": "canon_workbench_gateway@0.1",
-  "source": "the live gateway code, in-process dispatch (parity-law byte form); the observatory fixtures over the day1_full playscript run run_125_0 (56 events, seed 125, tavern_pack@0.1) generated in-session by the CLI; the backend.settings fixtures over the real composition (throwaway USER_CONFIG paths, the store's own persisted schema/2 document as the live evidence); the chat-row fixtures over the real composition (throwaway roots, one real dummy .gguf on disk for the §20 scan) — chat.send admitted against the default backend endpoint with no llama-server present, so the run's terminal band is the honestly observed FAILED (EngineError, connection refused), never a fabricated completion"
+  "source": "the live gateway code, in-process dispatch (parity-law byte form); the observatory fixtures over the day1_full playscript run run_125_0 (56 events, seed 125, tavern_pack@0.1) generated in-session by the CLI; the backend.settings fixtures over the real composition (throwaway USER_CONFIG paths, the store's own persisted schema/2 document as the live evidence); the chat-row fixtures over the real composition (throwaway roots, one real dummy .gguf on disk for the §20 scan) — chat.send admitted against the default backend endpoint with no llama-server present, so the run's terminal band is the honestly observed FAILED (EngineError, connection refused), never a fabricated completion; the inference.update fixtures over the same real composition (throwaway roots — the persisted profile evidence: schema canonsim.workbench.inference/1, the accepted partial update temperature 0.65 + top_k 20 landing verbatim, the three rejections loud: the unknown field, the bad type, the partial chain)"
 }
