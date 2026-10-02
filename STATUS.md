@@ -1,60 +1,60 @@
-Iteration: iter-303 (`overhead-audit` — the owner's audit request
-  over the proposed iter-N-overhead-audit task; R1 doc/state + one
-  R2-class check extension): PHASE A MEASURED — the full suite
-  2529+1 in 90.7s, top-40 all 0.5–2.1s, the profiled "duplicate
-  simulation" suites cost 0.46s (divergence_probe) + 0.24s
-  (semantic_diff) + 1.89s (topology) — the B3/B4/B5 performance
-  premise FALSIFIED by measurement (savings < 0.5% of suite time);
-  the REAL per-iteration overhead measured in TOKENS: the mandatory
-  reading carried ~48k tokens of which ~14k was HISTORY (the
-  pre-302 DONE narratives in this file's Next step + the TASKS
-  ledger's restated detail); the audit's C1 re-scoped to where the
-  history actually lived and EXECUTED: the old DONE blocks deleted
-  (the reports + worklog + git stay the owners), the TASKS ledger
-  lines compressed to true one-liners (the header's own
-  "never restated here" law), the FWL §0 stale "not yet in repo"
-  record retired; C3 MEASURED GREEN and EXECUTED: the topology
-  full-row pin (every map row's reads+emits exactly pinned, 93/93
-  at HEAD, zero resync — the map header's own claim now executed
-  in full, two new teeth tests); B1/B2/C4 rejected-with-numbers or
-  owner-proposal-only (the report's verdict table); the audit's own
-  false positive RETRACTED at byte level (a rendered `[m` artifact
-  had mimicked a corrupted CI trigger — the report's §D: verify at
-  the byte layer before recording a P0)
+Iteration: iter-304 (`tokenfloor` — the owner's «продолжай
+  фронтенд / перепроверь прошлые итерации + стили без хардкода»
+  call; R2 frontend-local): the re-verification pass first — the
+  FULL check packet re-run green at HEAD (2531+1 pytest, ruff,
+  docguard, topology --check, 221 vitest, tsc, build) + the live
+  composition re-verified end-to-end over the real gateway (all
+  seven surfaces clicked through, zero console errors); the audit's
+  finding: V1 (iter-297) tokenized COLORS only — VISUAL_SYSTEM_UI
+  §2.1's own law names raw scattered dimensions "the same violation
+  as raw colors" and §2.2 demands ONE typography contract, but
+  styles.css carried 105 raw dimension literals (fourteen organic
+  font sizes, the mono family copy-pasted THIRTEEN times, seven
+  `font-weight: 600`, five radius values); EXECUTED: the visual
+  floor's SECOND row (V2) — the typography contract + the radius
+  scale tokenized in :root (the seven-step type scale, the family
+  stacks, --weight-strong, --tracking-label, --radius-s/m/l/pill;
+  max drift +0.04rem = 0.56px), the architecture guard's V2 scan
+  added (mutation-verified: font-size / family-stack / radius
+  violations each caught red), the computed styles verified live in
+  the browser (root 14px, h1 14.7px, the mono stack, the radii);
+  the spacing scale (131 layout-affecting declarations) declared
+  the NEXT visual row — its own visual-proof pass, never silently
+  folded into this one
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2531 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; the full-suite
-  wall-clock re-measured post-change in the report's §A) ·
+  --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-10-03 ·
-Scope: STATUS.md (the header + the Next-step history collapse),
-  docs/TASKS.md (the ledger compressed to one-liners + the
-  iter-303 row, iter-293 evicted), worklog.md (the iter-303 entry,
-  iter-293 evicted), docs/FRONTEND_WEB_LAW.md (§0's stale "not yet"
-  record retired), scripts/topology.py (the full-row pin),
-  tests/test_topology.py (two non-watchlist drift tests),
-  docs/SSI_TOPOLOGY.md (the §0 pin description), docs/iterations/
-  iter-303-overhead-audit-report.md (new) — 8 changed/created
-  (7 modified + 1 created; R1 doc/state + the R2 check extension;
-  zero Python behavior change outside the check's teeth, zero canon
-  change, the LOG untouched, zero corpus price; NO test deleted or
-  weakened — 2 added, the suite count 2529+1 → 2531+1)
+Scope: frontend/src/app/composition/styles.css (105 literal
+  usages tokenized + :root's 17 new tokens),
+  frontend/tests/architecture/guard.test.ts (the V2 scan + the
+  docstring), frontend/README.md (the V2 row),
+  docs/VISUAL_SYSTEM_UI.md (§2's web-client token form LANDED
+  note), docs/TASKS.md (the ledger, iter-294 evicted), STATUS.md
+  (this header + the Next step), worklog.md (the iter-304 entry,
+  iter-294 evicted), docs/iterations/iter-304-tokenfloor-report.md
+  (new) — 8 changed/created (7 modified + 1 created; R2
+  frontend-local; zero Python change, zero canon change, the LOG
+  untouched, zero corpus price; NO test deleted or weakened — 1
+  added, vitest 221 → 222)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
-  first row + the V1 visual floor LANDED (iter-293/297); Phase 3's
-  SEVEN rows LANDED (iter-294/295/296/298/299/300/301) + the IA
-  REPAIR LANDED (iter-297, D-247); the owner-side bands CLOSED LIVE
-  (iter-302: chat COMPLETED, models ACTIVE/EVICTED, fetch COMPLETED,
-  S0-4 with a live LLM — over a real sandbox llama.cpp); the next
-  frontend rows the owner's call: the streaming admission (SSE — the
-  backend gateway contract first), the acceptance matrix, the
-  DECISIONS collapse (the owner's call); the standing boundaries:
-  SSE/WebSocket, Tauri, PWA, the Settings Appearance section (no
-  persisted store) — each its own admission (the import form's
-  native file/folder picker rides the Tauri row). The world track:
-  W8's remaining rows the owner's call. The ssi family COMPLETE
-  except ssi-5, owner-gated.
+  first row + the V1/V2 visual floors LANDED (iter-293/297/304);
+  Phase 3's SEVEN rows LANDED (iter-294/295/296/298/299/300/301) +
+  the IA REPAIR LANDED (iter-297, D-247); the owner-side bands
+  CLOSED LIVE (iter-302: chat COMPLETED, models ACTIVE/EVICTED,
+  fetch COMPLETED, S0-4 with a live LLM — over a real sandbox
+  llama.cpp); the next frontend rows the owner's call: the
+  streaming admission (SSE — the backend gateway contract first),
+  the acceptance matrix, the DECISIONS collapse, the SPACING scale
+  (the visual floor's third row, 131 declarations); the standing
+  boundaries: SSE/WebSocket, Tauri, PWA, the Settings Appearance
+  section (no persisted store) — each its own admission (the
+  import form's native file/folder picker rides the Tauri row).
+  The world track: W8's remaining rows the owner's call. The ssi
+  family COMPLETE except ssi-5, owner-gated.
 
 
 
@@ -123,31 +123,25 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-303 DONE: overhead-audit (the owner's audit request; R1
-  doc/state + the R2-class full-row pin).** Phase A measured: the
-  suite 2529+1 in 90.7s (top-40 all 0.5–2.1s); the B3/B4/B5
-  performance premise FALSIFIED (savings < 0.5% of suite time); the
-  real per-iteration overhead was ~14k tokens of HISTORY in the
-  mandatory reading — now cut (the pre-302 DONE narratives deleted
-  from this section — the RU reports + worklog + git stay the
-  owners; the TASKS ledger compressed to true one-liners; FWL §0's
-  stale "not yet in repo" record retired); C3 executed (the topology
-  full-row pin — every map row's reads+emits exactly pinned, 93/93
-  green at HEAD, zero resync, two new teeth tests); the audit's own
-  CI-trigger false positive retracted at the byte layer (a rendered
-  `[m` artifact mimicking a corrupted workflow trigger — never a
-  repo defect; the report's §D: verify bytes before recording a
-  P0); B1/B2/C4 rejected with numbers or left as owner proposals
-  (the report's verdict table).
-  The owner's RU report:
-  docs/iterations/iter-303-overhead-audit-report.md.
-Next: the owner's calls — (1) the B1/C4 law diffs: adopt or reject
-  (the report's §E — both small, both currently low-value by the
-  measurements); (2) the standing queue unchanged: the streaming
+**iter-304 DONE: tokenfloor (the owner's «стили без хардкода»
+  call over the re-verification pass; R2 frontend-local).** The
+  re-verification: the full packet green at HEAD (2531+1 + ruff +
+  docguard + topology --check + 221 vitest + tsc + build) + the
+  live composition re-verified (all seven surfaces, zero console
+  errors). The finding: V1 tokenized colors only; styles.css
+  carried 105 raw dimension literals. Executed: V2 — the typography
+  contract + the radius scale tokenized, the guard's V2 scan
+  mutation-verified, the computed styles verified live. The RU
+  report: docs/iterations/iter-304-tokenfloor-report.md.
+Next: the owner's calls — (1) the SPACING scale (the visual floor's
+  third row: 131 layout-affecting padding/margin/gap declarations
+  with 17 organic values — needs its own visual-proof pass per
+  surface); (2) the standing queue unchanged: the streaming
   admission (SSE — the backend gateway contract first, R3/R4-class),
   the acceptance matrix, the DECISIONS collapse (36→30, the owner's
   call), the tooling floor's remaining rows (the Playwright-class
-  multi-tab smoke), and the world track's parallel rows.
+  multi-tab smoke), the B1/C4 law diffs from iter-303 (adopt or
+  reject), and the world track's parallel rows.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns

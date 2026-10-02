@@ -27,8 +27,33 @@
   --row-selected-history: #2b2640;
   --text-mono: #b8c4cf;
   --border-strong: #3d4a58;
-  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-  font-size: 14px;
+  /* The typography contract (VISUAL_SYSTEM_UI §2.2 — font metrics are
+     layout; the web client's token form, iter-304): the two family
+     stacks, the seven-step scale, the strong weight, the label
+     tracking. A font size / family / weight / letter-spacing outside
+     this set is a V2 guard violation — a raw literal, never a token
+     by name. The scale consolidates the fourteen organic sizes onto
+     seven steps (the max drift +0.04rem = 0.56px at the 14px root). */
+  --font-body-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, monospace;
+  --font-root: 14px;
+  --font-micro: 0.72rem;
+  --font-meta: 0.78rem;
+  --font-compact: 0.84rem;
+  --font-body: 0.9rem;
+  --font-heading: 0.95rem;
+  --font-heading-l: 1rem;
+  --font-heading-xl: 1.05rem;
+  --weight-strong: 600;
+  --tracking-label: 0.05em;
+  /* The radius scale (§2.1's RADIUS row — a radius is a token, never
+     a raw literal; the pill carries the 999px semantics by name). */
+  --radius-s: 4px;
+  --radius-m: 6px;
+  --radius-l: 8px;
+  --radius-pill: 999px;
+  font-family: var(--font-body-family);
+  font-size: var(--font-root);
 }
 
 * {
@@ -40,18 +65,18 @@ body {
   color: var(--text);
 }
 code {
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-mono);
   font-size: 0.92em;
   background: var(--surface-2);
   border: 1px solid var(--line);
-  border-radius: 3px;
+  border-radius: var(--radius-s);
   padding: 0 4px;
 }
 button {
   background: var(--surface-2);
   color: var(--text);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: var(--radius-s);
   padding: 3px 10px;
   font: inherit;
   cursor: pointer;
@@ -68,7 +93,7 @@ select {
   background: var(--surface-2);
   color: var(--text);
   border: 1px solid var(--line);
-  border-radius: 4px;
+  border-radius: var(--radius-s);
   padding: 3px 6px;
   font: inherit;
 }
@@ -97,7 +122,7 @@ select {
   gap: 8px 16px;
 }
 .app-header-row h1 {
-  font-size: 1.05rem;
+  font-size: var(--font-heading-xl);
   margin: 0;
 }
 .app-header-row .strip {
@@ -109,12 +134,12 @@ select {
 .surface-note {
   color: var(--muted);
   margin: 2px 0 6px;
-  font-size: 0.9rem;
+  font-size: var(--font-body);
 }
 .tag {
-  font-size: 0.72rem;
+  font-size: var(--font-micro);
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 1px 8px;
   color: var(--muted);
   vertical-align: middle;
@@ -147,17 +172,17 @@ select {
   gap: 12px;
   align-items: center;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: var(--font-body);
 }
 .spacer {
   flex: 1;
 }
 .freshness {
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  font-size: 0.78rem;
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-label);
+  font-size: var(--font-meta);
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 1px 9px;
 }
 .freshness-live {
@@ -187,18 +212,18 @@ select {
 .surface {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-l);
   padding: 14px 16px;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 .surface-header h2 {
-  font-size: 1rem;
+  font-size: var(--font-heading-l);
   margin: 0;
 }
 .surface-header h3 {
-  font-size: 0.92rem;
+  font-size: var(--font-heading);
   margin: 6px 0 2px;
 }
 
@@ -207,7 +232,7 @@ select {
   grid-template-columns: auto 1fr;
   gap: 3px 12px;
   margin: 0;
-  font-size: 0.88rem;
+  font-size: var(--font-body);
 }
 .status-grid dt {
   color: var(--muted);
@@ -221,9 +246,9 @@ select {
 }
 
 .banner {
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   padding: 7px 10px;
-  font-size: 0.86rem;
+  font-size: var(--font-body);
   border: 1px solid var(--line);
 }
 .banner-resync {
@@ -251,7 +276,7 @@ select {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  font-size: 0.88rem;
+  font-size: var(--font-body);
   color: var(--muted);
 }
 
@@ -282,7 +307,7 @@ select {
   text-align: left;
   border: none;
   border-left: 2px solid transparent;
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
   background: transparent;
   padding: 7px 10px;
   font: inherit;
@@ -309,7 +334,7 @@ select {
   border-top: 1px solid var(--line);
   border-left: 2px solid transparent;
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: var(--font-compact);
 }
 .shell-item-diagnostics:hover:not(:disabled) {
   color: var(--text);
@@ -343,7 +368,7 @@ select {
   margin: 0 0 12px;
 }
 .diag-tab {
-  font-size: 0.85rem;
+  font-size: var(--font-compact);
   padding: 4px 12px;
   color: var(--muted);
 }
@@ -362,13 +387,13 @@ select {
 .empty,
 .empty-inspector {
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: var(--font-body);
   margin: 4px 0;
 }
 
 .vlist {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
 }
 .trow {
@@ -378,7 +403,7 @@ select {
   align-items: center;
   padding: 0 10px;
   height: 100%;
-  font-size: 0.84rem;
+  font-size: var(--font-compact);
   border-bottom: 1px solid var(--row-divider);
   cursor: pointer;
   white-space: nowrap;
@@ -399,7 +424,7 @@ select {
 }
 .cell-seq {
   color: var(--accent);
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-mono);
 }
 .cell-type {
   color: var(--muted);
@@ -407,12 +432,12 @@ select {
 .cell-op,
 .cell-id {
   color: var(--muted);
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
 .inspector {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
   max-height: 220px;
   overflow: auto;
@@ -420,7 +445,7 @@ select {
 .inspector pre {
   margin: 0;
   padding: 10px;
-  font-size: 0.8rem;
+  font-size: var(--font-meta);
   color: var(--text-mono);
 }
 
@@ -433,8 +458,8 @@ select {
    list + the bounded event window's own table shape. */
 .runs-block h3 {
   margin: 4px 0 2px;
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: var(--font-heading);
+  font-weight: var(--weight-strong);
 }
 .runs-list {
   list-style: none;
@@ -448,10 +473,10 @@ select {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.86rem;
+  font-size: var(--font-body);
   padding: 3px 6px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
 }
 .runs-row:hover {
@@ -459,10 +484,10 @@ select {
 }
 .runs-open {
   padding: 2px 10px;
-  font-size: 0.8rem;
+  font-size: var(--font-meta);
 }
 .runs-name {
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-mono);
   color: var(--history);
 }
 .runs-meta {
@@ -479,17 +504,17 @@ select {
   grid-template-columns: 54px 168px 158px 1fr 64px 120px;
   gap: 10px;
   padding: 0 10px;
-  font-size: 0.74rem;
+  font-size: var(--font-meta);
   color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-label);
 }
 .orow-list {
   list-style: none;
   margin: 0;
   padding: 0;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
   max-height: 420px;
   overflow: auto;
@@ -500,7 +525,7 @@ select {
   gap: 10px;
   align-items: center;
   padding: 3px 10px;
-  font-size: 0.84rem;
+  font-size: var(--font-compact);
   border-bottom: 1px solid var(--row-divider);
   cursor: pointer;
   white-space: nowrap;
@@ -524,9 +549,9 @@ select {
   color: var(--muted);
 }
 .cell-imp {
-  font-size: 0.74rem;
+  font-size: var(--font-meta);
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   text-align: center;
   color: var(--muted);
 }
@@ -536,7 +561,7 @@ select {
 }
 .controls-note {
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: var(--font-meta);
 }
 .probe-list {
   list-style: none;
@@ -550,13 +575,13 @@ select {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 0.84rem;
+  font-size: var(--font-compact);
 }
 .probe-label {
   color: var(--muted);
 }
 .probe-outcome {
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-mono);
 }
 .probe-DELIVERED {
   color: var(--accent);
@@ -584,7 +609,7 @@ button.probe {
   margin: 0 0 14px;
 }
 .section-tab {
-  font-size: 0.85rem;
+  font-size: var(--font-compact);
   padding: 4px 12px;
   color: var(--muted);
 }
@@ -609,33 +634,33 @@ button.probe {
 }
 .settings-field input[type="text"] {
   width: 100%;
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.86rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-body);
 }
 .settings-label {
-  font-size: 0.84rem;
+  font-size: var(--font-compact);
   color: var(--text);
 }
 .settings-label em {
   color: var(--muted);
   font-style: normal;
-  font-size: 0.78rem;
+  font-size: var(--font-meta);
 }
 .preview-block h3 {
   margin: 6px 0 2px;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: var(--font-body);
+  font-weight: var(--weight-strong);
 }
 .command-preview {
   margin: 0;
   padding: 10px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
   max-height: 180px;
   overflow: auto;
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-meta);
   color: var(--text-mono);
   white-space: pre-wrap;
   word-break: break-all;
@@ -647,7 +672,7 @@ button.probe {
    are the dual-read STATE classes), and the composer. */
 .chat-viewport {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
   min-height: 220px;
   max-height: 46vh;
@@ -664,7 +689,7 @@ button.probe {
 }
 .chat-bubble {
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--radius-l);
   padding: 7px 10px;
   max-width: 86%;
 }
@@ -680,8 +705,8 @@ button.probe {
 }
 .chat-role {
   display: block;
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
+  font-size: var(--font-micro);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 3px;
@@ -693,20 +718,20 @@ button.probe {
 }
 .chat-provenance {
   margin: 6px 0 0;
-  font-size: 0.74rem;
+  font-size: var(--font-meta);
   color: var(--muted);
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-mono);
   overflow-wrap: anywhere;
 }
 .chat-lane {
-  font-size: 0.84rem;
+  font-size: var(--font-compact);
 }
 .chat-lane .empty {
   margin: 2px 0;
 }
 .chat-repoll {
   margin-left: 10px;
-  font-size: 0.78rem;
+  font-size: var(--font-meta);
 }
 .chat-composer {
   display: flex;
@@ -721,7 +746,7 @@ button.probe {
   background: var(--surface-2);
   color: var(--text);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   padding: 6px 8px;
 }
 .chat-overrides {
@@ -760,24 +785,24 @@ button.probe {
   align-items: center;
   gap: 6px;
   white-space: nowrap;
-  font-size: 0.9rem;
+  font-size: var(--font-body);
 }
 .preset-preview {
   flex-basis: 100%;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
   padding: 8px 10px;
 }
 .preset-description {
   margin: 0 0 6px;
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: var(--font-body);
 }
 .preset-diff {
   margin: 0 0 8px;
   padding-left: 18px;
-  font-size: 0.86rem;
+  font-size: var(--font-body);
 }
 .preset-diff li {
   margin: 2px 0;
@@ -793,35 +818,35 @@ button.probe {
   display: inline-flex;
   align-items: center;
   border: 1px solid var(--border-strong);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   background: var(--surface-2);
   overflow: hidden;
 }
 .pinned-reveal {
   border: none;
-  border-radius: 999px 0 0 999px;
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
   background: transparent;
   padding: 2px 10px;
-  font-size: 0.82rem;
+  font-size: var(--font-compact);
 }
 .pinned-unpin {
   border: none;
-  border-radius: 0 999px 999px 0;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
   background: transparent;
   padding: 2px 8px;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: var(--font-compact);
 }
 .chain-region {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
   padding: 8px 10px;
   margin: 10px 0;
 }
 .chain-region h3 {
   margin: 0 0 6px;
-  font-size: 0.95rem;
+  font-size: var(--font-heading);
 }
 .chain-list {
   margin: 0;
@@ -843,13 +868,13 @@ button.probe {
 }
 .chain-member-draft {
   background: var(--row-hover);
-  border-radius: 4px;
+  border-radius: var(--radius-s);
   padding: 4px 6px;
 }
 .chain-order {
   color: var(--muted);
-  font-size: 0.8rem;
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: var(--font-meta);
+  font-family: var(--font-mono);
 }
 .inference-categories {
   display: flex;
@@ -859,7 +884,7 @@ button.probe {
 }
 .category-section {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
 }
 .category-toggle {
@@ -868,7 +893,7 @@ button.probe {
   text-align: left;
   background: transparent;
   border: none;
-  border-radius: 6px 6px 0 0;
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
   padding: 7px 10px;
 }
 .category-toggle:hover:not(:disabled) {
@@ -876,11 +901,11 @@ button.probe {
   background: var(--row-hover);
 }
 .category-title {
-  font-weight: 600;
+  font-weight: var(--weight-strong);
 }
 .category-count {
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: var(--font-meta);
   margin-left: 6px;
 }
 .control-row {
@@ -893,7 +918,7 @@ button.probe {
 }
 .control-row-revealed {
   background: var(--row-selected-live);
-  border-radius: 4px;
+  border-radius: var(--radius-s);
 }
 .control-head {
   display: flex;
@@ -902,10 +927,10 @@ button.probe {
   gap: 8px;
 }
 .control-name {
-  font-weight: 600;
+  font-weight: var(--weight-strong);
 }
 .control-flag {
-  font-size: 0.8rem;
+  font-size: var(--font-meta);
   color: var(--muted);
 }
 .pin-button {
@@ -916,16 +941,16 @@ button.probe {
   background: transparent;
   color: var(--muted);
   padding: 0 4px;
-  font-size: 0.9rem;
+  font-size: var(--font-body);
 }
 .pin-button[aria-pressed="true"] {
   color: var(--config);
 }
 .control-state {
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
+  font-size: var(--font-micro);
+  letter-spacing: var(--tracking-label);
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: var(--radius-pill);
   padding: 1px 8px;
 }
 /* The resolver's state vocabulary as STATE-class token mappings —
@@ -959,7 +984,7 @@ button.probe {
 }
 .control-doc {
   margin: 3px 0 5px;
-  font-size: 0.78rem;
+  font-size: var(--font-meta);
   color: var(--muted);
   overflow-wrap: anywhere;
 }
@@ -980,7 +1005,7 @@ button.probe {
 .control-reasons {
   margin: 5px 0 0;
   padding-left: 16px;
-  font-size: 0.78rem;
+  font-size: var(--font-meta);
   color: var(--muted);
 }
 .control-reasons li {
@@ -1004,7 +1029,7 @@ button.probe {
 }
 .models-arrival-form {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
   padding: 10px 12px;
   display: flex;
@@ -1013,24 +1038,24 @@ button.probe {
 }
 .models-arrival-form h3 {
   margin: 0;
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: var(--font-heading);
+  font-weight: var(--weight-strong);
 }
 .models-arrival-form textarea {
   width: 100%;
   resize: vertical;
   min-height: 64px;
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.84rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-compact);
   background: var(--surface);
   color: var(--text);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   padding: 6px 8px;
 }
 .models-arrival-form .settings-field input {
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.86rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-body);
 }
 .models-list {
   list-style: none;
@@ -1042,7 +1067,7 @@ button.probe {
 }
 .models-row {
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: var(--radius-m);
   background: var(--surface-2);
   padding: 8px 12px;
   display: flex;
@@ -1056,20 +1081,20 @@ button.probe {
   gap: 10px;
 }
 .models-name {
-  font-weight: 600;
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 0.9rem;
+  font-weight: var(--weight-strong);
+  font-family: var(--font-mono);
+  font-size: var(--font-body);
   overflow-wrap: anywhere;
 }
 .models-row-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
-  font-size: 0.8rem;
+  font-size: var(--font-meta);
   color: var(--muted);
 }
 .models-digest {
-  font-family: "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-mono);
   overflow-wrap: anywhere;
 }
 /* The §20 MODEL ladder's own vocabulary as STATE-class token

@@ -31,6 +31,15 @@
  *       wires features AND state together.
  *   R8  the test seam: src never imports from tests.
  *
+ * The visual floor (VISUAL_SYSTEM_UI — the token root is the one
+ * source of truth; a literal outside it is drift):
+ *   V1  colors (§2/§3): no raw hex/rgb outside `:root` (iter-297).
+ *   V2  dimensions + typography (§2.1/§2.2): no raw font-size
+ *       (px/rem), font-family stack, numeric font-weight, or
+ *       border-radius px outside `:root` (iter-304 — the seven-step
+ *       type scale, the family stacks, the weight, the radius
+ *       scale; em ratios stay legal as contextual metrics).
+ *
  * Scans are CALL-FORM patterns (e.g. `fetch(`, `localStorage.`) so
  * law-restating docstrings never false-positive — a comment saying
  * "no component ever sees fetch" is documentation, not usage.
@@ -265,6 +274,45 @@ describe("V1 — the visual floor: color literals live only in the token root (V
       const hits = chunk.match(literal);
       if (hits !== null) {
         violations.push(`${cssPath} ${where}: ${hits.join(", ")}`);
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("V2 — the dimension floor: typography + radius literals live only in the token root (VISUAL_SYSTEM_UI §2.1/§2.2)", () => {
+  it("styles.css: no raw font-size (px/rem), font-family stack, numeric font-weight, or border-radius px outside :root", () => {
+    const cssPath = join(SRC, "app", "composition", "styles.css");
+    const css = readFileSync(cssPath, "utf8");
+    const rootStart = css.indexOf(":root");
+    expect(rootStart).toBeGreaterThanOrEqual(0);
+    const rootEnd = css.indexOf("}", rootStart);
+    const chunks: readonly (readonly [string, string])[] = [
+      ["before :root", css.slice(0, rootStart)],
+      ["after :root", css.slice(rootEnd + 1)],
+    ];
+    const violations: string[] = [];
+    for (const [where, chunk] of chunks) {
+      // font-size: an ABSOLUTE literal (px/rem) is a token violation;
+      // em/% ratios stay legal (the code element's contextual ratio —
+      // relative metrics, never a scale decision).
+      for (const hit of chunk.match(/font-size:\s*[\d.]+(?:px|rem)/g) ?? []) {
+        violations.push(`${cssPath} ${where}: ${hit}`);
+      }
+      // font-family: a quoted stack is a token violation (the family
+      // contract is :root's --font-body-family / --font-mono).
+      for (const hit of chunk.match(/font-family:\s*"/g) ?? []) {
+        violations.push(`${cssPath} ${where}: ${hit}…"`);
+      }
+      // font-weight: a numeric weight is a token violation (the
+      // weight hierarchy is :root's --weight-*).
+      for (const hit of chunk.match(/font-weight:\s*\d+/g) ?? []) {
+        violations.push(`${cssPath} ${where}: ${hit}`);
+      }
+      // border-radius: a raw px radius is a token violation (0 in a
+      // compound is legal — the square corner's own semantic).
+      for (const hit of chunk.match(/border-radius:\s*[^;]*\d+px[^;]*/g) ?? []) {
+        violations.push(`${cssPath} ${where}: ${hit.trim()}`);
       }
     }
     expect(violations).toEqual([]);

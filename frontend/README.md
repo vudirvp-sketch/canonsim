@@ -76,8 +76,15 @@ imports; features couple to state only via `import type`; one
 composition root; src never imports tests; **V1 — the visual floor
 (iter-297): no raw color literals outside the `:root` token set**
 (a color is a named token, never a hex in a rule — VISUAL_SYSTEM_UI
-§2/§3; the scan caught and closed a standing 9-literal violation).
-A violation is a red
+§2/§3; the scan caught and closed a standing 9-literal violation);
+**V2 — the dimension floor (iter-304): no raw font-size (px/rem),
+font-family stack, numeric font-weight, or border-radius px outside
+`:root`** (VISUAL_SYSTEM_UI §2.1/§2.2 — the seven-step type scale
+`--font-micro/meta/compact/body/heading/heading-l/heading-xl`, the
+`--font-body-family`/`--font-mono` stacks, `--weight-strong`,
+`--tracking-label`, and `--radius-s/m/l/pill`; em ratios stay legal
+as contextual metrics; the scan's mutation check catches all three
+violation classes). A violation is a red
 test naming the file and line — never silent drift. The heavier
 instruments named by the law (dependency-cruiser / eslint-
 boundaries, the Playwright-class multi-tab smoke) stay parked rows,

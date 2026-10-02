@@ -77,7 +77,13 @@ Every visual decision routes through the semantic token set (the
 taxonomy below — §10's existing law). The deleted Redot theme file
 `workbench/presentation/redot/themes/workbench_theme.tres` was the
 first carrier (D-245 — recovery: git history); the web client
-carries its own token form going forward. The token names follow the
+carries its own token form going forward — LANDED:
+`frontend/src/app/composition/styles.css`'s `:root` (the colors
+iter-297/V1; the typography contract + the radius scale
+iter-304/V2 — the seven-step type scale, the two family stacks,
+the strong weight, the label tracking, RADIUS_S/M/L/PILL; enforced
+by the architecture guard's V1/V2 scans, a literal outside `:root`
+is a red test). The token names follow the
 role taxonomy:
 
 ```text
