@@ -14,8 +14,12 @@ arrival, the §20 load ladder; the SETTINGS SECONDARY NAV — the
 surface's own sections over real documents: Deployment | About) +
 the IA REPAIR (iter-297, D-247: the product/diagnostic registry
 split — a vertical product rail + the subdued Diagnostics entry,
-FRONTEND_UIUX_LAW §2.1's navigation contract).
-The law: `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
+FRONTEND_UIUX_LAW §2.1's navigation contract) + THE STREAM
+TRANSPORT (iter-306: the streaming admission's steps 3+4 — the
+EventSource adapter behind the typed client, the focused-tab
+budget policy, the dual-transport Trajectory feed).
+The law: `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the stream
+admission §5; the entry surface
 `docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md`).
 
 ## What this is (and is not)
@@ -24,9 +28,12 @@ The law: `docs/FRONTEND_WEB_LAW.md` (the S0 gate §2; the entry surface
   runtime-validated at the client boundary, replaceable,
   non-authoritative. The browser is an untrusted downstream client.
 - **Is not**: a second simulator, event-log authority, rules engine,
-  or LLM semantic authority. No SSE/WebSocket in S0 (POST `/op`
-  only). No browser storage as truth; each tab is an independent
-  gateway client.
+  or LLM semantic authority. POST `/op` remains the always-valid
+  transport; the SSE stream (iter-306) rides the landed GET
+  `/events` gateway contract (iter-305) — never a second event
+  source (the frames are the SAME bytes `session.events` replays).
+  No browser storage as truth; each tab is an independent gateway
+  client — and only the focused tab holds a live stream.
 
 ## Run it
 
@@ -67,9 +74,12 @@ The architecture guard (`tests/architecture/guard.test.ts`) is the
 tooling floor's first landed row (FRONTEND_WEB_LAW §11's
 dependency-boundary check, the backend `test_architecture.py`'s
 parity form): it enforces, as executable law — fetch ONLY in the
-typed gateway client (the one transport adapter); no
-XMLHttpRequest/EventSource/WebSocket/serviceWorker before their
-gateway contracts (the stream admission); no browser storage as
+typed gateway client (the one transport adapter); EventSource ONLY
+in the stream adapter (`api/gateway/stream.ts`, iter-306 — the
+admitted step 3 landing over the iter-305 contract; XMLHttpRequest/
+WebSocket/serviceWorker still forbidden everywhere — every further
+transport opens only through its own gateway contract + admission);
+no browser storage as
 truth (localStorage/sessionStorage/BroadcastChannel/indexedDB/
 caches); `src/api/**` imports nothing upward; no cross-feature
 imports; features couple to state only via `import type`; one
@@ -126,7 +136,7 @@ The product routes (the rail):
 | Session (lifecycle) | the lease closure over the existing ops: attach under the CAS revision guard, detach under the lease guard — REQUESTED → ACCEPTED/REJECTED → EFFECTIVE → OBSERVED, never collapsed; STALE_REVISION/LEASE_EXPIRED verbatim with the gateway's own reason; G4 — no auto-retry, a fresh `client_request_id` per explicit attempt |
 | Gateway (status) | the `app.status` round-trip + the honest rejection probes (DOMAIN_REJECTED / STALE_REVISION / DUPLICATE_REQUEST) — the DELIVERED/TRANSPORT/MISMATCH lanes never collapse |
 | Load probe | drives real `session.attach` ops (the CAS loop) — the S0-4 measurement instrument; with a model loaded the measurement runs alongside a live llama-server (iter-302: ≈108–110 ops/s, the S0-4 criterion literally met) |
-| Trajectory | the LIVE session tail (`session.events`): virtualized ≥10k rows (only the window mounts), the semantic-sequence cursor, event-id selection, RESYNC_REQUIRED handled honestly, the LIVE label (volatile tail, never durable history) |
+| Trajectory | the LIVE session tail — DUAL-TRANSPORT (iter-306): the SSE stream feed (the default) or the POST poll ladder (1s/2s/5s/off — S0's mandate, always valid, the stream's own fallback; the buffer survives the switch — one evidence world, two transports): virtualized ≥10k rows (only the window mounts), the semantic-sequence cursor, event-id selection, RESYNC_REQUIRED handled honestly (the stream lane performs the SAME one-POST recovery the poll lane applies, then re-begins from the reconciled cursor), the LIVE label (volatile tail, never durable history); the stream phase line (IDLE/CONNECTING/OPEN/PAUSED/RESYNC/REJECTED/FAILED) + the honest transport notes verbatim |
 | Chat | the conversation world (`chat.send` → `run.get` → `run.cancel` + the header's `model.list`/`model.states` + the `inference.read` compact projection): every turn an honest RUN — the admission answer is STARTING (never the completion), the bounded 700ms observation loop (dead at terminal/TRANSPORT/unmount, the re-poll explicit), the transcript per-surface VOLATILE (chat history is not canon — unmount drops it like every surface's local buffer), the REQUESTED/EFFECTIVE provenance line per turn, the near-bottom follow law, the call-local overrides explicitly surfaced (never hidden samplers), the messages-context rule (only admitted turns + completed replies ride the next send), every lane verbatim (FAILED with the observed diagnostics; CANCELED/FAILED_TO_CANCEL as the terminal truth past a cancel); the COMPLETED band CLOSED LIVE (iter-302: a real reply + provenance over a sandbox llama.cpp — the transcript + screenshots in the report) |
 | Models | the model family's mirror (`model.list`/`model.states` + `model.load`/`model.unload` + `run.start` over model.fetch/model.import/model.digest, observed via `run.get`/`run.cancel`): the §20 ladder law rendered — the row's chip is `model.states`'s OWN answer per name (a discovered file proves nothing: discovered ≠ selected ≠ loading ≠ active), the ACTIVE slot is the load-state owner's, MISSING ≠ EMPTY ≠ NO MODELS rendered distinct; the arrival pane (the fetch form — the admission gate fires BEFORE any network over the pure-string normalize law; the import form's honest web shape — ABSOLUTE paths as text, the native file/folder picker the Tauri row's own standing concern); the §9 strong-identity affordance as the digest RUN (the honest long arm for a multi-GB file — cancellable and observable; the synchronous `model.inspect` stays a backend surface, never a frozen UI); every dispatch a RUN with a fresh idempotency key (G4), ONE run at a time, the bounded observation dead at terminal/TRANSPORT/unmount, and exactly ONE context re-read at the terminal (the OBSERVED baseline — the landed file rides the NEXT discovery scan, the ladder rests at its own truth), never polling; the honest disabled gates (FAILED is terminal — no re-selection; unload only while ACTIVE; everything off without a session) |
 | Inference | the generation-control WORKSPACE (`inference.read` + `inference.update` — the full control depth, never Chat's compact projection): the §21.2 regions — the preset row (a TRANSPARENT diff preview BEFORE the apply, the apply a plain update guarded on a CLEAN draft), the search over name/flag/category (a match is an explicit ask — it shows the advanced rows), the pinned quick-access strip (reveals, never second editors; a pin/unpin its own dispatch over the workspace section), the collapsible categories with honest counts (the six general-chat families open by default), the advanced rung, the ordered 9-member sampler chain (membership a DRAFT edit — the Save carries the WHOLE document, never a partial edit), the compiled preview read-only; the editors are DATA-DRIVEN over the read document's own value_type/forms/limits metadata (the UI never re-encodes the vocabulary — a new control lands by the server's document alone); every row renders the OBSERVED state + the resolver's reasons verbatim (configured-but-ineffective stays VISIBLE) + the §4 defaults ladder (baseline · upstream side by side); §8's closure over the persisted profile store — the Save sends ONLY the changed keys with a fresh idempotency key (G4), on ACCEPTED the returned document is the new OBSERVED baseline (the draft reconciles to the SERVER's answer), `applies: next-spawn` verbatim, no polling |
@@ -137,23 +147,40 @@ The product routes (the rail):
 
 - Every wire payload enters as `unknown` and is runtime-validated
   (`src/api/gateway/validators.ts`) — raw JSON never reaches a
-  component; unknown keys are contract violations, not noise.
+  component; unknown keys are contract violations, not noise. The
+  stream frames carry the SAME law (`stream.ts` validates every
+  frame's document through the zod frame validators before any
+  consumer sees it; a deviation is a CONTRACT_MISMATCH — the phase
+  goes FAILED with the detail, never a silent pass-through).
 - The client auto-retries nothing (G4): UNKNOWN and transport
-  ambiguity stay honest; a retry is an explicit user action.
+  ambiguity stay honest; a retry is an explicit user action — the
+  stream's own law: a semantic `stream.rejected` verdict NEVER
+  auto-reconnects (the stream stops, the verdict surfaces verbatim;
+  an explicit restart is the caller's decision).
+- The stream adapter OWNS its reconnection (never the browser's
+  auto-reconnect — the explicit-cursor wire law makes it duplicate
+  the replay window): the source is closed on every terminal/error,
+  the re-dial rides a bounded backoff (500ms doubling to a 5s cap,
+  reset on OPEN) from the adapter's own cursor; the focused-tab
+  policy holds ONE stream per visible+focused tab (a background tab
+  holds NO connection — STALE, the last-known presentation).
 - The live tail buffer is bounded (50k rows): presentation window,
   never a client-side log; durable history is the Observatory's —
   and the Observatory pane holds ONE bounded window (≤ the backend's
   200-row cap) at a time, the forward pagination replacing it, the
   event-id cursor never mixed with the LIVE sequence cursor.
 - One composition root (`src/app/composition/`); surfaces reach
-  the gateway only through the typed client; the transport adapter
-  is the only place `fetch` exists.
+  the gateway only through the typed client; the transport adapters
+  are the only places `fetch` and `EventSource` exist.
 - Synthetic load-test rows are flagged at the row, in the banner,
   and in the payload — presentation-only, never gateway truth.
 
 ## Not in S0 (the gate list)
 
-SSE/WebSocket; the layout manifest / surface registry; the full
+a SharedWorker stream transport (§5's own law — packaging-only
+shared transport needs its own gateway contract); WebSocket (only
+for a concrete bidirectional requirement); the layout manifest /
+surface registry; the full
 Observatory analytical suite (compare/graphs/cross-run — the ENTRY
 row has landed: the runs scan + the bounded window); PWA offline
 packaging; Tauri 2; V5.2 polish; JSON-Schema-driven settings (the

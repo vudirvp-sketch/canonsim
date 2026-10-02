@@ -1,34 +1,34 @@
-Iteration: iter-305 (`sse-contract` — the owner's «можешь начать
-  работы по SSE-контракту гейтвея и прочему» call; R4
-  public-API, D-248): the streaming admission's step 2 LANDED —
-  the explicit SSE gateway contract, BACKEND FIRST
-  (FRONTEND_WEB_LAW §5's admission order, never ahead): the
-  socket-free subscription core (gateway.py: `subscribe`'s §13
-  dual answer — REPLAY window + live tail, or RESYNC snapshot +
-  live tail — under the SAME coarse dispatch lock `_emit` appends
-  under, so the replay/live boundary is gapless by construction;
-  the bounded per-subscriber buffer with the OBSERVABLE overflow
-  terminal — the queued events drain in order, then the channel
-  closes, the retained stream never drops;
-  `stream_buffer_events <= retention_events` as construction law —
-  an overflowed consumer's reconnect ALWAYS replays; the
-  graceful-close reality measured and documented: no RST comes,
-  the writes buffer into the void, the bounded buffer is the
-  reliable dead-consumer end; `close_subscriptions` the
-  bounded-shutdown wake) + the GET /events SSE binding
-  (transport.py: the closed frame vocabulary — stream.open /
-  stream.rejected / stream.overflow / stream.close + the event
-  frames byte-identical to `session.events`' replay (the D4 byte
-  parity, the contract's proof — the SAME stream, never a second
-  event source); the heartbeat comment cadence; the SSE-standard
-  Last-Event-ID fallback cursor; the pre-stream 4xx guards + the
-  auth-required 403 — auth material never rides URLs; the unknown
-  session riding ONE stream.rejected frame at HTTP 200 — §8's
-  delivery/semantics split holds on the stream surface; the
-  bounded stop() waking every writer with its honest stream.close);
-  24 contract rows (tests/test_sse_stream.py, NEW); the browser
-  adapter (step 3) + the focused-tab budget policy (step 4) the
-  NEXT rows, each its own admission
+Iteration: iter-306 (`browserstream` — the owner's «продолжить
+  работу по фронтенду, например браузерный адаптер» call; R2
+  frontend-local): the streaming admission's steps 3+4 LANDED
+  (FRONTEND_WEB_LAW §5's order, behind the iter-305 contract): the
+  EventSource adapter behind the typed gateway client
+  (`frontend/src/api/gateway/stream.ts`): every frame runtime-
+  validated by the zod frame validators over the 8 live-captured
+  wire fixtures (the open REPLAY/RESYNC documents, the event
+  envelope, the rejected/overflow/close terminals, the 4xx guard
+  bodies — captured off the real gateway through a real socket,
+  the D4 byte parity asserted at capture time); OWN bounded
+  reconnection — NEVER the browser's auto-reconnect (the explicit-
+  parameter-wins cursor law makes it re-request the ORIGINAL
+  cursor and duplicate the replay window; a semantic rejection
+  would reconnect into the same verdict forever): the source is
+  closed on every terminal/error, the re-dial rides the bounded
+  backoff ladder (500ms→5s cap, reset on OPEN) from the adapter's
+  own cursor; the honest phase vocabulary IDLE/CONNECTING/OPEN/
+  PAUSED/RESYNC/REJECTED/FAILED (the §5.2 first-class failure
+  classes, never collapsed); the RESYNC answer hands the recovery
+  to the consumer — the same one-POST `session.events` read the
+  poll lane applies, then the re-begin from the reconciled cursor;
+  the focused-tab policy (step 4) in `useLiveTail`'s dual-
+  transport stream lane: only a visible+focused tab holds a
+  connection (visibilitychange + focus/blur), a background tab
+  holds NONE (STALE, last-known presentation), one stream per
+  tab, the POST poll ladder the always-valid fallback (the feed
+  selector — stream default); the architecture guard's R2
+  narrowed to the sanctioned adapter module (EventSource ONLY in
+  api/gateway/stream.ts, exactly like fetch's R1); 29 new test
+  rows (23 contract + 6 integration)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
@@ -36,41 +36,41 @@ Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 2555 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-10-03 ·
-Scope: workbench/api/gateway.py (the subscription core + the
-  stream config + the fan-out), workbench/api/transport.py (the
-  SSE binding + the stream lifecycle + the bounded stop),
-  tests/test_sse_stream.py (new, 24 rows),
-  tests/test_gateway.py (the resync config gains
-  stream_buffer_events=1 — the new construction invariant, the
-  assertions unchanged), docs/WORKBENCH_APP_LAW.md (§13's LANDED
-  form + §5's skeleton), docs/FRONTEND_WEB_LAW.md (§5's admission
-  step 2 marked LANDED), docs/AGENT_NAVIGATION.md (§1's workbench
-  + frontend rows), docs/SSI_TOPOLOGY.md (the two api rows),
-  docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
-  docs/TASKS.md (the ledger, iter-295 evicted), STATUS.md (this
-  header + the Next step), worklog.md (the iter-305 entry,
-  iter-295 evicted), docs/DECISIONS.md (D-248, R4 + PCC),
-  docs/iterations/iter-305-sse-contract-report.md (new) — 14
-  changed/created (12 modified + 2 created; R4 — INV-4 untouched
-  (no new network module: the SSE arm rides the sanctioned inbound
-  binding), zero canon change, the LOG untouched, zero corpus
-  price; NO test deleted or weakened — 24 added, one existing
-  config completed, pytest 2531+1 → 2555+1)
+Scope: frontend/src/api/gateway/{contracts,validators}.ts (the
+  stream frame types + the zod frame validators), frontend/src/
+  api/gateway/stream.ts (NEW — the adapter), frontend/src/features/
+  trajectory/{useLiveTail.ts, Trajectory.tsx} (the dual-transport
+  lane + the feed selector + the phase line), frontend/src/app/
+  composition/styles.css (one token-compliant rule), frontend/
+  tests/{helpers/fakeEventSource.ts (NEW), contract/stream.test.ts
+  (NEW, 23 rows), integration/Trajectory.test.tsx (the stream lane's
+  6 rows + the poll rows carried), fixtures/stream_*.json ×8 +
+  manifest.json, architecture/guard.test.ts (R2 narrowed)},
+  frontend/README.md, docs/{FRONTEND_WEB_LAW.md (§3's session-stream
+  row + §5's steps 3+4 LANDED), AGENT_NAVIGATION.md (§1's frontend/
+  row), frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map +
+  §5's boundaries), TASKS.md (the ledger, iter-296 evicted),
+  STATUS.md (this header + the Next step), worklog.md (the iter-306
+  entry, iter-296 evicted), iterations/iter-306-browserstream-
+  report.md (new)} — 20 changed/created (12 modified + 8 created;
+  R2 — frontend-local, zero Python change, INV-4 untouched (no new
+  network module — the browser rides the SANCTIONED iter-305 GET
+  /events binding), zero canon change, the LOG untouched, zero
+  corpus price; NO test deleted or weakened — 29 added, the 7
+  carried poll rows re-pinned to the explicit poll feed, vitest
+  222 → 251)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1/V2 visual floors LANDED (iter-293/297/304);
   Phase 3's SEVEN rows LANDED (iter-294/295/296/298/299/300/301) +
   the IA REPAIR LANDED (iter-297, D-247); the owner-side bands
-  CLOSED LIVE (iter-302: chat COMPLETED, models ACTIVE/EVICTED,
-  fetch COMPLETED, S0-4 with a live LLM — over a real sandbox
-  llama.cpp); THE STREAMING ADMISSION'S BACKEND CONTRACT LANDED
-  (iter-305, D-248 — the SSE gateway contract, admission step 2);
-  the next frontend rows the owner's call: the browser stream
-  adapter (admission step 3: the EventSource client behind the
-  typed gateway client + the zod frame validators) + the
-  focused-tab budget policy (step 4, rides 3), the acceptance
-  matrix, the DECISIONS collapse, the SPACING scale (the visual
-  floor's third row, 131 declarations); the standing boundaries:
-  the browser-side SSE/WebSocket adapter, Tauri, PWA, the Settings
+  CLOSED LIVE (iter-302); THE STREAMING ADMISSION LANDED — the
+  backend contract (iter-305, D-248) + the browser adapter + the
+  focused-tab policy (iter-306, steps 3+4); the next frontend rows
+  the owner's call: the acceptance matrix, the SPACING scale (the
+  visual floor's third row, 131 declarations), the DECISIONS
+  collapse, the tooling floor's remaining rows (the CI wiring, the
+  Playwright-class multi-tab smoke); the standing boundaries: a
+  SharedWorker stream transport, Tauri, PWA, the Settings
   Appearance section (no persisted store) — each its own admission
   (the import form's native file/folder picker rides the Tauri
   row). The world track: W8's remaining rows the owner's call.
@@ -143,23 +143,22 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-305 DONE: sse-contract (the owner's «начни работы по
-  SSE-контракту гейтвея» call; R4 public-API, D-248).** The
-  streaming admission's step 2: the explicit SSE gateway contract,
-  backend first — the socket-free subscription core + the GET
-  /events binding, the 24-row packet, the byte parity with
-  session.events, the bounded overflow/shutdown laws. The RU
-  report: docs/iterations/iter-305-sse-contract-report.md.
-Next: the owner's calls — (1) the BROWSER STREAM ADAPTER (admission
-  step 3: the EventSource/fetch-stream client behind the typed
-  gateway client, the zod frame validators over the live-captured
-  wire fixtures; the focused-tab budget policy rides it — step 4);
-  (2) the standing queue unchanged: the SPACING scale (the visual
-  floor's third row, 131 declarations), the acceptance matrix, the
-  DECISIONS collapse (36→30, the owner's call), the tooling floor's
-  remaining rows (the Playwright-class multi-tab smoke), the B1/C4
-  law diffs from iter-303 (adopt or reject), and the world track's
-  parallel rows.
+**iter-306 DONE: browserstream (the owner's «продолжить работу по
+  фронтенду, например браузерный адаптер» call; R2
+  frontend-local).** The streaming admission's steps 3+4: the
+  EventSource adapter behind the typed gateway client, the zod
+  frame validators over the live-captured wire fixtures, the
+  focused-tab budget policy in the UI — dual-transport live tail
+  (stream default, POST poll the fallback). The RU report:
+  docs/iterations/iter-306-browserstream-report.md.
+Next: the owner's calls — (1) the standing queue unchanged: the
+  SPACING scale (the visual floor's third row, 131 declarations),
+  the acceptance matrix, the DECISIONS collapse (36→30, the
+  owner's call), the tooling floor's remaining rows (the CI
+  wiring, the Playwright-class multi-tab smoke — the adapter's
+  focused-tab law is now executable there), the B1/C4 law diffs
+  from iter-303 (adopt or reject), and the world track's parallel
+  rows.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns

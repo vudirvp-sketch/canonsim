@@ -804,3 +804,81 @@ export interface InferenceUpdateChanges {
   readonly pinned?: readonly string[];
   readonly values?: Readonly<Record<string, unknown>>;
 }
+
+// ----------------------------------------------------------------- stream
+
+/**
+ * The §13 one-way stream's CONTROL-frame names (iter-306, the
+ * admission step 3 mirror of `workbench/api/transport.py`'s
+ * STREAM_FRAME_TYPES): the closed set the stream may emit BESIDES the
+ * EVENT_TYPES event frames. The event frames reuse `EventEnvelope`
+ * byte-identically (the D4 parity law — the stream is a DELIVERY of
+ * the same ordered events, never a second source).
+ */
+export const STREAM_CONTROL_FRAMES = [
+  "stream.open",
+  "stream.rejected",
+  "stream.overflow",
+  "stream.close",
+] as const;
+export type StreamControlFrame = (typeof STREAM_CONTROL_FRAMES)[number];
+
+/** The subscription mode vocabulary — §13's dual answer, closed. */
+export const STREAM_MODES = ["REPLAY", "RESYNC"] as const;
+export type StreamMode = (typeof STREAM_MODES)[number];
+
+/**
+ * The framed server-close reasons — the closed mirror of the
+ * gateway's STREAM_CLOSE_REASONS. A CLIENT-side close frames nothing
+ * (nobody is listening) — the vocabulary never gains a member the
+ * client invents.
+ */
+export const STREAM_CLOSE_REASONS = ["SHUTDOWN"] as const;
+export type StreamCloseReason = (typeof STREAM_CLOSE_REASONS)[number];
+
+/**
+ * The `stream.open` document — §13's dual answer as the stream's
+ * first frame: REPLAY (the retained window rides the event frames
+ * that follow, gapless into the live tail) or RESYNC (the cursor fell
+ * out of retention — the snapshot document rides HERE, the same shape
+ * `session.events` answers; the retained window re-reads by POST).
+ */
+export type StreamOpenDocument =
+  | {
+      readonly mode: "REPLAY";
+      readonly session_id: string;
+      readonly last_sequence: number;
+    }
+  | {
+      readonly mode: "RESYNC";
+      readonly session_id: string;
+      readonly last_sequence: number;
+      readonly resync: "RESYNC_REQUIRED";
+      readonly retained_from: number;
+      readonly snapshot: SessionDocument;
+    };
+
+/** The `stream.rejected` document — the semantic lane (ONE frame at
+ * HTTP 200, then the stream ends): the closed §8 rejection vocabulary
+ * plus its reason, verbatim, never a fabricated transport failure. */
+export interface StreamRejectedDocument {
+  readonly rejection: Rejection;
+  readonly reason: string;
+}
+
+/** The `stream.overflow` document — the bounded buffer's observable
+ * terminal: the queued events drained first, then the channel closed;
+ * `last_sequence` is the session's newest sequence at the overflow
+ * moment (the consumer reconnects from ITS last received id). */
+export interface StreamOverflowDocument {
+  readonly last_sequence: number;
+}
+
+/** The `stream.close` document — the honest server-side terminal
+ * (e.g. the bounded shutdown). No `id` line rides the wire form: a
+ * control frame never moves the consumer's reconnect cursor. */
+export interface StreamCloseDocument {
+  readonly last_sequence: number;
+  readonly reason: StreamCloseReason;
+}
+

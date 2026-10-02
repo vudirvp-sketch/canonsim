@@ -28,6 +28,7 @@ import {
   OBSERVATORY_AUTHORITIES,
   OBSERVATORY_PROFILES,
   REJECTIONS,
+  STREAM_CLOSE_REASONS,
 } from "./contracts.ts";
 
 /** A non-empty string — the identity fields' shared shape. */
@@ -581,6 +582,53 @@ export const inferenceDocumentSchema = z.looseObject({
   applies: z.literal("next-spawn"),
   compiled_preview: z.string().nullable(),
   note: nonEmptyString.optional(),
+});
+
+// ------------------------------------------------------------------ stream
+
+/**
+ * The `stream.open` document — §13's dual answer, strict per arm: a
+ * REPLAY open carries exactly the mode/identity/bounds; a RESYNC open
+ * merges the SAME snapshot shape `session.events` answers (the
+ * `resync`/`retained_from`/`snapshot` members). The two arms never
+ * validate as each other (the same law the POST dual keeps).
+ */
+const streamOpenReplayShape = z.strictObject({
+  mode: z.literal("REPLAY"),
+  session_id: nonEmptyString,
+  last_sequence: nonNegativeInt,
+});
+const streamOpenResyncShape = z.strictObject({
+  mode: z.literal("RESYNC"),
+  session_id: nonEmptyString,
+  last_sequence: nonNegativeInt,
+  resync: z.literal("RESYNC_REQUIRED"),
+  retained_from: positiveInt,
+  snapshot: sessionDocumentSchema,
+});
+export const streamOpenDocumentSchema = z.union([
+  streamOpenReplayShape,
+  streamOpenResyncShape,
+]);
+
+/** The `stream.rejected` document — the semantic verdict over the
+ * closed §8 rejection vocabulary (strict: an unknown name is a
+ * contract mismatch, never a pass-through). */
+export const streamRejectedDocumentSchema = z.strictObject({
+  rejection: z.enum(REJECTIONS),
+  reason: nonEmptyString,
+});
+
+/** The `stream.overflow` terminal document (strict). */
+export const streamOverflowDocumentSchema = z.strictObject({
+  last_sequence: nonNegativeInt,
+});
+
+/** The `stream.close` terminal document — the close reason over the
+ * closed framed vocabulary (a foreign reason is a mismatch). */
+export const streamCloseDocumentSchema = z.strictObject({
+  last_sequence: nonNegativeInt,
+  reason: z.enum(STREAM_CLOSE_REASONS),
 });
 
 /** The validated response plus its dispatch outcome — the client's

@@ -13,9 +13,12 @@
  *       `fetch(` exists ONLY in the typed gateway client — the one
  *       transport adapter; everything else reaches the gateway
  *       through it, never around it.
- *   R2  the stream admission (§5): no XMLHttpRequest / EventSource /
- *       WebSocket / serviceWorker anywhere in src — SSE/WS/PWA open
- *       only through their own gateway contracts + admissions.
+ *   R2  the stream admission (§5): the browser stream adapter
+ *       (api/gateway/stream.ts, admitted iter-306 over the iter-305
+ *       gateway contract) is the ONE home of EventSource; no
+ *       XMLHttpRequest / WebSocket / serviceWorker anywhere in src —
+ *       every further transport opens only through its own gateway
+ *       contract + admission.
  *   R3  the forbidden stores (§6): no localStorage/sessionStorage/
  *       BroadcastChannel/indexedDB/caches — each tab is an
  *       independent client; browser storage is never truth.
@@ -164,10 +167,21 @@ describe("R1 — the network surface: fetch exists ONLY in the typed gateway cli
   });
 });
 
-describe("R2 — the stream admission: no second transport before its gateway contract (§5)", () => {
-  it("has no XMLHttpRequest / EventSource / WebSocket / serviceWorker anywhere in src", () => {
-    const found = hits(/\bnew\s+(XMLHttpRequest|EventSource|WebSocket)\b|\bserviceWorker\b/);
-    expect(found).toEqual([]);
+describe("R2 — the stream admission: the SSE adapter is the ONE sanctioned stream transport (§5)", () => {
+  it("EventSource exists ONLY in api/gateway/stream.ts; no XMLHttpRequest / WebSocket / serviceWorker anywhere in src", () => {
+    // The admission order's step 3 landed (iter-306): the browser
+    // stream adapter behind the typed gateway client IS the sanctioned
+    // home of EventSource — one module, exactly like fetch's R1. The
+    // unrequested transports (XMLHttpRequest, WebSocket, a service
+    // worker) stay forbidden until their own gateway contracts +
+    // admissions exist.
+    const eventSourceHits = hits(/\bnew\s+EventSource\b/);
+    expect(
+      eventSourceHits.map((f) => f.rel),
+      "the stream adapter is the ONLY module that may hold a live stream",
+    ).toEqual(["api/gateway/stream.ts"]);
+    const others = hits(/\bnew\s+(XMLHttpRequest|WebSocket)\b|\bserviceWorker\b/);
+    expect(others).toEqual([]);
   });
 });
 

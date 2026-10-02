@@ -121,7 +121,7 @@ trajectory virtualized → multi-tab note → load note.
 | Seam | Law |
 |---|---|
 | Gateway | the semantic entry is `POST /op`; RequestEnvelope / ResponseDocument / EventEnvelope; closed vocabularies and unknown-key rejection are backend-owned; the browser consumes typed/validated adapters — raw JSON never reaches components |
-| Session stream | `session.events` is the ordered per-session replay surface; retained sequence + `RESYNC_REQUIRED` semantics are existing backend law; browser transport for future SSE/WebSocket is NOT landed and must be separately admitted/tested; the client isolates transport adapters so surfaces never hard-code POST-only assumptions beyond the typed client API |
+| Session stream | `session.events` is the ordered per-session replay surface; retained sequence + `RESYNC_REQUIRED` semantics are existing backend law; the browser stream transport (iter-306) is the EventSource adapter behind the typed client (`src/api/gateway/stream.ts` — the admission step 3 landing over the iter-305 GET /events contract): every frame runtime-validated, the reconnection OWNED and bounded (never the browser's auto-reconnect — the explicit-cursor law makes it deliver duplicates), the focused-tab policy enforced at the hook; surfaces consume the typed frame API, never the raw source |
 | Execution | long-running work already has execution identity, deadline, cancellation, progress; ambiguous post-dispatch results remain UNKNOWN; cancellation is never visually treated as completed merely because a request was sent |
 | Provenance | execution artifacts freeze material inputs/identities and may carry capability/runtime/model/protocol/reproducibility information; replay creates a NEW execution identity, lineage via `replay_of` |
 | Observatory | the read-side already supports bounded run listing and bounded event windows; event ids are the semantic cursor/selection identities; NO DATA / NO MATCH / stale cursor / corrupt log are distinct observations; Trajectory is a presentation of the same evidence class, never a second store |
@@ -186,10 +186,24 @@ Admission order (never skip ahead; never implement 2–4 during S0):
    workbench/api/{gateway,transport}.py, WORKBENCH_APP_LAW §13's
    landed form; the frame vocabulary + the byte parity +
    boundedness are tested in tests/test_sse_stream.py]
-3. browser adapter behind the typed gateway client (NOT landed —
-   its own row: the EventSource/fetch-stream adapter, the zod frame
-   validators, the focused-tab reconnection policy)
-4. focused-tab / budget policy enforced in UI (rides 3)
+3. browser adapter behind the typed gateway client
+   [LANDED iter-306 — frontend/src/api/gateway/stream.ts: the
+   EventSource adapter over GET /events, every frame runtime-
+   validated by the zod frame validators (the live-captured wire
+   fixtures); OWN reconnection (the source is closed on every
+   terminal/error — the browser's auto-reconnect would re-request
+   the ORIGINAL cursor and duplicate the replay window; a semantic
+   rejection would loop forever), the bounded backoff ladder, the
+   honest phase vocabulary (IDLE/CONNECTING/OPEN/PAUSED/RESYNC/
+   REJECTED/FAILED — the first-class §5.2 failure classes); the
+   RESYNC answer closes and hands the recovery to the consumer (the
+   same one-POST read the poll lane applies, then the re-begin)]
+4. focused-tab / budget policy enforced in UI
+   [LANDED iter-306, rides 3 — useLiveTail's stream lane: only a
+   visible+focused tab holds a connection (visibilitychange +
+   focus/blur), a background tab holds NONE (STALE, last-known
+   presentation); one stream per tab, the POST poll ladder stays
+   the always-valid fallback (the feed selector)]
 5. HTTP/2 or server fan-out only on measured need
 6. WebSocket only for a concrete bidirectional requirement
 ```

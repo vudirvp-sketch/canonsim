@@ -189,6 +189,13 @@ select {
   color: var(--accent);
   border-color: var(--accent);
 }
+/* The stream adapter's honest phase line (iter-306): the live feed's
+   own state, muted — the freshness chip stays the state authority. */
+.stream-phase {
+  color: var(--muted);
+  font-size: var(--font-meta);
+  letter-spacing: var(--tracking-label);
+}
 .freshness-stale {
   color: var(--warn);
   border-color: var(--warn);

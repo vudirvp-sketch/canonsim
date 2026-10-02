@@ -23,11 +23,16 @@ import type { ScrollCommand, ScrollRequest } from "./VirtualList.tsx";
 
 const ROW_HEIGHT = 28;
 const VIEWPORT_HEIGHT = 420;
-const INTERVAL_CHOICES: readonly { readonly label: string; readonly ms: number }[] = [
-  { label: "off", ms: 0 },
-  { label: "1s", ms: 1000 },
-  { label: "2s", ms: 2000 },
-  { label: "5s", ms: 5000 },
+
+/** The tail's feed choices: the SSE stream (the admission step 3+4
+ * landing — the default) or the POST poll ladder (S0's mandate,
+ * always valid — the stream's own fallback), down to off. */
+const FEED_CHOICES: readonly { readonly label: string; readonly value: string }[] = [
+  { label: "stream (SSE)", value: "stream" },
+  { label: "poll 1s", value: "1000" },
+  { label: "poll 2s", value: "2000" },
+  { label: "poll 5s", value: "5000" },
+  { label: "off", value: "0" },
 ];
 
 export interface TrajectoryProps {
@@ -37,7 +42,7 @@ export interface TrajectoryProps {
 }
 
 export function Trajectory(props: TrajectoryProps): ReactNode {
-  const [intervalMs, setIntervalMs] = useState(2000);
+  const [feed, setFeed] = useState("stream");
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
   const [scrollCommand, setScrollCommand] = useState<ScrollCommand | null>(null);
   const [scrollToken, setScrollToken] = useState(0);
@@ -45,7 +50,8 @@ export function Trajectory(props: TrajectoryProps): ReactNode {
   const tail = useLiveTail({
     client: props.client,
     sessionId: props.sessionId,
-    intervalMs,
+    transport: feed === "stream" ? "stream" : "poll",
+    intervalMs: feed === "stream" ? 0 : Number.parseInt(feed, 10),
   });
 
   const events = tail.events;
@@ -98,6 +104,13 @@ export function Trajectory(props: TrajectoryProps): ReactNode {
           <span>seq <code>{String(tail.lastSequence)}</code></span>
           <span>rows <code>{String(events.length)}</code></span>
           <span className={`freshness freshness-${tail.freshness.toLowerCase()}`}>{tail.freshness}</span>
+          {feed === "stream" ? (
+            <span className="stream-phase" data-testid="stream-phase">
+              stream {tail.streamPhase ?? "—"}
+            </span>
+          ) : (
+            <span>poll {tail.polling ? "on" : "off"}</span>
+          )}
           <span>
             read{" "}
             <code>{tail.lastReadAt === null ? "never" : new Date(tail.lastReadAt).toISOString().slice(11, 19)}</code>
@@ -124,7 +137,10 @@ export function Trajectory(props: TrajectoryProps): ReactNode {
         </div>
       ) : null}
       {tail.transportNote !== null ? (
-        <div className={`banner ${tail.freshness === "STALE" ? "banner-stale" : "banner-error"}`} role="alert">
+        <div
+          className={`banner ${tail.freshness === "STALE" ? "banner-stale" : "banner-error"}`}
+          role={tail.freshness === "STALE" ? "status" : "alert"}
+        >
           {tail.transportNote}
           {tail.freshness === "DISCONNECTED" ? " — presentation is last-known, not fresh" : ""}
         </div>
@@ -132,21 +148,22 @@ export function Trajectory(props: TrajectoryProps): ReactNode {
 
       <div className="controls">
         <label>
-          poll{" "}
+          feed{" "}
           <select
-            value={String(intervalMs)}
+            aria-label="feed transport"
+            value={feed}
             onChange={(event) => {
-              setIntervalMs(Number.parseInt(event.target.value, 10));
+              setFeed(event.target.value);
             }}
           >
-            {INTERVAL_CHOICES.map((choice) => (
-              <option key={choice.label} value={String(choice.ms)}>
+            {FEED_CHOICES.map((choice) => (
+              <option key={choice.value} value={choice.value}>
                 {choice.label}
               </option>
             ))}
           </select>
         </label>
-        <button onClick={() => void tail.refreshNow()} disabled={props.sessionId === null}>
+        <button onClick={() => void tail.refreshNow()} disabled={props.sessionId === null} title="the POST read — always valid (S0's mandate is the stream's own fallback)">
           refresh now
         </button>
         <button onClick={() => scroll({ kind: "TOP" })}>top</button>

@@ -1,0 +1,4 @@
+{
+  "error": "BAD_STREAM_PARAMS",
+  "reason": "session_id: a non-empty query parameter"
+}

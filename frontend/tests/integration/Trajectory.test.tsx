@@ -1,10 +1,14 @@
 /**
- * The S0-2 integration proof, in the browser-less band (jsdom +
- * testing-library; the live-browser evidence rides the iteration
- * report): a ≥10_000-row tail renders with ONLY the window mounted
- * (never the full tree); the cursor is the semantic sequence; the
- * selection is the event_id; the LIVE label and the dual-read note
- * stand; the RESYNC banner shows the honest verdict.
+ * The S0-2 + iter-306 integration proof, in the browser-less band
+ * (jsdom + testing-library; the live-browser evidence rides the
+ * iteration report): a ≥10_000-row tail renders with ONLY the window
+ * mounted (never the full tree); the cursor is the semantic sequence;
+ * the selection is the event_id; the LIVE label and the dual-read note
+ * stand; the RESYNC banner shows the honest verdict — over BOTH
+ * transports: the POST poll lane (S0's mandate) and the SSE stream
+ * lane (the admission step 3+4 — the FakeEventSource double drives the
+ * frames, the focused-tab policy, the overflow reconnect, and the
+ * resync POST-recovery exactly as the adapter dispatches them).
  */
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -14,6 +18,7 @@ import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-li
 
 import { GatewayClient } from "../../src/api/gateway/client.ts";
 import { Trajectory } from "../../src/features/trajectory/Trajectory.tsx";
+import { FakeEventSource, frameData } from "../helpers/fakeEventSource.ts";
 
 const FIXTURES = join(dirname(fileURLToPath(import.meta.url)), "..", "fixtures");
 
@@ -56,12 +61,35 @@ afterEach(() => {
   cleanup();
   vi.unstubAllGlobals();
   vi.restoreAllMocks();
+  FakeEventSource.resetInstances();
 });
 
+/** The POST-lane mount: the feed select switched to the 2s poll (the
+ * original S0 posture — the stream lane has its own mounts below). */
 function mountTrajectory(fetchImpl: typeof fetch): void {
   vi.stubGlobal("fetch", fetchImpl);
   const client = new GatewayClient();
   render(<Trajectory client={client} sessionId="test-session" />);
+  fireEvent.change(screen.getByLabelText("feed transport"), { target: { value: "2000" } });
+}
+
+/** The STREAM-lane mount: the FakeEventSource double carries the wire.
+ * jsdom's defaults (visibilityState "prerender", hasFocus false) would
+ * honestly PAUSE the stream — the focused-tab policy firing on an
+ * unfocused test world. The stream-lane rows run as a VISIBLE+FOCUSED
+ * tab; the policy's own row flips the focus spy. */
+function mountTrajectoryStream(fetchImpl: typeof fetch): FakeEventSource {
+  vi.stubGlobal("fetch", fetchImpl);
+  vi.stubGlobal("EventSource", FakeEventSource as unknown as typeof EventSource);
+  FakeEventSource.resetInstances();
+  Object.defineProperty(document, "visibilityState", {
+    value: "visible",
+    configurable: true,
+  });
+  vi.spyOn(document, "hasFocus").mockReturnValue(true);
+  const client = new GatewayClient();
+  render(<Trajectory client={client} sessionId="test-session" />);
+  return FakeEventSource.instances[0]!;
 }
 
 describe("the Trajectory surface (S0-2)", () => {
@@ -185,5 +213,135 @@ describe("the Trajectory surface (S0-2)", () => {
     });
     expect(screen.getByRole("alert").textContent).toContain("UNREACHABLE");
     expect(screen.getByText(/DISCONNECTED — no successful read yet/i)).toBeTruthy();
+  });
+});
+
+describe("the Trajectory surface — the STREAM lane (iter-306, the admission step 3+4)", () => {
+  const openReplay = { mode: "REPLAY", session_id: "test-session", last_sequence: 2 };
+
+  it("the stream is the DEFAULT feed: the dial carries the session + the zero cursor; the frames render rows; the phase line reads OPEN", async () => {
+    const source = mountTrajectoryStream(vi.fn());
+    expect(source.url).toBe("/gateway/events?session_id=test-session&since_sequence=0");
+    source.emit("stream.open", frameData(openReplay));
+    source.emit("SESSION_CREATED", frameData(syntheticGatewayEvent(1)));
+    source.emit("SESSION_ATTACHED", frameData(syntheticGatewayEvent(2)));
+    await waitFor(() => {
+      expect(screen.getAllByRole("listitem").length).toBeGreaterThanOrEqual(2);
+    });
+    expect(screen.getByTestId("stream-phase").textContent).toBe("stream OPEN");
+    expect(screen.getByText(/LIVE SESSION TAIL/i)).toBeTruthy();
+  });
+
+  it("the focused-tab policy: a blurred tab closes its stream (PAUSED, STALE); the refocus re-dials from the cursor", async () => {
+    const source = mountTrajectoryStream(vi.fn());
+    source.emit("stream.open", frameData(openReplay));
+    source.emit("SESSION_CREATED", frameData(syntheticGatewayEvent(1)));
+    await waitFor(() => {
+      expect(screen.getAllByRole("listitem").length).toBeGreaterThanOrEqual(1);
+    });
+    const focusSpy = vi.spyOn(document, "hasFocus").mockReturnValue(false);
+    window.dispatchEvent(new Event("blur"));
+    await waitFor(() => {
+      expect(screen.getByTestId("stream-phase").textContent).toBe("stream PAUSED");
+    });
+    expect(source.closed).toBe(true);
+    expect(screen.getByText(/STALE/i)).toBeTruthy();
+    focusSpy.mockReturnValue(true);
+    window.dispatchEvent(new Event("focus"));
+    await waitFor(() => {
+      expect(FakeEventSource.instances.length).toBe(2);
+    });
+    // The re-dial resumes from the LAST RECEIVED sequence (1), never 0.
+    expect(FakeEventSource.instances[1]!.url).toContain("since_sequence=1");
+  });
+
+  it("a semantic rejection surfaces verbatim and nothing retries (G4's spirit on the stream surface)", async () => {
+    const source = mountTrajectoryStream(vi.fn());
+    source.emit("stream.rejected", frameData(fixture("stream_rejected")));
+    await waitFor(() => {
+      expect(screen.getByTestId("stream-phase").textContent).toBe("stream REJECTED");
+    });
+    const banner = screen.getByRole("status");
+    expect(banner.textContent).toContain("DOMAIN_REJECTED");
+    // No re-dial ever fires for a semantic verdict.
+    await new Promise((resolve) => setTimeout(resolve, 50));
+    expect(FakeEventSource.instances.length).toBe(1);
+  });
+
+  it("the overflow terminal: the honest note; the adapter's own reconnect re-dials from the last received id", async () => {
+    const source = mountTrajectoryStream(vi.fn());
+    source.emit("stream.open", frameData(openReplay));
+    source.emit("SESSION_CREATED", frameData(syntheticGatewayEvent(1)));
+    source.emit("stream.overflow", frameData(fixture("stream_overflow")));
+    await waitFor(() => {
+      expect(screen.getByTestId("stream-phase").textContent).toBe("stream CONNECTING");
+    });
+    expect(screen.getByRole("status").textContent).toContain("reconnecting from seq 1");
+    await waitFor(
+      () => {
+        expect(FakeEventSource.instances.length).toBe(2);
+      },
+      { timeout: 2000 },
+    );
+    expect(FakeEventSource.instances[1]!.url).toContain("since_sequence=1");
+  });
+
+  it("the RESYNC answer: the one-POST recovery fills the retained window, then the stream re-begins from the reconciled cursor", async () => {
+    const fetchImpl = vi.fn().mockResolvedValue(
+      json({
+        status: "OK",
+        operation_id: "op-recovery",
+        result: {
+          events: [4, 5, 6, 7].map((sequence) => syntheticGatewayEvent(sequence)),
+          last_sequence: 7,
+        },
+      }),
+    );
+    const source = mountTrajectoryStream(fetchImpl);
+    source.emit(
+      "stream.open",
+      frameData({
+        mode: "RESYNC",
+        session_id: "test-session",
+        last_sequence: 7,
+        resync: "RESYNC_REQUIRED",
+        retained_from: 4,
+        snapshot: {
+          session_id: "test-session",
+          attached: true,
+          created_observed_at: 1_000_000,
+          event_sequence: 7,
+          revision: 6,
+        },
+      }),
+    );
+    // The recovery read re-reads from the retained window (since 3).
+    await waitFor(() => {
+      expect(fetchImpl).toHaveBeenCalledTimes(1);
+    });
+    const body = JSON.parse(String(fetchImpl.mock.calls[0]![1]!.body)) as Record<string, unknown>;
+    expect(body).toMatchObject({ operation: "session.events", arguments: { since_sequence: 3 } });
+    await waitFor(() => {
+      expect(screen.getAllByRole("listitem").length).toBeGreaterThanOrEqual(4);
+    });
+    expect(screen.getByText(/RESYNC_REQUIRED/i)).toBeTruthy();
+    // The stream re-begins from the POST answer's last_sequence (7).
+    await waitFor(() => {
+      expect(FakeEventSource.instances.length).toBe(2);
+    });
+    expect(FakeEventSource.instances[1]!.url).toContain("since_sequence=7");
+  });
+
+  it("the transport switch stream -> poll: the stream stops (the source closes), the POST lane takes over", async () => {
+    const source = mountTrajectoryStream(vi.fn().mockResolvedValue(json(replayResponse(5))));
+    source.emit("stream.open", frameData(openReplay));
+    fireEvent.change(screen.getByLabelText("feed transport"), { target: { value: "2000" } });
+    await waitFor(() => {
+      expect(source.closed).toBe(true);
+    });
+    await waitFor(() => {
+      expect(screen.getAllByRole("listitem").length).toBeGreaterThanOrEqual(5);
+    });
+    expect(screen.getByText(/poll on/i)).toBeTruthy();
   });
 });

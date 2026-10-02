@@ -102,11 +102,13 @@ tooling floor, the optional P1 config).
 3. ~~**The `frontend-1` opening**~~ — RESOLVED: the S0 build landed
    iter-289 (the four criteria; the evidence in
    `docs/iterations/iter-289-frontendweb-report.md`).
-4. **Still gated** (each its own admission, never silent):
-   SSE/WebSocket (the §5
-   admission order), a SharedWorker transport, Tauri 2, PWA
+4. **Still gated** (each its own admission, never silent): a
+   SharedWorker stream transport (§5's own law), Tauri 2, PWA
    packaging, the layout manifest/Capabilities screen (optional
-   P1), the tooling floor's CI rows.
+   P1), the tooling floor's CI rows, WebSocket (only for a concrete
+   bidirectional requirement), HTTP/2 or server fan-out (measured
+   need). The SSE browser adapter + the focused-tab policy are
+   LANDED (iter-306, the §5 admission steps 3+4).
 
 ## 6. The stage map
 
@@ -151,9 +153,33 @@ POST-S0        — the tooling floor's first row LANDED (iter-293: the
                  tests/test_sse_stream.py (24 rows: the byte parity,
                  the gapless boundary, the overflow law + its
                  always-replay invariant, the bounded shutdown, the
-                 disconnect law, one-thread-per-stream); the browser
-                 adapter (step 3) + the focused-tab policy (step 4)
-                 the NEXT rows, each its own admission; the standing
+                 disconnect law, one-thread-per-stream); THE BROWSER
+                 ADAPTER LANDED (iter-306, the owner's «продолжить
+                 работу по фронтенду — браузерный адаптер» delegated
+                 call: the admission steps 3+4 — the EventSource
+                 adapter behind the typed gateway client at
+                 frontend/src/api/gateway/stream.ts (every frame
+                 zod-validated over the live-captured wire fixtures;
+                 OWN bounded reconnection — never the browser's
+                 auto-reconnect: the explicit-cursor law makes it
+                 duplicate the replay window, and a semantic
+                 rejection would loop forever; the honest phase
+                 vocabulary; the RESYNC answer hands the recovery to
+                 the consumer — the same one-POST read the poll lane
+                 applies, then the re-begin) + the focused-tab policy
+                 in useLiveTail's stream lane (only a visible+focused
+                 tab holds a connection, a background tab NONE; one
+                 stream per tab; the POST poll ladder the
+                 always-valid fallback — the feed selector) + the
+                 architecture guard's R2 narrowed to the sanctioned
+                 adapter module; 251 vitest + tsc + build + the live
+                 browser closure over the real gateway (the stream
+                 OPEN + live push through the Vite proxy, the
+                 focused-tab close/re-dial with no duplicate rows,
+                 two tabs two independent sessions, the RESYNC
+                 end-to-end — the retention rolled past a paused
+                 cursor, the recovery read fills the window, the
+                 stream re-begins; zero console errors); the standing
                  gates that remain: the acceptance matrix, the
                  tooling floor's remaining rows (the CI wiring, the
                  Playwright-class multi-tab smoke)

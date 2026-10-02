@@ -1,0 +1,12 @@
+{
+  "event_id": "3514020c018742c208ad4766a37a8a52eae9a9288d8564a4f80a637b4fb45ca1",
+  "event_type": "SESSION_ATTACHED",
+  "observed_at": 1790978057.0015278,
+  "operation_id": "97fb9f1ed960db6674d267d8d8c96da5e505939cd394765e13f7c3e8e5f80255",
+  "payload": {
+    "label": "attach-0",
+    "observed_at": 1790978057.001516
+  },
+  "sequence": 2,
+  "session_id": "cfcf8d447486f2560ac9e92d7d26d4516da73545d2a290c747a6b602927c9e85"
+}
