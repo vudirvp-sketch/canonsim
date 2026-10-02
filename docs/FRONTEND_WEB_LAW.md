@@ -41,11 +41,11 @@
   direction): **React + TypeScript + Vite, Web/PWA-first; Tauri 2
   optional and deferred; DOM/CSS for ordinary chrome; Canvas/WebGL
   only where scene workload requires it.**
-- Not yet in the repo: no `frontend/` tree, no React dependency, no
-  node tooling — this law binds what gets BUILT; it changes nothing
-  existing. The `frontend-1` TASKS row (the S0 build) is owner-gated.
-  [LANDED iter-289, D-244: the `frontend/` tree exists — the S0
-  skeleton; this §0's "not yet" lines are the pre-D-244 record]
+- Landed (iter-289, D-244): the `frontend/` tree exists — the S0
+  walking skeleton (React + TS + Vite), and the `frontend-1` build
+  row is discharged. The pre-D-244 "not yet in repo" snapshot lines
+  were retired with this landing (the verbatim pack record stays at
+  `docs/frontendweb/archive/`, never re-ingested).
 - Core rule (the pack's §1): semantics stay in CanonSim/Python;
   presentation and interaction stay downstream, typed, replaceable,
   non-authoritative. The React client is never a second simulator,

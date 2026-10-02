@@ -1,49 +1,46 @@
-Iteration: iter-302 (`liveband` — the owner-side bands CLOSED LIVE,
-  the owner's «продолжай работу над фронтендом» call + the explicit
-  sandbox-environment enabler «можешь поставить в песочницу llama.cpp
-  и любое окружение нужное»; R2 — frontend-local + one R1-class
-  hermetic test fix): the declared owner-side bands closed over a
-  REAL llama.cpp in the sandbox — llama.cpp b11337 (ubuntu-x64) in
-  the documented drop-folder (gitignored, discovery verified live by
-  the gateway banner), the models arriving THROUGH the gateway's own
-  model.fetch op (stories15M 19MB + Qwen2.5-0.5B-Instruct q4_k_m
-  491MB, PROGRESS observed — the fetch COMPLETED band closed too,
-  first live observation after iter-300's admission-only closure);
-  the LIVE smoke over real POSTs: load → ACTIVE (the slot filled),
-  chat.send → COMPLETED (a REAL reply, finish stop, backend identity
-  b11337-d775ebf36, REQUESTED/EFFECTIVE pair), the single-slot
-  DOMAIN_REJECTED verbatim, unload → EVICTED, re-selection
-  EVICTED→SELECTED→ACTIVE; the LIVE browser closure through the UI's
-  OWN buttons: the ACTIVE chip + tag-live + the active-slot strip,
-  the chat COMPLETED turn with the provenance line, the EVICTED chip,
-  the S0-4 load probe measured WITH a live LLM (50 ops, 0.45–0.49s,
-  107.8–110.3 ops/s — the S0-4 criterion literally met), ZERO
-  console errors; the stale probe copy fixed (App.tsx asserted "no
-  llama.cpp model present in this environment" — an environment fact
-  stale on the owner's own station); KI#110 opened+closed (the
-  launch-params merge test assumed an empty discovery home — the
-  documented llama.cpp drop made it red; pinned hermetically)
+Iteration: iter-303 (`overhead-audit` — the owner's audit request
+  over the proposed iter-N-overhead-audit task; R1 doc/state + one
+  R2-class check extension): PHASE A MEASURED — the full suite
+  2529+1 in 90.7s, top-40 all 0.5–2.1s, the profiled "duplicate
+  simulation" suites cost 0.46s (divergence_probe) + 0.24s
+  (semantic_diff) + 1.89s (topology) — the B3/B4/B5 performance
+  premise FALSIFIED by measurement (savings < 0.5% of suite time);
+  the REAL per-iteration overhead measured in TOKENS: the mandatory
+  reading carried ~48k tokens of which ~14k was HISTORY (the
+  pre-302 DONE narratives in this file's Next step + the TASKS
+  ledger's restated detail); the audit's C1 re-scoped to where the
+  history actually lived and EXECUTED: the old DONE blocks deleted
+  (the reports + worklog + git stay the owners), the TASKS ledger
+  lines compressed to true one-liners (the header's own
+  "never restated here" law), the FWL §0 stale "not yet in repo"
+  record retired; C3 MEASURED GREEN and EXECUTED: the topology
+  full-row pin (every map row's reads+emits exactly pinned, 93/93
+  at HEAD, zero resync — the map header's own claim now executed
+  in full, two new teeth tests); B1/B2/C4 rejected-with-numbers or
+  owner-proposal-only (the report's verdict table); the audit's own
+  false positive RETRACTED at byte level (a rendered `[m` artifact
+  had mimicked a corrupted CI trigger — the report's §D: verify at
+  the byte layer before recording a P0)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
-2529 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; the suite green WITH
-  the llama.cpp tree present in runtime/ — KI#110's hermeticity
-  verified live; the frontend stack: 221 vitest + tsc + build; the
-  live smoke over real POSTs + the live browser closure — the
-  report's §A) ·
-Date: 2026-10-02 ·
-Scope: frontend/src/app/composition/App.tsx (the stale probe copy),
-  tests/test_workbench_app.py (KI#110 — the hermetic exe rung),
-  STATUS.md (the header + KI#110), worklog.md (the entry, iter-292
-  evicted), docs/TASKS.md (the ledger, iter-292 evicted),
-  frontend/README.md (the band notes), docs/frontendweb/
-  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
-  docs/iterations/iter-302-liveband-report.md (new) — 8 changed/
-  created (7 modified + 1 created; R2 — frontend-local + one
-  hermetic test fix; zero Python behavior change, zero canon change,
-  the LOG untouched, zero corpus price)
+2531 passed + 1 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; the full-suite
+  wall-clock re-measured post-change in the report's §A) ·
+Date: 2026-10-03 ·
+Scope: STATUS.md (the header + the Next-step history collapse),
+  docs/TASKS.md (the ledger compressed to one-liners + the
+  iter-303 row, iter-293 evicted), worklog.md (the iter-303 entry,
+  iter-293 evicted), docs/FRONTEND_WEB_LAW.md (§0's stale "not yet"
+  record retired), scripts/topology.py (the full-row pin),
+  tests/test_topology.py (two non-watchlist drift tests),
+  docs/SSI_TOPOLOGY.md (the §0 pin description), docs/iterations/
+  iter-303-overhead-audit-report.md (new) — 8 changed/created
+  (7 modified + 1 created; R1 doc/state + the R2 check extension;
+  zero Python behavior change outside the check's teeth, zero canon
+  change, the LOG untouched, zero corpus price; NO test deleted or
+  weakened — 2 added, the suite count 2529+1 → 2531+1)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1 visual floor LANDED (iter-293/297); Phase 3's
   SEVEN rows LANDED (iter-294/295/296/298/299/300/301) + the IA
@@ -93,7 +90,10 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 (none further — KI#109 deleted at the iter-301 §5 cleanup: closed
   iter-294, seven iterations past the 2-iteration deletion rule; its
   substance verified resolved at the current mirror HEAD — the 16
-  D-245 deletions all present, the architecture suite green)
+  D-245 deletions all present, the architecture suite green; the
+  iter-303 audit's CI-trigger suspicion was RETRACTED at the byte
+  layer — a rendered-output artifact, never a repo defect — the
+  report's §D)
 
 ## FAQ / Pitfalls
 
@@ -123,405 +123,31 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-302 DONE: liveband (the owner's «продолжай работу над
-  фронтендом» call + the sandbox-environment enabler; R2).** The
-  declared owner-side bands CLOSED LIVE over a real sandbox
-  llama.cpp: chat COMPLETED (a real reply + provenance), models
-  ACTIVE/EVICTED (through the UI's own buttons), model.fetch
-  COMPLETED (first live observation), the S0-4 load probe measured
-  with a live LLM (≈108–110 ops/s); the stale probe copy fixed;
-  KI#110 opened+closed. The suite green with the llama.cpp tree
-  present (2529+1; the frontend 221). The owner's RU report:
-  docs/iterations/iter-302-liveband-report.md.
-Next: the owner's calls — the streaming admission (SSE — the backend
-  gateway contract first, R3/R4-class), the acceptance matrix, the
-  DECISIONS collapse (36→30, the owner's call), the tooling floor's
-  remaining rows (the CI wiring, the Playwright-class multi-tab
-  smoke), and the world track's parallel rows.
-iter-294 DONE: shell (Phase 3's first row, the owner's
-  «продолжай работы по фронтенду, над теми частями что логичнее
-  всего сейчас провести» call; R2 frontend-local + KI#109).** The
-  SHELL/NAV + the SESSION LIFECYCLE surface over the existing six
-  ops: only the active pane mounts (boundedness); the lease closure
-  REQUESTED→ACCEPTED/REJECTED→EFFECTIVE→OBSERVED, G4 no-retry,
-  STALE_REVISION/LEASE_EXPIRED verbatim; 59 vitest + tsc + build +
-  the live smoke (attach/detach/stale/expired against the real
-  gateway); KI#109 closed (the mirror's 16 missed D-245 deletions
-  re-executed, 2529+1 restored).
-iter-292 DONE: methoddoc (the owner's tmpfiles v3 delivery + the
-  «определись что перенимаем и куда» call; R0, doc-only).** D-246 —
-  the design-research & mechanism-transfer method adopted as METHOD,
-  never authority: the verbatim original archived (md5-pinned, the
-  read-only-copy class), the durable residue distilled as the agent
-  context's §9 (the five mechanisms + the depth ladder + the gates +
-  VIS-0..3 + the transfer-record form), the doc's own §34
-  rejections made CanonSim's (no parallel authority, no global
-  Reference Lock, no novelty quota, no pixel-perfect gate); zero
-  code, the product owners untouched.
-Active KIs: none new. The suite green (2529+1). The owner's RU
-  report: docs/iterations/iter-292-methoddoc-report.md.
-iter-291 DONE: redotfix (KI#108 — the half-applied iter-290 delta;
-  R3, the completion of the RECORDED D-245).** The owner-side
-  application landed the 65 changed/created paths but never executed
-  the 16 deletions — the repo claimed Redot deleted while the tree,
-  the index, the proof packets, and the Setup .bat stayed tracked
-  (docguard red on the 1462-line index, the stale shell-contract pin
-  red). Fixed: the 16 paths removed, the suite back to the claimed
-  2529+1, docguard clean; the one stale live-routing FAQ half synced
-  to the archived-pack form; the law-body residue (UIUX §0's diagram
-  row, WPL §14/§15 mentions) named for the owner, never silently
-  rewritten.
-Active KIs: KI#108 CLOSED iter-291. The suite green (2529+1). The
-  owner's RU report: docs/iterations/iter-291-redotfix-report.md.
-
-iter-286 DONE: the W7 station's fourth row (the owner's «точечный
-  и быстрый (read-side only)» call — the named-boundary rendering
-  route, iter-284/285's boundary (a); the same call conditionally
-  declining the disappearance-battery extension and opening W8,
-  both conditions resolved; R2 read-side only): rs-13 — the pack
-  table rejection_boundaries (leverage_over -> «no minted word to
-  lean on»), the ONE gloss boundary, the boundary slot before the
-  outcome loop, the intent_rejected line's conditional tail, the
-  armed-gate vacuity lint; MEASURED (tests/test_namedroute.py, 6
-  tests): the no-word twin's record renders «tries to coerce —
-  impossible here — no minted word to lean on» — the Q5 boundary
-  CLOSED at the readable surface; the unglossed gates byte-stable,
-  the tale gate untouched, the golden corpus byte-identical. W8
-  OPENED — the W7 station COMPLETE (iter-283/284/285/286). The
-  owner's RU report: docs/iterations/iter-286-namedroute-report.md.
-iter-285 DONE: the W7 reading band's LIVE half (the owner's blind
-  Q1–Q7 over the iter-284 kit received and scored against the
-  standing preset, the iter-270/280/282 precedent's form): every
-  pre-set bar MET n=1, the convergence question resolved yes — all
-  three ripples caught in the blind half; the reading band
-  CONFIRMED at BOTH bands (LLM n=2 + live n=1). The owner's RU
-  report: docs/iterations/iter-285-neglive-report.md.
-iter-284 DONE: the W7 reading band's LLM half (the battery's
-  answers as blind readings over the same battery's twins — the
-  W5-form kit of five packages, the preset before any reading, the
-  clean n=2 after one discarded contaminated pilot): every bar MET
-  (the departure, the carrier, the trade, the vigils 3=3, the dead
-  door, the invisible door's sell_bloom catch), the free namings
-  divergent; the readers' own discovery: the disappearance's
-  footprint wider than the census (the wait-band ripple, the
-  watch-briefing ripple, the records' entanglement) — the reading
-  band CONFIRMED at the LLM band; the live band stayed the owner's
-  (landed iter-285). The owner's RU report:
-  docs/iterations/iter-284-negread-report.md.
-iter-283 DONE: the W7 station's first row (the owner's «W7 открывай
-  если больше ничего не осталось» call): the eight-question battery
-  + the compression test on the same committed package — the
-  negative-space census, the lint's measured refusals, the
-  disappearance battery's three arms (settle / mourning / word), the
-  reachability inventory: no decorative material at the measured
-  band, the pack compressed; the honest boundaries classified (the
-  reachability-by-construction band; the unglossed literals the
-  documented dry fallback; the ungarrisoned window the composition
-  witness's own limitation). The witness tests/test_negative.py.
-iter-281 DONE: the two double-confirmed RENDERING_GAP routings
-  (the owner's delegated continuation call over iter-280 §F — the
-  W6 station's own remaining rows; W7 stays "after W6"): both gaps
-  closed read-side (the night form via phase.*/site.* + the
-  symbol-indirected move arm; the balance-move's causal row via
-  the account line's knows tail + the re-authored glosses) and
-  RE-MEASURED blind n=2 over the regenerated kit (byte-identical
-  double build): ADVENTURE 4/4 (the night form extracted and
-  quoted by both readings — GAP (a) CLOSED), MYSTERY 3/3 (no
-  regression), POLITICS P1/P2 MET + P3 materially improved (the
-  guild's agency n=2, the causal row quoted n=2 — GAP (b)'s named
-  legs CLOSED; the honest residuals: the intermediate arithmetic
-  unassembled though all numbers sit on the surfaces, the
-  decisive-move slot still the fires, the public retention not
-  explicit), the free namings again divergent — the reading-side
-  CONFIRMED at the improved band. W6's own rows COMPLETE.
-iter-279 DONE: the W6 reading band's LLM half (the owner's
-  «продолжай работу над задачами класса world track, делай то что
-  логичнее и правильнее сейчас сделать а не потом» call — the
-  current station's open row, the recorded W5 form): the reading
-  kit delivered over the committed pack — two one-history packages
-  (the JOURNEY seed 42 carrying adventure + mystery together; the
-  POLITICS seed 2 carrying the differential institutional answer +
-  the squeeze), the pre-set audit written before any reading, the
-  blind glm readings n=2 per question — MYSTERY 3/3 convergent,
-  ADVENTURE 3/4, POLITICS 2/3 (two RENDERING_GAPs named, never
-  fixed: the night risk form, the balance-move assembly), the free
-  readings diverging materially across the same pack's packages
-  (the W6 hypothesis's divergence half carried at the free band).
-  2530+9. The owner's RU report:
-  docs/iterations/iter-279-genreread-report.md.
-iter-278 DONE: the W6 genre matrix's first row (the owner's
-  «открывай задачу по W6» call — the station's law held: a failed
-  genre test identifies the missing world substrate, never triggers
-  plot writing; no test failed at its named band): the matrix's
-  substrate-side measured at the deterministic band on the SAME
-  committed package — adventure / mystery / politics CONFIRMED at
-  their named bands, the four carried genres cited (biography,
-  comedy, tragedy, relationship drama — the W5 evidence), the census
-  pinning all seven genres' surfaces; the honest boundaries
-  classified (the authored edge closure — the I0 inventory's
-  route-writer candidate, SUBSTRATE_GAP awaiting repetition; the
-  mystery's one-fact/one-path/one-revelation band; the player's
-  re-pricing power — iter-271's residue; the READING band
-  owner-routed).
-  2530+9. The owner's RU report:
-  docs/iterations/iter-278-genre-report.md.
-iter-277 DONE: the world-track archive ingestion (the owner's call:
-  the external WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip fully ingested
-  and reconciled, the durable agent context created, the pack
-  preserved as historical/bootstrap evidence — a future agent never
-  needs the zip re-uploaded; KI#106 found and closed; the W-boundary
-  recorded: W1–W4 closed historical foundation, W5 gate met /
-  evidence retained, W6 the current execution stage, W7 after W6,
-  W8 after W7).
-  2520+9. The owner's RU report:
-  docs/iterations/iter-277-worldcontext-report.md.
-iter-276 DONE: the I0 World Ignition Witness (the five-leg chain
-  measured on existing primitives over the perturbed keep-Malby
-  edge; the four timelines diverging never synchronized; the verdict
-  — the substrate expresses the chain, no machinery promoted; the
-  limitation inventory opened with three named candidates).
-  2520+9. The owner's RU report:
-  docs/iterations/iter-276-ignition-report.md.
-iter-275 DONE: the §6.2 fill row (PRESENT + NOTCH as live account
-  state, HATCH held as prose, the two-sided band gap measured and
-  named — the I0 inventory's first candidate; the embodiment
-  fill-list now CLOSED).
-  2513+9. The owner's RU report:
-  docs/iterations/iter-275-stepbench-report.md.
-iter-274 DONE: the §6.5 move release (the owner's row at its
-  measured price — the mourns intent pick re-authored to the
-  departure; the talks 287→2, the council pile 1→208, the honest
-  liveness shape: a living world is not a loud one; the smoke corpus
-  untouched; the surface re-measured and pinned).
-  2506+9. The owner's RU report:
-  docs/iterations/iter-274-moverelease-report.md.
-iter-273 DONE: the §6.4 SALE fork resolved through the owner's
-  generalized transaction synthesis (the fourth verb `settle` — the
-  multi-leg transaction over explicit owners; the re-weigh's sale
-  `sell_bloom` armed — the withhold's release, one load walked to
-  the beam's receiving stock for three coin banked at the crofts'
-  own ledger; the grammar wall measured first: the closed verbs'
-  from-side always the intent actor, the crafted transfer probe
-  refused at the actor's gate while the heap stands full; the class
-  pinned with the buyer's purchase — the owner's own example, one
-  atomic event over the same verb; the corpus byte-identical, the
-  twin deterministic; the R3 PCC record rides phases.md §6).
-  2506+9. The owner's RU report:
-  docs/iterations/iter-273-settlement-report.md.
-iter-272 DONE: the §6.1 fill row (the fill-list's second row —
-  the crossing's carrier strengthened): the flood debt's full
-  lifecycle over the account resolver's player-scaled arm — pure
-  pack data, zero core, the charcoalpaper precedent's family applied
-  to the crossing. The FOURTH kind floodpaper (the flood winter's
-  own paper — the borrowed punt twelve + the stranded season's
-  stores eight, the shelter law's cost; its own dated chain in the
-  kind's gloss, never the camp's starved winter) stocked on the
-  toll-taker (the paper twenty, the drowned generation's debt the
-  living hand's now) + the receiving stock on the second hand (the
-  inheritance's existence gate); the four doors: settle_paper (the
-  FALL, the covered-fund gate), render_toll (the COLLECTION, the
-  geography gate at the chest), pass_paper (the INHERITANCE — the
-  drowned generation's open question ANSWERED: the debt walking to
-  the living line, the pole and the paper one inheritance), buy_punt
-  (the PUNT'S PURCHASE, the punt fund's terminus — the flow
-  vocabulary's no-terminus residue closed); ONE COIN, TWO CLAIMS
-  made doors (the punt's twelve and the settlement's twenty on the
-  same thin surplus — the punt spent first leaves the fall refused).
-  Measured: the fall refused early / landed covered with the
-  witnesses holding the_floodpaper_fell and the tale carrying both
-  reckoning lines with the flood-winter gloss; the coupling
-  measured; the inheritance walked to the line with the stockless
-  target refused softly; the golden corpus byte-identical (zero
-  corpus price); the twin deterministic; the four census re-pins
-  (campaccount / charcoalpaper / debt1 / freightvol). Honest
-  residues: the punt's item-birth rides the parked st-5 door; a
-  dedicated boatyard entity a future row's own call. 2493+9 + ruff +
-  docguard + topology --check clean. The owner's RU report:
-  docs/iterations/iter-272-floodpaper-report.md.
-Next: §6.4's SALE fork (the owner's call on the grammar wall) →
-  §6.5 (the move-release, the owner's future row at its iter-263
-  price) → §6.2 (present / hatch / notch) → W6 genre.
-Active KIs: KI#104, KI#105 (both CLOSED iter-269).
-iter-271 DONE: the §6.4 fill row's first landing (the fill-list's
-  front row — FACTOR NEGOTIATION armed, the SALE forked to the
-  owner, the TAG measured at its boundary): the paper's RENEGOTIATION
-  as the guild's SQUEEZE over the account resolver's player-scaled
-  arm — the door reprice_paper (the squeeze's two sourced onto the
-  standing terms, the withheld margin's own number; the
-  standing-terms gate; the receiving-stock gate; the knowledge row
-  the_paper_repriced public; the compounding lawful while the terms
-  stand); the factor stays gateless as an entity (the beat rides the
-  seat's acceptance-door); the honest residue "the renegotiation
-  stays authored" CLOSED; the measured FORK recorded (the SALE — the
-  heap's drain): the account resolver's ACTOR-SIDE GRAMMAR WALL (a
-  location's stock is only ever a TO-side — the drain not authorable
-  as pure pack data; the owner's fork (a) the price-door (b) the
-  re-seating REJECTED (c) a location-side drain verb R3+); the TAG
-  TRANSFER at its boundary (the drop+take pair carries the
-  mechanics, the recognition mint stays un-armed). 2484+9 + ruff +
-  docguard + topology --check clean. The owner's RU report:
-  docs/iterations/iter-271-repricing-report.md.**
-iter-270 DONE: the owner's live reading of the delivered kit RECEIVED
-  and SCORED (the standing order's third row's own next beat — the
-  blind answers in the chat, the convergence assessment against the
-  pre-set bars, the live band's fresh n=1): every station bar MET at
-  the live band, the strict heartbreak pair CARRIED (the lost-future
-  half — the rs-8 re-subjectivation read exactly; the opened half —
-  the rs-7 clause quoted exactly), rs-9's causal row + rs-10's dated
-  chain both carried in full (the iter-208 human datum closed), the
-  humor's position-dependence explicit, the 40/80 echo consumed
-  naturally in reading; the heartbreak divergence's class RESOLVED
-  per the pre-set rule — the glm recheck's miss was the LLM band's
-  own reader-class variance, never a surface regression and never the
-  question form; the heartbreak human band MET on the fresh kit; the
-  live band's return row CLOSED (both just-landed surfaces read
-  together). 2478+9 + ruff + docguard + topology --check clean. The
-  owner's RU report: docs/iterations/iter-270-livescored-report.md.**
-iter-269 DONE: the live band's return + the heartbreak recheck (the
-  standing order's third row) DELIVERED — the reading kit re-established
-  over the CURRENT committed pack and handed to the owner: both
-  packages regenerated deterministically at seed 42, byte-identical on
-  regeneration, the re-weigh package now carrying BOTH just-landed
-  surfaces (rs-9's hold line + rs-10's dated withhold line) with EVERY
-  recorded substance shape hit exactly (the night read t=1112 partial,
-  the fall t=2824, the collection t=2826, seven crossings, the close
-  paper 0 / coin 8 / fatigue 98, the heap 18, the runner among the
-  fall's witnesses, the tale 90 lines); the heartbreak package
-  byte-stable against the recorded form (43 events, the tale 24 lines,
-  rs-7/8's lines, the dry holds); the briefs' cut points reconstructed
-  to the natural mirror of the recorded form (the honest note — the
-  original wording died with its session, Rule 9); the pre-set author
-  audit written BEFORE any reading (the isolation law) — the station
-  bars + the TWO NEW ROWS' bars; the HEARTBREAK RECHECK — the glm
-  blind reading n=2 over the heartbreak package: the opened half 2/2,
-  the lost-future half 1/2 (reading 1 carrying the rs-8 clause's own
-  semantics; reading 2 in the iter-204 remembered-dead mode), the
-  strict n=2 pair NOT met — the divergence's class UNRESOLVED between
-  the reader-class variance and the reconstructed question form; a
-  surface regression EXCLUDED (the package byte-stable); the iter-206
-  n=2 MET and iter-208 n=1 human MET records STAND; no fix attempted
-  (NEVER "improve the prose"; the same measurement re-run until it
-  passes is probe-shopping — the anti-loop law); the kit + the runner
-  + the transcripts outside the repo (Rule 9). 2478+9 + ruff + docguard
-  + topology --check clean. The owner's RU report:
-  docs/iterations/iter-269-livereturn-report.md.**
-iter-268 DONE: the shave's temporal surface (the standing order's
-  second row, the W5 owner disposition's ADD TEMPORAL SURFACE call)
-  LANDED read-side — the withhold's own line carrying the dated chain:
-  "the smelt crofts comes by 2 bloom kept off the weighbeam since the
-  guild factor shaved the camp's weight two seasons back and the camp
-  starved that winter — the withhold's own ledger at the year's
-  reckoning — the camp's answer to a tilted beam: unweighable at it,
-  the paper still paid" (the earlier season → the hunger winter → the
-  present consequence — the temporal anchor the iter-201/202 readers
-  lost, restored on the line they actually read); the mechanism rs-10
-  (the rs-5 precedent's own form — the SAME kind row re-authored,
-  zero code): ONE table row re-authored (templates.json::
-  account_kinds, bloom) + the re-pins (the three committed witnesses'
-  gloss constants — the deliberate act the pinning law names) + the
-  witness tests/test_shavememory.py (8 tests, the claim packet: the
-  dated chain's cells, the arc assembling ACROSS the tale's lines
-  through the winter's shared name between the two kind glosses, the
-  misparse falsifier — "that winter at the year's reckoning" absent
-  by the ledger tail's construction, the regression bars, the corpus
-  price, the twin); the measured evidence: the sparse twin's withhold
-  line carrying the chain at every crossing (seed 42), the crofts'
-  state apposition the same row (one boundary, every consumer), the
-  province smoke byte-identical (zero corpus price), the read-side
-  twin, and the probe's re-run — the glm blind reading n=2
-  convergent over the reconstructed recorded package (every substance
-  shape reproduced exactly: the night read t=1112, the fall t=2824,
-  the collection t=2826, seven crossings, close 0/8/98, heap 18):
-  the shave placed BEFORE the tale's events ("The phrase 'two
-  seasons back' clearly indicates this happened before the tale's
-  events" — reading 2), the withhold read as the dated past's
-  consequence, the regression bars held, the iter-201/202 failure
-  modes GONE (no present-weighing conflation, no "dispute remains
-  uncertain"); the author audit pre-set BEFORE the reading (the
-  isolation law), the runner + transcripts outside the repo (Rule 9);
-  the honest boundaries: the row dates the MEMORY as the camp tells
-  it (the authored constant, never a runtime clock read), the debt's
-  BIRTH stays on the paper's own line (the surfaces chain through
-  the winter's shared name — neither probe reading spells the
-  borrowing, the arc's assembly at its measured ceiling), the brief's
-  recalled-facts token stays dry (the brief's own law), the live
-  human band stays open (the standing order's next row reads both
-  just-landed surfaces together). 2478+9 + ruff + docguard +
-  topology --check clean. The owner's RU report:
-  docs/iterations/iter-268-shave-temporal-surface-report.md.**
-iter-267 DONE: the runner's grudge discovery surface (the standing
-  order's first row, the W5 owner disposition's ADD DISCOVERY SURFACE
-  call) LANDED read-side — the hold's own line carrying the
-  pack-authored causal row: "the factor's runner now holds something
-  over Garrick — the camp's word: the honest count cut in the tally;
-  the guild factor shaved the camp's weight two seasons back and the
-  camp starved that winter, and the bloom has sat off the weighbeam
-  since" (the standing → the remembered incident → the why, never the
-  biography); the mechanism rs-9 (the account/flow gloss boundary's
-  own shape): ONE table row (templates.json::knows, the_camps_word →
-  the prose) + the leverage line's conditional tail ({secret? —
-  {secret}}) + the boundary extension (render/chronicle.py: the
-  outcome's secret key rides the KNOWS boundary — rs-1's law, one
-  table, every consumer; an unglossed secret pre-seeds EMPTY, every
-  other hold rendering the dry standing unchanged, a foreign log's
-  included); the measured evidence: the lever chain's tale carrying
-  the row at seed 42 (the day arm AND the partial-fidelity night arm),
-  the grim fixture's leverage line DRY (the unglossed law over a
-  committed corpus), the province smoke byte-identical (zero corpus
-  price), the read-side twin; the witness tests/test_grudgesurface.py
-  (9 tests, the claim packet); the honest boundaries: the row is the
-  CAUSAL surface only (the temporal placement the NEXT row's own
-  material — the shave's dated-memory surface), the other three
-  read-hinge secrets stay unglossed (each its own row's call on the
-  owner's voice), the brief's recalled-facts token stays dry (the
-  brief's own law). 2470+9 + ruff + docguard + topology --check
-  clean. The owner's RU report:
-  docs/iterations/iter-267-runner-grudge-surface-report.md.**
-iter-266 DONE: the W5 owner decisions LANDED as the owning docs' decision records (zero code/pack/canon) — the residue list SPLIT by disposition (fail-then-pass + 40/80 CLOSE AS RESIDUE; the runner's grudge ADD DISCOVERY SURFACE; the shave's timing ADD TEMPORAL SURFACE), the fill-list re-ordered (§6.4 → §6.1 → §6.5 → §6.2 → W6, §6.3 REMOVED), the decision standard recorded as standing law. 2461+9. The owner's RU report: docs/iterations/iter-266-w5-owner-decisions-report.md.
-iter-265 DONE: the render conditional (the §6.5 row's last leg) LANDED read-side, zero core — the renderer's location fold (the DOTTED conditional keys) + the market line's own arm; the falsifier dead (36 ashes lines, 0 standing). 2461+9. The owner's RU report: docs/iterations/iter-265-render-conditional-report.md.
-iter-264 DONE: the §6.5 embodiment legs LANDED as pure pack data,
-zero core — the mourns hook market_mourns (the prop trigger, the
-RAMBLE intent pick, the TRIGGER-ONLY law's option gate), the trade
-verb trade_at_market (the stall gate closing the commerce with the
-burned market by construction), the council/vigil knowledge blocks;
-the composition deltas exactly the iter-263 predictions; the witness
-tests/test_marketlegs.py. 2455+9. The owner's RU report:
-docs/iterations/iter-264-market-legs-report.md.
-iter-263 DONE: the carrier-or-surface discrimination over the owner's
-question — the three-move probe (the reader audit → the ablation arm →
-the injection arm, WORLD_TESTS §7's third member; zero core/pack
-changes): the verdict PER-LEG never per-institution (the market
-carries all four bands; the calendar line a surface BY CONSTRUCTION),
-the epistemic band named and measured, the market-mourns prop trigger
-measured both ways (the move release massive, the ramble
-minimal-but-material — §6.5's move-release price), four
-expressibility boundaries named, the J-rows re-framed by measurement.
-2445+9. The owner's RU report:
-docs/iterations/iter-263-carrier-surface-report.md.
-iter-262 DONE: the composition-bottleneck diagnosis — the twin-fold causal-inertness test, J-1 re-framed, KI#103 fixed (the wait resolver's knowledge minting), J-3 closed. 2445+9. The owner's RU report: docs/iterations/iter-262-diagnosis-report.md.
-iter-261 DONE: the composition question over the parked intake-40
-P1 set — P1-1 the Province integrated witness (16 relational-oracle
-tests over one 2371-event run), P1-10 the timing witness (mechanics.py
-timing — the two-times table, the first named assignment_tick
-consumer), cov-1's runtime arm (census --log, the A..H loss
-vocabulary), the H1/H2 sliced pair measured (material outcomes
-invariant, deltas door-only), the province_calendar provenance fixed,
-B3 consumer status diagnostic-only, B1 no promotion evidence, the
-J-gaps all pack-level. 2444+9 + ruff + docguard + topology --check
-clean. The owner's RU report A–J: docs/iterations/.
-iter-260 DONE: the temp-1 LANDING over the owner's contract pick
-(A2 + B2/B3, B1 deferred) — the crossing-family slicing contract
-pinned (test_temp1_contract.py), the semantic-origin provenance landed
-(provenance.assignment_tick, schema 0.3), B2's runtime untouched (the
-clustering witness byte-verified), B1 deferred behind the card's
-reopening conditions; the five fixtures regenerated with every
-canonical field byte-identical to BASE.
-iter-257/258/259 DONE: the intake-40 instrument session — the fork
-card + cov-1 (D-234) + div-1 (D-235) + KI#101/102 closed.
-iter-255+256 DONE: the intake-40 routing (D-233) + KI#100 closed.
-iter-251/252 DONE: the ssi tail phases 6+7 (D-229/D-230).
-iter-241..250 DONE: the ssi foundation + phases 1..5 + KI#99
-(D-221..D-228).
+**iter-303 DONE: overhead-audit (the owner's audit request; R1
+  doc/state + the R2-class full-row pin).** Phase A measured: the
+  suite 2529+1 in 90.7s (top-40 all 0.5–2.1s); the B3/B4/B5
+  performance premise FALSIFIED (savings < 0.5% of suite time); the
+  real per-iteration overhead was ~14k tokens of HISTORY in the
+  mandatory reading — now cut (the pre-302 DONE narratives deleted
+  from this section — the RU reports + worklog + git stay the
+  owners; the TASKS ledger compressed to true one-liners; FWL §0's
+  stale "not yet in repo" record retired); C3 executed (the topology
+  full-row pin — every map row's reads+emits exactly pinned, 93/93
+  green at HEAD, zero resync, two new teeth tests); the audit's own
+  CI-trigger false positive retracted at the byte layer (a rendered
+  `[m` artifact mimicking a corrupted workflow trigger — never a
+  repo defect; the report's §D: verify bytes before recording a
+  P0); B1/B2/C4 rejected with numbers or left as owner proposals
+  (the report's verdict table).
+  The owner's RU report:
+  docs/iterations/iter-303-overhead-audit-report.md.
+Next: the owner's calls — (1) the B1/C4 law diffs: adopt or reject
+  (the report's §E — both small, both currently low-value by the
+  measurements); (2) the standing queue unchanged: the streaming
+  admission (SSE — the backend gateway contract first, R3/R4-class),
+  the acceptance matrix, the DECISIONS collapse (36→30, the owner's
+  call), the tooling floor's remaining rows (the Playwright-class
+  multi-tab smoke), and the world track's parallel rows.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns

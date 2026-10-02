@@ -13,8 +13,9 @@ over git history. Two modes:
   --check               validate docs/SSI_TOPOLOGY.md against HEAD:
                         the inventory pin (every scope .py has a row,
                         no stale rows), the owner pin (non-empty), and
-                        the WATCHLIST topology pin (reads + emits match
-                        the derivation exactly — a seam-relevant change
+                        the FULL-ROW topology pin (iter-303, C3-measured:
+                        EVERY map row's reads + emits match the
+                        derivation exactly — a seam-relevant change
                         without a map update goes RED here)
 
 Laws this rides: N018 (no architecture health from a snapshot — the
@@ -399,6 +400,33 @@ def run_check() -> list[str]:
         if doc_emits != live_literals:
             violations.append(
                 f"watchlist emits drift: {w} doc={sorted(doc_emits)} "
+                f"live={sorted(live_literals)}"
+            )
+    # iter-303 (overhead-audit, C3): the full-row pin — every map row's
+    # mechanical cells (reads + emits) match the derivation, not just
+    # the watchlist's. Measured green at HEAD before the extension
+    # landed (93/93 rows exact), so the tightened contract costs no
+    # map resync; the map's own header already claims "re-derives the
+    # mechanical columns and fails RED on drift" — the code now
+    # executes that claim in full.
+    for r in rows:
+        mod = derived.get(r["module"])
+        if mod is None or r["module"] in watchlist:
+            continue
+        doc_reads = _split_cell(r["reads"])
+        if sorted(doc_reads) != mod["reads"]:
+            violations.append(
+                f"row reads drift: {r['module']} doc={doc_reads} "
+                f"live={mod['reads']}"
+            )
+        live_literals = set(mod["emits"]["literals"])
+        if mod["emits"]["dynamic"]:
+            live_literals.add("dyn")
+        live_literals.update(mod["emits"]["ops"])
+        doc_emits = set(_split_cell(r["emits"]))
+        if doc_emits != live_literals:
+            violations.append(
+                f"row emits drift: {r['module']} doc={sorted(doc_emits)} "
                 f"live={sorted(live_literals)}"
             )
     return violations

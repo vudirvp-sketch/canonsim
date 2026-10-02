@@ -121,6 +121,53 @@ def test_watchlist_reads_drift_is_loud(
     )
 
 
+def test_non_watchlist_row_reads_drift_is_loud(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """iter-303 (overhead-audit, C3): the full-row pin — a NON-watchlist
+    row's mechanical cells are pinned exactly like the watchlist's (the
+    map's header claim "re-derives the mechanical columns, fails RED on
+    drift" executed in full). The crafted breach rewrites core/echo.py's
+    reads cell to a wrong list; only the row-pin catches it."""
+    monkeypatch.setattr(
+        topology,
+        "MAP_DOC",
+        _write_mutated(
+            tmp_path,
+            "| core/echo.py | the echo fold (knowledge stack, L6) | 130 | "
+            "core/knowledge.py, core/pack.py | — | — |",
+            "| core/echo.py | the echo fold (knowledge stack, L6) | 130 | "
+            "core/knowledge.py | — | — |",
+        ),
+    )
+    violations = topology.run_check()
+    assert any(
+        v.startswith("row reads drift: core/echo.py") for v in violations
+    )
+
+
+def test_non_watchlist_row_emits_drift_is_loud(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """The emits half of the full-row pin: a non-watchlist row whose
+    emits cell invents a literal the module never emits goes RED."""
+    monkeypatch.setattr(
+        topology,
+        "MAP_DOC",
+        _write_mutated(
+            tmp_path,
+            "| core/fold.py | the projection fold (engine, no-touch floor) "
+            "| 167 | core/log.py | — | — |",
+            "| core/fold.py | the projection fold (engine, no-touch floor) "
+            "| 167 | core/log.py | — | dyn |",
+        ),
+    )
+    violations = topology.run_check()
+    assert any(
+        v.startswith("row emits drift: core/fold.py") for v in violations
+    )
+
+
 def test_watchlist_emits_drift_is_loud(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

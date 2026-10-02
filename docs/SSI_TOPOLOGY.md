@@ -33,11 +33,13 @@
 - **Audit-time facts** (pinned to the recorded audit, NOT re-checked —
   they rot by design and the recipe below is the refresh): the
   `lines` column, §2's co-change figures, §3's trajectories. The
-  `--check` pin covers only what must stay true at every HEAD: the
+  `--check` pin covers what must stay true at every HEAD: the
   inventory (every scope module has a row, no stale rows), non-empty
-  owners, and the watchlist rows' `reads`+`emits` EXACTLY matching the
-  derivation (a seam-relevant change to a strangler target without a
-  map update in the same iteration goes RED).
+  owners, and — since iter-303 (overhead-audit, C3-measured: 93/93
+  rows exact at the extension's HEAD, zero resync) — EVERY row's
+  `reads`+`emits` EXACTLY matching the derivation (the watchlist
+  rows keep their dedicated drift lines; a mechanical-cell change
+  anywhere without a map update in the same iteration goes RED).
 - **Recorded audit**: BASE_COMMIT `08300a022940bd4c80f0893e5cb0cd8e543dc001`
   (2026-09-26), window = the last 150 of 290 commits — iter-90
   (2026-09-10, `5f13f7f`) through HEAD. Refresh recipe:
