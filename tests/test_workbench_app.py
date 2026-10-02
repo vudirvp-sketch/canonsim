@@ -274,16 +274,34 @@ def test_the_exe_resolution_order(tmp_path: Path) -> None:
     assert resolve_llama_exe("", empty_home) == "llama-server"
 
 
-def test_the_launch_params_merge_cli_over_settings(tmp_path: Path) -> None:
+def test_the_launch_params_merge_cli_over_settings(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """The EFFECTIVE provider: the CLI overrides win per-field over
     the store's CURRENT values (read at spawn time — a UI update
-    applies at the next spawn)."""
+    applies at the next spawn).
+
+    KI#110: the exe rung is pinned to an EMPTY discovery home — a
+    dropped llama.cpp tree in workbench/runtime/llama.cpp is the
+    documented launcher flow and must never turn this merge test red
+    (the resolution chain itself rides test_the_exe_resolution_order,
+    which is hermetic by construction)."""
     sys.path.insert(0, str(REPO))
-    from workbench_app import _make_launch_params
+    import workbench_app
 
     from workbench.application.inference import InferenceStore
     from workbench.application.settings import SettingsStore
 
+    empty_home = tmp_path / "no-llama-home"
+    empty_home.mkdir()
+    real_resolution = workbench_app.resolve_llama_exe
+    monkeypatch.setattr(
+        workbench_app,
+        "resolve_llama_exe",
+        lambda preference, llama_cpp_dir=None: real_resolution(
+            preference, empty_home
+        ),
+    )
     settings_path = _settings_path(tmp_path)
     store = SettingsStore(settings_path)
     inference = InferenceStore(tmp_path / "inference.json")
@@ -291,7 +309,7 @@ def test_the_launch_params_merge_cli_over_settings(tmp_path: Path) -> None:
         {"context": 4096, "gpu_layers": 24, "temperature": 0.25}
     )
     cli = parse_args(["--llama-ctx", "2048"])
-    provider = _make_launch_params(store, inference, cli)
+    provider = workbench_app._make_launch_params(store, inference, cli)
     params = provider()
     assert params["context"] == 2048  # the CLI override
     assert params["gpu_layers"] == 24  # the profile's value

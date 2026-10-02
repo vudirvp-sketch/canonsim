@@ -23,9 +23,10 @@
  * The op-driver (the S0-4 load probe) is also wired here: it
  * drives REAL `session.attach` ops against the gateway (the CAS
  * loop: read the revision, attach, repeat) and measures the
- * observed ops/s — the honest "simulation/LLM active on the Python
- * side" stand-in for the load note (no llama.cpp model is present
- * in this environment; that band is declared, not faked).
+ * observed ops/s. With a model loaded the measurement runs
+ * alongside a live llama-server (iter-302's liveband closure);
+ * without one it remains the honest Python-side stand-in — the
+ * probe never fabricates the LLM side either way.
  *
  * The Observatory route is session-free (its two READ ops are not
  * session-scoped) — the HISTORY world needs no lease, exactly as
@@ -176,7 +177,8 @@ export function App(): ReactNode {
             <h2>Load probe (S0-4)</h2>
             <p className="surface-note">
               drives real <code>session.attach</code> ops (CAS loop) — the Python-side load stand-in;
-              no llama.cpp model present in this environment (that band is declared, not faked)
+              with a model loaded, the LLM-side cost rides the chat runs (iter-302: 50 ops measured
+              at ~108 ops/s alongside a live llama-server — the note, not a perf lab)
             </p>
           </header>
           <div className="controls">

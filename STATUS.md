@@ -1,83 +1,57 @@
-Iteration: iter-301 (`settings-nav` — Phase 3's SEVENTH ROW, the
-  owner's «продолжай работу над фронтендом» delegated call; R2
-  frontend-local — the Settings secondary-nav row named by STATUS's
-  own next-row order, the external IA verdict's step 5 reconciled
-  with inf-1 by the D-246 method): the SETTINGS SECONDARY NAV
-  landed — the surface's own sections over REAL DOCUMENTS only
-  (never a feature directory; zero new routes, zero Python change):
-  DEPLOYMENT (the launch-settings store unchanged — the three-field
-  draft form, the §8 closure, the compiled preview; the verdict's
-  "Advanced" DISSOLVES into the document: extra_args is the same
-  store's raw escape hatch, §19's disclosure law — one document,
-  one draft, one Save carrying only the delta) | ABOUT (NEW — the
-  gateway's own identity document read-only over the EXISTING
-  session-free app.status; the verdict's "General" re-scoped to
-  what exists: no invented editable preferences, the closed
-  three-field set the store's own law; the probe console stays in
-  Diagnostics — identity here, proof there); APPEARANCE a NAMED
-  standing boundary (no persisted appearance store exists, browser
-  storage is never truth — the guard's R3; an in-memory preference
-  would die on remount), never a fabricated empty section; inf-1
-  STANDS (the pointer renders: the generation controls live in the
-  Inference surface, never a Settings subsection); the CONTAINER
-  owns the settings state — the DRAFT's owner is the SURFACE, a
-  section switch never drops the user's unsaved REQUEST (pinned by
-  an integration row + falsified live in the browser); only the
-  active section mounts (a remounted About re-reads its evidence;
-  the settings mount READ stays ONE per surface — the section
-  switches never re-read it); the secondary nav is the surface's
-  own concern (§2.1 — the Diagnostics area's in-workspace tab
-  precedent, mirrored: the section-tab strip, the CONFIG token on
-  the active tab, aria-current, keyboard-native buttons)
+Iteration: iter-302 (`liveband` — the owner-side bands CLOSED LIVE,
+  the owner's «продолжай работу над фронтендом» call + the explicit
+  sandbox-environment enabler «можешь поставить в песочницу llama.cpp
+  и любое окружение нужное»; R2 — frontend-local + one R1-class
+  hermetic test fix): the declared owner-side bands closed over a
+  REAL llama.cpp in the sandbox — llama.cpp b11337 (ubuntu-x64) in
+  the documented drop-folder (gitignored, discovery verified live by
+  the gateway banner), the models arriving THROUGH the gateway's own
+  model.fetch op (stories15M 19MB + Qwen2.5-0.5B-Instruct q4_k_m
+  491MB, PROGRESS observed — the fetch COMPLETED band closed too,
+  first live observation after iter-300's admission-only closure);
+  the LIVE smoke over real POSTs: load → ACTIVE (the slot filled),
+  chat.send → COMPLETED (a REAL reply, finish stop, backend identity
+  b11337-d775ebf36, REQUESTED/EFFECTIVE pair), the single-slot
+  DOMAIN_REJECTED verbatim, unload → EVICTED, re-selection
+  EVICTED→SELECTED→ACTIVE; the LIVE browser closure through the UI's
+  OWN buttons: the ACTIVE chip + tag-live + the active-slot strip,
+  the chat COMPLETED turn with the provenance line, the EVICTED chip,
+  the S0-4 load probe measured WITH a live LLM (50 ops, 0.45–0.49s,
+  107.8–110.3 ops/s — the S0-4 criterion literally met), ZERO
+  console errors; the stale probe copy fixed (App.tsx asserted "no
+  llama.cpp model present in this environment" — an environment fact
+  stale on the owner's own station); KI#110 opened+closed (the
+  launch-params merge test assumed an empty discovery home — the
+  documented llama.cpp drop made it red; pinned hermetically)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2529 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; zero Python change
-  this iteration — the frontend stack: 221 vitest + tsc + build +
-  the live gateway smoke 38/38 over the served composition: the
-  full 21-operation identity registry, the settings family, the
-  persisted schema/2 evidence on disk, the closed-set rejections
-  verbatim, the idempotent duplicate) + the live browser closure
-  (the secondary nav rendering, the About identity over the live
-  stack, the DRAFT surviving the section round-trip, zero console
-  errors) ·
+  --check clean (Python 3.12.14, the env pin; the suite green WITH
+  the llama.cpp tree present in runtime/ — KI#110's hermeticity
+  verified live; the frontend stack: 221 vitest + tsc + build; the
+  live smoke over real POSTs + the live browser closure — the
+  report's §A) ·
 Date: 2026-10-02 ·
-Scope: frontend/src/features/settings/Settings.tsx (the container +
-  the secondary nav + the Deployment section extraction — the
-  draft-survival law), frontend/src/features/settings/
-  SettingsAbout.tsx (new — the About section over app.status), 
-  frontend/src/app/composition/styles.css (the settings-sections
-  strip + the section-tab tokens — zero raw literals, the V1 scan
-  green), frontend/tests/fixtures/app_status_composition.json +
-  manifest.json (new — the FULL 21-operation registry captured
-  in-process over the real composition, throwaway roots),
-  frontend/tests/integration/Settings.test.tsx (7 new rows: the
-  nav's closed section set, the About identity read's wire law +
-  verbatim rendering, the DRAFT-survival falsifier, the remount
-  re-read, the TRANSPORT/MISMATCH lanes, the inf-1 pointer),
-  docs/FRONTEND_UIUX_LAW.md (§2.1's tree + binding lines — the
-  Settings secondary-nav law), docs/frontendweb/
-  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map), docs/TASKS.md
-  (the ledger, iter-291 evicted), STATUS.md (the header + the §5
-  cleanup: KI#109 deleted — closed iter-294, its substance verified
-  resolved at the current mirror HEAD),
-  worklog.md (iter-291 evicted, one in one out),
-  frontend/README.md (the Settings surface row),
-  docs/iterations/iter-301-frontendweb-report.md (new) — 13
-  changed/created (10 modified + 3 created; R2 — frontend-local;
-  zero Python change, zero canon change, the LOG untouched, zero
-  corpus price)
+Scope: frontend/src/app/composition/App.tsx (the stale probe copy),
+  tests/test_workbench_app.py (KI#110 — the hermetic exe rung),
+  STATUS.md (the header + KI#110), worklog.md (the entry, iter-292
+  evicted), docs/TASKS.md (the ledger, iter-292 evicted),
+  frontend/README.md (the band notes), docs/frontendweb/
+  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
+  docs/iterations/iter-302-liveband-report.md (new) — 8 changed/
+  created (7 modified + 1 created; R2 — frontend-local + one
+  hermetic test fix; zero Python behavior change, zero canon change,
+  the LOG untouched, zero corpus price)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1 visual floor LANDED (iter-293/297); Phase 3's
-  SEVEN rows LANDED (iter-294/295/296/298/299/300/301: shell/
-  lifecycle, observatory, settings, chat, inference, models, the
-  settings secondary nav) + the IA REPAIR LANDED (iter-297, D-247);
-  the chat row's COMPLETED band and the models row's ACTIVE/EVICTED
-  bands are owner-side (a loaded llama.cpp model); the next
-  frontend rows the owner's call: the streaming admission (SSE —
-  the backend gateway contract first), the acceptance matrix, the
+  SEVEN rows LANDED (iter-294/295/296/298/299/300/301) + the IA
+  REPAIR LANDED (iter-297, D-247); the owner-side bands CLOSED LIVE
+  (iter-302: chat COMPLETED, models ACTIVE/EVICTED, fetch COMPLETED,
+  S0-4 with a live LLM — over a real sandbox llama.cpp); the next
+  frontend rows the owner's call: the streaming admission (SSE — the
+  backend gateway contract first), the acceptance matrix, the
   DECISIONS collapse (the owner's call); the standing boundaries:
   SSE/WebSocket, Tauri, PWA, the Settings Appearance section (no
   persisted store) — each its own admission (the import form's
@@ -113,10 +87,13 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Active KIs
 
-(none — KI#109 deleted at the iter-301 §5 cleanup: closed iter-294,
-  seven iterations past the 2-iteration deletion rule; its substance
-  verified resolved at the current mirror HEAD — the 16 D-245
-  deletions all present, the architecture suite green)
+- KI#110 · the launch-params merge test assumed an empty llama.cpp discovery
+  home (the documented drop → red); pinned hermetically · CLOSED iter-302
+
+(none further — KI#109 deleted at the iter-301 §5 cleanup: closed
+  iter-294, seven iterations past the 2-iteration deletion rule; its
+  substance verified resolved at the current mirror HEAD — the 16
+  D-245 deletions all present, the architecture suite green)
 
 ## FAQ / Pitfalls
 
@@ -146,28 +123,21 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-295 DONE: observatory (Phase 3's second row, the owner's
-  «продолжай работы по фронтенду» repeated call; R2
-  frontend-local).** The dual-read law's HISTORY half landed over
-  the existing observatory.runs/read READ ops: ONE bounded window
-  at a time (the event-id cursor, next_after pagination that
-  REPLACES the window), the context strip's identity line, NO
-  DATA/NO MATCH/stale-cursor/TRANSPORT distinct, no polling; 78
-  vitest + tsc + build + the live smoke 8/8 over a real
-  CLI-generated run (run_125_0, 56 events, the head window 50/56,
-  the forward window to the end, NO MATCH and the stale cursor
-  verbatim).
-Next: the owner's calls — the Phase 3 continuation rows (each its
-  own iteration: the Chat/Inference contract mirror + surface —
-  needs a loaded model for the full band, the Settings mirror —
-  the backend.settings family, both ops live at the app gateway),
-  the streaming admission (SSE — the backend gateway contract
-  first), the acceptance matrix, the DECISIONS collapse (36→30, the
-  owner's call), and the world track's parallel rows.
-Active KIs: KI#109 CLOSED iter-294 (the record above — deleted at
-  the next STATUS-touching iteration per §5). The suite green
-  (2529+1; the frontend 78). The owner's RU report:
-  docs/iterations/iter-295-frontendweb-report.md.
+**iter-302 DONE: liveband (the owner's «продолжай работу над
+  фронтендом» call + the sandbox-environment enabler; R2).** The
+  declared owner-side bands CLOSED LIVE over a real sandbox
+  llama.cpp: chat COMPLETED (a real reply + provenance), models
+  ACTIVE/EVICTED (through the UI's own buttons), model.fetch
+  COMPLETED (first live observation), the S0-4 load probe measured
+  with a live LLM (≈108–110 ops/s); the stale probe copy fixed;
+  KI#110 opened+closed. The suite green with the llama.cpp tree
+  present (2529+1; the frontend 221). The owner's RU report:
+  docs/iterations/iter-302-liveband-report.md.
+Next: the owner's calls — the streaming admission (SSE — the backend
+  gateway contract first, R3/R4-class), the acceptance matrix, the
+  DECISIONS collapse (36→30, the owner's call), the tooling floor's
+  remaining rows (the CI wiring, the Playwright-class multi-tab
+  smoke), and the world track's parallel rows.
 iter-294 DONE: shell (Phase 3's first row, the owner's
   «продолжай работы по фронтенду, над теми частями что логичнее
   всего сейчас провести» call; R2 frontend-local + KI#109).** The

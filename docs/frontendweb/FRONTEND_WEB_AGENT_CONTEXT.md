@@ -192,10 +192,10 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  (only admitted turns + completed replies ride the
                  next send), every lane verbatim; Chat at the rail's
                  HEAD; 139 vitest + the 16/16 live smoke + the live
-                 browser closure; the COMPLETED band owner-side — a
-                 loaded llama.cpp model, this environment closes the
-                 admission/FAILED/REJECTED lanes verbatim, never a
-                 fabricated completion); the fifth row LANDED
+                 browser closure; the COMPLETED band CLOSED LIVE at
+                 iter-302 — a real reply + provenance over a sandbox
+                 llama.cpp, never a fabricated completion); the fifth
+                 row LANDED
                  (iter-299, the owner's «продолжай работу над
                  фронтендом» delegated call: the INFERENCE ENTRY —
                  the generation-control WORKSPACE over the existing
@@ -267,11 +267,35 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  DRAFT's owner the SURFACE (the container's hook) —
                  a section switch never drops the unsaved REQUEST,
                  falsified live in the browser; 221 vitest + the
-                 38/38 live smoke + the browser closure); the next
-                 rows the owner's call: the streaming admission (SSE
-                 — the backend gateway contract first), the
-                 acceptance matrix, the DECISIONS collapse (the
-                 owner's call); each its own iteration
+                 38/38 live smoke + the browser closure); the LIVE
+                 BAND CLOSURE LANDED (iter-302, the owner's
+                 «продолжай работу над фронтендом» call + the
+                 explicit sandbox-environment enabler «можешь
+                 поставить в песочницу llama.cpp и любое окружение
+                 нужное»: the declared owner-side bands CLOSED LIVE
+                 over a real sandbox llama.cpp — the fetch COMPLETED
+                 band (the models arriving THROUGH the gateway's own
+                 model.fetch op, PROGRESS observed — the first live
+                 closure after iter-300's admission-only form), the
+                 models ACTIVE/EVICTED bands (through the UI's OWN
+                 buttons: load → ACTIVE with the slot filled, the
+                 single-slot rejection verbatim, unload → EVICTED,
+                 re-selection), the chat COMPLETED band (a REAL
+                 reply, finish stop, backend identity, the
+                 REQUESTED/EFFECTIVE pair), the S0-4 load probe
+                 measured WITH a live LLM (≈108–110 ops/s — the
+                 criterion literally met), zero console errors; the
+                 stale probe copy fixed — App.tsx asserted an
+                 environment fact stale on the owner's own station;
+                 KI#110 opened+closed — the launch-params merge test
+                 assumed an empty llama.cpp discovery home, the
+                 documented drop made it red, the exe rung pinned
+                 hermetically; the suite green WITH the tree
+                 present); the next rows the owner's call: the
+                 streaming admission (SSE — the backend gateway
+                 contract first), the acceptance matrix, the
+                 DECISIONS collapse (the owner's call); each its own
+                 iteration
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the
                  owner's call
