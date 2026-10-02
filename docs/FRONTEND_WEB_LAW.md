@@ -182,8 +182,14 @@ Admission order (never skip ahead; never implement 2–4 during S0):
 1. POST /op only (landed; S0)
 2. explicit gateway contract for a one-way stream (SSE or
    fetch-stream) + tests
-3. browser adapter behind the typed gateway client
-4. focused-tab / budget policy enforced in UI
+   [LANDED iter-305 — the backend first: GET /events over
+   workbench/api/{gateway,transport}.py, WORKBENCH_APP_LAW §13's
+   landed form; the frame vocabulary + the byte parity +
+   boundedness are tested in tests/test_sse_stream.py]
+3. browser adapter behind the typed gateway client (NOT landed —
+   its own row: the EventSource/fetch-stream adapter, the zod frame
+   validators, the focused-tab reconnection policy)
+4. focused-tab / budget policy enforced in UI (rides 3)
 5. HTTP/2 or server fan-out only on measured need
 6. WebSocket only for a concrete bidirectional requirement
 ```

@@ -137,7 +137,7 @@ implied or admitted.
 ```text
 workbench/
 ├─ application/{operations, identity, artifact, directories, clock, settings}
-├─ api/{contract, gateway, transport}          # + streaming (§13, future)
+├─ api/{contract, gateway, transport}          # transport carries the §13 SSE arm (iter-305)
 ├─ platform/{llama_process, model_fetch}
 └─ presentation/redot/                          # the frontend companion's own
 ```
@@ -377,7 +377,7 @@ FAILED_TO_CANCEL | UNKNOWN`. Never claim completion because a stop
 button was pressed. Late results are rejected by operation/execution
 identity and current revision; they cannot mutate newer state.
 
-## 13. Streaming, bounded buffers and reconnect `[CONTRACT — the live-events row]`
+## 13. Streaming, bounded buffers and reconnect `[LANDED iter-305 — the SSE gateway contract: gateway.py's subscription core + transport.py's GET /events SSE binding]`
 
 ```text
 backend stream → bounded execution buffer → immutable execution record
@@ -392,6 +392,35 @@ instead of pretending completeness. Reconnect: `reconnect(last_sequence)
 snapshot`. Identity/order stay stable; a client disconnect never
 implicitly cancels unrelated execution. SSE is the default one-way event
 direction; WebSocket only for a concrete bidirectional need.
+
+The landed form (the ordered-session-events half; token-level backend
+deltas are a later row's own contract): `Gateway.subscribe(session_id,
+since_sequence)` opens a bounded per-subscriber channel under the same
+coarse dispatch lock `_emit` appends under — the replay/live boundary
+is gapless by construction (replay ends at `last_sequence`, the live
+queue starts at `last_sequence+1`); `stream_buffer_events` (<=
+`retention_events`, construction law) is the per-subscriber ceiling —
+overflow DRAINS the queued events in order, then closes the channel
+with the observable terminal (the retained stream never drops; the
+overflowed consumer's reconnect ALWAYS replays — never a second
+resync); `close_subscriptions()` is the bounded-shutdown wake (every
+writer frames its honest `stream.close` and exits). The wire: `GET
+/events?session_id=&since_sequence=` (the `Last-Event-ID` header the
+SSE standard's fallback cursor), one `stream.open` frame (the REPLAY/
+RESYNC mode document), one frame per event (`id`=sequence, `event`=type,
+`data` = the SAME canonical JSON `session.events` replays — byte
+parity), `: keep-alive` heartbeats, `stream.overflow`/`stream.close`
+terminals, and the semantic rejection riding ONE `stream.rejected`
+frame at HTTP 200 (the §8 delivery/semantics split holds on the stream
+surface); auth-required refuses the stream route (403) — auth material
+never rides URLs, the authenticated exposures own their own stream
+contract. The writer is the request's own handler thread (one thread
+per stream); a vanished consumer ends bounded (its queue fills → the
+overflow terminal, or the first failed write — a graceful close sends
+no RST, the writes buffer into the void; the bounded buffer is the
+reliable end). The client-side adapter (EventSource behind the typed
+gateway client) + the focused-tab budget policy are the admission
+order's next rows (FRONTEND_WEB_LAW §5).
 
 ## 14. Resource admission `[CONTRACT]`
 

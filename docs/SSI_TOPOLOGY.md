@@ -149,8 +149,8 @@ watchlist: core/loop.py, core/director.py, core/worldgen.py, core/intent.py, wor
 | workbench/__init__.py | the Workbench package root | 4 | — | — | — |
 | workbench/api/__init__.py | the api package root | 41 | — | — | — |
 | workbench/api/contract.py | the gateway envelopes + closed vocabularies (wb-4, D-201) | 529 | workbench/application/identity.py | — | — |
-| workbench/api/gateway.py | the socket-free dispatch core (wb-4, D-201) | 922 | workbench/api/contract.py, workbench/application/clock.py, workbench/application/identity.py | — | app.status, session.attach, session.create, session.detach, session.events, session.get |
-| workbench/api/transport.py | the loopback HTTP binding (INV-4's second surface) | 223 | workbench/api/gateway.py | — | — |
+| workbench/api/gateway.py | the socket-free dispatch core (wb-4, D-201; iter-305: the §13 subscription surface — subscribe/close_subscriptions + the bounded fan-out) | 1339 | workbench/api/contract.py, workbench/application/clock.py, workbench/application/identity.py | — | app.status, session.attach, session.create, session.detach, session.events, session.get |
+| workbench/api/transport.py | the loopback HTTP binding (INV-4's second surface; iter-305: + the GET /events SSE stream arm, §13) | 544 | workbench/api/contract.py, workbench/api/gateway.py | — | — |
 | workbench/application/__init__.py | the application package root (app spec) | 59 | — | — | — |
 | workbench/application/artifact.py | the artifact store (app §10) | 319 | workbench/application/identity.py | — | — |
 | workbench/application/clock.py | the AppClock (app §17) | 108 | — | — | — |

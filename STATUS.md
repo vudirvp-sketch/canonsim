@@ -1,60 +1,80 @@
-Iteration: iter-304 (`tokenfloor` — the owner's «продолжай
-  фронтенд / перепроверь прошлые итерации + стили без хардкода»
-  call; R2 frontend-local): the re-verification pass first — the
-  FULL check packet re-run green at HEAD (2531+1 pytest, ruff,
-  docguard, topology --check, 221 vitest, tsc, build) + the live
-  composition re-verified end-to-end over the real gateway (all
-  seven surfaces clicked through, zero console errors); the audit's
-  finding: V1 (iter-297) tokenized COLORS only — VISUAL_SYSTEM_UI
-  §2.1's own law names raw scattered dimensions "the same violation
-  as raw colors" and §2.2 demands ONE typography contract, but
-  styles.css carried 105 raw dimension literals (fourteen organic
-  font sizes, the mono family copy-pasted THIRTEEN times, seven
-  `font-weight: 600`, five radius values); EXECUTED: the visual
-  floor's SECOND row (V2) — the typography contract + the radius
-  scale tokenized in :root (the seven-step type scale, the family
-  stacks, --weight-strong, --tracking-label, --radius-s/m/l/pill;
-  max drift +0.04rem = 0.56px), the architecture guard's V2 scan
-  added (mutation-verified: font-size / family-stack / radius
-  violations each caught red), the computed styles verified live in
-  the browser (root 14px, h1 14.7px, the mono stack, the radii);
-  the spacing scale (131 layout-affecting declarations) declared
-  the NEXT visual row — its own visual-proof pass, never silently
-  folded into this one
+Iteration: iter-305 (`sse-contract` — the owner's «можешь начать
+  работы по SSE-контракту гейтвея и прочему» call; R4
+  public-API, D-248): the streaming admission's step 2 LANDED —
+  the explicit SSE gateway contract, BACKEND FIRST
+  (FRONTEND_WEB_LAW §5's admission order, never ahead): the
+  socket-free subscription core (gateway.py: `subscribe`'s §13
+  dual answer — REPLAY window + live tail, or RESYNC snapshot +
+  live tail — under the SAME coarse dispatch lock `_emit` appends
+  under, so the replay/live boundary is gapless by construction;
+  the bounded per-subscriber buffer with the OBSERVABLE overflow
+  terminal — the queued events drain in order, then the channel
+  closes, the retained stream never drops;
+  `stream_buffer_events <= retention_events` as construction law —
+  an overflowed consumer's reconnect ALWAYS replays; the
+  graceful-close reality measured and documented: no RST comes,
+  the writes buffer into the void, the bounded buffer is the
+  reliable dead-consumer end; `close_subscriptions` the
+  bounded-shutdown wake) + the GET /events SSE binding
+  (transport.py: the closed frame vocabulary — stream.open /
+  stream.rejected / stream.overflow / stream.close + the event
+  frames byte-identical to `session.events`' replay (the D4 byte
+  parity, the contract's proof — the SAME stream, never a second
+  event source); the heartbeat comment cadence; the SSE-standard
+  Last-Event-ID fallback cursor; the pre-stream 4xx guards + the
+  auth-required 403 — auth material never rides URLs; the unknown
+  session riding ONE stream.rejected frame at HTTP 200 — §8's
+  delivery/semantics split holds on the stream surface; the
+  bounded stop() waking every writer with its honest stream.close);
+  24 contract rows (tests/test_sse_stream.py, NEW); the browser
+  adapter (step 3) + the focused-tab budget policy (step 4) the
+  NEXT rows, each its own admission
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
-2531 passed + 1 skipped, ruff clean, docguard clean, topology
+2555 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-10-03 ·
-Scope: frontend/src/app/composition/styles.css (105 literal
-  usages tokenized + :root's 17 new tokens),
-  frontend/tests/architecture/guard.test.ts (the V2 scan + the
-  docstring), frontend/README.md (the V2 row),
-  docs/VISUAL_SYSTEM_UI.md (§2's web-client token form LANDED
-  note), docs/TASKS.md (the ledger, iter-294 evicted), STATUS.md
-  (this header + the Next step), worklog.md (the iter-304 entry,
-  iter-294 evicted), docs/iterations/iter-304-tokenfloor-report.md
-  (new) — 8 changed/created (7 modified + 1 created; R2
-  frontend-local; zero Python change, zero canon change, the LOG
-  untouched, zero corpus price; NO test deleted or weakened — 1
-  added, vitest 221 → 222)
+Scope: workbench/api/gateway.py (the subscription core + the
+  stream config + the fan-out), workbench/api/transport.py (the
+  SSE binding + the stream lifecycle + the bounded stop),
+  tests/test_sse_stream.py (new, 24 rows),
+  tests/test_gateway.py (the resync config gains
+  stream_buffer_events=1 — the new construction invariant, the
+  assertions unchanged), docs/WORKBENCH_APP_LAW.md (§13's LANDED
+  form + §5's skeleton), docs/FRONTEND_WEB_LAW.md (§5's admission
+  step 2 marked LANDED), docs/AGENT_NAVIGATION.md (§1's workbench
+  + frontend rows), docs/SSI_TOPOLOGY.md (the two api rows),
+  docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map),
+  docs/TASKS.md (the ledger, iter-295 evicted), STATUS.md (this
+  header + the Next step), worklog.md (the iter-305 entry,
+  iter-295 evicted), docs/DECISIONS.md (D-248, R4 + PCC),
+  docs/iterations/iter-305-sse-contract-report.md (new) — 14
+  changed/created (12 modified + 2 created; R4 — INV-4 untouched
+  (no new network module: the SSE arm rides the sanctioned inbound
+  binding), zero canon change, the LOG untouched, zero corpus
+  price; NO test deleted or weakened — 24 added, one existing
+  config completed, pytest 2531+1 → 2555+1)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1/V2 visual floors LANDED (iter-293/297/304);
   Phase 3's SEVEN rows LANDED (iter-294/295/296/298/299/300/301) +
   the IA REPAIR LANDED (iter-297, D-247); the owner-side bands
   CLOSED LIVE (iter-302: chat COMPLETED, models ACTIVE/EVICTED,
   fetch COMPLETED, S0-4 with a live LLM — over a real sandbox
-  llama.cpp); the next frontend rows the owner's call: the
-  streaming admission (SSE — the backend gateway contract first),
-  the acceptance matrix, the DECISIONS collapse, the SPACING scale
-  (the visual floor's third row, 131 declarations); the standing
-  boundaries: SSE/WebSocket, Tauri, PWA, the Settings Appearance
-  section (no persisted store) — each its own admission (the
-  import form's native file/folder picker rides the Tauri row).
-  The world track: W8's remaining rows the owner's call. The ssi
-  family COMPLETE except ssi-5, owner-gated.
+  llama.cpp); THE STREAMING ADMISSION'S BACKEND CONTRACT LANDED
+  (iter-305, D-248 — the SSE gateway contract, admission step 2);
+  the next frontend rows the owner's call: the browser stream
+  adapter (admission step 3: the EventSource client behind the
+  typed gateway client + the zod frame validators) + the
+  focused-tab budget policy (step 4, rides 3), the acceptance
+  matrix, the DECISIONS collapse, the SPACING scale (the visual
+  floor's third row, 131 declarations); the standing boundaries:
+  the browser-side SSE/WebSocket adapter, Tauri, PWA, the Settings
+  Appearance section (no persisted store) — each its own admission
+  (the import form's native file/folder picker rides the Tauri
+  row). The world track: W8's remaining rows the owner's call.
+  The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 
@@ -123,25 +143,23 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-304 DONE: tokenfloor (the owner's «стили без хардкода»
-  call over the re-verification pass; R2 frontend-local).** The
-  re-verification: the full packet green at HEAD (2531+1 + ruff +
-  docguard + topology --check + 221 vitest + tsc + build) + the
-  live composition re-verified (all seven surfaces, zero console
-  errors). The finding: V1 tokenized colors only; styles.css
-  carried 105 raw dimension literals. Executed: V2 — the typography
-  contract + the radius scale tokenized, the guard's V2 scan
-  mutation-verified, the computed styles verified live. The RU
-  report: docs/iterations/iter-304-tokenfloor-report.md.
-Next: the owner's calls — (1) the SPACING scale (the visual floor's
-  third row: 131 layout-affecting padding/margin/gap declarations
-  with 17 organic values — needs its own visual-proof pass per
-  surface); (2) the standing queue unchanged: the streaming
-  admission (SSE — the backend gateway contract first, R3/R4-class),
-  the acceptance matrix, the DECISIONS collapse (36→30, the owner's
-  call), the tooling floor's remaining rows (the Playwright-class
-  multi-tab smoke), the B1/C4 law diffs from iter-303 (adopt or
-  reject), and the world track's parallel rows.
+**iter-305 DONE: sse-contract (the owner's «начни работы по
+  SSE-контракту гейтвея» call; R4 public-API, D-248).** The
+  streaming admission's step 2: the explicit SSE gateway contract,
+  backend first — the socket-free subscription core + the GET
+  /events binding, the 24-row packet, the byte parity with
+  session.events, the bounded overflow/shutdown laws. The RU
+  report: docs/iterations/iter-305-sse-contract-report.md.
+Next: the owner's calls — (1) the BROWSER STREAM ADAPTER (admission
+  step 3: the EventSource/fetch-stream client behind the typed
+  gateway client, the zod frame validators over the live-captured
+  wire fixtures; the focused-tab budget policy rides it — step 4);
+  (2) the standing queue unchanged: the SPACING scale (the visual
+  floor's third row, 131 declarations), the acceptance matrix, the
+  DECISIONS collapse (36→30, the owner's call), the tooling floor's
+  remaining rows (the Playwright-class multi-tab smoke), the B1/C4
+  law diffs from iter-303 (adopt or reject), and the world track's
+  parallel rows.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns

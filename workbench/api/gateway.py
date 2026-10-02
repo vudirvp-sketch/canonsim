@@ -46,6 +46,18 @@ identity; `session.events` is the reconnect arm (§13): replay from
 current snapshot. Retention is an explicit ceiling (G5/§26:
 `retention_events`), FIFO beyond it.
 
+Live delivery (§13's one-way event direction, iter-305): `subscribe`
+is the push channel the SSE binding translates — the SAME ordered
+stream `session.events` replays on demand. The core stays socket-
+free (G1): a `Subscription` is a bounded per-subscriber delivery
+queue fanned out under the dispatch lock at `_emit` time; a slow
+consumer overflows OBSERVABLY (the channel closes with the terminal,
+the retained stream is never touched — the canonical record never
+drops, the derived delivery channel may). The replay/live boundary
+is gapless by construction: `subscribe` runs under the same coarse
+lock as `_emit`, so the replay window ends at `last_sequence` and
+the live queue starts at `last_sequence + 1` — no gap, no duplicate.
+
 Session translation (§4.1: the gateway owns it): the in-memory seed
 (session.create/get/attach/detach/events + app.status) — IN-MEMORY
 by contract (G2: restorable sessions wait for the persistence rows);
@@ -95,6 +107,29 @@ DEFAULT_LEASE_SECONDS = 30.0
 #: The per-session retained-event ceiling (G5/§26: bounded with an
 #: explicit ceiling — beyond it, reconnect answers RESYNC_REQUIRED).
 DEFAULT_RETENTION_EVENTS = 256
+
+#: The default per-subscriber live-delivery buffer (§13's bounded
+#: buffer, §26's explicit ceiling): the events a subscriber may lag
+#: behind before the channel overflows and closes with the terminal.
+DEFAULT_STREAM_BUFFER_EVENTS = 64
+
+#: The subscription's open modes (§13's dual answer — the same two
+#: lanes `session.events` answers): REPLAY (the retained window
+#: after the cursor) or RESYNC (the cursor fell out of retention —
+#: the bounded current snapshot, then the live tail).
+SUBSCRIPTION_MODES: frozenset[str] = frozenset({"REPLAY", "RESYNC"})
+
+#: The live channel's states: OPEN (receiving), OVERFLOW (the
+#: bounded buffer filled — drain, then the terminal), CLOSED (no
+#: further delivery, idempotent).
+SUBSCRIPTION_STATES: frozenset[str] = frozenset(
+    {"OPEN", "OVERFLOW", "CLOSED"}
+)
+
+#: The framed server-close reasons (§13/§25): the members that may
+#: ride a `stream.close` frame. `CLIENT` closes a channel without a
+#: frame (the consumer is gone — there is nobody to tell).
+STREAM_CLOSE_REASONS: frozenset[str] = frozenset({"SHUTDOWN"})
 
 #: The auth scope wildcard.
 SCOPE_WILDCARD = "*"
@@ -146,6 +181,7 @@ class GatewayConfig:
     credentials: tuple[GatewayCredential, ...] = ()
     lease_seconds: float = DEFAULT_LEASE_SECONDS
     retention_events: int = DEFAULT_RETENTION_EVENTS
+    stream_buffer_events: int = DEFAULT_STREAM_BUFFER_EVENTS
 
     def __post_init__(self) -> None:
         if self.exposure not in EXPOSURES:
@@ -176,6 +212,23 @@ class GatewayConfig:
             or self.retention_events < 1
         ):
             raise GatewayError("retention_events: an int >= 1")
+        if (
+            isinstance(self.stream_buffer_events, bool)
+            or not isinstance(self.stream_buffer_events, int)
+            or self.stream_buffer_events < 1
+        ):
+            raise GatewayError("stream_buffer_events: an int >= 1")
+        if self.stream_buffer_events > self.retention_events:
+            # §13's overflow invariant: a consumer that overflowed
+            # lags at most `stream_buffer_events` behind the live
+            # edge, and retention holds at least that many events —
+            # so a reconnect from its last received sequence ALWAYS
+            # replays (never a second resync). The constraint is
+            # construction law, never a runtime clamp.
+            raise GatewayError(
+                "stream_buffer_events cannot exceed retention_events "
+                "(the overflow-reconnect-always-replays invariant)"
+            )
 
 
 @dataclass(frozen=True)
@@ -323,6 +376,255 @@ class OperationRejected(_Rejected):
         super().__init__(rejection, reason)
 
 
+@dataclass(frozen=True)
+class StreamEvent:
+    """One live delivery item: an ordered session event (§13),
+    pushed at `_emit` time under the dispatch lock."""
+
+    envelope: EventEnvelope
+
+
+@dataclass(frozen=True)
+class StreamOverflow:
+    """The bounded buffer's observable terminal (§13): the consumer
+    fell further behind than `stream_buffer_events`; the queued
+    events drained first, then this terminal closes the channel.
+    `last_sequence` is the session's newest sequence at the overflow
+    moment — the consumer reconnects from ITS last received id."""
+
+    last_sequence: int
+
+
+@dataclass(frozen=True)
+class StreamClosed:
+    """The channel's closed terminal: the gateway stopped (the
+    framed `reason` is a STREAM_CLOSE_REASONS member) or the consumer
+    side ended the channel (`CLIENT` — unframed: nobody to tell).
+    Idempotent on repeated pulls."""
+
+    reason: str
+
+
+@dataclass(frozen=True)
+class StreamRejection:
+    """The subscribe answer's rejected lane: a member of the closed
+    §8 rejection vocabulary plus its reason — the same lane a POST
+    dispatch would answer with (the verdict rides the stream surface,
+    never a fabricated delivery failure)."""
+
+    rejection: str
+    reason: str
+
+    def __post_init__(self) -> None:
+        if self.rejection not in REJECTIONS:
+            raise GatewayError(
+                f"StreamRejection: {self.rejection!r} is not a member "
+                f"of the closed rejection set {sorted(REJECTIONS)}"
+            )
+        if not isinstance(self.reason, str) or not self.reason:
+            raise GatewayError("StreamRejection: a non-empty reason")
+
+
+#: The live channel's pull result: an event, a terminal, or None (the
+#: heartbeat wake — nothing arrived within the timeout).
+StreamItem = StreamEvent | StreamOverflow | StreamClosed
+
+
+class Subscription:
+    """One subscriber's bounded live-delivery channel over a
+    session's ordered stream (§13 — the core half of the SSE row,
+    socket-free by construction like everything else here).
+
+    The gateway constructs it under the dispatch lock (the gapless
+    replay/live boundary); the delivery surface (the loopback
+    transport's writer thread, a future CLI parity consumer) then
+    PULLS via `next_item(timeout)` and ends with `close()`.
+
+    Boundedness (§26): the pending queue never exceeds the
+    construction ceiling — a full queue at push time flips the
+    channel to OVERFLOW observably (the terminal item), the queued
+    events still drain in order, and the retained stream itself is
+    never touched: canonical data is never silently dropped, a
+    derived delivery channel may close loudly.
+
+    Lock discipline: `_push`/`_close` run under the GATEWAY's lock
+    and take only the condition (gateway -> cond, one-way nesting);
+    `next_item`/`close` take the condition alone — nothing ever
+    acquires the gateway lock while holding the condition.
+    """
+
+    def __init__(
+        self,
+        *,
+        session_id: str,
+        clock: AppClock,
+        ceiling: int,
+        mode: str,
+        replay: tuple[EventEnvelope, ...],
+        resync_document: Mapping[str, object] | None,
+        last_sequence: int,
+        unregister: Callable[["Subscription"], None],
+    ) -> None:
+        if mode not in SUBSCRIPTION_MODES:
+            raise GatewayError(
+                f"subscription mode {mode!r}: the closed set "
+                f"{sorted(SUBSCRIPTION_MODES)}"
+            )
+        if (
+            isinstance(ceiling, bool)
+            or not isinstance(ceiling, int)
+            or ceiling < 1
+        ):
+            raise GatewayError("subscription ceiling: an int >= 1")
+        if mode == "RESYNC" and resync_document is None:
+            raise GatewayError(
+                "a RESYNC subscription carries its snapshot document"
+            )
+        if mode == "REPLAY" and resync_document is not None:
+            raise GatewayError(
+                "a REPLAY subscription carries no snapshot document"
+            )
+        self._session_id = session_id
+        self._clock = clock
+        self._ceiling = ceiling
+        self._mode = mode
+        self._replay = replay
+        self._resync_document = (
+            dict(resync_document) if resync_document is not None else None
+        )
+        self._open_last_sequence = last_sequence
+        self._unregister = unregister
+        self._cond = threading.Condition()
+        self._pending: deque[EventEnvelope] = deque()
+        self._state = "OPEN"
+        self._terminal: StreamOverflow | StreamClosed | None = None
+        self._known_sequence = last_sequence
+
+    # ------------------------------------------------------------ answer
+
+    @property
+    def session_id(self) -> str:
+        return self._session_id
+
+    @property
+    def mode(self) -> str:
+        """§13's dual answer: REPLAY (the retained window rides
+        `replay`) or RESYNC (the snapshot rides
+        `resync_document`)."""
+        return self._mode
+
+    @property
+    def replay(self) -> tuple[EventEnvelope, ...]:
+        """The retained events after the cursor, in sequence order —
+        the SAME window `session.events(since_sequence)` replays."""
+        return self._replay
+
+    @property
+    def resync_document(self) -> Mapping[str, object] | None:
+        """The bounded current snapshot document (RESYNC mode only —
+        the same shape `session.events` answers)."""
+        return self._resync_document
+
+    @property
+    def last_sequence(self) -> int:
+        """The session's sequence at subscription time — the replay
+        window's end and the live tail's start (gapless)."""
+        return self._open_last_sequence
+
+    @property
+    def known_sequence(self) -> int:
+        """The newest sequence this channel has observed (at open or
+        on the last push) — the honest bound a terminal frame may
+        report; the consumer's own last received id stays its
+        reconnect cursor."""
+        with self._cond:
+            return self._known_sequence
+
+    # ------------------------------------------------------------ channel
+
+    def next_item(self, timeout: float) -> StreamItem | None:
+        """Pull the next delivery item, blocking up to `timeout`
+        seconds. None is the heartbeat wake (nothing arrived); an
+        event drains in sequence order; a terminal item arrives
+        after the pending queue drains and repeats idempotently."""
+        if (
+            isinstance(timeout, bool)
+            or not isinstance(timeout, (int, float))
+            or timeout <= 0
+        ):
+            raise GatewayError("next_item timeout: a positive number")
+        with self._cond:
+            deadline = self._clock.now_monotonic() + timeout
+            while self._state == "OPEN" and not self._pending:
+                remaining = deadline - self._clock.now_monotonic()
+                if remaining <= 0:
+                    return None
+                self._cond.wait(remaining)
+            if self._pending:
+                envelope = self._pending.popleft()
+                return StreamEvent(envelope)
+            assert self._terminal is not None  # not OPEN, queue empty
+            return self._terminal
+
+    def close(self) -> None:
+        """End the channel from the consumer side (idempotent): no
+        frame rides this close (`CLIENT` — the consumer is the one
+        ending it), the fan-out stops, the registration drops."""
+        with self._cond:
+            if self._state != "OPEN":
+                return
+            self._state = "CLOSED"
+            self._terminal = StreamClosed("CLIENT")
+            self._cond.notify_all()
+        self._unregister(self)
+
+    # ------------------------------------------------------- core-private
+
+    def _push(self, envelope: EventEnvelope) -> None:
+        """Fan out one event to this channel — called under the
+        GATEWAY's lock (the condition is the only lock taken here:
+        the safe one-way nesting)."""
+        with self._cond:
+            if self._state != "OPEN":
+                return
+            if len(self._pending) >= self._ceiling:
+                self._state = "OVERFLOW"
+                self._known_sequence = envelope.sequence
+                self._terminal = StreamOverflow(envelope.sequence)
+                self._cond.notify_all()
+                return
+            self._pending.append(envelope)
+            self._known_sequence = envelope.sequence
+            self._cond.notify_all()
+
+    def _close(self, reason: str) -> None:
+        """End the channel from the gateway side — called under the
+        GATEWAY's lock (the framed terminal; the registration removal
+        is the caller's, iterating a copied roster)."""
+        if reason not in STREAM_CLOSE_REASONS:
+            raise GatewayError(
+                f"stream close reason {reason!r}: the closed set "
+                f"{sorted(STREAM_CLOSE_REASONS)}"
+            )
+        with self._cond:
+            if self._state != "OPEN":
+                return
+            self._state = "CLOSED"
+            self._terminal = StreamClosed(reason)
+            self._cond.notify_all()
+
+    def state(self) -> str:
+        """The channel's state (SUBSCRIPTION_STATES) — an observable
+        for tests and diagnostics, never identity."""
+        with self._cond:
+            return self._state
+
+
+#: `Gateway.subscribe`'s answer: the rejected lane or the live
+#: channel (whose `mode` carries §13's dual answer).
+StreamAnswer = StreamRejection | Subscription
+
+
 class Gateway:
     """The one inbound Workbench gateway over application operations.
 
@@ -344,6 +646,7 @@ class Gateway:
         self._sessions: dict[str, _Session] = {}
         self._events: dict[str, deque[EventEnvelope]] = {}
         self._idempotency: dict[str, _RecordedOutcome] = {}
+        self._subscriptions: dict[str, list[Subscription]] = {}
         self._dispatch_counter = 0
         for spec in self._builtin_specs():
             self._operations[spec.name] = spec
@@ -393,6 +696,114 @@ class Gateway:
         coarse lock (the admission rows own finer policy)."""
         with self._lock:
             return self._dispatch_locked(envelope)
+
+    def subscribe(
+        self, session_id: str, since_sequence: int
+    ) -> StreamRejection | Subscription:
+        """Open one live delivery channel over a session's ordered
+        stream (§13 — the SSE binding's core surface, the same
+        channel a CLI parity consumer would pull).
+
+        The answer is §13's dual: REPLAY (the retained window after
+        `since_sequence` rides `subscription.replay`, then the live
+        tail) or RESYNC (the cursor fell out of retention — the
+        bounded current snapshot rides `resync_document`, then the
+        live tail). A cursor beyond `last_sequence` yields an empty
+        replay — the open answer's own `last_sequence` is the
+        observable the consumer needs to detect its inconsistency.
+
+        The whole open runs under the coarse dispatch lock, so the
+        replay/live boundary is exact: the replay ends at the
+        session's current `last_sequence` and the live queue starts
+        at `last_sequence + 1` — no gap, no duplicate, no missed
+        event between the two halves. An unknown session answers the
+        rejected lane (DOMAIN_REJECTED — the same verdict a POST
+        `session.events` would answer; the stream surface carries
+        it, never a fabricated transport failure).
+        """
+        if not isinstance(session_id, str) or not session_id:
+            raise GatewayError("subscribe: session_id must be a non-empty str")
+        if (
+            isinstance(since_sequence, bool)
+            or not isinstance(since_sequence, int)
+            or since_sequence < 0
+        ):
+            raise GatewayError("subscribe: since_sequence must be an int >= 0")
+        with self._lock:
+            session = self._sessions.get(session_id)
+            if session is None:
+                return StreamRejection(
+                    rejection="DOMAIN_REJECTED",
+                    reason=f"session {session_id!r}: no such session",
+                )
+            retained = self._events.get(session_id, deque())
+            resync_document: dict[str, object] | None = None
+            replay: tuple[EventEnvelope, ...] = ()
+            if retained and since_sequence < retained[0].sequence - 1:
+                # §13: the cursor fell out of the retained window —
+                # the bounded current snapshot (the SAME document
+                # `session.events` answers), then the live tail.
+                resync_document = {
+                    "last_sequence": session.last_sequence,
+                    "resync": "RESYNC_REQUIRED",
+                    "retained_from": retained[0].sequence,
+                    "snapshot": self._session_document(session),
+                }
+                mode = "RESYNC"
+            else:
+                replay = tuple(
+                    event for event in retained if event.sequence > since_sequence
+                )
+                mode = "REPLAY"
+            subscription = Subscription(
+                session_id=session_id,
+                clock=self._clock,
+                ceiling=self._config.stream_buffer_events,
+                mode=mode,
+                replay=replay,
+                resync_document=resync_document,
+                last_sequence=session.last_sequence,
+                unregister=self._unregister_subscription,
+            )
+            self._subscriptions.setdefault(session_id, []).append(subscription)
+            return subscription
+
+    def close_subscriptions(self) -> int:
+        """The bounded-shutdown surface (§25 + §13): close every live
+        channel with the SHUTDOWN terminal so each delivery writer
+        wakes immediately, frames its honest close, and exits — the
+        stream is a READ surface, nothing else is touched (a client
+        disconnect never implicitly cancels unrelated execution, and
+        neither does the server's own stop). Idempotent; returns the
+        number of channels closed by THIS call."""
+        with self._lock:
+            closed = 0
+            for session_id in list(self._subscriptions):
+                channels = self._subscriptions.get(session_id)
+                if not channels:
+                    del self._subscriptions[session_id]
+                    continue
+                for subscription in list(channels):
+                    before = subscription.state()
+                    subscription._close("SHUTDOWN")
+                    if before == "OPEN":
+                        closed += 1
+                channels.clear()
+            return closed
+
+    def _unregister_subscription(self, subscription: Subscription) -> None:
+        """Drop one consumer-side-closed channel from the fan-out
+        (idempotent — the shutdown path clears whole rosters
+        itself). Takes the gateway lock WITHOUT holding the channel
+        condition: the one-way nesting law."""
+        with self._lock:
+            channels = self._subscriptions.get(subscription.session_id)
+            if channels is None:
+                return
+            if subscription in channels:
+                channels.remove(subscription)
+            if not channels:
+                del self._subscriptions[subscription.session_id]
 
     # ------------------------------------------------------------ pipeline
 
@@ -908,7 +1319,10 @@ class Gateway:
         payload: Mapping[str, object],
     ) -> EventEnvelope:
         """The ordered append (§13): sequence = last + 1 — no clock
-        in the identity; `observed_at` is the UTC_WALL reading."""
+        in the identity; `observed_at` is the UTC_WALL reading. The
+        same append fans out to the session's live channels (under
+        this lock — the writer threads wake on their own condition,
+        never here)."""
         session.last_sequence += 1
         event = EventEnvelope.build(
             session_id=session.session_id,
@@ -919,4 +1333,6 @@ class Gateway:
             payload=payload,
         )
         self._events[session.session_id].append(event)
+        for subscription in self._subscriptions.get(session.session_id, ()):
+            subscription._push(event)
         return event

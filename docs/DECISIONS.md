@@ -555,3 +555,38 @@ honest chat.send DOMAIN_REJECTED lane) + the live browser closure
 nav renders behind the entry; zero console errors; 2 screenshots);
 2529+1 pytest + ruff + topology --check clean (zero Python change);
 rollback=git revert (the pane form is one commit away).
+
+### D-248 — iter-305 · sse-contract (R4) [PCC: intent=land FRONTEND_WEB_LAW §5's admission step 2 — the explicit one-way SSE gateway contract, backend first, over the EXISTING ordered session stream; invariants=INV-4 untouched (no new network module — the SSE arm rides the sanctioned inbound binding transport.py; gateway.py stays socket-free G1), §13's never-silently-drop + bounded-observable-overflow + disconnect-never-cancels, §8's delivery/semantics split on the stream surface, D4's canonical-JSON byte parity with session.events, no clock/RNG in any stream identity; delta=workbench/api/gateway.py +stream_buffer_events config +subscribe/StreamRejection/Subscription (the bounded channel: next_item/close, _push fan-out under the dispatch lock, the overflow terminal) +close_subscriptions; workbench/api/transport.py +STREAM_ROUTE GET /events +the SSE frames (stream.open/rejected/overflow/close, the event frames with id/event/data) +heartbeats +Last-Event-ID +the 4xx/403 pre-stream guards +the bounded stop() (close_subscriptions first); tests/test_sse_stream.py NEW (24 rows); verification=2555 passed + 1 skipped (=2531+24) + ruff clean + docguard clean + topology --check clean (the transport row's reads updated in-iteration) + 222 vitest + tsc + build + the live smoke over the real composition (open/replay/live-push/byte-parity); provenance=the owner's 2026-10-03 «можешь начать работы по SSE-контракту гейтвея и прочему» call — STATUS's standing Next row, the admission order's own sequence (step 2 before the browser adapter); runtime=loopback-only like the whole binding, in-memory process-lifetime streams (G2's honest form), the overflow-reconnect-always-replays invariant as GatewayConfig construction law] — the §13 one-way event direction's explicit contract
+
+The gap: STATUS's standing queue named "the streaming admission (SSE —
+the backend gateway contract first, R3/R4-class)" as the next frontend
+row; FRONTEND_WEB_LAW §5's admission order forbids the browser adapter
+before step 2 exists. Landed as the two-module contract: the semantic
+core (gateway.py — socket-free, the subscription surface with the
+gapless replay/live boundary guaranteed by running `subscribe` under
+the same coarse dispatch lock `_emit` appends under) + the delivery
+binding (transport.py — GET /events, the closed frame vocabulary, the
+canonical-JSON event frames byte-identical to `session.events`' replay
+— the parity test is the contract's proof, the SAME stream never a
+second event source). The overflow law as construction law:
+`stream_buffer_events <= retention_events` so an overflowed consumer's
+reconnect ALWAYS replays — the bounded buffer IS the reliable
+dead-consumer end (a graceful client close sends no RST; the writes
+buffer into the void — measured, the docstring records it), never a
+silent drop and never a leak. The semantic rejection (unknown session)
+rides ONE `stream.rejected` frame at HTTP 200 — §8's split holds on
+the stream surface; auth-required refuses the route (403) because the
+stream cannot carry a credential (auth material never rides URLs —
+the authenticated exposure rows own their own stream contract). The
+bounded shutdown: `stop()` wakes every writer via
+`close_subscriptions()` (the honest `stream.close` frame) before the
+serve loop joins. What this is NOT: the browser adapter (step 3, the
+EventSource client behind the typed gateway client + the focused-tab
+budget policy step 4 — each its own admission), token-level backend
+deltas (chat today is a blocking port call; §13's backend-stream arm
+is a later row with its own consumer), any aggregate stream cap (the
+thread-per-stream posture is http.server's own; documented, not
+invented policy). The existing resync test's config gained
+`stream_buffer_events=1` — the new construction invariant made the
+old small-retention config incomplete, the resync assertions
+themselves unchanged.

@@ -130,8 +130,31 @@ METHOD ROW     — iter-292, DONE (D-246: the design-research &
 POST-S0        — the tooling floor's first row LANDED (iter-293: the
                  architecture guard — the dependency-boundary row as
                  tests/test_architecture's parity form, riding npm
-                 test); the standing gates each its own admission:
-                 the streaming admission, the acceptance matrix, the
+                 test); THE STREAMING ADMISSION LANDED (iter-305, the
+                 owner's «начни работы по SSE-контракту гейтвея»
+                 call: the §5 admission order's step 2 — the explicit
+                 SSE gateway contract, BACKEND FIRST —
+                 workbench/api/gateway.py the §13 subscription core
+                 (subscribe's dual answer under the dispatch lock —
+                 the gapless replay/live boundary; the bounded
+                 per-subscriber buffer with the observable overflow
+                 terminal; close_subscriptions the bounded-shutdown
+                 wake) + workbench/api/transport.py the GET /events
+                 SSE binding (the frame vocabulary
+                 stream.open/rejected/overflow/close + the event
+                 frames byte-identical to session.events' replay;
+                 the heartbeat cadence; the Last-Event-ID fallback;
+                 the pre-stream 4xx guards + the auth-required 403 —
+                 auth never rides URLs; the semantic rejection riding
+                 ONE frame at HTTP 200; the bounded stop() waking
+                 every writer), the contract packet
+                 tests/test_sse_stream.py (24 rows: the byte parity,
+                 the gapless boundary, the overflow law + its
+                 always-replay invariant, the bounded shutdown, the
+                 disconnect law, one-thread-per-stream); the browser
+                 adapter (step 3) + the focused-tab policy (step 4)
+                 the NEXT rows, each its own admission; the standing
+                 gates that remain: the acceptance matrix, the
                  tooling floor's remaining rows (the CI wiring, the
                  Playwright-class multi-tab smoke)
 PHASE 3        — the first row LANDED (iter-294, the owner's

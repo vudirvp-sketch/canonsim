@@ -632,7 +632,8 @@ def test_events_replay_ordered_since_sequence() -> None:
 def test_resync_required_beyond_retention() -> None:
     clock, _ = _fixed_clock()
     gateway = _gateway(
-        config=GatewayConfig(retention_events=3), clock=clock
+        config=GatewayConfig(retention_events=3, stream_buffer_events=1),
+        clock=clock,
     )
     session_id = _create(gateway, "key-resync").result["session_id"]
     for revision in range(4):
