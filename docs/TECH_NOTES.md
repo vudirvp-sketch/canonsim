@@ -1447,6 +1447,125 @@ D-193; the serializer contract docs/PRESENTATION_SPEC.md).
      the 27B GBNF parse arm + the one-model-constrained A/B — no
      27B model in the delivery; the rows stand.
 
+- **The round-8 record (iter-314, the owner's second station delivery
+  «вот результаты прогона» — `station_20261003_161523.zip`, four
+  engines at one sitting through the v2 station probe (the
+  chosen-model instrument, outside the repo, Rule 9); the same
+  station: RTX 3080 Ti 12 GB / 32 GB RAM / Windows 11 / Python
+  3.14.3, llama-server b11064-a894dae93 — rounds 4–7's build; the
+  repo at the owner's iter-313 commit `4cbfe8ce` (the round-7 delta
+  applied + committed — the delivery chain's continuity); the probe's
+  per-model profiles: the round-7 pinned form byte-for-byte below
+  8 GiB (the rows' comparability law), the TUNED 27B form at ≥8 GiB
+  — `-c 16384 -b 512 -ub 256 -t 8 --jinja` + the probed MTP pair
+  (`--spec-type draft-mtp --spec-draft-n-max 2` — the build's own
+  `--help` names the value, LLAMA_CPP_INFERENCE_CONTROL_LAW §0/§9),
+  KV q8_0 EVERYWHERE (the owner's caveat over the external q4_0
+  advice — never below q8), placement AUTO everywhere (never a
+  forced `-ngl` — this section's own law), engine timeout 600 s)**:
+  1. THE 27B ROW — THE LAST STANDING ARM LANDED (TEST_PLAN §8.5:
+     engine1-q27b-r8; Qwen3.8-27B-OrcaRouter-GSQ-RCO-IQ3_XXS-v2.1,
+     9.67 GiB — the IQ3_XXS quant, not §13's original Q4_K_M smoke
+     model): **raw validity 51/51 with zero re-asks** — the source
+     grammar's size law extends to the FOURTH band; mix 31/3/17 —
+     BETWEEN e4b's 51/0/0 and q9b's 21/1/29: the caution gradient is
+     NOT monotone in size (the 27B more intent-taking than the 9B
+     and 12B bands; agreement_full 14/51 the HIGHEST measured of any
+     band — the honesty-vs-agreement tradeoff's fourth point breaks
+     the «bigger = more cautious» reading of round 7); agreement
+     14/11/26 full/kind/mismatch; the world refusing 12 of 31
+     intents (11 intent_rejected + 1 take_failed); the refusal
+     texture literal-minded (s8's c3: "circle back inside" answered
+     no_intent — «not a recognized verb», the corpus's expected move
+     declined; c1/c4 use/take of the oil lamp against the corpus's
+     candle takes). Spawn 19.7 s; grammar compile 3.43 s (the 16K
+     form); battery wall 222.3 s — the 600 s engine timeout held
+     with 2.7× headroom.
+  2. THE 27B's LIVE SHAPE (the tuned form's first station datum):
+     **the MTP draft LIVE** — acceptance 0.41–1.00 (the bulk
+     0.65–0.95), mean accepted length 2.0–3.0 tokens: the
+     speculative pair pays at this band; server-side prompt eval
+     ~297–389 tok/s at 611-token prompts, eval ~12.3–13.8 tok/s —
+     battery generate p50/p95 **3796.5/6109.7 ms** (~8–9× the small
+     bands' 402–459 ms p50: the 512-token prose cap at ~13 tok/s;
+     the mode-C live-play reading — a 27B beat costs ~3.8 s against
+     the small bands' ~0.4–0.5 s); the repo-side columns
+     size-independent as measured (tick 0.2/0.4 n=31 · fold 0.9/1.3
+     · brief 1.3/1.7 · parse 2.6/4.5 ms). The 16K KV at q8_0:
+     ~476–479 MiB per sequence (the prompt-cache eviction lines —
+     the 16-FA-layer hybrid's cache, the ctx recycled through the
+     battery, zero errors); **the GBNF penalty at 16K q8_0: −19.6
+     ms** (constrained 1699.8 vs unconstrained 1719.4 p50 — none;
+     the constraint free at the fourth band AND the deepest ctx);
+     **the determinism mini ×3 + restart cross-lifetime
+     byte-identical AT 16K** — the deepest ctx the mini has run; the
+     grammar id `9fa7e9f4359a9201` pinned-match at the derivation
+     again.
+  3. THE ONE battery_bug — ROOT CAUSE NAMED (the counter's first
+     nonzero in five rounds; the note said «PROBE BUG — the
+     substrate must hold»): s8_scene_close_retirement c5, the pinned
+     narrator fixture establishing `scene:loc_tavern.candles = lit`
+     (tex_0001, «The barkeep lit fresh candles»), REFUSED at the
+     regen rung. The mechanism, code-level: `brief/ledger.py`
+     `_establish`'s scene-scoped gateway — `target !=
+     scene.location_id` → the `scene_mismatch` refusal (the D-037
+     discipline: scene-scoped texture never leaks past a scene
+     change). The player was in loc_street: the ENGINE's own prior
+     replies left them there (c2's `move loc_street` — the corpus's
+     own expected reply — then c3's no_intent, c4's rejected
+     take-oil-lamp: the 27B never moved the player back inside).
+     **The SUBSTRATE HELD** — the refusal IS the law firing on a
+     stale-scoped establishment; the probe's fixture design is the
+     gap: the corpus's pinned narrator fixtures are premise-coupled
+     to the engine's prior semantic path (deterministic under the
+     repo's own battery_runner, which pins every reply; under a FREE
+     engine the prior cycles' divergence can invalidate a later
+     fixture's premise). No repo defect, no KI (the corpus +
+     battery_runner self-consistent); the counter's label imprecise
+     — the substrate held, the FIXTURE'S PREMISE drifted; the
+     probe-side refinement (scene-relative fixtures, or a distinct
+     fixture-premise-drift status) the owner's call, never snuck
+     in. The 27B's s8 divergence is itself an agreement datum —
+     four grammar-valid replies, zero matching the corpus reference
+     (the mismatch column's honest shape at this band).
+  4. THE THREE ROUND-7 BANDS RE-RUN BYTE-EQUAL (the cross-run
+     reproducibility datum — the strongest yet): mix 51/0/0 ·
+     21/1/29 · 0/11/40 and agreement 11/19/21 · 7/10/34 · 0/9/42 —
+     every semantic column BYTE-EQUAL to round 7 at one build, one
+     station, two independent sittings (the temp-0/seed-42
+     determinism measured ACROSS RUNS, not just within); the
+     wall-clock generate p50 402.8/459.1/418.6 ms vs round-7's
+     392.7/501.6/438.4 — ±10%, the GPU band's noise honestly
+     separated from the byte-equal semantics.
+  5. THE NARRATOR CALL AT 27B: 0/8 again (8 beats, 24 calls, every
+     exhaustion to the dry rung) — **32 beats, 96 calls, zero
+     accepted cumulative across 4B/9B/12B/27B-IQ3_XXS**; the 27B's
+     dry replies GOOD free prose (the street's description, the
+     salt-road line) but never the reply document — the
+     convention-not-ability shape extends to the fourth band;
+     PRESENTATION_SPEC §7 updated (the floor above 27B at the
+     IQ3_XXS quant — the Q4_K_M 27B unmeasured, the caveat honest).
+  6. THE ROUTER AT FOUR MODELS + THE BIG-SWITCH ARM (the 27B
+     operational half): registry 4 (the 27B joins); first-touch
+     Gemma 9.14 s; the pair switch Gemma→Qwen9B 10.31 s; **the
+     BIG-SWITCH Qwen9B→27B 9.0 s at --models-max 1** — the 9.67 GiB
+     IQ3_XXS swap pays NO size penalty against the 5.29 GiB swap
+     under the same sitting's conditions (the wall at the small
+     switch's own scale); the switch walls ~3× round-7's 3.81 s at
+     the identical pair/build/dir-shape — station-side I/O state
+     (the OneDrive-synced repo path) the honest attribution,
+     recorded as wall-clock variance, never a build regression; the
+     wb-6 wire confirmed a THIRD time (stem load/unload success,
+     the path form 404 — b11064 ×2 + b11337); GET /models after the
+     unload shows the first model auto-loading back (the router's
+     LRU backfill, the models_autoload economy observed live).
+     NOT RUN (honest): nothing — §8.5's gap rows are discharged;
+     the remaining open call is PRESENTATION_SPEC §7's
+     production-form decision (the L12 template rung vs a heavier
+     arm), the owner's. The probe + the runner outside the repo
+     (Rule 9); the evidence: the four manifest rows, the results
+     document, and this block.
+
 ## 14. The live-session operator recipes (narrate + say; moved from STATUS FAQ iter-176)
 
 Two doors, one ledger (D-049); `python -m cli` opens the interactive

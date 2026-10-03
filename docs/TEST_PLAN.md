@@ -590,12 +590,27 @@ the raw min/median/max with the gap noted).
 | engine1-e4b-r7 | 2026-10-03 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station — RTX 3080 Ti, the split instrument's first station deployment) | 100% → 100% (0 re-asks) | 51/0/0 | 11/51 full (19 kind / 21 mismatch) | tick 0.2/0.4 · fold 1.0/1.3 · brief 1.1/1.5 · parse 2.9/4.1 · generate 392.7/492.3 ms | round 4's row re-measured WITH THE SPLIT (the merged brief+parse 1.1/1.6 there — the columns land at that scale); the aggressive-mapper shape holds (mix 50/0/0 → 51/0/0; validity 98→100 raw, zero re-asks); agreement 15→11 full (the instrument difference recorded — §13 round-7); the world refusing 13 (11 intent_rejected + 2 take_failed); the determinism mini ×3 + restart byte-identical, zero cache flips (§13 round-7) |
 | engine1-q9b-r7 | 2026-10-03 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station, the split instrument) | 100% → 100% (0 re-asks) | 21/1/29 | 7/51 full (10 kind / 34 mismatch) | tick 0.2/0.5 (n=21) · fold 0.8/1.9 · brief 1.1/1.4 · parse 2.2/3.5 · generate 501.6/766.6 ms | the cautious-assistant mix reproduced EXACTLY (21/1/29 — round 4's row byte-equal; the temp-0/seed-42 determinism across instruments); validity 96.1→100 raw (round 4's re-ask rescue no longer needed); agreement 6→7 full; the narrator live-beat datum 0/8 at this sitting (§7's re-scope rides this row — §13 round-7) |
 | engine1-px12b-r7 | 2026-10-03 | Prototype-X-12b.i1 Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station, the split instrument) | 100% → 100% (0 re-asks) | 0/11/40 | 0/51 full (9 kind / 42 mismatch) | tick n=0 (zero intents — the honest gap) · fold 0.6/0.7 · brief 1.0/1.1 · parse 1.9/2.0 · generate 438.4/713.3 ms | round 5's live-session model through the battery: the most cautious mapper measured — ZERO intents (11 questions + 40 no_intent declines); the tick column honestly empty (no intents → no ticks); the narrator 0/8 with document-shaped WRONG-shape replies (markdown headers, fenced-json log blocks — §13 round-7) |
+| engine1-q27b-r8 | 2026-10-03 | Qwen3.8-27B-OrcaRouter-GSQ-RCO-IQ3_XXS-v2.1 local (llama-server b11064, GBNF; the owner's GPU station, the split instrument, the tuned 27B form: ctx 16384 · b 512/ub 256 · t 8 · --jinja · the probed draft-mtp pair · KV q8_0 · AUTO placement) | 100% → 100% (0 re-asks) | 31/3/17 | 14/51 full (11 kind / 26 mismatch) | tick 0.2/0.4 (n=31) · fold 0.9/1.3 · brief 1.3/1.7 · parse 2.6/4.5 · generate 3796.5/6109.7 ms | THE LAST STANDING ARM LANDED (round 8, §13): the grammar holds raw validity at the FOURTH band — the size law's fourth point; the mix 31/3/17 sits BETWEEN e4b and q9b — the caution gradient NOT monotone in size (agreement_full 14/51 the highest measured; the 27B more intent-taking than 9B/12B); the MTP draft live (acceptance 0.41–1.00, the bulk 0.65–0.95); the GBNF penalty at 16K q8_0 KV: none (−19.6 ms); the determinism mini ×3 + restart byte-identical at the deepest ctx yet; the one battery_bug — the s8 pinned fixture's PREMISE drift (scene_mismatch: the substrate HELD, the fixture coupled to the engine's prior path — §13 round-8); the same sitting re-ran the three round-7 bands BYTE-EQUAL (the cross-run reproducibility datum) |
 
-Gap rows standing: the 27B GBNF parse arm + the
-one-model-constrained A/B (CONTRACTS §4.3 arm a — the owner's next
-station run, now through the LANDED surface: the `--engine` session +
-the repo-side grammar, iter-177/D-193; NOT in the round-7 delivery —
-no 27B model present). Discharged in part by round 7 (iter-313,
+Gap rows standing: (none — the ledger complete through the 27B
+band; the remaining engine-side call is PRESENTATION_SPEC §7's
+narrator production-form decision, the owner's). Discharged by
+round 8 (iter-314, 2026-10-03 — the owner's second station delivery
+«вот результаты прогона» through the v2 probe — the chosen-model
+instrument, the four-engine sitting, TECH_NOTES §13's round-8
+record): the 27B GBNF parse arm + the one-model-constrained A/B
+(CONTRACTS §4.3 arm a) — the engine1-q27b-r8 row above (raw
+validity 51/51 at the fourth band, the mix 31/3/17, the MTP draft
+live, no GBNF penalty at 16K, the determinism mini + restart
+byte-identical at the deepest ctx, the one battery_bug's root cause
+named — the fixture-premise drift, the substrate held) + the three
+round-7 bands re-run BYTE-EQUAL in the same sitting (the cross-run
+reproducibility datum — the semantic columns' determinism measured
+across runs, not just within) + the router big-switch arm (the
+9B→27B swap 9.0 s at --models-max 1 — no size penalty against the
+small swap) + the narrator 27B arm (0/8 — 32 beats, 96 calls, zero
+accepted cumulative; PRESENTATION_SPEC §7 updated). Discharged in
+part by round 7 (iter-313,
 2026-10-03 — the owner's station delivery through the landed split
 instrument, TECH_NOTES §13's round-7 record): the three full-column
 station rows above (engine1-e4b-r7 / -q9b-r7 / -px12b-r7) + the

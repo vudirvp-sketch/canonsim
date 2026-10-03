@@ -116,20 +116,28 @@ narrating FROM the brief at 4B/9B (the q9b beats open with the voice
 exemplar VERBATIM — the narration ability present, the document
 convention absent), document-shaped-but-WRONG replies at 12B (markdown
 headers, fenced-json `log` blocks — a model that knows a document is
-wanted, not THIS document). The battery's 6/8 at 9B (round 4) is the
-runner-ladder bound at its corpus beats — instrument-specific, never a
-live-surface guarantee (now measured, not warned: the live-surface
-rate at 9B is 0/9 cumulative, round 6's beat included). **The
-live-surface floor sits ABOVE 12B at this call shape** — no measured
-band reaches the reply-document convention; the contract's consumer
-requirement (a narrator that answers the reply document) resolves
-between the 27B one-model arm (the §1 sweet spot — the owner's call)
-and the L12 template rung as the accepted production form (the beat's
-own chronicle lines — honest prose, never a fake document). The parse
-door serves every measured band (raw validity 51/51 at 4B/9B/12B,
-GBNF-constrained — the size gradient shows in the mix, never the
-validity). The one-model-constrained A/B (27B GBNF parse) is
-TEST_PLAN §8.5's standing gap row.
+wanted, not THIS document). Round 8 (the owner's second 2026-10-03
+delivery — the 27B arm, §13's round-8 record) MEASURED the remaining
+one-model arm: **0/8 at Qwen3.8-27B-OrcaRouter-GSQ-RCO-IQ3_XXS (9.67
+GiB) — 32 beats, 96 calls, zero accepted cumulative across
+4B/9B/12B/27B-IQ3_XXS**; the 27B's dry replies GOOD free prose (the
+salt-road street description) but never the reply document — the
+convention-not-ability shape extends to the fourth band. **The
+live-surface floor sits ABOVE 27B at the IQ3_XXS quant at this call
+shape** (the Q4_K_M 27B unmeasured — the quant caveat honest, never
+silent). The battery's 6/8 at 9B (round 4) is the runner-ladder bound
+at its corpus beats — instrument-specific, never a live-surface
+guarantee (now measured, not warned: the live-surface rate at 9B is
+0/9 cumulative, round 6's beat included). The contract's consumer
+requirement (a narrator that answers the reply document) now resolves
+between the L12 template rung as the accepted production form (the
+beat's own chronicle lines — honest prose, never a fake document) and
+a HEAVIER arm (a 27B at Q4_K_M or above — the owner's call, the
+IQ3_XXS datum in hand). The parse door serves every measured band
+(raw validity 51/51 at 4B/9B/12B/27B-IQ3_XXS, GBNF-constrained — the
+size gradient shows in the mix, never the validity). The
+one-model-constrained A/B (27B GBNF parse) — DISCHARGED round 8
+(engine1-q27b-r8, TEST_PLAN §8.5); no §8.5 gap rows stand.
 
 ## 8. The re-expansion law + the staged interpretation (intake-32's card, mapped)
 
