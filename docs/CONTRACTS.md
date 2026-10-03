@@ -102,401 +102,37 @@
 > `tests/test_shell_proof.py`, `tests/test_shell_contract.py`), the
 > engine index (`docs/REDOT_ENGINE_INDEX.md`), and `Workbench
 > Setup.bat` are removed; the launcher re-pointed to the web dev
-> server (D-245). The landing notes below stay as the historical
-> record — the Python half (scene IR, gateway, operations, platform)
-> is untouched and the web client (`frontend/`, D-244) is the active
-> consumer. Recovery: git history + the verbatim pack at
+> server (D-245). The landing notes below collapsed to pointers at
+> iter-316's cap pass (this file's own law + D-024 — the verbatim notes
+> in git history) — the Python half (scene IR, gateway, operations,
+> platform) is untouched and the web client (`frontend/`, D-244) is the
+> active consumer. Recovery: git history + the verbatim pack at
 > `docs/frontendweb/archive/`.
 >
-> **wb-1 LANDED (iter-215 the Python half + iter-216 the Redot half):**
-> the seam chain proven end to end — the tavern and province fixtures
-> composed and captured, the double-run PNG byte-diff CONFIRMED (the D4
-> falsifier), the REDOT_EXE-gated packet skipping clean without the
-> binary; the landing record: TASKS iter-215/216 + the worklog + git.
-> **wb-2 LANDED (iter-217):** the Redot shell + the semantic-token theme
-> — `themes/workbench_theme.tres` (the §10 token ladder: the
-> `Workbench/*` semantic namespace + the styled component types with
-> their state sets, the §12 contrast pairs recorded in-file),
-> `scenes/shell.tscn` + `scripts/shell.gd` (the code-built shell: the
-> §17 nav axes — Chat/Settings live, the later axes honestly disabled —
-> the Chat/Settings placeholder surfaces, the §16 status vocabulary
-> strip, the §18 backend badge), the main scene switched to the shell
-> (the app-entry law; the seam-proof scene now passed explicitly by the
-> runner), `scripts/visual_proof.py --shell` the proof mode, the gated
-> packet (double-run byte-diff CONFIRMED, the settings capture included)
-> + the non-gated committed-file contract. The landing record: TASKS
-> iter-217 + the worklog + git.
-> **wb-3 LANDED (iter-218):** the application-operations skeleton
-> (app §32 step 1) — `workbench/application/` the Python-side
-> package: `identity.py` (the §9 identity closure — the five axes
-> apart, sha256 content digests, the order-independent composite
-> identity, `recheck()` making the mismatch law executable:
-> VERIFIED | MISMATCH | INTEGRITY_UNKNOWN, never a quiet pass),
-> `artifact.py` (the §10 immutable execution artifact — the frozen
-> field list, the reproducibility scopes EXACT_BITWISE | SEMANTIC |
-> APPROXIMATE | EXPLANATORY_ONLY + the three kinds separated, the
-> request digest, the replay = NEW execution identity law, the
-> strict roundtrip, zero clock imports), `directories.py` (the §16
-> contract — the seven path roles, the absolute-root law, the
-> startup/recovery outcome vocabulary, the errno-classifying
-> probe), `clock.py` (the §17 four clock domains — MONOTONIC +
-> UTC_WALL provided injectably, SEMANTIC/UI_ANIMATION named-only),
-> + `__init__.py` the §27 dependency envelope (RUNTIME_DEPENDENCIES
-> = empty, agreeing with pyproject). The claim packet:
-> `tests/test_application_skeleton.py` (25 tests). The landing
-> record: TASKS iter-218 + the worklog + git. The family contract
-> below stays (wb-4..N still owner-gated rows).
-> **wb-4 LANDED (iter-219, the owner's «продолжай работу» continuation
-> call over the v5.2 brief):** the inbound gateway — `workbench/api/`
-> the Python-side package: `contract.py` (the §8 envelopes + the
-> closed vocabularies — the rejection set, the exposure axis, the
-> §12.1 status→outcome mapping, the event types; the strict
-> closed-document roundtrip), `gateway.py` (the SOCKET-FREE dispatch
-> core: auth → idempotency → revision/lease → operation → outcome;
-> the recorded-outcome replay = one effect; the §12.1 law — a
-> mutating raise after admission is SENT_OUTCOME_UNKNOWN, a read
-> raise RUNTIME_FAILED; the ordered per-session events + the
-> RESYNC_REQUIRED law; the in-memory session-translation seed
-> session.create/get/attach/detach/events + app.status; the typed
-> `OperationSpec` registration surface — wb-5+'s composition point),
-> `transport.py` (the loopback HTTP binding — INV-4's second
-> sanctioned module, D-201: loopback hosts only, the non-loopback
-> refusal executable at construction, the bounded body/drain
-> ceilings) + the architecture-test exception edit (the two-module
-> pin). The claim packet: `tests/test_gateway.py` (36 tests: the
-> vocabulary closures, the envelope laws, the auth/idempotency/
-> revision/lease laws, the dispatch-outcome mapping, the events +
-> RESYNC law, the direct-vs-HTTP byte parity, the cross-seed pair,
-> the boundary edges). The landing record: TASKS iter-219 + the
-> worklog + git. The G1..G7 pinned decisions, verbatim, in git
-> history at the iter-219 contract commit (23a3251). The family
-> contract below stays (wb-5..N still owner-gated rows).
-> **wb-5 LANDED (iter-220, the owner's «продолжай работу» continuation
-> call over the v5.2 brief):** the minimal application operations
-> (app §32 step 5) — `workbench/application/operations/` the
-> Python-side package: `lifecycles.py` (§11's four closed state
-> machines — Application/Backend/Model/Execution with the legal-
-> transition tables, the terminal semantics = the empty successor
-> set, the invalid-transition loudness; §25's FAILED_SHUTDOWN +
-> the process-loss UNKNOWN branches resolved), `execution.py` (§12's
-> absolute `OperationDeadline` — one per logical operation, frozen at
-> admission, remaining budget the only lower-layer view; the
-> cooperative `CancellationToken` + `WorkContext.check()`; the
-> in-memory `ExecutionRegistry`: admit freezes the §10 inputs BEFORE
-> any side effect, launch walks STARTING + spawns the daemon worker,
-> the truthful terminal close — the late result lands FAILED_TO_CANCEL
-> with the result recorded, the checkpoint abort CANCELED, the
-> deadline/anomalous raises FAILED, `mark_unknown` the §25 surface),
-> `models.py` (§20's discovery half over the §16 MODELS_ASSETS role:
-> the scan with the cheap fingerprint screen, `inspect`'s fresh §9
-> strong identity, `digest_work` the one real work kind — §20's
-> computed-when-needed long arm with the §12 checkpoints between
-> chunks), `composition.py` (§6.1's single wiring owner: the five
-> registered operations run.start/get/cancel + model.list/inspect,
-> the injectable work kinds; chat.send honestly NOT registered — its
-> consumer is the backend row, app §32 step 7, the admission law)
-> + the gateway's two targeted edits (`OperationRejected` the public
-> rejection carrier — the closed vocabulary enforced at raise time;
-> `OperationEffects` the session-scoped OPERATION_EFFECT surface on
-> the dispatch context). The claim packet: `tests/test_operations.py`
-> (46 tests). The landing record: TASKS iter-220 + the worklog +
-> git. The family contract below stays (wb-7..N still owner-gated
-> rows).
-> **wb-6 LANDED (iter-221, the owner's «подключи llama.cpp» call —
-> the backend row, app §32 step 7, the row that closes chat.send's
-> admission-law deferral):** the backend family —
-> `workbench/application/operations/backend.py`: the typed
-> `BackendPort` (props/chat/load_model/unload_model — every member
-> carrying a registered consumer; the physical owner
-> `cli/engine.py`'s `LlamaServerClient` satisfies it structurally,
-> NEVER imported: INV-4's two-surface form untouched, the §27
-> envelope holds — the port is injected at the composition root),
-> `ModelLoadStates` (§11's Model ladder walked on OBSERVED outcomes —
-> the state = the fold of the backend's replies; LOADING/LOADED/
-> UNLOADING transit states, never resting ones), `chat.send`
-> (§19.1's REQUESTED→ACCEPTED→EFFECTIVE→OBSERVED walk over the wb-5
-> run registry — identity-then-poll per §8; the caller-tunable §12
-> deadline; the props probe is evidence, not a gate — the failed
-> probe the honest «unavailable» note, the chat still completes),
-> `model.load`/`model.unload` (§20's loading half: the discovery
-> entry gate, select, the observed settle — ACTIVE on success, FAILED
-> on the observed refusal with the ladder's terminal-FAILED gap
-> recorded as D-203's open note, the unknown «unavailable» outcome
-> resting SELECTED — §12.1's sibling, the re-load legal; the unload
-> failure NO walk — the still-loaded truth) + `cli/engine.py`'s
-> model-management transport half (POST /models/load + /models/unload
-> — BUILD-SENSITIVE research evidence per app §20: the b11064
-> station's model-management reality is the ROUTER, the dedicated
-> endpoints the newer upstream line; the wire shapes stub-pinned,
-> the live re-verification a station row; single-try, no ladder) +
-> the composition's `backend=` wiring (the three operations
-> registered ONLY when the port is injected — the admission law's
-> honest form continued; a malformed port the §6.1 validate step's
-> loud CompositionError). The claim packet:
-> `tests/test_backend_row.py` (28 tests — the REAL adapter's port
-> conformance over the live stub server among them) + test_engine's
-> four management pins. The landing record: TASKS iter-221 + the
-> worklog + git. The family contract below stays (wb-9..N still
-> owner-gated rows).
-> **wb-7 LANDED (iter-222, the owner's «продолжай работу по wb 7» +
-> «могу ли я подключить llama.cpp к реготу» call — the live chat
-> circuit, frontend §46 Phase A's Chat row + app §22's CLI/batch
-> delivery surface):** the row that makes llama.cpp REACHABLE from
-> the Redot Chat surface — `scripts/workbench_app.py` the
-> composition root + loopback serve (the ONE launcher: Gateway +
-> `compose_workbench_operations(backend=LlamaServerClient(
-> EngineConfig(endpoint=...)))` + `LoopbackHttpTransport` on
-> 127.0.0.1:8765 — the only place INV-4's two sanctioned surfaces
-> meet, the port injected never imported; `--no-backend` the honest
-> admission form — the three backend operations simply unregistered;
-> the startup health probe evidence-not-gate — the app serves with
-> the backend down, chat runs closing FAILED with the observed cause;
-> the missing-models-dir loud AppError; the defaults 127.0.0.1:8765
-> + llama-server's own 8080 + `workbench/runtime/models` gitignored)
-> + the Redot frontend half — `presentation/redot/scripts/
-> gateway_client.gd` the typed POST /op client (the sequential
-> one-in-flight queue, `operation_answered`/`transport_failed`, the
-> non-200 = transport-failure law, NO endpoint of its own — G8's
-> executable half: the frontend dials the GATEWAY only, never
-> llama.cpp) + `shell.gd`'s live circuit (the URL resolution order
-> `--gateway-url` > `CANONSIM_GATEWAY_URL` > the committed project
-> setting; app.status → session.create (the per-process idempotency
-> key) → chat.send → the run.get poll to the truthful terminal —
-> COMPLETED lands the message + the backend OBSERVED note,
-> FAILED/CANCELED/FAILED_TO_CANCEL/UNKNOWN land their honest notes,
-> never a fake; Stop = run.cancel; the bounded §15 message list with
-> the one-shot trim note; the badge/Settings/status-bar live updates;
-> the proof mode stays the STATIC deterministic form — no network in
-> the capture, the wb-2 D4 law preserved) + `project.godot`'s
-> `canonism_workbench/gateway/url` committed default (the launcher's
-> own port). The claim packet: `tests/test_workbench_app.py` (8
-> tests — the wiring law, the honest no-backend form, the loud
-> arguments, the live loopback roundtrip, THE END-TO-END chat over
-> HTTP against the live stub llama-server, the dead-endpoint FAILED
-> close) + `test_shell_contract.py`'s three wb-7 pins. The landing
-> **wb-8 LANDED (iter-223, the owner's «выбирать модель я должно из
-> интерфейса» + «llama.cpp тоже запускаться при загрузке модели» +
-> «настройки подтягиваться и самые нужные флаги» calls over the v5.2
-> brief — frontend §46 Phase A's Models row + app §11.1's MANAGED
-> half):** the row that makes the model flow a UI flow —
-> `workbench/platform/llama_process.py` the process mechanics
-> (§2's platform/process row: `build_server_command` the typed
-> honest default flag set — `-m`/`--host`/`--port`/`-ngl`/`-c`/
-> `-fa on`/`-a`/`--jinja`/`--no-webui` + the operator's extras
-> verbatim, re-verified 2026-09-25 against the current llama.cpp
-> server surface; `LlamaServerProcess` spawn/exit-observation/the
-> §11.1 bounded graceful stop TERM→deadline→kill with the OBSERVED
-> exit code; the readiness wait over an INJECTED probe — ZERO
-> network imports: the engine adapter stays the one outbound
-> surface) + `scripts/workbench_app.py`'s `--managed` form (§11.1's
-> lifecycle policy at the composition root: `_ManagedBackend` the
-> port-face wrapper — a HEALTHY server delegates unchanged (the
-> ATTACHED behaviour preserved), `model.load` on a DOWN server
-> spawns llama-server WITH the caller's model (prepare → validate →
-> ready through the adapter's own health probe), the spawned
-> model's unload STOPS the process, Ctrl+C stops only OUR process;
-> the spawn/ready failure surfaces the honest 'unavailable' cause —
-> §12.1's sibling, the model rests SELECTED, the deliberate re-load
-> legal; `--llama-server-exe/--llama-ctx/--llama-ngl/--llama-args`
-> the operator's override surface; the managed ABSENT/LIVE evidence
-> line) + `backend.py`'s `model.states` READ operation (the
-> load-state read surface's registered consumer) + the Redot half —
-> `shell.gd`'s Models surface (the discovered list over `model.list`
-> + the per-model lifecycle states over `model.states`, Load/Unload
-> over `model.load`/`model.unload` with the honest minutes-class
-> per-call timeout (`gateway_client.gd`'s `timeout_s` envelope),
-> the truthful UNKNOWN/refusal/transport notes, FAILED terminal
-> shown never hidden — D-203's gap; the owner-reported launcher
-> warnings fixed — `_tag`/`_body`, the hygiene pinned in the
-> contract test). The claim packet: `tests/test_managed_backend.py`
-> (17 tests — the flag set, the process mechanics, the lifecycle
-> policy incl. THE REAL SPAWN over the stand-in server
-> `tests/_managed_fake_server.py`, the honest unavailable causes,
-> the launcher wiring + precedence) + `test_shell_contract.py`'s
-> three wb-8 pins. The landing record: TASKS iter-223 + the worklog
-> + git. The family contract below stays (wb-9..N still
-> owner-gated rows).
-
-> **wb-9 LANDED (iter-226, the owner's 2026-09-26 «открыл воркбенч,
-> зашел и загрузил модель» + «подтянуть модель откуда угодно» +
-> «настройки запуска llama.cpp... сэмплеры всякие» calls — the
-> model-flow row, frontend §46 Phase A's Models/Settings real-surface
-> half + app §11.1's managed default + §20's arrival half):** the row
-> that makes the model flow a ONE-COMMAND experience —
-> `workbench/platform/model_fetch.py` (D-208, INV-4's THIRD sanctioned
-> network surface, the owner-gated outbound model-assets fetch: the
-> operator URL vocabulary direct/HF-resolve/HF-blob→resolve/
-> hf:namespace/name/file → the `.part` stream with the injected §12
-> checkpoint (the caller's WorkCancelled/DeadlineExceeded carriers
-> propagate untouched) → the atomic rename into the models root; the
-> D1-family failure vocabulary; HTTP GET ONLY) + the `model.fetch`
-> work kind (models.py over the INJECTED fetcher — the BackendPort
-> pattern: the admission gates BEFORE the run exists (the occupied
-> name, the `.part` residue, the non-plain name — NOT_SENT), the run
-> registry's live PROGRESS surface (WorkContext.progress → the
-> run.get document, JSON-safe-gated), the kind's own 3600s default
-> deadline — the WorkKind field, chat.send's own-deadline pattern) +
-> `workbench/application/settings.py` (the typed LaunchSettings
-> document — exe/context/ngl/fa/jinja/no-webui/temp/top-k/top-p/
-> min-p/repeat-penalty/extra_args over the closed validated set, loud
-> never clamped; the atomic schema-tagged persistence at
-> workbench/runtime/settings.json — §16's USER_CONFIG role; the loud
-> load; the backend.settings / backend.settings.update operations with
-> the command preview + the managed liveness INJECTED at the
-> composition root; chat.send's absent-temperature default resolves
-> from the store — §19.1's BASE layer, the explicit value still wins) +
-> `llama_process.py`'s sampler default flags (--temp/--top-k/--top-p/
-> --min-p/--repeat-penalty, each emitted EXPLICITLY — the `-fa on`
-> pinning law) + `workbench_app.py`'s MANAGED DEFAULT (the
-> owner's model-flow call as THE default ownership form; `--attached`
-> restores wb-8's observe-only form; the settings load + the
-> CLI-over-store per-field overrides read at each spawn — a UI update
-> applies at the NEXT spawn; the exe auto-discovery: CLI > the store's
-> preference > the runtime/llama.cpp scan > PATH; the DEFAULT models
-> dir auto-creates — a custom missing dir stays the loud typo guard) +
-> `scripts/workbench_launch.py` the ONE-COMMAND launcher (the runtime
-> bootstrap workbench/runtime/{models,llama.cpp}/; the gateway child's
-> stdout bind-line watch — the readiness evidence without a
-> launcher-side socket; the Redot child after the bind (REDOT_EXE the
-> convention); either exit or Ctrl+C stops both, the gateway first so
-> the managed llama-server rides its own graceful path) + the Redot
-> half — shell.gd's Settings surface goes REAL (the typed launch
-> fields + the collapsed advanced extras + the command preview + the
-> honest next-spawn/LIVE note, backend.settings over the gateway) and
-> the Models surface gains the MANAGER (the URL row — a direct link, a
-> huggingface.co page, or hf:repo/file; Fetch/Cancel over
-> run.start/run.cancel; the distinct fetch-get poll tag with the live
-> progress note; the honest terminal notes; the offline hints name
-> workbench_launch.py). The claim packet: tests/test_model_fetch.py
-> (11 — the URL vocabulary, the admission gates, THE REAL end-to-end
-> fetch against a live loopback HTTP file server, the live progress,
-> the 404/cancellation truth, the .part cleanup) + tests/
-> test_settings.py (10 — the store laws, the loud load, the
-> operations over the gateway incl. the SETTINGS_UPDATED effect) + the
-> workbench_app/managed/shell_contract/architecture/operations/
-> gateway pin updates (35 new tests total). The landing record: TASKS
-> iter-226 + the worklog + git. The family contract below stays
-> (wb-10..N still owner-gated rows).
-
-> **wb-10 LANDED (iter-227, the owner's 2026-09-25 fix list over the
-> wb-9 handback — the launcher's Popen `buffering` TypeError + «где
-> найти redot.exe и как его подключить?» + «просто открывающийся
-> проводник и выбор уже скаченных локальных моделей» +
-> «пользователь не должен вводить команды чтобы запустить или скачать
-> что-либо!» + «интерфейс вверх убожества»):** the ZERO-COMMAND owner
-> experience — `scripts/workbench_launch.py` reworked (the bufsize
-> fix; the FOLDER-AWARE Redot resolution: a release folder scans for
-> the engine executable — the known names in preference order
-> (redot.windows.editor.x86_64.exe first, the owner's exact binary),
-> then the sorted redot* glob, root + one folder deep; the chain:
-> --redot-exe (exe or folder) > the persisted
-> workbench/runtime/launcher.json pick > REDOT_EXE > the
-> Desktop-shaped common-roots auto-scan > the native tk folder picker
-> ONCE (the pick persists); the explicit CLI/env forms pass verbatim
-> (strict — the spawn's own loud error), the persisted pick recovers
-> when stale; the OBSERVED bind URL is forwarded to the Redot child as
-> --gateway-url — the shell dials the gateway the launcher actually
-> started; the bare "--" separator stripped before the child's parser
-> — the latent wb-9 gateway-arg bug) + the `model.import` WORK KIND
-> (models.py: a LOCAL copy into the models root — one or more
-> absolute paths, the same admission gates as the fetch (exists,
-> plain name, unoccupied, no .part residue, no duplicates — NOT_SENT),
-> the .part stream + the atomic rename, the per-file live progress
-> (logical_name/file_index/file_count/copied_bytes/total_bytes) + the
-> cooperative §12 checkpoint per chunk, the best-effort .part cleanup
-> on every failure path; NO network anywhere — INV-4 untouched, wired
-> into the default composition unconditionally) + `discover()`'s
-> `models_root` (the frontend's open-folder answer, never a local
-> guess) + the Redot half — shell.gd's native-picker Models manager
-> (Add local models… = the OS file dialog multiselect with the .gguf
-> filter over FileDialog.use_native_dialog + ACCESS_FILESYSTEM; Add
-> folder… = the OS folder dialog, the .gguf files enumerated
-> presentation-locally; Open models folder = OS.shell_open on the
-> gateway's own models_root; the URL fetch demoted to the collapsed
-> advanced row, fully functional) + the theme@0.2 visual pass (the
-> warmer surface ramp, the pill chip, the user-card accent edge, the
-> taller nav) + `Workbench.bat` / `Workbench Setup.bat` the repo-root
-> double-click entries (the python/py resolution + the honest pause
-> on failure) + project.godot 1440×900. The claim packet:
-> tests/test_model_import.py (8 — the admission gates, THE REAL
-> end-to-end local copy with the independent sha256 oracle, the
-> multi-file form, the models_root field, the kind's checkpoint/
-> progress/cancellation laws) + tests/test_workbench_launch.py (12 —
-> THE REAL SPAWN integration: the launcher process starts the real
-> gateway, observes the bind line, and stops both on SIGINT — the
-> buffering crash pinned dead; the folder resolution; the auto-scan;
-> the persisted pick; the bind-URL parse) + the pin updates
-> (test_shell_contract +3 — the import surface, the zero-command
-> entries, the theme tokens; test_workbench_app's resolution +
-> passthrough; test_operations' work_kinds/models_root). The landing
-> record: TASKS iter-227 + the worklog + git. The family contract
-> below stays (wb-11..N still owner-gated rows).
-
-> **wb-11 LANDED (iter-228, the owner's 2026-09-26 report over the
-> wb-10 handback — «молча висят + транспорт результ 13» + «модель
-> выбрать не могу, там пусто, моделей не видно, кнопка выбрать модель
-> не работает (проводник не открывается)» + the evidence «llama.cpp и
-> модели запускаются штатно если отдельно запускать»):** the
-> transport-13 freeze chain pinned dead — the DIAGNOSIS: a
-> minutes-class managed model.load ran its spawn+readiness walk
-> INSIDE the gateway's coarse dispatch lock (gateway.py's one lock
-> around the whole pipeline), starving every concurrent request
-> (model.list, session.create, app.status) past the client's 10s
-> budget → HTTPRequest RESULT_TIMEOUT (13) on everything → the empty
-> Models list + the dead session-gated buttons; the client's
-> sequential one-request queue wedged behind the long call too; the
-> undrained Windows PIPEs could wedge the managed server mid-load;
-> the `os.set_blocking` stderr_tail raised on Windows — the failure
-> cause showed '(empty)'. THE FIX: `model.load`/`model.unload` become
-> RUNS (app §8's own law, the chat.send pattern — **the wire shape
-> change: both now return the execution document
-> {execution_id, state: "STARTING", work, deadline_seconds}, the
-> terminal truth rides run.get, the FAILED diagnostics carry the
-> observed cause**; the single-slot + in-flight admission guards;
-> MODEL_LOAD/UNLOAD_DEFAULT_DEADLINE_SECONDS 330/30 the rows' own §12
-> budgets) + `llama_process.py`'s `_PipeDrain` (one daemon reader per
-> captured pipe into a bounded 64KB tail ring — the pipe never fills,
-> stderr_tail cross-platform over the ring) + shell.gd's run-poll
-> Models circuits (model-load-get/model-unload-get on the shared
-> tick; the honest picker/load guards — never a silent return, §18;
-> the failed scan re-arms so the empty list never sticks). The claim
-> packet: test_backend_row's run-form rework + 3 new pins incl. THE
-> DISPATCH-LOCK regression (model.list ANSWERS while a gated load
-> stands in the port call) + test_shell_contract's wb-11 pins. The
-> landing record: TASKS iter-228 + D-210 + the worklog + git. The
-> family contract below stays (wb-12..N still owner-gated rows).
-
-> **wb-12 LANDED (iter-230, the owner's 2026-09-25 «тема и UI все так же
-> убоги, тема ужасная» + «в чате при получении сообщений от языковой
-> модели => не происходит плавной прокрутки вниз» calls over the v5.2
-> plans pack — VISUAL_SYSTEM_UI §10's queue head, D-211's law + D-212
-> the landing):** theme@0.3 — the token audit per the law's §2/§3: the
-> neutral ramp re-pinned over the Catppuccin Mocha VALUE reference
-> (§6's transplantation protocol applied to values — the MECHANISM
-> taken is the tuned layered luminance separation, the provenance
-> noted in the theme header; no assets, no code), exactly ONE accent
-> (the soft blue #89b4fa family: accent/accent_soft/focus_ring — the
-> old warm-orange family and its brown-tinted pressed/selected
-> surfaces retired, accent_deep RETIRED as token-without-consumer),
-> the NavButton type variation (the rail's quiet navigation set —
-> every value in the theme, the code names the type only) + the
-> styles/chip_busy token; ON THE SAME ROW the owner's named chat
-> blocker: the follow law in shell.gd (`_scroll_to_bottom_smooth` —
-> the smooth tween over the scrollbar's float value, never the integer
-> `scroll_vertical` jump; `await get_tree().process_frame` before the
-> target is read — the autowrapped labels size late, the old
-> call_deferred read was the short-scroll bug; the near-bottom gate
-> (SCROLL_FOLLOW_SLOP_PX) so a reader deep in history is never yanked;
-> the follow fires for EVERY role incl. the user's own send; the
-> bounded late-layout re-settle) + the GENERATING chip (§5's Chat
-> matrix state made visible: a pulsing accent dot AND a text label —
-> §4's not-color-only law, wired into `_set_busy` the single busy
-> owner). The claim packet: test_shell_contract's theme@0.3 pins
-> (the NavButton state set, chip_busy, the accent_deep-retirement
-> regression) + THE SMOOTH-FOLLOW pins (the tween recipe, the
-> layout-settle await, the near-bottom gate, the retired integer
-> jump, the every-role follow, the busy-chip carriers). The landing
-> record: TASKS iter-230 + D-212 + the worklog + git. The family
+> **Landed rows — collapsed to pointers per this file's own law + D-024**
+> (the per-row landing detail: `docs/TASKS.md`'s wb rows + the worklog +
+> git — never restated here; the collapse executed iter-316's cap pass,
+> the verbatim landing notes live in git history at each iteration's
+> commit): wb-1 the vertical seam (iter-215/216 — scene IR + scene build
+> + the visual proof, the D4 double-run PNG byte-diff CONFIRMED); wb-2
+> the shell + semantic-token theme (iter-217); wb-3 the
+> application-operations skeleton (iter-218 — identity/artifact/
+> directories/clock, 25 tests); wb-4 the inbound gateway (iter-219,
+> D-201 — contract/gateway/transport, INV-4's second sanctioned module,
+> 36 tests); wb-5 the minimal application operations (iter-220 —
+> lifecycles/execution/models/composition, 46 tests); wb-6 the backend
+> row (iter-221, D-203 — the typed BackendPort + chat.send +
+> model.load/unload, 28 tests); wb-7 the live chat circuit (iter-222,
+> D-204 — `scripts/workbench_app.py` the composition root + the Redot
+> chat surface, 8 tests); wb-8 the managed models surface (iter-223,
+> D-205 — `llama_process.py` + `--managed` + `model.states`, 17 tests);
+> wb-9 the one-command model flow (iter-226, D-208 — `model_fetch.py`
+> INV-4's THIRD sanctioned surface + `settings.py` + the launcher, 35
+> new tests); wb-10 the zero-command owner experience (iter-227 — the
+> launcher rework + the `model.import` work kind + the native picker);
+> wb-11 the dispatch-lock freeze chain (iter-228, D-210 —
+> model.load/unload as RUNS + the pipe drain); wb-12 the theme@0.3
+> token audit + the chat follow law (iter-230, D-212). The family
 > contract below stays (wb-13..N still owner-gated rows).
 
 **Pinned decisions** (each grounded in the brief or standing law):
@@ -569,8 +205,236 @@ chat.send's consumer, D-203); wb-7 the live chat circuit (D-204);
 wb-8 the managed models surface (app §11.1's MANAGED half + the
 Models surface — D-205); wb-9+ per the brief's §32/§46 ladders
 (live events + reconnect/resync; persistence; the frontend rows —
-inference; history/diagnostics; the CanonSim seam). Every wb row's
-engine/API facts route through `docs/REDOT_ENGINE_INDEX.md` (the
-Redot 26.2 version firewall + the class/networking/performance/
-debugging reference map — read before the row starts; admitted
-iter-225, D-207).
+inference; history/diagnostics; the CanonSim seam). Engine/API facts
+for the deleted Redot half route to the archived pack's reference docs
+(D-245 — the index deleted, never a repo file again); the web client
+(`frontend/`, D-244) is the active consumer.
+
+## 6. sem-1 — the semantic event validity + authority contract (review-C1/D1, the confirmed queue's head; the DEFINITION landed iter-316)
+
+> Owner-confirmed 2026-10-03 (iter-315's queue). R0–R1 definition
+> only: NOTHING here is implemented — no gate code, no schema change,
+> no draft field added (the row's own law). This section pins what any
+> future admissibility build must satisfy BEFORE it starts; the
+> implementation is NOT a standing row — the owner opens it after
+> accepting this contract (the runtime-promotion gate: a named
+> consumer + a measured native limit + the falsifier below).
+
+**Pinned decisions** (each grounded in standing code or law):
+
+- **S1 — one semantic owner.** The resolver circuit — the intent door
+  (`core/intent.py`: loud shape validation, preconditions, checks,
+  OCC) + the resolver registry (`core/resolvers.py`) + the loop's
+  mechanic producers (the map below) — stays the SOLE decider of what
+  an event means: its type, outcome payload, effects. The
+  admissibility gate never re-derives meaning, never re-runs a
+  precondition or check, never recomputes an outcome, never edits a
+  draft (review-D1; INV-1's writer monopoly untouched).
+- **S2 — the declared effect surface.** Admission is checked against
+  a declaration that exists INDEPENDENTLY of the draft instance: per
+  event type, (a) the legal actor classes, (b) the allowed effect
+  surface — the state-change family (entity-kind × prop pattern; or
+  NONE for knowledge-only/no-op types), the knowledge channels, the
+  hooks vocabulary, (c) the postconditions — pure predicates over
+  (projection, draft, pack). The declaration lives in pack data (the
+  action's `events` branches + effect blocks — `status_effects`/
+  `balance`/`ignition` — and the templates' closed type vocabulary
+  `Pack.event_types()`) + the mechanic modules' named constants
+  (`STATE_MUTATING`, `REJECTION_EVENT`, the economy verbs + the
+  account-stock props, the macro/calendar turn types + actor `world`,
+  the weather/transition/crime/group/knowledge/leverage families) —
+  NEVER per-draft, never derived from the producer's output at run
+  time (the static twin: the packlint admission family already reads
+  the pack-side half, D-152).
+- **S3 — the authority vocabulary (emit-side).** The actor classes the
+  producers already imply: the player entity, npc ids, `world` (the
+  ambient/clock/genesis family — macro/calendar/weather/worldgen/economy
+  aggregates), group ids (the condensation aggregates). An event type's
+  declared authority = the legal actor classes for THAT type (e.g.
+  `year_turns` → `world` only, `core/macro.py`'s own declaration;
+  `intent_rejected` → the front door's own emission). auth-1 (D9) owns
+  the INPUT-side pipeline (interpretation → classification →
+  authorization); sem-1 pins only the emit-side check — the two
+  vocabularies must never contradict (the namespace fence, the
+  package's §5).
+- **S4 — the gate.** Pure and non-resolving:
+  `admit(draft, declaration, projection) → ADMIT | REJECT(reason)` —
+  total, no writes, no RNG, no queue or resolver calls; it checks ONLY
+  authority (S3) + the declared surface and postconditions (S2).
+  Placement: INSIDE `_commit`, after the existing delta gate, before
+  `writer.append` — ONE door, one more check (D-035's form extended;
+  never a second door, never a second writer).
+- **S5 — the RED semantics, two lanes.** An INTERNAL producer violation
+  (a resolver/mechanic bug) fails LOUD — the pre-write `ValueError`
+  form, the log stays clean (the delta gate's own law, KI#13's form).
+  An EXTERNAL candidate (the mediator/engine path — a model-mediated
+  draft) is refused SOFT — the candidate dies at the door, never an
+  append of the unauthorized effect; what gets logged is the
+  attempt-fact per the mediator's own vocabulary (PARSER_SPEC §4/§6's
+  split, the emit-side twin). The lane is the producer's side of the
+  door: internal = trusted-but-buggy, external = untrusted-by-contract.
+- **S6 — no tautology.** The gate's reference is the DECLARATION (S2)
+  — an artifact independent of the draft instance. Forbidden:
+  comparing the draft to itself (its own fields as its reference), a
+  checker derived from the producer's output at run time, "valid
+  because the resolver produced it". The falsifier below is the
+  executable disproof: the SAME declaration that admits the unmutated
+  run rejects the mutated arms.
+- **S7 — the `_commit` probe is a contract gap, not a production
+  exploit.** Verified live at the iter-315 triage and re-proven by the
+  falsifier at iter-316: `core/loop.py::_commit` gates deltas + schema
+  + chain, never a declared effect surface or authority. No production
+  path feeds hand-mutated drafts through the private door — every live
+  producer is deterministic code over pack data; the gap is the absent
+  check, not a live hole. The implementation row (the owner's call)
+  closes it.
+
+**Producer map at HEAD** (the declaration's owners): the pack-action
+producers (the resolvers REGISTRY over the action's declared branches);
+worldgen genesis; the front door's rejection; the crime family
+(rotations/briefings/suspicion); the economy verbs; the clock family
+(macro/calendar — actor `world`); the weather family; the group
+aggregates; the transitions; the knowledge transfers; leverage;
+reflection/onaction/states; the director releases (through the intent
+door — auth-1's side).
+
+**Invariant set**: INV-1..5 unmodified — the gate adds a check inside
+the existing door (no second writer, no log edit, no schema change, no
+network); INV-2 untouched (pure, zero draws — the byte-identical replay
+over an admitted-only run is the proof); INV-3 untouched (the registry's
+code side carries no domain words — pack data carries them); L13/L14
+(one check at one door — no new layer, no framework).
+
+**Falsifier** (TEST_PLAN §9's packet form — the future implementation
+row's first RED test; run LIVE at iter-316: seed 42, the
+plumbing_smoke playscript, the probe script outside the repo per Rule 9,
+the artifact md5 `228ea08bff9b87afc9761d34bb704071`): mutate a captured
+producer output to stay schema-valid + delta-consistent + chain-valid
+while violating the declared authority/effect → the gate MUST go RED,
+no append. Both arms APPEND today (the gap demonstrated live): **Arm
+A** (effect surface) — a real `wait` producer output (declared surface:
+NO state changes) + an added `pc_01.position` teleport to a
+non-adjacent location (from_ = the live projection, so the D-035 delta
+gate passes) → appended `ev_0011`; **Arm B** (authority) — a producer
+output re-typed `year_turns` (declared actor `world`) with actor
+`pc_01` → appended `ev_0012`; the polluted log then FOLDS CLEANLY (T2
+holds — `pc_01.position` == the teleported value): a schema-valid log
+encoding an unauthorized semantic effect, exactly review-C1's risk.
+
+**Minimal test set** (the implementation row's, not today's): the two
+falsifier arms RED→GREEN with NO append; the positive control — every
+committed playscript corpus run admits 100% of its drafts, the golden
+T1 fixtures byte-identical (zero false positives); the tautology guard
+— flipping the DECLARATION side (e.g. declaring `wait` position-writable)
+flips Arm A's verdict, proving the gate reads the declaration, not the
+draft; the loud/soft split (S5's two lanes); INV-2 — byte-identical
+replay over an admitted-only run.
+
+**Deliberately NOT done here** (the row's own fence): no semantic
+checker implemented, no schema or draft-field change, no second
+resolver, no authority pipeline (auth-1's), no speech-act admission
+(speech-1's), no representation or LLM-boundary work (core-1-C4's —
+the namespace fence: review-C1 ≠ TASKS::core-1 C4).
+
+## 7. caus-1 — the causal sufficiency contract (review-C2/D2; the DEFINITION landed iter-317)
+
+> Owner-confirmed 2026-10-03 (iter-315's queue — the T2 half of the
+> package's own T1+T2 sequence, sem-1's natural pair). R0–R1
+> definition only: NOTHING here is implemented — no field added, no
+> schema change (the row's own law). The implementation is NOT a
+> standing row — the owner opens it after accepting this contract (the
+> runtime-promotion gate).
+
+**Pinned decisions** (each grounded in standing code or law):
+
+- **K1 — the causal spine, three parts, no graph.** `primary_cause` +
+  `necessary_supports[]` + `provenance`. Today's `cause` field IS the
+  primary-cause slot — the writer-enforced chain link (`core/loop.py`
+  sets it to `writer.last_id` at build, the chronological-chain law;
+  the hook family's `cause_hook` (D-140) and the OCC's
+  `based_on_event_seq` are the per-family attributions the spine
+  keeps). `necessary_supports[]` is the NEW declared claim: the prior
+  events WITHOUT EACH the outcome becomes unreachable. `provenance`
+  stays the evidentiary lineage block (seed / `cause_intent` /
+  `cause_hook` / `assignment_tick` — the temp-1 primitive, D-236) —
+  NEVER a causal claim (review-D2: provenance is lineage, not a
+  second causal ontology).
+- **K2 — counterfactual necessity (the definition).** Support X is
+  NECESSARY iff the same-seed ablation of X (removing X's producing
+  step/mechanic from the run's inputs) makes the claimed outcome
+  UNREACHABLE: no event with the outcome's identity (type + actor +
+  the material state-effect family) can occur in the re-derived run —
+  replacements (`intent_rejected` and kin) do not count as the
+  outcome. Enabling-but-unrequired, correlated, or downstream events
+  are NOT necessary — no matter how informative they are.
+- **K3 — necessity vs optional evidence, the split.** Optional
+  evidence = everything the outcome's audiences observed or the fold
+  consumed (perception records, ambient context, downstream
+  reactions) — it lives where it already lives (knowledge records,
+  the projection, the outcome payload), NEVER in `supports`. The
+  discriminating test is the ablation pair: evidence-removal leaves
+  the outcome REACHABLE (possibly shifted in tick or branch — the
+  deterministic streams shift, reachability is the invariant);
+  support-removal kills it.
+- **K4 — the ablation battery, off-line only.** The verification
+  instrument is the landed same-seed BASE/PERTURBED pair form
+  (`scripts/divergence_probe.py`, D-235 — the semantic_diff oracle +
+  the `cause`-ancestry walk). The battery runs over runs/logs,
+  NEVER inside the tick loop: no runtime re-derivation of necessity
+  (sem-1's S1 twin — the second-resolver ban holds for causal claims
+  too).
+- **K5 — the producer declares, the battery verifies.**
+  `necessary_supports` is a PRODUCER-DECLARED claim: the
+  resolver/mechanic names the events that established the facts its
+  resolution materially used (the read-set × the establishing events
+  — the loop's `_last_change` index (L3, D-050) is the existing
+  `(entity, prop) → tick` derivation seed). The declaration is
+  verified by the ablation battery over the corpus; a declared
+  support that survives ablation (the outcome still reachable) is
+  REFUTED — RED — and an omitted-but-required support is the
+  completeness gap the battery reports.
+- **K6 — compatibility + the no-DAG law.** INV-1: the supports ride
+  the event document (an additive provenance-family field — any
+  schema bump is the implementation row's business through AGENTS §8
+  stop&confirm, never this definition). INV-5: supports reference
+  committed event ids — append-only, never edited. Current consumers
+  unaffected and additive-only: the divergence probe's ancestry walk,
+  the observatory's cause-as-data (LAW §12), the hook-discharge
+  family (director/urgencies/factions/metrics), `brief/validator`,
+  the census forward walk. FORBIDDEN: DAG storage, graph-traversal
+  machinery, provenance engines, generic causal inference — the spine
+  is fields + one off-line battery; full graph machinery only behind
+  the runtime-promotion gate (a named consumer + a measured native
+  limit + the falsifier).
+
+**Falsifier** (TEST_PLAN §9's packet form — the future implementation
+row's first RED test; run LIVE at iter-317: seed 8, the day1 theft
+scenario's own steps + one inserted perception step, the probe script
+outside the repo per Rule 9; artifacts md5 base `947adfb5358984f76e21
+f5feb4208789` / ablate-move `ce05d72bb60ef4e94c5bf1d50ba59349` /
+ablate-look `26d5e6a11c0ec032d0d2d1a0a0052a10`): the same-seed
+ablation pair demonstrates BOTH directions AND the gap — BASE: the
+steal outcome `ev_0007` (type `steal`, the purse carrier delta) names
+as its `cause` the CHRONOLOGICAL predecessor `ev_0006`
+(`look_around`), while the materially-REQUIRED `ev_0005` (the move to
+the tavern — without which the steal is world-impossible) is
+INDISTINGUISHABLE from the look in the outcome's own fields: the
+necessity is real, measurable, and UNRECORDED (review-C2's risk —
+"tree-like reduction can erase conditions required for the outcome").
+ABLATE-MOVE: zero steal-family outcomes, three `intent_rejected` —
+the outcome unreachable (necessity). ABLATE-LOOK: the steal still
+fires — the outcome reachable (evidence, not necessity).
+
+**Minimal test set** (the implementation row's, not today's): the
+ablation battery over the committed corpus — every declared support
+kills its outcome under ablation (REFUTED declarations RED), the
+evidence controls stay reachable; the declaration completeness
+report; INV-1/INV-5 — the supports reference committed ids only, the
+append-only log untouched; the consumers additive-only (the
+divergence probe, the observatory, the hook family, the validator,
+the census).
+
+**Deliberately NOT done here** (the row's own fence): no field added,
+no schema change, no DAG/provenance engine, no runtime causal
+checking (the battery is off-line), no rewrite of the hook/OCC
+attribution families (the spine EXTENDS them, never merges).

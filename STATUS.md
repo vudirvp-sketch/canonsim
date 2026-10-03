@@ -1,60 +1,55 @@
-Iteration: iter-315 (`intakeland` — the owner's 2026-10-03 concept-review
-  confirmation call «м4 => жесткий канон … Сейчас — L12 как
-  production-форма … по факту готовности разве нельзя работу
-  выстраивать? … принимаем все правки и строки предложенные!» (the
-  REWORKED-v2 package's intake closure; R0 doc-only, the third
-  consecutive — D-022's fresh-owner-request exception firing): THE
-  CONFIRMED CONTRACT QUEUE LANDED — six owner-confirmed TASKS rows
-  (sem-1/caus-1/replay-1/scale-1/speech-1/auth-1 — the review's T1–T7
-  adapted and collapsed: T3 folded into core-1's amended POC set, the
-  review-C ↔ core-1-C namespace fence pinned) + the package VERBATIM
-  at docs/analysis/concept-review-2026-10/ (9 files, md5
-  17cfe3f8798d0a5a0ec48aedd6c68433 — the D-242 self-containment form,
-  fourth instance) + the phases.md §6 intake record (the triage
-  verdicts: 29 contracts classified, all six code probes verified live
-  at HEAD) + THE OWNER'S FOUR DECISIONS RECORDED in their owners:
-  (1) M4 = HARD CANON — no recovery/dispute path ever for
-  wrong-but-committed model-mediated actions (INV-5's irreversibility
-  the standing form; a retcon path would need a new owner-gated design
-  — refused; pinned in auth-1's row); (2) the narrator form = the L12
-  template rung AS PRODUCTION NOW (PRESENTATION_SPEC §7 — the honest
-  ceiling after 56 beats/168 calls zero accepted across
-  4B/9B/12B/27B-IQ3_XXS; the heavier arm re-opens only behind the
-  closed contract rows, never a parallel hope; the owner's framing
-  pinned: the production shape is the simulator-side prompt contract —
-  snapshot + system/situation prompt, the prose quality the MODEL's
-  business); (3) NO fixed playtime frame — work structured by
-  readiness (models/settings differ per user; the budget an OBSERVED
-  per-deployment property, never a repo-side target — M3's fixed-frame
-  question dissolved); (4) liveness/emergence (C24/C27) stays PARKED
-  until sem-1/auth-1/scale-1 close — then measured, never "added
-  interestingness".
+Iteration: iter-317 (`caus1` — the package's T1+T2 sequence, sem-1's
+  natural pair, the owner's «sem1 открывай и так далее» continuation):
+  THE CAUS-1 CONTRACT LANDED — the causal sufficiency definition
+  (review-C2/D2) at CONTRACTS.md §7, zero code change: six pinned
+  decisions (K1 the causal spine — `primary_cause +
+  necessary_supports[] + provenance`, no graph: today's `cause` IS the
+  primary-cause slot, provenance stays lineage never causal claims;
+  K2 counterfactual necessity — the same-seed ablation makes the
+  claimed outcome UNREACHABLE, replacements don't count; K3 the
+  necessity-vs-evidence split — evidence lives in knowledge/
+  projection/payload, never supports; K4 the ablation battery
+  OFF-LINE only — the divergence-probe form, never a runtime gate;
+  K5 the producer declares, the battery verifies — the read-set × the
+  `_last_change` index (D-050) the derivation seed, a support
+  surviving ablation is REFUTED; K6 compatibility + the no-DAG law —
+  an additive provenance-family field, INV-1/INV-5 + the consumers
+  additive-only) + THE ABLATION FALSIFIER RUN LIVE (seed 8, the day1
+  theft scenario + one inserted perception step: BASE — the steal
+  outcome `ev_0007` names as `cause` the CHRONOLOGICAL predecessor
+  `ev_0006` (`look_around`) while the materially-REQUIRED move
+  `ev_0005` is indistinguishable — the necessity real, measurable,
+  UNRECORDED, review-C2's risk live; ABLATE-MOVE — zero steal-family
+  outcomes, the outcome unreachable (necessity); ABLATE-LOOK — the
+  steal still fires (evidence, not necessity); the probe outside the
+  repo per Rule 9, artifacts md5-pinned) + the future implementation
+  row's minimal test set pinned; the implementation NOT a row — the
+  owner opens it after accepting the contract (the runtime-promotion
+  gate).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2556 passed + 1 skipped, ruff clean, docguard
-  clean, topology --check clean (Python 3.12.14, the env pin; R0
-  doc-only — zero code change, the substance the owner-confirmed queue
-  + the four decisions) ·
+  clean, topology --check clean (Python 3.12.14, the env pin; R0/R1
+  doc + probe only — zero code change, the substance the contract
+  definition + the live ablation evidence) ·
 Date: 2026-10-03 ·
-Scope: docs/analysis/concept-review-2026-10/ (new — 9 files, the
-  package verbatim), docs/TASKS.md (six rows + the core-1 amendment +
-  the ledger, iter-305 evicted), docs/PRESENTATION_SPEC.md (§7 the
-  owner's L12 call), docs/blueprint/phases.md (§6 the iter-315 intake
-  record), docs/AGENT_NAVIGATION.md (§1 the docs/analysis row),
-  STATUS.md (this header), worklog.md (the iter-315 entry, iter-305
-  evicted), docs/iterations/iter-315-intakeland-report.md (new — this
-  row's RU report) — 16 changed/created (6 modified + 10 created);
-  R0 verification — INV-1..5 untouched, the LOG untouched, zero corpus
+Scope: docs/CONTRACTS.md (§7 new — the caus-1 contract), docs/TASKS.md
+  (caus-1 DONE + the ledger, iter-307 evicted), STATUS.md (this
+  header), worklog.md (the iter-317 entry, iter-307 evicted),
+  docs/iterations/iter-317-caus1-report.md (new — this row's RU
+  report) — 5 changed/created (4 modified + 1 created); R0
+  verification — INV-1..5 untouched, the LOG untouched, zero corpus
   price; NO test deleted or weakened
-Track A: the confirmed contract queue — sem-1 (the queue's head, the
-  semantic event validity + authority contract) with caus-1 the
-  natural pair (the package's T1+T2 sequence), then replay-1 /
+Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317 — the T1+T2
+  pair closed, both definitions + live falsifiers at CONTRACTS §6/§7;
+  the implementations the owner's call after accepting the
+  contracts); replay-1 the queue's head NOW, then
   scale-1 / speech-1 / auth-1 (each its own iteration, R0–R1
-  definition first); core-1 stays PARKED (owner-gated
-  RESEARCH/POC-ONLY, its POC set now opening from the concept-review
-  package too). The web-frontend track — S0 LANDED; the tooling
+  definition first, the cheapest falsifier with it); core-1 stays
+  PARKED (owner-gated RESEARCH/POC-ONLY, its POC set now opening from
+  the concept-review package too). The web-frontend track — S0 LANDED;
   floor's rows + the V1/V2/V3 visual floors LANDED (iter-293/297/
   304/307); Phase 3's SEVEN rows LANDED
   (iter-294/295/296/298/299/300/301) + the IA REPAIR LANDED
@@ -136,27 +131,31 @@ Track A: the confirmed contract queue — sem-1 (the queue's head, the
 
 ## Next step
 
-**iter-315 DONE: intakeland (the owner's 2026-10-03 concept-review
-  confirmation call «м4 => жесткий канон … L12 как production-форма …
-  принимаем все правки и строки предложенные!»).** The confirmed
-  contract queue LANDED: six TASKS rows (sem-1/caus-1/replay-1/
-  scale-1/speech-1/auth-1) + the core-1 amendment (the D0/D3 POC law
-  set, the namespace fence pinned) + the package verbatim at
-  docs/analysis/concept-review-2026-10/ (md5-pinned) + the phases.md
-  §6 intake record + the owner's four decisions in their owners:
-  M4 = HARD CANON (no recovery/dispute path ever — auth-1's row);
-  the narrator = L12 AS PRODUCTION NOW (PRESENTATION_SPEC §7, the
-  heavier arm re-opens only behind the closed contract rows); NO
-  fixed playtime frame (readiness-based — the budget an observed
-  per-deployment property); liveness/emergence stays PARKED until
-  sem-1/auth-1/scale-1 close. 2556+1 + ruff + docguard + topology
-  --check clean (R0 doc-only — zero code change). The RU report:
-  docs/iterations/iter-315-intakeland-report.md.
-Next: the confirmed contract queue's head — **sem-1** (the semantic
-  event validity + authority contract, review-C1/D1) with **caus-1**
-  the natural pair (the package's T1+T2 sequence; each its own
-  iteration, R0–R1 definition first, the cheapest falsifier with
-  it); then replay-1 → scale-1 → speech-1 → auth-1; M2 (the claims
+**iter-317 DONE: caus1 (the owner's «sem1 открывай и так далее»
+  continuation — the package's T1+T2 sequence, sem-1's natural
+  pair).** The caus-1 CONTRACT LANDED at CONTRACTS.md §7 (review-C2/D2,
+  R0/R1, zero code change): the six pinned decisions K1..K6 (the
+  causal spine primary_cause+necessary_supports[]+provenance without a
+  graph; counterfactual necessity; the necessity-vs-evidence split;
+  the OFF-LINE ablation battery; the producer-declares-battery-verifies
+  law; the no-DAG compatibility fence) + the ablation falsifier RUN
+  LIVE (BASE: the steal outcome names the CHRONOLOGICAL predecessor as
+  `cause` while the materially-required move is indistinguishable —
+  review-C2's risk demonstrated; ABLATE-MOVE kills the outcome
+  (necessity); ABLATE-LOOK does not (evidence); the probe outside the
+  repo per Rule 9, artifacts md5-pinned) + the future implementation
+  row's minimal test set pinned; the implementation NOT a row — the
+  owner opens it after accepting the contract. The T1+T2 pair now
+  closed (sem-1 iter-316 + caus-1 iter-317). 2556+1 + ruff + docguard
+  + topology --check clean. The RU report:
+  docs/iterations/iter-317-caus1-report.md.
+Next: **replay-1** (the semantic replay identity + recovery durability
+  contract, review-C4/C7/C13/D4 — R0–R1 definition first, the cheapest
+  falsifier with it; the identity tuple `log_prefix_digest +
+  engine_semantic_version + schema_identity + pack_semantic_digest +
+  execution_config_digest + seed`, the live cursor's named gaps, the
+  lifecycle proposed→accepted→durable→committed, `flush == durable`
+  rejected) — then scale-1 → speech-1 → auth-1; M2 (the claims
   normalisation A/B) the next measurement battery when the owner
   calls it — station-side, never a repo row; the standing queue's
   other owner calls preserved: the replay-UI NOT-EXPOSED row and the
