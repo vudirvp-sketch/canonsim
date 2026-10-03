@@ -179,10 +179,24 @@ POST-S0        — the tooling floor's first row LANDED (iter-293: the
                  two tabs two independent sessions, the RESYNC
                  end-to-end — the retention rolled past a paused
                  cursor, the recovery read fills the window, the
-                 stream re-begins; zero console errors); the standing
-                 gates that remain: the acceptance matrix, the
-                 tooling floor's remaining rows (the CI wiring, the
-                 Playwright-class multi-tab smoke)
+                 stream re-begins; zero console errors); THE
+                 ACCEPTANCE MATRIX CLOSED (iter-308, the owner's
+                 «матрица приёмки… роль десятков/сотен тестеров»
+                 delegated call — the pack's full matrix verified
+                 over a mass live session: 39 rows VERIFIED, 2
+                 OPEN (the Playwright smoke, the frontend CI
+                 wiring), 1 PARTIAL (pixel-diff), 2 NOT-EXPOSED,
+                 zero product defects; llama.cpp b11337 re-dropped,
+                 models through the gateway's own fetch op, 77 API
+                 checks green across four batteries, a 9-persona
+                 browser drive with 15 screenshots and zero console
+                 errors, S0-4 at 124.9 ops/s with a live
+                 llama-server, the build byte-identical twice); the
+                 standing gates that remain: the tooling floor's
+                 remaining rows (the CI wiring, the Playwright-class
+                 multi-tab smoke, the pixel-diff visual regression)
+                 + the boot-time OBSERVED-sync candidate (the
+                 iter-308 report's §C)
 PHASE 3        — the first row LANDED (iter-294, the owner's
                  «продолжай работы по фронтенду» delegated call: the
                  SHELL/NAV + the SESSION LIFECYCLE surface over the
@@ -342,8 +356,9 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  hermetically; the suite green WITH the tree
                  present); the next rows the owner's call: the
                  streaming admission (SSE — the backend gateway
-                 contract first), the acceptance matrix, the
-                 DECISIONS collapse (the owner's call); each its own
+                 contract first; LANDED iter-305/306), the
+                 acceptance matrix (CLOSED iter-308), the DECISIONS
+                 collapse (the owner's call); each its own
                  iteration
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the

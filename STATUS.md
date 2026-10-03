@@ -1,25 +1,36 @@
-Iteration: iter-307 (`spacingscale` — the owner's «продолжить
-  работу по фронтенду» delegated call; R2 frontend-local): the
-  visual floor's THIRD row LANDED (iter-304's own declared NEXT —
-  layout changes get their own visual-proof pass, never a silent
-  fold): the SPACING SCALE in styles.css's :root — SPACE_1..10
-  (2/4/6/8/10/12/16/20/32/48px over VISUAL_SYSTEM_UI §1.1's bands):
-  the seventeen organic values across the 131 layout-affecting
-  padding/margin/gap declarations consolidated onto the ten steps
-  (149 literal usages replaced by the counter-audited persistent
-  script — max drift 2px, 119/149 exact; the twin merges 1→2,
-  3→4, 5→6, 7→8, 9→8, 14→16, 18→16, 34→32: the two-column grids
-  aligned at 16, the list indents at 16, the pill chips at 2/8;
-  0 and auto stay literal by law — the zero/auto semantics);
-  the architecture guard's V3 scan (a raw px/rem in any spacing
-  declaration outside :root is a red test; mutation-verified —
-  three violation classes caught RED, restored GREEN); the row's
-  own live visual-proof pass: 7+7 before/after surface
-  screenshots + the LIVE FAILED-band bubble check (the volatile
-  transcript drops on unmount — the bubble verified on a mounted
-  turn, never a detached selector) + 261 computed spacing values
-  — every after-value on the token grid, every drift a declared
-  twin merge, zero console errors
+Iteration: iter-308 (`acceptmatrix` — the owner's «продолжить
+  работу по фронтенду: матрица приёмки или CI-ряды… сыграть
+  роль десятков/сотен тестеров» delegated call; R0/R1 — a pure
+  verification iteration, ZERO code change): the FULL ACCEPTANCE
+  MATRIX from the archived pack CLOSED over a mass live
+  verification session — 39 rows VERIFIED (live evidence and/or
+  executable tests), 2 honestly OPEN (the Playwright smoke, the
+  frontend CI wiring — each its own parked row), 1 PARTIAL (visual
+  regression: the token floors are executable, a pixel-diff suite
+  is not), 2 NOT-EXPOSED (replay UI, honestly), ZERO product
+  defects found; the session: llama.cpp b11337 re-dropped (the
+  same build as iter-302), models fetched THROUGH the gateway's
+  own model.fetch (stories15M Q4_K_M 20 986 944 B +
+  qwen2.5-0.5b-instruct-q4_k_m 491 400 032 B — byte-exact with
+  iter-302's record), a real CLI canon run generated for the
+  HISTORY world (run_125_0, seed 125, 56 events), 77 API checks
+  green across four batteries (fetch 10/10, liveband 24/24 — the
+  full lifecycle DISCOVERED→ACTIVE→chat COMPLETED→single-slot
+  rejection→EVICTED→re-selection, matrix-api 31/31 — every honest
+  rejection lane + G4 BOTH edges + CAS + RESYNC over a rolled
+  retention + the §8 closures, observatory 12/12 over the
+  committed run), and a 9-persona browser drive over every
+  surface (15 screenshots, zero console errors): virtualization
+  10 001 rows → 201 DOM nodes, jump-to-seq, the chat provenance
+  pair requested→effective verbatim, the models lifecycle through
+  the UI's OWN buttons, the §8 draft reconciliation live, the
+  observatory window pagination replacing, the settings draft
+  surviving the section round-trip, all three gateway probes
+  verbatim, S0-4 measured WITH a live llama-server at 124.9 ops/s,
+  two tabs two independent sessions, the focused-tab stream policy
+  through its own mechanism (hidden→STALE, visible→re-dial), live
+  push without refresh, the poll fallback with the buffer
+  surviving; the build byte-identical twice
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
@@ -27,35 +38,33 @@ Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 2555 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-10-03 ·
-Scope: frontend/src/app/composition/styles.css (the ten spacing
-  tokens + the 131 declarations tokenized), frontend/tests/
-  architecture/guard.test.ts (the V3 scan — 40 additive lines,
-  zero deletions), frontend/README.md (the V3 row), docs/{
-  VISUAL_SYSTEM_UI.md (§2's LANDED line + §2.1's spacing
-  paragraph), TASKS.md (the ledger, iter-297 evicted), STATUS.md
-  (this header + the Next step), worklog.md (the iter-307 entry,
-  iter-297 evicted), iterations/iter-307-spacingscale-report.md
-  (new)} — 8 changed/created (7 modified + 1 created; R2 —
-  frontend-local, zero Python change, INV-4 untouched, zero canon
-  change, the LOG untouched, zero corpus price; NO test deleted
-  or weakened — 1 added, vitest 251 → 252)
+Scope: docs/iterations/iter-308-acceptmatrix-report.md (new —
+  the full matrix verdict table), STATUS.md (this header + the
+  Next step), worklog.md (the iter-308 entry, iter-298 evicted),
+  docs/TASKS.md (the ledger, iter-298 evicted), docs/frontendweb/
+  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map's acceptance-matrix
+  line) — 5 changed/created (4 modified + 1 created; R0/R1 — zero
+  Python change, zero frontend change, INV-1..5 untouched, the
+  LOG untouched, zero corpus price; NO test deleted or weakened)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1/V2/V3 visual floors LANDED (iter-293/297/
-  304/307 — the spacing scale the third row: ten steps, max
-  drift 2px, guard-executable); Phase 3's SEVEN rows LANDED
+  304/307); Phase 3's SEVEN rows LANDED
   (iter-294/295/296/298/299/300/301) + the IA REPAIR LANDED
-  (iter-297, D-247); the owner-side bands CLOSED LIVE (iter-302);
-  THE STREAMING ADMISSION LANDED — the backend contract
-  (iter-305, D-248) + the browser adapter + the focused-tab
-  policy (iter-306, steps 3+4); the next frontend rows the
-  owner's call: the acceptance matrix, the DECISIONS collapse,
-  the tooling floor's remaining rows (the CI wiring, the
-  Playwright-class multi-tab smoke); the standing boundaries: a
-  SharedWorker stream transport, Tauri, PWA, the Settings
-  Appearance section (no persisted store) — each its own admission
-  (the import form's native file/folder picker rides the Tauri
-  row). The world track: W8's remaining rows the owner's call.
-  The ssi family COMPLETE except ssi-5, owner-gated.
+  (iter-297, D-247); the owner-side bands CLOSED LIVE (iter-302)
+  and RE-CLOSED LIVE inside the matrix session (iter-308); THE
+  STREAMING ADMISSION LANDED (iter-305/306); THE FULL ACCEPTANCE
+  MATRIX CLOSED (iter-308 — 39 verified / 2 open / 1 partial /
+  2 not-exposed, zero defects); the next frontend rows the
+  owner's call: the DECISIONS collapse, the tooling floor's
+  remaining rows (the CI wiring, the Playwright-class multi-tab
+  smoke, the pixel-diff visual regression), the boot-time
+  OBSERVED-sync candidate (the iter-308 report's §C observation);
+  the standing boundaries: a SharedWorker stream transport, Tauri,
+  PWA, the Settings Appearance section (no persisted store) —
+  each its own admission (the import form's native file/folder
+  picker rides the Tauri row). The world track: W8's remaining
+  rows the owner's call. The ssi family COMPLETE except ssi-5,
+  owner-gated.
 
 
 
@@ -124,21 +133,28 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-307 DONE: spacingscale (the owner's «продолжить работу по
-  фронтенду» delegated call; R2 frontend-local).** The visual
-  floor's third row: the ten-step spacing scale in :root
-  (SPACE_1..10 over §1.1's bands), the 131 layout-affecting
-  declarations tokenized (max drift 2px, 119/149 exact), the
-  guard's V3 scan mutation-verified, the live before/after
-  visual-proof pass over all seven surfaces + the live
-  FAILED-band bubble check. The RU report:
-  docs/iterations/iter-307-spacingscale-report.md.
-Next: the owner's calls — (1) the standing queue: the acceptance
-  matrix, the DECISIONS collapse (36→30, the owner's call), the
-  tooling floor's remaining rows (the CI wiring, the
-  Playwright-class multi-tab smoke — the adapter's focused-tab
-  law is now executable there), the B1/C4 law diffs from iter-303
-  (adopt or reject), and the world track's parallel rows.
+**iter-308 DONE: acceptmatrix (the owner's «матрица приёмки или
+  CI-ряды… сыграть роль десятков/сотен тестеров» delegated call;
+  R0/R1 — pure verification, zero code change).** The full
+  acceptance matrix from the archived pack CLOSED over a mass live
+  session: 39 rows verified (live evidence and/or executable
+  tests), 2 honestly open (the Playwright smoke, the frontend CI
+  wiring — each its own parked row), 1 partial (visual regression:
+  token floors executable, pixel-diff not), 2 not-exposed (replay
+  UI, honestly), ZERO product defects; llama.cpp b11337 re-dropped,
+  models fetched through the gateway's own op, 77 API checks green
+  across four batteries, a 9-persona browser drive over every
+  surface (15 screenshots, zero console errors), S0-4 at 124.9
+  ops/s with a live llama-server. The RU report:
+  docs/iterations/iter-308-acceptmatrix-report.md.
+Next: the owner's calls — (1) the standing queue: the DECISIONS
+  collapse (36→30, the owner's call), the tooling floor's remaining
+  rows (the CI wiring — §8 stop&confirm; the Playwright-class
+  multi-tab smoke — iter-308's browser drive is the form's template;
+  the pixel-diff visual regression), the boot-time OBSERVED-sync
+  candidate (the iter-308 report's §C observation — one session.get
+  after create), the B1/C4 law diffs from iter-303 (adopt or
+  reject), and the world track's parallel rows.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns
