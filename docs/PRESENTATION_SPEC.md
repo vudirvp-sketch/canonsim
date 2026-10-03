@@ -105,22 +105,31 @@ presentation contract refuses every script-specific branch.
 
 ## 7. The narrator band (the measured bound, §4.3 arm d)
 
-Mode-A prose at the weak arm: the 4B class is **parser-only** at this
-call shape (every beat dry across all three ladders — the narrator
-replies are not valid JSON, the bounded json-retry ladder exhausted);
-the 9B class **narrates** in the battery (6/8 accepted per ladder,
-the regen ladder working) — the LIVE surface unconfirmed at 9B
-(round 6's first live Q9B beat fell in the failure tail: 3/3 prose,
-the MALFORMED ladder exhausted to the dry beat; n=1 — §13.1; the
-convention is model ability, round 5's verdict — the battery's
-ladder is never a live-surface guarantee). The narrator floor sits
-BETWEEN 4B and 9B: the contract's consumer requirement — the narrator
-door needs a ≥9B-class model at this station shape, its live-surface
-confirmation the owner's next station run (more live beats, or the
-27B); the 3–8B band serves the parse door (GBNF-constrained). The
-12–27B band stays the §1 sweet spot; the one-model-constrained A/B
-(27B GBNF parse) is TEST_PLAN §8.5's standing gap row, the owner's
-next station run.
+Mode-A prose at the live surface: round 7 (the owner's 2026-10-03
+station run — three bands at one sitting, TECH_NOTES §13's round-7
+record) SIZED the call — 8 live beats per band through the landed
+MALFORMED-regen ladder (3 calls each: the first + 2 regens, the note
+riding): **accepted 0/8 at 4B, 0/8 at 9B, 0/8 at 12B — 24 beats, 72
+calls, zero accepted** (every exhaustion honest, the session never
+dying: KI#90's fix live-verified at scale). The failure SHAPES: prose
+narrating FROM the brief at 4B/9B (the q9b beats open with the voice
+exemplar VERBATIM — the narration ability present, the document
+convention absent), document-shaped-but-WRONG replies at 12B (markdown
+headers, fenced-json `log` blocks — a model that knows a document is
+wanted, not THIS document). The battery's 6/8 at 9B (round 4) is the
+runner-ladder bound at its corpus beats — instrument-specific, never a
+live-surface guarantee (now measured, not warned: the live-surface
+rate at 9B is 0/9 cumulative, round 6's beat included). **The
+live-surface floor sits ABOVE 12B at this call shape** — no measured
+band reaches the reply-document convention; the contract's consumer
+requirement (a narrator that answers the reply document) resolves
+between the 27B one-model arm (the §1 sweet spot — the owner's call)
+and the L12 template rung as the accepted production form (the beat's
+own chronicle lines — honest prose, never a fake document). The parse
+door serves every measured band (raw validity 51/51 at 4B/9B/12B,
+GBNF-constrained — the size gradient shows in the mix, never the
+validity). The one-model-constrained A/B (27B GBNF parse) is
+TEST_PLAN §8.5's standing gap row.
 
 ## 8. The re-expansion law + the staged interpretation (intake-32's card, mapped)
 

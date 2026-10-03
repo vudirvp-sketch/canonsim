@@ -1355,6 +1355,98 @@ D-193; the serializer contract docs/PRESENTATION_SPEC.md).
   the row's evidence: the manifest, the results document, and this
   record.
 
+- **The round-7 record (iter-313, the owner's station run through the
+  LANDED split instrument — the 2026-10-03 delivery «я прислал тебе
+  результаты прогона на моем железе», the standing station rows'
+  run; three model bands at one sitting: RTX 3080 Ti 12 GB / 32 GB
+  RAM / Windows 11 / Python 3.14.3, llama-server b11064-a894dae93 —
+  rounds 4–6's build, vs the sandbox's b11337; the pinned form
+  everywhere: `-c 4096 -np 1 -ctk q8_0 -ctv q8_0 -fa on
+  --no-reasoning-preserve`; the grammar DERIVED at the station's
+  Python 3.14.3 → id `9fa7e9f4359a9201` byte-equal to the pin — the
+  derivation's interpreter-independence measured (3.12.14 the pin
+  env vs 3.14.3), and the same id at the station (rounds 5+7) and
+  the sandbox (iter-312))**:
+  1. THREE FULL-COLUMN heartbeat rows (TEST_PLAN §8.5:
+     engine1-e4b-r7 / engine1-q9b-r7 / engine1-px12b-r7 — the split
+     instrument's first STATION deployment; the 51-utterance corpus
+     through the real mode-C stack, the landed cycle mirrored):
+     **raw validity 51/51 at EVERY band with zero re-asks** (the v2
+     source grammar holds validity size-independently; round 4's q9b
+     needed the re-ask rescue 96.1%→100% — round 7's does not);
+     **the cautious-mapper gradient** — mix 51/0/0 (e4b, the
+     aggressive mapper) → 21/1/29 (q9b — round 4's mix byte-equal,
+     the temp-0/seed-42 determinism across instruments) → 0/11/40
+     (px12b, the most cautious measured: ZERO intents, 11 questions
+     + 40 no_intent declines); agreement 11/19/21 → 7/10/34 →
+     0/9/42 full/kind/mismatch (round 4: 15 and 6 full) — the bigger
+     the model, the fewer intents and the lower the agreement at
+     this corpus (the honesty-vs-agreement tradeoff measured at
+     three bands on one station; the instrument difference — the
+     landed mode-C stack + the current grammar vs the round-4
+     runner — recorded, never resolved by guess); e4b's world
+     refusing 13 of 51 (11 intent_rejected + 2 take_failed);
+     px12b's tick column an honest n=0 (zero intents → zero ticks).
+     Latency p50/p95: generate 392.7/492.3 (e4b) · 501.6/766.6
+     (q9b) · 438.4/713.3 ms (px12b) — the GPU band ~23–30× the
+     sandbox CPU's 1.7B at 2.4–7× the model size; the repo-side
+     columns at the round-4 merged scale (brief+parse 1.0–1.1 ms
+     there): brief 1.0–1.1 · parse 1.9–2.9 · tick 0.2 · fold
+     0.6–1.0 ms — generate dominates >100× at every band. Spawn to
+     ready 3.1 / 9.6 / 12.1 s (the size cost; no OOM at `-c 4096`
+     q8_0 KV on the 12 GB card, the 12B included).
+  2. THE DETERMINISM MINI AT THE STATION: greedy/seeded/cacheless ×3
+     + the restart arm (cross-lifetime) — byte-identical at ALL
+     THREE models (24/24 arms); the sandbox's one across-priming
+     cache flip NOT reproduced at the GPU band (one sitting, `-fa
+     on`, the pinned form); the manifests' model_sha256 populated at
+     every band (the absolute-`-m` form, round 6's).
+  3. THE GBNF PENALTY AT THE GPU BAND: constrained vs unconstrained
+     p50 deltas +1.5 / −3.5 / +2.3 ms — no measurable penalty (the
+     grammar constraint free at the station band too; round 4's
+     §13.1 CPU finding extended).
+  4. THE NARRATOR CALL'S Q9B SIDE ANSWERED (round 6's two-sided
+     call; PRESENTATION_SPEC §7 re-scoped): 8 live beats per band
+     through the landed MALFORMED-regen ladder (3 calls per beat —
+     the first + 2 regens, the note riding) — **accepted 0/8 at
+     e4b, 0/8 at q9b, 0/8 at px12b: 24 beats, 72 calls, zero
+     accepted**, every beat exhausted to the dry rung
+     (engine_fallback 0, open 0 — the ladder clean, the session
+     never dying: KI#90's fix live-verified at scale). The failure
+     SHAPES per band (the convention is model ability, round 5's
+     verdict — now three bands of it): e4b prose narrating FROM the
+     brief (the exemplar phrases woven in); q9b the voice exemplar
+     VERBATIM as the opening line; px12b document-shaped
+     WRONG-shape replies (markdown headers, fenced-json `log`
+     blocks — the model knows a document is wanted, not THIS
+     document). The live-surface convention rate at 9B is now 0/9
+     cumulative (round 6's 1 + round 7's 8) against round 4's
+     battery-ladder bound 6/8 — the instrument divergence recorded
+     honestly: the battery's json-retry ladder rescued prose into
+     documents at its corpus beats; the landed session's regen does
+     not at the live probe's beats. The floor at the live surface
+     sits ABOVE 12B; the remaining arms — the 27B one-model run
+     (the §1 sweet spot) or the L12 template rung as the accepted
+     production form — the owner's call; bg-9's mapping-drift
+     datum rides the same decision.
+  5. THE WB-6 CROSS-BUILD DATUM (b11064, the owner's build): the
+     single-model form /models/load → 404 (the OpenAI-style
+     envelope) — the router-mode-only semantics CONFIRMED at BOTH
+     builds (b11064 + b11337); the router probe (`--models-dir` +
+     `--models-max 1`): the stem-addressed load + unload both
+     success (the stub pins' exact shapes), the PATH form → 404
+     (stem-not-path, cross-build); first-touch autoload 3.10 s, the
+     evict+autoload switch 3.81 s (vs the sandbox's 0.95/2.62 s at
+     Qwen3-1.7B — the model-size cost of the router swap: the
+     GGUF load dominates; the workbench's model-swap UX expectation
+     at the station band); GET /models listing the per-model
+     status/argv/preset form (the loading state observable, the
+     spawned per-model argv visible). The runner + the probes
+     outside the repo (Rule 9); the evidence: the three manifest
+     rows, the results document, and this block. NOT RUN (honest):
+     the 27B GBNF parse arm + the one-model-constrained A/B — no
+     27B model in the delivery; the rows stand.
+
 ## 14. The live-session operator recipes (narrate + say; moved from STATUS FAQ iter-176)
 
 Two doors, one ledger (D-049); `python -m cli` opens the interactive

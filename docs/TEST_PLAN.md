@@ -587,12 +587,24 @@ the raw min/median/max with the gap noted).
 | engine1-e4b | 2026-09-21 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF) | 98.0% → 98.0% | 50/0/0 | 15/51 full | tick 2.3/3.2 · fold 0.7/1.1 · brief+parse 1.1/1.6 (one measured column — the door's emit_call; the split the gap) · generate 537/706 ms | the grammar lifts raw validity above both API rows; the mix collapses to all-intent (the aggressive mapper — TECH_NOTES §13.1); the deviation re-distillation: honest 18/36, the first local world-answer leak 33/34 |
 | engine1-q9b | 2026-09-21 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF) | 96.1% → 100% | 21/1/29 | 6/51 full | tick 1.5/4.9 · fold 0.6/0.8 · brief+parse 1.0/1.3 (the same gap) · generate 470/714 ms | the re-ask rescue closes validity; the mix inverts (the cautious assistant declines 29); deviation honest 15/36, coverage 34/34; the gate-valid protocol echo pinned (§13.1) |
 | engine1-q1p7b | 2026-10-03 | Qwen3-1.7B Q4_K_M local (llama-server b11337, GBNF; CPU 2-core sandbox band — not a station row) | 100% → 100% | 51/0/0 | 4/51 full (15 kind / 32 mismatch) | tick 0.3/0.5 · fold 0.8/0.9 · brief 0.9/1.1 · parse 2.7/3.4 · generate 11598/12512 ms | THE SPLIT LANDED (iter-312): the first row with all five columns — brief = emit_call, parse = grammar+gate+wiring minus the tick (the instrument's decomposition: TECH_NOTES §13's iter-312 block); the smallest band yet: the grammar holds raw validity at 100% with ZERO re-asks spent, the mix fully collapses to intents (the most aggressive mapper — 16 look_around guesses; the world refusing 6: 4 intent_rejected + 2 take_failed); the CPU generate dominates (~617-tok prompt at ~92 tok/s); the determinism mini greedy/seeded/cacheless ×3 byte-identical, one across-priming cache flip observed (§13) |
+| engine1-e4b-r7 | 2026-10-03 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station — RTX 3080 Ti, the split instrument's first station deployment) | 100% → 100% (0 re-asks) | 51/0/0 | 11/51 full (19 kind / 21 mismatch) | tick 0.2/0.4 · fold 1.0/1.3 · brief 1.1/1.5 · parse 2.9/4.1 · generate 392.7/492.3 ms | round 4's row re-measured WITH THE SPLIT (the merged brief+parse 1.1/1.6 there — the columns land at that scale); the aggressive-mapper shape holds (mix 50/0/0 → 51/0/0; validity 98→100 raw, zero re-asks); agreement 15→11 full (the instrument difference recorded — §13 round-7); the world refusing 13 (11 intent_rejected + 2 take_failed); the determinism mini ×3 + restart byte-identical, zero cache flips (§13 round-7) |
+| engine1-q9b-r7 | 2026-10-03 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station, the split instrument) | 100% → 100% (0 re-asks) | 21/1/29 | 7/51 full (10 kind / 34 mismatch) | tick 0.2/0.5 (n=21) · fold 0.8/1.9 · brief 1.1/1.4 · parse 2.2/3.5 · generate 501.6/766.6 ms | the cautious-assistant mix reproduced EXACTLY (21/1/29 — round 4's row byte-equal; the temp-0/seed-42 determinism across instruments); validity 96.1→100 raw (round 4's re-ask rescue no longer needed); agreement 6→7 full; the narrator live-beat datum 0/8 at this sitting (§7's re-scope rides this row — §13 round-7) |
+| engine1-px12b-r7 | 2026-10-03 | Prototype-X-12b.i1 Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station, the split instrument) | 100% → 100% (0 re-asks) | 0/11/40 | 0/51 full (9 kind / 42 mismatch) | tick n=0 (zero intents — the honest gap) · fold 0.6/0.7 · brief 1.0/1.1 · parse 1.9/2.0 · generate 438.4/713.3 ms | round 5's live-session model through the battery: the most cautious mapper measured — ZERO intents (11 questions + 40 no_intent declines); the tick column honestly empty (no intents → no ticks); the narrator 0/8 with document-shaped WRONG-shape replies (markdown headers, fenced-json log blocks — §13 round-7) |
 
 Gap rows standing: the 27B GBNF parse arm + the
 one-model-constrained A/B (CONTRACTS §4.3 arm a — the owner's next
 station run, now through the LANDED surface: the `--engine` session +
-the repo-side grammar, iter-177/D-193). Discharged by iter-312
-(2026-10-03, the owner's live-row enabler — llama.cpp b11337 in the
+the repo-side grammar, iter-177/D-193; NOT in the round-7 delivery —
+no 27B model present). Discharged in part by round 7 (iter-313,
+2026-10-03 — the owner's station delivery through the landed split
+instrument, TECH_NOTES §13's round-7 record): the three full-column
+station rows above (engine1-e4b-r7 / -q9b-r7 / -px12b-r7) + the
+narrator live-beat side of the standing call ANSWERED (0/8 at every
+band — the live-surface floor above 12B, PRESENTATION_SPEC §7
+re-scoped; the 27B one-model run the remaining arm) + the wb-6
+semantics confirmed cross-build (b11064 + b11337). Discharged by
+iter-312 (2026-10-03, the owner's live-row enabler — llama.cpp
+b11337 in the
 documented drop layout, the models through the gateway's own
 model.fetch): the brief/parse component split — the battery's own
 clock over the landed cycle seam (emit → grammar → generate → apply,
