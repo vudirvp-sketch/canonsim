@@ -5394,6 +5394,79 @@ D-242 family's D-251).**
   corpus price). The owner's RU report:
   `docs/iterations/iter-311-worldsuite-report.md`.
 
+**The iter-315 intakeland record (R0 doc-only — the owner's 2026-10-03
+concept-review confirmation call: «м4 => жесткий канон … Сейчас — L12
+как production-форма … по факту готовности разве нельзя работу
+выстраивать? … принимаем все правки и строки предложенные!» — the
+REWORKED-v2 package's intake closure, the triage session's landing).**
+
+- **The form.** The package `concept-review-2026-10-REWORKED-v2.zip`
+  (22102 bytes, 9 files, md5 `17cfe3f8798d0a5a0ec48aedd6c68433`,
+  sha256 `ab44847fba5513db20f074c125de645f2d48ef7b4ee969e57ed1fbd7c
+  03f1a80`) — the D0–D11 synthesis of the 2026-10 concept review,
+  authored against HEAD `528de9c` (iter-311). The intake triage ran
+  against the live HEAD `7e49199` (iter-314 — three commits of R0
+  doc-only station records ahead, `core/` untouched, verified by diff).
+- **The triage (29 contracts, every verdict evidence-pinned).** All
+  six material code probes verified TRUE at HEAD: the `_commit` gate
+  (deltas+schema+chain, never a declared effect surface —
+  `core/loop.py`), the player-position LOD (`core/lod.py`), the
+  cursor identity gaps (pack NAME only; no content/config digest), the
+  pack-wide scans (`core/intent.py`/`fold.py`/`lod.py`), the
+  flush-only durability (no fsync, no crash curriculum), the F6
+  injection corpora (`n_executed` verdicts measured in-repo). CLOSED:
+  C8/C9/C10/C19 (+ the standing strengths of the package's 02 — sole
+  writer, append-only log, RngBank, mediator boundary, intent ≠
+  event, `known_by`, phases 0–6). COVERED-BY-LAW: C6 (the queue key +
+  INV-2), C29 (the eager-foundation wording). MAPS-TO-CORE-1:
+  C3/C14/C18. OPEN-DEF: C1, C2, C4/C7/C13, C5/C16/C28, C11, C12,
+  C20, C25 (+C26's scope residue). PARKED: C24/C27 (owner product
+  choices) + the P2/P3 set. SUPERSEDED (the live repo moved past the
+  package's premises): M1's "27B smoke-level only" (the engine1-q27b-r8
+  full battery landed iter-314) and M3's "30–55 s per reply" (the
+  tuned 27B measures 3.8–6.1 s per generate call; the repo-side
+  columns at ~4 ms).
+- **The durable result.** The confirmed queue: six TASKS rows
+  (`sem-1`/`caus-1`/`replay-1`/`scale-1`/`speech-1`/`auth-1` — the
+  review's T1–T7 adapted, T3 folded into `core-1`'s amended POC set,
+  the review-C ↔ core-1-C namespace fence pinned in the row) + the
+  package VERBATIM at `docs/analysis/concept-review-2026-10/` (its own
+  declared path, md5-pinned in the AGENT_NAVIGATION §1 row — the
+  D-242 self-containment form, fourth instance: never re-ingested,
+  never a second source of truth; the adoptions live in TASKS, the
+  D0–D11 set the package's own law). The owner's four decisions
+  recorded in their owners: **(1) M4 = HARD CANON** — no
+  recovery/dispute path EVER for wrong-but-committed model-mediated
+  actions (INV-5's irreversibility the standing form; a retcon path
+  would need a new owner-gated design — refused; pinned in `auth-1`'s
+  row); **(2) the narrator = the L12 template rung AS PRODUCTION
+  NOW** (PRESENTATION_SPEC §7; the heavier arm re-opens only behind
+  the closed contract rows; the owner's framing pinned: the
+  production shape is the simulator-side prompt contract — snapshot +
+  system/situation prompt — the prose quality the MODEL's business);
+  **(3) NO fixed playtime frame** — work structured by readiness (the
+  owner's «модели разные у всех, настройки тоже» — the budget an
+  OBSERVED per-deployment property, never a repo-side target; M3's
+  fixed-frame question dissolved); **(4) liveness/emergence (C24/C27)
+  stays PARKED** until sem-1/auth-1/scale-1 close — then measured,
+  never "added interestingness". NOT adopted: any second
+  truth/resolver/graph/CRDT/planner machinery (the package's own
+  rejects, all standing); any runtime promotion (core-1's gate
+  unmet). DECISIONS.md untouched — the four decisions ride their
+  concrete owners (auth-1's row, PRESENTATION_SPEC §7, this record,
+  STATUS); a D-252 family row waits for the next owner-called
+  collapse (the cap at 30, docguard-enforced). llama.cpp NOT
+  installed — R0 doc-only (the D-251 form).
+- **The sync.** TASKS.md (six rows + the core-1 amendment + the
+  ledger, iter-305 evicted), PRESENTATION_SPEC.md (§7 the owner's
+  call), AGENT_NAVIGATION.md (§1 the new `docs/analysis/` row),
+  STATUS.md, worklog.md (iter-305 evicted),
+  `docs/analysis/concept-review-2026-10/` (9 new files), the
+  iteration report. 2556 passed + 1 skipped + ruff + docguard +
+  topology --check clean (zero code, zero pack, zero canon change,
+  the LOG untouched, zero corpus price). The owner's RU report:
+  `docs/iterations/iter-315-intakeland-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

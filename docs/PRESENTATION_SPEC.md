@@ -129,11 +129,24 @@ silent). The battery's 6/8 at 9B (round 4) is the runner-ladder bound
 at its corpus beats — instrument-specific, never a live-surface
 guarantee (now measured, not warned: the live-surface rate at 9B is
 0/9 cumulative, round 6's beat included). The contract's consumer
-requirement (a narrator that answers the reply document) now resolves
-between the L12 template rung as the accepted production form (the
-beat's own chronicle lines — honest prose, never a fake document) and
-a HEAVIER arm (a 27B at Q4_K_M or above — the owner's call, the
-IQ3_XXS datum in hand). The parse door serves every measured band
+requirement (a narrator that answers the reply document) was resolved
+by the owner's 2026-10-03 call (the concept-review intake session,
+iter-315): **the L12 template rung IS the production form — the beat's
+own chronicle lines, honest prose, never a fake document** (the
+evidence: zero accepted live-surface beats across 4B/9B/12B/27B-IQ3_XXS
+— 56 beats, 168 calls; the honest ceiling acknowledged, not a quality
+refusal). The HEAVIER arm (a 27B at Q4_K_M or above) re-opens ONLY
+behind the closed contract rows (sem-1 / auth-1 / speech-1 — the
+confirmed queue, `docs/TASKS.md`), never as a parallel hope: the
+authority/grounding/speech contracts close first, then the arm
+re-measures. The owner's framing pinned alongside: the production
+shape is the simulator-side prompt contract — the snapshot/brief IR +
+the system/situation prompt (who the model is, what it does, how it
+voices the scene) — with the prose quality the MODEL's own business
+(model + settings + prompt); the L12 rung the deterministic floor,
+exactly the landed architecture (the serializer contract §2 + the
+mediator door) now the declared intent. The parse door serves every
+measured band
 (raw validity 51/51 at 4B/9B/12B/27B-IQ3_XXS, GBNF-constrained — the
 size gradient shows in the mix, never the validity). The
 one-model-constrained A/B (27B GBNF parse) — DISCHARGED round 8

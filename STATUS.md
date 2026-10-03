@@ -1,48 +1,61 @@
-Iteration: iter-314 (`q27b` — the owner's second 2026-10-03 station
-  delivery «вот результаты прогона» (`station_20261003_161523.zip`,
-  four engines at one sitting through the v2 probe — the fresh owner
-  request firing the second consecutive doc-only iteration, D-022's
-  own form; R0 doc-only, the digest form, iter-311/313 precedent):
-  the ROUND-8 RECORD — the LAST STANDING §8.5 ARM LANDED: (1) THE
-  27B ONE-MODEL RUN engine1-q27b-r8 (Qwen3.8-27B-OrcaRouter-GSQ-
-  RCO-IQ3_XXS 9.67 GiB, the tuned form: ctx 16384 · b 512/ub 256 ·
-  t 8 · --jinja · the probed draft-mtp pair · KV q8_0 · AUTO
-  placement) — raw validity 51/51 zero re-asks (the grammar's size
-  law at the fourth band); mix 31/3/17 BETWEEN e4b and q9b — the
-  caution gradient NOT monotone in size (agreement_full 14/51 the
-  highest measured); the MTP draft live (acceptance 0.41–1.00); no
-  GBNF penalty at 16K (−19.6 ms); the determinism mini ×3 + restart
-  byte-identical at the deepest ctx; the ONE battery_bug's root
-  cause NAMED (s8 c5 scene_mismatch — the pinned fixture's premise
-  drift, the SUBSTRATE HELD: no repo defect, no KI); (2) THE THREE
-  ROUND-7 BANDS RE-RUN BYTE-EQUAL (the cross-run reproducibility
-  datum — one build, one station, two sittings); (3) THE NARRATOR
-  27B ARM — 0/8 (32 beats, 96 calls, zero accepted cumulative;
-  PRESENTATION_SPEC §7: the live-surface floor above 27B at the
-  IQ3_XXS quant, the Q4_K_M caveat honest); (4) THE ROUTER
-  BIG-SWITCH ARM — 9B→27B 9.0 s at --models-max 1 (no size penalty
-  against the small swap; the wb-6 wire a third confirmation).
-  §8.5's gap rows DISCHARGED — none stand.
+Iteration: iter-315 (`intakeland` — the owner's 2026-10-03 concept-review
+  confirmation call «м4 => жесткий канон … Сейчас — L12 как
+  production-форма … по факту готовности разве нельзя работу
+  выстраивать? … принимаем все правки и строки предложенные!» (the
+  REWORKED-v2 package's intake closure; R0 doc-only, the third
+  consecutive — D-022's fresh-owner-request exception firing): THE
+  CONFIRMED CONTRACT QUEUE LANDED — six owner-confirmed TASKS rows
+  (sem-1/caus-1/replay-1/scale-1/speech-1/auth-1 — the review's T1–T7
+  adapted and collapsed: T3 folded into core-1's amended POC set, the
+  review-C ↔ core-1-C namespace fence pinned) + the package VERBATIM
+  at docs/analysis/concept-review-2026-10/ (9 files, md5
+  17cfe3f8798d0a5a0ec48aedd6c68433 — the D-242 self-containment form,
+  fourth instance) + the phases.md §6 intake record (the triage
+  verdicts: 29 contracts classified, all six code probes verified live
+  at HEAD) + THE OWNER'S FOUR DECISIONS RECORDED in their owners:
+  (1) M4 = HARD CANON — no recovery/dispute path ever for
+  wrong-but-committed model-mediated actions (INV-5's irreversibility
+  the standing form; a retcon path would need a new owner-gated design
+  — refused; pinned in auth-1's row); (2) the narrator form = the L12
+  template rung AS PRODUCTION NOW (PRESENTATION_SPEC §7 — the honest
+  ceiling after 56 beats/168 calls zero accepted across
+  4B/9B/12B/27B-IQ3_XXS; the heavier arm re-opens only behind the
+  closed contract rows, never a parallel hope; the owner's framing
+  pinned: the production shape is the simulator-side prompt contract —
+  snapshot + system/situation prompt, the prose quality the MODEL's
+  business); (3) NO fixed playtime frame — work structured by
+  readiness (models/settings differ per user; the budget an OBSERVED
+  per-deployment property, never a repo-side target — M3's fixed-frame
+  question dissolved); (4) liveness/emergence (C24/C27) stays PARKED
+  until sem-1/auth-1/scale-1 close — then measured, never "added
+  interestingness".
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2556 passed + 1 skipped, ruff clean, docguard
   clean, topology --check clean (Python 3.12.14, the env pin; R0
-  doc-only — zero code change, the substance the owner-side run's
-  evidence, the probe + the runner outside the repo, Rule 9) ·
+  doc-only — zero code change, the substance the owner-confirmed queue
+  + the four decisions) ·
 Date: 2026-10-03 ·
-Scope: docs/TECH_NOTES.md (§13 the round-8 record), docs/TEST_PLAN.md
-  (§8.5 the engine1-q27b-r8 row + the gap-rows discharge),
-  docs/PRESENTATION_SPEC.md (§7 the 27B narrator datum),
-  docs/TASKS.md (the ledger, iter-304 evicted), STATUS.md (this
-  header), worklog.md (the iter-314 entry, iter-304 evicted),
-  docs/iterations/iter-314-q27b-report.md (new — this row's RU
-  report) — 7 changed/created (6 modified + 1 created); R0
-  verification — INV-1..5 untouched, the LOG untouched, zero corpus
+Scope: docs/analysis/concept-review-2026-10/ (new — 9 files, the
+  package verbatim), docs/TASKS.md (six rows + the core-1 amendment +
+  the ledger, iter-305 evicted), docs/PRESENTATION_SPEC.md (§7 the
+  owner's L12 call), docs/blueprint/phases.md (§6 the iter-315 intake
+  record), docs/AGENT_NAVIGATION.md (§1 the docs/analysis row),
+  STATUS.md (this header), worklog.md (the iter-315 entry, iter-305
+  evicted), docs/iterations/iter-315-intakeland-report.md (new — this
+  row's RU report) — 16 changed/created (6 modified + 10 created);
+  R0 verification — INV-1..5 untouched, the LOG untouched, zero corpus
   price; NO test deleted or weakened
-Track A: the web-frontend track — S0 LANDED; the tooling floor's
-  first row + the V1/V2/V3 visual floors LANDED (iter-293/297/
+Track A: the confirmed contract queue — sem-1 (the queue's head, the
+  semantic event validity + authority contract) with caus-1 the
+  natural pair (the package's T1+T2 sequence), then replay-1 /
+  scale-1 / speech-1 / auth-1 (each its own iteration, R0–R1
+  definition first); core-1 stays PARKED (owner-gated
+  RESEARCH/POC-ONLY, its POC set now opening from the concept-review
+  package too). The web-frontend track — S0 LANDED; the tooling
+  floor's rows + the V1/V2/V3 visual floors LANDED (iter-293/297/
   304/307); Phase 3's SEVEN rows LANDED
   (iter-294/295/296/298/299/300/301) + the IA REPAIR LANDED
   (iter-297, D-247); the owner-side bands CLOSED LIVE (iter-302)
@@ -50,22 +63,16 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
   STREAMING ADMISSION LANDED (iter-305/306); THE FULL ACCEPTANCE
   MATRIX CLOSED (iter-308 — 39 verified / 2 open / 1 partial /
   2 not-exposed, zero defects); THE TOOLING FLOOR'S CI + SMOKE
-  ROWS LANDED + THE BOOT-TIME OBSERVED-SYNC LANDED (iter-309 —
-  iter-308's two OPEN rows and the §C candidate all closed; the
-  smoke NOT in CI by the owner's row spec — the owner-side/sandbox
-  `npm run e2e`); THE STANDING QUEUE DISPOSITIONED + THE DECISIONS
-  COLLAPSE LANDED (iter-310, D-250 — the 40→30 collapse with the
-  docguard section-form tooth; the B1/C4 law diffs CLOSED WITHOUT
-  DIFF — both verdicts already measured; the pixel-diff row
-  POSTPONED — a real visual-regression pipeline when a live need
-  names it, the token-guards + the live screenshots stand); the
-  next frontend rows the owner's call: the replay-UI NOT-EXPOSED
-  row; the standing boundaries: a SharedWorker stream transport,
-  Tauri, PWA, the Settings Appearance section (no persisted store)
-  — each its own admission (the import form's native file/folder
-  picker rides the Tauri row). The world track: W8's remaining
-  rows the owner's call. The ssi family COMPLETE except ssi-5,
-  owner-gated.
+  ROWS LANDED + THE BOOT-TIME OBSERVED-SYNC LANDED (iter-309);
+  THE STANDING QUEUE DISPOSITIONED + THE DECISIONS COLLAPSE LANDED
+  (iter-310, D-250); the §8.5 heartbeat ledger COMPLETE through the
+  27B band (iter-312/313/314 — the station records). The next
+  frontend rows the owner's call: the replay-UI NOT-EXPOSED row; the
+  standing boundaries: a SharedWorker stream transport, Tauri, PWA,
+  the Settings Appearance section (no persisted store) — each its own
+  admission (the import form's native file/folder picker rides the
+  Tauri row). The world track: W8's remaining rows the owner's call.
+  The ssi family COMPLETE except ssi-5, owner-gated.
 
 
 
@@ -129,37 +136,35 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-314 DONE: q27b (the owner's second 2026-10-03 station delivery
-  «вот результаты прогона» — round 8, TECH_NOTES §13).** The last
-  standing §8.5 arm LANDED: the 27B one-model run engine1-q27b-r8
-  (Qwen3.8-27B-OrcaRouter-GSQ-RCO-IQ3_XXS, the tuned form — ctx 16384
-  · b 512/ub 256 · t 8 · --jinja · the probed draft-mtp pair · KV
-  q8_0 · AUTO placement): raw validity 51/51 with zero re-asks (the
-  grammar's size law at the fourth band), mix 31/3/17 — the caution
-  gradient NOT monotone in size (agreement_full 14/51 the highest
-  measured), the MTP draft live, no GBNF penalty at 16K, the
-  determinism mini ×3 + restart byte-identical at the deepest ctx;
-  the one battery_bug's root cause NAMED (the s8 pinned fixture's
-  premise drift — scene_mismatch; the substrate HELD, no repo
-  defect); the three round-7 bands re-run BYTE-EQUAL (the cross-run
-  reproducibility datum); the narrator 27B arm 0/8 (32 beats, 96
-  calls, zero accepted cumulative — PRESENTATION_SPEC §7: the floor
-  above 27B at the IQ3_XXS quant); the router big-switch 9B→27B
-  9.0 s at --models-max 1. §8.5's gap rows DISCHARGED — none stand.
-  2556+1 + ruff + docguard + topology --check clean (R0 doc-only —
-  zero code change). The RU report:
-  docs/iterations/iter-314-q27b-report.md.
-Next: the owner's calls — (1) the narrator production-form decision
-  (PRESENTATION_SPEC §7: the L12 template rung vs a heavier arm — a
-  27B at Q4_K_M or above; the IQ3_XXS datum in hand) + the
-  probe-side fixture refinement (scene-relative fixtures or a
-  distinct premise-drift status — the round-8 root cause); (2) the
-  standing queue: the replay-UI
-  NOT-EXPOSED row and the world track's parallel rows (the queue's
-  three other rows dispositioned by the same 2026-10-03 call,
-  D-250: the collapse LANDED iter-310; B1/C4 CLOSED WITHOUT DIFF —
-  both iter-303 verdicts already measured; pixel-diff POSTPONED —
-  a real visual-regression pipeline when a live need names it).
+**iter-315 DONE: intakeland (the owner's 2026-10-03 concept-review
+  confirmation call «м4 => жесткий канон … L12 как production-форма …
+  принимаем все правки и строки предложенные!»).** The confirmed
+  contract queue LANDED: six TASKS rows (sem-1/caus-1/replay-1/
+  scale-1/speech-1/auth-1) + the core-1 amendment (the D0/D3 POC law
+  set, the namespace fence pinned) + the package verbatim at
+  docs/analysis/concept-review-2026-10/ (md5-pinned) + the phases.md
+  §6 intake record + the owner's four decisions in their owners:
+  M4 = HARD CANON (no recovery/dispute path ever — auth-1's row);
+  the narrator = L12 AS PRODUCTION NOW (PRESENTATION_SPEC §7, the
+  heavier arm re-opens only behind the closed contract rows); NO
+  fixed playtime frame (readiness-based — the budget an observed
+  per-deployment property); liveness/emergence stays PARKED until
+  sem-1/auth-1/scale-1 close. 2556+1 + ruff + docguard + topology
+  --check clean (R0 doc-only — zero code change). The RU report:
+  docs/iterations/iter-315-intakeland-report.md.
+Next: the confirmed contract queue's head — **sem-1** (the semantic
+  event validity + authority contract, review-C1/D1) with **caus-1**
+  the natural pair (the package's T1+T2 sequence; each its own
+  iteration, R0–R1 definition first, the cheapest falsifier with
+  it); then replay-1 → scale-1 → speech-1 → auth-1; M2 (the claims
+  normalisation A/B) the next measurement battery when the owner
+  calls it — station-side, never a repo row; the standing queue's
+  other owner calls preserved: the replay-UI NOT-EXPOSED row and the
+  world track's rows (the queue's three other rows dispositioned by
+  the same 2026-10-03 call, D-250: the collapse LANDED iter-310;
+  B1/C4 CLOSED WITHOUT DIFF — both iter-303 verdicts already
+  measured; pixel-diff POSTPONED — a real visual-regression
+  pipeline when a live need names it).
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns
@@ -208,22 +213,18 @@ Next: the owner's calls — (1) the narrator production-form decision
    awareness, the session/preset persistence layers,
    LLAMA_CPP_INFERENCE_CONTROL_LAW §21). The exported-Windows-build
    row parked per AGENTS §2.4 — a named row when the owner calls it.
-3. The remaining station rows (OWNER-SIDE HARDWARE: the 27B GBNF parse
-   arm + the one-model-constrained A/B, CONTRACTS §4.3 arm a — NOT in
-   the round-7 delivery, no 27B model present; the landed split
-   instrument ready to reuse at the owner's GPU station);
-   DISCHARGED iter-313 (round 7 — the owner's 2026-10-03 station
-   delivery): the three full-column station rows (engine1-e4b-r7 /
-   -q9b-r7 / -px12b-r7, TEST_PLAN §8.5) + the narrator call's Q9B
-   side (0/8 at every band — the live-surface floor above 12B,
-   PRESENTATION_SPEC §7 re-scoped; the remaining arms: the 27B
-   one-model run OR the L12 template rung as the accepted production
-   form — the owner's call; bg-9's mapping-drift datum rides the same
-   decision); DISCHARGED iter-312: the brief/parse component split
-   (the engine1-q1p7b row) + the wb-6 live re-verification (now
-   cross-build: b11064 + b11337, TECH_NOTES §13's round-7 record);
-   GET /models/sse the observed load-progress surface — a candidate
-   row when a live consumer names it).
+3. The station side: §8.5's ledger COMPLETE through the 27B band
+   (iter-312/313/314 — the split instrument, the three round-7 rows,
+   the 27B one-model run, the narrator arms, the cross-run
+   reproducibility datum); the narrator production-form DECIDED
+   2026-10-03 (L12 the production form — PRESENTATION_SPEC §7; the
+   heavier arm gated behind the contract rows). The remaining owner
+   calls: the probe-side fixture refinement (scene-relative fixtures
+   or a distinct premise-drift status — the round-8 root cause) and
+   M2 (the surface→canonical-ID normalisation A/B — a station
+   battery, the motivating data the agreement columns, full never
+   above 15/51); GET /models/sse the observed load-progress surface —
+   a candidate row when a live consumer names it.
 4. The standing frames: the embodiment options (§6.4 → §6.1 → §6.5 →
    §6.2 per the owner's 2026-09-27 order; §6.3 closed iter-204..210,
    its fill row removed), the debt-1 residues, the re-weigh's SALE,
