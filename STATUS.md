@@ -1,104 +1,89 @@
-Iteration: iter-319 (`scale1` — the queue's head, the owner's
-  «продолжай работу прошлой итерации, со scale-1 как я понимаю,
-  и так далее» call; E1..E6 ACCEPTED AS LAW the same call — §8's
-  note, the implementation rows stay the owner's separate calls):
-  THE SCALE-1 CONTRACT LANDED — the causal-demand locality + work
-  budget + certified commutativity definition (review-C5/C6/C16/C28/
-  D5+D6) at CONTRACTS.md §9, zero engine change: seven pinned
-  decisions (Q1 the three work classes LOCAL/REGIONAL/GLOBAL
-  classified by CAUSAL DEMAND, declared per mechanism, never
-  implementation shape — the implementation MEETS the class's
-  complexity obligation or the gap is recorded; Q2 the work budget
-  explicit and per-origin — exhaustion DEFERS as semantic debt
-  through the standing queue forms, never silently drops; the
-  DUE-WORK-vs-ATTEMPT split pinned (a decay with a non-zero delta /
-  a scheduled completion / a seeded follow-up NEVER vanish — an
-  urgency miss is canon-noise, PARSER_SPEC §4/§6); Q3 the canonical
-  order `(tick, sub_order, actor_id, seq)` STANDS — no scheduler
-  machinery, the build-time system-pass schedule stays the only
-  scheduling authority; Q4 a parallel cohort only with a BUILD-TIME
-  mechanical commutativity certificate (disjoint writes, reads not
-  intersecting the cohort's writes — SystemDecl the substrate), the
-  log still records canonical order; no CRDT/MVCC; Q5 the
-  measurement `world size × fan-out × operation → inspected/
-  candidate/committed + wall time` as the admission instrument — any
-  runtime-promotion claim carries the battery at ≥2 world sizes
-  naming the native limit (D-11 executable); Q6 locality NEVER
-  changes semantics — byte-identical canon (T1), the depth-3 LOD /
-  the decay interval law / `_last_change` the standing exemplars;
-  Q7 the four measured gap targets) + THE FALSIFIER RUN LIVE (the
-  REAL core functions over the real tavern config with synthetic
-  scaled worlds, seed 4242, the probe outside the repo per Rule 9,
-  artifacts md5-pinned: Arm A the beat's LOCAL demand pays pack-wide
-  walks and O(|log|)/O(knowledge) folds — `live_leverage` walks the
-  whole log TWICE (32,002 iterations at |log|=16k, 5.9 ms/beat),
-  decay 1,248 map reads at N=384 for 80 zone commits; Arm B the
-  spread pass's REGIONAL demand (one burning location) scans the
-  WHOLE projection per pass tick — 1,053 reads at L=320, flat in
-  fan-out while committed is S-shaped — review-C5's «hot paths scan
-  pack-wide collections before filtering» measured exact; Arm C NO
-  work budget exists anywhere in the tick loop (384 drafts in one
-  uncapped beat), gated urgency attempts vanish with zero trace
-  (the noise-floor law live), the three deferral surfaces
-  (pass continuation / SEEDED follow-ups / the director buffer)
-  unbounded and unaccounted) + the CONTRACTS cap pass riding (§5's
-  wb family collapsed to the pointer form per the file's own law +
-  D-024, 589→494; §9 lands the file at 636 — the fifth contract
-  crossed the ceiling after the cruft passes: the file STANDS OVER
-  with the docguard allowlist entry + this worklog entry the §6.1
-  rationale owners, the file's own header notes it); the future
-  implementation row's minimal test set pinned; the implementation
-  NOT a row — the owner opens it after accepting the contract (the
-  runtime-promotion gate).
+Iteration: iter-321 (`auth1` — the queue's LAST row, opened by the
+  owner's «Продолжай очередь с speech-1 и так далее» continuation
+  call; Q1–Q7 ACCEPTED AS LAW the same call — §9's note): THE
+  AUTH-1 CONTRACT LANDED — the intent / agency / director boundary
+  definition (review-C11/C12/C20 + M4's vocabulary/D7–D9) at
+  CONTRACTS.md §11, zero code change: seven pinned decisions (A1
+  the pipeline input → interpretation → classification →
+  authorization → execution, each stage with its live carrier; A2
+  valid ≠ authorized — the three DISTINCT axes: malformed loud /
+  world-impossible the committed `intent_rejected` attempt-fact /
+  valid+authorized the INV-5-immutable event; A3 the INPUT-side
+  authority classes player|NPC|director|system|pack with the S3
+  emit-side fence; A4 ambiguity collapses ONLY on equivalent
+  canonical effect surfaces — the question alternative the clarify
+  path, NO global confidence score; A5 the D7 invariant
+  `DirectorOutput ⊆ EligibleConsequences` — the eligible set IS
+  the seeded-hook buffer, the release paths only SELECT, the
+  mutation probe's standing form; A6 bounded deterministic agency
+  where a named consumer needs it — no generic planner, no LLM
+  planner; A7 the M4 vocabulary instruction / proposal / authority
+  / realised intervention / canonical consequence + HARD CANON —
+  THE OWNER'S 2026-10-03 DECISION: no recovery/dispute path EVER
+  for wrong-but-committed model-mediated actions, the correction
+  form a NEW event, a retcon path REFUSED) + THE FALSIFIER RUN
+  LIVE (the REAL Simulator / Mediator / ParserDoor / intent door /
+  director / writer over the real tavern pack, seeds 42 + 8 (the
+  day1 corpus), the probe outside the repo per Rule 9, artifacts
+  md5-pinned: Arm A the three axes — the world-impossible talk →
+  `intent_rejected` committed ev_0006 with zero state changes, the
+  unknown kind → the loud RunnerError at ZERO events, the valid
+  move → committed, the confidence machinery 0 hits; Arm B the
+  authority + D7 + M4 — the guard's actor reply proposing the
+  player's talk WITHDRAWN at the caller gate (0 fed, the note
+  riding the player's next call), the eligibility set enumerated
+  (5 seeded instances) + no release-by-tag API, the invented
+  `spawn_dragon` refused loud at the door, the writer's surface
+  append/close only with 0 retcon hits; Arm C the question
+  alternative surfaced at zero events, the collapse machinery 0
+  hits). THE QUEUE IS NOW EMPTY — all six contracts landed.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2557 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R0/R1 doc + probe +
-  one R1 guard-table entry — zero engine change, INV-1..5
-  untouched) ·
-Date: 2026-10-03 ·
-Scope: docs/CONTRACTS.md (§9 new — the scale-1 contract; §5 the cap
-  pass collapse; the header's standing-over note), scripts/
-  docguard.py (the ALLOWLIST entry for CONTRACTS.md — the §6.1
-  standing over-cap state, one data-table row), docs/TASKS.md
-  (scale-1 DONE + the ledger, iter-309 evicted), STATUS.md (this
-  header), worklog.md (the iter-319 entry, iter-309 evicted),
-  docs/iterations/iter-319-scale1-report.md (new — this row's RU
-  report) — 6 changed/created (5 modified + 1 created; the §2.3
-  soft-limit note: the docguard entry rides the cap pass, same file
-  family as CONTRACTS) — R0/R1 verification: the probe's exact
-  counting proxies over the real engine functions (no corpus
-  touched, the LOG untouched, zero corpus price); NO test deleted
-  or weakened (the docguard table entry ADDS a guard state, the 18
-  docguard tests green).
+  --check clean (Python 3.12.14, the env pin; R0/R1 doc + probe —
+  zero code change, INV-1..5 untouched, the LOG untouched, zero
+  corpus price; NO test deleted or weakened) ·
+Date: 2026-10-04 ·
+Scope: docs/CONTRACTS.md (§11 new — the auth-1 contract; 929 lines
+  over-cap-allowed, the registry's seven definitions the standing
+  shape), scripts/docguard.py (the ALLOWLIST rationale update),
+  docs/TASKS.md (auth-1 DONE + the ledger, iter-311 evicted),
+  STATUS.md (this header), worklog.md (the iter-321 entry, iter-311
+  evicted), docs/iterations/iter-321-auth1-report.md (new — this
+  row's RU report) — 6 changed/created (5 modified + 1 created; the
+  §2.3 soft-limit note: the docguard entry rides the iter-320 cap
+  pass's family form).
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
-  DONE (iter-318) + scale-1 DONE (iter-319 — FOUR of the queue's six
-  contracts landed; S1–S7, K1–K6 and E1..E6 owner-accepted AS LAW
-  2026-10-03) ; speech-1 the queue's head NOW, then auth-1 (each its
-  own iteration, R0–R1 definition first, the cheapest falsifier with
-  it); core-1 stays PARKED (owner-gated RESEARCH/POC-ONLY, its POC
-  set now opening from the concept-review package too — scale-1's
-  Q5/Q6 map onto its C2/C3/C5 surfaces through the pinned namespace
-  fence). The web-frontend track — S0 LANDED; floor's rows + the
-  V1/V2/V3 visual floors LANDED (iter-293/297/304/307); Phase 3's
-  SEVEN rows LANDED (iter-294/295/296/298/299/300/301) + the IA
-  REPAIR LANDED (iter-297, D-247); the owner-side bands CLOSED LIVE
-  (iter-302) and RE-CLOSED LIVE inside the matrix session (iter-308);
-  THE STREAMING ADMISSION LANDED (iter-305/306); THE FULL ACCEPTANCE
+  DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
+  (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
+  contracts LANDED; S1–S7, K1–K6, E1..E6 and Q1–Q7 owner-accepted
+  AS LAW 2026-10-03 (P1..P7 and A1..A7 await the owner's next
+  acceptance call); the implementation rows are NOT standing rows —
+  each opens on the owner's separate call behind the
+  runtime-promotion gate; core-1 stays PARKED (owner-gated
+  RESEARCH/POC-ONLY — scale-1's Q5/Q6 map onto its C2/C3/C5
+  surfaces, speech-1's P3/P4 and auth-1's A5 onto its C4, through
+  the pinned namespace fence). The web-frontend track — S0 LANDED;
+  floor's rows + the V1/V2/V3 visual floors LANDED
+  (iter-293/297/304/307); Phase 3's SEVEN rows LANDED
+  (iter-294/295/296/298/299/300/301) + the IA REPAIR LANDED
+  (iter-297, D-247); the owner-side bands CLOSED LIVE (iter-302)
+  and RE-CLOSED LIVE inside the matrix session (iter-308); THE
+  STREAMING ADMISSION LANDED (iter-305/306); THE FULL ACCEPTANCE
   MATRIX CLOSED (iter-308 — 39 verified / 2 open / 1 partial / 2
   not-exposed, zero defects); THE TOOLING FLOOR'S CI + SMOKE ROWS
   LANDED + THE BOOT-TIME OBSERVED-SYNC LANDED (iter-309); THE
   STANDING QUEUE DISPOSITIONED + THE DECISIONS COLLAPSE LANDED
   (iter-310, D-250); the §8.5 heartbeat ledger COMPLETE through the
   27B band (iter-312/313/314 — the station records). The next
-  frontend rows the owner's call: the replay-UI NOT-EXPOSED row; the
-  standing boundaries: a SharedWorker stream transport, Tauri, PWA,
-  the Settings Appearance section (no persisted store) — each its own
-  admission (the import form's native file/folder picker rides the
-  Tauri row). The world track: W8's remaining rows the owner's call.
-  The ssi family COMPLETE except ssi-5, owner-gated.
+  frontend rows the owner's call: the replay-UI NOT-EXPOSED row;
+  the standing boundaries: a SharedWorker stream transport, Tauri,
+  PWA, the Settings Appearance section (no persisted store) — each
+  its own admission (the import form's native file/folder picker
+  rides the Tauri row). The world track: W8's remaining rows the
+  owner's call. The ssi family COMPLETE except ssi-5, owner-gated.
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -156,45 +141,42 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-319 DONE: scale1 (the owner's «продолжай работу прошлой
-  итерации, со scale-1 как я понимаю, и так далее» call — E1..E6
-  ACCEPTED AS LAW the same call).** The scale-1 CONTRACT LANDED at
-  CONTRACTS.md §9 (review-C5/C6/C16/C28/D5+D6, R0/R1): the seven
-  pinned decisions Q1..Q7 (the three work classes by causal demand /
-  the explicit budget — exhaustion defers as semantic debt, the
-  due-work-vs-attempt split / the canonical order stands / the
-  cohort's build-time commutativity certificate / the measurement
-  tuple as the admission instrument / locality = byte-identical
-  canon / the four measured gaps) + THE FALSIFIER RUN LIVE (the real
-  core functions over the real tavern config, synthetic scaled
-  worlds, seed 4242: Arm A the beat's LOCAL demand pays pack-wide
-  walks and O(|log|) folds — leverage 32,002 iterations at
-  |log|=16k; Arm B the spread pass scans the WHOLE projection for
-  ONE burning location — 1,053 reads at L=320; Arm C no work budget
-  exists, gated attempts vanish silently, the three deferral
-  surfaces unbounded; the probe outside the repo per Rule 9,
-  artifacts md5-pinned) + the CONTRACTS cap pass riding (§5's family
-  collapse 589→494; the file stands over at 636 with the guard's
-  allowlist entry — §6.1's own law, this worklog the rationale
-  owner). Four of the queue's six contracts landed. 2557+1 + ruff +
-  docguard + topology --check clean. The RU report:
-  docs/iterations/iter-319-scale1-report.md.
-Next: **speech-1** (the typed speech-act channel contract,
-  review-C8/C9/C10/C25/C26/D10, narrowed to the open residue —
-  R0–R1 definition first, the cheapest falsifier with it: the
-  channels enumerated; free prose never canon; a typed speech act
-  enters canon only through normal simulator admission; grounding
-  scoped to atomic externally-testable assertions; the epistemic
-  scope law; the explicit forgetting vocabulary; the closed halves
-  referenced, never restated) — then auth-1; M2 (the claims
-  normalisation A/B) the next measurement battery when the owner
-  calls it — station-side, never a repo row; the standing queue's
-  other owner calls preserved: the replay-UI NOT-EXPOSED row and the
-  world track's rows (the queue's three other rows dispositioned by
-  the same 2026-10-03 call, D-250: the collapse LANDED iter-310;
-  B1/C4 CLOSED WITHOUT DIFF — both iter-303 verdicts already
-  measured; pixel-diff POSTPONED — a real visual-regression pipeline
-  when a live need names it).
+**iter-321 DONE: auth1 (the queue's LAST row, opened by the owner's
+  «Продолжай очередь с speech-1 и так далее» continuation).** The
+  auth-1 CONTRACT LANDED at CONTRACTS.md §11 (review-C11/C12/C20 +
+  M4's vocabulary/D7–D9, R0/R1): the seven pinned decisions A1..A7
+  (the pipeline's five stages with live carriers / valid ≠
+  authorized — the three axes / the INPUT-side authority classes
+  with the S3 fence / ambiguity by effect-equivalence, no
+  confidence score / the D7 director invariant — the eligible set
+  IS the seeded buffer / bounded deterministic agency / the M4
+  vocabulary + HARD CANON — the owner's 2026-10-03 decision) + THE
+  FALSIFIER RUN LIVE (the REAL Simulator/Mediator/ParserDoor/door/
+  director/writer, seeds 42+8: Arm A the three axes live — the
+  intent_rejected attempt-fact, the loud malformed at zero events,
+  the committed valid; Arm B the caller gate WITHDRAWN the
+  foreign-actor proposal, the eligibility set enumerated, the
+  invented kind refused loud, the writer append-only; Arm C the
+  question surfaced at zero events; the probe outside the repo per
+  Rule 9, artifacts md5-pinned). THE QUEUE IS NOW EMPTY — all six
+  contracts of the confirmed 2026-10-03 queue landed (sem/caus/
+  replay/scale/speech/auth); P1..P7 and A1..A7 await the owner's
+  next acceptance call, the implementation rows stay owner-gated.
+  2557+1 + ruff + docguard + topology --check clean. The RU report:
+  docs/iterations/iter-321-auth1-report.md.
+Next: THE OWNER'S CALLS (the confirmed queue discharged): (1) the
+  acceptance calls for speech-1 (P1..P7) and auth-1 (A1..A7) — AS
+  LAW or amended; (2) the implementation rows — each opens
+  separately behind the runtime-promotion gate (a named consumer +
+  a measured native limit + the falsifier already pinned); (3) M2
+  (the surface→canonical-ID normalisation A/B) the next
+  measurement battery when the owner calls it — station-side,
+  never a repo row; (4) the standing owner calls preserved: the
+  replay-UI NOT-EXPOSED row, the world track's rows, the CONTRACTS
+  registry's standing-over disposition (the per-contract split vs
+  the accepted standing form — the iter-320 report §G options);
+  (5) the probe-side fixture refinement (scene-relative fixtures
+  or a distinct premise-drift status) when the owner calls it.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns

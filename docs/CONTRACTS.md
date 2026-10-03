@@ -17,8 +17,15 @@
 > pointer. Cap-law: `docs/*.md` ≤600 lines, substance-filtered
 > (AGENTS §6.1); the fifth contract (§9, iter-319) crossed the
 > ceiling after the cruft passes — the file stands over with the
-> guard's allowlist entry + worklog iter-319 the rationale owners
-> (§6.1's own law: the file stays over, the worklog records why).
+> guard's allowlist entry + the worklog rationale owners (§6.1's own
+> law: the file stays over, the worklog records why). iter-320's cap
+> pass: the §6..§9 falsifier RECORDS collapsed to the pointer form
+> (the verbatim numbers + md5 pins live in the iteration reports —
+> D-024's single owner); the new sections land natively in that form;
+> the decisions themselves are never-cut substance (owner-accepted
+> law). iter-321 lands §11 the same way — the registry's seven
+> definitions are the standing shape; a per-contract split is the
+> owner's call, never a silent restructure.
 
 ## 1. roads-1 — LANDED (iter-145, D-178)
 
@@ -217,20 +224,18 @@ code side carries no domain words — pack data carries them); L13/L14
 (one check at one door — no new layer, no framework).
 
 **Falsifier** (TEST_PLAN §9's packet form — the future implementation
-row's first RED test; run LIVE at iter-316: seed 42, the
-plumbing_smoke playscript, the probe script outside the repo per Rule 9,
-the artifact md5 `228ea08bff9b87afc9761d34bb704071`): mutate a captured
-producer output to stay schema-valid + delta-consistent + chain-valid
-while violating the declared authority/effect → the gate MUST go RED,
-no append. Both arms APPEND today (the gap demonstrated live): **Arm
-A** (effect surface) — a real `wait` producer output (declared surface:
-NO state changes) + an added `pc_01.position` teleport to a
-non-adjacent location (from_ = the live projection, so the D-035 delta
-gate passes) → appended `ev_0011`; **Arm B** (authority) — a producer
-output re-typed `year_turns` (declared actor `world`) with actor
-`pc_01` → appended `ev_0012`; the polluted log then FOLDS CLEANLY (T2
-holds — `pc_01.position` == the teleported value): a schema-valid log
-encoding an unauthorized semantic effect, exactly review-C1's risk.
+row's first RED test; run LIVE at iter-316, seed 42, the
+plumbing_smoke playscript, the probe outside the repo per Rule 9):
+mutate a captured producer output to stay schema-valid +
+delta-consistent + chain-valid while violating the declared
+authority/effect → the gate MUST go RED, no append. Both arms APPEND
+today (the gap demonstrated live): Arm A (effect surface) the `wait`
+output + a `pc_01.position` teleport → `ev_0011`; Arm B (authority)
+the re-typed `year_turns` with actor `pc_01` → `ev_0012`; the
+polluted log folds cleanly — a schema-valid log encoding an
+unauthorized semantic effect, exactly review-C1's risk. The verbatim
+probe output + the artifact md5 pins: the iter-316 report §D (the
+record's single owner, D-024 — collapsed at iter-320's cap pass).
 
 **Minimal test set** (the implementation row's, not today's): the two
 falsifier arms RED→GREEN with NO append; the positive control — every
@@ -322,22 +327,20 @@ the namespace fence: review-C1 ≠ TASKS::core-1 C4).
   limit + the falsifier).
 
 **Falsifier** (TEST_PLAN §9's packet form — the future implementation
-row's first RED test; run LIVE at iter-317: seed 8, the day1 theft
-scenario's own steps + one inserted perception step, the probe script
-outside the repo per Rule 9; artifacts md5 base `947adfb5358984f76e21
-f5feb4208789` / ablate-move `ce05d72bb60ef4e94c5bf1d50ba59349` /
-ablate-look `26d5e6a11c0ec032d0d2d1a0a0052a10`): the same-seed
-ablation pair demonstrates BOTH directions AND the gap — BASE: the
-steal outcome `ev_0007` (type `steal`, the purse carrier delta) names
-as its `cause` the CHRONOLOGICAL predecessor `ev_0006`
-(`look_around`), while the materially-REQUIRED `ev_0005` (the move to
-the tavern — without which the steal is world-impossible) is
-INDISTINGUISHABLE from the look in the outcome's own fields: the
-necessity is real, measurable, and UNRECORDED (review-C2's risk —
-"tree-like reduction can erase conditions required for the outcome").
-ABLATE-MOVE: zero steal-family outcomes, three `intent_rejected` —
-the outcome unreachable (necessity). ABLATE-LOOK: the steal still
-fires — the outcome reachable (evidence, not necessity).
+row's first RED test; run LIVE at iter-317, seed 8, the day1 theft
+scenario + one inserted perception step, the probe outside the repo
+per Rule 9): the same-seed ablation pair demonstrates BOTH directions
+AND the gap — BASE: the steal outcome `ev_0007` names as its `cause`
+the CHRONOLOGICAL predecessor `ev_0006` (`look_around`) while the
+materially-REQUIRED move `ev_0005` (without which the steal is
+world-impossible) is INDISTINGUISHABLE in the outcome's own fields:
+the necessity real, measurable, UNRECORDED (review-C2's risk —
+"tree-like reduction can erase conditions required for the
+outcome"). ABLATE-MOVE: zero steal-family outcomes, three
+`intent_rejected` — the outcome unreachable (necessity). ABLATE-LOOK:
+the steal still fires (evidence, not necessity). The verbatim probe
+output + the artifact md5 pins: the iter-317 report §D (the record's
+single owner, D-024 — collapsed at iter-320's cap pass).
 
 **Minimal test set** (the implementation row's, not today's): the
 ablation battery over the committed corpus — every declared support
@@ -458,26 +461,20 @@ attribution families (the spine EXTENDS them, never merges).
   business — durable is never claimed on flush alone.
 
 **Falsifier** (TEST_PLAN §9's packet form; run LIVE at iter-318 — the
-probe outside the repo per Rule 9, the `test_resume` corpus: seed 42,
-move/steal/wait-760/move, split after step 2; artifacts md5 probe
-`52cba69fcca1040fb4f0c19053293c99` / control log `6cc1e753…` / drift
-log `c496695d…`). CONTROL — the standing law holds: split+resume
-(same pack) is byte-identical to the uninterrupted run (24 events,
-identical md5) — the falsifier targets the GAPS, never the law.
-**Arm A** (pack content drift): a rules.json content mutation (the
-beat cadence `[360,720,1080] → [100,200,300]`) with `name@version`
-UNCHANGED — resume ACCEPTED (no refusal: cursor.pack == header.pack ==
-pack.name_version, all `tavern_pack@0.1`), the shared 7-event prefix
-identical, then the tails DIVERGE from the first appended event
-(control: `watch_change…`, 17 tail events; drift: `status_decayed…`,
-23) — the SAME identity as far as any carrier can see continued into
-a DIFFERENT future execution (review-C4's risk, live). **Arm B**
-(engine identity decorative): the header's commit `0000000`;
-`Simulator.resume` never reads `header["commit"]`; resume with
-commit=`deadbee2` accepted silently — recorded, never checked. **Arm
-C** (flush ≠ durable): the writer's 0 fsync / 3 flush(); a torn tail
-→ LOUD LogError (this arm FOUND KI#111 pre-fix); a lost pre-pin tail
-(log 6 events, cursor pins 7) → LOUD CursorError.
+test_resume corpus, seed 42, split after step 2, the probe outside
+the repo per Rule 9): CONTROL — split+resume (same pack)
+byte-identical to the uninterrupted run — the falsifier targets the
+GAPS, never the law. Arm A (pack content drift): a rules.json content
+mutation with `name@version` UNCHANGED — resume ACCEPTED, the tails
+diverge from the first appended event — the SAME identity as far as
+any carrier can see continued into a DIFFERENT future execution
+(review-C4's risk, live). Arm B (engine identity decorative): the
+header's commit never read by `Simulator.resume` — recorded, never
+checked. Arm C (flush ≠ durable): the writer's 0 fsync / 3 flush(); a
+torn tail → LOUD LogError (found KI#111 pre-fix); a lost pre-pin
+tail → LOUD CursorError. The verbatim probe output + the artifact
+md5 pins: the iter-318 report §D (the record's single owner, D-024 —
+collapsed at iter-320's cap pass).
 
 **Minimal test set** (the implementation row's, not today's — KI#111's
 closed torn-tail test excepted): the identity-gate RED arms — a
@@ -601,25 +598,20 @@ call.
 
 **Falsifier** (TEST_PLAN §9's packet form; run LIVE at iter-319 — the
 REAL `core/` functions over the real tavern config with synthetic
-scaled worlds, the probe outside the repo per Rule 9; the verbatim
-output: the iter-319 report §D; artifacts md5 probe
-`16aec5e51b113aa5b09c2a3e6d6c4ad3` / measurements
-`e0aca20bfd4ece99626550dce27b74bc` / output
-`b7f07857cbb06987c120a7a214a9c6ff`): ARM A — the beat's LOCAL demand
-pays pack-wide walks and O(|log|)/O(knowledge) folds (decay: inspected
-36→1,248 at N=6→384, commits 4→80; leverage 502→32,002; echo 180→2,880;
-urgency 10→197 entries walked). ARM B — the spread pass: B1 the world
-axis (inspected 108→1,053 at L=5→320 for ONE burning location —
-REGIONAL demand at GLOBAL cost, review-C5's "hot paths scan pack-wide
-collections before filtering" measured exact); B2 the fan-out axis
-(chance 1.0 probe-side: committed 3→24 = S, inspected ~flat — the
-measurement discriminates both directions). ARM C — the
+scaled worlds, seed 4242, the probe outside the repo per Rule 9):
+ARM A — the beat's LOCAL demand pays pack-wide walks and O(|log|)/
+O(knowledge) folds (decay: inspected 36→1,248 at N=6→384, commits
+4→80; leverage 502→32,002; echo 180→2,880; urgency 10→197 entries
+walked). ARM B — the spread pass: B1 the world axis (inspected
+108→1,053 at L=5→320 for ONE burning location — REGIONAL demand at
+GLOBAL cost, review-C5 measured exact); B2 the fan-out axis (chance
+1.0 probe-side: committed 3→24 = S, inspected ~flat). ARM C — the
 budget/deferral inventory: C1 101 gated-off urgency entries → 0
-intents, 0 events, 0 deferrals (the noise-floor law live — an
-attempt, never due work); C2 the uncapped beat (384 drafts in one
-beat, the full O(N) paid every beat — no budget, no cap, no defer);
-C3 the deferral exemplars live (`ignite` → `['smoke','burnout']` +
-seed_pass; `spread_tick` → continue_pass — unbounded, unaccounted).
+intents, 0 events, 0 deferrals (the noise-floor law live); C2 the
+uncapped beat (384 drafts in one beat); C3 the deferral exemplars
+live (unbounded, unaccounted). The verbatim probe output + the
+artifact md5 pins: the iter-319 report §D (the record's single
+owner, D-024 — collapsed at iter-320's cap pass).
 
 **Minimal test set** (the implementation row's, not today's): the Q5
 battery as a committed counting-proxy harness (inspected/candidate/
@@ -636,3 +628,304 @@ cache, no budget counter, no cohort machinery, no CRDT/MVCC, no
 second scheduler (the queue stands); no pack or schema change; the
 class declarations (Q1's per-mechanism map) ride the implementation
 row's pack-data design — never this definition.
+
+## 10. speech-1 — the typed speech-act channel contract (review-C8/C9/C10/C25/C26/D10; the DEFINITION landed iter-320)
+
+> Owner-confirmed 2026-10-03 (iter-315's queue — the T6 row, the
+> queue's head after the owner's «Продолжай очередь с speech-1 и так
+> далее» call; Q1–Q7 accepted AS LAW the same call, §9's note). R0–R1
+> definition only: NOTHING here is implemented — no channel code, no
+> freeze machinery, no forgetting vocabulary, no mediator rewrite (the
+> row's own law). The implementation is NOT a standing row — the
+> owner opens it after accepting this contract (the runtime-promotion
+> gate).
+
+**Pinned decisions** (each grounded in standing code or law):
+
+- **P1 — the channel enumeration, six channels, each with its live
+  carrier.** (1) CANONICAL FACT — the committed event log (INV-1:
+  state_changes + the knowledge/hook blocks; the writer the only
+  canon-write path). (2) KNOWLEDGE-BELIEF — the per-knower records
+  (L3: `who/channel/fidelity/knows/at` + the writer-stamped `source`;
+  the channel enum `saw|heard|told|inferred`, EVENT_SCHEMA §3; the
+  fidelity chain `exact|partial|vague`). (3) PERCEPTION — the
+  ACQUISITION FACE of (2), never a second store: the visibility
+  model (`rules.json::position_visibility` — sight same-location,
+  hearing adjacent-vague) + the action knowledge templates
+  (actions.json `knowledge` blocks) MINT the saw/heard records.
+  (4) STRUCTURED SPEECH ACT — a TYPED act through the intent door:
+  the pack's action grammar (talk/coerce/document_check/ramble —
+  social language as pack data, INV-3), the mode-C parser's `intent`
+  alternative (PARSER_SPEC §4), the mediator's IntentProposal
+  (VALIDATION_SPEC §3) — the ONLY social-language-to-canon route.
+  (5) NARRATION — the mediator's prose + the chronicle/tracery
+  render (read-side; the L12 production form, PRESENTATION_SPEC §7;
+  D-049's quarantine). (6) DIAGNOSTIC TRACE — the metrics/
+  observatory/chronicle artifacts (derived, rebuildable, never
+  canon). Measured live: the committed logs' observed channels
+  {saw, told} ⊂ the enum.
+- **P2 — free prose never canon (C25/D10).** The prose field is
+  display-only by construction: the response document is CLOSED
+  (`{prose, texture_delta?, proposal?}` — the unknown-key gate), the
+  parser's `question`/`no_intent` alternatives surface and feed
+  nothing (PARSER_SPEC §4), and the prose's world-assertions are
+  CHECKED against canon (the claims, P5) — never imported by it.
+  Measured live (Arm B1): a prose-only document asserting a world
+  change → accepted, ZERO events, the knowledge index unchanged.
+- **P3 — the promotion path (D10's pipeline, mapped): free-form
+  prose → candidate structure → normal authorization → semantic
+  validation → canonical event.** The candidate structure is the
+  CLOSED document family (IntentProposal / the parser intent — both
+  the INTENT_SCHEMA §2 grammar); authorization is the intent door
+  (`validate_shape`, the preconditions, the OCC
+  `based_on_event_seq`); semantic validation is the resolver circuit
+  (S1's law — the sole semantic owner); the canonical event is
+  `_commit`'s append. A typed speech act enters canon ONLY through
+  this normal admission — never a second door, never a prose import;
+  the mode-C parser path and the mode-A/B mediator path are two
+  entrances of the SAME door (INTENT_SCHEMA §9's conversion). auth-1
+  (D9) owns the INPUT-side pipeline vocabulary; speech-1 pins the
+  CHANNEL laws — the two never contradict (the S3 fence's twin).
+  Measured live (Arm B2): the content B1's prose carried, typed as
+  a `talk` intent → the door commits (`talk` + the telling
+  reaction's `rumor_told` — two canonical facts from one typed
+  act).
+- **P4 — channel isolation: an admitted structured act is FROZEN
+  against presentation retries (C8); today the boundary is ABSENT —
+  the measured gap.** The law for the future row: a
+  PRESENTATION-side defect (prose shape, the invented-entity floor,
+  a contradicted prose claim) must never invalidate, mutate, or
+  silently reopen an already-admitted structured act — the
+  presentation retries the presentation; conversely a structured-act
+  refusal never touches canon (the prose was never canon, P2). TODAY
+  (measured, Arm A): the response document is monolithic — an empty
+  prose kills the delta+proposal at the parse gate (A1:
+  NarratorError, the structured half never reaches its gates); a
+  contradicted prose claim regens the WHOLE exchange, the valid
+  intents half dying with ZERO trace (A2: 0 events, 0 withdrawal
+  notes, 0 deferral records), the re-delivered document free to
+  carry a different structured half (no freeze constraint); the
+  accepted delta items staying applied across regens (the gateway's
+  idempotent duplicate rule) is the one standing partial-survival
+  exemplar. Freeze machinery: 0 hits (A3).
+- **P5 — grounding scoped to ATOMIC externally-testable assertions
+  (C9); the closed halves referenced, never restated.** The claim
+  kinds are the closed set `state|knowledge|event` (VALIDATION_SPEC
+  §3 — additive kinds a spec edit, never silent); verdicts run
+  against CURRENT canon (the honest-verdict law, §4); the prose-side
+  twins: the invented-entity floor (§2.1) and the lowercase
+  assertion surface (`relation_attribute_tokens` — a measurement
+  export, never a gate, D-096). What the vocabulary cannot express
+  it does not ground: metaphors, tone, word-by-word token grounding
+  are OUT OF SCOPE by construction — the refusal is the
+  vocabulary's shape, never a per-prose judgment.
+- **P6 — the epistemic scope law: four scopes; dramatic irony is a
+  READ-side composition, never a write-side fact (C26).** ACTOR —
+  the per-knower records only (the fold IS the memory,
+  `records_of`); the acceptance roll reads only the listener's own
+  trust + the teller's own status (EPIST-1, the Influence
+  Boundary); a record the knower does not hold can never render in
+  their brief (mode B's leak surface, by construction). PLAYER —
+  the mode-A brief's bytes. NARRATOR — the call document, nothing
+  beyond (D-049); the prose may only assert what the document
+  carried (P5's checks enforce it). DEBUG — the observatory/
+  chronicle read-side: everything visible, nothing writable.
+  Dramatic irony lives ONLY in the debug/read composition (a reader
+  seeing several scopes at once); NO canon channel ever mixes
+  scopes — an NPC never draws on another's records, the narrator
+  never sees past the document, the fold never mints cross-knower.
+  Measured live (Arm C1): the player doc + the actor docs (the
+  chorus drain) each carry ONLY their knower's rows; the pc-only
+  and barkeep-only tokens never leak.
+- **P7 — the explicit forgetting vocabulary (C10) + the epistemic
+  field homes.** TODAY no forgetting exists — the fold is
+  append-only acquisition; measured live (Arm C2): 10,000 ticks
+  later NO holder ever dropped a token (acquisition continued).
+  Forgetting, when a named consumer requires it, is EXPLICIT: new
+  events (INV-5 — never an edit), a declared vocabulary (a `forgot`
+  record family or a pack-declared TTL — the design is the
+  implementation row's), and a derived cache may evict for cost but
+  NEVER changes the semantic answer (`holds` stays the fold's). The
+  C10 field homes: proposition = `knows`; source = the minting
+  event id (writer-stamped, L3); acquired_at = `at`; fidelity =
+  the chain; trust = the relations/pair axes (read per-pair by
+  `trust_toward` — NEVER a record field); status = the read-side
+  verdict family (supported/contradicted/insufficient_data —
+  computed per claim, NEVER stored belief state). No generic belief
+  graph (the reject list; the docstring 'belief' prose is
+  vocabulary, the module absent).
+
+**Falsifier** (TEST_PLAN §9's packet form; run LIVE at iter-320 —
+the REAL Simulator/Mediator/validator/ledger/knowledge over the
+real tavern pack, seed 42, the probe outside the repo per Rule 9;
+the verbatim output + the artifact md5 pins: the iter-320 report
+§D, the record's single owner): ARM A the C8 freeze gap — A1 the
+empty-prose kill at the boundary (NarratorError, the structured
+half never gated); A2 the monolithic regen (the valid take intent
+died with a contradicted prose claim: 0 events / 0 withdrawals / 0
+deferrals; the re-delivery unconstrained); A3 the freeze
+vocabulary 0 hits (`frozenset` the false friend, 74 — none
+machinery). ARM B the prose/canon boundary BOTH ways — B1
+prose-only → 0 events, the knowledge index unchanged; B2 the same
+content typed as `talk` → `talk`+`rumor_told` committed; B3 the
+observed channels {saw, told} ⊂ the enum {saw, heard, told,
+inferred}. ARM C the scope + forgetting — C1 the player + 2 actor
+documents, each knowledge block ⊆ its knower's records, zero
+cross-knower leaks; C2 no holder ever dropped a token across
+10,000 ticks, the forgetting vocabulary ABSENT.
+
+**Minimal test set** (the implementation row's, not today's): the
+freeze law — a presentation-defect document with a boundary-valid
+structured half feeds or withdraws the structure loudly while the
+presentation retries (the A1/A2 arms RED→GREEN); the
+prose-never-canon control (B1) and the typed-act route (B2) stay
+green; the scope law — the mode-B documents pinned per-knower (the
+C1 arms as committed fixtures); the forgetting vocabulary — an
+explicit-forget event flips `holds` through the fold (INV-5: a new
+event, never an edit; a cache eviction NEVER flips `holds`); INV-2
+— byte-identical replay over a run whose exchanges include frozen
+acts (the protocol changes, never the canon stream).
+
+**Deliberately NOT done here** (the row's own fence): no mediator
+code rewritten, no channel code, no freeze machinery, no
+speech-act admission family, no forgetting mechanism, no schema or
+pack change (the row's R0–R1 law).
+
+## 11. auth-1 — the intent / agency / director boundary contract (review-C11/C12/C20 + M4's vocabulary/D7–D9; the DEFINITION landed iter-321)
+
+> Owner-confirmed 2026-10-03 (iter-315's queue — the T7 row, the
+> queue's LAST row, opened by the owner's «Продолжай очередь с
+> speech-1 и так далее» continuation; Q1–Q7 accepted AS LAW the same
+> call, §9's note). R0–R1 definition only: NOTHING here is
+> implemented — no pipeline code, no authority registry, no director
+> or mediator machinery (the row's own law). The implementation is
+> NOT a standing row — the owner opens it after accepting this
+> contract (the runtime-promotion gate).
+
+**Pinned decisions** (each grounded in standing code or law):
+
+- **A1 — the pipeline, five stages, each with its live carrier
+  (D9's input side).** INPUT — the player's free text (mode C:
+  `ParserDoor.emit_call`), the narrator reply document (mode A/B:
+  `Mediator.apply_reply`), the playscript steps (`run_steps`), the
+  autonomous producers (urgencies / the director — through the SAME
+  door). INTERPRETATION — the parse into the typed candidate: the
+  closed gate accepting EXACTLY ONE of `intent|question|no_intent`
+  (`brief/parser.py`, PARSER_SPEC §4) / the proposal document
+  (`brief/validator.py`, VALIDATION_SPEC §3). CLASSIFICATION — the
+  kind/target/fields against the pack's action grammar
+  (`PACK.action`, the snapshot's verbs/nouns — INV-3: the grammar
+  is pack data). AUTHORIZATION — the intent door: `validate_shape`
+  (the loud shape half) + the closed precondition test set
+  (`core/intent.py`) + the OCC `based_on_event_seq`. EXECUTION —
+  the resolver circuit + `_commit` (S1's law; INV-1's writer).
+- **A2 — valid ≠ authorized; three DISTINCT axes with distinct
+  refusal vocabularies.** SHAPE-VALID (the grammar/gate families)
+  is not WORLD-LEGAL (the door's preconditions/OCC) is not
+  COMMITTED (the execution). Malformed → the LOUD family
+  (RunnerError/ParseError/ProposalError), ZERO events — nothing in
+  the world; well-formed but world-impossible → the committed
+  `intent_rejected` no-op (an attempt IS a fact, PARSER_SPEC §4/§5
+  — the noise floor's commit-side twin); valid+authorized → the
+  event, INV-5-immutable. Measured live: all three axes (Arm A).
+- **A3 — the authority classes, INPUT-side (D9's list): player |
+  NPC | director | system | pack.** PLAYER — the mode-A/C caller,
+  the playscript actor. NPC — mode B's caller gate (a reply
+  proposes its own caller's actions ONLY — `feedable_intents`;
+  measured live, Arm B1) + the urgencies' per-NPC templates.
+  DIRECTOR — the released hooks' payloads through the door
+  (`origin_hook` provenance, D-140). SYSTEM — the mechanic
+  producers (world/genesis/clock/weather/economy — emissions, not
+  intents). PACK — the seeded hooks, follow-ups, expectations (pack
+  data as origin). S3 (sem-1) owns the EMIT-side vocabulary; A3
+  owns the INPUT side — the two never contradict (the namespace
+  fence, the package's §5).
+- **A4 — ambiguity collapses ONLY on equivalent canonical effect
+  surfaces (D9); NO global confidence score.** Auto-collapse is
+  legal only when the candidate interpretations map to an
+  EQUIVALENT canonical effect surface (S2's declaration form); any
+  other ambiguity → CLARIFY (the parser's `question` alternative —
+  measured live, Arm C1: the question surfaced, nothing fed) or
+  REJECT. A global confidence/risk/truth number is FORBIDDEN
+  (measured: zero machinery, Arm A4/C2). Today no collapse
+  machinery exists — the collapse is the implementation row's, with
+  its equivalence proof.
+- **A5 — the D7 invariant: `DirectorOutput ⊆ EligibleConsequences(
+  world, pack, current_state)` + the mutation probe.** The eligible
+  set IS the seeded-hook buffer (pack-declared hooks seeded at
+  event time, D-005 — measured live: 5 instances over the day1
+  run, each with its pack-declared payload); the release paths
+  (explicit triggers / the quiet path / the climax layer) only
+  SELECT from the buffer under the pacing budget (1 release per
+  beat) and the pure option choice (no RNG — a function of (pack,
+  projection, beat_tick)); releases ride the intent door (D-037)
+  with `origin_hook` provenance. The director NEVER invents entity,
+  motive, goal, cause, or fact. The mutation probe's standing form:
+  (i) an invented KIND dies loud at the door (`PACK.action` → None
+  → the loud RunnerError — measured live, Arm B2c); (ii) an
+  unseeded consequence has NO release path (no release-by-tag API;
+  the buffer is the only source — the Director's public surface,
+  Arm B2b); (iii) the emit-side authority check is sem-1's S3/S5.
+- **A6 — bounded deterministic agency where a named consumer needs
+  it (D8); NO generic planner, NO LLM planner.** The standing
+  carriers: the urgencies (per-NPC goal specs, d100 per beat on
+  isolated streams, the precondition gate, the silent noise floor
+  — PARSER_SPEC §4/§6), the crystallized traits (the read-side
+  lens), the grudge/debt families. Selection stays bounded,
+  deterministic, and persistent only behind a named consumer; a
+  generic planning engine or an LLM planner is on the review's
+  reject list (VISION §6 — the Generative-Agents cost
+  anti-precedent). The through-the-door discipline (D-037):
+  autonomous intents broadcast objectives through the SAME door
+  the player's intents use — one mechanism, never two.
+- **A7 — the M4 vocabulary + HARD CANON (the owner's 2026-10-03
+  decision, iter-315's record): the model-path contract.**
+  INSTRUCTION — the prompt-side directives (the call document's
+  protocol lines; never canon). PROPOSAL — the typed candidate
+  (the IntentProposal / the parsed intent). AUTHORITY — the door's
+  authorization (A1/A2). REALISED INTERVENTION — the committed
+  event. CANONICAL CONSEQUENCE — the fold's downstream effects.
+  The HARD-CANON law: a wrong-but-committed model-mediated action
+  is INV-5-immutable — NO recovery/dispute path EVER; the
+  correction form is a NEW event, never an edit; a retcon path
+  would need a new owner-gated design — REFUSED by the standing
+  decision. Measured live: the writer's public surface is
+  append/close only (no edit, no undo, no retcon — Arm B3; zero
+  machinery hits).
+
+**Falsifier** (TEST_PLAN §9's packet form; run LIVE at iter-321 —
+the REAL Simulator / Mediator / ParserDoor / intent door /
+director / writer over the real tavern pack, seeds 42 + 8 (the
+day1 corpus), the probe outside the repo per Rule 9; the verbatim
+output + the artifact md5 pins: the iter-321 report §D, the
+record's single owner): ARM A the pipeline + the three axes — A1
+the world-impossible `talk` → `intent_rejected` committed
+(ev_0006, zero state changes, the world unchanged); A2 the unknown
+kind `seduce` → the loud RunnerError, ZERO events; A3 the valid
+`move` → committed; A4 the confidence/risk/truth-score machinery:
+0 hits. ARM B the authority + D7 + M4 — B1 the guard's actor reply
+proposing the player's talk → WITHDRAWN ("a reply proposes its own
+caller's actions only"), 0 fed, the note riding the player's next
+call; B2 the eligibility set enumerated (5 seeded instances) + the
+Director's public surface (seed/releases/next_beat — no
+release-by-tag API); B2c the invented `spawn_dragon` → `PACK.
+action` → None → the door's loud refusal; B3 the writer's surface
+append/close only, 0 retcon/undo/rewrite hits. ARM C the ambiguity
+law — C1 the `question` alternative surfaced, ZERO events fed; C2
+the effect-equivalence/auto-collapse machinery: 0 hits.
+
+**Minimal test set** (the implementation row's, not today's): the
+three-axis pipeline arms as committed fixtures (the rejection
+event, the loud malformed, the committed valid); the caller-gate
+arms (the foreign-actor withdrawal, mode A and B); the D7 mutation
+probes (the invented kind RED at the door; the unseeded-tag
+release REFUSED at the API shape); the collapse law — a collapse
+carries its effect-surface equivalence PROOF, otherwise the
+question path (C1 green); the M4 immutability — the writer stays
+append-only (the architecture pin); INV-2 — the director's pure
+selection (same log → same releases).
+
+**Deliberately NOT done here** (the row's own fence): no
+director/mediator runtime machinery, no pipeline code, no authority
+registry, no collapse implementation, no schema change (the row's
+R0–R1 law).
