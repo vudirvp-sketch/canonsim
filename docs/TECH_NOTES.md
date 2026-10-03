@@ -1276,6 +1276,85 @@ D-193; the serializer contract docs/PRESENTATION_SPEC.md).
   narrator ~0.5–0.8 s per call) — the brief/parse component split
   still wants the battery's clock.
 
+- **The iter-312 record (the owner's live-row enabler — llama.cpp in
+  the documented drop layout + the models through the gateway's own
+  model.fetch; the b11337 sandbox band: Linux x64, 2 CPU cores, 4.1 GB
+  RAM, no GPU — the §13.1 sandbox class, NOT a station)**: TWO standing
+  rows closed live, one honest boundary held.
+  (1) THE BRIEF/PARSE SPLIT + the heartbeat's first full-column row
+  (engine1-q1p7b): the 51-utterance corpus through the REAL mode-C
+  stack (the Layer-1 composition, the narrator half pinned — the
+  deterministic substrate) with Qwen3-1.7B-Q4_K_M as the parse
+  operator, the landed session's cycle mirrored verb-for-verb (emit →
+  grammar → GBNF chat temp-0/160 → apply; ParseError → one re-ask with
+  the session's own note; RunnerError → door_error). The instrument's
+  decomposition — brief = emit_call; parse = grammar_snapshot +
+  gbnf_grammar + apply_reply MINUS the tick; tick = run_steps via a
+  delegating proxy; generate = the adapter's chat; fold = a standalone
+  n=10-per-case probe: no gaps, no double counts. Numbers: **raw
+  validity 51/51 (100%, zero re-asks spent — the grammar holds validity
+  at the source at the smallest band yet), mix 51/0/0 (the most
+  aggressive mapper measured: every utterance becomes an intent, 16
+  look_around guesses; the disambiguation questions never fire),
+  agreement 4 full / 15 kind / 32 mismatch; the world refusing 6 of 51
+  (4 intent_rejected + 2 take_failed — attempts are facts), 4 takes
+  committed, 0 door errors (the v2 grammar makes the one-path class
+  structurally unemittable — the s2c1 shape needs a hand-written
+  probe)**. Latency p50/p95: tick 0.3/0.5 · fold 0.8/0.9 · brief
+  0.9/1.1 · parse 2.7/3.4 · generate 11598/12512 ms — the repo-side
+  columns land where the station's merged column did (brief+parse
+  1.0–1.1 ms there; the emit half is model-independent), the CPU
+  generate dominates (~617-tok prompt at ~92 tok/s, ~26-tok completions
+  at ~7.9 tok/s). The determinism mini: greedy/seeded/cacheless ×3
+  byte-identical each (the cacheless arm = §13.1's own probe form,
+  `cache_prompt false` as a RAW request outside the adapter's pinned
+  identity); ONE across-priming variance observed between battery runs
+  (the same request answered `loc_tavern` on an s1-primed slot vs
+  `loc_backyard` fresh/warm — the prompt-cache class, exactly why
+  §13.1 pinned the cache off; within-run identity never broke). The
+  manifest through the repo's own `manifest_row`: model_sha256
+  populated, build b11337-d775ebf36, `parse_grammar_id
+  9fa7e9f4359a9201` — byte-equal to round 5's station manifest id (the
+  pure grammar mapping's cross-environment determinism). ENVIRONMENT
+  LESSON (the honest config for a 4 GB box): AUTO slots at `-c 4096`
+  (4-slot unified pool) OOM-killed the server mid-corpus (anon-rss
+  3.5 GB); the pinned form `-np 1` (§13.1's predictable-slot law) +
+  `-c 2048` + q8_0 KV (round-6's quant) holds with ~0.6 GB headroom.
+  (2) THE WB-6 LIVE RE-VERIFICATION (the adapter's model-management
+  half — POST /models/load + /models/unload, stub-pinned since wb-6):
+  at b11337 the dedicated endpoints are ROUTER-MODE-ONLY — the
+  single-model form 404s both (routes compiled in, unregistered); in
+  router mode (`--models-dir`): **unload works with the stub pin's
+  exact shapes** (request `{"model": <stem>}`, reply `{"success":
+  true}`); **load works but `model` is the router's REGISTRY ID (the
+  file STEM), never a filesystem path — the path form 404s**
+  (`{"model": "Qwen3-1.7B-Q4_K_M"}` → 200 `{"success": true}`;
+  `<path>.gguf` → 404) — the workbench's ATTACHED-mode call passes the
+  path (correct against a path-accepting build; refused at this one),
+  the MANAGED default never touches the endpoints (the spawn path);
+  duplicate load → 400 `{"error":{"code":400,"message":"model is
+  already running","type":"invalid_request_error"}}`, unknown-model
+  unload → 400 "model is not found" — the OpenAI-style error envelope,
+  the adapter's terminal-HTTP mapping (no blind retry) verified
+  correct against both. The §13.1 router laws all HELD at b11337
+  (role/models_autoload/max_instances in /props, the stem-addressed
+  lazy autoload 0.95 s first-touch, the evict+autoload switch 2.62 s at
+  --models-max 1, model swap ≠ restart, GET /models listing with
+  per-model status/argv/preset/meta). NEW SURFACE observed: **GET
+  /models/sse** — the live per-model status stream (status_change
+  events with loading-stage progress) — the natural consumer for the
+  workbench's live load-progress band; parked as a candidate row (the
+  owner's call), never built here. /props drift datum: the
+  single-model form carries no `role` key at b11337 (the stub's
+  `"role": "server"` is a fixture assumption — the adapter reads
+  model_path/build_info only, no code impact). HELD OPEN (hardware,
+  honestly): the 27B GBNF parse arm + the one-model-constrained A/B —
+  owner-side station rows (this box's 4.1 GB RAM cannot host a 27B
+  Q4_K_M); the narrator-convention call unchanged (round-6's form).
+  The runner + the verification probes live outside the repo (Rule 9);
+  the row's evidence: the manifest, the results document, and this
+  record.
+
 ## 14. The live-session operator recipes (narrate + say; moved from STATUS FAQ iter-176)
 
 Two doors, one ledger (D-049); `python -m cli` opens the interactive

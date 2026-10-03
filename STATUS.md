@@ -1,54 +1,48 @@
-Iteration: iter-311 (`worldsuite` — the owner's 2026-10-03
-  chat-upload ingestion call: «изучи и обработай CANONSIM_AGENT_WORLD_
-  SUITE_v1_0.zip, что перенимаем и реализуем а что нет, что истинно а
-  что нет. куда "паркуем" результаты и данные с пака и почему. ВАЖНО: я
-  не хочу всю дорогу скидывать тебе вручную этот архив»): the third
-  external-pack ingestion (D-251, the D-242 family's form) — the
-  synchronized suite (CORE_WORLD v1.3 NEW + WORLD_TRACK v4.6) read in
-  full, every claim classified against HEAD: the CORE claims verified
-  TRUE (the W-stage map incl. W8's audit boundary, the substrate
-  evidence items, the resolver-kind list in code, the I0 inventory, the
-  promotion-gate/byte-identical-replay statements); the WORLD_TRACK
-  half's W5-asymmetric tables named STALE-but-self-disclaimed (the
-  iter-272 pin; superseded by the iter-266..287 landings) and the
-  bundle's own drift recorded (the read order's 08_CHANGE_GATE/INDEX —
-  absent files; the changelog stops at v1.2; the two halves carry
-  different repo pins); the v4.6 world half diff-verified byte-
-  equivalent to the archived v4.5 (sync notes only — no re-ingestion,
-  the iter-277 reconciliation still covers it). PARKED: the suite
-  verbatim at docs/worldbuild/archive/ (md5/sha256-pinned — once the
-  owner applies the delta, the zip lives in the repo: the «не хочу
-  скидывать вручную» requirement's durable answer); the C1–C5
-  cross-cutting taxonomy as the owner-gated TASKS row `core-1`
-  (RESEARCH/POC-ONLY — the promotion gate unmet, nothing implemented);
-  the cross-pack boundary as ROUTING (world context §10 + the
-  worldbuild README fence). NOT adopted: any second-truth claim, any
-  C2/C3/C5 runtime machinery, a new CORE navigation surface, the
-  external Cross-Domain method doc (referenced, never vendored);
-  llama.cpp not installed (R0 doc-only — the standing runtime drop
-  layout the documented home when a live row fires)
+Iteration: iter-312 (`stationlive` — the owner's 2026-10-03
+  delegation «дорабатывай прошлую итерацию и делай что должно,
+  разрешаю. мне нужно качество и отсутствие костылей» + the repeated
+  llama.cpp enabler «можешь устанавливать llama.cpp для работы и
+  прочее окружение» — iter-311's deferred live inference row fired):
+  the LIVE STATION ROW at the sandbox band (b11337 in the documented
+  drop layout `workbench/runtime/llama.cpp/`, both models through the
+  gateway's OWN model.fetch — the proven flow). CLOSED LIVE: (1) THE
+  BRIEF/PARSE COMPONENT SPLIT + the heartbeat's FIRST FULL-COLUMN ROW
+  (engine1-q1p7b — the 51-utterance corpus through the real mode-C
+  stack at Qwen3-1.7B, the landed cycle mirrored verb-for-verb, the
+  five-component clock: raw validity 51/51 with zero re-asks, mix
+  51/0/0, agreement 4/15/32, tick 0.3/0.5 · fold 0.8/0.9 · brief
+  0.9/1.1 · parse 2.7/3.4 · generate 11598/12512 ms; the determinism
+  mini greedy/seeded/cacheless ×3 byte-identical, one across-priming
+  cache flip honestly recorded; the manifest's parse_grammar_id
+  byte-equal to round 5's station id); (2) THE WB-6 ARM — POST
+  /models/load + /models/unload re-verified live through the repo's
+  own adapter (router-mode-only at b11337; the unload matches the
+  stub pins exactly; the load takes the REGISTRY STEM never a path;
+  OpenAI-style 400/404 envelopes, the terminal-HTTP mapping correct;
+  GET /models/sse observed as the new live-status surface — parked a
+  candidate row; the §13.1 router laws all held). HELD OPEN honestly:
+  the 27B GBNF parse arm + the one-model-constrained A/B — owner-side
+  hardware rows (the sandbox's 4.1 GB RAM cannot host a 27B Q4_K_M)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
-2556 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; the doc-only
-  collapse + the guard tooth — zero engine change) ·
+2556 passed + 1 skipped, ruff clean, docguard
+  clean, topology --check clean (Python 3.12.14, the env pin; one
+  adapter docstring/module-note refresh — zero behavior change, the
+  live evidence doc-side) ·
 Date: 2026-10-03 ·
-Scope: docs/worldbuild/archive/
-  CANONSIM_AGENT_WORLD_SUITE_v1_0.zip (new — the verbatim preservation),
-  docs/worldbuild/archive/README.md (the suite row + provenance + the
-  unique retains + the fence), docs/worldbuild/WORLD_TRACK_AGENT_
-  CONTEXT.md (the bootstrap line + §10's cross-pack routing),
-  docs/worldbuild/README.md (the archive fence), docs/TASKS.md (the
-  parked row core-1 + the ledger, iter-301 evicted), docs/DECISIONS.md
-  (D-251 in the D-242 family row), docs/blueprint/phases.md (§6 the
-  iter-311 record), STATUS.md, worklog.md (the iter-311 entry, iter-301
-  evicted), docs/iterations/iter-311-worldsuite-report.md (new — this
-  row's RU report) — 10 changed/created (9 modified + 1 created; R0
-  doc-only — zero code, zero pack, zero canon change, INV-1..5
-  untouched, the LOG untouched, zero corpus price; NO test deleted or
-  weakened)
+Scope: docs/TEST_PLAN.md (§8.5 the engine1-q1p7b row + the split
+  discharge), docs/TECH_NOTES.md (§13 the iter-312 record),
+  cli/engine.py (the module note + the load_model docstring — the
+  b11337 measured reality, comment-only), docs/TASKS.md (the ledger),
+  STATUS.md, worklog.md (the iter-312 entry, iter-302 evicted),
+  docs/iterations/iter-312-stationlive-report.md (new — this row's RU
+  report) — 7 changed/created (6 modified + 1 created); R0/R1
+  verification — the substance the live session's evidence (the
+  runner + the probes outside the repo, Rule 9), zero engine behavior
+  change, INV-1..5 untouched, the LOG untouched, zero corpus price;
+  NO test deleted or weakened
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1/V2/V3 visual floors LANDED (iter-293/297/
   304/307); Phase 3's SEVEN rows LANDED
@@ -142,19 +136,22 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-311 DONE: worldsuite (the owner's 2026-10-03 chat-upload
-  ingestion call — the suite studied, classified, and parked; D-251).**
-  The CORE claims verified TRUE against HEAD (the W-stage map, the
-  substrate evidence, the resolver kinds in code, the I0 inventory);
-  the WORLD_TRACK half's stale W5 tables and the bundle's own drift
-  (absent 08/INDEX files, the v1.2 changelog stop, the two pins)
-  recorded; the v4.6 half diff-verified byte-equivalent to the
-  archived v4.5 (no re-ingestion). PARKED: the suite verbatim at
-  docs/worldbuild/archive/ (the «не хочу скидывать вручную» answer —
-  the repo carries it after the delta applies), the C1–C5 taxonomy
-  as the owner-gated row core-1, the cross-pack boundary as routing.
-  2556+1 + ruff + docguard + topology --check clean (R0 doc-only).
-  The RU report: docs/iterations/iter-311-worldsuite-report.md.
+**iter-312 DONE: stationlive (the owner's 2026-10-03 delegation
+  «дорабатывай прошлую итерацию и делай что должно, разрешаю» + the
+  llama.cpp enabler — iter-311's deferred live inference row).** TWO
+  standing rows CLOSED LIVE at the b11337 sandbox band: the
+  BRIEF/PARSE COMPONENT SPLIT — the heartbeat's first full-column row
+  engine1-q1p7b (TEST_PLAN §8.5; the 51-utterance corpus at
+  Qwen3-1.7B, raw validity 51/51, the five-component latency split,
+  the determinism mini ×3 byte-identical in all three arms); the WB-6
+  ARM — POST /models/load + /models/unload re-verified through the
+  repo's own adapter (router-mode-only at b11337, the stem-not-path
+  load semantics, the success-form unload matching the stub pins, the
+  terminal-HTTP mapping correct; GET /models/sse the observed new
+  surface, parked a candidate row). 2556+1 + ruff + docguard +
+  topology --check clean (R0/R1 — the adapter's comment-only refresh,
+  zero behavior change). The RU report:
+  docs/iterations/iter-312-stationlive-report.md.
 Next: the owner's calls — (1) the standing queue: the replay-UI
   NOT-EXPOSED row and the world track's parallel rows (the queue's
   three other rows dispositioned by the same 2026-10-03 call,
@@ -209,16 +206,21 @@ Next: the owner's calls — (1) the standing queue: the replay-UI
    awareness, the session/preset persistence layers,
    LLAMA_CPP_INFERENCE_CONTROL_LAW §21). The exported-Windows-build
    row parked per AGENTS §2.4 — a named row when the owner calls it.
-3. The remaining station rows (the owner's next engine run, TEST_PLAN
-   §8.5's standing gaps + the wb-6 arm: the live-build
-   /models/load + /models/unload re-verification against the b11064
-   station's ROUTER reality): the 27B GBNF parse arm + the
-   one-model-constrained A/B (CONTRACTS §4.3 arm a) + the brief/
-   parse component split; the narrator-convention call for live
-   narrate play is two-sided now — more live beats at Q9B (size the
-   tail) or the 27B as the one-model candidate (the §1 sweet spot,
-   both doors) — the owner's choice (round 5's 12B + round 6's 9B
-   data: §13.1; bg-9's mapping-drift datum rides the same decision).
+3. The remaining station rows (the owner's next engine run —
+   OWNER-SIDE HARDWARE rows after iter-312: the 27B GBNF parse arm +
+   the one-model-constrained A/B, CONTRACTS §4.3 arm a — the sandbox's
+   4.1 GB RAM cannot host a 27B Q4_K_M; the row runs at the owner's
+   GPU station with the landed split instrument ready to reuse);
+   DISCHARGED iter-312: the brief/parse component split (the
+   engine1-q1p7b row, TEST_PLAN §8.5) + the wb-6 live re-verification
+   (TECH_NOTES §13's iter-312 record); the narrator-convention call
+   for live narrate play is two-sided now — more live beats at Q9B
+   (size the tail) or the 27B as the one-model candidate (the §1
+   sweet spot, both doors) — the owner's choice (round 5's 12B +
+   round 6's 9B + iter-312's 1.7B data: §13/§13.1; bg-9's
+   mapping-drift datum rides the same decision; GET /models/sse the
+   observed load-progress surface — a candidate row when a live
+   consumer names it).
 4. The standing frames: the embodiment options (§6.4 → §6.1 → §6.5 →
    §6.2 per the owner's 2026-09-27 order; §6.3 closed iter-204..210,
    its fill row removed), the debt-1 residues, the re-weigh's SALE,

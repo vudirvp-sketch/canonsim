@@ -575,10 +575,10 @@ assembly), **parse** (the parser-door cycle, repo-side), **generate**
 component cut is the latency BUDGET's owner: each future SoW engine
 decision reads which component eats the p95, never a single end-to-end
 number that hides it. Numbers' owner: TECH_NOTES; this table carries
-the trend pointers only. No live row carries the columns yet — the
-standing gap row below; the first bg-9+/engine-1 run populates them
-(the runner computes p50/p95 with `statistics.quantiles`, n≥4; a
-smaller n records the raw min/median/max with the gap noted).
+the trend pointers only. The first row carrying the FULL columns:
+engine1-q1p7b (iter-312 — the brief/parse split landed; the runner
+computes p50/p95 with `statistics.quantiles`, n≥4; a smaller n records
+the raw min/median/max with the gap noted).
 
 | Run | Date | Engine | Validity raw → 1 re-ask | Mix i/q/n | Agreement | Latency p50/p95 (tick/fold/brief/parse/generate) | Trend note |
 |---|---|---|---|---|---|---|---|
@@ -586,14 +586,21 @@ smaller n records the raw min/median/max with the gap noted).
 | bg-8 | 2026-09-09 | glm-4-plus API | 84.4% → 93.3% | 32/4/6 | 20/35 full, 35/45 alternative | — (gap: the end-to-end p50 1.1 s / p95 6.3 s recorded, components unmetered — §11) | the baseline row (§11): refusal families DRIFT (unknown-keys → texture-reference), question share halves; deviation coverage 34/34, honest 17/36 |
 | engine1-e4b | 2026-09-21 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF) | 98.0% → 98.0% | 50/0/0 | 15/51 full | tick 2.3/3.2 · fold 0.7/1.1 · brief+parse 1.1/1.6 (one measured column — the door's emit_call; the split the gap) · generate 537/706 ms | the grammar lifts raw validity above both API rows; the mix collapses to all-intent (the aggressive mapper — TECH_NOTES §13.1); the deviation re-distillation: honest 18/36, the first local world-answer leak 33/34 |
 | engine1-q9b | 2026-09-21 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF) | 96.1% → 100% | 21/1/29 | 6/51 full | tick 1.5/4.9 · fold 0.6/0.8 · brief+parse 1.0/1.3 (the same gap) · generate 470/714 ms | the re-ask rescue closes validity; the mix inverts (the cautious assistant declines 29); deviation honest 15/36, coverage 34/34; the gate-valid protocol echo pinned (§13.1) |
+| engine1-q1p7b | 2026-10-03 | Qwen3-1.7B Q4_K_M local (llama-server b11337, GBNF; CPU 2-core sandbox band — not a station row) | 100% → 100% | 51/0/0 | 4/51 full (15 kind / 32 mismatch) | tick 0.3/0.5 · fold 0.8/0.9 · brief 0.9/1.1 · parse 2.7/3.4 · generate 11598/12512 ms | THE SPLIT LANDED (iter-312): the first row with all five columns — brief = emit_call, parse = grammar+gate+wiring minus the tick (the instrument's decomposition: TECH_NOTES §13's iter-312 block); the smallest band yet: the grammar holds raw validity at 100% with ZERO re-asks spent, the mix fully collapses to intents (the most aggressive mapper — 16 look_around guesses; the world refusing 6: 4 intent_rejected + 2 take_failed); the CPU generate dominates (~617-tok prompt at ~92 tok/s); the determinism mini greedy/seeded/cacheless ×3 byte-identical, one across-priming cache flip observed (§13) |
 
 Gap rows standing: the 27B GBNF parse arm + the
 one-model-constrained A/B (CONTRACTS §4.3 arm a — the owner's next
 station run, now through the LANDED surface: the `--engine` session +
-the repo-side grammar, iter-177/D-193); the brief/parse component
-split (the battery's emit_call measures the door's one repo-side call
-— the landed session's engine cycle is the surface that owns the
-split, its numbers the next heartbeat's). Discharged by the engine-1
+the repo-side grammar, iter-177/D-193). Discharged by iter-312
+(2026-10-03, the owner's live-row enabler — llama.cpp b11337 in the
+documented drop layout, the models through the gateway's own
+model.fetch): the brief/parse component split — the battery's own
+clock over the landed cycle seam (emit → grammar → generate → apply,
+the tick extracted via a delegating run_steps proxy), its numbers the
+engine1-q1p7b row's; the same iteration closed the wb-6 arm live
+(POST /models/load + /models/unload re-verified against a real
+llama-server — the router-mode reality, TECH_NOTES §13's iter-312
+block). Discharged by the engine-1
 runs: the {3–8B, GBNF} arm (both rows), the per-component p50/p95
 columns (both rows), the per-family latency distribution (§13.1 — no
 Cyrillic latency penalty at this band), the grammar's live-backend

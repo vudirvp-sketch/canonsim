@@ -40,11 +40,20 @@ is the ROUTER (autoload/eviction, model swap ≠ restart — TECH_NOTES
 §13.1), and the dedicated endpoints are the newer upstream line. The
 wire shapes are pinned by the stub contract tests (test_engine.py —
 "adapter tests are not implementation snapshots", app §29); the live
-re-verification rides the station rows (TEST_PLAN §8.5's gap family).
-The management calls are SINGLE-TRY (unlike the chat ladder): §29's
-matrix allows bounded retry for an unavailable backend — "if
-allowed" — and the row's answer is no (a load/unload the caller may
-re-issue deliberately; the adapter never loops a management call).
+re-verification LANDED iter-312 at llama-server b11337 (TECH_NOTES
+§13's iter-312 record): the dedicated endpoints are ROUTER-MODE-ONLY
+at that build (the single-model form 404s both); in router mode the
+unload matches the stub pins exactly (request `{"model": <ref>}`, reply
+`{"success": true}`) and the load takes the router's REGISTRY ID (the
+file STEM) as `model` — a filesystem PATH 404s there (the workbench's
+ATTACHED-mode path form is correct against a path-accepting build; the
+MANAGED default spawns with `-m` and never touches the endpoints); the
+error envelopes are OpenAI-style 400/404 bodies, terminal under this
+adapter's no-blind-retry mapping (verified live). The management calls
+are SINGLE-TRY (unlike the chat ladder): §29's matrix allows bounded
+retry for an unavailable backend — "if allowed" — and the row's answer
+is no (a load/unload the caller may re-issue deliberately; the adapter
+never loops a management call).
 
 The failure→ladder mapping (CONTRACTS §4.1 D7): transport failures
 retry on the tries ladder (5, bg-8's precedent — the local engine is
@@ -288,11 +297,14 @@ class LlamaServerClient:
         self, model_path: str, alias: str | None = None
     ) -> dict[str, Any]:
         """POST `/models/load` — the model-management surface (wb-6,
-        the backend row): the model's filesystem path + the optional
-        alias (the workbench passes the logical_name). Build-sensitive
-        research evidence — the wire shape pinned by the stub contract
-        tests, the live re-verification a station row (see the module
-        note). Single-try, no ladder: a management call the caller may
+        the backend row): the model reference + the optional alias (the
+        workbench passes the logical_name over the resolved path — the
+        value a path-accepting build wants; at the b11337 router the
+        reference is the REGISTRY STEM, the path form 404s — the module
+        note's live record). Build-sensitive research evidence — the
+        wire shape pinned by the stub contract tests, the live
+        re-verification LANDED iter-312 (see the module note).
+        Single-try, no ladder: a management call the caller may
         re-issue, never a hidden loop."""
         body: dict[str, Any] = {"model": model_path}
         if alias is not None:
