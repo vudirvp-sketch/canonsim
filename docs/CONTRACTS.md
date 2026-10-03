@@ -24,8 +24,12 @@
 > D-024's single owner); the new sections land natively in that form;
 > the decisions themselves are never-cut substance (owner-accepted
 > law). iter-321 lands §11 the same way — the registry's seven
-> definitions are the standing shape; a per-contract split is the
-> owner's call, never a silent restructure.
+> definitions are the standing shape. **The owner's 2026-10-04
+> disposition: CONTRACTS STAYS THE SINGLE REGISTRY** («CONTRACTS
+> оставляем как реестр» — the iter-320 report §G's option (б): the
+> standing-over-cap form accepted as the registry's permanent shape,
+> the phases.md precedent; the per-contract split (а) refused, the
+> deeper collapse (в) not called).
 
 ## 1. roads-1 — LANDED (iter-145, D-178)
 
@@ -639,6 +643,10 @@ row's pack-data design — never this definition.
 > row's own law). The implementation is NOT a standing row — the
 > owner opens it after accepting this contract (the runtime-promotion
 > gate).
+> **Owner-ACCEPTED AS LAW 2026-10-04** (the iter-321 continuation call:
+> P1–P7 binding for every future implementation; the implementation
+> row NOT opened — «Строки имплементации пока не открываю», each row
+> opens separately behind the runtime-promotion gate).
 
 **Pinned decisions** (each grounded in standing code or law):
 
@@ -801,6 +809,10 @@ pack change (the row's R0–R1 law).
 > or mediator machinery (the row's own law). The implementation is
 > NOT a standing row — the owner opens it after accepting this
 > contract (the runtime-promotion gate).
+> **Owner-ACCEPTED AS LAW 2026-10-04** (the iter-321 continuation call:
+> A1–A7 binding for every future implementation; the implementation
+> row NOT opened — «Строки имплементации пока не открываю», each row
+> opens separately behind the runtime-promotion gate).
 
 **Pinned decisions** (each grounded in standing code or law):
 

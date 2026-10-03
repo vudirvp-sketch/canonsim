@@ -1,68 +1,49 @@
-Iteration: iter-321 (`auth1` — the queue's LAST row, opened by the
-  owner's «Продолжай очередь с speech-1 и так далее» continuation
-  call; Q1–Q7 ACCEPTED AS LAW the same call — §9's note): THE
-  AUTH-1 CONTRACT LANDED — the intent / agency / director boundary
-  definition (review-C11/C12/C20 + M4's vocabulary/D7–D9) at
-  CONTRACTS.md §11, zero code change: seven pinned decisions (A1
-  the pipeline input → interpretation → classification →
-  authorization → execution, each stage with its live carrier; A2
-  valid ≠ authorized — the three DISTINCT axes: malformed loud /
-  world-impossible the committed `intent_rejected` attempt-fact /
-  valid+authorized the INV-5-immutable event; A3 the INPUT-side
-  authority classes player|NPC|director|system|pack with the S3
-  emit-side fence; A4 ambiguity collapses ONLY on equivalent
-  canonical effect surfaces — the question alternative the clarify
-  path, NO global confidence score; A5 the D7 invariant
-  `DirectorOutput ⊆ EligibleConsequences` — the eligible set IS
-  the seeded-hook buffer, the release paths only SELECT, the
-  mutation probe's standing form; A6 bounded deterministic agency
-  where a named consumer needs it — no generic planner, no LLM
-  planner; A7 the M4 vocabulary instruction / proposal / authority
-  / realised intervention / canonical consequence + HARD CANON —
-  THE OWNER'S 2026-10-03 DECISION: no recovery/dispute path EVER
-  for wrong-but-committed model-mediated actions, the correction
-  form a NEW event, a retcon path REFUSED) + THE FALSIFIER RUN
-  LIVE (the REAL Simulator / Mediator / ParserDoor / intent door /
-  director / writer over the real tavern pack, seeds 42 + 8 (the
-  day1 corpus), the probe outside the repo per Rule 9, artifacts
-  md5-pinned: Arm A the three axes — the world-impossible talk →
-  `intent_rejected` committed ev_0006 with zero state changes, the
-  unknown kind → the loud RunnerError at ZERO events, the valid
-  move → committed, the confidence machinery 0 hits; Arm B the
-  authority + D7 + M4 — the guard's actor reply proposing the
-  player's talk WITHDRAWN at the caller gate (0 fed, the note
-  riding the player's next call), the eligibility set enumerated
-  (5 seeded instances) + no release-by-tag API, the invented
-  `spawn_dragon` refused loud at the door, the writer's surface
-  append/close only with 0 retcon hits; Arm C the question
-  alternative surfaced at zero events, the collapse machinery 0
-  hits). THE QUEUE IS NOW EMPTY — all six contracts landed.
+Iteration: iter-322 (`acceptland` — the owner's acceptance call:
+  «Принимаю P1–P7 и A1–A7 как закон. Строки имплементации пока не
+  открываю. CONTRACTS оставляем как реестр.»): THE LAST TWO PENDING
+  OWNER CALLS ANSWERED — (1) the speech-1 (P1–P7, CONTRACTS §10)
+  and auth-1 (A1–A7, §11) contracts ACCEPTED AS LAW (the §10/§11
+  notes landed in the §6/§7 acceptance-note form: binding for every
+  future implementation; the implementation rows stay CLOSED —
+  «строки имплементации пока не открываю», each row opens
+  separately behind the runtime-promotion gate: a named consumer +
+  a measured native limit + the falsifier already pinned); (2) the
+  CONTRACTS registry's standing-over disposition ANSWERED — THE
+  SINGLE-REGISTRY FORM STANDS (the iter-320 report §G's option (б):
+  the standing-over-cap form the registry's permanent shape, the
+  phases.md precedent; the per-contract split (а) refused, the
+  deeper collapse (в) not called — the header note landed). THE
+  CONFIRMED QUEUE FULLY DISCHARGED AND ACCEPTED — all six contracts
+  (sem/caus/replay/scale/speech/auth) owner-accepted AS LAW:
+  S1–S7 + K1–K6 + E1..E6 + Q1–Q7 2026-10-03, P1–P7 + A1–A7
+  2026-10-04. KI#111's §5 cleanup executed (closed iter-318, three
+  iterations past — the mandatory form, AGENTS §5).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2557 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R0/R1 doc + probe —
-  zero code change, INV-1..5 untouched, the LOG untouched, zero
-  corpus price; NO test deleted or weakened) ·
+  --check clean (Python 3.12.14, the env pin; R0 doc-only — zero
+  code change, INV-1..5 untouched, the LOG untouched, zero corpus
+  price; NO test deleted or weakened) ·
 Date: 2026-10-04 ·
-Scope: docs/CONTRACTS.md (§11 new — the auth-1 contract; 929 lines
-  over-cap-allowed, the registry's seven definitions the standing
-  shape), scripts/docguard.py (the ALLOWLIST rationale update),
-  docs/TASKS.md (auth-1 DONE + the ledger, iter-311 evicted),
-  STATUS.md (this header), worklog.md (the iter-321 entry, iter-311
-  evicted), docs/iterations/iter-321-auth1-report.md (new — this
-  row's RU report) — 6 changed/created (5 modified + 1 created; the
-  §2.3 soft-limit note: the docguard entry rides the iter-320 cap
-  pass's family form).
+Scope: docs/CONTRACTS.md (the §10/§11 acceptance notes + the header
+  registry-disposition note; 943 lines over-cap-allowed — the
+  owner-accepted standing form), docs/TASKS.md (the speech-1/auth-1
+  rows' acceptance notes + the ledger, iter-312 evicted), STATUS.md
+  (this header + KI#111's §5 cleanup), worklog.md (the iter-322
+  entry, iter-312 evicted), docs/iterations/
+  iter-322-acceptland-report.md (new — this row's RU report) — 5
+  changed/created (4 modified + 1 created).
+
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
-  contracts LANDED; S1–S7, K1–K6, E1..E6 and Q1–Q7 owner-accepted
-  AS LAW 2026-10-03 (P1..P7 and A1..A7 await the owner's next
-  acceptance call); the implementation rows are NOT standing rows —
-  each opens on the owner's separate call behind the
-  runtime-promotion gate; core-1 stays PARKED (owner-gated
+  contracts LANDED and OWNER-ACCEPTED AS LAW (S1–S7 + K1–K6 +
+  E1..E6 + Q1–Q7 2026-10-03; P1–P7 + A1–A7 2026-10-04); the
+  implementation rows are NOT standing rows — the owner's «пока не
+  открываю» call: each opens on the owner's separate call behind
+  the runtime-promotion gate; core-1 stays PARKED (owner-gated
   RESEARCH/POC-ONLY — scale-1's Q5/Q6 map onto its C2/C3/C5
   surfaces, speech-1's P3/P4 and auth-1's A5 onto its C4, through
   the pinned namespace fence). The web-frontend track — S0 LANDED;
@@ -111,7 +92,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Active KIs
 
-- KI#111 · read_log leaked a bare JSONDecodeError on a torn log line (the reader's LogError contract broken) · opened+CLOSED iter-318 (found live by the replay-1 falsifier's Arm C; the wrap + 1 test; §5 cleanup after 2 iterations)
+- (none — KI#111's §5 cleanup executed iter-322: closed iter-318, three iterations past, the mandatory AGENTS §5 form; the record lives in git + worklog iter-318)
 
 ## FAQ / Pitfalls
 
@@ -141,42 +122,31 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-321 DONE: auth1 (the queue's LAST row, opened by the owner's
-  «Продолжай очередь с speech-1 и так далее» continuation).** The
-  auth-1 CONTRACT LANDED at CONTRACTS.md §11 (review-C11/C12/C20 +
-  M4's vocabulary/D7–D9, R0/R1): the seven pinned decisions A1..A7
-  (the pipeline's five stages with live carriers / valid ≠
-  authorized — the three axes / the INPUT-side authority classes
-  with the S3 fence / ambiguity by effect-equivalence, no
-  confidence score / the D7 director invariant — the eligible set
-  IS the seeded buffer / bounded deterministic agency / the M4
-  vocabulary + HARD CANON — the owner's 2026-10-03 decision) + THE
-  FALSIFIER RUN LIVE (the REAL Simulator/Mediator/ParserDoor/door/
-  director/writer, seeds 42+8: Arm A the three axes live — the
-  intent_rejected attempt-fact, the loud malformed at zero events,
-  the committed valid; Arm B the caller gate WITHDRAWN the
-  foreign-actor proposal, the eligibility set enumerated, the
-  invented kind refused loud, the writer append-only; Arm C the
-  question surfaced at zero events; the probe outside the repo per
-  Rule 9, artifacts md5-pinned). THE QUEUE IS NOW EMPTY — all six
-  contracts of the confirmed 2026-10-03 queue landed (sem/caus/
-  replay/scale/speech/auth); P1..P7 and A1..A7 await the owner's
-  next acceptance call, the implementation rows stay owner-gated.
-  2557+1 + ruff + docguard + topology --check clean. The RU report:
-  docs/iterations/iter-321-auth1-report.md.
-Next: THE OWNER'S CALLS (the confirmed queue discharged): (1) the
-  acceptance calls for speech-1 (P1..P7) and auth-1 (A1..A7) — AS
-  LAW or amended; (2) the implementation rows — each opens
-  separately behind the runtime-promotion gate (a named consumer +
-  a measured native limit + the falsifier already pinned); (3) M2
+**iter-322 DONE: acceptland (the owner's acceptance call).** P1–P7
+  (speech-1, CONTRACTS §10) and A1–A7 (auth-1, §11) ACCEPTED AS
+  LAW — the §10/§11 notes landed in the §6/§7 form; the
+  implementation rows stay CLOSED («Строки имплементации пока не
+  открываю» — each opens separately behind the runtime-promotion
+  gate: a named consumer + a measured native limit + the
+  falsifier already pinned); CONTRACTS stays THE SINGLE REGISTRY
+  (the iter-320 report §G's option (б) — the standing-over-cap
+  form the permanent shape, the phases.md precedent; the header
+  note landed). THE CONFIRMED QUEUE FULLY DISCHARGED AND ACCEPTED
+  — all six contracts law (S/K/E/Q/P/A). KI#111's §5 cleanup
+  executed (the Active-KIs list now empty). 2557+1 + ruff +
+  docguard + topology --check clean. The RU report:
+  docs/iterations/iter-322-acceptland-report.md.
+Next: THE OWNER'S CALLS (nothing open on the agent side — every
+  remaining row owner-gated): (1) the implementation rows —
+  sem-1/caus-1/replay-1/scale-1/speech-1/auth-1 each opens on the
+  owner's separate call behind the runtime-promotion gate; (2) M2
   (the surface→canonical-ID normalisation A/B) the next
   measurement battery when the owner calls it — station-side,
-  never a repo row; (4) the standing owner calls preserved: the
-  replay-UI NOT-EXPOSED row, the world track's rows, the CONTRACTS
-  registry's standing-over disposition (the per-contract split vs
-  the accepted standing form — the iter-320 report §G options);
-  (5) the probe-side fixture refinement (scene-relative fixtures
-  or a distinct premise-drift status) when the owner calls it.
+  never a repo row; (3) the standing owner calls preserved: the
+  replay-UI NOT-EXPOSED row, the world track's rows (W8's
+  remaining), the frontend P1/P2/P3 continuation rows; (4) the
+  probe-side fixture refinement (scene-relative fixtures or a
+  distinct premise-drift status) when the owner calls it.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns
