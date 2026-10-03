@@ -1,34 +1,25 @@
-Iteration: iter-306 (`browserstream` — the owner's «продолжить
-  работу по фронтенду, например браузерный адаптер» call; R2
-  frontend-local): the streaming admission's steps 3+4 LANDED
-  (FRONTEND_WEB_LAW §5's order, behind the iter-305 contract): the
-  EventSource adapter behind the typed gateway client
-  (`frontend/src/api/gateway/stream.ts`): every frame runtime-
-  validated by the zod frame validators over the 8 live-captured
-  wire fixtures (the open REPLAY/RESYNC documents, the event
-  envelope, the rejected/overflow/close terminals, the 4xx guard
-  bodies — captured off the real gateway through a real socket,
-  the D4 byte parity asserted at capture time); OWN bounded
-  reconnection — NEVER the browser's auto-reconnect (the explicit-
-  parameter-wins cursor law makes it re-request the ORIGINAL
-  cursor and duplicate the replay window; a semantic rejection
-  would reconnect into the same verdict forever): the source is
-  closed on every terminal/error, the re-dial rides the bounded
-  backoff ladder (500ms→5s cap, reset on OPEN) from the adapter's
-  own cursor; the honest phase vocabulary IDLE/CONNECTING/OPEN/
-  PAUSED/RESYNC/REJECTED/FAILED (the §5.2 first-class failure
-  classes, never collapsed); the RESYNC answer hands the recovery
-  to the consumer — the same one-POST `session.events` read the
-  poll lane applies, then the re-begin from the reconciled cursor;
-  the focused-tab policy (step 4) in `useLiveTail`'s dual-
-  transport stream lane: only a visible+focused tab holds a
-  connection (visibilitychange + focus/blur), a background tab
-  holds NONE (STALE, last-known presentation), one stream per
-  tab, the POST poll ladder the always-valid fallback (the feed
-  selector — stream default); the architecture guard's R2
-  narrowed to the sanctioned adapter module (EventSource ONLY in
-  api/gateway/stream.ts, exactly like fetch's R1); 29 new test
-  rows (23 contract + 6 integration)
+Iteration: iter-307 (`spacingscale` — the owner's «продолжить
+  работу по фронтенду» delegated call; R2 frontend-local): the
+  visual floor's THIRD row LANDED (iter-304's own declared NEXT —
+  layout changes get their own visual-proof pass, never a silent
+  fold): the SPACING SCALE in styles.css's :root — SPACE_1..10
+  (2/4/6/8/10/12/16/20/32/48px over VISUAL_SYSTEM_UI §1.1's bands):
+  the seventeen organic values across the 131 layout-affecting
+  padding/margin/gap declarations consolidated onto the ten steps
+  (149 literal usages replaced by the counter-audited persistent
+  script — max drift 2px, 119/149 exact; the twin merges 1→2,
+  3→4, 5→6, 7→8, 9→8, 14→16, 18→16, 34→32: the two-column grids
+  aligned at 16, the list indents at 16, the pill chips at 2/8;
+  0 and auto stay literal by law — the zero/auto semantics);
+  the architecture guard's V3 scan (a raw px/rem in any spacing
+  declaration outside :root is a red test; mutation-verified —
+  three violation classes caught RED, restored GREEN); the row's
+  own live visual-proof pass: 7+7 before/after surface
+  screenshots + the LIVE FAILED-band bubble check (the volatile
+  transcript drops on unmount — the bubble verified on a mounted
+  turn, never a detached selector) + 261 computed spacing values
+  — every after-value on the token grid, every drift a declared
+  twin merge, zero console errors
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
@@ -36,39 +27,29 @@ Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
 2555 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin) ·
 Date: 2026-10-03 ·
-Scope: frontend/src/api/gateway/{contracts,validators}.ts (the
-  stream frame types + the zod frame validators), frontend/src/
-  api/gateway/stream.ts (NEW — the adapter), frontend/src/features/
-  trajectory/{useLiveTail.ts, Trajectory.tsx} (the dual-transport
-  lane + the feed selector + the phase line), frontend/src/app/
-  composition/styles.css (one token-compliant rule), frontend/
-  tests/{helpers/fakeEventSource.ts (NEW), contract/stream.test.ts
-  (NEW, 23 rows), integration/Trajectory.test.tsx (the stream lane's
-  6 rows + the poll rows carried), fixtures/stream_*.json ×8 +
-  manifest.json, architecture/guard.test.ts (R2 narrowed)},
-  frontend/README.md, docs/{FRONTEND_WEB_LAW.md (§3's session-stream
-  row + §5's steps 3+4 LANDED), AGENT_NAVIGATION.md (§1's frontend/
-  row), frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md (the stage map +
-  §5's boundaries), TASKS.md (the ledger, iter-296 evicted),
-  STATUS.md (this header + the Next step), worklog.md (the iter-306
-  entry, iter-296 evicted), iterations/iter-306-browserstream-
-  report.md (new)} — 20 changed/created (12 modified + 8 created;
-  R2 — frontend-local, zero Python change, INV-4 untouched (no new
-  network module — the browser rides the SANCTIONED iter-305 GET
-  /events binding), zero canon change, the LOG untouched, zero
-  corpus price; NO test deleted or weakened — 29 added, the 7
-  carried poll rows re-pinned to the explicit poll feed, vitest
-  222 → 251)
+Scope: frontend/src/app/composition/styles.css (the ten spacing
+  tokens + the 131 declarations tokenized), frontend/tests/
+  architecture/guard.test.ts (the V3 scan — 40 additive lines,
+  zero deletions), frontend/README.md (the V3 row), docs/{
+  VISUAL_SYSTEM_UI.md (§2's LANDED line + §2.1's spacing
+  paragraph), TASKS.md (the ledger, iter-297 evicted), STATUS.md
+  (this header + the Next step), worklog.md (the iter-307 entry,
+  iter-297 evicted), iterations/iter-307-spacingscale-report.md
+  (new)} — 8 changed/created (7 modified + 1 created; R2 —
+  frontend-local, zero Python change, INV-4 untouched, zero canon
+  change, the LOG untouched, zero corpus price; NO test deleted
+  or weakened — 1 added, vitest 251 → 252)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
-  first row + the V1/V2 visual floors LANDED (iter-293/297/304);
-  Phase 3's SEVEN rows LANDED (iter-294/295/296/298/299/300/301) +
-  the IA REPAIR LANDED (iter-297, D-247); the owner-side bands
-  CLOSED LIVE (iter-302); THE STREAMING ADMISSION LANDED — the
-  backend contract (iter-305, D-248) + the browser adapter + the
-  focused-tab policy (iter-306, steps 3+4); the next frontend rows
-  the owner's call: the acceptance matrix, the SPACING scale (the
-  visual floor's third row, 131 declarations), the DECISIONS
-  collapse, the tooling floor's remaining rows (the CI wiring, the
+  first row + the V1/V2/V3 visual floors LANDED (iter-293/297/
+  304/307 — the spacing scale the third row: ten steps, max
+  drift 2px, guard-executable); Phase 3's SEVEN rows LANDED
+  (iter-294/295/296/298/299/300/301) + the IA REPAIR LANDED
+  (iter-297, D-247); the owner-side bands CLOSED LIVE (iter-302);
+  THE STREAMING ADMISSION LANDED — the backend contract
+  (iter-305, D-248) + the browser adapter + the focused-tab
+  policy (iter-306, steps 3+4); the next frontend rows the
+  owner's call: the acceptance matrix, the DECISIONS collapse,
+  the tooling floor's remaining rows (the CI wiring, the
   Playwright-class multi-tab smoke); the standing boundaries: a
   SharedWorker stream transport, Tauri, PWA, the Settings
   Appearance section (no persisted store) — each its own admission
@@ -143,22 +124,21 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-306 DONE: browserstream (the owner's «продолжить работу по
-  фронтенду, например браузерный адаптер» call; R2
-  frontend-local).** The streaming admission's steps 3+4: the
-  EventSource adapter behind the typed gateway client, the zod
-  frame validators over the live-captured wire fixtures, the
-  focused-tab budget policy in the UI — dual-transport live tail
-  (stream default, POST poll the fallback). The RU report:
-  docs/iterations/iter-306-browserstream-report.md.
-Next: the owner's calls — (1) the standing queue unchanged: the
-  SPACING scale (the visual floor's third row, 131 declarations),
-  the acceptance matrix, the DECISIONS collapse (36→30, the
-  owner's call), the tooling floor's remaining rows (the CI
-  wiring, the Playwright-class multi-tab smoke — the adapter's
-  focused-tab law is now executable there), the B1/C4 law diffs
-  from iter-303 (adopt or reject), and the world track's parallel
-  rows.
+**iter-307 DONE: spacingscale (the owner's «продолжить работу по
+  фронтенду» delegated call; R2 frontend-local).** The visual
+  floor's third row: the ten-step spacing scale in :root
+  (SPACE_1..10 over §1.1's bands), the 131 layout-affecting
+  declarations tokenized (max drift 2px, 119/149 exact), the
+  guard's V3 scan mutation-verified, the live before/after
+  visual-proof pass over all seven surfaces + the live
+  FAILED-band bubble check. The RU report:
+  docs/iterations/iter-307-spacingscale-report.md.
+Next: the owner's calls — (1) the standing queue: the acceptance
+  matrix, the DECISIONS collapse (36→30, the owner's call), the
+  tooling floor's remaining rows (the CI wiring, the
+  Playwright-class multi-tab smoke — the adapter's focused-tab
+  law is now executable there), the B1/C4 law diffs from iter-303
+  (adopt or reject), and the world track's parallel rows.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns

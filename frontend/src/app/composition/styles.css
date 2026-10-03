@@ -52,6 +52,22 @@
   --radius-m: 6px;
   --radius-l: 8px;
   --radius-pill: 999px;
+  /* The spacing scale (§1.1's bands — the visual floor's third row,
+     iter-307): ten named steps consolidate the seventeen organic
+     values across the 131 layout-affecting declarations; max drift
+     2px, 119/149 usages exact. A padding/margin/gap literal outside
+     this set is a V3 guard violation. 0 and auto stay literal (the
+     zero/auto semantics); em/% stay legal as contextual ratios. */
+  --space-1: 2px;   /* optical: hairline gaps, chip insets */
+  --space-2: 4px;   /* optical: tight insets, code chips */
+  --space-3: 6px;   /* component inner: dense rows, label pairs */
+  --space-4: 8px;   /* component: controls, list gutters */
+  --space-5: 10px;  /* component: the workhorse inset */
+  --space-6: 12px;  /* component upper: group gaps */
+  --space-7: 16px;  /* section lower: surface padding, grid gaps */
+  --space-8: 20px;  /* section: workspace gutters */
+  --space-9: 32px;  /* section upper: major indents */
+  --space-10: 48px; /* major: scroll breathing room */
   font-family: var(--font-body-family);
   font-size: var(--font-root);
 }
@@ -70,14 +86,14 @@ code {
   background: var(--surface-2);
   border: 1px solid var(--line);
   border-radius: var(--radius-s);
-  padding: 0 4px;
+  padding: 0 var(--space-2);
 }
 button {
   background: var(--surface-2);
   color: var(--text);
   border: 1px solid var(--line);
   border-radius: var(--radius-s);
-  padding: 3px 10px;
+  padding: var(--space-2) var(--space-5);
   font: inherit;
   cursor: pointer;
 }
@@ -94,7 +110,7 @@ select {
   color: var(--text);
   border: 1px solid var(--line);
   border-radius: var(--radius-s);
-  padding: 3px 6px;
+  padding: var(--space-2) var(--space-3);
   font: inherit;
 }
 
@@ -110,8 +126,8 @@ select {
   flex: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 10px 16px;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-7);
   border-bottom: 1px solid var(--line);
   background: var(--surface);
 }
@@ -119,7 +135,7 @@ select {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px 16px;
+  gap: var(--space-4) var(--space-7);
 }
 .app-header-row h1 {
   font-size: var(--font-heading-xl);
@@ -133,17 +149,17 @@ select {
 }
 .surface-note {
   color: var(--muted);
-  margin: 2px 0 6px;
+  margin: var(--space-1) 0 var(--space-3);
   font-size: var(--font-body);
 }
 .tag {
   font-size: var(--font-micro);
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  padding: 1px 8px;
+  padding: var(--space-1) var(--space-4);
   color: var(--muted);
   vertical-align: middle;
-  margin-left: 6px;
+  margin-left: var(--space-3);
 }
 .tag-live {
   color: var(--accent);
@@ -169,7 +185,7 @@ select {
 .strip {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: var(--space-6);
   align-items: center;
   color: var(--muted);
   font-size: var(--font-body);
@@ -183,7 +199,7 @@ select {
   font-size: var(--font-meta);
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  padding: 1px 9px;
+  padding: var(--space-1) var(--space-4);
 }
 .freshness-live {
   color: var(--accent);
@@ -208,7 +224,7 @@ select {
 .columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: var(--space-7);
 }
 @media (max-width: 860px) {
   .columns {
@@ -220,10 +236,10 @@ select {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius-l);
-  padding: 14px 16px;
+  padding: var(--space-7) var(--space-7);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-5);
 }
 .surface-header h2 {
   font-size: var(--font-heading-l);
@@ -231,13 +247,13 @@ select {
 }
 .surface-header h3 {
   font-size: var(--font-heading);
-  margin: 6px 0 2px;
+  margin: var(--space-3) 0 var(--space-1);
 }
 
 .status-grid {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 3px 12px;
+  gap: var(--space-2) var(--space-6);
   margin: 0;
   font-size: var(--font-body);
 }
@@ -249,12 +265,12 @@ select {
 }
 .op-chip {
   display: inline-block;
-  margin: 1px 4px 1px 0;
+  margin: var(--space-1) var(--space-2) var(--space-1) 0;
 }
 
 .banner {
   border-radius: var(--radius-m);
-  padding: 7px 10px;
+  padding: var(--space-4) var(--space-5);
   font-size: var(--font-body);
   border: 1px solid var(--line);
 }
@@ -281,7 +297,7 @@ select {
 .controls {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: var(--space-4);
   align-items: center;
   font-size: var(--font-body);
   color: var(--muted);
@@ -302,8 +318,8 @@ select {
   width: 216px;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 12px 8px;
+  gap: var(--space-1);
+  padding: var(--space-6) var(--space-4);
   border-right: 1px solid var(--line);
   background: var(--surface);
   overflow-y: auto;
@@ -316,7 +332,7 @@ select {
   border-left: 2px solid transparent;
   border-radius: 0 var(--radius-s) var(--radius-s) 0;
   background: transparent;
-  padding: 7px 10px;
+  padding: var(--space-4) var(--space-5);
   font: inherit;
   color: var(--text);
 }
@@ -336,8 +352,8 @@ select {
 /* The Diagnostics entry — subdued by law: muted, separated, never a
    product peer. The proof instruments live behind it. */
 .shell-item-diagnostics {
-  margin-top: 16px;
-  padding-top: 8px;
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
   border-top: 1px solid var(--line);
   border-left: 2px solid transparent;
   color: var(--muted);
@@ -355,7 +371,7 @@ select {
   flex: 1;
   min-width: 0;
   overflow-y: auto;
-  padding: 16px 20px 48px;
+  padding: var(--space-7) var(--space-8) var(--space-10);
 }
 .shell-pane {
   max-width: 980px;
@@ -371,12 +387,12 @@ select {
 .diagnostics-tabs {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 12px;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-6);
 }
 .diag-tab {
   font-size: var(--font-compact);
-  padding: 4px 12px;
+  padding: var(--space-2) var(--space-6);
   color: var(--muted);
 }
 .diag-tab-active {
@@ -395,7 +411,7 @@ select {
 .empty-inspector {
   color: var(--muted);
   font-size: var(--font-body);
-  margin: 4px 0;
+  margin: var(--space-2) 0;
 }
 
 .vlist {
@@ -406,9 +422,9 @@ select {
 .trow {
   display: grid;
   grid-template-columns: 70px 190px 1fr 1fr;
-  gap: 10px;
+  gap: var(--space-5);
   align-items: center;
-  padding: 0 10px;
+  padding: 0 var(--space-5);
   height: 100%;
   font-size: var(--font-compact);
   border-bottom: 1px solid var(--row-divider);
@@ -451,20 +467,20 @@ select {
 }
 .inspector pre {
   margin: 0;
-  padding: 10px;
+  padding: var(--space-5);
   font-size: var(--font-meta);
   color: var(--text-mono);
 }
 
 .probe-panel {
   border-top: 1px solid var(--line);
-  padding-top: 8px;
+  padding-top: var(--space-4);
 }
 
 /* The Observatory surface (the HISTORY world) — the runs discovery
    list + the bounded event window's own table shape. */
 .runs-block h3 {
-  margin: 4px 0 2px;
+  margin: var(--space-2) 0 var(--space-1);
   font-size: var(--font-heading);
   font-weight: var(--weight-strong);
 }
@@ -474,14 +490,14 @@ select {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-2);
 }
 .runs-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-5);
   font-size: var(--font-body);
-  padding: 3px 6px;
+  padding: var(--space-2) var(--space-3);
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
   background: var(--surface-2);
@@ -490,7 +506,7 @@ select {
   border-color: var(--history);
 }
 .runs-open {
-  padding: 2px 10px;
+  padding: var(--space-1) var(--space-5);
   font-size: var(--font-meta);
 }
 .runs-name {
@@ -509,8 +525,8 @@ select {
 .orow-header {
   display: grid;
   grid-template-columns: 54px 168px 158px 1fr 64px 120px;
-  gap: 10px;
-  padding: 0 10px;
+  gap: var(--space-5);
+  padding: 0 var(--space-5);
   font-size: var(--font-meta);
   color: var(--muted);
   text-transform: uppercase;
@@ -529,9 +545,9 @@ select {
 .orow {
   display: grid;
   grid-template-columns: 54px 168px 158px 1fr 64px 120px;
-  gap: 10px;
+  gap: var(--space-5);
   align-items: center;
-  padding: 3px 10px;
+  padding: var(--space-2) var(--space-5);
   font-size: var(--font-compact);
   border-bottom: 1px solid var(--row-divider);
   cursor: pointer;
@@ -572,16 +588,16 @@ select {
 }
 .probe-list {
   list-style: none;
-  margin: 4px 0;
+  margin: var(--space-2) 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--space-2);
 }
 .probe-record {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: var(--space-6);
   font-size: var(--font-compact);
 }
 .probe-label {
@@ -612,12 +628,12 @@ button.probe {
 .settings-sections {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 14px;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-7);
 }
 .section-tab {
   font-size: var(--font-compact);
-  padding: 4px 12px;
+  padding: var(--space-2) var(--space-6);
   color: var(--muted);
 }
 .section-tab-active {
@@ -627,17 +643,17 @@ button.probe {
 .settings-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-6);
 }
 .settings-form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-5);
 }
 .settings-field {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: var(--space-2);
 }
 .settings-field input[type="text"] {
   width: 100%;
@@ -654,13 +670,13 @@ button.probe {
   font-size: var(--font-meta);
 }
 .preview-block h3 {
-  margin: 6px 0 2px;
+  margin: var(--space-3) 0 var(--space-1);
   font-size: var(--font-body);
   font-weight: var(--weight-strong);
 }
 .command-preview {
   margin: 0;
-  padding: 10px;
+  padding: var(--space-5);
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
   background: var(--surface-2);
@@ -684,20 +700,20 @@ button.probe {
   min-height: 220px;
   max-height: 46vh;
   overflow-y: auto;
-  padding: 10px;
+  padding: var(--space-5);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: var(--space-5);
 }
 .chat-turn {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-3);
 }
 .chat-bubble {
   border: 1px solid var(--line);
   border-radius: var(--radius-l);
-  padding: 7px 10px;
+  padding: var(--space-4) var(--space-5);
   max-width: 86%;
 }
 .chat-bubble-user {
@@ -716,7 +732,7 @@ button.probe {
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 3px;
+  margin-bottom: var(--space-2);
 }
 .chat-content {
   margin: 0;
@@ -724,7 +740,7 @@ button.probe {
   overflow-wrap: anywhere;
 }
 .chat-provenance {
-  margin: 6px 0 0;
+  margin: var(--space-3) 0 0;
   font-size: var(--font-meta);
   color: var(--muted);
   font-family: var(--font-mono);
@@ -734,16 +750,16 @@ button.probe {
   font-size: var(--font-compact);
 }
 .chat-lane .empty {
-  margin: 2px 0;
+  margin: var(--space-1) 0;
 }
 .chat-repoll {
-  margin-left: 10px;
+  margin-left: var(--space-5);
   font-size: var(--font-meta);
 }
 .chat-composer {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-4);
 }
 .chat-composer textarea {
   width: 100%;
@@ -754,12 +770,12 @@ button.probe {
   color: var(--text);
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
-  padding: 6px 8px;
+  padding: var(--space-3) var(--space-4);
 }
 .chat-overrides {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: var(--space-6);
 }
 @media (max-width: 860px) {
   .chat-overrides {
@@ -777,20 +793,20 @@ button.probe {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  margin: 8px 0;
+  gap: var(--space-5);
+  margin: var(--space-4) 0;
 }
 .workspace-row input[type="search"] {
   flex: 1 1 260px;
 }
 .strip-edit input {
   width: 11em;
-  padding: 1px 6px;
+  padding: var(--space-1) var(--space-3);
 }
 .strip-check {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-3);
   white-space: nowrap;
   font-size: var(--font-body);
 }
@@ -799,27 +815,27 @@ button.probe {
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
   background: var(--surface-2);
-  padding: 8px 10px;
+  padding: var(--space-4) var(--space-5);
 }
 .preset-description {
-  margin: 0 0 6px;
+  margin: 0 0 var(--space-3);
   color: var(--muted);
   font-size: var(--font-body);
 }
 .preset-diff {
-  margin: 0 0 8px;
-  padding-left: 18px;
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-7);
   font-size: var(--font-body);
 }
 .preset-diff li {
-  margin: 2px 0;
+  margin: var(--space-1) 0;
   overflow-wrap: anywhere;
 }
 .pinned-strip {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin: 8px 0;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
 }
 .pinned-chip {
   display: inline-flex;
@@ -833,14 +849,14 @@ button.probe {
   border: none;
   border-radius: var(--radius-pill) 0 0 var(--radius-pill);
   background: transparent;
-  padding: 2px 10px;
+  padding: var(--space-1) var(--space-5);
   font-size: var(--font-compact);
 }
 .pinned-unpin {
   border: none;
   border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
   background: transparent;
-  padding: 2px 8px;
+  padding: var(--space-1) var(--space-4);
   color: var(--muted);
   font-size: var(--font-compact);
 }
@@ -848,11 +864,11 @@ button.probe {
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
   background: var(--surface-2);
-  padding: 8px 10px;
-  margin: 10px 0;
+  padding: var(--space-4) var(--space-5);
+  margin: var(--space-5) 0;
 }
 .chain-region h3 {
-  margin: 0 0 6px;
+  margin: 0 0 var(--space-3);
   font-size: var(--font-heading);
 }
 .chain-list {
@@ -866,8 +882,8 @@ button.probe {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
-  padding: 4px 0;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
   border-bottom: 1px solid var(--row-divider);
 }
 .chain-member:last-child {
@@ -876,7 +892,7 @@ button.probe {
 .chain-member-draft {
   background: var(--row-hover);
   border-radius: var(--radius-s);
-  padding: 4px 6px;
+  padding: var(--space-2) var(--space-3);
 }
 .chain-order {
   color: var(--muted);
@@ -886,8 +902,8 @@ button.probe {
 .inference-categories {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
 }
 .category-section {
   border: 1px solid var(--line);
@@ -901,7 +917,7 @@ button.probe {
   background: transparent;
   border: none;
   border-radius: var(--radius-m) var(--radius-m) 0 0;
-  padding: 7px 10px;
+  padding: var(--space-4) var(--space-5);
 }
 .category-toggle:hover:not(:disabled) {
   border-color: transparent;
@@ -913,11 +929,11 @@ button.probe {
 .category-count {
   color: var(--muted);
   font-size: var(--font-meta);
-  margin-left: 6px;
+  margin-left: var(--space-3);
 }
 .control-row {
   border-top: 1px solid var(--row-divider);
-  padding: 7px 10px 8px 34px;
+  padding: var(--space-4) var(--space-5) var(--space-4) var(--space-9);
   position: relative;
 }
 .control-row-draft {
@@ -931,7 +947,7 @@ button.probe {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 8px;
+  gap: var(--space-4);
 }
 .control-name {
   font-weight: var(--weight-strong);
@@ -947,7 +963,7 @@ button.probe {
   border: none;
   background: transparent;
   color: var(--muted);
-  padding: 0 4px;
+  padding: 0 var(--space-2);
   font-size: var(--font-body);
 }
 .pin-button[aria-pressed="true"] {
@@ -958,7 +974,7 @@ button.probe {
   letter-spacing: var(--tracking-label);
   border: 1px solid var(--line);
   border-radius: var(--radius-pill);
-  padding: 1px 8px;
+  padding: var(--space-1) var(--space-4);
 }
 /* The resolver's state vocabulary as STATE-class token mappings —
    the honest matrix, never decorative color. */
@@ -990,7 +1006,7 @@ button.probe {
   border-color: var(--synthetic);
 }
 .control-doc {
-  margin: 3px 0 5px;
+  margin: var(--space-2) 0 var(--space-3);
   font-size: var(--font-meta);
   color: var(--muted);
   overflow-wrap: anywhere;
@@ -998,7 +1014,7 @@ button.probe {
 .control-editor {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-4);
 }
 .control-editor input[type="number"],
 .control-editor input[type="text"] {
@@ -1007,16 +1023,16 @@ button.probe {
 .gpu-layers-editor {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-3);
 }
 .control-reasons {
-  margin: 5px 0 0;
-  padding-left: 16px;
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-7);
   font-size: var(--font-meta);
   color: var(--muted);
 }
 .control-reasons li {
-  margin: 1px 0;
+  margin: var(--space-1) 0;
   overflow-wrap: anywhere;
 }
 
@@ -1027,7 +1043,7 @@ button.probe {
 .models-arrival {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: var(--space-7);
 }
 @media (max-width: 860px) {
   .models-arrival {
@@ -1038,10 +1054,10 @@ button.probe {
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
   background: var(--surface-2);
-  padding: 10px 12px;
+  padding: var(--space-5) var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--space-4);
 }
 .models-arrival-form h3 {
   margin: 0;
@@ -1058,7 +1074,7 @@ button.probe {
   color: var(--text);
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
-  padding: 6px 8px;
+  padding: var(--space-3) var(--space-4);
 }
 .models-arrival-form .settings-field input {
   font-family: var(--font-mono);
@@ -1070,22 +1086,22 @@ button.probe {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-3);
 }
 .models-row {
   border: 1px solid var(--line);
   border-radius: var(--radius-m);
   background: var(--surface-2);
-  padding: 8px 12px;
+  padding: var(--space-4) var(--space-6);
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: var(--space-3);
 }
 .models-row-head {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-5);
 }
 .models-name {
   font-weight: var(--weight-strong);
@@ -1096,7 +1112,7 @@ button.probe {
 .models-row-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px;
+  gap: var(--space-7);
   font-size: var(--font-meta);
   color: var(--muted);
 }
@@ -1131,9 +1147,9 @@ button.probe {
 }
 .models-run {
   border-top: 1px solid var(--line);
-  padding-top: 8px;
+  padding-top: var(--space-4);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-3);
 }
 

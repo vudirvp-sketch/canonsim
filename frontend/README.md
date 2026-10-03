@@ -94,7 +94,15 @@ font-family stack, numeric font-weight, or border-radius px outside
 `--font-body-family`/`--font-mono` stacks, `--weight-strong`,
 `--tracking-label`, and `--radius-s/m/l/pill`; em ratios stay legal
 as contextual metrics; the scan's mutation check catches all three
-violation classes). A violation is a red
+violation classes); **V3 — the spacing floor (iter-307): no raw
+px/rem in any padding/margin/gap declaration outside `:root`**
+(VISUAL_SYSTEM_UI §1.1/§2.1 — the ten-step spacing scale
+`--space-1..10` (2/4/6/8/10/12/16/20/32/48px) consolidating the
+seventeen organic values across the 131 layout-affecting
+declarations; max drift 2px, 119/149 usages exact; 0 and auto stay
+literal — the zero/auto semantics; em/% ratios stay legal; the
+scan's mutation check catches all three violation classes). A
+violation is a red
 test naming the file and line — never silent drift. The heavier
 instruments named by the law (dependency-cruiser / eslint-
 boundaries, the Playwright-class multi-tab smoke) stay parked rows,

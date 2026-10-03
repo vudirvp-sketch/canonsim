@@ -81,9 +81,12 @@ carries its own token form going forward — LANDED:
 `frontend/src/app/composition/styles.css`'s `:root` (the colors
 iter-297/V1; the typography contract + the radius scale
 iter-304/V2 — the seven-step type scale, the two family stacks,
-the strong weight, the label tracking, RADIUS_S/M/L/PILL; enforced
-by the architecture guard's V1/V2 scans, a literal outside `:root`
-is a red test). The token names follow the
+the strong weight, the label tracking, RADIUS_S/M/L/PILL; the
+spacing scale iter-307/V3 — SPACE_1..SPACE_10 over §1.1's bands,
+the seventeen organic values consolidated with max drift 2px,
+119/149 usages exact; enforced by the architecture guard's
+V1/V2/V3 scans, a literal outside `:root` is a red test). The
+token names follow the
 role taxonomy:
 
 ```text
@@ -112,6 +115,13 @@ ICON_SIZE_S / _M / _L            RADIUS_S / _M / _L
 MOTION_FAST / _STANDARD / _SLOW  FOCUS_RING_WIDTH
 DIVIDER_THICKNESS
 ```
+
+The SPACING half is LANDED (iter-307, V3): SPACE_1..SPACE_10 —
+2/4/6/8/10/12/16/20/32/48px, the §1.1 bands (optical 2–4 ·
+component 6–16 · section 20–32 · major 48); every
+padding/margin/gap value in the web client consumes a step by
+name, 0 and auto stay literal (the zero/auto semantics), em/%
+stay legal as contextual ratios.
 
 This is what makes DPI behavior, compact mode, accessibility hit
 targets, responsive layout and visual tuning one-place changes instead

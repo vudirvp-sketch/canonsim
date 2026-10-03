@@ -42,6 +42,12 @@
  *       border-radius px outside `:root` (iter-304 — the seven-step
  *       type scale, the family stacks, the weight, the radius
  *       scale; em ratios stay legal as contextual metrics).
+ *   V3  spacing (§1.1/§2.1): no raw px/rem literal in a
+ *       padding/margin/gap declaration outside `:root` (iter-307 —
+ *       the ten-step spacing scale consolidating the seventeen
+ *       organic values; 0 and auto stay literal — the zero/auto
+ *       semantics, exactly like the radius compound's 0; em/% stay
+ *       legal as contextual ratios).
  *
  * Scans are CALL-FORM patterns (e.g. `fetch(`, `localStorage.`) so
  * law-restating docstrings never false-positive — a comment saying
@@ -327,6 +333,40 @@ describe("V2 — the dimension floor: typography + radius literals live only in 
       // compound is legal — the square corner's own semantic).
       for (const hit of chunk.match(/border-radius:\s*[^;]*\d+px[^;]*/g) ?? []) {
         violations.push(`${cssPath} ${where}: ${hit.trim()}`);
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("V3 — the spacing floor: padding/margin/gap literals live only in the token root (VISUAL_SYSTEM_UI §1.1/§2.1)", () => {
+  it("styles.css: no raw px/rem in spacing declarations outside :root (a spacing value is a token, never a literal)", () => {
+    const cssPath = join(SRC, "app", "composition", "styles.css");
+    const css = readFileSync(cssPath, "utf8");
+    const rootStart = css.indexOf(":root");
+    expect(rootStart).toBeGreaterThanOrEqual(0);
+    const rootEnd = css.indexOf("}", rootStart);
+    const chunks: readonly (readonly [string, string])[] = [
+      ["before :root", css.slice(0, rootStart)],
+      ["after :root", css.slice(rootEnd + 1)],
+    ];
+    // A spacing declaration: the property carries the layout; its
+    // value must be token references. 0 and auto stay literal (the
+    // zero/auto semantics); em/% ratios stay legal (contextual
+    // metrics, the same form as V2's code-element exception).
+    const decl =
+      /((?:row-gap|column-gap|padding|margin|gap)(?:-(?:top|right|bottom|left))?)\s*:\s*([^;{}]+)/g;
+    const literal = /-?\d+(?:\.\d+)?(?:px|rem)\b/;
+    const violations: string[] = [];
+    for (const [where, chunk] of chunks) {
+      for (const m of chunk.matchAll(decl)) {
+        const value = m[2] ?? "";
+        const hit = literal.exec(value);
+        if (hit !== null) {
+          violations.push(
+            `${cssPath} ${where}: ${m[1]}: …${hit[0]} (in "${value.trim().slice(0, 60)}")`,
+          );
+        }
       }
     }
     expect(violations).toEqual([]);
