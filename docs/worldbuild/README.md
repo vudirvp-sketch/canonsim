@@ -31,10 +31,13 @@ Normal worldbuilding work:
 
 Do **not** load the legacy source archive by default. Open it only to recover
 provenance, inspect a disputed passage, or deliberately re-run old research.
-The same law governs `archive/` — the preserved world-track bootstrap pack
-(`WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip`, ingested iter-277): historical
-evidence only, never re-ingested wholesale (its provenance fence:
-`archive/README.md`).
+The same law governs `archive/` — the preserved world-track packs
+(`WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5.zip`, ingested iter-277; superseded as
+the newest bundle form by `CANONSIM_AGENT_WORLD_SUITE_v1_0.zip` — CORE_WORLD
+v1.3 + WORLD_TRACK v4.6, ingested iter-311, the world half byte-equivalent
+to v4.5 beyond its sync notes): historical evidence only, never re-ingested
+wholesale (the provenance fence: `archive/README.md`; the durable surface:
+`WORLD_TRACK_AGENT_CONTEXT.md`).
 
 ## Information ownership
 

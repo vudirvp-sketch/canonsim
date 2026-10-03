@@ -4,9 +4,12 @@
 > non-negotiable rules, boundaries, proven substrate, evidence conclusions,
 > open hypotheses, deferred mechanisms, the current stage/gate, navigation,
 > anti-patterns. Bootstrap source: `WORLD_TRACK_NEXT_v4_AGENT_PACK_v4.5`
-> (external navigation bundle, ingested iter-277) — preserved verbatim as
+> (external navigation bundle, ingested iter-277; superseded as the newest
+> bundle form by `CANONSIM_AGENT_WORLD_SUITE_v1_0` — CORE_WORLD v1.3 +
+> WORLD_TRACK v4.6 — ingested iter-311, its world half verified byte-
+> equivalent to v4.5 beyond the sync notes) — both preserved verbatim as
 > historical evidence in `archive/`, never re-ingested wholesale. This file
-> supersedes the pack as the durable surface; the repository's owner
+> supersedes the packs as the durable surface; the repository's owner
 > documents remain authoritative everywhere (D-024: this file navigates and
 > reconciles, it never restates an owner). Update it only when the stage,
 > a boundary, or an evidence verdict changes — never as a narrative log.
@@ -397,14 +400,22 @@ verdicts above carry the state; the history is not restated here).
 | verification claims | `docs/TEST_PLAN.md` §9 |
 | actor perception/knowledge boundary | `docs/DIRECTOR_SPEC.md` + `docs/ref/live_char_guide.md` |
 
-**The preserved pack** — `docs/worldbuild/archive/`: the verbatim v4.5
-zip (bootstrap evidence, md5-pinned) + its provenance README. Open it
-only for what it uniquely retains: the full caravan/mobility dossier
+**The preserved packs** — `docs/worldbuild/archive/`: the verbatim v4.5
+zip (bootstrap evidence, md5-pinned) + the verbatim suite zip
+(`CANONSIM_AGENT_WORLD_SUITE_v1_0`, iter-311 — CORE_WORLD v1.3 + WORLD_TRACK
+v4.6, md5/sha256-pinned) + the provenance README. The suite's cross-pack
+boundary is ROUTING, never authority: cross-cutting execution/scale/
+semantic-equivalence/LLM-boundary questions (its C1–C5 taxonomy) are
+parked research — the owner-gated TASKS row `core-1`, the POC contracts
+opened from the archive only when that row fires; world-specific
+questions stay with this file and the worldbuild owners. Open the archive
+only for what the packs uniquely retain: the full caravan/mobility dossier
 (the RU v3 source), the complete probe contracts, the dormant-regime
-cards, and the intake crosswalk. It is a derived convenience copy frozen
-at iter-272 — the repository's owner documents are current; the pack
-never overrides them, and it must not be re-ingested for subsequent
-tasks (this file is the ingestion's durable result).
+cards, the intake crosswalk, and (suite-only) the C1–C5/POC contracts and
+the sync matrix. They are derived convenience copies — the repository's
+owner documents are current; the packs never override them, and they
+must not be re-ingested for subsequent tasks (this file is the
+ingestions' durable result).
 
 ## 11. Explicit anti-patterns
 

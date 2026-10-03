@@ -5318,6 +5318,82 @@ third tab clean). Zero canon change, the LOG untouched, zero corpus
 price. The owner's RU report + the S0-4 load note:
 `docs/iterations/iter-289-frontendweb-report.md`.
 
+**The iter-311 worldsuite record (R0 doc-only — the owner's 2026-10-03
+chat-upload ingestion call: «изучи и обработай CANONSIM_AGENT_WORLD_SUITE_
+v1_0.zip, что перенимаем и реализуем а что нет, что истинно а что нет. куда
+"паркуем" результаты и данные с пака и почему. ВАЖНО: я не хочу всю дорогу
+скидывать тебе вручную этот архив» — the third external-pack ingestion, the
+D-242 family's D-251).**
+
+- **The form.** The suite (92572 bytes, 25 files, md5
+  `6b43aeb9b41c59c03dcb777424242000`, sha256 `e8c969666c3cac5bed5a543352b8
+  ce21efd52954f265b844c12cf74c7ffbfbec`) — a synchronized two-layer agent
+  handoff: `CORE_WORLD` v1.3 (the cross-cutting semantic/execution/scale/
+  LLM-boundary/research-routing layer, NEW material) + `WORLD_TRACK` v4.6
+  (the world half). Read in full against HEAD `8e788a4` (iter-310).
+- **The WORLD_TRACK half — no new substance.** Diff-verified file-by-file
+  against the archived v4.5: nine of ten files byte-identical except
+  version bumps and the cross-pack synchronization notes (02_DORMANT_
+  REGIMES fully identical); no new world evidence, probes, or proposals.
+  The iter-277 reconciliation (this section's record above) therefore
+  still covers it in full — the v4.6 half is NOT re-ingested.
+- **The CORE_WORLD half — every claim classified against the live repo.**
+  TRUE: the W-stage map (W1–W4 closed, W5 gate met, W6/W7 complete, W8
+  current with the readiness audit — WORLD_TRACK_AGENT_CONTEXT §9/WORKPLAN);
+  the substrate items (eight causal families, five meso units, the
+  account/economy arm, the 2371-event composition + 16 oracles, I0, the
+  four timelines, knowledge asymmetry, the genre/human bands — §5);
+  the resolver-kind list (checked in `core/resolvers.py`, all present
+  plus `settle` which the pack's "such as" list omits); the I0 limitation
+  inventory's three candidates (§7 verbatim); the W8 audit honest-boundary
+  list (iter-287's record); the promotion-gate, separate-track, and
+  byte-identical-replay statements (all standing law). STALE (self-
+  disclaimed at the pack's iter-272 pin, superseded by the iter-266..287
+  landings): the WORLD_TRACK half's W5-asymmetric evidence tables —
+  W5's residues were dispositioned iter-266, rs-9/rs-10 landed
+  iter-267/268, W6/W7/W8 since. INTERNALLY INCONSISTENT (the bundle's
+  own drift, recorded not repaired): the CORE read order lists
+  `08_CHANGE_GATE.md` + `INDEX.md` — absent from the zip; the changelog
+  stops at v1.2 (no v1.2→v1.3 entry — the sync state lives only in
+  PACK_META.json); the two halves carry different repo pins
+  (WORLD_TRACK iter-272, CORE_WORLD ~iter-287+) — "synchronized" means
+  the scope split, never snapshot equality.
+- **The durable result (the owner's «не хочу скидывать вручную» answer).**
+  The suite parked verbatim at `docs/worldbuild/archive/` (md5/sha256
+  pinned, the provenance README extended with the suite's two pins and
+  its unique retains; the v4.5 zip stays — both preserved, the suite the
+  newest bundle form). Once the owner applies the delta, the zip lives in
+  the repository: every future session/clone carries it, and the
+  distillation (the world context §10's cross-pack ROUTING note + the
+  worldbuild README fence + the TASKS row) means it is never re-ingested —
+  the D-242 requirement's form, third instance. The C1–C5 cross-cutting
+  taxonomy (representation continuity, compiled/indexed execution,
+  history/replay scale, the LLM boundary under unusual interaction,
+  shared semantic equivalence) parked as the owner-gated TASKS row
+  `core-1` (RESEARCH/POC-ONLY — the promotion gate unmet; the POC
+  contracts — index-superset/no-false-negatives, the equivalence
+  comparison set, the batch visibility prerequisites, the optimization
+  admission order — open from the archive only when that row fires).
+  NOT adopted: any authority/second-truth claim (the suite's own law
+  agrees — repo owners stay authoritative); any C2/C3/C5 runtime
+  machinery (no consumer, no measured native limit — the standing
+  refusal against speculative scaling engines); a new CORE navigation
+  surface (AGENT_NAVIGATION/TASKS/the archive README carry the routing —
+  AGENTS' no-second-project-memory refusal); the external Cross-Domain
+  method document (referenced by the suite's bridge, not delivered —
+  recorded as a reference, never vendored). llama.cpp NOT installed —
+  R0 doc-only; the standing `workbench/runtime/llama.cpp/` drop layout
+  (iter-302/308's proven flow) is the documented home when a live
+  inference row fires.
+- **The sync.** The archive README, the worldbuild README's fence,
+  WORLD_TRACK_AGENT_CONTEXT.md (the bootstrap line + §10), TASKS.md (the
+  core-1 row + the ledger), DECISIONS.md (D-251 in the D-242 family row),
+  STATUS.md, worklog.md (iter-301 evicted), the iteration report.
+  2556 passed + 1 skipped + ruff + docguard + topology --check clean
+  (zero code, zero pack, zero canon change, the LOG untouched, zero
+  corpus price). The owner's RU report:
+  `docs/iterations/iter-311-worldsuite-report.md`.
+
 ## 7. Cross-cutting (the questions that span phases)
 
 - **Do we ever need a real ECS?** Not in phases 0–2: the projection with

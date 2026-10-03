@@ -1,31 +1,32 @@
-Iteration: iter-310 (`deccollapse` — the owner's 2026-10-03
-  standing-queue disposition call: «DECISIONS-коллапс — сделать
-  сейчас… B1/C4 — оставить как есть / закрыть без изменений…
-  pixel-diff — отложить»): the DECISIONS collapse EXECUTED 40→30
-  — the honest count corrected first (the STATUS line had said
-  «37→30», a number true at iter-293 and stale since; the real
-  count at HEAD: 30 table rows + TEN post-table `###` sections
-  (D-240..D-249) the docguard row-regex never saw + the 75KB
-  D-176..D-239 mega-row): the ten sections re-folded into family
-  rows, the mega-row re-cut into six compact family rows
-  (substrate/packs, engine+workbench, visual/UIUX/obs,
-  corpus+inference, ssi, world-track), seven adjacent-family
-  merges in the old table (the compound-ID law — every D-001..D-250
-  citation verified resolving), the D-024 compression throughout
-  (the per-D detail in git + the iteration reports; the PCC records
-  and the SSI-N020 GC cards preserved in full form), the file
-  166KB→101KB / 594→42 lines; the RECURRENCE TOOTH: docguard now
-  counts the `### D-` section form toward the 30-entry cap and the
-  N017 PCC duty extends to it (the drift class can never regrow
-  silently — the doc-3 philosophy applied to its own blind spot);
-  the B1/C4 law diffs from iter-303 CLOSED WITHOUT DIFF (the
-  owner's call — both verdicts already measured: 0.4s and the
-  soft-cap's doc-sprawl function not worth a law change); the
-  pixel-diff visual regression POSTPONED (the owner's call — the
-  heaviest of the tooling floor's rows; a real visual-regression
-  pipeline when a live need names it; the token-guards + the
-  matrix's live screenshots stand) — all three dispositions
-  recorded as D-250
+Iteration: iter-311 (`worldsuite` — the owner's 2026-10-03
+  chat-upload ingestion call: «изучи и обработай CANONSIM_AGENT_WORLD_
+  SUITE_v1_0.zip, что перенимаем и реализуем а что нет, что истинно а
+  что нет. куда "паркуем" результаты и данные с пака и почему. ВАЖНО: я
+  не хочу всю дорогу скидывать тебе вручную этот архив»): the third
+  external-pack ingestion (D-251, the D-242 family's form) — the
+  synchronized suite (CORE_WORLD v1.3 NEW + WORLD_TRACK v4.6) read in
+  full, every claim classified against HEAD: the CORE claims verified
+  TRUE (the W-stage map incl. W8's audit boundary, the substrate
+  evidence items, the resolver-kind list in code, the I0 inventory, the
+  promotion-gate/byte-identical-replay statements); the WORLD_TRACK
+  half's W5-asymmetric tables named STALE-but-self-disclaimed (the
+  iter-272 pin; superseded by the iter-266..287 landings) and the
+  bundle's own drift recorded (the read order's 08_CHANGE_GATE/INDEX —
+  absent files; the changelog stops at v1.2; the two halves carry
+  different repo pins); the v4.6 world half diff-verified byte-
+  equivalent to the archived v4.5 (sync notes only — no re-ingestion,
+  the iter-277 reconciliation still covers it). PARKED: the suite
+  verbatim at docs/worldbuild/archive/ (md5/sha256-pinned — once the
+  owner applies the delta, the zip lives in the repo: the «не хочу
+  скидывать вручную» requirement's durable answer); the C1–C5
+  cross-cutting taxonomy as the owner-gated TASKS row `core-1`
+  (RESEARCH/POC-ONLY — the promotion gate unmet, nothing implemented);
+  the cross-pack boundary as ROUTING (world context §10 + the
+  worldbuild README fence). NOT adopted: any second-truth claim, any
+  C2/C3/C5 runtime machinery, a new CORE navigation surface, the
+  external Cross-Domain method doc (referenced, never vendored);
+  llama.cpp not installed (R0 doc-only — the standing runtime drop
+  layout the documented home when a live row fires)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
@@ -34,19 +35,20 @@ Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   --check clean (Python 3.12.14, the env pin; the doc-only
   collapse + the guard tooth — zero engine change) ·
 Date: 2026-10-03 ·
-Scope: docs/DECISIONS.md (the collapse 40→30 — the sections
-  re-folded, the mega-row re-cut, the family merges, D-250),
-  scripts/docguard.py (the section-form tooth: the `### D-` count
-  + the N017 PCC duty extended to it), tests/test_docguard.py
-  (+1 crafted-breach row; the row-cap assertion updated to the
-  new message shape), docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md
-  (the pixel-diff disposition at §5), STATUS.md, worklog.md (the
-  iter-310 entry, iter-300 evicted), docs/TASKS.md (the ledger,
-  iter-300 evicted), docs/iterations/iter-310-deccollapse-report.md
-  (new — this row's RU report) — 8 changed/created (6 modified + 2
-  created; R0/R1 — the doc collapse + the periphery guard tooth;
-  zero engine change, INV-1..5 untouched, the LOG untouched, zero
-  corpus price; NO test deleted or weakened — 1 added)
+Scope: docs/worldbuild/archive/
+  CANONSIM_AGENT_WORLD_SUITE_v1_0.zip (new — the verbatim preservation),
+  docs/worldbuild/archive/README.md (the suite row + provenance + the
+  unique retains + the fence), docs/worldbuild/WORLD_TRACK_AGENT_
+  CONTEXT.md (the bootstrap line + §10's cross-pack routing),
+  docs/worldbuild/README.md (the archive fence), docs/TASKS.md (the
+  parked row core-1 + the ledger, iter-301 evicted), docs/DECISIONS.md
+  (D-251 in the D-242 family row), docs/blueprint/phases.md (§6 the
+  iter-311 record), STATUS.md, worklog.md (the iter-311 entry, iter-301
+  evicted), docs/iterations/iter-311-worldsuite-report.md (new — this
+  row's RU report) — 10 changed/created (9 modified + 1 created; R0
+  doc-only — zero code, zero pack, zero canon change, INV-1..5
+  untouched, the LOG untouched, zero corpus price; NO test deleted or
+  weakened)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1/V2/V3 visual floors LANDED (iter-293/297/
   304/307); Phase 3's SEVEN rows LANDED
@@ -140,19 +142,19 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-310 DONE: deccollapse (the owner's 2026-10-03 standing-queue
-  disposition call — the DECISIONS collapse now, B1/C4 closed
-  without diff, pixel-diff postponed; D-250).** The collapse 40→30:
-  the ten post-table `###` sections (D-240..D-249) re-folded into
-  family rows, the 75KB D-176..D-239 mega-row re-cut into six
-  compact family rows, seven adjacent-family merges (every D-ID
-  verified resolving), the D-024 compression throughout (166KB→101KB;
-  the PCC records + the SSI-N020 GC cards preserved in full form);
-  the docguard recurrence tooth (the `### D-` section form counts
-  toward the cap + carries the N017 PCC duty, +1 crafted-breach
-  test). 2556+1 + ruff + docguard + topology --check clean (zero
-  engine change). The RU report:
-  docs/iterations/iter-310-deccollapse-report.md.
+**iter-311 DONE: worldsuite (the owner's 2026-10-03 chat-upload
+  ingestion call — the suite studied, classified, and parked; D-251).**
+  The CORE claims verified TRUE against HEAD (the W-stage map, the
+  substrate evidence, the resolver kinds in code, the I0 inventory);
+  the WORLD_TRACK half's stale W5 tables and the bundle's own drift
+  (absent 08/INDEX files, the v1.2 changelog stop, the two pins)
+  recorded; the v4.6 half diff-verified byte-equivalent to the
+  archived v4.5 (no re-ingestion). PARKED: the suite verbatim at
+  docs/worldbuild/archive/ (the «не хочу скидывать вручную» answer —
+  the repo carries it after the delta applies), the C1–C5 taxonomy
+  as the owner-gated row core-1, the cross-pack boundary as routing.
+  2556+1 + ruff + docguard + topology --check clean (R0 doc-only).
+  The RU report: docs/iterations/iter-311-worldsuite-report.md.
 Next: the owner's calls — (1) the standing queue: the replay-UI
   NOT-EXPOSED row and the world track's parallel rows (the queue's
   three other rows dispositioned by the same 2026-10-03 call,
