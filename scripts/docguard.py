@@ -137,6 +137,17 @@ ALLOWLIST: dict[str, str] = {
         "the prior canonical supplement retained for traceability — the "
         "READ-ONLY reference copy (ssi-2/D-222), the same §6.1 class as "
         "the v3 doctrine file above",
+    "docs/CONTRACTS.md":
+        "the pre-implementation contract registry (intake-29/D-175's "
+        "form) — the five landed definitions (sem-1 S1..S7 / caus-1 "
+        "K1..K6 / replay-1 E1..E6 / scale-1 Q1..Q7 + the measured "
+        "falsifiers and artifact pins) are owner-ACCEPTED law and "
+        "§6.1 never-cut substance; the fifth contract crossed the "
+        "ceiling after two real cruft passes (iter-316's §5 landing-"
+        "notes collapse, iter-319's family-decision collapse + the §9 "
+        "trims) — the file stays over and the worklog records why "
+        "(§6.1's own law); a future section's cap pass re-opens §5's "
+        "pointer form first",
 }
 
 FAQ_MAX_ENTRIES = 20

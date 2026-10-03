@@ -15,7 +15,10 @@
 > row's build lands, its spec absorbs its contract by reference (never
 > restated, D-024) and the section here collapses to a one-line
 > pointer. Cap-law: `docs/*.md` ≤600 lines, substance-filtered
-> (AGENTS §6.1).
+> (AGENTS §6.1); the fifth contract (§9, iter-319) crossed the
+> ceiling after the cruft passes — the file stands over with the
+> guard's allowlist entry + worklog iter-319 the rationale owners
+> (§6.1's own law: the file stays over, the worklog records why).
 
 ## 1. roads-1 — LANDED (iter-145, D-178)
 
@@ -78,138 +81,43 @@
 > gap rows, the owner's next station run.
 
 ## 5. wb-1..N — the Workbench family (the v5.2 Redot brief, owner's 2026-09-24 call)
-
 > Source: the owner-supplied `canonsim_workbench_v5_2_redot_2026-09-24`
-> package (5 documents, external — the convenience-copy law D-024: they
-> stay outside the repo, this section + the TASKS wb rows the distilled
-> owners, D-200 the admission). Contract written BEFORE wb-1 starts
-> (iter-215); when each wb row lands, its section here collapses to a
-> pointer per the file's own law.
->
-> **§-reference map (D-218, iter-237 — the corpus re-homing):** every
-> `app spec §N` citation below and across the repo resolves to
-> `docs/WORKBENCH_APP_LAW.md` §N (the binding distillation, the spec's
-> §-numbering preserved 1:1); every Observatory-doc §N resolves to
-> `docs/OBSERVATORY_LAW.md` §N; the frontend spec's §46 implementation
-> ladder resolves to `docs/FRONTEND_UIUX_LAW.md` §25; the world-
-> presentation contracts (the spec's §§23–31) live in
-> `docs/WORLD_PRESENTATION_LAW.md`. The external originals stay with the
-> owner — no repo work requires them anymore.
+> package (5 documents, external — the convenience-copy law D-024; D-200
+> the admission). **§-reference map (D-218, iter-237):** every `app
+> spec §N` citation resolves to `docs/WORKBENCH_APP_LAW.md` §N,
+> Observatory-doc §N to `docs/OBSERVATORY_LAW.md` §N, the frontend
+> spec's §46 ladder to `docs/FRONTEND_UIUX_LAW.md` §25, the
+> world-presentation contracts (§§23–31) to
+> `docs/WORLD_PRESENTATION_LAW.md`; the external originals stay with
+> the owner — no repo work requires them.
 >
 > **Redot half DELETED (iter-290/D-245 — the owner's «удаляй redot»
-> call):** `workbench/presentation/redot/`, `scripts/visual_proof.py`,
-> the Redot proof/contract packets (`tests/test_visual_proof.py`,
-> `tests/test_shell_proof.py`, `tests/test_shell_contract.py`), the
-> engine index (`docs/REDOT_ENGINE_INDEX.md`), and `Workbench
-> Setup.bat` are removed; the launcher re-pointed to the web dev
-> server (D-245). The landing notes below collapsed to pointers at
-> iter-316's cap pass (this file's own law + D-024 — the verbatim notes
-> in git history) — the Python half (scene IR, gateway, operations,
-> platform) is untouched and the web client (`frontend/`, D-244) is the
-> active consumer. Recovery: git history + the verbatim pack at
-> `docs/frontendweb/archive/`.
+> call):** the whole `.gd` tree, its proof packets
+> (`test_visual_proof`/`test_shell_proof`/`test_shell_contract`), and
+> the engine index are gone (recovery: git history +
+> `docs/frontendweb/archive/`); its GDScript lessons carry forward as
+> PRINCIPLES only (STATUS FAQ). The Python half (scene IR, gateway,
+> operations, platform) is untouched: `workbench/` is periphery
+> (D-046), imports `core/` read-side APIs only, zero canon writes,
+> network surfaces exactly INV-4's three sanctioned modules (the
+> wb-4/D-201 + wb-9/D-208 owner-gated exceptions). The web client
+> (`frontend/`, D-244) is the active consumer.
 >
-> **Landed rows — collapsed to pointers per this file's own law + D-024**
-> (the per-row landing detail: `docs/TASKS.md`'s wb rows + the worklog +
-> git — never restated here; the collapse executed iter-316's cap pass,
-> the verbatim landing notes live in git history at each iteration's
-> commit): wb-1 the vertical seam (iter-215/216 — scene IR + scene build
-> + the visual proof, the D4 double-run PNG byte-diff CONFIRMED); wb-2
-> the shell + semantic-token theme (iter-217); wb-3 the
-> application-operations skeleton (iter-218 — identity/artifact/
-> directories/clock, 25 tests); wb-4 the inbound gateway (iter-219,
-> D-201 — contract/gateway/transport, INV-4's second sanctioned module,
-> 36 tests); wb-5 the minimal application operations (iter-220 —
-> lifecycles/execution/models/composition, 46 tests); wb-6 the backend
-> row (iter-221, D-203 — the typed BackendPort + chat.send +
-> model.load/unload, 28 tests); wb-7 the live chat circuit (iter-222,
-> D-204 — `scripts/workbench_app.py` the composition root + the Redot
-> chat surface, 8 tests); wb-8 the managed models surface (iter-223,
-> D-205 — `llama_process.py` + `--managed` + `model.states`, 17 tests);
-> wb-9 the one-command model flow (iter-226, D-208 — `model_fetch.py`
-> INV-4's THIRD sanctioned surface + `settings.py` + the launcher, 35
-> new tests); wb-10 the zero-command owner experience (iter-227 — the
-> launcher rework + the `model.import` work kind + the native picker);
-> wb-11 the dispatch-lock freeze chain (iter-228, D-210 —
-> model.load/unload as RUNS + the pipe drain); wb-12 the theme@0.3
-> token audit + the chat follow law (iter-230, D-212). The family
-> contract below stays (wb-13..N still owner-gated rows).
-
-**Pinned decisions** (each grounded in the brief or standing law):
-
-- D1 Runtime: Redot 26.2 LTS (`redot-26.2-stable`), Compatibility
-  renderer, GDScript. The engine binary + export templates are an
-  EXTERNAL toolchain (never committed); one configurable `REDOT_EXE`
-  path is the single resolution point (the brief's integration §7).
-  Redot project root: `workbench/presentation/redot/`; committed:
-  project.godot, scenes, scripts, themes, source assets; ignored:
-  `.godot/`.
-- D2 Boundary: Redot owns presentation-local state only (camera,
-  selection, animation playback, transient effects, caches) — never
-  canonical world state, event history, semantic time, identity or
-  simulation rules. The chain is
-  `fixture → typed read model → Visual Scene IR → Redot composition →
-  screenshot artifact`; the IR is renderer-neutral (no Node/Texture/
-  UID as identity) with the v5.2 identity closure
-  (`scene_ir_schema_identity + composition_seed + asset_manifest_
-  identity + semantic_input_identity + composition_policy_version`).
-- D3 Python side: `workbench/` is periphery (the render/cli/scripts
-  class, D-046 — outside the INV-3 stoplist by the same law: entity
-  ids and location ids arrive as data from the log/pack, never
-  hardcoded). It imports `core/` read-side APIs only (read_log, fold,
-  present_in_order — the render/chronicle.py pattern); zero canon
-  writes, zero new network surfaces (INV-4 untouched: `cli/engine.py`
-  stays the only network module; the future inbound gateway is an
-  owner-gated row with its own contract + architecture-test exception
-  when it fires).
-- D4 Determinism: same semantic input + same seed → byte-identical IR
-  JSON; two consecutive Redot runs in the same environment →
-  byte-identical PNG (measured in-sandbox before this contract:
-  llvmpipe/Xvfb, 1280x720). No wall clock, no PYTHONHASHSEED
-  dependence (sha256 stable hashes + sorted/construction order — the
-  INV-2 read-side discipline; no RNG draws at all in the Python half).
-- D5 Status laws: the IR distinguishes
-  CANONICAL | DERIVED | OBSERVED | UNKNOWN | HIDDEN | VISUAL; the
-  silent collapses UNKNOWN→ABSENT, HIDDEN→ABSENT, VISUAL→CANONICAL,
-  LLM-text→CANONICAL are forbidden (the brief's §7/§23 vocabulary).
-- D6 Observation: the proof's artifacts (PNG + metadata JSON) are
-  runtime output — gitignored, never committed; the pytest regenerates
-  and compares in-run (the iter-207/209 byte-identical-on-regeneration
-  pattern). Tests skip cleanly without `REDOT_EXE` (the duckdb/D-093
-  pattern; CI stays engine-free).
-
-**Invariant set**: INV-1..INV-5 all hold unmodified; the seam adds no
-second semantic authority, no second fold, no second presence rule
-(`present_in_order` is the one presence law, reused).
-
-**Falsifier** (TEST_PLAN §9's packet form): any byte difference in the
-IR JSON on rebuild from the same fixture; any byte difference between
-two consecutive screenshot runs in one environment; any network import
-or canon write in the new modules (test_architecture); any setting
-word hardcoded in `workbench/` source (review — the stoplist does not
-scan periphery, the discipline is the review's).
-
-**Minimal test set**: `tests/test_scene_ir.py` (determinism + status
-laws + identity closure over the tavern and province smoke fixtures);
-`tests/test_visual_proof.py` (REDOT_EXE-gated: the artifact exists,
-metadata carries the identity fields, the double-run PNG byte-diff).
+> wb-1..12 all LANDED (the landing detail: TASKS' wb rows + the
+> worklog + git — the per-row notes collapsed at iter-316's cap pass,
+> the family's decision text at this pass, both verbatim in git
+> history). The remaining rows (wb-13..N) are owner-gated — TASKS owns
+> WHAT/WHEN; the live boundary laws live in their owners (INV-4,
+> WORKBENCH_APP_LAW, FRONTEND_WEB_LAW, the scene-IR status laws in
+> `tests/test_scene_ir.py`).
 
 **Family composition** (TASKS owns WHAT/WHEN; the brief's own order,
-owner-gated per row): wb-1 the vertical seam (this contract's first
-consumer); wb-2 the Redot shell + theme; wb-3 the application
-operations skeleton; wb-4 the gateway (INV-4's owner-gated exception);
-wb-5 the minimal application operations (app §32 step 5 — the
-operations substrate + the run/model-discovery families over the
-registered surface); wb-6 the backend row (the llama.cpp port —
-chat.send's consumer, D-203); wb-7 the live chat circuit (D-204);
-wb-8 the managed models surface (app §11.1's MANAGED half + the
-Models surface — D-205); wb-9+ per the brief's §32/§46 ladders
-(live events + reconnect/resync; persistence; the frontend rows —
-inference; history/diagnostics; the CanonSim seam). Engine/API facts
-for the deleted Redot half route to the archived pack's reference docs
-(D-245 — the index deleted, never a repo file again); the web client
-(`frontend/`, D-244) is the active consumer.
-
+owner-gated per row): the landed ladder wb-1..12 above; wb-13+ per the
+brief's §32/§46 ladders (live events + reconnect/resync; persistence;
+the frontend rows — inference; history/diagnostics; the CanonSim
+seam). Engine/API facts for the deleted Redot half route to the
+archived pack's reference docs (D-245); the web client (`frontend/`,
+D-244) is the active consumer.
 ## 6. sem-1 — the semantic event validity + authority contract (review-C1/D1, the confirmed queue's head; the DEFINITION landed iter-316)
 
 > Owner-confirmed 2026-10-03 (iter-315's queue). R0–R1 definition
@@ -587,3 +495,144 @@ cursor, no fsync policy, no crash curriculum, no second store — the
 identity components land behind the runtime-promotion gate (a named
 consumer + a measured native limit + the falsifier), the owner's
 call.
+
+## 9. scale-1 — the causal-demand locality + work budget + certified commutativity contract (review-C5/C6/C16/C28/D5+D6; the DEFINITION landed iter-319)
+
+> Owner-confirmed 2026-10-03 (iter-315's queue — the T5 row, the
+> queue's head after the owner's «продолжай работу прошлой итерации,
+> со scale-1 как я понимаю, и так далее» call; E1..E6 accepted AS LAW
+> the same call, §8's note). R0–R1 definition only: NOTHING is
+> implemented — no index, no budget counter, no cohort machinery (the
+> row's own law). The implementation is NOT a standing row — the owner
+> opens it after accepting this contract (the runtime-promotion gate).
+
+**Pinned decisions** (each grounded in standing code or law):
+
+- **Q1 — the three work classes, classified by CAUSAL DEMAND, never
+  by implementation shape; declared per mechanism (pack data + mechanic
+  constants — S2's twin); an implementation MEETS its class's
+  complexity obligation or the gap is recorded (Q7).** LOCAL: the
+  affected set by direct/indexed access — the resolver path, the OCC
+  re-check (`based_on_event_seq`), the decay baseline via
+  `_last_change` (L3/D-050, the standing indexed exemplar), the
+  follow-up drafts' one-location reads. REGIONAL: bounded causal
+  traversal from a demand seed — the transition spread over a
+  location's spot set, the scene zones' ring recompute (depth-3), the
+  one shared road-exits read (roads-1). GLOBAL: an explicit scheduled
+  pass whose semantics IS the whole world — the fold/replay (T2), the
+  macro/calendar turns, the entropy view, the unarmed one-scene law's
+  per-beat everything, the cold census.
+- **Q2 — the work budget is explicit, per origin, and exhaustion
+  DEFERS (semantic debt), never silently drops.** A budget is a
+  declared bound per scheduling unit (beat / crossing / pass tick),
+  owned by the spending mechanism, visible in pack data or a mechanic
+  constant — never an implicit emergent cap. Today's inventory: the
+  director's 1-release-per-beat (a PACING budget, DIRECTOR_SPEC's
+  law) is the ONLY budget in the tick loop — no general work budget
+  exists (measured, Arm C2). The deferral law: exhaustion produces
+  DURABLE deferred work through the standing queue forms — the
+  self-rescheduling pass continuation (`loop._run_pass`), the SEEDED
+  follow-ups (TIME-1), the director's seeded-hook buffer (D-005) —
+  today all three unbounded and unaccounted (Arm C3). The pinned
+  distinction: DUE WORK (the mechanism's semantics says it must run —
+  a decay with a non-zero delta, a scheduled completion, a seeded
+  follow-up) NEVER silently vanishes on exhaustion — it defers
+  visibly; an ATTEMPT (a roll whose miss is the no-op outcome — an
+  urgency miss, a gated autonomous try) is canon-noise (PARSER_SPEC
+  §4/§6), never deferral, never loss.
+- **Q3 — the default canonical order STANDS; no scheduler machinery.**
+  The queue's total order `(tick, sub_order, actor_id, seq)`
+  (SCHED-1, INV-2) is the single execution order — the sub_order
+  bands and the build-time system-pass schedule (reads/writes
+  topological order, `ScheduleAmbiguityError` on write-write
+  ambiguity) stay the only scheduling authorities. No second ordering
+  authority, no priority preemption, no work-stealing pool, no eager
+  index.
+- **Q4 — a parallel cohort is legal ONLY with a proof obligation.**
+  No parallel execution exists today (single-threaded kernel, D-2's
+  reject list standing). A cohort runs concurrently only when every
+  member pair carries a MECHANICAL certificate of order-commutativity:
+  disjoint write sets AND read sets not intersecting the cohort's
+  writes — the scheduler's build-time discipline generalized to the
+  cohort, verified at BUILD time from the pack-declared
+  `reads`/`writes` (SystemDecl the certificate substrate), never
+  trusted from runtime observation. The log still records the
+  canonical order — parallelism is an execution detail, never a
+  serialization change (Q6). FORBIDDEN: CRDT/MVCC/merge semantics
+  (D-6's reject — the single-writer kernel makes them redundant),
+  commutativity heuristics, benchmark-derived certifications.
+- **Q5 — the measurement is the admission instrument: `world size ×
+  fan-out × operation → inspected / candidate / committed + wall
+  time`.** INSPECTED = entities/props/events/entries the operation's
+  walk touches (exact, counted — the probe's counting proxies);
+  CANDIDATE = drafts/intents/changes produced; COMMITTED = events
+  through the `_commit` door (1:1 with drafts by construction);
+  wall time observed (perf_counter, median — a deployment property,
+  never canon, INV-2). ANY runtime-promotion claim (index, cache,
+  locality rework, budget) carries this battery at ≥2 world sizes
+  naming the native limit — D-11 made executable; a claim without
+  the measurement is refused.
+- **Q6 — locality never changes semantics: byte-identical canon.**
+  Any locality mechanism (zone filter, index, cache, coarser cadence)
+  leaves the canon stream byte-identical (T1, same environment) — the
+  standing exemplars: the depth-3 LOD filter (L13: fewer rolls, never
+  different odds), the decay interval law (the same linear drift,
+  value-exact modulo the floor), `_last_change` (the baseline the
+  scan would find). A locality change that shifts ANY canon byte is a
+  semantic change masquerading as an optimization — RED, R3+ through
+  AGENTS §8. The core-1 tie: obligation conservation (D0/D3) is
+  core-1's law over future reachability; scale-1's is byte-identity
+  over the canon stream — neither restates the other.
+- **Q7 — the gap record: today's measured profile (the implementation
+  row's RED targets; seed 4242, PYTHONHASHSEED=0, live at iter-319).**
+  (a) the beat's supporting read folds are per-beat GLOBAL —
+  `live_leverage` walks the whole log TWICE (32,002 iterations at
+  |log|=16k, 5.9 ms/beat), `echo_scores`/`crystallized_traits` walk
+  all knowers × records (2,880 at 96×30) — while the beat's demand is
+  the ACTIVE ZONE; (b) the spread pass scans the ENTIRE projection
+  per pass tick for a REGIONAL demand (1,053 map reads at 320
+  locations for ONE burning location — linear in L, flat in fan-out
+  S, committed S-shaped); (c) the decay/urgency walks are pack-wide
+  per beat with the LOD filter INSIDE the walk (N records walked,
+  in-zone commits only); (d) NO work budget exists in the tick loop;
+  the three deferral surfaces unbounded, unaccounted. The four gaps
+  close behind the gate (named consumer + the Q5 battery + a
+  falsifier).
+
+**Falsifier** (TEST_PLAN §9's packet form; run LIVE at iter-319 — the
+REAL `core/` functions over the real tavern config with synthetic
+scaled worlds, the probe outside the repo per Rule 9; the verbatim
+output: the iter-319 report §D; artifacts md5 probe
+`16aec5e51b113aa5b09c2a3e6d6c4ad3` / measurements
+`e0aca20bfd4ece99626550dce27b74bc` / output
+`b7f07857cbb06987c120a7a214a9c6ff`): ARM A — the beat's LOCAL demand
+pays pack-wide walks and O(|log|)/O(knowledge) folds (decay: inspected
+36→1,248 at N=6→384, commits 4→80; leverage 502→32,002; echo 180→2,880;
+urgency 10→197 entries walked). ARM B — the spread pass: B1 the world
+axis (inspected 108→1,053 at L=5→320 for ONE burning location —
+REGIONAL demand at GLOBAL cost, review-C5's "hot paths scan pack-wide
+collections before filtering" measured exact); B2 the fan-out axis
+(chance 1.0 probe-side: committed 3→24 = S, inspected ~flat — the
+measurement discriminates both directions). ARM C — the
+budget/deferral inventory: C1 101 gated-off urgency entries → 0
+intents, 0 events, 0 deferrals (the noise-floor law live — an
+attempt, never due work); C2 the uncapped beat (384 drafts in one
+beat, the full O(N) paid every beat — no budget, no cap, no defer);
+C3 the deferral exemplars live (`ignite` → `['smoke','burnout']` +
+seed_pass; `spread_tick` → continue_pass — unbounded, unaccounted).
+
+**Minimal test set** (the implementation row's, not today's): the Q5
+battery as a committed counting-proxy harness (inspected/candidate/
+committed pinned per operation at ≥2 world sizes — RED while the four
+Q7 gaps stand); the locality-identity law — any locality mechanism
+lands with the T1 corpus control byte-identical; the budget law —
+exhaustion produces a visible deferral record, due work never
+vanishes; the cohort law — a cohort without a build-time certificate
+REFUSED (the ScheduleAmbiguityError shape); the deferral accounting —
+every deferral surface carries origin and age.
+
+**Deliberately NOT done here** (the row's own fence): no index, no
+cache, no budget counter, no cohort machinery, no CRDT/MVCC, no
+second scheduler (the queue stands); no pack or schema change; the
+class declarations (Q1's per-mechanism map) ride the implementation
+row's pack-data design — never this definition.

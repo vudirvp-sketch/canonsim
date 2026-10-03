@@ -1,70 +1,96 @@
-Iteration: iter-318 (`replay1` — the queue's head, the owner's
-  «продолжай очередь с replay-1 и так далее» call; S1–S7 + K1–K6
-  ACCEPTED AS LAW the same call — CONTRACTS §6/§7's notes, the
-  implementation rows stay the owner's separate calls): THE REPLAY-1
-  CONTRACT LANDED — the semantic replay identity + recovery durability
-  definition (review-C4/C7/C13/D4) at CONTRACTS.md §8, zero
-  serialization change: six pinned decisions (E1 the identity tuple
-  `log_prefix_digest + engine_semantic_version + schema_identity +
-  pack_semantic_digest + execution_config_digest + seed`, mapped to
-  live carriers — seed/prefix-digest/schema-version carried AND
-  checked, pack-content digest / engine commit / execution-config
-  digest the three named GAPS; E2 semantic identity ≠ continuation
-  state — refusal vs staleness, never mixed; E3 the irreducible
-  continuation state a CLOSED set; E4 the lifecycle
-  proposed→accepted→durable→committed; E5 the crash contract over
-  append-before-durable / post-durable / derived-state; E6
-  `flush == durable` REJECTED — 0 fsync / 3 flush() audited) + THE
-  FALSIFIER RUN LIVE (the test_resume corpus, seed 42, split after
-  step 2: CONTROL — split+resume byte-identical, the D-139 law HELD;
-  Arm A — a same-name@version pack content drift (beat cadence)
-  resumes ACCEPTED and the tails DIVERGE from the first appended
-  event (17 vs 23) — review-C4's risk live; Arm B — header.commit
-  never read at resume, a foreign label accepted silently; Arm C —
-  the no-fsync audit + a torn tail LOUD + a lost pre-pin tail LOUD;
-  the probe outside the repo per Rule 9, artifacts md5-pinned) +
-  KI#111 OPENED AND CLOSED (Arm C found it live: read_log leaked a
-  bare JSONDecodeError on a torn line — now LogError, +1 test, the
-  iteration's single R2 code fix, AGENTS §5's record-then-fix); the
-  future implementation row's minimal test set pinned; the
-  implementation NOT a row — the owner opens it after accepting the
-  contract (the runtime-promotion gate).
+Iteration: iter-319 (`scale1` — the queue's head, the owner's
+  «продолжай работу прошлой итерации, со scale-1 как я понимаю,
+  и так далее» call; E1..E6 ACCEPTED AS LAW the same call — §8's
+  note, the implementation rows stay the owner's separate calls):
+  THE SCALE-1 CONTRACT LANDED — the causal-demand locality + work
+  budget + certified commutativity definition (review-C5/C6/C16/C28/
+  D5+D6) at CONTRACTS.md §9, zero engine change: seven pinned
+  decisions (Q1 the three work classes LOCAL/REGIONAL/GLOBAL
+  classified by CAUSAL DEMAND, declared per mechanism, never
+  implementation shape — the implementation MEETS the class's
+  complexity obligation or the gap is recorded; Q2 the work budget
+  explicit and per-origin — exhaustion DEFERS as semantic debt
+  through the standing queue forms, never silently drops; the
+  DUE-WORK-vs-ATTEMPT split pinned (a decay with a non-zero delta /
+  a scheduled completion / a seeded follow-up NEVER vanish — an
+  urgency miss is canon-noise, PARSER_SPEC §4/§6); Q3 the canonical
+  order `(tick, sub_order, actor_id, seq)` STANDS — no scheduler
+  machinery, the build-time system-pass schedule stays the only
+  scheduling authority; Q4 a parallel cohort only with a BUILD-TIME
+  mechanical commutativity certificate (disjoint writes, reads not
+  intersecting the cohort's writes — SystemDecl the substrate), the
+  log still records canonical order; no CRDT/MVCC; Q5 the
+  measurement `world size × fan-out × operation → inspected/
+  candidate/committed + wall time` as the admission instrument — any
+  runtime-promotion claim carries the battery at ≥2 world sizes
+  naming the native limit (D-11 executable); Q6 locality NEVER
+  changes semantics — byte-identical canon (T1), the depth-3 LOD /
+  the decay interval law / `_last_change` the standing exemplars;
+  Q7 the four measured gap targets) + THE FALSIFIER RUN LIVE (the
+  REAL core functions over the real tavern config with synthetic
+  scaled worlds, seed 4242, the probe outside the repo per Rule 9,
+  artifacts md5-pinned: Arm A the beat's LOCAL demand pays pack-wide
+  walks and O(|log|)/O(knowledge) folds — `live_leverage` walks the
+  whole log TWICE (32,002 iterations at |log|=16k, 5.9 ms/beat),
+  decay 1,248 map reads at N=384 for 80 zone commits; Arm B the
+  spread pass's REGIONAL demand (one burning location) scans the
+  WHOLE projection per pass tick — 1,053 reads at L=320, flat in
+  fan-out while committed is S-shaped — review-C5's «hot paths scan
+  pack-wide collections before filtering» measured exact; Arm C NO
+  work budget exists anywhere in the tick loop (384 drafts in one
+  uncapped beat), gated urgency attempts vanish with zero trace
+  (the noise-floor law live), the three deferral surfaces
+  (pass continuation / SEEDED follow-ups / the director buffer)
+  unbounded and unaccounted) + the CONTRACTS cap pass riding (§5's
+  wb family collapsed to the pointer form per the file's own law +
+  D-024, 589→494; §9 lands the file at 636 — the fifth contract
+  crossed the ceiling after the cruft passes: the file STANDS OVER
+  with the docguard allowlist entry + this worklog entry the §6.1
+  rationale owners, the file's own header notes it); the future
+  implementation row's minimal test set pinned; the implementation
+  NOT a row — the owner opens it after accepting the contract (the
+  runtime-promotion gate).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2557 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R0/R1 doc + probe + one
-  R2 KI fix — the reader envelope only, zero serialization change,
-  INV-1..5 untouched) ·
+  --check clean (Python 3.12.14, the env pin; R0/R1 doc + probe +
+  one R1 guard-table entry — zero engine change, INV-1..5
+  untouched) ·
 Date: 2026-10-03 ·
-Scope: docs/CONTRACTS.md (§8 new — the replay-1 contract; §6/§7
-  acceptance notes), docs/TASKS.md (replay-1 DONE + the ledger,
-  iter-308 evicted), STATUS.md (this header), worklog.md (the
-  iter-318 entry, iter-307 evicted), docs/iterations/iter-318-replay1-
-  report.md (new — this row's RU report) + the one KI fix: core/log.py
-  (the torn-line LogError wrap), tests/test_core.py (+1 test) — 7
-  changed/created (6 modified + 1 created; the §2.3 over-cap note:
-  the KI fix rides per AGENTS §5); R2 verification — the reader
-  contract test RED→GREEN, the LOG untouched, zero corpus price; NO
-  test deleted or weakened (1 added)
+Scope: docs/CONTRACTS.md (§9 new — the scale-1 contract; §5 the cap
+  pass collapse; the header's standing-over note), scripts/
+  docguard.py (the ALLOWLIST entry for CONTRACTS.md — the §6.1
+  standing over-cap state, one data-table row), docs/TASKS.md
+  (scale-1 DONE + the ledger, iter-309 evicted), STATUS.md (this
+  header), worklog.md (the iter-319 entry, iter-309 evicted),
+  docs/iterations/iter-319-scale1-report.md (new — this row's RU
+  report) — 6 changed/created (5 modified + 1 created; the §2.3
+  soft-limit note: the docguard entry rides the cap pass, same file
+  family as CONTRACTS) — R0/R1 verification: the probe's exact
+  counting proxies over the real engine functions (no corpus
+  touched, the LOG untouched, zero corpus price); NO test deleted
+  or weakened (the docguard table entry ADDS a guard state, the 18
+  docguard tests green).
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
-  DONE (iter-318 — three of the queue's six contracts landed; S1–S7
-  and K1–K6 owner-accepted AS LAW 2026-10-03) ; scale-1 the queue's
-  head NOW, then speech-1 / auth-1 (each its own iteration, R0–R1
-  definition first, the cheapest falsifier with it); core-1 stays
-  PARKED (owner-gated RESEARCH/POC-ONLY, its POC set now opening from
-  the concept-review package too). The web-frontend track — S0 LANDED;
-  floor's rows + the V1/V2/V3 visual floors LANDED (iter-293/297/
-  304/307); Phase 3's SEVEN rows LANDED
-  (iter-294/295/296/298/299/300/301) + the IA REPAIR LANDED
-  (iter-297, D-247); the owner-side bands CLOSED LIVE (iter-302)
-  and RE-CLOSED LIVE inside the matrix session (iter-308); THE
-  STREAMING ADMISSION LANDED (iter-305/306); THE FULL ACCEPTANCE
-  MATRIX CLOSED (iter-308 — 39 verified / 2 open / 1 partial /
-  2 not-exposed, zero defects); THE TOOLING FLOOR'S CI + SMOKE
-  ROWS LANDED + THE BOOT-TIME OBSERVED-SYNC LANDED (iter-309);
-  THE STANDING QUEUE DISPOSITIONED + THE DECISIONS COLLAPSE LANDED
+  DONE (iter-318) + scale-1 DONE (iter-319 — FOUR of the queue's six
+  contracts landed; S1–S7, K1–K6 and E1..E6 owner-accepted AS LAW
+  2026-10-03) ; speech-1 the queue's head NOW, then auth-1 (each its
+  own iteration, R0–R1 definition first, the cheapest falsifier with
+  it); core-1 stays PARKED (owner-gated RESEARCH/POC-ONLY, its POC
+  set now opening from the concept-review package too — scale-1's
+  Q5/Q6 map onto its C2/C3/C5 surfaces through the pinned namespace
+  fence). The web-frontend track — S0 LANDED; floor's rows + the
+  V1/V2/V3 visual floors LANDED (iter-293/297/304/307); Phase 3's
+  SEVEN rows LANDED (iter-294/295/296/298/299/300/301) + the IA
+  REPAIR LANDED (iter-297, D-247); the owner-side bands CLOSED LIVE
+  (iter-302) and RE-CLOSED LIVE inside the matrix session (iter-308);
+  THE STREAMING ADMISSION LANDED (iter-305/306); THE FULL ACCEPTANCE
+  MATRIX CLOSED (iter-308 — 39 verified / 2 open / 1 partial / 2
+  not-exposed, zero defects); THE TOOLING FLOOR'S CI + SMOKE ROWS
+  LANDED + THE BOOT-TIME OBSERVED-SYNC LANDED (iter-309); THE
+  STANDING QUEUE DISPOSITIONED + THE DECISIONS COLLAPSE LANDED
   (iter-310, D-250); the §8.5 heartbeat ledger COMPLETE through the
   27B band (iter-312/313/314 — the station records). The next
   frontend rows the owner's call: the replay-UI NOT-EXPOSED row; the
@@ -73,8 +99,6 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   admission (the import form's native file/folder picker rides the
   Tauri row). The world track: W8's remaining rows the owner's call.
   The ssi family COMPLETE except ssi-5, owner-gated.
-
-
 
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
@@ -132,45 +156,45 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-318 DONE: replay1 (the owner's «продолжай очередь с replay-1 и
-  так далее» call — S1–S7 + K1–K6 ACCEPTED AS LAW the same call,
-  CONTRACTS §6/§7's notes).** The replay-1 CONTRACT LANDED at
-  CONTRACTS.md §8 (review-C4/C7/C13/D4, R0/R1 + one R2 KI fix): the
-  six pinned decisions E1..E6 (the identity tuple mapped to live
-  carriers — three named GAPS: pack-content digest, engine commit,
-  execution-config digest; semantic identity ≠ continuation state —
-  refusal vs staleness; the irreducible continuation set CLOSED; the
-  lifecycle proposed→accepted→durable→committed; the crash contract
-  over append-before-durable / post-durable / derived-state; `flush ==
-  durable` REJECTED — 0 fsync / 3 flush() audited) + the falsifier RUN
-  LIVE (CONTROL: split+resume byte-identical, D-139 HELD; Arm A: a
-  same-name@version pack drift resumes ACCEPTED and diverges from the
-  first appended event — review-C4's risk live; Arm B: header.commit
-  never checked at resume; Arm C: the no-fsync audit + torn tail LOUD +
-  lost pre-pin tail LOUD; the probe outside the repo per Rule 9,
-  artifacts md5-pinned) + KI#111 opened and closed (Arm C found it:
-  read_log's bare JSONDecodeError on a torn line → LogError, +1 test).
-  Three of the queue's six contracts now landed. 2557+1 + ruff +
+**iter-319 DONE: scale1 (the owner's «продолжай работу прошлой
+  итерации, со scale-1 как я понимаю, и так далее» call — E1..E6
+  ACCEPTED AS LAW the same call).** The scale-1 CONTRACT LANDED at
+  CONTRACTS.md §9 (review-C5/C6/C16/C28/D5+D6, R0/R1): the seven
+  pinned decisions Q1..Q7 (the three work classes by causal demand /
+  the explicit budget — exhaustion defers as semantic debt, the
+  due-work-vs-attempt split / the canonical order stands / the
+  cohort's build-time commutativity certificate / the measurement
+  tuple as the admission instrument / locality = byte-identical
+  canon / the four measured gaps) + THE FALSIFIER RUN LIVE (the real
+  core functions over the real tavern config, synthetic scaled
+  worlds, seed 4242: Arm A the beat's LOCAL demand pays pack-wide
+  walks and O(|log|) folds — leverage 32,002 iterations at
+  |log|=16k; Arm B the spread pass scans the WHOLE projection for
+  ONE burning location — 1,053 reads at L=320; Arm C no work budget
+  exists, gated attempts vanish silently, the three deferral
+  surfaces unbounded; the probe outside the repo per Rule 9,
+  artifacts md5-pinned) + the CONTRACTS cap pass riding (§5's family
+  collapse 589→494; the file stands over at 636 with the guard's
+  allowlist entry — §6.1's own law, this worklog the rationale
+  owner). Four of the queue's six contracts landed. 2557+1 + ruff +
   docguard + topology --check clean. The RU report:
-  docs/iterations/iter-318-replay1-report.md.
-Next: **scale-1** (the causal-demand locality + work budget +
-  certified commutativity contract, review-C5/C6/C16/C28/D5+D6 —
-  R0–R1 definition first, the cheapest falsifier with it; LOCAL /
-  REGIONAL / GLOBAL work classes driven by causal demand; the explicit
-  budget — exhaustion defers (semantic debt), never silently drops;
-  the default canonical order stands; a parallel cohort only with a
-  proof obligation; the measurement `world size × fan-out × operation
-  → inspected/candidate/committed + wall time`; no indexes, no
-  CRDT/MVCC, no scheduler machinery in the definition task) — then
-  speech-1 → auth-1; M2 (the claims
+  docs/iterations/iter-319-scale1-report.md.
+Next: **speech-1** (the typed speech-act channel contract,
+  review-C8/C9/C10/C25/C26/D10, narrowed to the open residue —
+  R0–R1 definition first, the cheapest falsifier with it: the
+  channels enumerated; free prose never canon; a typed speech act
+  enters canon only through normal simulator admission; grounding
+  scoped to atomic externally-testable assertions; the epistemic
+  scope law; the explicit forgetting vocabulary; the closed halves
+  referenced, never restated) — then auth-1; M2 (the claims
   normalisation A/B) the next measurement battery when the owner
   calls it — station-side, never a repo row; the standing queue's
   other owner calls preserved: the replay-UI NOT-EXPOSED row and the
   world track's rows (the queue's three other rows dispositioned by
   the same 2026-10-03 call, D-250: the collapse LANDED iter-310;
   B1/C4 CLOSED WITHOUT DIFF — both iter-303 verdicts already
-  measured; pixel-diff POSTPONED — a real visual-regression
-  pipeline when a live need names it).
+  measured; pixel-diff POSTPONED — a real visual-regression pipeline
+  when a live need names it).
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns
