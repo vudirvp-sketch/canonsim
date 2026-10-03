@@ -345,6 +345,24 @@ def test_reader_refuses_stale_schema_version_header(tmp_path: Path) -> None:
     assert [e.id for e in events] == ["ev_0000"]
 
 
+def test_reader_refuses_torn_tail_line_loudly(tmp_path: Path) -> None:
+    """KI#111 (found live by the iter-318 replay-1 falsifier): a torn
+    event line — half a JSON object, the flushed-but-not-fsynced tail
+    lost mid-write — is a LOG-FORMAT violation and must surface as the
+    reader's own LogError contract, never as a bare JSONDecodeError
+    leaking through the boundary (the blank-line twin one gate above)."""
+    log = tmp_path / "torn.jsonl"
+    writer = EventLogWriter(log, SCHEMA)
+    writer.write_header(seed=42, commit="c", pack="p@0.1")
+    writer.append(draft(1, cause=None))
+    writer.close()
+    lines = log.read_text(encoding="utf-8").splitlines(keepends=True)
+    log.write_text("".join(lines[:-1]) + lines[-1][: len(lines[-1]) // 2],
+                   encoding="utf-8")
+    with pytest.raises(LogError, match="malformed JSON line"):
+        read_log(log, SCHEMA)
+
+
 # -- fold / projection (STATE-1) -----------------------------------------------
 
 

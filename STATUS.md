@@ -1,52 +1,57 @@
-Iteration: iter-317 (`caus1` — the package's T1+T2 sequence, sem-1's
-  natural pair, the owner's «sem1 открывай и так далее» continuation):
-  THE CAUS-1 CONTRACT LANDED — the causal sufficiency definition
-  (review-C2/D2) at CONTRACTS.md §7, zero code change: six pinned
-  decisions (K1 the causal spine — `primary_cause +
-  necessary_supports[] + provenance`, no graph: today's `cause` IS the
-  primary-cause slot, provenance stays lineage never causal claims;
-  K2 counterfactual necessity — the same-seed ablation makes the
-  claimed outcome UNREACHABLE, replacements don't count; K3 the
-  necessity-vs-evidence split — evidence lives in knowledge/
-  projection/payload, never supports; K4 the ablation battery
-  OFF-LINE only — the divergence-probe form, never a runtime gate;
-  K5 the producer declares, the battery verifies — the read-set × the
-  `_last_change` index (D-050) the derivation seed, a support
-  surviving ablation is REFUTED; K6 compatibility + the no-DAG law —
-  an additive provenance-family field, INV-1/INV-5 + the consumers
-  additive-only) + THE ABLATION FALSIFIER RUN LIVE (seed 8, the day1
-  theft scenario + one inserted perception step: BASE — the steal
-  outcome `ev_0007` names as `cause` the CHRONOLOGICAL predecessor
-  `ev_0006` (`look_around`) while the materially-REQUIRED move
-  `ev_0005` is indistinguishable — the necessity real, measurable,
-  UNRECORDED, review-C2's risk live; ABLATE-MOVE — zero steal-family
-  outcomes, the outcome unreachable (necessity); ABLATE-LOOK — the
-  steal still fires (evidence, not necessity); the probe outside the
-  repo per Rule 9, artifacts md5-pinned) + the future implementation
-  row's minimal test set pinned; the implementation NOT a row — the
-  owner opens it after accepting the contract (the runtime-promotion
-  gate).
+Iteration: iter-318 (`replay1` — the queue's head, the owner's
+  «продолжай очередь с replay-1 и так далее» call; S1–S7 + K1–K6
+  ACCEPTED AS LAW the same call — CONTRACTS §6/§7's notes, the
+  implementation rows stay the owner's separate calls): THE REPLAY-1
+  CONTRACT LANDED — the semantic replay identity + recovery durability
+  definition (review-C4/C7/C13/D4) at CONTRACTS.md §8, zero
+  serialization change: six pinned decisions (E1 the identity tuple
+  `log_prefix_digest + engine_semantic_version + schema_identity +
+  pack_semantic_digest + execution_config_digest + seed`, mapped to
+  live carriers — seed/prefix-digest/schema-version carried AND
+  checked, pack-content digest / engine commit / execution-config
+  digest the three named GAPS; E2 semantic identity ≠ continuation
+  state — refusal vs staleness, never mixed; E3 the irreducible
+  continuation state a CLOSED set; E4 the lifecycle
+  proposed→accepted→durable→committed; E5 the crash contract over
+  append-before-durable / post-durable / derived-state; E6
+  `flush == durable` REJECTED — 0 fsync / 3 flush() audited) + THE
+  FALSIFIER RUN LIVE (the test_resume corpus, seed 42, split after
+  step 2: CONTROL — split+resume byte-identical, the D-139 law HELD;
+  Arm A — a same-name@version pack content drift (beat cadence)
+  resumes ACCEPTED and the tails DIVERGE from the first appended
+  event (17 vs 23) — review-C4's risk live; Arm B — header.commit
+  never read at resume, a foreign label accepted silently; Arm C —
+  the no-fsync audit + a torn tail LOUD + a lost pre-pin tail LOUD;
+  the probe outside the repo per Rule 9, artifacts md5-pinned) +
+  KI#111 OPENED AND CLOSED (Arm C found it live: read_log leaked a
+  bare JSONDecodeError on a torn line — now LogError, +1 test, the
+  iteration's single R2 code fix, AGENTS §5's record-then-fix); the
+  future implementation row's minimal test set pinned; the
+  implementation NOT a row — the owner opens it after accepting the
+  contract (the runtime-promotion gate).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
-2556 passed + 1 skipped, ruff clean, docguard
-  clean, topology --check clean (Python 3.12.14, the env pin; R0/R1
-  doc + probe only — zero code change, the substance the contract
-  definition + the live ablation evidence) ·
+2557 passed + 1 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; R0/R1 doc + probe + one
+  R2 KI fix — the reader envelope only, zero serialization change,
+  INV-1..5 untouched) ·
 Date: 2026-10-03 ·
-Scope: docs/CONTRACTS.md (§7 new — the caus-1 contract), docs/TASKS.md
-  (caus-1 DONE + the ledger, iter-307 evicted), STATUS.md (this
-  header), worklog.md (the iter-317 entry, iter-307 evicted),
-  docs/iterations/iter-317-caus1-report.md (new — this row's RU
-  report) — 5 changed/created (4 modified + 1 created); R0
-  verification — INV-1..5 untouched, the LOG untouched, zero corpus
-  price; NO test deleted or weakened
-Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317 — the T1+T2
-  pair closed, both definitions + live falsifiers at CONTRACTS §6/§7;
-  the implementations the owner's call after accepting the
-  contracts); replay-1 the queue's head NOW, then
-  scale-1 / speech-1 / auth-1 (each its own iteration, R0–R1
+Scope: docs/CONTRACTS.md (§8 new — the replay-1 contract; §6/§7
+  acceptance notes), docs/TASKS.md (replay-1 DONE + the ledger,
+  iter-308 evicted), STATUS.md (this header), worklog.md (the
+  iter-318 entry, iter-307 evicted), docs/iterations/iter-318-replay1-
+  report.md (new — this row's RU report) + the one KI fix: core/log.py
+  (the torn-line LogError wrap), tests/test_core.py (+1 test) — 7
+  changed/created (6 modified + 1 created; the §2.3 over-cap note:
+  the KI fix rides per AGENTS §5); R2 verification — the reader
+  contract test RED→GREEN, the LOG untouched, zero corpus price; NO
+  test deleted or weakened (1 added)
+Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
+  DONE (iter-318 — three of the queue's six contracts landed; S1–S7
+  and K1–K6 owner-accepted AS LAW 2026-10-03) ; scale-1 the queue's
+  head NOW, then speech-1 / auth-1 (each its own iteration, R0–R1
   definition first, the cheapest falsifier with it); core-1 stays
   PARKED (owner-gated RESEARCH/POC-ONLY, its POC set now opening from
   the concept-review package too). The web-frontend track — S0 LANDED;
@@ -97,11 +102,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317 — the T1+T2
 
 ## Active KIs
 
-(none — KI#110 deleted at the iter-313 §5 cleanup: closed iter-302,
-  eleven iterations past the 2-iteration deletion rule, the cleanup
-  overdue since iter-304; its substance verified resolved at HEAD —
-  the hermetic empty-home pin present in
-  tests/test_workbench_app.py::test_the_launch_params_merge_cli_over_settings)
+- KI#111 · read_log leaked a bare JSONDecodeError on a torn log line (the reader's LogError contract broken) · opened+CLOSED iter-318 (found live by the replay-1 falsifier's Arm C; the wrap + 1 test; §5 cleanup after 2 iterations)
 
 ## FAQ / Pitfalls
 
@@ -131,31 +132,37 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317 — the T1+T2
 
 ## Next step
 
-**iter-317 DONE: caus1 (the owner's «sem1 открывай и так далее»
-  continuation — the package's T1+T2 sequence, sem-1's natural
-  pair).** The caus-1 CONTRACT LANDED at CONTRACTS.md §7 (review-C2/D2,
-  R0/R1, zero code change): the six pinned decisions K1..K6 (the
-  causal spine primary_cause+necessary_supports[]+provenance without a
-  graph; counterfactual necessity; the necessity-vs-evidence split;
-  the OFF-LINE ablation battery; the producer-declares-battery-verifies
-  law; the no-DAG compatibility fence) + the ablation falsifier RUN
-  LIVE (BASE: the steal outcome names the CHRONOLOGICAL predecessor as
-  `cause` while the materially-required move is indistinguishable —
-  review-C2's risk demonstrated; ABLATE-MOVE kills the outcome
-  (necessity); ABLATE-LOOK does not (evidence); the probe outside the
-  repo per Rule 9, artifacts md5-pinned) + the future implementation
-  row's minimal test set pinned; the implementation NOT a row — the
-  owner opens it after accepting the contract. The T1+T2 pair now
-  closed (sem-1 iter-316 + caus-1 iter-317). 2556+1 + ruff + docguard
-  + topology --check clean. The RU report:
-  docs/iterations/iter-317-caus1-report.md.
-Next: **replay-1** (the semantic replay identity + recovery durability
-  contract, review-C4/C7/C13/D4 — R0–R1 definition first, the cheapest
-  falsifier with it; the identity tuple `log_prefix_digest +
-  engine_semantic_version + schema_identity + pack_semantic_digest +
-  execution_config_digest + seed`, the live cursor's named gaps, the
-  lifecycle proposed→accepted→durable→committed, `flush == durable`
-  rejected) — then scale-1 → speech-1 → auth-1; M2 (the claims
+**iter-318 DONE: replay1 (the owner's «продолжай очередь с replay-1 и
+  так далее» call — S1–S7 + K1–K6 ACCEPTED AS LAW the same call,
+  CONTRACTS §6/§7's notes).** The replay-1 CONTRACT LANDED at
+  CONTRACTS.md §8 (review-C4/C7/C13/D4, R0/R1 + one R2 KI fix): the
+  six pinned decisions E1..E6 (the identity tuple mapped to live
+  carriers — three named GAPS: pack-content digest, engine commit,
+  execution-config digest; semantic identity ≠ continuation state —
+  refusal vs staleness; the irreducible continuation set CLOSED; the
+  lifecycle proposed→accepted→durable→committed; the crash contract
+  over append-before-durable / post-durable / derived-state; `flush ==
+  durable` REJECTED — 0 fsync / 3 flush() audited) + the falsifier RUN
+  LIVE (CONTROL: split+resume byte-identical, D-139 HELD; Arm A: a
+  same-name@version pack drift resumes ACCEPTED and diverges from the
+  first appended event — review-C4's risk live; Arm B: header.commit
+  never checked at resume; Arm C: the no-fsync audit + torn tail LOUD +
+  lost pre-pin tail LOUD; the probe outside the repo per Rule 9,
+  artifacts md5-pinned) + KI#111 opened and closed (Arm C found it:
+  read_log's bare JSONDecodeError on a torn line → LogError, +1 test).
+  Three of the queue's six contracts now landed. 2557+1 + ruff +
+  docguard + topology --check clean. The RU report:
+  docs/iterations/iter-318-replay1-report.md.
+Next: **scale-1** (the causal-demand locality + work budget +
+  certified commutativity contract, review-C5/C6/C16/C28/D5+D6 —
+  R0–R1 definition first, the cheapest falsifier with it; LOCAL /
+  REGIONAL / GLOBAL work classes driven by causal demand; the explicit
+  budget — exhaustion defers (semantic debt), never silently drops;
+  the default canonical order stands; a parallel cohort only with a
+  proof obligation; the measurement `world size × fan-out × operation
+  → inspected/candidate/committed + wall time`; no indexes, no
+  CRDT/MVCC, no scheduler machinery in the definition task) — then
+  speech-1 → auth-1; M2 (the claims
   normalisation A/B) the next measurement battery when the owner
   calls it — station-side, never a repo row; the standing queue's
   other owner calls preserved: the replay-UI NOT-EXPOSED row and the

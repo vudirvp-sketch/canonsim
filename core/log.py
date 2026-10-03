@@ -453,7 +453,16 @@ def read_log(
         for lineno, line in enumerate(fh, start=1):
             if not line.strip():
                 raise LogError(f"{path}:{lineno}: blank line in log")
-            data = json.loads(line)
+            try:
+                data = json.loads(line)
+            except json.JSONDecodeError as exc:
+                # KI#111: a torn/partial line (a flushed-but-not-fsynced
+                # tail lost mid-write) is a LOG-FORMAT violation — the
+                # reader's contract is LogError, never a bare decoder
+                # exception leaking through the boundary.
+                raise LogError(
+                    f"{path}:{lineno}: malformed JSON line: {exc}"
+                ) from exc
             if lineno == 1:
                 validate_header(data)
                 if data["schema_version"] != expected_version:

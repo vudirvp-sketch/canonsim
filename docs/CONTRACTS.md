@@ -219,6 +219,9 @@ for the deleted Redot half route to the archived pack's reference docs
 > implementation is NOT a standing row — the owner opens it after
 > accepting this contract (the runtime-promotion gate: a named
 > consumer + a measured native limit + the falsifier below).
+> **Owner-ACCEPTED AS LAW 2026-10-03** (the iter-318 continuation call:
+> S1–S7 binding for every future implementation; the implementation
+> row itself stays the owner's separate call).
 
 **Pinned decisions** (each grounded in standing code or law):
 
@@ -344,6 +347,9 @@ the namespace fence: review-C1 ≠ TASKS::core-1 C4).
 > schema change (the row's own law). The implementation is NOT a
 > standing row — the owner opens it after accepting this contract (the
 > runtime-promotion gate).
+> **Owner-ACCEPTED AS LAW 2026-10-03** (the iter-318 continuation call:
+> K1–K6 binding for every future implementation; the implementation
+> row itself stays the owner's separate call).
 
 **Pinned decisions** (each grounded in standing code or law):
 
@@ -438,3 +444,146 @@ the census).
 no schema change, no DAG/provenance engine, no runtime causal
 checking (the battery is off-line), no rewrite of the hook/OCC
 attribution families (the spine EXTENDS them, never merges).
+
+## 8. replay-1 — the semantic replay identity + recovery durability contract (review-C4/C7/C13/D4; the DEFINITION landed iter-318)
+
+> Owner-confirmed 2026-10-03 (iter-315's queue — the T4 row, the
+> queue's head after the owner's «продолжай очередь с replay-1 и так
+> далее» call; S1–S7 + K1–K6 accepted AS LAW the same call, §6/§7's
+> notes). R0–R1 definition + exactly ONE R2 KI fix (KI#111, found
+> live by this contract's own falsifier — AGENTS §5's record-then-fix;
+> a reader envelope fix, zero serialization change): NOTHING else is
+> implemented — no serialization change (the row's own law), no digest
+> field, no fsync policy. The implementation is NOT a standing row —
+> the owner opens it after accepting this contract (the
+> runtime-promotion gate).
+
+**Pinned decisions** (each grounded in standing code or law):
+
+- **E1 — the identity tuple, six components.** A run's semantic
+  replay identity = `log_prefix_digest + engine_semantic_version +
+  schema_identity + pack_semantic_digest + execution_config_digest +
+  seed`. The question it answers: "may this execution legitimately
+  CONTINUE or compare FUTURES with that one?" — never "are these two
+  logs equal" (byte equality is T1's same-environment law, a different
+  question). The components against their live carriers (the triage's
+  named gaps, now code-grounded): `seed` — carried (header.seed) and
+  checked at resume; `log_prefix_digest` — carried and checked
+  (`core.checkpoint.prefix_digest`, sha256 over the first `1+offset`
+  lines, append-stable under INV-5 — the cursor's binding teeth);
+  `schema_identity` — carried and checked (header.schema_version,
+  derived from the schema `$id` through the writer's own path; the
+  reader + append-writer gates, log-1/KI#100 — a stale log is a
+  migration, never a silent read), granularity a version STRING, not a
+  content digest (an un-bumped schema edit slips — named limitation,
+  the engine component the backstop); `pack_semantic_digest` — **GAP**:
+  header + cursor carry `pack.name_version` (name@version) only —
+  same-name content drift resumes silently (the falsifier's Arm A);
+  `engine_semantic_version` — **GAP (implicit)**: header.commit
+  records the writing build (the CLI's `_commit_id`, short HEAD or
+  `unknown` offline) but resume never compares it (Arm B) — recorded,
+  never checked; `execution_config_digest` — **GAP**: no complete
+  run-level config identity exists; the only carried knob is
+  `director_enabled` (cursor), and the Python env pin (header.python,
+  checked at append) is the same-environment law's carrier (TEST_PLAN
+  §1.1), not a config digest.
+- **E2 — semantic identity ≠ continuation state.** Two different
+  questions, different artifacts, different failure semantics.
+  IDENTITY asks "same world semantics?" — the tuple, compared BEFORE
+  anything else; a mismatch is a REFUSAL (a different world, never a
+  warning). CONTINUATION asks "where in this run did the session
+  stop?" — the cursor (entropy positions, clocks, counters); a
+  mismatch is STALENESS (a different point in the same world) — also
+  loud, the standing save-scumming law. The cursor's existing split is
+  this law's embodiment: log-derivable state deliberately absent (the
+  projection, the indexes, the WorldModel, the scene ledger re-derive;
+  D-139). Never mixed: an identity component never rides the cursor,
+  and continuation state never becomes identity.
+- **E3 — the irreducible continuation state is a closed set.**
+  "Irreducible" = not a pure function of (log, seed, pack, config).
+  Today's complete set (the cursor's own law, restated as the
+  contract's closed list): the bank positions, the director run marks,
+  the clock tick, the crossing cursors (rotation / beat / macro /
+  calendar), the intent counter, the live director toggle. Nothing
+  else may enter: a new runtime field declares its side — identity
+  component, continuation state, or non-canon presentation — and a
+  continuation claim must prove irreducibility (a resumed continuation
+  desyncs without it) or stay out.
+- **E4 — the lifecycle: proposed → accepted → durable → committed.**
+  PROPOSED: a producer's `EventDraft` (no id yet). ACCEPTED: the
+  `_commit` door's checks pass (schema validate + the delta gate +
+  the chain/tick laws, D-035) — an in-memory record, still refusable,
+  invisible to the log. DURABLE: the line reached its durability
+  boundary — today that boundary is the FLUSH (the honest form; its
+  OS-crash semantics unproven, E6). COMMITTED: durable AND the
+  continuation invariants hold (id assigned, cause chained onto a
+  written event, tick monotone — the writer's own laws). The log line
+  IS the commit record (INV-1/INV-5: committed lines are never
+  rewritten); an accepted-but-not-durable line lost to a crash NEVER
+  EXISTED — not a rollback, an un-happened event (E5a's recovery
+  semantics).
+- **E5 — the crash contract, three boundaries.** (a)
+  APPEND-BEFORE-DURABLE — a flushed line torn or lost (OS crash,
+  power loss): the truth is the last durable prefix; detection is LOUD
+  never silent (a torn line fails the reader's format gate — LogError;
+  KI#111 closed the bare-`JSONDecodeError` leak this iteration — and a
+  lost tail behind the cursor pin refuses at resume, count/digest
+  mismatch, never guessing the entropy); repair (dropping the
+  never-committed tail) is the implementation row's business with its
+  own crash curriculum — the definition pins the semantics only.
+  (b) POST-DURABLE — the durable prefix moved PAST the cursor pin (a
+  mid-drain crash, a manual append): the extra events' entropy state
+  is unrecoverable → LOUD refusal (the standing law, already
+  implemented). (c) DERIVED-STATE — checkpoints, the SQLite index, the
+  chronicle artifacts: derived, never truth (INV-1; the checkpoint
+  family's law) — a crash corrupting them costs replay cost, never
+  canon, and verify-by-refold detects the drift loud.
+- **E6 — `flush == durable` REJECTED (an evidence-free claim).** The
+  writer flushes (three sites: header, append, close) and never
+  fsyncs (zero calls across `core/`) — flushed bytes live in the OS
+  page cache; an OS crash may eat them. What IS proven: clean-boundary
+  resume — D-139, `tests/test_resume.py` byte-identity at every split
+  point: LOGICAL durability across process boundaries, same
+  environment. What is NOT: OS-level durability. Any fsync policy, a
+  documented durability boundary, or a crash curriculum (kill -9 /
+  power-loss simulation over the writer) is the implementation row's
+  business — durable is never claimed on flush alone.
+
+**Falsifier** (TEST_PLAN §9's packet form; run LIVE at iter-318 — the
+probe outside the repo per Rule 9, the `test_resume` corpus: seed 42,
+move/steal/wait-760/move, split after step 2; artifacts md5 probe
+`52cba69fcca1040fb4f0c19053293c99` / control log `6cc1e753…` / drift
+log `c496695d…`). CONTROL — the standing law holds: split+resume
+(same pack) is byte-identical to the uninterrupted run (24 events,
+identical md5) — the falsifier targets the GAPS, never the law.
+**Arm A** (pack content drift): a rules.json content mutation (the
+beat cadence `[360,720,1080] → [100,200,300]`) with `name@version`
+UNCHANGED — resume ACCEPTED (no refusal: cursor.pack == header.pack ==
+pack.name_version, all `tavern_pack@0.1`), the shared 7-event prefix
+identical, then the tails DIVERGE from the first appended event
+(control: `watch_change…`, 17 tail events; drift: `status_decayed…`,
+23) — the SAME identity as far as any carrier can see continued into
+a DIFFERENT future execution (review-C4's risk, live). **Arm B**
+(engine identity decorative): the header's commit `0000000`;
+`Simulator.resume` never reads `header["commit"]`; resume with
+commit=`deadbee2` accepted silently — recorded, never checked. **Arm
+C** (flush ≠ durable): the writer's 0 fsync / 3 flush(); a torn tail
+→ LOUD LogError (this arm FOUND KI#111 pre-fix); a lost pre-pin tail
+(log 6 events, cursor pins 7) → LOUD CursorError.
+
+**Minimal test set** (the implementation row's, not today's — KI#111's
+closed torn-tail test excepted): the identity-gate RED arms — a
+same-name content-drifted pack REFUSED at resume (E1's pack digest
+component); a foreign engine label REFUSED or the policy explicitly
+pinned (E1's engine component); the positive control — the committed
+corpus and every `test_resume` split stay GREEN with the gate live
+(zero false refusals); the lifecycle arms — a torn tail never
+silently repaired, a lost pre-pin tail refused; the closed-set pin —
+the cursor envelope unchanged unless a field proves irreducibility.
+
+**Deliberately NOT done here** (the row's own fence): no serialization
+change (the row's law), no digest field added to the header or the
+cursor, no fsync policy, no crash curriculum, no second store — the
+identity components land behind the runtime-promotion gate (a named
+consumer + a measured native limit + the falsifier), the owner's
+call.
