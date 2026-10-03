@@ -268,7 +268,57 @@ def test_decisions_row_cap(tmp_path: Path) -> None:
     _rewrite(root, "docs/DECISIONS.md",
              "| D-002 | 2026-01-02 | the crafted second row | why | so |",
              "| D-002 | 2026-01-02 | the crafted second row | why | so |\n" + rows)
-    assert any("32 rows" in v for v in docguard.violations(root))
+    assert any(
+        "32 entries (32 table rows + 0 post-table sections; cap 30" in v
+        for v in docguard.violations(root)
+    )
+
+
+def test_decisions_section_entries_count_and_pcc(tmp_path: Path) -> None:
+    """The iter-310 lesson: a post-table `### D-` section IS an entry —
+    the row-regex alone let the cap drift to 40 invisibly while the
+    guard reported clean; an R3+ tag in the section form carries the
+    same PCC duty as a table row."""
+    root = _mini(tmp_path)
+    sections = "\n\n".join(
+        f"### D-{n} — the crafted section entry\n\nThe crafted body."
+        for n in range(3, 34)
+    )
+    _rewrite(
+        root,
+        "docs/DECISIONS.md",
+        "| D-002 | 2026-01-02 | the crafted second row | why | so |",
+        "| D-002 | 2026-01-02 | the crafted second row | why | so |\n\n"
+        + sections,
+    )
+    found = docguard.violations(root)
+    assert any(
+        "33 entries (2 table rows + 31 post-table sections; cap 30" in v
+        for v in found
+    )
+    # an R3+ tag in the section form without the record — N017
+    _rewrite(
+        root,
+        "docs/DECISIONS.md",
+        "### D-3 — the crafted section entry",
+        "### D-3 — the crafted (R3) section entry",
+    )
+    assert any(
+        "R3+ row lacks the PCC fields" in v for v in docguard.violations(root)
+    )
+    # the same tag WITH the six markers clears the PCC family (the
+    # count breach stands — its own line, never silenced)
+    _rewrite(
+        root,
+        "docs/DECISIONS.md",
+        "### D-3 — the crafted (R3) section entry",
+        "### D-3 — the crafted (R3) section entry [PCC: intent= crafted; "
+        "invariants= crafted; delta= crafted; verification= crafted; "
+        "provenance= crafted; runtime= crafted]",
+    )
+    found = docguard.violations(root)
+    assert not any("PCC fields" in v for v in found)
+    assert any("33 entries" in v for v in found)
 
 
 def test_docs_cap_and_the_allowlist(tmp_path: Path) -> None:

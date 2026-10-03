@@ -19,11 +19,16 @@ What is counted (the AGENTS §6 table, mechanically):
                "### iter-N" detailed-history headings anywhere (the
                three ledgars stay dead — "### bg-N" under Track B is
                that track's live one-liner form, allowed).
-  docs/DECISIONS.md  <= 30 rows (compound-ID family rows count as 1);
-               an R3+ row (a `(R3)`/`(R4)`/`(R5)` tag, AGENTS §2.9)
-               must carry the six PCC field markers — intent=,
-               invariants=, delta=, verification=, provenance=,
-               runtime= (SSI-N017 proof-carrying-change, ssi-2/D-222).
+  docs/DECISIONS.md  <= 30 entries — a table row (`| D-…`) or a
+               post-table section (`### D-…`, the D-240..249 era's
+               form) each count as 1 (compound-ID family rows count
+               as 1); an R3+ row (a `(R3)`/`(R4)`/`(R5)` tag, AGENTS
+               §2.9) in EITHER form must carry the six PCC field
+               markers — intent=, invariants=, delta=, verification=,
+               provenance=, runtime= (SSI-N017 proof-carrying-change,
+               ssi-2/D-222; the section-form tooth: iter-310's lesson —
+               the cap drifted to 40 invisibly when ten `###` sections
+               landed past the row-regex's sight).
   AGENTS.md    the risk ladder must stand (the R0–R5 + PCC markers
                of §2.9 — a deleted ladder goes red, ssi-2/D-222).
   docs/ssi/SSI_OVERLAY.md  the SSI control plane's own shape (the
@@ -151,6 +156,12 @@ _DONE_BLOCK_RE = re.compile(r"^\*\*iter-\d+ DONE")
 _LEDGER_LINE_RE = re.compile(r"^- iter-\d+ · ")
 _HISTORY_HEADING_RE = re.compile(r"^### iter-\d+ ")
 _DECISION_ROW_RE = re.compile(r"^\| D-")
+#: A post-table long-form entry (the D-240..D-249 era's `###` form) —
+#: an entry the row-regex alone never saw (iter-310's lesson: the cap
+#: drifted to 40 invisibly while the guard reported clean). Counts
+#: toward the same cap; an R3+ tag in this form carries the same
+#: PCC duty as a table row.
+_DECISION_SECTION_RE = re.compile(r"^### D-")
 
 # -- the SSI control-plane shapes (ssi-2/D-222, ssi-2/D-223) -------------
 
@@ -351,11 +362,16 @@ def _decisions_checks(repo: Path) -> list[str]:
     text = _read(repo, "docs/DECISIONS.md")
     if text is None:
         return ["docs/DECISIONS.md: missing (the state doc must exist)"]
-    rows = [ln for ln in text.splitlines() if _DECISION_ROW_RE.match(ln)]
-    if len(rows) > DECISIONS_MAX:
+    lines = text.splitlines()
+    rows = [ln for ln in lines if _DECISION_ROW_RE.match(ln)]
+    sections = [ln for ln in lines if _DECISION_SECTION_RE.match(ln)]
+    total = len(rows) + len(sections)
+    if total > DECISIONS_MAX:
         return [
-            f"docs/DECISIONS.md: {len(rows)} rows (cap {DECISIONS_MAX}; "
-            f"collapse fires on the owner's call, D-034/D-185)"
+            f"docs/DECISIONS.md: {total} entries ({len(rows)} table "
+            f"rows + {len(sections)} post-table sections; cap "
+            f"{DECISIONS_MAX}; collapse fires on the owner's call, "
+            f"D-034/D-185)"
         ]
     return []
 
@@ -492,16 +508,20 @@ def _ssi_overlay_checks(repo: Path) -> list[str]:
 
 
 def _ssi_pcc_checks(repo: Path) -> list[str]:
-    """SSI-N017 executable (AGENTS §2.9): a DECISIONS row that
-    self-declares R3+ — a `(R3)`/`(R4)`/`(R5)` tag — must carry the
-    compact PCC record's six field markers. Green-and-armed: the
-    first R3+ row that ships without its proof goes red here."""
+    """SSI-N017 executable (AGENTS §2.9): a DECISIONS entry that
+    self-declares R3+ — a `(R3)`/`(R4)`/`(R5)` tag, in the table-row
+    OR the post-table section form — must carry the compact PCC
+    record's six field markers. Green-and-armed: the first R3+ entry
+    that ships without its proof goes red here."""
     text = _read(repo, "docs/DECISIONS.md")
     if text is None:
         return []
     out: list[str] = []
     for line in text.splitlines():
-        if _DECISION_ROW_RE.match(line) and _SSI_RISK_TAG_RE.search(line):
+        is_entry = _DECISION_ROW_RE.match(line) or _DECISION_SECTION_RE.match(
+            line
+        )
+        if is_entry and _SSI_RISK_TAG_RE.search(line):
             lacking = [f for f in SSI_PCC_FIELDS if f not in line]
             if lacking:
                 out.append(

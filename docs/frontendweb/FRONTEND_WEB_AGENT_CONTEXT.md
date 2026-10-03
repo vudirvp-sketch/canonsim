@@ -106,11 +106,16 @@ tooling floor, the optional P1 config).
    SharedWorker stream transport (§5's own law), Tauri 2, PWA
    packaging, the layout manifest/Capabilities screen (optional
    P1), the pixel-diff visual regression (the tooling floor's last
-   row — the CI job + the Playwright smoke LANDED iter-309),
-   WebSocket (only for a concrete bidirectional requirement),
-   HTTP/2 or server fan-out (measured need). The SSE browser adapter
-   + the focused-tab policy are LANDED (iter-306, the §5 admission
-   steps 3+4).
+   row — the CI job + the Playwright smoke LANDED iter-309; the
+   row itself POSTPONED by the owner's 2026-10-03 disposition,
+   D-250/iter-310: the heaviest of the floor's rows — a real
+   visual-regression pipeline (Playwright + pixelmatch/
+   jest-image-snapshot-class) when a live need names it; the
+   token-guards + the acceptance matrix's live screenshots stand
+   until then), WebSocket (only for a concrete bidirectional
+   requirement), HTTP/2 or server fan-out (measured need). The SSE
+   browser adapter + the focused-tab policy are LANDED (iter-306,
+   the §5 admission steps 3+4).
 
 ## 6. The stage map
 
@@ -206,7 +211,11 @@ POST-S0        — the tooling floor's first row LANDED (iter-293: the
                  wire, live push, the UNKNOWN lane + the explicit
                  retry; ONE session.get right after create); the
                  standing gate that remains: the pixel-diff visual
-                 regression (the tooling floor's last row)
+                 regression (the tooling floor's last row — POSTPONED
+                 by the owner's 2026-10-03 disposition, D-250/iter-310:
+                 a real visual-regression pipeline when a live need
+                 names it; the token-guards + the live screenshots
+                 stand)
 PHASE 3        — the first row LANDED (iter-294, the owner's
                  «продолжай работы по фронтенду» delegated call: the
                  SHELL/NAV + the SESSION LIFECYCLE surface over the

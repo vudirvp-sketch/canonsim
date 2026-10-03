@@ -1,63 +1,52 @@
-Iteration: iter-309 (`cie2e` — the owner's «CI-ряд (additive-ветка
-  для ci.yml с vitest+tsc+build), или Playwright multi-tab smoke на
-  основе сегодняшнего драйва, или крошечный ряд boot-time OBSERVED-sync
-  (один session.get после create); можешь все сразу…» delegated call;
-  R2 frontend-local + one R3-class CI row (D-249): ALL THREE rows
-  landed in one owner-sanctioned sweep): (1) the ADDITIVE frontend CI
-  job — ci.yml's new `frontend` lane (npm ci over the committed
-  lockfile + tsc --noEmit + vitest + build; the Python `test` job
-  stays BYTE-IDENTICAL — FRONTEND_WEB_LAW §11's additive law made
-  executable; the smoke NOT in CI by the owner's row spec); (2) the
-  PLAYWRIGHT MULTI-TAB SMOKE as a committed suite —
-  frontend/tests/e2e/ over the REAL composition (the gateway
-  --no-backend + the Vite proxy, both webServer-booted, TCP
-  readiness): two tabs two independent sessions each strip LIVE at
-  boot, the focused-tab policy over a live wire (a blurred tab's
-  connection REALLY closes → PAUSED/STALE; the refocus re-dials —
-  headless never blurs, so the drive dispatches the policy's own
-  listeners, the jsdom band's form over a live EventSource), live
-  push without refresh (three attach events through the CAS loop),
-  and the UNKNOWN outcome path (the mid-flight attach cut → the
-  honest TRANSPORT lane + the USER's explicit retry recovering
-  ATTACHED) — 4/4 green, zero app console errors; (3) the BOOT-TIME
-  OBSERVED-SYNC — ONE session.get immediately after a successful
-  create (iter-308 §C's candidate: a create-only boot honestly said
-  DISCONNECTED, readable as “gateway dead” while ops ran fine) — a
-  first observation, never a retry or a poll, the failure lanes
-  honest (TRANSPORT→DISCONNECTED, delivered-rejection→STALE)
+Iteration: iter-310 (`deccollapse` — the owner's 2026-10-03
+  standing-queue disposition call: «DECISIONS-коллапс — сделать
+  сейчас… B1/C4 — оставить как есть / закрыть без изменений…
+  pixel-diff — отложить»): the DECISIONS collapse EXECUTED 40→30
+  — the honest count corrected first (the STATUS line had said
+  «37→30», a number true at iter-293 and stale since; the real
+  count at HEAD: 30 table rows + TEN post-table `###` sections
+  (D-240..D-249) the docguard row-regex never saw + the 75KB
+  D-176..D-239 mega-row): the ten sections re-folded into family
+  rows, the mega-row re-cut into six compact family rows
+  (substrate/packs, engine+workbench, visual/UIUX/obs,
+  corpus+inference, ssi, world-track), seven adjacent-family
+  merges in the old table (the compound-ID law — every D-001..D-250
+  citation verified resolving), the D-024 compression throughout
+  (the per-D detail in git + the iteration reports; the PCC records
+  and the SSI-N020 GC cards preserved in full form), the file
+  166KB→101KB / 594→42 lines; the RECURRENCE TOOTH: docguard now
+  counts the `### D-` section form toward the 30-entry cap and the
+  N017 PCC duty extends to it (the drift class can never regrow
+  silently — the doc-3 philosophy applied to its own blind spot);
+  the B1/C4 law diffs from iter-303 CLOSED WITHOUT DIFF (the
+  owner's call — both verdicts already measured: 0.4s and the
+  soft-cap's doc-sprawl function not worth a law change); the
+  pixel-diff visual regression POSTPONED (the owner's call — the
+  heaviest of the tooling floor's rows; a real visual-regression
+  pipeline when a live need names it; the token-guards + the
+  matrix's live screenshots stand) — all three dispositions
+  recorded as D-250
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
-2555 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; zero Python change) +
-  256 vitest (=252+4) + tsc clean + build ×2 byte-identical + the
-  e2e smoke 4/4 over the real gateway + Vite + Chromium ·
+2556 passed + 1 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; the doc-only
+  collapse + the guard tooth — zero engine change) ·
 Date: 2026-10-03 ·
-Scope: .github/workflows/ci.yml (the additive frontend job — §8's
-  stop&confirm discharged by the owner's own call, D-249 R3+PCC),
-  frontend/playwright.config.ts (new), frontend/tests/e2e/
-  multitab.smoke.spec.ts (new — the 4-row smoke),
-  frontend/src/state/session/useTabSession.ts (the boot-time sync),
-  frontend/src/app/composition/App.tsx + frontend/src/features/
-  trajectory/Trajectory.tsx (the strip/tail testids),
-  frontend/tests/integration/BootSync.test.tsx (new — 4 rows),
-  frontend/tests/integration/Shell.test.tsx (the DISCONNECTED pin
-  updated to the row's intended LIVE), frontend/package.json +
-  package-lock.json (the e2e script + @playwright/test devDep),
-  .gitignore (the runner artifact dirs), docs/DECISIONS.md (D-249),
-  docs/FRONTEND_WEB_LAW.md (§0/§11 the landed markers), docs/
-  AGENT_NAVIGATION.md (§1 the frontend row + the ci row), docs/
-  TASKS.md (the ledger, iter-299 evicted), worklog.md (the iter-309
-  entry, iter-299 evicted), docs/frontendweb/
-  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map), frontend/README.md
-  (the e2e run form), docs/iterations/iter-309-cie2e-report.md (new
-  — this row's report) — 20 changed/created (16 modified + 4
-  created; the combined scope the owner's own «можешь все сразу» —
-  §2.3's over-cap note rides the worklog; R2 frontend-local + one
-  R3 CI row; zero Python change, INV-1..5 untouched, the LOG
-  untouched, zero corpus price; NO test deleted or weakened — 8
-  added: 4 BootSync + 4 e2e)
+Scope: docs/DECISIONS.md (the collapse 40→30 — the sections
+  re-folded, the mega-row re-cut, the family merges, D-250),
+  scripts/docguard.py (the section-form tooth: the `### D-` count
+  + the N017 PCC duty extended to it), tests/test_docguard.py
+  (+1 crafted-breach row; the row-cap assertion updated to the
+  new message shape), docs/frontendweb/FRONTEND_WEB_AGENT_CONTEXT.md
+  (the pixel-diff disposition at §5), STATUS.md, worklog.md (the
+  iter-310 entry, iter-300 evicted), docs/TASKS.md (the ledger,
+  iter-300 evicted), docs/iterations/iter-310-deccollapse-report.md
+  (new — this row's RU report) — 8 changed/created (6 modified + 2
+  created; R0/R1 — the doc collapse + the periphery guard tooth;
+  zero engine change, INV-1..5 untouched, the LOG untouched, zero
+  corpus price; NO test deleted or weakened — 1 added)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1/V2/V3 visual floors LANDED (iter-293/297/
   304/307); Phase 3's SEVEN rows LANDED
@@ -70,13 +59,16 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
   ROWS LANDED + THE BOOT-TIME OBSERVED-SYNC LANDED (iter-309 —
   iter-308's two OPEN rows and the §C candidate all closed; the
   smoke NOT in CI by the owner's row spec — the owner-side/sandbox
-  `npm run e2e`); the next frontend rows the owner's call: the
-  DECISIONS collapse (37→30 now, the owner's call), the pixel-diff
-  visual regression (the tooling floor's last row), the B1/C4 law
-  diffs from iter-303, the replay-UI NOT-EXPOSED row; the standing
-  boundaries: a SharedWorker stream transport, Tauri,
-  PWA, the Settings Appearance section (no persisted store) —
-  each its own admission (the import form's native file/folder
+  `npm run e2e`); THE STANDING QUEUE DISPOSITIONED + THE DECISIONS
+  COLLAPSE LANDED (iter-310, D-250 — the 40→30 collapse with the
+  docguard section-form tooth; the B1/C4 law diffs CLOSED WITHOUT
+  DIFF — both verdicts already measured; the pixel-diff row
+  POSTPONED — a real visual-regression pipeline when a live need
+  names it, the token-guards + the live screenshots stand); the
+  next frontend rows the owner's call: the replay-UI NOT-EXPOSED
+  row; the standing boundaries: a SharedWorker stream transport,
+  Tauri, PWA, the Settings Appearance section (no persisted store)
+  — each its own admission (the import form's native file/folder
   picker rides the Tauri row). The world track: W8's remaining
   rows the owner's call. The ssi family COMPLETE except ssi-5,
   owner-gated.
@@ -148,25 +140,25 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-309 DONE: cie2e (the owner's «CI-ряд / Playwright multi-tab
-  smoke / boot-time OBSERVED-sync — можешь все сразу» delegated
-  call; R2 frontend-local + one R3-class CI row, D-249).** All three
-  rows landed in one sweep: the ADDITIVE frontend CI job (ci.yml's
-  `frontend` lane — npm ci + tsc + vitest + build, the Python job
-  byte-identical), the Playwright MULTI-TAB SMOKE as a committed
-  4-row suite over the real gateway + Vite (two independent
-  sessions each LIVE at boot, the focused-tab policy over a live
-  wire, live push without refresh, the UNKNOWN lane + the explicit
-  retry), and the BOOT-TIME OBSERVED-SYNC (one session.get after
-  create — iter-308 §C's candidate closed). 256 vitest (=252+4) +
-  tsc + build ×2 byte-identical + e2e 4/4; 2555+1 + ruff +
-  docguard + topology --check clean (zero Python change). The RU
-  report: docs/iterations/iter-309-cie2e-report.md.
-Next: the owner's calls — (1) the standing queue: the DECISIONS
-  collapse (37→30, the owner's call), the tooling floor's LAST row
-  (the pixel-diff visual regression), the B1/C4 law diffs from
-  iter-303 (adopt or reject), the replay-UI NOT-EXPOSED row, and
-  the world track's parallel rows.
+**iter-310 DONE: deccollapse (the owner's 2026-10-03 standing-queue
+  disposition call — the DECISIONS collapse now, B1/C4 closed
+  without diff, pixel-diff postponed; D-250).** The collapse 40→30:
+  the ten post-table `###` sections (D-240..D-249) re-folded into
+  family rows, the 75KB D-176..D-239 mega-row re-cut into six
+  compact family rows, seven adjacent-family merges (every D-ID
+  verified resolving), the D-024 compression throughout (166KB→101KB;
+  the PCC records + the SSI-N020 GC cards preserved in full form);
+  the docguard recurrence tooth (the `### D-` section form counts
+  toward the cap + carries the N017 PCC duty, +1 crafted-breach
+  test). 2556+1 + ruff + docguard + topology --check clean (zero
+  engine change). The RU report:
+  docs/iterations/iter-310-deccollapse-report.md.
+Next: the owner's calls — (1) the standing queue: the replay-UI
+  NOT-EXPOSED row and the world track's parallel rows (the queue's
+  three other rows dispositioned by the same 2026-10-03 call,
+  D-250: the collapse LANDED iter-310; B1/C4 CLOSED WITHOUT DIFF —
+  both iter-303 verdicts already measured; pixel-diff POSTPONED —
+  a real visual-regression pipeline when a live need names it).
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns
