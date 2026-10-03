@@ -230,9 +230,15 @@ describe("the composition root's registry split (the IA acceptance floor)", () =
     });
 
     expect(screen.getByRole("heading", { level: 1, name: "CanonSim Workbench" })).toBeTruthy();
-    // The identity strip's honest state labels stay (the header strip
-    // and the live surface may both carry one — state, never prose)…
-    expect(screen.getAllByText("DISCONNECTED").length).toBeGreaterThan(0);
+    // The boot-time OBSERVED-sync (iter-309, iter-308 §C's candidate):
+    // after the create's ONE session.get, the header strip settles LIVE —
+    // a create-only boot's honest-but-misleading DISCONNECTED is the row's
+    // own before-state (the live surface keeps its own state labels — the
+    // jsdom tail stays DISCONNECTED: no EventSource, the stream honestly
+    // FAILED — state, never prose).
+    await waitFor(() => {
+      expect(screen.getByTestId("session-freshness").textContent).toBe("LIVE");
+    });
     // …the architecture essays do not (the IA floor's prose row).
     expect(screen.queryByText(/untrusted presentation client/i)).toBeNull();
     expect(screen.queryByText(/only the active surface mounts/i)).toBeNull();

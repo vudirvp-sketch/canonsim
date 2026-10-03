@@ -1,51 +1,63 @@
-Iteration: iter-308 (`acceptmatrix` — the owner's «продолжить
-  работу по фронтенду: матрица приёмки или CI-ряды… сыграть
-  роль десятков/сотен тестеров» delegated call; R0/R1 — a pure
-  verification iteration, ZERO code change): the FULL ACCEPTANCE
-  MATRIX from the archived pack CLOSED over a mass live
-  verification session — 39 rows VERIFIED (live evidence and/or
-  executable tests), 2 honestly OPEN (the Playwright smoke, the
-  frontend CI wiring — each its own parked row), 1 PARTIAL (visual
-  regression: the token floors are executable, a pixel-diff suite
-  is not), 2 NOT-EXPOSED (replay UI, honestly), ZERO product
-  defects found; the session: llama.cpp b11337 re-dropped (the
-  same build as iter-302), models fetched THROUGH the gateway's
-  own model.fetch (stories15M Q4_K_M 20 986 944 B +
-  qwen2.5-0.5b-instruct-q4_k_m 491 400 032 B — byte-exact with
-  iter-302's record), a real CLI canon run generated for the
-  HISTORY world (run_125_0, seed 125, 56 events), 77 API checks
-  green across four batteries (fetch 10/10, liveband 24/24 — the
-  full lifecycle DISCOVERED→ACTIVE→chat COMPLETED→single-slot
-  rejection→EVICTED→re-selection, matrix-api 31/31 — every honest
-  rejection lane + G4 BOTH edges + CAS + RESYNC over a rolled
-  retention + the §8 closures, observatory 12/12 over the
-  committed run), and a 9-persona browser drive over every
-  surface (15 screenshots, zero console errors): virtualization
-  10 001 rows → 201 DOM nodes, jump-to-seq, the chat provenance
-  pair requested→effective verbatim, the models lifecycle through
-  the UI's OWN buttons, the §8 draft reconciliation live, the
-  observatory window pagination replacing, the settings draft
-  surviving the section round-trip, all three gateway probes
-  verbatim, S0-4 measured WITH a live llama-server at 124.9 ops/s,
-  two tabs two independent sessions, the focused-tab stream policy
-  through its own mechanism (hidden→STALE, visible→re-dial), live
-  push without refresh, the poll fallback with the buffer
-  surviving; the build byte-identical twice
+Iteration: iter-309 (`cie2e` — the owner's «CI-ряд (additive-ветка
+  для ci.yml с vitest+tsc+build), или Playwright multi-tab smoke на
+  основе сегодняшнего драйва, или крошечный ряд boot-time OBSERVED-sync
+  (один session.get после create); можешь все сразу…» delegated call;
+  R2 frontend-local + one R3-class CI row (D-249): ALL THREE rows
+  landed in one owner-sanctioned sweep): (1) the ADDITIVE frontend CI
+  job — ci.yml's new `frontend` lane (npm ci over the committed
+  lockfile + tsc --noEmit + vitest + build; the Python `test` job
+  stays BYTE-IDENTICAL — FRONTEND_WEB_LAW §11's additive law made
+  executable; the smoke NOT in CI by the owner's row spec); (2) the
+  PLAYWRIGHT MULTI-TAB SMOKE as a committed suite —
+  frontend/tests/e2e/ over the REAL composition (the gateway
+  --no-backend + the Vite proxy, both webServer-booted, TCP
+  readiness): two tabs two independent sessions each strip LIVE at
+  boot, the focused-tab policy over a live wire (a blurred tab's
+  connection REALLY closes → PAUSED/STALE; the refocus re-dials —
+  headless never blurs, so the drive dispatches the policy's own
+  listeners, the jsdom band's form over a live EventSource), live
+  push without refresh (three attach events through the CAS loop),
+  and the UNKNOWN outcome path (the mid-flight attach cut → the
+  honest TRANSPORT lane + the USER's explicit retry recovering
+  ATTACHED) — 4/4 green, zero app console errors; (3) the BOOT-TIME
+  OBSERVED-SYNC — ONE session.get immediately after a successful
+  create (iter-308 §C's candidate: a create-only boot honestly said
+  DISCONNECTED, readable as “gateway dead” while ops ran fine) — a
+  first observation, never a retry or a poll, the failure lanes
+  honest (TRANSPORT→DISCONNECTED, delivered-rejection→STALE)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
   the ladder complete 0..6 — the standing work: the owner-gated
   backlog + the web-frontend track + the world track + the SoW
   horizon, ROADMAP §2/§6) ·
 2555 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin) ·
+  --check clean (Python 3.12.14, the env pin; zero Python change) +
+  256 vitest (=252+4) + tsc clean + build ×2 byte-identical + the
+  e2e smoke 4/4 over the real gateway + Vite + Chromium ·
 Date: 2026-10-03 ·
-Scope: docs/iterations/iter-308-acceptmatrix-report.md (new —
-  the full matrix verdict table), STATUS.md (this header + the
-  Next step), worklog.md (the iter-308 entry, iter-298 evicted),
-  docs/TASKS.md (the ledger, iter-298 evicted), docs/frontendweb/
-  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map's acceptance-matrix
-  line) — 5 changed/created (4 modified + 1 created; R0/R1 — zero
-  Python change, zero frontend change, INV-1..5 untouched, the
-  LOG untouched, zero corpus price; NO test deleted or weakened)
+Scope: .github/workflows/ci.yml (the additive frontend job — §8's
+  stop&confirm discharged by the owner's own call, D-249 R3+PCC),
+  frontend/playwright.config.ts (new), frontend/tests/e2e/
+  multitab.smoke.spec.ts (new — the 4-row smoke),
+  frontend/src/state/session/useTabSession.ts (the boot-time sync),
+  frontend/src/app/composition/App.tsx + frontend/src/features/
+  trajectory/Trajectory.tsx (the strip/tail testids),
+  frontend/tests/integration/BootSync.test.tsx (new — 4 rows),
+  frontend/tests/integration/Shell.test.tsx (the DISCONNECTED pin
+  updated to the row's intended LIVE), frontend/package.json +
+  package-lock.json (the e2e script + @playwright/test devDep),
+  .gitignore (the runner artifact dirs), docs/DECISIONS.md (D-249),
+  docs/FRONTEND_WEB_LAW.md (§0/§11 the landed markers), docs/
+  AGENT_NAVIGATION.md (§1 the frontend row + the ci row), docs/
+  TASKS.md (the ledger, iter-299 evicted), worklog.md (the iter-309
+  entry, iter-299 evicted), docs/frontendweb/
+  FRONTEND_WEB_AGENT_CONTEXT.md (the stage map), frontend/README.md
+  (the e2e run form), docs/iterations/iter-309-cie2e-report.md (new
+  — this row's report) — 20 changed/created (16 modified + 4
+  created; the combined scope the owner's own «можешь все сразу» —
+  §2.3's over-cap note rides the worklog; R2 frontend-local + one
+  R3 CI row; zero Python change, INV-1..5 untouched, the LOG
+  untouched, zero corpus price; NO test deleted or weakened — 8
+  added: 4 BootSync + 4 e2e)
 Track A: the web-frontend track — S0 LANDED; the tooling floor's
   first row + the V1/V2/V3 visual floors LANDED (iter-293/297/
   304/307); Phase 3's SEVEN rows LANDED
@@ -54,12 +66,15 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
   and RE-CLOSED LIVE inside the matrix session (iter-308); THE
   STREAMING ADMISSION LANDED (iter-305/306); THE FULL ACCEPTANCE
   MATRIX CLOSED (iter-308 — 39 verified / 2 open / 1 partial /
-  2 not-exposed, zero defects); the next frontend rows the
-  owner's call: the DECISIONS collapse, the tooling floor's
-  remaining rows (the CI wiring, the Playwright-class multi-tab
-  smoke, the pixel-diff visual regression), the boot-time
-  OBSERVED-sync candidate (the iter-308 report's §C observation);
-  the standing boundaries: a SharedWorker stream transport, Tauri,
+  2 not-exposed, zero defects); THE TOOLING FLOOR'S CI + SMOKE
+  ROWS LANDED + THE BOOT-TIME OBSERVED-SYNC LANDED (iter-309 —
+  iter-308's two OPEN rows and the §C candidate all closed; the
+  smoke NOT in CI by the owner's row spec — the owner-side/sandbox
+  `npm run e2e`); the next frontend rows the owner's call: the
+  DECISIONS collapse (37→30 now, the owner's call), the pixel-diff
+  visual regression (the tooling floor's last row), the B1/C4 law
+  diffs from iter-303, the replay-UI NOT-EXPOSED row; the standing
+  boundaries: a SharedWorker stream transport, Tauri,
   PWA, the Settings Appearance section (no persisted store) —
   each its own admission (the import form's native file/folder
   picker rides the Tauri row). The world track: W8's remaining
@@ -133,28 +148,25 @@ Track A: the web-frontend track — S0 LANDED; the tooling floor's
 
 ## Next step
 
-**iter-308 DONE: acceptmatrix (the owner's «матрица приёмки или
-  CI-ряды… сыграть роль десятков/сотен тестеров» delegated call;
-  R0/R1 — pure verification, zero code change).** The full
-  acceptance matrix from the archived pack CLOSED over a mass live
-  session: 39 rows verified (live evidence and/or executable
-  tests), 2 honestly open (the Playwright smoke, the frontend CI
-  wiring — each its own parked row), 1 partial (visual regression:
-  token floors executable, pixel-diff not), 2 not-exposed (replay
-  UI, honestly), ZERO product defects; llama.cpp b11337 re-dropped,
-  models fetched through the gateway's own op, 77 API checks green
-  across four batteries, a 9-persona browser drive over every
-  surface (15 screenshots, zero console errors), S0-4 at 124.9
-  ops/s with a live llama-server. The RU report:
-  docs/iterations/iter-308-acceptmatrix-report.md.
+**iter-309 DONE: cie2e (the owner's «CI-ряд / Playwright multi-tab
+  smoke / boot-time OBSERVED-sync — можешь все сразу» delegated
+  call; R2 frontend-local + one R3-class CI row, D-249).** All three
+  rows landed in one sweep: the ADDITIVE frontend CI job (ci.yml's
+  `frontend` lane — npm ci + tsc + vitest + build, the Python job
+  byte-identical), the Playwright MULTI-TAB SMOKE as a committed
+  4-row suite over the real gateway + Vite (two independent
+  sessions each LIVE at boot, the focused-tab policy over a live
+  wire, live push without refresh, the UNKNOWN lane + the explicit
+  retry), and the BOOT-TIME OBSERVED-SYNC (one session.get after
+  create — iter-308 §C's candidate closed). 256 vitest (=252+4) +
+  tsc + build ×2 byte-identical + e2e 4/4; 2555+1 + ruff +
+  docguard + topology --check clean (zero Python change). The RU
+  report: docs/iterations/iter-309-cie2e-report.md.
 Next: the owner's calls — (1) the standing queue: the DECISIONS
-  collapse (36→30, the owner's call), the tooling floor's remaining
-  rows (the CI wiring — §8 stop&confirm; the Playwright-class
-  multi-tab smoke — iter-308's browser drive is the form's template;
-  the pixel-diff visual regression), the boot-time OBSERVED-sync
-  candidate (the iter-308 report's §C observation — one session.get
-  after create), the B1/C4 law diffs from iter-303 (adopt or
-  reject), and the world track's parallel rows.
+  collapse (37→30, the owner's call), the tooling floor's LAST row
+  (the pixel-diff visual regression), the B1/C4 law diffs from
+  iter-303 (adopt or reject), the replay-UI NOT-EXPOSED row, and
+  the world track's parallel rows.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns

@@ -105,10 +105,12 @@ tooling floor, the optional P1 config).
 4. **Still gated** (each its own admission, never silent): a
    SharedWorker stream transport (§5's own law), Tauri 2, PWA
    packaging, the layout manifest/Capabilities screen (optional
-   P1), the tooling floor's CI rows, WebSocket (only for a concrete
-   bidirectional requirement), HTTP/2 or server fan-out (measured
-   need). The SSE browser adapter + the focused-tab policy are
-   LANDED (iter-306, the §5 admission steps 3+4).
+   P1), the pixel-diff visual regression (the tooling floor's last
+   row — the CI job + the Playwright smoke LANDED iter-309),
+   WebSocket (only for a concrete bidirectional requirement),
+   HTTP/2 or server fan-out (measured need). The SSE browser adapter
+   + the focused-tab policy are LANDED (iter-306, the §5 admission
+   steps 3+4).
 
 ## 6. The stage map
 
@@ -191,12 +193,20 @@ POST-S0        — the tooling floor's first row LANDED (iter-293: the
                  checks green across four batteries, a 9-persona
                  browser drive with 15 screenshots and zero console
                  errors, S0-4 at 124.9 ops/s with a live
-                 llama-server, the build byte-identical twice); the
-                 standing gates that remain: the tooling floor's
-                 remaining rows (the CI wiring, the Playwright-class
-                 multi-tab smoke, the pixel-diff visual regression)
-                 + the boot-time OBSERVED-sync candidate (the
-                 iter-308 report's §C)
+                 llama-server, the build byte-identical twice); THE
+                 TOOLING FLOOR'S CI + SMOKE ROWS + THE BOOT-TIME
+                 OBSERVED-SYNC LANDED (iter-309, the owner's «CI-ряд /
+                 Playwright multi-tab smoke / boot-time OBSERVED-sync —
+                 можешь все сразу» call: the ADDITIVE frontend CI job
+                 in ci.yml — npm ci + tsc + vitest + build, the Python
+                 job untouched; the committed 4-row Playwright
+                 multi-tab smoke over the real gateway --no-backend +
+                 Vite — `npm run e2e`, two independent sessions each
+                 LIVE at boot, the focused-tab policy over a live
+                 wire, live push, the UNKNOWN lane + the explicit
+                 retry; ONE session.get right after create); the
+                 standing gate that remains: the pixel-diff visual
+                 regression (the tooling floor's last row)
 PHASE 3        — the first row LANDED (iter-294, the owner's
                  «продолжай работы по фронтенду» delegated call: the
                  SHELL/NAV + the SESSION LIFECYCLE surface over the

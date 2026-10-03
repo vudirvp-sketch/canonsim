@@ -46,6 +46,16 @@
   row is discharged. The pre-D-244 "not yet in repo" snapshot lines
   were retired with this landing (the verbatim pack record stays at
   `docs/frontendweb/archive/`, never re-ingested).
+- Landed (iter-309, D-249 — the tooling floor's CI + smoke rows +
+  the boot-time OBSERVED-sync): the ADDITIVE frontend CI job
+  (ci.yml's `frontend` lane — npm ci + tsc + vitest + build; the
+  Python job untouched, §11's own additive law), the Playwright
+  multi-tab smoke as a COMMITTED suite (`frontend/tests/e2e/`,
+  `npm run e2e` — boots the real gateway --no-backend + the Vite
+  proxy; the iter-308 drive's template), and the boot-time one-read
+  OBSERVED-sync (`useTabSession` — ONE session.get right after a
+  successful create, iter-308 §C's candidate; a first observation,
+  never a retry or a poll).
 - Core rule (the pack's §1): semantics stay in CanonSim/Python;
   presentation and interaction stay downstream, typed, replaceable,
   non-authoritative. The React client is never a second simulator,
@@ -380,10 +390,14 @@ is `docs/VISUAL_SYSTEM_UI.md`.
   isolation.
 - Virtualization proof for large event/run lists.
 - Playwright-class smoke: multi-tab independent clients, reconnect/
-  STALE path, UNKNOWN outcome path.
+  STALE path, UNKNOWN outcome path. (LANDED iter-309:
+  `frontend/tests/e2e/` over the real gateway + Vite — `npm run e2e`;
+  the smoke is NOT a CI job: it boots the real composition, the
+  owner-side/sandbox run by the owner's own row spec.)
 - Frontend CI is ADDITIVE — it never replaces the Python CI (ruff +
   pytest stay the semantic verification; the web checks are a new
-  layer).
+  layer). (LANDED iter-309: the additive `frontend` job in
+  `.github/workflows/ci.yml` — tsc + vitest + build.)
 
 ## 12. The transfer matrix (mandatory rows)
 

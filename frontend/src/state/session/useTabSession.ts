@@ -14,6 +14,15 @@
  *                failed or polling is paused (hidden tab)
  * - DISCONNECTED — no successful read yet, or the client was never
  *                able to reach the gateway
+ *
+ * The boot-time OBSERVED-sync (iter-309, the iter-308 §C candidate
+ * row): a successful `session.create` is a MUTATION, so without a
+ * read the strip honestly says DISCONNECTED — by the vocabulary's
+ * own first arm, yet a user can read that as “gateway dead” while
+ * operations run fine. The boot therefore issues exactly ONE
+ * `session.get` right after the create: a FIRST OBSERVATION, never
+ * a retry (G4 — the create already answered), never a poll (exactly
+ * one read; failures keep their own honest lane below).
  */
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -52,6 +61,28 @@ export function useTabSession(): TabSessionState & {
   const [freshness, setFreshness] = useState<Freshness>("DISCONNECTED");
   const [lastReadAt, setLastReadAt] = useState<number | null>(null);
 
+  /** One OBSERVED read into the tab state — the single owner of the
+   * read lanes (the boot-time sync and the explicit refresh share
+   * it; the lane semantics are the vocabulary’s own, never split). */
+  const readInto = useCallback(
+    async (id: string) => {
+      const result = await client.sessionGet(id);
+      if (result.transport === "DELIVERED" && result.status === "OK") {
+        setDocument(result.result);
+        setFreshness("LIVE");
+        setLastReadAt(Date.now());
+      } else if (result.transport === "DELIVERED") {
+        // A delivered semantic rejection: the observation is honest —
+        // it is NOT a transport failure; present it as STALE-with-reason.
+        setFreshness("STALE");
+        setLastReadAt(Date.now());
+      } else {
+        setFreshness("DISCONNECTED");
+      }
+    },
+    [client],
+  );
+
   const runCreate = useCallback(
     (key: string) => {
       setCreating(true);
@@ -62,13 +93,19 @@ export function useTabSession(): TabSessionState & {
         if (result.transport === "DELIVERED" && result.status === "OK") {
           setSessionId(result.result.session_id);
           setCreating(false);
+          // The boot-time OBSERVED-sync (iter-308 §C's candidate): ONE
+          // session.get immediately after the create — the freshness
+          // vocabulary counts READS, and this is the first one. Not a
+          // retry (the create already answered OK), not a poll (one
+          // read; the sync’s own failure keeps its honest lane).
+          void readInto(result.result.session_id);
         } else {
           setCreateError(describeFailure(result));
           setCreating(false);
         }
       })();
     },
-    [client],
+    [client, readInto],
   );
 
   useEffect(() => {
@@ -83,20 +120,8 @@ export function useTabSession(): TabSessionState & {
 
   const refreshDocument = useCallback(async () => {
     if (sessionId === null) return;
-    const result = await client.sessionGet(sessionId);
-    if (result.transport === "DELIVERED" && result.status === "OK") {
-      setDocument(result.result);
-      setFreshness("LIVE");
-      setLastReadAt(Date.now());
-    } else if (result.transport === "DELIVERED") {
-      // A delivered semantic rejection: the observation is honest —
-      // it is NOT a transport failure; present it as STALE-with-reason.
-      setFreshness("STALE");
-      setLastReadAt(Date.now());
-    } else {
-      setFreshness("DISCONNECTED");
-    }
-  }, [client, sessionId]);
+    await readInto(sessionId);
+  }, [readInto, sessionId]);
 
   return {
     client,

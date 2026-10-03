@@ -68,7 +68,24 @@ together, installs on the first run, and opens the browser) — or
 npm run typecheck   # tsc --noEmit
 npm test            # vitest run (unit + contract + integration + architecture)
 npm run build       # typecheck + the production build
+npm run e2e         # the Playwright multi-tab smoke (iter-309) — over the REAL
+                    # composition: boots the gateway (--no-backend, port 8788)
+                    # + this dev server itself; first run needs
+                    # `npx playwright install chromium`
 ```
+
+The e2e smoke (FRONTEND_WEB_LAW §11's Playwright-class row, the
+iter-308 browser drive's template made committed): two tabs two
+independent sessions (each strip LIVE at boot — the boot-time
+OBSERVED-sync), the focused-tab stream policy over a live wire (a
+blurred tab's connection really closes, the refocus re-dials), live
+push without refresh, and the UNKNOWN outcome path (the mid-flight
+attach cut + the user's explicit retry). It is deliberately NOT a
+CI job (the owner's row spec: the additive CI lane runs tsc +
+vitest + build only); the smoke runs owner-side/sandbox — `npm run
+e2e` from this directory. Two environment facts the config pins:
+Vite exits on stdin-close unless `CI="true"` (its own interop
+flag), and binds `::1` only without `--host 127.0.0.1`.
 
 The architecture guard (`tests/architecture/guard.test.ts`) is the
 tooling floor's first landed row (FRONTEND_WEB_LAW §11's
@@ -104,9 +121,11 @@ literal — the zero/auto semantics; em/% ratios stay legal; the
 scan's mutation check catches all three violation classes). A
 violation is a red
 test naming the file and line — never silent drift. The heavier
-instruments named by the law (dependency-cruiser / eslint-
-boundaries, the Playwright-class multi-tab smoke) stay parked rows,
-each its own admission (AGENTS §2.8: the existing suite first).
+instruments named by the law: the Playwright-class multi-tab smoke
+LANDED (iter-309 — `tests/e2e/`, `npm run e2e`); dependency-cruiser /
+eslint-boundaries stay parked rows, each its own admission
+(AGENTS §2.8: the existing suite first — until the import graph
+outgrows the guard test).
 
 The contract tests run against the committed fixtures
 (`tests/fixtures/*.json`) — captured from the live gateway code
@@ -192,7 +211,8 @@ surface registry; the full
 Observatory analytical suite (compare/graphs/cross-run — the ENTRY
 row has landed: the runs scan + the bounded window); PWA offline
 packaging; Tauri 2; V5.2 polish; JSON-Schema-driven settings (the
-Settings ENTRY row has landed over the store's own closed document); the
-CI rows (dependency-cruiser CI, the Playwright smoke — post-S0
-admissions; the architecture guard itself rides `npm test` and IS
-landed).
+Settings ENTRY row has landed over the store's own closed document);
+the pixel-diff visual regression (the tooling floor's last parked
+row — the additive CI job AND the Playwright multi-tab smoke are
+LANDED, iter-309; dependency-cruiser stays parked behind the guard
+test, AGENTS §2.8's existing-mechanism law).

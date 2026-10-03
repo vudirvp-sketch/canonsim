@@ -7,6 +7,14 @@
 # fixture regen in the same iteration (TEST_PLAN.md §3).
 # The runner python is not PEP-668 fenced — unlike the local sandbox
 # recipe, the install needs no --break-system-packages.
+#
+# ci-2 (iter-309, the tooling floor's CI row — FRONTEND_WEB_LAW §11's
+# additive law): the frontend job runs the web checks — tsc + vitest +
+# build from the committed lockfile. ADDITIVE by law: the Python test
+# job stays the semantic verification, never replaced. The Playwright
+# multi-tab smoke is NOT a CI job (the owner's row spec): it boots the
+# real gateway + Vite and stays the owner-side/sandbox run
+# (`npm run e2e` in frontend/).
 name: ci
 
 on:
@@ -35,3 +43,25 @@ jobs:
         run: python -m ruff check .
       - name: pytest
         run: python -m pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "24" # the LTS line the suite is verified on (iter-309)
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: install (npm ci — the lockfile is the reproducibility root)
+        run: npm ci
+      - name: typecheck (tsc --noEmit)
+        run: npm run typecheck
+      - name: unit + contract + integration (vitest)
+        run: npm test
+      - name: build (tsc + vite build)
+        run: npm run build

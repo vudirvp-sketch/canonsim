@@ -222,12 +222,12 @@ export function App(): ReactNode {
               </code>
             </span>
             <span>
-              rev <code>{String(session.document?.revision ?? "—")}</code>
+              rev <code data-testid="session-rev">{String(session.document?.revision ?? "—")}</code>
             </span>
             <span>
-              seq <code>{String(session.document?.event_sequence ?? "—")}</code>
+              seq <code data-testid="session-seq">{String(session.document?.event_sequence ?? "—")}</code>
             </span>
-            <span className={`freshness freshness-${session.freshness.toLowerCase()}`}>
+            <span className={`freshness freshness-${session.freshness.toLowerCase()}`} data-testid="session-freshness">
               {session.freshness}
             </span>
             <button onClick={() => void session.refreshDocument()} disabled={session.sessionId === null}>

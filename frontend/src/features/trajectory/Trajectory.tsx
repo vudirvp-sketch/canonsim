@@ -101,8 +101,8 @@ export function Trajectory(props: TrajectoryProps): ReactNode {
         </p>
         <div className="strip">
           <span>session <code>{props.sessionId === null ? "—" : short(props.sessionId, 12)}</code></span>
-          <span>seq <code>{String(tail.lastSequence)}</code></span>
-          <span>rows <code>{String(events.length)}</code></span>
+          <span>seq <code data-testid="tail-seq">{String(tail.lastSequence)}</code></span>
+          <span>rows <code data-testid="tail-rows">{String(events.length)}</code></span>
           <span className={`freshness freshness-${tail.freshness.toLowerCase()}`}>{tail.freshness}</span>
           {feed === "stream" ? (
             <span className="stream-phase" data-testid="stream-phase">

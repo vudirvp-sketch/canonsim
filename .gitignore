@@ -37,3 +37,8 @@ workbench/runtime/
 # Environments & secrets
 .venv/
 .env
+
+# The Playwright smoke's runner artifacts (iter-309, the tooling floor's
+# e2e row): traces/reports/videos never committed — the run IS the report
+frontend/test-results/
+frontend/playwright-report/
