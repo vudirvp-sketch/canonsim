@@ -1,0 +1,759 @@
+{
+  "meta": {
+    "pack": "farstead_pack",
+    "version": "0.1",
+    "notes": "THE TIER A RULES (the Atomic World Lab fixture, lab-2): the L1 material loop as PACK DATA over the landed primitives. The three halves: THE SOURCES' REGENERATION (economy.flows — four ungated environmental mints at the year clock, the 02 §9 preferred form, no capacity cap by honest residue); THE ROUNDS (urgencies — the twelve adults' work cycles, each round a chain of one-hop moves + one material verb, every entry's (intent, requires) pair unique under the AP-11 clone law: the loaded-return gates carry each round's own kind signature, the daughters' idles their own lengths, the talk cycle its own directed targets); THE MEAL'S REPLY (on_action — the serve events' witnesses feel the fatigue ease, the loop's closing edge, the co-location race the settlement's attendance). The crime_watch key is the dormant scaffold (the required key, empty mappings its legal minimum — this fixture carries no crime line). The optional families (weather, echo, traits, reflection, secrets, factions, retrieval, scene_detail, expectations, worldgen, names, cultures, travel) stay UNARMED — the fixture's honest minimalism; the arming law (68a) owns each. Every value is v0.1 tunable pack data, never law (INV-3).",
+    "display": "Farstead — the Tier A world (the Atomic World Lab fixture)"
+  },
+  "time": {
+    "ticks_per_day": 1440,
+    "phases": [
+      {
+        "id": "morning",
+        "from": 0,
+        "to": 360
+      },
+      {
+        "id": "afternoon",
+        "from": 360,
+        "to": 720
+      },
+      {
+        "id": "evening",
+        "from": 720,
+        "to": 1080
+      },
+      {
+        "id": "night",
+        "from": 1080,
+        "to": 1440
+      }
+    ],
+    "macro": {
+      "cadence_ticks": 518400,
+      "event_type": "year_turns"
+    },
+    "notes": "MVP_SCOPE §8's day; the macro year at 360 days (the engine's standing shape). THE LOD LAW'S CADENCE SIDE: under the armed macro clock the beats run per-day for the ACTIVE location alone and the warm ring rolls once a year at the crossings — the Tier A world's material cycle is therefore a YEAR-CLOCKED thing wherever the workers stand beyond the anchor's room. The horizon arithmetic the Lab reads: 10y = 5,184,000 ticks, 100y = 51,840,000."
+  },
+  "states": {
+    "fatigue": {
+      "gain_per_360_ticks_awake": 10
+    },
+    "notes": "THE COMPOSITE BODY DEFICIT (the engine's one growing axis, named for the gain law's hardcoded key): hunger, thirst and weariness ride one number — the fixture's need gauge. It climbs ~40 a day and eases ONLY at the meal's reply (on_action, −40 for the witnesses); at the LOD's year cadence it pins at the ceiling between rare serves — THE PIN ITSELF THE DATUM (the daily-scale need axes against the year-scale world: the mismatch measured, not hidden). No decay: between the pin and the meal there is nothing that sheds the deficit for free."
+  },
+  "relations": {
+    "scale": [
+      0,
+      100
+    ],
+    "neutral": 50,
+    "axes": [
+      "trust",
+      "suspicion"
+    ],
+    "notes": "two axes, the standing minimal shape: TRUST is the settlement's whole social surface (the talk gate reads it; the households' pair bonds seed it); SUSPICION is the dormant crime scaffold's own home (the reaction door reads the axis unconditionally when the block is armed — this fixture's crime line is empty, the axis stands unwritten and unread)."
+  },
+  "checks": {
+    "die": 20,
+    "tie": "defender",
+    "failure_margin": 10,
+    "skills": {
+      "perception": {
+        "base": 50
+      },
+      "social": {
+        "base": 50
+      },
+      "pursuit": {
+        "base": 45
+      },
+      "evasion": {
+        "base": 45
+      }
+    },
+    "kinds": {
+      "perception": {
+        "attack": "perception",
+        "defend": null,
+        "defender_source": "environment"
+      },
+      "social": {
+        "attack": "social",
+        "defend": null,
+        "defender_source": "environment"
+      },
+      "evasion_vs_pursuit": {
+        "attack": "evasion",
+        "defend": "pursuit",
+        "defender_source": "best_in_location"
+      }
+    },
+    "notes": "the minimal check surface: no material verb in this fixture rolls (the haul, the fell, the draw are labor, never contests — the pressure precedent's law); the social check stands for the green's talk, the pursuit family for the dormant scaffold."
+  },
+  "knowledge": {
+    "channels": [
+      "saw",
+      "heard",
+      "told",
+      "inferred"
+    ],
+    "fidelity_chain": [
+      "exact",
+      "partial",
+      "vague"
+    ],
+    "transfer_decay_steps": 1,
+    "salience": "importance_then_recency",
+    "rumor_acceptance": {
+      "base": 50,
+      "trust_axis": "trust",
+      "trust_weight": 0.2,
+      "teller_penalty_axis": "fatigue",
+      "teller_penalty_per_10": -1
+    },
+    "telling": {
+      "on_event": "talk",
+      "teller": "target",
+      "listener": "actor",
+      "event": "rumor_told",
+      "facts": 1
+    },
+    "notes": "EVENT_SCHEMA §3's family, the fixture's tuning: the teller penalty reads FATIGUE (the hollow-cheeked teller mumbles — the tired settlement retells its own news badly, the pressure pack's cold-teller precedent moved onto the one axis this world carries). The green's oral memory is the fixture's whole knowledge transmission: what the daughters hear, the households repeat."
+  },
+  "crime_watch": {
+    "suspicion_axis": "suspicion",
+    "reaction_event": "suspicion_changed",
+    "status_values": [
+      "unknown",
+      "suspect",
+      "caught"
+    ],
+    "status_suspect_value": "suspect",
+    "suspicion_sources": {},
+    "suspicion_from_knowledge": {},
+    "watch_rotation_ticks": [],
+    "arrest": {
+      "requires_suspicion": 75,
+      "requires_same_location": true,
+      "event": "arrest_attempt",
+      "resolution_check": "evasion_vs_pursuit",
+      "resolution_event": "arrest_resolved",
+      "caught_value": "caught",
+      "caught_irreversible": true
+    },
+    "notes": "THE DORMANT SCAFFOLD (the engine's hard requirements, honestly declared): this fixture carries no crime line at all (the empty mapping returns before any suspicion move; no rotations; no sources) — nothing here ever fires. The settlement's order is a hearth and a store table, not a patrol."
+  },
+  "position_visibility": {
+    "sight": {
+      "same_location": true,
+      "through_exits": false
+    },
+    "hearing": {
+      "same_location": "normal",
+      "adjacent_location": "vague_only"
+    },
+    "smoke_penalty": -20,
+    "notes": "the node model, unchanged: the star's spokes are one hop each, sight never passes through exits, the anvil's ring heard vague one hop out (the green hears the workshop's hammer)."
+  },
+  "systems": {
+    "time": {
+      "reads": [],
+      "writes": [
+        "time"
+      ],
+      "per_tick": false
+    },
+    "position_visibility": {
+      "reads": [
+        "position",
+        "status"
+      ],
+      "writes": [],
+      "per_tick": false
+    },
+    "relations": {
+      "reads": [
+        "knowledge"
+      ],
+      "writes": [
+        "relations"
+      ],
+      "per_tick": false
+    },
+    "knowledge": {
+      "reads": [
+        "knowledge",
+        "position"
+      ],
+      "writes": [
+        "knowledge"
+      ],
+      "per_tick": false
+    },
+    "states": {
+      "reads": [
+        "time"
+      ],
+      "writes": [
+        "status"
+      ],
+      "per_tick": false
+    },
+    "hearth": {
+      "reads": [
+        "position"
+      ],
+      "writes": [
+        "status"
+      ],
+      "per_tick": false
+    },
+    "crime_watch": {
+      "reads": [
+        "relations",
+        "knowledge"
+      ],
+      "writes": [
+        "relations",
+        "status"
+      ],
+      "per_tick": false,
+      "after": [
+        "relations"
+      ]
+    },
+    "director": {
+      "reads": [
+        "hooks",
+        "relations"
+      ],
+      "writes": [],
+      "per_tick": false
+    },
+    "notes": "the pass DAG, fixture-shaped: the five engine rows in their standing shape + HEARTH (this pack's own material family — the account verbs and the meal's reply; event-driven, never a per-tick pass) + the dormant scaffold's two rows. No per-tick system exists (no transition layers, no fire family) — the whole world moves on intents, beats and the year clock."
+  },
+  "metrics": {
+    "system_of_type": {
+      "look_around": [
+        "position_visibility",
+        "knowledge"
+      ],
+      "move": [
+        "position_visibility"
+      ],
+      "talk": [
+        "relations",
+        "knowledge"
+      ],
+      "talk_rebuffed": [
+        "relations"
+      ],
+      "wait": [
+        "time"
+      ],
+      "account_sourced": [
+        "hearth"
+      ],
+      "account_transferred": [
+        "hearth"
+      ],
+      "account_consumed": [
+        "hearth"
+      ],
+      "account_settled": [
+        "hearth"
+      ],
+      "meal_eased": [
+        "states"
+      ],
+      "rumor_told": [
+        "knowledge",
+        "relations"
+      ],
+      "intent_rejected": [],
+      "year_turns": [
+        "time"
+      ],
+      "status_decayed": [
+        "states"
+      ],
+      "suspicion_changed": [
+        "relations"
+      ],
+      "arrest_attempt": [
+        "crime_watch"
+      ],
+      "arrest_resolved": [
+        "crime_watch"
+      ]
+    },
+    "notes": "M1's cross-system share, fixture-shaped: the HEARTH column is the L1 family's own attribution — every account verb and the meal's reply touch it (a gather, a deposit and a meal are all HEARTH events; the difference is which ledger they move — the pressure pack's M1 signature, moved from its thermal family onto the material one). The regrowth flows (account_sourced) sit beneath the tale's gate by the importance rule — the environment's hum, never the story."
+  },
+  "importance": {
+    "score": {
+      "entities_touched_at_least_2": 1,
+      "irreversible_state_change": 2,
+      "per_far_hook": 1,
+      "story_critical_event": 2
+    },
+    "story_critical_events": [
+      "account_settled",
+      "account_transferred",
+      "account_consumed",
+      "meal_eased",
+      "rumor_told"
+    ],
+    "thresholds": {
+      "medium": 2,
+      "high": 4
+    },
+    "notes": "THE TALE'S BEATS — the fixture's split from the committed packs: the MATERIAL TRANSITS are the story here (every settle, transfer and consume is a tale line; the meal's reply a medium beat) — in a world whose whole point is the material loop, the loop IS the chronicle. The environment's hum (the regrowth flows, account_sourced) stays LOW — four lines a year of 'the bank regrows' would bury the tale; the decay drift and the base verbs stay low with it (tune-1's law, the boundary moved where this pack's signal lives)."
+  },
+  "economy": {
+    "accounts": [
+      "food",
+      "wood",
+      "ore",
+      "water",
+      "tool"
+    ],
+    "flows": [
+      {
+        "id": "the_bank_regrows",
+        "verb": "source",
+        "kind": "food",
+        "amount": 8,
+        "every": 1,
+        "to": "loc_bank"
+      },
+      {
+        "id": "the_copse_regrows",
+        "verb": "source",
+        "kind": "wood",
+        "amount": 6,
+        "every": 1,
+        "to": "loc_copse"
+      },
+      {
+        "id": "the_outcrop_weathers",
+        "verb": "source",
+        "kind": "ore",
+        "amount": 4,
+        "every": 1,
+        "to": "loc_outcrop"
+      },
+      {
+        "id": "the_spring_runs",
+        "verb": "source",
+        "kind": "water",
+        "amount": 12,
+        "every": 1,
+        "to": "loc_spring"
+      }
+    ],
+    "prices": {
+      "food": {
+        "base": 30,
+        "per_unit": -1
+      },
+      "wood": {
+        "base": 20,
+        "per_unit": -1
+      },
+      "ore": {
+        "base": 40,
+        "per_unit": -2
+      },
+      "water": {
+        "base": 10,
+        "per_unit": 0
+      },
+      "tool": {
+        "base": 60,
+        "per_unit": -2
+      }
+    },
+    "notes": "THE SOURCES' REGENERATION (the L1 supply edge, 02 §9's preferred form): four environmental mints at the year clock, each into an EXISTING source's stock — never a bare spawn, always an environmental process changing a declared source's capacity. THE HONEST GAPS, declared not hidden: (1) NO CAPACITY — the flows mint unconditionally, an unharvested source accumulates without bound (the bounded-source primitive does not exist; the regrowth numbers are tuned small enough that the harvest pressure dominates at these cadences, and the accumulation curve itself is a measured read); (2) NO DRAIN ARM — the flows are pure mints, the depletion edge rides the extraction verbs' settle legs alone. The prices are derived reads (the scarcity dial, D-119's law: never stored, never a transaction — the future trade arm's standing surface)."
+  },
+  "director": {
+    "stagnation": {
+      "entropy_floor": 5,
+      "per_npc_cooldown_beats": 2
+    },
+    "notes": "the minimal armed shape: the stagnation floor stands (the loop's policy reads it unconditionally), and nothing else is declared — no hooks, no arcs, no channels: the director holds an empty buffer by construction and releases nothing. THE LAB'S OWN LAW (the pack's 03 §3: player-absent = no plot injection) — the fixture's world pressure is the material cycle's own, never the planner's."
+  },
+  "on_action": {
+    "account_consumed": [
+      {
+        "scope": "witnesses",
+        "event": "meal_eased",
+        "state": {
+          "prop": "status.fatigue",
+          "add": -40
+        },
+        "notes": "THE MEAL'S REPLY (the L1 loop's closing edge): everyone who witnessed a served meal or pail — the keeper herself and every soul standing on the green that moment — feels the body deficit ease by forty. THE CO-LOCATION RACE IS THE SETTLEMENT'S ATTENDANCE, measured: the straggler at the far copse misses supper and the log shows it (his fatigue keeps climbing, the decay pass writes it). One hop, no knowledge of its own — the cascade terminates by construction."
+      }
+    ],
+    "notes": "the world's replies, fixture-minimal: ONE family — the meal's. The material verbs need no social replies (a deposit is its own fact); the need axis's only writer beside the drift is this reply."
+  },
+  "urgencies": {
+    "beat_ticks": [
+      360,
+      720,
+      1080
+    ],
+    "entries": [
+      {
+        "npc": "npc_ashen_elder",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "haul_food",
+          "target": "loc_bank"
+        },
+        "requires": [
+          {
+            "holder": "loc_bank",
+            "test": "account_at_least",
+            "kind": "food",
+            "value": 2
+          }
+        ],
+        "notes": "THE FOOD POST, THE HAUL: certain at the yearly crossing (the warm bank rolls once a year) -- two food, bank to green's store, one event."
+      },
+      {
+        "npc": "npc_ashen_mate",
+        "probability_per_beat": 1,
+        "intent": {
+          "kind": "draw_rations",
+          "target": "loc_square"
+        },
+        "requires": [
+          {
+            "holder": "loc_square",
+            "test": "account_at_least",
+            "kind": "food",
+            "value": 1
+          },
+          {
+            "holder": "loc_square",
+            "test": "account_at_least",
+            "kind": "water",
+            "value": 1
+          }
+        ],
+        "notes": "THE MEAL ROUND, THE REFILL: thin by design -- the float's refill draws the pair from the store when both corners hold."
+      },
+      {
+        "npc": "npc_ashen_mate",
+        "probability_per_beat": 1,
+        "intent": {
+          "kind": "serve_the_meal"
+        },
+        "requires": [
+          {
+            "noun": "actor",
+            "test": "account_at_least",
+            "kind": "food",
+            "value": 1
+          }
+        ],
+        "notes": "THE MEAL ROUND, THE MEAL: a food off the float and out of the world, the green and the ring eased -- the loop's closing edge."
+      },
+      {
+        "npc": "npc_ashen_mate",
+        "probability_per_beat": 1,
+        "intent": {
+          "kind": "serve_the_pail"
+        },
+        "requires": [
+          {
+            "noun": "actor",
+            "test": "account_at_least",
+            "kind": "water",
+            "value": 1
+          }
+        ],
+        "notes": "THE MEAL ROUND, THE PAIL: the water's own sink, the same witnesses, the same reply."
+      },
+      {
+        "npc": "npc_ashen_son",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "haul_water",
+          "target": "loc_spring"
+        },
+        "requires": [
+          {
+            "holder": "loc_spring",
+            "test": "account_at_least",
+            "kind": "water",
+            "value": 2
+          }
+        ],
+        "notes": "THE WATER POST, THE HAUL: certain at the yearly crossing -- two water, basin to store, the pail at his feet."
+      },
+      {
+        "npc": "npc_ashen_daughter",
+        "probability_per_beat": 1,
+        "intent": {
+          "kind": "talk",
+          "target": "npc_bourne_daughter"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          }
+        ],
+        "notes": "THE GREEN'S FIRST VOICE: her talk round the daughters' directed cycle (Ashen to Bourne to Crome to Ashen -- every target unique under the clone law), the telling pair the settlement's oral memory."
+      },
+      {
+        "npc": "npc_bourne_elder",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "haul_timber",
+          "target": "loc_copse"
+        },
+        "requires": [
+          {
+            "holder": "loc_copse",
+            "test": "account_at_least",
+            "kind": "wood",
+            "value": 2
+          }
+        ],
+        "notes": "THE TIMBER POST, THE HAUL: certain at the yearly crossing -- two lengths, copse to wood corner."
+      },
+      {
+        "npc": "npc_bourne_mate",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "haul_ore",
+          "target": "loc_outcrop"
+        },
+        "requires": [
+          {
+            "holder": "loc_outcrop",
+            "test": "account_at_least",
+            "kind": "ore",
+            "value": 2
+          }
+        ],
+        "notes": "THE ORE POST, THE HAUL: certain at the yearly crossing -- two bloom, face to ore corner, the scarcest stream's edge."
+      },
+      {
+        "npc": "npc_bourne_son",
+        "probability_per_beat": 1,
+        "intent": {
+          "kind": "talk",
+          "target": "pc_01"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          }
+        ],
+        "notes": "THE ROAD-WATCH, THE TALK: the boy chats at whoever stands on the road -- in the player-absent runs, the silent surveyor himself (the world acknowledging the observer without authorship; the telling pair rides it, the settlement's first news of the stranger)."
+      },
+      {
+        "npc": "npc_bourne_daughter",
+        "probability_per_beat": 1,
+        "intent": {
+          "kind": "talk",
+          "target": "npc_crome_daughter"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          }
+        ],
+        "notes": "THE GREEN'S SECOND VOICE: her edge of the daughters' directed cycle -- the smiths' news through the cutters' house."
+      },
+      {
+        "npc": "npc_crome_elder",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "forge_tool",
+          "target": "loc_workshop"
+        },
+        "requires": [
+          {
+            "holder": "loc_workshop",
+            "test": "account_at_least",
+            "kind": "tool",
+            "value": 1
+          },
+          {
+            "holder": "loc_workshop",
+            "test": "account_at_least",
+            "kind": "ore",
+            "value": 1
+          },
+          {
+            "holder": "loc_workshop",
+            "test": "account_at_least",
+            "kind": "wood",
+            "value": 1
+          }
+        ],
+        "notes": "THE ANVIL POST, THE FORGE: certain at the yearly crossing while the rack holds and the bench is fed -- at these cadences the rack (six tools, one a year, no producer) empties inside the first decade and this goes silent at the door: the tool arm's death a measured curve in the log, the conversion gap's own face."
+      },
+      {
+        "npc": "npc_crome_mate",
+        "probability_per_beat": 100,
+        "intent": {
+          "kind": "bench_the_bloom",
+          "target": "loc_square"
+        },
+        "requires": [
+          {
+            "holder": "loc_square",
+            "test": "account_at_least",
+            "kind": "ore",
+            "value": 2
+          }
+        ],
+        "notes": "THE BENCH'S ORE ARM: certain at the yearly crossing when the green's ore corner holds -- two bloom, store to bench, the spoke carrying the goods to the workshop side."
+      },
+      {
+        "npc": "npc_crome_son",
+        "probability_per_beat": 1,
+        "intent": {
+          "kind": "bench_the_timber",
+          "target": "loc_square"
+        },
+        "requires": [
+          {
+            "holder": "loc_square",
+            "test": "account_at_least",
+            "kind": "wood",
+            "value": 2
+          }
+        ],
+        "notes": "THE BENCH'S WOOD ARM: the green-liver rolls at the ACTIVE square's beats -- thin (probability 1) because the active zone's beat rolls herd under the one-wait protocol (every passing roll enqueues for the wait's end); the wood corner's arrivals pace him."
+      },
+      {
+        "npc": "npc_crome_daughter",
+        "probability_per_beat": 1,
+        "intent": {
+          "kind": "talk",
+          "target": "npc_ashen_daughter"
+        },
+        "requires": [
+          {
+            "noun": "target",
+            "test": "same_location",
+            "with": "actor"
+          }
+        ],
+        "notes": "THE GREEN'S THIRD VOICE: her edge of the directed cycle -- the foragers' news through the smiths' house, the cycle closed."
+      }
+    ],
+    "notes": "THE TWELVE ADULTS' ROUNDS (the autonomous engine's whole fixture surface -- 14 entries, every (intent, requires) pair unique across NPCs under the AP-11 clone law, and every (npc, kind) pair unique per NPC under the one-goal-per-verb law the engine's content-addressed roll streams demand). THE HAUNT MODEL + THE DIRECT HAUL (every post resident from the founding -- the road-boy included; the pack carries NO move entry at all), declared not hidden: the substrate offers NO commuter form (a move entry has one fixed target, one goal per verb per NPC) and NO chainable round (the second verb's gate reads the pre-first state -- and under the one-wait E0 protocol every urgency intent DEFERS to the wait's end, the temp-1 law, so a chained second link never rolls); the honest shape is the resident post with a DIRECT settle -- source to store in one event, the hauler the doer. THE CADENCE TRUTH: the posts sit in the warm ring (yearly rolls, probability 100 = one certain haul a year), the green's voices at the active square's beats (probability 1 -- the active zone's rolls herd under the one-wait protocol, so the thin roll keeps the herd signal-sized). The E0 reads the cycle at the year clock: the material loop CLOSES, slowly -- the cadence is the LOD's own law and the protocol's own law, never a tuning failure (the anchor-pair battery measures both directly). The player is exempt (the surveyor authors nothing)."
+  },
+  "brief": {
+    "total_hard": 800,
+    "blocks": {
+      "directives": {
+        "soft": 60,
+        "hard": 80
+      },
+      "scene_delta": {
+        "soft": 150,
+        "hard": 200
+      },
+      "scene_texture": {
+        "soft": 100,
+        "hard": 140
+      },
+      "present_entities": {
+        "soft": 90,
+        "hard": 120
+      },
+      "recalled_facts": {
+        "soft": 180,
+        "hard": 240
+      },
+      "scheduled_lore": {
+        "soft": 90,
+        "hard": 120
+      },
+      "voice_exemplars": {
+        "soft": 90,
+        "hard": 120
+      },
+      "active_options": {
+        "soft": 90,
+        "hard": 120
+      }
+    },
+    "recalled_facts": {
+      "max_items": 12,
+      "recency_weight": 1.0,
+      "importance_weight": 1.0,
+      "relevance_weight": 1.0
+    },
+    "scene_texture": {
+      "max_items": 8,
+      "tombstone_max_items": 4,
+      "unique_slots": [],
+      "identity_slots": [
+        "speech_pattern",
+        "look",
+        "mannerism"
+      ],
+      "per_entity_max_items": 2
+    },
+    "present_entities": {
+      "max_entities": 8,
+      "max_pairs": 6,
+      "scene_line_fields": [
+        "layout",
+        "account.food"
+      ],
+      "card_markers": [
+        {
+          "prop": "status.fatigue",
+          "min": 70,
+          "marker": "hollow-cheeked"
+        }
+      ],
+      "notes": "THE GRANARY LINE (the fixture's one read surface): the green's scene line carries the LIVE food stock (the anchor field's legality, the pressure pack's gauge precedent — the fold-outranks-record law renders the standing number, integer truth below, one rendered line above). THE NEED MARKER: the hollow-cheeked flag at fatigue 70+ — the pin made visible on the card (between the rare meals, most of the settlement wears it at the year cadence; the marker's spread IS the famine gauge)."
+    },
+    "directives": [
+      "Narrate only what the brief contains; the log is the canon.",
+      "Facts are immutable; prose is yours.",
+      "Never invent events, names, or outcomes."
+    ],
+    "lore": [
+      {
+        "id": "the_three_households",
+        "text": "Farstead is three households around one green: the Ashens who forage, the Bournes who cut and break, the Cromes who work the anvil. Everything the settlement owns sits on the green or in the ground around it.",
+        "from_beat": 0,
+        "to_beat": 6
+      },
+      {
+        "id": "the_store_law",
+        "text": "The store on the green is the settlement's whole buffer: what the rounds bring in, the hearth draws out, and when the corners stand empty the green goes quiet and the people go hollow.",
+        "from_beat": 1,
+        "to_beat": 8
+      },
+      {
+        "id": "the_rack",
+        "text": "The smith's rack held six tools at the founding, and no craft since has made a seventh: the anvil moves them off one at a time, and when the rack stands empty the hammer falls silent for good.",
+        "from_beat": 2,
+        "to_beat": 9
+      }
+    ],
+    "voice_exemplars": [
+      "The green kept its count: food in the corner, wood in the stack, the ore waiting for the bench.",
+      "A meal passed on the green, and for a while the hollows eased."
+    ],
+    "notes": "BRIEF_SPEC §6's standing shape, fixture-filled: the lore carries the three truths (the households, the store's law, the rack's finitude — the conversion gap told as the settlement's own memory); the voice is a granary's patient arithmetic."
+  }
+}

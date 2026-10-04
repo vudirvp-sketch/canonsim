@@ -122,6 +122,19 @@ GRIM_STOPLIST: tuple[str, ...] = (
     "pawn", "counterfoil", "maudlin",
 )
 
+# Setting nouns of farstead_pack (lab-2, the Atomic World Lab's Tier A
+# synthetic fixture): the SIXTH pack's own vocabulary. The fixture is a
+# measurement instrument, not an authored setting — the list carries the
+# settlement's name, the household names, and the source nouns. Shared
+# words stay in the older lists: "ashen" rides the ROAD list (the ashen
+# wayfarer), "hearth" the tavern list; "keeper", "forager", "cutter",
+# "smith" are deliberately absent — common English role words the
+# engine's prose legitimately carries (the province's "keep" law).
+FARSTEAD_STOPLIST: tuple[str, ...] = (
+    "farstead", "bourne", "crome", "pail", "brambles", "hazel", "copse",
+    "outcrop", "granary",
+)
+
 
 def _segment_pattern(word: str) -> re.Pattern[str]:
     """The word as a full segment: delimited by non-alphanumerics on both
@@ -142,7 +155,8 @@ def test_no_setting_words_in_engine_code() -> None:
     patterns = [
         (word, _segment_pattern(word))
         for word in (
-            *STOPLIST, *ROAD_STOPLIST, *PROVINCE_STOPLIST, *GRIM_STOPLIST
+            *STOPLIST, *ROAD_STOPLIST, *PROVINCE_STOPLIST, *GRIM_STOPLIST,
+            *FARSTEAD_STOPLIST,
         )
     ]
     violations: list[str] = []
@@ -221,4 +235,22 @@ def test_grim_stoplist_words_actually_belong_to_the_grim_pack() -> None:
     ]
     assert not missing, (
         f"grim stoplist words absent from the grim pack data: {missing}"
+    )
+
+
+def test_farstead_stoplist_words_actually_belong_to_the_farstead_pack() -> None:
+    """The self-check extension, the sixth pack (lab-2, the Atomic World
+    Lab's Tier A fixture): the farstead stoplist tracks the fixture's
+    setting vocabulary — every word occurs in the pack's data as a full
+    segment (ids included)."""
+    pack_text = "\n".join(
+        path.read_text(encoding="utf-8")
+        for path in sorted((REPO / "content" / "farstead_pack").glob("*.json"))
+    )
+    missing = [
+        word for word in FARSTEAD_STOPLIST
+        if not _segment_pattern(word).search(pack_text)
+    ]
+    assert not missing, (
+        f"farstead stoplist words absent from the pack data: {missing}"
     )

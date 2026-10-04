@@ -1,51 +1,67 @@
-Iteration: iter-323 (`lab1` — the owner's Atomic World Lab
-  agent-pack call «начни работу с архивом»
-  (CANONSIM_ATOMIC_WORLD_LAB_AGENT_PACK_v1_5.zip; the pack's 04 §2
-  the Stage A order owner; the pack = a research program over the
-  SAME canonical substrate — the row lands the HARNESS, never an
-  engine change)): THE WORLD LAB STAGE A LANDED —
-  `scripts/labrunner.py` the batch runner (the player-absent law:
-  the fixed declared anchor + ONE whole-horizon wait, the player
-  authors nothing else; the MINIMAL observation profile over
-  `read_log` — identity/horizon/counts/mix/state/cost, no second
-  log/RNG/scheduler/resolver; the experiment-contract record
-  QUESTION/IDENTITY/ARMS/RUNS/DISPOSITION under the gitignored
-  output dir; the F1/T1 `--verify-replay` byte-identity double-run;
-  the ablation arm minus:<block> with the dead-vocabulary
-  fixpoint — the lint names the dead lines, the materializer
-  strips them, the removable set re-measured per pack+horizon,
-  never inherited) + `tests/test_lab.py` the nine Stage A laws +
-  THE E0 BASELINE MEASURED (province, directors off): 10y × 4
-  smoke seeds — 7,861–7,865 events (±2 variance), ~100%
-  autonomous, the mix 97.3% maintenance+account_flow, ZERO
-  ecology-closing families (the pack's 01 §11 finding now a
-  measured per-run law + the suite's honest canary); the 100y
-  deep run seed 7 — 78,212 events / 45.26 MB / 546 s wall: the
-  10× horizon costs 83× time, scale-1's super-linear RED finding
-  LIVE at whole-run scale (the 1,000y gate ≈ 90 min single-seed —
-  the first Lab scale datum, an input to Stage J, never an
-  optimization permission); the measured ablation verdicts:
-  CLEAN on_action/reflection/secrets/factions, LINT-REFUSED
-  urgencies/expectations/traits, RUNTIME-REFUSED weather (the
-  chain is cadence-armed — the day-1 balance set does NOT
-  transfer to long horizons) + crime_watch (a missing-block
-  KeyError, recorded as the arm's finding).
+Iteration: iter-324 (`lab2` — the owner's «продолжай lab2 и
+  так далее» call (the Atomic World Lab agent pack v1.5, its 04 §3
+  Stage B the first entry; lab-1's NEXT named this row; the fixture IS
+  the deliverable — a NEW content pack through the full admission
+  lint, never an engine change)): THE TIER A SYNTHETIC FIXTURE LANDED —
+  `content/farstead_pack/` (the 02 §12 smallest world: 1 settlement
+  (the green carries storage + exchange), 4 finite sources + regrowth
+  flows, 1 workshop + the finite 6-tool rack, 1 road, 12 adults in 3
+  households, 4 roles; the material surfaces over the LANDED
+  primitives only — the DIRECT-SETTLE HAULS (source→store in ONE
+  atomic event, the hauler the doer), the keeper's FLOAT-BASED meal
+  (serve the float, draw the refill — three independent verbs where a
+  chain would break), the on_action fatigue reply through the spoke
+  ring) + `tests/test_farstead_pack.py` the nine Tier A laws (the
+  admission lint, the 02 §12 shape, the player-absent + T1
+  byte-identity, THE LOOP CLOSES — every L1 edge live (haul → bench →
+  forge → draw → meal → reply), CONSERVATION EXACT per kind (init +
+  minted == final + consumed, 02 §5 executable), THE ANCHOR PAIR (the
+  LOD datum: the same seed/horizon, two anchors — the living world vs
+  the frozen diorama), the removable set re-measured per pack
+  (urgencies + on_action BOTH CLEAN — province's verdicts do not
+  transfer), THE DEFERRED-REALIZE LAW (under the one-wait protocol
+  every autonomous intent discharges at the wait's end)); THE E0
+  MEASURED (directors off): the anchor pair 10y × 4 seeds — square
+  933–971 events with the MATERIAL CYCLE SEED-INVARIANT (132 account
+  events every seed — the year clock's determinism) vs road 165–187
+  (the frozen diorama: the sources regow untended, the store
+  untouched, the road-boy's talk the world's one active voice); the
+  100y deep run square seed 7 — 8,663 events / 51.2 s: THE
+  DEFERRED-REALIZE LAW AT WHOLE-HORIZON SCALE (temp-1/D-236 measured:
+  94% of the century's autonomous life discharges in the final ~10
+  ticks — the mid-wait log is the scheduled machinery alone, 5
+  events/year; the herd tail ~5,400 door-rejects = p × beats × years,
+  the protocol's noise law); the per-block findings: the
+  one-goal-per-verb + one-target laws force THE HAUNT MODEL (no
+  commuter form exists — the direct settle is the honest round); the
+  CHAINED round cannot roll (the second verb's gate reads the
+  pre-first state — the float law); the rack empties at year ~6 (NO
+  conversion primitive — the anvil's inputs gate but never become the
+  tool; the Stage B gate's own measured input); the tools pile
+  unconsumed (no wear); the regrowth uncapped (no bounded-source
+  primitive) — the three Stage B contract rows now have DATA, not
+  prose.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2566 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R2 local-add —
-  two NEW files scripts/ + tests/, zero core/sim/render change,
-  INV-1..5 untouched, the LOG untouched, zero corpus price; NO
-  test deleted or weakened — 9 added) ·
+2576 passed + 1 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; R2 local-add — the
+  sixth content pack + two NEW test files, zero core/sim/render
+  change, INV-1..5 untouched, the LOG untouched, zero corpus price;
+  NO test deleted or weakened — 10 added) ·
 Date: 2026-10-04 ·
-Scope: scripts/labrunner.py (new — the Stage A batch runner),
-  tests/test_lab.py (new — the nine laws), docs/TASKS.md (the
-  lab-1 row + the ledger, iter-313 evicted), STATUS.md (this
-  header), worklog.md (the iter-323 entry, iter-313 evicted),
-  docs/iterations/iter-323-lab1-report.md (new — this row's RU
-  report) — 6 changed/created (3 modified + 3 created).
+Scope: content/farstead_pack/ (new — the four pack files),
+  tests/test_farstead_pack.py (new — the nine laws),
+  docs/iterations/iter-324-lab2-report.md (new — this row's RU
+  report) + tests/test_inv3_stoplist.py (the sixth list + the
+  self-check), tests/test_economy.py (the fourth armed consumer),
+  scripts/labrunner.py (the account-verb disposition line),
+  scripts/docguard.py (the TASKS allowlist rationale),
+  docs/AGENT_NAVIGATION.md (the sixth-pack row), docs/TASKS.md (the
+  lab-2 row + the ledger, iter-314 evicted), STATUS.md (this
+  header), worklog.md (the iter-324 entry, iter-314 evicted) — 15
+  changed/created (8 modified + 7 created).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE

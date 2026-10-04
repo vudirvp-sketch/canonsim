@@ -267,6 +267,15 @@ def extract_metrics(
         },
         "mix": dict(sorted(mix.items())),
         "by_type_top": dict(sorted(by_type.items(), key=lambda kv: -kv[1])[:12]),
+        # lab-2: the economy verbs' exact counts (the full Counter read,
+        # never the top-12 cutoff — a pack whose material loop rides the
+        # account family gets its production vocabulary quoted whole)
+        "account_verbs": {
+            verb: by_type[verb] for verb in (
+                "account_sourced", "account_transferred",
+                "account_consumed", "account_settled",
+            ) if by_type[verb]
+        },
         "state": {
             "projection_entities": len(projection),
             "declared_locations": len(pack.entities["locations"]),
@@ -321,6 +330,21 @@ def _disposition(metrics: dict[str, Any]) -> str:
     else:
         parts.append(f"MEASURED: {demographic} ecology-carrying events — "
                      "classify and trace before any claim.")
+    # lab-2: the account verbs are the ECONOMY substrate's own event
+    # family — for a pack whose material loop rides them (the Lab's
+    # synthetic fixtures) they ARE the production vocabulary; for a
+    # pack whose flows are authored ambience (the province's toll nets)
+    # they are maintenance. The runner never sniffs which — it quotes
+    # the counts and leaves the classification to the pack's economy
+    # semantics (the report's own job, never a per-pack branch here).
+    verbs = metrics.get("account_verbs", {})
+    if verbs:
+        parts.append(
+            "MEASURED: account-verb events "
+            + ", ".join(f"{v}={n}" for v, n in sorted(verbs.items()))
+            + " — the pack's material vocabulary; classify per its "
+              "economy semantics before any ecology claim."
+        )
     parts.append(
         "DISPOSITION: baseline recorded; no promotion claim rides E0 "
         "(assignment != realization; the pack's 06 §15 gate)."

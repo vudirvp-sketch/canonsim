@@ -150,6 +150,11 @@ ALLOWLIST: dict[str, str] = {
         "(D-024 — the iteration reports own the verbatim + the md5 "
         "pins) and §10/§11 landed natively in that form — the file "
         "stays over and the worklog records why (§6.1's own law)",
+    "docs/TASKS.md":
+        "the standing rows + the 10-entry ledger at the substance ceiling "
+        "— lab-2's row (the fixture's own findings) pushed the stack 1 "
+        "line over (cruft pass run: the ledger line already trimmed; "
+        "the rows are the queue's own law, worklog iter-324)",
 }
 
 FAQ_MAX_ENTRIES = 20

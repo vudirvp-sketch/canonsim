@@ -478,18 +478,23 @@ def test_the_committed_packs_land_unarmed() -> None:
     is the byte-identity pin; this test pins the unarmed precondition
     itself). iter-148 (pack-1): the GRIM pack is the armed FIRST
     CONSUMER; iter-149 (pack-4): the PRESSURE pack the second; iter-162
-    (debt-1): the PROVINCE the third — the crossing household's flood
-    debt (each declaration IS the arming, the corpus price its own: the
-    verb template lines; the province's flows ride the macro year,
-    beyond its day-scale golden corpus by construction), so the unarmed
-    law now reads "every pack before the first consumer", never "every
-    pack forever"."""
+    (debt-1): the PROVINCE the third; lab-2: the FARSTEAD pack the
+    fourth (the Atomic World Lab's Tier A fixture — its whole point IS
+    the account family: the regrowth flows and the material loop ride
+    the substrate) — the crossing household's flood debt and the
+    fixture's regrowth mints (each declaration IS the arming, the
+    corpus price its own: the verb template lines; the province's and
+    the fixture's flows ride the macro year, beyond its day-scale
+    golden corpus by construction), so the unarmed law now reads
+    "every pack before the first consumer", never "every pack
+    forever"."""
     for pack_dir in sorted((REPO / "content").iterdir()):
         if not pack_dir.is_dir():
             continue
         if pack_dir.name in (
             "grim_pack", "pressure_pack", "province_pack",  # the armed
-        ):  # consumers (the first, the second, the third)
+            "farstead_pack",  # consumers (1st..4th — lab-2 the fourth)
+        ):  # consumers (the first, the second, the third, the fourth)
             rules = json.loads(
                 (pack_dir / "rules.json").read_text(encoding="utf-8")
             )

@@ -1,0 +1,387 @@
+{
+  "meta": {
+    "pack": "farstead_pack",
+    "version": "0.1",
+    "notes": "THE TIER A ACTION SET (the L1 material surfaces over the landed primitives only — zero core change): the phase-0 base four (look_around, move, talk, wait) + EIGHT material verbs. THE SEVEN HAULS are DIRECT SETTLES over explicit holders — source to destination in ONE atomic event, the hauler the event's doer (the provenance), no chain: the deferred-realize law (temp-1/D-236) measured in this fixture's own development showed that a chained round (gather to hands, then stock) CANNOT roll — the second verb's gate reads the pre-first state, and under the whole-horizon wait every urgency intent discharges at the wait's end. THE KEEPER'S MEAL rides a STANDING FLOAT (her seeded food and water): the serves consume the float, the ration draw refills it — three independent verbs, no chain, the loop closing through the buffer. The settle-leg solvency gates are lint-required and honest: an insolvent attempt dies softly at the door (intent_rejected), never a negative stock. Every number is v0.1 tunable pack data."
+  },
+  "actions": [
+    {
+      "intent": "look_around",
+      "label": "look around",
+      "resolver": "observe",
+      "ticks": 1,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "look_around"},
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "scene_{location}"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "cheap perception of the current location (the phase-0 shape): at the green this reads the granary line — the settlement's one visible number."
+    },
+    {
+      "intent": "move",
+      "label": "go to",
+      "resolver": "movement",
+      "ticks": {"min": 2, "max": 4},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "move"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "adjacent_to", "with": "actor"}
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_left_toward_{target}"},
+          {"who": "destination_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_arrived"},
+          {"who": "actor", "present_at": "destination_location", "channel": "saw", "fidelity": "exact", "knows": "{present}_present"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "movement along the location graph (the phase-0 shape): the star's spokes — one hop at a time."
+    },
+    {
+      "intent": "talk",
+      "label": "talk",
+      "resolver": "converse",
+      "ticks": {"min": 4, "max": 8},
+      "check": {"kind": "social", "difficulty": 20},
+      "on_failure": "cold shoulder",
+      "events": {"success": "talk", "failure": "talk_rebuffed"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "npc"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"noun": "target", "test": "relation_at_least", "axis": "trust", "value": 20}
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "told", "fidelity": "exact", "knows": "conversation_with_{target}"},
+          {"who": "target", "channel": "told", "fidelity": "exact", "knows": "conversation_with_{actor}"}
+        ],
+        "failure": [
+          {"who": "actor", "channel": "told", "fidelity": "vague", "knows": "rebuffed_by_{target}"}
+        ]
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "social exchange (the phase-0 shape, the trust floor the gate): the green's oral surface — the telling pair carries what the households heard (the settlement's whole knowledge transmission in one verb)."
+    },
+    {
+      "intent": "wait",
+      "label": "wait",
+      "resolver": "wait",
+      "ticks": "N",
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "wait"},
+      "requires": [],
+      "fields": ["ticks"],
+      "knowledge": {"success": [], "failure": []},
+      "hooks": {"success": [], "failure": []},
+      "notes": "advance N ticks (the phase-0 shape): the whole-horizon wait of the player-absent law rides this verb; the world moves while the surveyor stands still. THE MEASURED LAW (this fixture's own finding): under one whole-horizon wait the urgency machinery DEFERS — every beat-born intent discharges at the wait's end (the deferred-realize law, temp-1/D-236) — the mid-wait log carries the scheduled machinery alone."
+    },
+    {
+      "intent": "haul_food",
+      "label": "haul food to the green",
+      "resolver": "account",
+      "ticks": {"min": 8, "max": 14},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_settled"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"holder": "loc_bank", "test": "account_at_least", "kind": "food", "value": 2}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {"from": "loc_bank", "to": "loc_square", "kind": "food", "amount": 2}
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "hauled_food"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE FOOD HAUL (the L1 extraction + storage edges, ONE event): two food from the bank's stock into the green's store, the forager the doer — the direct settle the chain law demands (no hands, no second verb: the deferred-realize law broke the chained form in this fixture's own development, the finding recorded). The depletion edge is the leg's own solvency gate — an emptied bank refuses softly at the door, the attempt a fact, the source's exhaustion a measured curve never a crash."
+    },
+    {
+      "intent": "haul_timber",
+      "label": "haul timber to the green",
+      "resolver": "account",
+      "ticks": {"min": 10, "max": 16},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_settled"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"holder": "loc_copse", "test": "account_at_least", "kind": "wood", "value": 2}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {"from": "loc_copse", "to": "loc_square", "kind": "wood", "amount": 2}
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "hauled_timber"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE TIMBER HAUL: two lengths from the copse's standing stock to the green's wood corner — the same direct shape."
+    },
+    {
+      "intent": "haul_ore",
+      "label": "haul ore to the green",
+      "resolver": "account",
+      "ticks": {"min": 10, "max": 16},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_settled"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"holder": "loc_outcrop", "test": "account_at_least", "kind": "ore", "value": 2}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {"from": "loc_outcrop", "to": "loc_square", "kind": "ore", "amount": 2}
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "hauled_ore"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE ORE HAUL: two bloom from the outcrop's face to the green's ore corner — the scarcest stream's edge (the +4/year regrowth against these hauls is the E0's scarcity read)."
+    },
+    {
+      "intent": "haul_water",
+      "label": "haul water to the green",
+      "resolver": "account",
+      "ticks": {"min": 6, "max": 10},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_settled"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"noun": "actor", "test": "flagged_accessible", "flag": "is_pail"},
+        {"holder": "loc_spring", "test": "account_at_least", "kind": "water", "value": 2}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {"from": "loc_spring", "to": "loc_square", "kind": "water", "amount": 2}
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "hauled_water"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE WATER HAUL: two measures from the spring's basin to the green's store, the pail the honest tool requirement — the abundant stream's edge (the +12/year regrowth keeps the basin full; the water never runs out at these cadences, by design)."
+    },
+    {
+      "intent": "bench_the_bloom",
+      "label": "bench the bloom",
+      "resolver": "account",
+      "ticks": 6,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_settled"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "adjacent_to", "with": "actor"},
+        {"holder": "loc_square", "test": "account_at_least", "kind": "ore", "value": 2}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {"from": "loc_square", "to": "loc_workshop", "kind": "ore", "amount": 2}
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "benched_bloom"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE BENCH'S ORE (the workshop supply edge): two bloom from the green's ore corner to the workshop's bench stock — the hauler stands at the workshop, the spoke carries the goods (the deposit-through-adjacency, the pressure pack's feed-the-fire law). The ore's whole path: outcrop -> green -> bench, every hop one event."
+    },
+    {
+      "intent": "bench_the_timber",
+      "label": "bench the timber",
+      "resolver": "account",
+      "ticks": 6,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_settled"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"holder": "loc_square", "test": "account_at_least", "kind": "wood", "value": 2}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {"from": "loc_square", "to": "loc_workshop", "kind": "wood", "amount": 2}
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "benched_timber"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE BENCH'S WOOD: two lengths from the green's wood corner to the workshop's bench — the apprentice stands at the green (the same_location form: his corner of the store), the spoke carries the fuel in."
+    },
+    {
+      "intent": "forge_tool",
+      "label": "forge a tool",
+      "resolver": "account",
+      "ticks": {"min": 12, "max": 18},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_settled"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"noun": "actor", "test": "flagged_accessible", "flag": "is_hammer"},
+        {"holder": "loc_workshop", "test": "account_at_least", "kind": "tool", "value": 1},
+        {"holder": "loc_workshop", "test": "account_at_least", "kind": "ore", "value": 1},
+        {"holder": "loc_workshop", "test": "account_at_least", "kind": "wood", "value": 1}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {"from": "loc_workshop", "to": "loc_square", "kind": "tool", "amount": 1}
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "worked_the_anvil"},
+          {"who": "same_location", "except": ["actor"], "channel": "heard", "fidelity": "partial", "knows": "the_anvil_rang"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE ANVIL (the transformation's honest stand-in — the finding, authored not hidden): the leg moves a tool from the RACK to the green's store; the bench's ore and wood GATE but never drain — the substrate has no conversion primitive (a settle conserves kinds per leg; the only mint is ungated). The rack is a finite pile: six tools, one a forge, no producer — when it empties the door refuses softly and the smith's verb goes silent, the tool arm's death a measured curve in the log. THE STAGE B GATE'S OWN INPUT (the pack's 04 §3: transformation + manufacture are narrow contracts to build behind their gate, never engines to smuggle in pack data)."
+    },
+    {
+      "intent": "draw_rations",
+      "label": "draw the rations",
+      "resolver": "account",
+      "ticks": 4,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_settled"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"holder": "loc_square", "test": "account_at_least", "kind": "food", "value": 1},
+        {"holder": "loc_square", "test": "account_at_least", "kind": "water", "value": 1}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {"from": "loc_square", "to": "actor", "kind": "food", "amount": 1},
+          {"from": "loc_square", "to": "actor", "kind": "water", "amount": 1}
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "drew_rations"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE RATION DRAW (the L1 distribution edge, the float's refill): the sack and the pail from the green's store to the hearth-keeper's hands — ONE atomic settle over both kinds, both legs gated. A store short of EITHER refuses the whole draw (the household takes the pair or nothing) — the scarcity gate's honest shape: the settlement eats what it has BOTH of, or nothing."
+    },
+    {
+      "intent": "serve_the_meal",
+      "label": "serve the meal",
+      "resolver": "account",
+      "ticks": 6,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_consumed"},
+      "requires": [
+        {"noun": "actor", "test": "account_at_least", "kind": "food", "value": 1}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "consume",
+        "kind": "food",
+        "amount": 1
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "served_a_meal"},
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "ate_at_{location}"},
+          {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "the_horn_at_{location}"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE MEAL (the L1 consumption edge): a food leaves the world through the hearth-keeper's hands — the consume verb's declared sink, no midden needed (the units leave the modeled world; the conservation check reads the flows against the sink, read-side). THE FLOAT: her standing stores (the seeded food and water) are the buffer the deferred-realize law demands — the serves consume the float, the ration draw refills it, three independent verbs where a chain would break. THE HORN CARRIES: the knowledge names the green AND the adjacent ring — every spoke is one hop from the hearth, so the on_action reply (fatigue -40) lands on the whole settlement (the pressure pack's warmth-through-the-walls law, the meal's own shape)."
+    },
+    {
+      "intent": "serve_the_pail",
+      "label": "serve the pail",
+      "resolver": "account",
+      "ticks": 4,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_consumed"},
+      "requires": [
+        {"noun": "actor", "test": "account_at_least", "kind": "water", "value": 1}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "consume",
+        "kind": "water",
+        "amount": 1
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "drew_the_pail_round"},
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "drank_at_{location}"},
+          {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "the_horn_at_{location}"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE PAIL (the water's consumption edge): the same sink shape for the water — one event, the same witnesses (the green and the ring), the same reply. The meal and the pail are the fixture's only consume verbs, so the on_action reply fires for meals alone — the event-type collision the substrate's naming law hands the author, turned honest by keeping the consuming family this small."
+    }
+  ]
+}

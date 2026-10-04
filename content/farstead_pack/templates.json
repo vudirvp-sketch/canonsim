@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "pack": "farstead_pack",
+    "version": "0.1",
+    "notes": "THE TIER A CHRONICLE (the fixture's tale lines). Tone per MVP_SCOPE §12: no LLM, no embellishment — the readability test's own law. THE MATERIAL SPLIT (the importance rule's other half): the material transits render as the tale's medium lines (the settles, the transfers, the meals and their reply) — in a world whose point is the material loop, the loop IS the chronicle; the environment's regrowth hum and the drift stay beneath the gate. Syntax: {slot} binds event data; #symbol# expands the tracery grammar; {cond?a|b} is ink-style conditional text; lists are alternatives via the ink-shuffle ShufflePool (cosmetic stream). tale_gate.min_importance decides which events earn a line."
+  },
+  "tale_gate": {
+    "min_importance": "medium"
+  },
+  "day_header": "— Day #day#, #phase.capitalize# —",
+  "scene_card": "{location_name}: {present_names}",
+  "fallback": "(t {t}) {event_type}: {actor} → {target}",
+  "symbols": {
+    "green_sign": [
+      "The green keeps its count in the corners.",
+      "The store table stands where the households left it."
+    ],
+    "work_sign": [
+      "The anvil's ring carries from the workshop door.",
+      "Somewhere out on the spokes, someone is working."
+    ]
+  },
+  "events": {
+    "look_around": "{actor} takes in {location}.",
+    "move": "{actor} heads to {target_location}.",
+    "talk": "{actor} talks with {target}.",
+    "talk_rebuffed": "{target} gives {actor} the cold shoulder.",
+    "wait": "{actor} waits.",
+    "intent_rejected": "{actor} tries to {action_label} — impossible here.",
+    "account_sourced": "{target} comes by {amount} {kind} at the year's turning{flow? — {flow}}.",
+    "account_transferred": "{actor} passes {amount} {kind} to {target}.",
+    "account_consumed": "{amount} {kind} leaves {actor}'s hands for good — a meal on the green.",
+    "account_settled": "{actor} settles a handover at {target}: {leg_0_amount} {leg_0_kind}{leg_1_kind? for {leg_1_amount} {leg_1_kind}}.",
+    "meal_eased": "A meal passes at {location} — the body remembers it.",
+    "suspicion_changed": "{actor} grows warier of {target}.",
+    "arrest_attempt": "{actor} moves to arrest {target}.",
+    "arrest_resolved": "{caught?{target} is caught — the pursuit holds.|{target} slips away.}",
+    "year_turns": "The year turns to {year}.",
+    "status_decayed": "{actor} drifts: {axes}.",
+    "rumor_told": "{accepted?{actor} tells {target}: {knows}.|{target} does not believe {actor}.}"
+  },
+  "account_kinds": {
+    "food": "food",
+    "wood": "timber",
+    "ore": "ore",
+    "water": "water",
+    "tool": "tools"
+  },
+  "flow_glosses": {
+    "the_bank_regrows": "the berry bank regrows",
+    "the_copse_regrows": "the hazel copse thickens",
+    "the_outcrop_weathers": "the outcrop weathers fresh ore loose",
+    "the_spring_runs": "the cold spring refills its basin"
+  },
+  "knows": {
+    "scene_{location}": "the lay of {location}",
+    "details_{target}": "the details of {target}",
+    "vague_details_{target}": "a vague impression of {target}",
+    "{actor}_left_toward_{target}": "{actor} left toward {target}",
+    "{actor}_arrived": "{actor} arrived",
+    "{present}_present": "{present} is there",
+    "conversation_with_{target}": "a conversation with {target}",
+    "rebuffed_by_{target}": "a rebuff from {target}",
+    "hauled_food": "a food haul to the green",
+    "hauled_timber": "a timber haul to the green",
+    "hauled_ore": "an ore haul to the green",
+    "hauled_water": "a water haul to the green",
+    "benched_bloom": "ore on the smith's bench",
+    "benched_timber": "timber on the smith's bench",
+    "worked_the_anvil": "a tool off the rack",
+    "the_anvil_rang": "the anvil's ring",
+    "drew_rations": "the rations drawn from the store",
+    "served_a_meal": "the meal served",
+    "ate_at_{location}": "a meal at {location}",
+    "drew_the_pail_round": "the pail served",
+    "drank_at_{location}": "a drink at {location}",
+    "the_horn_at_{location}": "the meal-horn at {location}"
+  }
+}
