@@ -1,61 +1,67 @@
-Iteration: iter-326 (`lab4` — the owner's «продолжай» call
-  (the Atomic World Lab agent pack v1.5; the E1 horizon row the
-  iter-325 NEXT named — the kiloyear datum, the pack's 04 §12
-  horizon battery 100y → 1,000y → 10,000y)): THE E1 LADDER MEASURED
-  — `scripts/labrunner.py` the lab-4 REPLAY-COST instrument
-  (`read_seconds`/`fold_seconds`/`replay_alloc_peak_mb` — the
-  read-side cost split a resume/replay pays, the tracemalloc peak
-  honestly labeled as interpreter allocations, NEVER the OS RSS,
-  Windows-portable; `wall_seconds` and every prior field untouched,
-  the records backward-compatible) + `tests/test_lab.py` the two
-  lab-4 laws (the instrument law — every record carries the block on
-  both protocols, a non-empty log pays real read+fold time; THE
-  KILOYEAR ARITHMETIC law — the step-list pure at 1,000y: exactly
-  1,000 cadence waits, custom segments sum EXACTLY to the span,
-  whole stays ONE wait at any horizon, zero corpus price) + THE
-  SEGMENTED LADDER 2y→650y (farstead, seed 7, square, eight rungs;
-  650y = 81,823 events / 465.22 s — the deepest rung the sandbox's
-  600-s tool-call window holds, the window itself measured honestly:
-  background processes do not survive the call boundary) + THE
-  STATION HORIZON PROBE v1 (outside the repo per Rule 9 — the
-  session's offload rule: the 1,000y PAIRED battery rides the
-  owner's hardware, every stage a checkpoint, a timeout is itself a
-  datum, self-checked end-to-end in-sandbox). THE E1 FINDINGS: the
-  wall curve STEEPENS monotonically (local exponents 1.00→1.81 — the
-  iter-325 t^1.3 forecast REFUTED at depth: 1,000y ≈ 930–1100 s on
-  the sandbox CPU, 16–18 min, never "minutes"; events stay LINEAR
-  122–132/year — the super-linearity is the per-EVENT cost growth,
-  never the count); THE FLAT-LIFE LAW (life ~71–72/year from 10y to
-  650y, 650/651 spans live — a 325× horizon range with zero life
-  trend: no collapse, no explosion, the deferred-realize law's
-  kiloyear answer); THE LINEAR VERB LAWS (sourced 4.00/year EXACT,
-  consumed 4.03, settled 8.03 — iter-325's seed-invariance now
-  measured across scale to 6.5 centuries); THE CONSTANT-STATE LAW
-  (projection_entities = 25 at 100/500/650y — the state NEVER grows
-  with the horizon, only the LOG does; the accounts pile linearly
-  ~26.3 units/year, water 1,060→6,560 — the Stage B bounded-source
-  falsifier at 6.5-century scale; the super-linear wall at CONSTANT
-  state = the scale-1 decomposition's named gap, never guessed);
-  THE REPLAY-COST DATUM (read-bound: 0.62 s/MB flat, the fold
-  near-free 0.055 s at 81,823 events, the alloc peak 3.34× the log —
-  a resume pays O(log bytes), the state never participates in the
-  price).
+Iteration: iter-327 (`stageb1` — the owner's «продолжай работу» call
+  (the station kiloyear zip `horizon_station_20261004_112903`
+  analyzed in-session the same call; the row the iter-326 NEXT named
+  first after the station run — the Lab queue's Stage B contract
+  row)): THE STATION KILOYEAR DATUM ANALYZED + THE MATERIAL CYCLE
+  CONTRACT LANDED — the station probe v2.1 ALL FIVE STAGES ok
+  (Python 3.14.3 / 30.9 GB / HEAD febab32; T1 byte-identity HELD on
+  the station; the control 100y pair byte-for-byte the sandbox's own
+  numbers — 8,663/13,234 events, the cross-hardware determinism
+  law; the station ≈ 1.20–1.24× faster): THE KILOYEAR PAIR — whole
+  86,265 events / 3,306.63 s / life 81,214 in ONE final tick vs
+  segmented 126,392 / 884.39 s / 71,798 life in 1000/1000 spans
+  (the flat-life law at the kiloyear: 71.8/year); the control
+  family talk 32,165 = 32,165 EXACT; sourced 4,000 = 4.00/year in
+  both arms; THE KILOYEAR REALIZED_DELTA — the Stage B falsifier in
+  its final form: segmented leaves `loc_workshop` ore 2,004 + wood
+  2,012 = 4,016 units DEAD at tool = 0, whole leaves ~200/kind on
+  the store with the workshop untouched; tools 8 at the square
+  UNCONSUMED a millennium in both arms (no wear); the spring 10,060
+  = 60 + 10/year EXACT linear (no cap); THE WALL DATUM — the
+  iter-326 forecast HELD (sandbox-equivalent ≈ 1,061 s vs the
+  predicted 930–1,100), and the in-session cProfile decomposition
+  (10y vs 100y, farstead seed 7) NAMES the super-linearity's
+  mechanism: TWO quadratic read-side members —
+  `occ_breaking_cause`'s full-log refold per OCC rejection
+  (per-call ×9.51) + `knowledge._novel_facts`' whole-knowledge
+  re-ranking per talk (per-call ×9.17); the A·t + B·t² model
+  reproduces the α-ladder (1.01→1.83 model vs 1.00→1.81 measured)
+  and explains 77.5% of the kiloyear wall — scale-1's decomposition
+  answered, measured not guessed. THE CONTRACT: CONTRACTS.md §12
+  stageb-1 — eight pinned decisions B1..B8 (one substrate — the
+  account primitive / the atomic recipe event, settle's precedent,
+  conservation PER RECIPE, the float law respected by construction
+  / per-USE wear on the named instrument, never wall-clock, the I5
+  fence / the mint's min() cap, silence at full — the every-miss
+  form / the unarmed law — the golden fixtures byte-identical / the
+  REALIZED_DELTA oracle — acceptance MATERIALIZED: the dead pile
+  dies, the piling breaks at the cap, the turnover bounded / the
+  cost law — every new read surface index-based, never a log scan
+  (the measured wall law the row's own RED gate) / the pack-data
+  boundary + the promotion gate) + the falsifier pointer block
+  (iter-324 + iter-326 + the iter-327 report §B, md5-pinned) + the
+  future row's minimal test set pinned. The implementation is NOT a
+  row — the owner opens it after accepting (the runtime-promotion
+  gate).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
 2582 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R2 local-add — the
-  labrunner's replay-cost instrument + two NEW tests, zero
-  core/sim/render change, INV-1..5 untouched, the LOG untouched,
-  zero corpus price; NO test deleted or weakened — 2 added) ·
+  --check clean (Python 3.12.14, the env pin; R0 definition —
+  zero engine change, the only code-adjacent edit the docguard
+  allowlist rationale (seven → eight definitions), INV-1..5
+  untouched, the LOG untouched, zero corpus price; NO test deleted
+  or weakened) ·
 Date: 2026-10-04 ·
-Scope: scripts/labrunner.py (the lab-4 replay-cost instrument),
-  tests/test_lab.py (the two lab-4 laws),
-  docs/iterations/iter-326-lab4-report.md (new — this row's RU
-  report) + docs/TASKS.md (the lab-4 row + the ledger, iter-316
-  evicted), STATUS.md (this header), worklog.md (the iter-326 entry,
-  iter-316 evicted) — 6 changed/created (5 modified + 1 created).
+Scope: docs/CONTRACTS.md (§12 stageb-1 + the header note, 1,095
+  lines over-cap-allowed — the standing registry form),
+  scripts/docguard.py (the CONTRACTS allowlist rationale: eight
+  definitions), docs/TASKS.md (the stageb-1 row + the ledger,
+  iter-317 evicted), STATUS.md (this header), worklog.md (the
+  iter-327 entry, iter-317 evicted),
+  docs/iterations/iter-327-stageb-report.md (new — this row's RU
+  report) — 6 changed/created (5 modified + 1 created).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -143,55 +149,42 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-326 DONE: lab4 (the owner's «продолжай» call — the E1 horizon
-  row).** The replay-cost instrument landed + the segmented ladder
-  measured 2y→650y: the wall curve steepens monotonically (local
-  exponents 1.00→1.81, the t^1.3 forecast refuted — 1,000y ≈ 930–1100
-  s on the sandbox CPU), the FLAT-LIFE LAW (life ~71–72/year across a
-  325× horizon range, 650/651 spans live), the LINEAR VERB LAWS
-  (sourced 4.00/year exact), the CONSTANT-STATE LAW (projection 25
-  entities at every depth — only the log grows; the accounts pile
-  linearly, the Stage B bounded-source falsifier at 6.5-century
-  scale), the REPLAY-COST DATUM (read-bound 0.62 s/MB, the fold
-  near-free, the alloc peak 3.34× the log); the station horizon probe
-  v1 built + self-checked (the 1,000y PAIRED battery — whole +
-  segmented + the kiloyear REALIZED_DELTA — rides the owner's
-  hardware, the session's offload rule). 2582+1 + ruff + docguard +
-  topology clean. The RU report:
-  docs/iterations/iter-326-lab4-report.md. The prior queue's
-  standing: P1–P7
-  (speech-1, CONTRACTS §10) and A1–A7 (auth-1, §11) ACCEPTED AS
-  LAW — the §10/§11 notes landed in the §6/§7 form; the
-  implementation rows stay CLOSED («Строки имплементации пока не
-  открываю» — each opens separately behind the runtime-promotion
-  gate: a named consumer + a measured native limit + the
-  falsifier already pinned); CONTRACTS stays THE SINGLE REGISTRY
-  (the iter-320 report §G's option (б) — the standing-over-cap
-  form the permanent shape, the phases.md precedent; the header
-  note landed). THE CONFIRMED QUEUE FULLY DISCHARGED AND ACCEPTED
-  — all six contracts law (S/K/E/Q/P/A). KI#111's §5 cleanup
-  executed (the Active-KIs list now empty). 2557+1 + ruff +
-  docguard + topology --check clean. The RU report:
-  docs/iterations/iter-322-acceptland-report.md.
+**iter-327 DONE: stageb1 (the owner's «продолжай работу» call — the
+  station kiloyear zip analyzed in-session + the Stage B contract
+  row).** The station probe v2.1 ALL FIVE STAGES ok (T1 HELD on the
+  station; the control 100y byte-for-byte the sandbox's numbers;
+  station ≈ 1.20–1.24× faster): the kiloyear pair measured (whole
+  86,265 events / 3,306.63 s / life 100% in ONE final tick vs
+  segmented 126,392 / 884.39 s / life in 1000/1000 spans — the
+  flat-life law at the kiloyear; talk 32,165 = 32,165 EXACT; sourced
+  4.00/year both arms), the KILOYEAR REALIZED_DELTA — the Stage B
+  falsifier in its final form (4,016 units DEAD at the workshop at
+  tool = 0; tools 8 unconsumed a millennium; the spring 10,060
+  linear, no cap), the WALL DECOMPOSED in-session (two quadratic
+  read-side members — the OCC refold ×9.51 per-call + the knowledge
+  re-ranking ×9.17; A·t + B·t² explains 77.5% of the kiloyear wall,
+  the α-ladder reproduced) — and THE stageb-1 CONTRACT LANDED at
+  CONTRACTS.md §12 (B1..B8 + the falsifier pointer block + the
+  future row's minimal test set). The implementation is NOT a row —
+  the owner opens it after accepting (the runtime-promotion gate).
+  2582+1 + ruff + docguard + topology clean. The RU report:
+  docs/iterations/iter-327-stageb-report.md.
 Next: THE OWNER'S CALLS (nothing open on the agent side — every
-  remaining row owner-gated): (0) THE STATION RUN FIRST — the owner
-  runs canonsim_station_horizon_probe_v1.zip (preflight → sanity
-  2y+T1 → control 100y paired → MAIN 1,000y paired; ~1.5–2.5 h; the
-  zip comes back for the agent's kiloyear analysis: the whole arm's
-  first deep datum + the kiloyear REALIZED_DELTA + the cross-hardware
-  wall), then the Lab queue's remaining rows: the Stage B contract
-  rows (transformation/wear/bounded sources — the measured
-  falsifiers in hand), the scale-1 follow-up (the wall-cost
-  decomposition: WHY the per-event cost grows at constant state — now
-  a SHARPER named gap than the 2.5× herd question);
-  (1) the implementation rows —
-  sem-1/caus-1/replay-1/scale-1/speech-1/auth-1 each opens on the
-  owner's separate call behind the runtime-promotion gate; (2) M2
-  (the surface→canonical-ID normalisation A/B) the next
+  remaining row owner-gated): (0) THE OWNER'S ACCEPTANCE of §12
+  (B1..B8 as law or with edits — the contract's whole point); (1)
+  THE LAB QUEUE'S NEXT ROW — the scale-1 instrumentation row (the
+  wall-decomposition instrument in the labrunner: the per-member
+  cost split at two depths + the laws — the in-session cProfile
+  findings made reproducible; the data already in the iter-327
+  report §B), then the pack's remaining battery rows per the pack's
+  own order; (2) the implementation rows —
+  sem-1/caus-1/replay-1/scale-1/speech-1/auth-1/stageb-1 each opens
+  on the owner's separate call behind the runtime-promotion gate;
+  (3) M2 (the surface→canonical-ID normalisation A/B) the next
   measurement battery when the owner calls it — station-side,
-  never a repo row; (3) the standing owner calls preserved: the
+  never a repo row; (4) the standing owner calls preserved: the
   replay-UI NOT-EXPOSED row, the world track's rows (W8's
-  remaining), the frontend P1/P2/P3 continuation rows; (4) the
+  remaining), the frontend P1/P2/P3 continuation rows; (5) the
   probe-side fixture refinement (scene-relative fixtures or a
   distinct premise-drift status) when the owner calls it.
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and

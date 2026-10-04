@@ -29,7 +29,9 @@
 > оставляем как реестр» — the iter-320 report §G's option (б): the
 > standing-over-cap form accepted as the registry's permanent shape,
 > the phases.md precedent; the per-contract split (а) refused, the
-> deeper collapse (в) not called).
+> deeper collapse (в) not called). iter-327 lands §12 (stageb-1, the
+> Lab track's first contract) natively in the pointer form — eight
+> definitions the standing shape.
 
 ## 1. roads-1 — LANDED (iter-145, D-178)
 
@@ -941,3 +943,153 @@ selection (same log → same releases).
 director/mediator runtime machinery, no pipeline code, no authority
 registry, no collapse implementation, no schema change (the row's
 R0–R1 law).
+
+## 12. stageb-1 — the material cycle contract (transformation / wear / bounded sources; the Lab track's Stage B gate, the DEFINITION landed iter-327)
+
+> Owner-opened 2026-10-04 (the «продолжай работу» call — the station
+> kiloyear zip `horizon_station_20261004_112903` analyzed in-session
+> the same call; the row the iter-326 NEXT named first after the
+> station run — the Lab queue's head). R0 definition only: NOTHING
+> here is implemented — no verb, no gate, no schema change, no pack
+> data (the row's own law). The implementation is NOT a standing row —
+> the owner opens it after accepting this contract (the
+> runtime-promotion gate: the named consumer is the farstead material
+> cycle, the measured native limits are the falsifier records below).
+> Unlike §6..§11 (whose falsifiers ran live at landing), the three
+> gaps here are ALREADY MEASURED — lab-2/lab-3/lab-4 + the station
+> kiloyear battery; the falsifier block is the pointer form over those
+> records (D-024 — the iter-327 report owns the kiloyear verbatim +
+> the artifact md5 pins).
+
+**Pinned decisions** (each grounded in standing code or law):
+
+- **B1 — one substrate: the material cycle rides the ACCOUNT
+  primitive, never a second mechanism.** All three gaps are EDGES
+  over account stocks (`core/economy.py`: `account.<kind>` on any
+  declared entity, the four verbs source/transfer/consume/settle,
+  integer-only arithmetic): a conversion is consume-legs +
+  produce-legs over declared accounts; wear is a per-use consume over
+  the instrument's own stock; a capacity is a mint-side bound on a
+  source stock. No new state family, no second stock type, no float
+  arithmetic anywhere; the `_commit` floor (`is_account_prop`, D3's
+  loud arm) extends unchanged — no negative write, and (B4) no write
+  above a declared cap, ever.
+- **B2 — the conversion verb: ONE atomic recipe event (the settle
+  precedent).** A recipe is pack data (`economy.recipes`: id, input
+  legs [{holder, kind, amount}], output legs [{holder, kind,
+  amount}], the producing action's binding — the flow declaration's
+  own shape family). The event is ONE canonical event carrying every
+  leg's state changes (iter-273's atomic multi-leg law), the outcome
+  carrying the recipe id (the flow outcome's diagnosability form);
+  per-leg solvency gates the door (`account_at_least` per input leg —
+  the haul's own form). Conservation is PER RECIPE, never per kind:
+  for each kind, Σ(outputs) − Σ(inputs) = the recipe's declared net —
+  the fold-checkable identity (`tests/test_farstead_pack.py`'s
+  conservation law the extension point). The FLOAT LAW RESPECTED: the
+  recipe completes in ONE event — lab-2's chained-round impossibility
+  (the second verb's gate reads pre-first state) dissolves by
+  construction, never by a chaining mechanism.
+- **B3 — the wear law: per-USE, integer, the named instrument, never
+  wall-clock.** Wear is an event-driven consume leg on the
+  instrument's own stock, firing ON the consuming action's completion
+  (the on_action hook point), amount = the pack-declared per-use
+  integer; the instrument is NAMED in the event (the
+  `flagged_accessible` flags' own referents — the pail, the hammer).
+  Break at zero: a use that would drive the stock below 0 is
+  world-impossible (the door's soft arm — `intent_rejected`, attempts
+  are facts); the 0-crossing is the LAST use, and the broken state
+  reads from the stock (fold-derivable, L3 — never a second status
+  axis). NO time-based decay of instruments (the I5 fence:
+  `core/states.py` never touches account props — wear is not decay;
+  decay stays NPC-status-only).
+- **B4 — the bounded source: the mint's min() cap, silence at
+  full.** A source flow may declare `capacity` per (entity, kind):
+  the mint at a crossing is `min(declared_amount, capacity −
+  current_stock)`; at full cap the flow is NOT DUE — zero events, the
+  `every`-miss form (`flow_drafts`' own due-check; the noise law's
+  precedent — lab-3's day-wait 42% datum). The cap arithmetic is
+  tick+stock-derived and draw-free (the stock is a fold of the log —
+  INV-2-clean); the `_commit` floor extends: a source write above cap
+  refused LOUD (D3's form). Depletion needs NO new mechanism — the
+  extraction side already gates (`account_at_least` at the source;
+  the measured herd door-rejects are the noise law, not a defect).
+- **B5 — the unarmed law (the 68a pattern).** No recipes, no wear
+  bindings, no capacities declared → ZERO events change: the golden
+  T1 fixtures byte-identical, the committed corpora untouched, every
+  prior Lab record reproducible. The first consumer pack arms each
+  edge and pays its own corpus price (the template lines for the new
+  event types — the economy family's own landing precedent).
+- **B6 — the REALIZED_DELTA oracle: acceptance is MATERIALIZED,
+  never asserted (the pack's 03 §8 law as the row's gate).** With the
+  three edges live in farstead, the kiloyear battery's REALIZED_DELTA
+  must CHANGE SHAPE: (a) THE DEAD PILE DIES — the workshop's terminal
+  ore+wood (4,016 units at the 1,000y segmented station run) falls to
+  the recipe's working stock, tools > 0 at every horizon; (b) THE
+  LINEAR PILING LAW BREAKS — the spring's water plateaus at the
+  declared cap (the measured ~26.3 units/year account growth bends to
+  the cap asymptote); (c) THE INSTRUMENT TURNOVER — the tool stocks
+  cycle produced → worn → reproduced, terminal counts bounded by the
+  production × wear rates. The verb laws shift measurably (sourced
+  4.00/year exact stays; settled/consumed grow by the recipe+wear
+  rates — the +8..12 events/year estimate the row's RED target).
+- **B7 — the cost law: every NEW read surface is index-based, never
+  a log scan (the scale-1 lesson, binding HERE).** The three edges'
+  read surfaces (recipe solvency, instrument stocks, capacity checks)
+  ride derived indexes maintained at `_commit` (the `_last_change`
+  pattern, D-050) — NEVER a per-beat walk over the accumulated log or
+  knowledge. The measured wall law makes this the row's own gate: the
+  kiloyear wall at CONSTANT state decomposes into two quadratic
+  read-side members (the OCC attribution refold + the knowledge
+  re-ranking; the A·t + B·t² model explains 77.5% of the station
+  1,000y wall — the iter-327 report §B), so any O(|log|)-per-event
+  surface the row introduces is RED. The row's battery: the Q5-form
+  measurement (inspected/candidate/committed at ≥2 horizons,
+  before/after) + the local-exponent-not-steeper law.
+- **B8 — the pack-data boundary + the promotion gate.** All
+  semantics live in pack data (recipes, wear bindings, capacities —
+  INV-3: the engine carries mechanic words only); the engine adds the
+  three edge MECHANICS exactly once (the verb, the use-hook, the cap
+  arithmetic). No second resolver family, no scheduler change, no
+  schema break: the new event types ride the existing account
+  templates' shape (additive enum values — the schema's own additive
+  law; a breaking change is AGENTS §8's stop&confirm, never this
+  row). The implementation opens on the owner's separate call behind
+  the runtime-promotion gate.
+
+**Falsifier** (the pointer form over the measured records — the three
+gaps, each with its single owner): (a) NO CONVERSION — lab-2
+(iter-324): the rack empties at year ~6, tools 8→0 at every horizon,
+the chained round cannot roll (the float law); the KILOYEAR (the
+station probe 2026-10-04, md5-pinned in the iter-327 report):
+segmented 1,000y — `loc_workshop` terminal ore 2,004 + wood 2,012 =
+4,016 units DEAD at tool = 0 (the conveyor delivered, nothing
+transforms); whole — the deferred batch leaves ~200/kind on the
+store, the workshop untouched (ore 8, wood 14). (b) NO WEAR — the 8
+tools that reach the square sit UNCONSUMED a millennium (tool = 8 at
+`loc_square`, BOTH arms at 1,000y); `status_decayed` 48,593
+(segmented) vs 49 (whole) — the decay family live but NPC-status-only
+(I5); the verb inventory carries no use-cost anywhere. (c) NO CAP —
+the spring 10,060 = 60 + 10/year EXACT linear at the kiloyear, both
+arms (the pack's own declared gap: «NO CAPACITY»); the accounts pile
+~26.3 units/year (iter-326's 650y law: water 1,060→6,560). Records:
+the iter-324 report + the iter-326 report + the iter-327 report §B
+(the station kiloyear verbatim + the artifact md5 pins).
+
+**Minimal test set** (the implementation row's, not today's): the B6
+battery — the three materialized shape changes (the dead pile dies /
+the piling breaks at the cap / the turnover bounded) as the row's
+RED→GREEN; the per-recipe conservation identity (fold-checkable per
+kind); the door arms — per-leg solvency soft-rejected
+(`intent_rejected`), underflow and cap-overflow LOUD at `_commit`;
+the unarmed law — the golden T1 fixtures byte-identical, zero corpus
+price; the B7 cost battery — inspected/candidate/committed at ≥2
+horizons, the wall's local exponent not steeper; INV-2 —
+byte-identical replay over an armed run (the recipes draw-free, the
+cap arithmetic deterministic).
+
+**Deliberately NOT done here** (the row's own fence): no verb
+implemented, no recipe/wear/capacity pack data, no schema or template
+change, no gate code, no index built (the implementation row's own);
+no LOD/cadence work (Stage J's rows); no wall fix (scale-1's
+implementation row — B7 binds only the NEW surfaces); no trade/price
+work (the prices stay derived reads).

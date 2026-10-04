@@ -139,16 +139,19 @@ ALLOWLIST: dict[str, str] = {
         "the v3 doctrine file above",
     "docs/CONTRACTS.md":
         "the pre-implementation contract registry (intake-29/D-175's "
-        "form) — the seven landed definitions (sem-1 S1..S7 / caus-1 "
+        "form) — the eight landed definitions (sem-1 S1..S7 / caus-1 "
         "K1..K6 / replay-1 E1..E6 / scale-1 Q1..Q7 / speech-1 P1..P7 "
-        "/ auth-1 A1..A7 + the measured falsifiers and artifact pins) "
+        "/ auth-1 A1..A7 / stageb-1 B1..B8 + the measured falsifiers "
+        "and artifact pins) "
         "are owner-ACCEPTED law and §6.1 never-cut substance; the "
         "fifth contract crossed the ceiling after two real cruft "
         "passes (iter-316's §5 landing-notes collapse, iter-319's "
         "family-decision collapse + the §9 trims); iter-320's pass "
         "collapsed the §6..§9 falsifier RECORDS to the pointer form "
         "(D-024 — the iteration reports own the verbatim + the md5 "
-        "pins) and §10/§11 landed natively in that form — the file "
+        "pins) and §10/§11 landed natively in that form; §12 "
+        "(stageb-1, iter-327) lands natively in the same form — the "
+        "file "
         "stays over and the worklog records why (§6.1's own law)",
     "docs/TASKS.md":
         "the standing rows + the 10-entry ledger at the substance ceiling "
