@@ -1,40 +1,51 @@
-Iteration: iter-322 (`acceptland` — the owner's acceptance call:
-  «Принимаю P1–P7 и A1–A7 как закон. Строки имплементации пока не
-  открываю. CONTRACTS оставляем как реестр.»): THE LAST TWO PENDING
-  OWNER CALLS ANSWERED — (1) the speech-1 (P1–P7, CONTRACTS §10)
-  and auth-1 (A1–A7, §11) contracts ACCEPTED AS LAW (the §10/§11
-  notes landed in the §6/§7 acceptance-note form: binding for every
-  future implementation; the implementation rows stay CLOSED —
-  «строки имплементации пока не открываю», each row opens
-  separately behind the runtime-promotion gate: a named consumer +
-  a measured native limit + the falsifier already pinned); (2) the
-  CONTRACTS registry's standing-over disposition ANSWERED — THE
-  SINGLE-REGISTRY FORM STANDS (the iter-320 report §G's option (б):
-  the standing-over-cap form the registry's permanent shape, the
-  phases.md precedent; the per-contract split (а) refused, the
-  deeper collapse (в) not called — the header note landed). THE
-  CONFIRMED QUEUE FULLY DISCHARGED AND ACCEPTED — all six contracts
-  (sem/caus/replay/scale/speech/auth) owner-accepted AS LAW:
-  S1–S7 + K1–K6 + E1..E6 + Q1–Q7 2026-10-03, P1–P7 + A1–A7
-  2026-10-04. KI#111's §5 cleanup executed (closed iter-318, three
-  iterations past — the mandatory form, AGENTS §5).
-Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116, D-151;
-  the ladder complete 0..6 — the standing work: the owner-gated
-  backlog + the web-frontend track + the world track + the SoW
-  horizon, ROADMAP §2/§6) ·
-2557 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R0 doc-only — zero
-  code change, INV-1..5 untouched, the LOG untouched, zero corpus
-  price; NO test deleted or weakened) ·
+Iteration: iter-323 (`lab1` — the owner's Atomic World Lab
+  agent-pack call «начни работу с архивом»
+  (CANONSIM_ATOMIC_WORLD_LAB_AGENT_PACK_v1_5.zip; the pack's 04 §2
+  the Stage A order owner; the pack = a research program over the
+  SAME canonical substrate — the row lands the HARNESS, never an
+  engine change)): THE WORLD LAB STAGE A LANDED —
+  `scripts/labrunner.py` the batch runner (the player-absent law:
+  the fixed declared anchor + ONE whole-horizon wait, the player
+  authors nothing else; the MINIMAL observation profile over
+  `read_log` — identity/horizon/counts/mix/state/cost, no second
+  log/RNG/scheduler/resolver; the experiment-contract record
+  QUESTION/IDENTITY/ARMS/RUNS/DISPOSITION under the gitignored
+  output dir; the F1/T1 `--verify-replay` byte-identity double-run;
+  the ablation arm minus:<block> with the dead-vocabulary
+  fixpoint — the lint names the dead lines, the materializer
+  strips them, the removable set re-measured per pack+horizon,
+  never inherited) + `tests/test_lab.py` the nine Stage A laws +
+  THE E0 BASELINE MEASURED (province, directors off): 10y × 4
+  smoke seeds — 7,861–7,865 events (±2 variance), ~100%
+  autonomous, the mix 97.3% maintenance+account_flow, ZERO
+  ecology-closing families (the pack's 01 §11 finding now a
+  measured per-run law + the suite's honest canary); the 100y
+  deep run seed 7 — 78,212 events / 45.26 MB / 546 s wall: the
+  10× horizon costs 83× time, scale-1's super-linear RED finding
+  LIVE at whole-run scale (the 1,000y gate ≈ 90 min single-seed —
+  the first Lab scale datum, an input to Stage J, never an
+  optimization permission); the measured ablation verdicts:
+  CLEAN on_action/reflection/secrets/factions, LINT-REFUSED
+  urgencies/expectations/traits, RUNTIME-REFUSED weather (the
+  chain is cadence-armed — the day-1 balance set does NOT
+  transfer to long horizons) + crime_watch (a missing-block
+  KeyError, recorded as the arm's finding).
+Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
+  D-151; the ladder complete 0..6 — the standing work: the
+  owner-gated backlog + the web-frontend track + the world track
+  + the SoW horizon, ROADMAP §2/§6) ·
+2566 passed + 1 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; R2 local-add —
+  two NEW files scripts/ + tests/, zero core/sim/render change,
+  INV-1..5 untouched, the LOG untouched, zero corpus price; NO
+  test deleted or weakened — 9 added) ·
 Date: 2026-10-04 ·
-Scope: docs/CONTRACTS.md (the §10/§11 acceptance notes + the header
-  registry-disposition note; 943 lines over-cap-allowed — the
-  owner-accepted standing form), docs/TASKS.md (the speech-1/auth-1
-  rows' acceptance notes + the ledger, iter-312 evicted), STATUS.md
-  (this header + KI#111's §5 cleanup), worklog.md (the iter-322
-  entry, iter-312 evicted), docs/iterations/
-  iter-322-acceptland-report.md (new — this row's RU report) — 5
-  changed/created (4 modified + 1 created).
+Scope: scripts/labrunner.py (new — the Stage A batch runner),
+  tests/test_lab.py (new — the nine laws), docs/TASKS.md (the
+  lab-1 row + the ledger, iter-313 evicted), STATUS.md (this
+  header), worklog.md (the iter-323 entry, iter-313 evicted),
+  docs/iterations/iter-323-lab1-report.md (new — this row's RU
+  report) — 6 changed/created (3 modified + 3 created).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
