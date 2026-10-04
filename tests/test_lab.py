@@ -46,6 +46,21 @@ of (years, segment_ticks): the kiloyear wait list sums EXACTLY to
 the span, the whole form stays ONE wait — the committed bytes'
 arithmetic never drifts with horizon scale).
 
+lab-5 (the scale-1 instrumentation row — the owner's
+«инструментальную строку scale-1 в labrunner» call, the row the
+iter-327 NEXT named; the wall-decomposition instrument): the
+CANON-NEUTRALITY law (the profiled pass's committed bytes EQUAL the
+unprofiled run's — profiling observes, never mutates; canon_check
+in-record, a breach is the instrument's own RED), the ACCOUNTING law
+(the member split partitions the profiled wall — members + rest ==
+the total, the disjointness flag green; E03 rule-parses/beat, E04
+greedy derived-read calls/beat vs the STATIC gated-entry demand, and
+beats/event — the ULTIMATE pack's counters executable, its stale
+"~50 beats/event" replaced by the measured number), and the GROWTH +
+honest-label law (the two-depth per-call ratios are the
+super-linearity datum; the profiled wall rides under its own key,
+never the battery's cost.wall_seconds).
+
 Horizons stay at 2y in-test (≈0.3 s/run); longer horizons are the
 runner's job (100y+), never the suite's (the corpus-price law).
 """
@@ -479,3 +494,115 @@ def test_the_kiloyear_step_list_arithmetic_law() -> None:
                          protocol="whole") == [
         {"intent": "wait", "ticks": span}
     ]
+
+
+# -- lab-5: the wall-decomposition instrument laws (the scale-1
+# instrumentation row, the owner's «инструментальную строку scale-1
+# в labrunner» call — the row the iter-327 NEXT named) ----------------
+
+
+def _profile_record(tmp_path: Path) -> dict[str, object]:
+    """The lab-5 battery at smoke scale: farstead seed 7, segmented,
+    the main 2y run + profiled passes at 1y and 2y (the depth pair the
+    growth block reads; canon_check rides the coinciding 2y depth).
+    Drives the CLI form — the profile arm is a main-level battery."""
+    out = tmp_path / "out"
+    rc = labrunner_main([
+        "--years", "2", "--seeds", "7", "--protocol", "segmented",
+        "--profile-depths", "1,2",
+        "--pack", str(REPO / "content" / "farstead_pack"),
+        "--anchor", SQUARE, "--out", str(out),
+    ])
+    assert rc == 0
+    record = json.loads(
+        (out / "lab_e0_2y_segmented.json").read_text(encoding="utf-8")
+    )
+    assert "profile" in record
+    return record["profile"]
+
+
+def test_the_wall_instrument_is_canon_neutral(tmp_path: Path) -> None:
+    """lab-5 law 1 — the canon-neutrality law: profiling OBSERVES,
+    never mutates. The profiled pass's committed bytes are
+    byte-identical to the unprofiled main-battery run's at the
+    coinciding depth (Q6's instrument-side echo: a profiler that
+    shifted ANY canon byte would be a semantic change masquerading as
+    measurement — RED, and the runner's own exit code carries the
+    verdict, never just this assertion)."""
+    profile = _profile_record(tmp_path)
+    canon = profile["canon_check"]
+    assert canon["checked"] is True
+    assert canon["byte_identical"] is True
+    assert [row["years"] for row in canon["depths"]] == [2]
+
+
+def test_the_wall_split_accounting_law(tmp_path: Path) -> None:
+    """lab-5 law 2 — the accounting law: the member split PARTITIONS
+    the profiled wall (every member a documented entry-cumtime
+    aggregate; members + rest == the profiled total, the disjointness
+    flag green), and the counters carry the ULTIMATE pack's vocabulary:
+    the beat machinery re-parses the rules every beat (E03 >= 1
+    parse/beat), computes the derived folds GREEDILY on the clock path
+    while this fixture's gated-entry demand is ZERO (E04's Q7a waste
+    measured — the P0.5-A implementation row's RED baseline, flipping
+    deliberately when beat laziness lands), and beats/event is the
+    measured per-run number (the pack's stale '~50' replaced)."""
+    profile = _profile_record(tmp_path)
+    for depth in profile["per_depth"]:
+        shares = depth["member_shares"]
+        total = depth["profiled_total_seconds"]
+        assert depth["members_disjoint"] is True
+        assert depth["member_rest_seconds"] >= 0
+        accounted = (
+            sum(depth["members"].values()) + depth["member_rest_seconds"]
+        )
+        assert abs(accounted - total) < 1e-3, (depth["years"], accounted)
+        assert abs(sum(shares.values()) - 1.0) < 0.01
+        # the named members exist as keys even when a depth never pays
+        # them (an honest zero, never an absent key)
+        for member in ("occ_refold", "knowledge_rerank", "beat_rolls",
+                       "decay_walk", "clock_derived_folds",
+                       "door_derived_folds", "rest"):
+            assert member in shares, (depth["years"], member)
+        # the clock parses the rules every beat — E03 measured
+        assert depth["beats"] > 0
+        assert depth["counters"]["e03_parses_per_beat"] >= 1.0
+        # the greedy derived folds: every fold function computed on
+        # the clock path at least once per beat — TODAY's shape, the
+        # laziness row's own RED baseline
+        e04 = depth["counters"]["e04_derived_reads"]
+        for name, per_func in e04["per_function"].items():
+            assert per_func["clock"] >= depth["beats"], (name, "clock")
+        assert e04["clock_calls_per_beat"] >= 3.0
+        # this fixture demands NONE of them — the waste quantified
+        assert profile["e04_gated_entries"]["total"] == 0
+        # the beats/event counter present and measured
+        assert depth["beats_per_event"] and depth["beats_per_event"] > 0
+
+
+def test_the_wall_growth_and_labels_law(tmp_path: Path) -> None:
+    """lab-5 law 3 — the growth and honest-label law: the two-depth
+    growth block carries the per-call ratios of every key function
+    observed at both depths (the super-linearity datum — both rungs
+    equally instrumented, the ratio never the absolute), and the
+    record's honest labels stand: the profiled wall rides under its
+    own key (never the battery's cost.wall_seconds), the notes name
+    the instrument artifact, and the key-function table quotes ncalls
+    for the beat machinery (the anchor of every per-beat counter)."""
+    profile = _profile_record(tmp_path)
+    growth = profile["growth"]
+    assert growth["from_years"] == 1
+    assert growth["to_years"] == 2
+    assert growth["per_call_ratios"], "no key function at both depths"
+    for label, ratio in growth["per_call_ratios"].items():
+        assert ratio > 0, label
+    # the beat machinery observed at both depths — the counter anchor
+    for depth in profile["per_depth"]:
+        key_table = depth["key_functions"]
+        assert "core/loop.py:_run_beat" in key_table
+        assert key_table["core/loop.py:_run_beat"]["ncalls"] == depth["beats"]
+        # the honest labels: profiled wall under its own key, never
+        # the battery's wall vocabulary
+        assert "profiled_wall_seconds" in depth
+        assert "wall_seconds" not in depth
+    assert any("instrument artifact" in note for note in profile["notes"])

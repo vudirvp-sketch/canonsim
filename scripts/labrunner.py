@@ -43,6 +43,30 @@ THE LAB LAWS (the pack's non-negotiables, made executable here):
    player still authors NOTHING but null waits (never another intent
    kind) — segmentation changes WHEN the world moves, never WHAT the
    player is. The engine is untouched: the arm is step-list data.
+8. THE WALL-DECOMPOSITION INSTRUMENT (lab-5, the scale-1
+   instrumentation row — the owner's «инструментальную строку scale-1
+   в labrunner» call, the row the iter-327 NEXT named): `--profile-
+   depths 10,100` runs the FIRST seed once per depth under cProfile
+   and decomposes the profiled wall into NAMED MEMBERS by entry
+   cumtime — `occ_refold` (occ_breaking_cause's full-log prefix
+   refold per OCC rejection, the iter-327 member 1),
+   `knowledge_rerank` (_novel_facts' whole-knowledge re-ranking per
+   talk, member 2), `beat_rolls` (urgency/faction rolls),
+   `decay_walk` (the NPC x axis walk), and the derived folds
+   attributed BY CALLER (`_run_beat`/`_run_macro` = the clock's
+   greedy per-beat computation vs `_fold_reads` = the intent door's
+   lazy reads) — plus the pack counters the ULTIMATE pack named:
+   E03 rule-parses per beat (the `_specs` re-parse), E04 derived-read
+   calls per beat (greedy vs lazy vs the STATIC gated-entry demand),
+   and beats/event (the pack's stale "~50" replaced by the measured
+   number). The instrument is CANON-NEUTRAL by law: the profiled
+   pass's committed bytes are byte-identical to the unprofiled run
+   of the same (seed, anchor, horizon, arm, protocol) tuple — checked
+   in-record (canon_check) whenever a depth coincides with the main
+   battery, RED otherwise. Honest labels: the profiled wall is an
+   instrument artifact (cProfile overhead), never quoted as wall —
+   the member SHARES and the two-depth per-call RATIOS are the
+   datums (scale-1's Q5 discipline; the split, never the absolute).
 
 The ablation arm (`--arm minus:<block>`) materializes the pack minus
 one optional rules block under the gitignored output dir — the 68a law
@@ -75,6 +99,9 @@ Usage:
         --protocol segmented --segment-ticks 518400
     python scripts/labrunner.py --years 1000 --seeds 7 \
         --protocol segmented  # the E1 horizon ladder (lab-4)
+    python scripts/labrunner.py --years 100 --seeds 7 \
+        --protocol segmented --profile-depths 10,100 \
+        --pack content/farstead_pack  # the wall decomposition (lab-5)
 
 Output: `output/lab_<tag>.json` + a stdout summary (the gitignored
 runtime artifact family — the harness is committed, the runs are
@@ -84,7 +111,9 @@ reproducible from seed + pack + horizon).
 from __future__ import annotations
 
 import argparse
+import cProfile
 import json
+import pstats
 import re
 import shutil
 import sys
@@ -100,10 +129,17 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
+from core.factions import _specs as _faction_specs  # noqa: E402
 from core.fold import fold, initial_projection  # noqa: E402
+from core.intent import (  # noqa: E402
+    ECHO_TEST,
+    LEVERAGE_TEST,
+    TRAIT_TEST,
+)
 from core.log import read_log  # noqa: E402
 from core.loop import Simulator  # noqa: E402
 from core.pack import Pack, PackError, load_pack  # noqa: E402
+from core.urgencies import _specs as _urgency_specs  # noqa: E402
 
 DEFAULT_PACK = REPO / "content" / "province_pack"
 DEFAULT_OUT = REPO / "output"
@@ -199,6 +235,7 @@ def run_world(
     arm: str,
     protocol: str = "whole",
     segment_ticks: int = 0,
+    profiler: cProfile.Profile | None = None,
 ) -> tuple[Path, float]:
     """One Lab run: the real Simulator, player-absent steps, the
     committed log under the gitignored output dir. Returns (log path,
@@ -207,6 +244,12 @@ def run_world(
     (KI#112, found twice in one battery session: the anchor pair
     batteries collided first, then the 10y battery overwrote the 100y
     logs — the run identity is the full tuple, never a prefix of it).
+
+    `profiler` (lab-5) wraps ONLY the run_steps window in
+    enable/disable — observation, never mutation: the profiled pass's
+    committed bytes are byte-identical to the unprofiled run's (the
+    canon-neutrality law, checked in-record by canon_check); the wall
+    under profiling is an instrument artifact, never quoted as wall.
 
     A runtime refusal inside the arm (the substrate's own loud
     backstops — the cadence-armed families, the missing-block
@@ -231,14 +274,21 @@ def run_world(
         director_enabled=directors,
     )
     sim.open()
+    wall = 0.0
     try:
         t0 = time.perf_counter()
-        sim.run_steps(
-            _anchor_steps(
-                pack, years, anchor,
-                protocol=protocol, segment_ticks=segment_ticks,
+        try:
+            if profiler is not None:
+                profiler.enable()
+            sim.run_steps(
+                _anchor_steps(
+                    pack, years, anchor,
+                    protocol=protocol, segment_ticks=segment_ticks,
+                )
             )
-        )
+        finally:
+            if profiler is not None:
+                profiler.disable()
         wall = time.perf_counter() - t0
     except Exception as exc:  # noqa: BLE001 -- the arm's honest verdict:
         # the block is not cleanly removable at this horizon; the
@@ -706,6 +756,439 @@ def _protocol_disposition(comparison: list[dict[str, Any]]) -> str:
     return " ".join(parts)
 
 
+#: The lab-5 QUESTION (the scale-1 instrumentation row, the row the
+#: iter-327 NEXT named — the owner's «инструментальную строку scale-1
+#: в labrunner» call): what does the native wall CONSIST of, and which
+#: members grow super-linearly with depth at constant state?
+_PROFILE_QUESTION: Final = (
+    "Wall decomposition (scale-1's named gap, iter-327's in-session "
+    "cProfile finding made reproducible): at two depths of the SAME "
+    "(seed, pack, anchor, protocol) world, what share of the profiled "
+    "wall is each named member — the OCC prefix refold "
+    "(occ_breaking_cause), the knowledge re-ranking (_novel_facts), "
+    "the beat roll machinery, the decay walk, the derived folds by "
+    "caller (the clock's greedy per-beat computation vs the intent "
+    "door's lazy reads) — and how do the key functions' per-call "
+    "costs GROW between the depths? (E03 rule-parses/beat, E04 "
+    "derived-read calls/beat vs the static gated-entry demand, and "
+    "beats/event quoted with it — the ULTIMATE pack's counters, "
+    "measured per-run. The profiled wall is an instrument artifact: "
+    "shares and ratios are the datums, never the absolute; the "
+    "profiled bytes must equal the unprofiled run's — canon_check.)"
+)
+
+#: The member map (the module's own documented split): each member is
+#: the CUMULATIVE time of its ENTRY functions — the entries' call
+#: subtrees are disjoint by call-site construction (verified live by
+#: the accounting law, tests/test_lab.py: sum(members) <= total), so
+#: the split partitions the profiled wall with `rest` the remainder.
+#: The map is (module-suffix, function-name) pairs, POSIX/Windows
+#: portable (the pstats path is normalized before matching).
+_MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
+    # iter-327 member 1: the OCC attribution's full-log prefix refold
+    "occ_refold": (("core/intent.py", "occ_breaking_cause"),),
+    # iter-327 member 2: the teller's whole-knowledge re-ranking per talk
+    "knowledge_rerank": (("core/knowledge.py", "_novel_facts"),),
+    # the beat's roll machinery (urgency + faction, both clock callers)
+    "beat_rolls": (
+        ("core/urgencies.py", "urgency_intents"),
+        ("core/factions.py", "faction_intents"),
+    ),
+    # the NPC x axis decay walk
+    "decay_walk": (("core/states.py", "decay_drafts"),),
+}
+
+#: The derived folds (E04's surface), attributed BY CALLER: the clock
+#: path (_run_beat + _run_macro — the greedy per-beat computation,
+#: Q7a's measured gap) vs the intent door (_fold_reads — the lazy
+#: iter-45 law: computed only when the precondition list reads it).
+_DERIVED_FOLDS: Final = (
+    ("core/leverage.py", "live_leverage"),
+    ("core/echo.py", "echo_scores"),
+    ("core/traits.py", "crystallized_traits"),
+)
+_CLOCK_CALLERS: Final = (
+    ("core/loop.py", "_run_beat"),
+    ("core/loop.py", "_run_macro"),
+)
+_DOOR_CALLERS: Final = (("core/loop.py", "_fold_reads"),)
+
+#: The key-function table (iter-327's §B.4 reproduction): ncalls /
+#: tottime / cumtime / per-call µs for every named function the
+#: decomposition reads. Absent functions (never called at this depth)
+#: are simply not in the table — an honest zero, never a guessed one.
+_KEY_FUNCS: Final = (
+    ("core/loop.py", "_run_beat"),
+    ("core/loop.py", "_run_macro"),
+    ("core/states.py", "decay_drafts"),
+    ("core/urgencies.py", "urgency_intents"),
+    ("core/factions.py", "faction_intents"),
+    ("core/urgencies.py", "_specs"),
+    ("core/factions.py", "_specs"),
+    ("core/leverage.py", "live_leverage"),
+    ("core/echo.py", "echo_scores"),
+    ("core/traits.py", "crystallized_traits"),
+    ("core/intent.py", "occ_breaking_cause"),
+    ("core/fold.py", "fold"),
+    ("core/fold.py", "apply_event"),
+    ("core/knowledge.py", "_novel_facts"),
+    ("core/knowledge.py", "_ranked"),
+)
+
+#: The three derived-fold tests (core/intent.py's closed set) — E04's
+#: demand side reads the pack's own parsers, never a second truth.
+_GATED_TESTS: Final = (LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST)
+
+_PROFILE_NOTES: Final = (
+    "the profiled wall is an instrument artifact (cProfile overhead "
+    "rides every entry) — never quoted as wall; the member shares and "
+    "the two-depth per-call ratios are the datums (scale-1's Q5 "
+    "discipline: the split, never the absolute)",
+    "members are entry-cumtime aggregates over the documented map "
+    "(_MEMBER_ENTRIES + _DERIVED_FOLDS by caller); rest = total - "
+    "sum(members); the profiled bytes must equal the unprofiled "
+    "run's (canon_check — the canon-neutrality law)",
+    "E03/E04/beats-event are the ULTIMATE pack's counters made "
+    "executable: its stale '~50 beats/event' claim is replaced by "
+    "the measured per-run number",
+)
+
+
+def _core_key(stats_key: tuple[str, int, str]) -> tuple[str, str] | None:
+    """Normalize a pstats key to (module-suffix, name) when it names a
+    core/ function, else None. Path-shape portable (the owner-side
+    checkout is Windows): backslashes normalized, the LAST '/core/'
+    segment anchors the suffix."""
+    path = stats_key[0].replace("\\", "/")
+    idx = path.rfind("/core/")
+    if idx == -1:
+        return None
+    return (f"core/{path[idx + len('/core/'):]}", stats_key[2])
+
+
+def _log_event_count(log: Path) -> int:
+    """The committed event count, cheap: line 1 is the header
+    (EVENT_SCHEMA.md §1 — one header, one event per line), so the
+    events are the remaining lines. A counting read, never a second
+    parse (the full record stays read_log's own business)."""
+    with log.open("rb") as handle:
+        return sum(1 for _ in handle) - 1
+
+
+def _gated_entry_count(pack: Pack) -> dict[str, int]:
+    """E04's demand side (read-side, the pack's OWN parsers — no second
+    truth): how many urgency/faction entries actually gate on the three
+    derived-fold tests. The greedy clock computation pays for EVERY
+    beat regardless; the gap between these two numbers is the Q7a
+    waste the P0.5-A implementation row will close."""
+    families = (("_urgencies", _urgency_specs(pack)),
+                ("_factions", _faction_specs(pack)))
+    out: dict[str, int] = {}
+    for name, specs in families:
+        out[name] = sum(
+            1 for spec in specs
+            if any(cond.get("test") in _GATED_TESTS for cond in spec.requires)
+        )
+    out["total"] = out["_urgencies"] + out["_factions"]
+    return out
+
+
+def _aggregate_profile(
+    prof: cProfile.Profile, *, events_total: int,
+) -> dict[str, Any]:
+    """One depth's decomposition: the member split (entry cumtimes +
+    caller-attributed derived folds), the key-function table, and the
+    E03/E04/beats-event counters. pstats' caller attribution is exact
+    (sum of caller ct == callee cum, session-verified) — the clock vs
+    door split of the derived folds is measured, never estimated."""
+    # (module, name) -> [ncalls, tottime, cumtime, callers-map]; the
+    # merge absorbs duplicate line-keys for one function (defensive —
+    # the target set has one def each).
+    raw: dict[tuple[str, str], list[Any]] = {}
+    total = 0.0
+    for key, (_cc, nc, tt, ct, callers) in pstats.Stats(prof).stats.items():
+        total += tt
+        ck = _core_key(key)
+        if ck is None:
+            continue
+        row = raw.setdefault(ck, [0, 0.0, 0.0, {}])
+        row[0] += nc
+        row[1] += tt
+        row[2] += ct
+        for caller_key, (_ccc, cnc, _ctt, cct) in callers.items():
+            cck = _core_key(caller_key)
+            if cck is None:
+                continue
+            crow = row[3].setdefault(cck, [0, 0.0])
+            crow[0] += cnc
+            crow[1] += cct
+
+    def nc_of(target: tuple[str, str]) -> int:
+        return raw.get(target, [0])[0]
+
+    def ct_of(target: tuple[str, str]) -> float:
+        return raw.get(target, [0, 0.0])[2]
+
+    def caller_of(
+        target: tuple[str, str], callers: tuple[tuple[str, str], ...],
+    ) -> tuple[int, float]:
+        row = raw.get(target)
+        if row is None:
+            return (0, 0.0)
+        hits = [row[3][c] for c in callers if c in row[3]]
+        return (sum(h[0] for h in hits), sum(h[1] for h in hits))
+
+    members: dict[str, float] = {
+        name: sum(ct_of(entry) for entry in entries)
+        for name, entries in _MEMBER_ENTRIES.items()
+    }
+    derived_per_func: dict[str, dict[str, int]] = {}
+    clock_calls = door_calls = 0
+    clock_ct = door_ct = 0.0
+    for func in _DERIVED_FOLDS:
+        cnc, cct = caller_of(func, _CLOCK_CALLERS)
+        dnc, dct = caller_of(func, _DOOR_CALLERS)
+        derived_per_func[func[1]] = {"clock": cnc, "door": dnc}
+        clock_calls += cnc
+        door_calls += dnc
+        clock_ct += cct
+        door_ct += dct
+    members["clock_derived_folds"] = clock_ct
+    members["door_derived_folds"] = door_ct
+    members_s = {name: round(value, 4) for name, value in members.items()}
+    rest = round(total - sum(members.values()), 4)
+    shares = {
+        name: round(value / total, 3) if total else 0.0
+        for name, value in members.items()
+    }
+    shares["rest"] = round(rest / total, 3) if total else 0.0
+
+    key_functions: dict[str, dict[str, Any]] = {}
+    for func in _KEY_FUNCS:
+        row = raw.get(func)
+        if row is None:
+            continue  # never called at this depth — an honest absence
+        key_functions[f"{func[0]}:{func[1]}"] = {
+            "ncalls": row[0],
+            "tottime_s": round(row[1], 4),
+            "cumtime_s": round(row[2], 4),
+            "per_call_us": round(row[1] / row[0] * 1e6, 1) if row[0] else 0.0,
+        }
+
+    beats = nc_of(("core/loop.py", "_run_beat"))
+    parses = (
+        nc_of(("core/urgencies.py", "_specs"))
+        + nc_of(("core/factions.py", "_specs"))
+    )
+    return {
+        "events_total": events_total,
+        "beats": beats,
+        "macro_crossings": nc_of(("core/loop.py", "_run_macro")),
+        "beats_per_event": (
+            round(beats / events_total, 2) if events_total else None
+        ),
+        "profiled_total_seconds": round(total, 4),
+        "members": members_s,
+        "member_shares": shares,
+        "member_rest_seconds": rest,
+        # the accounting law's own flag: overlapping subtrees would
+        # push the sum past the total — measured, never assumed
+        "members_disjoint": sum(members.values()) <= total + 1e-9,
+        "key_functions": key_functions,
+        "counters": {
+            "e03_rule_parses": parses,
+            "e03_parses_per_beat": (
+                round(parses / beats, 2) if beats else None
+            ),
+            "e04_derived_reads": {
+                "per_function": derived_per_func,
+                "clock_calls_total": clock_calls,
+                "clock_calls_per_beat": (
+                    round(clock_calls / beats, 2) if beats else None
+                ),
+                "door_calls_total": door_calls,
+            },
+        },
+    }
+
+
+def _profile_block(
+    pack: Pack,
+    schema: dict[str, Any],
+    seed: int,
+    depths: Sequence[int],
+    out_dir: Path,
+    *,
+    anchor: str,
+    directors: bool,
+    arm: str,
+    protocol: str,
+    segment_ticks: int,
+    main_runs: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """The lab-5 record block: one profiled pass per depth over the
+    FIRST seed (the decomposition's datum is the depth pair, never the
+    seed spread — replication rides the main battery), the growth
+    ratios between the shallowest and deepest rung, the static E04
+    demand, and the canon-neutrality check against the main battery's
+    own log whenever a depth coincides (the instrument's own
+    falsifier: the profiled bytes MUST equal the unprofiled run's)."""
+    per_depth: list[dict[str, Any]] = []
+    for depth in depths:
+        prof = cProfile.Profile()
+        log, prof_wall = run_world(
+            pack, schema, seed, depth, out_dir,
+            anchor=anchor, directors=directors, arm=f"{arm}_prof",
+            protocol=protocol, segment_ticks=segment_ticks,
+            profiler=prof,
+        )
+        per_depth.append({
+            "years": depth,
+            "log": str(log),
+            "profiled_wall_seconds": round(prof_wall, 2),
+            **_aggregate_profile(
+                prof, events_total=_log_event_count(log),
+            ),
+        })
+
+    block: dict[str, Any] = {
+        "question": _PROFILE_QUESTION,
+        "seed": seed,
+        "protocol": protocol,
+        "depths": list(depths),
+        "e04_gated_entries": _gated_entry_count(pack),
+        "per_depth": per_depth,
+        "notes": list(_PROFILE_NOTES),
+    }
+
+    # the growth block: both depths equally instrumented, so the
+    # per-call ratio between them is the super-linearity datum (the
+    # iter-327 form: fold x9.51, _novel_facts x9.17 at 10y->100y)
+    if len(per_depth) >= 2:
+        shallow, deep = per_depth[0], per_depth[-1]
+        per_call: dict[str, Any] = {}
+        ncalls_ratio: dict[str, Any] = {}
+        for label, row in deep["key_functions"].items():
+            srow = shallow["key_functions"].get(label)
+            if srow is None or srow["per_call_us"] <= 0:
+                continue
+            per_call[label] = round(row["per_call_us"] / srow["per_call_us"], 2)
+            ncalls_ratio[label] = (
+                round(row["ncalls"] / srow["ncalls"], 2)
+                if srow["ncalls"] else None
+            )
+        block["growth"] = {
+            "from_years": shallow["years"],
+            "to_years": deep["years"],
+            "per_call_ratios": per_call,
+            "ncalls_ratios": ncalls_ratio,
+            "member_shares": {
+                name: [
+                    shallow["member_shares"][name],
+                    deep["member_shares"][name],
+                ]
+                for name in deep["member_shares"]
+            },
+        }
+
+    # the canon-neutrality law: whenever a profiled depth coincides
+    # with a main-battery run of the same (seed, protocol), the two
+    # committed byte streams must be EQUAL — profiling observes, never
+    # mutates; a breach is the instrument's own RED.
+    checks: list[dict[str, Any]] = []
+    for depth_row in per_depth:
+        match = next(
+            (
+                run for run in main_runs
+                if run["seed"] == seed
+                and run["protocol"] == protocol
+                and run["metrics"]["identity"]["horizon_years"]
+                == depth_row["years"]
+            ),
+            None,
+        )
+        if match is None:
+            continue
+        checks.append({
+            "years": depth_row["years"],
+            "byte_identical": (
+                Path(match["log"]).read_bytes()
+                == Path(depth_row["log"]).read_bytes()
+            ),
+        })
+    block["canon_check"] = {
+        "checked": bool(checks),
+        "byte_identical": (
+            all(row["byte_identical"] for row in checks) if checks else None
+        ),
+        "depths": checks,
+    }
+    return block
+
+
+def _profile_disposition(profile: Mapping[str, Any]) -> str:
+    """The lab-5 honest read (the pack's FACT/INFERENCE discipline):
+    the deepest rung's member shares, the E03/E04/beats-event counters,
+    the growth ratios of the hottest per-call costs — and the
+    canon-neutrality verdict. Shares and ratios only, never the
+    absolute profiled wall."""
+    deep = profile["per_depth"][-1]
+    shares = deep["member_shares"]
+    counters = deep["counters"]
+    e04 = counters["e04_derived_reads"]
+    parts = [
+        "FACT: the {}y profiled wall decomposes into ".format(deep["years"])
+        + " + ".join(
+            f"{name} {share:.1%}"
+            for name, share in sorted(
+                shares.items(), key=lambda kv: -kv[1]
+            )
+        )
+        + " (rest included in the list; shares only, never wall).",
+        "MEASURED: E03 {} rule-parses/beat; E04 {} greedy derived-read "
+        "calls/beat vs {} gated entries (the door's lazy reads: {}); "
+        "beats/event {}.".format(
+            counters["e03_parses_per_beat"],
+            e04["clock_calls_per_beat"],
+            profile["e04_gated_entries"]["total"],
+            e04["door_calls_total"],
+            deep["beats_per_event"],
+        ),
+    ]
+    growth = profile.get("growth")
+    if growth:
+        hottest = sorted(
+            growth["per_call_ratios"].items(),
+            key=lambda kv: -kv[1],
+        )[:3]
+        parts.append(
+            "GROWTH {}y->{}y: ".format(
+                growth["from_years"], growth["to_years"],
+            )
+            + ", ".join(f"{name} per-call x{ratio}" for name, ratio in hottest)
+            + " (both depths equally instrumented — the ratio is the "
+            "super-linearity datum)."
+        )
+    canon = profile.get("canon_check", {})
+    if canon.get("checked"):
+        parts.append(
+            "CANON-NEUTRALITY {}: the profiled bytes {} the unprofiled "
+            "run's at depth(s) {}.".format(
+                "HELD" if canon["byte_identical"] else "BROKEN",
+                "equal" if canon["byte_identical"] else "DIVERGE from",
+                [row["years"] for row in canon["depths"]],
+            ),
+        )
+    parts.append(
+        "DISPOSITION: the iter-327 in-session decomposition made "
+        "reproducible; no promotion claim rides the record (the "
+        "implementation rows stay behind their gates)."
+    )
+    if canon.get("checked") and not canon["byte_identical"]:
+        parts.append("T1-CLASS BREACH — the instrument is RED.")
+    return " ".join(parts)
+
+
 def _render_summary(record: dict[str, Any]) -> str:
     """The stdout summary: the E0 table (one line per run) + the
     paired comparison lines (lab-3) + the disposition — the report
@@ -739,6 +1222,39 @@ def _render_summary(record: dict[str, Any]) -> str:
             f"{'HELD' if rc['byte_identical'] else 'BROKEN'} "
             f"({rc['first_bytes']} vs {rc['second_bytes']} bytes)"
         )
+    profile = record.get("profile")
+    if profile:
+        for depth_row in profile["per_depth"]:
+            shares = depth_row["member_shares"]
+            counters = depth_row["counters"]
+            lines.append(
+                f"  profile {profile['seed']:>4} {depth_row['years']:>4}y | "
+                f"occ_refold {shares['occ_refold']:.1%} · "
+                f"knowledge {shares['knowledge_rerank']:.1%} · "
+                f"rest {shares['rest']:.1%} | "
+                f"E03 {counters['e03_parses_per_beat']}/beat · "
+                f"E04 {counters['e04_derived_reads']['clock_calls_per_beat']}/beat | "
+                f"beats/event {depth_row['beats_per_event']}"
+            )
+        canon = profile.get("canon_check", {})
+        if canon.get("checked"):
+            lines.append(
+                f"  canon-neutrality: "
+                f"{'HELD' if canon['byte_identical'] else 'BROKEN'} "
+                f"(profiled == unprofiled bytes at "
+                f"{[d['years'] for d in canon['depths']]}y)"
+            )
+        growth = profile.get("growth")
+        if growth:
+            hottest = sorted(
+                growth["per_call_ratios"].items(), key=lambda kv: -kv[1],
+            )[:3]
+            lines.append(
+                f"  growth {growth['from_years']}y->{growth['to_years']}y: "
+                + ", ".join(
+                    f"{name} ×{ratio}" for name, ratio in hottest
+                )
+            )
     lines.append(f"disposition: {record['disposition']}")
     lines.append(f"record: {record['record_path']}")
     return "\n".join(lines)
@@ -777,6 +1293,14 @@ def main(argv: Sequence[str] | None = None) -> int:
                              "pack's macro cadence — the year-aligned form)")
     parser.add_argument("--verify-replay", action="store_true",
                         help="the F1/T1 double-run: same seed, byte-identity")
+    parser.add_argument("--profile-depths", default="",
+                        help="the lab-5 wall-decomposition arm (the scale-1 "
+                             "instrumentation row): comma-separated depths, "
+                             "e.g. '10,100' — the FIRST seed runs once per "
+                             "depth under cProfile; the record gains the "
+                             "member split, the E03/E04/beats-event counters, "
+                             "the growth ratios, and the canon-neutrality "
+                             "check (default: off)")
     parser.add_argument("--out", default=str(DEFAULT_OUT),
                         help="the output root (gitignored runtime space)")
     parser.add_argument("--tag", default=None,
@@ -910,6 +1434,28 @@ def main(argv: Sequence[str] | None = None) -> int:
         if first != second:
             record["disposition"] += " T1 BROKEN — the determinism law failed."
 
+    # The lab-5 wall-decomposition arm (law 8): the FIRST seed, one
+    # profiled pass per declared depth, the same (anchor, directors,
+    # arm, protocol, segment) as the main battery. The block carries
+    # its own falsifier — canon_check, the profiled-vs-unprofiled
+    # byte identity whenever a depth coincides with the battery.
+    profile_depths = sorted({
+        int(d) for d in args.profile_depths.split(",") if d.strip()
+    })
+    if args.profile_depths and (not profile_depths or min(profile_depths) < 1):
+        raise SystemExit(
+            f"--profile-depths must be comma-separated positive years, "
+            f"got {args.profile_depths!r}"
+        )
+    if profile_depths and seeds:
+        record["profile"] = _profile_block(
+            pack, schema, seeds[0], profile_depths, out_dir,
+            anchor=anchor, directors=directors, arm=args.arm,
+            protocol=protocols[0], segment_ticks=args.segment_ticks,
+            main_runs=runs,
+        )
+        record["disposition"] += " " + _profile_disposition(record["profile"])
+
     record_path = out_dir / f"lab_{tag}.json"
     record["record_path"] = str(record_path)
     record_path.write_text(
@@ -917,7 +1463,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         encoding="utf-8",
     )
     print(_render_summary(record))
-    return 0 if record.get("replay_check", {}).get("byte_identical", True) else 1
+    return 0 if (
+        record.get("replay_check", {}).get("byte_identical", True)
+        and record.get("profile", {}).get("canon_check", {}).get(
+            "byte_identical", True,
+        )
+    ) else 1
 
 
 if __name__ == "__main__":
