@@ -25,7 +25,18 @@ The runner's own ablation discovery is exercised at one measured
 clean block (on_action) and one measured refusal (weather, the
 cadence-armed family) — the per-pack re-measurement law.
 
-Horizons stay at 2y in-test (≈0.7 s/run); longer horizons are the
+lab-3 (the protocol arm, the owner's «продолжай lab3» call — the
+deferred-realize finding's answer): the segmented-wait A/B laws —
+the step-list form (whole = ONE wait, the committed bytes; segmented
+= N waits summing EXACTLY to the span), the segmented player-absent
++ T1 laws, THE MID-HORIZON LIFE DISCRIMINANT (whole: 100% of life at
+the horizon's final boundary — iter-324's 94% datum pinned at suite
+scale; segmented: every year carries its own life), and the paired
+record's REALIZED_DELTA surface (the 03 §8 mandatory field, with the
+measured verdict: the protocol is NOT measurement-neutral on this
+fixture).
+
+Horizons stay at 2y in-test (≈0.3 s/run); longer horizons are the
 runner's job (100y+), never the suite's (the corpus-price law).
 """
 
@@ -34,6 +45,7 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -59,6 +71,7 @@ from labrunner import (  # noqa: E402
     extract_metrics,
     run_world,
 )
+from labrunner import main as labrunner_main  # noqa: E402
 
 
 def _lab_run(tmp_path: Path, seed: int = 42) -> tuple[Path, dict[str, object]]:
@@ -280,3 +293,124 @@ def test_the_runner_cli_smoke(tmp_path: Path) -> None:
     assert "T1 byte-identity: HELD" in result.stdout
     record = json.loads((out / "lab_cli_smoke.json").read_text(encoding="utf-8"))
     assert record["runs"][0]["metrics"]["horizon"]["year_turns"] == 1
+
+
+# -- lab-3: the protocol arm (the segmented-wait A/B, the owner's call) --------
+
+FARSTEAD = load_pack(REPO / "content" / "farstead_pack")
+SQUARE = "loc_square"
+
+
+def _protocol_run(
+    tmp_path: Path, seed: int, protocol: str,
+) -> tuple[Path, dict[str, object]]:
+    """One farstead run under a declared wait protocol (2y, the square
+    anchor — the living-world arm; directors off, the E0 form)."""
+    log, _wall = run_world(
+        FARSTEAD, SCHEMA, seed, 2, tmp_path,
+        anchor=SQUARE, directors=False, arm="proto_test",
+        protocol=protocol,
+    )
+    metrics = extract_metrics(
+        FARSTEAD, SCHEMA, log, years=2, wall_s=0.0, directors=False,
+        protocol=protocol,
+    )
+    return log, metrics
+
+
+def test_the_step_list_law_per_protocol() -> None:
+    """The protocol's own form (law 7): whole = ONE wait spanning the
+    horizon (the committed lab-1 bytes — every prior record unchanged);
+    segmented = N equal waits summing EXACTLY to the same span, the
+    last absorbing the remainder; the boundary law: one segment IS the
+    whole (years=1 makes the two step lists equal)."""
+    whole = _anchor_steps(PACK, 2, PLAYER_START, protocol="whole")
+    assert whole == [{"intent": "wait", "ticks": 518400 * 2}]
+    seg = _anchor_steps(PACK, 2, PLAYER_START, protocol="segmented")
+    assert seg == [{"intent": "wait", "ticks": 518400}] * 2
+    # the custom segment: full segments + the remainder tail
+    custom = _anchor_steps(
+        PACK, 2, PLAYER_START, protocol="segmented", segment_ticks=700_000,
+    )
+    assert custom == [
+        {"intent": "wait", "ticks": 700_000},
+        {"intent": "wait", "ticks": 336_800},
+    ]
+    assert sum(s["ticks"] for s in custom) == 518_400 * 2
+    # the boundary law: at years=1 the protocols coincide
+    assert _anchor_steps(PACK, 1, PLAYER_START, protocol="segmented") == \
+        _anchor_steps(PACK, 1, PLAYER_START, protocol="whole")
+
+
+def test_segmented_is_player_absent_and_t1_stable(tmp_path: Path) -> None:
+    """The segmented protocol's player-absent law: the player authors
+    ONLY waits (one per segment, never another intent kind), and the
+    same seed re-run end-to-end is byte-identical (INV-2 held under the
+    protocol — the arm is step-list data, never an engine change)."""
+    first, metrics = _protocol_run(tmp_path, seed=42, protocol="segmented")
+    second, _ = _protocol_run(tmp_path, seed=42, protocol="segmented")
+    assert first.read_bytes() == second.read_bytes()
+    _, events = read_log(first, SCHEMA)
+    player = FARSTEAD.player_id()
+    player_events = [e for e in events if e.actor == player]
+    kinds = Counter(e.type for e in player_events)
+    # the anchor move + the segment waits, NOTHING else, ever
+    assert kinds == {"move": 1, "wait": 2}, kinds
+    assert metrics["horizon"]["player_waits"] == 2
+    assert metrics["horizon"]["year_turns"] == 2  # the horizon law holds
+
+
+def test_the_mid_horizon_life_law(tmp_path: Path) -> None:
+    """THE A/B PRIMARY DISCRIMINANT (lab-3, the deferred-realize
+    finding's answer): under the whole wait the world's autonomous life
+    realizes ENTIRELY at the horizon's final boundary (the 94% datum of
+    iter-324, now 100% at this scale — the mid-horizon log is the
+    scheduled machinery alone); under year-segmented waits EVERY year
+    carries its own life. Pinned on farstead 2y, the square anchor —
+    the numbers are the measured law, not a target."""
+    _, whole = _protocol_run(tmp_path, seed=7, protocol="whole")
+    _, seg = _protocol_run(tmp_path, seed=7, protocol="segmented")
+    whole_life = whole["life"]
+    seg_life = seg["life"]
+    # whole: the deferred realization — all life in the FINAL span
+    assert whole_life["by_year"] == [0, 0, whole_life["total"]]
+    assert whole_life["years_with_life"] == 1
+    assert whole_life["final_year_share"] == 1.0
+    # segmented: life in EVERY year span (the world lives mid-horizon)
+    assert seg_life["by_year"][0] == 0  # the initial span: machinery only
+    assert seg_life["by_year"][1] > 0
+    assert seg_life["by_year"][2] > 0
+    assert seg_life["years_with_life"] == 2
+    assert seg_life["final_year_share"] < 1.0
+
+
+def test_the_paired_record_carries_realized_deltas(tmp_path: Path) -> None:
+    """The 03 §8 REALIZED_DELTA law, executable: the paired record
+    holds per-seed whole-vs-segmented deltas INCLUDING the final
+    material state, and the verdict names the measured fact — for this
+    fixture the protocol is NOT measurement-neutral (the gates
+    re-validate per year against each year's own state, so WHAT
+    realizes differs, not only WHEN). The paired battery runs in-process
+    through the same door the CLI opens."""
+    out = tmp_path / "out"
+    rc = labrunner_main([
+        "--pack", str(REPO / "content" / "farstead_pack"),
+        "--years", "2", "--seeds", "42", "--anchor", SQUARE,
+        "--protocol", "paired", "--out", str(out), "--tag", "paired_test",
+    ])
+    assert rc == 0
+    record = json.loads(
+        (out / "lab_paired_test.json").read_text(encoding="utf-8")
+    )
+    assert record["protocol"] == "paired"
+    assert len(record["runs"]) == 2  # whole + segmented, the same seed
+    (row,) = record["comparison"]
+    assert row["seed"] == 42
+    assert row["whole"]["protocol"] == "whole"
+    assert row["segmented"]["protocol"] == "segmented"
+    delta = row["realized_delta"]
+    # the realized-delta surface: the final material state per holder
+    assert delta["final_material_delta"], "the material delta must be live"
+    assert delta["material_state_identical"] is False
+    assert delta["events_total"] > 0  # segmented realizes MORE life here
+    assert "REALIZED DELTAS LIVE" in record["disposition"]

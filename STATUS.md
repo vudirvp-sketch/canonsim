@@ -1,67 +1,61 @@
-Iteration: iter-324 (`lab2` — the owner's «продолжай lab2 и
-  так далее» call (the Atomic World Lab agent pack v1.5, its 04 §3
-  Stage B the first entry; lab-1's NEXT named this row; the fixture IS
-  the deliverable — a NEW content pack through the full admission
-  lint, never an engine change)): THE TIER A SYNTHETIC FIXTURE LANDED —
-  `content/farstead_pack/` (the 02 §12 smallest world: 1 settlement
-  (the green carries storage + exchange), 4 finite sources + regrowth
-  flows, 1 workshop + the finite 6-tool rack, 1 road, 12 adults in 3
-  households, 4 roles; the material surfaces over the LANDED
-  primitives only — the DIRECT-SETTLE HAULS (source→store in ONE
-  atomic event, the hauler the doer), the keeper's FLOAT-BASED meal
-  (serve the float, draw the refill — three independent verbs where a
-  chain would break), the on_action fatigue reply through the spoke
-  ring) + `tests/test_farstead_pack.py` the nine Tier A laws (the
-  admission lint, the 02 §12 shape, the player-absent + T1
-  byte-identity, THE LOOP CLOSES — every L1 edge live (haul → bench →
-  forge → draw → meal → reply), CONSERVATION EXACT per kind (init +
-  minted == final + consumed, 02 §5 executable), THE ANCHOR PAIR (the
-  LOD datum: the same seed/horizon, two anchors — the living world vs
-  the frozen diorama), the removable set re-measured per pack
-  (urgencies + on_action BOTH CLEAN — province's verdicts do not
-  transfer), THE DEFERRED-REALIZE LAW (under the one-wait protocol
-  every autonomous intent discharges at the wait's end)); THE E0
-  MEASURED (directors off): the anchor pair 10y × 4 seeds — square
-  933–971 events with the MATERIAL CYCLE SEED-INVARIANT (132 account
-  events every seed — the year clock's determinism) vs road 165–187
-  (the frozen diorama: the sources regow untended, the store
-  untouched, the road-boy's talk the world's one active voice); the
-  100y deep run square seed 7 — 8,663 events / 51.2 s: THE
-  DEFERRED-REALIZE LAW AT WHOLE-HORIZON SCALE (temp-1/D-236 measured:
-  94% of the century's autonomous life discharges in the final ~10
-  ticks — the mid-wait log is the scheduled machinery alone, 5
-  events/year; the herd tail ~5,400 door-rejects = p × beats × years,
-  the protocol's noise law); the per-block findings: the
-  one-goal-per-verb + one-target laws force THE HAUNT MODEL (no
-  commuter form exists — the direct settle is the honest round); the
-  CHAINED round cannot roll (the second verb's gate reads the
-  pre-first state — the float law); the rack empties at year ~6 (NO
-  conversion primitive — the anvil's inputs gate but never become the
-  tool; the Stage B gate's own measured input); the tools pile
-  unconsumed (no wear); the regrowth uncapped (no bounded-source
-  primitive) — the three Stage B contract rows now have DATA, not
-  prose.
+Iteration: iter-325 (`lab3` — the owner's «продолжай lab3 и/или
+  можешь прогнать полную батарею 100y×4 сида (~4 мин) для репортажа»
+  call (the Atomic World Lab agent pack v1.5, the pack's 04 §8 the
+  experiment-contract form; the row the iter-324 NEXT named — the A/B
+  deepening, the segmented-wait protocol the deferred-realize
+  finding's answer)): THE PROTOCOL ARM LANDED — `scripts/labrunner.py`
+  `--protocol whole|segmented|paired` + `--segment-ticks` (the new
+  law 7: the player authors NOTHING but null waits — segmentation
+  changes WHEN the world moves, never WHAT the player is; `whole` the
+  DEFAULT, byte-compatible with every prior record; the engine
+  untouched — the arm is step-list data) + the lab-3 metric block (the
+  MID-HORIZON LIFE profile — autonomous non-machinery events per
+  year-span, the deferred-realize discriminant; the FINAL MATERIAL
+  STATE per holder — the 03 §8 REALIZED_DELTA surface; player_waits)
+  + the paired record (per-seed whole-vs-segmented deltas) +
+  `tests/test_lab.py` the four lab-3 laws (the step-list law, the
+  segmented player-absent + T1 byte-identity, THE MID-HORIZON LIFE
+  DISCRIMINANT — whole `[0,0,total]` 100% final vs segmented every
+  year live; the paired REALIZED_DELTA executable); KI#112 opened AND
+  closed in-iteration (the log identity grew to the full (seed,
+  anchor, horizon, arm, protocol) tuple — the batteries themselves
+  found two prefix collisions: the road run overwrote the square
+  logs, then the 10y the 100y). THE BATTERY MEASURED (farstead,
+  directors off): the 100y paired × 4 seeds — whole 8,564–8,749
+  events with life 100% at the horizon's final boundary (the
+  deferred-realize law at century scale) vs segmented 12,212–14,038
+  (+42–61%) with life in 100/101 spans; THE REALIZED DELTAS LIVE ON
+  EVERY SEED — verb deltas SEED-INVARIANT (consumed +394, settled
+  +395), the material delta the two different worlds: the deferred
+  batch (~200 of each kind on the store, 28 meals, 3 eased) vs the
+  flow (the store near-empty, ~200 ore+wood on the rack, 422 meals,
+  267 eased, decay 5,417 vs 49); THE CONTROL FAMILY talk 3,209 = 3,209
+  (protocol-invariant — the divergence enters exactly where the gates
+  read mutable state); THE COST DATUM: segmented 2.5× FASTER (20–22 s
+  vs 51–53 s per century-seed — the whole protocol's "cheap" century
+  was an illusion of deferral); the road pair (life 1,072 = 1,072
+  invariant, the diorama's voice spreads while the material stays
+  frozen — the LOD gate WHO-rolls orthogonal to the protocol
+  WHEN-realizes); the day-wait granularity datum (720 player waits =
+  42% of a 2y log — the daily form's noise law).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2576 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R2 local-add — the
-  sixth content pack + two NEW test files, zero core/sim/render
-  change, INV-1..5 untouched, the LOG untouched, zero corpus price;
-  NO test deleted or weakened — 10 added) ·
+2580 passed + 1 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; R2 local-add + one R2
+  KI fix — the labrunner's protocol arm + four NEW tests + the
+  KI#112 filename law, zero core/sim/render change, INV-1..5
+  untouched, the LOG untouched, zero corpus price; NO test deleted
+  or weakened — 4 added) ·
 Date: 2026-10-04 ·
-Scope: content/farstead_pack/ (new — the four pack files),
-  tests/test_farstead_pack.py (new — the nine laws),
-  docs/iterations/iter-324-lab2-report.md (new — this row's RU
-  report) + tests/test_inv3_stoplist.py (the sixth list + the
-  self-check), tests/test_economy.py (the fourth armed consumer),
-  scripts/labrunner.py (the account-verb disposition line),
-  scripts/docguard.py (the TASKS allowlist rationale),
-  docs/AGENT_NAVIGATION.md (the sixth-pack row), docs/TASKS.md (the
-  lab-2 row + the ledger, iter-314 evicted), STATUS.md (this
-  header), worklog.md (the iter-324 entry, iter-314 evicted) — 15
-  changed/created (8 modified + 7 created).
+Scope: scripts/labrunner.py (the protocol arm + the lab-3 metrics +
+  the KI#112 log identity), tests/test_lab.py (the four lab-3 laws),
+  tests/test_farstead_pack.py (the KI#112 filename form),
+  docs/iterations/iter-325-lab3-report.md (new — this row's RU
+  report) + docs/TASKS.md (the lab-3 row + the ledger, iter-315
+  evicted), STATUS.md (this header), worklog.md (the iter-325 entry,
+  iter-315 evicted) — 7 changed/created (6 modified + 1 created).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -119,7 +113,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Active KIs
 
-- (none — KI#111's §5 cleanup executed iter-322: closed iter-318, three iterations past, the mandatory AGENTS §5 form; the record lives in git + worklog iter-318)
+- (none open — KI#112 was opened AND closed inside iter-325: the labrunner's log filename collided on identity prefixes (the anchor pair batteries first, then the 10y/100y pair), each found by the batteries themselves; the fix — the full (seed, anchor, horizon, arm, protocol) tuple in the stem. The record: git + worklog iter-325)
 
 ## FAQ / Pitfalls
 
@@ -149,7 +143,18 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-322 DONE: acceptland (the owner's acceptance call).** P1–P7
+**iter-325 DONE: lab3 (the owner's «продолжай lab3 … полную
+  батарею 100y×4» call).** The protocol arm landed + the battery
+  measured: the segmented wait realizes the world's autonomous life
+  year by year (100/101 spans vs 100% at the final boundary), the
+  REALIZED DELTAS live on every seed (the verb deltas seed-invariant),
+  the material story the two worlds (the deferred batch vs the flow),
+  the talk control 3,209=3,209 (protocol-invariant), the cost datum
+  segmented 2.5× FASTER, the road pair's diorama invariant; KI#112
+  opened+closed (the log identity = the full run tuple). 2580+1 +
+  ruff + docguard + topology clean. The RU report:
+  docs/iterations/iter-325-lab3-report.md. The prior queue's
+  standing: P1–P7
   (speech-1, CONTRACTS §10) and A1–A7 (auth-1, §11) ACCEPTED AS
   LAW — the §10/§11 notes landed in the §6/§7 form; the
   implementation rows stay CLOSED («Строки имплементации пока не
@@ -164,7 +169,14 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   docguard + topology --check clean. The RU report:
   docs/iterations/iter-322-acceptland-report.md.
 Next: THE OWNER'S CALLS (nothing open on the agent side — every
-  remaining row owner-gated): (1) the implementation rows —
+  remaining row owner-gated): (0) the Lab queue after lab-3 — the E1
+  horizon row (the segmented 1,000y probe: the measured curve ~t^1.3
+  says minutes in-sandbox, the whole 1,000y stays the lab-1 ~90-min
+  datum; a station-side battery if the owner wants the whole arm at
+  1,000y), the Stage B contract rows (transformation/wear/bounded
+  sources — the measured falsifiers in hand), the scale-1 follow-up
+  (the wall-cost decomposition: WHY the deferred herd pays 2.5×);
+  (1) the implementation rows —
   sem-1/caus-1/replay-1/scale-1/speech-1/auth-1 each opens on the
   owner's separate call behind the runtime-promotion gate; (2) M2
   (the surface→canonical-ID normalisation A/B) the next

@@ -30,6 +30,19 @@ THE LAB LAWS (the pack's non-negotiables, made executable here):
    same seed + same declared environment -> the two log byte streams
    equal. The same-environment law only — cross-environment claims
    route to `scripts/semantic_diff.py`, never here (replay-1's fence).
+7. THE PROTOCOL ARM (lab-3, the owner's «продолжай lab3» call — the
+   deferred-realize finding's answer, iter-324's §E1 candidate): the
+   player-authored WAIT PROTOCOL is now a declared arm — `whole` (the
+   committed lab-1 law 2 form: ONE whole-horizon wait; the default,
+   byte-compatible with every prior record), `segmented` (N equal
+   waits summing EXACTLY to the horizon — the world realizes its
+   autonomous life year by year instead of at the horizon's final
+   tick), `paired` (both, the same seed set — the 03 §8 A/B battery
+   with REALIZED_DELTA per seed: event totals, the mid-horizon life
+   profile, account verbs, the FINAL material state, wall cost). The
+   player still authors NOTHING but null waits (never another intent
+   kind) — segmentation changes WHEN the world moves, never WHAT the
+   player is. The engine is untouched: the arm is step-list data.
 
 The ablation arm (`--arm minus:<block>`) materializes the pack minus
 one optional rules block under the gitignored output dir — the 68a law
@@ -56,6 +69,10 @@ Usage:
     python scripts/labrunner.py --years 10 --seeds 42,8 \
         --arm minus:on_action
     python scripts/labrunner.py --years 10 --seeds 42 --directors on
+    python scripts/labrunner.py --years 2 --seeds 7 --protocol paired \
+        --pack content/farstead_pack --anchor loc_square
+    python scripts/labrunner.py --years 100 --seeds 7 \
+        --protocol segmented --segment-ticks 518400
 
 Output: `output/lab_<tag>.json` + a stdout summary (the gitignored
 runtime artifact family — the harness is committed, the runs are
@@ -123,19 +140,47 @@ def _player_start(pack: Pack) -> str:
     return str(player["position"])
 
 
-def _anchor_steps(pack: Pack, years: int, anchor: str) -> list[dict[str, Any]]:
-    """The PLAYER-ABSENT step list (law 2): a declared anchor move ONLY
-    when the player does not already stand there (a rejected move is
-    harness noise, not a world fact), then ONE whole-horizon wait. The
-    crossings fire mid-wait (D-038's law); the player authors nothing
-    else, ever."""
+def _anchor_steps(
+    pack: Pack,
+    years: int,
+    anchor: str,
+    *,
+    protocol: str = "whole",
+    segment_ticks: int = 0,
+) -> list[dict[str, Any]]:
+    """The PLAYER-ABSENT step list (law 2 + law 7): a declared anchor
+    move ONLY when the player does not already stand there (a rejected
+    move is harness noise, not a world fact), then the wait protocol —
+    `whole`: ONE wait spanning the horizon (the committed lab-1 form);
+    `segmented`: N equal waits summing EXACTLY to the same span (the
+    last absorbs the remainder; `segment_ticks=0` = the pack's macro
+    cadence — the year-aligned form). The crossings fire mid-wait
+    (D-038's law) identically in both forms; the difference is WHERE
+    the beat-born and crossing-born autonomous intents land: the
+    entry tick they enqueue at is each wait's own completion, so
+    segmentation realizes the world's life year by year instead of at
+    the horizon's final tick (the deferred-realize law, made an arm)."""
     if pack.kind_of(anchor) != "location":
         known = [rec["id"] for rec in pack.entities["locations"]]
         raise SystemExit(f"anchor {anchor!r} is not a location; known: {known}")
     steps: list[dict[str, Any]] = []
     if anchor != _player_start(pack):
         steps.append({"intent": "move", "target": anchor})
-    steps.append({"intent": "wait", "ticks": _cadence(pack) * years})
+    span = _cadence(pack) * years
+    if protocol == "whole":
+        steps.append({"intent": "wait", "ticks": span})
+        return steps
+    if protocol != "segmented":
+        raise SystemExit(f"unknown protocol: {protocol!r}")
+    seg = segment_ticks or _cadence(pack)
+    if seg <= 0 or seg > span:
+        raise SystemExit(
+            f"segment {seg!r} out of range for the {span}-tick horizon"
+        )
+    whole_segments, remainder = divmod(span, seg)
+    steps += [{"intent": "wait", "ticks": seg}] * whole_segments
+    if remainder:
+        steps.append({"intent": "wait", "ticks": remainder})
     return steps
 
 
@@ -149,11 +194,16 @@ def run_world(
     anchor: str,
     directors: bool,
     arm: str,
+    protocol: str = "whole",
+    segment_ticks: int = 0,
 ) -> tuple[Path, float]:
     """One Lab run: the real Simulator, player-absent steps, the
     committed log under the gitignored output dir. Returns (log path,
-    wall seconds). The log file is per-(seed, arm) so a replication
-    never collides with a prior run's bytes.
+    wall seconds). The log file is per-(seed, anchor, horizon, arm,
+    protocol) so a replication never collides with a prior run's bytes
+    (KI#112, found twice in one battery session: the anchor pair
+    batteries collided first, then the 10y battery overwrote the 100y
+    logs — the run identity is the full tuple, never a prefix of it).
 
     A runtime refusal inside the arm (the substrate's own loud
     backstops — the cadence-armed families, the missing-block
@@ -164,7 +214,13 @@ def run_world(
     # a ':' from 'minus:<block>' is an INVALID path char there; the
     # arm's own name stays untouched in the record)
     arm_fs = arm.replace(":", "_").replace("/", "_")
-    log = out_dir / f"lab_{seed}_{arm_fs}.jsonl"
+    # the protocol's own log stem (whole keeps the committed lab-1 stem
+    # form), plus THE ANCHOR (KI#112: the log identity is per-(seed,
+    # anchor, arm, protocol) — the anchor pair batteries collided on
+    # one name and the road run silently overwrote the square arm's
+    # logs; a different anchor is a different world volume)
+    proto_fs = "" if protocol == "whole" else f"_{protocol}"
+    log = out_dir / f"lab_{seed}_{anchor}_{years}y_{arm_fs}{proto_fs}.jsonl"
     if log.exists():
         log.unlink()
     sim = Simulator(
@@ -174,7 +230,12 @@ def run_world(
     sim.open()
     try:
         t0 = time.perf_counter()
-        sim.run_steps(_anchor_steps(pack, years, anchor))
+        sim.run_steps(
+            _anchor_steps(
+                pack, years, anchor,
+                protocol=protocol, segment_ticks=segment_ticks,
+            )
+        )
         wall = time.perf_counter() - t0
     except Exception as exc:  # noqa: BLE001 -- the arm's honest verdict:
         # the block is not cleanly removable at this horizon; the
@@ -200,6 +261,14 @@ _MAINTENANCE_TYPES: Final = (
 )
 _ACCOUNT_PREFIX: Final = "account_"
 
+#: The SCHEDULED MACHINERY the mid-horizon life profile excludes (lab-3):
+#: the clock's own events plus the authored environmental mints — the
+#: world ticking is not the world LIVING. Everything else an autonomous
+#: actor emits (the hauls' settles, the meals' consumes, the talks, the
+#: door's refusals, the replies) is realized life, whatever family the
+#: mix map assigns it.
+_MACHINERY_TYPES: Final = _MAINTENANCE_TYPES + ("account_sourced",)
+
 
 def _family(event_type: str, outcome: Mapping[str, Any]) -> str:
     """The E0 event-mix family (the pack's 06 §11 interpretation rule:
@@ -223,17 +292,24 @@ def extract_metrics(
     years: int,
     wall_s: float,
     directors: bool,
+    protocol: str = "whole",
+    segment_ticks: int = 0,
 ) -> dict[str, Any]:
     """The MINIMAL observation profile (law 4) over one committed log:
     identity, horizon, event counts/mix, autonomous share, projection
-    size, cost. Derived read-side only — rebuilding the fold is the
-    check, never a second truth."""
+    size, cost — plus lab-3's protocol block: the player's own wait
+    count, the MID-HORIZON LIFE profile (autonomous non-machinery
+    events per year — the deferred-realize discriminant), and the FINAL
+    material state (per-holder account levels — the A/B battery's
+    REALIZED_DELTA surface, the pack's 03 §8 mandatory field). Derived
+    read-side only — rebuilding the fold is the check, never a second
+    truth."""
     header, events = read_log(log, schema)
     player = pack.player_id()
     projection = fold(events, initial_projection(pack.entities))
     by_type: Counter[str] = Counter(e.type for e in events)
-    # The player-authored law check: the anchor's own move + wait
-    # completion are the ONLY player-actor events allowed in E0.
+    # The player-authored law check: the anchor's own move + the
+    # protocol's waits are the ONLY player-actor events allowed in E0.
     player_events = [e for e in events if e.actor == player]
     actors = {e.actor for e in events}
     autonomous = sum(1 for e in events if e.actor != player)
@@ -241,6 +317,35 @@ def extract_metrics(
     for event in events:
         mix[_family(event.type, event.outcome)] += 1
     final_tick = events[-1].t if events else 0
+    # lab-3: the mid-horizon LIFE profile — autonomous events outside
+    # the scheduled machinery, bucketed per macro year (floor t//cadence,
+    # clamped to `years`; the list carries years+1 spans: 0..years-1 are
+    # the calendar years, span `years` is the horizon's final boundary —
+    # the last turn, whose drain under the whole protocol carries the
+    # ENTIRE deferred realization and under segmentation only the last
+    # year's own life; the contrast IS the measurement).
+    cadence = _cadence(pack)
+    life_by_year = [0] * (years + 1)
+    for event in events:
+        if (
+            event.actor != player
+            and event.type not in _MACHINERY_TYPES
+        ):
+            life_by_year[min(event.t // cadence, years)] += 1
+    life_total = sum(life_by_year)
+    # lab-3: the realized material state — every account.* prop in the
+    # final projection, per holder per kind (the conservation test's
+    # own read surface, quoted as the A/B delta instrument)
+    final_accounts: dict[str, dict[str, int]] = {}
+    for holder in sorted(projection):
+        props = projection[holder]
+        kinds = {
+            key[len("account."):]: int(value)
+            for key, value in sorted(props.items())
+            if key.startswith("account.")
+        }
+        if kinds:
+            final_accounts[holder] = kinds
     return {
         "identity": {
             "seed": int(header["seed"]),
@@ -250,11 +355,26 @@ def extract_metrics(
             "python": str(header["python"]),
             "directors": directors,
             "horizon_years": years,
+            "protocol": protocol,
+            "segment_ticks": (
+                segment_ticks or cadence if protocol == "segmented" else None
+            ),
         },
         "horizon": {
             "final_tick": final_tick,
             "years_requested": years,
             "year_turns": by_type.get("year_turns", 0),
+            "player_waits": sum(
+                1 for e in player_events if e.type == "wait"
+            ),
+        },
+        "life": {
+            "by_year": life_by_year,
+            "total": life_total,
+            "years_with_life": sum(1 for c in life_by_year if c),
+            "final_year_share": (
+                round(life_by_year[-1] / life_total, 3) if life_total else 0.0
+            ),
         },
         "counts": {
             "events_total": len(events),
@@ -276,6 +396,7 @@ def extract_metrics(
                 "account_consumed", "account_settled",
             ) if by_type[verb]
         },
+        "final_accounts": final_accounts,
         "state": {
             "projection_entities": len(projection),
             "declared_locations": len(pack.entities["locations"]),
@@ -423,21 +544,169 @@ def _variant_pack(
     )
 
 
+#: The lab-3 QUESTION (the protocol A/B battery — iter-324's §E1
+#: candidate, the deferred-realize finding's answer row): does the wait
+#: protocol change only WHEN the world's autonomous life realizes, or
+#: also WHAT realizes — and at what native cost?
+_LAB3_QUESTION: Final = (
+    "Protocol A/B (paired seeds): under the whole-horizon wait the "
+    "world's autonomous intents all land at the horizon's final tick "
+    "(the deferred-realize law, iter-324's 94% datum) and their gates "
+    "re-validate against the END state; under year-segmented waits the "
+    "same rolls realize year by year against each year's own state. "
+    "Does the segmentation move life into the horizon's middle, does "
+    "it change the realized material outcome (the 03 §8 REALIZED_DELTA "
+    "law), and what does it cost? (Assignment != realization; no "
+    "promotion claim rides a protocol record — the engine is untouched.)"
+)
+
+
+def _life_compact(metrics: dict[str, Any]) -> str:
+    """The one-line mid-horizon life profile (the deferred-realize
+    discriminant, quoted per run): how much autonomous life, how many
+    year-spans carried it (of the years+1 spans — the last span is the
+    horizon's final boundary), and what share landed in that final
+    span."""
+    life = metrics["life"]
+    spans = len(life["by_year"])
+    return (
+        f"life {life['total']} in {life['years_with_life']}/{spans} spans, "
+        f"{life['final_year_share']:.0%} final"
+    )
+
+
+def _paired_summary(metrics: dict[str, Any]) -> dict[str, Any]:
+    """The compact per-arm read the A/B comparison quotes (the full
+    metrics stay in each run's own record entry)."""
+    return {
+        "protocol": metrics["identity"]["protocol"],
+        "events_total": metrics["counts"]["events_total"],
+        "autonomous_events": metrics["counts"]["autonomous_events"],
+        "player_waits": metrics["horizon"]["player_waits"],
+        "life": {
+            "total": metrics["life"]["total"],
+            "years_with_life": metrics["life"]["years_with_life"],
+            "final_year_share": metrics["life"]["final_year_share"],
+        },
+        "account_verbs": dict(metrics["account_verbs"]),
+        "final_accounts": {
+            holder: dict(kinds)
+            for holder, kinds in metrics["final_accounts"].items()
+        },
+        "wall_seconds": metrics["cost"]["wall_seconds"],
+    }
+
+
+def _realized_delta(
+    whole: dict[str, Any], segmented: dict[str, Any],
+) -> dict[str, Any]:
+    """The 03 §8 REALIZED_DELTA instrument (mandatory for every A/B
+    record): the paired per-seed difference — event totals, the life
+    profile, the account verbs, and the FINAL MATERIAL STATE per holder
+    per kind (nonzero deltas only, the surface the verdict reads)."""
+    verb_delta = {
+        verb: segmented["account_verbs"].get(verb, 0)
+        - whole["account_verbs"].get(verb, 0)
+        for verb in sorted(
+            set(whole["account_verbs"]) | set(segmented["account_verbs"])
+        )
+        if segmented["account_verbs"].get(verb, 0)
+        != whole["account_verbs"].get(verb, 0)
+    }
+    material: dict[str, dict[str, int]] = {}
+    for holder in sorted(
+        set(whole["final_accounts"]) | set(segmented["final_accounts"])
+    ):
+        w = whole["final_accounts"].get(holder, {})
+        s = segmented["final_accounts"].get(holder, {})
+        for kind in sorted(set(w) | set(s)):
+            if s.get(kind, 0) != w.get(kind, 0):
+                material.setdefault(holder, {})[kind] = (
+                    s.get(kind, 0) - w.get(kind, 0)
+                )
+    return {
+        "events_total": (
+            segmented["events_total"] - whole["events_total"]
+        ),
+        "life_total": (
+            segmented["life"]["total"] - whole["life"]["total"]
+        ),
+        "life_years_with_life": (
+            segmented["life"]["years_with_life"]
+            - whole["life"]["years_with_life"]
+        ),
+        "account_verbs": verb_delta,
+        "final_material_delta": material,
+        "material_state_identical": not material,
+        "wall_seconds": (
+            round(segmented["wall_seconds"] - whole["wall_seconds"], 2)
+        ),
+    }
+
+
+def _protocol_disposition(comparison: list[dict[str, Any]]) -> str:
+    """The paired record's honest verdict (the pack's FACT/INFERENCE
+    discipline): per-seed whether the protocol moved life into the
+    horizon's middle, whether the realized material state changed, and
+    the one-line disposition — never a graded 'mostly working'."""
+    parts: list[str] = []
+    for row in comparison:
+        w, s, delta = row["whole"], row["segmented"], row["realized_delta"]
+        parts.append(
+            f"seed {row['seed']}: whole {w['events_total']} events "
+            f"({w['life']['years_with_life']}y live, "
+            f"{w['life']['final_year_share']:.0%} final) vs segmented "
+            f"{s['events_total']} events ({s['life']['years_with_life']}y live, "
+            f"{s['life']['final_year_share']:.0%} final); "
+            f"events delta {delta['events_total']:+d}; "
+            f"material "
+            f"{'IDENTICAL' if delta['material_state_identical'] else 'DELTA LIVE'}."
+        )
+    any_material = any(
+        not row["realized_delta"]["material_state_identical"]
+        for row in comparison
+    )
+    verdict = (
+        "REALIZED DELTAS LIVE — the protocol is not measurement-neutral: "
+        "segmentation changes WHAT the world realizes, not only WHEN "
+        "(the gates re-validate per year against each year's own state)."
+        if any_material
+        else "TIMING-ONLY — the realized material state is protocol-"
+        "invariant; segmentation moved life's clock, not its content."
+    )
+    parts.append(
+        "DISPOSITION: " + verdict
+        + " No promotion claim rides the record (the pack's 06 §15 gate; "
+        "the engine is untouched — the arm is step-list data)."
+    )
+    return " ".join(parts)
+
+
 def _render_summary(record: dict[str, Any]) -> str:
     """The stdout summary: the E0 table (one line per run) + the
-    disposition — the report format the agent reads first."""
+    paired comparison lines (lab-3) + the disposition — the report
+    format the agent reads first."""
     lines = [
-        f"Atomic World Lab — E0 baseline ({record['tag']})",
-        f"question: {_E0_QUESTION}",
+        f"Atomic World Lab — {record['tag']}",
+        f"question: {record.get('question', _E0_QUESTION)}",
         f"pack: {record['pack_dir']}",
     ]
     for run in record["runs"]:
         m = run["metrics"]
+        proto = m["identity"]["protocol"]
         lines.append(
-            f"  seed {m['identity']['seed']:>4} | "
+            f"  seed {m['identity']['seed']:>4} {proto:<10} | "
             f"{m['counts']['events_total']:>6} events | "
             f"{m['counts']['autonomous_share']:>6.1%} auto | "
-            f"mix {m['mix']} | {m['cost']['wall_seconds']}s"
+            f"{_life_compact(m)} | {m['cost']['wall_seconds']}s"
+        )
+    for row in record.get("comparison", []):
+        delta = row["realized_delta"]
+        lines.append(
+            f"  A/B seed {row['seed']:>4}: whole {row['whole']['events_total']}"
+            f" vs segmented {row['segmented']['events_total']} events "
+            f"({delta['events_total']:+d}) | "
+            f"material {'IDENTICAL' if delta['material_state_identical'] else 'DELTA LIVE'}"
         )
     if record.get("replay_check"):
         rc = record["replay_check"]
@@ -453,7 +722,8 @@ def _render_summary(record: dict[str, Any]) -> str:
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="The Atomic World Lab batch runner (Stage A, lab-1).",
+        description="The Atomic World Lab batch runner (Stage A, lab-1; "
+                    "the lab-3 protocol A/B arm).",
     )
     parser.add_argument("--pack", default=str(DEFAULT_PACK),
                         help="the pack directory (default: province_pack)")
@@ -471,20 +741,37 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--arm", default="baseline",
                         help="'baseline' or 'minus:<rules-block>' — the "
                              "ablation arm (one optional block dropped)")
+    parser.add_argument("--protocol", choices=("whole", "segmented", "paired"),
+                        default="whole",
+                        help="the player wait protocol (lab-3): 'whole' — "
+                             "ONE whole-horizon wait (the committed lab-1 "
+                             "law, the default); 'segmented' — N equal "
+                             "waits; 'paired' — both, the A/B battery with "
+                             "per-seed REALIZED_DELTA")
+    parser.add_argument("--segment-ticks", type=int, default=0,
+                        help="the segmented wait length (default: 0 = the "
+                             "pack's macro cadence — the year-aligned form)")
     parser.add_argument("--verify-replay", action="store_true",
                         help="the F1/T1 double-run: same seed, byte-identity")
     parser.add_argument("--out", default=str(DEFAULT_OUT),
                         help="the output root (gitignored runtime space)")
     parser.add_argument("--tag", default=None,
-                        help="the record tag (default: e0_<years>y)")
+                        help="the record tag (default: e0_<years>y, "
+                             "e0_<years>y_segmented, or ab_<years>y)")
     args = parser.parse_args(argv)
 
     pack_dir = Path(args.pack).resolve()
     out_dir = Path(args.out).resolve()
     seeds = [int(s) for s in args.seeds.split(",") if s.strip()]
     directors = args.directors == "on"
-    tag = args.tag or f"e0_{args.years}y"
     years = max(1, args.years)
+    protocols = ["whole", "segmented"] if args.protocol == "paired" \
+        else [args.protocol]
+    tag = args.tag or (
+        f"ab_{years}y" if args.protocol == "paired"
+        else f"e0_{years}y" if args.protocol == "whole"
+        else f"e0_{years}y_{args.protocol}"
+    )
 
     # The arm resolution: baseline uses the committed pack as-is; the
     # ablation arm materializes the variant once, then every seed runs
@@ -503,45 +790,95 @@ def main(argv: Sequence[str] | None = None) -> int:
     anchor = args.anchor or _player_start(pack)
 
     runs: list[dict[str, Any]] = []
+    metrics_by_protocol: dict[int, dict[str, dict[str, Any]]] = {}
     for seed in seeds:
-        log, wall = run_world(
-            pack, schema, seed, years, out_dir,
-            anchor=anchor, directors=directors, arm=args.arm,
-        )
-        metrics = extract_metrics(
-            pack, schema, log, years=years, wall_s=wall, directors=directors,
-        )
-        runs.append({
-            "seed": seed,
-            "arm": args.arm,
-            "anchor": anchor,
-            "log": str(log),
-            "metrics": metrics,
-        })
+        metrics_by_protocol[seed] = {}
+        for proto in protocols:
+            log, wall = run_world(
+                pack, schema, seed, years, out_dir,
+                anchor=anchor, directors=directors, arm=args.arm,
+                protocol=proto, segment_ticks=args.segment_ticks,
+            )
+            metrics = extract_metrics(
+                pack, schema, log, years=years, wall_s=wall,
+                directors=directors, protocol=proto,
+                segment_ticks=args.segment_ticks,
+            )
+            runs.append({
+                "seed": seed,
+                "arm": args.arm,
+                "anchor": anchor,
+                "protocol": proto,
+                "log": str(log),
+                "metrics": metrics,
+            })
+            metrics_by_protocol[seed][proto] = metrics
 
     record: dict[str, Any] = {
-        "question": _E0_QUESTION,
+        "question": (
+            _LAB3_QUESTION if args.protocol == "paired" else _E0_QUESTION
+        ),
         "tag": tag,
         "pack_dir": str(pack_dir),
         "arm": args.arm,
         "anchor": anchor,
+        "protocol": args.protocol,
+        "segment_ticks": (
+            args.segment_ticks or _cadence(pack)
+            if args.protocol != "whole" else None
+        ),
         "runs": runs,
-        "disposition": _disposition(runs[0]["metrics"]) if runs else "no runs",
     }
+
+    if args.protocol == "paired":
+        comparison = []
+        for seed in seeds:
+            whole_summary = _paired_summary(metrics_by_protocol[seed]["whole"])
+            segmented_summary = _paired_summary(
+                metrics_by_protocol[seed]["segmented"]
+            )
+            comparison.append({
+                "seed": seed,
+                "whole": whole_summary,
+                "segmented": segmented_summary,
+                "realized_delta": _realized_delta(
+                    whole_summary, segmented_summary,
+                ),
+            })
+        record["comparison"] = comparison
+        record["disposition"] = (
+            _protocol_disposition(comparison) if comparison else "no runs"
+        )
+    else:
+        record["disposition"] = (
+            _disposition(runs[0]["metrics"]) if runs else "no runs"
+        )
+        if args.protocol == "segmented" and runs:
+            record["disposition"] += (
+                f" PROTOCOL: segmented ({record['segment_ticks']}-tick "
+                f"waits, {runs[0]['metrics']['horizon']['player_waits']} "
+                f"player waits) — {_life_compact(runs[0]['metrics'])}."
+            )
 
     # The F1/T1 falsifier (law 6): one seed re-run end-to-end; the two
     # committed byte streams must be EQUAL (the same-environment law).
+    # The twin runs under the record's FIRST protocol — the paired
+    # battery's T1 rides the whole arm (its bytes are the committed
+    # form's), a segmented run's T1 rides the segmented arm itself.
     if args.verify_replay and seeds:
         probe_seed = seeds[0]
+        probe_proto = protocols[0]
         first = Path(runs[0]["log"]).read_bytes()
         log2, _ = run_world(
             pack, schema, probe_seed, years, out_dir,
             anchor=anchor, directors=directors, arm=f"{args.arm}_twin",
+            protocol=probe_proto, segment_ticks=args.segment_ticks,
         )
         second = log2.read_bytes()
         log2.unlink()
         record["replay_check"] = {
             "seed": probe_seed,
+            "protocol": probe_proto,
             "byte_identical": first == second,
             "first_bytes": len(first),
             "second_bytes": len(second),

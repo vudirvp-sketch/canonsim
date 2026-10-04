@@ -82,7 +82,14 @@ def _run(
         cmd += ["--anchor", anchor]
     proc = subprocess.run(cmd, capture_output=True, text=True, check=True)
     assert "T1 byte-identity: BROKEN" not in proc.stdout
-    log = out / f"lab_{seed}_{arm.replace(':', '_')}.jsonl"
+    # KI#112: the log identity is per-(seed, anchor, horizon, arm,
+    # protocol) — the full tuple joins the stem (two battery sessions
+    # collided on prefixes: the road pair first, then the 10y/100y
+    # pair); the default anchor is the pack's own player position
+    resolved_anchor = "loc_road" if anchor is None else anchor
+    log = out / (
+        f"lab_{seed}_{resolved_anchor}_{years}y_{arm.replace(':', '_')}.jsonl"
+    )
     _, events = read_log(log, SCHEMA)
     return log, events
 
