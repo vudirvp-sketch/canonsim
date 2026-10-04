@@ -36,6 +36,16 @@ record's REALIZED_DELTA surface (the 03 §8 mandatory field, with the
 measured verdict: the protocol is NOT measurement-neutral on this
 fixture).
 
+lab-4 (the E1 horizon row, the pack's 04 §12 horizon battery at
+kiloyear scale): the REPLAY-COST instrument laws — every metrics
+record carries the read-side cost split (read_log wall, fold wall,
+the read+fold pipeline's Python-allocation peak, an honest
+tracemalloc label — never the OS RSS), and the protocol arithmetic
+holds at 1,000y WITHOUT running it (the step-list is a pure function
+of (years, segment_ticks): the kiloyear wait list sums EXACTLY to
+the span, the whole form stays ONE wait — the committed bytes'
+arithmetic never drifts with horizon scale).
+
 Horizons stay at 2y in-test (≈0.3 s/run); longer horizons are the
 runner's job (100y+), never the suite's (the corpus-price law).
 """
@@ -414,3 +424,58 @@ def test_the_paired_record_carries_realized_deltas(tmp_path: Path) -> None:
     assert delta["material_state_identical"] is False
     assert delta["events_total"] > 0  # segmented realizes MORE life here
     assert "REALIZED DELTAS LIVE" in record["disposition"]
+
+
+def test_the_replay_cost_instrument_law(tmp_path: Path) -> None:
+    """lab-4 (the E1 horizon row, the pack's 04 §12 battery): every
+    metrics record carries the REPLAY-COST instrument — the read-side
+    cost split a resume/replay pays, measured on the committed log:
+    read_log's wall, the fold's wall, and the read+fold pipeline's
+    Python-allocation peak (tracemalloc's own accounting, honestly
+    labeled `replay_alloc_peak_mb` — the interpreter's allocations,
+    NEVER the OS RSS, portable across the owner's Windows station).
+    Non-negative, present on BOTH protocols, and the record stays
+    rebuildable (a non-empty log pays real read+fold time)."""
+    for protocol in ("whole", "segmented"):
+        _, metrics = _protocol_run(tmp_path, seed=7, protocol=protocol)
+        cost = metrics["cost"]
+        for key in ("read_seconds", "fold_seconds",
+                    "replay_alloc_peak_mb"):
+            assert key in cost, f"{key} missing under {protocol}"
+            assert isinstance(cost[key], (int, float))
+            assert cost[key] >= 0, (key, cost[key])
+        # a non-empty committed log pays real read+fold time — the
+        # instrument measures the pipeline, never a cached zero
+        assert metrics["counts"]["events_total"] > 0
+        assert cost["read_seconds"] + cost["fold_seconds"] > 0
+
+
+def test_the_kiloyear_step_list_arithmetic_law() -> None:
+    """lab-4 (the E1 horizon row): the protocol's arithmetic holds at
+    KILOYEAR scale without running it — the step list is a pure
+    function of (years, segment_ticks), so the 1,000y battery's own
+    form is pinned here at zero corpus price: year-segmentation yields
+    EXACTLY 1,000 waits of the macro cadence (the E1 battery's own
+    shape); a custom segment yields whole segments + the remainder
+    tail; every list sums EXACTLY to cadence x years (the horizon
+    law's arithmetic, scale-free); and the whole form stays ONE wait
+    at any horizon — the committed bytes' form never drifts with
+    scale."""
+    cadence = 518_400
+    span = cadence * 1000
+    # the E1 battery's own shape: the year-aligned kiloyear wait list
+    kiloyear = _anchor_steps(PACK, 1000, PLAYER_START,
+                             protocol="segmented")
+    assert kiloyear == [{"intent": "wait", "ticks": cadence}] * 1000
+    # the custom segment: whole segments + the remainder tail, the sum
+    # EXACTLY the span (no drift, no remainder lost at kiloyear scale)
+    custom = _anchor_steps(PACK, 1000, PLAYER_START,
+                           protocol="segmented", segment_ticks=700_001)
+    whole_segments, remainder = divmod(span, 700_001)
+    assert len(custom) == whole_segments + (1 if remainder else 0)
+    assert sum(s["ticks"] for s in custom) == span
+    # the committed whole form: ONE wait at kiloyear scale too
+    assert _anchor_steps(PACK, 1000, PLAYER_START,
+                         protocol="whole") == [
+        {"intent": "wait", "ticks": span}
+    ]

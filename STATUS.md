@@ -1,61 +1,61 @@
-Iteration: iter-325 (`lab3` — the owner's «продолжай lab3 и/или
-  можешь прогнать полную батарею 100y×4 сида (~4 мин) для репортажа»
-  call (the Atomic World Lab agent pack v1.5, the pack's 04 §8 the
-  experiment-contract form; the row the iter-324 NEXT named — the A/B
-  deepening, the segmented-wait protocol the deferred-realize
-  finding's answer)): THE PROTOCOL ARM LANDED — `scripts/labrunner.py`
-  `--protocol whole|segmented|paired` + `--segment-ticks` (the new
-  law 7: the player authors NOTHING but null waits — segmentation
-  changes WHEN the world moves, never WHAT the player is; `whole` the
-  DEFAULT, byte-compatible with every prior record; the engine
-  untouched — the arm is step-list data) + the lab-3 metric block (the
-  MID-HORIZON LIFE profile — autonomous non-machinery events per
-  year-span, the deferred-realize discriminant; the FINAL MATERIAL
-  STATE per holder — the 03 §8 REALIZED_DELTA surface; player_waits)
-  + the paired record (per-seed whole-vs-segmented deltas) +
-  `tests/test_lab.py` the four lab-3 laws (the step-list law, the
-  segmented player-absent + T1 byte-identity, THE MID-HORIZON LIFE
-  DISCRIMINANT — whole `[0,0,total]` 100% final vs segmented every
-  year live; the paired REALIZED_DELTA executable); KI#112 opened AND
-  closed in-iteration (the log identity grew to the full (seed,
-  anchor, horizon, arm, protocol) tuple — the batteries themselves
-  found two prefix collisions: the road run overwrote the square
-  logs, then the 10y the 100y). THE BATTERY MEASURED (farstead,
-  directors off): the 100y paired × 4 seeds — whole 8,564–8,749
-  events with life 100% at the horizon's final boundary (the
-  deferred-realize law at century scale) vs segmented 12,212–14,038
-  (+42–61%) with life in 100/101 spans; THE REALIZED DELTAS LIVE ON
-  EVERY SEED — verb deltas SEED-INVARIANT (consumed +394, settled
-  +395), the material delta the two different worlds: the deferred
-  batch (~200 of each kind on the store, 28 meals, 3 eased) vs the
-  flow (the store near-empty, ~200 ore+wood on the rack, 422 meals,
-  267 eased, decay 5,417 vs 49); THE CONTROL FAMILY talk 3,209 = 3,209
-  (protocol-invariant — the divergence enters exactly where the gates
-  read mutable state); THE COST DATUM: segmented 2.5× FASTER (20–22 s
-  vs 51–53 s per century-seed — the whole protocol's "cheap" century
-  was an illusion of deferral); the road pair (life 1,072 = 1,072
-  invariant, the diorama's voice spreads while the material stays
-  frozen — the LOD gate WHO-rolls orthogonal to the protocol
-  WHEN-realizes); the day-wait granularity datum (720 player waits =
-  42% of a 2y log — the daily form's noise law).
+Iteration: iter-326 (`lab4` — the owner's «продолжай» call
+  (the Atomic World Lab agent pack v1.5; the E1 horizon row the
+  iter-325 NEXT named — the kiloyear datum, the pack's 04 §12
+  horizon battery 100y → 1,000y → 10,000y)): THE E1 LADDER MEASURED
+  — `scripts/labrunner.py` the lab-4 REPLAY-COST instrument
+  (`read_seconds`/`fold_seconds`/`replay_alloc_peak_mb` — the
+  read-side cost split a resume/replay pays, the tracemalloc peak
+  honestly labeled as interpreter allocations, NEVER the OS RSS,
+  Windows-portable; `wall_seconds` and every prior field untouched,
+  the records backward-compatible) + `tests/test_lab.py` the two
+  lab-4 laws (the instrument law — every record carries the block on
+  both protocols, a non-empty log pays real read+fold time; THE
+  KILOYEAR ARITHMETIC law — the step-list pure at 1,000y: exactly
+  1,000 cadence waits, custom segments sum EXACTLY to the span,
+  whole stays ONE wait at any horizon, zero corpus price) + THE
+  SEGMENTED LADDER 2y→650y (farstead, seed 7, square, eight rungs;
+  650y = 81,823 events / 465.22 s — the deepest rung the sandbox's
+  600-s tool-call window holds, the window itself measured honestly:
+  background processes do not survive the call boundary) + THE
+  STATION HORIZON PROBE v1 (outside the repo per Rule 9 — the
+  session's offload rule: the 1,000y PAIRED battery rides the
+  owner's hardware, every stage a checkpoint, a timeout is itself a
+  datum, self-checked end-to-end in-sandbox). THE E1 FINDINGS: the
+  wall curve STEEPENS monotonically (local exponents 1.00→1.81 — the
+  iter-325 t^1.3 forecast REFUTED at depth: 1,000y ≈ 930–1100 s on
+  the sandbox CPU, 16–18 min, never "minutes"; events stay LINEAR
+  122–132/year — the super-linearity is the per-EVENT cost growth,
+  never the count); THE FLAT-LIFE LAW (life ~71–72/year from 10y to
+  650y, 650/651 spans live — a 325× horizon range with zero life
+  trend: no collapse, no explosion, the deferred-realize law's
+  kiloyear answer); THE LINEAR VERB LAWS (sourced 4.00/year EXACT,
+  consumed 4.03, settled 8.03 — iter-325's seed-invariance now
+  measured across scale to 6.5 centuries); THE CONSTANT-STATE LAW
+  (projection_entities = 25 at 100/500/650y — the state NEVER grows
+  with the horizon, only the LOG does; the accounts pile linearly
+  ~26.3 units/year, water 1,060→6,560 — the Stage B bounded-source
+  falsifier at 6.5-century scale; the super-linear wall at CONSTANT
+  state = the scale-1 decomposition's named gap, never guessed);
+  THE REPLAY-COST DATUM (read-bound: 0.62 s/MB flat, the fold
+  near-free 0.055 s at 81,823 events, the alloc peak 3.34× the log —
+  a resume pays O(log bytes), the state never participates in the
+  price).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2580 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R2 local-add + one R2
-  KI fix — the labrunner's protocol arm + four NEW tests + the
-  KI#112 filename law, zero core/sim/render change, INV-1..5
-  untouched, the LOG untouched, zero corpus price; NO test deleted
-  or weakened — 4 added) ·
+2582 passed + 1 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; R2 local-add — the
+  labrunner's replay-cost instrument + two NEW tests, zero
+  core/sim/render change, INV-1..5 untouched, the LOG untouched,
+  zero corpus price; NO test deleted or weakened — 2 added) ·
 Date: 2026-10-04 ·
-Scope: scripts/labrunner.py (the protocol arm + the lab-3 metrics +
-  the KI#112 log identity), tests/test_lab.py (the four lab-3 laws),
-  tests/test_farstead_pack.py (the KI#112 filename form),
-  docs/iterations/iter-325-lab3-report.md (new — this row's RU
-  report) + docs/TASKS.md (the lab-3 row + the ledger, iter-315
-  evicted), STATUS.md (this header), worklog.md (the iter-325 entry,
-  iter-315 evicted) — 7 changed/created (6 modified + 1 created).
+Scope: scripts/labrunner.py (the lab-4 replay-cost instrument),
+  tests/test_lab.py (the two lab-4 laws),
+  docs/iterations/iter-326-lab4-report.md (new — this row's RU
+  report) + docs/TASKS.md (the lab-4 row + the ledger, iter-316
+  evicted), STATUS.md (this header), worklog.md (the iter-326 entry,
+  iter-316 evicted) — 6 changed/created (5 modified + 1 created).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -143,17 +143,22 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-325 DONE: lab3 (the owner's «продолжай lab3 … полную
-  батарею 100y×4» call).** The protocol arm landed + the battery
-  measured: the segmented wait realizes the world's autonomous life
-  year by year (100/101 spans vs 100% at the final boundary), the
-  REALIZED DELTAS live on every seed (the verb deltas seed-invariant),
-  the material story the two worlds (the deferred batch vs the flow),
-  the talk control 3,209=3,209 (protocol-invariant), the cost datum
-  segmented 2.5× FASTER, the road pair's diorama invariant; KI#112
-  opened+closed (the log identity = the full run tuple). 2580+1 +
-  ruff + docguard + topology clean. The RU report:
-  docs/iterations/iter-325-lab3-report.md. The prior queue's
+**iter-326 DONE: lab4 (the owner's «продолжай» call — the E1 horizon
+  row).** The replay-cost instrument landed + the segmented ladder
+  measured 2y→650y: the wall curve steepens monotonically (local
+  exponents 1.00→1.81, the t^1.3 forecast refuted — 1,000y ≈ 930–1100
+  s on the sandbox CPU), the FLAT-LIFE LAW (life ~71–72/year across a
+  325× horizon range, 650/651 spans live), the LINEAR VERB LAWS
+  (sourced 4.00/year exact), the CONSTANT-STATE LAW (projection 25
+  entities at every depth — only the log grows; the accounts pile
+  linearly, the Stage B bounded-source falsifier at 6.5-century
+  scale), the REPLAY-COST DATUM (read-bound 0.62 s/MB, the fold
+  near-free, the alloc peak 3.34× the log); the station horizon probe
+  v1 built + self-checked (the 1,000y PAIRED battery — whole +
+  segmented + the kiloyear REALIZED_DELTA — rides the owner's
+  hardware, the session's offload rule). 2582+1 + ruff + docguard +
+  topology clean. The RU report:
+  docs/iterations/iter-326-lab4-report.md. The prior queue's
   standing: P1–P7
   (speech-1, CONTRACTS §10) and A1–A7 (auth-1, §11) ACCEPTED AS
   LAW — the §10/§11 notes landed in the §6/§7 form; the
@@ -169,13 +174,16 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   docguard + topology --check clean. The RU report:
   docs/iterations/iter-322-acceptland-report.md.
 Next: THE OWNER'S CALLS (nothing open on the agent side — every
-  remaining row owner-gated): (0) the Lab queue after lab-3 — the E1
-  horizon row (the segmented 1,000y probe: the measured curve ~t^1.3
-  says minutes in-sandbox, the whole 1,000y stays the lab-1 ~90-min
-  datum; a station-side battery if the owner wants the whole arm at
-  1,000y), the Stage B contract rows (transformation/wear/bounded
-  sources — the measured falsifiers in hand), the scale-1 follow-up
-  (the wall-cost decomposition: WHY the deferred herd pays 2.5×);
+  remaining row owner-gated): (0) THE STATION RUN FIRST — the owner
+  runs canonsim_station_horizon_probe_v1.zip (preflight → sanity
+  2y+T1 → control 100y paired → MAIN 1,000y paired; ~1.5–2.5 h; the
+  zip comes back for the agent's kiloyear analysis: the whole arm's
+  first deep datum + the kiloyear REALIZED_DELTA + the cross-hardware
+  wall), then the Lab queue's remaining rows: the Stage B contract
+  rows (transformation/wear/bounded sources — the measured
+  falsifiers in hand), the scale-1 follow-up (the wall-cost
+  decomposition: WHY the per-event cost grows at constant state — now
+  a SHARPER named gap than the 2.5× herd question);
   (1) the implementation rows —
   sem-1/caus-1/replay-1/scale-1/speech-1/auth-1 each opens on the
   owner's separate call behind the runtime-promotion gate; (2) M2

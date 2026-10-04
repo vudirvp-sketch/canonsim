@@ -73,6 +73,8 @@ Usage:
         --pack content/farstead_pack --anchor loc_square
     python scripts/labrunner.py --years 100 --seeds 7 \
         --protocol segmented --segment-ticks 518400
+    python scripts/labrunner.py --years 1000 --seeds 7 \
+        --protocol segmented  # the E1 horizon ladder (lab-4)
 
 Output: `output/lab_<tag>.json` + a stdout summary (the gitignored
 runtime artifact family — the harness is committed, the runs are
@@ -87,6 +89,7 @@ import re
 import shutil
 import sys
 import time
+import tracemalloc
 from collections import Counter
 from collections.abc import Mapping, Sequence
 from pathlib import Path
@@ -301,12 +304,25 @@ def extract_metrics(
     count, the MID-HORIZON LIFE profile (autonomous non-machinery
     events per year — the deferred-realize discriminant), and the FINAL
     material state (per-holder account levels — the A/B battery's
-    REALIZED_DELTA surface, the pack's 03 §8 mandatory field). Derived
+    REALIZED_DELTA surface, the pack's 03 §8 mandatory field); plus
+    lab-4's REPLAY-COST instrument (the pack's 04 §12 horizon battery:
+    work, log size, REPLAY COST, state size, MEMORY — read_log's wall,
+    the fold's wall, and the Python-allocation peak of the read+fold
+    pipeline via tracemalloc, portable across the owner's Windows
+    station; tracemalloc measures the interpreter's own allocations,
+    never the OS RSS — labeled honestly, never conflated). Derived
     read-side only — rebuilding the fold is the check, never a second
     truth."""
+    tracemalloc.start()
+    t_read0 = time.perf_counter()
     header, events = read_log(log, schema)
+    read_s = time.perf_counter() - t_read0
+    t_fold0 = time.perf_counter()
     player = pack.player_id()
     projection = fold(events, initial_projection(pack.entities))
+    fold_s = time.perf_counter() - t_fold0
+    _, alloc_peak = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
     by_type: Counter[str] = Counter(e.type for e in events)
     # The player-authored law check: the anchor's own move + the
     # protocol's waits are the ONLY player-actor events allowed in E0.
@@ -407,6 +423,14 @@ def extract_metrics(
         "cost": {
             "wall_seconds": round(wall_s, 2),
             "log_bytes": log.stat().st_size,
+            # lab-4 (the E1 horizon row, the pack's 04 §12 battery):
+            # the replay-cost instrument — what a resume/replay pays to
+            # rebuild the world from the committed bytes, plus the
+            # read+fold pipeline's Python-allocation peak (never the OS
+            # RSS; a tracemalloc honest label)
+            "read_seconds": round(read_s, 3),
+            "fold_seconds": round(fold_s, 3),
+            "replay_alloc_peak_mb": round(alloc_peak / (1024 * 1024), 1),
         },
     }
 
