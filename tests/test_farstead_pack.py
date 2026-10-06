@@ -68,7 +68,7 @@ YEAR = 518_400
 
 def _run(
     tmp: Path, *, years: int, seed: int = 42, anchor: str | None = None,
-    arm: str = "baseline",
+    arm: str = "baseline", protocol: str = "whole",
 ) -> tuple[Path, list]:
     """One labrunner run over the fixture (the committed protocol; the
     logs land in the pytest tmp dir — zero repo-side runtime residue)."""
@@ -80,6 +80,8 @@ def _run(
     ]
     if anchor is not None:
         cmd += ["--anchor", anchor]
+    if protocol != "whole":
+        cmd += ["--protocol", protocol]
     proc = subprocess.run(cmd, capture_output=True, text=True, check=True)
     assert "T1 byte-identity: BROKEN" not in proc.stdout
     # KI#112: the log identity is per-(seed, anchor, horizon, arm,
@@ -87,8 +89,10 @@ def _run(
     # collided on prefixes: the road pair first, then the 10y/100y
     # pair); the default anchor is the pack's own player position
     resolved_anchor = "loc_road" if anchor is None else anchor
+    proto_stem = "" if protocol == "whole" else f"_{protocol}"
     log = out / (
-        f"lab_{seed}_{resolved_anchor}_{years}y_{arm.replace(':', '_')}.jsonl"
+        f"lab_{seed}_{resolved_anchor}_{years}y_"
+        f"{arm.replace(':', '_')}{proto_stem}.jsonl"
     )
     _, events = read_log(log, SCHEMA)
     return log, events
@@ -184,19 +188,30 @@ def test_the_material_loop_closes(tmp_path: Path) -> None:
     """Every L1 edge live over one short run (the 03 §14 shape: repeated
     cycle + persistent consequence + downstream consumer) — the first
     test-flip of the province canary: the ecology-carrying families are
-    no longer zero."""
+    no longer zero. stageb-1 (the arming's corpus price on this law):
+    the smith's forge joined the account family as account_converted —
+    the closure counts the WHOLE verb family (settled + converted +
+    consumed), never one type."""
     _, events = _run(tmp_path, years=4, anchor="loc_square")
     by_actor = Counter(
-        e.actor for e in events if e.type == "account_settled"
+        e.actor for e in events
+        if e.type in ("account_settled", "account_converted")
     )
     # the four source hauls (source -> store), the bench deliveries
-    # (store -> workshop), the forge (rack -> store), the ration draws
+    # (store -> workshop), the forge (the recipe: the workshop's
+    # ore+wood become tools), the ration draws
     for npc in ("npc_ashen_elder", "npc_ashen_son", "npc_bourne_elder",
                 "npc_bourne_mate", "npc_crome_mate", "npc_crome_elder",
                 "npc_ashen_mate"):
         assert by_actor[npc] >= 1, (npc, by_actor)
     meals = [e for e in events if e.type == "account_consumed"]
     assert len(meals) >= 2  # the sink (the meal + the pail)
+    # the wear rides the sink family: the bloom bench's uses commit
+    # per-use consumes naming the instrument
+    wears = [
+        e for e in meals if e.outcome.get("use") == "bench_the_bloom"
+    ]
+    assert wears  # the instrument turnover live on the short run too
     replies = [e for e in events if e.type == "meal_eased"]
     assert replies and all(
         len(r.state_changes) >= 2 for r in replies
@@ -204,10 +219,16 @@ def test_the_material_loop_closes(tmp_path: Path) -> None:
 
 
 def test_material_conservation_holds(tmp_path: Path) -> None:
-    """02 §5 as an executable read: for every kind, initial + minted ==
-    final + consumed — the flows' environmental mints against the meals'
-    sink, the stocks' remainder exact (no unexplained creation or
-    deletion anywhere in the ledger)."""
+    """02 §5 as an executable read: for every kind, initial + minted +
+    transformed_in == final + consumed + transformed_out — the flows'
+    environmental mints and the recipes' OUTPUT legs against the
+    meals' sink and the recipes' INPUT legs, the stocks' remainder
+    exact (no unexplained creation or deletion anywhere in the
+    ledger). stageb-1 (B2, CONTRACTS §12 — the law the contract
+    itself names this test as the extension point of): conservation
+    is PER RECIPE never per kind — the conversion's inputs leave
+    their kind's ledger and its outputs enter their own, so the
+    per-kind identity carries both legs explicitly."""
     pack = load_pack(PACK)
     _, events = _run(tmp_path, years=4, anchor="loc_square")
     initial = initial_projection(pack.entities)
@@ -228,7 +249,24 @@ def test_material_conservation_holds(tmp_path: Path) -> None:
             e.outcome["amount"] for e in events
             if e.type == "account_consumed" and e.outcome.get("kind") == kind
         )
-        assert total(initial, kind) + minted == total(final, kind) + consumed, kind
+        # stageb-1 B2: the conversion legs — the inputs leave the
+        # kind's ledger (a sink), the outputs enter it (a mint)
+        transformed_out = sum(
+            leg["amount"] for e in events
+            if e.type == "account_converted"
+            for leg in e.outcome.get("inputs", ())
+            if leg.get("kind") == kind
+        )
+        transformed_in = sum(
+            leg["amount"] for e in events
+            if e.type == "account_converted"
+            for leg in e.outcome.get("outputs", ())
+            if leg.get("kind") == kind
+        )
+        assert (
+            total(initial, kind) + minted + transformed_in
+            == total(final, kind) + consumed + transformed_out
+        ), kind
 
 
 # -- 6: the anchor pair (the LOD datum) ------------------------------------------
@@ -307,3 +345,110 @@ def test_the_deferred_realize_law(tmp_path: Path) -> None:
         "an autonomous material transit fired mid-wait — the deferred-"
         "realize law broke (a protocol change, never a pack fix)"
     )
+
+
+# -- 10: the Stage B edges armed (iter-333, CONTRACTS §12 B1..B8) ---------------
+
+
+def test_the_stageb_edges_are_armed_coherently() -> None:
+    """The arming's data shape: the recipe declared (the workshop's
+    ore+wood drain, the tool produced), the caps on every source (the
+    seeded basin = the declared capacity), the wear bound to the
+    bloom bench with its lint-required solvency gate."""
+    rules = json.loads((PACK / "rules.json").read_text(encoding="utf-8"))
+    eco = rules["economy"]
+    recipe = eco["recipes"][0]
+    assert recipe["id"] == "forge_a_tool"
+    assert recipe["inputs"] == [
+        {"holder": "loc_workshop", "kind": "ore", "amount": 2},
+        {"holder": "loc_workshop", "kind": "wood", "amount": 2},
+    ]
+    assert recipe["outputs"] == [
+        {"holder": "loc_workshop", "kind": "tool", "amount": 1},
+    ]
+    caps = {f["id"]: f.get("capacity") for f in eco["flows"]}
+    assert caps == {
+        "the_bank_regrows": 40,
+        "the_copse_regrows": 40,
+        "the_outcrop_weathers": 24,
+        "the_spring_runs": 60,
+    }
+    acts = {
+        a["intent"]: a
+        for a in json.loads((PACK / "actions.json").read_text())["actions"]
+    }
+    assert acts["forge_tool"]["account"] == {
+        "verb": "convert", "recipe": "forge_a_tool",
+    }
+    assert acts["bench_the_bloom"]["instrument"] == {
+        "holder": "loc_workshop", "kind": "tool", "amount": 1,
+    }
+    assert "instrument" not in acts["bench_the_timber"]
+
+
+def test_the_b6_battery_the_cycle_lives_and_binds(tmp_path: Path) -> None:
+    """THE B6 REALIZED_DELTA ORACLE at 10y (the acceptance MATERIALIZED,
+    never asserted): (a) THE DEAD PILE DIES — the workshop's terminal
+    ore+wood is the recipe's WORKING stock (bounded, not the conveyor's
+    dead terminal: the unarmed 10y left ~50 units piling toward the
+    kiloyear's 4,016); (b) THE LINEAR PILING BREAKS — every source
+    sits at-or-below its declared cap (the unarmed spring grew +10/year
+    past its basin); (c) THE INSTRUMENT TURNOVER — the tools cycle
+    produced → worn → reproduced at matched rates (the conversion and
+    the wear counts within one of each other per decade), the terminal
+    tool count the seed's own magnitude, never a pile and never a
+    collapse. The verb mix shifted measurably (the unarmed '~50'
+    beats/event era closed by iter-328; the converts + wears ride)."""
+    log, events = _run(
+        tmp_path, years=10, seed=7, anchor="loc_square", protocol="segmented",
+    )
+    types = Counter(e.type for e in events)
+    # (a) the transformation is LIVE: ~1 forge per year, each an
+    # atomic recipe event
+    assert 8 <= types["account_converted"] <= 12
+    # (c) the wear is LIVE and PAIRED: one bloom wear per forge
+    wears = sum(
+        1 for e in events
+        if e.type == "account_consumed"
+        and e.outcome.get("use") == "bench_the_bloom"
+    )
+    assert abs(wears - types["account_converted"]) <= 1
+    state = fold(events[1:], initial_projection(load_pack(PACK).entities))
+    # (a) the working stock BOUNDED: the unarmed pile grew past 24 ore
+    # by 10y heading to 2,004 at the kiloyear; the armed workshop
+    # holds the conveyor's buffer, both kinds under the unarmed
+    # trajectory's decade one
+    assert state["loc_workshop"]["account.ore"] <= 8
+    assert state["loc_workshop"]["account.wood"] <= 20
+    # (c) tools ALIVE at the horizon (the unarmed 8-at-the-square sat
+    # unconsumed a millennium; the armed rack cycles)
+    assert 3 <= state["loc_workshop"]["account.tool"] <= 9
+    # (b) every capped source at-or-below its basin
+    assert state["loc_spring"]["account.water"] <= 60
+    assert state["loc_bank"]["account.food"] <= 40
+    assert state["loc_copse"]["account.wood"] <= 40
+    assert state["loc_outcrop"]["account.ore"] <= 24
+
+
+def test_the_recipe_conservation_holds_per_kind(tmp_path: Path) -> None:
+    """B2's fold-checkable identity: for each kind, the recipe's
+    committed net equals the declared net summed over its events —
+    every conversion's legs conserve (ore −2, wood −2, tool +1 per
+    event), the aggregate on the fold."""
+    log, events = _run(
+        tmp_path, years=10, seed=7, anchor="loc_square", protocol="segmented",
+    )
+    # the DIRECT identity: each conversion event's own legs net to the
+    # declared recipe per kind (the world's net includes the benches'
+    # deliveries — the recipe's conservation is PER EVENT, fold-checkable
+    # on its own state_changes)
+    conversions = [e for e in events if e.type == "account_converted"]
+    assert conversions
+    for event in conversions:
+        per_kind: dict[str, int] = {}
+        for change in event.state_changes:
+            kind = change.prop.split(".", 1)[1]
+            per_kind[kind] = per_kind.get(kind, 0) + (
+                change.to_ - change.from_
+            )
+        assert per_kind == {"ore": -2, "wood": -2, "tool": 1}

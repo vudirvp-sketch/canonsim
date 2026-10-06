@@ -37,7 +37,8 @@
     "arrest_resolved": "{caught?{target} is caught — the pursuit holds.|{target} slips away.}",
     "year_turns": "The year turns to {year}.",
     "status_decayed": "{actor} drifts: {axes}.",
-    "rumor_told": "{accepted?{actor} tells {target}: {knows}.|{target} does not believe {actor}.}"
+    "rumor_told": "{accepted?{actor} tells {target}: {knows}.|{target} does not believe {actor}.}",
+    "account_converted": "{actor} works the bench at {target}: {input_0_amount} {input_0_kind} and {input_1_amount} {input_1_kind} become {output_0_amount} {output_0_kind}."
   },
   "account_kinds": {
     "food": "food",

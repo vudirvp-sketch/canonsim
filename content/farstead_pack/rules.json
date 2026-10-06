@@ -324,7 +324,8 @@
         "kind": "food",
         "amount": 8,
         "every": 1,
-        "to": "loc_bank"
+        "to": "loc_bank",
+        "capacity": 40
       },
       {
         "id": "the_copse_regrows",
@@ -332,7 +333,8 @@
         "kind": "wood",
         "amount": 6,
         "every": 1,
-        "to": "loc_copse"
+        "to": "loc_copse",
+        "capacity": 40
       },
       {
         "id": "the_outcrop_weathers",
@@ -340,7 +342,8 @@
         "kind": "ore",
         "amount": 4,
         "every": 1,
-        "to": "loc_outcrop"
+        "to": "loc_outcrop",
+        "capacity": 24
       },
       {
         "id": "the_spring_runs",
@@ -348,7 +351,8 @@
         "kind": "water",
         "amount": 12,
         "every": 1,
-        "to": "loc_spring"
+        "to": "loc_spring",
+        "capacity": 60
       }
     ],
     "prices": {
@@ -373,7 +377,31 @@
         "per_unit": -2
       }
     },
-    "notes": "THE SOURCES' REGENERATION (the L1 supply edge, 02 §9's preferred form): four environmental mints at the year clock, each into an EXISTING source's stock — never a bare spawn, always an environmental process changing a declared source's capacity. THE HONEST GAPS, declared not hidden: (1) NO CAPACITY — the flows mint unconditionally, an unharvested source accumulates without bound (the bounded-source primitive does not exist; the regrowth numbers are tuned small enough that the harvest pressure dominates at these cadences, and the accumulation curve itself is a measured read); (2) NO DRAIN ARM — the flows are pure mints, the depletion edge rides the extraction verbs' settle legs alone. The prices are derived reads (the scarcity dial, D-119's law: never stored, never a transaction — the future trade arm's standing surface)."
+    "notes": "THE SOURCES' REGENERATION (the L1 supply edge, 02 §9's preferred form): four environmental mints at the year clock, each into an EXISTING source's stock — never a bare spawn, always an environmental process changing a declared source's capacity. THE STAGE B EDGES ARMED (the material cycle contract, CONTRACTS §12 B1..B8): (1) THE RECIPE — the smith's forge consumes the workshop's ore and wood and produces tools (the transformation edge: the conveyor's terminal pile becomes the working stock, conservation per recipe per kind, the float law by construction — ONE atomic event); (2) THE WEAR — the bench verbs wear the workshop's tool stock per use (the instrument named in the event, break-at-zero the last use, below-zero the door's soft arm); (3) THE CAPACITY — every source's mint is bounded by its basin (the seeded level is the declared cap: an unharvested source fills to its basin and the mint falls silent — the every-miss form, tick+stock-derived, draw-free). The prices are derived reads (the scarcity dial, D-119's law: never stored, never a transaction — the future trade arm's standing surface).",
+    "recipes": [
+      {
+        "id": "forge_a_tool",
+        "inputs": [
+          {
+            "holder": "loc_workshop",
+            "kind": "ore",
+            "amount": 2
+          },
+          {
+            "holder": "loc_workshop",
+            "kind": "wood",
+            "amount": 2
+          }
+        ],
+        "outputs": [
+          {
+            "holder": "loc_workshop",
+            "kind": "tool",
+            "amount": 1
+          }
+        ]
+      }
+    ]
   },
   "director": {
     "stagnation": {
