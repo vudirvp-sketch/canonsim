@@ -960,6 +960,13 @@ R0–R1 law).
 > kiloyear battery; the falsifier block is the pointer form over those
 > records (D-024 — the iter-327 report owns the kiloyear verbatim +
 > the artifact md5 pins).
+> **Owner-ACCEPTED AS LAW 2026-10-04** (the iter-328 follow-up call:
+> B1–B8 binding for every future implementation; the implementation
+> row OPENED the same call — «§12 (B1..B8) = принимаю, можешь
+> начинать (stageb-1 и scale-1) и прочее» — together with scale-1's,
+> the first rows behind the runtime-promotion gate; the byte-identical
+> scale-1 rows land FIRST by the rng-1 order, then stageb-1's edges on
+> the faster wall).
 
 **Pinned decisions** (each grounded in standing code or law):
 

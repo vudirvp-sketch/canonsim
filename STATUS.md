@@ -1,44 +1,45 @@
-Iteration: iter-328 (`lab5` — the owner's «Дальше открываем то, что
-  ты предложил под (1): инструментальную строку scale-1 в labrunner»
-  call + the same message's C-13 decision «разрешаю, на будущее стоит
-  это заложить сразу» — the scale-1 instrumentation row the iter-327
-  NEXT named first): THE WALL-DECOMPOSITION INSTRUMENT LANDED — the
-  labrunner's `--profile-depths` arm (the member split by entry
-  cumtime over a documented map — occ_refold / knowledge_rerank /
-  beat_rolls / decay_walk / the derived folds BY CALLER (the clock's
-  greedy path vs the intent door's lazy reads) — + the ULTIMATE
-  pack's counters E03 rule-parses/beat, E04 derived-read calls/beat
-  vs the static gated-entry demand, beats/event; canon_check = the
-  instrument's own falsifier) + the three laws (canon-neutrality,
-  the accounting + P0.5-A RED baseline, growth + honest labels) +
-  THE DATUM MEASURED (farstead seed 7, segmented, 10y+100y): the
-  iter-327 in-session decomposition REPRODUCED as a committed record
-  — occ_refold 27.3% + knowledge_rerank 10.8% of the 100y profiled
-  wall (the two quadratic read-side members named), the growth
-  ratios fold ×9.67 / _novel_facts ×9.54 / _ranked ×10.4 (iter-327:
-  ×9.51/×9.17/×10.02 — within noise), CANON-NEUTRALITY HELD at 100y
-  (the profiled bytes byte-identical to the battery's), E03 2.0
-  parses/beat + E04 5.01 greedy calls/beat vs 0 gated entries (the
-  Q7a waste quantified), beats/event 8.16 at 100y (the pack's stale
-  "~50" replaced) + THE C-13 DECISION RECORDED (the rng-1 standing
-  row: the RNG epoch APPROVED IN PRINCIPLE — the end-state
-  time-skip/politics/city-builder horizon; the byte-identical
-  scale-1 rows land first, the epoch row opens on the owner's call).
+Iteration: iter-333 (`stageb1impl2` — the stageb-1-impl row's
+  second half, the farstead arming + the B6 battery, R2 pack-data;
+  the owner's «можешь начинать (stageb-1 и scale-1) и прочее»
+  continuation): **THE MATERIAL CYCLE COMPLETE** — the recipe
+  forge_a_tool (the workshop's ore 2 + wood 2 → tool 1), the
+  bloom-bench wear (tool 1 per use, the lint-required gate), the
+  four source caps (the seeded basins: bank 40 / copse 40 /
+  outcrop 24 / spring 60 — the first cut BELOW the seeds was
+  caught BY the cap floor itself, the loud refusal the law's own
+  proof). **THE B6 REALIZED_DELTA ORACLE GREEN at 10y+100y**: (a)
+  the dead pile DIES (the workshop static: ore 4 = the seed, wood
+  12 the conveyor's buffer — the unarmed trajectory headed to
+  2,004 at the kiloyear); (b) the linear piling BREAKS (the total
+  account mass CONSTANT vs the unarmed +26.3/year; the spring ≤ 60
+  vs 10,060); (c) the instrument turnover LIVE AND BALANCED (100
+  conversions = 100 bloom wears over the century, the tools static
+  at the seed 6). B7 held (the armed wall +0.7%, the growth
+  ratios ×1.17–1.5, canon-neutrality HELD); the conservation law
+  extended per B2's own letter (the contract named the test as the
+  extension point).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2585 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R2 local-add — the
-  runner + tests only, INV-1..5 untouched, the LOG untouched, zero
-  corpus price; NO test deleted or weakened — 3 added) ·
+2606 passed + 1 skipped, ruff clean, docguard clean, topology
+  --check clean (Python 3.12.14, the env pin; R2 pack-data — the
+  farstead fixture's own corpus price paid (the T1 laws re-pinned
+  to the armed shape), the OTHER packs byte-untouched; INV-1..5
+  untouched, the LOG untouched; NO test deleted or weakened — 3
+  added, 2 re-pinned with the arming's measured shape) ·
 Date: 2026-10-04 ·
-Scope: scripts/labrunner.py (the wall-decomposition instrument),
-  tests/test_lab.py (+3 laws), docs/TASKS.md (the lab-5 row + the
-  rng-1 row + the ledger, iter-318 evicted), STATUS.md (this
-  header), worklog.md (the iter-328 entry, iter-318 evicted),
-  docs/iterations/iter-328-lab5-report.md (new — this row's RU
-  report) — 6 changed/created (5 modified + 1 created).
+Scope: content/farstead_pack/rules.json (the recipe + the caps +
+  the notes), content/farstead_pack/actions.json (the convert
+  door + the wear binding + the gates),
+  content/farstead_pack/templates.json (the converted line),
+  tests/test_farstead_pack.py (+3 laws, the conservation
+  extension, the loop-closes re-pin, the _run protocol arm),
+  docs/TASKS.md (the row DONE + the ledger, iter-323 evicted),
+  STATUS.md (this header), worklog.md (the iter-333 entry,
+  iter-323 evicted), docs/iterations/iter-333-stageb1impl2-report.md
+  (new — this row's RU report) — 8 changed/created (4 pack/test +
+  4 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -96,7 +97,8 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Active KIs
 
-- (none open — KI#112 was opened AND closed inside iter-325: the labrunner's log filename collided on identity prefixes (the anchor pair batteries first, then the 10y/100y pair), each found by the batteries themselves; the fix — the full (seed, anchor, horizon, arm, protocol) tuple in the stem. The record: git + worklog iter-325)
+- KI#113 · the wall-split accounting law (test_lab) raised
+  AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
 
 ## FAQ / Pitfalls
 
@@ -126,43 +128,22 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-328 DONE: lab5 (the owner's «инструментальную строку scale-1 в
-  labrunner» call — the scale-1 instrumentation row; the same
-  message's C-13 decision recorded as the rng-1 standing row).** The
-  wall-decomposition instrument landed in the labrunner
-  (--profile-depths: the member split by entry cumtime + the derived
-  folds by caller + the ULTIMATE pack's counters E03/E04/beats-event
-  + canon_check, the instrument's own falsifier) + the three laws;
-  the datum measured (farstead 7, segmented, 10y+100y): the
-  iter-327 in-session decomposition REPRODUCED — occ_refold 27.3% +
-  knowledge_rerank 10.8% of the 100y profiled wall, fold ×9.67 /
-  _novel_facts ×9.54 / _ranked ×10.4 per-call growth (iter-327:
-  ×9.51/×9.17/×10.02), canon-neutrality HELD at 100y, E03 2.0/beat,
-  E04 5.01/beat vs 0 gated entries, beats/event 8.16 (the pack's
-  "~50" replaced). The C-13 decision: the RNG epoch APPROVED IN
-  PRINCIPLE (rng-1, PARKED — the byte-identical scale-1 rows first,
-  the epoch row on the owner's call). 2585+1 + ruff + docguard +
-  topology clean. The RU report: docs/iterations/iter-328-lab5-report.md.
-Next: THE OWNER'S CALLS (nothing open on the agent side — every
-  remaining row owner-gated): (0) THE OWNER'S ACCEPTANCE of §12
-  (B1..B8 as law or with edits — still pending from iter-327);
-  (1) THE LAB QUEUE'S REMAINING BATTERY ROWS per the pack's own
-  order — E02 in its full form (10× unrelated growth at long
-  horizon), the pack's remaining counters/matrix rows, E31
-  (cold-query block skipping) a named high-value candidate; (2) the
-  implementation rows — sem-1/caus-1/replay-1/scale-1/speech-1/
-  auth-1/stageb-1 each opens on the owner's separate call behind
-  the runtime-promotion gate (the scale-1 implementation's content
-  now carries the instrument's own RED baselines: P0.5-A the E04
-  greedy gap, P0.5-B the E03 re-parse, the wall members' shares);
-  (3) rng-1 (the RNG epoch) opens on the owner's call AFTER the
-  byte-identical rows; (4) M2 (the surface→canonical-ID normalisation
-  A/B) the next measurement battery when the owner calls it —
-  station-side, never a repo row; (5) the standing owner calls
-  preserved: the replay-UI NOT-EXPOSED row, the world track's rows
-  (W8's remaining), the frontend P1/P2/P3 continuation rows; (6) the
-  probe-side fixture refinement (scene-relative fixtures or a
-  distinct premise-drift status) when the owner calls it.
+**iter-333 DONE: stageb1impl2 (the farstead arming + the B6 battery
+  — the material cycle COMPLETE, the oracle green on all three
+  arms; both opened implementation rows LANDED: scale-1-impl
+  iter-330/331 + stageb-1-impl iter-332/333).**
+Next: THE OWNER'S CALLS (the session's opened rows discharged):
+  (1) P0.5-C — the candidates in the iter-330 report §E (the
+  hoist rode P0.5-A; the LOD-filter-outside-the-walk is P1-class;
+  the ~22% residual now measured near-linear); (2) rng-1 — the
+  RNG epoch row opens on the owner's call (the byte-identical
+  rows it waited for are LANDED); (3) the station cross-check —
+  the kiloyear battery on the owner's hardware with the armed
+  pack (the B6 oracle at 1,000y; the sandbox predicts ~4.5 min
+  segmented vs the unarmed 14.7); (4) the standing calls preserved
+  (the Lab queue's battery rows E02/E31, M2, the replay-UI row,
+  the world track's W8, the frontend P1/P2/P3 continuations).
+
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
    material outcomes invariant under slicing; the calendar turns
