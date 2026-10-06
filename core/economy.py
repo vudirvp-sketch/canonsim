@@ -58,7 +58,7 @@ price (the template lines for the three verb types).
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from typing import Any, Final
 
 from core.intent import pack_importance
@@ -69,8 +69,10 @@ __all__ = [
     "ACCOUNT_GLOSS_BLOCK",
     "ACCOUNT_PREFIX",
     "CONSUME_EVENT",
+    "CONVERT_EVENT",
     "ECONOMY_BLOCK",
     "LEG_KEYS",
+    "RECIPE_KEYS",
     "SETTLE_EVENT",
     "SOURCE_EVENT",
     "TRANSFER_EVENT",
@@ -79,11 +81,15 @@ __all__ = [
     "account_level",
     "account_prop",
     "consume_draft",
+    "convert_resolution",
     "flow_drafts",
     "is_account_prop",
     "price_of",
+    "recipe_of",
+    "source_caps",
     "source_draft",
     "transfer_draft",
+    "wear_draft",
 ]
 
 #: The rules.json block this module reads (`core/packlint/economy.py`
@@ -147,11 +153,26 @@ CONSUME_EVENT: Final = "account_consumed"
 #: never a per-case verb).
 SETTLE_EVENT: Final = "account_settled"
 
+#: The convert verb's event type (stageb-1, CONTRACTS §12 B2 — the
+#: material cycle's transformation edge): ONE atomic RECIPE event —
+#: inputs consumed, outputs produced, every leg's state changes in
+#: the SAME canonical event (the settle precedent's atomic multi-leg
+#: law; the float law respected by construction — no chained second
+#: verb ever reads pre-first state). Actor the INITIATOR, target the
+#: intent's own target, the outcome carrying the recipe id + the
+#: resolved input/output legs (the flow outcome's diagnosability
+#: form). Conservation is PER RECIPE, fold-checkable per kind. The
+#: type rides the pack-defined snake_case vocabulary — additive, no
+#: schema change (EVENT_SCHEMA §2's free-form type; the armed pack's
+#: templates carry the line, the lint's closure family).
+CONVERT_EVENT: Final = "account_converted"
+
 VERB_EVENT_TYPES: Final[Mapping[str, str]] = {
     "source": SOURCE_EVENT,
     "transfer": TRANSFER_EVENT,
     "consume": CONSUME_EVENT,
     "settle": SETTLE_EVENT,
+    "convert": CONVERT_EVENT,
 }
 
 #: The flow declaration's closed key set (the lint owns the load-time
@@ -167,6 +188,21 @@ FLOW_KEYS: Final = ("id", "verb", "kind", "amount", "every", "from", "to")
 #: positive integer. The lint (`core/packlint/actions.py`) owns the
 #: load-time contract; this mirror is the docs' single citation.
 LEG_KEYS: Final = ("from", "to", "kind", "amount")
+
+#: The recipe leg's closed key set (stageb-1, CONTRACTS §12 B2):
+#: `holder` — the noun `actor`/`target` or an explicit entity id (the
+#: settle leg's resolution family); `kind` an economy.accounts kind;
+#: `amount` a positive integer. An INPUT leg drains its holder's
+#: stock (the per-leg solvency gates the door — the haul's own
+#: form); an OUTPUT leg produces into its holder's. The lint
+#: (`core/packlint/economy.py`) owns the load-time contract; this
+#: mirror is the docs' single citation.
+RECIPE_KEYS: Final = ("holder", "kind", "amount")
+
+
+#: The recipe declaration's closed key set (stageb-1, B2): id,
+#: inputs, outputs — the flow declaration's own shape family.
+RECIPE_DECL_KEYS: Final = ("id", "inputs", "outputs")
 
 
 class EconomyError(ValueError):
@@ -383,6 +419,141 @@ def consume_draft(
     )
 
 
+def recipe_of(rules: Mapping[str, Any], recipe_id: str) -> Mapping[str, Any]:
+    """The declared recipe by id (stageb-1, B2) — LOUD when absent (the
+    pred-contract family: the lint pinned the id at load, this is the
+    runtime backstop for hand-built configs)."""
+    economy = rules.get(ECONOMY_BLOCK)
+    recipes = economy.get("recipes") if isinstance(economy, Mapping) else None
+    if isinstance(recipes, list):
+        for recipe in recipes:
+            if (
+                isinstance(recipe, Mapping)
+                and recipe.get("id") == recipe_id
+            ):
+                return recipe
+    raise EconomyError(
+        f"economy.recipes declares no recipe {recipe_id!r} — the convert "
+        "verb reads a declared recipe (the lint requires the binding "
+        "action to name one; this is the runtime backstop)"
+    )
+
+
+def convert_resolution(
+    rules: Mapping[str, Any],
+    projection: Mapping[str, Mapping[str, Any]],
+    t: int,
+    recipe_id: str,
+    holders: "Callable[[str], str]",
+) -> tuple[dict[str, Any], tuple[StateChange, ...]]:
+    """The convert verb's resolution half (stageb-1, B2): the recipe's
+    input legs drain, its output legs produce, ONE net state change
+    per touched (entity, kind) — the settle aggregation's own law
+    (the commit gate's progressive semantics never sees a chained
+    intermediate). `holders` resolves each leg's holder reference
+    (the settle `_leg_entity` family — nouns through the intent,
+    explicit ids as themselves). Returns (outcome, state_changes):
+    the outcome carrying the recipe id + the RESOLVED legs (the flow
+    outcome's diagnosability form), the changes first-touch in
+    construction order (INV-2). The per-input solvency gates the
+    DOOR (the lint-required account_at_least preconditions — the
+    haul's own form); the reads here are live at completion
+    (KI#13's law), an underflow refused LOUD at the commit floor
+    (D3 — the same net law as every other write path)."""
+    recipe = recipe_of(rules, recipe_id)
+    order: list[tuple[str, str]] = []  # first-touch — construction order
+    net: dict[tuple[str, str], int] = {}
+    resolved_inputs: list[dict[str, Any]] = []
+    resolved_outputs: list[dict[str, Any]] = []
+    for legs, sign, sink in (
+        (recipe.get("inputs", ()), -1, resolved_inputs),
+        (recipe.get("outputs", ()), +1, resolved_outputs),
+    ):
+        for leg in legs:
+            holder = holders(leg["holder"])
+            leg_kind = leg["kind"]
+            if (holder, leg_kind) not in net:
+                net[(holder, leg_kind)] = 0
+                order.append((holder, leg_kind))
+            net[(holder, leg_kind)] += sign * leg["amount"]
+            sink.append({
+                "holder": holder, "kind": leg_kind,
+                "amount": leg["amount"],
+            })
+    changes: list[StateChange] = []
+    for entity, leg_kind in order:
+        level = _level_or_loud(projection, entity, leg_kind)
+        changes.append(
+            StateChange(
+                entity=entity, prop=account_prop(leg_kind),
+                from_=level, to_=level + net[(entity, leg_kind)],
+            )
+        )
+    outcome: dict[str, Any] = {
+        "recipe": recipe_id,
+        "inputs": resolved_inputs,
+        "outputs": resolved_outputs,
+    }
+    return outcome, tuple(changes)
+
+
+def source_caps(
+    rules: Mapping[str, Any],
+) -> dict[tuple[str, str], int]:
+    """The declared source-flow capacities (stageb-1, B4): (to-entity,
+    kind) -> cap — the mint-side bound the `_commit` floor enforces
+    (a write above a declared cap refused LOUD, any verb — B1's
+    "never" arm; the flow's own mint stays compliant by the min()
+    arithmetic). The lint refuses two capped flows into one stock
+    (one cap owner per (entity, kind)); an unarmed economy answers
+    {} — no caps, no floor arm, the 68a pattern."""
+    economy = rules.get(ECONOMY_BLOCK)
+    if not isinstance(economy, Mapping):
+        return {}
+    caps: dict[tuple[str, str], int] = {}
+    for flow in economy.get("flows", ()):
+        if not isinstance(flow, Mapping) or flow.get("verb") != "source":
+            continue
+        capacity = flow.get("capacity")
+        if capacity is not None:
+            caps[(flow["to"], flow["kind"])] = int(capacity)
+    return caps
+
+
+def wear_draft(
+    rules: Mapping[str, Any],
+    projection: Mapping[str, Mapping[str, Any]],
+    t: int,
+    user: str,
+    holder: str,
+    kind: str,
+    amount: int,
+    used_action: str,
+) -> EventDraft:
+    """The use-hook's wear draft (stageb-1, B3): a per-USE integer
+    consume on the instrument's own stock, fired at the consuming
+    action's completion — the instrument NAMED in the event (target
+    = the stock's holder, outcome's `use` = the action that wore
+    it; the flagged_accessible referents' own diagnose form). Break
+    at zero: the 0-crossing is the LAST use (the stock reads broken
+    — fold-derivable, L3, never a second status axis); a use that
+    would drive the stock below zero is world-impossible, refused
+    SOFTLY at the door by the lint-required account_at_least
+    precondition (attempts are facts). NO wall-clock anywhere (the
+    I5 fence holds — decay stays NPC-status-only)."""
+    level = _level_or_loud(projection, holder, kind)
+    return _draft(
+        rules, t, CONSUME_EVENT, user, holder,
+        {"kind": kind, "amount": amount, "use": used_action},
+        (
+            StateChange(
+                entity=holder, prop=account_prop(kind),
+                from_=level, to_=level - amount,
+            ),
+        ),
+    )
+
+
 def flow_drafts(
     rules: Mapping[str, Any],
     projection: Mapping[str, Mapping[str, Any]],
@@ -413,10 +584,24 @@ def flow_drafts(
             continue  # not this flow's turn (the cadence arithmetic)
         verb = flow["verb"]
         if verb == "source":
+            # stageb-1, B4 — the bounded source: at full cap the flow
+            # is NOT DUE (zero events, the every-miss form — the
+            # noise law's precedent); the mint is min(declared,
+            # capacity - stock) — tick+stock-derived, draw-free
+            # (INV-2-clean; the stock is a fold of the log)
+            capacity = flow.get("capacity")
+            if capacity is not None:
+                stock = _level_or_loud(projection, flow["to"], flow["kind"])
+                room = int(capacity) - stock
+                if room <= 0:
+                    continue  # full — silence (the every-miss form)
+                amount = min(flow["amount"], room)
+            else:
+                amount = flow["amount"]
             drafts.append(
                 source_draft(
                     rules, projection, t, flow["to"], flow["kind"],
-                    flow["amount"], flow_id=flow["id"],
+                    amount, flow_id=flow["id"],
                 )
             )
         elif verb == "transfer":

@@ -28,7 +28,7 @@ from core.packlint.helpers import _SNAKE_CASE, PackError, _is_int, _require
 
 #: The economy block's closed key vocabulary (the engine-side mirror
 #: `core/economy.py` reads; this lint is the authority).
-ECONOMY_KEYS: Final = ("accounts", "flows", "prices", "notes")
+ECONOMY_KEYS: Final = ("accounts", "flows", "recipes", "prices", "notes")
 
 #: The flow declaration's closed key set, per verb: `id`, `verb`,
 #: `kind`, `amount`, the optional `every` cadence, and the endpoint
@@ -78,6 +78,7 @@ class EconomyLint:
         self._accounts_vocabulary(economy)
         self._gloss_table(vocabulary=frozenset(economy["accounts"]))
         self._flows(economy)
+        self._recipes(economy)
         self._flow_gloss_table(
             flow_ids=frozenset(
                 flow["id"] for flow in economy.get("flows", ())
@@ -207,6 +208,7 @@ class EconomyLint:
             else None
         )
         seen_ids: set[str] = set()
+        seen_caps: set[tuple[str, str]] = set()
         for flow in flows:
             _require(
                 isinstance(flow, Mapping),
@@ -221,7 +223,7 @@ class EconomyLint:
             )
             where_flow = f"{where}.{flow['id']!r}"
             keys = _VERB_KEYS[verb]
-            unknown = sorted(set(flow) - set(keys) - {"every"})
+            unknown = sorted(set(flow) - set(keys) - {"every", "capacity"})
             _require(
                 not unknown,
                 f"{where_flow}: unknown keys {unknown} (the closed "
@@ -255,6 +257,31 @@ class EconomyLint:
                     "macro-turn divisor — tick-derived arithmetic, never "
                     "entropy)",
                 )
+            # stageb-1, B4 — the bounded source: a SOURCE flow may
+            # declare `capacity` per its (to, kind) stock; the mint is
+            # min(declared, capacity - stock), silence at full. One cap
+            # per stock — a second capped flow into the same (to, kind)
+            # is an ambiguous bound, refused (one owner per fact).
+            if "capacity" in flow:
+                _require(
+                    verb == "source",
+                    f"{where_flow}: only a source flow declares capacity "
+                    "(the mint-side bound, CONTRACTS §12 B4 — transfers "
+                    "and consumes ride the underflow floor alone)",
+                )
+                _require(
+                    _is_int(flow.get("capacity")) and flow["capacity"] >= 1,
+                    f"{where_flow}: capacity must be an integer >= 1 (a "
+                    "zero cap is dead data — the vacuity law)",
+                )
+                stock = (flow["to"], flow["kind"])
+                _require(
+                    stock not in seen_caps,
+                    f"{where_flow}: another capped flow already bounds "
+                    f"{flow['to']!r}.{flow['kind']!r} — one capacity per "
+                    "stock (one owner per fact, the D-024 law)",
+                )
+                seen_caps.add(stock)
             for endpoint in ("from", "to"):
                 if endpoint in keys:
                     _require(
@@ -282,6 +309,85 @@ class EconomyLint:
                 "rules declare no time.macro block (the pairing law: a "
                 "pack declaring economy.flows declares the clock)",
             )
+
+    def _recipes(self, economy: Mapping[str, Any]) -> None:
+        """The recipe declarations (stageb-1, CONTRACTS §12 B2 — the
+        material cycle's transformation edge): `economy.recipes`, the
+        flow declaration's own shape family. Each recipe: the closed
+        key set id/inputs/outputs, a snake_case unique id, non-empty
+        input and output leg lists, each leg the closed holder/kind/
+        amount shape with the kind in the accounts vocabulary and the
+        amount a positive integer. The EXPLICIT-id holders' entity
+        cross-check rides the LATE phase (`_economy_cross` — the
+        flow-endpoint law's own shape); noun holders (actor/target)
+        resolve through the binding intent at runtime and ride the
+        action lint's per-leg solvency law."""
+        recipes = economy.get("recipes")
+        if recipes is None:
+            return  # no recipes — the unarmed law (the 68a pattern)
+        where = "economy.recipes"
+        _require(isinstance(recipes, list), f"{where} must be a list")
+        seen: set[str] = set()
+        for recipe in recipes:
+            _require(
+                isinstance(recipe, Mapping),
+                f"{where}: every entry must be an object (id | inputs | "
+                "outputs)",
+            )
+            where_recipe = f"{where}.{recipe.get('id')!r}"
+            unknown = sorted(set(recipe) - {"id", "inputs", "outputs"})
+            _require(
+                not unknown,
+                f"{where_recipe}: unknown keys {unknown} (the closed "
+                "vocabulary: id | inputs | outputs)",
+            )
+            _require(
+                isinstance(recipe.get("id"), str)
+                and bool(_SNAKE_CASE.match(recipe["id"])),
+                f"{where_recipe}: id must be a snake_case string",
+            )
+            _require(
+                recipe["id"] not in seen,
+                f"{where_recipe}: duplicate recipe id",
+            )
+            seen.add(recipe["id"])
+            for side in ("inputs", "outputs"):
+                legs = recipe.get(side)
+                _require(
+                    isinstance(legs, list) and bool(legs),
+                    f"{where_recipe}.{side} must be a non-empty list of "
+                    f"leg objects (a recipe with no {side} is dead data — "
+                    "the vacuity law)",
+                )
+                for index, leg in enumerate(legs):
+                    leg_where = f"{where_recipe}.{side}[{index}]"
+                    _require(
+                        isinstance(leg, Mapping),
+                        f"{leg_where} must be an object (holder | kind | "
+                        "amount)",
+                    )
+                    leg_unknown = sorted(set(leg) - {"holder", "kind", "amount"})
+                    _require(
+                        not leg_unknown,
+                        f"{leg_where}: unknown keys {leg_unknown} (the "
+                        "closed vocabulary: holder | kind | amount)",
+                    )
+                    holder = leg.get("holder")
+                    _require(
+                        isinstance(holder, str) and bool(holder.strip()),
+                        f"{leg_where}.holder must be a non-empty entity id "
+                        "or the noun actor/target",
+                    )
+                    _require(
+                        leg.get("kind") in economy["accounts"],
+                        f"{leg_where}.kind {leg.get('kind')!r} is not in "
+                        "the economy.accounts vocabulary",
+                    )
+                    _require(
+                        _is_int(leg.get("amount")) and leg["amount"] >= 1,
+                        f"{leg_where}.amount must be an integer >= 1 (a "
+                        "zero amount is dead data — the vacuity law)",
+                    )
 
     def _prices(self, economy: Mapping[str, Any]) -> None:
         """The price formulas (`economy.prices`): per account kind, the
@@ -368,3 +474,33 @@ class EconomyLint:
                     "pack bug, never a materialization (the pairing "
                     "law's entity half)",
                 )
+        # stageb-1, B2 — the recipe legs' entity half: every EXPLICIT
+        # holder must name a declared entity declaring the leg's kind
+        # (the flow-endpoint law's own shape; noun holders resolve
+        # through the binding intent and ride the action lint's
+        # per-leg solvency law instead)
+        for recipe in economy.get("recipes", ()):
+            if not isinstance(recipe, Mapping):
+                continue
+            for side in ("inputs", "outputs"):
+                for leg in recipe.get(side, ()):
+                    if not isinstance(leg, Mapping):
+                        continue
+                    holder = leg.get("holder")
+                    if holder in ("actor", "target") or not isinstance(holder, str):
+                        continue
+                    holds = declared.get(holder)
+                    _require(
+                        holds is not None,
+                        f"economy.recipes.{recipe.get('id')!r}.{side}: "
+                        f"holder {holder!r} is not a declared entity",
+                    )
+                    assert holds is not None  # the require above
+                    _require(
+                        leg.get("kind") in holds,
+                        f"economy.recipes.{recipe.get('id')!r}.{side}: "
+                        f"holder {holder!r} declares no account of kind "
+                        f"{leg.get('kind')!r} — a recipe into an "
+                        "undeclared stock is a pack bug, never a "
+                        "materialization (the pairing law's entity half)",
+                    )

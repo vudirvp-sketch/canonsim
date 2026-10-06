@@ -23,9 +23,11 @@ from typing import TYPE_CHECKING, Any, Callable, Final
 from core.detail import materialize_scene_detail, materialized_fields
 from core.economy import (
     CONSUME_EVENT,
+    CONVERT_EVENT,
     SETTLE_EVENT,
     SOURCE_EVENT,
     TRANSFER_EVENT,
+    convert_resolution,
 )
 from core.intent import (
     CheckResult,
@@ -767,6 +769,24 @@ def _account(
         # initiator is not implicitly any leg's owner (the §6.4 SALE
         # synthesis; the resolution half in _settle below)
         return _settle(pack, projection, intent, action, outcome, tick)
+    if verb == "convert":
+        # stageb-1, B2: the RECIPE event — inputs drain, outputs
+        # produce, ONE atomic canonical event (the float law by
+        # construction; the resolution half rides the economy
+        # substrate's own aggregation, the settle family's twin)
+        recipe_id = config["recipe"]
+        convert_outcome, changes = convert_resolution(
+            pack.rules, projection, tick, recipe_id,
+            holders=lambda ref: _leg_entity(ref, intent),
+        )
+        return Resolution(
+            event_type=CONVERT_EVENT,
+            outcome={**outcome, **convert_outcome},
+            knowledge=_knowledge(
+                action, "success", pack, projection, intent, tick
+            ),
+            state_changes=changes,
+        )
     # consume — the lint closes the verb vocabulary
     level = _stock_or_loud(projection, intent.actor, kind)
     return Resolution(

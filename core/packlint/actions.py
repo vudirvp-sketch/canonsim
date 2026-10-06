@@ -7,7 +7,7 @@ from __future__ import annotations
 from collections.abc import Mapping
 from typing import Any
 
-from core.economy import SETTLE_EVENT, VERB_EVENT_TYPES
+from core.economy import CONVERT_EVENT, SETTLE_EVENT, VERB_EVENT_TYPES
 from core.intent import (
     ACCOUNT_TEST,
     ECHO_TEST,
@@ -339,7 +339,7 @@ class ActionsLint:
             self._status_effects(intent, action)
             self._balance(intent, action)
             self._account_block(intent, action)
-
+            self._instrument_block(intent, action)
 
     def _balance(self, intent: str, action: Mapping[str, Any]) -> None:
         """The optional balance block (iter-45, social-1b): the pack
@@ -425,6 +425,9 @@ class ActionsLint:
         if verb == "settle":
             self._account_settle_block(intent, action, block, where)
             return
+        if verb == "convert":
+            self._account_convert_block(intent, action, block, where)
+            return
         unknown = sorted(set(block) - {"verb", "kind", "amount"})
         if unknown:
             raise PackError(
@@ -480,6 +483,198 @@ class ActionsLint:
                 f"amount (>= {block['amount']}) — a lower gate passes "
                 "insolvent attempts to the commit gate's loud refusal",
             )
+
+    def _account_convert_block(
+        self, intent: str, action: Mapping[str, Any],
+        block: Mapping[str, Any], where: str,
+    ) -> None:
+        """The convert form (stageb-1, CONTRACTS §12 B2 — the material
+        cycle's transformation edge): the block declares a RECIPE id
+        instead of inline legs — the recipe lives in
+        `economy.recipes` (the flow declaration's own shape family),
+        its INPUT legs drain their holders, its OUTPUT legs produce.
+        The lint's own law (the settle form's twin): the id must name
+        a DECLARED recipe, every input leg must carry its
+        account_at_least solvency gate in the action's requires (the
+        HOLDER form for explicit ids, the noun form for actor/target
+        refs — the KI#15 family, refuse at load what would crash at
+        the commit floor mid-run), and events.success must restate
+        the verb's engine constant (the naming-pass cross-check that
+        carries the template closure — the armed pack pays its own
+        corpus price)."""
+        unknown = sorted(set(block) - {"verb", "recipe"})
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the convert form's "
+                "closed vocabulary: verb | recipe — the legs live on "
+                "the declared recipe, never inline)"
+            )
+        economy = self._data["rules.json"].get("economy")
+        recipes = (
+            economy.get("recipes") if isinstance(economy, Mapping) else None
+        )
+        recipes = recipes if isinstance(recipes, list) else []
+        recipe_id = block.get("recipe")
+        recipe = next(
+            (
+                r for r in recipes
+                if isinstance(r, Mapping) and r.get("id") == recipe_id
+            ),
+            None,
+        )
+        _require(
+            recipe is not None,
+            f"{where}.recipe {recipe_id!r} is not a declared "
+            "economy.recipes id (the conversion binds a declared "
+            "recipe — the flow declaration's own shape family)",
+        )
+        assert recipe is not None  # the require above
+        _require(
+            action.get("events", {}).get("success") == CONVERT_EVENT,
+            f"{where}: events.success must restate the convert verb's "
+            f"engine constant {CONVERT_EVENT!r} (the emitted type is "
+            "the engine's, the naming pass; the restatement is the "
+            "cross-check and carries the template closure)",
+        )
+        for index, leg in enumerate(recipe.get("inputs", ())):
+            leg_where = f"economy.recipes.{recipe_id!r}.inputs[{index}]"
+            holder = leg["holder"]
+            noun = holder in ("actor", "target")
+            gate = next(
+                (
+                    cond for cond in action.get("requires", ())
+                    if isinstance(cond, Mapping)
+                    and cond.get("test") == ACCOUNT_TEST
+                    and cond.get("kind") == leg["kind"]
+                    and (
+                        cond.get("noun") == holder if noun
+                        else cond.get("holder") == holder
+                    )
+                ),
+                None,
+            )
+            _require(
+                gate is not None,
+                f"{where}: the input leg {leg_where} declares no "
+                f"account_at_least solvency gate for {holder!r} kind "
+                f"{leg['kind']!r} — an ungated drain would underflow "
+                "at the commit floor mid-run (author the "
+                "precondition: the door rejects insolvent attempts "
+                "softly, attempts are facts)",
+            )
+            assert gate is not None  # the require above
+            _require(
+                _is_int(gate.get("value")) and gate["value"] >= leg["amount"],
+                f"{where}: the input leg {leg_where}'s solvency gate "
+                f"value must cover the amount (>= {leg['amount']}) — a "
+                "lower gate passes insolvent attempts to the commit "
+                "floor's loud refusal",
+            )
+
+    def _instrument_block(
+        self, intent: str, action: Mapping[str, Any]
+    ) -> None:
+        """The optional instrument block (stageb-1, CONTRACTS §12 B3 —
+        the wear edge's pack half): the action declares the stock its
+        use wears — holder (the noun actor/target or a DECLARED
+        entity declaring the kind), kind (the economy vocabulary),
+        amount (a positive integer per use). The lint's own law (the
+        KI#15 family, both arms): the block REQUIRES its
+        account_at_least solvency gate in the action's requires with
+        value >= amount — break-at-zero is the LAST use (the
+        0-crossing commits), below-zero never reaches the hook (the
+        door refuses softly, attempts are facts). No block, no wear
+        — the unarmed law (the 68a pattern)."""
+        block = action.get("instrument")
+        if block is None:
+            return
+        where = f"action {intent!r} instrument"
+        _require(
+            isinstance(block, Mapping),
+            f"{where}: must be an object (holder | kind | amount)",
+        )
+        unknown = sorted(set(block) - {"holder", "kind", "amount"})
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the closed "
+                "vocabulary: holder | kind | amount)"
+            )
+        economy = self._data["rules.json"].get("economy")
+        vocabulary = (
+            economy.get("accounts") if isinstance(economy, Mapping) else None
+        )
+        _require(
+            isinstance(vocabulary, list) and block.get("kind") in vocabulary,
+            f"{where}.kind {block.get('kind')!r} is not in the "
+            "economy.accounts vocabulary (wear rides declared stocks "
+            "— the pairing law)",
+        )
+        _require(
+            _is_int(block.get("amount")) and block["amount"] >= 1,
+            f"{where}.amount must be an integer >= 1 (a zero wear is "
+            "dead data — the vacuity law)",
+        )
+        holder = block.get("holder")
+        _require(
+            isinstance(holder, str) and bool(holder.strip()),
+            f"{where}.holder must be a non-empty entity id or noun",
+        )
+        noun = holder in ("actor", "target")
+        if not noun:
+            entities = self._data["entities.json"]
+            record = next(
+                (
+                    rec
+                    for category in (
+                        "locations", "npcs", "ambient_entities",
+                        "items", "groups",
+                    )
+                    for rec in entities.get(category, ())
+                    if rec["id"] == holder
+                ),
+                None,
+            )
+            _require(
+                record is not None,
+                f"{where}.holder {holder!r} is not a declared entity",
+            )
+            assert record is not None  # the require above
+            accounts = record.get("accounts")
+            _require(
+                isinstance(accounts, Mapping) and block["kind"] in accounts,
+                f"{where}.holder {holder!r} declares no account of kind "
+                f"{block['kind']!r} — wear rides a declared stock (the "
+                "flow-endpoint law's own shape)",
+            )
+        gate = next(
+            (
+                cond for cond in action.get("requires", ())
+                if isinstance(cond, Mapping)
+                and cond.get("test") == ACCOUNT_TEST
+                and cond.get("kind") == block["kind"]
+                and (
+                    cond.get("noun") == holder if noun
+                    else cond.get("holder") == holder
+                )
+            ),
+            None,
+        )
+        _require(
+            gate is not None,
+            f"{where}: the wear declares no account_at_least solvency "
+            f"gate for {holder!r} kind {block['kind']!r} — without the "
+            "gate a use on an empty stock reaches the hook and "
+            "underflows at the commit floor mid-run (author the "
+            "precondition: break-at-zero is the LAST use, below-zero "
+            "dies softly at the door, attempts are facts)",
+        )
+        assert gate is not None  # the require above
+        _require(
+            _is_int(gate.get("value")) and gate["value"] >= block["amount"],
+            f"{where}: the solvency gate's value must cover the amount "
+            f"(>= {block['amount']}) — a lower gate passes an "
+            "under-wearing use to the commit floor's loud refusal",
+        )
 
     def _account_settle_block(
         self, intent: str, action: Mapping[str, Any],

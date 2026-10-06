@@ -291,6 +291,25 @@ def _event_context(
                     else:
                         value = _display_if_entity(pack, positions, value)
                     context[f"leg_{index}_{key}"] = value
+        # stageb-1, B2 (the recipe legs' read surface): the convert
+        # verb's outcome carries INPUT and OUTPUT leg lists — the
+        # same indexed-slot law as the settle legs above, one prefix
+        # per side (input_<i>_<key> / output_<i>_<key>), the kinds
+        # through the SAME rs-2 boundary, the entity refs
+        # fold-first. The raw lists never reach a slot.
+        for side in ("inputs", "outputs"):
+            side_legs = outcome.get(side)
+            if not isinstance(side_legs, list):
+                continue
+            for index, leg in enumerate(side_legs):
+                if not isinstance(leg, Mapping):
+                    continue
+                for key, value in leg.items():
+                    if key == "kind" and isinstance(value, str):
+                        value = gloss_account_kind(pack.templates, value)
+                    else:
+                        value = _display_if_entity(pack, positions, value)
+                    context[f"{side[:-1]}_{index}_{key}"] = value
     # rs-9 (iter-267, the runner-grudge discovery surface's rendering
     # half): the hold's CONTENT rides the KNOWS boundary — the secret
     # IS a knowledge token (the read-hinge mint), and rs-1's law is one
