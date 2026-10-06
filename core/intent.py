@@ -864,13 +864,31 @@ def occ_breaking_cause(
     intent: IntentData,
     initial: Projection,
     world: "WorldModel | None" = None,
+    *,
+    start_state: "Mapping[str, Mapping[str, Any]] | None" = None,
 ) -> str | None:
     """The event id whose application first broke a precondition after the
     intent was proposed; None when nothing broke it. One forward fold from
     the proposal point (test-path machinery reused for attribution only):
     `fold` is a strict left fold over `apply_event`, so folding the prefix
     once and then applying one event at a time visits exactly the states
-    the per-index refold used to rebuild — at O(events), not O(w·events)."""
+    the per-index refold used to rebuild — at O(events), not O(w·events).
+
+    `start_state` (scale-1-impl, P1a — the wall fix's first member):
+    the caller's ENQUEUE-TIME snapshot of the projection — by
+    construction exactly `fold(events[:based_on_event_seq], initial)`
+    (the live projection at the moment the intent's
+    `based_on_event_seq` was stamped, the T2 law's own equality), so
+    the walk applies only the WINDOW [seq, end) — the prefix refold
+    was the measured quadratic member (occ_refold, 27–29% of the
+    100y profiled wall, per-call ×9.5–9.7 growth, iter-327/328).
+    None (the default) keeps the fold-from-initial form — the resume
+    path and external callers stay exact (a snapshot whose seq is
+    NOT the stamping moment would SKIP the [seq, snapshot) events,
+    so the loop only ever passes one taken at the stamp itself).
+    The snapshot is copied here: the walk mutates its state, and a
+    public function never mutates a caller's structure (the fold
+    path's own discipline)."""
     action = pack.action(intent.kind)
     preconditions = requires_for(action, intent) if action else []
     # Window preconditions (the tick-windowed family: the leverage
@@ -884,7 +902,20 @@ def occ_breaking_cause(
     attributable = [
         cond for cond in preconditions if cond.get("test") not in WINDOWED_TESTS
     ]
-    state = fold(events[:based_on_event_seq], initial)
+    if not attributable:
+        # the walk's own vacuity: first_failing over an empty list is
+        # None at every step, so the full walk returns None — paying
+        # neither the prefix fold nor the snapshot copy for it is
+        # EXACT (the empty-snapshot intents' `_snapshot_for` already
+        # answers None on this same condition; the two agree by
+        # construction, never by restatement — both read this test)
+        return None
+    if start_state is not None:
+        state: Projection = {
+            entity: dict(props) for entity, props in start_state.items()
+        }
+    else:
+        state = fold(events[:based_on_event_seq], initial)
     for idx in range(based_on_event_seq, len(events)):
         apply_event(state, events[idx])
         if first_failing(

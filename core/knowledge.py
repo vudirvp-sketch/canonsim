@@ -42,7 +42,7 @@ Mechanics (every name and number that is not a mechanic lives in the pack):
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
@@ -87,7 +87,24 @@ class _Row:
 
 class KnowledgeView:
     """The derived per-knower memory index (L3). Rebuildable from any log;
-    the runtime updates it inside the commit door, one event at a time."""
+    the runtime updates it inside the commit door, one event at a time.
+
+    scale-1-impl P1b (the wall fix's second member): the ranked
+    iteration rides the RANK-BUCKET index (`_runs`) — per knower,
+    per importance rank, an ordered list of TIE-RUNS (maximal groups
+    of rows sharing one event tick) — so `_ranked` walks the exact
+    stable-sort order (rank DESC, then tick DESC, ties in arrival
+    order) with ZERO comparisons; the per-beat re-sort was the
+    measured quadratic member (`_ranked` per-call ×10.02,
+    `list.sort` ×8.61 at 100y, iter-327/328). The order is exact
+    because event ticks never regress (the writer's own law,
+    `core/log.py`'s tick-regression refusal) — a new row either
+    extends the last tie-run of its rank or starts a new one.
+    The (teller, listener) NOVELTY COUNT (`_novelty`, maintained
+    with `add` over the inverted token-holder index) answers the
+    saturated teller in O(1): zero novel rows → no walk at all
+    (the whole-knowledge re-ranking per talk was the measured
+    cost, ×9.17 per-call growth)."""
 
     def __init__(self) -> None:
         self._rows: dict[str, list[_Row]] = {}
@@ -95,16 +112,76 @@ class KnowledgeView:
         # with `add` as its only writer — `holds` is O(1) instead of a row
         # scan; the same funnel feeds it on replay (`from_events`).
         self._sources: dict[str, dict[str, set[str]]] = {}
+        # P1b: per knower, per rank, the ordered tie-runs (the ranked
+        # order without the sort — see the class docstring).
+        self._runs: dict[str, dict[int, list[list[_Row]]]] = {}
+        # P1b: token -> the knowers holding it (the inverted holder
+        # index the novelty bookkeeping walks).
+        self._token_holders: dict[str, set[str]] = {}
+        # P1b: teller -> listener -> the count of the teller's rows
+        # whose token the listener does NOT hold (the O(1) saturated
+        # answer; maintained by `add`, born-correct for late knowers).
+        self._novelty: dict[str, dict[str, int]] = {}
+        # P1b: knower -> token -> how many rows of that token they
+        # hold (the decrement weights for the novelty count).
+        self._rows_by_token: dict[str, dict[str, int]] = {}
 
     def add(self, event: EventRecord) -> None:
         """Absorb one committed event's records (acquisition order)."""
         for record in event.knowledge:
-            self._rows.setdefault(record.who, []).append(
-                _Row(record=record, importance=event.importance)
+            who = record.who
+            # P1b: a knower's FIRST row initializes their novelty
+            # column for every existing teller — the newborn holds
+            # nothing, so every teller's rows count as unheld (the
+            # incremental counts would otherwise miss pre-birth rows)
+            if who not in self._rows:
+                for teller, rows in self._rows.items():
+                    self._novelty.setdefault(teller, {})[who] = len(rows)
+            held_before = (
+                record.knows in self._sources.get(who, {})
             )
-            self._sources.setdefault(record.who, {}).setdefault(
+            row = _Row(record=record, importance=event.importance)
+            self._rows.setdefault(who, []).append(row)
+            self._sources.setdefault(who, {}).setdefault(
                 record.knows, set()
             ).add(record.source)
+            # P1b: the bucket append — `at` never regresses (the
+            # writer's tick-regression law), so the row either
+            # extends the rank's last tie-run or starts a new one;
+            # the iteration order is then exactly the stable sort's
+            runs = (
+                self._runs.setdefault(who, {})
+                .setdefault(_IMPORTANCE_RANK[event.importance], [])
+            )
+            if runs and runs[-1][0].record.at == record.at:
+                runs[-1].append(row)
+            else:
+                runs.append([row])
+            self._rows_by_token.setdefault(who, {}).setdefault(
+                record.knows, 0
+            )
+            self._rows_by_token[who][record.knows] += 1
+            # P1b: the row is novel to every knower who does not hold
+            # its token
+            for listener in self._rows:
+                if listener == who:
+                    continue
+                if record.knows not in self._sources.get(listener, {}):
+                    counts = self._novelty.setdefault(who, {})
+                    counts[listener] = counts.get(listener, 0) + 1
+            # P1b: `who` newly holds the token — every teller's rows
+            # of it leave their novelty counts for `who`
+            if not held_before:
+                for teller in self._token_holders.get(record.knows, ()):
+                    if teller == who:
+                        continue
+                    weight = self._rows_by_token.get(teller, {}).get(
+                        record.knows, 0
+                    )
+                    if weight:
+                        counts = self._novelty.setdefault(teller, {})
+                        counts[who] = counts.get(who, 0) - weight
+            self._token_holders.setdefault(record.knows, set()).add(who)
 
     @classmethod
     def from_events(cls, events: Sequence[EventRecord]) -> KnowledgeView:
@@ -137,19 +214,29 @@ class KnowledgeView:
 
     def _ranked(
         self, who: str, *, exclude_source: str | None
-    ) -> list[LoggedKnowledgeRecord]:
+    ) -> Iterator[LoggedKnowledgeRecord]:
         """The knower's records, best salience first (importance, then
-        recency; the newest of equals wins)."""
-        rows = [
-            row
-            for row in self._rows.get(who, ())
-            if exclude_source is None or row.record.source != exclude_source
-        ]
-        rows.sort(
-            key=lambda row: (_IMPORTANCE_RANK[row.importance], row.record.at),
-            reverse=True,
-        )
-        return [row.record for row in rows]
+        recency; the newest of equals wins) — the RANK-BUCKET
+        iteration (P1b): ranks DESC, tie-runs newest-first, arrival
+        order within a run — EXACTLY the stable sort's order, with
+        zero comparisons (the per-call re-sort was the measured
+        quadratic member; the structure is maintained by `add`)."""
+        runs_by_rank = self._runs.get(who)
+        if not runs_by_rank:
+            return iter(())
+
+        def generate() -> Iterator[LoggedKnowledgeRecord]:
+            for rank in sorted(runs_by_rank, reverse=True):
+                for run in reversed(runs_by_rank[rank]):
+                    for row in run:
+                        if (
+                            exclude_source is not None
+                            and row.record.source == exclude_source
+                        ):
+                            continue
+                        yield row.record
+
+        return generate()
 
     def salient(
         self, who: str, *, exclude_source: str | None = None
@@ -297,7 +384,16 @@ def _novel_facts(
     limit: int,
 ) -> list[LoggedKnowledgeRecord]:
     """The teller's salient facts the listener does not already hold,
-    best first, at most `limit` (dedup by token — a listener never re-learns)."""
+    best first, at most `limit` (dedup by token — a listener never re-learns).
+
+    P1b: the O(1) saturated answer — the (teller, listener) novelty
+    count says ZERO unheld rows, so the walk (a subset of the rows —
+    it additionally excludes one source) can pick nothing; sound
+    because `holds` is monotone (knowledge is append-only, the
+    forgetting vocabulary absent by P7's law) and the count is
+    maintained on the same `add` funnel."""
+    if view._novelty.get(teller, {}).get(listener, 0) == 0:
+        return []
     picks: list[LoggedKnowledgeRecord] = []
     taken: set[str] = set()
     for record in view._ranked(teller, exclude_source=exclude_source):
