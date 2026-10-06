@@ -80,6 +80,7 @@ __all__ = [
     "FACTION_PREFIX",
     "faction_intents",
     "faction_probability",
+    "faction_specs",
 ]
 
 FACTION_PREFIX: Final = "faction"  # intent ids (faction_0000…)
@@ -145,6 +146,17 @@ def _specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
             )
         )
     return tuple(specs)
+
+
+def faction_specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
+    """The parse-once accessor (scale-1-impl, P0.5-B — the E03 fix):
+    the same pure parse `_specs` owns, named for the LOOP's init-time
+    memo — the per-beat re-parse was the measured E03 waste (one
+    urgency + one faction parse per beat, 2.0/beat at iter-328, the
+    faction arm firing even on packs without the block); pure over
+    immutable pack data, so the memo is byte-identical by
+    construction."""
+    return _specs(pack)
 
 
 def faction_probability(
@@ -213,6 +225,7 @@ def faction_intents(
     traits: Sequence[Any] = (),
     locations: Collection[str] | None = None,
     world: "WorldModel | None" = None,
+    specs: "Sequence[_FactionSpec] | None" = None,
 ) -> list[IntentData]:
     """One walk's worth of faction goal intents (depth-6): for each
     pack-declared faction — compute the small formula's probability
@@ -242,9 +255,15 @@ def faction_intents(
     same duck-typed discipline as `urgency_intents` (this module never
     imports the fold owners; the import direction stays one-way).
     roads-1: `world` threads the generated model for the adjacent_to
-    gate (the ONE shared exits read); None is the unarmed default."""
+    gate (the ONE shared exits read); None is the unarmed default.
+    `specs` (scale-1-impl, P0.5-B): the caller's PRE-PARSED specs
+    (the loop's init-time memo via `faction_specs`) — None (the
+    default) keeps the standalone parse; the memo is
+    byte-identical (the parse is pure)."""
     out: list[IntentData] = []
-    for seq, spec in enumerate(_specs(pack)):
+    for seq, spec in enumerate(
+        _specs(pack) if specs is None else specs
+    ):
         props = projection.get(spec.group)
         if props is None:
             continue  # a crafted runtime config without the entity

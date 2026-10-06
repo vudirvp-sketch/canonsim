@@ -42,7 +42,7 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.rng import RngBank
     from core.worldgen import WorldModel
 
-__all__ = ["URGENCY_PREFIX", "urgency_intents"]
+__all__ = ["URGENCY_PREFIX", "urgency_intents", "urgency_specs"]
 
 URGENCY_PREFIX: Final = "urgency"
 
@@ -88,6 +88,17 @@ def _specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
     return tuple(specs)
 
 
+def urgency_specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
+    """The parse-once accessor (scale-1-impl, P0.5-B — the E03 fix):
+    the same pure parse `_specs` owns, named for the LOOP's init-time
+    memo. The beat machinery re-parsing the pack's rules every beat
+    was the measured E03 waste (2.0 parses/beat, iter-328's
+    instrument); the parse is pure over immutable pack data, so the
+    memo is byte-identical by construction — the same specs, read
+    once instead of per beat."""
+    return _specs(pack)
+
+
 def _build_intent(spec: _UrgencySpec, seq: int) -> IntentData:
     """Materialize an IntentData from a pack spec; the loop stamps the
     real `based_on_event_seq` at enqueue time."""
@@ -110,6 +121,7 @@ def urgency_intents(
     traits: Sequence[Any] = (),
     locations: Collection[str] | None = None,
     world: "WorldModel | None" = None,
+    specs: "Sequence[_UrgencySpec] | None" = None,
 ) -> list[IntentData]:
     """One beat's worth of autonomous NPC intents (P2b). For each
     pack-declared urgency: roll d100 against `probability_per_beat`; on
@@ -137,6 +149,11 @@ def urgency_intents(
     own stream, the belief only filters; the door re-validates with
     its own read at the entry tick).
 
+    `specs` (scale-1-impl, P0.5-B): the caller's PRE-PARSED specs
+    (the loop's init-time memo via `urgency_specs`) — None (the
+    default) keeps the standalone parse, so every existing caller
+    is untouched; the memo is byte-identical (the parse is pure).
+
     depth-3 (the scene-LOD filter): `locations` scopes the entry walk
     to NPCs positioned there (the active zone at a beat, the warm ring
     at a macro crossing); None (the default) is the one-scene law —
@@ -145,7 +162,9 @@ def urgency_intents(
     ONE shared exits read — an autonomous move along a derived edge
     passes the gate); None is the unarmed default."""
     out: list[IntentData] = []
-    for seq, spec in enumerate(_specs(pack)):
+    for seq, spec in enumerate(
+        _specs(pack) if specs is None else specs
+    ):
         # skip actors absent from the projection (arrested, fled, removed)
         if spec.npc not in projection:
             continue

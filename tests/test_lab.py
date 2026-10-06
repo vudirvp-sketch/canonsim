@@ -540,13 +540,14 @@ def test_the_wall_split_accounting_law(tmp_path: Path) -> None:
     """lab-5 law 2 — the accounting law: the member split PARTITIONS
     the profiled wall (every member a documented entry-cumtime
     aggregate; members + rest == the profiled total, the disjointness
-    flag green), and the counters carry the ULTIMATE pack's vocabulary:
-    the beat machinery re-parses the rules every beat (E03 >= 1
-    parse/beat), computes the derived folds GREEDILY on the clock path
-    while this fixture's gated-entry demand is ZERO (E04's Q7a waste
-    measured — the P0.5-A implementation row's RED baseline, flipping
-    deliberately when beat laziness lands), and beats/event is the
-    measured per-run number (the pack's stale '~50' replaced)."""
+    flag green), and the counters carry the ULTIMATE pack's
+    vocabulary — POST scale-1-impl P0.5-A/B (iter-330): the spec
+    families parse ONCE at init (E03 in-window = 0 — iter-328's RED
+    baseline flipped, the designed resolution its docstring named),
+    and the derived folds ride the pack's DECLARED gated-entry demand
+    (this fixture demands zero → the clock path computes NONE — the
+    E04 greedy waste closed), while beats/event stays the measured
+    per-run number (the pack's stale '~50' replaced)."""
     profile = _profile_record(tmp_path)
     for depth in profile["per_depth"]:
         shares = depth["member_shares"]
@@ -564,17 +565,28 @@ def test_the_wall_split_accounting_law(tmp_path: Path) -> None:
                        "decay_walk", "clock_derived_folds",
                        "door_derived_folds", "rest"):
             assert member in shares, (depth["years"], member)
-        # the clock parses the rules every beat — E03 measured
+        # scale-1-impl P0.5-B (the E03 fix): the spec families are
+        # parsed ONCE at Simulator init — OUTSIDE the profiled
+        # run_steps window — so the in-window parse count is ZERO
+        # per beat. The flip from >= 1.0/beat (iter-328's RED
+        # baseline, the deliberate flip its docstring named) is the
+        # row's designed resolution.
         assert depth["beats"] > 0
-        assert depth["counters"]["e03_parses_per_beat"] >= 1.0
-        # the greedy derived folds: every fold function computed on
-        # the clock path at least once per beat — TODAY's shape, the
-        # laziness row's own RED baseline
+        assert depth["counters"]["e03_parses_per_beat"] == 0.0
+        # scale-1-impl P0.5-A (the E04 fix): the derived folds ride
+        # the pack's DECLARED gated-entry demand — with this
+        # fixture's demand ZERO the clock path computes NONE of them
+        # (the flip from >= 1 call/beat per fold and >= 3.0
+        # calls/beat is the row's designed resolution; the DOOR
+        # stays lazy as ever — its reads were never the waste)
         e04 = depth["counters"]["e04_derived_reads"]
         for name, per_func in e04["per_function"].items():
-            assert per_func["clock"] >= depth["beats"], (name, "clock")
-        assert e04["clock_calls_per_beat"] >= 3.0
-        # this fixture demands NONE of them — the waste quantified
+            assert per_func["clock"] == 0, (name, "clock")
+        assert e04["clock_calls_total"] == 0
+        assert e04["clock_calls_per_beat"] == 0.0
+        # this fixture demands NONE of them — the zero-demand side of
+        # the measured pair (the armed side rides the standing tavern
+        # corpus: the golden T1 bytes are the byte-identity law)
         assert profile["e04_gated_entries"]["total"] == 0
         # the beats/event counter present and measured
         assert depth["beats_per_event"] and depth["beats_per_event"] > 0

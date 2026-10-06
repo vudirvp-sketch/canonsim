@@ -93,8 +93,13 @@ from core.crime import (
 from core.cursor import CursorError
 from core.director import Director, policy_from_rules
 from core.echo import echo_scores
-from core.economy import flow_drafts, is_account_prop
-from core.factions import faction_intents
+from core.economy import (
+    flow_drafts,
+    is_account_prop,
+    source_caps,
+    wear_draft,
+)
+from core.factions import faction_intents, faction_specs
 from core.fold import Projection, apply_event, fold, initial_projection
 from core.groups import condensation_drafts, macro_tick_drafts
 from core.ids import sequence_id
@@ -130,7 +135,7 @@ from core.states import decay_drafts, rotation_resets
 from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.travel import edge_duration
-from core.urgencies import urgency_intents
+from core.urgencies import urgency_intents, urgency_specs
 from core.weather import (
     current_weather,
     erosion_drafts,
@@ -162,11 +167,20 @@ __all__ = [
 @dataclass(frozen=True, slots=True)
 class CompletionPayload:
     """An accepted intent pending its SCHEDULED completion (the
-    ACCEPTED state of the intent lifecycle)."""
+    ACCEPTED state of the intent lifecycle).
+
+    `snapshot` (scale-1-impl, P1a): the projection copy taken at the
+    intent's ENQUEUE — the moment `based_on_event_seq` was stamped —
+    so the OCC attribution walk at completion starts from the exact
+    proposal-point state (the prefix refold replaced by the copy;
+    None when the intent's preconditions carry nothing attributable,
+    the walk's own vacuity, or on paths that never had a
+    stamping-moment copy — the fold stays the exact fallback)."""
 
     intent: IntentData
     duration: int
     based_on_event_seq: int
+    snapshot: "Mapping[str, Mapping[str, Any]] | None" = None
 
 
 @dataclass(frozen=True, slots=True)
@@ -219,6 +233,27 @@ def load_playscript(path: Path) -> dict[str, Any]:
         return script
 
 
+def _instrument_holder(
+    binding: Mapping[str, Any], intent: IntentData
+) -> str:
+    """The wear binding's holder reference (stageb-1, B3): the noun
+    `actor`/`target` resolves through the intent, any other value is
+    an EXPLICIT entity id — the settle leg's own resolution family
+    (`LEG_KEYS`' law, the lint's cross-check on both sides)."""
+    holder = binding["holder"]
+    if holder == "actor":
+        return intent.actor
+    if holder == "target":
+        if intent.target is None:
+            raise RunnerError(
+                f"{intent.kind}: the instrument binding references 'target' "
+                "without a target (the door demands one when the action "
+                "names it — the needs_target law)"
+            )
+        return intent.target
+    return holder
+
+
 class Simulator:
     """One deterministic run: bank + clock + queue + writer + projection."""
 
@@ -268,10 +303,61 @@ class Simulator:
         self._pass_live: set[str] = set()
         # derived knowledge index (L3) + the next watch rotation tick
         self._knowledge = KnowledgeView()
+        # scale-1-impl, P0.5-B (the E03 fix — iter-328's RED baseline):
+        # the beat machinery's two spec families parsed ONCE here, at
+        # run start, and handed to the family walks via `specs=` — the
+        # per-beat re-parse was the measured waste (2.0 parses/beat,
+        # the faction arm firing even on packs without the block).
+        # The parse is pure over immutable pack data, so the memo is
+        # byte-identical by construction (Q6's law: same specs, read
+        # once instead of per beat).
+        self._urgency_specs = urgency_specs(pack)
+        self._faction_specs = faction_specs(pack)
+        # scale-1-impl, P0.5-A (the E04 fix — iter-328's RED baseline):
+        # the beat/macro derived-fold DEMAND — the windowed tests any
+        # spec's `requires` gates on, read from the same memo. The
+        # greedy form computed all three folds on EVERY beat while a
+        # zero-demand pack declares NONE (the measured 5.01 calls/beat
+        # vs 0 gated entries on the Lab fixture); the lazy form
+        # computes each fold only when the
+        # pack declares a consumer for it. Byte-identity: the folds
+        # are pure read-side aggregates that never feed entropy or
+        # canon (L6/EPIST-1 — the iter-45 laziness law's own ground),
+        # so computing one zero times changes no gate's answer when
+        # no gate exists to read it — the door's `_fold_reads` form,
+        # now the clock's own.
+        self._fold_demand: frozenset[str] = frozenset(
+            cond.get("test")
+            for spec in (*self._urgency_specs, *self._faction_specs)
+            for cond in spec.requires
+        ) & frozenset((LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST))
         # derived last-change index (L3): (entity, prop) -> tick of the
         # latest committed event that changed it — the decay baseline
         # without a per-beat log scan; `_commit` is its only writer
         self._last_change: dict[tuple[str, str], int] = {}
+        # scale-1-impl, P1a (the OCC attribution snapshot side-table):
+        # intent id -> a FIFO of projection copies, one per enqueue
+        # (the ids REPEAT — the family walks re-enumerate their specs
+        # every beat, so `urgency_0005` mints a thousand times a year;
+        # the FIFO restores the exact pairing: same-id entries pop in
+        # queue order, and the queue's (tick, sub_order, actor, seq)
+        # key makes that the push order — the k-th accept of an id
+        # gets the k-th store, its own stamping-moment copy). Popped
+        # at the accept door and carried on the CompletionPayload;
+        # valid iff taken at the stamp itself; entries for intents
+        # that never pop die with the run (bounded by the queue
+        # depth, not the log).
+        self._occ_snapshots: dict[str, list[Projection]] = {}
+        # stageb-1, B4 — the declared source-flow capacities: (entity,
+        # kind) -> cap, read ONCE here (the P0.5-B parse-once
+        # discipline — pure over immutable pack data). The `_commit`
+        # floor's cap arm reads it: a write landing above a declared
+        # cap refuses LOUD, any verb (B1's "never" arm; the flow's
+        # own mint stays compliant by the min() arithmetic — a
+        # violation is a hand-built draft or a pack bug, never the
+        # flow machinery). An unarmed economy answers {} — no caps,
+        # no floor arm, the 68a pattern.
+        self._source_caps = source_caps(pack.rules)
         self._next_rotation = next_rotation_tick(
             pack.rules, self._clock.ticks_per_day, 0
         )
@@ -398,6 +484,14 @@ class Simulator:
                 remaining = steps[1:]
                 first = self._intent_from_step(steps[0])
                 self._step_intent_id = first.id
+                # P1a: the first step rides the same stamping-moment
+                # snapshot as every fed step (run_steps pushes it
+                # directly — the _feed_next twin, one law both doors)
+                first_snapshot = self._snapshot_for(first)
+                if first_snapshot is not None:
+                    self._occ_snapshots.setdefault(first.id, []).append(
+                        first_snapshot
+                    )
                 self._queue.push(
                     tick=self._clock.tick, sub_order=self._step_band(first),
                     actor_id=first.actor, kind="intent", payload=first,
@@ -755,9 +849,41 @@ class Simulator:
         checkpoint = load_checkpoint(record, checkpoints_dir)
         return checkpoint.restore(events)
 
+    def _snapshot_for(self, intent: IntentData) -> Projection | None:
+        """P1a's enqueue-time snapshot, taken iff the intent's OCC walk
+        could ever attribute: an action whose attributable
+        preconditions (the non-windowed set) are empty can never fire
+        the walk's first_failing — the snapshot would be dead weight,
+        so None is EXACT (the walk returns None on both paths). The
+        copy is one level deep: the projection's props are scalars
+        (state_changes write ints/strings/bools — the seeding and the
+        resolvers' own discipline), so dict-per-entity captures the
+        state fully."""
+        action = self._pack.action(intent.kind)
+        if action is None:
+            return None  # the door raises before any completion exists
+        attributable = [
+            cond for cond in requires_for(action, intent)
+            if cond.get("test") not in (LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST)
+        ]
+        if not attributable:
+            return None
+        return {
+            entity: dict(props)
+            for entity, props in self._projection.items()
+        }
+
     def _feed_next(self, tick: int, remaining: list[Mapping[str, Any]]) -> None:
         intent = self._intent_from_step(remaining.pop(0))
         self._step_intent_id = intent.id
+        # P1a: the stamping-moment copy (valid iff taken HERE — the
+        # based_on_event_seq was stamped in _intent_from_step, no
+        # commit between the two). The FIFO append: the step ids are
+        # unique per run, the list stays length-1 — the deque form is
+        # the autonomous path's law, shared for one shape
+        snapshot = self._snapshot_for(intent)
+        if snapshot is not None:
+            self._occ_snapshots.setdefault(intent.id, []).append(snapshot)
         self._queue.push(
             tick=tick, sub_order=self._step_band(intent),
             actor_id=intent.actor, kind="intent", payload=intent,
@@ -842,6 +968,37 @@ class Simulator:
         )
         return facts, echoes, traits
 
+    def _clock_fold_reads(
+        self, tick: int
+    ) -> tuple[tuple[Any, ...], tuple[Any, ...], tuple[Any, ...]]:
+        """The CLOCK's lazy fold triple (scale-1-impl, P0.5-A — the
+        E04 fix): each derived fold computed only on the pack's
+        DECLARED gated-entry demand (`_fold_demand`, read once at
+        init from the spec families' own `requires` — the same
+        closed-set discipline the door's `_fold_reads` applies per
+        precondition list, here applied per pack). One computation
+        per tick, shared by the urgency and faction walks (the old
+        greedy form paid `live_leverage` and `crystallized_traits`
+        TWICE per beat — once per family call — with values provably
+        equal, no commit between them; the hoist is value-identical,
+        hence byte-identical)."""
+        facts = (
+            live_leverage(self._pack, self._events, tick)
+            if LEVERAGE_TEST in self._fold_demand
+            else ()
+        )
+        echoes = (
+            echo_scores(self._pack, self._knowledge, tick)
+            if ECHO_TEST in self._fold_demand
+            else ()
+        )
+        traits = (
+            crystallized_traits(self._pack, self._knowledge, tick)
+            if TRAIT_TEST in self._fold_demand
+            else ()
+        )
+        return facts, echoes, traits
+
     def _execute_intent(self, entry: Any) -> bool:
         """PROPOSED → ACCEPTED (SCHEDULED) | REJECTED (no-op event).
         Returns whether the intent was accepted."""
@@ -851,6 +1008,19 @@ class Simulator:
             raise RunnerError(
                 f"unknown intent {intent.kind!r} (not in the pack's actions)"
             )
+        # P1a: the enqueue-time snapshot leaves the side-table HERE —
+        # the accept door is the intent's only exit from the queue,
+        # accepted or rejected (a door-rejected intent never completes;
+        # its copy must not linger — the herd's ~45k door-rejects at the
+        # kiloyear would otherwise pin every snapshot for the run). The
+        # FIFO popleft: same-id intents accept in queue order == push
+        # order, so this is THIS intent's own stamping-moment copy
+        occ_snapshot = None
+        fifo = self._occ_snapshots.get(intent.id)
+        if fifo:
+            occ_snapshot = fifo.pop(0)
+            if not fifo:
+                del self._occ_snapshots[intent.id]
         validate_shape(action, intent)
         preconditions = requires_for(action, intent)
         facts, echoes, traits = self._fold_reads(preconditions, entry.tick)
@@ -890,6 +1060,10 @@ class Simulator:
             payload=CompletionPayload(
                 intent=intent, duration=duration,
                 based_on_event_seq=intent.based_on_event_seq,
+                # P1a: the enqueue-time copy rides to the completion
+                # (popped at the accept door above — door-rejected
+                # intents discard theirs here, never a lingering ref)
+                snapshot=occ_snapshot,
             ),
         )
         return True
@@ -930,6 +1104,11 @@ class Simulator:
                 cause = occ_breaking_cause(
                     self._pack, self._events, payload.based_on_event_seq,
                     intent, self._initial, world=self._world,
+                    # P1a: the enqueue-time snapshot — the walk pays
+                    # the WINDOW [seq, now), never the prefix (the
+                    # resume path and external callers keep the
+                    # fold-from-initial exactness via the default)
+                    start_state=payload.snapshot,
                 )
                 self._emit_rejection(
                     intent, entry.tick, reason="projection_moved",
@@ -982,6 +1161,36 @@ class Simulator:
             provenance=self._provenance(intent),
         )
         record = self._commit(draft)
+
+        # stageb-1, B3 — the USE-HOOK: an action declaring an
+        # `instrument` binding wears the instrument's stock ON its
+        # successful completion (the use that did the work; a failed
+        # attempt leaves the tool untouched — the attempt is a fact,
+        # the stock is not). ONE consume event chained to whatever
+        # committed last (the chronological-chain law — the
+        # in-commit reactions may precede it, the chain stays
+        # honest); the door already gated solvency (the lint-required
+        # account_at_least precondition — break-at-zero is the LAST
+        # use, below-zero never reaches here). The loop owns the log,
+        # so the loop owns the hook (the spend-stamping precedent's
+        # family — loop-side, action-declared, never a resolver's
+        # business).
+        instrument = action.get("instrument")
+        if isinstance(instrument, Mapping):
+            self._commit(
+                replace(
+                    wear_draft(
+                        self._pack.rules, self._projection, entry.tick,
+                        user=intent.actor,
+                        holder=_instrument_holder(instrument, intent),
+                        kind=instrument["kind"],
+                        amount=int(instrument["amount"]),
+                        used_action=intent.kind,
+                    ),
+                    cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
 
         for ignition in resolution.ignitions:
             self._execute_ignition(
@@ -1228,15 +1437,17 @@ class Simulator:
         # holds a live cluster — iter-45; an echo-gated one until the
         # residue clears the bar — iter-46; a trait-gated one until the
         # belief crystallizes — iter-67, beliefwire; the front door
-        # re-validates at the entry tick with its own reads)
+        # re-validates at the entry tick with its own reads).
+        # scale-1-impl P0.5-A: the triple computed ONCE per beat on the
+        # pack's declared demand (zero when the pack declares no
+        # gated entries — the E04 fix), shared by both family walks.
         self._director.next_beat()
-        beat_echoes = echo_scores(self._pack, self._knowledge, beat_tick)
+        facts, beat_echoes, traits = self._clock_fold_reads(beat_tick)
         for intent in urgency_intents(
             self._pack, self._projection, self._bank,
-            facts=live_leverage(self._pack, self._events, beat_tick),
-            echoes=beat_echoes,
-            traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
+            facts=facts, echoes=beat_echoes, traits=traits,
             locations=locations, world=self._world,
+            specs=self._urgency_specs,
         ):
             self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
         # 2b) faction goals (depth-6) — the small-formula dynamics at
@@ -1249,10 +1460,9 @@ class Simulator:
         # order — INV-2).
         for intent in faction_intents(
             self._pack, self._projection, self._bank,
-            facts=live_leverage(self._pack, self._events, beat_tick),
-            echoes=beat_echoes,
-            traits=crystallized_traits(self._pack, self._knowledge, beat_tick),
+            facts=facts, echoes=beat_echoes, traits=traits,
             locations=locations, world=self._world,
+            specs=self._faction_specs,
         ):
             self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
         # 3) director releases — explicit triggers + stagnation; budget 1
@@ -1289,6 +1499,14 @@ class Simulator:
             origin_hook=intent.origin_hook,
             assignment_tick=assignment_tick,
         )
+        # P1a: the stamping-moment copy — taken HERE, at the same
+        # instant based_on_event_seq is stamped above (the snapshot's
+        # validity condition; a later copy would skip the window's
+        # head and mis-attribute). The FIFO append: the id repeats
+        # across beats, the copies pair in queue order
+        snapshot = self._snapshot_for(stamped)
+        if snapshot is not None:
+            self._occ_snapshots.setdefault(stamped.id, []).append(snapshot)
         self._queue.push(
             tick=tick, sub_order=NPC_REACTION, actor_id=intent.actor,
             kind="intent", payload=stamped,
@@ -1409,13 +1627,16 @@ class Simulator:
             )
         # the warm ring's goal rolls — the gates read at the crossing
         # tick (the beat's own law), the intents enqueue at the entry
-        # tick (the never-regress law)
+        # tick (the never-regress law). scale-1-impl P0.5-A: the lazy
+        # triple on the pack's declared demand, one computation shared
+        # by both family walks (the E04 fix — the greedy form paid all
+        # three folds per crossing on every pack).
+        facts, echoes, traits = self._clock_fold_reads(tick)
         for intent in urgency_intents(
             self._pack, self._projection, self._bank,
-            facts=live_leverage(self._pack, self._events, tick),
-            echoes=echo_scores(self._pack, self._knowledge, tick),
-            traits=crystallized_traits(self._pack, self._knowledge, tick),
+            facts=facts, echoes=echoes, traits=traits,
             locations=zones.warm, world=self._world,
+            specs=self._urgency_specs,
         ):
             self._enqueue_autonomous(intent, entry_tick, assignment_tick=tick)
         # the warm ring's FACTION goals (depth-6) — the same clock's
@@ -1426,10 +1647,9 @@ class Simulator:
         # aggregate machinery, never this walk's)
         for intent in faction_intents(
             self._pack, self._projection, self._bank,
-            facts=live_leverage(self._pack, self._events, tick),
-            echoes=echo_scores(self._pack, self._knowledge, tick),
-            traits=crystallized_traits(self._pack, self._knowledge, tick),
+            facts=facts, echoes=echoes, traits=traits,
             locations=zones.warm, world=self._world,
+            specs=self._faction_specs,
         ):
             self._enqueue_autonomous(intent, entry_tick, assignment_tick=tick)
 
@@ -1731,6 +1951,29 @@ class Simulator:
                     "(the underflow floor, CONTRACTS §2 D3; the "
                     "player-scaled arm dies soft at the door, the "
                     "aggregate and every other path fail loud here)"
+                )
+            # stageb-1, B4 — the CAPACITY floor (CONTRACTS §12, B1's
+            # "no write above a declared cap, ever" arm): a stock
+            # with a declared source capacity never exceeds it — the
+            # flow's min() mint keeps the machinery compliant, so a
+            # breach here is a hand-built draft or a pack bug and
+            # fails LOUD, before the log ever sees it (D3's form)
+            cap = self._source_caps.get((change.entity, change.prop[8:]))
+            if (
+                cap is not None
+                and is_account_prop(change.prop)
+                and isinstance(change.to_, int)
+                and not isinstance(change.to_, bool)
+                and change.to_ > cap
+            ):
+                raise ValueError(
+                    f"{draft.type}: the account stock "
+                    f"{change.entity}.{change.prop} would write "
+                    f"{change.to_!r} above its declared capacity {cap} — "
+                    "a capped stock never exceeds its cap (CONTRACTS §12 "
+                    "B4; the flow's min() mint stays compliant, so a "
+                    "breach is a pack bug or a hand-built draft, never "
+                    "the machinery)"
                 )
             pending[key] = change.to_
         record = self._writer.append(draft)
