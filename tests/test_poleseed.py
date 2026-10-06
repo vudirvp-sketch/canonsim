@@ -106,9 +106,9 @@ THEFT_CHAIN: tuple[dict, ...] = (
     {"intent": "wait", "ticks": 900},
 )
 SEED_DAY = 42  # the read exact, the lever minted, the corner spent
-SEED_NIGHT = 42  # the same clock: the read lands at t=1082, in the night
+SEED_NIGHT = 2  # rng-1: the same clock law, the epoch's read lands by night
 SEED_LIFT = 2  # the stealth draw passes: the pole lifted unseen
-SEED_FAIL = 42  # the total-failure margin: the whole crossing sees
+SEED_FAIL = 3  # rng-1: the total-failure margin: the whole crossing sees
 
 
 def _run(tmp_path: Path, name: str, seed: int, steps: tuple[dict, ...]) -> list:

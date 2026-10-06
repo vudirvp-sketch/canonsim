@@ -1749,7 +1749,7 @@
     },
     {
       "name": "cascade_claims_supported_after_correction",
-      "seed": 15,
+      "seed": 1,
       "setup": [
         {
           "intent": "move",
@@ -1808,7 +1808,7 @@
     },
     {
       "name": "second_steal_moves_the_carried_purse",
-      "seed": 15,
+      "seed": 5,
       "setup": [
         {
           "intent": "move",
@@ -1941,7 +1941,7 @@
     },
     {
       "name": "noticed_reach_witnesses_supported",
-      "seed": 15,
+      "seed": 5,
       "setup": [
         {
           "intent": "move",
@@ -2004,7 +2004,7 @@
     },
     {
       "name": "rumor_told_transfers_the_noise",
-      "seed": 15,
+      "seed": 5,
       "setup": [
         {
           "intent": "move",
@@ -2074,7 +2074,7 @@
     },
     {
       "name": "carried_purse_rides_the_flee",
-      "seed": 15,
+      "seed": 5,
       "setup": [
         {
           "intent": "move",
@@ -2152,7 +2152,7 @@
     },
     {
       "name": "arson_cascade_events_in_canon",
-      "seed": 20,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -2213,7 +2213,7 @@
     },
     {
       "name": "fire_state_claimable_post_arson",
-      "seed": 20,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -2278,7 +2278,7 @@
     },
     {
       "name": "player_perceives_spread_and_smoke",
-      "seed": 20,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -2570,7 +2570,7 @@
     },
     {
       "name": "oil_lamp_broken_in_yard",
-      "seed": 20,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -2623,7 +2623,7 @@
     },
     {
       "name": "canon_event_claimable_even_when_unperceived",
-      "seed": 20,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -3026,7 +3026,7 @@
     },
     {
       "name": "caught_fleeing_the_burning_tavern",
-      "seed": 33,
+      "seed": 1,
       "setup": [
         {
           "intent": "move",
@@ -3810,7 +3810,7 @@
     },
     {
       "name": "the_lamp_taken_silently",
-      "seed": 85,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -3860,7 +3860,7 @@
     },
     {
       "name": "silent_steal_puts_both_prizes_on_one_coat",
-      "seed": 85,
+      "seed": 3,
       "setup": [
         {
           "intent": "move",
@@ -3915,7 +3915,7 @@
     },
     {
       "name": "backyard_arrival_carries_both_items_and_the_departure_token",
-      "seed": 85,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -3978,7 +3978,7 @@
     },
     {
       "name": "arson_after_theft_the_lamp_chain_by_id",
-      "seed": 85,
+      "seed": 11,
       "setup": [
         {
           "intent": "move",
@@ -4105,7 +4105,7 @@
     },
     {
       "name": "the_arsonists_cascade_knowledge_and_calm",
-      "seed": 85,
+      "seed": 9,
       "setup": [
         {
           "intent": "move",
@@ -4184,7 +4184,7 @@
     },
     {
       "name": "the_flee_fed_through_the_door_from_a_burned_yard",
-      "seed": 85,
+      "seed": 11,
       "setup": [
         {
           "intent": "move",
@@ -4284,7 +4284,7 @@
     },
     {
       "name": "the_watch_hands_over_the_crime_not_the_fire",
-      "seed": 85,
+      "seed": 11,
       "setup": [
         {
           "intent": "move",
@@ -4469,7 +4469,7 @@
     },
     {
       "name": "the_noise_is_the_only_echo",
-      "seed": 85,
+      "seed": 11,
       "setup": [
         {
           "intent": "move",
@@ -4574,7 +4574,7 @@
     },
     {
       "name": "arson_without_fuel_is_a_logged_no",
-      "seed": 85,
+      "seed": 11,
       "setup": [
         {
           "intent": "move",
@@ -4673,7 +4673,7 @@
     },
     {
       "name": "the_intent_rejected_event_is_claimable",
-      "seed": 85,
+      "seed": 11,
       "setup": [
         {
           "intent": "move",
@@ -4857,7 +4857,7 @@
     },
     {
       "name": "the_rumor_leg_boundary_honest_close",
-      "seed": 85,
+      "seed": 3,
       "setup": [
         {
           "intent": "move",
@@ -5781,7 +5781,7 @@
     },
     {
       "name": "witnessed_reach_feeds_the_door",
-      "seed": 93,
+      "seed": 1,
       "setup": [
         {
           "intent": "move",
@@ -5855,7 +5855,7 @@
     },
     {
       "name": "the_marked_room_suspicion_claims",
-      "seed": 93,
+      "seed": 40,
       "setup": [
         {
           "intent": "move",
@@ -5934,7 +5934,7 @@
     },
     {
       "name": "silent_second_steal_waits_out_the_watch",
-      "seed": 93,
+      "seed": 40,
       "setup": [
         {
           "intent": "move",
@@ -6001,7 +6001,7 @@
     },
     {
       "name": "document_check_releases_at_the_rotation",
-      "seed": 93,
+      "seed": 99,
       "setup": [
         {
           "intent": "move",
@@ -6095,7 +6095,7 @@
     },
     {
       "name": "outgoing_guard_blind_to_the_distraction_fire",
-      "seed": 93,
+      "seed": 22,
       "setup": [
         {
           "intent": "move",
@@ -6256,7 +6256,7 @@
     },
     {
       "name": "caught_at_the_door_of_his_own_distraction",
-      "seed": 93,
+      "seed": 22,
       "setup": [
         {
           "intent": "move",

@@ -240,7 +240,9 @@ def test_deep_field_mutation_is_reported_at_its_path(
     diff = semantic_diff.compare(GOLDEN, other)
     assert not diff.equal
     report = semantic_diff.format_report(diff)
-    assert "event.outcome.duration: 4 != 9" in report
+    # rng-1's epoch: the regenerated fixture's event 10 carries
+    # duration 3 (was 4) — the mutation target moved with the corpus
+    assert "event.outcome.duration: 3 != 9" in report
     assert "id=ev_0010" in report
 
 

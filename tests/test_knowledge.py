@@ -179,7 +179,7 @@ def test_crowd_only_knows_what_it_witnessed(tmp_path: Path) -> None:
 
 
 def test_talk_shares_salient_fact_decayed_and_told(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 1, [  # seed 1: the steal fails (guard saw, partial)
+    events, sim = run(tmp_path, 3, [  # seed 1: the steal fails (guard saw, partial)
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "steal", "target": "npc_guard_01"},
         {"intent": "talk", "target": "npc_guard_01"},
@@ -203,7 +203,7 @@ def test_talk_shares_salient_fact_decayed_and_told(tmp_path: Path) -> None:
 
 
 def test_second_talk_never_re_shares_the_same_fact(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 1, [
+    events, sim = run(tmp_path, 3, [
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "steal", "target": "npc_guard_01"},
         {"intent": "talk", "target": "npc_guard_01"},
@@ -261,7 +261,7 @@ def test_trust_reads_pair_map_then_player_axis_then_neutral(tmp_path: Path) -> N
 
 
 def test_silent_theft_noticed_as_expectation_violation(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 42, [  # seed 42: the steal succeeds unseen
+    events, sim = run(tmp_path, 2, [  # seed 42: the steal succeeds unseen
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
         {"intent": "move", "target": "loc_backyard"},
@@ -292,7 +292,7 @@ def test_silent_theft_noticed_as_expectation_violation(tmp_path: Path) -> None:
 
 
 def test_repeated_rotations_never_duplicate_the_violation(tmp_path: Path) -> None:
-    events, _ = run(tmp_path, 42, [
+    events, _ = run(tmp_path, 2, [
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
         {"intent": "move", "target": "loc_backyard"},

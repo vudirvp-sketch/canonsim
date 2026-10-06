@@ -97,7 +97,7 @@ def test_the_ladder_fires_the_full_boss_beat(tmp_path: Path) -> None:
     suspect (the irreversible T4 flip), and the crowd reaction lands
     on the check's own witnesses (the room +5; the checked stranger is
     dropped — no suspicion home, the suspicion law)."""
-    events, sim = run(tmp_path, 19, DOUBLE_STEAL_WAIT)
+    events, sim = run(tmp_path, 31, DOUBLE_STEAL_WAIT)  # the epoch's rolls
     (check,) = by_type(events, "document_check")
     # the release rides the intent door: the relief guard's intent
     assert str(check.provenance["cause_intent"]) == "director_0000"
@@ -145,7 +145,7 @@ def test_the_talked_down_verdict_escalates_nothing(tmp_path: Path) -> None:
     escalation, no arrest; the crowd layer still lands (a public
     challenge unsettles the room either way). The first_time_only
     burn means the check never re-rolls within the run."""
-    events, sim = run(tmp_path, 93, DOUBLE_STEAL_WAIT)
+    events, sim = run(tmp_path, 1, DOUBLE_STEAL_WAIT)  # the epoch's rolls
     (check,) = all_checks(events)
     assert check.type == "document_check_failed"  # the talked-down branch
     assert check.outcome["check"]["passed"] is False
@@ -206,7 +206,7 @@ def test_the_climax_path_releases_when_the_band_never_opens(
     boss beat) and the verdict escalates the watcher below the arrest
     threshold (no arrest: the boss without the band is one rung
     short)."""
-    events, sim = run(tmp_path, 2, DOUBLE_STEAL_WAIT)
+    events, sim = run(tmp_path, 5, DOUBLE_STEAL_WAIT)  # the epoch's rolls
     (check,) = all_checks(events)
     assert check.type == "document_check"  # the damning branch
     # the band never opened: the pre-check suspicion is below the
@@ -316,8 +316,8 @@ def test_the_boss_beat_reads_as_a_story(tmp_path: Path) -> None:
     watcher's escalation, the arrest, the catch."""
     from render.chronicle import chronicle_from_log
 
-    events, _ = run(tmp_path, 19, DOUBLE_STEAL_WAIT)
-    log = tmp_path / "run_19.jsonl"
+    events, _ = run(tmp_path, 31, DOUBLE_STEAL_WAIT)  # the epoch's rolls (rng-1's corpus price)
+    log = tmp_path / "run_31.jsonl"
     text = chronicle_from_log(log, PACK, SCHEMA)
     for line in (
         "the relief guard demands papers from the player — the papers do not satisfy.",
@@ -333,8 +333,8 @@ def test_the_talked_down_line_renders(tmp_path: Path) -> None:
     other conditional arm."""
     from render.chronicle import chronicle_from_log
 
-    events, _ = run(tmp_path, 93, DOUBLE_STEAL_WAIT)
-    log = tmp_path / "run_93.jsonl"
+    events, _ = run(tmp_path, 1, DOUBLE_STEAL_WAIT)  # the epoch's rolls (rng-1's corpus price)
+    log = tmp_path / "run_1.jsonl"
     text = chronicle_from_log(log, PACK, SCHEMA)
     assert (
         "the relief guard demands papers from the player — the answer satisfies."

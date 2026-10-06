@@ -117,13 +117,13 @@ BOARD_CLIMB: tuple[tuple[int, int, int], ...] = (
 
 
 def _run(
-    tmp_path: Path, name: str, steps: list[dict[str, Any]]
+    tmp_path: Path, name: str, steps: list[dict[str, Any]], *, seed: int = 42
 ) -> tuple[list, Any, Simulator]:
     pack = load_pack(PACK_DIR)
     log = tmp_path / name
-    sim = Simulator(pack, 42, log, SCHEMA, commit="0000000")
+    sim = Simulator(pack, seed, log, SCHEMA, commit="0000000")
     sim.run_playscript({
-        "name": name, "seed": 42, "pack": "province_pack@0.1",
+        "name": name, "seed": seed, "pack": "province_pack@0.1",
         "steps": steps,
     })
     _, events = read_log(log, SCHEMA)
@@ -289,8 +289,11 @@ def test_the_formation_tale_carries_the_winters_rhythm(tmp_path: Path) -> None:
 
 def test_the_return_claims_the_edge(tmp_path: Path) -> None:
     """The return's chain, exact: the honest failure surface first (the
-    read failing at seed 42 — the marks staying marks, the perception
-    gate the poleseed precedent's own law), then the proof (the second
+    read failing — the marks staying marks, the perception gate the
+    poleseed precedent's own law; at the epoch's rolls the instance
+    rides seed 80 — the pre-epoch seed 42 first read now succeeds,
+    the failure surface re-pinned to the new measured instance, rng-1's
+    recorded corpus price), then the proof (the second
     read minting the_winter_kin to the reader ALONE — the selective
     disclosure), then the claim (the door's lever spent aloud where
     the road can hear), then the echo (the host's side completing at
@@ -301,12 +304,15 @@ def test_the_return_claims_the_edge(tmp_path: Path) -> None:
     iter-205's rendering fix, never only the present standing). The
     son's own side stays 40 — the honest state:
     his own winter not spent, the carried edge's claim answered."""
-    events, _pack, sim = _run(tmp_path, "return.jsonl", _walk_to_the_stair() + [
-        {"intent": "read_kinmark", "actor": TORK, "target": POLE},
-        {"intent": "read_kinmark", "actor": TORK, "target": POLE},
-        {"intent": "claim_kinmark", "actor": TORK, "target": KETTA},
-        {"intent": "say_the_names", "actor": TORK, "target": POLE},
-    ])
+    events, _pack, sim = _run(
+        tmp_path, "return.jsonl", _walk_to_the_stair() + [
+            {"intent": "read_kinmark", "actor": TORK, "target": POLE},
+            {"intent": "read_kinmark", "actor": TORK, "target": POLE},
+            {"intent": "claim_kinmark", "actor": TORK, "target": KETTA},
+            {"intent": "say_the_names", "actor": TORK, "target": POLE},
+        ],
+        seed=80,
+    )
     sim.close()
     # the honest failure surface, then the proof
     reads = [e for e in events if e.type.startswith("kinmark_read")]

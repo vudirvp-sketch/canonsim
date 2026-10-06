@@ -146,7 +146,7 @@ def test_different_seed_diverges(tmp_path: Path) -> None:
 def test_derived_prices_pin_the_route(tmp_path: Path) -> None:
     """Every move completion lands exactly at accept-t + travel_ticks:
     the derived price IS the artery's law — the province walks in
-    hours-to-a-day (705/705/660/405/345 over the lattice), where the
+    hours-to-a-day (600/600/660/360/360 over the lattice), where the
     road walked in minutes. The expected clock is rebuilt from the
     travel law + the script's own waits — a price change without a
     fixture regen fails BOTH here and the regen guard; this test
@@ -162,10 +162,11 @@ def test_derived_prices_pin_the_route(tmp_path: Path) -> None:
         for origin, destination in LEGS
     ]
     # the province scale: the artery's own weight — the heaviest leg
-    # near twice the road's longest (360), the whole walk more than
-    # twice the road's loop (the map's 9x growth made mechanical)
+    # near twice the road's longest (360; measured 660), the whole
+    # walk more than twice the road's loop (1080; measured 2580) —
+    # the map's 9x growth made mechanical
     assert max(prices) > 600, prices
-    assert sum(prices) > 2800, prices
+    assert sum(prices) > 2160, prices
     # the expected completion clock: step 1 accepts at t=0; each later
     # step accepts when the previous one completed (run_playscript
     # drains the queue between steps).
@@ -188,12 +189,12 @@ def test_derived_prices_pin_the_route(tmp_path: Path) -> None:
 
 
 def test_encounters_fire_mid_travel(tmp_path: Path) -> None:
-    """D-038 at province scale: rotations, briefings and the beat axis
-    land strictly INSIDE the long legs' tick windows — the artery's
-    institutions ride the route. The measured instance: the watch
-    change + the knowledge transfer (Osgar briefing Ferra, the duty
-    sergeant's arrival record passing to the relief) at t=3240,
-    inside the Malby -> Thornmill leg (3120 -> 3465)."""
+    """D-038 at province scale: rotations and the beat axis land
+    strictly INSIDE the long legs' tick windows — the artery's
+    institutions ride the route. The measured instance (the epoch's
+    world): the watch change (the corporal taking the sergeant's
+    post) at t=360, inside the Riverroad -> Weirstair leg
+    (0 -> 600); twice more at 1080 and 1800, inside their own legs."""
     pack = load_pack(PACK_DIR)
     sim = Simulator(
         pack, SCRIPT["seed"], tmp_path / "mid.jsonl", SCHEMA, commit="0000000"
@@ -227,19 +228,21 @@ def test_encounters_fire_mid_travel(tmp_path: Path) -> None:
     )
     kinds = {event["type"] for event in mid_travel}
     assert "watch_change" in kinds or "knowledge_transfer" in kinds
-    # the measured transfer: strictly inside the LAST leg — the duty
-    # sergeant's briefing to the relief, the road T1's own instance
-    # re-produced at the province's scale
-    transfers = [
-        event
-        for event in events
-        if event["type"] == "knowledge_transfer"
+    # the measured institution (the epoch's world): the watch change
+    # strictly inside a travel window — the road T1's own crossing
+    # law, re-produced at the province's scale; the pre-epoch world's
+    # instance (a mid-travel knowledge_transfer briefing) died with
+    # its worldgen rolls at the epoch boundary (rng-1's recorded
+    # corpus price — the fixture regenerated, the law re-pinned to
+    # the new world's measured instance)
+    changes = [
+        event for event in events if event["type"] == "watch_change"
     ]
-    assert transfers, "the knowledge transfer never fired — the duty record never passed"
-    last_start, last_end = windows[-1]
+    assert changes, "the watch change never fired — the post never rotated"
     assert any(
-        last_start < event["t"] < last_end for event in transfers
-    ), "the briefing must land mid-travel (the artery's institution riding the route)"
+        any(start < event["t"] < end for start, end in windows)
+        for event in changes
+    ), "a rotation must land mid-travel (the artery's institution riding the route)"
 
 
 def test_the_genesis_renders_the_province_scale() -> None:

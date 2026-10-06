@@ -57,7 +57,8 @@ REPO = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text())
 PACK_DIR = REPO / "content" / "pressure_pack"
 PACK = load_pack(PACK_DIR)
-GOLDEN = REPO / "tests" / "fixtures" / "pressure_smoke_seed42.jsonl"
+GOLDEN = REPO / "tests" / "fixtures" / "pressure_smoke_seed39.jsonl"
+# the epoch's seed (rng-1's corpus price)
 SCRIPT = load_playscript(REPO / "tests" / "playscripts" / "pressure_smoke.json")
 
 PLAYER = "pc_01"
@@ -169,7 +170,8 @@ def test_the_two_flow_arms_fire_on_a_short_cadence(tmp_path: Path) -> None:
         }}}},
     )
     events = run(
-        tmp_path, twin, [{"intent": "wait", "ticks": 400}], "flows"
+        tmp_path, twin, [{"intent": "wait", "ticks": 400}], "flows",
+        seed=2,  # the epoch's rolls (rng-1's corpus price)
     )
     flows = {
         event.outcome.get("flow"): event
@@ -262,9 +264,9 @@ def test_the_knocking_and_the_collection_fire_on_schedule_and_idempotently() -> 
     knocks = by_type(events, "pipes_knock")
     collections = by_type(events, "debt_collects")
     burns = by_type(events, "boiler_run_hard")
-    assert [event.t for event in burns] == [7, 34]
-    assert len(knocks) == 1 and knocks[0].t == 7 + 600  # not 34 + 600
-    assert len(collections) == 1 and collections[0].t == 7 + 4320
+    assert [event.t for event in burns] == [8, 29]  # the epoch's rolls (rng-1's corpus price)
+    assert len(knocks) == 1 and knocks[0].t == 8 + 600  # not 29 + 600
+    assert len(collections) == 1 and collections[0].t == 8 + 4320
     # the follow-up flags are irreversible counter-events on the location
     for change in knocks[0].state_changes + collections[0].state_changes:
         assert change.entity == BOILER and change.irreversible
@@ -297,18 +299,18 @@ def test_the_scream_the_warmth_and_the_cold_replies() -> None:
     the feeder and the wall-hearers two degrees; the burst collects
     ten cold from the whole district."""
     events = load_golden()
-    # the scream (t=7): pc 10->15, both stokers +5
+    # the scream (t=8, the epoch's rolls): pc 10->15, both stokers +5
     first_dread = by_type(events, "dread_rises")[0]
     shifted = {(c.entity, c.from_, c.to_) for c in first_dread.state_changes}
     assert (PLAYER, 10, 15) in shifted
     assert ("npc_stoker_01", 20, 25) in shifted
     assert ("npc_stoker_02", 15, 20) in shifted
-    # the feed (t=27): the feeder and the stokers through the wall -2
+    # the feed (t=23): the feeder and the stokers through the wall -2
     warmth = by_type(events, "warmth_felt")[0]
     warmed = {(c.entity, c.from_, c.to_) for c in warmth.state_changes}
     assert (PLAYER, 20, 18) in warmed  # the feeder feels his own fire
     assert ("npc_stoker_01", 35, 33) in warmed  # through the shared wall
-    # the burst (t=4327): the district +10
+    # the burst (t=4328): the district +10
     cold = by_type(events, "the_cold_collects")[0]
     collected = {(c.entity, c.from_, c.to_) for c in cold.state_changes}
     assert (WIDOW, 40, 50) in collected
@@ -534,7 +536,7 @@ def test_fresh_run_matches_committed_golden(tmp_path: Path) -> None:
     sim = Simulator(PACK, SCRIPT["seed"], fresh, SCHEMA, commit="0000000")
     result = sim.run_playscript(SCRIPT)
     assert fresh.read_bytes() == GOLDEN.read_bytes()
-    assert result.fingerprint == 15  # the talk checks the run takes
+    assert result.fingerprint == 17  # the talk checks the run takes (the epoch's rolls)
 
 
 def test_different_seed_diverges(tmp_path: Path) -> None:

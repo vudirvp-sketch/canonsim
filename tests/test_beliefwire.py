@@ -490,10 +490,11 @@ def test_the_channel_fires_only_when_the_belief_is_held(
     ]
     # weather-1's arming price, re-pinned: the 1456 scan (the off-duty
     # relief at the guardroom) rode the warm ring — held for crossings
-    # no day-scale run reaches. The ACTIVE-scene pair at 733 stays (the
-    # relief held the tavern post at the beat-720 roll)
+    # no day-scale run reaches. The ACTIVE-scene pair stays, the epoch's
+    # beat grid moving it to t=731 (the relief held the tavern post at
+    # the beat-720 roll)
     assert [(e.t, e.outcome["location"]) for e in scans] == [
-        (733, "loc_tavern"), (733, "loc_tavern"),
+        (731, "loc_tavern"), (731, "loc_tavern"),
     ]
     # the crystallization evidence the gate read (the fold at the beats)
     view = KnowledgeView.from_events(events)
@@ -508,7 +509,8 @@ def test_the_channel_fires_only_when_the_belief_is_held(
     )
     # the honest quiet seeds: where the theft chain never completes, the
     # gate never passes — the entry stays silent, the run byte-clean
-    for seed in (7, 120):  # the quiet arm (steals succeed, no failure)
+    for seed in (3, 120):  # the quiet arm (steals succeed, no failure;
+    # rng-1's epoch: seed 7's steals fail now, seed 3 carries the pin)
         quiet = run(tmp_path, PACK, seed, DAY1["steps"], f"quiet_{seed}.jsonl")
         assert not any(
             e.type == "look_around" and e.actor == RELIEF for e in quiet

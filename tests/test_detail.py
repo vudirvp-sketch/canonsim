@@ -583,10 +583,10 @@ def test_the_paid_day1_price_is_two_scan_payloads(tmp_path: Path) -> None:
     """The corpus-price law's paid half (measured both arms, iter-76):
     over the day1 ten's scan seed (125 — the guard's belief-gated
     scans, the beliefwire-2 arming's own price row; director ON, the
-    Simulator default) the scene-detail arming costs exactly TWO event
-    payloads — the guard's first tavern scan (the second reads canon:
-    one draw per slot ever; the barkeep's later director look reads it
-    too) and the guardroom rotation scan — and NOTHING else: same
+    Simulator default) the scene-detail arming costs exactly ONE event
+    payload (rng-1's epoch re-measured: the guard's first tavern scan
+    materializes the slots, every later read is canon — one draw per
+    slot ever) and NOTHING else: same
     event count, same ids, same types, same knowledge, same
     importance, same t/cause; the price is the births + the outcome
     key on the materializing events themselves (the fidelity-only
@@ -621,26 +621,29 @@ def test_the_paid_day1_price_is_two_scan_payloads(tmp_path: Path) -> None:
         assert armed_event["t"] == base_event["t"]
         assert armed_event["cause"] == base_event["cause"]
     scans = [event for event, _ in diffed]
-    assert scans[0]["id"] == "ev_0041"  # the first tavern scan materializes
+    assert scans[0]["id"] == "ev_0040"  # the epoch's first tavern scan materializes
+    # rng-1's epoch drew the barrel slot empty on the canonical seed —
+    # the materialization law is the two slots read, the values are draws
     assert scans[0]["outcome"]["materialized"] == [
         {"slot": "under_bench", "value": "old_cloak"},
-        {"slot": "behind_barrel", "value": "lost_ring"},
+        {"slot": "behind_barrel", "value": "empty"},
     ]
 
 
 def test_the_day1_ten_pays_only_the_observing_seeds(tmp_path: Path) -> None:
     """The corpus-price law's shape (measured both arms, iter-76):
     the day1 ten (director ON — the Simulator default) pays ONLY where
-    an observation of an armed scene actually fires. Four seeds carry
-    no observation at all (121, 122, 126, 129 — zero bytes); five
-    seeds pay exactly ONE payload — the director-released barkeep look,
-    the run's FIRST tavern observation (120, 123, 124, 127, 128); the
-    scan seed (125) pays two — its own pin above. Every paid line is
+    an observation of an armed scene actually fires. rng-1's epoch
+    re-measured the split: five seeds carry no observation at all
+    (120, 121, 122, 126, 128 — zero bytes); four seeds pay exactly ONE
+    payload — the director-released barkeep look, the run's FIRST
+    tavern observation (123, 124, 127, 129); the scan seed (125) pays
+    its own one — the pin above. Every paid line is
     fidelity-only: fields <= {state_changes, outcome}, the knowledge,
     importance, t and cause untouched."""
     v01 = crafted_pack(tmp_path, "v01_ten", None)
-    zero_seeds = (121, 122, 126, 129)
-    look_seeds = (120, 123, 124, 127, 128)
+    zero_seeds = (120, 121, 122, 126, 128)
+    look_seeds = (123, 124, 127, 129)
     for seed in zero_seeds:
         base = run_day1(tmp_path, v01, seed, f"ten_base_{seed}")
         armed = run_day1(tmp_path, PACK, seed, f"ten_armed_{seed}")

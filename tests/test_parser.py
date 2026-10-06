@@ -416,7 +416,9 @@ def test_world_impossible_attempt_is_a_fact_not_a_crash(tmp_path: Path) -> None:
 
 
 def test_texture_reference_pins_and_promotes(tmp_path: Path) -> None:
-    door = _door(tmp_path, seed=4)  # probed: the take check passes
+    door = _door(tmp_path, seed=8)
+    # probed: the take check passes (the epoch's rolls; the pre-epoch
+    # seed 4 died at the boundary)
     events = _events(door._log_path)
     _establish(door._ledger, events)  # the narrator established the candles
     door.emit_call("pocket one of those candles")

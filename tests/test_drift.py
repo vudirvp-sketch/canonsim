@@ -200,7 +200,7 @@ def test_observed_prop_heads_are_known_vocabulary(tmp_path: Path) -> None:
     for script_name, seed, directors in (
         ("day1_full.json", 100, True),
         ("day1_full.json", 100, False),
-        ("day1_theft_and_arson.json", 8, True),
+        ("day1_theft_and_arson.json", 15, True),  # rng-1: the epoch's arson chain
     ):
         observed |= _observed_heads(_run(script_name, seed, directors, tmp_path))
     unknown = observed - allowed
@@ -209,7 +209,8 @@ def test_observed_prop_heads_are_known_vocabulary(tmp_path: Path) -> None:
         f"(allowed: {sorted(allowed)}) — a new mechanic vocabulary landed "
         "without joining the metrics map or the registry"
     )
-    # the corpus must actually exercise the fire family (the seed-8 arm)
+    # the corpus must actually exercise the fire family (the seed-15 arm:
+    # rng-1's epoch moved the arson chain — seed 8 steals clean, no fire)
     assert "fire" in observed or "smoke" in observed or "destroyed" in observed
     # and the genesis/claim family (worldgen's armed genesis)
     assert "terrain" in observed

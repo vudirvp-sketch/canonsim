@@ -103,7 +103,7 @@ FAR_CHAIN: tuple[dict, ...] = (
     {"intent": "read_stair", "target": STAIR},
 )
 SEED_DAY = 42  # the read exact, the brief carrying the order
-SEED_NIGHT = 42  # the same clock: the read lands at t=1082, in the night
+SEED_NIGHT = 2  # rng-1: the same clock law, the epoch's read lands by night
 
 
 def _run(tmp_path: Path, name: str, seed: int, steps: tuple[dict, ...]) -> list:

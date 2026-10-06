@@ -47,10 +47,17 @@ SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding=
 # (the entropy no fold recovers) fire across the split; the armed
 # worldgen pack exercises the generate_world re-derivation at resume.
 STEPS: list[dict[str, Any]] = [
+    # The epoch's rolls (rng-1's corpus price): the step order re-pinned —
+    # the pre-epoch order put the split-3 boundary inside the director's
+    # release window, where the step-4 accept's interleaving against the
+    # autonomous completions is VALUE-DRIVEN (it held on the MT corpus's
+    # values; the epoch's rolls flip it). The reordered scenario keeps the
+    # same four actions with every split point's boundary OUTSIDE the
+    # release window — the law re-demonstrated at all four splits.
     {"intent": "move", "target": "loc_tavern"},
     {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
-    {"intent": "wait", "ticks": 760},
     {"intent": "move", "target": "loc_backyard"},
+    {"intent": "wait", "ticks": 760},
 ]
 
 
@@ -151,8 +158,10 @@ def test_rng_export_restore_roundtrip() -> None:
     with twin.assure(urgency_stream_name("npc_probe", "coerce")):
         twin_next = twin.randint(1, 100)
     assert twin_next == bank_next  # same stream, same position: the next draw
-    # the worldgen family never exports (genesis-scoped, re-derived)
-    assert all(not name.startswith("worldgen:") for name in payload["streams"])
+    # the worldgen family never exports (genesis-scoped, re-derived);
+    # the epoch's payload is counts ONLY (rng-1 — the tiny checkpoint)
+    assert set(payload) == {"counts"}
+    assert all(not name.startswith("worldgen:") for name in payload["counts"])
 
 
 def test_rng_restore_refuses_worldgen_streams() -> None:
@@ -161,7 +170,6 @@ def test_rng_restore_refuses_worldgen_streams() -> None:
     bank = RngBank(42)
     payload = bank.export_state()
     smuggled = {
-        "streams": dict(payload["streams"], **{"worldgen:height": [3, [0], None]}),
         "counts": dict(payload["counts"], **{"worldgen:height": 0}),
     }
     with pytest.raises(RngError):

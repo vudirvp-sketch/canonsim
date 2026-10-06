@@ -83,7 +83,7 @@ CURSOR_KEYS: Final = frozenset({
     "bank",
     "director",
 })
-_BANK_KEYS: Final = frozenset({"streams", "counts"})
+_BANK_KEYS: Final = frozenset({"counts"})
 
 
 class CursorError(RuntimeError):
@@ -178,6 +178,13 @@ def _validate(cursor: Mapping[str, Any]) -> None:
             )
     bank = cursor["bank"]
     if not isinstance(bank, Mapping) or set(bank) != _BANK_KEYS:
+        if isinstance(bank, Mapping) and "streams" in bank:
+            raise CursorError(
+                "cursor 'bank' carries 'streams' (Mersenne Twister states) — "
+                "a pre-epoch cursor from the MT bank: the counter epoch "
+                "(rng-1) cannot resume it; restart the run from its log "
+                "(the epoch boundary's recorded price)"
+            )
         raise CursorError(
             f"cursor 'bank' must be a mapping with keys {sorted(_BANK_KEYS)}, "
             f"got {bank!r}"

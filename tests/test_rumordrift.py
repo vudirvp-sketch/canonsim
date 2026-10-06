@@ -356,7 +356,7 @@ def test_a_told_fact_drifts_and_the_outcome_names_the_source(
     pack = crafted_pack(tmp_path, "armed", {"figure_deeds": _spec(
         [SOURCE, SIBLING], {"exact": 0, "partial": 100, "vague": 100},
     )})
-    events, sim = run(tmp_path, pack, 1, DAY1_TALK, "drift.jsonl")
+    events, sim = run(tmp_path, pack, 3, DAY1_TALK, "drift.jsonl")  # the epoch's rolls
     telling = by_type(events, "rumor_told")[0]
     assert telling.outcome["accepted"] is True
     assert telling.outcome["knows"] == SIBLING
@@ -388,7 +388,7 @@ def test_the_novelty_gate_tests_the_teller_token(
         [SOURCE, SIBLING], {"exact": 0, "partial": 100, "vague": 100},
     )})
     steps = DAY1_TALK + [{"intent": "talk", "target": GUARD}]
-    events, sim = run(tmp_path, pack, 1, steps, "twice.jsonl")
+    events, sim = run(tmp_path, pack, 3, steps, "twice.jsonl")  # the epoch's rolls
     tellings = by_type(events, "rumor_told")
     shared = [e.outcome["knows"] for e in tellings]
     assert shared.count(SOURCE) == 0 and shared[0] == SIBLING
@@ -411,7 +411,7 @@ def test_a_refused_telling_never_drifts(tmp_path: Path) -> None:
     rules["knowledge"]["drift"] = {"figure_deeds": _spec([SOURCE, SIBLING])}
     (target / "rules.json").write_text(json.dumps(rules, indent=2), encoding="utf-8")
     deaf = load_pack(target)
-    events, _ = run(tmp_path, deaf, 1, DAY1_TALK, "deaf.jsonl")
+    events, _ = run(tmp_path, deaf, 3, DAY1_TALK, "deaf.jsonl")  # the epoch's rolls
     telling = by_type(events, "rumor_told")[0]
     assert telling.outcome["accepted"] is False
     assert telling.outcome["knows"] == SOURCE  # the refused fact, verbatim
@@ -429,7 +429,7 @@ def test_the_official_briefing_never_drifts(tmp_path: Path) -> None:
     pack = crafted_pack(tmp_path, "verbatim", {"evidence": _spec(
         [SOURCE, SIBLING, THIRD], {"exact": 100, "partial": 100, "vague": 100},
     )})
-    events, sim = run(tmp_path, pack, 19, [
+    events, sim = run(tmp_path, pack, 1, [  # the epoch's rolls (was 19)
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "steal", "target": GUARD, "method": "distraction"},
         {"intent": "steal", "target": GUARD, "method": "distraction"},
@@ -547,9 +547,9 @@ def test_the_committed_arming_corpus_price_zero(tmp_path: Path) -> None:
     # non-vacuity: the seed-15 session really fires a telling (the
     # noise the drunk shares) — an accepted non-member transfer
     log = tmp_path / "vacuity.jsonl"
-    sim = Simulator(PACK, 15, log, SCHEMA, commit="0000000")
+    sim = Simulator(PACK, 5, log, SCHEMA, commit="0000000")
     sim.run_playscript(
-        {"name": "v", "seed": 15, "pack": "tavern_pack@0.1",
+        {"name": "v", "seed": 5, "pack": "tavern_pack@0.1",
          "steps": SEED15_TALK}
     )
     sim.close()
@@ -578,15 +578,15 @@ def test_the_committed_family_is_live_a_hit_drifts(tmp_path: Path) -> None:
     bytes_of: dict[str, bytes] = {}
     for label, p in (("armed", PACK), ("v01", unarmed)):
         log = tmp_path / f"live_{label}.jsonl"
-        sim = Simulator(p, 2, log, SCHEMA, commit="0000000")
+        sim = Simulator(p, 4, log, SCHEMA, commit="0000000")
         sim.run_playscript(
-            {"name": "live", "seed": 2, "pack": "tavern_pack@0.1",
+            {"name": "live", "seed": 4, "pack": "tavern_pack@0.1",
              "steps": GUARD_TALK}
         )
         sim.close()
         bytes_of[label] = log.read_bytes()
     assert bytes_of["armed"] != bytes_of["v01"]  # the hit is a real byte
-    events, sim = run(tmp_path, PACK, 2, GUARD_TALK, "hit.jsonl")
+    events, sim = run(tmp_path, PACK, 4, GUARD_TALK, "hit.jsonl")  # the epoch's rolls
     telling = by_type(events, "rumor_told")[0]
     assert telling.outcome["accepted"] is True
     assert telling.outcome["knows"] == SIBLING
@@ -614,15 +614,15 @@ def test_a_miss_keeps_the_v0_1_bytes(tmp_path: Path) -> None:
     bytes_of: dict[str, bytes] = {}
     for label, p in (("armed", PACK), ("v01", unarmed)):
         log = tmp_path / f"miss_{label}.jsonl"
-        sim = Simulator(p, 1, log, SCHEMA, commit="0000000")
+        sim = Simulator(p, 3, log, SCHEMA, commit="0000000")
         sim.run_playscript(
-            {"name": "miss", "seed": 1, "pack": "tavern_pack@0.1",
+            {"name": "miss", "seed": 3, "pack": "tavern_pack@0.1",
              "steps": GUARD_TALK}
         )
         sim.close()
         bytes_of[label] = log.read_bytes()
     assert bytes_of["armed"] == bytes_of["v01"]
-    events, _ = run(tmp_path, PACK, 1, GUARD_TALK, "miss.jsonl")
+    events, _ = run(tmp_path, PACK, 3, GUARD_TALK, "miss.jsonl")  # the epoch's rolls
     telling = by_type(events, "rumor_told")[0]
     assert telling.outcome["accepted"] is True
     assert telling.outcome["knows"] == SOURCE

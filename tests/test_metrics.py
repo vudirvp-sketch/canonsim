@@ -739,8 +739,9 @@ def test_payoff_latencies_undeclared_tags_never_pair() -> None:
 def test_payoff_latencies_on_the_committed_day1_run() -> None:
     """The e2e pin: the committed pack's day1_full run carries
     cause_hook on every director release (D-140), and the latencies
-    pair with real seeds (seed 100: the relief document check and the
-    barkeep sweep — both first_time_only, first-seed pairing)."""
+    pair with real seeds (rng-1's epoch moved the pairing seed to 125 —
+    the canonical beat geometry's own: the relief document check and
+    the barkeep sweep, both first_time_only, first-seed pairing)."""
     from core.log import read_log
     from core.loop import Simulator, load_playscript
 
@@ -749,9 +750,9 @@ def test_payoff_latencies_on_the_committed_day1_run() -> None:
     if log.exists():
         log.unlink()
     sim = Simulator(
-        PACK, 100, log, SCHEMA, commit="0000000", director_enabled=True,
+        PACK, 125, log, SCHEMA, commit="0000000", director_enabled=True,
     )
-    sim.run_playscript(dict(script, seed=100))
+    sim.run_playscript(dict(script, seed=125))
     _, events = read_log(log, SCHEMA)
     released = [
         event for event in events

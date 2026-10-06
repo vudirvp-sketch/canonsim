@@ -295,19 +295,20 @@ def test_session_directors_toggle_and_chronicle(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    # A story-bearing script (session seed 42): the clean steal is
-    # story-critical (tune-1), so its line renders in BOTH the post-play
-    # delta print and the full `chronicle` — the prefix-stability law the
-    # waits used to pin before the gate rose.
+    # A story-bearing script (session seed 2 — rng-1's epoch: seed 42's
+    # steal fails now, the lift needs the epoch's own lucky seed): the
+    # clean steal is story-critical (tune-1), so its line renders in BOTH
+    # the post-play delta print and the full `chronicle` — the
+    # prefix-stability law the waits used to pin before the gate rose.
     story = write_script(tmp_path, {
-        "name": "session_story", "seed": 42, "pack": "tavern_pack@0.1",
+        "name": "session_story", "seed": 2, "pack": "tavern_pack@0.1",
         "steps": [
             {"intent": "move", "target": "loc_tavern"},
             {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
         ],
     })
     feed(monkeypatch, ["directors off", f"play {story}", "chronicle", "quit"])
-    assert main(["--seed", "42", "--logs-dir", str(tmp_path / "logs")]) == 0
+    assert main(["--seed", "2", "--logs-dir", str(tmp_path / "logs")]) == 0
     out = capsys.readouterr().out
     assert "director releases OFF" in out
     assert out.count("the player lifts the purse unseen.") == 2  # delta + full

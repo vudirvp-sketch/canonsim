@@ -193,7 +193,7 @@ def test_knower_filter_the_known_by_boundary(tmp_path: Path) -> None:
     index = built(tmp_path)
     guard_view = index.query("purse", knower=GUARD)
     assert {hit.ref for hit in guard_view} == {"figure_reaching_for_purse"}
-    assert {hit.source for hit in guard_view} == {"ev_0007", "ev_0020"}
+    assert {hit.source for hit in guard_view} == {"ev_0007", "ev_0013"}
     pc_view = index.query("purse", knower=PC)
     assert {hit.ref for hit in pc_view} == {"purse_01_present"}
     assert all(hit.knower == PC for hit in pc_view)
@@ -307,12 +307,12 @@ def test_query_vector_dim_and_nan(tmp_path: Path) -> None:
 
 def test_recency_the_newer_record_first(tmp_path: Path) -> None:
     """α·recency: the same token held twice (the guard's two sightings,
-    t=9 and t=12) — the newer record ranks first (age at the build
+    t=8 and t=11 at the epoch's rolls — the newer record ranks first (age at the build
     snapshot)."""
     index = built(tmp_path)
     hits = index.query("purse", knower=GUARD)
-    assert [hit.source for hit in hits] == ["ev_0020", "ev_0007"]
-    assert hits[0].at == 12 and hits[1].at == 9
+    assert [hit.source for hit in hits] == ["ev_0013", "ev_0007"]
+    assert hits[0].at == 11 and hits[1].at == 8  # the epoch's rolls
     index.close()
 
 
@@ -352,12 +352,12 @@ def test_coefficients_are_pack_data(tmp_path: Path) -> None:
     assert flat is not None
     assert [hit.source for hit in flat.query("purse", knower=GUARD)] == [
         "ev_0007",
-        "ev_0020",
+        "ev_0013",
     ]
     flat.close()
     sharp = built(tmp_path)
     assert [hit.source for hit in sharp.query("purse", knower=GUARD)] == [
-        "ev_0020",
+        "ev_0013",
         "ev_0007",
     ]
     sharp.close()
@@ -431,7 +431,7 @@ def test_stale_law_scavenged_store(tmp_path: Path) -> None:
     assert index is not None
     assert index.query("sneak", knower=GUARD) == ()  # stale — never served
     purse = index.query("purse", knower=GUARD)
-    assert [hit.source for hit in purse] == ["ev_0020"]  # the survivor
+    assert [hit.source for hit in purse] == ["ev_0013"]  # the survivor
     index.close()
 
 
@@ -448,14 +448,14 @@ def test_source_precedence_law_live(tmp_path: Path) -> None:
     index = built(tmp_path)
     hits = index.query("purse sneak", knower=GUARD)
     reflection = [hit for hit in hits if hit.ref == INSIGHT]
-    sources = [hit for hit in hits if hit.source in ("ev_0007", "ev_0020")]
+    sources = [hit for hit in hits if hit.source in ("ev_0007", "ev_0013")]
     assert len(reflection) == 1 and len(sources) == 2
     # the score alone would put the reflection FIRST (authority 1.0
     # over 0.5) — the law, not the score, orders the evidence first
     assert reflection[0].score > sources[0].score
     assert hits.index(reflection[0]) > hits.index(sources[0])
     assert hits.index(reflection[0]) > hits.index(sources[1])
-    assert [hit.source for hit in hits] == ["ev_0020", "ev_0007", "ev_0021"]
+    assert [hit.source for hit in hits] == ["ev_0013", "ev_0007", "ev_0014"]
     index.close()
 
 
@@ -466,7 +466,7 @@ def test_reflection_alone_ranks_by_score(tmp_path: Path) -> None:
     index = built(tmp_path)
     hits = index.query("sneak", knower=GUARD)
     assert [hit.ref for hit in hits] == [INSIGHT]
-    assert hits[0].source == "ev_0021"
+    assert hits[0].source == "ev_0014"
     index.close()
 
 

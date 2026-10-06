@@ -226,7 +226,7 @@ def test_the_open_road_cycle(tmp_path: Path) -> None:
     # banks outpace the two-load sales, the withhold deepening even as
     # it sells: the desynchronization WITHIN the working loop itself)
     heaps = [sale.state_changes[0].from_ for sale in sales]
-    assert heaps == [6, 5, 14, 13, 20, 19]
+    assert heaps == [6, 5, 14, 13, 22, 21]
     # the fund climbs on the nets flow — the aggregate arm, its own time
     assert sim.projection[MASTER]["account.coin"] == 42
     # the sale's record public: the beam's witnesses learned
@@ -358,12 +358,12 @@ def test_the_changed_next_cycle_condition(tmp_path: Path) -> None:
     )
     # A: the punctuated rhythm — each cycle's sitting drains two
     # loads, the crossings bank between (the banks outpacing the
-    # sales: every subsequent sitting faces a higher pile — 6, 14, 20)
+    # sales: every subsequent sitting faces a higher pile — 6, 14, 22)
     heaps_a = [
         sale.state_changes[0].from_
         for sale in events_a if sale.type == "account_settled"
     ]
-    assert heaps_a == [6, 5, 14, 13, 20, 19]
+    assert heaps_a == [6, 5, 14, 13, 22, 21]
     # B: the monotone climb — the withhold deepening, never drained
     banks_b = [
         e for e in events_b if e.type == "account_sourced"

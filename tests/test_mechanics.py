@@ -172,9 +172,11 @@ def test_shadow_releases_equal_the_log(tmp_path: Path) -> None:
 
 
 def test_trace_pins_the_canonical_run(tmp_path: Path) -> None:
-    """The STATUS pins render: the relief's check commits at t=734; the
+    """The STATUS pins render: the relief's check commits at t=732; the
     sweep is the day's last event at t=1456; the release lines name the
-    hooks and the log events carry the director attribution."""
+    hooks and the log events carry the director attribution (the epoch's
+    rolls — rng-1's corpus price; the pre-epoch realization's pins died
+    at the boundary)."""
     events = _run_day1(tmp_path)
     out = mechanics.render_trace(
         PACK, events, source="day1", seed=125, tick_from=700
@@ -182,17 +184,17 @@ def test_trace_pins_the_canonical_run(tmp_path: Path) -> None:
     # weather-1's arming price, re-pinned: the warm ring's beat events
     # left the day (the check's id shifted with them, the verdict with
     # the draw sequence); the sweep is the day's last event
-    assert "[t=734] ev_0043 document_check_failed" in out
-    assert "director_0000 -> possible_document_check_relief" in out
+    assert "[t=732] ev_0042 document_check" in out
     tail = mechanics.render_trace(
         PACK, events, source="day1", seed=125, tick_from=1447
     )
-    assert "[t=1456] ev_0055 look_around" in tail
+    assert "[t=1456] ev_0057 look_around" in tail
     assert "barkeep_wary_sweep" in tail
     hook_view = mechanics.render_trace(
         PACK, events, source="day1", seed=125, hook="possible_document_check_relief"
     )
-    assert "seeded 1 (ev_0007@t=9)" in hook_view
+    assert "director_0000 -> possible_document_check_relief" in hook_view
+    assert "seeded 1 (ev_0007@t=7)" in hook_view
     assert "released at beat(s) 360" in hook_view
 
 
@@ -545,13 +547,17 @@ def test_blast_reports_the_insert_delta(tmp_path: Path) -> None:
     out = mechanics.run_blast(
         PACK, SCHEMA, script, step, 3, tmp_path / "blast"
     )
-    # weather-1's arming price: the warm ring's beat events left the
-    # day — the base arm carries 56 (was 61), the +distract arm 57
-    assert "arm A (base)     : 56 events" in out
-    assert "arm B (modified) : 57 events" in out
+    # the epoch's realization (rng-1's corpus price): the base arm
+    # carries 58, the +distract arm 56 — the distraction turned the
+    # relief's check to a failure and the arrest chain died with it;
+    # the fingerprints coincide (EQUAL) at this realization — the
+    # arms' divergence rides the event and projection deltas
+    assert "arm A (base)     : 58 events" in out
+    assert "arm B (modified) : 56 events" in out
     assert "+distract x1" in out
     assert "npc_guard_01.status.attention: None -> 'distracted'" in out
-    assert "DIVERGED" in out
+    assert "+document_check_failed x1" in out
+    assert "-arrest_attempt x1" in out
     assert (tmp_path / "blast" / "blast_day1_full_a.jsonl").exists()
     assert (tmp_path / "blast" / "blast_day1_full_b.jsonl").exists()
 
@@ -674,22 +680,21 @@ def test_census_cli_dispatch(capsys: pytest.CaptureFixture[str]) -> None:
 
 
 def test_timing_reports_the_two_times_record(tmp_path: Path) -> None:
-    """P1-10 over the canonical day1_full run (seed 125): five autonomous
+    """P1-10 over the canonical day1_full run (seed 125): four autonomous
     resolutions, ALL carrying `assignment_tick` with origin <= realization
-    (the B3 discipline block), and the ONE OCC miss is the temp-1 card's
-    own seed-125 datum re-derived independently — the beat-720 coerce
-    attempt whose door landed at t=732 (latency 12, the expired leverage
-    card, phases.md §6's decision record)."""
+    (the B3 discipline block). The pre-epoch realization's ONE OCC miss
+    (the beat-720 coerce, the temp-1 card's datum) died with its rolls at
+    the epoch boundary — the honest zero stands (rng-1's corpus price)."""
     events = _run_day1(tmp_path)
     out = mechanics.render_timing(
         PACK, events, {"seed": 125}, source="day1_full"
     )
-    assert "autonomous resolutions: 5 (4 accepted + 1 rejected)" in out
-    assert "B3 discipline: 5/5 carry assignment_tick" in out
+    assert "autonomous resolutions: 4 (4 accepted + 0 rejected)" in out
+    assert "B3 discipline: 4/4 carry assignment_tick" in out
     assert "non-autonomous carriers: 0" in out
-    assert "latency: min 12 · max 376" in out
-    assert "OCC misses (the deferral window broke a precondition): 1" in out
-    assert "urgency_0000 at 720 -> t 732 (latency 12)" in out
+    assert "latency: min 11 · max 376" in out
+    assert "OCC misses (the deferral window broke a precondition): 0" in out
+    assert "urgency_0004      2 resolutions (   2 accepted) · origins [360,720]" in out
     assert "compression: assignments span [360, 1080] (720 ticks)" in out
 
 
@@ -738,14 +743,18 @@ def test_census_run_names_the_full_path_and_the_occ_class(
     tmp_path: Path,
 ) -> None:
     """Over day1_full (seed 125) the realized families reach H through
-    their declared consumers, and the all-rejected family is the D class
-    — the OCC window's own loss (the same seed-125 datum the timing
-    table reports, the two instruments agreeing)."""
+    their declared consumers; the losses localize as C rows (never
+    co-located / rolled, never hit / the gates), the D class empty at
+    the epoch's rolls (the pre-epoch all-rejected family died with its
+    rolls at the boundary — rng-1's corpus price; the same datum the
+    timing table reports, the two instruments agreeing)."""
     events = _run_day1(tmp_path)
     out = mechanics.render_census_run(
         PACK, events, {"seed": 125}, source="day1_full"
     )
-    assert "urgency_0000" in out and "D: every minted intent died at the door" in out
+    assert "urgency_0000" in out
+    assert "C: never co-located with the target; leverage cluster" in out
+    assert "classes: A 0 · B 1 · C 4 · D 0 · E 0 · F 0 · G 0 · H 9" in out
     assert "urgency_0004" in out and "— H:" in out
     assert "director releases" in out
     assert "possible_document_check" in out  # the payload attribution

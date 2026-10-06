@@ -165,25 +165,28 @@ def test_the_quiet_march_releases_the_murmur(tmp_path: Path) -> None:
     releases it: beat 360, STAGNATION (entropy 0 — no suspicion, no
     fire, no other tension), the ambient channel's own floor the only
     gate left (0 < 2). The murmur releases: director_0000, the
-    drunkard's ramble at t=365 (the intent enqueued at the beat, 3
+    drunkard's ramble at t=366 (the intent enqueued at the beat, 3
     ticks of rambling; the unarmed arm seeded at the wait's own
-    completion — t=725, the second beat — the pre-seed is the arming's
-    designed price on this stage). The room hears — the occupants
+    completion — t=723, the second beat — the pre-seed is the arming's
+    designed price on this stage; rng-1's epoch moved the ride one
+    tick). The room hears — the occupants
     minus the actor, the outgoing guard honestly absent (the t=360
     rotation moved him to the guardroom). Beat 1080 stays silent: the
     tag burned (first_time_only)."""
     events, sim, _ = run_script(tmp_path, QUIET)
     waits = [e for e in events if e.type == "wait"]
     assert all(TAG in e.hooks for e in waits)
-    assert [e.t for e in waits] == [362, 722, 1082]
+    # rng-1's epoch: the first wait's own ride split (363, 364) — the
+    # murmur's window moved one tick with it; the law is the release
+    assert [e.t for e in waits] == [363, 364, 723, 1083]
     (ramble,) = rambles(events)
     # depth-5b: the genesis pre-seeds the murmur (D-005 — the PC walks
     # into a world whose buffer already holds the room's murmur), so the
-    # FIRST quiet beat releases it: t=365, right after the first wait
-    # (the unarmed arm waited for the wait's own seed — t=725, the
+    # FIRST quiet beat releases it: t=366, right after the first wait
+    # (the unarmed arm waited for the wait's own seed — t=723, the
     # second beat)
-    assert ramble.id == "ev_0014"
-    assert ramble.t == 365
+    assert ramble.id == "ev_0015"
+    assert ramble.t == 366
     assert ramble.actor == "npc_drunk_01"
     assert str(ramble.provenance["cause_intent"]) == "director_0000"
     # the murmur rides the door: the observe resolver, the pack's
@@ -334,13 +337,15 @@ def test_the_weight_zero_footprint_the_fingerprint_identity(
     # the pre-murmur prefix is identical; the murmur lands mid-run
     # (past the 5-event genesis prefix both arms share, right after the
     # first wait — the genesis pre-seed admits it at the FIRST beat)
-    assert [e.id for e in live_events[:14]] == [e.id for e in stripped_events[:14]]
-    murmur = live_events[14]
-    assert murmur.type == "ramble" and murmur.t == 365
+    # rng-1's epoch: the murmur rides at index 15 now (the first wait's
+    # own ride split added a line before it)
+    assert [e.id for e in live_events[:15]] == [e.id for e in stripped_events[:15]]
+    murmur = live_events[15]
+    assert murmur.type == "ramble" and murmur.t == 366
     # the tail is content-identical except ONE extra event: the heard
     # record crossing the watch change (guard_02's briefing)
-    live_tail = [(e.t, e.type, e.actor) for e in live_events[15:]]
-    stripped_tail = [(e.t, e.type, e.actor) for e in stripped_events[14:]]
+    live_tail = [(e.t, e.type, e.actor) for e in live_events[16:]]
+    stripped_tail = [(e.t, e.type, e.actor) for e in stripped_events[15:]]
     assert live_tail[:8] == stripped_tail[:8]  # the second beat + the watch change
     assert live_tail[8] == (1080, "knowledge_transfer", "npc_guard_02")
     assert live_tail[9:] == stripped_tail[8:]

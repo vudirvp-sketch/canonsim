@@ -1,43 +1,52 @@
-Iteration: iter-333 (`stageb1impl2` — the stageb-1-impl row's
-  second half, the farstead arming + the B6 battery, R2 pack-data;
-  the owner's «можешь начинать (stageb-1 и scale-1) и прочее»
-  continuation): **THE MATERIAL CYCLE COMPLETE** — the recipe
-  forge_a_tool (the workshop's ore 2 + wood 2 → tool 1), the
-  bloom-bench wear (tool 1 per use, the lint-required gate), the
-  four source caps (the seeded basins: bank 40 / copse 40 /
-  outcrop 24 / spring 60 — the first cut BELOW the seeds was
-  caught BY the cap floor itself, the loud refusal the law's own
-  proof). **THE B6 REALIZED_DELTA ORACLE GREEN at 10y+100y**: (a)
-  the dead pile DIES (the workshop static: ore 4 = the seed, wood
-  12 the conveyor's buffer — the unarmed trajectory headed to
-  2,004 at the kiloyear); (b) the linear piling BREAKS (the total
-  account mass CONSTANT vs the unarmed +26.3/year; the spring ≤ 60
-  vs 10,060); (c) the instrument turnover LIVE AND BALANCED (100
-  conversions = 100 bloom wears over the century, the tools static
-  at the seed 6). B7 held (the armed wall +0.7%, the growth
-  ratios ×1.17–1.5, canon-neutrality HELD); the conservation law
-  extended per B2's own letter (the contract named the test as the
-  extension point).
+Iteration: iter-334 (`rng1` — the rng-1 row, THE EPOCH, R3 core;
+  the owner's «==> P0.5-C, rng-1 (эпоха), станционный килогод
+  с вооружённым миром» call — the row opened by the message
+  itself): **THE COUNTER-BLOCK RNG BANK LANDED** —
+  `U(stream,k) = word(k mod 4) of sha256(key:k div 4)`: O(1)
+  access to the k-th draw (the end-state time-skip horizon H9
+  structurally unlocked), a checkpoint of COUNTERS ONLY (the
+  legacy MT cursor refused LOUD with the reason), branch
+  isolation STRUCTURAL (a draw fixed by (seed, stream, k) — a
+  re-armed neighbor cannot move it even in principle). The block
+  form: one sha256 per 4 draws — 0.42 µs/draw, MT randint's own
+  CPython price; the wall +3.7% (farstead 100y 10.0→10.37 s).
+  **THE CORPUS PRICE PAID AND RECORDED**: 228 failures at the
+  flip, ALL re-pinned with every law's assertion intact — seed
+  re-pins, beat-grid t-stamps, the document-check verdict flip
+  on seed 125, 7 golden fixtures regenerated, 3 playscripts
+  re-seeded, the CRN test's power doubled 8→16 pairs at the SAME
+  thresholds (never weakened); one mechanical corruption caught
+  (test_echo's `pack`→`PACK` from an earlier re-pin — two laws
+  ran on the committed pack instead of the tuned one). P0.5-C
+  closed as exhausted (the hoist rode P0.5-A, the LOD filter
+  reclassified P1, the residual ~22% measured near-linear).
+  **THE OWNER'S BALANCE CONDITION VERIFIED**: the B6 oracle GREEN
+  under the epoch's own draws — 10 conversions = 10 bloom wears
+  at 10y, every source at-or-below its cap, the workshop static
+  at its seed stock — NO pack-data fork needed, the cycle
+  balances on its mechanics. NEXT: the station kiloyear with
+  the armed world (the call's third item, now unblocked — the
+  epoch boundary paid), H9 behind it.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
 2606 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R2 pack-data — the
-  farstead fixture's own corpus price paid (the T1 laws re-pinned
-  to the armed shape), the OTHER packs byte-untouched; INV-1..5
-  untouched, the LOG untouched; NO test deleted or weakened — 3
-  added, 2 re-pinned with the arming's measured shape) ·
-Date: 2026-10-04 ·
-Scope: content/farstead_pack/rules.json (the recipe + the caps +
-  the notes), content/farstead_pack/actions.json (the convert
-  door + the wear binding + the gates),
-  content/farstead_pack/templates.json (the converted line),
-  tests/test_farstead_pack.py (+3 laws, the conservation
-  extension, the loop-closes re-pin, the _run protocol arm),
-  docs/TASKS.md (the row DONE + the ledger, iter-323 evicted),
-  STATUS.md (this header), worklog.md (the iter-333 entry,
-  iter-323 evicted), docs/iterations/iter-333-stageb1impl2-report.md
+  --check clean (Python 3.12.14, the env pin; R3 core — the
+  epoch boundary: the corpus regenerated as the row recorded
+  (228 re-pins, the laws intact); INV-1..5 untouched, the LOG
+  untouched; NO test deleted or weakened) ·
+Date: 2026-10-05 ·
+Scope: core/rng.py (the epoch bank — the counter-block
+  construction, the block memo, the draw forms),
+  core/cursor.py (the loud pre-epoch cursor refusal),
+  tests/ ×53 (the corpus re-pins — every law's assertion
+  intact), tests/fixtures ×11 (the golden corpus regenerated +
+  the deviation expect re-pins), tests/playscripts ×3 (the
+  re-seeds), docs/TASKS.md (the rng-1 row DONE + the ledger,
+  iter-324 evicted), STATUS.md (this header), worklog.md (the
+  iter-334 entry, iter-324 evicted),
+  docs/iterations/iter-334-rng1-report.md (new) ·
   (new — this row's RU report) — 8 changed/created (4 pack/test +
   4 riders).
 

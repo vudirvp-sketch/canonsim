@@ -266,10 +266,11 @@
        },
        "expect": {
         "status": "intent",
-        "events": 2,
-        "last_event": "rumor_told"
+        "events": 1,
+        "last_event": "talk"
        },
-       "answer": "event"
+       "answer": "event",
+       "note": "rng-1 epoch re-measure: the counterparty's rumor roll moved with the draw sequence — the talk commits alone (the door verdict unchanged, the answer still event)"
       }
      ],
      "answers": {
@@ -361,10 +362,11 @@
        },
        "expect": {
         "status": "intent",
-        "events": 2,
-        "last_event": "rumor_told"
+        "events": 1,
+        "last_event": "talk"
        },
-       "answer": "event"
+       "answer": "event",
+       "note": "rng-1 epoch re-measure: the counterparty's rumor roll moved with the draw sequence — the talk commits alone (the door verdict unchanged, the answer still event)"
       },
       {
        "id": "f3e",

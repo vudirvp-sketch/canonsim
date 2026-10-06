@@ -372,9 +372,10 @@ def test_the_mourning_disappears_the_market_stays_loud(
     """The departure's disappearance — iter-274's measured price
     inverted, arm for arm. With the hook gone the mistress NEVER
     leaves the ashes (zero moves against one; she ends at Malby, not
-    the keep's roof) and the market's social surface stays loud: the
-    talks 287 against 2, the rumors 22 against 2, the council back to
-    its single live sitting against the 208-event catch-up pile — the
+    the keep's roof) and the market's social surface stays loud (rng-1's
+    epoch re-measured): the talks 253 against 1, the rumors 18 against
+    1, the council back to its single live sitting against the
+    225-event catch-up pile — the
     carrier's footprint, the exact shape the departure had paid. The
     OTHER families survive the disable test: the feud's vigils 4=4
     and the macro arm's sourced 4=4, untouched — the mourning was
@@ -398,18 +399,18 @@ def test_the_mourning_disappears_the_market_stays_loud(
     assert _moves_by(twin_events, MIST) == 0    # the carrier never left
     assert base_sim.projection[MIST]["position"] == KEEP
     assert twin_sim.projection[MIST]["position"] == MALBY
-    assert _count(twin_events, "talk", "talk_rebuffed") == 287
-    assert _count(base_events, "talk", "talk_rebuffed") == 2
-    assert _count(twin_events, "rumor_told") == 22
-    assert _count(base_events, "rumor_told") == 2
+    assert _count(twin_events, "talk", "talk_rebuffed") == 253
+    assert _count(base_events, "talk", "talk_rebuffed") == 1
+    assert _count(twin_events, "rumor_told") == 18
+    assert _count(base_events, "rumor_told") == 1
     assert _count(twin_events, "guild_councils") == 1
-    assert _count(base_events, "guild_councils") == 208
+    assert _count(base_events, "guild_councils") == 225
     # the other families survive (the disable test's law)
     assert _count(twin_events, "wergeld_vigil") == 4
     assert _count(base_events, "wergeld_vigil") == 4
     assert _count(twin_events, "account_sourced") == 4
     assert _count(base_events, "account_sourced") == 4
-    assert (len(twin_events), len(base_events)) == (2372, 2269)
+    assert (len(twin_events), len(base_events)) == (2327, 2276)
 
 
 def test_the_word_unregisters_the_door_dies(tmp_path: Path) -> None:

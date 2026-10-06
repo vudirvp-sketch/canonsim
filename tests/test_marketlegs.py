@@ -142,11 +142,17 @@ def _run(
     return events, result
 
 
+#: The witness seed (the epoch's rolls — rng-1's corpus price; the
+#: pre-epoch seed 2's lamp take failed at the boundary).
+WITNESS_SEED: int = 229
+
+
 @pytest.fixture(scope="module")
 def witness(tmp_path_factory: pytest.TempPathFactory) -> list[EventRecord]:
     """The minimal legs run, once per module."""
     events, _result = _run(
         tmp_path_factory.mktemp("marketlegs"), "witness.jsonl", STEPS,
+        seed=WITNESS_SEED,
     )
     return events
 
@@ -338,7 +344,7 @@ def test_the_mourns_release_reads_the_ashes(
     ]
     assert len(mourns) == 1, "one mourns per run (first_time_only)"
     departure = mourns[0]
-    assert departure.t == 3252 and departure.t > market_burnout.t
+    assert departure.t == 3297 and departure.t > market_burnout.t  # the epoch's rolls
     assert departure.target == "loc_keep"
     assert _changes(departure) == {
         (MAREN, "position"): (CHEST, "loc_keep"),
@@ -385,13 +391,14 @@ def test_the_vigil_mints_the_blood_price(
     """The families' public act likewise: Thornmill hears the blood
     price spoken (partial — the runner stands there, the steward
     beside him), Malby through the market walls (vague). iter-274's
-    departure footprint ON the hearer sets: the first vigil (t=3255,
-    two ticks past Maren's move) mints WITHOUT her — she is at the
-    keep now, not through the market walls — and with the CORPORAL on
-    the post (the rotation's window moved with the cascade); the
-    later pair (t=4274) carries the SERGEANT back (the rotation's
-    own rhythm). The residue is the ACT's, minted per event at the
-    hearers' live positions, never once per run."""
+    departure footprint ON the hearer sets (the epoch's rolls — rng-1's
+    corpus price): the first vigil (t=3299, two ticks past Maren's
+    move) mints WITHOUT her — she is at the keep now, not through the
+    market walls — and with the CORPORAL on the post (the rotation's
+    window moved with the cascade); the later pair (t=4379) carries
+    the SERGEANT back (the rotation's own rhythm). The residue is the
+    ACT's, minted per event at the hearers' live positions, never
+    once per run."""
     events = witness
     vigils = _of(events, "wergeld_vigil")
     assert len(vigils) == 3  # the deadband's landing pile at this window
@@ -414,8 +421,8 @@ def test_the_vigil_mints_the_blood_price(
     by_tick = {}
     for vigil in vigils:
         by_tick.setdefault(vigil.t, []).append(vigil)
-    assert _records(by_tick[3254][0]) == first  # the departure's own window
-    for vigil in by_tick[4274]:
+    assert _records(by_tick[3299][0]) == first  # the departure's own window
+    for vigil in by_tick[4379]:
         assert _records(vigil) == later
 
 

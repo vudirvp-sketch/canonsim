@@ -108,11 +108,11 @@ def test_scenes_from_the_golden_log() -> None:
         (scene.location_id, scene.ordinal, scene.from_tick, scene.to_tick)
         for scene in scenes(events, PACK)
     ] == [
-        ("loc_street", 0, 0, 2),
-        ("loc_tavern", 0, 2, 36),
-        ("loc_backyard", 0, 36, 54),
-        ("loc_street", 1, 54, 58),  # the revisit is a NEW scene
-        ("loc_market", 0, 58, None),
+        ("loc_street", 0, 0, 3),
+        ("loc_tavern", 0, 3, 37),
+        ("loc_backyard", 0, 37, 56),
+        ("loc_street", 1, 56, 59),  # the revisit is a NEW scene
+        ("loc_market", 0, 59, None),
     ]
 
 
@@ -162,10 +162,10 @@ def test_present_entities_item_carried_by_absent_npc_is_absent() -> None:
 
 
 def test_establishment_stamps_t_from_the_log_never_the_delta() -> None:
-    events = _golden_events()[5:7]  # last event t=32
+    events = _golden_events()[5:7]  # last event t=33
     ledger = SceneLedger()
     report = _establish(ledger, events, "scene:loc_tavern", "candles", "lit")
-    assert [entry.t for entry in report.established] == [32]  # L3: derive-never-store
+    assert [entry.t for entry in report.established] == [33]  # L3: derive-never-store
     assert report.established[0].source == "turn:1"
 
 

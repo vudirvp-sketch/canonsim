@@ -282,7 +282,7 @@ def test_mode_b_scene_delta_is_the_knowers_perception(tmp_path: Path) -> None:
     (mid-run beats included — the guard's window at the theft beats,
     the empty window after his departure: silence is the honest
     answer, never a leak)."""
-    events = run_day1(tmp_path, 123)
+    events = run_day1(tmp_path, 1)
     for cut in (13, 16, 20, 25, 30, len(events)):
         brief = render_brief(assemble_brief(events[:cut], knower=GUARD, pack=PACK))
         _run_delta_is_leak_free(events[:cut], GUARD, brief)
@@ -793,7 +793,7 @@ def test_recall_query_is_the_fresh_window_tokens(tmp_path: Path) -> None:
     for the knower, first-seen order, space-joined — leak-free by
     construction (the tokens ARE the knower's own fresh records; the
     pre-first-beat window is the whole log)."""
-    events = run_day1(tmp_path, 123)
+    events = run_day1(tmp_path, 1)
     assert recall_query(events[5:15], PACK, GUARD) == (
         "pc_01_arrived pc_01_reaching_for_oil_lamp_01 noise_in_loc_tavern "
         "figure_reaching_for_purse noise_by_the_bar"
@@ -887,7 +887,7 @@ def test_the_actor_call_carries_query_and_retrieval_lines(
     `query:` line (the relevance signal made visible) and the ladder's
     top `retrieval:` rows — dry demand handles with the fidelity and
     the minting event id inline; mode A carries neither."""
-    events = run_day1(tmp_path, 123)
+    events = run_day1(tmp_path, 1)
     window = events[5:15]
     query = recall_query(window, PACK, GUARD)
     index = RetrievalIndex.build(PACK, window)

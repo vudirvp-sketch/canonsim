@@ -91,9 +91,9 @@ SCRIPT = load_playscript(REPO / "tests" / "playscripts" / "province_composition.
 #: autonomous resolutions 384→306, the event total 2376→2269 — the
 #: collapse outweighs the pile). Re-pin only together with a
 #: legitimate pack or engine change that explains the move.
-EVENT_COUNT: int = 2269
-AUTONOMOUS_RESOLUTIONS: int = 306  # 305 accepted + 1 rejected
-TALK_COUNT: int = 2
+EVENT_COUNT: int = 2276
+AUTONOMOUS_RESOLUTIONS: int = 309  # 308 accepted + 1 rejected
+TALK_COUNT: int = 1
 VIGIL_COUNT: int = 4
 
 
@@ -132,10 +132,12 @@ def test_the_theft_failure_mints_knowledge_leverage_and_suspicion(
     """The chain's first leg: the failed steal of the sergeant's pay tin
     is a FACT (a `pickpocket_failed` event, cause-chained), and the
     world answers on three subsystems at once — the witnessed knowledge
-    mint (`figure_reaching_for_tin`, the sergeant AND the mistress),
-    the leverage economy (a cluster over the PC for each novel knower),
-    and the crime axis (suspicion +25 / noise +10, the PC `suspect`:
-    the status flips at the declared 25 bar)."""
+    mint (`figure_reaching_for_tin`), the leverage economy (a cluster
+    over the PC for each novel knower: the sergeant at the theft tick,
+    the corporal at the briefing tick — the transfer's own mint; the
+    epoch's rolls dropped the mistress's cluster with the old
+    realization, rng-1's corpus price), and the crime axis (suspicion
+    +25, the PC `suspect`: the status flips at the declared 25 bar)."""
     events, _ = witness
     steal = _of(events, "pickpocket_failed")
     assert len(steal) == 1 and steal[0].actor == "pc_01"
@@ -143,10 +145,10 @@ def test_the_theft_failure_mints_knowledge_leverage_and_suspicion(
     minted = _of(events, "leverage_gained")
     holders = {e.actor: e.t for e in minted}
     assert set(holders) == {
-        "npc_sergeant_01", "npc_marketmistress_01", "npc_corporal_01",
+        "npc_sergeant_01", "npc_corporal_01",
     }, (
         "the theft sighting must mint a cluster for each NOVEL knower: "
-        "the two co-located witnesses at the theft tick, the relief at "
+        "the witness at the theft tick, the relief at "
         "the briefing tick (the transfer's own mint)"
     )
     assert holders["npc_corporal_01"] > holders["npc_sergeant_01"]
@@ -156,7 +158,6 @@ def test_the_theft_failure_mints_knowledge_leverage_and_suspicion(
     ]
     by_source = {e.outcome["source"]: e.outcome["to"] for e in suspicion}
     assert by_source["witnessed_steal_failure"] == 55  # 30 (the arson) + 25
-    assert by_source["heard_noise"] == 65  # +10 the stalls' noise
     status = next(
         e for e in _of(events, "suspicion_changed")
         if ("pc_01", "crime_status") in _changes(e)
@@ -186,7 +187,6 @@ def test_the_watch_rotation_briefing_spreads_the_whole_stack(
     assert by_source == {
         "witnessed_arson": 30,
         "witnessed_steal_failure": 55,
-        "heard_noise": 65,
     }, "the briefing must carry the whole stack in one cause-chained tick"
 
 
@@ -197,10 +197,12 @@ def test_the_institutional_check_consumes_the_suspicion_and_arrests(
     (`document_check`, urgency_0001 — the levy bending for whoever
     feeds it) realizes as an accepted check, the waybill knowledge
     crosses the arrest bar (75) WHILE co-located, the arrest attempt
-    follows in the same tick, and the resolution writes the terminal
-    `caught` status — irreversible (a later re-arrest is idempotent,
-    the KI#13 discipline). The relief hook's own check arm fires too
-    (the director's manifest hook at t=4680) — two arms, one door."""
+    follows in the same tick — and the epoch's rolls turn the
+    resolution into an EVASION (caught false, evasion 60 vs pursuit
+    51, margin -9): no terminal status is written, the PC stays
+    `suspect` (rng-1's corpus price — the pre-epoch resolution's
+    `caught` died at the boundary). The relief hook's own check arm
+    no longer fires on this realization."""
     events, _ = witness
     checks = _of(events, "document_check")
     assert checks and all(c.actor == "npc_sergeant_01" for c in checks)
@@ -219,15 +221,9 @@ def test_the_institutional_check_consumes_the_suspicion_and_arrests(
     assert attempt[0].t == waybill[0].t, "the attempt rides the crossing tick"
     resolved = _of(events, "arrest_resolved")
     assert len(resolved) == 1
-    assert _changes(resolved[0])[("pc_01", "crime_status")] == (
-        "suspect", "caught",
-    )
-    relief_waybill = [
-        e for e in _of(events, "suspicion_changed")
-        if e.outcome.get("source") == "waybill_unsatisfactory"
-        and e.actor == "npc_corporal_01"
-    ]
-    assert relief_waybill, "the relief hook's own check arm must fire"
+    assert resolved[0].outcome["caught"] is False
+    assert resolved[0].outcome["margin"] == -9
+    assert not _changes(resolved[0]), "the evasion writes no state change"
 
 
 # -- chain 2: the fire loops (A's guild arm + B's vigil) ----------------------
@@ -267,20 +263,20 @@ def test_the_market_fire_tips_the_guild(
     else."""
     events, _ = witness
     councils = _of(events, "guild_councils")
-    # iter-274: the departure's own price — the live council (t=4175,
-    # the fear spiked past the bar) plus the 207-event B2 catch-up
-    # pile at the year crossing (t=525335), the fear frozen cold at
-    # the keep above the guild bar, the known one-tick pile shape
-    assert len(councils) == 208
+    # iter-274 + the epoch's rolls (rng-1's corpus price): the live
+    # council (t=4760, the fear spiked past the bar) plus the 224-event
+    # B2 catch-up pile at the year crossing (t=525560), the fear frozen
+    # cold at the keep above the guild bar, the known one-tick pile shape
+    assert len(councils) == 225
     assert all(c.actor == "grp_river_guild" for c in councils)
     assert all(
         c.provenance["cause_intent"] == "faction_0000" for c in councils
     )
     live = next(c for c in councils if c.t < 500000)
-    assert live.t == 4175
+    assert live.t == 4760
     assert live.provenance["assignment_tick"] < live.t
-    pile = [c for c in councils if c.t == 525335]
-    assert len(pile) == 207  # the catch-up: origins spread, one landing
+    pile = [c for c in councils if c.t == 525560]
+    assert len(pile) == 224  # the catch-up: origins spread, one landing
 
 
 def test_both_fires_open_the_families_deadband(
@@ -308,10 +304,11 @@ def test_the_year_turns_the_whole_calendar_with_the_ride(
     """The composed year (the F3 form over this run): 36 market days,
     12 fairs, the four seasons in cycle order at days 90/180/270/360,
     one year turn (151 — the chronicle binding), the seasonal weather
-    ride (3 rolls — the long-light's no-op roll suppresses its event;
-    the thaw's roll draws STORM). The co-occurrence at the rise: the
-    season crossing FIRST, then its weather roll, then the market —
-    the coarsest-first discipline."""
+    ride (4 rolls at the epoch's draws — rng-1's corpus price: the
+    high-water OVERCAST, the long-light RAIN, the first-frost CLEAR,
+    the thaw RAIN). The co-occurrence at the rise: the season crossing
+    FIRST, then its weather roll, then the fair — the coarsest-first
+    discipline."""
     events, _ = witness
     assert len(_of(events, "market_opens")) == 36
     assert len(_of(events, "fair_opens")) == 12
@@ -324,7 +321,7 @@ def test_the_year_turns_the_whole_calendar_with_the_ride(
     assert len(year) == 1 and year[0].outcome["year"] == 151
     rides = _of(events, "weather_turns")
     assert [r.outcome["weather"] for r in rides] == [
-        "overcast", "clear", "storm",
+        "overcast", "rain", "clear", "rain",
     ]
     at_90 = [e.type for e in events if e.t == 129600]
     assert at_90[:3] == ["high_water_rises", "weather_turns", "fair_opens"]
@@ -393,10 +390,10 @@ def test_the_world_stays_causally_loud_through_the_year(
     assert all(
         t.provenance["cause_intent"] == "urgency_0004" for t in talks
     )
-    assert all(t.t < 3573 for t in talks)  # the burnout ends the market's life
+    assert all(t.t < 3798 for t in talks)  # the burnout ends the market's life
     assert len(_of(events, "watch_change")) == 730
-    assert len(_of(events, "knowledge_transfer")) == 7
-    assert len(_of(events, "rumor_told")) == 2
+    assert len(_of(events, "knowledge_transfer")) == 8
+    assert len(_of(events, "rumor_told")) == 1
 
 
 # -- the persistence oracles (§12's relations) ---------------------------------
@@ -423,21 +420,22 @@ def test_persistent_residue_feeds_a_future_faction_event(
 def test_the_final_projection_carries_the_persistent_deltas(
     witness: tuple[list[EventRecord], Any],
 ) -> None:
-    """The end-state relations: the caught status persists (irreversible),
-    both burned locations stay destroyed, the elders' grievance holds
-    (50/55 — decay 0), and the watchers' suspicion stacks persist at
-    100/90 — the run's residues survive the whole year of churn (the
-    long-wait oracle: waiting never erases a declared persistent
-    consequence)."""
+    """The end-state relations: the evasion's residue persists (the PC
+    stays `suspect` — the epoch's resolution never wrote `caught`,
+    rng-1's corpus price), both burned locations stay destroyed, the
+    elders' grievance holds (50/55 — decay 0), and the watchers'
+    suspicion stacks persist at 100/55 — the run's residues survive
+    the whole year of churn (the long-wait oracle: waiting never erases
+    a declared persistent consequence)."""
     events, _ = witness
     projection = fold(events, initial_projection(PROVINCE.entities))
-    assert projection["pc_01"]["crime_status"] == "caught"
+    assert projection["pc_01"]["crime_status"] == "suspect"
     assert projection["loc_keep"]["destroyed"] is True
     assert projection["loc_malby"]["destroyed"] is True
     assert projection["npc_smelter_01"]["status.grievance"] == 50
     assert projection["npc_steward_01"]["status.grievance"] == 55
     assert projection["npc_sergeant_01"]["pair.pc_01.suspicion"] == 100
-    assert projection["npc_corporal_01"]["pair.pc_01.suspicion"] == 90
+    assert projection["npc_corporal_01"]["pair.pc_01.suspicion"] == 55
 
 
 # -- the timing oracles (P1-10, temp-1's half (b) over THIS witness) -----------
@@ -448,9 +446,9 @@ def test_every_autonomous_resolution_carries_both_times(
 ) -> None:
     """The B3 discipline over the composition corpus: EVERY autonomous
     resolution (accepted and rejected alike) carries `assignment_tick`
-    with origin ≤ realization; the measured surface is 305 resolutions
-    (iter-274: the departure's collapse — the talks and the cascade
-    gone with the carrier) — and no player or world event ever
+    with origin ≤ realization; the measured surface is 309 resolutions
+    (iter-274's collapse re-measured at the epoch — rng-1's corpus
+    price) — and no player or world event ever
     carries the field (the field is the autonomous door's own)."""
     events, _ = witness
     autonomous = [e for e in events if _is_autonomous(e)]
@@ -467,23 +465,22 @@ def test_the_deferral_latency_surface(
     witness: tuple[list[EventRecord], Any],
 ) -> None:
     """The two-times surface over the integrated run: every autonomous
-    resolution is deferred (min latency 7 — the door+duration floor,
-    never zero), the max is the year-scale 517055 (iter-274: the
-    council pile's own catch-up, the origins spread to 517680 with
-    the one-tick landing), and the two remaining talks' real origins
-    sit early [1800, 2520] — the burnout at t=3573 ends the talk
-    family's window before the year turns, the departure's own
-    footprint on the two-times surface."""
+    resolution is deferred (min latency 80 — the door+duration floor,
+    never zero), the max is the year-scale 511880 (the council pile's
+    own catch-up with the one-tick landing), and the remaining talk's
+    real origin sits at 3240 — the burnout at t=3798 ends the talk
+    family's window before the year turns (the epoch's rolls — rng-1's
+    corpus price)."""
     events, _ = witness
     latencies = [
         e.t - e.provenance["assignment_tick"]
         for e in events if _is_autonomous(e)
     ]
-    assert min(latencies) == 7
-    assert max(latencies) == 517055
+    assert min(latencies) == 80
+    assert max(latencies) == 511880
     talks = _of(events, "talk")
     origins = [t.provenance["assignment_tick"] for t in talks]
-    assert (min(origins), max(origins)) == (1800, 2520)
+    assert origins == [3240]
 
 
 def test_the_occ_miss_is_a_recorded_fact(
@@ -491,9 +488,10 @@ def test_the_occ_miss_is_a_recorded_fact(
 ) -> None:
     """The material H1 instance on this corpus: the ONE autonomous
     rejection — a director release (the manifest-check family) minted
-    at the beat t=2520 whose door landed at t=3449, 929 ticks later —
+    at the beat t=2520 whose door landed at t=3674, 1154 ticks later —
     the deferral window is where the precondition broke (the duty
-    rotation moved the sergeant off-stage). The rejection carries BOTH
+    rotation moved the sergeant off-stage; the epoch's rolls moved the
+    landing — rng-1's corpus price). The rejection carries BOTH
     times: a minted-and-doomed fact, exactly the OCC miss the two-times
     record makes inspectable."""
     events, _ = witness
@@ -502,10 +500,10 @@ def test_the_occ_miss_is_a_recorded_fact(
     ]
     assert len(rejected) == 1
     miss = rejected[0]
-    assert miss.provenance["cause_intent"] == "director_0001"
+    assert miss.provenance["cause_intent"] == "director_0002"
     assert miss.provenance["assignment_tick"] == 2520
-    assert miss.t == 3449
-    assert miss.t - miss.provenance["assignment_tick"] == 929
+    assert miss.t == 3674
+    assert miss.t - miss.provenance["assignment_tick"] == 1154
 
 
 # -- the determinism + scope pins ----------------------------------------------

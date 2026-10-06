@@ -82,19 +82,25 @@ def _checks(events) -> list[tuple[str, dict]]:
 
 
 def test_exp0_world_side_grows_on_the_landed_folds(tmp_path: Path) -> None:
-    """Seed 32, the rich arc: the day-one botch seeds the room's memory
-    (four leverage holders + the transferred fifth), the purse lift fires
-    the expectation violation, the document challenge is answered, the
-    trait crystallizes on BOTH guards (the permanent paranoia) and the
-    trait-gated scans keep firing all week. Growth runs on the landed
-    folds — the reframe's null, measured."""
+    """Seed 32, the rich arc (rng-1's epoch re-measured): the day-one
+    double botch seeds the room's memory (four leverage holders + the
+    transferred fifth), the purse lift fires the expectation violation,
+    the document challenge is answered — AGAINST the player now (the
+    epoch's dice flipped the verdict: the guard's check passes, the
+    papers do not satisfy), the trait crystallizes on BOTH guards (the
+    permanent paranoia) and the trait-gated scans keep firing all
+    week; the suspicion axis climbs past the arrest threshold and the
+    attempt fires at the week's end — the player evades by one (51 vs
+    50). Growth runs on the landed folds — the reframe's null,
+    measured."""
     events, projection = _run(32, tmp_path)
     types = [e.type for e in events]
     assert types.count("leverage_gained") == 5  # the botch's social residue
     assert types.count("expectation_violation") == 1  # the purse discovery
-    assert types.count("document_check_failed") == 1  # the challenge answered
-    assert types.count("knowledge_transfer") == 2  # the watch rotations
-    assert types.count("look_around") == 9  # the trait-gated paranoid scans
+    assert types.count("document_check") == 1  # the challenge answered (against)
+    assert types.count("knowledge_transfer") == 3  # the watch rotations
+    assert types.count("look_around") == 7  # the trait-gated paranoid scans
+    assert types.count("arrest_attempt") == 1  # the suspicion's end-game
     # the crystallized trait: both guards, permanent
     traits = crystallized_traits(
         PACK, KnowledgeView.from_events(events), events[-1].t
@@ -103,9 +109,10 @@ def test_exp0_world_side_grows_on_the_landed_folds(tmp_path: Path) -> None:
         ("npc_guard_01", "paranoid_about_thieves"),
         ("npc_guard_02", "paranoid_about_thieves"),
     }
-    # the persistent suspicion axis, below the arrest threshold all week
-    assert projection["npc_guard_01"]["pair.pc_01.suspicion"] == 55
-    assert projection["npc_guard_02"]["pair.pc_01.suspicion"] == 55
+    # the persistent suspicion axis: guard_02 crosses the threshold (75)
+    # at the week's end — the attempt fires, the evasion holds by one
+    assert projection["npc_guard_01"]["pair.pc_01.suspicion"] == 85
+    assert projection["npc_guard_02"]["pair.pc_01.suspicion"] == 100
     # the chronicle tells it as a story (the tale-gated read of the same)
     text = chronicle_from_log(
         tmp_path / "exp0_32.jsonl", PACK, SCHEMA
@@ -115,7 +122,7 @@ def test_exp0_world_side_grows_on_the_landed_folds(tmp_path: Path) -> None:
         "the movement.",
         "the player lifts the purse unseen.",
         "Doren checks on the purse — it is not where it should be.",
-        "Doren demands papers from the player — the answer satisfies.",
+        "Doren demands papers from the player — the papers do not satisfy.",
         "The room watches the player closely.",
         "the player takes the mug of ale.",
         "the mug of ale breaks with a noise.",
@@ -124,27 +131,31 @@ def test_exp0_world_side_grows_on_the_landed_folds(tmp_path: Path) -> None:
 
 
 def test_exp0_actor_side_stays_the_day_one_coin(tmp_path: Path) -> None:
-    """The falsifier's flat half, pinned: 27 opposed checks over the week
-    (25 lift attempts, 3 wins; the purse gambit 1-of-2 — the botch, then
-    the luck), every attacker total inside base + d20, and the actor's
-    effective stealth at the run's END exactly the pack base — after 159
-    canonical events of practice, nothing in the folded state feeds the
-    thief's resolution. A per-actor mastery term (the card's leading
-    candidate) fails this pin the day it lands — by design: the verdict's
-    substrate, re-verified at every HEAD."""
+    """The falsifier's flat half, pinned (rng-1's epoch re-measured):
+    29 opposed checks over the week (25 lift attempts, 3 wins; the
+    purse gambit 1-of-3 — two botches, an interleaved failed mug-take,
+    then the lucky lift), every attacker total inside base + d20, and
+    the actor's effective stealth at the run's END exactly the pack
+    base — after 168 canonical events of practice, nothing in the
+    folded state feeds the thief's resolution. A per-actor mastery
+    term (the card's leading candidate) fails this pin the day it
+    lands — by design: the verdict's substrate, re-verified at every
+    HEAD."""
     events, projection = _run(32, tmp_path)
     checks = _checks(events)
-    assert len(events) == 159
-    # the purse race first (2 checks: the botch, then the lift), then 25
-    # lift attempts — the one-shot purse law: the script's later steal
-    # steps reject once the purse rides the actor (attempts are facts)
-    assert [kind for kind, _ in checks[:2]] == [
-        "pickpocket_failed", "steal",
+    assert len(events) == 168
+    # the purse race first (3 steal attempts: two botches, then the
+    # lift — with a failed mug-take interleaved before the win), then
+    # 25 lift attempts — the one-shot purse law: the script's later
+    # steal steps reject once the purse rides the actor (attempts are
+    # facts)
+    assert [kind for kind, _ in checks[:4]] == [
+        "pickpocket_failed", "pickpocket_failed", "take_failed", "steal",
     ]
     take_totals = [c["attacker_total"] for kind, c in checks if
                    kind in ("take", "take_failed")]
     assert len(take_totals) == 25
-    assert sum(1 for kind, c in checks[2:] if c["passed"]) == 3
+    assert sum(1 for kind, c in checks[4:] if c["passed"]) == 3
     assert all(41 <= t <= 60 for t in take_totals)  # stealth base 40 + d20
     # the tripwire: the day-one resolution inputs, unchanged at the horizon
     assert skill_total(PACK, projection, "pc_01", "stealth") == 40
@@ -158,9 +169,11 @@ def test_exp0_actor_side_stays_the_day_one_coin(tmp_path: Path) -> None:
 def test_exp0_sweep_win_vector_is_the_flat_coin(tmp_path: Path) -> None:
     """The distributional half: across the eight pinned sweep seeds the
     lift-attempt win counts are exactly this vector — the flat coin's
-    draws. Any systematic per-actor drift (a mastery term, a draw-order
-    change, a pack edit to the stealth table) moves the vector and fires
-    the pin; the verdict then needs re-reading, not a test tweak."""
+    draws (rng-1's epoch re-drawn; the take count itself stays 25 on
+    every seed). Any systematic per-actor drift (a mastery term, a
+    draw-order change, a pack edit to the stealth table) moves the
+    vector and fires the pin; the verdict then needs re-reading, not
+    a test tweak."""
     wins = []
     for seed in range(2000, 2008):
         events, _ = _run(seed, tmp_path)
@@ -171,4 +184,4 @@ def test_exp0_sweep_win_vector_is_the_flat_coin(tmp_path: Path) -> None:
         takes = [c for kind, c in checks if kind in ("take", "take_failed")]
         assert len(takes) == 25
         wins.append(sum(1 for c in takes if c["passed"]))
-    assert wins == [7, 2, 4, 1, 7, 4, 6, 5]
+    assert wins == [2, 3, 2, 3, 3, 4, 3, 1]

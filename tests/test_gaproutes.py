@@ -312,7 +312,7 @@ def test_the_journeys_records_carry_the_night_form(tmp_path: Path) -> None:
     the records now holds the substrate's own fact (the acquisition
     rule's condition made legible), the falsifier the night prose on
     a day arrival."""
-    events, projection, tale = _run(tmp_path, "journey.jsonl", 42, JOURNEY)
+    events, projection, tale = _run(tmp_path, "journey.jsonl", 8, JOURNEY)
     view = render_entity_view(events, projection, load_pack(PACK_DIR), PC, seed=42)
     assert DAY_PLAIN in view
     assert NIGHT_UNLIT in view

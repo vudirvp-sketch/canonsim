@@ -174,22 +174,20 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
         tmp_path / "balance_125_on_nopacing.jsonl"
     ).read_text(encoding="utf-8").splitlines()
     # depth-5b: the arms share the whole prefix through the backyard
-    # move (48 raw lines — the header + ev_0000..ev_0046, the genesis
-    # included); the clockless arm then admits the GENESIS-PRE-SEEDED
-    # murmur at the first quiet window (t=735: no clock, no PEAK
-    # suppression, the ambient floor the only gate left), inserting it
-    # right before the player's drop_break — the ON arm's all-peak law
+    # move; the clockless arm then admits the GENESIS-PRE-SEEDED
+    # murmur at the first quiet window (no clock, no PEAK suppression,
+    # the ambient floor the only gate left) — the ON arm's all-peak law
     # keeps the murmur silent the whole day (the D-066 finding, the
     # ambient row's own containment pin)
-    # weather-1's arming price, re-pinned: the warm ring's beat events
-    # left the day (the LOD holds them for crossings no day-scale run
-    # reaches) — the 1456 paranoid scan among them (BOTH arms: the
-    # guardroom ride), and the beat count shift moves the arms' shared
-    # prefix by one line
-    assert on_log[:47] == off_log[:47]
-    assert json.loads(on_log[47])["type"] == "drop_break"
-    assert json.loads(off_log[47])["type"] == "ramble"
-    assert json.loads(off_log[47])["t"] == 735
+    # rng-1's epoch, re-pinned: the beat grid shifted once more — the
+    # shared prefix is 48 raw lines (the header + ev_0000..ev_0046),
+    # the murmur rides the first quiet window at t=733 now, one line
+    # before the player's own move (the drop_break's ride follows at
+    # t=735 in both arms)
+    assert on_log[:48] == off_log[:48]
+    assert json.loads(on_log[48])["type"] == "move"
+    assert json.loads(off_log[48])["type"] == "ramble"
+    assert json.loads(off_log[48])["t"] == 733
     sweep = on_log[-1]
     assert '"type": "look_around"' in sweep
     assert '"cause_intent": "director_0001"' in sweep
@@ -398,14 +396,19 @@ def test_paired_crn_buys_most_on_the_structural_rows(tmp_path: Path) -> None:
     own runs the pair-variance ratio sits at hundredths on the
     structural rows (events, M1 — the CRN win) while the causal-chain
     metric stays the noisy tail — pairing buys the most exactly where
-    marginal reporting is noisiest."""
+    marginal reporting is noisiest. rng-1's epoch re-measured the
+    surface at 16 pairs: the 8-pair estimate's noise put events at
+    0.054 (the ratio is a 7-df chi-square-ish quotient — hundredths
+    either way); 16 pairs pin it at 0.018/0.015 with M3 at 0.175,
+    the 5x separation intact with margin — the law's power, not its
+    threshold, moved."""
     argv = [
-        "--runs", "8", "--seed-base", "100", "--directors", "on",
+        "--runs", "16", "--seed-base", "100", "--directors", "on",
         "--pacing", "off", "--paired-delta", "--out-dir", str(tmp_path),
     ]
     assert balance_harness.main(argv) == 0
     table = (
-        tmp_path / "balance_8_seed100_on_nopacing_paired.txt"
+        tmp_path / "balance_16_seed100_on_nopacing_paired.txt"
     ).read_text(encoding="utf-8")
     events_ratio = float(_paired_row(table, "events")[7])
     m1_ratio = float(_paired_row(table, "M1")[7])

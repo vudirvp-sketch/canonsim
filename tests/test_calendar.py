@@ -475,7 +475,7 @@ def test_the_default_ride_stays_the_macro_year(tmp_path: Path) -> None:
     move it."""
     pack = crafted_pack(tmp_path, "default", crafted_calendar())
     assert seasonal_ride(pack.rules) is None
-    log, _ = _run(tmp_path, pack, 11, WAIT_100, "default")
+    log, _ = _run(tmp_path, pack, 3, WAIT_100, "default")
     _, events = read_log(log, SCHEMA)
     weather = _events(events, "weather_turns")
     assert [e.t for e in weather] == [24, 48, 72, 96]
@@ -552,8 +552,11 @@ def test_the_session_law_and_the_resume_door_straddle_crossings(
 def test_the_committed_year_run_reads_the_whole_calendar(
     tmp_path: Path,
 ) -> None:
-    """The composed experiment (province_calendar.json, seed 42 — the
-    F3 four-read-surfaces form): the factor's runner walks to Malby and
+    """The composed experiment (province_calendar.json, seed 52 —
+    rng-1's epoch re-measured: the weather chain's draws moved, the
+    full four-turn ride with the storm at the rise needs the epoch's
+    own seed (42 draws the same sky thrice); the F3 four-read-surfaces form): the factor's runner
+    walks to Malby and
     waits through the year. The counts: 36 market days, 12 fairs, the
     four seasons in cycle order (the run OPENS in the thaw — the first
     crossing is the RISE at day 90, the wrap's thaw turns with the year
@@ -573,8 +576,8 @@ def test_the_committed_year_run_reads_the_whole_calendar(
     )
     pack = load_pack(REPO / "content" / "province_pack")
     log = tmp_path / "year.jsonl"
-    sim = Simulator(pack, 42, log, SCHEMA, commit="0000000")
-    sim.run_playscript(script)
+    sim = Simulator(pack, 52, log, SCHEMA, commit="0000000")
+    sim.run_playscript(dict(script, seed=52))
     sim.close()
     _, events = read_log(log, SCHEMA)
 
@@ -610,8 +613,8 @@ def test_the_committed_year_run_reads_the_whole_calendar(
 
     # the determinism: the twin run byte-identical (INV-2)
     twin = tmp_path / "year_twin.jsonl"
-    sim = Simulator(pack, 42, twin, SCHEMA, commit="0000000")
-    sim.run_playscript(script)
+    sim = Simulator(pack, 52, twin, SCHEMA, commit="0000000")
+    sim.run_playscript(dict(script, seed=52))
     sim.close()
     assert twin.read_bytes() == log.read_bytes()
 
@@ -619,7 +622,7 @@ def test_the_committed_year_run_reads_the_whole_calendar(
     # (the story-critical listing decides — the tune-1 split)
     from render.chronicle import render_chronicle
 
-    tale = render_chronicle(events, pack, seed=42)
+    tale = render_chronicle(events, pack, seed=52)
     assert "Day 10: the river market opens at Malby" in tale
     assert "Day 30: the month's fair at Malby" in tale
     assert "Day 90: the river rises" in tale

@@ -4,7 +4,7 @@
 contradiction, the `stale` flag, reflection-on-recurrence never
 `summarize_messages_in_place`; LEGEND_SPEC.md written just-in-time at
 this row"; leg-3b — "the tavern reflection set, arming the v0.1 pack
-block ... the measured candidates are day1_full seeds 123/128"). The
+block ... the measured candidates are day1_full seeds 123/129"). The
 contract owner is `docs/LEGEND_SPEC.md`.
 
 The laws pinned here:
@@ -33,7 +33,7 @@ The laws pinned here:
   reads a knowledge-derived entry; the cascade terminates by
   construction.
 - **The arming law (leg-3b, iter-58)**: the committed pack carries
-  the LIVE block — the measured recurrence (day1_full seeds 123/128:
+  the LIVE block — the measured recurrence (day1_full seeds 123/129:
   the PC retries the theft) mints the pack's four conclusions (the
   targeted guard's `sneak_at_work_here`, the room trio's
   `trouble_by_the_bar`); every other seed, the narrator corpus (105
@@ -191,8 +191,8 @@ def test_the_mint_fires_at_the_threshold_crossing(tmp_path: Path) -> None:
     assert len(minted) == 1
     event = minted[0]
     assert event.actor == GUARD
-    assert event.cause == "ev_0020"  # the second pickpocket attempt
-    assert event.t == 12  # the second sighting's tick — the crossing
+    assert event.cause == "ev_0013"  # the second pickpocket attempt (the epoch's rolls)
+    assert event.t == 11  # the second sighting's tick — the crossing
     # the cascade terminates: the reflection event's own reaction pass
     # mints nothing (no recursion — exactly one event in the log)
     assert sum(1 for e in events if e.type == REFLECTION_EVENT) == 1
@@ -221,7 +221,7 @@ def test_the_committed_pack_arms_the_measured_recurrence(
     tmp_path: Path,
 ) -> None:
     """leg-3b live: the committed block's own mint — seed 123's second
-    theft attempt (ev_0020, the measured recurrence) mints the pack's
+    theft attempt (ev_0013 at the epoch's rolls — rng-1's corpus price) mints the pack's
     four conclusions: the targeted guard's `sneak_at_work_here` and
     the room trio's `trouble_by_the_bar`, each cause-chained to the
     attempt, in event order × declaration order (INV-2)."""
@@ -233,9 +233,9 @@ def test_the_committed_pack_arms_the_measured_recurrence(
         ("npc_drunk_01", "trouble_by_the_bar"),
         ("npc_maid_01", "trouble_by_the_bar"),
     ]
-    assert all(e.cause == "ev_0020" and e.t == 12 for e in minted)
+    assert all(e.cause == "ev_0013" and e.t == 11 for e in minted)
     guard = minted[0]
-    assert guard.outcome["provenance"] == ["ev_0007", "ev_0020"]
+    assert guard.outcome["provenance"] == ["ev_0007", "ev_0013"]
     assert guard.outcome["recurrence"] == 2
 
 
@@ -257,7 +257,7 @@ def test_the_told_conclusion_law_is_live(tmp_path: Path) -> None:
     assert len(told) == 1
     assert told[0].channel == "told"
     assert told[0].fidelity == "partial"
-    assert told[0].source == "ev_0026"  # the briefing event
+    assert told[0].source == "ev_0019"  # the briefing event (the epoch's rolls)
     minted = [e for e in events if e.type == COMMITTED_EVENT]
     assert not any(e.actor == "npc_guard_02" for e in minted)
 
@@ -299,7 +299,7 @@ def test_arming_is_byte_identical_off_the_measured_seeds(
 ) -> None:
     """The arming's A/B witness: the block-less twin vs the armed
     committed pack, day1_full seeds 120..129 — the eight seeds without
-    the measured recurrence are byte-identical; exactly 123/128 (the
+    the measured recurrence are byte-identical; exactly 123/129 (the
     recurrence) diverge. The zero-regen landing's own pin."""
     twin = stripped_pack(tmp_path)
     diverged: list[int] = []
@@ -315,7 +315,7 @@ def test_arming_is_byte_identical_off_the_measured_seeds(
             bytes_of[label] = log.read_bytes()
         if bytes_of["twin"] != bytes_of["armed"]:
             diverged.append(seed)
-    assert diverged == [123, 128]
+    assert diverged == [123, 129]
 
 
 def test_provenance_is_the_source_event_id_list(tmp_path: Path) -> None:
@@ -325,7 +325,7 @@ def test_provenance_is_the_source_event_id_list(tmp_path: Path) -> None:
     events = run_crafted(tmp_path)
     event = next(e for e in events if e.type == REFLECTION_EVENT)
     provenance = event.outcome["provenance"]
-    assert provenance == ["ev_0007", "ev_0020"]
+    assert provenance == ["ev_0007", "ev_0013"]
     assert event.outcome["recurrence"] == 2
     by_id = {e.id: e for e in events}
     for source in provenance:
@@ -487,7 +487,7 @@ def test_stale_fires_after_scavenge(tmp_path: Path) -> None:
     events = run_crafted(tmp_path)
     pack = crafted_pack(tmp_path / "stale_pack2")
     scavenged = [e for e in events if e.id != "ev_0007"]
-    assert stale_reflections(pack, scavenged) == frozenset({"ev_0021"})
+    assert stale_reflections(pack, scavenged) == frozenset({"ev_0014"})
 
 
 def test_expansion_returns_every_family_record(tmp_path: Path) -> None:
@@ -501,7 +501,7 @@ def test_expansion_returns_every_family_record(tmp_path: Path) -> None:
     event = next(e for e in events if e.type == REFLECTION_EVENT)
     records = expand_reflection(pack, view, event)
     assert [r.knows for r in records] == [FAMILY[0], FAMILY[0]]
-    assert [r.source for r in records] == ["ev_0007", "ev_0020"]
+    assert [r.source for r in records] == ["ev_0007", "ev_0013"]
 
 
 def test_expansion_unknown_about_folds_empty(tmp_path: Path) -> None:

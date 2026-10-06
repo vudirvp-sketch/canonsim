@@ -60,10 +60,12 @@ MINI_TEMPLATES = {
 }
 
 
-def run_day1(tmp_path: Path, seed: int = 8) -> list[EventRecord]:
+def run_day1(tmp_path: Path, seed: int | None = None) -> list[EventRecord]:
     """The §3 walkthrough shape: theft, arson, and a long wait crossing
     beats and rotations — every reaction system gets a chance to fire."""
     script = load_playscript(REPO / "tests" / "playscripts" / "day1_theft_and_arson.json")
+    if seed is None:
+        seed = script["seed"]  # the script's own seed (the epoch's rolls)
     script = dict(script, steps=script["steps"][:5] + [{"intent": "wait", "ticks": 1400}])
     sim = Simulator(PACK, seed, tmp_path / "day1.jsonl", SCHEMA, commit="0000000")
     sim.run_playscript(script)
@@ -225,7 +227,7 @@ def test_grammar_cycle_fails_loudly() -> None:
 
 def test_chronicle_renders_day_header_and_lines(tmp_path: Path) -> None:
     events = run_day1(tmp_path)
-    text = render_chronicle(events, PACK, seed=8)
+    text = render_chronicle(events, PACK, seed=15)
     assert text.startswith("— Day 1, ")
     assert "the player lifts the purse unseen." in text
     assert "burns out. Nothing will be the same here." in text
@@ -294,7 +296,7 @@ def test_chronicle_importance_gate(tmp_path: Path) -> None:
     data["templates.json"] = copy.deepcopy(dict(PACK.templates))
     data["templates.json"]["tale_gate"] = {"min_importance": "high"}
     strict_pack = Pack(data=data)
-    text = render_chronicle(events, strict_pack, seed=8)
+    text = render_chronicle(events, strict_pack, seed=15)
     assert "the player lifts the purse unseen." not in text  # medium: gated out
     assert "burns out. Nothing will be the same here." in text  # high: stays
 
@@ -306,7 +308,7 @@ def test_chronicle_tale_gate_medium_is_the_tune1_split(tmp_path: Path) -> None:
     waits/moves stay below the line while the theft ladder, the watch
     handover, and the fire chain all render."""
     events = run_day1(tmp_path)
-    text = render_chronicle(events, PACK, seed=8)
+    text = render_chronicle(events, PACK, seed=15)
     # the tale's beats
     assert "the player takes the oil lamp." in text
     assert "the player lifts the purse unseen." in text
@@ -329,15 +331,15 @@ def test_chronicle_fallback_for_unknown_type() -> None:
 
 def test_chronicle_is_byte_identical_across_renders(tmp_path: Path) -> None:
     events = run_day1(tmp_path)
-    first = render_chronicle(events, PACK, seed=8)
-    second = render_chronicle(events, PACK, seed=8)
+    first = render_chronicle(events, PACK, seed=15)
+    second = render_chronicle(events, PACK, seed=15)
     assert first == second  # fresh bank + fresh pools per pass
 
 
 def test_chronicle_prefix_stable_under_log_growth(tmp_path: Path) -> None:
     events = run_day1(tmp_path)
-    prefix = render_chronicle(events[:6], PACK, seed=8)
-    full = render_chronicle(events, PACK, seed=8)
+    prefix = render_chronicle(events[:6], PACK, seed=15)
+    full = render_chronicle(events, PACK, seed=15)
     assert full.startswith(prefix)
 
 
@@ -362,14 +364,14 @@ def test_chronicle_from_log_reads_seed_from_header(tmp_path: Path) -> None:
     # never stale-version tolerance)
     lines = [json.dumps({"header": True,
                          "schema_version": SCHEMA["$id"].rsplit("/", 1)[-1],
-                         "seed": 8, "python": "3.11", "commit": "0000000",
+                         "seed": 15, "python": "3.11", "commit": "0000000",
                          "pack": "tavern_pack@0.1"})]
     from core.log import event_to_mapping
 
     lines += [json.dumps(event_to_mapping(e)) for e in events]
     log.write_text("\n".join(lines) + "\n", encoding="utf-8")
     assert chronicle_from_log(log, PACK, SCHEMA) == render_chronicle(
-        events, PACK, seed=8
+        events, PACK, seed=15
     )
 
 
@@ -394,7 +396,7 @@ def test_scene_card_empty_location(tmp_path: Path) -> None:
 def test_entity_view_full_history_and_state(tmp_path: Path) -> None:
     events = run_day1(tmp_path)
     projection = fold(events, initial_projection(PACK.entities))
-    text = render_entity_view(events, projection, PACK, "purse_01", seed=8)
+    text = render_entity_view(events, projection, PACK, "purse_01", seed=15)
     assert text.startswith("the purse (purse_01)")
     assert "carrier: the player" in text
     assert "[t 6] the player lifts the purse unseen." in text

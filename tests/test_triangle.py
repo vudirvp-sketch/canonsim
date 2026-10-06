@@ -220,7 +220,9 @@ def test_the_bars_over_the_committed_shapes() -> None:
 
 
 def test_the_market_fire_tips_the_guild(tmp_path: Path) -> None:
-    """The committed experiment arm (province_feud.json, seed 53): the
+    """The committed experiment arm (province_feud.json, seed 25 at the
+    epoch's rolls — rng-1's corpus price, the pre-epoch seed 53's take
+    failed at the boundary): the
     runner takes his own lamp, walks the artery, burns the market row —
     the alarm spikes Maren past the guild's bar, and the GUILD
     COUNCILS through the front door (actor = the group id, the
@@ -253,7 +255,8 @@ def test_the_market_fire_wakes_one_elder_only(tmp_path: Path) -> None:
     the KI#85-consistent write) — but Garrick at the crofts hears
     nothing: the families read fraction 50 at threshold 50 and the
     VIGIL STAYS SILENT (the old blood moves together, by design)."""
-    events, projection = _run(tmp_path, "market_elder", ROAD_MARKET, 53)
+    events, projection = _run(tmp_path, "market_elder", ROAD_MARKET, 15)
+    # the epoch's rolls (rng-1's corpus price)
     grief = _events_of(events, "grief_wakes")
     assert len(grief) == 1
     changes = {c.entity: (c.from_, c.to_)
@@ -284,7 +287,8 @@ def test_the_keep_fire_tips_the_garrison(tmp_path: Path) -> None:
     PC lingers there: the active zone rolls the walk). The crown's
     answer is the rare one by design: the split rotation reads
     fraction 50, bar 15 — the escalation ladder's honest shape."""
-    events, _projection = _run(tmp_path, "keep_road", ROAD_KEEP, 139)
+    events, _projection = _run(tmp_path, "keep_road", ROAD_KEEP, 63)
+    # the epoch's rolls (rng-1's corpus price)
     patrols = _events_of(events, "garrison_patrols")
     assert len(patrols) == 1
     assert patrols[0].actor == "grp_garrison"
@@ -298,7 +302,8 @@ def test_the_keep_fire_wakes_the_other_elder(tmp_path: Path) -> None:
     hold the deadband (Wilmot asleep at 35): the vigil needs both
     houses, and each fire wakes exactly one — the many roads made
     mechanical."""
-    events, projection = _run(tmp_path, "keep_elder", ROAD_KEEP, 139)
+    events, projection = _run(tmp_path, "keep_elder", ROAD_KEEP, 63)
+    # the epoch's rolls (rng-1's corpus price)
     grief = _events_of(events, "grief_wakes")
     assert len(grief) == 1
     changes = {c.entity: (c.from_, c.to_)
@@ -375,11 +380,14 @@ def test_the_deep_feud_tree_renders_its_tiers() -> None:
     collections = [
         e["outcome"].get("collection") for e in history
     ]
-    # the seed-42 tree: two blood-ending feud roots with quarrel and
-    # exodus members, a first independent, the war chained last
+    # the seed-42 tree at the epoch's rolls (rng-1's corpus price): the
+    # sagas re-rolled — two feud roots with a quarrel under the first,
+    # an exodus under the second, the second feud root chaining to the
+    # FIRST root (the latest top-level), the last quarrel to the third
+    # war
     assert collections == [
-        None, "feud", "quarrel", "exodus", "feud", "exodus", "exodus",
-        "feud",
+        None, None, "feud", "quarrel", "feud", "exodus", "feud",
+        "quarrel",
     ]
     # the cause chains: the members chain to their nearest lower tier,
     # the roots to the previous TOP-LEVEL event (the sagas chain —
@@ -387,14 +395,14 @@ def test_the_deep_feud_tree_renders_its_tiers() -> None:
     # the war to the second)
     causes = [e["cause"] for e in history]
     assert causes == [
-        "ev_0000",  # the first independent -> world_formed
-        "ev_0001",  # the first feud root -> the independent (last top)
-        "ev_0002",  # the quarrel -> its feud root
-        "ev_0003",  # the exodus -> the quarrel (nearest lower tier)
-        "ev_0002",  # the second feud root -> the FIRST root (top-level)
-        "ev_0005",  # the second exodus -> its feud root
-        "ev_0005",  # the third exodus -> its feud root
-        "ev_0005",  # the war -> the second root (the latest saga)
+        "ev_0000",  # the founding -> world_formed
+        "ev_0001",  # the pact -> the founding (last top)
+        "ev_0002",  # the first war (feud root) -> the pact
+        "ev_0003",  # the quarrel -> its feud root
+        "ev_0003",  # the second war (feud root) -> the FIRST root (top)
+        "ev_0005",  # the exodus -> its feud root
+        "ev_0005",  # the third war -> the second root (the latest saga)
+        "ev_0007",  # the last quarrel -> the third war
     ]
     # the claim tags drawn onto the tree: all three ride
     tags = {t for e in history for t in e["hooks"]}
@@ -467,10 +475,11 @@ def test_the_lod_scoping_reads_the_anchors() -> None:
         projection[npc_id]["status.fear"] = 80
     for npc_id in ("npc_steward_01", "npc_smelter_01"):
         projection[npc_id]["status.grievance"] = 80
-    # bank seed 1: all three first-draws hit their bars (deterministic)
+    # bank seed 3 at the epoch's rolls (rng-1's corpus price): all
+    # three first-draws hit their bars (deterministic)
     walked = {
         zone: sorted(i.actor for i in faction_intents(
-            pack, projection, RngBank(1), locations=(zone,)
+            pack, projection, RngBank(3), locations=(zone,)
         ))
         for zone in ("loc_malby", "loc_thornmill", "loc_keep",
                      "loc_riverroad")
@@ -481,5 +490,5 @@ def test_the_lod_scoping_reads_the_anchors() -> None:
     assert walked["loc_riverroad"] == []  # the traffic carries no entry
     # the one-scene law: no scoping, every entry walks
     assert sorted(i.actor for i in faction_intents(
-        pack, projection, RngBank(1)
+        pack, projection, RngBank(3)
     )) == ["grp_garrison", "grp_old_families", "grp_river_guild"]

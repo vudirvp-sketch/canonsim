@@ -304,7 +304,7 @@ def test_the_reckoning_when_the_fund_covers(tmp_path: Path) -> None:
         {"intent": "wait", "ticks": 10},
     ]
     events, pack, sim = _run_pack(
-        _twin(tmp_path, "reckoning"), tmp_path, "reckoning.jsonl", 42, steps
+        _twin(tmp_path, "reckoning"), tmp_path, "reckoning.jsonl", 1, steps
     )
     falls = [e for e in events if e.type == FALL_EVENT
              and e.outcome.get("kind") == "floodpaper"]

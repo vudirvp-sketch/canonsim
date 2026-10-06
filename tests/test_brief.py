@@ -682,8 +682,8 @@ def test_scene_texture_window_and_line_shapes() -> None:
     ledger = _texture_ledger(events[5:7])
     body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, active] npc_guard_01: cloak = muddy hem",  # newest first
-        "- [t 32, active] candles = lit",
+        "- [t 33, active] npc_guard_01: cloak = muddy hem",  # newest first
+        "- [t 33, active] candles = lit",
     ]
     # at the full log the PC is at the market: the tavern scene closed
     # (auto-sync) and the guard is absent — the window is empty
@@ -701,8 +701,8 @@ def test_scene_texture_pinned_first_ranking() -> None:
     )  # pin the OLDER entry
     body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, pinned] candles = lit",  # pinned outranks newer actives
-        "- [t 32, active] npc_guard_01: cloak = muddy hem",
+        "- [t 33, pinned] candles = lit",  # pinned outranks newer actives
+        "- [t 33, active] npc_guard_01: cloak = muddy hem",
     ]
 
 
@@ -795,7 +795,7 @@ def test_scene_texture_tombstones_render_with_cause_and_cap() -> None:
     )
     text = render_brief(assemble_brief(events[5:7], pack, ledger))
     body = _blocks(text)["scene_texture"]
-    assert body == ["- [t 32, refuted] shutters (cause: ev_9001)"]  # newest tombstone only
+    assert body == ["- [t 33, refuted] shutters (cause: ev_9001)"]  # newest tombstone only
 
 
 def test_scene_texture_byte_identity_across_calls() -> None:
@@ -910,9 +910,9 @@ def test_scene_texture_identity_slot_outranks_newer_plain_texture() -> None:
     ])
     body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # the tier
-        "- [t 32, active] npc_barkeep_01: apron = stained",  # newest plain
-        "- [t 32, active] candles = lit",
+        "- [t 33, active] npc_guard_01: speech_pattern = clipped",  # the tier
+        "- [t 33, active] npc_barkeep_01: apron = stained",  # newest plain
+        "- [t 33, active] candles = lit",
     ]
 
 
@@ -930,8 +930,8 @@ def test_scene_texture_identity_slot_is_a_slot_class_not_a_scope_condition() -> 
     ])
     body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, active] look = smoky",  # the identity slot ranks in the tier
-        "- [t 32, active] shadows = long",
+        "- [t 33, active] look = smoky",  # the identity slot ranks in the tier
+        "- [t 33, active] shadows = long",
     ]
 
 
@@ -952,8 +952,8 @@ def test_scene_texture_pinned_outranks_identity_within_the_tier() -> None:
     )  # pin the scene entry
     body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, pinned] candles = lit",  # pinned within the tier
-        "- [t 32, active] npc_guard_01: speech_pattern = clipped",
+        "- [t 33, pinned] candles = lit",  # pinned within the tier
+        "- [t 33, active] npc_guard_01: speech_pattern = clipped",
     ]
 
 
@@ -975,7 +975,7 @@ def test_scene_texture_identity_survives_max_items_pressure() -> None:
     ])
     text = render_brief(assemble_brief(events[5:7], pack, ledger))
     body = _blocks(text)["scene_texture"]
-    assert body == ["- [t 32, active] npc_guard_01: speech_pattern = clipped"]
+    assert body == ["- [t 33, active] npc_guard_01: speech_pattern = clipped"]
     assert "[truncated:" not in text.split("## scene_texture")[1].split("##")[0]
 
 
@@ -1004,10 +1004,10 @@ def test_scene_texture_per_entity_quota_caps_a_chatty_entity() -> None:
     text = render_brief(assemble_brief(events[5:7], PACK, ledger))
     body = _blocks(text)["scene_texture"]
     assert body == [
-        "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # the tier
-        "- [t 32, active] npc_barkeep_01: apron = stained",  # newest plain
-        "- [t 32, active] npc_guard_01: gait = limping",  # the guard's Kth line
-        "- [t 32, active] candles = lit",  # scene scope: never quota'd
+        "- [t 33, active] npc_guard_01: speech_pattern = clipped",  # the tier
+        "- [t 33, active] npc_barkeep_01: apron = stained",  # newest plain
+        "- [t 33, active] npc_guard_01: gait = limping",  # the guard's Kth line
+        "- [t 33, active] candles = lit",  # scene scope: never quota'd
     ]
     assert "[truncated:" not in text.split("## scene_texture")[1].split("##")[0]
 
@@ -1029,8 +1029,8 @@ def test_scene_texture_quota_bounds_identity_too() -> None:
     ])
     body = _blocks(render_brief(assemble_brief(events[5:7], PACK, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, active] npc_guard_01: mannerism = thumb on belt",  # newest identity
-        "- [t 32, active] npc_guard_01: look = weathered",  # the Kth identity
+        "- [t 33, active] npc_guard_01: mannerism = thumb on belt",  # newest identity
+        "- [t 33, active] npc_guard_01: look = weathered",  # the Kth identity
     ]
 
 
@@ -1055,10 +1055,10 @@ def test_scene_texture_quota_at_max_items_is_the_inert_state() -> None:
     ])
     body = _blocks(render_brief(assemble_brief(events[5:7], pack, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, active] npc_guard_01: speech_pattern = clipped",
-        "- [t 32, active] npc_guard_01: scar = brow",
-        "- [t 32, active] npc_guard_01: cloak = muddy hem",
-        "- [t 32, active] candles = lit",
+        "- [t 33, active] npc_guard_01: speech_pattern = clipped",
+        "- [t 33, active] npc_guard_01: scar = brow",
+        "- [t 33, active] npc_guard_01: cloak = muddy hem",
+        "- [t 33, active] candles = lit",
     ]
 
 
@@ -1100,9 +1100,9 @@ def test_scene_texture_tombstones_carry_no_quota() -> None:
     )
     body = _blocks(render_brief(assemble_brief(events[5:7], pack, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, active] npc_guard_01: speech_pattern = clipped",  # K=1 live line
-        "- [t 32, refuted] npc_guard_01: scar (cause: ev_9001)",  # tombs unquota'd
-        "- [t 32, refuted] npc_guard_01: cloak (cause: ev_9000)",
+        "- [t 33, active] npc_guard_01: speech_pattern = clipped",  # K=1 live line
+        "- [t 33, refuted] npc_guard_01: scar (cause: ev_9001)",  # tombs unquota'd
+        "- [t 33, refuted] npc_guard_01: cloak (cause: ev_9000)",
     ]
 
 
@@ -1129,9 +1129,9 @@ def test_scene_texture_empty_identity_slots_is_the_pinned_only_law() -> None:
     )  # pin the scene entry
     body = _blocks(render_brief(assemble_brief(events[5:7], stripped, ledger)))["scene_texture"]
     assert body == [
-        "- [t 32, pinned] candles = lit",  # pinned first (the old law's top)
-        "- [t 32, active] npc_guard_01: gait = limping",  # newest plain
-        "- [t 32, active] npc_guard_01: speech_pattern = clipped",
+        "- [t 33, pinned] candles = lit",  # pinned first (the old law's top)
+        "- [t 33, active] npc_guard_01: gait = limping",  # newest plain
+        "- [t 33, active] npc_guard_01: speech_pattern = clipped",
     ]
 
 
@@ -1353,7 +1353,7 @@ def test_present_entities_scene_line_renders_pack_fields_then_promotions() -> No
 
     events = _golden_prefix() + [
         _promotion_event(
-            "ev_9000", 2, "scene:loc_tavern", "candles", "lit", "loc_tavern"
+            "ev_9000", 3, "scene:loc_tavern", "candles", "lit", "loc_tavern"
         )
     ]
     text = render_brief(assemble_brief(events, PACK))
@@ -1410,7 +1410,7 @@ def test_present_entities_entity_scoped_promotion_rides_the_card() -> None:
     the promoted-prop visibility law; an absent holder renders nothing."""
     events = _golden_prefix() + [
         _promotion_event(
-            "ev_9000", 2, "entity:npc_maid_01", "kerchief", "blue", "npc_maid_01"
+            "ev_9000", 3, "entity:npc_maid_01", "kerchief", "blue", "npc_maid_01"
         )
     ]
     text = render_brief(assemble_brief(events, PACK))
@@ -1560,7 +1560,7 @@ def test_card_markers_render_the_crime_cascade() -> None:
     The card_markers table is prop-path keyed with threshold rows (numeric
     min) and value rows (string value): the guard's card renders `wary` at
     suspicion >= 25 and the player's card renders `suspect` on the flip."""
-    events = _golden_prefix() + [_suspicion_event("ev_9000", 2, 35)]
+    events = _golden_prefix() + [_suspicion_event("ev_9000", 3, 35)]
     text = render_brief(assemble_brief(events, PACK))
     body = _blocks(text)["present_entities"]
     assert "- npc_guard_01 (Doren) markers=wary carries=purse_01" in body
@@ -1575,7 +1575,7 @@ def test_card_markers_threshold_row_respects_the_pack_number() -> None:
     flip)."""
     events = _golden_prefix() + [
         EventRecord(
-            id="ev_9000", t=2, type="suspicion_changed", actor="npc_guard_01",
+            id="ev_9000", t=3, type="suspicion_changed", actor="npc_guard_01",
             cause=None, target=PLAYER,
             outcome={"token": "trail_and_noise", "delta": 20, "from": 0, "to": 20},
             knowledge=(),
@@ -1601,7 +1601,7 @@ def test_card_markers_value_row_is_pack_data() -> None:
             5, {"prop": "crime_status", "value": "suspect", "marker": "marked"}
         )
     )
-    events = _golden_prefix() + [_suspicion_event("ev_9000", 2, 35)]
+    events = _golden_prefix() + [_suspicion_event("ev_9000", 3, 35)]
     text = render_brief(assemble_brief(events, pack))
     assert "markers=marked" in _blocks(text)["present_entities"].__str__()
 
@@ -1612,7 +1612,7 @@ def test_scene_delta_stays_blind_to_interior_suspicion() -> None:
     the PC's own perception (the blind-NPC law, BRIEF_SPEC §3.2) — the
     card is the narrator's read surface for standing state, the delta
     window is the player's. The two halves have different owners."""
-    events = _golden_prefix() + [_suspicion_event("ev_9000", 2, 35)]
+    events = _golden_prefix() + [_suspicion_event("ev_9000", 3, 35)]
     text = render_brief(assemble_brief(events, PACK))
     delta = _blocks(text)["scene_delta"]
     assert "suspicion_changed" not in delta

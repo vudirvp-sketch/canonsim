@@ -306,7 +306,8 @@ def test_the_reweigh_tale_and_records(tmp_path: Path) -> None:
         pack, MASTER, seed=42,
     )
     assert f"  account.paper: 0 — {PAPER_GLOSS}" in view
-    assert f"[t 2559] Garrick is rid of {PAPER} {PAPER_GLOSS}." in view
+    # rng-1's epoch: the discharge's tick moved with the corpus (2559 -> 2574)
+    assert f"[t 2574] Garrick is rid of {PAPER} {PAPER_GLOSS}." in view
     crofts_view = render_entity_view(
         events, fold(events, initial_projection(pack.entities)),
         pack, CROFTS, seed=42,

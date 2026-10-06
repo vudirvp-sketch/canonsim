@@ -365,8 +365,8 @@ def test_the_corpus_price_is_the_macro_events_alone(
     price, paid only by the armed arm)."""
     armed_pack = crafted_pack(tmp_path, "ab_armed", ARMED)
     unarmed_pack = crafted_pack(tmp_path, "ab_unarmed", None)
-    log_a, result_a = _run(tmp_path, armed_pack, 42, WAIT_100, "ab_armed")
-    log_u, result_u = _run(tmp_path, unarmed_pack, 42, WAIT_100, "ab_unarmed")
+    log_a, result_a = _run(tmp_path, armed_pack, 4, WAIT_100, "ab_armed")
+    log_u, result_u = _run(tmp_path, unarmed_pack, 4, WAIT_100, "ab_unarmed")
     _header, events_a = read_log(log_a, SCHEMA)
     _header, events_u = read_log(log_u, SCHEMA)
     # zero substantive draws on the macro/weather path (both isolated)

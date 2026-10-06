@@ -65,7 +65,7 @@ TAVERN_STEPS = [{"intent": "move", "target": "loc_tavern"}]
 
 
 def test_steal_success_transfers_the_item(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 42, TAVERN_STEPS + [
+    events, sim = run(tmp_path, 2, TAVERN_STEPS + [
         {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
     ])
     steal = events[-1]
@@ -76,7 +76,7 @@ def test_steal_success_transfers_the_item(tmp_path: Path) -> None:
 
 
 def test_steal_partial_failure_records_ev_0007_family(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 1, TAVERN_STEPS + [
+    events, sim = run(tmp_path, 3, TAVERN_STEPS + [
         {"intent": "steal", "target": "npc_guard_01"},
     ])
     failed = next(e for e in events if e.type == "pickpocket_failed")
@@ -107,7 +107,7 @@ def test_steal_partial_failure_records_ev_0007_family(tmp_path: Path) -> None:
 
 
 def test_steal_total_failure_everyone_saw(tmp_path: Path) -> None:
-    events, _ = run(tmp_path, 2, TAVERN_STEPS + [
+    events, _ = run(tmp_path, 4, TAVERN_STEPS + [
         {"intent": "steal", "target": "npc_guard_01"},
     ])
     failed = next(e for e in events if e.type == "pickpocket_failed")
@@ -300,7 +300,7 @@ def test_drop_break_unknown_spot_is_loud(tmp_path: Path) -> None:
 
 
 def test_distract_turns_attention(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 42, TAVERN_STEPS + [
+    events, sim = run(tmp_path, 1, TAVERN_STEPS + [
         {"intent": "distract", "target": "npc_drunk_01"},
     ])
     distract = events[-1]
@@ -318,7 +318,7 @@ def test_distract_turns_attention(tmp_path: Path) -> None:
 
 
 def test_flee_caught_and_escape(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 42, TAVERN_STEPS + [
+    events, sim = run(tmp_path, 2, TAVERN_STEPS + [
         {"intent": "flee", "target": "loc_street"},
     ], name="caught.jsonl")
     caught = events[-1]
@@ -327,7 +327,7 @@ def test_flee_caught_and_escape(tmp_path: Path) -> None:
     assert (caught.knowledge[0].who, caught.knowledge[0].fidelity) == (
         "npc_guard_01", "exact"
     )
-    events, sim = run(tmp_path, 3, TAVERN_STEPS + [
+    events, sim = run(tmp_path, 1, TAVERN_STEPS + [
         {"intent": "flee", "target": "loc_street"},
     ], name="escape.jsonl")
     flee = events[-1]
@@ -454,11 +454,11 @@ def test_all_emitted_types_stay_in_pack_vocabulary(tmp_path: Path) -> None:
 
 
 def test_double_drop_break_of_a_broken_item_is_idempotent(tmp_path: Path) -> None:
-    # seed 34: both stealth takes succeed. The retake-and-redrop of the
+    # seed 35 (the epoch's rolls): both stealth takes succeed. The retake-and-redrop of the
     # broken mug must not desync the projection (KI#13): the second drop
     # releases the carrier and keeps the noise, but carries no second
     # condition change.
-    events, sim = run(tmp_path, 34, [
+    events, sim = run(tmp_path, 35, [
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "take", "target": "ale_mug_01"},
         {"intent": "drop_break", "target": "ale_mug_01"},
@@ -480,7 +480,7 @@ def test_two_staggered_fires_share_one_pass_and_keep_the_cause_chain(
     # seed 19 (the KI#16 reproducer): the tavern fire's spread pass is live
     # when the backyard lamp drops. One pass must roll both locations with a
     # cause for every spread — no parallel pass, no cause=None crash.
-    events, sim = run(tmp_path, 19, [
+    events, sim = run(tmp_path, 4, [
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "arson", "target": "loc_tavern"},
         {"intent": "take", "target": "oil_lamp_01"},
@@ -573,8 +573,9 @@ def test_texture_take_success_is_the_canon_birth(tmp_path: Path) -> None:
     """A take on a resolved texture reference: the committed event IS the
     promotion — the scope target gains the slot as a canon prop, the
     outcome carries the reference, knowledge rides the texture templates.
-    Probed seed: the opposed stealth check passes for pc_01."""
-    events, sim = run(tmp_path, 4, TAVERN_STEPS + [
+    Probed seed: the opposed stealth check passes for pc_01 (the
+    epoch's rolls — rng-1's corpus price)."""
+    events, sim = run(tmp_path, 8, TAVERN_STEPS + [
         {"intent": "take", "texture": dict(_CANDLES_REF)},
     ])
     take = events[-1]
@@ -670,7 +671,7 @@ def test_arson_on_a_destroyed_location_is_rejected(tmp_path: Path) -> None:
         {"intent": "wait", "ticks": 300},  # the cascade burns out the yard
         {"intent": "arson", "target": "loc_backyard"},
     ]
-    events, sim = run(tmp_path, 4, steps)  # seed 4: the take succeeds
+    events, sim = run(tmp_path, 8, steps)  # seed 8 (the epoch's rolls): the take succeeds
     assert sim.projection["loc_backyard"]["destroyed"] is True
     rejected = events[-1]
     assert rejected.type == "intent_rejected"
@@ -691,7 +692,7 @@ def test_arson_on_a_fresh_location_still_ignites(tmp_path: Path) -> None:
         {"intent": "move", "target": "loc_backyard"},
         {"intent": "arson", "target": "loc_backyard"},
     ]
-    events, sim = run(tmp_path, 4, steps)
+    events, sim = run(tmp_path, 8, steps)
     assert any(e.type == "arson" for e in events)
     assert any(e.type == "fire_started" for e in events)
     rejected = [e for e in events if e.type == "intent_rejected"]

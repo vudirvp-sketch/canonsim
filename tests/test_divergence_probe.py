@@ -58,22 +58,24 @@ def test_t8_minimal_pair_pins_the_first_divergence(
     tmp_path: Path,
 ) -> None:
     """The landed minimal pair through the probe: the first divergence
-    is the director's release (the document check chain — the guard's
-    check FAILS on the gate scenario), the divergence persists to the
-    horizon and never re-converges, the families delta names the
-    release's events, and the state-level persistence shows in the
-    suspicion props."""
+    is the director's release (the document check chain — rng-1's epoch
+    moved the check's dice with the draw sequence: the verdict now
+    satisfies, document_check, the checked paper reads clean — the
+    release itself is the divergence either way), the divergence
+    persists to the horizon and never re-converges, the families delta
+    names the release's events, and the state-level persistence shows
+    in the suspicion props."""
     records, diff = divergence_probe.probe(
         SCRIPT, PACK, PACK,
         base_directors=True, pert_directors=False, out_dir=tmp_path,
     )
     assert not diff.equal
     assert records.first_index is not None
-    assert records.first_type == "document_check_failed"
+    assert records.first_type == "document_check"
     assert records.first_side == "both"  # the streams shift at the release
     assert records.persists_to_horizon
     assert not records.re_converged
-    assert "-1 document_check_failed" in records.family_delta
+    assert "-1 document_check" in records.family_delta
     assert "-1 crowd_wary" in records.family_delta
     assert any(
         line.startswith("npc_guard_01.pair.pc_01.suspicion")
@@ -133,9 +135,11 @@ def test_systems_minus_urgencies_kills_the_beat_machinery(
     tmp_path: Path,
 ) -> None:
     """The urgencies block carries the beat grid: its removal drops the
-    beat machinery wholesale — the family delta names the decay family,
-    the projection delta shows the undecayed statuses (the empty-ablation
-    rule's exercise half: the arm demonstrably exercises the target)."""
+    beat machinery wholesale — the family delta names the decay family
+    (rng-1's epoch re-pins the count: one decay rides a different
+    family's slot now), the projection delta shows the undecayed
+    statuses (the empty-ablation rule's exercise half: the arm
+    demonstrably exercises the target)."""
     from balance_harness import _systems_minus_pack  # type: ignore[import-not-found]
 
     pert = _systems_minus_pack(tmp_path, "urgencies", drop_pacing=False)
@@ -144,7 +148,7 @@ def test_systems_minus_urgencies_kills_the_beat_machinery(
         base_directors=True, pert_directors=True, out_dir=tmp_path,
     )
     assert not diff.equal
-    assert "-11 status_decayed" in records.family_delta
+    assert "-10 status_decayed" in records.family_delta
     assert records.projection_delta_count >= 4
 
 

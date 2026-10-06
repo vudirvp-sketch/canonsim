@@ -108,8 +108,9 @@ def _variant_pack(
 
 def test_the_march_releases_in_order_with_the_gap(tmp_path: Path) -> None:
     """The canonical day1_full run (seed 125, the only live stage): the
-    relief's check releases first (the corpus pin untouched — director_0000,
-    t=734), the barkeep's sweep second (director_0001) — and the sweep's
+    relief's check releases first (the corpus pin re-pinned for rng-1's
+    epoch — director_0000, t=732: the epoch's draws moved the check's
+    dice with the sequence), the barkeep's sweep second (director_0001) — and the sweep's
     event lands at t=1456, the day's last DIRECTOR event, AFTER the check
     and after everything HEAD held (the append-only footprint: zero id
     shifts). The arc completes: the cursor sits past its members, and the
@@ -126,20 +127,21 @@ def test_the_march_releases_in_order_with_the_gap(tmp_path: Path) -> None:
     (check,) = checks(events)
     (sweep,) = sweeps(events)
     assert str(check.provenance["cause_intent"]) == "director_0000"
-    assert check.t == 734 and check.actor == "npc_guard_02"
+    assert check.t == 732 and check.actor == "npc_guard_02"
     assert str(sweep.provenance["cause_intent"]) == "director_0001"
     assert sweep.t == 1456
     # the canon order IS the declared causality: the sweep after the check
     assert sweep.id > check.id
-    # weather-1's arming price, re-pinned: the warm ring's beat events
-    # left the day (the LOD holds them for crossings no day-scale run
-    # reaches) — the beliefwire scan's urgency roll among them, AND the
-    # check's dice moved with the draw sequence (the verdict flips to
-    # the satisfying answer: the warm NPCs' intent draws left the
-    # sequence ahead of it). The sweep is the day's LAST event and its
-    # closing beat — the scan that followed it at iter-70 waits for a
-    # crossing now; the day's closer is the story's own.
-    assert check.type == "document_check_failed"
+    # weather-1's arming price, re-pinned twice: the warm ring's beat
+    # events left the day (the LOD holds them for crossings no day-scale
+    # run reaches) — the beliefwire scan's urgency roll among them, AND
+    # the check's dice move with the draw sequence (rng-1's epoch moved
+    # them again: the verdict now satisfies — document_check, the
+    # checked paper reads clean; the release order, the march's law,
+    # is untouched by the flip). The sweep is the day's LAST event and
+    # its closing beat — the scan that followed it at iter-70 waits for
+    # a crossing now; the day's closer is the story's own.
+    assert check.type == "document_check"
     assert events[-1].id == sweep.id
     assert events[-1].t == 1456
     # the arc marched: beat 1 (the check) -> beat 3 (the sweep, gap 2 held
@@ -166,10 +168,10 @@ def test_the_stripped_arc_inverts_the_canon_order(tmp_path: Path) -> None:
     Without the chain the sweep still releases SECOND (director_0001,
     the relief wins beat 360's budget by buffer order) but at beat 720 —
     one beat past the check's release — and both intents ride the SAME
-    entry tick (t=732), where the queue's actor_id tiebreak pops the
-    barkeep BEFORE the relief guard: the sweep's event lands at t=733,
-    BEFORE the check's own event at t=734. A second beat landing before
-    its predecessor is a causality lie in the canon — the inversion the
+    entry tick (t=730, the epoch's re-pin), where the queue's actor_id
+    tiebreak pops the barkeep BEFORE the relief guard: the sweep's event
+    lands at t=731, BEFORE the check's own event at t=732. A second
+    beat landing before its predecessor is a causality lie in the canon — the inversion the
     gap law exists to prevent (the committed run's march is the fix,
     pinned above)."""
     def mutate_rules(rules: dict[str, Any]) -> None:
@@ -185,7 +187,7 @@ def test_the_stripped_arc_inverts_the_canon_order(tmp_path: Path) -> None:
     assert sweep.t < check.t
     assert sweep.id < check.id
     # both intents rode the same entry tick; the actor tiebreak decided
-    assert sweep.t == 733 and check.t == 734
+    assert sweep.t == 731 and check.t == 732
 
 
 # -- the order law live: the honest stall ----------------------------------------
@@ -267,14 +269,16 @@ def test_the_sweep_adds_no_draws_the_fingerprint_identity(
     # crossings no day-scale run reaches, both arms' shape)
     assert [e.id for e in live_events[:-1]] == [e.id for e in stripped_events]
     assert live_events[-1].actor == "npc_barkeep_01"  # the sweep
-    assert live_events[-1].id == "ev_0055"
+    assert live_events[-1].id == "ev_0057"
     assert stripped_events[-1].actor == "pc_01"  # the day's last wait
-    assert stripped_events[-1].id == "ev_0054"
+    assert stripped_events[-1].id == "ev_0056"
 
 
 def test_the_quiet_seeds_stay_byte_identical(tmp_path: Path) -> None:
     """The day1 A/B's quiet arm, pinned on a representative quiet seed
-    (7): the steals succeed there — no failure event, no hooks seeded,
+    (3 — the epoch's re-pin: seed 7's steals fail now, the sweep seeds
+    there; the quiet law is the steal's success, not the seed): the
+    steals succeed there — no failure event, no hooks seeded,
     the successor never enters the buffer — so the committed pack and
     the successor-stripped pack produce identical (id, t, type) rows
     (depth-5b: the two arms' genesis prefix differs only in the drawn
@@ -296,8 +300,8 @@ def test_the_quiet_seeds_stay_byte_identical(tmp_path: Path) -> None:
                 item["hooks"]["failure"].remove(SWEEP_TAG)
 
     stripped = _variant_pack(tmp_path, mutate_rules, mutate_actions)
-    live_events, _, _ = run_day1(tmp_path, seed=7, label="live")
-    stripped_events, _, _ = run_day1(tmp_path, pack=stripped, seed=7, label="stripped")
+    live_events, _, _ = run_day1(tmp_path, seed=3, label="live")
+    stripped_events, _, _ = run_day1(tmp_path, pack=stripped, seed=3, label="stripped")
     assert [(e.id, e.t, e.type) for e in live_events] == [
         (e.id, e.t, e.type) for e in stripped_events
     ]

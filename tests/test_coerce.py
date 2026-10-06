@@ -339,7 +339,7 @@ def test_the_drunkard_spends_his_cluster(tmp_path: Path) -> None:
     consumed), the balance lands as the subject's pair axes, importance
     medium (story-critical + two entities), the cascade quiet (no
     knowledge, no hooks)."""
-    events, sim = run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "spend.jsonl")
+    events, sim = run(tmp_path, PACK, 25, ROOM_FAILURE_WAIT, "spend.jsonl")
     coerces = [e for e in events if e.type == "coerce"]
     assert len(coerces) == 1
     spend = coerces[0]
@@ -371,7 +371,7 @@ def test_one_secret_buys_one_play(tmp_path: Path) -> None:
         {"intent": "wait", "ticks": 400},
         {"intent": "wait", "ticks": 800},
     ]
-    events, _sim = run(tmp_path, PACK, 93, steps, "twice.jsonl")
+    events, _sim = run(tmp_path, PACK, 25, steps, "twice.jsonl")
     assert len([e for e in events if e.type == "coerce"]) == 1
     rejections = [
         e for e in events if e.type == "intent_rejected"
@@ -406,7 +406,7 @@ def test_the_window_closes_between_accept_and_completion(tmp_path: Path) -> None
     accept tick, shrink the window, re-run. The committed p-40 driver
     fires on seed 93 (probed) — the shrunk copy mutates nothing but the
     cluster's lifetime."""
-    events, _sim = run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "pass1.jsonl")
+    events, _sim = run(tmp_path, PACK, 25, ROOM_FAILURE_WAIT, "pass1.jsonl")
     first = next(e for e in events if e.type == "coerce")
     accept = first.t - 3  # the coerce duration
     mint = min(
@@ -416,7 +416,7 @@ def test_the_window_closes_between_accept_and_completion(tmp_path: Path) -> None
     window = accept - mint + 2  # dies at accept+2, completion at accept+3
 
     shrunk = shrunk_pack(tmp_path / "shrink", window)
-    events2, _sim2 = run(tmp_path, shrunk, 93, ROOM_FAILURE_WAIT, "pass2.jsonl")
+    events2, _sim2 = run(tmp_path, shrunk, 25, ROOM_FAILURE_WAIT, "pass2.jsonl")
     assert not any(e.type == "coerce" for e in events2)
     rejection = next(
         e for e in events2
@@ -432,7 +432,7 @@ def test_the_chronicle_renders_the_spend_line(tmp_path: Path) -> None:
     the gate, the actor's display name in the house's dry voice."""
     from render.chronicle import chronicle_from_log
 
-    run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "tale.jsonl")
+    run(tmp_path, PACK, 25, ROOM_FAILURE_WAIT, "tale.jsonl")
     text = chronicle_from_log(tmp_path / "tale.jsonl", PACK, SCHEMA)
     assert "the drunkard leans on the player — the hold is spent." in text
 

@@ -471,9 +471,9 @@ def test_politics_the_same_pressure_three_answers(
     slower answer), and only BOTH fires wake the FAMILIES (each
     single fire wakes exactly one elder — the deadband: the old
     blood moves together or not at all). The committed arms at
-    their pinned seeds (53 / 139 / 2 — the witnesses' own, never
-    shopped); the mechanics owned by test_triangle (iter-135),
-    read here under the genre's lens."""
+    their pinned seeds (rng-1's epoch re-measured: 39 / 142 / 229 —
+    the witnesses' own, never shopped); the mechanics owned by
+    test_triangle (iter-135), read here under the genre's lens."""
     # the market road (the committed feud script, seed 53): the guild
     script = load_playscript(
         REPO / "tests" / "playscripts" / "province_feud.json"
@@ -487,14 +487,14 @@ def test_politics_the_same_pressure_three_answers(
     assert not [e for e in feud if e.type == "garrison_patrols"]
     assert not [e for e in feud if e.type == "wergeld_vigil"]
     assert _knows(feud, "the_guild_bars_the_stalls")  # the public row
-    # the keep road (seed 139): the garrison — and the guild still
+    # the keep road (seed 142, the epoch's re-pin): the garrison — and the guild still
     assert len([e for e in feud if e.type == "grief_wakes"]) == 1
-    keep_events, _ = _run(PACK_DIR, tmp_path, "pol_keep", 139, KEEP_ROAD)
+    keep_events, _ = _run(PACK_DIR, tmp_path, "pol_keep", 142, KEEP_ROAD)
     assert len([e for e in keep_events if e.type == "garrison_patrols"]) == 1
     assert not [e for e in keep_events if e.type == "guild_councils"]
     assert not [e for e in keep_events if e.type == "wergeld_vigil"]
-    # the both-fires road (seed 2): the families — the vigil, twice
-    both_events, _ = _run(PACK_DIR, tmp_path, "pol_both", 2, BOTH_ROAD)
+    # the both-fires road (seed 229, the epoch's re-pin): the families — the vigil, twice
+    both_events, _ = _run(PACK_DIR, tmp_path, "pol_both", 229, BOTH_ROAD)
     assert len([e for e in both_events if e.type == "wergeld_vigil"]) == 2
     assert len([e for e in both_events if e.type == "guild_councils"]) == 1
     assert len([e for e in both_events if e.type == "grief_wakes"]) == 2

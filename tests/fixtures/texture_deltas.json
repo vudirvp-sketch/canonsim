@@ -18,7 +18,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": [],
-        "ledger": [["tex_0000", 32, "active", null], ["tex_0001", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "active", null], ["tex_0001", 33, "active", null]]
       }
     },
     {
@@ -36,7 +36,7 @@
         "retired": [],
         "no_ops": 1,
         "refusals": [],
-        "ledger": [["tex_0000", 32, "active", null], ["tex_0001", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "active", null], ["tex_0001", 33, "active", null]]
       }
     },
     {
@@ -54,7 +54,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish scene:loc_tavern.candles = guttering (slot_conflict)"],
-        "ledger": [["tex_0000", 32, "active", null], ["tex_0001", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "active", null], ["tex_0001", 33, "active", null]]
       }
     },
     {
@@ -73,7 +73,7 @@
         "retired": ["tex_0000"],
         "no_ops": 0,
         "refusals": [],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "active", null], ["tex_0002", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "active", null], ["tex_0002", 33, "active", null]]
       }
     },
     {
@@ -89,7 +89,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": [],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "active", null]]
       }
     },
     {
@@ -107,7 +107,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": [],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "active", null], ["tex_0003", 33, "active", null]]
       }
     },
     {
@@ -125,7 +125,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish entity:npc_guard_01.position = by the door (canon_slot)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "active", null], ["tex_0003", 33, "active", null]]
       }
     },
     {
@@ -143,7 +143,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish entity:npc_guard_02.scarf = grey wool (absent_entity)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "active", null], ["tex_0003", 33, "active", null]]
       }
     },
     {
@@ -161,7 +161,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish scene:loc_backyard.bonfire = smoldering (scene_mismatch)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "active", null], ["tex_0003", 33, "active", null]]
       }
     },
     {
@@ -179,7 +179,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish scene:loc_nowhere.well = dry (scope_target)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "active", null], ["tex_0003", 32, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "active", null], ["tex_0003", 33, "active", null]]
       }
     },
     {
@@ -197,7 +197,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": [],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "retired", "scene_close"], ["tex_0003", 33, "active", null], ["tex_0004", 59, "active", null]]
       }
     },
     {
@@ -213,7 +213,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED ref tex_0002 (stale_ref)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "retired", "scene_close"], ["tex_0003", 33, "active", null], ["tex_0004", 59, "active", null]]
       }
     },
     {
@@ -231,7 +231,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": [],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "retired", "scene_close"], ["tex_0003", 33, "active", null], ["tex_0004", 59, "active", null], ["tex_0005", 59, "active", null]]
       }
     },
     {
@@ -249,7 +249,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": [],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "retired", "scene_close"], ["tex_0003", 33, "active", null], ["tex_0004", 59, "active", null], ["tex_0005", 59, "active", null], ["tex_0006", 59, "active", null]]
       }
     },
     {
@@ -267,7 +267,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish entity:npc_market_crowd_01.hearth = their own fire (unique_slot)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "active", null]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "retired", "scene_close"], ["tex_0003", 33, "active", null], ["tex_0004", 59, "active", null], ["tex_0005", 59, "active", null], ["tex_0006", 59, "active", null]]
       }
     },
     {
@@ -288,7 +288,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish scene:loc_market.hearth = newly lit (laundering)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "promoted", "ev_0010"]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "retired", "scene_close"], ["tex_0003", 33, "active", null], ["tex_0004", 59, "active", null], ["tex_0005", 59, "active", null], ["tex_0006", 59, "promoted", "ev_0010"]]
       }
     },
     {
@@ -306,7 +306,7 @@
         "retired": [],
         "no_ops": 0,
         "refusals": ["REFUSED establish entity:npc_market_crowd_01.hearth = their own fire (unique_slot)"],
-        "ledger": [["tex_0000", 32, "retired", "turn:4"], ["tex_0001", 32, "pinned", null], ["tex_0002", 32, "retired", "scene_close"], ["tex_0003", 32, "active", null], ["tex_0004", 58, "active", null], ["tex_0005", 58, "active", null], ["tex_0006", 58, "promoted", "ev_0010"]]
+        "ledger": [["tex_0000", 33, "retired", "turn:4"], ["tex_0001", 33, "pinned", null], ["tex_0002", 33, "retired", "scene_close"], ["tex_0003", 33, "active", null], ["tex_0004", 59, "active", null], ["tex_0005", 59, "active", null], ["tex_0006", 59, "promoted", "ev_0010"]]
       }
     }
   ]

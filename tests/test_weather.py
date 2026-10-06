@@ -419,7 +419,7 @@ def test_the_rain_washes_the_smoke_from_the_burned_location(
         }
 
     pack = crafted_pack(tmp_path, "wash", patch_weather=bias_rain)
-    log, _result = _run(tmp_path, pack, 8, FIRE_STEPS, "wash")
+    log, _result = _run(tmp_path, pack, 15, FIRE_STEPS, "wash")
     _header, events = read_log(log, SCHEMA)
     washes = [e for e in events if e.type == "smoke_washed_away"]
     assert washes  # the rain came and the wash fired
@@ -434,9 +434,9 @@ def test_the_rain_washes_the_smoke_from_the_burned_location(
         )
     # T2: the fold replays the projection with the wash included
     from core.fold import fold, initial_projection
-    sim = Simulator(pack, 8, tmp_path / "wash2.jsonl", SCHEMA, commit="0000000")
+    sim = Simulator(pack, 15, tmp_path / "wash2.jsonl", SCHEMA, commit="0000000")
     sim.run_playscript(
-        {"name": "wash", "seed": 8, "pack": "tavern_pack@0.1", "steps": FIRE_STEPS}
+        {"name": "wash", "seed": 15, "pack": "tavern_pack@0.1", "steps": FIRE_STEPS}
     )
     _header2, events2 = read_log(tmp_path / "wash2.jsonl", SCHEMA)
     rebuilt = fold(events2, initial_projection(pack.entities))

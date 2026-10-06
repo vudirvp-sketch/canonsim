@@ -671,15 +671,15 @@ def test_the_pass_one_stream_positions_are_frozen() -> None:
     _model, drafts, _parents = genesis(RngBank(42), _rules_with(WG), [], 42)
     history = drafts[1:]
     assert [draft.outcome["kind"] for draft in history] == [
-        "pact_signed", "lineage_ended", "pact_signed", "settlement_founded",
+        "settlement_founded", "pact_signed", "settlement_founded", "pact_signed",
     ]
-    assert [draft.outcome["year"] for draft in history] == [35, 64, 96, 146]
+    assert [draft.outcome["year"] for draft in history] == [20, 73, 127, 146]  # the epoch's rolls
     assert [draft.hooks for draft in history] == [
-        ("ambient_drunkard_ramble",),
+        ("barkeep_wary_sweep",),
         ("ambient_drunkard_ramble",),
         ("barkeep_wary_sweep",),
         ("ambient_drunkard_ramble",),
-    ]
+    ]  # the epoch's rolls
 
 
 #: The walk probe's tier vocabulary — the war→battle→episode hierarchy
@@ -687,9 +687,13 @@ def test_the_pass_one_stream_positions_are_frozen() -> None:
 #: (pact→lineage→pact→settlement): the pact anchors the war, the
 #: lineage joins as the battle, the second pact descends to the
 #: episode tier, the settlement stays independent.
+# The epoch's pass-1 draws (rng-1's corpus price): seed 42 now draws
+# settlement/pact/settlement/pact — the tiers re-tuned to the new kinds
+# so the SAME laws demonstrate (the anchor, the members at their first
+# matching tier, the cap re-processing, the unaffiliated closer).
 WALK_TIERS: list[dict[str, Any]] = [
-    {"type": "war", "kinds": ["pact_signed"]},
-    {"type": "battle", "kinds": ["lineage_ended"], "members": 1},
+    {"type": "war", "kinds": ["settlement_founded"]},
+    {"type": "battle", "kinds": ["settlement_founded"], "members": 1},
     {"type": "episode", "kinds": ["pact_signed"], "members": 1},
 ]
 
@@ -715,9 +719,9 @@ def test_the_collection_walk_builds_the_df_nesting() -> None:
     )
     assert model is not None
     _formed, *history = drafts
-    assert parents == (-1, 0, 1, 2, 1)  # the tree, not the linear chain
+    assert parents == (-1, 0, 1, 1, 1)  # the tree, not the linear chain
     assert [draft.outcome.get("collection") for draft in history] == [
-        "war", "battle", "episode", None,
+        "war", "episode", "battle", None,
     ]
     anchor_pair = history[0].outcome["participants"]
     assert history[1].outcome["participants"] == anchor_pair
@@ -733,12 +737,13 @@ def test_the_member_cap_closes_the_run_and_re_anchors() -> None:
     re-processes FRESH — a root-kind event opens the NEXT collection
     (the sagas chain: the new anchor's parent is the previous anchor,
     never the capped run's last member). Seed 42 with the battle tier
-    widened to both nested kinds at cap 1: the lineage joins, the
-    second pact is capped into a NEW war anchor, the settlement (the
-    unaffiliated closer) chains to that anchor."""
+    widened to both drawn kinds at cap 1 (the epoch's rolls — rng-1's
+    corpus price): the first pact joins (the battle tier full), the
+    second settlement is capped into a NEW war anchor, the second pact
+    joins the new war's battle."""
     tiers = [
-        {"type": "war", "kinds": ["pact_signed"]},
-        {"type": "battle", "kinds": ["lineage_ended", "pact_signed"], "members": 1},
+        {"type": "war", "kinds": ["settlement_founded"]},
+        {"type": "battle", "kinds": ["settlement_founded", "pact_signed"], "members": 1},
     ]
     _model, drafts, parents = genesis(
         RngBank(42), _rules_with(_walk_config(tiers)), [], 42
@@ -746,7 +751,7 @@ def test_the_member_cap_closes_the_run_and_re_anchors() -> None:
     _formed, *history = drafts
     assert parents == (-1, 0, 1, 1, 3)
     assert [draft.outcome.get("collection") for draft in history] == [
-        "war", "battle", "war", None,
+        "war", "battle", "war", "battle",
     ]
 
 
@@ -922,8 +927,8 @@ def test_the_genesis_cause_tree_lands_in_the_committed_log(
 ) -> None:
     """L7 end to end: the loop resolves the worldgen's parent map
     through the WRITER'S OWN ids (the id law single-owner), so the
-    committed log carries the TREE — the episode's cause is the battle
-    (the nearest lower tier), the independent's cause is the ANCHOR
+    committed log carries the TREE — every later history event's cause
+    is the ANCHOR (the sagas chain
     (the sagas chain, never the linear predecessor ev_0003), the
     writer's chain law accepts every reference (backward-only by the
     walk's construction), and the log replays through the fold
@@ -935,7 +940,7 @@ def test_the_genesis_cause_tree_lands_in_the_committed_log(
     try:
         _header, events = read_log(log, SCHEMA)
         assert [event.cause for event in events] == [
-            None, "ev_0000", "ev_0001", "ev_0002", "ev_0001",
+            None, "ev_0000", "ev_0001", "ev_0001", "ev_0001",
         ]
         fold(events, initial_projection(armed.entities))  # T2 clean
     finally:
@@ -957,8 +962,8 @@ def test_the_chronicle_renders_the_collection_tier_names(
     lines = tale.splitlines()[2:]  # past the day header + world_formed
     assert len(lines) == 4
     assert lines[0].endswith("in the war.")
-    assert lines[1].endswith("in the battle.")
-    assert lines[2].endswith("in the episode.")
+    assert lines[1].endswith("in the episode.")
+    assert lines[2].endswith("in the battle.")
     assert not re.search(r", in the [a-z]+\.$", lines[3])  # no tier clause
     for line in lines:
         assert "between region_" in line and "at site " in line

@@ -190,13 +190,13 @@ def test_the_answer_is_keyed_on_the_attraction_home(tmp_path: Path) -> None:
             }}
         )
     )
-    high_events = run(tmp_path, high, LADDER, "high")
+    high_events = run(tmp_path, high, LADDER, "high", seed=1)
     assert by_type(high_events, "consent_given")
     assert not by_type(high_events, "consent_refused")
     # the canonical consented fact: her intimacy +20 toward the asker
     assert prop(high_events, MAID, "relations.intimacy") == 30
 
-    low_events = run(tmp_path, PACK, LADDER, "low")
+    low_events = run(tmp_path, PACK, LADDER, "low", seed=1)
     assert by_type(low_events, "consent_refused")
     assert not by_type(low_events, "consent_given")
     assert prop(low_events, MAID, "status.anger") == 10
@@ -227,7 +227,7 @@ def test_the_jealousy_fires_both_gated_arms(tmp_path: Path) -> None:
     """The bond-gated barkeep (+10) and the desire-gated drunk (+15):
     the gates read each candidate's OWN pair home toward the maid — the
     long intimacy and the unanswered attraction, never the bystander."""
-    events = run(tmp_path, PACK, LADDER, "jealousy")
+    events = run(tmp_path, PACK, LADDER, "jealousy", seed=1)
     smolders = by_type(events, "jealousy_smolders")
     assert len(smolders) == 2  # one flirt, both gated arms
     assert prop(events, BARKEEP, "status.anger") == 20  # 10 seed + 10 bond-gated

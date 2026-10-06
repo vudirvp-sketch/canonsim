@@ -397,7 +397,9 @@ def test_contradicted_claims_refuse_the_document(tmp_path: Path) -> None:
 
 
 def test_texture_intent_feeds_the_door_and_promotes(tmp_path: Path) -> None:
-    sim, mediator = _session(tmp_path, seed=4)  # probed: the take check passes
+    sim, mediator = _session(tmp_path, seed=8)
+    # probed: the take check passes (the epoch's rolls; the pre-epoch
+    # seed 4 died at the boundary — rng-1's recorded corpus price)
     mediator.emit_call()
     mediator.apply_reply(_reply(tmp_path, "r1.json", {
         "prose": "The tables stood in candlelight.",

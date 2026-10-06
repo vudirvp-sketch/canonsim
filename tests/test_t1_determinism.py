@@ -115,11 +115,24 @@ def test_different_seed_different_streams() -> None:
     assert RngBank(42).peek() != RngBank(43).peek()
 
 
-def test_stream_derivation_matches_stable_hash() -> None:
-    import random
+def test_stream_derivation_matches_the_counter_epoch() -> None:
+    """The epoch's value law (rng-1), pinned against an independent
+    in-test construction — never the bank's own call path: the first
+    draw of a stream is word 0 of sha256(f"{key}:0"), read as the
+    [0, 1) 53-bit form; the fourth draw is word 3 of the SAME block
+    (one sha256 serves four 64-bit words)."""
+    import hashlib
 
-    expected = random.Random(stable_hash("42:substantive"))
-    assert RngBank(42).peek() == pytest.approx(expected.random())
+    key = stable_hash("42:substantive")
+    digest = hashlib.sha256(f"{key}:0".encode()).digest()
+    assert RngBank(42).peek() == pytest.approx(
+        (int.from_bytes(digest[:8], "big") >> 11) / 2**53
+    )
+    bank = RngBank(42)
+    [bank.randint(1, 100) for _ in range(3)]
+    assert bank.peek() == pytest.approx(
+        (int.from_bytes(digest[24:32], "big") >> 11) / 2**53
+    )
 
 
 def test_substantive_and_cosmetic_are_distinct_streams() -> None:

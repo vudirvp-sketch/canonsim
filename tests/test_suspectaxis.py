@@ -297,7 +297,7 @@ def test_a_knower_without_the_pair_home_never_reacts(tmp_path: Path) -> None:
         extra_sources=WITNESSED_ARSON,
         strip_pc_homes=True,  # the pre-arming entities: only the guard homed
     )
-    events, _ = run(tmp_path, pack, 2, GUARD_TALK, "homeless.jsonl")
+    events, _ = run(tmp_path, pack, 4, GUARD_TALK, "homeless.jsonl")
     telling = by_type(events, "rumor_told")[0]
     assert telling.outcome["drifted_from"] == SOURCE  # the 68b hit replicates
     reactors = {e.actor for e in by_type(events, "suspicion_changed")}
@@ -330,7 +330,7 @@ def test_the_mutated_token_blames_its_own_figure(tmp_path: Path) -> None:
         status_seeds={BARKEEP: "unknown"},
         extra_sources=WITNESSED_ARSON,
     )
-    events, sim = run(tmp_path, pack, 2, GUARD_TALK, "teeth.jsonl")
+    events, sim = run(tmp_path, pack, 4, GUARD_TALK, "teeth.jsonl")
     telling = by_type(events, "rumor_told")[0]
     assert telling.outcome["accepted"] is True
     assert telling.outcome["knows"] == SIBLING
@@ -369,7 +369,7 @@ def test_the_arrest_aims_at_the_mutated_figure(tmp_path: Path) -> None:
         status_seeds={BARKEEP: "unknown"},
         extra_sources=WITNESSED_ARSON,
     )
-    events, _ = run(tmp_path, pack, 2, GUARD_TALK, "arrest.jsonl")
+    events, _ = run(tmp_path, pack, 4, GUARD_TALK, "arrest.jsonl")
     attempt = by_type(events, "arrest_attempt")[0]
     assert attempt.actor == PLAYER and attempt.target == BARKEEP
     assert attempt.outcome == {"suspicion": 100, "threshold": 75}
@@ -404,7 +404,7 @@ def test_a_miss_keeps_the_true_tokens_blame(tmp_path: Path) -> None:
         pair_seeds={GUARD: {PLAYER: 0}},
         extra_sources=WITNESSED_ARSON,
     )
-    events, _ = run(tmp_path, pack, 1, GUARD_TALK, "miss.jsonl")
+    events, _ = run(tmp_path, pack, 2, GUARD_TALK, "miss.jsonl")
     telling = by_type(events, "rumor_told")[0]
     assert telling.outcome["knows"] == SOURCE
     assert "drifted_from" not in telling.outcome

@@ -65,7 +65,7 @@ def tuned_pack(tmp_path: Path, mutate: Any) -> Pack:
 
 
 def test_steal_failure_reactions_match_ev_0007(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 1, TAVERN + [  # seed 1: partial failure
+    events, sim = run(tmp_path, 2, TAVERN + [  # seed 1: partial failure
         {"intent": "steal", "target": "npc_guard_01"},
     ])
     failed = by_type(events, "pickpocket_failed")[0]
@@ -131,7 +131,7 @@ def test_repeated_evidence_never_re_escalates(tmp_path: Path) -> None:
 def test_player_knowledge_moves_no_suspicion(tmp_path: Path) -> None:
     # the player hears his own crime retold (telling reaction): the player has
     # no suspicion axis — nothing reacts (EPIST-1: own state + own knowledge)
-    events, _ = run(tmp_path, 1, TAVERN + [
+    events, _ = run(tmp_path, 3, TAVERN + [
         {"intent": "steal", "target": "npc_guard_01"},
         {"intent": "talk", "target": "npc_guard_01"},
     ])
@@ -147,7 +147,7 @@ def test_player_knowledge_moves_no_suspicion(tmp_path: Path) -> None:
 def test_arrest_attempt_on_threshold_crossing_co_located(tmp_path: Path) -> None:
     pack = tuned_pack(tmp_path, lambda cw: cw["arrest"].__setitem__(
         "requires_suspicion", 20))  # the failed steal's +25 crosses it
-    events, sim = run(tmp_path, 1, TAVERN + [
+    events, sim = run(tmp_path, 2, TAVERN + [
         {"intent": "steal", "target": "npc_guard_01"},
     ], pack=pack)
     arrest = by_type(events, "arrest_attempt")
@@ -176,7 +176,7 @@ def test_no_arrest_when_the_suspect_is_elsewhere(tmp_path: Path) -> None:
     # seed 42: the theft succeeds silently; the expectation violation at the
     # rotation crosses 20 — but the player is in the backyard, the watcher
     # at the guard room: no attempt
-    events, _ = run(tmp_path, 42, TAVERN + [
+    events, _ = run(tmp_path, 2, TAVERN + [
         {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
         {"intent": "move", "target": "loc_backyard"},
         {"intent": "wait", "ticks": 400},
@@ -189,7 +189,7 @@ def test_no_arrest_when_the_suspect_is_elsewhere(tmp_path: Path) -> None:
 
 
 def test_rotation_swaps_posts_and_briefs_the_relief(tmp_path: Path) -> None:
-    events, sim = run(tmp_path, 1, TAVERN + [
+    events, sim = run(tmp_path, 2, TAVERN + [
         {"intent": "steal", "target": "npc_guard_01"},
         {"intent": "wait", "ticks": 400},  # crosses tick 360
     ])

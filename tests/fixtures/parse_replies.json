@@ -201,7 +201,7 @@
     },
     {
       "name": "s3_texture_promotes",
-      "seed": 4,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -280,7 +280,7 @@
     },
     {
       "name": "s4_fire_chain",
-      "seed": 23,
+      "seed": 8,
       "setup": [
         {
           "intent": "move",
@@ -462,7 +462,7 @@
     },
     {
       "name": "s6_probe_family",
-      "seed": 41,
+      "seed": 3,
       "setup": [
         {
           "intent": "move",
@@ -706,7 +706,7 @@
     },
     {
       "name": "s7_untested_verbs",
-      "seed": 111,
+      "seed": 3,
       "setup": [
         {
           "intent": "move",
@@ -810,7 +810,7 @@
           },
           "expect": {
             "status": "intent",
-            "events": 14,
+            "events": 15,
             "pinned": [],
             "promoted": [],
             "last_event": "ramble",
@@ -855,7 +855,7 @@
     },
     {
       "name": "s8_scene_close_retirement",
-      "seed": 65,
+      "seed": 12,
       "setup": [
         {
           "intent": "move",
@@ -1117,7 +1117,7 @@
     },
     {
       "name": "s10_narrator_withdrawal",
-      "seed": 32,
+      "seed": 3,
       "setup": [
         {
           "intent": "move",

@@ -2,11 +2,22 @@
 
 One master seed; named streams deterministically derived via
 `stable_hash(f"{seed}:{stream}")` — sha256-based, environment-independent
-(never relies on PYTHONHASHSEED). Registered streams: `substantive` (canon
-checks) and `cosmetic` (render-only); plus seven CONTENT-ADDRESSED
-FAMILIES
-of lazily registered streams, whose names are built by the owning module
-and pack-linted before any draw — `urgency:<npc>:<kind>` (engine-2,
+(never relies on PYTHONHASHSEED). THE EPOCH (rng-1, the owner's C-13
+call): the value at a stream's draw position `k` is a PURE COUNTER
+FUNCTION — `U(stream, k) = word (k mod 4) of sha256(f"{key}:{k div 4})`
+where `key = stable_hash(f"{seed}:{stream}")` — read in 64-bit
+big-endian words, so O(1) access to the k-th draw, a checkpoint state
+of COUNTERS ONLY (never generator internals), and branch isolation: an
+added or removed draw anywhere shifts no later draw's index (each
+position's value is fixed by construction). The Mersenne Twister named
+streams (the pre-epoch bank) could serve none of these without O(k)
+replay; their canonical bytes die at the epoch boundary (rng-1's
+recorded price — the corpus regeneration, never a silent read).
+
+Registered streams: `substantive` (canon checks) and `cosmetic`
+(render-only); plus seven CONTENT-ADDRESSED FAMILIES of lazily
+registered streams, whose names are built by the owning module and
+pack-linted before any draw — `urgency:<npc>:<kind>` (engine-2,
 D-079, `urgency_stream_name`), `drift:<family>` (rumordrift, A2''/
 D-099, `drift_stream_name`), `scene:<id>:detail` (lazy detail
 materialization, depth-2, `scene_detail_stream_name`),
@@ -14,30 +25,37 @@ materialization, depth-2, `scene_detail_stream_name`),
 `worldgen_stream_name`), `faction:<group>:<kind>` (the faction
 goal rolls, depth-6, `faction_stream_name`), `name:<npc>` (the
 generated names, name-1, `name_stream_name`), and `weather:chain`
-(weather-1, `weather_stream_name`). All draws flow through the
-bank, which counts them per stream; the substantive counter is the
-replay fingerprint T1 compares. Guards (donor discipline,
-`docs/blueprint/phase0.md` §1):
+(weather-1, `weather_stream_name`). All draws flow through the bank,
+which counts them per stream; the substantive counter is the replay
+fingerprint T1 compares. The draw forms: `randint(lo, hi)` = `lo +
+U mod (hi - lo + 1)` (the modulo bias over a 64-bit draw is <=
+span/2**64 — negligible at every real range); `random()` =
+`(U >> 11) / 2**53` (the [0, 1) 53-bit form). A per-stream BLOCK
+MEMO (the sha256 of the current 4-draw block) is derived state —
+pure function of (key, block index), recomputed on any counter jump,
+never exported (the checkpoint carries counters only).
+
+Guards (donor discipline, `docs/blueprint/phase0.md` §1):
 
 - `assure(name)` — run a scope with `name` as the active stream (Brogue
   `assureCosmeticRNG`). Nesting a *different* stream inside an assured
   scope raises immediately — EXCEPT the seven content-addressed
   families: an urgency-, drift-, scene-, worldgen-, faction-, name-, or
-  weather-family
-  stream may shadow the assured `substantive` run scope
+  weather-family stream may shadow the assured `substantive` run scope
   (engine-2, rumordrift + lazy detail (depth-2), worldgen (depth-5),
   factions (depth-6), names (name-1), weather (weather-1)): all are
   canon-relevant but stream-isolated per declared entry, so an added,
   removed, or re-armed pack entry shifts neither a later canon check
   draw nor another entry's roll — the single shared stream was measured
-  and refused for urgencies (the entries
-  coupled by draw position; D-079); drift, scene detail, the worldgen
-  passes, the generated names, and the weather chain inherit the same
-  isolation law
-  (D-095: "isolation is
-  law"; at pass granularity a re-tuned map config shifts neither a
-  canon check draw nor another pass's draws). A wrong-stream draw is
-  loud, never silent.
+  and refused for urgencies (the entries coupled by draw position;
+  D-079); drift, scene detail, the worldgen passes, the generated
+  names, and the weather chain inherit the same isolation law
+  (D-095: "isolation is law"; at pass granularity a re-tuned map
+  config shifts neither a canon check draw nor another pass's draws).
+  Under the epoch the isolation law is structural: a stream's draw at
+  position k is fixed by (seed, stream, k) alone, so a re-armed
+  neighbor entry cannot move it even in principle. A wrong-stream draw
+  is loud, never silent.
 - `audit(name)` — assert zero draws on `name` inside the scope (DCSS
   `ASSERT_stable`); the test-side assertion.
 - `peek(name)` — non-advancing read of the next float (tests only).
@@ -49,7 +67,6 @@ A draw outside any `assure` scope goes to the default active stream:
 from __future__ import annotations
 
 import hashlib
-import random
 from collections.abc import Iterable, Iterator, Mapping
 from contextlib import contextmanager
 from typing import Any, Final
@@ -103,6 +120,13 @@ FAMILY_PREFIXES: Final = (
     NAME_PREFIX,
     WEATHER_PREFIX,
 )
+
+# The counter block: one sha256 digest serves BLOCK draws (four
+# 64-bit big-endian words); the block index of draw position k is
+# k >> BLOCK_SHIFT, the word index is k & (BLOCK_SIZE - 1).
+_BLOCK_SHIFT: Final = 2
+_BLOCK_SIZE: Final = 1 << _BLOCK_SHIFT
+_WORD_MASK: Final = _BLOCK_SIZE - 1
 
 
 def urgency_stream_name(npc: str, intent_kind: str) -> str:
@@ -188,7 +212,8 @@ def weather_stream_name() -> str:
 
 
 class RngError(RuntimeError):
-    """INV-2 violation: wrong-stream draw or an audit-scope draw leak."""
+    """INV-2 violation: wrong-stream draw, an audit-scope draw leak, or
+    a bank state from another epoch."""
 
 
 def stable_hash(text: str) -> int:
@@ -196,13 +221,31 @@ def stable_hash(text: str) -> int:
     return int.from_bytes(hashlib.sha256(text.encode()).digest()[:8], "big")
 
 
+def _draw_word(key: int, position: int, memo: dict[str, tuple[int, bytes]], name: str) -> int:
+    """The 64-bit word at a stream's draw position: the epoch's counter
+    function. Pure in (key, position); the block memo is derived state —
+    recomputed whenever the position's block differs, correct by
+    construction on any counter jump (restore, branch, seek)."""
+    block_index = position >> _BLOCK_SHIFT
+    cached = memo.get(name)
+    if cached is None or cached[0] != block_index:
+        digest = hashlib.sha256(f"{key}:{block_index}".encode()).digest()
+        cached = (block_index, digest)
+        memo[name] = cached
+    word = position & _WORD_MASK
+    return int.from_bytes(cached[1][8 * word:8 * word + 8], "big")
+
+
 class RngBank:
-    """Holds every named stream; the only door to entropy (L5)."""
+    """Holds every named stream; the only door to entropy (L5). The
+    epoch (rng-1): a stream's draws are its counter positions — the
+    checkpoint is the counts, nothing else."""
 
     def __init__(self, seed: int, streams: Iterable[str] = PHASE0_STREAMS) -> None:
         self._seed = int(seed)
-        self._streams: dict[str, random.Random] = {}
+        self._keys: dict[str, int] = {}
         self._counts: dict[str, int] = {}
+        self._memo: dict[str, tuple[int, bytes]] = {}
         self._active: str = SUBSTANTIVE
         self._assured: str | None = None
         for name in streams:
@@ -218,13 +261,14 @@ class RngBank:
         return self._active
 
     def _register(self, name: str) -> None:
-        if name in self._streams:
+        if name in self._counts:
             raise RngError(f"duplicate stream {name!r}")
-        self._streams[name] = random.Random(stable_hash(f"{self._seed}:{name}"))
+        self._keys[name] = stable_hash(f"{self._seed}:{name}")
         self._counts[name] = 0
 
-    def _rng(self, name: str) -> random.Random:
-        if name not in self._streams:
+    def _ensure(self, name: str) -> None:
+        """Register `name` if the family law admits it; loud otherwise."""
+        if name not in self._counts:
             if name.startswith(FAMILY_PREFIXES):
                 # engine-2 + rumordrift + lazy detail (depth-2) + the
                 # worldgen passes (depth-5) + the faction goal rolls
@@ -241,12 +285,11 @@ class RngBank:
                 self._register(name)
             else:
                 raise RngError(
-                    f"unknown stream {name!r} (known: {sorted(self._streams)})"
+                    f"unknown stream {name!r} (known: {sorted(self._counts)})"
                 )
-        return self._streams[name]
 
     def count(self, name: str = SUBSTANTIVE) -> int:
-        """Draws taken from `name` so far."""
+        """Draws taken from `name` so far (the counter positions)."""
         return self._counts[name]
 
     @property
@@ -261,7 +304,7 @@ class RngBank:
         urgency-, drift-, scene-, worldgen-, faction-, name-, or
         weather-family stream may shadow the assured substantive run
         scope — and nothing else may nest anywhere."""
-        self._rng(name)
+        self._ensure(name)
         if (
             self._assured is not None
             and self._assured != name
@@ -283,7 +326,7 @@ class RngBank:
     @contextmanager
     def audit(self, name: str = SUBSTANTIVE) -> Iterator[None]:
         """Assert zero draws on `name` inside the scope (DCSS ASSERT_stable)."""
-        self._rng(name)  # fail fast on unknown stream names
+        self._ensure(name)  # fail fast on unknown stream names
         before = self._counts[name]
         try:
             yield
@@ -296,69 +339,78 @@ class RngBank:
 
     def peek(self, name: str = SUBSTANTIVE) -> float:
         """Next float of `name` without advancing it (tests only)."""
-        rng = self._rng(name)
-        state = rng.getstate()
-        try:
-            return rng.random()
-        finally:
-            rng.setstate(state)
+        self._ensure(name)
+        word = _draw_word(self._keys[name], self._counts[name], self._memo, name)
+        return (word >> 11) / 2**53
 
     # -- draw surface (the only advancing operations) -----------------------
 
     def randint(self, lo: int, hi: int) -> int:
-        """Inclusive integer draw from the active stream."""
-        self._counts[self._active] += 1
-        return self._streams[self._active].randint(lo, hi)
+        """Inclusive integer draw from the active stream: `lo + U mod span`
+        (one counter position per call, uniform at every real range —
+        the modulo bias over a 64-bit word is <= span/2**64)."""
+        if hi < lo:
+            raise ValueError(f"empty range for randint: [{lo}, {hi}]")
+        name = self._active
+        word = _draw_word(self._keys[name], self._counts[name], self._memo, name)
+        self._counts[name] += 1
+        return lo + word % (hi - lo + 1)
 
     def random(self) -> float:
-        """Float draw from the active stream."""
-        self._counts[self._active] += 1
-        return self._streams[self._active].random()
+        """Float draw from the active stream: `(U >> 11) / 2**53`, the
+        [0, 1) 53-bit form (one counter position per call)."""
+        name = self._active
+        word = _draw_word(self._keys[name], self._counts[name], self._memo, name)
+        self._counts[name] += 1
+        return (word >> 11) / 2**53
 
     # -- the resume door (iter-106, D-139): entropy positions ----------
 
     def export_state(self) -> dict[str, Any]:
         """The bank's full entropy position, JSON-ready: every registered
-        stream's `random.Random` state + draw count, EXCEPT the worldgen
-        family (their positions are genesis-scoped — `generate_world`
-        re-derives them from the fresh seed at resume, so a cursor must
-        never carry them). Sorted stream names; the same run state
-        serializes to the same bytes in any process (INV-2's spirit —
-        `core/cursor.py` owns the artifact around this payload)."""
-        streams: dict[str, list[Any]] = {}
+        stream's draw COUNTER — the epoch's tiny checkpoint (rng-1: the
+        pre-epoch form carried each stream's 624-word Mersenne Twister
+        state; the counter form is the whole position). EXCEPT the
+        worldgen family (their positions are genesis-scoped —
+        `generate_world` re-derives them from the fresh seed at resume,
+        so a cursor must never carry them; under the epoch the
+        re-derivation recomputes the same pure values by construction).
+        Sorted stream names; the same run state serializes to the same
+        bytes in any process (INV-2's spirit — `core/cursor.py` owns the
+        artifact around this payload)."""
         counts: dict[str, int] = {}
-        for name in sorted(self._streams):
+        for name in sorted(self._counts):
             if name.startswith(WORLDGEN_PREFIX):
                 continue  # genesis-scoped: rebuilt, never restored
-            version, internal, gauss = self._streams[name].getstate()
-            streams[name] = [version, list(internal), gauss]
             counts[name] = self._counts[name]
-        return {"streams": streams, "counts": counts}
+        return {"counts": counts}
 
     def restore_state(self, mapping: Mapping[str, Any]) -> None:
-        """Restore stream positions + draw counts (the resume door's bank
-        half — `Simulator.resume` is the only caller). The worldgen family
-        is REFUSED loudly: a cursor carrying `worldgen:<pass>` positions
-        claims a state `generate_world` is about to re-derive differently
-        — the mismatch would be silent entropy drift. The always-registered
-        pair (`substantive`, `cosmetic`) must be present: an export without
-        the fingerprint's own stream is a lie about the run. Unknown
+        """Restore draw counters (the resume door's bank half —
+        `Simulator.resume` is the only caller). The payload is counts
+        ONLY: a mapping carrying `streams` (Mersenne Twister states) is
+        a cursor from the pre-epoch bank — refused LOUD, never silently
+        drifted across the epoch boundary (rng-1's recorded price: the
+        run restarts from its log; the log itself stays replayable and
+        foldable — INV-1/INV-5 untouched). The worldgen family is
+        REFUSED loudly as ever: a cursor carrying `worldgen:<pass>`
+        positions claims a state `generate_world` is about to re-derive
+        differently. The always-registered pair (`substantive`,
+        `cosmetic`) must be present: an export without the
+        fingerprint's own stream is a lie about the run. Unknown
         non-family stream names stay loud (the closed-set tripwire)."""
-        if set(mapping) != {"streams", "counts"}:
+        if "streams" in mapping or set(mapping) != {"counts"}:
             raise RngError(
-                f"bank state keys must be ['counts', 'streams'], got "
-                f"{sorted(mapping)}"
+                "bank state must carry exactly the draw counters "
+                "{'counts'} — a payload with 'streams' (or any other "
+                "shape) is a cursor from the pre-epoch MT bank: the "
+                "counter epoch cannot restore it; restart the run from "
+                "its log (rng-1's recorded price)"
             )
-        streams = mapping["streams"]
         counts = mapping["counts"]
-        if not isinstance(streams, Mapping) or not isinstance(counts, Mapping):
-            raise RngError("bank 'streams' and 'counts' must be mappings")
-        if set(streams) != set(counts):
-            raise RngError(
-                f"bank streams and counts disagree: {sorted(streams)} vs "
-                f"{sorted(counts)}"
-            )
-        for name in streams:
+        if not isinstance(counts, Mapping):
+            raise RngError("bank 'counts' must be a mapping")
+        for name in counts:
             if name.startswith(WORLDGEN_PREFIX):
                 raise RngError(
                     f"bank state carries the genesis-scoped stream {name!r} — "
@@ -366,31 +418,16 @@ class RngBank:
                     "restored"
                 )
         for required in PHASE0_STREAMS:
-            if required not in streams:
+            if required not in counts:
                 raise RngError(
                     f"bank state lacks the always-registered stream "
                     f"{required!r} — an export without it is a lie"
                 )
-        for name, raw in streams.items():
-            state = self._rng(name)  # registers family streams lazily; loud otherwise
-            if (
-                not isinstance(raw, (list, tuple)) or len(raw) != 3
-                or raw[0] != 3 or not isinstance(raw[1], (list, tuple))
-                or not all(isinstance(word, int) and not isinstance(word, bool) for word in raw[1])
-                or not (raw[2] is None or isinstance(raw[2], float))
-            ):
-                raise RngError(
-                    f"bank state for {name!r} is not a [version, words, "
-                    f"gauss] Mersenne Twister state, got {raw!r}"
-                )
-            try:
-                state.setstate((raw[0], tuple(raw[1]), raw[2]))
-            except ValueError as exc:
-                raise RngError(f"bank state for {name!r} rejected: {exc}") from exc
-            count = counts[name]
-            if not isinstance(count, int) or isinstance(count, bool) or count < 0:
+        for name, raw in counts.items():
+            self._ensure(name)  # registers family streams lazily; loud otherwise
+            if not isinstance(raw, int) or isinstance(raw, bool) or raw < 0:
                 raise RngError(
                     f"bank count for {name!r} must be a non-negative int, "
-                    f"got {count!r}"
+                    f"got {raw!r}"
                 )
-            self._counts[name] = count
+            self._counts[name] = raw

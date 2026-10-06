@@ -224,11 +224,12 @@ def test_a_pack_without_the_block_yields_nothing() -> None:
 
 
 def test_the_failed_steal_mints_the_room_live(tmp_path: Path) -> None:
-    """Seed 93: the total failure teaches the token to the whole room —
+    """Seed 25 at the epoch's rolls (rng-1's corpus price; the pre-epoch
+    seed 93's steal now succeeds): the total failure teaches the token to the whole room —
     every witnessing npc mints a cluster over the player, cause-chained
     to the pickpocket event, the fidelity riding the acquisition (the
     relief's cluster lands later, at the rotation — its own test)."""
-    events = run(tmp_path, 93, ROOM_FAILURE_WAIT)
+    events = run(tmp_path, 25, ROOM_FAILURE_WAIT)
     clusters = [e for e in events if e.type == "leverage_gained"]
     pickpocket = next(e for e in events if e.type == "pickpocket_failed")
     room = [e for e in clusters if e.cause == pickpocket.id]
@@ -241,7 +242,7 @@ def test_the_failed_steal_mints_the_room_live(tmp_path: Path) -> None:
         assert cluster.outcome["secret"] == "figure_reaching_for_purse"
         assert cluster.outcome["expires_at"] == pickpocket.t + 720
         assert cluster.outcome["fidelity"] == "partial"
-        assert cluster.provenance == {"seed": 93}
+        assert cluster.provenance == {"seed": 25}
 
 
 def test_the_briefing_transfer_mints_the_relief(tmp_path: Path) -> None:
@@ -249,7 +250,7 @@ def test_the_briefing_transfer_mints_the_relief(tmp_path: Path) -> None:
     relief watcher — the institution's knowledge becomes the
     institution's leverage (the transfer event's records are knowledge
     like any other)."""
-    events = run(tmp_path, 93, ROOM_FAILURE_WAIT)
+    events = run(tmp_path, 25, ROOM_FAILURE_WAIT)
     clusters = [e for e in events if e.type == "leverage_gained"]
     transfer = next(e for e in events if e.type == "knowledge_transfer")
     relief = [e for e in clusters if e.actor == "npc_guard_02"]
@@ -260,10 +261,10 @@ def test_the_briefing_transfer_mints_the_relief(tmp_path: Path) -> None:
 
 
 def test_the_second_failure_never_re_mints(tmp_path: Path) -> None:
-    """Seed 19: two steal failures against the same mark in view of the
+    """Seed 25 (the epoch's rolls): two steal failures against the same mark in view of the
     same room — ONE mint round (the novelty law live: the second event's
     knowers already hold the token)."""
-    events = run(tmp_path, 19, [
+    events = run(tmp_path, 25, [  # the epoch's rolls (rng-1's corpus price)
         {"intent": "move", "target": "loc_tavern"},
         {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
         {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
@@ -284,7 +285,7 @@ def test_live_leverage_expires_at_the_boundary(tmp_path: Path) -> None:
     relief's (minted at the rotation, 360) outlives it. Four live, not
     five: the drunkard's card is SPENT at the beat coercion (content-4,
     D-078) — the spend kills the cluster long before its own expiry."""
-    events = run(tmp_path, 93, ROOM_FAILURE_WAIT)
+    events = run(tmp_path, 25, ROOM_FAILURE_WAIT)
     clusters = [e for e in events if e.type == "leverage_gained"]
     room_expiry = max(
         int(e.outcome["expires_at"]) for e in clusters if e.t < 300
@@ -314,8 +315,8 @@ def test_the_chronicle_renders_the_cluster_line(tmp_path: Path) -> None:
     in the chronicle (story-critical → medium → above the tale gate)."""
     from render.chronicle import chronicle_from_log
 
-    run(tmp_path, 93, ROOM_FAILURE_WAIT)
-    text = chronicle_from_log(tmp_path / "run_93.jsonl", PACK, SCHEMA)
+    run(tmp_path, 25, ROOM_FAILURE_WAIT)
+    text = chronicle_from_log(tmp_path / "run_25.jsonl", PACK, SCHEMA)
     assert "Doren now holds something over the player." in text
     assert "the barkeep now holds something over the player." in text
     assert "the serving maid now holds something over the player." in text
@@ -355,12 +356,12 @@ def test_births_are_the_only_divergence(tmp_path: Path) -> None:
     steps = ROOM_FAILURE_WAIT
     with_log = tmp_path / "with.jsonl"
     without_log = tmp_path / "without.jsonl"
-    Simulator(PACK, 93, with_log, SCHEMA, commit="0000000").run_playscript(
-        {"name": "ab", "seed": 93, "pack": "tavern_pack@0.1", "steps": steps}
+    Simulator(PACK, 25, with_log, SCHEMA, commit="0000000").run_playscript(
+        {"name": "ab", "seed": 25, "pack": "tavern_pack@0.1", "steps": steps}
     )
-    Simulator(stripped_pack(tmp_path / "arm"), 93, without_log, SCHEMA,
+    Simulator(stripped_pack(tmp_path / "arm"), 25, without_log, SCHEMA,
               commit="0000000").run_playscript(
-        {"name": "ab", "seed": 93, "pack": "tavern_pack@0.1", "steps": steps}
+        {"name": "ab", "seed": 25, "pack": "tavern_pack@0.1", "steps": steps}
     )
     _h, with_events = read_log(with_log, SCHEMA)
     _h, without_events = read_log(without_log, SCHEMA)

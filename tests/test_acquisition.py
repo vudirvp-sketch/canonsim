@@ -338,8 +338,8 @@ def test_the_paid_price_is_exactly_one_stepped_burnout_record(
         (REPO / "tests" / "playscripts" / "day1_theft_and_arson.json")
         .read_text(encoding="utf-8")
     )["steps"]
-    armed_log = run(tmp_path, PACK, 8, steps, "paid_armed")
-    base_log = run(tmp_path, v01, 8, steps, "paid_base")
+    armed_log = run(tmp_path, PACK, 15, steps, "paid_armed")
+    base_log = run(tmp_path, v01, 15, steps, "paid_base")
     armed_lines = armed_log.read_text().splitlines()
     base_lines = base_log.read_text().splitlines()
     assert len(armed_lines) == len(base_lines)
@@ -367,8 +367,8 @@ def test_the_liveness_law_a_degraded_site_steps_the_born_records(
     born PARTIAL where the v0.1 twin births them EXACT, and the bytes
     differ (the arming is measurable, never silent)."""
     v01 = crafted_pack(tmp_path, "v01_live", None)
-    armed_log = run(tmp_path, PACK, 8, SMOKE_RETURN, "live_armed")
-    base_log = run(tmp_path, v01, 8, SMOKE_RETURN, "live_base")
+    armed_log = run(tmp_path, PACK, 3, SMOKE_RETURN, "live_armed")
+    base_log = run(tmp_path, v01, 3, SMOKE_RETURN, "live_base")
     armed_records = [
         r
         for r in born_knowledges(armed_log)

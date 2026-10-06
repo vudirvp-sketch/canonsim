@@ -440,7 +440,7 @@ def test_the_residue_drives_the_behavior(tmp_path: Path) -> None:
     roll stays SILENT — "events that happened but no longer matter"
     (P3e's headline law, live)."""
     pack = tuned_pack(tmp_path)
-    events, sim = run(tmp_path, pack, 93, FADE_SCRIPT, "driver.jsonl")
+    events, sim = run(tmp_path, pack, 25, FADE_SCRIPT, "driver.jsonl")
     looks = [e for e in events if e.type == "look_around"]
     assert [e.t for e in looks] == [406]
     assert looks[0].actor == "npc_drunk_01"
@@ -470,9 +470,7 @@ def test_the_jittery_watcher_beat_fires_and_fades(tmp_path: Path) -> None:
     the committed pack. Each scan takes the actor's CURRENT room in (the
     rotation moved him to the guardroom at 360) and mints the snapshot
     record; the silent-skip law holds (no rejection ever)."""
-    events, sim = run(
-        tmp_path, v01_pack(tmp_path), 33, FADE_ARC, "jittery.jsonl"
-    )
+    events, sim = run(tmp_path, v01_pack(tmp_path), 19, FADE_ARC, "jittery.jsonl")
     looks = [e for e in events if e.type == "look_around"]
     assert [(e.t, e.actor) for e in looks] == [
         (374, "npc_guard_01"), (774, "npc_guard_01"),
@@ -513,7 +511,7 @@ def test_the_committed_valence_table_reads_real_residue(tmp_path: Path) -> None:
     tick — and the landed guard driver stays SILENT on the reach family
     (6 < 15, the half-window bar: the scan is the fire-watcher's, not
     the purse-watcher's)."""
-    events, sim = run(tmp_path, PACK, 93, ROOM_FAILURE_WAIT, "plain.jsonl")
+    events, sim = run(tmp_path, PACK, 25, ROOM_FAILURE_WAIT, "plain.jsonl")
     assert not any(e.type == "look_around" for e in events)
     scores = {
         (s.who, s.axis): s.score
@@ -542,7 +540,7 @@ def test_the_window_closes_between_accept_and_completion(tmp_path: Path) -> None
         ]
 
     pack = tuned_pack(tmp_path / "window", mutate_actions=gate_and_lengthen)
-    events, sim = run(tmp_path, pack, 93, ROOM_FAILURE_WAIT, "window.jsonl")
+    events, sim = run(tmp_path, pack, 25, ROOM_FAILURE_WAIT, "window.jsonl")
     assert not any(e.type == "look_around" for e in events)
     rejection = next(
         e for e in events
