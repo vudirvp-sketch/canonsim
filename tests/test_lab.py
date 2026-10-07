@@ -439,6 +439,17 @@ def test_the_paired_record_carries_realized_deltas(tmp_path: Path) -> None:
     assert delta["material_state_identical"] is False
     assert delta["events_total"] > 0  # segmented realizes MORE life here
     assert "REALIZED DELTAS LIVE" in record["disposition"]
+    # iter-335 (the kiloyear row): the full-read law extended to the
+    # family's FIFTH verb — account_converted (stageb-1-impl B2) is the
+    # B6 turnover counter, and it must ride every surface the verb
+    # family quotes: each run's own metrics AND the paired summary the
+    # REALIZED_DELTA verb delta derives from. Measured live at 2y on
+    # both arms (the forge fires in the deferred batch and in the
+    # year-flow alike).
+    for run in record["runs"]:
+        assert run["metrics"]["account_verbs"].get("account_converted", 0) >= 1
+    assert row["whole"]["account_verbs"].get("account_converted", 0) >= 1
+    assert row["segmented"]["account_verbs"].get("account_converted", 0) >= 1
 
 
 def test_the_replay_cost_instrument_law(tmp_path: Path) -> None:

@@ -1,54 +1,55 @@
-Iteration: iter-334 (`rng1` — the rng-1 row, THE EPOCH, R3 core;
-  the owner's «==> P0.5-C, rng-1 (эпоха), станционный килогод
-  с вооружённым миром» call — the row opened by the message
-  itself): **THE COUNTER-BLOCK RNG BANK LANDED** —
-  `U(stream,k) = word(k mod 4) of sha256(key:k div 4)`: O(1)
-  access to the k-th draw (the end-state time-skip horizon H9
-  structurally unlocked), a checkpoint of COUNTERS ONLY (the
-  legacy MT cursor refused LOUD with the reason), branch
-  isolation STRUCTURAL (a draw fixed by (seed, stream, k) — a
-  re-armed neighbor cannot move it even in principle). The block
-  form: one sha256 per 4 draws — 0.42 µs/draw, MT randint's own
-  CPython price; the wall +3.7% (farstead 100y 10.0→10.37 s).
-  **THE CORPUS PRICE PAID AND RECORDED**: 228 failures at the
-  flip, ALL re-pinned with every law's assertion intact — seed
-  re-pins, beat-grid t-stamps, the document-check verdict flip
-  on seed 125, 7 golden fixtures regenerated, 3 playscripts
-  re-seeded, the CRN test's power doubled 8→16 pairs at the SAME
-  thresholds (never weakened); one mechanical corruption caught
-  (test_echo's `pack`→`PACK` from an earlier re-pin — two laws
-  ran on the committed pack instead of the tuned one). P0.5-C
-  closed as exhausted (the hoist rode P0.5-A, the LOD filter
-  reclassified P1, the residual ~22% measured near-linear).
-  **THE OWNER'S BALANCE CONDITION VERIFIED**: the B6 oracle GREEN
-  under the epoch's own draws — 10 conversions = 10 bloom wears
-  at 10y, every source at-or-below its cap, the workshop static
-  at its seed stock — NO pack-data fork needed, the cycle
-  balances on its mechanics. NEXT: the station kiloyear with
-  the armed world (the call's third item, now unblocked — the
-  epoch boundary paid), H9 behind it.
+Iteration: iter-335 (`kiloyear-1` — the armed-world kiloyear
+  under the epoch, R2 local-add; the owner's standing third call
+  item «станционный килогод с вооружённым миром» (opened with
+  rng-1, unblocked by the epoch) + the active «продолжай работы,
+  открывай важнейшее» directive): **THE B6 ORACLE GREEN AT THE
+  MILLENNIUM** — 1,000 conversions = 1,000 bloom wears (exactly
+  1.00/year), the workshop static at the 10y levels (ore 4 /
+  wood 12 / tool 6 vs the unarmed MT's 4,016 DEAD at tool=0),
+  every source ≤ its basin (58/60, 38/40, 38/40, 22/24), the
+  total mass −30 vs the unarmed +26,300 — ZERO pack-data forks,
+  the material cycle holds equilibrium a thousand years on its
+  own mechanics (B6 closed at every scale 10y→100y→1000y).
+  **T1 HELD at 76,951,399 bytes × 2** — the deepest determinism
+  verification ever run (the full kiloyear double-run under the
+  epoch; sanity 2y + T1 HELD too). **The segmented wall is
+  LINEAR**: 10.32 s@100y → 102.54 s@1000y (9.94× on 10×) —
+  10.3× faster than the unarmed MT sandbox-equivalent ~1,061 s.
+  **THE WHOLE ARM DECOMPOSED** (lab-5 on whole 50y/100y,
+  canon-neutrality HELD): occ_refold 68.8%→81.7%, per-call ×2.0,
+  knowledge 0.0% (P1b holds on BOTH protocols) — the mechanism
+  named in code: the deferred-realize law holds completions to
+  the horizon's end, so the whole protocol's OCC window [seq,
+  end) is horizon-long (P1a removed only the PREFIX refold; on
+  segmented the window ≈ one year) — NOT a P1a regression; the
+  whole bound 400y > 595 s (α ≈ 1.72), the fix (an index-based
+  window attribution, B7's letter) a future gated row, the
+  station prediction ~3,000–4,500 s. The kiloyear laws: sourced
+  4.00/year EXACT, flat life 74.3/year (trend 0.976), constant
+  state 25, the talk control 3,355 = 3,355 (the epoch moves the
+  MT absolute, never the invariance), read 0.604 s/MB. The
+  convert verb joined the labrunner's account_verbs full-read
+  (the B6 turnover counter) + its law. The station probe v3
+  (session artifact, self-checked green) delivered for the
+  owner's cross-check. NEXT: the station cross-check on the
+  owner's hardware (the whole kiloyear + the cross-hardware T1),
+  H9 behind it.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
 2606 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; R3 core — the
-  epoch boundary: the corpus regenerated as the row recorded
-  (228 re-pins, the laws intact); INV-1..5 untouched, the LOG
-  untouched; NO test deleted or weakened) ·
-Date: 2026-10-05 ·
-Scope: core/rng.py (the epoch bank — the counter-block
-  construction, the block memo, the draw forms),
-  core/cursor.py (the loud pre-epoch cursor refusal),
-  tests/ ×53 (the corpus re-pins — every law's assertion
-  intact), tests/fixtures ×11 (the golden corpus regenerated +
-  the deviation expect re-pins), tests/playscripts ×3 (the
-  re-seeds), docs/TASKS.md (the rng-1 row DONE + the ledger,
-  iter-324 evicted), STATUS.md (this header), worklog.md (the
-  iter-334 entry, iter-324 evicted),
-  docs/iterations/iter-334-rng1-report.md (new) ·
-  (new — this row's RU report) — 8 changed/created (4 pack/test +
-  4 riders).
+  --check clean (Python 3.12.14, the env pin; INV-1..5 untouched,
+  the LOG untouched; NO test deleted or weakened — 1 extended,
+  assertions only added) ·
+Date: 2026-10-07 ·
+Scope: scripts/labrunner.py (the convert verb in the account_verbs
+  full-read — the family's fifth verb), tests/test_lab.py (the law
+  in the paired record), docs/TASKS.md (the kiloyear-1 row + the
+  ledger, iter-325 evicted), STATUS.md (this header), worklog.md
+  (the iter-335 entry, iter-324 evicted),
+  docs/iterations/iter-335-kiloyear-report.md (new) —
+  6 changed/created (2 code/test + 4 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -137,21 +138,23 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-333 DONE: stageb1impl2 (the farstead arming + the B6 battery
-  — the material cycle COMPLETE, the oracle green on all three
-  arms; both opened implementation rows LANDED: scale-1-impl
-  iter-330/331 + stageb-1-impl iter-332/333).**
-Next: THE OWNER'S CALLS (the session's opened rows discharged):
-  (1) P0.5-C — the candidates in the iter-330 report §E (the
-  hoist rode P0.5-A; the LOD-filter-outside-the-walk is P1-class;
-  the ~22% residual now measured near-linear); (2) rng-1 — the
-  RNG epoch row opens on the owner's call (the byte-identical
-  rows it waited for are LANDED); (3) the station cross-check —
-  the kiloyear battery on the owner's hardware with the armed
-  pack (the B6 oracle at 1,000y; the sandbox predicts ~4.5 min
-  segmented vs the unarmed 14.7); (4) the standing calls preserved
-  (the Lab queue's battery rows E02/E31, M2, the replay-UI row,
-  the world track's W8, the frontend P1/P2/P3 continuations).
+**iter-335 DONE: kiloyear-1 (the armed-world kiloyear under the epoch
+  — B6 GREEN at the millennium, 1,000 conversions = 1,000 wears;
+  the segmented wall LINEAR at 102.54 s; T1 HELD at 77 MB × 2;
+  the whole arm decomposed — the deferred-drain occ window, the
+  named residue behind its own future gated row).**
+Next: THE OWNER'S CALLS (the standing items in order):
+  (1) the station cross-check — the probe v3 (the session artifact,
+  self-checked) on the owner's hardware: the whole kiloyear (the
+  sandbox bound 400y > 595 s, the prediction ~3,000–4,500 s), the
+  segmented verification against the sandbox's 102.54 s, the
+  cross-hardware T1; (2) H9 — the event-to-event waiting on the
+  time-skip (structurally unblocked by the epoch's O(1) counter
+  jump — the row behind the kiloyear); (3) the whole-arm occ-window
+  fix (an index-based window attribution, B7's letter) — a named
+  row on the owner's call; (4) the standing calls preserved (the
+  Lab queue's battery rows E02/E31, M2, the replay-UI row, the
+  world track's W8, the frontend P1/P2/P3 continuations).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

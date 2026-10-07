@@ -455,11 +455,15 @@ def extract_metrics(
         "by_type_top": dict(sorted(by_type.items(), key=lambda kv: -kv[1])[:12]),
         # lab-2: the economy verbs' exact counts (the full Counter read,
         # never the top-12 cutoff — a pack whose material loop rides the
-        # account family gets its production vocabulary quoted whole)
+        # account family gets its production vocabulary quoted whole;
+        # iter-335: account_converted joins the read — the family's fifth
+        # verb since stageb-1-impl (B2), the B6 turnover metric's own
+        # counter, invisible to the top-12 cutoff on long horizons)
         "account_verbs": {
             verb: by_type[verb] for verb in (
                 "account_sourced", "account_transferred",
                 "account_consumed", "account_settled",
+                "account_converted",
             ) if by_type[verb]
         },
         "final_accounts": final_accounts,
