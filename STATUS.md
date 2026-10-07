@@ -1,58 +1,55 @@
-Iteration: iter-338 (`occidx` — the whole-arm OCC window fix,
-  the STATUS Next item (1), the row iter-335/336/337's NEXT lines
-  named first, B7's letter — an index-based window attribution, never
-  a log scan; the owner's active «продолжай работы, открывай
-  важнейшее на долгосрок» directive): **THE INDEX-BASED WINDOW
-  ATTRIBUTION LANDED** — the Simulator maintains the write index
-  (`_occ_index`: (entity, prop) → the ascending event indices of
-  every committed write, the `_last_change` pattern's full-history
-  form; `_commit` the only writer, the resume loop the only
-  rebuilder) and `occ_breaking_cause(changes=…)` visits ONLY the
-  window events that write a pair the intent's attributable tests
-  can read — the read-set declared by the twin table in
-  core/intent.py (`OCC_READ_PAIRS` + `STATIC_TESTS` +
-  `precondition_read_pairs`, next to the test family; completeness
-  law: every PRECONDITION_TESTS name is exactly one of
-  table/static/windowed). **THE FALSIFIER IS THE A/B
-  ATTRIBUTION-EQUIVALENCE LAW** (every index answer == the exact
-  full walk's on the SAME call — both wait protocols, non-vacuous) +
-  byte-identity both arms + the twin-agreement property over all 6
-  committed packs × every action × seeded non-read mutations + the
-  resume rebuild + the unit grid — +11 laws (tests/test_occidx.py).
-  **THE WALL: whole 50y 13.66 → 2.22 s (6.15×), whole 100y
-  51.64 → 4.36 s (11.8× — the local exponent 1.89 → 0.997, the
-  quadratic member DEAD); THE WHOLE KILOYEAR 3,818 → 43.5 s (87.7×
-  — now CHEAPER than the segmented arm; T1 HELD md5 `7cbfb68a…` × 2
-  at 45,000,433 B, the iter-336 LF-platform byte prediction landed
-  EXACTLY; events 82,757 = the station's number)**; the walk
-  surface at whole 100y cut 223× (window 18,341,200 → inspected
-  82,174); the profiled wall: occ_refold 81.7% → 7.3%, per-call
-  ×2.0 → ×1.02; the segmented kiloyear md5 `a1d8f05b…` = the
-  iter-335 canon. Honest labels: `Simulator.occ_stats` + the
-  labrunner `cost.occ` block. SIDE FINDING: KI#114 opened (the
-  pre-existing resume-boundary drain divergence — a split AFTER a
-  wait enters the next step +16 ticks late; found by the law's
-  first draft, reproduced with occ-1 fully stripped; its own row).
-  NEXT: the standing owner calls (E02/E31, M2, replay-UI, W8, the
-  frontend P1/P2/P3) + the KI#114 fix row.
+Iteration: iter-339 (`ki114dec` — the KI#114 composition-law
+  DECISION PACKET, R0 doc-only; the owner's 2026-10-08 decision call
+  «Принимаем B — закон композиции на чистой границе drain» — the
+  row opened by the message itself, D-198 intake): **THE B DIRECTION
+  RECORDED AS CANONICAL** — the next player intent admissible ONLY at
+  a clean drain boundary (queue empty, the causal cascade complete);
+  the composition law `run_steps([A,B]) == run_steps([A]);
+  run_steps([B])` for EVERY partitioning; resume with NO separate
+  timing semantics (checkpoint + resume == continuous == split,
+  byte-for-byte); candidate A (mid-drain resume) OUT OF CONTRACT.
+  **THE STRENGTHENED FALSIFIER** (the session artifact
+  `scripts/ki114_law.py`, 143 checks — the full cut lattice x
+  wait/move/zero-duration/follow-up-drain kinds x 5 packs x 2 seeds x
+  both lab protocols x split AND checkpoint-resume-at-every-cut x
+  double-run): **PROTOTYPE 0/143, BASE 44/143** — the falsifier has
+  teeth (the old semantics CANNOT compose); the KI#114 repro CLOSED
+  (the farstead 2-segment split byte-identical, the +16 gone).
+  **THE 70-FAILURE CLASSIFICATION** (BASE 2627+1 verified green
+  first; the prototype 70 failed / 2557+1, every assertion captured):
+  23 pure timing/value re-pins + 23 expected causal/state shifts + 24
+  golden byte compares (the fixture census: province +10 events /
+  road pure +3 timing / pressure +9; grim + plumbing PROVEN
+  byte-identical — the quiet-boundary law) — **REAL SEMANTIC
+  REGRESSIONS: 0** (every family mechanism-named: the feed-point
+  shift, the deferred-realize phase shift, the exposure-window
+  closure — the pole carried off before the read enters, the echo
+  residue decayed past the keeper's gate — and the span effects; the
+  OCC census 1->76: ALL honest door breaks on `target.same_location`,
+  zero player-step rejections, no wedge; determinism, INV-1..5 and
+  the door/honesty laws held). **THE CONSCIOUS REBASE LIST FIXED**:
+  regenerate province/road/pressure smoke + the mediator
+  narrator-beats expectations (point 6); the landing row
+  `ki114-1-impl` OPENED behind the owner's confirmation of the packet
+  (point 9 — no mass regeneration, no landing, until then). The exact
+  prototype patch preserved as the session artifact
+  `ki114-prototype-B.patch` (ruff clean; the working tree keeps it
+  applied for the next session).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2627 passed + 1 skipped, ruff clean, docguard clean, topology
-  --check clean (Python 3.12.14, the env pin; INV-1..5 untouched,
-  the LOG untouched; NO test deleted or weakened — 11 added, 4
-  mechanical 4-tuple re-pins) ·
-Date: 2026-10-07 ·
-Scope: core/intent.py (the twin table + precondition_read_pairs +
-  the indexed walk + the stats surface), core/loop.py (the _occ_index
-  init/commit/resume + the call + occ_stats), scripts/labrunner.py
-  (cost.occ + the 4-tuple), tests/test_occidx.py (new, 11 laws),
-  tests/test_lab.py + tests/test_h9.py (mechanical re-pins),
-  docs/TASKS.md (the occ-1 row + the ledger, iter-328 evicted),
-  STATUS.md (this header + Next + KI#114), worklog.md (the iter-338
-  entry, iter-328 evicted), docs/iterations/iter-338-occidx-report.md
-  (new) — 10 changed/created (3 code + 3 test + 4 riders).
+2627 passed + 1 skipped, ruff clean, docguard clean (the COMMITTED
+  state — this delta is docs-only; the prototype's 70 classified
+  failures are the packet's subject, never a red suite in the repo;
+  INV-1..5 untouched, the LOG untouched; NO test deleted or
+  weakened) ·
+Date: 2026-10-08 ·
+Scope: docs/iterations/iter-339-ki114dec-report.md (new, the packet),
+  docs/TASKS.md (the ki114dec-1 row + the ki114-1-impl gated row +
+  the ledger, iter-329 evicted), STATUS.md (this header + KI#114 +
+  Next), worklog.md (the iter-339 entry, iter-329 evicted) —
+  4 changed/created, all riders.
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -112,7 +109,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
-- KI#114 · the resume-boundary drain divergence: a split AFTER a wait feeds the next step at the post-drain tick (+16 vs the uninterrupted feed-at-completion; farstead 2-segment split, ev_0210) — found by occ-1's resume law, reproduced with occ-1 stripped (pre-existing); the fix its own owner-gated row · opened 2026-10-07
+- KI#114 · the resume-boundary drain divergence: a split AFTER a wait feeds the next step at the post-drain tick (+16 vs the uninterrupted feed-at-completion; farstead 2-segment split, ev_0210) — found by occ-1's resume law, reproduced with occ-1 stripped (pre-existing). DECIDED 2026-10-08 (iter-339): option B — the composition law on the clean drain boundary — ACCEPTED AS CANONICAL; the decision packet delivered (the 70-failure classification: 0 real regressions; the 143-check falsifier 0/143 under the prototype, 44/143 under BASE); the landing `ki114-1-impl` gated on the owner's packet confirmation; candidate A out of contract · opened 2026-10-07
 
 ## FAQ / Pitfalls
 
@@ -142,20 +139,16 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-338 DONE: occidx (THE INDEX-BASED OCC WINDOW ATTRIBUTION —
-  B7's letter: the write index (entity, prop) → event indices +
-  the read-set twin table; the walk visits only the window's writers
-  of the readable pairs. THE A/B ATTRIBUTION-EQUIVALENCE LAW held on
-  every call; byte-identity both arms; whole 100y 51.64 → 4.36 s
-  (11.8×, α 1.89 → 0.997); THE WHOLE KILOYEAR 3,818 → 43.5 s
-  (87.7×), T1 HELD 45,000,433 × 2 — the iter-336 LF-byte prediction
-  landed EXACTLY; the segmented kiloyear = the iter-335 canon;
-  occ_refold 81.7% → 7.3%; KI#114 opened — the pre-existing
-  resume-boundary drain divergence, its own row).**
+**iter-339 DONE: ki114dec (THE KI#114 COMPOSITION-LAW DECISION
+  PACKET — the owner's B acceptance recorded; the strengthened
+  falsifier 143 checks: prototype 0/143, BASE 44/143; the
+  70-failure classified: 23 + 23 + 24, REAL REGRESSIONS 0; the
+  rebase list fixed; the landing gated on the packet's
+  confirmation).**
 Next: THE OWNER'S CALLS (the standing items in order):
-  (1) the KI#114 fix row (the resumed segment feeds at the
-  post-drain tick — the feed-at-completion semantics, a named row on
-  the owner's call); (2) the standing calls preserved (the Lab
+  (1) the ki114-1-impl landing (the composition law, the falsifier
+  battery, the 3-fixture regeneration + the 46 re-pins — on the
+  owner's confirmation of the iter-339 packet); (2) the standing calls preserved (the Lab
   queue's battery rows E02/E31, M2, the replay-UI row, the world
   track's W8, the frontend P1/P2/P3 continuations).
 
