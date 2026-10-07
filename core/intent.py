@@ -27,7 +27,7 @@ machinery the front door runs:
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Mapping, MutableMapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
@@ -57,10 +57,12 @@ __all__ = [
     "IntentData",
     "KNOWLEDGE_SLOTS",
     "LEVERAGE_TEST",
+    "OCC_READ_PAIRS",
     "PRECONDITION_TESTS",
     "REJECTION_EVENT",
     "Resolution",
     "RunnerError",
+    "STATIC_TESTS",
     "TEXTURE_FIELD",
     "TEXTURE_SCOPES",
     "TRAIT_TEST",
@@ -664,6 +666,150 @@ PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
 }
 
 
+# -- the OCC attribution read-set twin (occ-1, B7's letter) ------------------
+#
+# The whole-arm window fix: `occ_breaking_cause` walks the window
+# [seq, end) applying one event at a time and re-checking the
+# preconditions — O(window) per rejected completion, and the whole
+# protocol's deferred-realize law makes that window horizon-long
+# (iter-335's decomposition: occ_refold 81.7% of the profiled wall at
+# 100y). The index law that collapses it: a precondition test's
+# verdict is a function of the projection pairs it reads (plus
+# pack/world/intent data, all constant through one walk — both paths
+# evaluate through the same live objects), so an event that writes
+# NONE of those pairs cannot flip any verdict, and the walk may visit
+# only the events that DO. These handlers declare those pairs — the
+# TWIN of the test family above, next to it, never a second truth:
+# the twin-agreement property law (tests/test_occidx.py) falsifies
+# the over-approximation directly (two projections agreeing on the
+# declared pairs but mutated elsewhere answer first_failing
+# identically), and the A/B equivalence law falsifies the whole walk
+# end-to-end on every committed pack family.
+
+
+def _pairs_same_location(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    return {
+        (ctx.entity(cond["noun"]), "position"),
+        (ctx.entity(cond["with"]), "position"),
+    }
+
+
+def _pairs_adjacent_to(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the exits read rides the world model (roads-1) — static through a
+    # walk; the projection reads are the two positions alone
+    return _pairs_same_location(ctx, cond)
+
+
+def _pairs_location_of(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the noun side is a kind read (pack-static); the with side is the
+    # one position read
+    return {(ctx.entity(cond["with"]), "position")}
+
+
+def _pairs_carries_flagged(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the flag itself is read off the PACK record (static); the scan's
+    # projection read is each item's carrier
+    return {(item["id"], "carrier") for item in ctx.pack.entities["items"]}
+
+
+def _pairs_flagged_accessible(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the noun's position (the location the items must lie in) plus
+    # every item's carrier and position — the scan's whole surface
+    pairs = {(ctx.entity(cond["noun"]), "position")}
+    for item in ctx.pack.entities["items"]:
+        pairs.add((item["id"], "carrier"))
+        pairs.add((item["id"], "position"))
+    return pairs
+
+
+def _pairs_relation_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    return {(ctx.entity(cond["noun"]), f"relations.{cond['axis']}")}
+
+
+def _pairs_carried_by(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    return {(ctx.entity(cond["noun"]), "carrier")}
+
+
+def _pairs_uncarried(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    return _pairs_carried_by(ctx, cond)
+
+
+def _pairs_account_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the holder form names the entity directly (iter-273); the noun
+    # form resolves through the intent — one vocabulary either way
+    holder = cond["holder"] if "holder" in cond else ctx.entity(cond["noun"])
+    return {(holder, f"account.{cond['kind']}")}
+
+
+def _pairs_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the spot list rides the PACK record (static), so the spot pairs
+    # are known at declaration time; the layer's vocabulary is pack
+    # data — core stays layer-blind (INV-3)
+    layer_cfg = ctx.pack.rules["transitions"][cond["layer"]]
+    noun = ctx.entity(cond["noun"])
+    spots = ctx.record(cond["noun"]).get(layer_cfg["spot_field"], [])
+    return {(noun, f"{cond['layer']}.{spot}") for spot in spots}
+
+
+OCC_READ_PAIRS: Final[Mapping[str, Any]] = {
+    "same_location": _pairs_same_location,
+    "adjacent_to": _pairs_adjacent_to,
+    "location_of": _pairs_location_of,
+    "carries_flagged": _pairs_carries_flagged,
+    "flagged_accessible": _pairs_flagged_accessible,
+    "relation_at_least": _pairs_relation_at_least,
+    "carried_by": _pairs_carried_by,
+    "uncarried": _pairs_uncarried,
+    "account_at_least": _pairs_account_at_least,
+    "spot_available": _pairs_spot_available,
+}
+"""The attribution read-set table: test name -> the handler declaring
+the projection pairs its verdict can read. ABSENT names read no
+projection pair at all (the static family below) or are never
+attributed (the windowed family, `WINDOWED_TESTS`). COMPLETENESS IS
+LAW (tests/test_occidx.py): every name in `PRECONDITION_TESTS` is
+exactly one of — a table entry, a static name, or a windowed name; a
+new test declares its pairs here or joins the static tuple, never
+neither."""
+
+STATIC_TESTS: Final = (
+    "kind", "flag", "field_in", "field_nonempty", "has_field", "texture_noun",
+)
+"""The pack-static family: tests whose reads ride the PACK records,
+the intent's own frozen data, or nothing at all — a projection write
+can never flip them, so they contribute no read pair. `flag`/
+`field_in`/`field_nonempty`/`has_field` read `ctx.record` (the pack
+declaration, not the projection); `kind` reads `pack.kind_of`;
+`texture_noun` reads the intent's own reference. Whether any of
+those surfaces mutates mid-run is moot for attribution: both walk
+forms evaluate through the same live objects, so their verdicts move
+together — the index law needs only the PROJECTION reads."""
+
+
+def precondition_read_pairs(
+    pack: "Pack",
+    intent: IntentData,
+    preconditions: Sequence[Mapping[str, Any]],
+) -> frozenset[tuple[str, str]]:
+    """The projection pairs the given preconditions' verdicts can ever
+    read — the OCC attribution twin (occ-1). An OVER-APPROXIMATION by
+    construction (scanning tests declare the whole scanned surface);
+    the walk that visits only writers of these pairs is exact BECAUSE
+    a verdict is a function of these pairs' values. The windowed
+    family is skipped (never attributed); the static family declares
+    nothing. Unknown test names are not raised here — the walk's own
+    `first_failing` raises on them, and the shortcut path always
+    calls it at least once, so loudness is preserved by construction.
+    """
+    ctx = _Ctx(pack, {}, intent)  # entity resolution only — no projection reads
+    pairs: set[tuple[str, str]] = set()
+    for cond in preconditions:
+        handler = OCC_READ_PAIRS.get(cond.get("test"))
+        if handler is not None:
+            pairs.update(handler(ctx, cond))
+    return frozenset(pairs)
+
+
 def first_failing(
     pack: Pack,
     projection: Mapping[str, Mapping[str, Any]],
@@ -866,6 +1012,8 @@ def occ_breaking_cause(
     world: "WorldModel | None" = None,
     *,
     start_state: "Mapping[str, Mapping[str, Any]] | None" = None,
+    changes: "Mapping[tuple[str, str], Sequence[int]] | None" = None,
+    stats: "MutableMapping[str, int] | None" = None,
 ) -> str | None:
     """The event id whose application first broke a precondition after the
     intent was proposed; None when nothing broke it. One forward fold from
@@ -888,7 +1036,36 @@ def occ_breaking_cause(
     so the loop only ever passes one taken at the stamp itself).
     The snapshot is copied here: the walk mutates its state, and a
     public function never mutates a caller's structure (the fold
-    path's own discipline)."""
+    path's own discipline).
+
+    `changes` (occ-1 — the whole-arm window fix, B7's letter): the
+    caller's WRITE INDEX, `(entity, prop) -> the ascending event
+    indices of every committed write to that pair` (the Simulator's
+    `_occ_index`, maintained at `_commit`, rebuilt at resume — the
+    `_last_change` pattern's full-history form). Given, the walk
+    visits ONLY the window events that write a pair the intent's
+    attributable tests can read (`precondition_read_pairs` — the
+    twin table): an event writing none of those pairs cannot flip a
+    verdict, so the first breaking event is necessarily among the
+    writers (the index law; the A/B equivalence law in
+    tests/test_occidx.py is the falsifier — every index answer equals
+    the full walk's on every call). The visited state carries the
+    SNAPSHOT's values outside the read set — by design: no test
+    reads them, and writes there are skipped — so the from_-check is
+    kept only ON the read pairs (the index law's own net: on a
+    complete index it can never fire; a firing means the index and
+    the log disagree). The one shortcut: when the verdict ALREADY
+    fails at the walk's starting state and the first window event is
+    not itself a writer, the full walk answers events[seq].id —
+    the verdict is constant up to the first writer, so the shortcut
+    is exact. None (the default) keeps the exact full walk — the
+    external callers and the resume path.
+
+    `stats` (occ-1): the caller's observation surface — the walk
+    counts itself into the mutable mapping (`calls`, `window` — the
+    full walk's cost basis, `inspected` — the events actually
+    applied, `attributed`). The counting changes nothing: the walk
+    stays a pure function of its declared inputs."""
     action = pack.action(intent.kind)
     preconditions = requires_for(action, intent) if action else []
     # Window preconditions (the tick-windowed family: the leverage
@@ -916,12 +1093,105 @@ def occ_breaking_cause(
         }
     else:
         state = fold(events[:based_on_event_seq], initial)
+    if stats is not None:
+        window = max(0, len(events) - based_on_event_seq)
+        stats["calls"] = stats.get("calls", 0) + 1
+        stats["window"] = stats.get("window", 0) + window
+    if changes is not None:
+        return _indexed_window_walk(
+            pack, events, based_on_event_seq, intent, state, attributable,
+            changes, world, stats=stats,
+        )
+    inspected = 0
     for idx in range(based_on_event_seq, len(events)):
         apply_event(state, events[idx])
+        inspected += 1
         if first_failing(
             pack, state, intent, attributable, world=world
         ) is not None:
+            if stats is not None:
+                stats["inspected"] = stats.get("inspected", 0) + inspected
+                stats["attributed"] = stats.get("attributed", 0) + 1
             return events[idx].id
+    if stats is not None:
+        stats["inspected"] = stats.get("inspected", 0) + inspected
+    return None
+
+
+def _indexed_window_walk(
+    pack: Pack,
+    events: list[EventRecord],
+    based_on_event_seq: int,
+    intent: IntentData,
+    state: Projection,
+    attributable: list[Mapping[str, Any]],
+    changes: "Mapping[tuple[str, str], Sequence[int]]",
+    world: "WorldModel | None",
+    *,
+    stats: "MutableMapping[str, int] | None" = None,
+) -> str | None:
+    """The occ-1 walk over the write index's candidates only — the exact
+    twin of the full window walk (`occ_breaking_cause`'s loop form),
+    never a second semantics: same answer, by the index law, on every
+    input the A/B equivalence law measured. `state` is the walk's own
+    copy (the snapshot copy or the prefix fold — already private to
+    the caller's walk, mutated here)."""
+    read_pairs = precondition_read_pairs(pack, intent, attributable)
+    candidates = sorted(
+        {
+            index
+            for pair in read_pairs
+            for index in changes.get(pair, ())
+            if based_on_event_seq <= index < len(events)
+        }
+    )
+    # the verdict before the first writer equals the starting state's
+    # verdict: the full walk answers events[seq].id when that verdict
+    # already fails and the first window event is not itself a writer
+    # (a writer at seq can repair it — then the loop below evaluates
+    # exactly the states the full walk does)
+    if first_failing(pack, state, intent, attributable, world=world) is not None:
+        if not candidates or candidates[0] != based_on_event_seq:
+            if stats is not None:
+                stats["attributed"] = stats.get("attributed", 0) + (
+                    1 if based_on_event_seq < len(events) else 0
+                )
+            return (
+                events[based_on_event_seq].id
+                if based_on_event_seq < len(events)
+                else None
+            )
+    inspected = 0
+    for idx in candidates:
+        event = events[idx]
+        for change in event.state_changes:
+            props = state.get(change.entity)
+            if props is None:
+                raise ValueError(
+                    f"{event.id}: state_change touches unknown entity "
+                    f"{change.entity!r}"
+                )
+            if (change.entity, change.prop) in read_pairs and props.get(
+                change.prop
+            ) != change.from_:
+                raise ValueError(
+                    f"{event.id}: {change.entity}.{change.prop} expected from "
+                    f"{change.from_!r} but the attribution window holds "
+                    f"{props.get(change.prop)!r} — the read-set index and "
+                    "the log disagree (occ-1's net; the index law is "
+                    "broken, never the pack)"
+                )
+            props[change.prop] = change.to_
+        inspected += 1
+        if first_failing(
+            pack, state, intent, attributable, world=world
+        ) is not None:
+            if stats is not None:
+                stats["inspected"] = stats.get("inspected", 0) + inspected
+                stats["attributed"] = stats.get("attributed", 0) + 1
+            return event.id
+    if stats is not None:
+        stats["inspected"] = stats.get("inspected", 0) + inspected
     return None
 
 

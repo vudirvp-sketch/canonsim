@@ -407,12 +407,12 @@ def test_the_labrunner_skip_arm(tmp_path: Path) -> None:
     skip block; the two logs are byte-identical (the wall A/B's own
     battery shape at smoke scale)."""
     out = tmp_path / "out"
-    log_on, wall_on, stats_on = run_world(
+    log_on, wall_on, stats_on, occ_on = run_world(
         FARSTEAD, SCHEMA, 7, 2, out,
         anchor=SQUARE, directors=False, arm="baseline",
         protocol="segmented", skip=True,
     )
-    log_off, wall_off, stats_off = run_world(
+    log_off, wall_off, stats_off, _occ_off = run_world(
         FARSTEAD, SCHEMA, 7, 2, out,
         anchor=SQUARE, directors=False, arm="baseline",
         protocol="segmented", skip=False,

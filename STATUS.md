@@ -1,55 +1,58 @@
-Iteration: iter-337 (`h9-1` — the event-to-event
-  waiting on the time-skip, R3 core; the STATUS Next item (1), the row
-  the iter-334/335/336 NEXT lines named first, the owner's active
-  «продолжай работы, открывай важнейшее на долгосрок» directive):
-  **THE QUIET-BEAT SKIP LANDED** — the loop's crossing discipline
-  jumps the clock, the bank counters (`skip_draws`), and the
-  director's beat counter across beats whose machinery would produce
-  NOTHING, landing at the first producing beat or the stretch's
-  committing bound; the landing computation rides three pure twins
-  (`next_decay_tick`, `condensation_pending`, `urgency_scan`/
-  `faction_scan` over the shared rolling predicates + one
-  `first_failing` gate evaluation per stretch + `next_d100_hit`, the
-  epoch's O(1) block walk). **THE FALSIFIER IS THE A/B
-  BYTE-IDENTITY LAW** (ON vs OFF, stats non-vacuous): farstead 10y ×3
-  seeds × both protocols IDENTICAL; 100y segmented IDENTICAL (md5 =
-  the iter-335 canon); **THE KILOYEAR IDENTICAL — md5 `a1d8f05b…` =
-  the iter-335 canonical log, T1 HELD 76,951,399 × 2**; whole 50y
-  IDENTICAL. **THE WALL: the segmented kiloyear 102.54 → 46.44 s
-  (2.21× — 1,009,806 of 1,080,000 beats skipped, 93.5%); 100y 2.16×;
-  the whole arm 1.20× at 50y (the occ-refold residue is B7's row)**;
-  10,000y now ~8 min single-seed (was ~17). **THE CAPABILITY
-  FENCES** (init-once; a failing pack keeps the exact old path): the
-  arm switch, the QUIET DIRECTOR (no hooks or disabled — the pacing
-  clock's beat-count dependence the named residue), the EMPTY FOLD
-  DEMAND (the per-tick fold verdicts the second residue); the live
-  set is the Lab fixture family (farstead both director arms;
-  pressure/tavern REFUSED by their gates). +10 laws in
-  tests/test_h9.py + the labrunner `--skip` arm (the `_noskip`
-  volume, the cost.skip honest labels). NEXT: the standing owner
-  calls — the whole-arm occ-window fix (B7's letter), the Lab rows
-  E02/E31, M2, replay-UI, W8, the frontend P1/P2/P3.
+Iteration: iter-338 (`occidx` — the whole-arm OCC window fix,
+  the STATUS Next item (1), the row iter-335/336/337's NEXT lines
+  named first, B7's letter — an index-based window attribution, never
+  a log scan; the owner's active «продолжай работы, открывай
+  важнейшее на долгосрок» directive): **THE INDEX-BASED WINDOW
+  ATTRIBUTION LANDED** — the Simulator maintains the write index
+  (`_occ_index`: (entity, prop) → the ascending event indices of
+  every committed write, the `_last_change` pattern's full-history
+  form; `_commit` the only writer, the resume loop the only
+  rebuilder) and `occ_breaking_cause(changes=…)` visits ONLY the
+  window events that write a pair the intent's attributable tests
+  can read — the read-set declared by the twin table in
+  core/intent.py (`OCC_READ_PAIRS` + `STATIC_TESTS` +
+  `precondition_read_pairs`, next to the test family; completeness
+  law: every PRECONDITION_TESTS name is exactly one of
+  table/static/windowed). **THE FALSIFIER IS THE A/B
+  ATTRIBUTION-EQUIVALENCE LAW** (every index answer == the exact
+  full walk's on the SAME call — both wait protocols, non-vacuous) +
+  byte-identity both arms + the twin-agreement property over all 6
+  committed packs × every action × seeded non-read mutations + the
+  resume rebuild + the unit grid — +11 laws (tests/test_occidx.py).
+  **THE WALL: whole 50y 13.66 → 2.22 s (6.15×), whole 100y
+  51.64 → 4.36 s (11.8× — the local exponent 1.89 → 0.997, the
+  quadratic member DEAD); THE WHOLE KILOYEAR 3,818 → 43.5 s (87.7×
+  — now CHEAPER than the segmented arm; T1 HELD md5 `7cbfb68a…` × 2
+  at 45,000,433 B, the iter-336 LF-platform byte prediction landed
+  EXACTLY; events 82,757 = the station's number)**; the walk
+  surface at whole 100y cut 223× (window 18,341,200 → inspected
+  82,174); the profiled wall: occ_refold 81.7% → 7.3%, per-call
+  ×2.0 → ×1.02; the segmented kiloyear md5 `a1d8f05b…` = the
+  iter-335 canon. Honest labels: `Simulator.occ_stats` + the
+  labrunner `cost.occ` block. SIDE FINDING: KI#114 opened (the
+  pre-existing resume-boundary drain divergence — a split AFTER a
+  wait enters the next step +16 ticks late; found by the law's
+  first draft, reproduced with occ-1 fully stripped; its own row).
+  NEXT: the standing owner calls (E02/E31, M2, replay-UI, W8, the
+  frontend P1/P2/P3) + the KI#114 fix row.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2616 passed + 1 skipped, ruff clean, docguard clean, topology
+2627 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; INV-1..5 untouched,
-  the LOG untouched; NO test deleted or weakened — the suite
-  untouched, a datum-parse iteration) ·
+  the LOG untouched; NO test deleted or weakened — 11 added, 4
+  mechanical 4-tuple re-pins) ·
 Date: 2026-10-07 ·
-Scope: core/rng.py (next_d100_hit + skip_draws), core/states.py
-  (next_decay_tick), core/urgencies.py + core/factions.py (the
-  shared rolling predicates + the scans + faction_bar),
-  core/groups.py (condensation_pending), core/loop.py (the skip +
-  the fences + the stats + the skip_quiet_beats arm),
-  scripts/labrunner.py (the --skip arm + cost.skip),
-  tests/test_lab.py (the 3-tuple re-pin), tests/test_h9.py (new,
-  10 laws), docs/TASKS.md (the h9-1 row + the ledger, iter-327
-  evicted), STATUS.md (this header + Next), worklog.md (the
-  iter-337 entry, iter-326 evicted), docs/iterations/
-  iter-337-h9-report.md (new) — 13 changed/created (6 code + 1
-  instrument + 2 test + 4 riders).
+Scope: core/intent.py (the twin table + precondition_read_pairs +
+  the indexed walk + the stats surface), core/loop.py (the _occ_index
+  init/commit/resume + the call + occ_stats), scripts/labrunner.py
+  (cost.occ + the 4-tuple), tests/test_occidx.py (new, 11 laws),
+  tests/test_lab.py + tests/test_h9.py (mechanical re-pins),
+  docs/TASKS.md (the occ-1 row + the ledger, iter-328 evicted),
+  STATUS.md (this header + Next + KI#114), worklog.md (the iter-338
+  entry, iter-328 evicted), docs/iterations/iter-338-occidx-report.md
+  (new) — 10 changed/created (3 code + 3 test + 4 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -109,6 +112,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
+- KI#114 · the resume-boundary drain divergence: a split AFTER a wait feeds the next step at the post-drain tick (+16 vs the uninterrupted feed-at-completion; farstead 2-segment split, ev_0210) — found by occ-1's resume law, reproduced with occ-1 stripped (pre-existing); the fix its own owner-gated row · opened 2026-10-07
 
 ## FAQ / Pitfalls
 
@@ -138,22 +142,22 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-337 DONE: h9-1 (THE QUIET-BEAT SKIP — the world waits
-  event-to-event on the time-skip: the crossing discipline jumps the
-  clock/counters/director-beat across beats that would produce
-  nothing; THE A/B BYTE-IDENTITY LAW HELD at every measured shape —
-  the kiloyear md5 = the iter-335 canon, T1 HELD 77 MB × 2; the
-  segmented wall 102.54 → 46.44 s = 2.21×, 93.5% of beats skipped;
-  the whole arm 1.20× at 50y — the occ-refold residue stays B7's
-  row; the fences: the arm switch / the quiet director / the empty
-  fold demand — pressure and tavern keep the exact old path).**
+**iter-338 DONE: occidx (THE INDEX-BASED OCC WINDOW ATTRIBUTION —
+  B7's letter: the write index (entity, prop) → event indices +
+  the read-set twin table; the walk visits only the window's writers
+  of the readable pairs. THE A/B ATTRIBUTION-EQUIVALENCE LAW held on
+  every call; byte-identity both arms; whole 100y 51.64 → 4.36 s
+  (11.8×, α 1.89 → 0.997); THE WHOLE KILOYEAR 3,818 → 43.5 s
+  (87.7×), T1 HELD 45,000,433 × 2 — the iter-336 LF-byte prediction
+  landed EXACTLY; the segmented kiloyear = the iter-335 canon;
+  occ_refold 81.7% → 7.3%; KI#114 opened — the pre-existing
+  resume-boundary drain divergence, its own row).**
 Next: THE OWNER'S CALLS (the standing items in order):
-  (1) the whole-arm occ-window fix (an index-based window
-  attribution, B7's letter) — a named row on the owner's call (the
-  datum's price raised: the station's own α = 1.91, the window holds
-  cross-iron); (2) the standing calls preserved (the Lab queue's
-  battery rows E02/E31, M2, the replay-UI row, the world track's W8,
-  the frontend P1/P2/P3 continuations).
+  (1) the KI#114 fix row (the resumed segment feeds at the
+  post-drain tick — the feed-at-completion semantics, a named row on
+  the owner's call); (2) the standing calls preserved (the Lab
+  queue's battery rows E02/E31, M2, the replay-UI row, the world
+  track's W8, the frontend P1/P2/P3 continuations).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
@@ -222,4 +226,3 @@ Next: THE OWNER'S CALLS (the standing items in order):
    the shave's temporal surface (the standing order's second), the
    SoW horizon (bg-6, owner-deferred — long-parked per the owner's
    2026-09-21 call). New rows enter on the owner's call only.
-

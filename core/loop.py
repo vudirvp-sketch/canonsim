@@ -351,6 +351,30 @@ class Simulator:
         # latest committed event that changed it — the decay baseline
         # without a per-beat log scan; `_commit` is its only writer
         self._last_change: dict[tuple[str, str], int] = {}
+        # occ-1 (the whole-arm OCC window fix, B7's letter — the
+        # STATUS Next item (1)): the WRITE INDEX — (entity, prop) -> the
+        # ascending event indices of EVERY committed write to that pair
+        # (the `_last_change` pattern's full-history form; `_commit` is
+        # its only writer, the resume loop its only rebuilder). The OCC
+        # attribution walk rides it to visit ONLY the window events
+        # that write a pair the intent's attributable tests can read
+        # (`core/intent.py::precondition_read_pairs` — the twin table):
+        # the whole protocol's deferred-realize law made the window
+        # [seq, end) horizon-long and the per-event re-check the
+        # measured wall (occ_refold, 81.7% of the whole 100y profiled
+        # wall, iter-335); the index law makes the same walk visit the
+        # writers alone. Byte-transparent by construction: the walk is
+        # read-side only — the A/B equivalence law
+        # (tests/test_occidx.py) is the falsifier.
+        self._occ_index: dict[tuple[str, str], list[int]] = {}
+        # occ-1's honest labels (the cost.skip precedent): calls — the
+        # walk's invocation count; window — the full-walk cost basis
+        # (Σ window sizes); inspected — the events the index path
+        # actually applied; attributed — the non-None answers. The
+        # wall delta IS the datum, never these alone.
+        self._occ_stats: dict[str, int] = {
+            "calls": 0, "window": 0, "inspected": 0, "attributed": 0,
+        }
         # scale-1-impl, P1a (the OCC attribution snapshot side-table):
         # intent id -> a FIFO of projection copies, one per enqueue
         # (the ids REPEAT — the family walks re-enumerate their specs
@@ -812,10 +836,17 @@ class Simulator:
             )
             sim._events = list(events)
             sim._projection = sim._restore_projection(events, checkpoints_dir)
-            for event in events:
+            for event_index, event in enumerate(events):
                 sim._knowledge.add(event)
                 for change in event.state_changes:
                     sim._last_change[(change.entity, change.prop)] = event.t
+                    # occ-1: the write index rebuilt from the log — the
+                    # same pairs, the same ascending indices, the
+                    # _commit form's exact twin (a resume is invisible
+                    # to the attribution by construction)
+                    sim._occ_index.setdefault(
+                        (change.entity, change.prop), []
+                    ).append(event_index)
                 sim._director.seed(event)
             sim._director.restore_run_state(cursor["director"])
             sim._bank.restore_state(cursor["bank"])
@@ -1176,6 +1207,12 @@ class Simulator:
                     # resume path and external callers keep the
                     # fold-from-initial exactness via the default)
                     start_state=payload.snapshot,
+                    # occ-1: the write index — the walk visits only the
+                    # window's writers of the intent's read pairs (the
+                    # horizon-long whole-arm window's measured fix);
+                    # the honest labels ride the stats surface
+                    changes=self._occ_index,
+                    stats=self._occ_stats,
                 )
                 self._emit_rejection(
                     intent, entry.tick, reason="projection_moved",
@@ -1573,6 +1610,16 @@ class Simulator:
         fired after a skip) — read-side bookkeeping for the operator's
         records; never canon, never the log."""
         return dict(self._skip_stats)
+
+    @property
+    def occ_stats(self) -> dict[str, int]:
+        """occ-1's honest labels: the OCC attribution walk's counters —
+        calls, window (the full-walk cost basis: the sum of window
+        sizes the old form would pay), inspected (the events the index
+        path actually applied), attributed (the non-None answers). The
+        wall delta is the datum; these name its mechanism (the
+        cost.skip precedent — never quoted alone)."""
+        return dict(self._occ_stats)
 
     def _condense_groups(self, zones: SceneZones, tick: int) -> None:
         """depth-7's tier-transition pass (one law, two ride points —
@@ -2204,8 +2251,15 @@ class Simulator:
         record = self._writer.append(draft)
         apply_event(self._projection, record)
         self._events.append(record)  # in-memory cache: OCC attribution only
+        # the record's own index in _events — the OCC walk's coordinate
+        # system (the walk's candidates are these indices, filtered to
+        # its window and its read pairs)
+        event_index = len(self._events) - 1
         for change in record.state_changes:
             self._last_change[(change.entity, change.prop)] = record.t
+            self._occ_index.setdefault((change.entity, change.prop), []).append(
+                event_index
+            )
         self._knowledge.add(record)  # derived index (L3)
         self._react(record)  # event-driven reactions (phase0 §3)
         return record

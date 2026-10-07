@@ -237,7 +237,7 @@ def run_world(
     segment_ticks: int = 0,
     profiler: cProfile.Profile | None = None,
     skip: bool = True,
-) -> tuple[Path, float, dict[str, int]]:
+) -> tuple[Path, float, dict[str, int], dict[str, int]]:
     """One Lab run: the real Simulator, player-absent steps, the
     committed log under the gitignored output dir. Returns (log path,
     wall seconds). The log file is per-(seed, anchor, horizon, arm,
@@ -259,7 +259,15 @@ def run_world(
     tests/test_h9.py), so the record's cost.skip block carries the
     honest acceleration labels (stretches / skipped beats / landings)
     and the wall delta IS the datum. Returns (log path, wall seconds,
-    the skip's stats).
+    the skip's stats, the OCC attribution walk's stats).
+
+    The fourth return (occ-1, the whole-arm OCC window fix): the
+    attribution walk's honest labels (calls / window — the full
+    walk's cost basis / inspected — the events the index path
+    actually applied / attributed) — the same read-side bookkeeping
+    discipline as the skip's; the wall delta between the index ride
+    and the stripped form (tests/test_occidx.py's A/B law) is the
+    row's measured claim, never these counters alone.
 
     A runtime refusal inside the arm (the substrate's own loud
     backstops — the cadence-armed families, the missing-block
@@ -316,7 +324,7 @@ def run_world(
             f"finding, not a defect to patch here)"
         ) from exc
     sim.close()
-    return log, wall, sim.skip_stats
+    return log, wall, sim.skip_stats, sim.occ_stats
 
 
 #: The event families the E0 baseline classifies (the pack's 06 §11 —
@@ -362,6 +370,7 @@ def extract_metrics(
     protocol: str = "whole",
     segment_ticks: int = 0,
     skip_stats: Mapping[str, int] | None = None,
+    occ_stats: Mapping[str, int] | None = None,
 ) -> dict[str, Any]:
     """The MINIMAL observation profile (law 4) over one committed log:
     identity, horizon, event counts/mix, autonomous share, projection
@@ -505,6 +514,12 @@ def extract_metrics(
             # the run (never canon); a refused pack (guards) or the
             # off-arm answers all zeros
             **({"skip": dict(skip_stats)} if skip_stats is not None else {}),
+            # occ-1 (the whole-arm OCC window fix): the attribution
+            # walk's honest labels — calls, window (the full walk's
+            # cost basis), inspected (the index path's actually-applied
+            # events), attributed; the wall delta between the index
+            # ride and the stripped form is the row's measured claim
+            **({"occ": dict(occ_stats)} if occ_stats is not None else {}),
         },
     }
 
@@ -1060,7 +1075,7 @@ def _profile_block(
     per_depth: list[dict[str, Any]] = []
     for depth in depths:
         prof = cProfile.Profile()
-        log, prof_wall, _prof_skip = run_world(
+        log, prof_wall, _prof_skip, _prof_occ = run_world(
             pack, schema, seed, depth, out_dir,
             anchor=anchor, directors=directors, arm=f"{arm}_prof",
             protocol=protocol, segment_ticks=segment_ticks,
@@ -1374,7 +1389,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     for seed in seeds:
         metrics_by_protocol[seed] = {}
         for proto in protocols:
-            log, wall, skip_stats = run_world(
+            log, wall, skip_stats, occ_stats = run_world(
                 pack, schema, seed, years, out_dir,
                 anchor=anchor, directors=directors, arm=args.arm,
                 protocol=proto, segment_ticks=args.segment_ticks,
@@ -1385,6 +1400,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 directors=directors, protocol=proto,
                 segment_ticks=args.segment_ticks,
                 skip_stats=skip_stats,
+                occ_stats=occ_stats,
             )
             runs.append({
                 "seed": seed,
@@ -1451,7 +1467,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         probe_seed = seeds[0]
         probe_proto = protocols[0]
         first = Path(runs[0]["log"]).read_bytes()
-        log2, _, _ = run_world(
+        log2, _, _, _ = run_world(
             pack, schema, probe_seed, years, out_dir,
             anchor=anchor, directors=directors, arm=f"{args.arm}_twin",
             protocol=probe_proto, segment_ticks=args.segment_ticks,

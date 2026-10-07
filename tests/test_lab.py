@@ -102,7 +102,7 @@ from labrunner import main as labrunner_main  # noqa: E402
 def _lab_run(tmp_path: Path, seed: int = 42) -> tuple[Path, dict[str, object]]:
     """One player-absent Lab run at the smoke horizon (directors off —
     the E0 baseline form)."""
-    log, _wall, _skip = run_world(
+    log, _wall, _skip, _occ = run_world(
         PACK, SCHEMA, seed, YEARS, tmp_path,
         anchor=PLAYER_START, directors=False, arm="test",
     )
@@ -236,7 +236,7 @@ def test_ablation_arm_clean_block_runs(tmp_path: Path) -> None:
         variant = _load(variant_dir)
 
     baseline_log, _ = _lab_run(tmp_path)
-    arm_log, _, _ = run_world(
+    arm_log, _, _, _ = run_world(
         variant, SCHEMA, 42, YEARS, tmp_path,
         anchor=PLAYER_START, directors=False, arm="test_minus",
     )
@@ -331,7 +331,7 @@ def _protocol_run(
 ) -> tuple[Path, dict[str, object]]:
     """One farstead run under a declared wait protocol (2y, the square
     anchor — the living-world arm; directors off, the E0 form)."""
-    log, _wall, _skip = run_world(
+    log, _wall, _skip, _occ = run_world(
         FARSTEAD, SCHEMA, seed, 2, tmp_path,
         anchor=SQUARE, directors=False, arm="proto_test",
         protocol=protocol,
