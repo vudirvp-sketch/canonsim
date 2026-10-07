@@ -236,7 +236,8 @@ def run_world(
     protocol: str = "whole",
     segment_ticks: int = 0,
     profiler: cProfile.Profile | None = None,
-) -> tuple[Path, float]:
+    skip: bool = True,
+) -> tuple[Path, float, dict[str, int]]:
     """One Lab run: the real Simulator, player-absent steps, the
     committed log under the gitignored output dir. Returns (log path,
     wall seconds). The log file is per-(seed, anchor, horizon, arm,
@@ -250,6 +251,15 @@ def run_world(
     committed bytes are byte-identical to the unprofiled run's (the
     canon-neutrality law, checked in-record by canon_check); the wall
     under profiling is an instrument artifact, never quoted as wall.
+
+    `skip` (H9, iter-337): the Simulator's quiet-beat skip arm — the
+    off-arm (`skip=False`, the `_noskip` log suffix — a separate
+    volume, never an overwrite) is the A/B wall's baseline; the two
+    arms' bytes are EQUAL by construction (the skip's own falsifier,
+    tests/test_h9.py), so the record's cost.skip block carries the
+    honest acceleration labels (stretches / skipped beats / landings)
+    and the wall delta IS the datum. Returns (log path, wall seconds,
+    the skip's stats).
 
     A runtime refusal inside the arm (the substrate's own loud
     backstops — the cadence-armed families, the missing-block
@@ -266,12 +276,16 @@ def run_world(
     # one name and the road run silently overwrote the square arm's
     # logs; a different anchor is a different world volume)
     proto_fs = "" if protocol == "whole" else f"_{protocol}"
-    log = out_dir / f"lab_{seed}_{anchor}_{years}y_{arm_fs}{proto_fs}.jsonl"
+    skip_fs = "" if skip else "_noskip"
+    log = out_dir / (
+        f"lab_{seed}_{anchor}_{years}y_{arm_fs}{proto_fs}{skip_fs}.jsonl"
+    )
     if log.exists():
         log.unlink()
     sim = Simulator(
         pack, seed, log, schema, commit="0000000",
         director_enabled=directors,
+        skip_quiet_beats=skip,
     )
     sim.open()
     wall = 0.0
@@ -302,7 +316,7 @@ def run_world(
             f"finding, not a defect to patch here)"
         ) from exc
     sim.close()
-    return log, wall
+    return log, wall, sim.skip_stats
 
 
 #: The event families the E0 baseline classifies (the pack's 06 §11 —
@@ -347,6 +361,7 @@ def extract_metrics(
     directors: bool,
     protocol: str = "whole",
     segment_ticks: int = 0,
+    skip_stats: Mapping[str, int] | None = None,
 ) -> dict[str, Any]:
     """The MINIMAL observation profile (law 4) over one committed log:
     identity, horizon, event counts/mix, autonomous share, projection
@@ -485,6 +500,11 @@ def extract_metrics(
             "read_seconds": round(read_s, 3),
             "fold_seconds": round(fold_s, 3),
             "replay_alloc_peak_mb": round(alloc_peak / (1024 * 1024), 1),
+            # H9 (iter-337): the quiet-beat skip's honest labels — the
+            # acceleration's own counters, read-side bookkeeping over
+            # the run (never canon); a refused pack (guards) or the
+            # off-arm answers all zeros
+            **({"skip": dict(skip_stats)} if skip_stats is not None else {}),
         },
     }
 
@@ -1040,7 +1060,7 @@ def _profile_block(
     per_depth: list[dict[str, Any]] = []
     for depth in depths:
         prof = cProfile.Profile()
-        log, prof_wall = run_world(
+        log, prof_wall, _prof_skip = run_world(
             pack, schema, seed, depth, out_dir,
             anchor=anchor, directors=directors, arm=f"{arm}_prof",
             protocol=protocol, segment_ticks=segment_ticks,
@@ -1305,6 +1325,13 @@ def main(argv: Sequence[str] | None = None) -> int:
                              "member split, the E03/E04/beats-event counters, "
                              "the growth ratios, and the canon-neutrality "
                              "check (default: off)")
+    parser.add_argument("--skip", choices=("on", "off"), default="on",
+                        help="H9 (iter-337): the Simulator's quiet-beat "
+                             "skip arm (default: on — the skip is "
+                             "byte-identical by construction, the A/B law "
+                             "pinned in tests/test_h9.py; 'off' is the "
+                             "tick-by-tick baseline, the _noskip log "
+                             "suffix — the wall A/B's other arm)")
     parser.add_argument("--out", default=str(DEFAULT_OUT),
                         help="the output root (gitignored runtime space)")
     parser.add_argument("--tag", default=None,
@@ -1316,6 +1343,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     out_dir = Path(args.out).resolve()
     seeds = [int(s) for s in args.seeds.split(",") if s.strip()]
     directors = args.directors == "on"
+    args.skip = args.skip == "on"
     years = max(1, args.years)
     protocols = ["whole", "segmented"] if args.protocol == "paired" \
         else [args.protocol]
@@ -1346,15 +1374,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     for seed in seeds:
         metrics_by_protocol[seed] = {}
         for proto in protocols:
-            log, wall = run_world(
+            log, wall, skip_stats = run_world(
                 pack, schema, seed, years, out_dir,
                 anchor=anchor, directors=directors, arm=args.arm,
                 protocol=proto, segment_ticks=args.segment_ticks,
+                skip=args.skip,
             )
             metrics = extract_metrics(
                 pack, schema, log, years=years, wall_s=wall,
                 directors=directors, protocol=proto,
                 segment_ticks=args.segment_ticks,
+                skip_stats=skip_stats,
             )
             runs.append({
                 "seed": seed,
@@ -1421,10 +1451,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         probe_seed = seeds[0]
         probe_proto = protocols[0]
         first = Path(runs[0]["log"]).read_bytes()
-        log2, _ = run_world(
+        log2, _, _ = run_world(
             pack, schema, probe_seed, years, out_dir,
             anchor=anchor, directors=directors, arm=f"{args.arm}_twin",
             protocol=probe_proto, segment_ticks=args.segment_ticks,
+            skip=args.skip,
         )
         second = log2.read_bytes()
         log2.unlink()

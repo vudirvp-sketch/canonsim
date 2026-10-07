@@ -99,9 +99,17 @@ from core.economy import (
     source_caps,
     wear_draft,
 )
-from core.factions import faction_intents, faction_specs
+from core.factions import (
+    faction_intents,
+    faction_scan,
+    faction_specs,
+)
 from core.fold import Projection, apply_event, fold, initial_projection
-from core.groups import condensation_drafts, macro_tick_drafts
+from core.groups import (
+    condensation_drafts,
+    condensation_pending,
+    macro_tick_drafts,
+)
 from core.ids import sequence_id
 from core.intent import (
     ECHO_TEST,
@@ -129,13 +137,20 @@ from core.pack import Pack
 from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, EventQueue
 from core.reflection import reflection_drafts
 from core.resolvers import REGISTRY
-from core.rng import SUBSTANTIVE, RngBank
+from core.rng import (
+    SUBSTANTIVE,
+    RngBank,
+)
 from core.scheduler import build, decls_from_rules
-from core.states import decay_drafts, rotation_resets
+from core.states import decay_drafts, next_decay_tick, rotation_resets
 from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.travel import edge_duration
-from core.urgencies import urgency_intents, urgency_specs
+from core.urgencies import (
+    urgency_intents,
+    urgency_scan,
+    urgency_specs,
+)
 from core.weather import (
     current_weather,
     erosion_drafts,
@@ -267,6 +282,7 @@ class Simulator:
         *,
         director_enabled: bool = True,
         append_writer: EventLogWriter | None = None,
+        skip_quiet_beats: bool = True,
     ) -> None:
         self._pack = pack
         self._seed = int(seed)
@@ -389,6 +405,46 @@ class Simulator:
             pack=pack, policy=policy_from_rules(pack.rules, director_enabled)
         )
         self._next_beat = self._first_beat(pack.rules)
+        # H9 (iter-337): THE QUIET-BEAT SKIP — the crossing discipline
+        # jumps the clock, the bank counters, and the director's beat
+        # counter across beats whose machinery would produce NOTHING
+        # (no decay draft, no condensation, no urgency/faction hit with
+        # open gates), landing at the first producing beat or the
+        # stretch's bound. Byte-identical to the tick-by-tick run BY
+        # CONSTRUCTION: a skipped beat commits nothing and consumes
+        # exactly its rolling entries' rolls (+1 each — the counters
+        # advance arithmetically, and the landed beat's first draw
+        # reads the same position both paths would). The skip is the
+        # epoch's structural dividend (rng-1: O(1) access to any draw
+        # position — the pre-epoch bank would have paid O(k) replay
+        # per skipped beat).
+        #
+        # THE CAPABILITY FENCES (all three checked once, here — a
+        # pack that fails any one keeps the exact tick-by-tick path,
+        # zero divergence surface by construction):
+        #   1. the requested arm (`skip_quiet_beats`, the falsifier's
+        #      off-switch — the A/B byte-identity law runs both arms,
+        #      never a semantics choice);
+        #   2. the DIRECTOR IS QUIET: disabled, or the pack declares no
+        #      release hooks — `releases()` then answers [] forever, so
+        #      the pacing clock's beat-count dependence is inert (a
+        #      hook-declaring world under an ENABLED director keeps
+        #      the old path: the pacing phases gate releases on beat
+        #      counts, a named residue, never silently approximated);
+        #   3. THE FOLD DEMAND IS EMPTY: no urgency/faction gate reads
+        #      the time-dependent folds (leverage/echo/trait) — the
+        #      gate verdicts are then frozen between events by
+        #      construction, so ONE evaluation per stretch is exact.
+        #      A gated pack (the per-tick fold verdicts — a leverage
+        #      map expiring, a belief un-crystallizing) keeps the old
+        #      path; modeling the folds' breakpoints is the future row.
+        director_hooks = pack.rules.get("director", {}).get("hooks", ())
+        self._skip_capable = bool(
+            skip_quiet_beats
+            and (not director_enabled or not director_hooks)
+            and not self._fold_demand
+        )
+        self._skip_stats = {"stretches": 0, "skipped": 0, "landings": 0}
         # depth-5: the generated world (None for an unarmed pack — the
         # 68a pattern; `open` runs the genesis only when the pack
         # declares the worldgen block)
@@ -561,8 +617,19 @@ class Simulator:
                                 crossing,
                             )
                         else:
-                            self._run_beat(crossing, entry.tick)
-                            self._next_beat = self._next_beat_after(crossing)
+                            # H9 (iter-337): the quiet-beat skip —
+                            # jump the clock/counters across the
+                            # stretch's quiet beats, landing at the
+                            # first producing one (or none, when the
+                            # whole stretch is quiet — the loop
+                            # proceeds to the bound's own machinery)
+                            if self._skip_capable:
+                                crossing = self._skip_quiet_beats(
+                                    crossing, entry.tick
+                                )
+                            if crossing is not None:
+                                self._run_beat(crossing, entry.tick)
+                                self._next_beat = self._next_beat_after(crossing)
                     self._clock.advance_to(entry.tick)
                     if entry.kind == "intent":
                         accepted = self._execute_intent(entry)
@@ -1348,6 +1415,164 @@ class Simulator:
             if candidate > after:
                 return candidate
         raise AssertionError("unreachable: next-day offsets always exceed `after`")
+
+    def _beat_grid_count(self, from_tick: int, to_tick: int) -> int:
+        """H9: the number of beat grid points in [from_tick, to_tick) —
+        the skip's arithmetic over the same daily-offsets grid
+        `_next_beat_after` walks. Pure integer day arithmetic: the
+        points strictly before a tick are (whole days below it) x
+        (offsets per day) plus (this day's offsets below the
+        in-day remainder); a difference of two such counts is the
+        half-open interval's grid population. `from_tick` may be a
+        grid point itself (excluded, half-open); `to_tick` need not be
+        one (the bound is often a rotation/macro/entry tick)."""
+        offsets = sorted(
+            self._pack.rules.get("urgencies", {}).get("beat_ticks", ())
+        )
+        if not offsets:
+            return 0
+        day = self._clock.ticks_per_day
+        per_day = len(offsets)
+
+        def before(tick: int) -> int:
+            days, remainder = divmod(tick, day)
+            below = sum(1 for offset in offsets if offset < remainder)
+            return days * per_day + below
+
+        return before(to_tick) - before(from_tick)
+
+    def _beat_grid_point(self, from_tick: int, offset: int) -> int:
+        """H9: the beat grid point `offset` grid steps after the grid
+        point `from_tick` (both on the grid, offset >= 0 — the scan's
+        beat offsets map onto ticks here). The index arithmetic is the
+        `_beat_grid_count` twin: a grid point's index is the count of
+        points strictly before it."""
+        offsets = sorted(
+            self._pack.rules.get("urgencies", {}).get("beat_ticks", ())
+        )
+        day = self._clock.ticks_per_day
+        per_day = len(offsets)
+        days, remainder = divmod(from_tick, day)
+        index = days * per_day + sum(1 for o in offsets if o < remainder)
+        index += offset
+        return (index // per_day) * day + offsets[index % per_day]
+
+    def _skip_quiet_beats(self, beat_tick: int, entry_tick: int) -> int | None:
+        """H9 (iter-337): the quiet-beat skip's landing computation and
+        application for the beat crossing at `beat_tick` — called
+        BEFORE `_run_beat` fires it, with the clock already at
+        `beat_tick` and the state frozen (the last commit/enqueue sits
+        at or before this moment).
+
+        The stretch is [beat_tick, bound) where bound is the next due
+        non-beat crossing (rotation / calendar / macro — all COMMIT,
+        so none is ever skipped past) or the popped entry's tick,
+        whichever comes first. The landing is the first beat in the
+        stretch that would PRODUCE anything — a decay draft (the
+        `next_decay_tick` formula), a condensation draft (the
+        `condensation_pending` twin), or an enqueued urgency/faction
+        intent (the family scans: a roll hit with open gates — the
+        enqueues ride the entry tick, but an enqueue is a world change
+        the door later answers with an event or an `intent_rejected`,
+        never silence). Returns:
+
+        - `beat_tick` — the very first beat produces; no skip (the
+          caller runs `_run_beat` at `beat_tick` as ever);
+        - a later grid tick — `m > 0` quiet beats were skipped (the
+          counters advanced, the clock jumped); the caller runs
+          `_run_beat` at the returned tick;
+        - `None` — the whole stretch is quiet; the counters advanced
+          through `bound`, the beat cursor sits at the first grid
+          point at-or-after it, and the caller must NOT run a beat
+          (the crossing loop proceeds to the bound itself).
+
+        The stats block counts stretches / skipped beats / landings —
+        the operator's honest labels (the labrunner's record), never
+        canon."""
+        bound = entry_tick
+        for due in (
+            self._next_rotation,
+            self._next_macro,
+            *self._next_calendar.values(),
+        ):
+            if due is not None and beat_tick < due <= entry_tick and due < bound:
+                bound = due
+        m_stretch = self._beat_grid_count(beat_tick, bound)
+        if m_stretch <= 0:
+            return beat_tick  # nothing ahead of this beat before the bound
+        zones = self._scene_zones()
+        locations: Collection[str] | None = (
+            None if zones is None else (zones.active,)
+        )
+        # condensation: a pending transition drafts at the very next
+        # computation — the first beat of the stretch materializes it
+        if zones is not None and condensation_pending(
+            self._pack, self._projection, (*zones.warm, zones.active)
+        ):
+            return beat_tick
+        # the rolling sets + the first-fire offsets (zero draws; the
+        # gates evaluated once against the frozen state)
+        u_streams, u_first = urgency_scan(
+            self._pack, self._projection, self._bank,
+            locations=locations, world=self._world,
+            specs=self._urgency_specs, limit=m_stretch,
+        )
+        f_streams, f_first = faction_scan(
+            self._pack, self._projection, self._bank,
+            locations=locations, world=self._world,
+            specs=self._faction_specs, limit=m_stretch,
+        )
+        # the decay landing: the first tick a draft would fire, mapped
+        # onto the grid (never past the bound)
+        landing: int | None = None
+        decay_tick = next_decay_tick(
+            self._pack, self._projection, self._last_change,
+            beat_tick, locations=locations,
+        )
+        if decay_tick is not None:
+            first_beat = self._next_beat_after(max(decay_tick, beat_tick) - 1)
+            if first_beat is not None and first_beat < bound:
+                landing = first_beat
+        for offset in (u_first, f_first):
+            if offset is None:
+                continue
+            candidate = self._beat_grid_point(beat_tick, offset - 1)
+            if candidate < bound and (landing is None or candidate < landing):
+                landing = candidate
+        # apply: jump the counters across the skipped beats, then hand
+        # the landing back (or the bound, when the whole stretch is
+        # quiet — the beat cursor moves past it, the crossing loop
+        # proceeds to the bound's own machinery)
+        if landing is not None and landing <= beat_tick:
+            return beat_tick  # the first beat produces — no skip
+        streams = {**u_streams, **f_streams}
+        if landing is None:
+            skipped = m_stretch
+            self._skip_stats["stretches"] += 1
+            self._skip_stats["skipped"] += skipped
+            for name, per_beat in streams.items():
+                self._bank.skip_draws(name, per_beat * skipped)
+            self._director.beat_count += skipped
+            self._next_beat = self._next_beat_after(bound - 1)
+            return None
+        skipped = self._beat_grid_count(beat_tick, landing)
+        if skipped > 0:
+            self._skip_stats["stretches"] += 1
+            self._skip_stats["skipped"] += skipped
+            self._skip_stats["landings"] += 1
+            for name, per_beat in streams.items():
+                self._bank.skip_draws(name, per_beat * skipped)
+            self._director.beat_count += skipped
+            self._clock.advance_to(landing)
+        return landing
+
+    @property
+    def skip_stats(self) -> dict[str, int]:
+        """H9's honest labels: the quiet-beat skip's counters (stretches
+        attempted with >= 1 skipped beat, beats skipped, landings
+        fired after a skip) — read-side bookkeeping for the operator's
+        records; never canon, never the log."""
+        return dict(self._skip_stats)
 
     def _condense_groups(self, zones: SceneZones, tick: int) -> None:
         """depth-7's tier-transition pass (one law, two ride points —

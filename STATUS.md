@@ -1,60 +1,55 @@
-Iteration: iter-336 (`stationcross-1` — the station
-  cross-check datum parse, R0 doc-only, zero code change; the owner's
-  «Продолжай работу, я архив с результатами предоставил» call answering
-  the standing proposal «запустите зонд v3 на станции… после его zip
-  я разберу датум»; the row the iter-335 NEXT named first): **THE
-  STATION CROSS-CHECK CLOSED** (probe v3.0 on the owner's iron —
-  Win11 / Python 3.14.3 / Coffee Lake / 30.9 GB, HEAD `ad79e1f` =
-  the sandbox BASE_COMMIT, all six stages ok, the manifest md5s
-  re-verified in-sandbox, all 8 copied files match). **THE WHOLE
-  KILOYEAR MEASURED**: 3,818.15 s / 82,757 events / life 81,706 in
-  1/1001 spans 100% final — INSIDE the predicted 3,000–4,500 s
-  window (the α-model holds cross-iron; the station's own
-  α(100→1000) = 1.91); the whole-arm REALIZED_DELTA at the
-  millennium closed (the workshop starved ore=0/wood=6/tool=8,
-  4 conversions per millennium — the iter-335 §D item). **THE
-  CROSS-IRON WALL**: segmented 104.36 s vs the sandbox's 102.54 s =
-  +1.8% (LINEAR on both irons — 9.85× on 10× at the station); the
-  whole arm iron-sensitive the other way (46.94 vs 57.14 s — the
-  station 1.22× faster on the occ-refold's allocation churn; read
-  0.647 vs 0.604 s/MB, the iter-327 law 0.648 holding). **THE
-  CROSS-IRON T1 DECOMPOSED TO THE BYTE**: the file delta = (lines −
-  1) EXACTLY on every measurable pair (+230/+290/+8,557/+14,210 on
-  2y/100y × whole/segmented, +130,327 on the kiloyear by manifest
-  arithmetic) — the two named causes: the Windows CRLF newline
-  translation (+1 byte/line, od-dumped `}}\n` vs `}}\r\n`) + the
-  header's python meta (−1 byte: "3.14.3" vs "3.12.14"); **THE EVENT
-  STREAM IS BYTE-IDENTICAL cross-iron** (the \r-strip per-line
-  compare: ALL event lines identical ×4; the event-stream md5
-  IDENTICAL ×4; semantic_diff exit 0 ×4 — the sanctioned comparator
-  D-229) — **THE INTERPRETER CONTRIBUTES ZERO CONTENT BYTES**
-  (3.12.14 ↔ 3.14.3, two minors apart: byte-identity is a property
-  of the CONTENT, not the environment — the env pin's excluded
-  question answered by measurement); the derived prediction: the
-  whole-kiloyear log = 45,000,433 bytes on a LF platform. **B6
-  GREEN on the independent iron** (1,000 conversions = 1,000 wears,
-  every source ≤ its cap, the mass −30 — iter-335's numbers
-  reproduced on foreign hardware + interpreter) + the kiloyear talk
-  invariant 32,404 = 32,404 both arms + the 100y family 3,355 =
-  3,355 (the triple check). NEXT: H9 (the event-to-event waiting on
-  the time-skip — structurally unblocked by the epoch's O(1)
-  counter jump), the whole-arm occ-window fix (B7's letter) on the
-  owner's call.
+Iteration: iter-337 (`h9-1` — the event-to-event
+  waiting on the time-skip, R3 core; the STATUS Next item (1), the row
+  the iter-334/335/336 NEXT lines named first, the owner's active
+  «продолжай работы, открывай важнейшее на долгосрок» directive):
+  **THE QUIET-BEAT SKIP LANDED** — the loop's crossing discipline
+  jumps the clock, the bank counters (`skip_draws`), and the
+  director's beat counter across beats whose machinery would produce
+  NOTHING, landing at the first producing beat or the stretch's
+  committing bound; the landing computation rides three pure twins
+  (`next_decay_tick`, `condensation_pending`, `urgency_scan`/
+  `faction_scan` over the shared rolling predicates + one
+  `first_failing` gate evaluation per stretch + `next_d100_hit`, the
+  epoch's O(1) block walk). **THE FALSIFIER IS THE A/B
+  BYTE-IDENTITY LAW** (ON vs OFF, stats non-vacuous): farstead 10y ×3
+  seeds × both protocols IDENTICAL; 100y segmented IDENTICAL (md5 =
+  the iter-335 canon); **THE KILOYEAR IDENTICAL — md5 `a1d8f05b…` =
+  the iter-335 canonical log, T1 HELD 76,951,399 × 2**; whole 50y
+  IDENTICAL. **THE WALL: the segmented kiloyear 102.54 → 46.44 s
+  (2.21× — 1,009,806 of 1,080,000 beats skipped, 93.5%); 100y 2.16×;
+  the whole arm 1.20× at 50y (the occ-refold residue is B7's row)**;
+  10,000y now ~8 min single-seed (was ~17). **THE CAPABILITY
+  FENCES** (init-once; a failing pack keeps the exact old path): the
+  arm switch, the QUIET DIRECTOR (no hooks or disabled — the pacing
+  clock's beat-count dependence the named residue), the EMPTY FOLD
+  DEMAND (the per-tick fold verdicts the second residue); the live
+  set is the Lab fixture family (farstead both director arms;
+  pressure/tavern REFUSED by their gates). +10 laws in
+  tests/test_h9.py + the labrunner `--skip` arm (the `_noskip`
+  volume, the cost.skip honest labels). NEXT: the standing owner
+  calls — the whole-arm occ-window fix (B7's letter), the Lab rows
+  E02/E31, M2, replay-UI, W8, the frontend P1/P2/P3.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2606 passed + 1 skipped, ruff clean, docguard clean, topology
+2616 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; INV-1..5 untouched,
   the LOG untouched; NO test deleted or weakened — the suite
   untouched, a datum-parse iteration) ·
 Date: 2026-10-07 ·
-Scope: docs/TASKS.md (the stationcross-1 row + the ledger,
-  iter-326 evicted), STATUS.md (this header + Next), worklog.md
-  (the iter-336 entry, iter-325 evicted), docs/TEST_PLAN.md (§1.4
-  — the measured cross-iron byte law, one paragraph),
-  docs/iterations/iter-336-stationcross-report.md (new) —
-  5 changed/created (all riders, zero code).
+Scope: core/rng.py (next_d100_hit + skip_draws), core/states.py
+  (next_decay_tick), core/urgencies.py + core/factions.py (the
+  shared rolling predicates + the scans + faction_bar),
+  core/groups.py (condensation_pending), core/loop.py (the skip +
+  the fences + the stats + the skip_quiet_beats arm),
+  scripts/labrunner.py (the --skip arm + cost.skip),
+  tests/test_lab.py (the 3-tuple re-pin), tests/test_h9.py (new,
+  10 laws), docs/TASKS.md (the h9-1 row + the ledger, iter-327
+  evicted), STATUS.md (this header + Next), worklog.md (the
+  iter-337 entry, iter-326 evicted), docs/iterations/
+  iter-337-h9-report.md (new) — 13 changed/created (6 code + 1
+  instrument + 2 test + 4 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -143,24 +138,22 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-336 DONE: stationcross-1 (the station cross-check CLOSED on the
-  owner's iron — the whole kiloyear measured 3,818 s inside the
-  3,000–4,500 s window; the segmented wall +1.8% cross-iron, LINEAR
-  on both irons; THE CROSS-IRON T1 DECOMPOSED TO THE BYTE — the
-  delta = CRLF(+1/line) + the header python-meta(−1), the event
-  stream BYTE-IDENTICAL, the interpreter contributes zero content
-  bytes; B6 GREEN on the independent iron; the kiloyear talk
-  invariant 32,404 = 32,404).**
+**iter-337 DONE: h9-1 (THE QUIET-BEAT SKIP — the world waits
+  event-to-event on the time-skip: the crossing discipline jumps the
+  clock/counters/director-beat across beats that would produce
+  nothing; THE A/B BYTE-IDENTITY LAW HELD at every measured shape —
+  the kiloyear md5 = the iter-335 canon, T1 HELD 77 MB × 2; the
+  segmented wall 102.54 → 46.44 s = 2.21×, 93.5% of beats skipped;
+  the whole arm 1.20× at 50y — the occ-refold residue stays B7's
+  row; the fences: the arm switch / the quiet director / the empty
+  fold demand — pressure and tavern keep the exact old path).**
 Next: THE OWNER'S CALLS (the standing items in order):
-  (1) H9 — the event-to-event waiting on the time-skip (structurally
-  unblocked by the epoch's O(1) counter jump — the row behind the
-  kiloyear, now first); (2) the whole-arm occ-window fix (an
-  index-based window attribution, B7's letter) — a named row on the
-  owner's call (the datum's price raised: the station's own α =
-  1.91, the window holds cross-iron); (3) the standing calls
-  preserved (the Lab queue's battery rows E02/E31, M2, the
-  replay-UI row, the world track's W8, the frontend P1/P2/P3
-  continuations).
+  (1) the whole-arm occ-window fix (an index-based window
+  attribution, B7's letter) — a named row on the owner's call (the
+  datum's price raised: the station's own α = 1.91, the window holds
+  cross-iron); (2) the standing calls preserved (the Lab queue's
+  battery rows E02/E31, M2, the replay-UI row, the world track's W8,
+  the frontend P1/P2/P3 continuations).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

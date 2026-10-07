@@ -38,7 +38,7 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.fold import Projection
     from core.pack import Pack
 
-__all__ = ["decay_drafts", "rotation_resets"]
+__all__ = ["decay_drafts", "next_decay_tick", "rotation_resets"]
 
 DECAY_EVENT: str = "status_decayed"  # templates vocabulary (lint-checked)
 
@@ -183,6 +183,77 @@ def decay_drafts(
             )
         )
     return tuple(drafts)
+
+
+def next_decay_tick(
+    pack: "Pack",
+    projection: "Projection",
+    last_change: Mapping[tuple[str, str], int],
+    from_tick: int,
+    locations: Collection[str] | None = None,
+) -> int | None:
+    """The first tick >= `from_tick` at which `decay_drafts` would be
+    non-empty — H9's quiet-beat skip landing bound for the decay family
+    (iter-337). The pure FORMULA TWIN of the per-beat walk: per (npc,
+    axis) in the ticking scope, the interval-proportional delta crosses
+    1 exactly at ``last + ceil(360 / rate)`` (integer arithmetic: the
+    floored product first reaches 1 there, and every later tick covers
+    the same elapsed plus more — the decay is interval-proportional, so
+    a skipped beat changes NO value, the next computed delta covers the
+    whole gap); an axis whose value is already PINNED at the clamp
+    bound in the delta's direction never fires (the pinned law —
+    ``_clamp(current + sign) == current`` holds for every delta >= 1,
+    monotonically), so it never constrains a landing. None when no axis
+    can fire at any tick (the run's quiet stretches on a clamped or
+    fully-rested world).
+
+    The answer is a TICK, not a beat: the caller maps it onto the beat
+    grid (the first grid point >= this tick inside the stretch). The
+    twin's exactness is pinned by a property law (tests/test_h9.py:
+    the formula's tick vs the first beat where `decay_drafts` answers
+    non-empty, over crafted states) — the twin mirrors the walk's own
+    filters (absent NPCs skip, the LOD scope skips, the caught skip),
+    never re-deciding them."""
+    states_config = pack.rules.get("states", {})
+    if not states_config:
+        return None
+    scale = pack.rules["relations"]["scale"]
+    best: int | None = None
+    for npc in pack.entities["npcs"]:
+        npc_id = npc["id"]
+        props = projection.get(npc_id)
+        if props is None:
+            continue
+        if locations is not None and props.get("position") not in locations:
+            continue
+        if props.get("crime_status") == "caught":
+            continue
+        for axis, config in states_config.items():
+            if not isinstance(config, Mapping):
+                continue
+            if axis == "notes":
+                continue
+            current = props.get(f"status.{axis}")
+            if not isinstance(current, int) or isinstance(current, bool):
+                continue
+            rate_key = (
+                "gain_per_360_ticks_awake" if axis == "fatigue"
+                else "decay_per_360_ticks"
+            )
+            rate = config.get(rate_key)
+            if rate is None or rate == 0:
+                continue
+            sign = 1 if axis == "fatigue" else -1
+            if _clamp(current + sign, scale[0], scale[1]) == current:
+                continue  # pinned at the bound: this axis never fires
+            last = last_change.get((npc_id, f"status.{axis}"))
+            base = last if last is not None else 0
+            # delta = (elapsed * rate) // 360 >= 1  <=>  elapsed >= ceil(360/rate)
+            elapsed_first = -(-360 // int(rate))
+            candidate = max(base + elapsed_first, from_tick)
+            if best is None or candidate < best:
+                best = candidate
+    return best
 
 
 def rotation_resets(

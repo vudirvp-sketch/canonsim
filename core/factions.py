@@ -78,8 +78,11 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
 
 __all__ = [
     "FACTION_PREFIX",
+    "faction_bar",
     "faction_intents",
     "faction_probability",
+    "faction_rolls",
+    "faction_scan",
     "faction_specs",
 ]
 
@@ -216,6 +219,90 @@ def _build_intent(spec: _FactionSpec, seq: int) -> IntentData:
     )
 
 
+def faction_rolls(
+    spec: "_FactionSpec",
+    projection: "Projection",
+    locations: Collection[str] | None,
+) -> bool:
+    """The rolling predicate — ONE law, TWO consumers (iter-337, H9):
+    the faction rolls this walk iff its group entity is present in the
+    projection and anchored inside the ticking zone. The walk itself
+    (`faction_intents`) and the quiet-beat skip's rolling-set
+    computation (the loop's `_quiet_landing`) read the SAME predicate
+    — the urgency family's own extraction law (a diverging copy would
+    desync the skip's counter arithmetic against the walk's draw
+    pattern)."""
+    props = projection.get(spec.group)
+    if props is None:
+        return False
+    if locations is not None and props.get("position") not in locations:
+        return False
+    return True
+
+
+def faction_bar(spec: "_FactionSpec", projection: "Projection") -> int:
+    """The entry's CURRENT probability bar from the live fold (iter-337,
+    H9): the small formula over the members' axis values — the same
+    number `faction_intents` rolls against, exposed for the quiet-beat
+    skip's landing scan (the bar is a pure projection read, frozen
+    between events — the scan never re-derives the formula's inputs,
+    it reads this)."""
+    return faction_probability(
+        _member_values(spec, projection),
+        spec.trigger_value,
+        spec.threshold,
+        spec.max_per_beat,
+    )
+
+
+def faction_scan(
+    pack: "Pack",
+    projection: "Projection",
+    bank: "RngBank",
+    locations: Collection[str] | None = None,
+    world: "WorldModel | None" = None,
+    specs: "Sequence[_FactionSpec] | None" = None,
+    limit: int = 0,
+) -> tuple[dict[str, int], int | None]:
+    """H9's rolling-set + first-hit scan, the faction twin
+    (iter-337 — `core.urgencies.urgency_scan` owns the family's law;
+    this walk adds the ratio bar): the bar is a pure projection read
+    (the members' live axes, frozen between events), so the scan
+    evaluates it once per stretch and walks the entry's own stream
+    for the first draw under it. ``streams`` maps every rolling
+    faction's stream to 1 draw per beat (the cadence law: the roll
+    fires once per walk regardless of the bar — a bar-0 entry still
+    consumes its roll); ``first_fire`` is the smallest beat offset in
+    ``[1, limit]`` at which the walk would enqueue a goal (a hit
+    passing the ``requires`` gates), or ``None``; ``1"
+    short-circuits exactly as the urgency twin."""
+    streams: dict[str, int] = {}
+    first: int | None = None
+    for seq, spec in enumerate(
+        _specs(pack) if specs is None else specs
+    ):
+        if not faction_rolls(spec, projection, locations):
+            continue
+        name = faction_stream_name(spec.group, spec.intent_kind)
+        streams[name] = 1
+        bar = faction_bar(spec, projection)
+        if bar <= 0:
+            continue  # rolls, never fires (the cadence law)
+        if spec.requires:
+            probe = _build_intent(spec, seq)
+            if first_failing(
+                pack, projection, probe, list(spec.requires),
+                facts=(), echoes=(), traits=(), world=world,
+            ) is not None:
+                continue  # the gates are shut for the whole stretch
+        if bar >= 100:
+            return streams, 1
+        offset = bank.next_d100_hit(name, bar, limit)
+        if offset is not None and (first is None or offset < first):
+            first = offset
+    return streams, first
+
+
 def faction_intents(
     pack: "Pack",
     projection: "Projection",
@@ -264,14 +351,10 @@ def faction_intents(
     for seq, spec in enumerate(
         _specs(pack) if specs is None else specs
     ):
-        props = projection.get(spec.group)
-        if props is None:
-            continue  # a crafted runtime config without the entity
-        if (
-            locations is not None
-            and props.get("position") not in locations
-        ):
-            continue  # this zone does not tick here (the LOD filter)
+        # the rolling filter — the shared predicate (iter-337): an
+        # absent or out-of-zone faction never rolls
+        if not faction_rolls(spec, projection, locations):
+            continue
         values = _member_values(spec, projection)
         bar = faction_probability(
             values, spec.trigger_value, spec.threshold, spec.max_per_beat,

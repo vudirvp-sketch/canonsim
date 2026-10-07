@@ -42,7 +42,7 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.rng import RngBank
     from core.worldgen import WorldModel
 
-__all__ = ["URGENCY_PREFIX", "urgency_intents", "urgency_specs"]
+__all__ = ["URGENCY_PREFIX", "urgency_rolls", "urgency_intents", "urgency_specs"]
 
 URGENCY_PREFIX: Final = "urgency"
 
@@ -97,6 +97,91 @@ def urgency_specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
     memo is byte-identical by construction — the same specs, read
     once instead of per beat."""
     return _specs(pack)
+
+
+def urgency_rolls(
+    spec: "_UrgencySpec",
+    projection: "Projection",
+    locations: Collection[str] | None,
+) -> bool:
+    """The rolling predicate — ONE law, TWO consumers (iter-337, H9):
+    the entry rolls this walk iff its NPC is present in the projection,
+    positioned inside the ticking zone, and not caught. The walk itself
+    (`urgency_intents`) and the quiet-beat skip's rolling-set
+    computation (the loop's `_quiet_landing`) read the SAME predicate —
+    a diverging copy would desync the skip's counter arithmetic against
+    the walk's draw pattern, so the filter lives here, extracted, never
+    duplicated."""
+    if spec.npc not in projection:
+        return False
+    if (
+        locations is not None
+        and projection[spec.npc].get("position") not in locations
+    ):
+        return False
+    if projection[spec.npc].get("crime_status") == "caught":
+        return False
+    return True
+
+
+def urgency_scan(
+    pack: "Pack",
+    projection: "Projection",
+    bank: "RngBank",
+    locations: Collection[str] | None = None,
+    world: "WorldModel | None" = None,
+    specs: "Sequence[_UrgencySpec] | None" = None,
+    limit: int = 0,
+) -> tuple[dict[str, int], int | None]:
+    """H9's rolling-set + first-hit scan (iter-337): the data the
+    loop's quiet-beat skip needs from THIS family, drawn from the same
+    predicates and gates the walk itself uses — zero draws, zero
+    enqueues. Returns ``(streams, first_fire)``:
+
+    - ``streams`` maps every ROLLING entry's stream name to its
+      per-beat draw count (1 — the walk draws once per rolling entry
+      per beat, the hit/miss/gate outcome never changes the count);
+    - ``first_fire`` is the smallest beat offset in ``[1, limit]`` at
+      which the walk would ENQUEUE an intent — a hit whose ``requires``
+      gates pass; a gate-failing hit stays silent and its beat stays
+      quiet (the noise-floor law). ``None`` when nothing fires within
+      the limit; ``1`` short-circuits (a probability-100 entry with
+      open gates fires the very first beat — the streams map may be
+      partial there, the caller skips zero beats and advances
+      nothing).
+
+    All reads are against the FROZEN state the caller pinned: between
+    two committed moments the projection, the folds, and the world
+    cannot move, so ONE gate evaluation serves the whole stretch (the
+    loop's fold-demand fence upstream makes this a law, never an
+    approximation — no gate of a skip-capable pack reads a
+    time-dependent fold)."""
+    streams: dict[str, int] = {}
+    first: int | None = None
+    for seq, spec in enumerate(
+        _specs(pack) if specs is None else specs
+    ):
+        if not urgency_rolls(spec, projection, locations):
+            continue
+        name = urgency_stream_name(spec.npc, spec.intent_kind)
+        streams[name] = 1
+        if spec.probability_per_beat <= 0:
+            continue  # rolls, never fires
+        if spec.requires:
+            probe = _build_intent(spec, seq)
+            if first_failing(
+                pack, projection, probe, list(spec.requires),
+                facts=(), echoes=(), traits=(), world=world,
+            ) is not None:
+                continue  # the gates are shut for the whole stretch
+        if spec.probability_per_beat >= 100:
+            return streams, 1
+        offset = bank.next_d100_hit(
+            name, spec.probability_per_beat, limit
+        )
+        if offset is not None and (first is None or offset < first):
+            first = offset
+    return streams, first
 
 
 def _build_intent(spec: _UrgencySpec, seq: int) -> IntentData:
@@ -165,22 +250,9 @@ def urgency_intents(
     for seq, spec in enumerate(
         _specs(pack) if specs is None else specs
     ):
-        # skip actors absent from the projection (arrested, fled, removed)
-        if spec.npc not in projection:
-            continue
-        # depth-3 (the scene-LOD filter): only the ticking zone's
-        # entries roll — the ACTIVE zone at a beat, the WARM ring at a
-        # macro crossing; None is the one-scene law, every entry (the
-        # unarmed world's per-beat behavior). The roll cadence is the
-        # LOD's own cost: the warm ring rolls at the crossings alone —
-        # the odds stay the pack's number, never a second probability
-        # (L13 — fewer rolls, never different odds).
-        if (
-            locations is not None
-            and projection[spec.npc].get("position") not in locations
-        ):
-            continue
-        if projection[spec.npc].get("crime_status") == "caught":
+        # the rolling filter — the shared predicate (iter-337): absent,
+        # out-of-zone, and caught NPCs never roll
+        if not urgency_rolls(spec, projection, locations):
             continue
         # the roll: d100 <= probability, on the entry's OWN urgency-family
         # stream `urgency:<npc>:<kind>` (engine-2, D-079) — canon-relevant

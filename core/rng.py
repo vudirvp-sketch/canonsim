@@ -343,6 +343,63 @@ class RngBank:
         word = _draw_word(self._keys[name], self._counts[name], self._memo, name)
         return (word >> 11) / 2**53
 
+    def next_d100_hit(
+        self, name: str, probability: int, limit: int
+    ) -> int | None:
+        """The smallest offset j in [1, limit] such that the d100 roll
+        the stream would draw at position ``count + j - 1`` HITS
+        (``1 + U mod 100 <= probability``) — H9's quiet-beat scan
+        primitive (iter-337). Pure: never advances the counter, never
+        touches the block memo (the scan walks its own digests — the
+        landed draw recomputes them through the normal path, exactly as
+        the tick-by-tick run would). ``None`` when no draw within the
+        limit hits; ``probability >= 100`` answers 1 (every draw hits);
+        ``probability <= 0`` answers None (none ever does — the
+        probability-0 entry's roll is still consumed by the walk, but
+        never fires, so it never constrains a landing). The offset is
+        in BEATS-from-now: the caller maps it onto the beat grid."""
+        self._ensure(name)
+        if limit <= 0 or probability <= 0:
+            return None
+        if probability >= 100:
+            return 1
+        key = self._keys[name]
+        base = self._counts[name]
+        pos = base
+        remaining = limit
+        while remaining > 0:
+            block_index = pos >> _BLOCK_SHIFT
+            digest = hashlib.sha256(f"{key}:{block_index}".encode()).digest()
+            start_word = pos & _WORD_MASK
+            take = min(_BLOCK_SIZE - start_word, remaining)
+            for word_index in range(start_word, start_word + take):
+                word = int.from_bytes(
+                    digest[8 * word_index:8 * word_index + 8], "big"
+                )
+                if word % 100 < probability:
+                    return pos - base + (word_index - start_word) + 1
+            pos += take
+            remaining -= take
+        return None
+
+    def skip_draws(self, name: str, count: int) -> None:
+        """Advance ``name``'s counter by ``count`` positions WITHOUT
+        drawing — H9's counter jump across quiet beats (iter-337). The
+        quiet-beat skip's own law: a skipped beat consumes exactly the
+        rolls its rolling entries would have drawn (one per entry per
+        beat, the values unconsumed by anything — the beat committed
+        nothing, so no check, duration, or pick ever read them); the
+        jump is therefore the tick-by-tick counters advanced in one
+        arithmetic step, and the landed beat's first draw reads the
+        same position both paths would. The only caller is the loop's
+        ``_apply_skip``; the A/B byte-identity law (tests/test_h9.py)
+        is the operation's falsifier — a wrong jump is a wrong canon,
+        never a wrong speed."""
+        if count < 0:
+            raise RngError(f"skip_draws count must be >= 0, got {count}")
+        self._ensure(name)
+        self._counts[name] += count
+
     # -- draw surface (the only advancing operations) -----------------------
 
     def randint(self, lo: int, hi: int) -> int:

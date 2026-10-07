@@ -97,6 +97,7 @@ __all__ = [
     "NAMES_KEY",
     "POPULATION_KEY",
     "condensation_drafts",
+    "condensation_pending",
     "is_condensed",
     "macro_tick_drafts",
 ]
@@ -137,6 +138,32 @@ def is_condensed(projection: "Projection", group_id: str) -> bool:
     macro-tick walk stays silent from that event on). Derived from
     the fold (L3), never stored outside it."""
     return projection.get(group_id, {}).get(MARKER_PROP) is True
+
+
+def condensation_pending(
+    pack: "Pack",
+    projection: "Projection",
+    locations: Collection[str],
+) -> bool:
+    """Would `condensation_drafts` answer non-empty here? — the pure
+    EMPTINESS TWIN (iter-337, H9): the drafts' own entry filter (a
+    declared condense_event, not yet tombstoned, anchored in
+    `locations` — a passing group ALWAYS drafts, even with an empty
+    birth set: the marker write rides the event) with ZERO draws (the
+    drafts themselves draw the members' generated names — calling
+    them to test emptiness would burn the name streams' counters and
+    desync the canon). The quiet-beat skip's landing predicate; the
+    twin mirrors the filter exactly, never re-deciding it."""
+    for group in pack.entities.get("groups", ()):
+        if group.get("condense_event") is None:
+            continue
+        group_id = group["id"]
+        if is_condensed(projection, group_id):
+            continue
+        if projection.get(group_id, {}).get("position") not in locations:
+            continue
+        return True
+    return False
 
 
 def _population(
