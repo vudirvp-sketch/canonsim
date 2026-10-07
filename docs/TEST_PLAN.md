@@ -141,6 +141,24 @@ the generating interpreter (§1.1). T1 itself never changes: the golden
 stays byte-compared on the env pin, the schema_version pin and the
 fixture-regeneration guard untouched.
 
+**The measured cross-iron law (iter-336, the station probe v3
+datum — Win11/Python 3.14.3/Coffee Lake vs Linux/3.12.14/Xeon, HEAD
+`ad79e1f`)**: the event stream is BYTE-IDENTICAL across iron AND
+interpreter — after the `\r` strip every event line matches
+byte-for-byte on all four comparable pairs (2y/100y × whole/segmented;
+the event-stream md5 with the header excluded is identical on each),
+`semantic_diff` exits 0 on all four, and the ENTIRE file-level delta
+decomposes exactly as (number of lines) − 1 on every horizon including
+the kiloyear (+130,327 at 130,327 events): the Windows CRLF newline
+translation (+1 byte per line — text-mode `\n` → `\r\n`, od-dumped,
+zero lone CRs) plus the header's python meta (−1 byte, "3.14.3" vs
+"3.12.14"). The interpreter itself contributes ZERO content bytes —
+the byte-identity T1 verifies is a property of the CONTENT, not of the
+environment; the env pin stays the law for the golden byte-compare,
+and this layer remains the cross-environment oracle (line endings and
+environment meta ignored by design, exactly as measured). Detail: the
+iter-336 report §A.4 (the single owner of the numbers, D-024).
+
 ## 2. Metrics M1–M5 (`MVP_SCOPE.md` §15 owns the definitions)
 
 Computed by folding the log — never collected by feel (Mesa

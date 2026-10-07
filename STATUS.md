@@ -1,55 +1,60 @@
-Iteration: iter-335 (`kiloyear-1` — the armed-world kiloyear
-  under the epoch, R2 local-add; the owner's standing third call
-  item «станционный килогод с вооружённым миром» (opened with
-  rng-1, unblocked by the epoch) + the active «продолжай работы,
-  открывай важнейшее» directive): **THE B6 ORACLE GREEN AT THE
-  MILLENNIUM** — 1,000 conversions = 1,000 bloom wears (exactly
-  1.00/year), the workshop static at the 10y levels (ore 4 /
-  wood 12 / tool 6 vs the unarmed MT's 4,016 DEAD at tool=0),
-  every source ≤ its basin (58/60, 38/40, 38/40, 22/24), the
-  total mass −30 vs the unarmed +26,300 — ZERO pack-data forks,
-  the material cycle holds equilibrium a thousand years on its
-  own mechanics (B6 closed at every scale 10y→100y→1000y).
-  **T1 HELD at 76,951,399 bytes × 2** — the deepest determinism
-  verification ever run (the full kiloyear double-run under the
-  epoch; sanity 2y + T1 HELD too). **The segmented wall is
-  LINEAR**: 10.32 s@100y → 102.54 s@1000y (9.94× on 10×) —
-  10.3× faster than the unarmed MT sandbox-equivalent ~1,061 s.
-  **THE WHOLE ARM DECOMPOSED** (lab-5 on whole 50y/100y,
-  canon-neutrality HELD): occ_refold 68.8%→81.7%, per-call ×2.0,
-  knowledge 0.0% (P1b holds on BOTH protocols) — the mechanism
-  named in code: the deferred-realize law holds completions to
-  the horizon's end, so the whole protocol's OCC window [seq,
-  end) is horizon-long (P1a removed only the PREFIX refold; on
-  segmented the window ≈ one year) — NOT a P1a regression; the
-  whole bound 400y > 595 s (α ≈ 1.72), the fix (an index-based
-  window attribution, B7's letter) a future gated row, the
-  station prediction ~3,000–4,500 s. The kiloyear laws: sourced
-  4.00/year EXACT, flat life 74.3/year (trend 0.976), constant
-  state 25, the talk control 3,355 = 3,355 (the epoch moves the
-  MT absolute, never the invariance), read 0.604 s/MB. The
-  convert verb joined the labrunner's account_verbs full-read
-  (the B6 turnover counter) + its law. The station probe v3
-  (session artifact, self-checked green) delivered for the
-  owner's cross-check. NEXT: the station cross-check on the
-  owner's hardware (the whole kiloyear + the cross-hardware T1),
-  H9 behind it.
+Iteration: iter-336 (`stationcross-1` — the station
+  cross-check datum parse, R0 doc-only, zero code change; the owner's
+  «Продолжай работу, я архив с результатами предоставил» call answering
+  the standing proposal «запустите зонд v3 на станции… после его zip
+  я разберу датум»; the row the iter-335 NEXT named first): **THE
+  STATION CROSS-CHECK CLOSED** (probe v3.0 on the owner's iron —
+  Win11 / Python 3.14.3 / Coffee Lake / 30.9 GB, HEAD `ad79e1f` =
+  the sandbox BASE_COMMIT, all six stages ok, the manifest md5s
+  re-verified in-sandbox, all 8 copied files match). **THE WHOLE
+  KILOYEAR MEASURED**: 3,818.15 s / 82,757 events / life 81,706 in
+  1/1001 spans 100% final — INSIDE the predicted 3,000–4,500 s
+  window (the α-model holds cross-iron; the station's own
+  α(100→1000) = 1.91); the whole-arm REALIZED_DELTA at the
+  millennium closed (the workshop starved ore=0/wood=6/tool=8,
+  4 conversions per millennium — the iter-335 §D item). **THE
+  CROSS-IRON WALL**: segmented 104.36 s vs the sandbox's 102.54 s =
+  +1.8% (LINEAR on both irons — 9.85× on 10× at the station); the
+  whole arm iron-sensitive the other way (46.94 vs 57.14 s — the
+  station 1.22× faster on the occ-refold's allocation churn; read
+  0.647 vs 0.604 s/MB, the iter-327 law 0.648 holding). **THE
+  CROSS-IRON T1 DECOMPOSED TO THE BYTE**: the file delta = (lines −
+  1) EXACTLY on every measurable pair (+230/+290/+8,557/+14,210 on
+  2y/100y × whole/segmented, +130,327 on the kiloyear by manifest
+  arithmetic) — the two named causes: the Windows CRLF newline
+  translation (+1 byte/line, od-dumped `}}\n` vs `}}\r\n`) + the
+  header's python meta (−1 byte: "3.14.3" vs "3.12.14"); **THE EVENT
+  STREAM IS BYTE-IDENTICAL cross-iron** (the \r-strip per-line
+  compare: ALL event lines identical ×4; the event-stream md5
+  IDENTICAL ×4; semantic_diff exit 0 ×4 — the sanctioned comparator
+  D-229) — **THE INTERPRETER CONTRIBUTES ZERO CONTENT BYTES**
+  (3.12.14 ↔ 3.14.3, two minors apart: byte-identity is a property
+  of the CONTENT, not the environment — the env pin's excluded
+  question answered by measurement); the derived prediction: the
+  whole-kiloyear log = 45,000,433 bytes on a LF platform. **B6
+  GREEN on the independent iron** (1,000 conversions = 1,000 wears,
+  every source ≤ its cap, the mass −30 — iter-335's numbers
+  reproduced on foreign hardware + interpreter) + the kiloyear talk
+  invariant 32,404 = 32,404 both arms + the 100y family 3,355 =
+  3,355 (the triple check). NEXT: H9 (the event-to-event waiting on
+  the time-skip — structurally unblocked by the epoch's O(1)
+  counter jump), the whole-arm occ-window fix (B7's letter) on the
+  owner's call.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
 2606 passed + 1 skipped, ruff clean, docguard clean, topology
   --check clean (Python 3.12.14, the env pin; INV-1..5 untouched,
-  the LOG untouched; NO test deleted or weakened — 1 extended,
-  assertions only added) ·
+  the LOG untouched; NO test deleted or weakened — the suite
+  untouched, a datum-parse iteration) ·
 Date: 2026-10-07 ·
-Scope: scripts/labrunner.py (the convert verb in the account_verbs
-  full-read — the family's fifth verb), tests/test_lab.py (the law
-  in the paired record), docs/TASKS.md (the kiloyear-1 row + the
-  ledger, iter-325 evicted), STATUS.md (this header), worklog.md
-  (the iter-335 entry, iter-324 evicted),
-  docs/iterations/iter-335-kiloyear-report.md (new) —
-  6 changed/created (2 code/test + 4 riders).
+Scope: docs/TASKS.md (the stationcross-1 row + the ledger,
+  iter-326 evicted), STATUS.md (this header + Next), worklog.md
+  (the iter-336 entry, iter-325 evicted), docs/TEST_PLAN.md (§1.4
+  — the measured cross-iron byte law, one paragraph),
+  docs/iterations/iter-336-stationcross-report.md (new) —
+  5 changed/created (all riders, zero code).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -138,23 +143,24 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-335 DONE: kiloyear-1 (the armed-world kiloyear under the epoch
-  — B6 GREEN at the millennium, 1,000 conversions = 1,000 wears;
-  the segmented wall LINEAR at 102.54 s; T1 HELD at 77 MB × 2;
-  the whole arm decomposed — the deferred-drain occ window, the
-  named residue behind its own future gated row).**
+**iter-336 DONE: stationcross-1 (the station cross-check CLOSED on the
+  owner's iron — the whole kiloyear measured 3,818 s inside the
+  3,000–4,500 s window; the segmented wall +1.8% cross-iron, LINEAR
+  on both irons; THE CROSS-IRON T1 DECOMPOSED TO THE BYTE — the
+  delta = CRLF(+1/line) + the header python-meta(−1), the event
+  stream BYTE-IDENTICAL, the interpreter contributes zero content
+  bytes; B6 GREEN on the independent iron; the kiloyear talk
+  invariant 32,404 = 32,404).**
 Next: THE OWNER'S CALLS (the standing items in order):
-  (1) the station cross-check — the probe v3 (the session artifact,
-  self-checked) on the owner's hardware: the whole kiloyear (the
-  sandbox bound 400y > 595 s, the prediction ~3,000–4,500 s), the
-  segmented verification against the sandbox's 102.54 s, the
-  cross-hardware T1; (2) H9 — the event-to-event waiting on the
-  time-skip (structurally unblocked by the epoch's O(1) counter
-  jump — the row behind the kiloyear); (3) the whole-arm occ-window
-  fix (an index-based window attribution, B7's letter) — a named
-  row on the owner's call; (4) the standing calls preserved (the
-  Lab queue's battery rows E02/E31, M2, the replay-UI row, the
-  world track's W8, the frontend P1/P2/P3 continuations).
+  (1) H9 — the event-to-event waiting on the time-skip (structurally
+  unblocked by the epoch's O(1) counter jump — the row behind the
+  kiloyear, now first); (2) the whole-arm occ-window fix (an
+  index-based window attribution, B7's letter) — a named row on the
+  owner's call (the datum's price raised: the station's own α =
+  1.91, the window holds cross-iron); (3) the standing calls
+  preserved (the Lab queue's battery rows E02/E31, M2, the
+  replay-UI row, the world track's W8, the frontend P1/P2/P3
+  continuations).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
