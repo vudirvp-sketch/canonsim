@@ -1,61 +1,46 @@
-Iteration: iter-344 (`packabsorb` — THE UNIFIED-PACK
-  v1.5 ABSORPTION, R1 doc-only; the owner's 2026-10-08 session call
-  «проработай архив, впитал полезное, поставь задачи соответственные
-  и припарковал куда нужно законы, паттерны и всякое прочее что
-  должно жить долго и всегда» before the standing queue
-  E02/E31 → M2 → replay-UI → W8 → P1/P2/P3): the pack read whole
-  (12/12 files — ROUTER/INDEX/QUICKSTART/CURRENT_STATE/MANIFEST/
-  ULT/SCALE_TESTING_LAW/CONS/CDMT/TEXT2/AUDIT/INTEGRITY); the
-  snapshot FRESHNESS verified historical (the pack pins iter-337 /
-  2e54d39, HEAD e183c64/iter-343 — the pack's B7/M-2/M-7/M-8 rows
-  stale, all landed; the reconciliation table the iter-344 report
-  §B); THE DURABLE LAWS PARKED at their repo consumers: (1) the
-  scale-claim sufficiency law → TEST_PLAN §9.1 (the workload axes
-  E/L/R/F/ρ/K/H/Q, the five sufficiency classes
-  UNEXERCISED..TARGET-SCALE, the oracle tiers, the minimal
-  scale-claim packet, the seven named workload profiles, the
-  standing SEMANTIC-ONLY classification of the farstead kiloyear
-  family); (2) the composite proof-test pattern map → TEST_PLAN
-  §9.2 (14 patterns; the live owners named — certificate quiescence
-  = test_h9's A/B law, derived-index poisoning = test_occidx's
-  twin-agreement, schedule permutation = test_composition's
-  143-check lattice, mutation adequacy = the mutation probe,
-  workload-sufficiency = §9.1; locality injection / boundary surgery
-  / promotion ping-pong / observer noninterference / adaptive
-  sufficient state / specialized-kernel differential honestly
-  marked vocabulary-only); (3) the 8-part runtime-promotion gate
-  DEFINITION → CONTRACTS.md's preamble (the gate referenced 10+
-  times across CONTRACTS sections, never defined repo-side before —
-  REAL CONSUMER / REAL FAILURE / MATERIAL QUALITY GAP / NATIVE
-  LIMIT / REPEATED SHAPE / FALSIFIER / INFORMATION-SEMANTIC OWNER /
-  PHASE-GATE, all eight mandatory); THE QUEUE ROWS OPENED:
-  `density-1` (the E02 successor form — the density-envelope
-  battery: profile+seed → an ordinary valid pack through the
-  admission lint, E/L + R/F explicit knobs, the H1/H2 separation the
-  first battery, the sufficiency class declared per §9.1) +
-  `lab-composite-1` (the E31/metamorphic-families successor — the
-  §9.2 vocabulary-only patterns made executable where a consumer
-  names itself); the old E02/E31 labels' honest mapping recorded
-  (the deleted ULTIMATE pack's registry died with the pack; the v1.5
-  successor's ULT §19.3/§17.4.1 the current owners; the owner
-  re-scopes if the old registry's E31 differs); NOT parked
-  deliberately: CONS T1–T7 (already absorbed as CONTRACTS §6–11),
-  CDMT v2 (the pack owns the method; the synthesis doctrine already
-  AGENTS §2.7), TEXT2 disposition (the pack's own memory), the
-  M-register wholesale (the pack owns the register; landed facts
-  live in git); zero code, zero pack data, zero corpus price.
+Iteration: iter-345 (`density1` — THE DENSITY-ENVELOPE
+  MATERIALIZER + THE FIRST LOCALITY DATUM, R2 local-add; the
+  density-1 row's first half — the row iter-344 opened, the
+  owner's standing «продолжай работу, открывай важнейшее»
+  directive + the called order's head E02/E31 → M2 → …):
+  `scripts/densitypack.py` the profile→pack materializer (the
+  SCALE_TESTING_LAW §15 boundary: the ONLY new mechanism — the
+  packs consume load_pack/Simulator/labrunner as-is, disposable
+  under gitignored output/; the settlement unit namespaced s<i>
+  from the committed Tier A template, every cross-reference
+  rewritten; the knobs --settlements E/L (K=0 by construction),
+  --talk-links R (the AP-11 ceiling loud), --prob-scale ρ (the
+  sampled family only — B6's crossings stay certain); pure
+  determinism — no RNG in the generator); +7 laws
+  (tests/test_densitypack.py — the pure-function, lint+axes,
+  isolation, R-knob+ceiling, ρ-knob+B6, the 1y smoke+T1, the
+  template economy); THE FIRST DATUM — the locality-control
+  ladder (E 25→205, L 7→112, seeds 7/42, 10y, both protocols,
+  the square anchor): the event stream INVARIANT across S=1/4/8/16
+  (1195 events segmented, 899 whole), THE BYTE-LEVEL ISOLATION LAW
+  (the S=1 vs S=16 whole logs differ in EXACTLY the ten census
+  lines — cold_npcs 0 vs 180, D-112's counts-for-populations the
+  cold units' whole event footprint — every other byte identical),
+  T1 HELD both ends, the wall 0.43→0.95 s (2.2× on 16× E — the
+  projection plane's residue; beat_rolls ~7%, occ_refold
+  1.4-1.5%, knowledge 0.0%, E03/E04 = 0.0); the §9.1
+  classification LOCAL-SCALE (the warm-ring population not yet
+  varied — the households knob's future row); the H1/H2 first
+  answer: H2 dead by construction under the LOD, H1 1.4-1.5%,
+  the residue = the projection-plane walk inside `rest` — the
+  row's named next half. Zero core change, INV-1..5 untouched,
+  the LOG untouched, zero committed pack data.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2632 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero runtime code, zero pack data, the LOG untouched — the doc-only absorption; the suite byte-untouched, the collection IDENTICAL to BASE e183c64, zero failures) ·
+2639 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero core change, the LOG untouched; +7 laws, nothing deleted or weakened) ·
 Date: 2026-10-08 ·
-Scope: docs/TEST_PLAN.md (§9.1 + §9.2 — the two parked laws),
-  docs/CONTRACTS.md (the preamble gate definition),
-  docs/TASKS.md (pack-absorb-1 DONE + density-1/lab-composite-1
-  OPEN + the ledger, iter-334 evicted), STATUS.md, worklog.md
-  (iter-334 evicted), docs/iterations/iter-344-packabsorb-report.md
-  (new) — 6 changed/created, all doc riders.
+Scope: scripts/densitypack.py (new), tests/test_densitypack.py
+  (new, 7 laws), docs/TASKS.md (the density-1 row + the ledger,
+  iter-335 evicted), STATUS.md, worklog.md (iter-335 evicted),
+  docs/iterations/iter-345-density1-report.md (new) — 6
+  changed/created (2 code + 4 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -146,17 +131,19 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-344 DONE: packabsorb (the unified-pack v1.5 absorption — the
-  scale-claim law + the composite pattern map + the gate definition
-  parked; density-1/lab-composite-1 opened).**
-Next: the standing owner calls in order — `density-1` (the
-  density-envelope battery, the queue's head: the profile→pack
-  materializer + the H1/H2 separation + the first sufficiency-classed
-  datum per TEST_PLAN §9.1), then M2 (the surface→canonical-ID
-  normalisation A/B — a station battery), the replay-UI NOT-EXPOSED
-  row, the world track's W8, the frontend P1/P2/P3 continuations,
-  `lab-composite-1` behind density-1 (the §9.2 vocabulary-only
-  patterns where a consumer names itself).
+**iter-345 DONE: density1 (the density-1 row's first half — the
+  materializer + 7 laws + the locality datum: the event stream
+  invariant on 16× E, the byte-level isolation law, LOCAL-SCALE
+  classified).**
+Next: `density-1`'s second half — the `rest`-member split at
+  growing E (the profile instrument's map extension: the
+  projection-plane walk named), then the households knob (the
+  warm-ring density — the DENSITY-SCALE arm); behind it the
+  standing owner calls in order — M2 (the surface→canonical-ID
+  normalisation A/B — a station battery), the replay-UI
+  NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
+  continuations, `lab-composite-1` behind density-1 (the §9.2
+  vocabulary-only patterns where a consumer names itself).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
