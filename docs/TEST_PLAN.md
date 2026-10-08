@@ -871,7 +871,7 @@ never asymptotic proof).
 | Workload-sufficiency gate | the claim's density axes actually exercised | §9.1 (this file — the sufficiency classes) |
 | Reference equivalence | optimized path == reference path for every maintained view | T2 + the OCC A/B attribution-equivalence law; the snapshot-vs-fold law (scale-1-impl) |
 | Replay/resume equivalence | checkpoint+tail == uninterrupted; split == whole | T1/T2 + `tests/test_composition.py` + the Lab `--verify-replay` arm |
-| Locality injection | 1×/10×/100×/1 000× unrelated volume — local query unchanged, local work bounded | **vocabulary-only** — waits on the density-envelope battery (the `locality-control` profile) |
+| Locality injection | 1×/10×/100×/1 000× unrelated volume — local query unchanged, local work bounded | **the density-envelope battery's landed datums** (iter-345/346): `tests/test_densitypack.py` law 3 (the K=0 isolation — the cross-unit falsifier) + the locality-control ladder (the event-stream invariance + the byte-level isolation law, iter-345's report §A.3; the wall decomposition's named members = the "local work bounded" half, iter-346's report §A.3) |
 | Boundary surgery | perturb just-outside vs just-inside a declared dependency boundary — outside cannot change the result | **vocabulary-only** — same row; the OCC read-pair mutations are its nearest landed kin |
 | Promotion ping-pong | coarse↔fine cycles — identity/obligations/conserved quantities do not drift | **vocabulary-only** — a world-track/meso row (representation continuity, CONTRACTS §6/§7's laws) |
 | Observer noninterference | hidden/private changes under a fixed authorized surface leave the authorized result unchanged | **vocabulary-only** — CONS-side assurance grammar; nearest landed kin: the blind suite (§1.3) |

@@ -55,7 +55,13 @@ THE LAB LAWS (the pack's non-negotiables, made executable here):
    `decay_walk` (the NPC x axis walk), and the derived folds
    attributed BY CALLER (`_run_beat`/`_run_macro` = the clock's
    greedy per-beat computation vs `_fold_reads` = the intent door's
-   lazy reads) — plus the pack counters the ULTIMATE pack named:
+   lazy reads), and — iter-346, density-1's second half — the
+   projection-plane family: `director_global_passes` (the story
+   layer's per-beat whole-population entropy pass),
+   `projection_snapshot` (the O(E) state copy per autonomous
+   enqueue), `skip_probes` (the quiet-beat skip's population
+   probes — h9's twins), `lod_zone_walk` (the LOD zone
+   computation over L) — plus the pack counters the ULTIMATE pack named:
    E03 rule-parses per beat (the `_specs` re-parse), E04 derived-read
    calls per beat (greedy vs lazy vs the STATIC gated-entry demand),
    and beats/event (the pack's stale "~50" replaced by the measured
@@ -835,6 +841,30 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     ),
     # the NPC x axis decay walk
     "decay_walk": (("core/states.py", "decay_drafts"),),
+    # iter-346 (density-1's second half): the projection-plane family —
+    # the E-scaling members of `rest`, each named by its architectural
+    # role. The row anticipated ONE `projection_walk` member; the
+    # measurement dissolved it into four distinguishable walks (the
+    # caller attribution: every entry below has its whole call subtree
+    # OUTSIDE the other entries' — the accounting law's disjointness
+    # holds by construction, measured first, never guessed).
+    # the story layer's per-beat whole-population pass — the director
+    # stays GLOBAL by law (_run_beat's docstring); entropy's cumtime
+    # covers _global_suspicion + _visible_physical_threats
+    "director_global_passes": (("core/director.py", "entropy"),),
+    # the O(E) projection copy per autonomous intent enqueue (the
+    # scale-1-impl P1a snapshot side-table — the copy's own E-price)
+    "projection_snapshot": (("core/loop.py", "_snapshot_for"),),
+    # the quiet-beat skip's per-stretch population probes (h9's twins —
+    # the scans walk every spec against the projection; the cumtime
+    # contains the E-flat rng block walk, next_d100_hit)
+    "skip_probes": (
+        ("core/urgencies.py", "urgency_scan"),
+        ("core/factions.py", "faction_scan"),
+        ("core/states.py", "next_decay_tick"),
+    ),
+    # the LOD zone computation (walks the location set — L's own walk)
+    "lod_zone_walk": (("core/lod.py", "scene_zones"),),
 }
 
 #: The derived folds (E04's surface), attributed BY CALLER: the clock
@@ -872,6 +902,18 @@ _KEY_FUNCS: Final = (
     ("core/fold.py", "apply_event"),
     ("core/knowledge.py", "_novel_facts"),
     ("core/knowledge.py", "_ranked"),
+    # iter-346: the projection-plane family's entries + the block walk
+    # (the E-flat anchor inside skip_probes' cumtime) — the per-call
+    # growth table's density-row legs
+    ("core/director.py", "entropy"),
+    ("core/director.py", "_global_suspicion"),
+    ("core/director.py", "_visible_physical_threats"),
+    ("core/loop.py", "_snapshot_for"),
+    ("core/urgencies.py", "urgency_scan"),
+    ("core/factions.py", "faction_scan"),
+    ("core/states.py", "next_decay_tick"),
+    ("core/lod.py", "scene_zones"),
+    ("core/rng.py", "next_d100_hit"),
 )
 
 #: The three derived-fold tests (core/intent.py's closed set) — E04's
@@ -887,6 +929,13 @@ _PROFILE_NOTES: Final = (
     "(_MEMBER_ENTRIES + _DERIVED_FOLDS by caller); rest = total - "
     "sum(members); the profiled bytes must equal the unprofiled "
     "run's (canon_check — the canon-neutrality law)",
+    "the iter-346 projection-plane members split the E-scaling part "
+    "of the old `rest` (density-1's second half): every entry's call "
+    "subtree was measured disjoint from the other entries' (caller "
+    "attribution) — an entry whose subtree nests inside another's "
+    "would double-count (kind_of stays in rest for exactly that "
+    "reason: its lookups ride occ_refold's and skip_probes' subtrees "
+    "via the door's precondition tests)",
     "E03/E04/beats-event are the ULTIMATE pack's counters made "
     "executable: its stale '~50 beats/event' claim is replaced by "
     "the measured per-run number",

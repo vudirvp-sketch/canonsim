@@ -90,6 +90,7 @@ PLAYER_START = next(
 YEARS = 2
 
 sys.path.insert(0, str(REPO / "scripts"))
+from densitypack import materialize  # noqa: E402
 from labrunner import (  # noqa: E402
     _anchor_steps,
     _player_start,
@@ -571,9 +572,12 @@ def test_the_wall_split_accounting_law(tmp_path: Path) -> None:
         assert abs(accounted - total) < 1e-3, (depth["years"], accounted)
         assert abs(sum(shares.values()) - 1.0) < 0.01
         # the named members exist as keys even when a depth never pays
-        # them (an honest zero, never an absent key)
+        # them (an honest zero, never an absent key) — the projection-
+        # plane family joined at iter-346 (density-1's second half)
         for member in ("occ_refold", "knowledge_rerank", "beat_rolls",
-                       "decay_walk", "clock_derived_folds",
+                       "decay_walk", "director_global_passes",
+                       "projection_snapshot", "skip_probes",
+                       "lod_zone_walk", "clock_derived_folds",
                        "door_derived_folds", "rest"):
             assert member in shares, (depth["years"], member)
         # scale-1-impl P0.5-B (the E03 fix): the spec families are
@@ -629,3 +633,61 @@ def test_the_wall_growth_and_labels_law(tmp_path: Path) -> None:
         assert "profiled_wall_seconds" in depth
         assert "wall_seconds" not in depth
     assert any("instrument artifact" in note for note in profile["notes"])
+
+
+def test_the_projection_plane_members_on_a_grown_world(
+    tmp_path: Path,
+) -> None:
+    """iter-346 (density-1's second half) — the projection-plane map
+    extension's own law: the four E-scaling members that split the old
+    `rest` (director_global_passes / projection_snapshot /
+    skip_probes / lod_zone_walk) actually CATCH their walks on a
+    GROWN world — the densitypack materializer's S=4 pack (49 npcs,
+    28 locations, 4 disconnected units), materialized into the
+    tmp dir (the fixture-hardcoding law: generated packs are
+    disposable, never committed herds). The accounting partition
+    holds there exactly as on the small fixture, and the instrument
+    stays canon-neutral at the coinciding depth.
+
+    The disjointness of the entries is construction law (the caller
+    attribution measured in the iteration); what THIS law pins is
+    that the map's names point at real call sites on a world dense
+    enough to pay them — the farthest-family small fixture leaves
+    the family's shares in the low single digits, the grown world is
+    where the row's question lives (the E-axis legs of the ladder)."""
+    pack_dir = tmp_path / "density_s4"
+    materialize(pack_dir, 4, 0, 1.0)
+    out = tmp_path / "out"
+    rc = labrunner_main([
+        "--years", "2", "--seeds", "7", "--protocol", "segmented",
+        "--profile-depths", "2",
+        "--pack", str(pack_dir), "--anchor", "loc_s0_square",
+        "--out", str(out),
+    ])
+    assert rc == 0
+    record = json.loads(
+        (out / "lab_e0_2y_segmented.json").read_text(encoding="utf-8")
+    )
+    profile = record["profile"]
+    depth = profile["per_depth"][-1]
+    # the accounting law on the grown world: the partition holds and
+    # the disjointness flag stays green (the new members did not
+    # double-count anything — the law that governs the map's growth)
+    assert depth["members_disjoint"] is True
+    accounted = (
+        sum(depth["members"].values()) + depth["member_rest_seconds"]
+    )
+    assert abs(accounted - depth["profiled_total_seconds"]) < 1e-3
+    # the projection-plane family: every member NON-ZERO on the grown
+    # world — each named walk actually paid (the honest zero stays a
+    # different member's business: knowledge_rerank is 0.0% on the
+    # density family because nobody talks to the player)
+    members = depth["members"]
+    for name in ("director_global_passes", "projection_snapshot",
+                 "skip_probes", "lod_zone_walk"):
+        assert members[name] > 0.0, name
+    # canon-neutrality held at the coinciding depth (profiling
+    # observes, never mutates — on the generated world too)
+    canon = profile["canon_check"]
+    assert canon["checked"] is True
+    assert canon["byte_identical"] is True

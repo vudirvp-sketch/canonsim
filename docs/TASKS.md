@@ -356,8 +356,8 @@ TEST_PLAN §9's claim packet)
   below). Detail: the iter-344 report (the freshness reconciliation
   table: the pack's snapshot iter-337 vs HEAD — B7/M-2/M-7/M-8 stale
   in the pack, all landed) + git.
-- `density-1` — IN PROGRESS, the first half LANDED (iter-345, R2
-  local-add — the row iter-344 opened, the owner's standing
+- `density-1` — DONE (iter-345 the first half + iter-346 the second
+  half, R2 local-add — the row iter-344 opened, the owner's standing
   «продолжай работу, открывай важнейшее» directive + the called
   order's head): **THE PROFILE→PACK MATERIALIZER**
   (`scripts/densitypack.py` — the SCALE_TESTING_LAW §15 boundary
@@ -373,31 +373,48 @@ TEST_PLAN §9's claim packet)
   (ρ: the SAMPLED family only — the p=100 crossings stay certain,
   B6's law); determinism pure (no RNG — same profile → identical
   bytes); PROFILE.md the transparent axes echo. +7 LAWS
-  (`tests/test_densitypack.py`: the pure-function law, the
-  lint+axes law, the isolation law, the R-knob + the ceiling, the
-  ρ-knob + B6, the 1y smoke + T1 HELD, the template economy).
-  **THE FIRST DATUM (the locality-control ladder, seeds 7/42, 10y,
-  both protocols, the square anchor)**: E 25→205, L 7→112, the
-  living surface held at one unit — the event stream INVARIANT
-  (segmented 1195 = 1195 = 1195 = 1195 events across S=1/4/8/16;
-  whole 899 = 899), **THE BYTE-LEVEL ISOLATION LAW: the S=1 vs
-  S=16 whole logs differ in EXACTLY 10 lines — the ten year turns'
-  census digits (`cold_npcs: 0` vs `180`; D-112's counts-for-
-  populations the cold units' whole event footprint)**, every other
-  byte identical; T1 HELD both ends (576,845 ×2 / 576,865 ×2); the
-  wall 0.43→0.95 s (2.2× for 16× E — sub-linear, the projection
-  plane's residue, not the beat machinery: beat_rolls 6.5→7.0%,
-  occ_refold 1.4→1.5%, knowledge 0.0%, E03/E04 = 0.0 — the P0.5
-  dividends hold on the density family); the §9.1 classification:
-  **LOCAL-SCALE** (the cone exercised + the unrelated volume varied
-  16×; the warm-ring population NOT varied — the households knob's
-  future row). THE H1/H2 FIRST ANSWER: H2 dead by construction
-  under the LOD (the cold tier never polls — the census is its
-  whole footprint); H1 1.4-1.5% at 10y; the residue = the
-  projection-plane walk inside `rest` — its decomposition the
-  row's named next half. NEXT: the `rest`-member split at growing
-  E (the profile instrument's map extension), then the households
-  knob (the warm-ring density — the DENSITY-SCALE arm).
+  (`tests/test_densitypack.py`). **THE FIRST DATUM (iter-345, the
+  locality-control ladder, seeds 7/42, 10y, both protocols, the
+  square anchor)**: E 25→205, L 7→112, the living surface held at
+  one unit — the event stream INVARIANT (segmented
+  1195=1195=1195=1195; whole 899 = 899), **THE BYTE-LEVEL
+  ISOLATION LAW: the S=1 vs S=16 whole logs differ in EXACTLY 10
+  lines — the census digits, every other byte identical**; T1 HELD
+  both ends; the wall 0.43→0.95 s (2.2× on 16× E); §9.1 class
+  LOCAL-SCALE; H2 dead by construction under the LOD, H1
+  1.4-1.5%. **THE SECOND DATUM (iter-346 — the `rest`-member
+  split, the profile instrument's map extension)**: the
+  projection-plane family landed in `_MEMBER_ENTRIES` —
+  `director_global_passes` (entropy's per-beat whole-population
+  pass), `projection_snapshot` (the O(E) state copy per autonomous
+  enqueue), `skip_probes` (h9's population twins), `lod_zone_walk`
+  (the zone computation over L), every entry's call subtree
+  measured DISJOINT from the other entries' (caller attribution;
+  `kind_of` deliberately NOT a member — its O(E) lookups ride
+  occ_refold's/skip_probes' subtrees, the accounting law's
+  boundary); +1 law (`tests/test_lab.py` — the grown-world law:
+  the four members non-zero on a materialized S=4 pack, the
+  partition holds, canon-neutral); the ladder re-measured with the
+  decomposed wall: **director_global_passes 5.4%→31.2% (the
+  E-dominant member — the story layer global by law, its E-price
+  named)**, rest 37.7%→20.7%, per-call ×13.2 (_global_suspicion)
+  / ×6.2 (snapshot) / ×3.7 (decay tick) / ×2.7 (lod) / ×1.01
+  (next_d100_hit — the block walk E-flat as designed); the 100y
+  ladder: the per-call growth ratios ALL ≈×1.0 (no depth-super-
+  linear member), the stream invariant 10863 = 10863 at 100y; the
+  wall S16/S1 = ×2.17 at 10y = ×2.16 at 100y (the E-exponent
+  scale-stable across H). NEXT: `density-2` (the households knob —
+  the warm-ring density, the DENSITY-SCALE arm).
+- `density-2` — OPEN (the density-1 row's named continuation —
+  the households knob, the warm-ring density: **the DENSITY-SCALE
+  arm**): the unit is atomic at 12 adults (the Tier A template's
+  roster); the knob grows the ACTIVE unit's households — AP-11
+  requires unique (npc, verb) pairs, so the roster expansion is
+  its own materializer arm (`--households`), the warm ring's
+  population the varied axis while the cold volume stays fixed;
+  the §9.1 sufficiency class target: the first LOCAL-SCALE →
+  DENSITY-SCALE promotion candidate (the cone's own population
+  varied, not just the unrelated volume). Opened iter-346.
 - `lab-composite-1` — OPEN (behind `density-1`, the same owner
   order; the old `E31` + «метаморфические семейства §26» labels'
   v1.5-successor form — ULT §17.4.1 + §17.5): **the composite/
@@ -412,6 +429,7 @@ TEST_PLAN §9's claim packet)
   from the v1.5 re-derivation (the honest-unknown note, iter-344's
   report §D).
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+- iter-346 · 2026-10-09 · density2 (R2 instrument-extension — the density-1 row's second half, the owner's standing «продолжай работы, открывай важнейшее, на долгосрок» directive; the STATUS Next item (1)): THE PROJECTION-PLANE MEMBER SPLIT — the labrunner's `_MEMBER_ENTRIES` grown by four E-scaling members (director_global_passes / projection_snapshot / skip_probes / lod_zone_walk), every entry's subtree measured disjoint by CALLER ATTRIBUTION first (kind_of deliberately excluded — its O(E) scans ride other members' subtrees; the accounting law's boundary respected, never guessed); +1 law (tests/test_lab.py — the grown-world law: the four members non-zero on a materialized S=4 pack, the partition + canon-neutrality held there); THE SECOND DATUM: the ladder re-measured with the decomposed wall (S=1/4/8/16 × 10y + the 100y depth, segmented, seed 7/42) — director_global_passes 5.4%→31.2% THE E-DOMINANT MEMBER (the story layer global by law, its E-price named: per-call ×13.2 on 16× E), rest 37.7%→20.7%, next_d100_hit ×1.01 (the block walk E-flat as designed); the 100y ladder: per-call ratios ALL ≈×1.0 (no depth-super-linear member), the stream invariant 10863=10863 at 100y, the E-exponent scale-stable across H (×2.17 at 10y, ×2.16 at 100y); the §9.2 locality-injection row's live owner landed (the battery's datums, was vocabulary-only); density-1 CLOSED (both halves), density-2 OPENED (the households knob — the DENSITY-SCALE arm); 2640+1 + ruff + docguard + topology clean (+1 law, nothing weakened); NEXT: density-2 (the queue's head), then M2, replay-UI, W8, P1/P2/P3; the report iter-346-density2-report.md
 - iter-345 · 2026-10-08 · density1 (R2 local-add — the density-1 row's first half, the owner's standing directive + the called order's head): THE PROFILE→PACK MATERIALIZER (scripts/densitypack.py — the settlement unit namespaced from the Tier A template, the E/L/R/ρ knobs, K=0 by construction, pure-function determinism, the lint the gate) + 7 laws (tests/test_densitypack.py) + THE FIRST DATUM: the locality-control ladder E 25→205 (S=1/4/8/16, seeds 7/42, 10y, both protocols) — the event stream INVARIANT (1195=1195=1195=1195 segmented; 899=899 whole), THE BYTE-LEVEL ISOLATION LAW (S=1 vs S=16 whole logs differ in EXACTLY the 10 census lines — cold_npcs 0 vs 180, every other byte identical), T1 HELD both ends, the wall 0.43→0.95s (2.2× on 16× E — the projection plane, not the beat machinery: occ_refold 1.4-1.5%, E03/E04 0.0); §9.1 class LOCAL-SCALE; H2 dead by construction under the LOD, H1 1.4-1.5%, the rest-member decomposition the next half; 2639+1 + ruff + docguard + topology clean (+7 laws, nothing weakened); NEXT: the rest-member split at growing E, then the households knob (the DENSITY-SCALE arm); the report iter-345-density1-report.md
 - iter-344 · 2026-10-08 · packabsorb (R1 doc-only — the owner's pack-absorption call: the unified pack v1.5 read whole 12/12, the durable laws parked at their repo consumers): the scale-claim sufficiency law → TEST_PLAN §9.1 (the E/L/R/F/ρ/K/H/Q axes, the five sufficiency classes, the oracle tiers, the scale-claim packet, the named profiles, the farstead family classified SEMANTIC-ONLY); the composite proof-test pattern map → TEST_PLAN §9.2 (14 patterns, the live owners named — h9/composition/occidx/mutation-probe/divergence-probe — the rest vocabulary-only); the 8-part runtime-promotion gate DEFINITION → CONTRACTS.md's preamble (referenced 10+ times, never defined repo-side before); the queue rows opened: density-1 (the E02 successor form — the density-envelope battery, H1/H2 separation) + lab-composite-1 (the E31/metamorphic successor); NOT parked deliberately: CONS T1–T7 (absorbed as CONTRACTS §6–11), CDMT (pack-owned method), TEXT2 (pack-owned memory), the M-register (pack-owned; the landed facts live in git); zero code, zero pack data, zero corpus price; 2632+1 + ruff + docguard + topology clean (the suite byte-untouched); NEXT: density-1 (the queue's head), then M2, replay-UI, W8, P1/P2/P3; the report iter-344-packabsorb-report.md
 - iter-343 · 2026-10-08 · doc-4-lawrehome (R1 doc-only — the owner's 2026-10-08 repo-revision call; FRONTEND_WEB_LAW §14's Phase 1): THE LAW-BODY RE-HOMING LANDED — the five live laws re-pointed to the web client (UIUX §0/§19..§25, APP §0/§3/§33, PRESENTATION §0..§15, LLAMA_CPP §0/§5/§19, VISUAL §8), the dead REDOT_ENGINE_INDEX routing (TASKS' live line, UIUX §5, PRESENTATION §14/§15) replaced by the D-245 archive routing; the TASKS DONE rows (wb-1..12, ux-1, obs-1/2, inf-1/2) collapsed to the landing-record form — the §8-report restatements cut, the docguard allowlist entry retired (the designed under-cap exit); the frontendweb README's stage + the migration ladder's phase markers synced; zero code, zero pack data, zero corpus price; 2632+1 + ruff + docguard + topology clean (the suite byte-untouched, the collection IDENTICAL to BASE, zero failures — the prior session's 2638+1 its own environment's count); NEXT: the standing owner calls (the station canon re-measure, E02/E31, M2, replay-UI, W8, P1/P2/P3); the report iter-343-lawrehome-report.md
@@ -421,4 +439,3 @@ TEST_PLAN §9's claim packet)
 - iter-339 · 2026-10-08 · ki114dec (R0 doc-only — the owner's «Принимаем B» decision call on KI#114; zero committed code change, the packet IS the deliverable): THE COMPOSITION-LAW DECISION PACKET — the B direction recorded (the clean-drain-boundary admission, every-partition composition, resume with no separate timing semantics, candidate A out of contract); the strengthened falsifier 143 checks (every partitioning x wait/move/zero-duration/follow-up-drain x 5 packs x 2 seeds x both protocols x split + resume-at-every-cut + double-run): PROTOTYPE 0/143, BASE 44/143 (the teeth), the KI#114 repro closed byte-identical; the 70-failure classification: 23 timing/value re-pins + 23 expected causal/state shifts + 24 golden byte compares (the census: province +10 / road pure +3 / pressure +9; grim + plumbing PROVEN byte-identical — the quiet-boundary law), REAL SEMANTIC REGRESSIONS 0 (every family mechanism-named: F1 the feed shift, F2 the deferred-realize phase, F3 the exposure-window closure — the pole carried off, the echo residue decayed, F4 the span effects; the OCC census 1→76 all honest door breaks, zero player rejections, no wedge; determinism + INV-1..5 + the door laws held); the conscious rebase list fixed (province/road/pressure smoke + the mediator corpus); the landing row ki114-1-impl OPENED behind the owner's confirmation; 2627+1 + ruff + docguard clean at the COMMITTED state (the prototype's 70 = the packet's subject, the exact patch preserved as the session artifact); the report iter-339-ki114dec-report.md
 - iter-338 · 2026-10-07 · occidx (R3 core — the STATUS Next item (1), the row iter-335/336/337 named first, B7's letter; the owner's active «продолжай работы, открывай важнейшее» directive): THE INDEX-BASED OCC WINDOW ATTRIBUTION — the write index (entity, prop) -> event indices (the _last_change pattern's full-history form) + the read-set twin table in core/intent.py (completeness law: every test name is table/static/windowed, exactly one); THE A/B ATTRIBUTION-EQUIVALENCE LAW the falsifier (every index answer == the full walk's, both protocols, non-vacuous) + byte-identity both arms + the twin-agreement property over all 6 packs x every action + the resume rebuild + the unit grid (+11 laws); THE WALL: whole 50y 13.66->2.22s, whole 100y 51.64->4.36s (11.8x, alpha 1.89->0.997), THE WHOLE KILOYEAR 3,818->43.5s (87.7x; T1 HELD md5 `7cbfb68a…` x2 at 45,000,433 B — the iter-336 LF byte prediction landed exactly; events 82,757 = the station's), the segmented kiloyear md5 = the iter-335 canon; occ_refold 81.7%->7.3% of the profiled wall, per-call x2.0->x1.02; the walk surface 223x-2,203x cut; KI#114 opened (the pre-existing resume-boundary drain divergence, found by the law, reproduced stripped — its own row); 2627+1 + ruff + docguard + topology clean (NO test deleted or weakened — 11 added, 4 mechanical 4-tuple re-pins); NEXT: the standing owner calls (E02/E31, M2, replay-UI, W8, P1/P2/P3) + KI#114's fix row; the report iter-338-occidx-report.md
 - iter-337 · 2026-10-07 · h9 (R3 core — the STATUS Next item (1), the row the iter-334/335/336 NEXT lines named first, the owner's active «продолжай работы, открывай важнейшее» directive): THE QUIET-BEAT SKIP — the crossing discipline jumps the clock/counters/director-beat across beats that would produce nothing, landing at the first producing beat or the committing bound; THE A/B BYTE-IDENTITY LAW the falsifier (ON vs OFF: farstead 10y ×3 seeds ×2 protocols, 100y, whole 50y — ALL IDENTICAL; THE KILOYEAR md5 `a1d8f05b…` = the iter-335 canon, T1 HELD 77 MB ×2); THE WALL: segmented kiloyear 102.54→46.44 s (2.21×, 93.5% of beats skipped), 100y 2.16×, whole 50y 1.20× (the occ residue is B7's); the fences: skip arm / quiet director / empty fold demand — a failing pack (pressure, tavern) keeps the exact old path; +10 laws (tests/test_h9.py) + the labrunner --skip arm; 2616+1 + ruff + docguard + topology clean (NO test deleted or weakened — 10 added); NEXT: the standing owner calls (B7, E02/E31, M2, replay-UI, W8, P1/P2/P3); the report iter-337-h9-report.md
-- iter-336 · 2026-10-07 · stationcross (R0 datum-parse, ZERO code change — the owner's «Продолжай работу, я архив с результатами предоставил» call; the STATUS Next item (1), the station cross-check row): THE STATION CROSS-CHECK CLOSED (probe v3.0, Win11/Python 3.14.3/Coffee Lake/30.9 GB, HEAD ad79e1f = the sandbox BASE_COMMIT; all six stages ok, the manifest md5s re-verified in-sandbox): THE WHOLE KILOYEAR MEASURED — 3,818.15 s / 82,757 events / life 100% final, INSIDE the predicted 3,000–4,500 s window (the α-model holds cross-iron; the station's own α = 1.91); the whole-arm REALIZED_DELTA at the millennium (the workshop starved ore=0/wood=6/tool=8, 4 conversions — the iter-335 §D item closed); THE CROSS-IRON WALL: segmented 104.36 s vs 102.54 s = +1.8% (LINEAR on both irons; the whole arm the other way — the station 1.22× faster on the allocation churn; read 0.647 vs 0.604 s/MB, the iter-327 law holding); THE CROSS-IRON T1 DECOMPOSED TO THE BYTE — the file delta = (lines − 1) EXACTLY on every measurable pair (+230/+290/+8,557/+14,210, +130,327 on the kiloyear by arithmetic), the causes named: the Windows CRLF (+1 byte/line, od-dumped) + the header's python meta (−1); THE EVENT STREAM BYTE-IDENTICAL cross-iron (the \r-strip per-line compare ALL IDENTICAL ×4, the event-stream md5 IDENTICAL ×4, semantic_diff exit 0 ×4 — the sanctioned comparator D-229) — THE INTERPRETER CONTRIBUTES ZERO CONTENT BYTES (3.12.14 ↔ 3.14.3: byte-identity is a property of the CONTENT, not the environment); the derived prediction: the whole-kiloyear log = 45,000,433 bytes on a LF platform; B6 GREEN on the independent iron (1,000 = 1,000, sources ≤ caps, the mass −30); the kiloyear talk invariant 32,404 = 32,404 both arms + the 100y family 3,355 = 3,355 (the triple check); 2606+1 + ruff + docguard + topology clean (NO test deleted or weakened — the suite untouched); NEXT: H9 (structurally unblocked by the epoch), the occ-window fix (B7) on the owner's call; the report iter-336-stationcross-report.md

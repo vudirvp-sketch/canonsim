@@ -1,46 +1,47 @@
-Iteration: iter-345 (`density1` — THE DENSITY-ENVELOPE
-  MATERIALIZER + THE FIRST LOCALITY DATUM, R2 local-add; the
-  density-1 row's first half — the row iter-344 opened, the
-  owner's standing «продолжай работу, открывай важнейшее»
-  directive + the called order's head E02/E31 → M2 → …):
-  `scripts/densitypack.py` the profile→pack materializer (the
-  SCALE_TESTING_LAW §15 boundary: the ONLY new mechanism — the
-  packs consume load_pack/Simulator/labrunner as-is, disposable
-  under gitignored output/; the settlement unit namespaced s<i>
-  from the committed Tier A template, every cross-reference
-  rewritten; the knobs --settlements E/L (K=0 by construction),
-  --talk-links R (the AP-11 ceiling loud), --prob-scale ρ (the
-  sampled family only — B6's crossings stay certain); pure
-  determinism — no RNG in the generator); +7 laws
-  (tests/test_densitypack.py — the pure-function, lint+axes,
-  isolation, R-knob+ceiling, ρ-knob+B6, the 1y smoke+T1, the
-  template economy); THE FIRST DATUM — the locality-control
-  ladder (E 25→205, L 7→112, seeds 7/42, 10y, both protocols,
-  the square anchor): the event stream INVARIANT across S=1/4/8/16
-  (1195 events segmented, 899 whole), THE BYTE-LEVEL ISOLATION LAW
-  (the S=1 vs S=16 whole logs differ in EXACTLY the ten census
-  lines — cold_npcs 0 vs 180, D-112's counts-for-populations the
-  cold units' whole event footprint — every other byte identical),
-  T1 HELD both ends, the wall 0.43→0.95 s (2.2× on 16× E — the
-  projection plane's residue; beat_rolls ~7%, occ_refold
-  1.4-1.5%, knowledge 0.0%, E03/E04 = 0.0); the §9.1
-  classification LOCAL-SCALE (the warm-ring population not yet
-  varied — the households knob's future row); the H1/H2 first
-  answer: H2 dead by construction under the LOD, H1 1.4-1.5%,
-  the residue = the projection-plane walk inside `rest` — the
-  row's named next half. Zero core change, INV-1..5 untouched,
-  the LOG untouched, zero committed pack data.
+Iteration: iter-346 (`density2` — THE PROJECTION-PLANE
+  MEMBER SPLIT, R2 instrument-extension; the density-1 row's second
+  half — the row's named next step, the owner's standing
+  «продолжай работы, открывай важнейшее, на долгосрок»
+  directive): the labrunner's member map grown by the four
+  E-scaling members of the old `rest` —
+  `director_global_passes` (entropy's per-beat whole-population
+  pass; the story layer global BY LAW, its E-price named),
+  `projection_snapshot` (the O(E) state copy per autonomous
+  enqueue), `skip_probes` (h9's population twins — the cumtime
+  contains the E-flat rng block walk), `lod_zone_walk` (the zone
+  computation over L); every entry's call subtree measured
+  DISJOINT by caller attribution FIRST (the accounting law's
+  boundary: kind_of deliberately NOT a member — its O(E) lookups
+  ride occ_refold's/skip_probes' subtrees); +1 law
+  (tests/test_lab.py — the grown-world law: the four members
+  non-zero on a materialized S=4 pack, the partition +
+  canon-neutrality held there). THE SECOND DATUM — the ladder
+  re-measured with the decomposed wall (S=1/4/8/16, 10y battery +
+  the 100y depth, segmented, seeds 7/42): director_global_passes
+  5.4%→31.2% THE E-DOMINANT MEMBER (per-call ×13.2 on 16× E),
+  rest 37.7%→20.7% (the unexplained bulk halved), next_d100_hit
+  ×1.01 (the block walk E-flat as designed); the 100y ladder: the
+  per-call growth ratios ALL ≈×1.0 (no depth-super-linear
+  member), the event stream invariant 10863 = 10863 at 100y, the
+  E-exponent scale-stable across H (the wall S16/S1 = ×2.17 at
+  10y, ×2.16 at 100y). The §9.2 locality-injection pattern's live
+  owner landed (the battery's datums — the map's registry honest
+  again). density-1 CLOSED (both halves landed); density-2 OPENED
+  (the households knob — the DENSITY-SCALE arm, the queue's new
+  head). Zero core change, INV-1..5 untouched, the LOG untouched.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2639 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero core change, the LOG untouched; +7 laws, nothing deleted or weakened) ·
-Date: 2026-10-08 ·
-Scope: scripts/densitypack.py (new), tests/test_densitypack.py
-  (new, 7 laws), docs/TASKS.md (the density-1 row + the ledger,
-  iter-335 evicted), STATUS.md, worklog.md (iter-335 evicted),
-  docs/iterations/iter-345-density1-report.md (new) — 6
-  changed/created (2 code + 4 riders).
+2640 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero core change, the LOG untouched; +1 law, nothing deleted or weakened) ·
+Date: 2026-10-09 ·
+Scope: scripts/labrunner.py (the member map + the key-function
+  table + the docstring law 8), tests/test_lab.py (the grown-world
+  law + the named-keys extension), docs/TEST_PLAN.md (the §9.2
+  locality-injection owner cell), docs/TASKS.md (density-1 DONE +
+  density-2 OPEN + the ledger, iter-336 evicted), STATUS.md,
+  worklog.md (iter-336 evicted), docs/iterations/iter-346-density2-
+  report.md (new) — 7 changed/created (2 code + 5 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -131,18 +132,19 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-345 DONE: density1 (the density-1 row's first half — the
-  materializer + 7 laws + the locality datum: the event stream
-  invariant on 16× E, the byte-level isolation law, LOCAL-SCALE
-  classified).**
-Next: `density-1`'s second half — the `rest`-member split at
-  growing E (the profile instrument's map extension: the
-  projection-plane walk named), then the households knob (the
-  warm-ring density — the DENSITY-SCALE arm); behind it the
-  standing owner calls in order — M2 (the surface→canonical-ID
-  normalisation A/B — a station battery), the replay-UI
-  NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
-  continuations, `lab-composite-1` behind density-1 (the §9.2
+**iter-346 DONE: density2 (the density-1 row's second half — the
+  projection-plane member split: four E-scaling members named,
+  every subtree measured disjoint first; the ladder re-measured
+  with the decomposed wall, the 100y depth's per-call ratios all
+  ≈×1.0, density-1 CLOSED both halves).**
+Next: `density-2` (the queue's new head — the households knob:
+  the warm-ring density, the DENSITY-SCALE arm — the unit's
+  roster expansion under the AP-11 unique-(npc, verb) ceiling;
+  the first LOCAL-SCALE → DENSITY-SCALE promotion candidate);
+  behind it the standing owner calls in order — M2 (the
+  surface→canonical-ID normalisation A/B — a station battery),
+  the replay-UI NOT-EXPOSED row, the world track's W8, the
+  frontend P1/P2/P3 continuations, `lab-composite-1` (the §9.2
   vocabulary-only patterns where a consumer names itself).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
