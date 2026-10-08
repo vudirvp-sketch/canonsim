@@ -256,13 +256,15 @@ def test_the_closed_verb_cannot_drain_the_heap(tmp_path: Path) -> None:
     assert rejected[0].outcome["failed_test"] == "actor.account_at_least"
     assert sim.projection[MASTER].get("account.bloom") is None
     # the settle: the same heap, the same twin — drained lawfully
-    # (the sale's own change: the heap 6→5 — the post-sale crossings
-    # bank the margin further, the final level the flows' own law)
+    # (the sale's own change: the heap 10→9 — the post-sale crossings
+    # bank the margin further, the final level the flows' own law;
+    # ki114-1-impl: the heap banked two more crossings — every step
+    # now feeds at the post-drain clock, the F1/F4 +4 translation)
     sales = [e for e in events if e.type == SETTLE_EVENT]
     assert len(sales) == 1
     assert [(c.entity, c.prop, c.from_, c.to_)
             for c in sales[0].state_changes][0] == (
-        CROFTS, "account.bloom", 6, 5,
+        CROFTS, "account.bloom", 10, 9,
     )
     sim.close()
 
@@ -349,14 +351,16 @@ def test_the_armed_census() -> None:
 
 def test_the_sale_walked_once(tmp_path: Path) -> None:
     """The re-weigh's sale walked once through the canon door: the
-    master at the beam after the walk (one crossing en route — the heap
-    banked 4→6, the chest 40→44), ONE atomic account_settled event
-    carrying BOTH legs and FOUR net state changes (the heap 6→5, the
-    beam's receiving stock 0→1, the chest 44→41, the camp's ledger
-    0→3), the beam's witnesses (the keeper of the weighbeam among them)
-    learning the_bloom_sold exact, and the tale carrying the settle
-    line with the bloom gloss riding the leg slot (rs-2's boundary,
-    the legs' own form)."""
+    master at the beam after the walk (the crossings en route — the
+    heap banked 4→10, the chest 40→52; ki114-1-impl: every step feeds
+    at the post-drain clock, two more crossings banked en route than
+    the mid-drain feed caught, the F1/F4 +4 translation), ONE atomic
+    account_settled event carrying BOTH legs and FOUR net state
+    changes (the heap 10→9, the beam's receiving stock 0→1, the chest
+    52→49, the camp's ledger 0→3), the beam's witnesses (the keeper of
+    the weighbeam among them) learning the_bloom_sold exact, and the
+    tale carrying the settle line with the bloom gloss riding the leg
+    slot (rs-2's boundary, the legs' own form)."""
     steps = _to_beam([
         {"intent": "sell_bloom", "actor": MASTER, "target": CHEST},
         {"intent": "wait", "ticks": 10},
@@ -377,9 +381,9 @@ def test_the_sale_walked_once(tmp_path: Path) -> None:
     # its from-side loss and to-side gain — one net change per account
     assert [(c.entity, c.prop, c.from_, c.to_)
             for c in sale.state_changes] == [
-        (CROFTS, "account.bloom", 6, 5),
+        (CROFTS, "account.bloom", 10, 9),
         (CHEST, "account.bloom", 0, 1),
-        (CHEST, "account.coin", 44, 41),
+        (CHEST, "account.coin", 52, 49),
         (CROFTS, "account.coin", 0, 3),
     ]
     # the beam's witnesses: the keeper of the weighbeam among them, all
@@ -405,7 +409,7 @@ def test_the_sale_walked_once(tmp_path: Path) -> None:
 
 def test_the_drain_compounds(tmp_path: Path) -> None:
     """The withhold's release is the world's own compounding, never a
-    clock: three fires walk three loads (the heap 6→5→4→3, each sale
+    clock: three fires walk three loads (the heap 10→9→8→7, each sale
     its own event), the ledger climbing 0→3→6→9 — the drain repeated
     while the heap stands and the chest covers, the squeeze's own law
     (the amounts authored, the repetition the player's or the world's
@@ -425,7 +429,7 @@ def test_the_drain_compounds(tmp_path: Path) -> None:
         (sale.state_changes[0].from_, sale.state_changes[0].to_)
         for sale in sales
     ]
-    assert heaps == [(6, 5), (5, 4), (4, 3)]  # the heap's own chain
+    assert heaps == [(10, 9), (9, 8), (8, 7)]  # the heap's own chain
     ledgers = [
         next(c for c in sale.state_changes if c.entity == CROFTS
              and c.prop == "account.coin")
@@ -579,7 +583,7 @@ def test_the_buyers_purchase_one_atomic_event(tmp_path: Path) -> None:
             for c in sale.state_changes] == [
         (PC, "account.coin", 6, 3),
         (CROFTS, "account.coin", 0, 3),
-        (CROFTS, "account.bloom", 8, 7),
+        (CROFTS, "account.bloom", 10, 9),
         (PC, "account.bloom", 0, 1),
     ]
     sim.close()

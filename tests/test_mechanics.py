@@ -173,7 +173,8 @@ def test_shadow_releases_equal_the_log(tmp_path: Path) -> None:
 
 def test_trace_pins_the_canonical_run(tmp_path: Path) -> None:
     """The STATUS pins render: the relief's check commits at t=732; the
-    sweep is the day's last event at t=1456; the release lines name the
+    sweep is the day's last event at t=1577 (ki114-1-impl: the F1 feed
+    shift, the same ev_0057); the release lines name the
     hooks and the log events carry the director attribution (the epoch's
     rolls — rng-1's corpus price; the pre-epoch realization's pins died
     at the boundary)."""
@@ -186,9 +187,9 @@ def test_trace_pins_the_canonical_run(tmp_path: Path) -> None:
     # the draw sequence); the sweep is the day's last event
     assert "[t=732] ev_0042 document_check" in out
     tail = mechanics.render_trace(
-        PACK, events, source="day1", seed=125, tick_from=1447
+        PACK, events, source="day1", seed=125, tick_from=1568
     )
-    assert "[t=1456] ev_0057 look_around" in tail
+    assert "[t=1577] ev_0057 look_around" in tail
     assert "barkeep_wary_sweep" in tail
     hook_view = mechanics.render_trace(
         PACK, events, source="day1", seed=125, hook="possible_document_check_relief"
@@ -692,7 +693,7 @@ def test_timing_reports_the_two_times_record(tmp_path: Path) -> None:
     assert "autonomous resolutions: 4 (4 accepted + 0 rejected)" in out
     assert "B3 discipline: 4/4 carry assignment_tick" in out
     assert "non-autonomous carriers: 0" in out
-    assert "latency: min 11 · max 376" in out
+    assert "latency: min 11 · max 497" in out
     assert "OCC misses (the deferral window broke a precondition): 0" in out
     assert "urgency_0004      2 resolutions (   2 accepted) · origins [360,720]" in out
     assert "compression: assignments span [360, 1080] (720 ticks)" in out

@@ -330,12 +330,12 @@ def test_the_resume_rebuild_law(tmp_path: Path) -> None:
     boundary (calls > 0 — the rebuilt index is the one doing the
     attributing).
 
-    NOT asserted here: split-vs-uninterrupted byte identity — the
-    farstead split-after-a-wait boundary diverges by a PRE-EXISTING
-    drain semantics (the resumed segment's clock pins the post-drain
-    tick, 16 past the wait's completion; KI#114, found by this law's
-    first draft, reproduced with occ-1 fully stripped — never this
-    row's surface)."""
+    ki114-1-impl: the split-vs-uninterrupted byte identity this law
+    once set aside as KI#114's open divergence is now THE LAW itself
+    (`tests/test_composition.py`'s 143-check falsifier — the
+    clean-drain-boundary composition holds at every cut, split AND
+    resume); this row keeps its own narrower surface (the index ride's
+    A/B, never the feed law)."""
     steps = _steps(2, "segmented")  # [anchor move?, wait 1y, wait 1y]
     assert len(steps) == 3, "the farstead anchor move rides first"
     from core.cursor import cursor_path, load_cursor, save_cursor

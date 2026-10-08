@@ -134,8 +134,9 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
     guard's trait-gated look, pack-side urgency — the pacing clock
     never gates it) fires in BOTH arms: the arms share their whole
     55-line prefix through the day's wait; the ON arm appends the
-    sweep (t=1456) with the paranoid scan following it at the same
-    tick (the day's last beat, the arc suite's twin pin), the OFF arm
+    sweep (t=1577) with the paranoid scan following it at the same
+    tick (the day's last beat, the arc suite's twin pin; ki114-1-impl:
+    the F1 shift, the same ev_0057), the OFF arm
     appends its own scan copy then the ramble (t=1458) — the clock's
     presence swaps WHICH director beat closes the story, and the
     structure rows (chains, M5, destroyed locations, the stretch
@@ -191,7 +192,7 @@ def test_seed_125_arms_agree_the_d065_record(tmp_path: Path) -> None:
     sweep = on_log[-1]
     assert '"type": "look_around"' in sweep
     assert '"cause_intent": "director_0001"' in sweep
-    assert '"t": 1456' in sweep
+    assert '"t": 1577' in sweep
     # the sweep alone closes the ON arm's day (the paranoid scan that
     # followed it rides the warm ring now); the OFF arm's closer is the
     # day's last wait (the murmur moved mid-run — the pre-seed's price

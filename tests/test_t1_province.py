@@ -168,15 +168,24 @@ def test_derived_prices_pin_the_route(tmp_path: Path) -> None:
     assert max(prices) > 600, prices
     assert sum(prices) > 2160, prices
     # the expected completion clock: step 1 accepts at t=0; each later
-    # step accepts when the previous one completed (run_playscript
-    # drains the queue between steps).
+    # step accepts at the DRAINED clock (ki114-1-impl: the composition
+    # law — a step feeds only when the queue is empty, so the feed
+    # waits out the previous step's whole drain tail). The measured
+    # feed shifts on the regenerated corpus: +3 after the first leg's
+    # wait (the smelter's ramble rides the tail), +600 after the
+    # second leg (the COMPANION'S OWN WALK drains before the wait —
+    # the escort's leg riding the same log, its own price law pinned
+    # in tests/test_companion.py), empty tails on the quiet road
+    # after; every move's completion still sits exactly at
+    # accept-t + travel_ticks
+    feed_shift = {0: 3, 1: 600, 3: 0}
     clock = 0
     expected: list[tuple[int, str]] = []
     for index, (_origin, destination) in enumerate(LEGS):
         clock += prices[index]
         expected.append((clock, destination))
         if index in WAITS:
-            clock += WAITS[index]
+            clock += WAITS[index] + feed_shift[index]
     # iter-157: the companion's own legs ride the same log — the route
     # pin scopes to the RUNNER's moves (the escort's legs carry their
     # own price law, pinned in tests/test_companion.py)

@@ -306,15 +306,17 @@ def test_the_reweigh_tale_and_records(tmp_path: Path) -> None:
         pack, MASTER, seed=42,
     )
     assert f"  account.paper: 0 — {PAPER_GLOSS}" in view
-    # rng-1's epoch: the discharge's tick moved with the corpus (2559 -> 2574)
-    assert f"[t 2574] Garrick is rid of {PAPER} {PAPER_GLOSS}." in view
+    # rng-1's epoch: the discharge's tick moved with the corpus (2559 -> 2574);
+    # ki114-1-impl: every step feeds at the post-drain clock, the walk
+    # rides later in the stretched span (2574 -> 3177, the F1/F4 shift)
+    assert f"[t 3177] Garrick is rid of {PAPER} {PAPER_GLOSS}." in view
     crofts_view = render_entity_view(
         events, fold(events, initial_projection(pack.entities)),
         pack, CROFTS, seed=42,
     )
     # the withhold's own surface at the close: the heap's level beside
     # its meaning (the probe package's crofts record)
-    assert f"  account.bloom: 14 — {BLOOM_GLOSS}" in crofts_view
+    assert f"  account.bloom: 16 — {BLOOM_GLOSS}" in crofts_view
 
 
 def test_the_log_bytes_are_untouched(tmp_path: Path) -> None:

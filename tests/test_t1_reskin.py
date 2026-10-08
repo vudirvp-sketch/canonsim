@@ -131,15 +131,20 @@ def test_derived_prices_pin_the_route(tmp_path: Path) -> None:
         for origin, destination in LEGS
     ]
     # the expected completion clock: step 1 accepts at t=0; each later
-    # step accepts when the previous one completed (run_playscript
-    # drains the queue between steps).
+    # step accepts at the DRAINED clock (ki114-1-impl: the composition
+    # law — the feed waits out the previous step's drain tail; the
+    # measured shifts on this corpus: empty tail after the first leg,
+    # +3 after the second's wait — the beat machinery's ramble riding
+    # that tail; every move's completion still sits exactly at
+    # accept-t + travel_ticks)
+    feed_shift = [0, 3]
     clock = 0
     expected: list[tuple[int, str]] = []
     for index, (_origin, destination) in enumerate(LEGS):
         clock += prices[index]
         expected.append((clock, destination))
         if index < len(WAITS):
-            clock += WAITS[index]
+            clock += WAITS[index] + feed_shift[index]
     moves = [
         (event["t"], event["target"])
         for event in _events(tmp_path / "prices.jsonl")

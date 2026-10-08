@@ -85,11 +85,17 @@ READ_CHAIN: tuple[dict, ...] = (
     {"intent": "move", "target": STAIR},
     {"intent": "read_stair", "target": STAIR},
 )
-#: The night twin: the same walk plus the wait to the night phase
-#: (t=1080) — the unlit weir's acquisition arm on the read.
+#: The night twin: the same walk plus the wait through the road-leg
+#: beat's drain — ki114-1-impl re-crafted (wait 375 -> 1107): under the
+#: composition law the read feeds at the DRAINED clock, and the first
+#: night window [1080, 1440) is owned by the world's own road-leg beat
+#: (Dellan's 705-tick walk pends through it); the SECOND day's night
+#: window [2520, 2880) is the clean one — the wait completing at 1815
+#: drains through the walk (completing 2520) and the read lands at
+#: 2522, IN the night phase — the unlit weir's acquisition arm kept.
 NIGHT_CHAIN: tuple[dict, ...] = (
     {"intent": "move", "target": STAIR},
-    {"intent": "wait", "ticks": 375},
+    {"intent": "wait", "ticks": 1107},
     {"intent": "read_stair", "target": STAIR},
 )
 #: The off-site arm: the reader studies another stone at their own
@@ -211,11 +217,17 @@ def test_the_night_read_steps_the_order_down(tmp_path: Path) -> None:
     """The acquisition arm rides the new verb unchanged: the weir stair
     is unlit, and a read in the night phase steps the record down the
     fidelity chain — the order learned PARTIAL by dark, half the rungs
-    legible. No cluster mints on this arm either (the partial-knowing
-    reader holds knowledge, never a lever)."""
+    legible (the re-crafted chain lands the read at t=2522, inside the
+    second day's night window [2520, 2880) — the first window belongs
+    to the road-leg beat's drain under the composition law). No
+    cluster mints on this arm either (the partial-knowing reader holds
+    knowledge, never a lever)."""
     events = _run(tmp_path, "night.jsonl", SEED_NIGHT, NIGHT_CHAIN)
     read = next(e for e in events if e.type == "stair_read")
-    assert 1080 <= read.t < 1440  # the night phase pinned by the wait
+    # the night phase pinned by the re-crafted wait (2520 <= t < 2880,
+    # the second day's window — 2522 measured)
+    assert 2520 <= read.t < 2880
+    assert read.t == 2522
     assert (PC, LAW, "saw", "partial") in {
         (r.who, r.knows, r.channel, r.fidelity) for r in read.knowledge
     }

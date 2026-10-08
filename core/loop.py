@@ -305,11 +305,6 @@ class Simulator:
         self._events: list[EventRecord] = []
         self._intent_seq = 0
         self._player_id = pack.player_id()
-        # the current playscript step's intent id (scene-2: the KI#17
-        # generalization — the feed advances on THE STEP'S OWN ending,
-        # whatever its actor; autonomous intents carry other ids and
-        # never advance the script)
-        self._step_intent_id: str | None = None
         self._schedule = build(decls_from_rules(pack.rules))
         self._system_order = {
             decl.name: index for index, decl in enumerate(self._schedule)
@@ -551,138 +546,140 @@ class Simulator:
                 ids.append(record.id)
 
     def run_steps(self, steps: Sequence[Mapping[str, Any]]) -> RunResult:
-        """Feed player steps through the live simulator until the queue
-        drains. Callable repeatedly on one opened Simulator (the session
-        pattern): each call is a self-contained feed-and-drain cycle, so
-        the world between calls moves only through the queue it seeded —
-        beats, rotations and reactions fire on clock crossings during
-        entry processing, exactly as in a batch run.
+        """Feed player steps through the live simulator, each step
+        entering ONLY at a clean drain boundary (KI#114, iter-340: the
+        composition law — ``run_steps([A,B]) == run_steps([A]);
+        run_steps([B])`` and every arbitrary partitioning of the SAME
+        step list; a split, a checkpoint/resume at any boundary and
+        the uninterrupted batch are byte-identical). The feed point is
+        a function of the drained state alone — the queue empty, the
+        clock at the drain's end tick — never of the call structure
+        around it: one intent is fed, the FULL cascade it seeded
+        drains (crossings, reactions, follow-ups, passes, beats), then
+        the next intent enters at the drained clock. Callable
+        repeatedly on one opened Simulator (the session pattern): each
+        call composes with every other by construction. The script
+        advances only at drains, so KI#17 ("an autonomous intent's
+        ending never advances the script") holds vacuously — only the
+        queue's emptiness speaks. Beats, rotations and reactions still
+        fire on clock crossings during entry processing, exactly as in
+        a batch run.
         """
-        steps = list(steps)
-        if steps:
+        pending = list(steps)
+        if pending:
             with self._bank.assure(SUBSTANTIVE):
-                remaining = steps[1:]
-                first = self._intent_from_step(steps[0])
-                self._step_intent_id = first.id
-                # P1a: the first step rides the same stamping-moment
-                # snapshot as every fed step (run_steps pushes it
-                # directly — the _feed_next twin, one law both doors)
-                first_snapshot = self._snapshot_for(first)
-                if first_snapshot is not None:
-                    self._occ_snapshots.setdefault(first.id, []).append(
-                        first_snapshot
-                    )
-                self._queue.push(
-                    tick=self._clock.tick, sub_order=self._step_band(first),
-                    actor_id=first.actor, kind="intent", payload=first,
-                )
-                while len(self._queue):
-                    entry = self._queue.pop()
-                    # clock-crossing beats fire before the popped entry —
-                    # rotations (iter-3) AND decay/urgencies/director
-                    # (iter-4) all ride the same crossing discipline,
-                    # never pre-seeded (a run still ends when its
-                    # script's queue drains). Crossings fire in TICK
-                    # ORDER: a beat at T=720 between rotations at T=360
-                    # and T=1080 fires between them, not after both —
-                    # otherwise the log writer's tick-monotonicity
-                    # invariant would reject the out-of-order commit.
-                    while True:
-                        candidates: list[int] = []
-                        if (
-                            self._next_rotation is not None
-                            and self._next_rotation <= entry.tick
-                        ):
-                            candidates.append(self._next_rotation)
-                        if (
-                            self._next_beat is not None
-                            and self._next_beat <= entry.tick
-                        ):
-                            candidates.append(self._next_beat)
-                        if (
-                            self._next_macro is not None
-                            and self._next_macro <= entry.tick
-                        ):
-                            candidates.append(self._next_macro)
-                        # the calendar family's due crossings join the
-                        # same candidate pool (the sub-year cadences)
-                        candidates.extend(
-                            tick
-                            for tick in self._next_calendar.values()
-                            if tick <= entry.tick
+                while pending:
+                    intent = self._intent_from_step(pending.pop(0))
+                    # P1a: the stamping-moment snapshot, taken at the
+                    # clean boundary — the queue is empty, so no commit
+                    # can ride between the stamp and the copy (one law
+                    # at every feed door, run_steps's own boundary
+                    # included; the mid-drain feed is gone by the
+                    # composition law itself).
+                    snapshot = self._snapshot_for(intent)
+                    if snapshot is not None:
+                        self._occ_snapshots.setdefault(intent.id, []).append(
+                            snapshot
                         )
-                        if not candidates:
-                            break
-                        crossing = min(candidates)
-                        self._clock.advance_to(crossing)
-                        # maclock-1: at a co-occurring tick the COARSEST
-                        # clock fires first (the year turns before the
-                        # season, the season before the fair, the fair
-                        # before the week's turn, the week's turn before
-                        # the day's rotation, the rotation before the
-                        # beat — the calendar contains the year, the year contains the day,
-                        # the day contains the beat); one crossing kind
-                        # per iteration, the equal-tick remaining
-                        # candidates re-loop (the writer's
-                        # tick-monotonicity allows equal ticks).
-                        if crossing == self._next_macro:
-                            self._run_macro(crossing, entry.tick)
-                            self._next_macro = next_macro_tick(
-                                self._pack.rules["time"].get("macro"),
-                                crossing,
+                    self._queue.push(
+                        tick=self._clock.tick,
+                        sub_order=self._step_band(intent),
+                        actor_id=intent.actor, kind="intent", payload=intent,
+                    )
+                    while len(self._queue):
+                        entry = self._queue.pop()
+                        # clock-crossing beats fire before the popped entry —
+                        # rotations (iter-3) AND decay/urgencies/director
+                        # (iter-4) all ride the same crossing discipline,
+                        # never pre-seeded (a run still ends when its
+                        # script's queue drains). Crossings fire in TICK
+                        # ORDER: a beat at T=720 between rotations at T=360
+                        # and T=1080 fires between them, not after both —
+                        # otherwise the log writer's tick-monotonicity
+                        # invariant would reject the out-of-order commit.
+                        while True:
+                            candidates: list[int] = []
+                            if (
+                                self._next_rotation is not None
+                                and self._next_rotation <= entry.tick
+                            ):
+                                candidates.append(self._next_rotation)
+                            if (
+                                self._next_beat is not None
+                                and self._next_beat <= entry.tick
+                            ):
+                                candidates.append(self._next_beat)
+                            if (
+                                self._next_macro is not None
+                                and self._next_macro <= entry.tick
+                            ):
+                                candidates.append(self._next_macro)
+                            # the calendar family's due crossings join the
+                            # same candidate pool (the sub-year cadences)
+                            candidates.extend(
+                                tick
+                                for tick in self._next_calendar.values()
+                                if tick <= entry.tick
                             )
-                        elif crossing in self._next_calendar.values():
-                            self._run_calendar(crossing, entry.tick)
-                        elif crossing == self._next_rotation:
-                            self._run_rotation(crossing)
-                            self._next_rotation = next_rotation_tick(
-                                self._pack.rules,
-                                self._clock.ticks_per_day,
-                                crossing,
-                            )
-                        else:
-                            # H9 (iter-337): the quiet-beat skip —
-                            # jump the clock/counters across the
-                            # stretch's quiet beats, landing at the
-                            # first producing one (or none, when the
-                            # whole stretch is quiet — the loop
-                            # proceeds to the bound's own machinery)
-                            if self._skip_capable:
-                                crossing = self._skip_quiet_beats(
-                                    crossing, entry.tick
+                            if not candidates:
+                                break
+                            crossing = min(candidates)
+                            self._clock.advance_to(crossing)
+                            # maclock-1: at a co-occurring tick the COARSEST
+                            # clock fires first (the year turns before the
+                            # season, the season before the fair, the fair
+                            # before the week's turn, the week's turn before
+                            # the day's rotation, the rotation before the
+                            # beat — the calendar contains the year, the year contains the day,
+                            # the day contains the beat); one crossing kind
+                            # per iteration, the equal-tick remaining
+                            # candidates re-loop (the writer's
+                            # tick-monotonicity allows equal ticks).
+                            if crossing == self._next_macro:
+                                self._run_macro(crossing, entry.tick)
+                                self._next_macro = next_macro_tick(
+                                    self._pack.rules["time"].get("macro"),
+                                    crossing,
                                 )
-                            if crossing is not None:
-                                self._run_beat(crossing, entry.tick)
-                                self._next_beat = self._next_beat_after(crossing)
-                    self._clock.advance_to(entry.tick)
-                    if entry.kind == "intent":
-                        accepted = self._execute_intent(entry)
-                        # only the CURRENT step's own lifecycle feeds the
-                        # next playscript step — an autonomous (urgency /
-                        # director) intent ending must never advance the
-                        # script (KI#17: step 3 committed before step 2;
-                        # scene-2 generalizes the proxy "the actor is the
-                        # player" to the exact law: the ending entry IS
-                        # the step's own intent — actor steps chain the
-                        # same way, autonomous intents never match)
-                        if (
-                            not accepted and remaining
-                            and entry.payload.id == self._step_intent_id
-                        ):
-                            self._feed_next(entry.tick, remaining)
-                    elif entry.kind == "completion":
-                        self._complete(entry)
-                        if (
-                            remaining
-                            and entry.payload.intent.id == self._step_intent_id
-                        ):
-                            self._feed_next(entry.tick, remaining)
-                    elif entry.kind == "pass":
-                        self._run_pass(entry)
-                    elif entry.kind == "weather":
-                        self._run_weather_follow_up(entry)
-                    else:
-                        self._run_follow_up(entry)
+                            elif crossing in self._next_calendar.values():
+                                self._run_calendar(crossing, entry.tick)
+                            elif crossing == self._next_rotation:
+                                self._run_rotation(crossing)
+                                self._next_rotation = next_rotation_tick(
+                                    self._pack.rules,
+                                    self._clock.ticks_per_day,
+                                    crossing,
+                                )
+                            else:
+                                # H9 (iter-337): the quiet-beat skip —
+                                # jump the clock/counters across the
+                                # stretch's quiet beats, landing at the
+                                # first producing one (or none, when the
+                                # whole stretch is quiet — the loop
+                                # proceeds to the bound's own machinery)
+                                if self._skip_capable:
+                                    crossing = self._skip_quiet_beats(
+                                        crossing, entry.tick
+                                    )
+                                if crossing is not None:
+                                    self._run_beat(crossing, entry.tick)
+                                    self._next_beat = self._next_beat_after(crossing)
+                        self._clock.advance_to(entry.tick)
+                        if entry.kind == "intent":
+                            # the feed door is the drain boundary alone: an
+                            # accepted, rejected or completed intent's own
+                            # lifecycle no longer feeds anything mid-drain
+                            # (the composition law); the next step waits for
+                            # the queue to empty.
+                            self._execute_intent(entry)
+                        elif entry.kind == "completion":
+                            self._complete(entry)
+                        elif entry.kind == "pass":
+                            self._run_pass(entry)
+                        elif entry.kind == "weather":
+                            self._run_weather_follow_up(entry)
+                        else:
+                            self._run_follow_up(entry)
         return RunResult(
             log_path=self._writer.path,
             event_count=self._writer.event_count,
@@ -970,22 +967,6 @@ class Simulator:
             entity: dict(props)
             for entity, props in self._projection.items()
         }
-
-    def _feed_next(self, tick: int, remaining: list[Mapping[str, Any]]) -> None:
-        intent = self._intent_from_step(remaining.pop(0))
-        self._step_intent_id = intent.id
-        # P1a: the stamping-moment copy (valid iff taken HERE — the
-        # based_on_event_seq was stamped in _intent_from_step, no
-        # commit between the two). The FIFO append: the step ids are
-        # unique per run, the list stays length-1 — the deque form is
-        # the autonomous path's law, shared for one shape
-        snapshot = self._snapshot_for(intent)
-        if snapshot is not None:
-            self._occ_snapshots.setdefault(intent.id, []).append(snapshot)
-        self._queue.push(
-            tick=tick, sub_order=self._step_band(intent),
-            actor_id=intent.actor, kind="intent", payload=intent,
-        )
 
     def _step_band(self, intent: IntentData) -> int:
         """The step's sub_order band: PLAYER_INTENT for the player's own

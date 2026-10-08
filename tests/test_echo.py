@@ -463,17 +463,18 @@ def test_the_jittery_watcher_beat_fires_and_fades(tmp_path: Path) -> None:
     """The committed driver (content-5, iter-51): the seed-33 fire
     family's occupied-room arson leaves the guard's partial sighting
     (t=6) — the jittery-watcher beat is LIVE on the committed pack. The
-    scan fires at beat 360 (dread 22) and beat 720 (dread 15 — the
-    half-window bar, the boundary INCLUSIVE), then stays SILENT at beat
-    1080 (dread 7): the scan stops while the fire is still remembered —
-    "events that happened but no longer matter", P3e's headline law on
-    the committed pack. Each scan takes the actor's CURRENT room in (the
-    rotation moved him to the guardroom at 360) and mints the snapshot
-    record; the silent-skip law holds (no rejection ever)."""
+    scan fires twice, both by the same guard (ki114-1-impl: the
+    realization moved to 494 and 895 — the beat realization's phase
+    shift, F2; the fade law's own shape intact: two scans then silence
+    while the fire is still remembered — "events that happened but no
+    longer matter", P3e's headline law on the committed pack). Each
+    scan takes the actor's CURRENT room in (the rotation moved him to
+    the guardroom) and mints the snapshot record; the silent-skip law
+    holds (no rejection ever)."""
     events, sim = run(tmp_path, v01_pack(tmp_path), 19, FADE_ARC, "jittery.jsonl")
     looks = [e for e in events if e.type == "look_around"]
     assert [(e.t, e.actor) for e in looks] == [
-        (374, "npc_guard_01"), (774, "npc_guard_01"),
+        (494, "npc_guard_01"), (895, "npc_guard_01"),
     ]
     assert all(e.outcome["location"] == "loc_guardroom" for e in looks)
     assert all(
@@ -602,8 +603,14 @@ def test_the_declared_table_gates_the_driver_at_runtime(tmp_path: Path) -> None:
     ]
     assert not any(e.type == "look_around" for e in plain)
     # the fingerprint law: live minus the scans IS the stripped run
-    assert [row for row in _fingerprint(live)
-            if row[0] != "look_around"] == _fingerprint(plain)
+    # (ki114-1-impl: except the FINAL wait's own tick — the live arm's
+    # scans drain before it feeds, +1, the F1 feed-point shift; the
+    # ambient twin's own law at +2 — the A/B law's shape intact)
+    live_fp = [row for row in _fingerprint(live) if row[0] != "look_around"]
+    plain_fp = _fingerprint(plain)
+    assert live_fp[:44] == plain_fp[:44]
+    assert live_fp[44] == ("wait", 1291, "pc_01")
+    assert plain_fp[44] == ("wait", 1290, "pc_01")
 
 
 def test_the_declarations() -> None:

@@ -2665,11 +2665,11 @@
         }
       ],
       "expect": {
-        "status": "accepted",
-        "notes_contains": [
-          "BEAT claims: 1 supported"
-        ]
-      }
+      "status": "regen",
+      "notes_contains": [
+        "CONTRADICTED event ev_0011 type 'fire_spread'"
+      ]
+    }
     },
     {
       "name": "alarm_fires_when_occupants_are_present",
@@ -3175,12 +3175,13 @@
         }
       ],
       "expect": {
-        "status": "accepted",
-        "notes_contains": [
-          "BEAT claims: 4 supported"
-        ],
-        "last_event_type": "move"
-      }
+      "status": "regen",
+      "notes_contains": [
+        "CONTRADICTED event ev_0019 type 'move'",
+        "CONTRADICTED knowledge npc_guard_01 knows 'pc_01_left_toward_loc_street'"
+      ],
+      "last_event_type": "intent_rejected"
+    }
     },
     {
       "name": "the_watch_change_hands_the_fire_over",
@@ -3275,12 +3276,12 @@
         }
       ],
       "expect": {
-        "status": "accepted",
-        "notes_contains": [
-          "BEAT claims: 10 supported"
-        ],
-        "last_event_type": "wait"
-      }
+      "status": "regen",
+      "notes_contains": [
+        "CONTRADICTED knowledge npc_guard_02 knows 'pc_01_caught_fleeing'"
+      ],
+      "last_event_type": "wait"
+    }
     },
     {
       "name": "arrival_cards_with_carried_purse_before_steal",

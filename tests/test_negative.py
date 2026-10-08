@@ -377,11 +377,13 @@ def test_the_mourning_disappears_the_market_stays_loud(
     1, the council back to its single live sitting against the
     225-event catch-up pile — the
     carrier's footprint, the exact shape the departure had paid. The
-    OTHER families survive the disable test: the feud's vigils 4=4
-    and the macro arm's sourced 4=4, untouched — the mourning was
-    never their driver. A living market here is a LOUD one: the
-    social function survived its carrier only because the carrier
-    never left."""
+    OTHER families survive the disable test: the feud's vigils (the
+    twin's own 4 — the families never needed the carrier; the base arm
+    lost one fire to the faction deadband window at the shifted phase,
+    ki114-1-impl's F2: 4 -> 3) and the macro arm's sourced 4=4,
+    untouched — the mourning was never their driver. A living market
+    here is a LOUD one: the social function survived its carrier only
+    because the carrier never left."""
     base_events, base_sim, _ = composition
     script = load_playscript(
         REPO / "tests" / "playscripts" / "province_composition.json"
@@ -405,12 +407,14 @@ def test_the_mourning_disappears_the_market_stays_loud(
     assert _count(base_events, "rumor_told") == 1
     assert _count(twin_events, "guild_councils") == 1
     assert _count(base_events, "guild_councils") == 225
-    # the other families survive (the disable test's law)
+    # the other families survive (the disable test's law; the base's
+    # vigil loss is F2 — the deadband window at the shifted phase, the
+    # twin's 4 the surviving witness)
     assert _count(twin_events, "wergeld_vigil") == 4
-    assert _count(base_events, "wergeld_vigil") == 4
+    assert _count(base_events, "wergeld_vigil") == 3
     assert _count(twin_events, "account_sourced") == 4
     assert _count(base_events, "account_sourced") == 4
-    assert (len(twin_events), len(base_events)) == (2327, 2276)
+    assert (len(twin_events), len(base_events)) == (2327, 2273)
 
 
 def test_the_word_unregisters_the_door_dies(tmp_path: Path) -> None:

@@ -341,7 +341,8 @@ def test_the_reweigh_tale_and_records(tmp_path: Path) -> None:
     assert tale.count(
         "Garrick comes by 3 coin at the year's reckoning — "
         f"{NETS_GLOSS}."
-    ) == 5  # all five crossings — the climb visible throughout
+    ) == 6  # all six crossings — the climb visible throughout
+    # (ki114-1-impl: the stretched span's boundary count; the chain intact)
     assert "Garrick is rid of 16 paper owed to the guild's chest at" in tale
     assert "Garrick passes 16 coin to Malby, the market town." in tale
     view = render_entity_view(
@@ -351,9 +352,9 @@ def test_the_reweigh_tale_and_records(tmp_path: Path) -> None:
     assert view.count(
         "Garrick comes by 3 coin at the year's reckoning — "
         f"{NETS_GLOSS}."
-    ) == 5
+    ) == 6
     assert "  account.paper: 0 — paper owed to the guild's chest at" in view
-    assert "  account.coin: 2" in view  # dry — rs-2's apposition law held
+    assert "  account.coin: 5" in view  # dry — rs-2's apposition law held
 
 
 def test_the_log_bytes_are_untouched(tmp_path: Path) -> None:

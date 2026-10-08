@@ -240,9 +240,13 @@ def test_the_derived_price_reads_the_scarcity_direction() -> None:
 
 
 def test_each_burn_shocks_the_first_whole_seam_in_pack_order() -> None:
-    """The ratchet: the golden run's two burns shocked the FIRST
-    UNSHOCKED seam each time, in the pack's declaration order — the
-    deterministic, draw-free selection (never a roll, never a skip)."""
+    """The ratchet: every burn shocks the FIRST UNSHOCKED seam each
+    time, in the pack's declaration order — the deterministic,
+    draw-free selection (never a roll, never a skip). ki114-1-impl:
+    the regenerated corpus carries THREE burns (the player's stoke at
+    t=8 plus the stokers' autonomous pair at t=4332 — the circle's
+    own urgency realized at the drain's own time, under BASE it
+    interleaved at t=29), the whole machine spent."""
     seams = [
         change
         for event in by_type(load_golden(), "seam_shocked")
@@ -250,6 +254,7 @@ def test_each_burn_shocks_the_first_whole_seam_in_pack_order() -> None:
     ]
     assert [change.prop for change in seams] == [
         "thermal_shock.main_riser", "thermal_shock.east_joint",
+        "thermal_shock.crown_seam",
     ]
     assert all(change.from_ is None and change.to_ == "shocked" for change in seams)
     assert all(change.irreversible for change in seams)
@@ -257,15 +262,21 @@ def test_each_burn_shocks_the_first_whole_seam_in_pack_order() -> None:
 
 def test_the_knocking_and_the_collection_fire_on_schedule_and_idempotently() -> None:
     """The delayed public follow-ups: the knocking at +600 and the
-    collection at +4320 after the FIRST burn; the second burn's seeds
+    collection at +4320 after the FIRST burn; every later burn's seeds
     of both are SILENCED by the fired flags (the idempotence law —
-    the first knock says the line, the first burst ends the decade)."""
+    the first knock says the line, the first burst ends the decade).
+    ki114-1-impl: the burns are the player's stoke (t=8) plus the
+    stokers' autonomous pair (t=4332, realized at the drain's own
+    time — under BASE the circle interleaved at t=29, mid-drain; the
+    F1/F4 shift), all three past-silenced by the first burn's
+    flags."""
     events = load_golden()
     knocks = by_type(events, "pipes_knock")
     collections = by_type(events, "debt_collects")
     burns = by_type(events, "boiler_run_hard")
-    assert [event.t for event in burns] == [8, 29]  # the epoch's rolls (rng-1's corpus price)
-    assert len(knocks) == 1 and knocks[0].t == 8 + 600  # not 29 + 600
+    # the epoch's rolls + the composition law's own phase (F1/F4)
+    assert [event.t for event in burns] == [8, 4332, 4332]
+    assert len(knocks) == 1 and knocks[0].t == 8 + 600  # never 4332 + 600
     assert len(collections) == 1 and collections[0].t == 8 + 4320
     # the follow-up flags are irreversible counter-events on the location
     for change in knocks[0].state_changes + collections[0].state_changes:
@@ -433,10 +444,17 @@ def test_the_bench_convenes_and_the_keeper_rations_on_the_knock(
     """The ledger arm (minimum 20-year systemic damage): the crafted run
     burns once and parks the reader at the registry; the knocking
     (+10 dread through the shared walls) crosses BOTH keepers' bar —
-    the bench convenes (the public order, the ratio's own voice) and
-    the keeper's echo-gated ration releases four coal from the reserve
-    (the knocking's residue the gate, the grim guard's precedent). The
-    antagonist pair's divergence: the SAME system, the OTHER answer."""
+    the bench convenes (the public order, the ratio's own voice).
+    ki114-1-impl (F3, the iter-339 packet's own measured mechanism):
+    under the clean-boundary feed the stoke's whole drain runs past
+    the collection — the wait completes t=12251, the convening lands
+    t=12253, and the knocking's echo residue is 11,649 ticks stale
+    at the gate, BELOW the bar: the keeper honestly refuses (the
+    ration never releases; under the mid-drain feed the convening
+    landed t=3608, inside the echo window, and rationed four coal).
+    The gate's honesty IS the law — a decayed echo never rations.
+    The antagonist pair's divergence: the SAME system, the OTHER
+    answer."""
     twin = pressure_twin(tmp_path, "bench_twin", _move_pc(BOILER))
     events = run(
         tmp_path, twin,
@@ -451,17 +469,19 @@ def test_the_bench_convenes_and_the_keeper_rations_on_the_knock(
     assert by_type(events, "pipes_knock")
     convenes = by_type(events, "the_bench_convenes")
     assert convenes and all(event.actor == "grp_regulators" for event in convenes)
+    assert [event.t for event in convenes] == [12253, 12253]
+    # the honest refusal: the decayed echo never rations (F3 — the
+    # convening sits 11,649 ticks past the knock, the residue long
+    # below the keeper's gate)
     rations = [
         event
         for event in by_type(events, "account_transferred")
         if event.actor == KEEPER
     ]
-    assert rations  # the measured release: four coal, never five
-    for ration in rations:
-        assert ration.outcome["amount"] == 4
-        for change in ration.state_changes:
-            if change.entity == KEEPER:
-                assert change.prop == "account.coal"  # the reserve drains
+    assert not rations, (
+        "the keeper rationed on a stale echo — the gate's decay read "
+        "moved with the phase; re-measure before re-pinning"
+    )
 
 
 def test_the_deadband_holds_below_the_bar(tmp_path: Path) -> None:

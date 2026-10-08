@@ -295,18 +295,20 @@ def test_the_fall_requires_the_covered_fund(tmp_path: Path) -> None:
 
 def test_the_reckoning_at_the_fifth_crossing(tmp_path: Path) -> None:
     """The clearance walked once through the canon door: the master at
-    the beam when the fifth reckoning covers the paper (fund 18) — the
+    the beam when the reckoning covers the paper (fund 21 — ki114-1-impl:
+    one more settle realized before the point, every step feeding at
+    the post-drain clock; the F1/F4 translation) — the
     FALL (account_consumed: the paper 16→0, the covered-fund gate
     passed, the market's witnesses holding the_paper_fell), then the
-    COLLECTION (account_transferred: 16 coin master→chest, the fund 2,
-    the chest 76), the walk's cause chained to the fall, and the tale
+    COLLECTION (account_transferred: 16 coin master→chest, the fund 5,
+    the chest 80), the walk's cause chained to the fall, and the tale
     carrying both lines."""
     steps = [
         # the master walks to the beam's town (the honest geography:
         # the fund renders at the chest) — the crossings fire en route
         {"intent": "move", "actor": MASTER, "target": "loc_keep"},
         {"intent": "move", "actor": MASTER, "target": CHEST},
-        # past the fifth crossing (t=2400): the fund 3 + 3x5 = 18
+        # past the crossings (t≈2400): the fund 3 + 6x3 = 21
         {"intent": "wait", "ticks": 1700},
         # the fall, then the collection — the scene's lawful order
         {"intent": "reckon_paper", "actor": MASTER},
@@ -340,14 +342,14 @@ def test_the_reckoning_at_the_fifth_crossing(tmp_path: Path) -> None:
     assert walk.outcome["amount"] == PAPER
     assert [(c.entity, c.prop, c.from_, c.to_)
             for c in walk.state_changes] == [
-        (MASTER, "account.coin", 18, 2),
-        (CHEST, "account.coin", 60, 76),
+        (MASTER, "account.coin", 21, 5),
+        (CHEST, "account.coin", 64, 80),
     ]
     assert walk.cause == fall.id  # the chronological chain
     # the terminus: the paper fallen, the fund spent, the chest paid
     assert sim.projection[MASTER]["account.paper"] == 0
-    assert sim.projection[MASTER]["account.coin"] == 2
-    assert sim.projection[CHEST]["account.coin"] == 76
+    assert sim.projection[MASTER]["account.coin"] == 5
+    assert sim.projection[CHEST]["account.coin"] == 80
     sim.close()
     # the tale carries the reckoning's two lines — rs-2 (iter-191): the
     # fall's line carries the account-kind gloss (the debt's frame, the

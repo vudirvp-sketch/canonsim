@@ -222,13 +222,18 @@ def test_the_open_road_cycle(tmp_path: Path) -> None:
     assert sim.projection[CHEST]["account.bloom"] == 6
     # the heap's own rhythm — the two arms' timescales honest: each
     # cycle's sitting starts HIGHER than the last (the crossings bank
-    # +2 on their own cadence while the cycle walks and waits — the
+    # +4 on their own cadence while the cycle walks and waits — the
     # banks outpace the two-load sales, the withhold deepening even as
-    # it sells: the desynchronization WITHIN the working loop itself)
+    # it sells: the desynchronization WITHIN the working loop itself;
+    # ki114-1-impl: every step feeds at the post-drain clock, the
+    # crossings bank twice per sitting what the mid-drain feed caught —
+    # the F1/F4 +4 translation, the rhythm's shape intact)
     heaps = [sale.state_changes[0].from_ for sale in sales]
-    assert heaps == [6, 5, 14, 13, 22, 21]
+    assert heaps == [10, 9, 16, 15, 24, 23]
     # the fund climbs on the nets flow — the aggregate arm, its own time
-    assert sim.projection[MASTER]["account.coin"] == 42
+    # (ki114-1-impl: 42 -> 48 — the fund's own crossings bank the same
+    # +4 translation as the heap; the aggregate arm's law intact)
+    assert sim.projection[MASTER]["account.coin"] == 48
     # the sale's record public: the beam's witnesses learned
     knows = {r.knows for e in events for r in e.knowledge}
     assert "the_bloom_sold" in knows
@@ -342,7 +347,7 @@ def test_the_changed_next_cycle_condition(tmp_path: Path) -> None:
     condition. Run A's heap carries the punctuated rhythm (each
     sitting drains two loads while the crossings bank between — the
     banks outpacing the sales, every subsequent sitting facing a
-    higher pile: 6, 14, 20); run B's heap climbs MONOTONICALLY (the
+    higher pile: 10, 16, 24); run B's heap climbs MONOTONICALLY (the
     withhold deepening against the closed road — each cycle's attempt
     faces a bigger pile and the same refusal), and the beam's chest
     covers a price it never pays. The residue persists through the
@@ -358,12 +363,12 @@ def test_the_changed_next_cycle_condition(tmp_path: Path) -> None:
     )
     # A: the punctuated rhythm — each cycle's sitting drains two
     # loads, the crossings bank between (the banks outpacing the
-    # sales: every subsequent sitting faces a higher pile — 6, 14, 22)
+    # sales: every subsequent sitting faces a higher pile — 10, 16, 24)
     heaps_a = [
         sale.state_changes[0].from_
         for sale in events_a if sale.type == "account_settled"
     ]
-    assert heaps_a == [6, 5, 14, 13, 22, 21]
+    assert heaps_a == [10, 9, 16, 15, 24, 23]
     # B: the monotone climb — the withhold deepening, never drained
     banks_b = [
         e for e in events_b if e.type == "account_sourced"

@@ -1,55 +1,50 @@
-Iteration: iter-339 (`ki114dec` — the KI#114 composition-law
-  DECISION PACKET, R0 doc-only; the owner's 2026-10-08 decision call
-  «Принимаем B — закон композиции на чистой границе drain» — the
-  row opened by the message itself, D-198 intake): **THE B DIRECTION
-  RECORDED AS CANONICAL** — the next player intent admissible ONLY at
-  a clean drain boundary (queue empty, the causal cascade complete);
-  the composition law `run_steps([A,B]) == run_steps([A]);
-  run_steps([B])` for EVERY partitioning; resume with NO separate
-  timing semantics (checkpoint + resume == continuous == split,
-  byte-for-byte); candidate A (mid-drain resume) OUT OF CONTRACT.
-  **THE STRENGTHENED FALSIFIER** (the session artifact
-  `scripts/ki114_law.py`, 143 checks — the full cut lattice x
+Iteration: iter-340 (`ki114-1-impl` — THE COMPOSITION LAW
+  LANDING, R3; the owner's 2026-10-08 packet acceptance «Принимаем B»
+  — the row the iter-339 packet opened): **THE CLEAN-DRAIN-BOUNDARY
+  FEED LAW IS THE ENGINE'S CONTRACT** — `run_steps` feeds one intent,
+  drains its FULL cascade, then feeds the next at the drained clock
+  (`_feed_next` and `_step_intent_id` DELETED — only the queue's
+  emptiness speaks; KI#17 holds vacuously); the composition law
+  `run_steps([A,B]) == run_steps([A]); run_steps([B])` for EVERY
+  partitioning, and resume with NO separate timing semantics —
+  continuous == split == checkpoint/resume, byte-for-byte. **THE
+  PERMANENT FALSIFIER** (`tests/test_composition.py`, 143 checks
+  pinned BY the battery-shape assert): the full cut lattice x
   wait/move/zero-duration/follow-up-drain kinds x 5 packs x 2 seeds x
-  both lab protocols x split AND checkpoint-resume-at-every-cut x
-  double-run): **PROTOTYPE 0/143, BASE 44/143** — the falsifier has
-  teeth (the old semantics CANNOT compose); the KI#114 repro CLOSED
-  (the farstead 2-segment split byte-identical, the +16 gone).
-  **THE 70-FAILURE CLASSIFICATION** (BASE 2627+1 verified green
-  first; the prototype 70 failed / 2557+1, every assertion captured):
-  23 pure timing/value re-pins + 23 expected causal/state shifts + 24
-  golden byte compares (the fixture census: province +10 events /
-  road pure +3 timing / pressure +9; grim + plumbing PROVEN
-  byte-identical — the quiet-boundary law) — **REAL SEMANTIC
-  REGRESSIONS: 0** (every family mechanism-named: the feed-point
-  shift, the deferred-realize phase shift, the exposure-window
-  closure — the pole carried off before the read enters, the echo
-  residue decayed past the keeper's gate — and the span effects; the
-  OCC census 1->76: ALL honest door breaks on `target.same_location`,
-  zero player-step rejections, no wedge; determinism, INV-1..5 and
-  the door/honesty laws held). **THE CONSCIOUS REBASE LIST FIXED**:
-  regenerate province/road/pressure smoke + the mediator
-  narrator-beats expectations (point 6); the landing row
-  `ki114-1-impl` OPENED behind the owner's confirmation of the packet
-  (point 9 — no mass regeneration, no landing, until then). The exact
-  prototype patch preserved as the session artifact
-  `ki114-prototype-B.patch` (ruff clean; the working tree keeps it
-  applied for the next session).
+  split + resume-at-every-cut + double-run + the Lab segmented 3y
+  family — **0/143 under the law; BASE 45/143** (the teeth
+  re-measured, family-exact vs the packet's 44/143); the historical
+  farthest repro pinned forever. **THE CONSCIOUS REBASE** (the owner's
+  point 8, the census EXACTLY the iter-339 table: province +10 / road
+  pure +3 / pressure +9; grim + plumbing byte-identical — the
+  quiet-boundary proof): the 3 smoke fixtures regenerated, the
+  mediator narrator-beats corpus rebaselined (3 verdicts, the corpus
+  protocol's own 'regen' answer), **48 expectations re-pinned every
+  one mechanism-named** (the packet's (a)/(b) tables + the 2
+  pressure-fixture legs), one night corpus re-crafted (stepread —
+  the second day's window). **KI#115 opened** (pre-existing, NOT the
+  law's: the grim pack's two same-account every:1 flows —
+  `flow_drafts` computes both drafts on one snapshot, the second
+  stale the moment the first commits; caught BY the _commit gate at
+  the first year turn any grim run ever reached; the falsifier's
+  grim battery stays below the year horizon by design). The
+  partition-vs-wait-split distinction fixed in the record: the law
+  composes ONE sequence at every cut; `wait(2y)` vs `wait(1y)x2` are
+  DIFFERENT sequences — the Lab's whole-vs-segmented contract stands
+  untouched.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2627 passed + 1 skipped, ruff clean, docguard clean (the COMMITTED
-  state — this delta is docs-only; the prototype's 70 classified
-  failures are the packet's subject, never a red suite in the repo;
-  INV-1..5 untouched, the LOG untouched; NO test deleted or
-  weakened) ·
+2630 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, the LOG untouched — three fixtures regenerated per TEST_PLAN §3 with the regen guards green; NO test deleted or weakened — 3 laws added, 48 re-pinned with every mechanism named, 1 corpus re-crafted) ·
 Date: 2026-10-08 ·
-Scope: docs/iterations/iter-339-ki114dec-report.md (new, the packet),
-  docs/TASKS.md (the ki114dec-1 row + the ki114-1-impl gated row +
-  the ledger, iter-329 evicted), STATUS.md (this header + KI#114 +
-  Next), worklog.md (the iter-339 entry, iter-329 evicted) —
-  4 changed/created, all riders.
+Scope: core/loop.py (the feed law), tests/test_composition.py (new,
+  the 143-check falsifier + 2 laws), tests/fixtures x4 (the 3
+  regenerated smokes + the mediator corpus), tests/ x17 (the
+  re-pins), docs/TEST_PLAN.md (§9's claim-packet row),
+  docs/iterations/iter-340-ki114impl-report.md (new),
+  docs/TASKS.md, STATUS.md, worklog.md — 26 changed/created
+  (1 core + 21 test/fixture + 4 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -109,7 +104,8 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
-- KI#114 · the resume-boundary drain divergence: a split AFTER a wait feeds the next step at the post-drain tick (+16 vs the uninterrupted feed-at-completion; farstead 2-segment split, ev_0210) — found by occ-1's resume law, reproduced with occ-1 stripped (pre-existing). DECIDED 2026-10-08 (iter-339): option B — the composition law on the clean drain boundary — ACCEPTED AS CANONICAL; the decision packet delivered (the 70-failure classification: 0 real regressions; the 143-check falsifier 0/143 under the prototype, 44/143 under BASE); the landing `ki114-1-impl` gated on the owner's packet confirmation; candidate A out of contract · opened 2026-10-07
+- KI#114 · the resume-boundary drain divergence · CLOSED iter-340 (`ki114-1-impl` — the composition law landed: the feed at the clean drain boundary, the 143-check falsifier permanent, split == resume == continuous byte-for-byte; the B direction the owner accepted 2026-10-08) — opened 2026-10-07, found by occ-1's resume law, decided by the iter-339 packet
+- KI#115 · the grim pack's economy declares two `every:1` flows on one account (`till_settling` +12 / `license_fee` −4, both `loc_tavern.account.coin`); `flow_drafts` computes both drafts against one projection snapshot, so the second flow's `from` is stale the moment the first commits — the `_commit` gate refuses LOUD at the year turn. Pre-existing (reproduced with the composition law stripped); slept behind the day-scale corpus until ki114-1-impl's year-scale battery reached the turn. Fix = pack data (one account per flow, or per-flow snapshot re-reads) — the owner's call · opened 2026-10-08
 
 ## FAQ / Pitfalls
 
@@ -139,18 +135,19 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-339 DONE: ki114dec (THE KI#114 COMPOSITION-LAW DECISION
-  PACKET — the owner's B acceptance recorded; the strengthened
-  falsifier 143 checks: prototype 0/143, BASE 44/143; the
-  70-failure classified: 23 + 23 + 24, REAL REGRESSIONS 0; the
-  rebase list fixed; the landing gated on the packet's
-  confirmation).**
+**iter-340 DONE: ki114-1-impl (THE COMPOSITION LAW LANDED — the
+  clean-drain-boundary feed law the engine's contract; the 143-check
+  falsifier permanent: 0/143 under the law, BASE 45/143 the teeth;
+  the 3 fixtures + the mediator corpus rebaselined; 48 expectations
+  re-pinned mechanism-named; KI#114 CLOSED; KI#115 opened).**
 Next: THE OWNER'S CALLS (the standing items in order):
-  (1) the ki114-1-impl landing (the composition law, the falsifier
-  battery, the 3-fixture regeneration + the 46 re-pins — on the
-  owner's confirmation of the iter-339 packet); (2) the standing calls preserved (the Lab
-  queue's battery rows E02/E31, M2, the replay-UI row, the world
-  track's W8, the frontend P1/P2/P3 continuations).
+  (1) KI#115's fix row (the grim economy graph — pack data, the
+  two same-account flows); (2) the packet §4's re-craft rows (the
+  poleseed night chain, the p1 institutional check, the pressure
+  bench ration — the honest door facts pinned meanwhile); (3) the
+  standing calls preserved (the Lab queue's battery rows E02/E31,
+  M2, the replay-UI row, the world track's W8, the frontend
+  P1/P2/P3 continuations).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

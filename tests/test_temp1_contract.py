@@ -87,12 +87,14 @@ EXPECTED_CROSSING_COUNTS: dict[int, dict[str, int]] = {
 }
 #: The A/B seeds (the card's own four).
 SEEDS: tuple[int, ...] = (125, 42, 7, 1001)
-#: The measured day1_full fingerprints at the RNG epoch (rng-1): the
-#: ONLY fingerprint divergence in the 8 pairs is seed 7's cascade
-#: (10 span vs 12 sliced — the sliced arm's accepted document check
-#: draws one more opposed check, the arrest chain one more).
+#: The measured day1_full fingerprints (ki114-1-impl: the seed-7
+#: cascade flip DIED — the F2 phase shift moved the deferred check's
+#: evaluation; both arms pass the check and cascade, the sliced arm's
+#: extra coerce balances the span's extra rejection, 12/12; the other
+#: three seeds unchanged — NO fingerprint divergence in the 8 pairs
+#: now, the composition law's own convergence).
 EXPECTED_FINGERPRINTS: dict[int, tuple[int, int]] = {
-    125: (15, 15), 42: (6, 6), 7: (10, 12), 1001: (6, 6),
+    125: (15, 15), 42: (6, 6), 7: (12, 12), 1001: (6, 6),
 }
 
 
@@ -331,24 +333,30 @@ def test_a2_door_freedom_seed125_the_coerce_flip(
 def test_a2_door_freedom_seed1001_the_cascade(
     day1_arms: dict[tuple[int, str], ArmView],
 ) -> None:
-    """The second known divergence, PINNED (the epoch's rolls moved it
-    from seed 1001 to seed 7 — rng-1's corpus price): seed 7 — the
-    document-check flip (the span arm's `document_check_failed` vs the
-    sliced arm's accepted `document_check` with the arrest chain), and
-    the ONLY fingerprint divergence in the 8 pairs (10 vs 12 — the
-    accepted check draws one more opposed check, the arrest chain
-    one more)."""
+    """The second known divergence, PINNED — and ki114-1-impl KILLED
+    IT: the composition law's F2 phase shift moved the deferred
+    check's evaluation, and the seed-7 document-check flip DIED — the
+    honest check now PASSES in BOTH arms (the arrest chain fires in
+    both, the day1 corpus's own -4/+4 family), and the fingerprints
+    agree at 12/12 (the sliced arm's extra coerce balances the span's
+    extra rejection). The door families stay FREE — the remaining
+    seed-7 divergence is the coerce pin above; this pin stays as the
+    loud detector for the flip's return."""
     span, r_span = day1_arms[(7, "span")]
     sliced, r_sliced = day1_arms[(7, "sliced")]
-    assert any(e.type == "document_check_failed" for e in span)
-    assert not any(e.type == "document_check" for e in span)
-    assert any(e.type == "document_check" for e in sliced)
-    assert any(e.type == "arrest_attempt" for e in sliced), (
-        "the sliced arm's accepted check cascades into the arrest chain"
+    assert not any(e.type == "document_check_failed" for e in span), (
+        "the seed-7 flip returned — the span arm's check fails again; "
+        "re-measure the deferred realization's phase before re-pinning"
     )
-    assert r_span.fingerprint == 10 and r_sliced.fingerprint == 12, (
+    assert any(e.type == "document_check" for e in span)
+    assert any(e.type == "arrest_attempt" for e in span), (
+        "the span arm's accepted check cascades into the arrest chain now"
+    )
+    assert any(e.type == "document_check" for e in sliced)
+    assert any(e.type == "arrest_attempt" for e in sliced)
+    assert r_span.fingerprint == 12 and r_sliced.fingerprint == 12, (
         f"the measured cascade fingerprints moved "
-        f"({r_span.fingerprint}/{r_sliced.fingerprint} != 10/12) — "
+        f"({r_span.fingerprint}/{r_sliced.fingerprint} != 12/12) — "
         f"re-pin with the explaining change"
     )
 
@@ -417,8 +425,11 @@ def test_b2_b3_the_two_times_separate_under_a_long_wait(
 ) -> None:
     """The B2 witness UNCHANGED (the clustering is still total) with the
     B3 separation now observable: all 270 talks realize in the last five
-    ticks [520024, 520028] — the world resumes only at the wait's
-    landing — while their semantic origins span the whole year
+    ticks [520030, 520034] — the world resumes only at the wait's
+    landing (ki114-1-impl: +6 — the wait's own feed rides the drained
+    clock, the composition law's F1 shift; the test's own note: a
+    runtime-semantics change, re-pinned with the explaining law) —
+    while their semantic origins span the whole year
     [1800, 519480], a deferral latency of up to ~518k ticks. `event.t`
     stays the canonical realization time (the card's law: B3 records,
     never re-times). The witness numbers are the epoch's (rng-1's
@@ -432,7 +443,7 @@ def test_b2_b3_the_two_times_separate_under_a_long_wait(
     talks = [e for e in events if e.type == "talk"]
     assert len(talks) == 270
     talk_ticks = [e.t for e in talks]
-    assert min(talk_ticks) == 520024 and max(talk_ticks) == 520028, (
+    assert min(talk_ticks) == 520030 and max(talk_ticks) == 520034, (
         "the B2 clustering moved — the talks no longer pile into the "
         "last five ticks (a runtime-semantics change, not a provenance one)"
     )
@@ -441,8 +452,8 @@ def test_b2_b3_the_two_times_separate_under_a_long_wait(
         "the assignment range moved — re-pin with the explaining change"
     )
     max_latency = max(e.t - e.provenance["assignment_tick"] for e in talks)
-    assert max_latency == 518227, (
-        f"the max deferral latency moved ({max_latency} != 518227)"
+    assert max_latency == 518233, (
+        f"the max deferral latency moved ({max_latency} != 518233)"
     )
 
 

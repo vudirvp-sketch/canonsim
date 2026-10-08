@@ -248,7 +248,10 @@ def test_the_banking_line_carries_the_dated_chain(tmp_path: Path) -> None:
         f"the smelt crofts comes by 2 {DATED_GLOSS}"
         f" at the year's reckoning — {WITHHOLD_FLOW_GLOSS}."
     )
-    assert tale.count(line) == 5  # every crossing — the anchor throughout
+    assert tale.count(line) == 6  # every crossing — the anchor throughout
+    # (ki114-1-impl: six crossings now — the stretched span's boundary
+    # count, every step feeding at the post-drain clock; the dated
+    # chain's shape intact)
     # the coin lines unchanged (the regression: the flows' meanings)
     assert (
         "Garrick comes by 3 coin at the year's reckoning — the honest"
@@ -265,7 +268,7 @@ def test_the_state_record_carries_the_dated_chain(tmp_path: Path) -> None:
     events, pack = _reweigh(_twin(tmp_path, "reweigh"), tmp_path, "reweigh.jsonl")
     state = fold(events, initial_projection(pack.entities))
     view = render_entity_view(events, state, pack, CROFTS, seed=42)
-    assert f"  account.bloom: 14 — {DATED_GLOSS}" in view
+    assert f"  account.bloom: 16 — {DATED_GLOSS}" in view
     assert f"[t 480] the smelt crofts comes by 2 {DATED_GLOSS}" in view
 
 

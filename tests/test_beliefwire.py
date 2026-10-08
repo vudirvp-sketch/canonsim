@@ -527,12 +527,20 @@ def test_the_counter_block_decrystallizes_between_accept_and_completion(
     — then the watch transfer at 1080 carries both counter tokens to
     the off-duty guard (the in-room witnesses saw the fire; the
     rotation's briefing hands it over — the counter conduit), the
-    belief de-crystallizes, and the beat-720 intent still in flight
-    completes into the UNCONDITIONAL re-read: the rejection keeps
-    `projection_moved` with the failed test `actor.trait_held` and the
+    belief de-crystallizes, and the in-flight later intents complete:
+    ki114-1-impl (F2/F4) — under the clean-boundary feed the deferred
+    pile realizes INSIDE the window now (three scans — 810, 1210,
+    1610 — the whole walk realized while the trait's counters were
+    still arriving), and the LAST mint (the barkeep's sweep, assigned
+    1800) lands past the de-crystallization at the DOOR: the rejection
+    is `precondition` with the failed test `actor.trait_held` (the
+    honest fresh read — the belief gone before the mint; under the
+    mid-drain feed the same family surfaced as a completion-time
+    `projection_moved` — the OCC catch moved with the phase) and the
     cause chained to the LAST committed canon (never an event the log
-    does not hold). The beat-1080 gate re-reads the fold and stays
-    silent — the de-crystallized world stops scanning."""
+    does not hold). The later gates re-read the fold and stay
+    silent — exactly one rejection ever, the de-crystallized world's
+    own close."""
 
     def mutate_rules(rules: dict[str, Any]) -> None:
         rules["traits"]["threshold"] = 2
@@ -566,19 +574,21 @@ def test_the_counter_block_decrystallizes_between_accept_and_completion(
         {"intent": "wait", "ticks": 400},
     ]
     events = run(tmp_path, pack, DAY1["seed"], script, "decrystallize.jsonl")
-    # the first scan commits (the belief held from 360 to the transfer)
+    # the scans: the deferred pile realized inside the window (F2/F4 —
+    # 810 the first, 1210 and 1610 the in-flight completions, all
+    # BEFORE the de-crystallization's own close)
     scans = [
         e for e in events
         if e.type == "look_around" and e.actor == GUARD
     ]
-    assert len(scans) == 1 and scans[0].t < 1080
-    # the in-flight beat-720 intent completes into the de-crystallized
-    # fold — the window close, not a door refusal
+    assert [s.t for s in scans] == [810, 1210, 1610]
+    # the last mint lands past the de-crystallization at the door —
+    # the fresh honest read, never a door refusal mid-flight
     rejection = next(
         e for e in events
         if e.type == "intent_rejected" and e.outcome.get("action") == "look_around"
     )
-    assert rejection.outcome["reason"] == "projection_moved"
+    assert rejection.outcome["reason"] == "precondition"
     assert rejection.outcome["failed_test"] == "actor.trait_held"
     assert rejection.cause is not None  # the last committed canon
     # the counter evidence: both tokens in the guard's records by the

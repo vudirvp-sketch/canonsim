@@ -254,19 +254,38 @@ def test_the_corner_without_the_read_dies_at_the_door(tmp_path: Path) -> None:
 
 
 def test_the_night_read_steps_the_story_down(tmp_path: Path) -> None:
-    """The acquisition arm rides the new verb: the weir stair is
-    unlit, and a read in the night phase steps the record down the
-    fidelity chain — the flood story learned PARTIAL by dark, half the
-    tale legible. The cluster still mints (a partial-knowing holder
-    still holds the lever, the cluster recording how well)."""
+    """ki114-1-impl (F3, the iter-339 packet's own mechanism, pinned as
+    the world's answer): the composition law closed the exposure window
+    — the wait's drain runs through the world's own road-leg beat, and
+    Dellan's 705-tick walk carries the pole off to the artery BEFORE
+    the read can enter at any clean boundary. The read honestly rejects
+    at the co-location door (the attempt IS a fact, PARSER_SPEC §4 —
+    `intent_rejected` names `target.same_location`), and the pole's
+    position write rides the walk's own event. The night-phase
+    partial-read witness now lives on the STAIR (a fixture of the
+    place, never carried — tests/test_stepread.py's re-crafted chain);
+    THIS pole chain's night re-craft is a named follow-up (the pole
+    rides the road-leg beat — every clean night boundary on this stage
+    finds it gone)."""
     events = _run(tmp_path, "night.jsonl", SEED_NIGHT, NIGHT_CHAIN)
-    read = next(e for e in events if e.type == "pole_read")
-    assert 1080 <= read.t < 1440  # the night phase pinned by the wait
-    assert (PC, STORY, "saw", "partial") in {
-        (r.who, r.knows, r.channel, r.fidelity) for r in read.knowledge
+    assert not [e for e in events if e.type == "pole_read"], (
+        "the pole read fired — the road-leg beat no longer owns the "
+        "night window; re-measure before re-pinning"
+    )
+    rejection = next(
+        e for e in events
+        if e.type == "intent_rejected" and e.outcome.get("action") == "read_pole"
+    )
+    assert rejection.outcome["reason"] == "precondition"
+    assert rejection.outcome["failed_test"] == "target.same_location"
+    # the world's own fact the door read: the walk carried the pole off
+    hop = next(e for e in events if e.type == "move" and e.actor == DELLAN)
+    assert hop.target == "loc_riverroad"
+    assert (POLE, "position", "loc_weirstair", "loc_riverroad") in {
+        (c.entity, c.prop, c.from_, c.to_) for c in hop.state_changes
     }
-    cluster = next(e for e in events if e.type == "leverage_gained")
-    assert cluster.outcome["fidelity"] == "partial"
+    # no cluster mints on a rejected arm (a failed reader holds no lever)
+    assert not [e for e in events if e.type == "leverage_gained"]
 
 
 # -- the theft chain (the player-facing ablation) ------------------------------

@@ -123,8 +123,10 @@ TALLY = "camp_tally_01"
 
 #: The journey chain (test_tallyread's DAY_CHAIN form — cited, never
 #: re-derived): the walk to the keep lands in the afternoon (t=660),
-#: the walk to the crofts lands IN THE NIGHT (t=1110, the unlit yards),
-#: the night waited out, the tally read by daylight.
+#: the walk to the crofts lands IN THE NIGHT (t=1113, the unlit yards —
+#: ki114-1-impl: +3, the F1 feed shift, the move feeding at the drained
+#: clock; the night window still held), the night waited out, the
+#: tally read by daylight.
 JOURNEY: tuple[dict[str, Any], ...] = (
     {"intent": "move", "target": KEEP},
     {"intent": "move", "target": CROFTS},
@@ -154,7 +156,7 @@ SQUEEZE: tuple[dict[str, Any], ...] = (
 
 DAY_PLAIN = "[t 660] the factor's runner takes the road to the half-pay keep."
 NIGHT_UNLIT = (
-    "[t 1110] the factor's runner takes the road to the smelt crofts"
+    "[t 1113] the factor's runner takes the road to the smelt crofts"
     " — the walk landing after dark, the yards unlit."
 )
 NIGHT_LIT = (

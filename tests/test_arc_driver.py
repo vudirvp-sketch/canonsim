@@ -111,9 +111,11 @@ def test_the_march_releases_in_order_with_the_gap(tmp_path: Path) -> None:
     relief's check releases first (the corpus pin re-pinned for rng-1's
     epoch — director_0000, t=732: the epoch's draws moved the check's
     dice with the sequence), the barkeep's sweep second (director_0001) — and the sweep's
-    event lands at t=1456, the day's last DIRECTOR event, AFTER the check
+    event lands at t=1577, the day's last DIRECTOR event, AFTER the check
     and after everything HEAD held (the append-only footprint: zero id
-    shifts). The arc completes: the cursor sits past its members, and the
+    shifts; ki114-1-impl: +121 — the waits feed at the post-drain clock,
+    the drain-boundary composition law's F1 shift on the same ev_0057).
+    The arc completes: the cursor sits past its members, and the
     sweep's release marks the day's closing beat (PEAK_CLIMAX — the
     denouement the clock already defines). Since beliefwire-2 (iter-70)
     exactly one event follows the sweep at the same tick: the off-duty
@@ -129,7 +131,7 @@ def test_the_march_releases_in_order_with_the_gap(tmp_path: Path) -> None:
     assert str(check.provenance["cause_intent"]) == "director_0000"
     assert check.t == 732 and check.actor == "npc_guard_02"
     assert str(sweep.provenance["cause_intent"]) == "director_0001"
-    assert sweep.t == 1456
+    assert sweep.t == 1577
     # the canon order IS the declared causality: the sweep after the check
     assert sweep.id > check.id
     # weather-1's arming price, re-pinned twice: the warm ring's beat
@@ -143,7 +145,7 @@ def test_the_march_releases_in_order_with_the_gap(tmp_path: Path) -> None:
     # a crossing now; the day's closer is the story's own.
     assert check.type == "document_check"
     assert events[-1].id == sweep.id
-    assert events[-1].t == 1456
+    assert events[-1].t == 1577
     # the arc marched: beat 1 (the check) -> beat 3 (the sweep, gap 2 held
     # beat 720) — the cursor now past the chain's end
     assert sim.director._arc_cursor == {"aftermath": 2}  # type: ignore[attr-defined]

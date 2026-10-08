@@ -493,9 +493,14 @@ def test_politics_the_same_pressure_three_answers(
     assert len([e for e in keep_events if e.type == "garrison_patrols"]) == 1
     assert not [e for e in keep_events if e.type == "guild_councils"]
     assert not [e for e in keep_events if e.type == "wergeld_vigil"]
-    # the both-fires road (seed 229, the epoch's re-pin): the families — the vigil, twice
+    # the both-fires road (seed 229, the epoch's re-pin): the families —
+    # the vigil (ki114-1-impl: twice -> once — the second fire's
+    # realization missed the faction deadband's window at the shifted
+    # phase, F2; the LAW held: both fires wake the families, each
+    # single fire wakes none — the vigil still fires, the elders still
+    # both wake)
     both_events, _ = _run(PACK_DIR, tmp_path, "pol_both", 229, BOTH_ROAD)
-    assert len([e for e in both_events if e.type == "wergeld_vigil"]) == 2
+    assert len([e for e in both_events if e.type == "wergeld_vigil"]) == 1
     assert len([e for e in both_events if e.type == "guild_councils"]) == 1
     assert len([e for e in both_events if e.type == "grief_wakes"]) == 2
     assert _knows(both_events, "the_blood_price_spoken")  # the vigil's row

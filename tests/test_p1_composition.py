@@ -64,6 +64,7 @@ re-pin only together with the explaining change.
 from __future__ import annotations
 
 import json
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -91,10 +92,10 @@ SCRIPT = load_playscript(REPO / "tests" / "playscripts" / "province_composition.
 #: autonomous resolutions 384→306, the event total 2376→2269 — the
 #: collapse outweighs the pile). Re-pin only together with a
 #: legitimate pack or engine change that explains the move.
-EVENT_COUNT: int = 2276
-AUTONOMOUS_RESOLUTIONS: int = 309  # 308 accepted + 1 rejected
+EVENT_COUNT: int = 2273
+AUTONOMOUS_RESOLUTIONS: int = 309  # 233 accepted + 76 rejected (ki114-1-impl's census)
 TALK_COUNT: int = 1
-VIGIL_COUNT: int = 4
+VIGIL_COUNT: int = 3
 
 
 def _is_autonomous(event: EventRecord) -> bool:
@@ -193,37 +194,58 @@ def test_the_watch_rotation_briefing_spreads_the_whole_stack(
 def test_the_institutional_check_consumes_the_suspicion_and_arrests(
     witness: tuple[list[EventRecord], Any],
 ) -> None:
-    """The chain's closing leg: the sergeant's own urgency
-    (`document_check`, urgency_0001 — the levy bending for whoever
-    feeds it) realizes as an accepted check, the waybill knowledge
-    crosses the arrest bar (75) WHILE co-located, the arrest attempt
-    follows in the same tick — and the epoch's rolls turn the
-    resolution into an EVASION (caught false, evasion 60 vs pursuit
-    51, margin -9): no terminal status is written, the PC stays
-    `suspect` (rng-1's corpus price — the pre-epoch resolution's
-    `caught` died at the boundary). The relief hook's own check arm
-    no longer fires on this realization."""
+    """ki114-1-impl (F2/F3, the iter-339 packet's own OCC census §3.5,
+    pinned as the world's answer): under the clean-boundary feed the
+    sergeant's deferred check pile (`document_check`, urgency_0001 —
+    the levy bending for whoever feeds it, re-minted every beat — plus
+    the director's manifest-check release, director_0002) realizes at
+    exactly three evaluation ticks (3797 / 5065 / 526229, the full
+    census with the talk's miss) — and EVERY attempt honestly rejects
+    at the co-location door
+    (`target.same_location`): the duty rotation keeps the sergeant and
+    the PC apart at every landing, the waybill leg never crosses, no
+    arrest attempt fires, and the suspicion stack stays at the
+    witnessed-steal-failure level (55, never consumed — the honest
+    residue of the deferred piles' own arithmetic). The accepted-check
+    + arrest-chain witness is a NAMED RE-CRAFT (the packet's §4 — a
+    corpus that co-locates the sergeant's landing with the PC's);
+    until then THIS pin is the loud detector: a check firing here
+    means the co-location windows moved again — re-measure first."""
     events, _ = witness
     checks = _of(events, "document_check")
-    assert checks and all(c.actor == "npc_sergeant_01" for c in checks)
-    assert checks[0].provenance["cause_intent"] == "urgency_0001"
-    assert checks[0].provenance["assignment_tick"] < checks[0].t
+    assert not checks, (
+        "the sergeant's check fired — the deferred pile found a "
+        "co-location window; re-measure before re-pinning"
+    )
+    rejections = [
+        e for e in _of(events, "intent_rejected")
+        if e.outcome.get("action") == "document_check"
+    ]
+    assert len(rejections) == 75, (
+        "the deferred pile's rejection count moved — the census law's "
+        "own shape"
+    )
+    assert all(r.actor == "npc_sergeant_01" for r in rejections)
+    assert all(
+        r.outcome["failed_test"] == "target.same_location" for r in rejections
+    )
+    # the two families: the sergeant's own urgency pile (74) + the
+    # director's manifest-check release (1) — both through the door,
+    # landing at two of the census's three ticks (the third, 5065,
+    # belongs to the talk rejection below)
+    assert Counter(
+        r.provenance["cause_intent"] for r in rejections
+    ) == {"urgency_0001": 74, "director_0002": 1}
+    assert sorted(set(r.t for r in rejections)) == [3797, 526229]
+    # the chain's honest absence: no waybill leg, no arrest, the stack
+    # unconsumed at the witnessed level
     waybill = [
         e for e in _of(events, "suspicion_changed")
         if e.outcome.get("source") == "waybill_unsatisfactory"
-        and e.actor == "npc_sergeant_01"
     ]
-    assert waybill and waybill[0].outcome["to"] >= 75, (
-        "the waybill leg must cross the arrest bar (75) on the sergeant"
-    )
-    attempt = _of(events, "arrest_attempt")
-    assert len(attempt) == 1 and attempt[0].actor == "npc_sergeant_01"
-    assert attempt[0].t == waybill[0].t, "the attempt rides the crossing tick"
-    resolved = _of(events, "arrest_resolved")
-    assert len(resolved) == 1
-    assert resolved[0].outcome["caught"] is False
-    assert resolved[0].outcome["margin"] == -9
-    assert not _changes(resolved[0]), "the evasion writes no state change"
+    assert not waybill
+    assert not _of(events, "arrest_attempt")
+    assert not _of(events, "arrest_resolved")
 
 
 # -- chain 2: the fire loops (A's guild arm + B's vigil) ----------------------
@@ -260,22 +282,23 @@ def test_the_market_fire_tips_the_guild(
     mistress past the guild's fear bar (30), and the GUILD COUNCILS as
     the group entity (`faction_0000`, D-112's one-id law) — the
     autonomous collective riding the same intent door as everything
-    else."""
+    else. iter-274 + the epoch's rolls + ki114-1-impl (F2): the live
+    council lands at t=5067 (+307 — the realization phase moved with
+    the feed law), plus the B2 catch-up pile at the year crossing
+    (t=526231, moved with the year's own drain), the fear frozen
+    cold at the keep above the guild bar, the known one-tick pile
+    shape"""
     events, _ = witness
     councils = _of(events, "guild_councils")
-    # iter-274 + the epoch's rolls (rng-1's corpus price): the live
-    # council (t=4760, the fear spiked past the bar) plus the 224-event
-    # B2 catch-up pile at the year crossing (t=525560), the fear frozen
-    # cold at the keep above the guild bar, the known one-tick pile shape
     assert len(councils) == 225
     assert all(c.actor == "grp_river_guild" for c in councils)
     assert all(
         c.provenance["cause_intent"] == "faction_0000" for c in councils
     )
     live = next(c for c in councils if c.t < 500000)
-    assert live.t == 4760
+    assert live.t == 5067
     assert live.provenance["assignment_tick"] < live.t
-    pile = [c for c in councils if c.t == 525560]
+    pile = [c for c in councils if c.t == 526231]
     assert len(pile) == 224  # the catch-up: origins spread, one landing
 
 
@@ -285,7 +308,9 @@ def test_both_fires_open_the_families_deadband(
     """Loop B's consummation: BOTH elders grieve past the bar (the
     fraction reads 100, the deadband opens) and the OLD FAMILIES hold
     the wergeld vigil — the faction's autonomous act, twice-armed by
-    the two fires' residues."""
+    the two fires' residues (ki114-1-impl, F2: four landings -> three —
+    one fire's window missed the deadband at the shifted phase; the
+    year-old residue landing survives, the persistence law below)."""
     events, _ = witness
     vigils = _of(events, "wergeld_vigil")
     assert len(vigils) == VIGIL_COUNT
@@ -390,8 +415,11 @@ def test_the_world_stays_causally_loud_through_the_year(
     assert all(
         t.provenance["cause_intent"] == "urgency_0004" for t in talks
     )
-    assert all(t.t < 3798 for t in talks)  # the burnout ends the market's life
-    assert len(_of(events, "watch_change")) == 730
+    # the burnout ends the market's life (ki114-1-impl: the malby
+    # burnout moved 3798 -> 3925 with the phase; the talk lands 3801,
+    # still inside the living window)
+    assert all(t.t < 3925 for t in talks)
+    assert len(_of(events, "watch_change")) == 731
     assert len(_of(events, "knowledge_transfer")) == 8
     assert len(_of(events, "rumor_told")) == 1
 
@@ -420,13 +448,14 @@ def test_persistent_residue_feeds_a_future_faction_event(
 def test_the_final_projection_carries_the_persistent_deltas(
     witness: tuple[list[EventRecord], Any],
 ) -> None:
-    """The end-state relations: the evasion's residue persists (the PC
-    stays `suspect` — the epoch's resolution never wrote `caught`,
-    rng-1's corpus price), both burned locations stay destroyed, the
-    elders' grievance holds (50/55 — decay 0), and the watchers'
-    suspicion stacks persist at 100/55 — the run's residues survive
-    the whole year of churn (the long-wait oracle: waiting never erases
-    a declared persistent consequence)."""
+    """The end-state relations: the suspicion stacks persist at the
+    witnessed level (ki114-1-impl: 55/55 — the waybill leg never fired,
+    the deferred check piles missing every co-location window; the
+    unconsumed residue IS the persistence law's answer), both burned
+    locations stay destroyed, the elders' grievance holds (50/55 —
+    decay 0) — the run's residues survive the whole year of churn
+    (the long-wait oracle: waiting never erases a declared persistent
+    consequence)."""
     events, _ = witness
     projection = fold(events, initial_projection(PROVINCE.entities))
     assert projection["pc_01"]["crime_status"] == "suspect"
@@ -434,7 +463,7 @@ def test_the_final_projection_carries_the_persistent_deltas(
     assert projection["loc_malby"]["destroyed"] is True
     assert projection["npc_smelter_01"]["status.grievance"] == 50
     assert projection["npc_steward_01"]["status.grievance"] == 55
-    assert projection["npc_sergeant_01"]["pair.pc_01.suspicion"] == 100
+    assert projection["npc_sergeant_01"]["pair.pc_01.suspicion"] == 55
     assert projection["npc_corporal_01"]["pair.pc_01.suspicion"] == 55
 
 
@@ -465,19 +494,19 @@ def test_the_deferral_latency_surface(
     witness: tuple[list[EventRecord], Any],
 ) -> None:
     """The two-times surface over the integrated run: every autonomous
-    resolution is deferred (min latency 80 — the door+duration floor,
-    never zero), the max is the year-scale 511880 (the council pile's
-    own catch-up with the one-tick landing), and the remaining talk's
-    real origin sits at 3240 — the burnout at t=3798 ends the talk
-    family's window before the year turns (the epoch's rolls — rng-1's
-    corpus price)."""
+    resolution is deferred (ki114-1-impl: min latency 25 — the floor
+    moved with the realization phase, never zero), the max is the
+    year-scale 512911 (the council pile's own catch-up with the
+    one-tick landing), and the remaining talk's real origin sits at
+    3240 — the burnout at t=3925 ends the talk family's window before
+    the year turns (the epoch's rolls — rng-1's corpus price)."""
     events, _ = witness
     latencies = [
         e.t - e.provenance["assignment_tick"]
         for e in events if _is_autonomous(e)
     ]
-    assert min(latencies) == 80
-    assert max(latencies) == 511880
+    assert min(latencies) == 25
+    assert max(latencies) == 512911
     talks = _of(events, "talk")
     origins = [t.provenance["assignment_tick"] for t in talks]
     assert origins == [3240]
@@ -486,24 +515,42 @@ def test_the_deferral_latency_surface(
 def test_the_occ_miss_is_a_recorded_fact(
     witness: tuple[list[EventRecord], Any],
 ) -> None:
-    """The material H1 instance on this corpus: the ONE autonomous
-    rejection — a director release (the manifest-check family) minted
-    at the beat t=2520 whose door landed at t=3674, 1154 ticks later —
-    the deferral window is where the precondition broke (the duty
-    rotation moved the sergeant off-stage; the epoch's rolls moved the
-    landing — rng-1's corpus price). The rejection carries BOTH
-    times: a minted-and-doomed fact, exactly the OCC miss the two-times
-    record makes inspectable."""
+    """The material H1 instance on this corpus, ki114-1-impl's own
+    census (the iter-339 packet §3.5, pinned as the law): 76
+    autonomous rejections — 74 `document_check` (the sergeant's
+    re-minted deferred pile, urgency_0001), one `talk` (the mistress's
+    urgency_0004), one director release (the manifest-check family,
+    director_0002) — ALL honest door breaks on `target.same_location`
+    at exactly THREE evaluation ticks (3797 / 5065 / 526229): the
+    deferral windows are where the preconditions broke (the duty
+    rotation keeps the parties apart at every landing; the composition
+    law's phase shift moved the landings — the accepted canonical
+    semantics, per the owner's B-direction decision). Every rejection
+    carries BOTH times: minted-and-doomed facts, exactly the OCC
+    misses the two-times record makes inspectable. ZERO player-step
+    rejections in the corpus — the door never blocks the script."""
     events, _ = witness
     rejected = [
         e for e in _of(events, "intent_rejected") if _is_autonomous(e)
     ]
-    assert len(rejected) == 1
-    miss = rejected[0]
-    assert miss.provenance["cause_intent"] == "director_0002"
-    assert miss.provenance["assignment_tick"] == 2520
-    assert miss.t == 3674
-    assert miss.t - miss.provenance["assignment_tick"] == 1154
+    assert len(rejected) == 76
+    assert all(
+        r.outcome["failed_test"] == "target.same_location" for r in rejected
+    )
+    assert Counter(
+        r.provenance["cause_intent"] for r in rejected
+    ) == {
+        "urgency_0001": 74, "urgency_0004": 1, "director_0002": 1,
+    }
+    assert sorted(set(r.t for r in rejected)) == [3797, 5065, 526229]
+    # every rejection carries both times — the minted-and-doomed shape
+    for miss in rejected:
+        assert miss.provenance["assignment_tick"] < miss.t
+    # the player's own steps never reject on this corpus
+    assert not [
+        e for e in _of(events, "intent_rejected")
+        if str(e.provenance.get("cause_intent", "")).startswith("intent_")
+    ]
 
 
 # -- the determinism + scope pins ----------------------------------------------

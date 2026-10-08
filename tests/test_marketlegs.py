@@ -276,9 +276,10 @@ def test_the_trade_door_opens_at_the_stalls(
     """The accepted purchase: the runner's coin walks to the chest at
     the weighbeam (render_fund's own shape — the account verb over the
     same door), and the market's own people see the beat: the
-    co-located watchers (the duty corporal at the post — the rotation
-    moved the sergeant to his rest — the mistress, the queue) each
-    hold the saw-partial record."""
+    co-located watchers (ki114-1-impl, F2: the trade's shifted tick
+    finds the SERGEANT at the post — the rotation's window moved with
+    the phase; the mistress, the queue) each hold the saw-partial
+    record."""
     events = witness
     trades = _of(events, "account_transferred")
     assert len(trades) == 1 and trades[0].actor == "pc_01"
@@ -286,7 +287,7 @@ def test_the_trade_door_opens_at_the_stalls(
     assert changes[("pc_01", "account.coin")] == (6, 4)
     assert changes[(CHEST, "account.coin")] == (40, 42)
     assert _records(trades[0]) == {
-        CORPORAL: ("coin_changed_hands_at_loc_malby", "partial"),
+        SERGEANT: ("coin_changed_hands_at_loc_malby", "partial"),
         MAREN: ("coin_changed_hands_at_loc_malby", "partial"),
         CROWD: ("coin_changed_hands_at_loc_malby", "partial"),
     }
@@ -326,13 +327,15 @@ def test_the_mourns_release_reads_the_ashes(
     for the keep, the grief answering with feet), the tally staff
     riding with her (the carried-item contract, iter-263's measured
     shape reproduced on the committed form), and the ramble GONE (the
-    release replaced, never doubled — first_time_only's own law). The
-    scene's residue — the dropped tally under the stall row — still
-    materializes: the observe family's LAZY canon birth on the
-    market's own stream, the sergeant's post-burnout scan drawing it
-    first in this witness (t=1153, three ticks past the burnout) —
-    the ramble's own draw is gone, the stream's birth remains
-    (INV-2: the draw is the stream's, never the observer's)."""
+    release replaced, never doubled — first_time_only's own law).
+    ki114-1-impl (F2): the release realizes at the shifted phase
+    (t=4983 — the director's beat realization moved with the feed
+    law), still after the market's burnout. The scene's residue — the
+    dropped tally under the stall row — stayed UNMATERIALIZED this
+    run: the observe family's lazy canon birth is the stream's own
+    draw (INV-2 — never the observer's), and the shifted windows left
+    no scanner past the burnout; the honest window closure, never a
+    scripted flag."""
     events = witness
     market_burnout = next(
         b for b in _of(events, "location_burned_out") if b.target == CHEST
@@ -344,7 +347,8 @@ def test_the_mourns_release_reads_the_ashes(
     ]
     assert len(mourns) == 1, "one mourns per run (first_time_only)"
     departure = mourns[0]
-    assert departure.t == 3297 and departure.t > market_burnout.t  # the epoch's rolls
+    # ki114-1-impl: the epoch's rolls plus the F2 phase shift (3297 -> 4983)
+    assert departure.t == 4983 and departure.t > market_burnout.t
     assert departure.target == "loc_keep"
     assert _changes(departure) == {
         (MAREN, "position"): (CHEST, "loc_keep"),
@@ -352,9 +356,11 @@ def test_the_mourns_release_reads_the_ashes(
     }
     # the ramble replaced, never doubled
     assert not [e for e in _of(events, "ramble") if e.actor == MAREN]
-    # the scene's residue: the lazy birth still lands on the stream
+    # the scene's residue: the lazy birth never drew this run (F2's
+    # window closure — no scanner past the burnout at the shifted
+    # phase; the stream's birth remains the stream's own, INV-2)
     projection = fold(events, initial_projection(load_pack(PACK_DIR).entities))
-    assert projection[CHEST]["under_stall_row"] == "dropped_tally"
+    assert projection[CHEST].get("under_stall_row") is None
     assert projection[CHEST]["destroyed"] is True
 
 
@@ -390,15 +396,14 @@ def test_the_vigil_mints_the_blood_price(
 ) -> None:
     """The families' public act likewise: Thornmill hears the blood
     price spoken (partial — the runner stands there, the steward
-    beside him), Malby through the market walls (vague). iter-274's
-    departure footprint ON the hearer sets (the epoch's rolls — rng-1's
-    corpus price): the first vigil (t=3299, two ticks past Maren's
-    move) mints WITHOUT her — she is at the keep now, not through the
-    market walls — and with the CORPORAL on the post (the rotation's
-    window moved with the cascade); the later pair (t=4379) carries
-    the SERGEANT back (the rotation's own rhythm). The residue is the
-    ACT's, minted per event at the hearers' live positions, never
-    once per run."""
+    beside him), Malby through the market walls (vague). ki114-1-impl
+    (F2): the deadband's landing pile moved to t=4625 — ONE landing,
+    three fires (the phase shift collapsed the old 3299/4379 pair);
+    Maren is STILL at the market (the departure moved past the pile to
+    4983 — she hears the blood price through the walls, vague), and
+    the SERGEANT holds the post (the rotation's window at the shifted
+    phase). The residue is the ACT's, minted per event at the
+    hearers' live positions, never once per run."""
     events = witness
     vigils = _of(events, "wergeld_vigil")
     assert len(vigils) == 3  # the deadband's landing pile at this window
@@ -406,42 +411,41 @@ def test_the_vigil_mints_the_blood_price(
     assert all(
         v.provenance["cause_intent"] == "faction_0001" for v in vigils
     )
-    first = {
-        "pc_01": ("the_blood_price_spoken", "partial"),
-        STEWARD: ("the_blood_price_spoken", "partial"),
-        CORPORAL: ("the_blood_price_spoken", "vague"),
-        CROWD: ("the_blood_price_spoken", "vague"),
-    }
-    later = {
+    hearers = {
         "pc_01": ("the_blood_price_spoken", "partial"),
         STEWARD: ("the_blood_price_spoken", "partial"),
         SERGEANT: ("the_blood_price_spoken", "vague"),
+        MAREN: ("the_blood_price_spoken", "vague"),
         CROWD: ("the_blood_price_spoken", "vague"),
     }
     by_tick = {}
     for vigil in vigils:
         by_tick.setdefault(vigil.t, []).append(vigil)
-    assert _records(by_tick[3299][0]) == first  # the departure's own window
-    for vigil in by_tick[4379]:
-        assert _records(vigil) == later
+    assert set(by_tick) == {4625}  # one landing, three fires
+    for vigil in by_tick[4625]:
+        assert _records(vigil) == hearers
 
 
 def test_the_briefing_carries_the_trade_token(
     witness: list[EventRecord],
 ) -> None:
     """The institutional memory consumer measured in iter-263's I2
-    arm, re-measured here for the TRADE's own token: the rotation's
-    briefing carries the duty corporal's stack — the coin-changed-
-    hands record among the fire family — to the sergeant (one fidelity
-    step down, the D-006 briefing law). The chest's commerce is now
-    the watch's institutional knowledge: who bought, on the record."""
+    arm, re-measured here for the TRADE's own token (ki114-1-impl,
+    F2): the trade's shifted tick finds the SERGEANT on the post —
+    the coin-changed-hands record is minted ON HIM, and the next
+    rotation carries HIS stack out (sergeant -> corporal, one
+    fidelity step down, the D-006 briefing law — the direction
+    rotated with the duty window, the law itself intact). The chest's
+    commerce is now the watch's institutional knowledge: who bought,
+    on the record."""
     events = witness
     transfer = next(
         e for e in _of(events, "knowledge_transfer")
-        if e.actor == CORPORAL and e.target == SERGEANT
+        if e.actor == SERGEANT and e.target == CORPORAL
+        and any(k.knows == "coin_changed_hands_at_loc_malby" for k in e.knowledge)
     )
     records = _records(transfer)
-    assert records.get(SERGEANT) is not None
+    assert records.get(CORPORAL) is not None
     know = {k.knows: k.fidelity for k in transfer.knowledge}
     assert know["coin_changed_hands_at_loc_malby"] == "vague"
 
