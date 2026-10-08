@@ -379,6 +379,12 @@ PHASE 3        — the first row LANDED (iter-294, the owner's
                  acceptance matrix (CLOSED iter-308), the DECISIONS
                  collapse (the owner's call); each its own
                  iteration
+LAWS RE-HOMED  — iter-343, DONE (FRONTEND_WEB_LAW §14's Phase 1:
+                 the five live law bodies re-pointed to the web
+                 client — Redot historical/reference-only everywhere;
+                 the dead engine-index routing replaced by the
+                 D-245 archive routing; the TASKS DONE rows
+                 collapsed to landing records)
 MIGRATION      — the pack's Phase 3..6 sequence (slice → world →
                  remote/PWA → optional Tauri), each phase the
                  owner's call

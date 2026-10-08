@@ -108,8 +108,8 @@ RAW CAPABILITY      the runtime's own surface — existence, syntax,
 SEMANTIC CONTROL    the application's overlay — identity, human
                     name, category, kind, scope, default, relations,
                     effective state. THIS layer owns MEANING.
-UI REPRESENTATION   the Redot projection — one representation of a
-                    control, never the semantic authority. A chip
+UI REPRESENTATION   the web-client projection — one representation
+                    of a control, never the semantic authority. A chip
                     widget edit is a REQUEST, never a truth.
 ```
 
@@ -330,7 +330,7 @@ PLATFORM     process management + runtime translation (the typed
              surface: build_server_command owns the flag emission)
 ADAPTER      the wire boundary (cli/engine.py, INV-4 — never a
              second transport)
-REDOT        presentation (never invokes llama.cpp)
+WEB CLIENT   presentation (never invokes llama.cpp)
 ```
 
 The emitted command is a COMPILED ARTIFACT, never the authoring
@@ -458,8 +458,10 @@ settings migration), the resolver (deterministic composition, the
 evidence-pinned relations), the compiled spawn surface
 (build_server_command's additive params), the duplicate-ownership
 guard, the gateway family (inference.read/update), the chat BASE
-re-point + the REQUESTED/EFFECTIVE pair, the Redot Inference
-surface + the Chat projection + the Settings slim, the claim
+re-point + the REQUESTED/EFFECTIVE pair, the Inference surface
+(the Redot-era surface at landing, now the web client's
+`frontend/src/features/inference/`) + the Chat projection + the
+Settings slim, the claim
 packet (tests/test_inference.py, 26 tests).
 
 `[LANDED iter-240 (inf-2 — the owner's 2026-09-26 «доделывай
@@ -476,7 +478,7 @@ the temperature-0 deterministic noop, the family requires, the
 chain-family membership concern), the 9-member chain (+ the inf-1
 load upgrade), the four §30 presets as transparent diff-previewed
 documents, the workspace PINNING (the profile document's own
-workspace section), the DATA-DRIVEN Redot workspace (the
+workspace section), the DATA-DRIVEN Inference workspace (the
 preset/search/pinned/collapsible-category/advanced-rung regions —
 the editors built from the read document's own metadata; inf-1's
 compose-before-read bug — the live flow rendered EMPTY groups —

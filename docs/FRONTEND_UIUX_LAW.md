@@ -64,7 +64,7 @@ The central implementation invariant:
 ```text
 canonical/backend state → typed read model
 → ViewModel only where projection logic is needed
-→ UI / Visual Scene IR → Redot presentation
+→ UI / Visual Scene IR → web presentation (`frontend/`, React)
 ```
 
 Never: `UI → hidden transport → semantic authority`.
@@ -80,7 +80,7 @@ contract and the visual/UI system — is what this law owns:
 SEMANTIC / BACKEND CONTRACT
     ↓ ANALYTICAL INTERACTION GRAMMAR   ← this law
 VISUAL / UI SYSTEM                    ← VISUAL_SYSTEM_UI.md
-REDOT IMPLEMENTATION                  ← REDOT_ENGINE_INDEX.md
+WEB IMPLEMENTATION (`frontend/`)      ← FRONTEND_WEB_LAW.md
 RUNTIME + TASK PROOF                  ← §22 here
 ```
 
@@ -490,20 +490,23 @@ shell/workspace controller · nav · chat · models · settings
 · observatory · shared controls · visual proof hooks
 ```
 
-NOT 2200→100 tiny classes, and NOT widget-per-`.tscn`. A reusable
+NOT 2200→100 tiny classes, and NOT widget-per-file. A reusable
 component is created only when it has reuse, independent state, an
 independent test contract, or a meaningful lifecycle — neither a
 god-script nor cargo-cult proliferation.
 
 ## 19. Scene IR integration; world presentation
 
-The gap: Scene IR exists Python-side; Redot does not consume it.
+The gap: Scene IR exists Python-side; no presentation consumer
+has wired it yet (the Redot consumer was deleted at D-245; the
+web client's world-scene row is the P4 family, owner-gated).
 The target chain (the world view stays a projection of
 authoritative/typed data — never a second parallel scene authority):
 
 ```text
 canonical scene/read model → Visual Scene IR → scene composition
-policy → presentation read model → Redot → Canvas/sprites/effects/UI
+policy → presentation read model → the web client
+→ DOM/CSS chrome + Canvas/WebGL scene-only
 ```
 
 Target graphics scope: 2D/2.5D (static/procedural background +
@@ -539,7 +542,7 @@ incremental loading. Analytical populations scale SMALL (JSONL +
 SQLite) → MEDIUM (DuckDB over exports) → LARGE (Parquet + DuckDB);
 distributed only on measured workload evidence. Boundedness = declared
 ceiling + measurement + degradation path; measure the joint workload
-(Redot UI + concurrent local LLM on the same GPU) — cold/warm
+(the web UI + concurrent local LLM on the same machine/GPU) — cold/warm
 startup, RAM/VRAM idle+active, CPU during streaming, frame-time
 p50/p95/p99, UI latency during streaming, history render cost, scene
 rebuild cost, peak memory. Budget categories (declare a ceiling per
@@ -644,13 +647,13 @@ Three DISTINCT proof layers — never conflated:
 STATIC UI PROOF ≠ RUNTIME UI PROOF ≠ TASK / HUMAN UX PROOF
 ```
 
-- **Static** (no Redot needed): token usage, forbidden raw values,
+- **Static** (no live runtime needed): token usage, forbidden raw values,
   translation boundary, interactive control metadata, status-role
   mapping, contrast calculations, configuration invariants,
   component naming, surface registration.
-- **Runtime** (needs Redot): layout, focus, keyboard, responsive, DPI,
-  visual regression, scroll behavior, interaction states,
-  accessibility tree, motion policy.
+- **Runtime** (needs the live browser runtime): layout, focus, keyboard,
+  responsive, DPI, visual regression, scroll behavior, interaction
+  states, accessibility tree, motion policy.
 - **Task**: T1..T8 complete without hidden assumptions, without
   manual ID copying, without false semantic implication, without
   unnecessary recovery cost.
@@ -669,7 +672,8 @@ STATIC_VERIFIED · RUNTIME_VERIFIED · MANUALLY_VERIFIED
 · TASK_VERIFIED · DEFERRED · NOT_VERIFIED
 ```
 
-Where Redot runtime is available: deterministic captures across
+Where a deterministic browser runtime is available (the Playwright
+smoke, `frontend/tests/e2e/`): deterministic captures across
 SMALL/MEDIUM/LARGE/HIGH-DPI/ULTRAWIDE viewports × the task states
 (empty, loading, ready, partial, stale, failed, selected, focused,
 disabled, compare, evidence, inspector); regression compares semantics
@@ -708,7 +712,7 @@ alone.
 
 ### 22.2 The acceptance benchmark and the final gates
 
-The representative acceptance covers: Redot startup/packaging · custom
+The representative acceptance covers: web client build/serve · custom
 UI + keyboard/focus/accessibility · Chat streaming + large history ·
 Models/Inference controls + effective-state display · the CanonSim
 placeholder world + deterministic Visual Scene IR · procedural props/
@@ -718,7 +722,7 @@ reconnect/cancellation truth · screenshot/headless regression ·
 frontend alone vs frontend + concurrent local LLM.
 
 ```text
-G1  Redot startup/packaging works in the actual runtime envelope
+G1  the web client builds and serves in the actual runtime envelope
 G2  Chat/Settings/History use shared application operations
 G3  backend reconnect/cancellation semantics remain correct
 G4  CanonSim read-side seam explicit/renderer-independent
@@ -756,13 +760,14 @@ surface implying omniscient observability · model-capability data
 auto-generating widgets · a giant generic Visual DSL before the first
 real scene · modal chains compensating for missing IA · fixed-English
 geometry (font metrics are part of layout) · a renderer dependency
-added "just in case" · Redot resource/UID as CanonSim identity ·
+added "just in case" · engine resource/UID forms (the deleted
+Redot's resource/UID class) as CanonSim identity ·
 style compensating for weak IA.
 
 Corrected conclusions (do not adopt too literally): (a) accent
 overload is fixed FIRST by shape/pattern/weight/iconography/position,
 colors only if truly required; (b) NOT every component becomes
-`.gd`+`.tscn` — split by responsibility/state/reuse/testability; (c)
+its own module/file — split by responsibility/state/reuse/testability; (c)
 accessibility is "materially incomplete implementation and
 verification", not "zero"; (d) "1 of 12 surfaces" is a scope warning,
 not a KPI; (e) never encode user-population assumptions — the
@@ -777,7 +782,8 @@ new view? (6) what selection/focus/context behavior? (7) what
 epistemic states must be visible? (8) smallest reusable component
 boundary? (9) which tokens? (10) which
 accessibility/localization/responsive requirements? (11) how
-statically verified? (12) how runtime-verified if Redot is available?
+statically verified? (12) how runtime-verified if a live runtime is
+available?
 (13) how task-proven?
 
 A need for new transport, new authority, a new generic visualization
@@ -822,7 +828,8 @@ P3 analytical depth       timeline · compare · semantic zoom ·
                          cross-highlighting · archaeology · bounded
                          graph · Evidence Capsules · persistent
                          research contexts
-P4 world presentation    Scene IR → Redot · deterministic world
+P4 world presentation    Scene IR → the web scene renderer ·
+                         deterministic world
                          rendering · world visual identity ·
                          procedural/asset presentation ·
                          assurance/debug overlays
@@ -850,7 +857,7 @@ evidence, visual hierarchy) first.
 | Runtime testing | Static proof cannot substitute for runtime/task proof |
 | Localization | Boundary established NOW; language expansion staged |
 | Fixed viewport | Baseline kept; min-size/stretch/viewport matrix before surface count grows |
-| Visual Scene IR | Does not block the interaction spike; one eventual semantic path into Redot; never a second scene authority |
+| Visual Scene IR | Does not block the interaction spike; one eventual semantic path into the presentation client; never a second scene authority |
 
 ## 27. Non-negotiable invariants
 

@@ -21,16 +21,18 @@
 >
 > **Current state:** the Python half is LANDED (`workbench/scene_ir.py` +
 > `scene_build.py`, wb-1: typed, deterministic, the identity closure +
-> status laws, byte-identical IR JSON + the double-run PNG proof). The
-> Redot consumption half is NOT STARTED (the P4 family). Sections below
-> carry `[LANDED …]` / `[CONTRACT — the P4 rows]` honestly.
+> status laws, byte-identical IR JSON + the double-run PNG proof). No
+> presentation consumer is wired yet — the Redot consumer was deleted
+> at D-245; the web client's world-scene row is the P4 family,
+> owner-gated. Sections below carry `[LANDED …]` / `[CONTRACT — the P4
+> rows]` honestly.
 
 ## 1. The boundary and the two procedurality forms
 
 ```text
 CanonSim semantic/read products → Visual Scene IR → scene composition
 policy → asset selection/variation → presentation read model
-→ Redot → Canvas/sprites/effects/UI
+→ the web client → DOM/CSS chrome + Canvas/WebGL scene-only
 ```
 
 The two procedural forms are NEVER conflated:
@@ -47,9 +49,10 @@ prohibited; the World view is a projection of authoritative/typed data.
 
 ## 2. Visual Scene IR contract `[LANDED — scene_ir.py; CONTRACTS D2/D4/D5 own identity/determinism]`
 
-The IR is engine-independent and read-side: no Redot `Node`,
-`Texture2D`, GPU IDs, renderer resource paths as identity, or renderer
-internals. Conceptual structure:
+The IR is engine-independent and read-side: no engine object types
+as identity (the deleted Redot's `Node`/`Texture2D` the named
+historical example), no GPU IDs, renderer resource paths as identity,
+or renderer internals. Conceptual structure:
 
 ```text
 Scene = scene_identity + source_revision + observation_profile + camera
@@ -65,8 +68,9 @@ OBSERVED | UNKNOWN | HIDDEN | TEXTURE/PURELY_VISUAL`; the silent
 collapses `UNKNOWN→ABSENT`, `HIDDEN→ABSENT`, `VISUAL→CANONICAL`,
 `LLM-text→CANONICAL` are forbidden (D5). The IR exists to separate
 semantics from rendering, make compositor output testable, enable
-screenshot regression/CLI/debug reuse, and keep Redot from becoming
-CanonSim. Keep the IR minimal — it is not a universal scene DSL; a giant
+screenshot regression/CLI/debug reuse, and keep the presentation
+runtime from becoming CanonSim. Keep the IR minimal — it is not a
+universal scene DSL; a giant
 generic Visual DSL before the first real scene is an anti-pattern.
 
 ## 3. Deterministic composition
@@ -119,7 +123,8 @@ Prefer PARAMETERIZED variants when adequate: mirror/rotation/scale,
 palette/material, weather, wear/damage, occupancy, expression/pose,
 decals — never a full independent asset per variation when composition
 parameters suffice. `[CONTRACT — the P4 vocabulary rows; do not scale
-asset production before §1's seam is proven end-to-end in Redot]`
+asset production before §1's seam is proven end-to-end in the
+presentation consumer]`
 
 ## 5. Asset identity, provenance and the Asset Manifest contract
 
@@ -294,7 +299,7 @@ the same machine/GPU may concurrently host a local LLM — visual capacity
 is never treated as dedicated headroom. Acceptance uses measured
 profiles for: `visual-only · visual + representative local-LLM load ·
 peak asset/scene transition · worst supported window/DPI case`. The
-benchmark matches the real product: `Redot UI + large history + mostly
+benchmark matches the real product: `web UI + large history + mostly
 static scene + several animated actors + light effects + concurrent
 local LLM on the same GPU`. Measure frontend alone AND frontend +
 concurrent LLM:
@@ -337,22 +342,25 @@ engine licence does not imply the shipped bundle is permissively
 redistributable. Trust boundary (the LAW §21 set, world side): `path ≠
 command · import ≠ execution · model output ≠ authority · asset
 metadata ≠ executable code · UI command ≠ direct CanonSim mutation`;
-Redot input, imported assets and external metadata are UNTRUSTED until
+client input, imported assets and external metadata are UNTRUSTED until
 application validation. `[CONTRACT — the degradation row]`
 
 ## 14. The renderer fork gate
 
-The runtime baseline is Redot 26.2 LTS (Compatibility). Another
+The presentation runtime baseline is the web client (React + TS +
+Vite over the browser's DOM/CSS + Canvas/WebGL scene-only, D-244/D-245
+— the Redot baseline deleted with the tree). Another
 engine/runtime is admitted ONLY when ALL are demonstrated: `real
 consumer + concrete limitation/risk + measured quality/performance gap +
 acceptable runtime/dependency/licence envelope + testable agent
-workflow`. Reconsider Redot only if: 2D/2.5D cannot represent the
+workflow`. Reconsider a heavier runtime only if: 2D/2.5D cannot represent the
 required visual class; a required asset class demands a materially
 different runtime; measured GPU/RAM overhead breaks the product budget;
 agent automation cannot reliably achieve required changes; packaging
 creates an unacceptable constraint. Never add Panda3D/ModernGL/wgpu/
-full-3D machinery just for future-proofing. `[LAW — mirrors
-REDOT_ENGINE_INDEX's version firewall]`
+full-3D machinery just for future-proofing. `[LAW — the admission
+form of the deleted engine index's version firewall (D-245); Redot
+engine facts route to the archived pack's reference docs]`
 
 ## 15. Acceptance and gates
 
@@ -363,7 +371,7 @@ The world-presentation slice of the acceptance benchmark
 G4  CanonSim read-side seam explicit/renderer-independent      [LANDED wb-1]
 G5  Visual Scene IR fixture deterministic                      [LANDED wb-1]
 G6  placeholder scene renders without hand-authored per-instance lists
-G7  screenshot/headless regression works                       [LANDED — visual_proof]
+G7  screenshot/headless regression works                       [Redot-era LANDED via visual_proof — deleted D-245; the web-side capture rides the Playwright e2e + the P4 acceptance row]
 G9  resource budgets measured with degradation paths
 G10 concurrent LLM + frontend measured
 G11 dependency/licence inventory complete for admitted runtime
@@ -371,9 +379,11 @@ G12 asset identity/provenance exists before large ingestion
 ```
 
 Visual regression compares SEMANTICS where rendering is nondeterministic;
-screenshot-driven development (agent → code/config → Redot headless →
-deterministic capture → inspect → patch → rerun) is the standing
-workflow — REDOT_ENGINE_INDEX owns its mechanics. `[CONTRACT — the P4
+screenshot-driven development (agent → code/config → a deterministic
+capture → inspect → patch → rerun) is the standing
+workflow — the web side's capture surface is the Playwright e2e
+(`frontend/tests/e2e/`); Redot-era mechanics live in the archived
+pack's reference docs (D-245). `[CONTRACT — the P4
 acceptance row]`
 
 ## 16. Design rules (the world-presentation subset)

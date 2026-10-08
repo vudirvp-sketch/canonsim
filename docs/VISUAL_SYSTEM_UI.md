@@ -235,8 +235,10 @@ INVARIANT            what must NOT change (behavior, wire, tests)
 FILES AFFECTED       the explicit path list
 EXPECTED CONSEQUENCE the user-visible outcome
 REJECT CONDITIONS    what would make the owner reject this row
-VERIFICATION STATE   the proof run (tests + the REDOT_EXE-gated
-                     screenshot packets where applicable)
+VERIFICATION STATE   the proof run (tests + the browser-side capture
+                     evidence where applicable — the web e2e/Playwright
+                     surface; the Redot-era REDOT_EXE packets deleted
+                     at D-245)
 ```
 
 ## 9. Anti-patterns (rejected on sight)

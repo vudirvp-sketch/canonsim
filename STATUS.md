@@ -1,43 +1,43 @@
-Iteration: iter-342 (`ki114-recraft` — THE THREE
-  CORPUS RE-CRAFTS, R0 test/doc only; the owner's 2026-10-08
-  «три строки ki114-recraft» call, the iter-339 packet §4's named
-  residue): **(A) THE POLESEED NIGHT CHAIN** — the reader FOLLOWS
-  the pole: the walk to the artery before the road-leg beat
-  delivers Dellan and the pole there (t=2118, the beat's own move),
-  the read completing at t=2820 inside the SECOND day's night
-  window — the partial-by-dark acquisition arm alive again (the
-  flood story `saw`/`partial`, the cluster partial over Ketta);
-  **(B) THE P1 INSTITUTIONAL CHECK** — a second corpus
-  (`province_institutional.json`, seed 2) whose re-timed wait
-  (1100, completing t=2897) lands inside the sergeant's duty window
-  at Malby (the rotation keep→malby at t=2520): the deferred check
-  CO-LOCATES — the verdict honestly unsatisfactory (perception 60
-  vs social 57), the waybill consuming the stack 55→80 (the arrest
-  bar 75 crossed), the arrest attempt at the threshold, the
-  resolution the world's own roll (the EVASION arm 61 vs 48 — the
-  caught arm stays the crime family's witness); **(C) THE PRESSURE
-  BENCH RATION** — the registry-parked corpus (seed 7): the world's
-  own closed loop with the player as pure audience — the stokers'
-  year-crossing stoke (t=520004, no player lever anywhere), the
-  knock (t=520604, the keeper's vague hearing), the in-window
-  beat's mint (t=520920, the residue 11), the firing at the
-  drain's own boundary (t=524327): FOUR COAL to the firehole
-  (24→20 / 5→9), the bench convening one tick before, the warmth
-  the reply. The honest-rejection pins KEPT beside them (the loud
-  detectors); zero runtime code, zero pack data.
+Iteration: iter-343 (`doc-4-lawrehome` — THE LAW-BODY
+  RE-HOMING, R1 doc-only; the owner's 2026-10-08 repo-revision call
+  «очистить документацию от старой информации по redot и фронтенду
+  той "обвязки"» + «ревизия всех путей и противоречий»; FRONTEND_WEB_LAW
+  §14's migration Phase 1, the D-245-deferred deep re-homing): the
+  five live law bodies re-pointed to the web client as the
+  presentation runtime (FRONTEND_UIUX_LAW §0/§19..§25 — the layering
+  + pipeline diagrams, the static/runtime split, the acceptance
+  gates G1, the P4 row; WORKBENCH_APP_LAW §0/§3/§23/§33 — the
+  layering, the package tree, the live seam note, the architecture
+  diagram; WORLD_PRESENTATION_LAW §0/§1/§2/§4/§12/§13/§14/§15 — the
+  consumption state, the chains, the fork-gate baseline, the G7
+  marker; LLAMA_CPP_INFERENCE_CONTROL_LAW §0/§5/§19 — the layering
+  + adapter diagrams, the landing notes' current carriers;
+  VISUAL_SYSTEM_UI §8 — the verification-state vocabulary); the
+  dead REDOT_ENGINE_INDEX routing (TASKS' live wb line, UIUX §5,
+  PRESENTATION §14/§15) replaced by the D-245 archive routing; the
+  TASKS DONE rows (wb-1..12, ux-1, obs-1/2, inf-1/2) collapsed to
+  the landing-record form — 616→346 lines, the §8-report
+  restatements cut (detail verbatim in git + CONTRACTS §5), the
+  docguard allowlist entry retired (the cap now ENFORCED on
+  TASKS.md); the frontendweb README's stage + the migration
+  ladder's phase markers synced; zero code, zero pack data, zero
+  corpus price.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2638 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero runtime code, zero pack data, the LOG untouched — the honest-rejection pins kept, 2 witnesses added, 1 re-crafted; the three corpora double-run byte-identical) ·
+2632 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero runtime code, zero pack data, the LOG untouched — the doc-only re-homing; the suite byte-untouched, the collection IDENTICAL to BASE a22fc61, zero failures — the prior session's 2638+1 its own environment's count) ·
 Date: 2026-10-08 ·
-Scope: tests/test_poleseed.py (the follow-chain re-craft),
-  tests/test_p1_composition.py (+ the institutional fixture + the
-  witness), tests/playscripts/province_institutional.json (new),
-  tests/test_pressure_pack.py (+ the ration witness),
-  docs/iterations/iter-342-ki114recraft-report.md (new),
-  docs/TASKS.md, STATUS.md, worklog.md — 8 changed/created
-  (4 test/corpus + 4 riders).
+Scope: docs/TASKS.md (the DONE-row collapse + the D-245 routing +
+  the doc-4 row + the ledger), docs/FRONTEND_UIUX_LAW.md,
+  docs/WORKBENCH_APP_LAW.md, docs/WORLD_PRESENTATION_LAW.md,
+  docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md, docs/VISUAL_SYSTEM_UI.md,
+  docs/FRONTEND_WEB_LAW.md (the phase markers),
+  docs/frontendweb/README.md + FRONTEND_WEB_AGENT_CONTEXT.md (the
+  stage sync), scripts/docguard.py (the allowlist retirement),
+  STATUS.md, worklog.md, docs/iterations/iter-343-lawrehome-report.md
+  (new) — 12 changed/created (all doc riders + the guard's data
+  entry).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -128,10 +128,10 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-342 DONE: ki114-recraft (THE THREE CORPUS RE-CRAFTS — the
-  poleseed follow-chain, the institutional duty-window corpus, the
-  registry-parked ration corpus; the honest-rejection pins kept as
-  the loud detectors; zero runtime code, zero pack data).**
+**iter-343 DONE: doc-4-lawrehome (the law-body re-homing — the five
+  live laws re-pointed to the web client, the dead engine-index
+  routing replaced by the D-245 archive routing, the TASKS DONE rows
+  collapsed; the docguard cap now ENFORCED on TASKS.md).**
 Next: the standing owner calls in order — the station canon
   re-measure (the kiloyear md5s, the owner's separate call), the
   Lab queue's battery rows E02/E31, M2 (the surface→canonical-ID

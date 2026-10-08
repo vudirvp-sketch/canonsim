@@ -92,14 +92,18 @@ ACTIVE REPO BINDING LAW
 - If an active owner and this law disagree, stop at the seam, name
   the exact contradiction, and update this law before implementing.
 
-## 2. Phase gate — Skeleton S0 (the primary gate until green)
+## 2. Phase gate — Skeleton S0 (GREEN — landed iter-289, D-244; the
+four criteria evidenced and accepted; the S0 laws below remain
+BINDING for every future surface)
 
 A minimal React + TS + Vite client over the existing loopback
 gateway, proving multi-tab and large-list behaviour, and measuring
 cost next to a live sim/LLM — ~1–2 weeks of focused work. **During
 S0, agents MUST NOT expand into the full ACCEPTANCE_MATRIX, the V5.2
 source trees, SSE implementation, a surface registry, a layout
-manifest, or Redot parity.** Those gates open only after S0 is green.
+manifest, or Redot parity.** Those gates open only after S0 is green
+(the gates that opened after green each rode their own admission row
+— the SSE contract iter-305/306, the acceptance matrix iter-308).
 
 | # | Criterion |
 |---|---|
@@ -443,17 +447,28 @@ Phase 0 — freeze Redot + archive cleanly (DONE — D-244 the freeze,
           the launcher re-pointed to the web dev server; recovery:
           git history)
 Phase 1 — re-home the laws (Redot → historical/reference-only)
+          (DONE — iter-343/doc-4: the five live law bodies re-pointed
+          to the web client, the dead engine-index routing replaced
+          by the D-245 archive routing, the TASKS DONE rows collapsed)
 Phase 2 — frontend foundation (the S0-class client: shell, typed
           gateway client, runtime validation, state models, design
           tokens, harnesses, locked reproducible build)
+          (LANDED — S0 iter-289; the tooling floor + the visual
+          floors + Phase 3's rows + the streaming admission + the
+          acceptance matrix + the CI/smoke rows iter-293..309)
 Phase 3 — Workbench vertical slice (shell/nav, connection state,
           Chat/Inference, Settings, Observatory entry, lifecycle/
           error/reconnect)
+          (LANDED — iter-294..302 + the IA repair iter-297 + the
+          live-band closures iter-302/308)
 Phase 4 — simulation + world (run/session surfaces, Scene IR, the
           web scene renderer, deterministic fixtures + visual proofs)
+          (owner-gated — the P4 family)
 Phase 5 — remote/PWA (mobile, install/update, secure remote
           transport, reconnect, degraded/offline honesty)
+          (owner-gated)
 Phase 6 — optional Tauri 2 (thin shell, web stays fully functional)
+          (owner-gated — a standing boundary row)
 ```
 
 The final agent rule (the pack's, binding): build forward only on

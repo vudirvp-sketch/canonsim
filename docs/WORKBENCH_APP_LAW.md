@@ -30,13 +30,15 @@ control, provenance, recovery, tests — and drops history/repetition.
 ```text
 CanonSim core = canonical simulation semantics/events/fold/doors
 Workbench app = operations/runtime/identity/lifecycle/persistence/inference/gateway
-Frontend companion = UX/UI/Redot/Visual Scene IR/assets/visual validation
+Frontend companion = UX/UI/web client/Visual Scene IR/assets/visual validation
 OBSERVATORY = rebuildable analytical evidence over canonical runs
 PRESENTATION_SPEC = model-facing CanonSim presentation/serialization
 ```
 
-Redot is a presentation/runtime implementation detail, never a semantic
-owner. The single shared seam with the frontend is §23.
+The frontend companion (the web client `frontend/`, D-244 — the
+Redot-era companion deleted at D-245) is a presentation/runtime
+implementation detail, never a semantic owner. The single shared
+seam with the frontend is §23.
 
 ## 1. Product boundary
 
@@ -139,7 +141,8 @@ workbench/
 ├─ application/{operations, identity, artifact, directories, clock, settings}
 ├─ api/{contract, gateway, transport}          # transport carries the §13 SSE arm (iter-305)
 ├─ platform/{llama_process, model_fetch}
-└─ presentation/redot/                          # the frontend companion's own
+└─ (the presentation companion lives outside: `frontend/`, D-244 —
+   the Redot tree deleted at D-245)
 ```
 
 The spec's `domain/`, `features/`, `persistence/`, `adapters/llama_cpp/`
@@ -610,6 +613,12 @@ second backend client or semantics implementation.
 
 ## 23. Shared seam with the frontend companion
 
+> The LIVE seam with the web client (`frontend/`, D-244): the browser
+> dials the gateway's loopback `POST /op` (+ `GET /events` SSE) as an
+> untrusted presentation client — `docs/FRONTEND_WEB_LAW.md` the
+> implementation-law owner; the ownership split below carries with
+> "the web client" in the Redot seat.
+
 ### 23.1 Redot runtime contract `[DELETED at iter-290/D-245 — the owner's «удаляй redot» call; the record below is the historical contract; recovery: git history + docs/frontendweb/archive/]`
 
 Redot 26.2 LTS (`redot-26.2-stable`) pinned; project root
@@ -814,11 +823,11 @@ queue owner; FRONTEND_UIUX_LAW §25 the frontend ladder).
                 FRONTEND / VISUAL COMPANION
                     ViewModel / Scene IR
                            │
-                         REDOT
+                WEB CLIENT (`frontend/`, React)
 ```
 
 CanonSim decides canonical meaning/world change; the Workbench
 application decides safe operations, lifecycle, persistence, inference
 and external control; the frontend companion decides how results become
-understandable and visual; Redot presents without becoming a second
-simulator.
+understandable and visual; the web client presents without becoming a
+second simulator.

@@ -106,6 +106,18 @@ TEST_PLAN §9's claim packet)
   ledgers dead, the DECISIONS collapse 31→30) + the mechanical cap guard
   LIVE (`scripts/docguard.py` + `tests/test_docguard.py` — the recurrence
   fix). Detail: the iter-176 record + git.
+- `doc-4` — DONE (iter-343, R1 doc-only — the owner's 2026-10-08
+  repo-revision call: clean the docs of the stale Redot-era
+  frontend-wrapper information): FRONTEND_WEB_LAW §14's Phase 1
+  LANDED — the law bodies re-homed (Redot → historical/reference-only):
+  the five live laws (FRONTEND_UIUX_LAW / WORKBENCH_APP_LAW /
+  WORLD_PRESENTATION_LAW / LLAMA_CPP_INFERENCE_CONTROL_LAW /
+  VISUAL_SYSTEM_UI) name the web client as the presentation runtime,
+  the dead REDOT_ENGINE_INDEX routing replaced by the D-245 archive
+  routing everywhere it survived; the TASKS DONE rows (wb/ux/obs/inf)
+  collapsed to the landing-record form (the §8-report restatements
+  cut — the detail verbatim in git + CONTRACTS §5). Detail: the
+  iter-343 report + git.
 - `mech-2` — the agent impact surface — DONE (iter-196, the owner's
   «открывай mech 2» call; `mechanics impact --path <pack path> |
   --ref <name>` the derived reader index (the AST scan, D-118
@@ -118,367 +130,85 @@ TEST_PLAN §9's claim packet)
   instead; the structured-patch proposal PARKED behind a minimal
   prototype; the rename-safety lint gap closed as `rename-1`.
   Detail: iter-196/198/200 + D-197 + git.
-- `wb-1` — the Workbench vertical seam (the v5.2 Redot brief, the
-  owner's 2026-09-24 «start development» call — the family's first
-  row, CONTRACTS §5 the pre-implementation contract, D-200 the
-  admission): the chain
-  `known fixture → typed read model → Visual Scene IR → Redot
-  composition → screenshot artifact` — the Python half
-  (`workbench/scene_ir.py` + `workbench/scene_build.py` over the
-  smoke fixtures, present_in_order the one presence law) and the
-  Redot half (`workbench/presentation/redot/` the pinned 26.2 LTS
-  project, code-built composition, `scripts/visual_proof.py` the
-  REDOT_EXE operator runner). DONE (iter-215 the Python half + the
-  contract; iter-216 the Redot half + the live proof — the tavern and
-  province fixtures both composed and captured, the double-run PNG
-  byte-diff CONFIRMED, the REDOT_EXE-gated packet skipping clean
-  without the binary).
-- `wb-2..wb-N` — the family's forward rows (owner-gated, each fires
-  on the owner's call in the brief's own order — CONTRACTS §5's
-  composition block): wb-2 the Redot shell + custom theme (frontend
-  §46 Phase A) — DONE (iter-217: the semantic-token theme file + the
-  code-built application shell + the Chat/Settings placeholder
-  surfaces + the shell proof mode/packet; the landing record: CONTRACTS
-  §5's wb-2 note + the worklog + git); wb-3 the application-operations
-  skeleton (app §32 step 1: identity + execution artifact +
-  directories + clock) — DONE (iter-218: `workbench/application/` the
-  Python-side package — identity/artifact/directories/clock + the
-  §27 dependency envelope, the 25-test claim packet; the landing
-  record: CONTRACTS §5's wb-3 note + the worklog + git); wb-4 the
-  inbound gateway (INV-4's owner-gated exception, its own contract
-  first) — DONE (iter-219: `workbench/api/` the Python-side package —
-  contract.py the §8 envelopes + closed vocabularies, gateway.py the
-  socket-free dispatch core (the recorded-outcome replay, the §12.1
-  outcome mapping, the ordered events + RESYNC law, the in-memory
-  session-translation seed), transport.py the loopback HTTP binding —
-  INV-4's second sanctioned module, D-201, the architecture-test
-  exception + AGENTS §4/§8 rewording riding; the 36-test claim packet;
-  the landing record: CONTRACTS §5's wb-4 note + the worklog + git);
-  wb-5 the minimal application operations (app §32 step 5) — DONE
-  (iter-220, the owner's «продолжай работу» continuation call:
-  workbench/application/operations/ the Python-side package —
-  lifecycles.py §11's four closed state machines, execution.py §12's
-  absolute deadline + cooperative cancellation + the in-memory run
-  registry over the §10 artifact-before-side-effects freeze,
-  models.py §20's discovery half + the one real work kind (the
-  chunked digest), composition.py §6.1's single wiring owner
-  registering run.start/get/cancel + model.list/inspect — chat.send
-  honestly NOT registered (the backend row's consumer, the
-  admission law) + the gateway's two targeted edits
-  (OperationRejected the public rejection carrier, OperationEffects
-  the session-scoped event surface); the 46-test claim packet; the
-  landing record: CONTRACTS §5's wb-5 note + the worklog + git);
-  wb-6 the backend row (app §32 step 7 — capability-aware
-  inference/configuration + model identity/loading; the owner's
-  «подключи llama.cpp» call, the row that closes chat.send's
-  admission-law deferral) — DONE (iter-221:
-  `workbench/application/operations/backend.py` the backend family's
-  module — the typed `BackendPort` (props/chat/load_model/unload_model,
-  the physical owner `cli/engine.py`'s LlamaServerClient satisfying it
-  structurally, never imported — INV-4's two-surface form untouched)
-  + `chat.send` (the §19.1 REQUESTED→ACCEPTED→EFFECTIVE→OBSERVED walk
-  over the wb-5 run registry — identity-then-poll, the failed props
-  probe the honest «unavailable» note) + `model.load`/`model.unload`
-  (§20's loading half — the Model ladder walked on OBSERVED outcomes:
-  ACTIVE on success, FAILED on the observed refusal — the terminal
-  FAILED the recorded ladder gap, D-203 — SELECTED rest on the
-  unknown outcome, EVICTED→SELECTED the re-selection) + the engine
-  adapter's model-management half (POST /models/load +
-  /models/unload — build-sensitive research evidence, the stub-pinned
-  wire shapes, the live re-verification a station row) + the
-  composition's `backend=` wiring (the three operations registered
-  only when the port is injected — the admission law's honest form
-  continued); the 28-test claim packet
-  (tests/test_backend_row.py: the port conformance over the live
-  stub server, the layer walk, the cancellation trio, the deadline
-  terminal, the load/unload walks incl. the unknown-outcome rest, the
-  direct-vs-HTTP parity over the new surface, the byte-deterministic
-  pair, the cross-PYTHONHASHSEED pair, the import-closure scan) +
-  test_engine.py's four management adapter pins; the landing record:
-  CONTRACTS §5's wb-6 note + the worklog + git);
-  wb-7 the live chat circuit (frontend §46 Phase A's Chat row — the
-  Chat surface's real machinery over the gateway + app §22's
-  launcher; the owner's «продолжай работу по wb 7» + «могу ли я
-  подключить llama.cpp к реготу» call) — DONE (iter-222:
-  scripts/workbench_app.py the composition root + loopback serve —
-  the ONE launcher assembling the gateway + the operations + the
-  injected llama.cpp backend port (the two sanctioned surfaces meet
-  only there) + LoopbackHttpTransport on 127.0.0.1:8765, the
-  honest --no-backend admission form, the startup health probe
-  evidence-not-gate; the Redot half — presentation/redot/scripts/
-  gateway_client.gd the typed POST /op client (the sequential queue,
-  NO endpoint of its own) + shell.gd's live circuit (app.status →
-  session.create → chat.send → the run.get poll to the truthful
-  terminal; Stop = run.cancel; the honest NOT CONNECTED/refusal/
-  failure notes; the bounded message list) + project.godot's
-  canonism_workbench/gateway/url default; tests/test_workbench_app.py
-  the 8-test claim packet (the end-to-end chat over HTTP against the
-  live stub llama-server + the dead-endpoint FAILED close) +
-  test_shell_contract.py's three G8 pins; the landing record:
-  CONTRACTS §5's wb-7 note + the worklog + git);
-  wb-9 the model-flow row (frontend §46 Phase A's Models/Settings
-  real-surface half + app §11.1's managed default + §20's arrival
-  half — the owner's 2026-09-26 «открыл воркбенч, зашел и загрузил
-  модель» + «подтянуть модель откуда угодно» + «настройки запуска
-  llama.cpp... сэмплеры всякие» calls) — DONE (iter-226: the D-208
-  third network surface workbench/platform/model_fetch.py + the
-  model.fetch work kind with live progress + the launch-settings
-  family (settings.py + backend.settings ops + the persisted
-  workbench/runtime/settings.json) + the runtime layout decision
-  (workbench/runtime/{models,llama.cpp}/) + workbench_app.py's MANAGED
-  default + the exe auto-discovery + scripts/workbench_launch.py the
-  one-command launcher + shell.gd's real Settings surface + the Models
-  manager; the 35-test claim packet; detail: CONTRACTS §5's wb-9 note +
-  D-208 + the worklog + git);
-  wb-10 the owner-experience row (the owner's 2026-09-25 fix list
-  over the wb-9 handback: the launcher's Popen `buffering` TypeError +
-  «редот у меня такой …\Redot_v26.2-stable_windows_win64, где найти
-  redot.exe и как его подключить?» + «просто открывающийся проводник
-  и выбор уже скаченных локальных моделей» + «пользователь не должен
-  вводить команды чтобы запустить или скачать что-либо!» +
-  «интерфейс вверх убожества») — DONE (iter-227: the launcher rework —
-  bufsize, the folder-aware Redot resolution with the persisted
-  launcher.json + the Desktop-shaped auto-scan + the native tk picker,
-  the observed bind URL forwarded to the Redot child, the bare "--"
-  stripped; the model.import work kind — the local copy with live
-  progress + cooperative cancel, NO network; discover()'s models_root;
-  shell.gd's native-picker Models manager with the URL fetch demoted
-  to the collapsed advanced row; the theme@0.2 visual pass; the
-  Workbench.bat/Workbench Setup.bat zero-command entries; the 23-test
-  claim packet incl. THE REAL SPAWN integration; detail: CONTRACTS §5's
-  wb-10 note + D-209 + the worklog + git);
-  wb-11 the transport-chain row (the owner's 2026-09-26 report over
-  the wb-10 handback: «молча висят + транспорт результ 13» + «модель
-  выбрать не могу, там пусто, моделей не видно, кнопка выбрать модель
-  не работает (проводник не открывается)» + the evidence «llama.cpp и
-  модели запускаются штатно если отдельно запускать») — DONE
-  (iter-228: model.load/model.unload as RUNS — the fast dispatch +
-  the worker-thread port call + the cause on the run.get wire (§21);
-  llama_process.py's pipe drains + the cross-platform stderr_tail
-  (the Windows pipe wedge + '(empty)' pinned dead); shell.gd's
-  run-poll circuits + the honest picker/load guards + the scan
-  re-arm; the single-slot + in-flight guards; the 3-new-pin claim
-  packet incl. THE DISPATCH-LOCK regression; detail: CONTRACTS §5's
-  wb-11 note + D-210 + the worklog + git);
-  wb-12 the token-audit row (VISUAL_SYSTEM_UI §10's queue head — the
-  owner's 2026-09-25 «тема и UI все так же убоги» + «не происходит
-  плавной прокрутки вниз» calls over the v5.2 plans pack) — DONE
-  (iter-230: theme@0.3 — the neutral ramp re-pinned over the
-  Catppuccin Mocha VALUE reference (§6 mechanisms-not-looks), ONE
-  accent #89b4fa, accent_deep retired, the NavButton variation + the
-  chip_busy token; + the chat's follow law on the same row — the
-  smooth tween over the scrollbar's float value, the layout-settle
-  await, the near-bottom gate, the follow on every role; + the
-  GENERATING chip (§5's matrix state visible); detail: CONTRACTS §5's
-  wb-12 note + D-212 + the worklog + git);
-  the exported-Windows-build row (the owner's «по человечески сделать
-  это нельзя?» — the dev form runs the project through the editor
-  binary; the product form is an exported .exe over Redot export
-  presets + the launcher's export-binary resolution arm) — PARKED per
-  AGENTS §2.4 (a named row when the owner calls it);
-  wb-9+ per the brief's §32/§46 ladders (live events +
+- `wb-1` — DONE (iter-215 the Python half + the contract; iter-216
+  the presentation half + the live double-run PNG byte-diff proof —
+  the v5.2 brief's first row, D-200 the admission, CONTRACTS §5 the
+  pre-implementation contract): the Workbench vertical seam — the
+  chain `known fixture → typed read model → Visual Scene IR →
+  composition → screenshot artifact`; the Python half
+  (`workbench/scene_ir.py` + `workbench/scene_build.py`,
+  present_in_order the one presence law) alive; the presentation
+  half was the Redot composition, DELETED at iter-290/D-245 (the
+  web client the active consumer). Detail: CONTRACTS §5 + git.
+- `wb-2..wb-12` — DONE (iter-217..230, the brief's own order, one
+  row per landing; the per-row landing records verbatim in git
+  history): the Workbench application stack — wb-2 the shell + the
+  semantic-token theme; wb-3 `workbench/application/`
+  (identity/artifact/directories/clock); wb-4 `workbench/api/` the
+  socket-free gateway + `transport.py` the loopback binding (INV-4's
+  second sanctioned module, D-201); wb-5 `operations/` (the §11
+  lifecycles, the §12 deadline/cancellation run registry, the
+  model-discovery half — chat.send honestly deferred to its
+  consumer, the admission law); wb-6 the backend row
+  (`operations/backend.py` the typed BackendPort + chat.send +
+  model.load/unload over the OBSERVED ladder, D-203); wb-7
+  `scripts/workbench_app.py` the composition root + the live chat
+  circuit; wb-8 `platform/llama_process.py` the managed llama-server
+  process row (D-205); wb-9 the model-flow row
+  (`platform/model_fetch.py` INV-4's third sanctioned module, D-208,
+  + the launch-settings store + the runtime layout +
+  `scripts/workbench_launch.py` the zero-command launcher); wb-10
+  the owner-experience rework (model.import the local native-picker
+  arrival, NO network, D-209); wb-11 the transport-chain row (the
+  load/unload runs' fast dispatch, the pipe drains, D-210); wb-12
+  the token-audit row (theme@0.3 + the chat follow law, D-212). The
+  Redot frontend halves (shell.gd & co.) DELETED at iter-290/D-245 —
+  the web client (`frontend/`, D-244) the active consumer; the
+  exported-Windows-build row PARKED per AGENTS §2.4 (the Redot
+  export form died with the tree; the product form re-scoped to the
+  web client when the owner calls it). Detail: CONTRACTS §5 + git.
+- `wb-13+` — the family's forward rows (owner-gated, each fires on
+  the owner's call — the brief's §32/§46 ladders: live events +
   reconnect/resync + the idempotency/revision/lease tests at live
-  scale; persistence; the frontend rows — inference, history,
-  diagnostics, the CanonSim seam, asset vocabulary, the G1–G12
-  gates; the VISUAL rows — wb-12+ per docs/VISUAL_SYSTEM_UI.md §10,
-  each visual row its own §8 report, the functional row first).
-  Never speculative — a row opens only when the owner names
-  it. Engine/API facts for any wb row: `docs/REDOT_ENGINE_INDEX.md`
-  (the Redot 26.2 routing firewall — read before the row starts;
-  admitted iter-225, D-207). Visual/UI facts for any wb row:
-  `docs/VISUAL_SYSTEM_UI.md` (the surface-driven grammar + the token
-  taxonomy + the state matrix + the transplantation protocol —
-  admitted iter-229, D-211).
-- `ux-1` — DONE (iter-234, 2026-09-25). The §8-style report:
-  TARGET PROBLEM: the P0 minimums absent — hard-coded strings,
-  no motion policy, fixed-viewport bootstrap, no keyboard path
-  (FRONTEND_UIUX_LAW §17/§15/§16). CURRENT PRIMITIVE: shell.gd's
-  ~197 inline literals, the always-on chat tween + busy pulse, the
-  bare 1440x900, focus grabbed by the nav button.
-  TRANSFERRED MECHANISM: first-party (the LAW's own contracts);
-  the catalog pattern preload+static lookup (Object.tr's native
-  signature forbids `static func tr(` — pinned). INVARIANT: the
-  wire, the theme values, the follow law's settle frame, KI#96's
-  re-scan, the honest-note vocabulary all unchanged; the canonical
-  protocol vocabulary (lifecycle states) renders verbatim, never
-  re-worded; proof captures stay byte-identical (locale explicit-
-  only, ui_state never read/written, the seam harness pins its own
-  window). FILES: scripts/strings.gd (new), shell.gd, seam_proof.gd,
-  project.godot, tests/{test_shell_contract.py,test_shell_proof.py}.
-  EXPECTED CONSEQUENCE: ru renders natively on the owner's machine
-  (OS locale), motion-doling users get static equivalents, the
-  window scales below base without clipping, Esc/Ctrl+. stop a
-  generation, each surface opens focused on its task entry.
-  REJECT CONDITIONS: any catalog key missing in a locale; Cyrillic
-  tofu/clipping; a proof-capture diff between same-arg runs; the
-  gated pins drifting again. VERIFICATION STATE: STATIC_VERIFIED
-  (the boundary scan + the four ux-1 contract tests, 2289+6 CI)
-  + RUNTIME_VERIFIED (the five REDOT_EXE packets green 2294+1; the
-  ru screenshot VLM-checked: no tofu, no clipping) + DEFERRED: the
-  language picker row (the override chain suffices), the
-  per-surface font-size scaling (rides the stretch scale).
-- `obs-1` — DONE (iter-235, 2026-09-25). The §8-style report:
-  TARGET PROBLEM: the Observatory absent even as a stub — the
-  project's defining analytical surface had no frontend entry
-  (LAW §25's standing resolution: "more important than polishing secondary shell surfaces
-  indefinitely"). CURRENT PRIMITIVE: nothing — no nav entry, no
-  regions, no grammar. TRANSFERRED MECHANISM: first-party (the LAW's
-  own §3/§25 grammar — the workspace regions + the slice ladder); the hosting form — observatory.gd composes
-  itself over the injected theme + the shell's _tr Callable (LAW
-  §18's split seed). INVARIANT: zero dispatch, zero new transport,
-  zero fabricated data (INVARIANTS 1/2); the read-only DRAFT
-  lifecycle; the distinct NO DATA semantics; the evidence rungs'
-  unknown as text. FILES: observatory.gd (new), shell.gd, strings.gd,
-  visual_proof.py, tests ×2. EXPECTED CONSEQUENCE: the interaction
-  grammar is visible and navigable — the IA reads as intent groups;
-  every region exists honestly-empty, ready for the read-side seam.
-  REJECT CONDITIONS: any fabricated value; a second transport or
-  authority; a flat nav catalog; color-only state. VERIFICATION
-  STATE: STATIC_VERIFIED (the obs-1 slice contract, the boundary-
-  from-birth scan) + RUNTIME_VERIFIED (the observatory capture
-  under the pinned engine, VLM-checked composition) + DEFERRED: the
-  live-run feed (obs-2's own row — a READ-side seam into the
-  canonical backend), selection (needs rows to select), the
-  question EDITING form (the DRAFT display is the slice's truth).
-- `obs-2` — DONE (iter-236, 2026-09-25). The §8-style report:
-  TARGET PROBLEM: obs-1's regions were honestly empty — no data
-  reached the Observatory (LAW §25's P1 continuation: the live run
-  feeding the context strip + the event table over a READ-side
-  seam; the selection model's first consumer, §6). CURRENT
-  PRIMITIVE: nothing — no read op, no feed path, no selection.
-  TRANSFERRED MECHANISM: first-party (the LAW's own §3/§4/§20/§21
-  grammars) over the wb-1 read-side edge precedent
-  (workbench/scene_build.py's core.log import): the seam's one home
-  workbench/observatory_read.py + the ops layer
-  operations/observatory.py + the shell's two-signal hosting +
-  observatory.gd v0.2's feeds. INVARIANT: zero new transport (the
-  loopback gateway is the only seam; the observatory never touches
-  the client), zero fabricated values (every render from a feed
-  document), the boundedness ceiling ONE (the op's default 50/cap
-  200 — the UI re-declares nothing), the selection the event ID
-  (never a row index), the authority CANONICAL rendered never
-  guessed, the distinct empties (probing/NO RUNS/NO EVENTS/refused
-  never collapse), only the READ rung confirms under a selection
-  (a cause_id never confirms BRANCH). FILES:
-  workbench/observatory_read.py (new), workbench/application/
-  operations/observatory.py (new), composition.py, workbench_app.py,
-  observatory.gd, shell.gd, strings.gd, visual_proof.py,
-  tests/{test_observatory_read.py(new), test_shell_contract.py,
-  test_shell_proof.py, test_operations.py}. EXPECTED CONSEQUENCE:
-  opening the Observatory with a gateway live lists the runs, loads
-  the first readable one, renders its context + rows, and a click
-  opens the inspector + scopes the ladder + extends the breadcrumb;
-  pagination windows the history; a corrupt log degrades honestly.
-  REJECT CONDITIONS: any fabricated value; a second transport or
-  authority; a UI-side page-size constant; selection by position;
-  "42.0"-style float rendering; the loaded capture masquerading as
-  empty. VERIFICATION STATE: STATIC_VERIFIED (the op contract's 17
-  tests + the obs-2 shell contract) + RUNTIME_VERIFIED (the
-  REDOT_EXE loaded capture — double-run byte-identical, distinct
-  from the empty slice, VLM-verified composition incl. the
-  inspector's full dump via the headless harness) + DEFERRED: the
-  timeline lanes (P3), the question EDITING form (obs-3+), the
-  perception/observation profiles (their own rows).
+  scale; persistence; the frontend continuation rows — inference,
+  history, diagnostics, the CanonSim seam, the asset vocabulary; the
+  visual rows per VISUAL_SYSTEM_UI §10). Never speculative — a row
+  opens only when the owner names it. Redot/Godot engine questions
+  route to the archived pack's reference docs
+  (`docs/frontendweb/archive/`, D-245 — the repo's engine index
+  deleted, never a repo file again); visual/UI facts for any wb
+  row: `docs/VISUAL_SYSTEM_UI.md` (the surface-driven grammar + the
+  token taxonomy + the state matrix, D-211).
+- `ux-1` — DONE (iter-234): the P0 UX minimums over the then-Redot
+  shell (deleted D-245) — the string catalog, the motion policy, the
+  responsive bootstrap, the keyboard path; the lessons carry to the
+  web client as PRINCIPLES (STATUS FAQ's Redot-era entry). Detail:
+  git.
+- `obs-1`/`obs-2` — DONE (iter-235/236): the Observatory frontend
+  entry — the IA regions + the interaction grammar (obs-1); the
+  read-side seam + the feeds (obs-2: `workbench/observatory_read.py`
+  + `workbench/application/operations/observatory.py`, the
+  boundedness ceiling ONE, selection by event ID, the distinct
+  empties). The live surfaces now the web client's Observatory
+  feature (`frontend/src/features/observatory/`); the obs-3+ P3
+  rungs the owner's call. Detail: OBSERVATORY_LAW + git.
 - `obs-3..obs-N` — the Observatory continuation family (each row
   owner-gated, the LAW §25 ladder): the P3 rungs after obs-2
   (timeline lanes, compare arms, semantic zoom, cross-highlighting,
   Evidence Capsules, persistent research contexts) + the question
   editing form when its consumer names itself.
-- `inf-1` — DONE (iter-239, 2026-09-25). The §8-style report:
-  TARGET PROBLEM: the llama.cpp generation-control surface was flat
-  launch fields with no meaning layer (no categories, no AUTO, no
-  ordered chain, no relations, no effective state) and Settings was
-  becoming the flag browser the chip specification forbids. The
-  owner's 2026-09-25 chip-workspace hand-off (the external
-  `llama_cpp_chip_workspace_spec_2026-09-25.md` + the reviewed
-  `флаги llama.cpp.txt` snapshot — research inputs, never vendored).
-  CURRENT PRIMITIVE: the flat launch-settings fields (context/gpu/
-  fa/jinja + the five sampler flags) + build_server_command's fixed
-  emission. TRANSFERRED MECHANISM: the chip specification's own
-  three-layer split (raw capability / semantic control / UI
-  projection) over the repo's single-owner seam (settings.py's own
-  store pattern, llama_process's typed surface, composition.py's
-  injection seams): docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md (the
-  binding owner, D-219) + workbench/application/inference.py (the
-  control library — 13 controls over 5 categories; the profile
-  store inference.json; the deterministic resolver — composition,
-  the evidence-pinned relations, the effective-state vocabulary;
-  the compiled launch surface; the migrate_launch_semantics
-  one-way schema/1→settings/2+inference/1 value-preserving
-  migration) + the settings store's DEPLOYMENT slim + the platform
-  builder's additive params (samplers/seed/fit/kv; the legacy
-  command byte-stable) + the extra_args duplicate-ownership guard +
-  the gateway family (inference.read/update) + chat's BASE
-  re-point (the resolver's effective temperature) + the run
-  document's REQUESTED/EFFECTIVE pair + inference.gd the Inference
-  surface (the control groups + the ordered chain + the state
-  badges + the compiled preview + the save circuit) + the Chat
-  projection row + the Settings slim + the proof injection
-  (--inference-document). INVARIANT: Settings ≠ Inference Control
-  (one value owner per control; the profile store the single
-  semantic authority); AUTO ≠ unset ≠ disabled (the runtime's own
-  forms: -ngl auto/all, -fa auto, --seed -1); the chain is ordered
-  (an order change changes the emitted --samplers); temperature 0
-  PRESERVES the sampler configuration (INEFFECTIVE with reasons,
-  never deleted); configured-but-ineffective stays VISIBLE with the
-  reason; the raw hatch never shadows a semantic control (the
-  compile-time conflict, both flag forms matched); the states shown
-  are the SERVER's resolution (a local edit never fabricates a
-  state). VERIFICATION STATE: STATIC_VERIFIED (test_inference.py —
-  26 tests: the semantic-model laws, the resolver laws, the chain
-  round-trips, the backend translation, the truth layers, the store
-  + migration laws, the guard, the operations; the updated
-  settings/workbench_app/shell_contract/operations packets; 2335+8
-  + ruff + docguard clean) + the runtime proof row (the
-  --inference-document capture) as the follow-up arm. DEFERRED: the
-  session override layer, capability discovery (--help registry),
-  the library/pinning/search workspace, presets/scenarios/recipes/
-  hardware profiles, the later capability groups (DRY/XTC/Mirostat/
-  MoE/server/speculative...), seed's request scope, the chat-template
-  override relation — each its own owner-gated row.
-- `inf-2` — DONE (iter-240, 2026-09-26). The §8-style report:
-  TARGET PROBLEM: the owner's «результат вообще неудовлетворительный!
-  Очень коряво, криво и косо + далеко не все сэмплеры и настройки
-  есть» report over the inf-1 slice: the library carried 13 of the
-  ~85 reviewed controls (the DRY/XTC/Mirostat/Typical/Top-N-Sigma/
-  penalties/MoE/loading/server/reasoning/... families all missing),
-  the Inference surface COMPOSED its rows before the first read (the
-  live flow rendered EMPTY category groups — only the proof-only
-  injection masked it), and the UI re-encoded the vocabulary
-  client-side (VALUE_SPINS + the form constants — a second source
-  of truth). TRANSFERRED MECHANISM: the same three-layer split,
-  completed — the library over the WHOLE reviewed snapshot (the
-  §31 category ladder, every disabled/AUTO form the runtime's own
-  literal), the typed relation DATA (Condition/Requires/
-  EffectiveNoop — the mirostat noop pinned from the --help's own
-  words, the temperature-0 deterministic noop, the family
-  requires), the DATA-DRIVEN Redot workspace (the editors built
-  from the read document's own value_type/forms/limits metadata;
-  the rows build ON the read; search/pins/collapsible categories/
-  the advanced rung/the transparent preset diff preview), the
-  platform's SEMANTIC_FLAG_TABLE + build_semantic_command (the
-  compile seam: field-keyed values in, flag syntax out, unknown
-  fields LOUD; build_server_command byte-stable as the deployment
-  path), and the workspace section (the pinned ids ride the
-  profile document — one file, two named sections). INVARIANT: the
-  profile document FIELD-STABLE (an inf-1 profile loads as-is; the
-  5-member chain upgrades to 9 at load, the operator's order
-  preserved); one value owner per control; the UI never re-encodes
-  the vocabulary; the unsaved edits survive a refresh (the carried
-  editor values law, the own-save exception). VERIFICATION STATE:
-  STATIC_VERIFIED (test_inference.py — 34 tests: the full-library
-  laws, the cross-layer vocabulary pins, the relation laws, the
-  chain upgrade, the presets/pins, the compile surface, the guard
-  over 138 tokens; 2344+9 / 2352+1 REDOT_EXE + ruff + docguard
-  clean) + RUNTIME_VERIFIED (the --inference-document capture
-  double-run byte-identical + the VLM eyeball: the pinned chips,
-  the preset row, the search field, the collapsible categories with
-  counts, the 9-member chain with states — the effective-state
-  presentation renders). DEFERRED: the session override layer,
-  capability discovery, the model-driven context awareness,
-  recent/frequent ordering, scenarios/recipes/hardware profiles,
-  custom preset persistence, seed's request scope, observability
-  feeds — each its own owner-gated row.
+- `inf-1`/`inf-2` — DONE (iter-239/240): the llama.cpp
+  inference-control family —
+  `docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md` (D-219) the binding
+  owner + `workbench/application/inference/` the control library
+  (the three-layer split: raw capability / semantic control / UI
+  projection; the whole reviewed control set; the typed relations;
+  the deterministic resolver; the compiled launch surface; the
+  profile store + the one-way migration; the extra_args
+  duplicate-ownership guard) + the gateway family
+  (inference.read/update). The Inference surface now the web
+  client's feature (`frontend/src/features/inference/`); the inf-3+
+  continuation rows the owner's call. Detail: the law + git.
 - `inf-3..inf-N` — the inference continuation family (each row
   owner-gated, LLAMA_CPP_INFERENCE_CONTROL_LAW §21's ladder): the
   capability discovery + the context-aware/model-driven visibility +
@@ -604,6 +334,7 @@ TEST_PLAN §9's claim packet)
   agreement, determinism. Detail: D-235 + TEST_PLAN §9's first-prism
   row + git.
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+- iter-343 · 2026-10-08 · doc-4-lawrehome (R1 doc-only — the owner's 2026-10-08 repo-revision call; FRONTEND_WEB_LAW §14's Phase 1): THE LAW-BODY RE-HOMING LANDED — the five live laws re-pointed to the web client (UIUX §0/§19..§25, APP §0/§3/§33, PRESENTATION §0..§15, LLAMA_CPP §0/§5/§19, VISUAL §8), the dead REDOT_ENGINE_INDEX routing (TASKS' live line, UIUX §5, PRESENTATION §14/§15) replaced by the D-245 archive routing; the TASKS DONE rows (wb-1..12, ux-1, obs-1/2, inf-1/2) collapsed to the landing-record form — the §8-report restatements cut, the docguard allowlist entry retired (the designed under-cap exit); the frontendweb README's stage + the migration ladder's phase markers synced; zero code, zero pack data, zero corpus price; 2632+1 + ruff + docguard + topology clean (the suite byte-untouched, the collection IDENTICAL to BASE, zero failures — the prior session's 2638+1 its own environment's count); NEXT: the standing owner calls (the station canon re-measure, E02/E31, M2, replay-UI, W8, P1/P2/P3); the report iter-343-lawrehome-report.md
 - iter-342 · 2026-10-08 · ki114-recraft (R0 test/doc only — the owner's 2026-10-08 «я б сначала сделал следующее: ki115-fix, три строки ki114-recraft» call, the second half; the iter-339 packet §4's named residue): THE THREE CORPUS RE-CRAFTS — (A) the poleseed night chain: the reader FOLLOWS the pole to the artery (the beat's own move t=2118 delivering Dellan + the pole to the player's location), the read at t=2820 inside the SECOND day's night window — the partial-by-dark acquisition arm alive (the flood story saw/partial, the cluster partial); (B) the p1 institutional check: the second corpus `province_institutional.json` (seed 2) whose re-timed wait lands inside the sergeant's duty window (the rotation keep→malby at 2520) — the deferred check CO-LOCATES (t=2899): the verdict honestly unsatisfactory (60 vs 57), the waybill 55→80 (the arrest bar 75 crossed), the arrest attempt at the threshold, the resolution the EVASION arm (61 vs 48; the caught arm the crime family's witness, no seed 2..53 aligns the three rolls); (C) the pressure bench ration: the registry-parked corpus (seed 7, the player a pure audience) — the stokers' year-crossing stoke (t=520004, no player lever), the knock (t=520604, the keeper's vague hearing), the in-window beat's mint (t=520920, the residue 11), the firing at the drain's boundary (t=524327): FOUR COAL to the firehole (24→20 / 5→9), the bench one tick before, the warmth the reply — the antagonist pair's other answer; the honest-rejection pins KEPT (the loud detectors); 2638+1 + ruff + docguard + topology clean (2 witnesses added, 1 re-crafted, nothing weakened; the corpora double-run byte-identical); NEXT: the standing owner calls (the station canon re-measure, E02/E31, M2, the replay-UI row, W8, P1/P2/P3); the report iter-342-ki114recraft-report.md
 - iter-341 · 2026-10-08 · ki115-1 (R2 core — the owner's 2026-10-08 «я б сначала сделал следующее: ki115-fix, три строки ki114-recraft» call, the first half): THE CROSSING'S PROGRESSIVE LAW — co-due same-account flows draft and commit progressively (`flow_drafts`: flow N sees flows 0..N-1 of the same crossing, `_commit`'s pending-dict law one level up, a copy-on-write overlay, the function pure, every signature + loop.py untouched; the capped source's occupancy rides the overlay — the fill + silence arms); the fork resolved for the engine side (the lint declares co-due same-account flows LEGAL data — the crash was the engine's; the D-182 fold stays valid pack data; the till's +12/−4 REQUIRE the shared account); ZERO CORPUS PRICE PROVEN (grim the only co-due pack, no committed corpus crosses the grim year — 2636 passed, every golden byte-compare green, the fold untouched); KI#115 CLOSED (the year turn green 30→42→38; the crash reproduced at BASE in-session, dead at the fix); the year-scale grim witness LANDED (the row's own ask): the progressive reckoning + the multi-year +8/year ladder (38→50→46→58→54) + T1 at the year scale + the composition law at the year boundary (continuous == split == resume byte-for-byte; the battery's guard comment updated to the design reason); +6 laws (2 substrate — the co-due chain/purity/gate-walk + the capped occupancy arms; 4 witness), nothing weakened; 2636+1 + ruff + docguard + topology clean; NEXT: the three ki114-recraft rows (the owner's called remainder), then the standing queue; the report iter-341-ki115-report.md
 - iter-340 · 2026-10-08 · ki114-1-impl (R3 core — the owner's «Пакет KI#114 принят. Переходи к ki114-1-impl» call, the iter-339 packet's landing): THE CLEAN-DRAIN-BOUNDARY COMPOSITION LAW the engine's own contract (run_steps feeds one intent, drains the full cascade, feeds the next at the drained clock; _feed_next/_step_intent_id deleted; the feed point a function of the drained state alone) — run_steps([A,B]) == run_steps([A]); run_steps([B]) for every partitioning, continuous == split == checkpoint/resume byte-for-byte, KI#17 vacuous; THE PERMANENT FALSIFIER tests/test_composition.py (143 checks pinned by the shape assert: cut lattice x kinds x 5 packs x 2 seeds x split+resume-at-every-cut+double-run + the Lab segmented 3y family — 0/143 under the law, BASE 45/143 the teeth; the farthest repro + the boundary-door laws); the partition-vs-wait-split distinction fixed (the Lab contract untouched); the conscious rebase EXACTLY the packet's census (province/road/pressure regenerated — +10/pure+3/+9, grim+plumbing byte-identical; the mediator corpus 3 verdicts; 48 re-pins mechanism-named; stepread's night corpus re-crafted); KI#114 CLOSED; KI#115 opened (the grim two-same-account-flows latent bug, caught BY the _commit gate at the first year turn — pre-existing, pack-data fix, the owner's call); 2630+1 + ruff + docguard + topology clean (3 laws added, nothing weakened); NEXT: KI#115's row, the ki114-recraft rows, the standing queue; the report iter-340-ki114impl-report.md
@@ -613,4 +344,3 @@ TEST_PLAN §9's claim packet)
 - iter-336 · 2026-10-07 · stationcross (R0 datum-parse, ZERO code change — the owner's «Продолжай работу, я архив с результатами предоставил» call; the STATUS Next item (1), the station cross-check row): THE STATION CROSS-CHECK CLOSED (probe v3.0, Win11/Python 3.14.3/Coffee Lake/30.9 GB, HEAD ad79e1f = the sandbox BASE_COMMIT; all six stages ok, the manifest md5s re-verified in-sandbox): THE WHOLE KILOYEAR MEASURED — 3,818.15 s / 82,757 events / life 100% final, INSIDE the predicted 3,000–4,500 s window (the α-model holds cross-iron; the station's own α = 1.91); the whole-arm REALIZED_DELTA at the millennium (the workshop starved ore=0/wood=6/tool=8, 4 conversions — the iter-335 §D item closed); THE CROSS-IRON WALL: segmented 104.36 s vs 102.54 s = +1.8% (LINEAR on both irons; the whole arm the other way — the station 1.22× faster on the allocation churn; read 0.647 vs 0.604 s/MB, the iter-327 law holding); THE CROSS-IRON T1 DECOMPOSED TO THE BYTE — the file delta = (lines − 1) EXACTLY on every measurable pair (+230/+290/+8,557/+14,210, +130,327 on the kiloyear by arithmetic), the causes named: the Windows CRLF (+1 byte/line, od-dumped) + the header's python meta (−1); THE EVENT STREAM BYTE-IDENTICAL cross-iron (the \r-strip per-line compare ALL IDENTICAL ×4, the event-stream md5 IDENTICAL ×4, semantic_diff exit 0 ×4 — the sanctioned comparator D-229) — THE INTERPRETER CONTRIBUTES ZERO CONTENT BYTES (3.12.14 ↔ 3.14.3: byte-identity is a property of the CONTENT, not the environment); the derived prediction: the whole-kiloyear log = 45,000,433 bytes on a LF platform; B6 GREEN on the independent iron (1,000 = 1,000, sources ≤ caps, the mass −30); the kiloyear talk invariant 32,404 = 32,404 both arms + the 100y family 3,355 = 3,355 (the triple check); 2606+1 + ruff + docguard + topology clean (NO test deleted or weakened — the suite untouched); NEXT: H9 (structurally unblocked by the epoch), the occ-window fix (B7) on the owner's call; the report iter-336-stationcross-report.md
 - iter-335 · 2026-10-07 · kiloyear (R2 local-add — the owner's standing third call item «станционный килогод с вооружённым миром» (opened with rng-1, unblocked by the epoch) + the active «продолжай работы, открывай важнейшее» directive): THE ARMED-WORLD KILOYEAR BATTERY UNDER THE EPOCH — sanity 2y paired + T1 HELD (183,697 B); control 100y paired (whole 8,557/56.2 s, segmented 14,210/10.32 s, talk 3,355 = 3,355 INVARIANT — the epoch moves the MT absolute (3,209), never the invariance); MAIN segmented 1,000y: 130,327 events / 102.54 s / life 74,322 in 1000/1001 spans, T1 HELD at 76,951,399 B × 2 (the deepest determinism run ever); THE B6 ORACLE GREEN AT THE MILLENNIUM — the workshop static at the 10y levels (4/12/6 vs the unarmed 4,016 DEAD), every source ≤ its basin (58/60, 38/40, 38/40, 22/24; the mass −30 vs the unarmed +26,300), 1,000 conversions = 1,000 bloom wears (exactly 1.00/year) — ZERO pack-data forks, B6 closed at every scale 10y→100y→1000y; the kiloyear laws: sourced 4.00/year EXACT, flat life 74.3/year (trend 0.976), constant state 25, read 0.604 s/MB; THE WALL: segmented LINEAR (9.94× on 10×, 10.3× faster than the unarmed MT sandbox-equivalent), THE WHOLE ARM DECOMPOSED — occ_refold 68.8%→81.7%, per-call ×2.0, knowledge 0.0% (P1b holds on both protocols); the mechanism named in code: the deferred-realize law makes the whole protocol's OCC window [seq, end) horizon-long (P1a removed only the prefix refold) — NOT a P1a regression (its law was measured on the segmented form); the whole bound 400y > 595 s (α ≈ 1.72), the station prediction ~3,000–4,500 s, the fix a future gated row (B7's letter); the armed whole world at 100y: 4 conversions/century, the store's deferred pile CAP-BOUNDED; + account_converted joins the labrunner full-read (the B6 turnover counter) + its law; the station probe v3 (session artifact, self-checked) for the owner's cross-check; 2606+1 + ruff + docguard + topology clean (NO test deleted or weakened — 1 extended, assertions only added); NEXT: the station cross-check on the owner's hardware, H9 behind it; the report iter-335-kiloyear-report.md
 - iter-334 · 2026-10-05 · rng1 (R3 core — the owner's «P0.5-C, rng-1 (эпоха), станционный килогод» call, the row opened by the message itself): THE EPOCH LANDED — the counter-block RNG bank (U(stream,k) = word(k mod 4) of sha256(key:k div 4); O(1) to the k-th draw, counters-only checkpoint, structural branch isolation; the legacy MT cursor refused loud) + THE CORPUS PRICE PAID: 228 failures re-pinned with every law's assertion intact (7 golden fixtures regenerated, 3 playscripts re-seeded, the document-check verdict flip, the CRN power doubled at the same thresholds; test_echo's mechanical pack→PACK corruption caught and fixed) + P0.5-C closed as exhausted + the owner's balance condition verified: the B6 oracle GREEN under the epoch's own draws (10 conversions = 10 wears, all caps held — zero pack-data forks); measured: 766,832 draws/100y (98.7% urgency family), the block form free per-draw (0.42 µs = MT randint's own), the wall +3.7% (10.0→10.37 s); 2606+1 + ruff + docguard + topology clean (NO test deleted or weakened); NEXT: the station kiloyear with the armed world (unblocked — the boundary paid), H9 behind it; the report iter-334-rng1-report.md
-- iter-333 · 2026-10-04 · stageb1impl2 (R2 pack-data — the farstead arming + the B6 battery, the material cycle COMPLETE): the recipe forge_a_tool (ore 2 + wood 2 → tool 1 at the workshop), the bloom-bench wear (tool 1 per use), the four source caps (the seeded basins — the first cut BELOW the seeds caught by the cap floor itself: the loud refusal the law's own proof); THE B6 ORACLE GREEN: the dead pile dies (the workshop static: ore 4 the seed, wood 12 the buffer), the piling breaks (the total account mass CONSTANT vs the unarmed +26.3/year; the spring ≤ 60 vs 10,060 at the kiloyear), the turnover balanced (100 conversions = 100 wears/century, the tools static at the seed); B7 held (the armed wall +0.7%, the growth ratios ×1.17–1.5); the conservation law extended per B2's letter (transformed_in/out legs); +3 farstead laws, the loop-closes law re-pinned to the verb family; the tuning honest (v1→v4 by the battery: the wear balanced to the production, the recipe's inputs to the delivery cadence); 2606+1 + ruff + docguard + topology clean; the report iter-333-stageb1impl2-report.md

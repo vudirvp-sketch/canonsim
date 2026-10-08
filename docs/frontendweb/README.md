@@ -44,8 +44,15 @@ Do **not** load the archive by default; its provenance fence is
 
 ## Current stage
 
-**S0 LANDED (iter-289, D-244) — awaiting the owner's green review.**
-The Redot tree DELETED at iter-290/D-245 (the owner's «удаляй redot»
-call — the launcher re-pointed to the web dev server). The standing
-boundary list (the later gates):
-`FRONTEND_WEB_AGENT_CONTEXT.md` §5.
+**Beyond S0** — S0 landed iter-289 (D-244) and was accepted; the
+tooling floor + the V1/V2/V3 visual floors (iter-293/297/304/307),
+Phase 3's seven rows (iter-294..301), the IA repair (iter-297,
+D-247), the live-band closures (iter-302/308), the streaming
+admission (iter-305/306), the acceptance matrix CLOSED (iter-308),
+and the CI + e2e smoke rows (iter-309) all landed; §8.5's heartbeat
+ledger completed through the 27B band (iter-312/313/314). The
+Redot tree DELETED at iter-290/D-245 (the owner's «удаляй redot»
+call — the launcher re-pointed to the web dev server); the
+migration ladder's Phase 1 (the law-body re-homing) landed
+iter-343. The next rows the owner's call; the standing boundary
+list (the later gates): `FRONTEND_WEB_AGENT_CONTEXT.md` §5.
