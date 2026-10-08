@@ -60,6 +60,14 @@ changes; assignment → the semantic origin stays observable; realization
 → the canonical event stays deterministic (the byte-identical twin).
 The measured surface (counts, ticks, latencies) is pinned as numbers —
 re-pin only together with the explaining change.
+
+ki114-recraft (iter-342): the module carries a SECOND corpus —
+`province_institutional.json` (the `institutional` fixture), the
+re-timed chain whose wait lands inside the sergeant's duty window so
+the deferred check co-locates: the accepted-check + arrest-chain
+witness the year-idle corpus's piles could never deliver (the packet
+§4's named row; the honest-rejection pin above stays the loud
+detector for the composition run's own windows).
 """
 from __future__ import annotations
 
@@ -79,6 +87,17 @@ REPO = Path(__file__).resolve().parents[1]
 SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
 PROVINCE = load_pack(REPO / "content" / "province_pack")
 SCRIPT = load_playscript(REPO / "tests" / "playscripts" / "province_composition.json")
+#: ki114-recraft (the iter-339 packet §4's named row): the institutional
+#: corpus — the composition run's opening (the lamp, the keep arson,
+#: the failed steal minting the witnessed stack) with the closing wait
+#: RE-TIMED so the deferred check's realization lands with the duty
+#: sergeant ON POST at Malby (the wait completing inside his duty
+#: window): the accepted check + the waybill crossing the arrest bar
+#: + the arrest attempt — the chain the year-idle corpus's deferred
+#: piles could never co-locate.
+INSTITUTIONAL_SCRIPT = load_playscript(
+    REPO / "tests" / "playscripts" / "province_institutional.json"
+)
 
 #: The measured surface at HEAD (iter-274 — the §6.5 move release:
 #: the intent pick re-authored from the ramble to the DEPARTURE, the
@@ -111,6 +130,23 @@ def witness(tmp_path_factory: pytest.TempPathFactory) -> tuple[list[EventRecord]
     log = tmp_path_factory.mktemp("p1") / "composition.jsonl"
     sim = Simulator(PROVINCE, SCRIPT["seed"], log, SCHEMA, commit="0000000")
     result = sim.run_playscript(SCRIPT)
+    sim.close()
+    _header, events = read_log(log, SCHEMA)
+    return events, result
+
+
+@pytest.fixture(scope="module")
+def institutional(
+    tmp_path_factory: pytest.TempPathFactory,
+) -> tuple[list[EventRecord], Any]:
+    """The institutional corpus, once per module: (events, run result)
+    — the re-crafted chain whose wait completes inside the sergeant's
+    duty window at Malby (ki114-recraft)."""
+    log = tmp_path_factory.mktemp("p1i") / "institutional.jsonl"
+    sim = Simulator(
+        PROVINCE, INSTITUTIONAL_SCRIPT["seed"], log, SCHEMA, commit="0000000",
+    )
+    result = sim.run_playscript(INSTITUTIONAL_SCRIPT)
     sim.close()
     _header, events = read_log(log, SCHEMA)
     return events, result
@@ -246,6 +282,82 @@ def test_the_institutional_check_consumes_the_suspicion_and_arrests(
     assert not waybill
     assert not _of(events, "arrest_attempt")
     assert not _of(events, "arrest_resolved")
+
+
+def test_the_re_crafted_check_consumes_the_suspicion_and_arrests(
+    institutional: tuple[list[EventRecord], Any],
+) -> None:
+    """ki114-recraft (the iter-339 packet §4's named row, landed): the
+    accepted-check + arrest-chain witness the year-idle corpus's
+    deferred piles could never co-locate. The institutional corpus
+    re-times the closing wait (1100, completing t=2897) so the
+    sergeant's deferred check realizes with him ON POST at Malby —
+    the rotation's watch_change at t=2520 (keep→malby) opens the duty
+    window [2520, 3240), the wait lands inside it, and the co-location
+    door PASSES: the check fires at t=2899, the verdict honestly
+    unsatisfactory (the sergeant's perception 60 beating the PC's
+    social 57, margin −3), the waybill consumes the witnessed stack
+    (55→80, crossing the arrest bar 75), and the arrest machinery
+    engages — the attempt at the threshold, the resolution the world's
+    own roll (the evasion arm: 61 vs 48 — the PC slips the garrison;
+    the CAUGHT arm stays pinned by the crime family's own witness,
+    `tests/test_crime.py`'s resolution law)."""
+    events, _ = institutional
+    # the witnessed stack the check consumes: the arson sighting (834,
+    # 0→30 on the sergeant's pair) + the steal failure (1797, 30→55)
+    stack = [
+        (e.t, e.outcome["from"], e.outcome["to"])
+        for e in _of(events, "suspicion_changed")
+        if e.actor == "npc_sergeant_01" and e.t <= 1797
+    ]
+    assert stack == [(834, 0, 30), (1797, 30, 55)]
+    # the duty-window delivery: the rotation moves the sergeant ON
+    # POST at Malby before the wait completes (keep→malby at 2520)
+    rotations = [
+        (e.t, _changes(e).get(("npc_sergeant_01", "position")))
+        for e in _of(events, "watch_change")
+        if ("npc_sergeant_01", "position") in _changes(e)
+    ]
+    assert (2520, ("loc_keep", "loc_malby")) in rotations
+    # the accepted check: co-located, the papers do not satisfy
+    checks = _of(events, "document_check")
+    assert len(checks) == 1
+    check = checks[0]
+    assert check.t == 2899 and 2520 <= check.t < 3240  # inside the window
+    assert check.actor == "npc_sergeant_01" and check.target == "pc_01"
+    assert check.outcome["check"] == {
+        "passed": True, "margin": -3, "attacker_total": 60,
+        "defender_total": 57, "defender_id": "pc_01", "total_failure": False,
+    }
+    # the waybill consumes the stack, crossing the arrest bar
+    waybill = next(
+        e for e in _of(events, "suspicion_changed")
+        if e.outcome.get("source") == "waybill_unsatisfactory"
+    )
+    assert (waybill.t, waybill.outcome["from"], waybill.outcome["to"]) == (
+        2899, 55, 80,
+    )
+    assert _changes(waybill)[("npc_sergeant_01", "pair.pc_01.suspicion")] == (
+        55, 80,
+    )
+    # the arrest machinery engages: the attempt at the threshold
+    attempt = _of(events, "arrest_attempt")[0]
+    assert attempt.t == 2899
+    assert attempt.outcome == {"suspicion": 80, "threshold": 75}
+    # the resolution — the world's own roll, the evasion arm (the
+    # caught arm is the crime family's own witness, never this seed's)
+    resolved = _of(events, "arrest_resolved")[0]
+    assert resolved.t == 2899
+    assert resolved.outcome == {
+        "caught": False, "evasion_total": 61, "pursuit_total": 48,
+        "margin": -13,
+    }
+    # the evasion arm's residue: the PC stays 'suspect' (no caught flip)
+    status_flips = [
+        c for e in events for c in e.state_changes
+        if c.entity == "pc_01" and c.prop == "crime_status"
+    ]
+    assert [(c.from_, c.to_) for c in status_flips] == [(None, "suspect")]
 
 
 # -- chain 2: the fire loops (A's guild arm + B's vigil) ----------------------

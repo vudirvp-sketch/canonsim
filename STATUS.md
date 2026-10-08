@@ -1,50 +1,43 @@
-Iteration: iter-340 (`ki114-1-impl` — THE COMPOSITION LAW
-  LANDING, R3; the owner's 2026-10-08 packet acceptance «Принимаем B»
-  — the row the iter-339 packet opened): **THE CLEAN-DRAIN-BOUNDARY
-  FEED LAW IS THE ENGINE'S CONTRACT** — `run_steps` feeds one intent,
-  drains its FULL cascade, then feeds the next at the drained clock
-  (`_feed_next` and `_step_intent_id` DELETED — only the queue's
-  emptiness speaks; KI#17 holds vacuously); the composition law
-  `run_steps([A,B]) == run_steps([A]); run_steps([B])` for EVERY
-  partitioning, and resume with NO separate timing semantics —
-  continuous == split == checkpoint/resume, byte-for-byte. **THE
-  PERMANENT FALSIFIER** (`tests/test_composition.py`, 143 checks
-  pinned BY the battery-shape assert): the full cut lattice x
-  wait/move/zero-duration/follow-up-drain kinds x 5 packs x 2 seeds x
-  split + resume-at-every-cut + double-run + the Lab segmented 3y
-  family — **0/143 under the law; BASE 45/143** (the teeth
-  re-measured, family-exact vs the packet's 44/143); the historical
-  farthest repro pinned forever. **THE CONSCIOUS REBASE** (the owner's
-  point 8, the census EXACTLY the iter-339 table: province +10 / road
-  pure +3 / pressure +9; grim + plumbing byte-identical — the
-  quiet-boundary proof): the 3 smoke fixtures regenerated, the
-  mediator narrator-beats corpus rebaselined (3 verdicts, the corpus
-  protocol's own 'regen' answer), **48 expectations re-pinned every
-  one mechanism-named** (the packet's (a)/(b) tables + the 2
-  pressure-fixture legs), one night corpus re-crafted (stepread —
-  the second day's window). **KI#115 opened** (pre-existing, NOT the
-  law's: the grim pack's two same-account every:1 flows —
-  `flow_drafts` computes both drafts on one snapshot, the second
-  stale the moment the first commits; caught BY the _commit gate at
-  the first year turn any grim run ever reached; the falsifier's
-  grim battery stays below the year horizon by design). The
-  partition-vs-wait-split distinction fixed in the record: the law
-  composes ONE sequence at every cut; `wait(2y)` vs `wait(1y)x2` are
-  DIFFERENT sequences — the Lab's whole-vs-segmented contract stands
-  untouched.
+Iteration: iter-342 (`ki114-recraft` — THE THREE
+  CORPUS RE-CRAFTS, R0 test/doc only; the owner's 2026-10-08
+  «три строки ki114-recraft» call, the iter-339 packet §4's named
+  residue): **(A) THE POLESEED NIGHT CHAIN** — the reader FOLLOWS
+  the pole: the walk to the artery before the road-leg beat
+  delivers Dellan and the pole there (t=2118, the beat's own move),
+  the read completing at t=2820 inside the SECOND day's night
+  window — the partial-by-dark acquisition arm alive again (the
+  flood story `saw`/`partial`, the cluster partial over Ketta);
+  **(B) THE P1 INSTITUTIONAL CHECK** — a second corpus
+  (`province_institutional.json`, seed 2) whose re-timed wait
+  (1100, completing t=2897) lands inside the sergeant's duty window
+  at Malby (the rotation keep→malby at t=2520): the deferred check
+  CO-LOCATES — the verdict honestly unsatisfactory (perception 60
+  vs social 57), the waybill consuming the stack 55→80 (the arrest
+  bar 75 crossed), the arrest attempt at the threshold, the
+  resolution the world's own roll (the EVASION arm 61 vs 48 — the
+  caught arm stays the crime family's witness); **(C) THE PRESSURE
+  BENCH RATION** — the registry-parked corpus (seed 7): the world's
+  own closed loop with the player as pure audience — the stokers'
+  year-crossing stoke (t=520004, no player lever anywhere), the
+  knock (t=520604, the keeper's vague hearing), the in-window
+  beat's mint (t=520920, the residue 11), the firing at the
+  drain's own boundary (t=524327): FOUR COAL to the firehole
+  (24→20 / 5→9), the bench convening one tick before, the warmth
+  the reply. The honest-rejection pins KEPT beside them (the loud
+  detectors); zero runtime code, zero pack data.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2630 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, the LOG untouched — three fixtures regenerated per TEST_PLAN §3 with the regen guards green; NO test deleted or weakened — 3 laws added, 48 re-pinned with every mechanism named, 1 corpus re-crafted) ·
+2638 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero runtime code, zero pack data, the LOG untouched — the honest-rejection pins kept, 2 witnesses added, 1 re-crafted; the three corpora double-run byte-identical) ·
 Date: 2026-10-08 ·
-Scope: core/loop.py (the feed law), tests/test_composition.py (new,
-  the 143-check falsifier + 2 laws), tests/fixtures x4 (the 3
-  regenerated smokes + the mediator corpus), tests/ x17 (the
-  re-pins), docs/TEST_PLAN.md (§9's claim-packet row),
-  docs/iterations/iter-340-ki114impl-report.md (new),
-  docs/TASKS.md, STATUS.md, worklog.md — 26 changed/created
-  (1 core + 21 test/fixture + 4 riders).
+Scope: tests/test_poleseed.py (the follow-chain re-craft),
+  tests/test_p1_composition.py (+ the institutional fixture + the
+  witness), tests/playscripts/province_institutional.json (new),
+  tests/test_pressure_pack.py (+ the ration witness),
+  docs/iterations/iter-342-ki114recraft-report.md (new),
+  docs/TASKS.md, STATUS.md, worklog.md — 8 changed/created
+  (4 test/corpus + 4 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -105,7 +98,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
 - KI#114 · the resume-boundary drain divergence · CLOSED iter-340 (`ki114-1-impl` — the composition law landed: the feed at the clean drain boundary, the 143-check falsifier permanent, split == resume == continuous byte-for-byte; the B direction the owner accepted 2026-10-08) — opened 2026-10-07, found by occ-1's resume law, decided by the iter-339 packet
-- KI#115 · the grim pack's economy declares two `every:1` flows on one account (`till_settling` +12 / `license_fee` −4, both `loc_tavern.account.coin`); `flow_drafts` computes both drafts against one projection snapshot, so the second flow's `from` is stale the moment the first commits — the `_commit` gate refuses LOUD at the year turn. Pre-existing (reproduced with the composition law stripped); slept behind the day-scale corpus until ki114-1-impl's year-scale battery reached the turn. Fix = pack data (one account per flow, or per-flow snapshot re-reads) — the owner's call · opened 2026-10-08
+- KI#115 · the grim pack's two same-account every:1 flows · CLOSED iter-341 (`ki115-1` — THE CROSSING'S PROGRESSIVE LAW: flow_drafts drafts flow N against the state as changed by flows 0..N-1 of the same crossing, a copy-on-write overlay, the function pure; the fork resolved for the engine side — the lint declares co-due same-account flows legal data, the D-182 fold stays valid pack data with its own semantics; zero corpus price, every golden byte-compare green; the year-scale grim witness landed: the progressive reckoning, the multi-year +8/year ladder, T1 at the year scale, the composition law at the year boundary) · opened 2026-10-08, closed 2026-10-08
 
 ## FAQ / Pitfalls
 
@@ -135,19 +128,15 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-340 DONE: ki114-1-impl (THE COMPOSITION LAW LANDED — the
-  clean-drain-boundary feed law the engine's contract; the 143-check
-  falsifier permanent: 0/143 under the law, BASE 45/143 the teeth;
-  the 3 fixtures + the mediator corpus rebaselined; 48 expectations
-  re-pinned mechanism-named; KI#114 CLOSED; KI#115 opened).**
-Next: THE OWNER'S CALLS (the standing items in order):
-  (1) KI#115's fix row (the grim economy graph — pack data, the
-  two same-account flows); (2) the packet §4's re-craft rows (the
-  poleseed night chain, the p1 institutional check, the pressure
-  bench ration — the honest door facts pinned meanwhile); (3) the
-  standing calls preserved (the Lab queue's battery rows E02/E31,
-  M2, the replay-UI row, the world track's W8, the frontend
-  P1/P2/P3 continuations).
+**iter-342 DONE: ki114-recraft (THE THREE CORPUS RE-CRAFTS — the
+  poleseed follow-chain, the institutional duty-window corpus, the
+  registry-parked ration corpus; the honest-rejection pins kept as
+  the loud detectors; zero runtime code, zero pack data).**
+Next: the standing owner calls in order — the station canon
+  re-measure (the kiloyear md5s, the owner's separate call), the
+  Lab queue's battery rows E02/E31, M2 (the surface→canonical-ID
+  normalisation A/B), the replay-UI NOT-EXPOSED row, the world
+  track's W8, the frontend P1/P2/P3 continuations.
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

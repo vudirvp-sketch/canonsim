@@ -484,6 +484,77 @@ def test_the_bench_convenes_and_the_keeper_rations_on_the_knock(
     )
 
 
+def test_the_ration_releases_on_a_live_echo(tmp_path: Path) -> None:
+    """ki114-recraft (the iter-339 packet §4's named row, landed): the
+    echo-gated door's FIRING witness — the antagonist pair's other
+    answer, the same system. The re-crafted corpus parks the reader at
+    the REGISTRY from the start (the bench's own audience — the keeper
+    ACTIVE under the scene LOD, his per-beat rolls live) and lets the
+    world provide the burn: the year crossing's warm tick rolls the
+    stokers' goal (t=520004, faction_0000 — the machine's cold its own
+    driver, no player lever anywhere), the pressure ramp knocks at
+    t=520604 and the keeper honestly hears it VAGUE through the shared
+    walls, and the beat inside the knock's echo window (t=520920, the
+    residue 11 of the vague 60-weight token's 1440-tick fade) passes
+    his urgency's roll — the mint the gate admits. The firing lands
+    with the drain's own discipline (the deferred realization at the
+    debt turn's boundary, t=524327): FOUR COAL from the reserve to
+    the firehole (the keeper 24→20, the boiler 5→9 — deliberately one
+    short of a full feed), the bench convening one tick before (the
+    order and the release, two surfaces of one objective), the warmth
+    the world's own reply."""
+    twin = pressure_twin(tmp_path, "ration_twin", _move_pc("loc_registry"))
+    events = run(
+        tmp_path, twin, [{"intent": "wait", "ticks": 520000}],
+        "ration", seed=7,
+    )
+    # the world's own burn: the stokers' goal at the year crossing
+    stokes = [
+        event for event in by_type(events, "boiler_run_hard")
+        if event.actor == GROUP_STOKERS
+    ]
+    assert [(event.t, event.provenance["cause_intent"]) for event in stokes] == [
+        (520004, "faction_0000")
+    ]
+    # the knock and the honest vague hearing through the shared walls
+    knocks = by_type(events, "pipes_knock")
+    assert [event.t for event in knocks] == [520604]
+    assert (KEEPER, "knocking_in_the_walls", "vague", 520604) in {
+        (r.who, r.knows, r.fidelity, r.at)
+        for event in knocks for r in event.knowledge
+    }
+    # the bench convenes (the public order) one tick before the release
+    convenes = by_type(events, "the_bench_convenes")
+    assert [event.t for event in convenes] == [524326]
+    assert all(event.actor == "grp_regulators" for event in convenes)
+    # THE RATION FIRES: the echo-gated door's own answer — four coal
+    # from the keeper's reserve to the firehole, the warmth the reply
+    rations = [
+        event for event in by_type(events, "account_transferred")
+        if event.actor == KEEPER
+    ]
+    assert len(rations) == 1
+    ration = rations[0]
+    assert ration.t == 524327
+    assert ration.provenance["cause_intent"].startswith("urgency_")
+    assert ration.outcome["kind"] == "coal" and ration.outcome["amount"] == 4
+    assert {
+        (change.entity, change.prop): (change.from_, change.to_)
+        for change in ration.state_changes
+    } == {
+        (KEEPER, "account.coal"): (24, 20),
+        (BOILER, "account.coal"): (5, 9),
+    }
+    # the release is its own knowledge (the keeper's exact record) and
+    # the warmth the world's own consequence
+    assert (KEEPER, "ration_released_for_the_firehole", "exact", 524327) in {
+        (r.who, r.knows, r.fidelity, r.at)
+        for r in ration.knowledge
+    }
+    warmth = by_type(events, "warmth_felt")
+    assert [event.t for event in warmth] == [524327]
+
+
 def test_the_deadband_holds_below_the_bar(tmp_path: Path) -> None:
     """The vacuity law's quiet half: the crafted twin seeds the circle's
     cold BELOW the trigger AND parks the player at the firehole (the

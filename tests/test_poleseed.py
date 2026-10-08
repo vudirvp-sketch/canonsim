@@ -89,11 +89,18 @@ READ_CHAIN: tuple[dict, ...] = (
     {"intent": "read_pole", "target": POLE},
     {"intent": "coerce", "target": KETTA},
 )
-#: The night twin: the same walk plus the wait to the night phase
-#: (t=1080) — the unlit stair's acquisition arm on the read.
+#: The night twin, RE-CRAFTED (ki114-recraft, the iter-339 packet §4's
+#: named row): under the composition law the stair's first night window
+#: is owned by the road-leg beat's drain (Dellan's walk carries the pole
+#: off before any read enters) — so the reader FOLLOWS the pole: the
+#: walk to the stair (warming the beat's zone), then the artery BEFORE
+#: Dellan's road-leg walk delivers the pole there, the wait whose drain
+#: delivers him, and the read completing inside the SECOND day's night
+#: window (the stepread precedent's own shape).
 NIGHT_CHAIN: tuple[dict, ...] = (
     {"intent": "move", "target": "loc_weirstair"},
-    {"intent": "wait", "ticks": 375},
+    {"intent": "move", "target": "loc_riverroad"},
+    {"intent": "wait", "ticks": 700},
     {"intent": "read_pole", "target": POLE},
 )
 #: The theft chain (the ablation): the walk, the lift, the two waits
@@ -254,38 +261,48 @@ def test_the_corner_without_the_read_dies_at_the_door(tmp_path: Path) -> None:
 
 
 def test_the_night_read_steps_the_story_down(tmp_path: Path) -> None:
-    """ki114-1-impl (F3, the iter-339 packet's own mechanism, pinned as
-    the world's answer): the composition law closed the exposure window
-    — the wait's drain runs through the world's own road-leg beat, and
-    Dellan's 705-tick walk carries the pole off to the artery BEFORE
-    the read can enter at any clean boundary. The read honestly rejects
-    at the co-location door (the attempt IS a fact, PARSER_SPEC §4 —
-    `intent_rejected` names `target.same_location`), and the pole's
-    position write rides the walk's own event. The night-phase
-    partial-read witness now lives on the STAIR (a fixture of the
-    place, never carried — tests/test_stepread.py's re-crafted chain);
-    THIS pole chain's night re-craft is a named follow-up (the pole
-    rides the road-leg beat — every clean night boundary on this stage
-    finds it gone)."""
+    """The night acquisition arm, RE-CRAFTED (ki114-recraft — the
+    iter-339 packet §4's named row, the F3 window closure answered by
+    FOLLOWING the pole): under the composition law the stair's first
+    night window belongs to the road-leg beat's drain — Dellan's walk
+    carries the pole off before any read can enter at a clean boundary
+    (the old honest-rejection pin). The re-crafted chain walks to the
+    stair (warming the beat's zone), then to the ARTERY before the
+    beat delivers Dellan and the pole there (t=2118, the beat's own
+    move, cause urgency_0007 — the co-location door now passes), and
+    the read completes at t=2820, inside the SECOND day's night window
+    [2520, 2880) — the unlit-dark acquisition arm alive again: the
+    flood story learned PARTIAL, the cluster minting partial (a
+    half-knowing holder still holds the lever, the cluster recording
+    how well). The honest door fact on the way: the beat's next leg
+    rejects at `target.adjacent_to` (the artery the road's end — the
+    beat re-mints, the door honest)."""
     events = _run(tmp_path, "night.jsonl", SEED_NIGHT, NIGHT_CHAIN)
-    assert not [e for e in events if e.type == "pole_read"], (
-        "the pole read fired — the road-leg beat no longer owns the "
-        "night window; re-measure before re-pinning"
-    )
-    rejection = next(
-        e for e in events
-        if e.type == "intent_rejected" and e.outcome.get("action") == "read_pole"
-    )
-    assert rejection.outcome["reason"] == "precondition"
-    assert rejection.outcome["failed_test"] == "target.same_location"
-    # the world's own fact the door read: the walk carried the pole off
+    read = next(e for e in events if e.type == "pole_read")
+    assert 2520 <= read.t < 2880  # day 2's night phase (1080 + 1440)
+    assert (PC, STORY, "saw", "partial") in {
+        (r.who, r.knows, r.channel, r.fidelity) for r in read.knowledge
+    }
+    cluster = next(e for e in events if e.type == "leverage_gained")
+    assert cluster.outcome["fidelity"] == "partial"
+    assert cluster.actor == PC and cluster.target == KETTA
+    # the delivery: the beat's own move brought the pole to the reader
+    # (the co-location the door read — never a scripted position)
     hop = next(e for e in events if e.type == "move" and e.actor == DELLAN)
-    assert hop.target == "loc_riverroad"
+    assert hop.target == "loc_riverroad" and hop.t < read.t
     assert (POLE, "position", "loc_weirstair", "loc_riverroad") in {
         (c.entity, c.prop, c.from_, c.to_) for c in hop.state_changes
     }
-    # no cluster mints on a rejected arm (a failed reader holds no lever)
-    assert not [e for e in events if e.type == "leverage_gained"]
+    # the honest door fact beside the delivery: the beat's next leg —
+    # the artery is the road's end, the adjacency gate refuses
+    rejections = [
+        e for e in events
+        if e.type == "intent_rejected" and e.actor == DELLAN
+        and e.outcome.get("action") == "move"
+    ]
+    assert all(
+        r.outcome["failed_test"] == "target.adjacent_to" for r in rejections
+    )
 
 
 # -- the theft chain (the player-facing ablation) ------------------------------
@@ -371,9 +388,10 @@ def test_the_failed_lift_is_the_fact_family(tmp_path: Path) -> None:
 
 def test_the_chains_are_deterministic(tmp_path: Path) -> None:
     """The twin of T1's law at the seeds' own band: same seed + script
-    + environment, byte-identical logs — both chains."""
+    + environment, byte-identical logs — all three chains."""
     for name, seed, steps in (
         ("read", SEED_DAY, READ_CHAIN),
+        ("night", SEED_NIGHT, NIGHT_CHAIN),
         ("lift", SEED_LIFT, THEFT_CHAIN),
     ):
         first = _run(tmp_path, f"{name}_a.jsonl", seed, steps)
