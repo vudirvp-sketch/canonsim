@@ -1,43 +1,61 @@
-Iteration: iter-343 (`doc-4-lawrehome` — THE LAW-BODY
-  RE-HOMING, R1 doc-only; the owner's 2026-10-08 repo-revision call
-  «очистить документацию от старой информации по redot и фронтенду
-  той "обвязки"» + «ревизия всех путей и противоречий»; FRONTEND_WEB_LAW
-  §14's migration Phase 1, the D-245-deferred deep re-homing): the
-  five live law bodies re-pointed to the web client as the
-  presentation runtime (FRONTEND_UIUX_LAW §0/§19..§25 — the layering
-  + pipeline diagrams, the static/runtime split, the acceptance
-  gates G1, the P4 row; WORKBENCH_APP_LAW §0/§3/§23/§33 — the
-  layering, the package tree, the live seam note, the architecture
-  diagram; WORLD_PRESENTATION_LAW §0/§1/§2/§4/§12/§13/§14/§15 — the
-  consumption state, the chains, the fork-gate baseline, the G7
-  marker; LLAMA_CPP_INFERENCE_CONTROL_LAW §0/§5/§19 — the layering
-  + adapter diagrams, the landing notes' current carriers;
-  VISUAL_SYSTEM_UI §8 — the verification-state vocabulary); the
-  dead REDOT_ENGINE_INDEX routing (TASKS' live wb line, UIUX §5,
-  PRESENTATION §14/§15) replaced by the D-245 archive routing; the
-  TASKS DONE rows (wb-1..12, ux-1, obs-1/2, inf-1/2) collapsed to
-  the landing-record form — 616→346 lines, the §8-report
-  restatements cut (detail verbatim in git + CONTRACTS §5), the
-  docguard allowlist entry retired (the cap now ENFORCED on
-  TASKS.md); the frontendweb README's stage + the migration
-  ladder's phase markers synced; zero code, zero pack data, zero
-  corpus price.
+Iteration: iter-344 (`packabsorb` — THE UNIFIED-PACK
+  v1.5 ABSORPTION, R1 doc-only; the owner's 2026-10-08 session call
+  «проработай архив, впитал полезное, поставь задачи соответственные
+  и припарковал куда нужно законы, паттерны и всякое прочее что
+  должно жить долго и всегда» before the standing queue
+  E02/E31 → M2 → replay-UI → W8 → P1/P2/P3): the pack read whole
+  (12/12 files — ROUTER/INDEX/QUICKSTART/CURRENT_STATE/MANIFEST/
+  ULT/SCALE_TESTING_LAW/CONS/CDMT/TEXT2/AUDIT/INTEGRITY); the
+  snapshot FRESHNESS verified historical (the pack pins iter-337 /
+  2e54d39, HEAD e183c64/iter-343 — the pack's B7/M-2/M-7/M-8 rows
+  stale, all landed; the reconciliation table the iter-344 report
+  §B); THE DURABLE LAWS PARKED at their repo consumers: (1) the
+  scale-claim sufficiency law → TEST_PLAN §9.1 (the workload axes
+  E/L/R/F/ρ/K/H/Q, the five sufficiency classes
+  UNEXERCISED..TARGET-SCALE, the oracle tiers, the minimal
+  scale-claim packet, the seven named workload profiles, the
+  standing SEMANTIC-ONLY classification of the farstead kiloyear
+  family); (2) the composite proof-test pattern map → TEST_PLAN
+  §9.2 (14 patterns; the live owners named — certificate quiescence
+  = test_h9's A/B law, derived-index poisoning = test_occidx's
+  twin-agreement, schedule permutation = test_composition's
+  143-check lattice, mutation adequacy = the mutation probe,
+  workload-sufficiency = §9.1; locality injection / boundary surgery
+  / promotion ping-pong / observer noninterference / adaptive
+  sufficient state / specialized-kernel differential honestly
+  marked vocabulary-only); (3) the 8-part runtime-promotion gate
+  DEFINITION → CONTRACTS.md's preamble (the gate referenced 10+
+  times across CONTRACTS sections, never defined repo-side before —
+  REAL CONSUMER / REAL FAILURE / MATERIAL QUALITY GAP / NATIVE
+  LIMIT / REPEATED SHAPE / FALSIFIER / INFORMATION-SEMANTIC OWNER /
+  PHASE-GATE, all eight mandatory); THE QUEUE ROWS OPENED:
+  `density-1` (the E02 successor form — the density-envelope
+  battery: profile+seed → an ordinary valid pack through the
+  admission lint, E/L + R/F explicit knobs, the H1/H2 separation the
+  first battery, the sufficiency class declared per §9.1) +
+  `lab-composite-1` (the E31/metamorphic-families successor — the
+  §9.2 vocabulary-only patterns made executable where a consumer
+  names itself); the old E02/E31 labels' honest mapping recorded
+  (the deleted ULTIMATE pack's registry died with the pack; the v1.5
+  successor's ULT §19.3/§17.4.1 the current owners; the owner
+  re-scopes if the old registry's E31 differs); NOT parked
+  deliberately: CONS T1–T7 (already absorbed as CONTRACTS §6–11),
+  CDMT v2 (the pack owns the method; the synthesis doctrine already
+  AGENTS §2.7), TEXT2 disposition (the pack's own memory), the
+  M-register wholesale (the pack owns the register; landed facts
+  live in git); zero code, zero pack data, zero corpus price.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2632 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero runtime code, zero pack data, the LOG untouched — the doc-only re-homing; the suite byte-untouched, the collection IDENTICAL to BASE a22fc61, zero failures — the prior session's 2638+1 its own environment's count) ·
+2632 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero runtime code, zero pack data, the LOG untouched — the doc-only absorption; the suite byte-untouched, the collection IDENTICAL to BASE e183c64, zero failures) ·
 Date: 2026-10-08 ·
-Scope: docs/TASKS.md (the DONE-row collapse + the D-245 routing +
-  the doc-4 row + the ledger), docs/FRONTEND_UIUX_LAW.md,
-  docs/WORKBENCH_APP_LAW.md, docs/WORLD_PRESENTATION_LAW.md,
-  docs/LLAMA_CPP_INFERENCE_CONTROL_LAW.md, docs/VISUAL_SYSTEM_UI.md,
-  docs/FRONTEND_WEB_LAW.md (the phase markers),
-  docs/frontendweb/README.md + FRONTEND_WEB_AGENT_CONTEXT.md (the
-  stage sync), scripts/docguard.py (the allowlist retirement),
-  STATUS.md, worklog.md, docs/iterations/iter-343-lawrehome-report.md
-  (new) — 12 changed/created (all doc riders + the guard's data
-  entry).
+Scope: docs/TEST_PLAN.md (§9.1 + §9.2 — the two parked laws),
+  docs/CONTRACTS.md (the preamble gate definition),
+  docs/TASKS.md (pack-absorb-1 DONE + density-1/lab-composite-1
+  OPEN + the ledger, iter-334 evicted), STATUS.md, worklog.md
+  (iter-334 evicted), docs/iterations/iter-344-packabsorb-report.md
+  (new) — 6 changed/created, all doc riders.
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -128,15 +146,17 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-343 DONE: doc-4-lawrehome (the law-body re-homing — the five
-  live laws re-pointed to the web client, the dead engine-index
-  routing replaced by the D-245 archive routing, the TASKS DONE rows
-  collapsed; the docguard cap now ENFORCED on TASKS.md).**
-Next: the standing owner calls in order — the station canon
-  re-measure (the kiloyear md5s, the owner's separate call), the
-  Lab queue's battery rows E02/E31, M2 (the surface→canonical-ID
-  normalisation A/B), the replay-UI NOT-EXPOSED row, the world
-  track's W8, the frontend P1/P2/P3 continuations.
+**iter-344 DONE: packabsorb (the unified-pack v1.5 absorption — the
+  scale-claim law + the composite pattern map + the gate definition
+  parked; density-1/lab-composite-1 opened).**
+Next: the standing owner calls in order — `density-1` (the
+  density-envelope battery, the queue's head: the profile→pack
+  materializer + the H1/H2 separation + the first sufficiency-classed
+  datum per TEST_PLAN §9.1), then M2 (the surface→canonical-ID
+  normalisation A/B — a station battery), the replay-UI NOT-EXPOSED
+  row, the world track's W8, the frontend P1/P2/P3 continuations,
+  `lab-composite-1` behind density-1 (the §9.2 vocabulary-only
+  patterns where a consumer names itself).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

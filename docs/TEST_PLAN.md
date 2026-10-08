@@ -767,3 +767,123 @@ matching name is not proof; a useful form with unproven quality stays
 PARTIAL. A new lens or prism enters this
 table only after one claim packet used it (the first-consumer law).
 
+### 9.1 The scale-claim sufficiency law (iter-344 — the unified-pack v1.5 absorption; the standing vocabulary for every scale/asymptotic claim)
+
+> Source: the owner-maintained research companion
+> (`canonsim_unified_agent_pack` v1.5, `docs/SCALE_TESTING_LAW.md` +
+> ULT §3/§17.2) — absorbed into the repo's verification owner because
+> the queue's next rows (the density-envelope battery, the world
+> track's dense-world horizons) are its named consumers, and the lab
+> reports had already hand-stated its forms (iter-337's "horizon
+> evidence, not dense-world proof"; iter-335's sufficiency hedging).
+> The pack remains the research companion; this section is the
+> executable-claims side, single-owned here (D-024).
+
+**Core law:**
+
+```text
+TEST PASS ≠ SCALE PROOF
+a test proves only the relation exercised by its workload
+a small authored world cannot prove dense-world scalability
+a long horizon cannot substitute for population/relation/causal density
+```
+
+Every non-trivial scale claim declares the smallest useful workload
+tuple — `E` entities · `L` locations · `R` relationship fan-out · `F`
+causal fan-out · `ρ` event density · `K` cross-domain coupling · `H`
+horizon · `Q` query locality (+ `B` branch/checkpoint pressure when
+relevant) — and names which axes were VARIED, which HELD, and which
+were nuisance. `same E ≠ same workload`; `same H ≠ same scale`; `same
+event count ≠ same causal complexity`. A strong locality claim varies
+at least two independent axes (e.g. local cone size + unrelated world
+volume).
+
+**Sufficiency classes** (never silently promoted upward):
+
+```text
+UNEXERCISED    the workload does not exercise the claimed shape
+SEMANTIC-ONLY  correct on real content; density below the claimed envelope
+LOCAL-SCALE    the local cone stressed + unrelated volume varied;
+               target density not reached
+DENSITY-SCALE  the claimed density axes varied with independent controls;
+               survived the oracle/falsifier pair
+TARGET-SCALE   the declared target envelope exercised — a capacity
+               statement for the measured profile/hardware/protocol only
+```
+
+**Oracle tiers** (proof strength matches workload size — the repo
+already lives this: T1 goldens / `semantic_diff` / the Lab's compact
+records; the tier law makes the pairing standing): small = byte-golden
+committed fixtures; medium = semantic equivalence + selected exact
+invariants + deterministic counters (compact fingerprints, not giant
+logs); large = regenerated workload + reference differential +
+invariant/effect summaries + operation counts — a large run never
+compares two independently invented approximations, and "completed" is
+never read as "scaled".
+
+**The minimal scale-claim packet** (rides the §9 claim-packet form;
+the scale-specific fields):
+
+```text
+CLAIM       what is expected to scale / remain bounded
+WORKLOAD    profile, seed, E/L/R/F/ρ/K/H/Q/B
+CONTROL     what stays fixed and why
+ORACLE      the exact semantic relation / reference / invariant
+FALSIFIER   the smallest mutation or adversarial boundary that must fail
+EVIDENCE    operation counts and slopes first; wall/memory where relevant
+SUFFICIENCY UNEXERCISED | SEMANTIC-ONLY | LOCAL-SCALE | DENSITY-SCALE | TARGET-SCALE
+DISPOSITION CONFIRMED | PARTIALLY CONFIRMED | REJECTED | UNRESOLVED | DEFERRED
+```
+
+**Named workload profiles** (the profile vocabulary for scale rows;
+`locality-control` = 1×/10×/100×/1 000× unrelated volume with the
+local query held; `entity-density` = E up, topology/rules fixed;
+`relationship-fanout` = R independent of E; `causal-fanout` = F with
+ρ controlled; `cross-domain-coupling` = K via legitimate family
+interactions; `horizon-density` = H with E/R/F/ρ controlled;
+`mixed-density` = several axes together — late-stage validation,
+never the first diagnostic). Standing classification of the measured
+corpus: the farstead kiloyear family (iter-335/336/337/338) is
+**SEMANTIC-ONLY** — horizon evidence on a sparse authored world; no
+repo row has earned LOCAL-SCALE or above (the density-envelope
+battery's own target). Fixture hardcoding is forbidden as the
+mechanism of generality: scale rows consume profile + seed + counts +
+the existing schema — never hand-written ID herds; and a promoted
+metric must name its intended effect, a sensitivity witness, and a
+known decoy it rejects (metric validity; M1–M5 are liveness evidence,
+never asymptotic proof).
+
+### 9.2 The composite proof-test pattern map (iter-344 — the v1.5 absorption's second parking; pattern NAMES with their live owners, never claims of implementation)
+
+> Source: ULT §17.4.1/§17.5 (v1.5). A composite pattern is a research
+> name for a verification SHAPE; the map's job is two-directional
+> honesty: a pattern WITH a live owner is cited by that owner (never
+> re-built); a pattern WITHOUT one is vocabulary only — saying it is
+> "implemented" without naming the live test/instrument here is a
+> doc-drift bug. New patterns enter only with their first consumer.
+
+| Pattern | The relation it demands | Live owner (or vocabulary-only) |
+|---|---|---|
+| Certificate quiescence | explicit stepping vs jump-to-next-producing-beat — exact result preserved; invalid boundary detected | `tests/test_h9.py` law 1 (the A/B byte-identity pair) + the fences |
+| Derived-index poisoning | delete/stale/poison a derived structure — canon unchanged; stale state rebuilt/rejected | `tests/test_occidx.py` (the twin-agreement property, seeded non-read mutations; the resume rebuild law) |
+| Schedule permutation | equivalent event set under partition/split/resume — commutative class equivalent, ordered class detects | `tests/test_composition.py` (the 143-check lattice; split + resume-at-every-cut) |
+| Mutation adequacy | a meaningful semantic mutation is detected | the mutation probe row above + `mechanics.py census` (cov-1) |
+| Workload-sufficiency gate | the claim's density axes actually exercised | §9.1 (this file — the sufficiency classes) |
+| Reference equivalence | optimized path == reference path for every maintained view | T2 + the OCC A/B attribution-equivalence law; the snapshot-vs-fold law (scale-1-impl) |
+| Replay/resume equivalence | checkpoint+tail == uninterrupted; split == whole | T1/T2 + `tests/test_composition.py` + the Lab `--verify-replay` arm |
+| Locality injection | 1×/10×/100×/1 000× unrelated volume — local query unchanged, local work bounded | **vocabulary-only** — waits on the density-envelope battery (the `locality-control` profile) |
+| Boundary surgery | perturb just-outside vs just-inside a declared dependency boundary — outside cannot change the result | **vocabulary-only** — same row; the OCC read-pair mutations are its nearest landed kin |
+| Promotion ping-pong | coarse↔fine cycles — identity/obligations/conserved quantities do not drift | **vocabulary-only** — a world-track/meso row (representation continuity, CONTRACTS §6/§7's laws) |
+| Observer noninterference | hidden/private changes under a fixed authorized surface leave the authorized result unchanged | **vocabulary-only** — CONS-side assurance grammar; nearest landed kin: the blind suite (§1.3) |
+| Causal debugging closure | fault → first divergence → slice → ablation → minimized capsule | `scripts/divergence_probe.py` (first-divergence/causal-path/persistence) — the capsule-minimization half vocabulary-only |
+| Adaptive sufficient state | removing a candidate field is detected; retaining it preserves declared behavior | **vocabulary-only** — a meso/LOD research row |
+| Specialized-kernel differential | interpreted vs specialized execution — declared state/event/RNG relation preserved | **vocabulary-only** — fires only if a native/batch row ever opens (ULT S8-class) |
+
+The pairing map for future executables (profile → pattern):
+locality-control → locality injection; relationship/causal-fanout →
+boundary surgery; horizon-density → certificate quiescence;
+mixed-density → promotion ping-pong; the generated envelope → causal
+debugging closure. A row that lands one of these patterns names its
+owner here in the same iteration — the map stays the single registry
+of what exists versus what is merely named.
+

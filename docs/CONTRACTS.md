@@ -1,5 +1,29 @@
 # CONTRACTS.md — Pre-Implementation Contracts
 
+> **The runtime-promotion gate (iter-344 — the definition parked from
+> the unified pack v1.5; this file is where the references live, so
+> this is where the gate is defined):** a new RUNTIME primitive (a
+> core/engine mechanism, a new execution family, a new store/index
+> class — distinct from agent-facing TOOLING, AGENTS §2.8) requires
+> ALL EIGHT, no "applicable subset":
+>
+> ```text
+> 1 REAL CONSUMER          a named consumer that reads/writes the primitive
+> 2 REAL FAILURE           a demonstrated failure or measured cost, not a fear
+> 3 MATERIAL QUALITY GAP   the mechanism removes a failure CLASS or lifts a
+>                          material property — not merely "another way"
+> 4 NATIVE LIMIT           the existing substrate provably cannot express it
+> 5 REPEATED SHAPE         the need has appeared more than once, not a one-off
+> 6 FALSIFIER              a stated observation that would prove the claim false
+> 7 INFORMATION / SEMANTIC OWNER   the single owner doc named before the build
+> 8 PHASE / GATE           the row's acceptance gate and its place in the order
+> ```
+>
+> Missing ANY one of the eight → the idea stays research vocabulary /
+> test relation / proposal (TEST_PLAN §9's epistemic classes), never a
+> build. The owner opens each gate row by explicit call — the
+> sem-1..auth-1 implementation rows are the standing precedent.
+
 > What this file is: the compact pre-implementation contracts for the
 > contract-write rows (intake-29/D-175's closing proposal, written
 > iter-144/D-177 under the owner's delegation). A contract pins what a
