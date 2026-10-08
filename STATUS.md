@@ -1,47 +1,53 @@
-Iteration: iter-346 (`density2` — THE PROJECTION-PLANE
-  MEMBER SPLIT, R2 instrument-extension; the density-1 row's second
-  half — the row's named next step, the owner's standing
-  «продолжай работы, открывай важнейшее, на долгосрок»
-  directive): the labrunner's member map grown by the four
-  E-scaling members of the old `rest` —
-  `director_global_passes` (entropy's per-beat whole-population
-  pass; the story layer global BY LAW, its E-price named),
-  `projection_snapshot` (the O(E) state copy per autonomous
-  enqueue), `skip_probes` (h9's population twins — the cumtime
-  contains the E-flat rng block walk), `lod_zone_walk` (the zone
-  computation over L); every entry's call subtree measured
-  DISJOINT by caller attribution FIRST (the accounting law's
-  boundary: kind_of deliberately NOT a member — its O(E) lookups
-  ride occ_refold's/skip_probes' subtrees); +1 law
-  (tests/test_lab.py — the grown-world law: the four members
-  non-zero on a materialized S=4 pack, the partition +
-  canon-neutrality held there). THE SECOND DATUM — the ladder
-  re-measured with the decomposed wall (S=1/4/8/16, 10y battery +
-  the 100y depth, segmented, seeds 7/42): director_global_passes
-  5.4%→31.2% THE E-DOMINANT MEMBER (per-call ×13.2 on 16× E),
-  rest 37.7%→20.7% (the unexplained bulk halved), next_d100_hit
-  ×1.01 (the block walk E-flat as designed); the 100y ladder: the
-  per-call growth ratios ALL ≈×1.0 (no depth-super-linear
-  member), the event stream invariant 10863 = 10863 at 100y, the
-  E-exponent scale-stable across H (the wall S16/S1 = ×2.17 at
-  10y, ×2.16 at 100y). The §9.2 locality-injection pattern's live
-  owner landed (the battery's datums — the map's registry honest
-  again). density-1 CLOSED (both halves landed); density-2 OPENED
-  (the households knob — the DENSITY-SCALE arm, the queue's new
-  head). Zero core change, INV-1..5 untouched, the LOG untouched.
+Iteration: iter-347 (`households` — THE DENSITY-SCALE ARM,
+  the density-2 row the queue's head; the owner's standing
+  «продолжай работы, открывай важнейшее, на долгосрок» directive
+  + the session's explicit environment permission «можешь
+  устанавливать llama.cpp для работы и прочее окружение» — this
+  iteration LLM-free, the permission stands for the station rows):
+  THE HOUSEHOLDS KNOB (`scripts/densitypack.py --households H` —
+  the ACTIVE unit's roster grown: H−3 extension households of four
+  hearth-voice adults on the anchor's square, the Ashen-mirror
+  pair web, ONE talk post each (the sampled family, ρ-scaled) on
+  the extension's INTERNAL bijective 2-step ring — no template
+  adult targeted, the knobs ORTHOGONAL, every AP-11 pair unique
+  by construction; the stem ceiling H≤32 loud; H=3 the density-1
+  form BYTE-FOR-BYTE) + 4 laws (the identity / the axes+echo's
+  honest warm/cold split / the ring with the direct AP-11 teeth +
+  the refusal arms / the run law — T1 HELD, the extension talks
+  PRESENT, the census untouched, THE MATERIAL SUBSTREAM IDENTICAL
+  to H=3). THE THIRD DATUM — THE DENSITY-SCALE LADDER (H=3/6/12/
+  24/32 → warm 12→128, S=4, cold 36 FIXED, segmented 10y, seeds
+  7/42 + the whole ends): the wall 0.56→63.87 s (×114, EXPONENT
+  2.04 — QUADRATIC in the cone's population, against the locality
+  arm's ×2.17 on 16× cold E); **skip_probes 35.9%→75.0% THE
+  DOMINANT MEMBER (×211 absolute — THE QUIET-SKIP ECONOMY
+  INVERTS AT DENSITY: the beats themselves grow ×10.4 with the
+  population, every probe walks posts × projection; the per-call
+  costs LINEAR — urgency_scan ×9.6, decay ×10.3)**; the rumor
+  cascade the super-linear event amplifier (rumor_told 3→6097,
+  events ×21.6 on ×10.7 warm); the E-flat members FLAT
+  (next_d100_hit ×1.08, scene_zones ×1.15, occ_refold FLAT — the
+  iter-338 index dividend holds at density); T1 + census {36} +
+  material multiset + canon-neutrality ALL held at every depth
+  (the segmented ±1-3 tick shift the honest beat-lattice coupling,
+  declared; the WHOLE protocol's material substream
+  byte-identical). **THE FIRST LOCAL-SCALE → DENSITY-SCALE
+  PROMOTION** (TEST_PLAN §9.1's standing classification synced);
+  the skip_probes optimization address NAMED for the owner's call.
+  Zero core change, INV-1..5 untouched, the LOG untouched.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2640 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero core change, the LOG untouched; +1 law, nothing deleted or weakened) ·
+2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero core change, the LOG untouched; +4 laws, nothing deleted or weakened) ·
 Date: 2026-10-09 ·
-Scope: scripts/labrunner.py (the member map + the key-function
-  table + the docstring law 8), tests/test_lab.py (the grown-world
-  law + the named-keys extension), docs/TEST_PLAN.md (the §9.2
-  locality-injection owner cell), docs/TASKS.md (density-1 DONE +
-  density-2 OPEN + the ledger, iter-336 evicted), STATUS.md,
-  worklog.md (iter-336 evicted), docs/iterations/iter-346-density2-
-  report.md (new) — 7 changed/created (2 code + 5 riders).
+Scope: scripts/densitypack.py (the households knob + the extension
+  households builder), tests/test_densitypack.py (+4 laws),
+  docs/TEST_PLAN.md (§9.1's standing classification — the battery's
+  LOCAL-SCALE + DENSITY-SCALE), docs/TASKS.md (density-2 DONE + the
+  ledger, iter-337 evicted), STATUS.md, worklog.md (iter-337
+  evicted), docs/iterations/iter-347-households-report.md (new) —
+  7 changed/created (2 code + 5 riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -132,20 +138,25 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-346 DONE: density2 (the density-1 row's second half — the
-  projection-plane member split: four E-scaling members named,
-  every subtree measured disjoint first; the ladder re-measured
-  with the decomposed wall, the 100y depth's per-call ratios all
-  ≈×1.0, density-1 CLOSED both halves).**
-Next: `density-2` (the queue's new head — the households knob:
-  the warm-ring density, the DENSITY-SCALE arm — the unit's
-  roster expansion under the AP-11 unique-(npc, verb) ceiling;
-  the first LOCAL-SCALE → DENSITY-SCALE promotion candidate);
-  behind it the standing owner calls in order — M2 (the
-  surface→canonical-ID normalisation A/B — a station battery),
-  the replay-UI NOT-EXPOSED row, the world track's W8, the
-  frontend P1/P2/P3 continuations, `lab-composite-1` (the §9.2
-  vocabulary-only patterns where a consumer names itself).
+**iter-347 DONE: households (the density-2 row — THE HOUSEHOLDS
+  KNOB + THE DENSITY-SCALE LADDER: the cone's own population
+  12→128 at the cold volume fixed, the wall ×114 QUADRATIC with
+  skip_probes the dominant member — the quiet-skip economy
+  inverts at density; the rumor cascade the super-linear event
+  amplifier; THE FIRST LOCAL-SCALE → DENSITY-SCALE PROMOTION,
+  TEST_PLAN §9.1's standing classification synced).**
+Next: `M2` (the station battery — the surface→canonical-ID
+  normalisation A/B, the motivating data the agreement columns,
+  full never above 15/51; the owner's explicit environment
+  permission «можешь устанавливать llama.cpp» granted this
+  session — the station rows may run in the sandbox now);
+  behind it the standing owner calls in order — the replay-UI
+  NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
+  continuations, `lab-composite-1` (the §9.2 vocabulary-only
+  patterns where a consumer names itself); the named candidate
+  from iter-347: the skip_probes optimization row (the spec
+  filter + the O(E) kind_of walks riding its subtree — the
+  address measured, the admission the owner's call).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

@@ -27,6 +27,21 @@ The knobs (TEST_PLAN §9.1's axes, declared not implied):
                     meal round, the rations, the idle bench); the
                     crossing-certain posts (the p=100 material
                     cycle) stay certain — B6's balance law.
+  --households H    the ACTIVE unit's households (density-2, the
+                    DENSITY-SCALE arm): H−3 extension households of
+                    four hearth-voice adults each, resident on the
+                    active unit's square, every adult one talk post
+                    (the sampled family) on the extension's own
+                    directed ring — the warm ring's population the
+                    varied axis while the cold volume stays the
+                    template's own (12·(S−1) cold adults, the census
+                    law untouched). The material web stays the
+                    template's verbatim (no extension post touches
+                    an account): the cone's POPULATION density
+                    varies, never its material semantics. AP-11's
+                    unique-(intent, requires) ceiling is why this
+                    is its own arm — a verbatim household copy would
+                    clone; the ring keeps every pair unique.
 
 Determinism: the pack is a PURE function of (profile, template) —
 no RNG anywhere; same profile → byte-identical files (the
@@ -44,7 +59,9 @@ lint-read).
 Usage:
     python -m scripts.densitypack --out output/density_s4 \\
         --settlements 4 --talk-links 8 --prob-scale 1.0
-    python scripts/labrunner.py --pack output/density_s4 --years 10 ...
+    python -m scripts.densitypack --out output/density_h12 \\
+        --settlements 4 --households 12
+    python scripts/labrunner.py --pack output/density_h12 --years 10 ...
 """
 
 from __future__ import annotations
@@ -99,6 +116,22 @@ _BOUND_INTENTS: frozenset[str] = frozenset({
 #: The sampled post family the ρ knob scales (everything the template
 #: fires at p<100; the p=100 crossings are the material cycle's own).
 _SAMPLED_PROB: int = 1
+#: The extension households' plain-noun stems (the template's own
+#: "every noun deliberately plain" law); the knob's honest ceiling —
+#: past the list the generator refuses LOUD (the talk-links roster
+#: precedent: a named ceiling, never a silent truncation).
+_EXT_STEMS: tuple[str, ...] = (
+    "dun", "elm", "fenn", "gale", "hale", "iris", "joss", "kern",
+    "lyle", "moss", "nix", "orra", "peat", "quill", "reed", "sedge",
+    "torr", "ursa", "vail", "wick", "yate", "zeph", "brack", "croft",
+    "dell", "flint", "gorse", "hesp", "kale",
+)
+#: The extension adult's four roles (the template household's own
+#: shape: elder, mate, son, daughter).
+_EXT_ROLES: tuple[str, ...] = ("elder", "mate", "son", "daughter")
+#: The template's own household count (the knob's floor and identity:
+#: H = 3 is the density-1 form byte-for-byte).
+_TEMPLATE_HOUSEHOLDS: int = 3
 
 
 def _ns(kind: str, i: int, ident: str) -> str:
@@ -273,8 +306,115 @@ def _urgency_entries(
     return entries
 
 
+def _extension_households(
+    households: int, prob_scale: float,
+) -> tuple[list[dict[str, object]], list[dict[str, object]],
+           list[dict[str, object]]]:
+    """The ACTIVE unit's extension households (density-2, the
+    DENSITY-SCALE arm): `households` − 3 new households of four
+    hearth-voice adults, resident on unit 0's square (the anchor's
+    active location — the population the cone actually exercises
+    per-beat), every adult ONE talk post on the extension's own
+    directed 2-step ring (`npc_j → npc_{(j+2) mod N}` — two
+    interleaved rings through the households, the elders-and-heirs
+    and the keepers-and-daughters). The ring is deliberately
+    INTERNAL: no extension post targets a template adult, so the
+    knobs stay ORTHOGONAL (the talk-links pool and the daughters'
+    cycle untouched — no AP-11 collision by construction, measured
+    not merely lint-hoped). The pair web mirrors the Ashen
+    household's own shape (elder↔mate 80, son→elder 70,
+    daughter→mate 75) — the household's semantics carried as
+    projection-side data, never a material post: the extension
+    touches NO account anywhere (the warm material web stays the
+    template's verbatim — the row's control)."""
+    extra = households - _TEMPLATE_HOUSEHOLDS
+    ids = [f"npc_s0_{stem}_{role}"
+           for stem in _EXT_STEMS[:extra] for role in _EXT_ROLES]
+    npcs: list[dict[str, object]] = []
+    groups: list[dict[str, object]] = []
+    entries: list[dict[str, object]] = []
+    for e, stem in enumerate(_EXT_STEMS[:extra]):
+        titled = stem.capitalize()
+        members = [f"npc_s0_{stem}_{role}" for role in _EXT_ROLES]
+        elder, mate, son, daughter = members
+        pairs: dict[str, list[dict[str, object]]] = {
+            elder: [{"with": mate, "trust": 80}],
+            mate: [{"with": elder, "trust": 80}],
+            son: [{"with": elder, "trust": 70}],
+            daughter: [{"with": mate, "trust": 75}],
+        }
+        names: dict[str, str] = {
+            "elder": f"{titled}, the elder voice",
+            "mate": f"the {stem} hearth-keeper",
+            "son": f"the {stem} boy",
+            "daughter": f"{titled}'s daughter",
+        }
+        roles: dict[str, str] = {
+            "elder": "hearth-voice — the household's head, the green's ear",
+            "mate": "hearth-voice — the household's hands, the square's round",
+            "son": "hearth-voice — the household's legs, the square's watch",
+            "daughter": "hearth-voice — the household's young ear",
+        }
+        for role in _EXT_ROLES:
+            npc_id = f"npc_s0_{stem}_{role}"
+            npcs.append({
+                "id": npc_id,
+                "name": names[role],
+                "role": roles[role],
+                "position": "loc_s0_square",
+                "status": {"fatigue": 10},
+                "relations": {"trust": 50},
+                "knowledge": [],
+                "mood": "easy",
+                "goal": "the green's life heard and kept",
+                "pair_relations": pairs[npc_id],
+                "notes": (
+                    f"THE DENSITY HOUSEHOLD {e} ({titled}): a "
+                    "measurement instrument's hearth-voice (density-2, "
+                    "the DENSITY-SCALE arm) — resident on the active "
+                    "unit's square so the cone's own population rolls "
+                    "per-beat; the talk post the extension ring's own "
+                    "edge; NO material post (the warm material web is "
+                    "the template's verbatim, the row's control)."
+                ),
+            })
+        groups.append({
+            "id": f"grp_s0_{stem}",
+            "name": f"the {titled} household",
+            "position": "loc_s0_square",
+            "members": members,
+            "notes": (
+                f"THE DENSITY HOUSEHOLD {e}: the extension arm's "
+                "social unit — four voices at the green, the warm "
+                "ring's population the varied axis (TEST_PLAN §9.1's "
+                "DENSITY-SCALE class, the first promotion candidate)."
+            ),
+        })
+    for j, npc_id in enumerate(ids):
+        target = ids[(j + 2) % len(ids)]
+        entries.append({
+            "npc": npc_id,
+            "probability_per_beat": max(1, min(100,
+                round(_SAMPLED_PROB * prob_scale))),
+            "intent": {"kind": "talk", "target": target},
+            "requires": [{
+                "noun": "target", "test": "same_location",
+                "with": "actor",
+            }],
+            "notes": (
+                f"THE DENSITY WEB (households): the extension ring's "
+                f"own edge — {npc_id} to {target}, the 2-step ring "
+                "internal to the extension (no template adult "
+                "targeted: the knobs orthogonal, every AP-11 pair "
+                "unique by construction)."
+            ),
+        })
+    return npcs, groups, entries
+
+
 def build_pack(
     settlements: int, talk_links: int, prob_scale: float,
+    households: int = _TEMPLATE_HOUSEHOLDS,
 ) -> dict[str, object]:
     """The four pack files' content as a dict (pure: no IO, no RNG —
     the same (knobs, template) always yields the same bytes)."""
@@ -316,14 +456,31 @@ def build_pack(
                        for r in rules_t["economy"]["recipes"])
         urgencies.extend(_urgency_entries(i, talk_links, prob_scale))
 
+    # density-2 (the DENSITY-SCALE arm): the ACTIVE unit's extension
+    # households ride AFTER every template unit — the additive form,
+    # so households = 3 (the template's own) is the density-1 form
+    # byte-for-byte (the identity law) and the extension is visibly
+    # its own surface in the file order too.
+    if households > _TEMPLATE_HOUSEHOLDS:
+        ext_npcs, ext_groups, ext_entries = _extension_households(
+            households, prob_scale,
+        )
+        npcs.extend(ext_npcs)
+        groups.extend(ext_groups)
+        urgencies.extend(ext_entries)
+
     actions = generic + actions
 
+    extra_households = households - _TEMPLATE_HOUSEHOLDS
     profile_note = (
-        f"THE DENSITY-ENVELOPE PACK (density-1, iter-345): "
+        f"THE DENSITY-ENVELOPE PACK (density-1/2, iter-345/347): "
         f"{settlements} settlement unit(s) of the Tier A template, "
         f"{talk_links} extra talk link(s) per unit, prob-scale "
-        f"{prob_scale} on the sampled family. A DISPOSABLE "
-        "measurement instrument (TEST_PLAN §9.1's axes; the "
+        f"{prob_scale} on the sampled family, {households} household(s) "
+        f"in the ACTIVE unit ({extra_households} extension hearth-voice "
+        "households — the DENSITY-SCALE arm: the warm ring's population "
+        "the varied axis, the cold volume the template's own). A "
+        "DISPOSABLE measurement instrument (TEST_PLAN §9.1's axes; the "
         "fixture-hardcoding law — never committed, regenerated from "
         "the profile). The unit's semantics ride the template "
         "verbatim; the namespace is the only rewrite."
@@ -379,7 +536,8 @@ def build_pack(
 
 
 def materialize(out_dir: Path, settlements: int, talk_links: int,
-                prob_scale: float) -> str:
+                prob_scale: float,
+                households: int = _TEMPLATE_HOUSEHOLDS) -> str:
     """Write the four files + the PROFILE.md echo, lint-gate the
     result through `load_pack`, return the pack's name@version. A
     variant the lint refuses never survives on disk."""
@@ -399,25 +557,45 @@ def materialize(out_dir: Path, settlements: int, talk_links: int,
             "(the sampled family's multiplier; the certain crossings "
             "stay certain by B6's law)"
         )
-    docs = build_pack(settlements, talk_links, prob_scale)
+    if households < _TEMPLATE_HOUSEHOLDS:
+        raise SystemExit(
+            "densitypack refused — --households must be >= 3 (the "
+            "template's own three households are the base, copied "
+            "verbatim; the knob only GROWS the active unit — a "
+            "smaller roster is not this instrument's surface)"
+        )
+    if households > _TEMPLATE_HOUSEHOLDS + len(_EXT_STEMS):
+        raise SystemExit(
+            f"densitypack refused — --households {households} exceeds "
+            f"the stem list's honest ceiling "
+            f"({_TEMPLATE_HOUSEHOLDS + len(_EXT_STEMS)}): every "
+            "extension household needs its own plain-noun stem (the "
+            "template's every-noun-plain law), never a synthesized id"
+        )
+    docs = build_pack(settlements, talk_links, prob_scale, households)
     out_dir.mkdir(parents=True, exist_ok=True)
     for name, doc in docs.items():
         (out_dir / name).write_text(
             json.dumps(doc, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
+    extra_households = households - _TEMPLATE_HOUSEHOLDS
     profile = {
         "generator": "scripts/densitypack.py",
         "template": "content/farstead_pack",
         "settlements": settlements,
         "talk_links": talk_links,
         "prob_scale": prob_scale,
+        "households": households,
         "axes_echo": {
             "L": 7 * settlements,
-            "E_npcs": 1 + 12 * settlements,
-            "E_groups": 3 * settlements,
+            "E_npcs": 1 + 12 * settlements + 4 * extra_households,
+            "E_groups": 3 * settlements + extra_households,
             "E_items": 2 * settlements,
-            "R_talk_posts_per_unit": 4 + talk_links,
+            "warm_adults_unit0": 12 + 4 * extra_households,
+            "cold_npcs": 12 * (settlements - 1),
+            "R_talk_posts_unit0": 4 + talk_links + 4 * extra_households,
+            "R_talk_posts_per_cold_unit": 4 + talk_links,
             "K": 0,
         },
     }
@@ -432,16 +610,17 @@ def materialize(out_dir: Path, settlements: int, talk_links: int,
         raise SystemExit(
             f"densitypack refused by the pack lint: {exc} — the "
             f"profile (settlements={settlements}, "
-            f"talk-links={talk_links}, prob-scale={prob_scale}) "
-            "produced an invalid variant; the template's own shapes "
-            "must be re-checked against the admission grammar"
+            f"talk-links={talk_links}, prob-scale={prob_scale}, "
+            f"households={households}) produced an invalid variant; "
+            "the template's own shapes must be re-checked against "
+            "the admission grammar"
         ) from exc
     return pack.name_version
 
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="The density-envelope pack generator (density-1)",
+        description="The density-envelope pack generator (density-1/2)",
     )
     parser.add_argument(
         "--out", type=Path, required=True,
@@ -452,6 +631,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument(
         "--talk-links", type=int, default=0,
         help="extra talk posts per unit (the R knob; default 0)",
+    )
+    parser.add_argument(
+        "--households", type=int, default=_TEMPLATE_HOUSEHOLDS,
+        help="the ACTIVE unit's households (the DENSITY-SCALE arm; "
+             "default 3 = the template's own, byte-identical to "
+             "the density-1 form)",
     )
     parser.add_argument(
         "--prob-scale", type=float, default=1.0,
@@ -468,11 +653,12 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
     name_version = materialize(
         resolved, args.settlements, args.talk_links, args.prob_scale,
+        args.households,
     )
     print(
         f"[densitypack: {resolved} — {name_version}, lint green] "
         f"settlements={args.settlements} talk-links={args.talk_links} "
-        f"prob-scale={args.prob_scale}"
+        f"prob-scale={args.prob_scale} households={args.households}"
     )
     return 0
 

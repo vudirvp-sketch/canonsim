@@ -844,9 +844,18 @@ interactions; `horizon-density` = H with E/R/F/ρ controlled;
 `mixed-density` = several axes together — late-stage validation,
 never the first diagnostic). Standing classification of the measured
 corpus: the farstead kiloyear family (iter-335/336/337/338) is
-**SEMANTIC-ONLY** — horizon evidence on a sparse authored world; no
-repo row has earned LOCAL-SCALE or above (the density-envelope
-battery's own target). Fixture hardcoding is forbidden as the
+**SEMANTIC-ONLY** — horizon evidence on a sparse authored world; the
+density-envelope battery (the generated Tier A family) has earned the
+repo's first two scale classes — **LOCAL-SCALE** (iter-345/346: the
+locality-control ladder, E 25→205 unrelated volume, the event stream
+invariant + the byte-level isolation law) and **DENSITY-SCALE**
+(iter-347: the households ladder, the cone's own population 12→128
+with the cold volume fixed, the wall's quadratic growth decomposed
+into the named members — skip_probes the dominant term, the
+quiet-skip economy inverting at density; T1/census/material-
+multiset/canon-neutrality all held). No row has earned TARGET-SCALE
+(the declared target envelope — a capacity statement for the measured
+profile/hardware/protocol only). Fixture hardcoding is forbidden as the
 mechanism of generality: scale rows consume profile + seed + counts +
 the existing schema — never hand-written ID herds; and a promoted
 metric must name its intended effect, a sensitivity witness, and a
