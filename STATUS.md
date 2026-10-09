@@ -1,43 +1,51 @@
-Iteration: iter-352 (`m3repoladder` — THE SECOND STATION
-  ROUND-TRIP'S LAUNCH-FORM LESSON, the repo half this time: the m3
-  pack v1's repo discovery — THREE candidates (pack/canonsim,
-  cwd/canonsim, cwd) — died on the exact BESIDE-THE-REPO layout the
-  m2 v2 ladder served (`../canonsim` absent; the README's own
-  instruction required it); the owner's call «пути бери с версии
-  canonsim_m2_station_pack_v2.7z» — THE PACK v2: the m2 v2 ladder
-  ported VERBATIM (--repo > CANONSIM_REPO > pack-relative
-  beside/above > cwd-relative > the 8 home paths incl.
-  OneDrive/Desktop/repo/canonsim; the two-marker validation; the
-  loud refusal naming every candidate) + `cd /d "%~dp0"` in the
-  bat + the case-insensitive `.gguf` + THE 'none'/'self' ANSWERS AT
-  THE EXTRACTOR PROMPT (the owner's three models — Kev-4B /
-  Gemma-4-E4B / Qwen3.5-9B — carry no ultra-light; iter-349's
-  double-click self-sufficiency law applied to the extractor
-  choice) + repo/repo_tried in the gate report; THE BATTERY
-  BYTE-UNTouched (m3_analysis/m3_units md5-identical to v1);
-  VALIDATED §13.1 (b11429 + 1.7B + 0.6B): T-R1 the owner's failure
-  reproduced 1:1 on v1 (exit 1, repo-not-found, the pack beside
-  the repo — the diagnosis by EXECUTION), T-R2/R3a/R3b the ladder
-  legs, T-M the suffix/.part laws, T-E0..E3 the exe + prompt
-  forms (pty), THE FINAL FULL SMOKE end-to-end from the
-  double-click form (cwd = the pack dir, zero path flags): all 10
-  stages green across 3 chunked budget runs (the resume law
-  exercised live), zero engine failures, zero zombie servers, the
-  zip packaged; the preflight pins = iter-351's exactly (pin_g
-  `9fa7e9f4359a9201` — the cross-battery anchor's FIFTH point,
-  golden byte-contract true, HEAD 3580ebc), off_gr 0 on all arms,
-  the det g cold≠warm datum honestly recorded (the b11429 build
-  class); the terminal-ate-`[m` false alarm closed by execution —
-  suspicious syntax is verified by running it, never by eye).
+Iteration: iter-353 (`m3attach` — THE THIRD STATION ROUND-TRIP,
+  the first where the failures hit MID-FLIGHT, not at launch: the
+  owner's two v2 crashes — run 1, the ATTACH to the owner's own
+  b11490 server, died on its FIRST engine call with HTTP 400
+  «model name is missing from the request»; run 2, the Kev-4B
+  extractor spawn, died rc=1 BEFORE preflight and killed the whole
+  run; the owner's call «исправь все и пришли ссылку на правленный
+  архив»): THE PACK v3 — THE OAI `model` FIELD ALWAYS SENT (the id
+  from the server's own /v1/models, cached per endpoint — the
+  build-window datum: b11064/b11429/b11500/b11538 accept a body
+  without it, the owner's b11490 REJECTS; m2 v2 worked because its
+  client HAD the field (station_m2_probe.py:327) and because the
+  m2 station round AUTOSPAWNED the old b11064 — the m3 attach hit
+  the strict build first) + THE EXTRACTOR DEGRADE LAW (a broken
+  extractor model — the owner's Kev path — NEVER kills the run:
+  the GGUF pre-check (magic/size/OneDrive-placeholder, named
+  reasons), the spawn GPU ladder (default → ngl 24/8/0, a fresh
+  port per rung, an explicit -ngl disables), the log TAIL in every
+  spawn failure, the TTY re-prompt (skip F / self / another
+  model), the honest non-TTY auto-skip, the ExtractorDown class
+  through every path) + THE CRASH-ZIP LAW (any crashed run still
+  packages its diagnostic m3_*.zip — summary inside, the server
+  logs copied into run/logs/ and zipped) + THREE LATENT v1 CRASHES
+  closed in the never-exercised attach/F-self forms (the det
+  restart None-guard, the F-self ensure/stop guards ×3, the
+  attach-no-exe IndexError) + the v2 repo-ladder features
+  re-applied from the iter-352 spec (the v2 source lost with the
+  interrupted session; the battery BYTE-UNTouched);
+  VALIDATED: the strict b11490 MOCK 9/9 (T1 the v1 400 reproduced
+  1:1 BEFORE the fix — the diagnosis by execution; T3 the full
+  attach battery green; T4 the dead-extractor degrade; T5 F-self
+  end-to-end; T6 the GPU ladder ×3; T7 the crash zip), PTY 3/3
+  (none / self / the dead-extractor re-prompt → 'u'), REAL
+  llama.cpp b11538 + Qwen3-0.6B in BOTH forms (attach 10/10
+  stages across 3 chunked resume runs, the G pin
+  `9fa7e9f4359a9201` = the cross-battery anchor's SIXTH point;
+  autospawn 10/10, zero zombies); the b11538 LENIENCY datum
+  recorded (200 with no field and a foreign id — the strictness is
+  a build-window property, the owner's b11490 the authority).
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the pack + the CPU run's zip outside the repo per Rule 9) ·
-Date: 2026-10-09 ·
+2644 green indicators (this environment's count, rc=0; the class of iter-343's environment note), ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the pack v3 + the validation zips outside the repo per Rule 9) ·
+Date: 2026-10-10 ·
 Scope: STATUS.md (the header + Next), worklog.md
-  (iter-342 evicted), docs/TASKS.md (the ledger, iter-342
-  evicted), docs/iterations/iter-352-m3repoladder-report.md (new) — 4
+  (iter-343 evicted), docs/TASKS.md (the ledger, iter-342
+  evicted), docs/iterations/iter-353-m3attach-report.md (new) — 4
   changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
@@ -138,12 +146,16 @@ iteration.)
   smoke battery green from the double-click form, the G pin = the
   anchor's fifth point; the analysis at iter-352's report §A/§C,
   the pack §B).**
-Next: THE M3 STATION RUN v2 (the owner's call — unpack the pack
-  ANYWHERE beside canonsim (the ladder finds it, incl. the home
-  paths), double-click station_m3_probe.bat; two prompts: the
-  main model's number, then the extractor — a number, 'self', or
-  'none' (G/H/G2 self-sufficient); the m3_*.zip back; the
-  reading: the census deltas, the GPU latency ledger — the
+Next: THE M3 STATION RUN v3 (the owner's call — the fixed pack:
+  unpack ANYWHERE beside canonsim, double-click
+  station_m3_probe.bat; a live 8080 server is ATTACHED to (the
+  `model` field is sent automatically — the b11490 fix), else
+  autospawn; two prompts: the main model's number, then the
+  extractor — a number, 'self', or 'none'; a DEAD extractor now
+  degrades: the log tail prints in the window and the choice is
+  skip / self / another model — G/H0/H8/G2 always run; the
+  m3_*.zip back (a crashed run leaves its diagnostic zip too);
+  the reading: the census deltas, the GPU latency ledger — the
   «тапки» question where prompt-processing dominates, the prose
   probes, the f6f exfil datum); WITH it or after it THE M2
   POLICY DECISION (the owner's call: block / downgrade / allow —
