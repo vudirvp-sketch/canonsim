@@ -1,48 +1,61 @@
-Iteration: iter-350 (`m2station` — THE STATION M2 READING:
-  the returned m2_station_20261009_113929.zip read AGAINST THE
-  RAW RECORDS (the owner's interrupted session — the station run
-  itself finished clean: the pack v2's double-click END-TO-END,
-  the engine ladder live (attach-check dead → autodiscovery →
-  the TTY model prompt, 4 models, the owner's choice
-  Gemma-4-E4B Q4_K_M) → autospawn b11064, HEAD 63a4a0c, the
-  grammar pin held (the fourth build point), zero engine
-  failures, ~5 min); THE ANCHOR CLOSED ON BOTH BANDS: arm A
-  reproduces the e4b-r7 §8.5 headline EXACTLY on the same
-  model × build × station (11/51 full, the r7 generate class)
-  — the CPU band reproduced q1p7b (iter-348), the station band
-  reproduces e4b-r7; the arms B−A/C−A +0/+0 (CLEAN 4/4/4);
-  THE TEXTURE-FAMILY DATUM (the policy-decisive): under A the
-  grammar forces wrong-but-committed canon-ID intents (pinned
-  [] ×10 — the worst class, HARD CANON), under B the name-enum
-  blesses nearest-name guesses («the thing» → «the mug of
-  ale», candles → «the player»), under C the band emits the
-  honest surface ('candles' ×6, 'candle' ×3, 'the thing' ×1)
-  and the cascade REFUSES ALL 10 → honest questions, zero
-  commits, zero leaks — THE CASCADE FINALLY EXERCISED (the
-  1.7B band echoed IDs); LEAK 0 everywhere, F3 6/6
-  ghost→canon under ALL arms (the aggressive mapper — even
-  under the free grammar), F6 f6a executed 1/6 arm-invariantly
-  (the auth pipeline's row, never the normaliser's), f6f's
-  protocol-dump blocked by the grammar; determinism 6/6 green
-  (greedy cold==warm, restart reproduces both — the THIRD
-  build point: b11500's cold≠warm is build-specific); the
-  economics: B +22% generate on the GPU band (vs ×2.5 on CPU),
-  C −4% the cheapest form; THE DECISION PACKET delivered —
-  block / downgrade / allow + the C-tight/C-full fork (the
-  loose cascade steps unexercised on both bands), the owner's
-  call behind the runtime-promotion gate. Zero repo code, the
-  riders + the §8.5 row only; the station zip stays outside
-  the repo (Rule 9/INV-5, md5 recorded).)
+Iteration: iter-351 (`m3arch` — THE OWNER'S GRAMMAR-VS-
+  CLASSIFIER QUESTION DECOMPOSED (the «не лучше поставить в
+  рантайм к llm модели laya какую (классификатор)
+  ультралегкий» + «если модель может моментально почти "на
+  лету" работать с грамматикой, а потом выдавать красивую
+  прозу … то мб и без классификатора типа jev, kev, laya
+  можно обойтись» call — opens M3's first half: WHERE the
+  intent extraction lives at runtime and what each placement
+  costs): THE DECOMPOSITION — a PURE-GATE classifier is
+  insufficient (the doors need the intent DOCUMENT), a
+  CanonSim-legal classifier IS a grammar-constrained tiny
+  extractor (the grammar = the safety mechanism, model-size-
+  independent: structural validity, ghost-block, the f6f
+  exfil-block); the «tapki» cost split into THREE measured
+  things — per-token constraint (small on GPU, m2's C −4%),
+  the MID-GENERATION switch (zero round-trips — the hybrid
+  single-pass form), the ROUND-TRIP switch (the second call's
+  own prompt processing + HTTP); THE M3 STATION PACK v1
+  (5 files, OUTSIDE the repo per Rule 9): G control (§8.5
+  byte-for-byte) / H0,H8 the single-pass hybrid (the
+  grammar prefix RELEASING into free prose mid-generation —
+  the owner's «на лету» form made testable; THE TERMINATED-
+  PROSE LAW found live: the star tail `[^]*` FAILS TO PARSE
+  at b11500 and ANY star form HOLDS EOS — the blank-line
+  terminator lets root complete and EOS fire naturally,
+  finish='stop') / F the classifier form (free main prose +
+  the ultra-light extractor under the SAME reply grammar —
+  the jev/kev/laya class) / G2 the two-pass latency
+  reference; leak-watch F3/F6 × {G,H8,F}, determinism-mini,
+  the latency ledger; the lazy second server (the OOM law:
+  two resident servers + grammar growth do not fit 4 GB);
+  VALIDATED CPU-SIDE END-TO-END (§13.1: b11500 + Qwen3-1.7B
+  + Qwen3-0.6B, ~430 calls, chunked with resume): THE ANCHOR
+  4 full = the q1p7b row, the G pin `9fa7e9f4359a9201` = m2's
+  (cross-battery), off_gr 0 EVERYWHERE incl. 84 hybrid
+  cycles; census H0/H8 +2 full vs G, F −2 (the 0.6B
+  extractor's instruction cost); the latency ORDER: all
+  prose-bearing turns cluster 16–17 s vs G's 10 — the CPU
+  wash H≈G2, THE TWO-MODEL CONTENTION TAX measured (the same
+  free leg 7.11 s alone vs 11.36 s with the extractor up,
+  +60% CPU); THE F6F DATUM: the free form's prose EXFILTRATED
+  the grammar block on the protocol-dump ask — the grammar
+  forms hold it structurally; F3 6/6 guess-into-canon
+  arm-invariant (m2 reproduced); six instrument defects
+  found and closed by the validation (the terminated-prose
+  law the form-defining one); THE STATION RUN is the next
+  owner call — the GPU ledger decides the «тапки» question
+  where prompt-processing dominates; the M2 decision
+  UNTOUCHED, composable with every m3 form.)
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the station zip outside the repo per Rule 9) ·
+2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the pack + the CPU run's zip outside the repo per Rule 9) ·
 Date: 2026-10-09 ·
 Scope: STATUS.md (the header + Next), worklog.md
-  (iter-340 evicted), docs/TASKS.md (the ledger, iter-340
-  evicted), docs/TEST_PLAN.md (§8.5's engine1-e4b-m2 row),
-  docs/iterations/iter-350-m2station-report.md (new) — 5
+  (iter-341 evicted), docs/TASKS.md (the ledger, iter-341
+  evicted), docs/iterations/iter-351-m3arch-report.md (new) — 4
   changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
@@ -136,19 +149,22 @@ iteration.)
 
 ## Next step
 
-**iter-350 DONE: m2station (THE STATION M2 READING — the
-  returned zip verified against the raw records; the anchor
-  closed on both bands (arm A = the e4b-r7 headline exactly);
-  the texture-family datum + the cascade exercised (10 honest
-  refusals, LEAK 0); determinism 6/6 (the third build point);
-  THE DECISION PACKET at iter-350's report §G).**
-Next: THE M2 POLICY DECISION (the owner's call: block /
-downgrade / allow — + the C-tight/C-full fork; the packet's
-reading: the metric flat on agreement, the failure-mode the
-difference — A/B wrong-but-committed vs C honest questions, LEAK
-0, C the cheapest; the implementation rows open each on the
-owner's separate call behind the runtime-promotion gate);
-behind it the standing owner calls in order — the replay-UI
+**iter-351 DONE: m3arch (THE OWNER'S GRAMMAR-VS-CLASSIFIER
+  QUESTION DECOMPOSED + THE M3 STATION PACK validated CPU-side;
+  the terminated-prose law the form-defining find; the analysis
+  at iter-351's report §A, the pack §B).**
+Next: THE M3 STATION RUN (the owner's call — the pack beside
+  canonsim, the main model + an ultra-light extractor in
+  workbench/runtime/models/, double-click station_m3_probe.bat,
+  the m3_*.zip back; the reading: the census deltas, the GPU
+  latency ledger — the «тапки» question where prompt-processing
+  dominates, the prose probes, the f6f exfil datum); WITH it or
+  after it THE M2 POLICY DECISION (the owner's call: block /
+  downgrade / allow — + the C-tight/C-full fork; the packet's
+  reading at iter-350 §G; the m3 forms compose with any M2
+  policy — the JSON prefix and the extractor ride the same
+  reply grammar);
+behind them the standing owner calls in order — the replay-UI
 NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
 continuations, `lab-composite-1`; the skip_probes optimization
 address named iter-347 (the admission the owner's call).
