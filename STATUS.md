@@ -1,59 +1,47 @@
-Iteration: iter-348 (`m2pack` — THE M2 STATION PACK, the STATUS
-  Next head; the owner's session call «подготовь m2 пак со
-  скриптами нужными архивом по примеру этого
-  canonsim_station_horizon_probe_v3.zip…» + the standing
-  «продолжай работы, открывай важнейшее, на долгосрок»
-  directive + the session's environment permission exercised
-  IN FULL: llama.cpp b11500 + Qwen3-1.7B Q4_K_M downloaded and
-  run in the §13.1 sandbox class — the first station row
-  validated CPU-side): the pack `canonsim_m2_station_pack_v1.zip`
-  (4 files — the probe, the station analysis, the bat, the
-  README; OUTSIDE the repo per Rule 9, the horizon-probe
-  delivery form) — the battery: the arms A baseline (the §8.5
-  form byte-for-byte) / B surface-enum (name→id exact, the
-  one-protocol-line declared factor) / C free-target (the
-  deterministic cascade id → name → casefold → article-strip →
-  unique substring → unique levenshtein≤2; refusal = the honest
-  question path, never a silent guess), the leak-watch (F3
-  ghost nouns + F6 injections under every arm — the cascade's
-  LEAK counter the «without increasing canon leakage»
-  falsifier), the determinism-mini (greedy / seeded-one-seed /
-  cacheless ×3 + restart; the COLD≠WARM split verdicts), the
-  premise-drift status (iter-314 §D's root cause — every arm
-  checks the world state at each cycle's start against the
-  corpus-pinned reference walk; the census reported RAW and
-  CLEAN), the iter-312 split columns (brief/parse/tick/generate);
-  attach + spawn engine forms, `--run-dir` resume,
-  `--restart-per-stage` + mid-arm restart-and-retry self-healing.
-  VALIDATED END-TO-END CPU-SIDE (~190 calls, ~49 min): THE
-  CONTROL ARM REPRODUCES THE iter-312 engine1-q1p7b LEDGER ROW
-  EXACTLY (4 full / 15 kind / 32 mismatch, mix 51/0/0) ON A
-  DIFFERENT BUILD (b11500 vs b11337) — the battery anchored to
-  §8.5 (any station-side divergence of arm A = a surface shift,
-  loud); the 1.7B band's first A/B/C numbers: B−A full +0 (the
-  ID-form no worse than names at this band), C−A +1 at zero
-  normaliser refusals (the band echoes IDs — the free-form
-  cascade surface UNEXERCISED, honest), B's name-literal
-  grammar costs ~2.5× generate on CPU (an economic datum); F3
-  6/6 guess-into-canon at every arm, LEAK 0 (the falsifier
-  armed, waiting for a band that emits free references); greedy
-  cold≠warm at b11500 (a build regression vs b11337's 5/5 —
-  recorded as two verdicts, regime-coherent); the grammar pin
-  9fa7e9f4359a9201 = the THIRD build point. Six instrument
-  defects found and closed BY the validation (the B-literal
-  JSON-quote bug, the blind spawn bind, the ~34 MB/unique-
-  grammar OOM wall at ~52 calls / 4.1 GB, the seeded-determinism
-  vacuity, the leak family separation, the dead-cycle census
-  visibility). Zero repo code, the riders only.
+Iteration: iter-349 (`m2spawn` — THE M2 STATION PACK v2:
+  THE ENGINE LADDER; the returned m2_station.zip's lesson —
+  preflight GREEN (the grammar pin, the repo found at HEAD ef40986,
+  all checks), the engine stage FAIL (8080 dead — the v1 default
+  attach-only; the owner's double-click spent a round-trip on the
+  launch FORM, not the measurement); the pack v2 (probe v1.1,
+  OUTSIDE the repo per Rule 9): the ladder — explicit spawn →
+  attach → AUTO-DISCOVERY by the LAUNCHER LAW
+  (workbench_app._exe_candidates: runtime/llama.cpp root +
+  subfolders → PATH → the D:\llama.cpp station hint; *.gguf from
+  runtime/models, .part-immune) → AUTO-SPAWN (-c 4096 -np 1
+  --jinja, GPU auto-fit, the honest cmd line, the port retry on an
+  OS-free port, the 900 s OneDrive heartbeat wait, the late-attach
+  resolution); the TTY model prompt (number-or-path; non-TTY → the
+  loud FAIL with copy-paste --model-file lines — never a silent
+  guess); --no-autospawn (the v1 form); the machine-readable
+  GATE REPORT in summary.json; ONE instrument defect found by the
+  validation and closed in-iteration (the determinism restart arm
+  gated on the --spawn-server FLAG instead of spawn-OWNERSHIP —
+  silently skipped under autospawn, T-A2's restart=None; fixed to
+  engine._proc is not None, both spawn forms now restart). VALIDATED
+  §13.1 END-TO-END (llama.cpp b11500 + Qwen3-1.7B Q4_K_M, the
+  station layout reproduced 1:1, ~120 engine calls): the ladder
+  T-A/T-A2/T-A3/T-B/T-B2/T-C/T-D all green — the happy path
+  (discovery → spawn in 3 s → reference → arms), the multi-model
+  loud FAIL, the TTY prompt via pty with choice, the zero-models
+  report, the attach precedence — plus THE FINAL FULL SMOKE on the
+  final build: zero engine failures, leak 12/12 ×3 (payload 2,
+  LEAK 0), determinism greedy cold≠warm with the restart
+  reproducing the COLD call — the exact b11500 picture of iter-348;
+  the known grammar-growth memory wall re-confirmed at -c 4096
+  (T-A: honest degradation at ~call 40 on 4.1 GB — the station's
+  32 GB never sees it; --restart-per-stage always the documented
+  insurance). Zero repo code, the riders only.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
 2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the pack outside the repo per Rule 9) ·
 Date: 2026-10-09 ·
-Scope: STATUS.md, worklog.md (iter-338 evicted), docs/TASKS.md
-  (the ledger, iter-338 evicted), docs/iterations/iter-348-
-  m2pack-report.md (new) — 4 changed/created (all riders).
+Scope: STATUS.md (the header + the KI cleanup + Next), worklog.md
+  (iter-339 evicted), docs/TASKS.md (the ledger, iter-339 evicted),
+  docs/iterations/iter-349-m2spawn-report.md (new) — 4
+  changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -113,8 +101,10 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
-- KI#114 · the resume-boundary drain divergence · CLOSED iter-340 (`ki114-1-impl` — the composition law landed: the feed at the clean drain boundary, the 143-check falsifier permanent, split == resume == continuous byte-for-byte; the B direction the owner accepted 2026-10-08) — opened 2026-10-07, found by occ-1's resume law, decided by the iter-339 packet
-- KI#115 · the grim pack's two same-account every:1 flows · CLOSED iter-341 (`ki115-1` — THE CROSSING'S PROGRESSIVE LAW: flow_drafts drafts flow N against the state as changed by flows 0..N-1 of the same crossing, a copy-on-write overlay, the function pure; the fork resolved for the engine side — the lint declares co-due same-account flows legal data, the D-182 fold stays valid pack data with its own semantics; zero corpus price, every golden byte-compare green; the year-scale grim witness landed: the progressive reckoning, the multi-year +8/year ladder, T1 at the year scale, the composition law at the year boundary) · opened 2026-10-08, closed 2026-10-08
+
+(KI#114 and KI#115 deleted per AGENTS §5 — closed iter-340/341,
+more than two iterations ago; the mandatory cleanup this
+iteration.)
 
 ## FAQ / Pitfalls
 
@@ -144,22 +134,24 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-348 DONE: m2pack (THE M2 STATION PACK — the battery
-  built and CPU-validated per the §13.1 precedent: the control
-  arm reproduces the iter-312 q1p7b ledger row exactly on
-  b11500; six instrument defects found and closed by the
-  validation; the environment permission exercised).**
-Next: THE M2 STATION RUN (the owner's call: unpack the pack
-  beside canonsim, raise llama-server — or the spawn form —
-  double-click station_m2_probe.bat, send the
-  m2_station_*.zip back; the policy decision (block / downgrade
-  / allow as non-canonical narration) reads the STATION columns
-  against the sandbox mechanics — the 1.7B band's +0/+1 deltas
-  are mechanics, never the decision); behind it the standing
-  owner calls in order — the replay-UI NOT-EXPOSED row, the
-  world track's W8, the frontend P1/P2/P3 continuations,
-  `lab-composite-1`; the skip_probes optimization address named
-  iter-347 (the admission the owner's call).
+**iter-349 DONE: m2spawn (THE M2 STATION PACK v2 — THE ENGINE
+  LADDER; the returned station zip's lesson closed: the
+  double-click is now self-sufficient — attach → auto-discovery
+  by the launcher law → auto-spawn with the TTY model prompt;
+  the restart-arm defect found and fixed; §13.1-validated
+  end-to-end, the final full smoke at zero engine failures).**
+Next: THE M2 STATION RUN v2 (the owner's call: unpack the pack
+  v2, DOUBLE-CLICK station_m2_probe.bat — several models → the
+  probe asks the number in the window; a live server on 8080
+  still wins (attach); send the m2_station_*.zip back; the
+  policy decision (block / downgrade / allow as non-canonical
+  narration) reads the STATION columns against the sandbox
+  mechanics — the 1.7B band's +0/+1 deltas are mechanics, never
+  the decision); behind it the standing owner calls in order —
+  the replay-UI NOT-EXPOSED row, the world track's W8, the
+  frontend P1/P2/P3 continuations, `lab-composite-1`; the
+  skip_probes optimization address named iter-347 (the admission
+  the owner's call).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
