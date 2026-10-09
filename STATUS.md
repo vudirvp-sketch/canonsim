@@ -1,53 +1,59 @@
-Iteration: iter-347 (`households` — THE DENSITY-SCALE ARM,
-  the density-2 row the queue's head; the owner's standing
-  «продолжай работы, открывай важнейшее, на долгосрок» directive
-  + the session's explicit environment permission «можешь
-  устанавливать llama.cpp для работы и прочее окружение» — this
-  iteration LLM-free, the permission stands for the station rows):
-  THE HOUSEHOLDS KNOB (`scripts/densitypack.py --households H` —
-  the ACTIVE unit's roster grown: H−3 extension households of four
-  hearth-voice adults on the anchor's square, the Ashen-mirror
-  pair web, ONE talk post each (the sampled family, ρ-scaled) on
-  the extension's INTERNAL bijective 2-step ring — no template
-  adult targeted, the knobs ORTHOGONAL, every AP-11 pair unique
-  by construction; the stem ceiling H≤32 loud; H=3 the density-1
-  form BYTE-FOR-BYTE) + 4 laws (the identity / the axes+echo's
-  honest warm/cold split / the ring with the direct AP-11 teeth +
-  the refusal arms / the run law — T1 HELD, the extension talks
-  PRESENT, the census untouched, THE MATERIAL SUBSTREAM IDENTICAL
-  to H=3). THE THIRD DATUM — THE DENSITY-SCALE LADDER (H=3/6/12/
-  24/32 → warm 12→128, S=4, cold 36 FIXED, segmented 10y, seeds
-  7/42 + the whole ends): the wall 0.56→63.87 s (×114, EXPONENT
-  2.04 — QUADRATIC in the cone's population, against the locality
-  arm's ×2.17 on 16× cold E); **skip_probes 35.9%→75.0% THE
-  DOMINANT MEMBER (×211 absolute — THE QUIET-SKIP ECONOMY
-  INVERTS AT DENSITY: the beats themselves grow ×10.4 with the
-  population, every probe walks posts × projection; the per-call
-  costs LINEAR — urgency_scan ×9.6, decay ×10.3)**; the rumor
-  cascade the super-linear event amplifier (rumor_told 3→6097,
-  events ×21.6 on ×10.7 warm); the E-flat members FLAT
-  (next_d100_hit ×1.08, scene_zones ×1.15, occ_refold FLAT — the
-  iter-338 index dividend holds at density); T1 + census {36} +
-  material multiset + canon-neutrality ALL held at every depth
-  (the segmented ±1-3 tick shift the honest beat-lattice coupling,
-  declared; the WHOLE protocol's material substream
-  byte-identical). **THE FIRST LOCAL-SCALE → DENSITY-SCALE
-  PROMOTION** (TEST_PLAN §9.1's standing classification synced);
-  the skip_probes optimization address NAMED for the owner's call.
-  Zero core change, INV-1..5 untouched, the LOG untouched.
+Iteration: iter-348 (`m2pack` — THE M2 STATION PACK, the STATUS
+  Next head; the owner's session call «подготовь m2 пак со
+  скриптами нужными архивом по примеру этого
+  canonsim_station_horizon_probe_v3.zip…» + the standing
+  «продолжай работы, открывай важнейшее, на долгосрок»
+  directive + the session's environment permission exercised
+  IN FULL: llama.cpp b11500 + Qwen3-1.7B Q4_K_M downloaded and
+  run in the §13.1 sandbox class — the first station row
+  validated CPU-side): the pack `canonsim_m2_station_pack_v1.zip`
+  (4 files — the probe, the station analysis, the bat, the
+  README; OUTSIDE the repo per Rule 9, the horizon-probe
+  delivery form) — the battery: the arms A baseline (the §8.5
+  form byte-for-byte) / B surface-enum (name→id exact, the
+  one-protocol-line declared factor) / C free-target (the
+  deterministic cascade id → name → casefold → article-strip →
+  unique substring → unique levenshtein≤2; refusal = the honest
+  question path, never a silent guess), the leak-watch (F3
+  ghost nouns + F6 injections under every arm — the cascade's
+  LEAK counter the «without increasing canon leakage»
+  falsifier), the determinism-mini (greedy / seeded-one-seed /
+  cacheless ×3 + restart; the COLD≠WARM split verdicts), the
+  premise-drift status (iter-314 §D's root cause — every arm
+  checks the world state at each cycle's start against the
+  corpus-pinned reference walk; the census reported RAW and
+  CLEAN), the iter-312 split columns (brief/parse/tick/generate);
+  attach + spawn engine forms, `--run-dir` resume,
+  `--restart-per-stage` + mid-arm restart-and-retry self-healing.
+  VALIDATED END-TO-END CPU-SIDE (~190 calls, ~49 min): THE
+  CONTROL ARM REPRODUCES THE iter-312 engine1-q1p7b LEDGER ROW
+  EXACTLY (4 full / 15 kind / 32 mismatch, mix 51/0/0) ON A
+  DIFFERENT BUILD (b11500 vs b11337) — the battery anchored to
+  §8.5 (any station-side divergence of arm A = a surface shift,
+  loud); the 1.7B band's first A/B/C numbers: B−A full +0 (the
+  ID-form no worse than names at this band), C−A +1 at zero
+  normaliser refusals (the band echoes IDs — the free-form
+  cascade surface UNEXERCISED, honest), B's name-literal
+  grammar costs ~2.5× generate on CPU (an economic datum); F3
+  6/6 guess-into-canon at every arm, LEAK 0 (the falsifier
+  armed, waiting for a band that emits free references); greedy
+  cold≠warm at b11500 (a build regression vs b11337's 5/5 —
+  recorded as two verdicts, regime-coherent); the grammar pin
+  9fa7e9f4359a9201 = the THIRD build point. Six instrument
+  defects found and closed BY the validation (the B-literal
+  JSON-quote bug, the blind spawn bind, the ~34 MB/unique-
+  grammar OOM wall at ~52 calls / 4.1 GB, the seeded-determinism
+  vacuity, the leak family separation, the dead-cycle census
+  visibility). Zero repo code, the riders only.
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero core change, the LOG untouched; +4 laws, nothing deleted or weakened) ·
+2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the pack outside the repo per Rule 9) ·
 Date: 2026-10-09 ·
-Scope: scripts/densitypack.py (the households knob + the extension
-  households builder), tests/test_densitypack.py (+4 laws),
-  docs/TEST_PLAN.md (§9.1's standing classification — the battery's
-  LOCAL-SCALE + DENSITY-SCALE), docs/TASKS.md (density-2 DONE + the
-  ledger, iter-337 evicted), STATUS.md, worklog.md (iter-337
-  evicted), docs/iterations/iter-347-households-report.md (new) —
-  7 changed/created (2 code + 5 riders).
+Scope: STATUS.md, worklog.md (iter-338 evicted), docs/TASKS.md
+  (the ledger, iter-338 evicted), docs/iterations/iter-348-
+  m2pack-report.md (new) — 4 changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -138,25 +144,22 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 ## Next step
 
-**iter-347 DONE: households (the density-2 row — THE HOUSEHOLDS
-  KNOB + THE DENSITY-SCALE LADDER: the cone's own population
-  12→128 at the cold volume fixed, the wall ×114 QUADRATIC with
-  skip_probes the dominant member — the quiet-skip economy
-  inverts at density; the rumor cascade the super-linear event
-  amplifier; THE FIRST LOCAL-SCALE → DENSITY-SCALE PROMOTION,
-  TEST_PLAN §9.1's standing classification synced).**
-Next: `M2` (the station battery — the surface→canonical-ID
-  normalisation A/B, the motivating data the agreement columns,
-  full never above 15/51; the owner's explicit environment
-  permission «можешь устанавливать llama.cpp» granted this
-  session — the station rows may run in the sandbox now);
-  behind it the standing owner calls in order — the replay-UI
-  NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
-  continuations, `lab-composite-1` (the §9.2 vocabulary-only
-  patterns where a consumer names itself); the named candidate
-  from iter-347: the skip_probes optimization row (the spec
-  filter + the O(E) kind_of walks riding its subtree — the
-  address measured, the admission the owner's call).
+**iter-348 DONE: m2pack (THE M2 STATION PACK — the battery
+  built and CPU-validated per the §13.1 precedent: the control
+  arm reproduces the iter-312 q1p7b ledger row exactly on
+  b11500; six instrument defects found and closed by the
+  validation; the environment permission exercised).**
+Next: THE M2 STATION RUN (the owner's call: unpack the pack
+  beside canonsim, raise llama-server — or the spawn form —
+  double-click station_m2_probe.bat, send the
+  m2_station_*.zip back; the policy decision (block / downgrade
+  / allow as non-canonical narration) reads the STATION columns
+  against the sandbox mechanics — the 1.7B band's +0/+1 deltas
+  are mechanics, never the decision); behind it the standing
+  owner calls in order — the replay-UI NOT-EXPOSED row, the
+  world track's W8, the frontend P1/P2/P3 continuations,
+  `lab-composite-1`; the skip_probes optimization address named
+  iter-347 (the admission the owner's call).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
@@ -212,11 +215,12 @@ Next: `M2` (the station battery — the surface→canonical-ID
    reproducibility datum); the narrator production-form DECIDED
    2026-10-03 (L12 the production form — PRESENTATION_SPEC §7; the
    heavier arm gated behind the contract rows). The remaining owner
-   calls: the probe-side fixture refinement (scene-relative fixtures
-   or a distinct premise-drift status — the round-8 root cause) and
-   M2 (the surface→canonical-ID normalisation A/B — a station
-   battery, the motivating data the agreement columns, full never
-   above 15/51); GET /models/sse the observed load-progress surface —
+   calls: the M2 STATION RUN (the pack delivered + CPU-validated
+   iter-348 — the owner runs it and sends the zip back; the
+   premise-drift half of the round-8 fixture refinement LANDED
+   with the pack's census as the distinct status; the
+   scene-relative fixtures form stays a row only if the owner
+   wants RAW without drift); GET /models/sse the observed load-progress surface —
    a candidate row when a live consumer names it.
 4. The standing frames: the embodiment options (§6.4 → §6.1 → §6.5 →
    §6.2 per the owner's 2026-09-27 order; §6.3 closed iter-204..210,
