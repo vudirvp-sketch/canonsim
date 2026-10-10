@@ -145,10 +145,11 @@ def urgency_scan(
       which the walk would ENQUEUE an intent — a hit whose ``requires``
       gates pass; a gate-failing hit stays silent and its beat stays
       quiet (the noise-floor law). ``None`` when nothing fires within
-      the limit; ``1`` short-circuits (a probability-100 entry with
-      open gates fires the very first beat — the streams map may be
-      partial there, the caller skips zero beats and advances
-      nothing).
+      the limit; ``1`` answers a probability-100 entry with open gates
+      (fires the very first beat). The walk itself is ONE collective
+      `RngBank.first_d100_hit` over the gate-open entries (iter-362,
+      the walk half of iter-347's named address — the per-stream form
+      walked every entry past the collective landing at density).
 
     All reads are against the FROZEN state the caller pinned: between
     two committed moments the projection, the folds, and the world
@@ -157,7 +158,7 @@ def urgency_scan(
     approximation — no gate of a skip-capable pack reads a
     time-dependent fold)."""
     streams: dict[str, int] = {}
-    first: int | None = None
+    rolls: dict[str, int] = {}
     for seq, spec in enumerate(
         _specs(pack) if specs is None else specs
     ):
@@ -174,13 +175,13 @@ def urgency_scan(
                 facts=(), echoes=(), traits=(), world=world,
             ) is not None:
                 continue  # the gates are shut for the whole stretch
-        if spec.probability_per_beat >= 100:
-            return streams, 1
-        offset = bank.next_d100_hit(
-            name, spec.probability_per_beat, limit
-        )
-        if offset is not None and (first is None or offset < first):
-            first = offset
+        # the duplicate-(npc, kind) fold (iter-362): two entries on one
+        # stream walk the same words — the max probability's first hit
+        # IS the minimum over the entries' first hits (the monotonicity
+        # law, `first_d100_hit`'s contract)
+        if spec.probability_per_beat > rolls.get(name, 0):
+            rolls[name] = spec.probability_per_beat
+    first = bank.first_d100_hit(rolls, limit)
     return streams, first
 
 

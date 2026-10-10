@@ -857,7 +857,7 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     "projection_snapshot": (("core/loop.py", "_snapshot_for"),),
     # the quiet-beat skip's per-stretch population probes (h9's twins —
     # the scans walk every spec against the projection; the cumtime
-    # contains the E-flat rng block walk, next_d100_hit)
+    # contains the E-flat rng block walk, first_d100_hit)
     "skip_probes": (
         ("core/urgencies.py", "urgency_scan"),
         ("core/factions.py", "faction_scan"),
@@ -904,7 +904,8 @@ _KEY_FUNCS: Final = (
     ("core/knowledge.py", "_ranked"),
     # iter-346: the projection-plane family's entries + the block walk
     # (the E-flat anchor inside skip_probes' cumtime) — the per-call
-    # growth table's density-row legs
+    # growth table's density-row legs; iter-362: the walk entry renamed
+    # with the collective primitive (first_d100_hit)
     ("core/director.py", "entropy"),
     ("core/director.py", "_global_suspicion"),
     ("core/director.py", "_visible_physical_threats"),
@@ -913,7 +914,7 @@ _KEY_FUNCS: Final = (
     ("core/factions.py", "faction_scan"),
     ("core/states.py", "next_decay_tick"),
     ("core/lod.py", "scene_zones"),
-    ("core/rng.py", "next_d100_hit"),
+    ("core/rng.py", "first_d100_hit"),
 )
 
 #: The three derived-fold tests (core/intent.py's closed set) — E04's

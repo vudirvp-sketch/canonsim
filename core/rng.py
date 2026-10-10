@@ -343,43 +343,70 @@ class RngBank:
         word = _draw_word(self._keys[name], self._counts[name], self._memo, name)
         return (word >> 11) / 2**53
 
-    def next_d100_hit(
-        self, name: str, probability: int, limit: int
+    def first_d100_hit(
+        self, rolls: Mapping[str, int], limit: int
     ) -> int | None:
-        """The smallest offset j in [1, limit] such that the d100 roll
-        the stream would draw at position ``count + j - 1`` HITS
-        (``1 + U mod 100 <= probability``) — H9's quiet-beat scan
-        primitive (iter-337). Pure: never advances the counter, never
-        touches the block memo (the scan walks its own digests — the
-        landed draw recomputes them through the normal path, exactly as
-        the tick-by-tick run would). ``None`` when no draw within the
-        limit hits; ``probability >= 100`` answers 1 (every draw hits);
-        ``probability <= 0`` answers None (none ever does — the
-        probability-0 entry's roll is still consumed by the walk, but
-        never fires, so it never constrains a landing). The offset is
-        in BEATS-from-now: the caller maps it onto the beat grid."""
-        self._ensure(name)
-        if limit <= 0 or probability <= 0:
+        """The smallest offset j in [1, limit] such that ANY of the named
+        streams' d100 rolls at position ``count + j - 1`` HITS its
+        probability (``1 + U mod 100 <= p``) — the collective form of
+        H9's quiet-beat scan (iter-362, the walk half of iter-347's
+        named address). The family scans need only the FIRST beat at
+        which any rolling entry would fire, but the per-stream form
+        walked EVERY stream to its own first hit — at density that is
+        the whole population walking past the collective landing (the
+        measured wall: 933k per-stream walks, 88.6M block words on one
+        h32 run). The beat-outer order answers the same minimum by
+        construction: at each beat offset every stream's draw is the
+        same word the per-stream walk would read at that offset (the
+        counter function is pure in (key, position)), so the first
+        beat at which any stream hits IS the minimum over the
+        per-stream first hits — and the walk stops there.
+
+        Callers with two entries on one stream name (same actor+kind,
+        different gates) must fold them to the MAXIMUM probability:
+        the hit set ``{j: word_j % 100 < p}`` grows with p, so the
+        max-probability entry's first hit equals the minimum over the
+        entries' first hits (the monotonicity law; the scans do this).
+
+        Pure: never advances a counter, never touches the block memo
+        (a per-call memo holds each stream's current block — the
+        landed draws recompute through the normal path, exactly as the
+        tick-by-tick run would). ``None`` when no stream hits within
+        the limit; a p>=100 stream answers 1 (every draw hits); a
+        p<=0 entry never hits (filtered here — the roll is still
+        consumed by the walk, but it never constrains a landing). The
+        offset is in BEATS-from-now: the caller maps it onto the beat
+        grid."""
+        if limit <= 0:
             return None
-        if probability >= 100:
-            return 1
-        key = self._keys[name]
-        base = self._counts[name]
-        pos = base
-        remaining = limit
-        while remaining > 0:
-            block_index = pos >> _BLOCK_SHIFT
-            digest = hashlib.sha256(f"{key}:{block_index}".encode()).digest()
-            start_word = pos & _WORD_MASK
-            take = min(_BLOCK_SIZE - start_word, remaining)
-            for word_index in range(start_word, start_word + take):
+        entries: list[tuple[int, int, str]] = []
+        for name, probability in rolls.items():
+            self._ensure(name)
+            if probability <= 0:
+                continue
+            entries.append((self._counts[name], probability, name))
+        if not entries:
+            return None
+        memo: dict[str, tuple[int, bytes]] = {}
+        for offset in range(1, limit + 1):
+            for base, probability, name in entries:
+                pos = base + offset - 1
+                block_index = pos >> _BLOCK_SHIFT
+                cached = memo.get(name)
+                if cached is None or cached[0] != block_index:
+                    cached = (
+                        block_index,
+                        hashlib.sha256(
+                            f"{self._keys[name]}:{block_index}".encode()
+                        ).digest(),
+                    )
+                    memo[name] = cached
+                word_index = pos & _WORD_MASK
                 word = int.from_bytes(
-                    digest[8 * word_index:8 * word_index + 8], "big"
+                    cached[1][8 * word_index:8 * word_index + 8], "big"
                 )
                 if word % 100 < probability:
-                    return pos - base + (word_index - start_word) + 1
-            pos += take
-            remaining -= take
+                    return offset
         return None
 
     def skip_draws(self, name: str, count: int) -> None:

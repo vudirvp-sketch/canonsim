@@ -28,7 +28,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Iterable, Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Final
 
@@ -195,11 +195,50 @@ class _Lint:
         admissionlint._live_char()
 
 
+#: The entity categories in canonical scan order (the kind mapping
+#: alongside; iter-362's index and the old linear scans share it —
+#: the single owner of the order).
+_ENTITY_CATEGORIES: Final = (
+    ("locations", "location"),
+    ("npcs", "npc"),
+    ("ambient_entities", "ambient"),
+    ("items", "item"),
+    ("groups", "group"),
+)
+
+
 @dataclass(frozen=True, slots=True)
 class Pack:
     """Loaded, linted pack: the setting as read-only data (INV-3)."""
 
     data: Mapping[str, Mapping[str, Any]]
+    # iter-362 (skipprobe, the id→kind half of iter-347's named address):
+    # the entity lookup indexes, built once at construction — the linear
+    # category scans (`kind_of`/`entity` walked every record per call)
+    # were the measured O(E) cost inside the quiet-beat skip's per-stretch
+    # gate evaluations (density-2's wall: 1.92M `kind_of` walks on one
+    # h32 run). First-wins in category order — the exact semantics the
+    # scans had, so a (lint-forbidden) cross-category duplicate id keeps
+    # the same answer by construction. Derived state, never a second
+    # truth: both are pure functions of `data`, rebuilt with it.
+    _kinds: dict[str, str] = field(
+        init=False, compare=False, repr=False, default_factory=dict
+    )
+    _records: dict[str, Mapping[str, Any]] = field(
+        init=False, compare=False, repr=False, default_factory=dict
+    )
+
+    def __post_init__(self) -> None:
+        kinds: dict[str, str] = {}
+        records: dict[str, Mapping[str, Any]] = {}
+        for category, kind in _ENTITY_CATEGORIES:
+            for record in self.entities.get(category, ()):
+                eid = record["id"]
+                if eid not in kinds:  # first-wins: the scan order's law
+                    kinds[eid] = kind
+                    records[eid] = record
+        object.__setattr__(self, "_kinds", kinds)
+        object.__setattr__(self, "_records", records)
 
     @property
     def name(self) -> str:
@@ -226,32 +265,16 @@ class Pack:
         return self.data["templates.json"]
 
     def entity(self, entity_id: str) -> Mapping[str, Any] | None:
-        """The pack record for an entity id, or None (any category)."""
-        for category in (
-            "locations", "npcs", "ambient_entities", "items", "groups",
-        ):
-            records: Iterable[Mapping[str, Any]] = self.entities.get(
-                category, ()
-            )
-            for record in records:
-                if record["id"] == entity_id:
-                    return record
-        return None
+        """The pack record for an entity id, or None (any category) —
+        O(1) through the construction-time index (iter-362; the scan
+        order's first-wins semantics preserved exactly)."""
+        return self._records.get(entity_id)
 
     def kind_of(self, entity_id: str) -> str | None:
         """The entity category: location | npc | ambient | item | group,
-        or None."""
-        for category, kind in (
-            ("locations", "location"),
-            ("npcs", "npc"),
-            ("ambient_entities", "ambient"),
-            ("items", "item"),
-            ("groups", "group"),
-        ):
-            for record in self.entities.get(category, ()):
-                if record["id"] == entity_id:
-                    return kind
-        return None
+        or None — O(1) through the construction-time index (iter-362;
+        the scan order's first-wins semantics preserved exactly)."""
+        return self._kinds.get(entity_id)
 
     def action(self, intent: str) -> Mapping[str, Any] | None:
         """The action record for an intent type, or None."""

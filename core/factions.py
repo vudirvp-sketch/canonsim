@@ -268,16 +268,19 @@ def faction_scan(
     (iter-337 — `core.urgencies.urgency_scan` owns the family's law;
     this walk adds the ratio bar): the bar is a pure projection read
     (the members' live axes, frozen between events), so the scan
-    evaluates it once per stretch and walks the entry's own stream
-    for the first draw under it. ``streams`` maps every rolling
+    evaluates it once per stretch and ONE collective
+    `RngBank.first_d100_hit` walks the entries' own streams for the
+    first draw under any of them (iter-362, the walk half of
+    iter-347's named address — the same restructure as the urgency
+    twin). ``streams`` maps every rolling
     faction's stream to 1 draw per beat (the cadence law: the roll
     fires once per walk regardless of the bar — a bar-0 entry still
     consumes its roll); ``first_fire`` is the smallest beat offset in
     ``[1, limit]`` at which the walk would enqueue a goal (a hit
-    passing the ``requires`` gates), or ``None``; ``1"
-    short-circuits exactly as the urgency twin."""
+    passing the ``requires`` gates), or ``None``; ``1`` answers a
+    bar-100 entry with open gates exactly as the urgency twin."""
     streams: dict[str, int] = {}
-    first: int | None = None
+    rolls: dict[str, int] = {}
     for seq, spec in enumerate(
         _specs(pack) if specs is None else specs
     ):
@@ -295,11 +298,13 @@ def faction_scan(
                 facts=(), echoes=(), traits=(), world=world,
             ) is not None:
                 continue  # the gates are shut for the whole stretch
-        if bar >= 100:
-            return streams, 1
-        offset = bank.next_d100_hit(name, bar, limit)
-        if offset is not None and (first is None or offset < first):
-            first = offset
+        # the duplicate-(group, kind) fold (iter-362): the max bar's
+        # first hit IS the minimum over the entries' first hits on the
+        # shared stream (the monotonicity law, `first_d100_hit`'s
+        # contract)
+        if bar > rolls.get(name, 0):
+            rolls[name] = bar
+    first = bank.first_d100_hit(rolls, limit)
     return streams, first
 
 

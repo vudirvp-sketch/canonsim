@@ -357,6 +357,142 @@ def test_the_scan_vs_walk_law() -> None:
         ), "a rolling entry missed a beat — the rolling set diverged"
 
 
+# -- law 5b: THE COLLECTIVE FIRST-HIT WALK (iter-362, the walk half of
+# iter-347's named skip_probes address — the beat-outer restructure) ---------
+
+
+def _per_stream_first_hit(bank: RngBank, name: str, p: int, limit: int) -> int | None:
+    """The OLD per-stream block walk (iter-337's `next_d100_hit` body),
+    re-derived here as the reference oracle: the first offset in
+    [1, limit] at which the stream's d100 roll hits `p`."""
+    if limit <= 0 or p <= 0:
+        return None
+    if p >= 100:
+        return 1
+    import hashlib
+
+    key = bank._keys[name]
+    base = bank.count(name)
+    pos = base
+    remaining = limit
+    while remaining > 0:
+        block_index = pos >> 2
+        digest = hashlib.sha256(f"{key}:{block_index}".encode()).digest()
+        start_word = pos & 3
+        take = min(4 - start_word, remaining)
+        for word_index in range(start_word, start_word + take):
+            word = int.from_bytes(
+                digest[8 * word_index:8 * word_index + 8], "big"
+            )
+            if word % 100 < p:
+                return pos - base + (word_index - start_word) + 1
+        pos += take
+        remaining -= take
+    return None
+
+
+def test_the_collective_first_hit_law() -> None:
+    """`first_d100_hit` answers EXACTLY the minimum over the per-stream
+    block walks — the beat-outer order reads the same word the
+    per-stream walk would read at each offset (the counter function is
+    pure in (key, position)), so the first beat at which any stream
+    hits IS the per-stream minimum. Over fresh banks, several seeds,
+    varied probabilities (0 / low / mid / 97 / 100), varied limits, and
+    pre-advanced counters (a stretch mid-stream, never only block 0);
+    the walk never advances a counter (the purity law)."""
+    from core.rng import urgency_stream_name
+
+    seen_hit: int = 0
+    seen_none: int = 0
+    for seed in (7, 42, 125, 20261011):
+        for limit in (1, 2, 7, 40, 400):
+            for probs in (
+                (0, 3, 25, 97, 100),  # the hit-rich family (p=100 -> 1)
+                (0, 0, 1, 2, 3),  # the miss-capable family (the None case)
+            ):
+                names = [
+                    urgency_stream_name(f"npc_probe_{i}", "talk")
+                    for i in range(len(probs))
+                ]
+                bank = RngBank(seed)
+                for name in names:
+                    bank._ensure(name)
+                    bank.skip_draws(name, (seed + len(name)) % 37)
+                reference: int | None = None
+                for name, p in zip(names, probs, strict=True):
+                    offset = _per_stream_first_hit(bank, name, p, limit)
+                    if offset is not None and (
+                        reference is None or offset < reference
+                    ):
+                        reference = offset
+                before = {n: bank.count(n) for n in names}
+                collective = bank.first_d100_hit(
+                    dict(zip(names, probs, strict=True)), limit
+                )
+                assert collective == reference, (
+                    seed, limit, probs, collective, reference,
+                )
+                assert {n: bank.count(n) for n in names} == before
+                if collective is None:
+                    seen_none += 1
+                else:
+                    seen_hit += 1
+    assert seen_hit > 0 and seen_none > 0, "the law must be non-vacuous"
+
+
+def test_the_collective_duplicate_fold_law() -> None:
+    """The scans' fold contract (iter-362): two entries on ONE stream
+    name (same actor+kind, different gates) walk the same words, so the
+    MAXIMUM probability's first hit IS the minimum over the entries'
+    first hits — the monotonicity law (`{j: word_j % 100 < p}` grows
+    with p). `first_d100_hit` itself takes one probability per name;
+    the scans fold with max, and this law pins that the fold loses
+    nothing against walking both entries separately."""
+    from core.rng import urgency_stream_name
+
+    name = urgency_stream_name("npc_probe_duo", "haul")
+    low, high = 4, 60
+    for seed in (7, 42, 125, 20261011):
+        for limit in (5, 40, 400):
+            bank = RngBank(seed)
+            bank._ensure(name)
+            bank.skip_draws(name, seed % 29)
+            low_hit = _per_stream_first_hit(bank, name, low, limit)
+            high_hit = _per_stream_first_hit(bank, name, high, limit)
+            both = min(
+                off for off in (low_hit, high_hit) if off is not None
+            ) if (low_hit is not None or high_hit is not None) else None
+            folded = bank.first_d100_hit({name: max(low, high)}, limit)
+            assert folded == both, (seed, limit, folded, both)
+
+
+def test_the_p100_full_streams_map_law() -> None:
+    """The p>=100 early return is gone (iter-362): `urgency_scan` ALWAYS
+    returns the full rolling-set map — every rolling entry's stream,
+    including those after the probability-100 one — with `first_fire=1`
+    when the p=100 entry's gates are open (farstead's elder haul at the
+    initial projection). The caller only reads the map when beats are
+    actually skipped (a first_fire of 1 skips nothing), so the partial
+    map the early return produced was unobservable there — this law
+    pins the new full-map shape against regression into either form."""
+    from core.fold import initial_projection
+
+    projection = initial_projection(FARSTEAD.entities)
+    specs = urgency_specs(FARSTEAD)
+    streams, first = urgency_scan(
+        FARSTEAD, projection, RngBank(7), specs=specs, limit=400,
+    )
+    assert first == 1  # the p=100 elder haul, gates open at start
+    rolling = {
+        f"urgency:{spec.npc}:{spec.intent_kind}"
+        for spec in specs
+        if spec.npc in projection
+    }
+    assert set(streams) == rolling, (
+        "the streams map must carry EVERY rolling entry — the full map"
+    )
+
+
 # -- law 6: THE BEAT-GRID ARITHMETIC ------------------------------------------
 
 

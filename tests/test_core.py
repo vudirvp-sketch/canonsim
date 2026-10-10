@@ -25,7 +25,7 @@ from core.log import (
     read_log,
     validate_header,
 )
-from core.pack import PackError, load_pack
+from core.pack import Pack, PackError, load_pack
 from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, EventQueue
 from core.rng import (
     COSMETIC,
@@ -425,6 +425,65 @@ def test_load_pack_happy_path() -> None:
     assert pack.action("move") is not None and pack.action("move")["resolver"] == "movement"
     assert "move" in pack.event_types() and "rumor_told" in pack.event_types()
     assert pack.player_id() == "pc_01"
+
+
+# -- the entity lookup index (iter-362: the id→kind half of iter-347's
+# named skip_probes address — the index must answer EXACTLY what the
+# linear category scans answered, or every gate that reads a kind
+# silently diverges) -------------------------------------------------------
+
+
+def _linear_kind(entities: Any, entity_id: str) -> str | None:
+    """The OLD linear scan, re-derived here as the reference oracle."""
+    for category, kind in (
+        ("locations", "location"),
+        ("npcs", "npc"),
+        ("ambient_entities", "ambient"),
+        ("items", "item"),
+        ("groups", "group"),
+    ):
+        for record in entities.get(category, ()):
+            if record["id"] == entity_id:
+                return kind
+    return None
+
+
+def test_pack_kind_index_matches_the_linear_scan() -> None:
+    """Over EVERY committed pack: `kind_of`/`entity` answer exactly the
+    linear category scan's answers — every declared id both directions
+    (kind + record identity), plus an unknown id's None."""
+    for pack_dir in sorted((REPO / "content").iterdir()):
+        pack = load_pack(pack_dir)
+        ids: list[str] = []
+        for category in (
+            "locations", "npcs", "ambient_entities", "items", "groups",
+        ):
+            for record in pack.entities.get(category, ()):
+                ids.append(str(record["id"]))
+        for entity_id in ids:
+            assert pack.kind_of(entity_id) == _linear_kind(
+                pack.entities, entity_id
+            ), (pack_dir.name, entity_id)
+            record = pack.entity(entity_id)
+            assert record is not None and record["id"] == entity_id
+        assert pack.kind_of("no_such_entity") is None
+        assert pack.entity("no_such_entity") is None
+
+
+def test_pack_kind_index_first_wins_on_cross_category_duplicate() -> None:
+    """A (lint-forbidden) duplicate id across categories keeps the
+    FIRST category's kind — the scan order's exact semantics, pinned so
+    the index's construction order can never drift from the old walk."""
+    base = load_pack(REPO / "content" / "tavern_pack")
+    data = json.loads(json.dumps(dict(base.data)))
+    # inject npc pc_01's id onto a location record (the last category
+    # wins never: locations scan FIRST)
+    data["entities.json"]["locations"].append(
+        {"id": "pc_01", "exits": {}}
+    )
+    pack = Pack(data=data)
+    assert pack.kind_of("pc_01") == "location"  # first-wins, not npc
+    assert pack.entity("pc_01") is not None
 
 
 def _broken_pack(tmp_path: Path, mutate: Any) -> Path:

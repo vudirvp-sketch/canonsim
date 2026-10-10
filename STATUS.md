@@ -1,53 +1,78 @@
-Iteration: iter-361 (`m4fullrun` — THE FULL
-  v4.3 RUN READ: the owner's `m4_20261010_170258.zip`
-  is the FIRST COMPLETE station run of the series —
-  preflight + reference 10/10 + R s1..s10 (42 cycles) +
-  G control (42) + RU band (12) + det mini + package,
-  ZERO crashes; THE VERB FIX PROVEN LIVE: s4's fire
-  cascade committed by the REAL door event-by-event
-  (drop_break broken=true → fire_started back_wall →
-  fire_spread woodpile → smoke_rising →
-  location_burned_out t=131 irreversible → flee),
-  census=fields the counted honest divergence exactly
-  as iter-360's GREEN predicted; KI#117's branch fired
-  live and survived. FOURTH byte-identical run (s1..s3
-  gate_p/itok/census match v4.1 + both v4.2 exactly);
-  det router identical=True digest 962b30a43bdb6363.
-  FULL-CORPUS R PROOFS: 0 inventions on 42 docs +
-  output_tokens=[0] ×42 (0/132 live docs series-wide);
-  med 0.556 s; gate sweep monotone 67.7%@0.5 /
-  87.1%@0.4 / 96.8%@0.3 / 100%@0.2. THE RU BAND — THE
-  HEADLINE TRUST QUESTION ANSWERED: 5/12 full at gate
-  0.5, every gate-passed row assembled PERFECTLY (5/5
-  kind+target exact, zero assembly errors on Russian);
-  all 5 misses are gate_blocked on LOW-AGENCY verbs
-  (look_around/wait/talk/examine/rest) with gate_p
-  0.38–0.49 — a THRESHOLD story, not comprehension.
-  THE G CONTROL — first like-for-like on ONE battery:
-  R full 38.1% vs G 21.4% (×1.8), R max 0.796 s vs G
-  max 2.907 s, G leans on look_around ×4.7. HONEST
-  GAPS: s7 cy0 the router's top action was examine
-  CORRECT (0.308) but the answer carried no target →
-  door_error "examine requires a target" (the R-form's
-  target-resolution cost, the door refuses loud); drift
-  flags R 27/42 G 32/42 (premise-drift status); det
-  g-digest empty; cuda_gate.bands still {}. THE
-  M2/M3 DECISION MATERIAL delivered: both routes'
-  full-corpus live numbers on one battery, the
-  Russian-trust column, the threshold knob (0.5 honest
-  default, 0.4 the measured recovery point) — the pack
-  v4.3 has now delivered everything iter-357 promised);
+Iteration: iter-362 (`skipprobe` — iter-347's
+  named skip_probes address LANDED whole (the
+  owner's standing «продолжай работы, открывай
+  важнейшее на долгосрок… я разрешаю» directive;
+  the ONLY measured core wall: 75.0% of the
+  density-scale profile at H=32, ×211 absolute,
+  QUADRATIC in cone population): (1) THE
+  COLLECTIVE BEAT-OUTER WALK —
+  `RngBank.first_d100_hit(rolls, limit)` replaces
+  the per-stream `next_d100_hit` in both family
+  scans (urgency/faction): at each beat offset
+  every stream's word is the SAME word the
+  per-stream walk would read (the counter
+  function pure in (key, position)), so the
+  first beat at which ANY stream hits IS the
+  per-stream minimum — and the walk STOPS there
+  (the old form walked every stream to its OWN
+  first hit: the whole population past the
+  collective landing — 88.6M block words /
+  22.17M sha256 digests on one h32 run); the
+  duplicate-(npc,kind)/(group,kind) entries fold
+  to the MAX probability per stream name (the
+  monotonicity law: {j: word_j%100 < p} grows
+  with p, so the max's first hit == the min over
+  the entries' first hits); the scans' p>=100
+  early return DROPPED (the partial streams map
+  was unobservable in the caller — first=1 skips
+  nothing; the map is now always full, law-pinned);
+  (2) THE O(1) id→kind / id→record INDEX in
+  `core/pack.py` (`__post_init__`, first-wins in
+  category order — the old linear scan's exact
+  semantics, the cross-category duplicate law
+  pins it; `kind_of`/`entity` were the measured
+  O(E) cost inside the scans' gate evaluations:
+  1.92M walks / 13.94 s on one h32 profile);
+  `next_d100_hit` REMOVED (the two scans were its
+  only production consumers; the block-walk
+  exactness lives in the test-local reference
+  oracle); labrunner `_KEY_FUNCS` synced. THE
+  WALL, one instrument, one protocol (labrunner,
+  seed 7, h32, segmented 10y): 61.87 → 18.34 s
+  (×3.37), skip_probes 74.9% → 33.2%, the walk
+  member ×33 (73.30 → 2.22 s profiled), kind_of
+  gone from the top table; ZERO canon bytes
+  moved: the h32 log md5 07e924cbe6a3f05e9991e
+  083ed004610 IDENTICAL before/after, skip_stats
+  {2251, 3166, 2248} and occ_stats {231, 99354,
+  752, 231} identical verbatim, the farthest
+  envelope farstead 100y 4.48 → 3.28 s (NO
+  regression — the None-case walk is
+  cost-neutral, the index helps every door/gate);
+  +5 laws (the index-vs-linear-scan over all six
+  packs + first-wins duplicate; the
+  collective-vs-per-stream reference oracle ×40
+  trials + the max-fold monotonicity + the p100
+  full-map law); the residual members named
+  honestly (rest 21.5% / beat_rolls 16.2% /
+  decay_walk 15.4% / director_global_passes
+  10.2% — each its own future row) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2616 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code; pytest reports 28 T1 byte-identical replay failures on the log-header's `python` field — `3.12.15` sandbox vs `3.12.14` golden fixture-build, reproduced 1:1 on a clean clone in iter-358, NOT my regression, AGENTS §10's env-caveat; riders-only, zero repo code; the iter-361 reading is riders-only) ·
+2622 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero schema/log changes; pytest reports 27 T1 byte-identical replay failures on the log-header's `python` field — `3.12.15` sandbox vs `3.12.14` golden, the failure set IDENTICAL to the pristine-code baseline taken this session before the change — zero new) ·
 Date: 2026-10-11 ·
-Scope: STATUS.md (the header + KI#116 deleted per §5 + Next),
-  worklog.md (iter-361 entry, iter-350 evicted), docs/TASKS.md
-  (the m4-r row updated — the full run read, the ledger: iter-361
-  added, iter-350 evicted), docs/iterations/iter-361-m4fullrun-
-  report.md (new) — 4 changed/created (all riders).
+Scope: core/pack.py (the index), core/rng.py (first_d100_hit;
+  next_d100_hit removed), core/urgencies.py + core/factions.py (the
+  collective walk + the max-fold), scripts/labrunner.py (the
+  _KEY_FUNCS sync), tests/test_core.py + tests/test_h9.py (+5 laws),
+  STATUS.md (the header + Next), worklog.md (iter-362 entry,
+  iter-352 evicted), docs/TASKS.md (the skipprobe-1 row DONE + the
+  ledger: iter-362 added, iter-351 evicted), docs/iterations/
+  iter-362-skipprobe-report.md (new — the R3 PCC record rides its
+  §G; DECISIONS stays at cap 30/30, the iter-332 precedent) —
+  11 changed/created.
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -141,18 +166,16 @@ KI#115 deleted earlier per the same law.)
 
 ## Next step
 
-**iter-361 DONE: m4fullrun (THE FULL v4.3 RUN READ — the owner's
-  m4_20261010_170258.zip: the FIRST complete station run, zero
-  crashes; the Verb fix proven LIVE by the s4 event log; the
-  fourth byte-identical run; the RU band answered — comprehension
-  5/5 perfect on gate-passed rows, all misses the 0.38–0.49
-  threshold on low-agency verbs; the G control like-for-like —
-  R 38.1% full vs G 21.4%; the report
-  iter-361-m4fullrun-report.md §A..§J).**
+**iter-362 DONE: skipprobe (iter-347's named address LANDED — the
+  collective beat-outer first-hit walk + the O(1) id→kind/id→record
+  index; the h32 density wall 61.87 → 18.34 s ×3.37, ZERO canon
+  bytes moved — the log md5 identical before/after; farstead 100y
+  no regression; +5 laws; the report
+  iter-362-skipprobe-report.md §A..§G).**
 Next: THE OWNER'S M2/M3 DECISIONS behind the
 runtime-promotion gate — M2 the policy fork
 (block/downgrade/allow + the C-tight/C-full sub-fork, the packet
-iter-350 §G + the m3 addendum, now carrying the Russian-trust
+iter-350 §G + the m3 addendum, carrying the Russian-trust
 column and the threshold knob: 0.5 the honest default, 0.4 the
 measured recovery point 87.1% EN / 3-of-5 RU misses) and M3 the
 form fork (H the measured m3-battery leader / F needs a working
@@ -166,8 +189,11 @@ rows (the formalized band sweep `cuda_gate.bands`, the det
 g-digest line) each the owner's call; behind them the standing
 owner calls in order — the replay-UI NOT-EXPOSED row, the world
 track's W8, the frontend P1/P2/P3 continuations,
-`lab-composite-1`; the skip_probes optimization address named
-iter-347 (the admission the owner's call).
+`lab-composite-1`; from the iter-362 residual members, the next
+measured-wall candidates (each its own admission): the scans'
+gate pass (`first_failing` 3.85 s residue), `decay_walk` /
+`beat_rolls`, `director_global_passes` (the story layer's
+E-dominant pass — iter-346's named member).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
