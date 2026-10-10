@@ -1,49 +1,56 @@
-Iteration: iter-354 (`m3station` — THE M3 STATION READING,
-  the owner's returned m3_20261010_004929.zip read AGAINST THE
-  RAW RECORDS — every m3_report.txt number verified + TWO
-  CORRECTIONS: the g2 "−3" delta is a SUBSET ARTIFACT (zero
-  paired census flips vs G on the 23 shared cycles — the
-  two-pass form does NOT hurt extraction), and the hybrid's RAW
-  +4/+3 rides the 32 drift cycles (the same 10 clean cycles for
-  g/h0/h8, per-cycle verdicts IDENTICAL — the prose channel
-  FLIPS the 9B's verdict behavior: 22 not_intent under the pure
-  JSON grammar vs 12 under the hybrid, mix 23/1/18 vs 40/1/1);
-  THE BAND DISCOVERY: the station's b11538 build carries NO
-  CUDA — zero ggml_cuda_init/offload lines in the shipped
-  406 KB of server logs, gen 5.78 tok/s, prompt 48.8 (the m2
-  station b11064 did 366 ms/call on the SAME machine — ×46
-  here at ×2.25 the model) — the run was a SECOND CPU POINT at
-  9B, the GPU «tapki» ledger stays OPEN (one CUDA-build re-run
-  closes it; the instrument lesson: the gate must record the
-  device class — a pack-v4 row, the owner's call); the latency
-  ORDER H < G2 < F CONFIRMED on the second CPU point (the
-  single-pass saving +5.93 s GROWS with the model — prompt ≈79%
-  of the call wall; the two-model contention tax +15.4% vs
-  +60% on 4.1 GB); the prose REAL (407–418 chars p50, temp-0
-  included) with the NAMED prose-fact divergence class (success
-  narration over take_failed doors, the f6e fiction-layer
-  laundering — «a hundred gold coins materialize» while the
-  door committed wait, the refuser-bleed on injection cycles) +
-  f6f EXFILTRATION REPRODUCED 1:1 (the free arm's prose dumped
-  the FULL parse_protocol, 1 639 chars; the grammar arms hold
-  structurally — the third band); KEV-4B BROKEN AT THE GGUF
-  LEVEL (wrong tensor count, 20 failed loads — the v3 degrade
-  law PROVEN LIVE: the spawn ladder survived, the TTY re-prompt
-  fired, decider chosen, the battery completed, the zip home —
-  the owner's exact path); determinism cold==warm + restart —
-  the FOURTH build point (b11500's cold≠warm stays the lone
-  anomaly); KI#116 opened and closed (iter-353's STATUS tests
-  line broke the digest regex — the shape restored here));
+Iteration: iter-356 (`clfarch` — THE CLASSIFIER SEMANTICS
+  CORRECTED, the owner's explicit session call «kev и подобные
+  модели => они не могут генерировать текст вообще! изучи
+  принципы работы классификаторов типа jev» + «чтобы он
+  валидность ответов игрока/llm моделей проверял и мог "триггеры"
+  дергать доступные… чтобы большая llm модель не тупила и не
+  троила сто лет»: iter-351 §A.2's «a legal classifier IS a
+  grammar-constrained tiny extractor» was WRONG for the
+  jev/kev/laya class — the class = DECISION MODELS (TypeSafe Jev
+  the reference; jaredpalmer/kev-4B, convaiinnovations/laya,
+  Mapika/decider, julia-1/lev/openjev the open family): encoder +
+  typed decision head, NO autoregression, NO text generation,
+  answers {state, questions: choice/noul/score} with calibrated
+  probabilities in ONE forward pass via llama.cpp's
+  POST /v1/systemone (PR #29818, merged 2026-10-02 — inside the
+  station's b11538 build window) + VALIDATED LIVE §13.1-class:
+  b11540 × Laya-Q8_0 × the REAL tavern_pack inventory (16 actions
+  as choice criteria, 10 targets) — T1 EN owner scenario
+  `move` P≈1.0, T3 target `npc_guard_01` top-1, T5 chat
+  completions REFUSED HTTP 500 in 1 ms + output_tokens=0 (the
+  non-generativity PROVEN LIVE — form F's chat-grammar extractor
+  was category-impossible for this class; the m3 F arm never
+  measured the owner's idea), 0.80–1.39 s on the sandbox CPU vs
+  the 33-ms-class GPU band + THE HONEST LIMITS live: the EN
+  checkpoint CONFIDENTLY WRONG on Russian (coerce 0.9998 on
+  «подошёл заговорить» — talk 2nd; no ggml-org laya-multilingual
+  GGUF exists), scene-prose validation confidently wrong (arson
+  on «fire pops»), zero-shot base ≈ chance (the card's
+  0.362-vs-0.766 — fine-tune the jump, the door stays the
+  validator) + THE OWNER'S TWO FILES live-probed by Range-header
+  GGUF HEAD probes: ggml-org/Kev-4B-Q8_0 SELF-CONSISTENT (428
+  tensors + `qwen35.decision.type=kev` + calibrated temps — the
+  STATION copy is the stale broken one: RE-DOWNLOAD is the
+  confirmed fix, iter-354's guess upgraded to a datum), Mapika
+  decider-4b 426 tensors NO decision metadata, a plain causal-LM
+  conversion — OUTSIDE the llama.cpp five, unusable via
+  systemone today + THE R-FORM (the owner's architecture): choice
+  over the pack's action inventory + scene targets + noul
+  validity → the deterministic door assembles the intent document
+  (the classifier ROUTES, never commits — STRONGER than F by
+  construction: it physically cannot hallucinate a document); the
+  M4 R-arm row opened owner-gated; M2/M3 decisions untouched;
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the station zip outside the repo per Rule 9, md5 a4954eefc5eca4b1a261b8f3843a7850) ·
+2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code; this environment's count) ·
 Date: 2026-10-10 ·
-Scope: STATUS.md (the header + KI#116 + Next), worklog.md
-  (iter-344 evicted), docs/TASKS.md (the ledger, iter-343
-  evicted), docs/TEST_PLAN.md (§8.5's engine1-q9b-m3 row),
-  docs/iterations/iter-354-m3station-report.md (new) — 5
+Scope: STATUS.md (the header + Next), worklog.md
+  (iter-346 evicted), docs/TASKS.md (the ledger, iter-345
+  evicted; the m4-r standing row), docs/LLAMA_CPP_INFERENCE_
+  CONTROL_LAW.md (§16's ladder — the decision-model surface),
+  docs/iterations/iter-356-clfarch-report.md (new) — 5
   changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
@@ -138,37 +145,32 @@ iteration.)
 
 ## Next step
 
-**iter-354 DONE: m3station (THE M3 STATION READING — the v3 run
-  END-TO-END, every m3_report number verified + two corrections,
-  THE BAND DISCOVERY: the CPU-only b11538, the order H < G2 < F
-  confirmed on the second CPU point, the prose-fact divergence
-  class named, f6f reproduced 1:1, the Kev GGUF broken, the v3
-  degrade law live; the reading at iter-354's report §A..§I,
-  the §8.5 row engine1-q9b-m3).**
-Next: THE OWNER'S THREE CALLS in order — (1) THE M3 GPU RE-RUN
-  (one CUDA-build llama-server.exe dropped into
-  workbench/runtime/llama.cpp/ — the working precedent b11064/
-  the winget package already on the station — OR a manually
-  started server + the probe's ATTACH form; the double-click,
-  the zip back; closes the GPU half of the «tapki» question,
-  ~10–20 min against the CPU run's 2 h 20); (2) THE M2 POLICY
-  DECISION (block / downgrade / allow — + the C-tight/C-full
-  fork; the packet's reading at iter-350 §G + the m3 addendum:
-  the fiction-layer-divergence class named for ANY
-  prose-bearing form, iter-354 §I.2); (3) THE M3 FORM DECISION
-  (the hybrid H the measured leader on both CPU points / the F
-  form needs a WORKING ultra-light — on this station Kev is
-  broken at the GGUF level (re-download or drop the file) and
-  decider-4b refuses to extract (37/42) / the verdict-aware G2
-  free leg a NEW row if the owner opens it — the honest H-vs-G2
-  design fork: fast pre-verdict prose vs slower honest prose);
-  WITH the pack-v4 instrument rows each the owner's call (the
-  device-class in the gate, the memory-pressure recycle instead
-  of the per-unit one, the probe console in the zip);
-behind them the standing owner calls in order — the replay-UI
-NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
-continuations, `lab-composite-1`; the skip_probes optimization
-address named iter-347 (the admission the owner's call).
+**iter-356 DONE: clfarch (the classifier semantics corrected + the
+  decision-model class studied live + /v1/systemone proven against
+  the real tavern pack + both owner files verdicted by live HEAD
+  probes — the report iter-356-clfarch-report.md §A..§H).**
+Next: THE OWNER'S FORK, all composable: (1) THE M4 R-ARM
+  (m4-r, owner-gated — the /v1/systemone route measured on the
+  station: re-download ggml-org/Kev-4B-Q8_0 (428 tensors,
+  self-consistent — the station copy is the broken one) and/or
+  fetch Laya-Q8_0 (450 MB), the RU band measured before trust);
+  (2) THE M3 GPU RE-RUN — the iter-355 kit's three double-clicks
+  (setup → start/swap → station_m3_probe.bat), send back
+  m3_*.zip + cuda_gate.json + cuda_server_*.log — closes the GPU
+  half of the «tapki» ledger; (3) THE M2 POLICY DECISION
+  (block/downgrade/allow + the C-tight/C-full fork; iter-350 §G +
+  the m3 addendum) and THE M3 FORM DECISION (H the measured
+  leader on both CPU points / F needs a working generative
+  ultra-light — now fetchable one-click / G2 the verdict-aware
+  leg / R the NEW honest row the owner's 2026-10-09 question
+  actually asked — fast pre-verdict routing vs prose);
+  WITH decider-4b parked (outside the llama.cpp five — no systemone
+  surface today) and the pack-v4 instrument rows each the owner's
+  call; behind them the standing owner calls in order — the
+  replay-UI NOT-EXPOSED row, the world track's W8, the frontend
+  P1/P2/P3 continuations, `lab-composite-1`; the skip_probes
+  optimization address named iter-347 (the admission the owner's
+  call).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

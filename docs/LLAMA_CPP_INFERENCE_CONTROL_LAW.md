@@ -399,7 +399,13 @@ a named row (never one "advanced parameters" bucket):
 DRY/XTC/adaptive/dynamic/Mirostat · CPU/NUMA · KV/cache mechanics ·
 MoE placement · loading modes · chat template/reasoning ·
 structured output · server/concurrency · observability ·
-speculative/lookup decoding · multimodal/embeddings/rerank · LoRA/
+speculative/lookup decoding · multimodal/embeddings/rerank ·
+decision models (System-1: POST /v1/systemone, the
+jev/kev/laya class — non-generative typed questions
+choice/noul/score, the answer space defined per request; the five
+supported GGUFs: laya/julia-1/lev/openjev/kev, PR #29818; iter-356
+the live record — a chat-completions call on this class is
+refused by construction) · LoRA/
 control vectors · low-level diagnostics · tools/MCP · legacy
 migration. Sampling is ONE subsystem — temperature/top-p UI is not
 "the inference architecture".
