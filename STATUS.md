@@ -1,53 +1,52 @@
-Iteration: iter-357 (`m4station` — THE M4 STATION PACK
-  delivered, the owner's explicit commission «нормально проработай
-  скрипт» — the five points: the 3080 Ti/32 GB band, the
-  script-installed LATEST CUDA llama.cpp, the models folder, the
-  Kev/Decision/decider CLASSIFIER semantics (verify + trigger,
-  never generate), the broken local runtime/llama.cpp): the
-  m3 pack v3's F arm (a generative grammar extractor) REPLACED by
-  the R arm — ONE POST /v1/systemone call per cycle (choice over
-  the pack's 16 actions + the LIVE scene nouns + the noul validity
-  gate + the risk score) → the DETERMINISTIC door assembles the
-  intent from KNOWN keys (kind-aware target pick; take's dual
-  item|texture form) → the REAL ParserDoor validates + commits
-  (the classifier ROUTES, never commits — 0 inventions on 42
-  assembled docs, output_tokens=0 on every call: both proofs ride
-  the report) + THE PINNED INSTALLER (b11541 win-cuda-12.4 + the
-  NEW official cudart companion — the three DLLs the iter-355 kit
-  hand-resolved, now one official zip; sha256-pinned, idempotent,
-  the offline path, the /v1/systemone byte-check before done) +
-  THE SWAP FORM (--swap/--restore — the owner's broken
-  workbench/runtime/llama.cpp, a canonsim REPO CLONE with stray
-  exes, diagnosed loud + healed whole-folder, nothing deleted) +
-  THE MODEL DOCTOR (every *.gguf read locally + verdicted
-  decision:<five>/causal-lm/broken; the broken-Kev overlay → the
-  pinned --fetch-kev re-download; the pinned fetches --fetch-laya/
-  --fetch-qwen) + the G control arm (byte-comparable, optional) +
-  the RU band (12 hand-authored rows) + the det mini + the
-  crash-zip + the resumable stages + the device-class gate INSIDE
-  the pack (the iter-355 §D v4 row closed) + THE GATE SWEEP (the
-  validity threshold as measured data, no rerun needed);
-  VALIDATED LIVE §13.1-class end-to-end (b11541 ubuntu × Laya-Q8_0
-  × Qwen3-0.6B through the REAL Simulator+Mediator+ParserDoor: all
-  stages green, the heal ladder fired live, swap+restore 1:1 on the
-  REPRODUCED broken folder, the honest zero-shot numbers — full
-  14.3% RAW / gate_blocked 57% / the sweep 22.6%@0.5→74%@0.1 / the
-  RU band confidently-wrong — iter-356's T2 reproduced; R 3.3 s
-  vs G 4.5 s CPU, the GPU band tens of ms by the card); two live
-  defects found and closed by the validation (the emit-call
-  contract; the take-texture targetless form); the pack 11 files
-  outside the repo per Rule 9 (md5 4518ce2593bac53d8c0183963531f510);
-  the owner's station run = three double-clicks, the zip back;
+Iteration: iter-358 (`m4station-run` — THE M4 STATION
+  RUN: the owner returned `m4_20261010_140427.zip`, the pack v4.1's
+  three double-clicks END-TO-END on the station — Kev-4B as the
+  router autospawn + Gemma-4-E4B as the G-control, RTX 3080 Ti /
+  32 GB): TWO R-FORM PROOFS lie in the owner's report verbatim —
+  (1) the INVENTION LEDGER 0 inventions on 12 assembled docs (the
+  classifier ROUTES never commits — hallucination of an intent
+  document PHYSICALLY impossible, the keys come from the pack's 16
+  actions + the live scene nouns); (2) `output_tokens=[0]` on
+  every call (non-generativity of the kev family PROVEN LIVE —
+  iter-356's owner correction «kev и подобные => не могут
+  генерировать текст вообще» reproduced by a live /v1/systemone
+  call, not a claim); THE GPU BAND OPENED BY MEASUREMENT — R
+  systemone call med 0.520 s on the 3080 Ti vs 3.30 s CPU in
+  iter-357 (×6.3; the residual ~480 ms over the card's tens of ms =
+  HTTP+preproc+prefil; the band-sweep stage `cuda_gate.bands={}`
+  still OPEN — not run this round); THE GATE SWEEP FIRST LIVE
+  NUMBERS — gate>=0.5 6/9 gold-intent passes (66.7%, the default),
+  gate>=0.4 9/9 (100%) — the validity threshold now a measured
+  knob, not a guess; THE DOCTOR VERDICTS on the station's six
+  models: Kev-4B `decision:kev` (428 tensors + kev metadata +
+  calibrated temps — the iter-356 §D «station file IS the stale
+  broken copy» NOT reproduced in this run, the file is fresh or
+  --fetch-kev re-fetched; the broken-copy line CLOSED LIVE),
+  Decision-2.0-Nox `decision:unknown(decision2)` (outside the
+  llama.cpp five), decider-4b-v2.1 plain `causal-lm` (no decision
+  metadata), Gemma-4-E4B + Qwen3.5-9B + Qwen3.8-27B `causal-lm`
+  (generative); the CENSUS RAW 12 say-cycles (4 units s1-s4): full
+  50%, kind+ 50%, gate_blocked 25% (vs 57% on CPU Laya iter-357),
+  gate_fp 8.3% (1 cycle — gold≠intent, the gate passed look_around
+  over a question, NOT an invention — the assembled doc uses a
+  known key, the world reacts by canon), not_intent 8.3%,
+  parse_error 0%; OPEN for the next station run: the RU band (12
+  hand-authored gold rows — the headline trust question, NOT
+  run), the G-control arm on Gemma-4-E4B (NOT run), the det mini
+  (NOT run), the formalized band sweep (`cuda_gate.bands` empty),
+  AND a packaging anomaly — `arm_r.jsonl` end-event missing for
+  s4_fire_chain (2 replies produced, the end-record absent — a
+  question to the owner, not a blocker);
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code; this environment's count) ·
+2616 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code; the sandbox has no ruff in PATH — the canonical form kept for the digest regex; pytest reports 28 T1 byte-identical replay failures on the log-header's `python` field, `3.12.15` sandbox vs `3.12.14` golden fixture-build — reproduced 1:1 on a CLEAN BASE_COMMIT `e275b63` clone, NOT my regression, AGENTS §10's env-caveat, TEST_PLAN §1.4's `scripts/semantic_diff.py` the cross-env companion — riders-only, zero repo code) ·
 Date: 2026-10-10 ·
 Scope: STATUS.md (the header + Next), worklog.md
-  (iter-347 evicted), docs/TASKS.md (the m4-r row — the pack
-  delivered, the station run pending; the ledger, iter-346
-  evicted), docs/iterations/iter-357-m4station-report.md (new) — 4
+  (iter-351 evicted), docs/TASKS.md (the m4-r row CLOSED — the
+  station run done; the ledger, iter-347 evicted),
+  docs/iterations/iter-358-m4station-run-report.md (new) — 4
   changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
@@ -142,18 +141,25 @@ iteration.)
 
 ## Next step
 
-**iter-357 DONE: m4station (THE M4 STATION PACK delivered + CPU-
-  validated end-to-end; the owner's five points mapped onto the
-  pack's four tools — the installer, the doctor, the R battery,
-  the report; the honest zero-shot limits ride as DATA — the
-  report iter-357-m4station-report.md §A..§H).**
-Next: THE OWNER'S STATION RUN (the fork's item (1) now
-  three double-clicks: setup → doctor → probe; the pack
-  canonsim_m4_station_pack.zip beside the repo; ~650 MB of
-  pinned downloads, then the ~5–10-min GPU battery; send back
-  m4_*.zip — inside it cuda_gate.json + the server logs) —
-  closes the R-arm's GPU half (the Kev-on-RU band the headline
-  question; Laya already fetched-or-fetchable one-click) and
+**iter-358 DONE: m4station-run (THE M4 STATION RUN READING — the
+  owner returned `m4_20261010_140427.zip`; the two R-form proofs
+  ride the owner's own report: 0 inventions on 12 docs +
+  output_tokens=[0] on every call; the GPU band opened by
+  measurement, R systemone med 0.520 s on the 3080 Ti vs 3.30 s
+  CPU iter-357 ×6.3; the gate sweep first live numbers gate>=0.5
+  66.7% / gate>=0.4 100%; the doctor verdicts on the station's
+  six models recorded; Kev-4B validated `decision:kev` — the
+  iter-356 §D broken-copy line NOT reproduced, CLOSED LIVE — the
+  report iter-358-m4station-run-report.md §A..§L).**
+Next: THE FOLLOW-UP STATION RUN with `--g --ru --det` (or
+  `--full-corpus`) — the RU band (12 hand-authored gold rows) the
+  headline trust question NOT run this round; the G-control arm
+  on Gemma-4-E4B (the model was loaded, the process lived, but
+  the stage did not fire); the det mini; the formalized band
+  sweep (the `cuda_gate.bands={}` empty); the s4 packaging
+  anomaly — `arm_r.jsonl` end-event missing for s4_fire_chain (2
+  replies produced, the end-record absent — a question to the
+  owner, not a blocker) — closes the R-arm's GPU half full and
   composes with (2) THE M3 GPU RE-RUN (the iter-355 kit's three
   double-clicks — a SEPARATE form; the kit's b11538 and the m4
   pack's b11541 coexist, the pack installs into its own folder,
@@ -162,12 +168,12 @@ Next: THE OWNER'S STATION RUN (the fork's item (1) now
   iter-350 §G + the m3 addendum) and THE M3 FORM DECISION (H
   the measured leader / F needs a working generative
   ultra-light — now fetchable one-click / G2 the verdict-aware
-  leg / R the NEW honest row the m4 pack now measures); WITH
-  decider-4b parked (outside the llama.cpp five — no systemone
-  surface today) and the pack-v5 instrument rows each the
-  owner's call; behind them the standing owner calls in order —
-  the replay-UI NOT-EXPOSED row, the world track's W8, the
-  frontend P1/P2/P3 continuations, `lab-composite-1`; the
+  leg / R the NEW honest row the m4 station run now measures
+  live); WITH decider-4b parked (outside the llama.cpp five — no
+  systemone surface today) and the pack-v5 instrument rows each
+  the owner's call; behind them the standing owner calls in
+  order — the replay-UI NOT-EXPOSED row, the world track's W8,
+  the frontend P1/P2/P3 continuations, `lab-composite-1`; the
   skip_probes optimization address named iter-347 (the admission
   the owner's call).
 
