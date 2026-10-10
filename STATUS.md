@@ -1,52 +1,42 @@
-Iteration: iter-358 (`m4station-run` — THE M4 STATION
-  RUN: the owner returned `m4_20261010_140427.zip`, the pack v4.1's
-  three double-clicks END-TO-END on the station — Kev-4B as the
-  router autospawn + Gemma-4-E4B as the G-control, RTX 3080 Ti /
-  32 GB): TWO R-FORM PROOFS lie in the owner's report verbatim —
-  (1) the INVENTION LEDGER 0 inventions on 12 assembled docs (the
-  classifier ROUTES never commits — hallucination of an intent
-  document PHYSICALLY impossible, the keys come from the pack's 16
-  actions + the live scene nouns); (2) `output_tokens=[0]` on
-  every call (non-generativity of the kev family PROVEN LIVE —
-  iter-356's owner correction «kev и подобные => не могут
-  генерировать текст вообще» reproduced by a live /v1/systemone
-  call, not a claim); THE GPU BAND OPENED BY MEASUREMENT — R
-  systemone call med 0.520 s on the 3080 Ti vs 3.30 s CPU in
-  iter-357 (×6.3; the residual ~480 ms over the card's tens of ms =
-  HTTP+preproc+prefil; the band-sweep stage `cuda_gate.bands={}`
-  still OPEN — not run this round); THE GATE SWEEP FIRST LIVE
-  NUMBERS — gate>=0.5 6/9 gold-intent passes (66.7%, the default),
-  gate>=0.4 9/9 (100%) — the validity threshold now a measured
-  knob, not a guess; THE DOCTOR VERDICTS on the station's six
-  models: Kev-4B `decision:kev` (428 tensors + kev metadata +
-  calibrated temps — the iter-356 §D «station file IS the stale
-  broken copy» NOT reproduced in this run, the file is fresh or
-  --fetch-kev re-fetched; the broken-copy line CLOSED LIVE),
-  Decision-2.0-Nox `decision:unknown(decision2)` (outside the
-  llama.cpp five), decider-4b-v2.1 plain `causal-lm` (no decision
-  metadata), Gemma-4-E4B + Qwen3.5-9B + Qwen3.8-27B `causal-lm`
-  (generative); the CENSUS RAW 12 say-cycles (4 units s1-s4): full
-  50%, kind+ 50%, gate_blocked 25% (vs 57% on CPU Laya iter-357),
-  gate_fp 8.3% (1 cycle — gold≠intent, the gate passed look_around
-  over a question, NOT an invention — the assembled doc uses a
-  known key, the world reacts by canon), not_intent 8.3%,
-  parse_error 0%; OPEN for the next station run: the RU band (12
-  hand-authored gold rows — the headline trust question, NOT
-  run), the G-control arm on Gemma-4-E4B (NOT run), the det mini
-  (NOT run), the formalized band sweep (`cuda_gate.bands` empty),
-  AND a packaging anomaly — `arm_r.jsonl` end-event missing for
-  s4_fire_chain (2 replies produced, the end-record absent — a
-  question to the owner, not a blocker);
+Iteration: iter-359 (`m4flags` — THE FLAG FIX: my
+  iter-358 §K guidance named `--g`/`--ru`/`--det`/`--full-corpus`;
+  the owner tried them; they did NOT exist — both calls died in
+  argparse, the second one (`--ru`) masking the real
+  «unrecognized» error behind `--run-dir`'s prefix-match): THE
+  PACK v4.2 — `station_m4_probe.py` patched with (1) FOUR no-op
+  alias flags for the default (all stages run, full 10-unit
+  corpus — the real toggles stay `--no-g` and the new `--stages`;
+  zero battery behavior change); (2) `--stages a,b,c` selector —
+  comma-separated subset of STAGES, unknown name = LOUD refusal
+  with the valid list, `package` always implicit at the end (the
+  always-a-zip law); (3) `allow_abbrev=False` on the ArgumentParser
+  — `--ru` no longer collides with `--run-dir`; bad flags now get
+  a CLEAN `unrecognized arguments: --xyz`; (4) `epilog` with the
+  STAGES table + 7 EXAMPLES in `--help`; PACK_VERSION bumped to
+  `v4.2 (iter-359: the flag fix — --g/--ru/--det/--full-corpus
+  no-op aliases + --stages selector + allow_abbrev=False)`;
+  README_RU.txt updated (the «ДОБАВЛЕНО В v4.2» section + the
+  «ПОЧЕМУ ТВОЙ ПРЕДЫДУЩИЙ ПРОГОН ОБОРВАЛСЯ НА s4» explanation + the
+  `--run-dir <ts> --stages ru,det` docatka recipe); VALIDATED in
+  sandbox: 7/7 smoke tests — syntax OK, `--g --ru --det` accepted,
+  `--full-corpus` accepted, all-four-at-once accepted, `--xyz`
+  clean unrecognized, `--stages r,foo` loud refusal, `--stages
+  ru,det` accepted; PACK v4.2 built (10 files, 49 079 bytes, md5
+  `be974f8c32771922766ffbb21051ae4c`, outside the repo per Rule
+  9; runtime artifacts doctor.json/m4_llama_*.log/__pycache__
+  excluded — clean tools only);
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2616 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code; the sandbox has no ruff in PATH — the canonical form kept for the digest regex; pytest reports 28 T1 byte-identical replay failures on the log-header's `python` field, `3.12.15` sandbox vs `3.12.14` golden fixture-build — reproduced 1:1 on a CLEAN BASE_COMMIT `e275b63` clone, NOT my regression, AGENTS §10's env-caveat, TEST_PLAN §1.4's `scripts/semantic_diff.py` the cross-env companion — riders-only, zero repo code) ·
+2616 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code; pytest reports 28 T1 byte-identical replay failures on the log-header's `python` field — `3.12.15` sandbox vs `3.12.14` golden fixture-build, reproduced 1:1 on a CLEAN BASE_COMMIT `e275b63` clone, NOT my regression, AGENTS §10's env-caveat; riders-only, zero repo code; the iter-359 pack v4.2 itself is outside the repo per Rule 9) ·
 Date: 2026-10-10 ·
 Scope: STATUS.md (the header + Next), worklog.md
-  (iter-351 evicted), docs/TASKS.md (the m4-r row CLOSED — the
-  station run done; the ledger, iter-347 evicted),
-  docs/iterations/iter-358-m4station-run-report.md (new) — 4
+  (iter-348 evicted), docs/TASKS.md (the m4-r row updated — the
+  pack v4.2 delivered; the ledger, iter-348 evicted),
+  docs/iterations/iter-359-m4flags-report.md (new),
+  docs/iterations/iter-358-m4station-run-report.md (this
+  session's prior iter — both ride this delta) — 5
   changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
@@ -141,39 +131,46 @@ iteration.)
 
 ## Next step
 
-**iter-358 DONE: m4station-run (THE M4 STATION RUN READING — the
-  owner returned `m4_20261010_140427.zip`; the two R-form proofs
-  ride the owner's own report: 0 inventions on 12 docs +
-  output_tokens=[0] on every call; the GPU band opened by
-  measurement, R systemone med 0.520 s on the 3080 Ti vs 3.30 s
-  CPU iter-357 ×6.3; the gate sweep first live numbers gate>=0.5
-  66.7% / gate>=0.4 100%; the doctor verdicts on the station's
-  six models recorded; Kev-4B validated `decision:kev` — the
-  iter-356 §D broken-copy line NOT reproduced, CLOSED LIVE — the
-  report iter-358-m4station-run-report.md §A..§L).**
-Next: THE FOLLOW-UP STATION RUN with `--g --ru --det` (or
-  `--full-corpus`) — the RU band (12 hand-authored gold rows) the
-  headline trust question NOT run this round; the G-control arm
-  on Gemma-4-E4B (the model was loaded, the process lived, but
-  the stage did not fire); the det mini; the formalized band
-  sweep (the `cuda_gate.bands={}` empty); the s4 packaging
-  anomaly — `arm_r.jsonl` end-event missing for s4_fire_chain (2
-  replies produced, the end-record absent — a question to the
-  owner, not a blocker) — closes the R-arm's GPU half full and
-  composes with (2) THE M3 GPU RE-RUN (the iter-355 kit's three
-  double-clicks — a SEPARATE form; the kit's b11538 and the m4
-  pack's b11541 coexist, the pack installs into its own folder,
-  --swap only on the owner's call) and (3) THE M2 POLICY
-  DECISION (block/downgrade/allow + the C-tight/C-full fork;
-  iter-350 §G + the m3 addendum) and THE M3 FORM DECISION (H
-  the measured leader / F needs a working generative
-  ultra-light — now fetchable one-click / G2 the verdict-aware
-  leg / R the NEW honest row the m4 station run now measures
-  live); WITH decider-4b parked (outside the llama.cpp five — no
-  systemone surface today) and the pack-v5 instrument rows each
-  the owner's call; behind them the standing owner calls in
-  order — the replay-UI NOT-EXPOSED row, the world track's W8,
-  the frontend P1/P2/P3 continuations, `lab-composite-1`; the
+**iter-359 DONE: m4flags (THE FLAG FIX — my iter-358 §K guidance
+  named flags that did NOT exist; the owner tried them; both
+  calls died in argparse, the second masking the real error behind
+  `--run-dir`'s prefix-match. THE PACK v4.2 — four no-op alias
+  flags for the default (`--g`/`--ru`/`--det`/`--full-corpus`);
+  NEW `--stages a,b,c` selector (the docatka form iter-358 §F
+  named); `allow_abbrev=False` (clean unrecognized errors); zero
+  battery behavior change; PACK_VERSION `v4.2`; 7/7 smoke tests
+  green; pack v4.2 49 079 B md5 `be974f8c32771922766ffbb21051ae4c`
+  delivered (attachment + tmpfiles); the report iter-359-m4flags-
+  report.md §A..§J).**
+Next: THE OWNER'S RERUN WITH v4.2 (the fork's item (1) now
+  four-equivalent-call form — unpack `canonsim_m4_station_pack_
+  v4.2.7z` over the current pack, three double-clicks setup →
+  doctor → probe; the probe step accepts any of these four
+  invocations: bare `station_m4_probe.bat` / `--full-corpus` /
+  `--g --ru --det` / `--g --ru --det --full-corpus` — all four
+  are no-op aliases of the default, the run is identical). For
+  the docatka form (if owner wants to extend iter-358's
+  `m4_20261010_140351` instead of re-running): `--run-dir
+  m4_20261010_140351 --stages ru,det` (R will be «done (resumed)»,
+  script proceeds to RU + det). The follow-up station run closes
+  the R-arm's GPU half full (the RU band 12 hand-authored gold
+  rows — the headline trust question on Kev, NOT run in iter-358;
+  the G-control arm on Gemma-4-E4B; the det mini; the formalized
+  band sweep `cuda_gate.bands={}`) and composes with (2) THE M3
+  GPU RE-RUN (the iter-355 kit's three double-clicks — a
+  SEPARATE form; the kit's b11538 and the m4 pack's b11541
+  coexist, the pack installs into its own folder, --swap only on
+  the owner's call) and (3) THE M2 POLICY DECISION
+  (block/downgrade/allow + the C-tight/C-full fork; iter-350 §G
+  + the m3 addendum) and THE M3 FORM DECISION (H the measured
+  leader / F needs a working generative ultra-light — now
+  fetchable one-click / G2 the verdict-aware leg / R the NEW
+  honest row the m4 station run now measures live); WITH
+  decider-4b parked (outside the llama.cpp five — no systemone
+  surface today) and the pack-v5 instrument rows each the
+  owner's call; behind them the standing owner calls in order —
+  the replay-UI NOT-EXPOSED row, the world track's W8, the
+  frontend P1/P2/P3 continuations, `lab-composite-1`; the
   skip_probes optimization address named iter-347 (the admission
   the owner's call).
 
