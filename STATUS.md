@@ -1,78 +1,55 @@
-Iteration: iter-362 (`skipprobe` — iter-347's
-  named skip_probes address LANDED whole (the
-  owner's standing «продолжай работы, открывай
-  важнейшее на долгосрок… я разрешаю» directive;
-  the ONLY measured core wall: 75.0% of the
-  density-scale profile at H=32, ×211 absolute,
-  QUADRATIC in cone population): (1) THE
-  COLLECTIVE BEAT-OUTER WALK —
-  `RngBank.first_d100_hit(rolls, limit)` replaces
-  the per-stream `next_d100_hit` in both family
-  scans (urgency/faction): at each beat offset
-  every stream's word is the SAME word the
-  per-stream walk would read (the counter
-  function pure in (key, position)), so the
-  first beat at which ANY stream hits IS the
-  per-stream minimum — and the walk STOPS there
-  (the old form walked every stream to its OWN
-  first hit: the whole population past the
-  collective landing — 88.6M block words /
-  22.17M sha256 digests on one h32 run); the
-  duplicate-(npc,kind)/(group,kind) entries fold
-  to the MAX probability per stream name (the
-  monotonicity law: {j: word_j%100 < p} grows
-  with p, so the max's first hit == the min over
-  the entries' first hits); the scans' p>=100
-  early return DROPPED (the partial streams map
-  was unobservable in the caller — first=1 skips
-  nothing; the map is now always full, law-pinned);
-  (2) THE O(1) id→kind / id→record INDEX in
-  `core/pack.py` (`__post_init__`, first-wins in
-  category order — the old linear scan's exact
-  semantics, the cross-category duplicate law
-  pins it; `kind_of`/`entity` were the measured
-  O(E) cost inside the scans' gate evaluations:
-  1.92M walks / 13.94 s on one h32 profile);
-  `next_d100_hit` REMOVED (the two scans were its
-  only production consumers; the block-walk
-  exactness lives in the test-local reference
-  oracle); labrunner `_KEY_FUNCS` synced. THE
-  WALL, one instrument, one protocol (labrunner,
-  seed 7, h32, segmented 10y): 61.87 → 18.34 s
-  (×3.37), skip_probes 74.9% → 33.2%, the walk
-  member ×33 (73.30 → 2.22 s profiled), kind_of
-  gone from the top table; ZERO canon bytes
-  moved: the h32 log md5 07e924cbe6a3f05e9991e
-  083ed004610 IDENTICAL before/after, skip_stats
-  {2251, 3166, 2248} and occ_stats {231, 99354,
-  752, 231} identical verbatim, the farthest
-  envelope farstead 100y 4.48 → 3.28 s (NO
-  regression — the None-case walk is
-  cost-neutral, the index helps every door/gate);
-  +5 laws (the index-vs-linear-scan over all six
-  packs + first-wins duplicate; the
-  collective-vs-per-stream reference oracle ×40
-  trials + the max-fold monotonicity + the p100
-  full-map law); the residual members named
-  honestly (rest 21.5% / beat_rolls 16.2% /
-  decay_walk 15.4% / director_global_passes
-  10.2% — each its own future row) ·
+Iteration: iter-364 (`restsplit` — шаги 3–4 плана
+  сессии владельца: пост-362 `rest` (21.5% h32-профиля) РАЗЛОЖЕН
+  на именованные операции, инструмент расширен нести их (форма
+  iter-346), таблица роста по оси плотности снята, решения M2/M3
+  ЗАПИСАНЫ): полная каллер-атрибуция pstats (пробник сессии, вне
+  репо, Правило 9; канон-нейтральность HELD) — `rest` ≈ 93% ПУТЬ
+  КОММИТА: `knowledge.add` 8.9% (пер-эвентный эпистемический
+  фолд, пер-колл ×6.74 по оси h3→h32 при росте NPC-населения
+  ×3.37) + `schema.validate` 7.7% (пер-эвентная схемная страховка
+  писателя, ×1.04 ПЛОСКО, 780K вызовов = 25 859 первичных +
+  рекурсивный спуск) + обёртки/очередь/дверь 4.8%; ДВА ЛИСТА
+  стали ЧЛЕНАМИ (`commit_validate` + `commit_knowledge_fold`,
+  оба вызваны ТОЛЬКО из `_commit`; закон двойного счёта держит
+  _complete/_commit/log.append/_react/releases ВНЕ — их поддеревья
+  содержат листья, `_react` ре-ентерит `_commit` 6 115 раз),
+  +7 ног таблицы ключ-функций, rest 21.5% → 4.8%, стена
+  неизменна 18.31 с; ТАБЛИЦА РОСТА (обе ступени S=4/10y/seed 7,
+  NPC 49→165): decay_drafts ×11.76 / next_decay_tick ×10.42 /
+  beat_rolls ×8.71 / knowledge.add ×6.74 / urgency_scan ×6.06 /
+  _react ×3.49 / entropy ×2.50 (СУБЛИНЕЙ на душу — самый мягкий
+  популяционный проход) / validate ×1.04; РАНЖИРОВАНИЕ следующей
+  стены измерением: бит-семейство (skip-остаток 33.4 + beat_rolls
+  16.3 + decay_walk 15.5 ≈ 65%, квадратично) > commit_knowledge_fold
+  (8.9%, ×6.7, T3-законы утечки — фальсификаторы) >
+  director_global_passes (10.2%, ×2.5 — кандидат владельца честно
+  переранжирован ТРЕТЬИМ по экспоненте) > commit_validate (7.7%,
+  плоско — никогда не стена); РЕШЕНИЯ ВЛАДЕЛЬЦА M2/M3 записаны
+  (отчёт §F): M3 — R ведущий кандидат M4-корпуса, до
+  runtime-promotion сравнение R vs H НА ОДНОМ КОРПУСЕ; M2 — 0.5
+  консервативный дефолт, 0.4 — отдельный RU-прогон с измерением
+  ЛОЖНО РАЗРЕШЁННЫХ действий; строка m5-station открыта
+  (предусловие — зип m4-пака от владельца). iter-363 (`py31214`)
+  — ОГОВОРКА ОКРУЖЕНИЯ T1 ЗАКРЫТА ФАКТОМ: на золотом
+  интерпретаторе 3.12.14 полный сюит ЗЕЛЁНЫЙ (2649 passed +
+  1 skipped, НОЛЬ ПАДАЕНИЙ; 27 сбоев 3.12.15 — РОВНО только поле
+  `python` log-header, закрыто в обе стороны; свежая
+  кросс-железная точка: Linux x86_64 3.12.14 регенерирует золотые
+  фикстуры владельца побайтово) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2622 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero schema/log changes; pytest reports 27 T1 byte-identical replay failures on the log-header's `python` field — `3.12.15` sandbox vs `3.12.14` golden, the failure set IDENTICAL to the pristine-code baseline taken this session before the change — zero new) ·
+2649 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero schema/log changes; counts from the GOLDEN interpreter 3.12.14 — the iter-363 closure; the sandbox's 3.12.15 shows the known 27 T1 log-header `python`-field failures, the set byte-identical to iter-362's baseline — zero new) ·
 Date: 2026-10-11 ·
-Scope: core/pack.py (the index), core/rng.py (first_d100_hit;
-  next_d100_hit removed), core/urgencies.py + core/factions.py (the
-  collective walk + the max-fold), scripts/labrunner.py (the
-  _KEY_FUNCS sync), tests/test_core.py + tests/test_h9.py (+5 laws),
-  STATUS.md (the header + Next), worklog.md (iter-362 entry,
-  iter-352 evicted), docs/TASKS.md (the skipprobe-1 row DONE + the
-  ledger: iter-362 added, iter-351 evicted), docs/iterations/
-  iter-362-skipprobe-report.md (new — the R3 PCC record rides its
-  §G; DECISIONS stays at cap 30/30, the iter-332 precedent) —
-  11 changed/created.
+Scope: scripts/labrunner.py (the member map +2, the key table +7,
+  the notes + the docstring law 8), tests/test_lab.py (the
+  accounting law's name set + the grown-world teeth), docs/
+  TEST_PLAN.md (§1.1 the iter-363 measured fact), STATUS.md (the
+  header + Next + KI#117 deleted per §5), worklog.md (iter-363 +
+  iter-364, iter-353/354 evicted), docs/TASKS.md (the ledger +2,
+  the m5-station row, the residual-members re-naming), the
+  iter-363 + iter-364 reports — 10 changed/created.
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -132,11 +109,10 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
-- KI#117 · the m4 pack's drop_break/near branch read `Verb.name` (the field is `intent`) — a never-exercised typo from the pack's birth (iter-357) that killed both v4.2 station runs at s4 cycle 2 and, retroactively, the v4.1 run's "s4 anomaly" (iter-358 §F) · CLOSED iter-360 (one line + the RED/GREEN sandbox proof; pack v4.3 — the fix now PROVEN LIVE by the owner's full iter-361 run: the branch fired and survived)
 
-(KI#116 deleted per AGENTS §5 — closed iter-354, more than two
-iterations ago; the mandatory cleanup this iteration. KI#114 and
-KI#115 deleted earlier per the same law.)
+(KI#117 deleted per AGENTS §5 — closed iter-360, more than two
+iterations ago; the mandatory cleanup this iteration. KI#114/115/116
+deleted earlier per the same law.)
 
 ## FAQ / Pitfalls
 
@@ -166,34 +142,34 @@ KI#115 deleted earlier per the same law.)
 
 ## Next step
 
-**iter-362 DONE: skipprobe (iter-347's named address LANDED — the
-  collective beat-outer first-hit walk + the O(1) id→kind/id→record
-  index; the h32 density wall 61.87 → 18.34 s ×3.37, ZERO canon
-  bytes moved — the log md5 identical before/after; farstead 100y
-  no regression; +5 laws; the report
-  iter-362-skipprobe-report.md §A..§G).**
-Next: THE OWNER'S M2/M3 DECISIONS behind the
-runtime-promotion gate — M2 the policy fork
-(block/downgrade/allow + the C-tight/C-full sub-fork, the packet
-iter-350 §G + the m3 addendum, carrying the Russian-trust
-column and the threshold knob: 0.5 the honest default, 0.4 the
-measured recovery point 87.1% EN / 3-of-5 RU misses) and M3 the
-form fork (H the measured m3-battery leader / F needs a working
-generative ultra-light / G2 the verdict-aware leg / R the
-strongest measured row on the m4 corpus: 38.1% full, 0
-inventions, output_tokens=[0], med 0.556 s, byte-reproducible ×4
-runs) — the pack v4.3 has delivered everything iter-357 promised,
-no new station runs needed for the decisions; WITH decider-4b
-parked (outside the llama.cpp five) and the pack-v5 instrument
-rows (the formalized band sweep `cuda_gate.bands`, the det
-g-digest line) each the owner's call; behind them the standing
-owner calls in order — the replay-UI NOT-EXPOSED row, the world
-track's W8, the frontend P1/P2/P3 continuations,
-`lab-composite-1`; from the iter-362 residual members, the next
-measured-wall candidates (each its own admission): the scans'
-gate pass (`first_failing` 3.85 s residue), `decay_walk` /
-`beat_rolls`, `director_global_passes` (the story layer's
-E-dominant pass — iter-346's named member).
+**iter-363 + iter-364 DONE: py31214 (the T1 env caveat CLOSED —
+  the suite fully green on the golden interpreter 3.12.14: 2649
+  passed + 1 skipped, zero failed) + restsplit (the post-362
+  `rest` decomposed: 93% the commit path — knowledge.add 8.9% +
+  schema.validate 7.7% became instrument members, rest 21.5% →
+  4.8%; the density-axis growth table measured; the next-wall
+  ranking forced by exponents: the beat family (quadratic, ~65%)
+  > commit_knowledge_fold (×6.7) > director_global_passes (×2.5,
+  sublinear per capita) > commit_validate (flat); the reports
+  iter-363-py31214-report.md + iter-364-restsplit-report.md).**
+Next: THE OWNER'S TWO IMMEDIATE CALLS — (1) THE M4 PACK ZIP (Rule
+9: the pack lives outside the repo, the sandbox does not carry it;
+its arrival opens the `m5-station` row: the R-vs-H SAME-CORPUS
+battery + the RU-0.4 stage with the falsely-allowed-actions census
+— the owner's recorded M2/M3 decisions iter-364 §F, the instrument
+answer to both); (2) THE NEXT MEASURED-WALL ADMISSION — the
+ranking's head: the beat-machinery family (decay_walk ×11.76 /
+beat_rolls ×8.71 / the scans' gate pass `first_failing` 3.85 s
+residue), the iter-362 transformation class (collective walks +
+O(1) indexes, byte-identity + oracle laws) the proven form;
+commit_knowledge_fold second (T3 leak laws the falsifiers);
+director_global_passes third (×2.5, the mildest population walk);
+WITH decider-4b parked (outside the llama.cpp five) and the
+pack-v5 instrument rows (the formalized band sweep
+`cuda_gate.bands`, the det g-digest line) each the owner's call;
+behind them the standing owner calls in order — the replay-UI
+NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
+continuations, `lab-composite-1`.
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

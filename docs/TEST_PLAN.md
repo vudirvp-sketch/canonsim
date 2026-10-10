@@ -38,6 +38,20 @@ The guard runs in-pytest (no CI change). T1 executes twice in
    `schemas/event.schema.json`. A schema bump without a fixture regen fails
    here loudly — the migration procedure (§3 below) is forced, not punted.
 
+**The env caveat closed as a measured fact (iter-363, 2026-10-11):**
+the interpreter pin's meaning — a non-golden interpreter shows T1
+byte-compare failures on the log-header's `python` field ALONE. Both
+directions measured at HEAD `768dfdc`: Python 3.12.15 (the sandbox
+venv) → 2622 passed + 27 failed + 1 skipped, the failure set exactly
+the iter-362 record (every failure's first diff = the patch-version
+character of the header's `python` field); Python 3.12.14 (the golden
+interpreter, uv standalone `cpython-3.12.14-linux-x86_64-gnu`) →
+**2649 passed + 1 skipped, ZERO failed** (2622+27=2649 reconciled —
+every 3.12.15 failure passes on the golden interpreter, no new
+failures). A fresh cross-iron point for the §1.4 law: the Linux x86_64
+standalone build regenerates the owner's Windows-generated goldens
+byte-identically.
+
 ### 1.2 T8 emergent chain (the operational definition)
 
 An **emergent chain** is a maximal causal path `ev_n → ev_{n-1} → … → ev_0`

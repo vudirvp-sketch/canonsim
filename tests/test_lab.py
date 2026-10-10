@@ -573,11 +573,14 @@ def test_the_wall_split_accounting_law(tmp_path: Path) -> None:
         assert abs(sum(shares.values()) - 1.0) < 0.01
         # the named members exist as keys even when a depth never pays
         # them (an honest zero, never an absent key) — the projection-
-        # plane family joined at iter-346 (density-1's second half)
+        # plane family joined at iter-346 (density-1's second half);
+        # the commit-path leaves at iter-364 (restsplit)
         for member in ("occ_refold", "knowledge_rerank", "beat_rolls",
                        "decay_walk", "director_global_passes",
                        "projection_snapshot", "skip_probes",
-                       "lod_zone_walk", "clock_derived_folds",
+                       "lod_zone_walk", "commit_validate",
+                       "commit_knowledge_fold",
+                       "clock_derived_folds",
                        "door_derived_folds", "rest"):
             assert member in shares, (depth["years"], member)
         # scale-1-impl P0.5-B (the E03 fix): the spec families are
@@ -686,6 +689,13 @@ def test_the_projection_plane_members_on_a_grown_world(
     for name in ("director_global_passes", "projection_snapshot",
                  "skip_probes", "lod_zone_walk"):
         assert members[name] > 0.0, name
+    # iter-364 (restsplit): the commit-path leaves catch their calls
+    # on ANY world that commits events — validate once per event via
+    # the writer's append, knowledge.add once per event from _commit
+    # (the teeth form: a member that cannot catch a walk is
+    # decoration — these catch every committed event)
+    assert members["commit_validate"] > 0.0
+    assert members["commit_knowledge_fold"] > 0.0
     # canon-neutrality held at the coinciding depth (profiling
     # observes, never mutates — on the generated world too)
     canon = profile["canon_check"]

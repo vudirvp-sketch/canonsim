@@ -61,7 +61,12 @@ THE LAB LAWS (the pack's non-negotiables, made executable here):
    `projection_snapshot` (the O(E) state copy per autonomous
    enqueue), `skip_probes` (the quiet-beat skip's population
    probes — h9's twins), `lod_zone_walk` (the LOD zone
-   computation over L) — plus the pack counters the ULTIMATE pack named:
+   computation over L) — and — iter-364, restsplit — the commit
+   path's leaves that split the post-362 `rest`:
+   `commit_validate` (the writer's per-event schema validation,
+   population-flat per call) and `commit_knowledge_fold` (the
+   per-event knowledge-view update, E-scaled per call) — plus
+   the pack counters the ULTIMATE pack named:
    E03 rule-parses per beat (the `_specs` re-parse), E04 derived-read
    calls per beat (greedy vs lazy vs the STATIC gated-entry demand),
    and beats/event (the pack's stale "~50" replaced by the measured
@@ -865,6 +870,24 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     ),
     # the LOD zone computation (walks the location set — L's own walk)
     "lod_zone_walk": (("core/lod.py", "scene_zones"),),
+    # iter-364 (restsplit, the post-362 `rest` decomposition): the
+    # commit path's two leaves, both called ONLY from core/loop.py's
+    # _commit (validate via log.append, add directly — the caller
+    # attribution measured on h32: 25,859 = every event, each). The
+    # other commit-path carriers stay `rest` BY THE DOUBLE-COUNT LAW:
+    # _complete/_commit/log.append/_react are wrapper residues whose
+    # subtrees CONTAIN these leaves (and _react's subtree re-enters
+    # _commit itself — 6,115 nested commits on h32), so admitting any
+    # of them as an entry would double-count the leaves below.
+    # commit_validate: the writer's per-event JSON-schema validation
+    # (the runtime backstop; recursive $ref descent — per-call cost
+    # population-FLAT, x1.04 along the h3->h32 density axis).
+    "commit_validate": (("core/schema.py", "validate"),),
+    # commit_knowledge_fold: the per-event knowledge-view update (the
+    # epistemic fold's incremental add; per-call cost E-SCALED —
+    # x6.74 along h3->h32, the second-strongest growth of the
+    # decomposed rest).
+    "commit_knowledge_fold": (("core/knowledge.py", "add"),),
 }
 
 #: The derived folds (E04's surface), attributed BY CALLER: the clock
@@ -915,6 +938,19 @@ _KEY_FUNCS: Final = (
     ("core/states.py", "next_decay_tick"),
     ("core/lod.py", "scene_zones"),
     ("core/rng.py", "first_d100_hit"),
+    # iter-364 (restsplit): the commit path's leaves + wrappers and
+    # the director's release wrapper — the per-call growth table's
+    # rest-decomposition legs (the wrappers carry the nesting datum:
+    # releases' cumtime CONTAINS the entropy member; _complete's
+    # contains the commit leaves — they are keys, never member
+    # entries, for exactly that reason)
+    ("core/schema.py", "validate"),
+    ("core/knowledge.py", "add"),
+    ("core/log.py", "append"),
+    ("core/loop.py", "_commit"),
+    ("core/loop.py", "_complete"),
+    ("core/loop.py", "_react"),
+    ("core/director.py", "releases"),
 )
 
 #: The three derived-fold tests (core/intent.py's closed set) — E04's
@@ -940,6 +976,16 @@ _PROFILE_NOTES: Final = (
     "E03/E04/beats-event are the ULTIMATE pack's counters made "
     "executable: its stale '~50 beats/event' claim is replaced by "
     "the measured per-run number",
+    "iter-364 (restsplit): `rest` is the commit path's WRAPPER "
+    "residues (_complete/_commit/log.append/_react — their leaves "
+    "validate/knowledge.add are members; _react re-enters _commit) "
+    "+ the queue/clock machinery + the door — measured 21.5% at "
+    "h32 post-362, of which the two named leaves were 16.1 points; "
+    "the per-call density-axis growth (h3->h32, both S=4/10y/seed 7): "
+    "knowledge.add x6.74 (E-scaled) vs validate x1.04 (population-"
+    "flat) — the exponent datum for the next-wall ranking; "
+    "director.releases' cumtime CONTAINS the entropy member (its "
+    "wrapper self-time is the whole rest-side director residue)",
 )
 
 
