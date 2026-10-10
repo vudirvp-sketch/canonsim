@@ -1,51 +1,49 @@
-Iteration: iter-353 (`m3attach` — THE THIRD STATION ROUND-TRIP,
-  the first where the failures hit MID-FLIGHT, not at launch: the
-  owner's two v2 crashes — run 1, the ATTACH to the owner's own
-  b11490 server, died on its FIRST engine call with HTTP 400
-  «model name is missing from the request»; run 2, the Kev-4B
-  extractor spawn, died rc=1 BEFORE preflight and killed the whole
-  run; the owner's call «исправь все и пришли ссылку на правленный
-  архив»): THE PACK v3 — THE OAI `model` FIELD ALWAYS SENT (the id
-  from the server's own /v1/models, cached per endpoint — the
-  build-window datum: b11064/b11429/b11500/b11538 accept a body
-  without it, the owner's b11490 REJECTS; m2 v2 worked because its
-  client HAD the field (station_m2_probe.py:327) and because the
-  m2 station round AUTOSPAWNED the old b11064 — the m3 attach hit
-  the strict build first) + THE EXTRACTOR DEGRADE LAW (a broken
-  extractor model — the owner's Kev path — NEVER kills the run:
-  the GGUF pre-check (magic/size/OneDrive-placeholder, named
-  reasons), the spawn GPU ladder (default → ngl 24/8/0, a fresh
-  port per rung, an explicit -ngl disables), the log TAIL in every
-  spawn failure, the TTY re-prompt (skip F / self / another
-  model), the honest non-TTY auto-skip, the ExtractorDown class
-  through every path) + THE CRASH-ZIP LAW (any crashed run still
-  packages its diagnostic m3_*.zip — summary inside, the server
-  logs copied into run/logs/ and zipped) + THREE LATENT v1 CRASHES
-  closed in the never-exercised attach/F-self forms (the det
-  restart None-guard, the F-self ensure/stop guards ×3, the
-  attach-no-exe IndexError) + the v2 repo-ladder features
-  re-applied from the iter-352 spec (the v2 source lost with the
-  interrupted session; the battery BYTE-UNTouched);
-  VALIDATED: the strict b11490 MOCK 9/9 (T1 the v1 400 reproduced
-  1:1 BEFORE the fix — the diagnosis by execution; T3 the full
-  attach battery green; T4 the dead-extractor degrade; T5 F-self
-  end-to-end; T6 the GPU ladder ×3; T7 the crash zip), PTY 3/3
-  (none / self / the dead-extractor re-prompt → 'u'), REAL
-  llama.cpp b11538 + Qwen3-0.6B in BOTH forms (attach 10/10
-  stages across 3 chunked resume runs, the G pin
-  `9fa7e9f4359a9201` = the cross-battery anchor's SIXTH point;
-  autospawn 10/10, zero zombies); the b11538 LENIENCY datum
-  recorded (200 with no field and a foreign id — the strictness is
-  a build-window property, the owner's b11490 the authority).
+Iteration: iter-354 (`m3station` — THE M3 STATION READING,
+  the owner's returned m3_20261010_004929.zip read AGAINST THE
+  RAW RECORDS — every m3_report.txt number verified + TWO
+  CORRECTIONS: the g2 "−3" delta is a SUBSET ARTIFACT (zero
+  paired census flips vs G on the 23 shared cycles — the
+  two-pass form does NOT hurt extraction), and the hybrid's RAW
+  +4/+3 rides the 32 drift cycles (the same 10 clean cycles for
+  g/h0/h8, per-cycle verdicts IDENTICAL — the prose channel
+  FLIPS the 9B's verdict behavior: 22 not_intent under the pure
+  JSON grammar vs 12 under the hybrid, mix 23/1/18 vs 40/1/1);
+  THE BAND DISCOVERY: the station's b11538 build carries NO
+  CUDA — zero ggml_cuda_init/offload lines in the shipped
+  406 KB of server logs, gen 5.78 tok/s, prompt 48.8 (the m2
+  station b11064 did 366 ms/call on the SAME machine — ×46
+  here at ×2.25 the model) — the run was a SECOND CPU POINT at
+  9B, the GPU «tapki» ledger stays OPEN (one CUDA-build re-run
+  closes it; the instrument lesson: the gate must record the
+  device class — a pack-v4 row, the owner's call); the latency
+  ORDER H < G2 < F CONFIRMED on the second CPU point (the
+  single-pass saving +5.93 s GROWS with the model — prompt ≈79%
+  of the call wall; the two-model contention tax +15.4% vs
+  +60% on 4.1 GB); the prose REAL (407–418 chars p50, temp-0
+  included) with the NAMED prose-fact divergence class (success
+  narration over take_failed doors, the f6e fiction-layer
+  laundering — «a hundred gold coins materialize» while the
+  door committed wait, the refuser-bleed on injection cycles) +
+  f6f EXFILTRATION REPRODUCED 1:1 (the free arm's prose dumped
+  the FULL parse_protocol, 1 639 chars; the grammar arms hold
+  structurally — the third band); KEV-4B BROKEN AT THE GGUF
+  LEVEL (wrong tensor count, 20 failed loads — the v3 degrade
+  law PROVEN LIVE: the spawn ladder survived, the TTY re-prompt
+  fired, decider chosen, the battery completed, the zip home —
+  the owner's exact path); determinism cold==warm + restart —
+  the FOURTH build point (b11500's cold≠warm stays the lone
+  anomaly); KI#116 opened and closed (iter-353's STATUS tests
+  line broke the digest regex — the shape restored here));
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2644 green indicators (this environment's count, rc=0; the class of iter-343's environment note), ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the pack v3 + the validation zips outside the repo per Rule 9) ·
+2644 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code, the LOG untouched; the station zip outside the repo per Rule 9, md5 a4954eefc5eca4b1a261b8f3843a7850) ·
 Date: 2026-10-10 ·
-Scope: STATUS.md (the header + Next), worklog.md
-  (iter-343 evicted), docs/TASKS.md (the ledger, iter-342
-  evicted), docs/iterations/iter-353-m3attach-report.md (new) — 4
+Scope: STATUS.md (the header + KI#116 + Next), worklog.md
+  (iter-344 evicted), docs/TASKS.md (the ledger, iter-343
+  evicted), docs/TEST_PLAN.md (§8.5's engine1-q9b-m3 row),
+  docs/iterations/iter-354-m3station-report.md (new) — 5
   changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
@@ -106,6 +104,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
+- KI#116 · iter-353's STATUS tests-count line broke the digest regex ("2644 green indicators (…)" instead of the `N passed + M skipped, ruff clean` shape — the digest test red at fresh HEAD, found by this session's baseline run) · CLOSED iter-354 (the shape restored)
 
 (KI#114 and KI#115 deleted per AGENTS §5 — closed iter-340/341,
 more than two iterations ago; the mandatory cleanup this
@@ -139,29 +138,33 @@ iteration.)
 
 ## Next step
 
-**iter-352 DONE: m3repoladder (THE M3 PACK v2 — the repo
-  ladder of m2 v2 ported; the owner's beside-the-repo failure
-  reproduced 1:1 and fixed; the extractor prompt 'none'/'self'
-  answers — no ultra-light needed for the double-click; the full
-  smoke battery green from the double-click form, the G pin = the
-  anchor's fifth point; the analysis at iter-352's report §A/§C,
-  the pack §B).**
-Next: THE M3 STATION RUN v3 (the owner's call — the fixed pack:
-  unpack ANYWHERE beside canonsim, double-click
-  station_m3_probe.bat; a live 8080 server is ATTACHED to (the
-  `model` field is sent automatically — the b11490 fix), else
-  autospawn; two prompts: the main model's number, then the
-  extractor — a number, 'self', or 'none'; a DEAD extractor now
-  degrades: the log tail prints in the window and the choice is
-  skip / self / another model — G/H0/H8/G2 always run; the
-  m3_*.zip back (a crashed run leaves its diagnostic zip too);
-  the reading: the census deltas, the GPU latency ledger — the
-  «тапки» question where prompt-processing dominates, the prose
-  probes, the f6f exfil datum); WITH it or after it THE M2
-  POLICY DECISION (the owner's call: block / downgrade / allow —
-  + the C-tight/C-full fork; the packet's reading at iter-350
-  §G; the m3 forms compose with any M2 policy — the JSON prefix
-  and the extractor ride the same reply grammar);
+**iter-354 DONE: m3station (THE M3 STATION READING — the v3 run
+  END-TO-END, every m3_report number verified + two corrections,
+  THE BAND DISCOVERY: the CPU-only b11538, the order H < G2 < F
+  confirmed on the second CPU point, the prose-fact divergence
+  class named, f6f reproduced 1:1, the Kev GGUF broken, the v3
+  degrade law live; the reading at iter-354's report §A..§I,
+  the §8.5 row engine1-q9b-m3).**
+Next: THE OWNER'S THREE CALLS in order — (1) THE M3 GPU RE-RUN
+  (one CUDA-build llama-server.exe dropped into
+  workbench/runtime/llama.cpp/ — the working precedent b11064/
+  the winget package already on the station — OR a manually
+  started server + the probe's ATTACH form; the double-click,
+  the zip back; closes the GPU half of the «tapki» question,
+  ~10–20 min against the CPU run's 2 h 20); (2) THE M2 POLICY
+  DECISION (block / downgrade / allow — + the C-tight/C-full
+  fork; the packet's reading at iter-350 §G + the m3 addendum:
+  the fiction-layer-divergence class named for ANY
+  prose-bearing form, iter-354 §I.2); (3) THE M3 FORM DECISION
+  (the hybrid H the measured leader on both CPU points / the F
+  form needs a WORKING ultra-light — on this station Kev is
+  broken at the GGUF level (re-download or drop the file) and
+  decider-4b refuses to extract (37/42) / the verdict-aware G2
+  free leg a NEW row if the owner opens it — the honest H-vs-G2
+  design fork: fast pre-verdict prose vs slower honest prose);
+  WITH the pack-v4 instrument rows each the owner's call (the
+  device-class in the gate, the memory-pressure recycle instead
+  of the per-unit one, the probe console in the zip);
 behind them the standing owner calls in order — the replay-UI
 NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
 continuations, `lab-composite-1`; the skip_probes optimization
