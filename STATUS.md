@@ -1,43 +1,49 @@
-Iteration: iter-359 (`m4flags` — THE FLAG FIX: my
-  iter-358 §K guidance named `--g`/`--ru`/`--det`/`--full-corpus`;
-  the owner tried them; they did NOT exist — both calls died in
-  argparse, the second one (`--ru`) masking the real
-  «unrecognized» error behind `--run-dir`'s prefix-match): THE
-  PACK v4.2 — `station_m4_probe.py` patched with (1) FOUR no-op
-  alias flags for the default (all stages run, full 10-unit
-  corpus — the real toggles stay `--no-g` and the new `--stages`;
-  zero battery behavior change); (2) `--stages a,b,c` selector —
-  comma-separated subset of STAGES, unknown name = LOUD refusal
-  with the valid list, `package` always implicit at the end (the
-  always-a-zip law); (3) `allow_abbrev=False` on the ArgumentParser
-  — `--ru` no longer collides with `--run-dir`; bad flags now get
-  a CLEAN `unrecognized arguments: --xyz`; (4) `epilog` with the
-  STAGES table + 7 EXAMPLES in `--help`; PACK_VERSION bumped to
-  `v4.2 (iter-359: the flag fix — --g/--ru/--det/--full-corpus
-  no-op aliases + --stages selector + allow_abbrev=False)`;
-  README_RU.txt updated (the «ДОБАВЛЕНО В v4.2» section + the
-  «ПОЧЕМУ ТВОЙ ПРЕДЫДУЩИЙ ПРОГОН ОБОРВАЛСЯ НА s4» explanation + the
-  `--run-dir <ts> --stages ru,det` docatka recipe); VALIDATED in
-  sandbox: 7/7 smoke tests — syntax OK, `--g --ru --det` accepted,
-  `--full-corpus` accepted, all-four-at-once accepted, `--xyz`
-  clean unrecognized, `--stages r,foo` loud refusal, `--stages
-  ru,det` accepted; PACK v4.2 built (10 files, 49 079 bytes, md5
-  `be974f8c32771922766ffbb21051ae4c`, outside the repo per Rule
-  9; runtime artifacts doctor.json/m4_llama_*.log/__pycache__
-  excluded — clean tools only);
+Iteration: iter-360 (`m4verbfix` — BOTH v4.2
+  station runs (m4_20261010_150710/150805) died ONE
+  error deep in arm r s4_fire_chain:
+  `AttributeError: 'Verb' object has no attribute 'name'` at
+  station_m4_probe.py:1131 — the drop_break/near special case
+  read `c.name` on brief/parser.py's Verb whose field is `intent`
+  (since iter-31, never name — one line, confirmed by a full
+  attribute scan; the branch fires ONLY when a live router picks
+  drop_break top, never happened before — which RETROACTIVELY
+  EXPLAINS iter-358's "s4 packaging anomaly": the v4.1 run died
+  the same line, identical artifact signature, three runs one
+  byte pattern; my v4.2 "NOT a script bug" claim honestly
+  retracted in README v4.3). THE CRASHED RUNS STILL DELIVERED:
+  cross-run reproducibility of the R-arm on Kev-4B (both runs
+  byte-identical in assembled docs/census/gate_p/itok; census
+  matches the v4.1 run exactly — extends iter-314's datum), 24
+  more invention-free docs (0/36 live total), output_tokens=[0]
+  ×24, latency med 0.519 s re-confirmed, gate sweep 66.7%@0.5 /
+  100%@0.4 re-confirmed, reference 10/10 + doctor + cuda_gate
+  intact — the docatka needs no rerun of what is done. THE FIX:
+  `c.name` → `c.intent` + PACK_VERSION v4.3 + README (the v4.3
+  section + the honest s4 correction + the docatka recipe
+  `--run-dir m4_20261010_150805`). PROVEN in sandbox on the REAL
+  repo doors: RED — pristine v4.2 dies the exact crash at s4
+  cycle 2 (1:1); GREEN — v4.3 runs all five s4 cycles: take/move
+  full, drop_break census=fields (near=back_wall the fixed-policy
+  default vs gold woodpile — the counted honest divergence), the
+  fire cascade drains inside the door (drop_break →
+  fire_started → fire_spread → smoke_rising →
+  location_burned_out, exactly the corpus expect), flee commits,
+  arson lands intent_rejected, inventions 0 everywhere; flag
+  regression 7/7; GREEN re-run from the extracted 7z. Pack v4.3
+  (10 files, 50 211 B, md5 `270018c458a436a2c344528b6aa31444`,
+  outside the repo per Rule 9); KI#117 opened+closed
+  in-iteration);
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2616 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code; pytest reports 28 T1 byte-identical replay failures on the log-header's `python` field — `3.12.15` sandbox vs `3.12.14` golden fixture-build, reproduced 1:1 on a CLEAN BASE_COMMIT `e275b63` clone, NOT my regression, AGENTS §10's env-caveat; riders-only, zero repo code; the iter-359 pack v4.2 itself is outside the repo per Rule 9) ·
-Date: 2026-10-10 ·
-Scope: STATUS.md (the header + Next), worklog.md
-  (iter-348 evicted), docs/TASKS.md (the m4-r row updated — the
-  pack v4.2 delivered; the ledger, iter-348 evicted),
-  docs/iterations/iter-359-m4flags-report.md (new),
-  docs/iterations/iter-358-m4station-run-report.md (this
-  session's prior iter — both ride this delta) — 5
-  changed/created (all riders).
+2616 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero repo code; pytest reports 28 T1 byte-identical replay failures on the log-header's `python` field — `3.12.15` sandbox vs `3.12.14` golden fixture-build, reproduced 1:1 on a clean clone in iter-358, NOT my regression, AGENTS §10's env-caveat; riders-only, zero repo code; the iter-360 pack v4.3 itself is outside the repo per Rule 9) ·
+Date: 2026-10-11 ·
+Scope: STATUS.md (the header + KI#117 + Next), worklog.md
+  (iter-360 entry, iter-349 evicted), docs/TASKS.md (the m4-r row
+  updated — the pack v4.3 delivered; the ledger, iter-349
+  evicted), docs/iterations/iter-360-m4verbfix-report.md (new) —
+  4 changed/created (all riders).
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -97,6 +103,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
+- KI#117 · the m4 pack's drop_break/near branch read `Verb.name` (the field is `intent`) — a never-exercised typo from the pack's birth (iter-357) that killed both v4.2 station runs at s4 cycle 2 and, retroactively, the v4.1 run's "s4 anomaly" (iter-358 §F) · CLOSED iter-360 (one line + the RED/GREEN sandbox proof; pack v4.3)
 - KI#116 · iter-353's STATUS tests-count line broke the digest regex ("2644 green indicators (…)" instead of the `N passed + M skipped, ruff clean` shape — the digest test red at fresh HEAD, found by this session's baseline run) · CLOSED iter-354 (the shape restored)
 
 (KI#114 and KI#115 deleted per AGENTS §5 — closed iter-340/341,
@@ -131,48 +138,47 @@ iteration.)
 
 ## Next step
 
-**iter-359 DONE: m4flags (THE FLAG FIX — my iter-358 §K guidance
-  named flags that did NOT exist; the owner tried them; both
-  calls died in argparse, the second masking the real error behind
-  `--run-dir`'s prefix-match. THE PACK v4.2 — four no-op alias
-  flags for the default (`--g`/`--ru`/`--det`/`--full-corpus`);
-  NEW `--stages a,b,c` selector (the docatka form iter-358 §F
-  named); `allow_abbrev=False` (clean unrecognized errors); zero
-  battery behavior change; PACK_VERSION `v4.2`; 7/7 smoke tests
-  green; pack v4.2 49 079 B md5 `be974f8c32771922766ffbb21051ae4c`
-  delivered (attachment + tmpfiles); the report iter-359-m4flags-
-  report.md §A..§J).**
-Next: THE OWNER'S RERUN WITH v4.2 (the fork's item (1) now
-  four-equivalent-call form — unpack `canonsim_m4_station_pack_
-  v4.2.7z` over the current pack, three double-clicks setup →
-  doctor → probe; the probe step accepts any of these four
-  invocations: bare `station_m4_probe.bat` / `--full-corpus` /
-  `--g --ru --det` / `--g --ru --det --full-corpus` — all four
-  are no-op aliases of the default, the run is identical). For
-  the docatka form (if owner wants to extend iter-358's
-  `m4_20261010_140351` instead of re-running): `--run-dir
-  m4_20261010_140351 --stages ru,det` (R will be «done (resumed)»,
-  script proceeds to RU + det). The follow-up station run closes
-  the R-arm's GPU half full (the RU band 12 hand-authored gold
-  rows — the headline trust question on Kev, NOT run in iter-358;
-  the G-control arm on Gemma-4-E4B; the det mini; the formalized
-  band sweep `cuda_gate.bands={}`) and composes with (2) THE M3
-  GPU RE-RUN (the iter-355 kit's three double-clicks — a
-  SEPARATE form; the kit's b11538 and the m4 pack's b11541
-  coexist, the pack installs into its own folder, --swap only on
-  the owner's call) and (3) THE M2 POLICY DECISION
-  (block/downgrade/allow + the C-tight/C-full fork; iter-350 §G
-  + the m3 addendum) and THE M3 FORM DECISION (H the measured
-  leader / F needs a working generative ultra-light — now
-  fetchable one-click / G2 the verdict-aware leg / R the NEW
-  honest row the m4 station run now measures live); WITH
-  decider-4b parked (outside the llama.cpp five — no systemone
-  surface today) and the pack-v5 instrument rows each the
-  owner's call; behind them the standing owner calls in order —
-  the replay-UI NOT-EXPOSED row, the world track's W8, the
-  frontend P1/P2/P3 continuations, `lab-composite-1`; the
-  skip_probes optimization address named iter-347 (the admission
-  the owner's call).
+**iter-360 DONE: m4verbfix (THE VERB ATTRIBUTE FIX — both v4.2
+  station runs died one error at s4 cycle 2: `'Verb' object has no
+  attribute 'name'`; the drop_break/near branch read `c.name`, the
+  Verb field is `intent` since iter-31; one line + PACK_VERSION
+  v4.3 + the honest README correction of my «NOT a script bug»
+  claim; the retroactive closure of iter-358's «s4 packaging
+  anomaly» — the v4.1 run died the same line, three runs one
+  byte pattern; RED 1:1 + GREEN all-five-cycles (the fire cascade
+  drains, flee commits, arson rejected, 0 inventions) + flags 7/7
+  + from the extracted 7z; pack v4.3 50 211 B md5
+  `270018c458a436a2c344528b6aa31444` delivered attachment +
+  tmpfiles; the report iter-360-m4verbfix-report.md §A..§K).**
+Next: THE OWNER'S DOCATKA WITH v4.3 (the cheapest complete path —
+unpack `canonsim_m4_station_pack_v4.3.7z` over the current pack,
+then `station_m4_probe.bat --run-dir m4_20261010_150805`:
+preflight/reference skip as done, the R arm replays s4..s10 (s1..s3
+already done — their data byte-identical across all three runs so
+far), then the G-control arm on Gemma-4-E4B, the RU band (12
+hand-authored gold rows — the headline trust question on Kev),
+the det mini, and the package; a fresh bare
+`station_m4_probe.bat` run is equally valid and only re-pays the
+R arm's ~15 s of GPU cycles). The returning m4_*.zip closes the
+RU band + the G control + the det mini (the formalized band sweep
+`cuda_gate.bands` still the instrument row it was) and composes
+with (2) THE M3 GPU RE-RUN (the iter-355 kit's three
+double-clicks — a SEPARATE form; the kit's b11538 and the m4
+pack's b11541 coexist, the pack installs into its own folder,
+--swap only on the owner's call) and (3) THE M2 POLICY DECISION
+(block/downgrade/allow + the C-tight/C-full fork; iter-350 §G
++ the m3 addendum) and THE M3 FORM DECISION (H the measured
+leader / F needs a working generative ultra-light — now
+fetchable one-click / G2 the verdict-aware leg / R the NEW
+honest row the m4 station runs now measure live — 0/36
+inventions, output_tokens=[0] ×36, byte-reproducible across
+runs); WITH decider-4b parked (outside the llama.cpp five — no
+systemone surface today) and the pack-v5 instrument rows each the
+owner's call; behind them the standing owner calls in order —
+the replay-UI NOT-EXPOSED row, the world track's W8, the
+frontend P1/P2/P3 continuations, `lab-composite-1`; the
+skip_probes optimization address named iter-347 (the admission
+the owner's call).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
