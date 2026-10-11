@@ -90,47 +90,43 @@ TEST_PLAN §9's claim packet)
   station flags). Detail: iter-365-m5station-report.md +
   iter-366-m5read-report.md + iter-367-m5correct-report.md.
 
-- `m6-station` — OPEN (iter-368 the agent half DONE: THE R-PROMOTION
-  EXECUTED per the owner's «разрешаю promotion R» + D-250 M3 — THE
-  M6 STATION PACK v6.0 built on the m5 base verbatim (Rule 9) +
-  validated live full-corpus CPU-side (b11541 + Laya + Qwen3-0.6B):
-  ALL stages green, THE M4/M5 PARITY REPRODUCED EXACTLY (R
-  full=6/14.3%, the G/RU censuses identical), narrate 20/20
-  deterministic, det identical, the resume machine green, units
-  12/12. THE DEFAULT BATTERY IS THE PRODUCTION FORM: R at the door
-  on the --gate profile (0.5 default / 0.4 the explicit
-  recall-oriented override per D-250 M2, the measured cost
-  verbatim) + NARRATE the L12 TEMPLATE RUNG (the prose a SEPARATE
-  surface: every R unit's log through the repo's chronicle
-  renderer, each tale rendered twice — the determinism digests;
-  the gold units beside; the full tales in narrate/*.txt) + the
-  G anchor + the RU band + det; H OPT-IN ONLY (--stages h — never
-  in the default, H not promoted, the aesthetic call open);
-  ru04/r04 retired (the --gate knob replaced the stages); the
-  false-allow census the STANDING WATCH on every R/RU row at any
-  profile. THE BAND INSTRUMENT (KI#119): the m5 station run's own
-  logs carry ZERO CUDA lines — the servers never initialized
-  CUDA, the run was the CPU band while cuda_gate.bands honestly
-  read {}; the iter-358 «×6.3 GPU» and iter-361 «FULL offload»
-  readings withdrawn as assumption-carried (the latency numbers
-  stand as unlabelled wall-times; the D-250 decisions unaffected —
-  single-band like-for-like); the v6.0 gate DERIVES the band from
-  the server logs, records the negative verdict, says it LOUD at
-  run end. KI#120 OPEN: the reference never commits the pinned
-  say-replies (no emit_call — the door's one-call-awaits-one-reply
-  refuses each, the tolerant except swallows; the reference logs =
-  setup + narrator beats; the drift fingerprints measure
-  pristine-premise divergence, never gold-path; the fix changes
-  the drift column series-wide — the owner's exclusive call). The
-  m5 zip archived IN the repo at docs/station/archive/ per the
-  owner's explicit instruction (the station source for every
-  future clone; the m6 zip beside it; Rule 9 yielded to the
-  owner's direct call, recorded). THE STATION RUN rides the owner:
-  re-run station_m6_setup.bat (watch the «CUDA runtime in place»
-  line), double-click station_m6_probe.bat, send the m6_*.zip back
-  with the band verdict from the console tail. Detail:
-  iter-368-m6promotion-report.md + the pack
-  docs/station/archive/canonsim_m6_station_pack_v6.0.zip.
+- `m6-station` — OPEN, THE STATION RUN NOW RIDES v6.1 (iter-368
+  the R-promotion + iter-371 KI#120 CLOSED by the v6.1 fix —
+  the owner's «готовь прогон или ki закрывай» call, 2026-10-12):
+  THE M6 STATION PACK v6.1 (built on the v6.0 base verbatim,
+  Rule 9; validated live full-corpus CPU-side — b11541 + Laya +
+  Qwen3-0.6B, md5-pinned): THE REFERENCE COMMITS THE GOLD
+  TRAJECTORY — emit_call in run_reference's say-cycles (the
+  parser test's own form; the bug lived since m3: every pinned
+  reply died a swallowed ParseError, the reference logs were
+  setup + narrator beats, the gold never ran); the DRIFT COLUMN
+  now reads gold-path divergence (the m4/m5 numbers keep their
+  narrowed pristine-premise reading — both documented in the
+  pack's report; the probe-cycle skip law untouched — arms and
+  reference skip the same cycles); the arms r/g/ru ride
+  m5-verbatim, THE PARITY REPRODUCED EXACTLY on the v6.1
+  validation (R full=6/14.3%, G full=4/kind+=16/38.1%,
+  refusals 11, RU classes identical, output_tokens=[0]×42,
+  inventions 0/42); units 13/13 (+1: the reference commits
+  gold — s4's fire chain event-by-event, the fingerprints
+  grow); gold:s4 = 13 lines of prose WITH the cascade (r:s4 =
+  14); the new-meaning drift numbers: R 28/42 / G 29/42 (CLEAN
+  R 14 / G 13); narrate 20/20 deterministic; det identical; the
+  band instrument loud (CPU verdict live in the sandbox). The
+  v6.0 promotion core rides beneath: the default battery IS the
+  production form (R at the door on the --gate profile + the
+  L12 narrate rung + the G anchor + the RU band + det; H
+  opt-in only; the false-allow census the standing watch). THE
+  STATION RUN rides the owner: unpack
+  canonsim_m6_station_pack_v6.1 (the zip rides the chat +
+  docs/station/archive/), re-run station_m6_setup.bat (watch
+  the «CUDA runtime in place» line — the m5 run was the CPU
+  band by its own logs), double-click station_m6_probe.bat,
+  send the m6_*.zip back with the band verdict from the console
+  tail. Detail: iter-368-m6promotion-report.md +
+  iter-371-refemit-report.md + the packs
+  docs/station/archive/canonsim_m6_station_pack_v6.0.zip and
+  …v6.1.zip.
 
 - `engine-1` — DONE (iter-170 D-192 DECIDED + iter-171..174 the {3-8B, GBNF}
   experiment, move (a) CLOSED + iter-177 D-193 the BUILD LANDING):
@@ -575,6 +571,7 @@ TEST_PLAN §9's claim packet)
   from the v1.5 re-derivation (the honest-unknown note, iter-344's
   report §D).
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+- iter-371 · 2026-10-12 · refemit (R0/R1 riders + R2 вне репо — вызов владельца «готовь прогон или ki закрывай» (2026-10-12), ОБЕ половины исполнены: KI#120 ЗАКРЫТ ФИКСОМ, станционный прогон подготовлен на v6.1): THE M6 STATION PACK v6.1 — РЕФЕРЕНС КОММИТИТ ЗОЛОТУЮ ТРАЕКТОРИЮ: emit_call в say-циклах run_reference (форма собственного теста парсера репо, test_parser.py; баг с рождения m3 — каждый закреплённый ответ умирал глотаемым ParseError'ом, референс-логи = setup + narrator-биты, золото никогда не выполнялось, drift мерил «от premise»); закон пропуска probe-циклов не тронут (руки и референс пропускают одни и те же циклы — apples-to-apples); DRIFT-КОЛОНКА — новый смысл «расхождение с золотой траекторией» (числа m4/m5 остаются в узком чтении, оба задокументированы в README/отчёте пака); ДОКАЗАНО ЖИВЬЁМ до/после: s4 = 6 событий без цепочки → 15 событий (take → move → drop_break → fire_started → fire_spread → smoke_rising → location_burned_out → flee → intent_rejected); ВАЛИДАЦИЯ полный корпус (b11541 ubuntu + Laya + Qwen3-0.6B, md5-pinned): юниты 13/13 (+1 новый: референс коммитит золото), смоук зелёный, полный корпус одним чанком — все стадии done, ПАРИТЕТ m4/m5/v6.0 ТОЧНЫЙ (R full=6/14.3%, G full=4/kind+=16/38.1%/refusals=11, RU-классы идентичны, output_tokens=[0]×42, inventions 0/42, вход med 841 — перепроверено из сырья); отпечатки референса растут (s4 6→7→8→13→14, s7 до 24), gold:s4 = 13 строк прозы с каскадом, drift нового смысла R 28/42 / G 29/42 (CLEAN 14/13), narrate 20/20, det identical, бенд CPU громко; v6.1-зип в docs/station/archive/ (паттерн m5/m6.0); 2626+27 (известный T1-набор, идентичен базе ДО правок; ноль флейков)+1, ruff+docguard+topology+digest clean; the report iter-371-refemit-report.md
 - iter-370 · 2026-10-12 · beatmach (R3 core, D-253 the PCC row — the owner's standing «продолжай работы… я разрешаю» directive, the iter-364 ranking's head): THE BEAT-MACHINERY STATIC-RESOLUTION FAMILY, the iter-362 class, ZERO canon bytes — RngBank.family_randint (the fused assure+randint: the with-scope machinery was 3.2 profiled s over 939K draw pairs; the nesting law inline, the oracle law pins the equality) + the urgency/faction spec STREAM/PROBE memos (the E03 class extended to the parse's products; the scan's 939K probe allocations and the name f-strings gone; the frozen probe shared scan/walk — replace() stamps, no mutation path) + decay_axes (the static axis table both decay walks read; the loop init memo; the linear oracle over all six packs) + first_failing's preconditions honestly Sequence; MEASURED: the wall 18.58 → 12.51 s (×1.48), urgency_scan 11.19→7.45 / urgency_intents 8.13→3.97 / decay_drafts 7.73→3.26 / next_decay_tick 5.40→2.65 profiled s, the exponents decay ×11.85→×8.1 / rolls ×8.94→×7.1, the beat machinery 64.7%→47.8%; +4 oracle laws; the h32 10y md5 07e924cb… IDENTICAL, farstead + h3 pairs identical, canon-neutrality HELD; 2626+27 (the failure set diffed identical to the pristine baseline; the test_lab flake once — the KI#113 class, retries green)+1, ruff+docguard+topology+digest clean; the residual head named honestly: first_failing's gate reads (7.45 s) > commit_knowledge_fold > director_global_passes; the report iter-370-beatmach-report.md
 - iter-369 · 2026-10-12 · deccap (R0/R1 riders + the periphery guard's cap constant — the owner's 2026-10-12 directive «если можно что убрать — убирай (например про redot всякое), иначе расширь капу до 35; исследовать и решить»): THE DECISIONS ENTRY CAP RAISED 30→35 ON RESEARCH, D-252 RECORDED — the full-repo citation scan ran FIRST: ALL 31 rows live-cited (zero fully-dead families; the Redot row D-244/D-245 carries 30 citations — the live authority of the ACTIVE web stack; its PCC + GC cards preserved IN FULL by the iter-310 collapse's own call); deletion impossible without dangling citations ⇒ the cap branch: DECISIONS_MAX=35 (docguard + AGENTS §6 + NAV + the header/ledger notes), the two craft fixtures re-armed at 36/38 entries, the collapse mechanism untouched; the docguard real-repo red CLEARED (the guard clean again); 2622+27 (the known T1 env set, the docguard red GONE)+1, ruff+docguard+topology+digest clean; the report iter-369-deccap-report.md
 - iter-368 · 2026-10-11 · m6promotion (R0/R1 riders + R2 вне репо — ПРИКАЗ ВЛАДЕЛЬЦА «разрешаю promotion R» ИСПОЛНЕН: THE M6 STATION PACK v6.0, батарея по умолчанию = ПРОДАКШН-ФОРМА D-250 M3): R у двери на профиле --gate 0.5|0.4 (D-250 M2, цена дословно; ru04/r04 убраны) + NARRATE = L12-ШАБЛОН, проза как ОТДЕЛЬНАЯ поверхность (render/chronicle.py, тейл дважды — дайджесты; золотые юниты рядом; INV-1-чист) + G-якорь + RU + det; H только --stages h; ЦЕНЗА ЛОЖНЫХ РАЗРЕШЕНИЙ — ПОСТОЯННЫЙ СТРАЖ. ВАЛИДАЦИЯ ЖИВЬЁМ полный корпус: все стадии done, ПАРИТЕТ m4/m5 ТОЧНЫЙ (R full=6/14.3%, цензы G/RU идентичны), narrate 20/20 детерминирован, det identical, resume зелёный, юниты 12/12. KI#119 закрыт прибором (логи m5 несут НОЛЬ строк CUDA — бенд был CPU, чтения «GPU ×6.3»/«FULL offload» сняты; решения D-250 не меняются; прибор v6.0 выводит бенд из логов и говорит громко). KI#120 ОТКРЫТ (референс не коммитит закреплённые say-ответы — дрифт = от premise, не от золотой траектории; фикс — вызов владельца). m5-зип в репо по прямому указанию (docs/station/archive/, m6-зип рядом; Правило 9 уступило, записано); 2621+28(27 известный T1 + guard на строке D-250)+1, ruff+docguard(1 строка D-250)+topology+digest clean; the report iter-368-m6promotion-report.md
@@ -584,4 +581,3 @@ TEST_PLAN §9's claim packet)
 - iter-364 · 2026-10-11 · restsplit (R2 instrument extension — the owner's steps 3–4, the iter-346 form; the M2/M3 decisions recorded — the report §F, DECISIONS at cap 30/30): THE POST-362 `rest` 21.5% DECOMPOSED — ≈93% THE COMMIT PATH: knowledge.add 8.9% (the per-event epistemic fold, per-call ×6.74 along h3→h32, NPC 49→165 ×3.37) + schema.validate 7.7% (the writer's per-event schema backstop, 780K calls, ×1.04 population-FLAT) + wrappers/queue/door 4.8%; the two leaves became instrument MEMBERS (commit_validate + commit_knowledge_fold — both called ONLY from _commit, 25,859 = every event; the DOUBLE-COUNT LAW keeps _complete/_commit/log.append/_react/releases OUT: their subtrees CONTAIN the leaves, _react re-enters _commit 6,115×, releases WRAPS the entropy member — no second unnamed director pass exists), +7 key-table legs, rest 21.5% → 4.8%, the wall unchanged 18.31 s, canon_check HELD; THE DENSITY-AXIS GROWTH TABLE (both rungs S=4/10y/seed 7): decay_drafts ×11.76 / next_decay_tick ×10.42 / beat_rolls ×8.71 / knowledge.add ×6.74 / urgency_scan ×6.06 / _react ×3.49 / entropy ×2.50 (SUBLIMEAR per capita — the mildest population walk) / validate ×1.04 flat — THE NEXT-WALL RANKING the exponents force: the beat-machinery family (~65% of the wall, quadratic) > commit_knowledge_fold (T3 leak laws the falsifiers) > director_global_passes (10.2%, ×2.5 — honestly re-ranked THIRD) > commit_validate (flat — never the wall); THE OWNER'S M2/M3 CALLS recorded (M3 the R-vs-H same-corpus gate before runtime-promotion; M2 0.5 default + the 0.4 RU run with the false-allow census) and the `m5-station` row opened (precondition: the owner's m4 pack zip, Rule 9); 2649+1 on the golden 3.12.14, 19 test_lab laws green, ruff+docguard+topology+digest clean; the report iter-364-restsplit-report.md
 - iter-363 · 2026-10-11 · py31214 (R0/R1 riders-only — the owner's step 2 «Запустить тесты на Python 3.12.14 и документировать фактический результат»): THE T1 ENV CAVEAT CLOSED BY FACT, both directions at HEAD 768dfdc — Python 3.12.15 (the sandbox venv): 2622 passed + 27 failed + 1 skipped, the failure set exactly iter-362's record (every first diff = the patch-version character of the log-header's `python` field); Python 3.12.14 (uv standalone cpython-3.12.14-linux-x86_64-gnu): **2649 passed + 1 skipped, ZERO FAILED** — 2622+27=2649 reconciled, every 3.12.15 failure passes on the golden interpreter, zero new; A FRESH CROSS-IRON POINT for the iter-336 law (the Linux x86_64 standalone build regenerates the owner's Windows goldens byte-identically); TEST_PLAN §1.1 carries the measured fact; ruff+docguard+topology+digest clean; the report iter-363-py31214-report.md
 - iter-362 · 2026-10-11 · skipprobe (R3 core — iter-347's named skip_probes address LANDED whole on the owner's standing «продолжай работы… я разрешаю» directive; the PCC record rides the iter-362 report §G — DECISIONS at cap 30/30, the iter-332 precedent): THE COLLECTIVE BEAT-OUTER WALK (`RngBank.first_d100_hit` replaces the per-stream `next_d100_hit` in both family scans — at each beat offset every stream reads the SAME pure counter word, the first beat any stream hits IS the per-stream minimum, the walk stops there; duplicate entries fold to the max probability per name, the monotonicity law; the p>=100 early return dropped, the streams map now always full — unobservable in the caller, law-pinned) + THE O(1) id→kind/id→record INDEX in core/pack.py (first-wins in category order, the old scan's exact semantics; kind_of was the measured O(E) gate cost — 1.92M walks / 13.94 s on one h32 profile); labrunner _KEY_FUNCS synced. THE WALL (labrunner, seed 7, h32, segmented 10y): 61.87 → 18.34 s (×3.37), skip_probes 74.9% → 33.2%, the walk member ×33 (73.30 → 2.22 s profiled); ZERO canon bytes moved — the h32 log md5 07e924cbe6a3f05e9991e083ed004610 IDENTICAL before/after, skip_stats {2251, 3166, 2248} + occ_stats identical verbatim; farstead 100y 4.48 → 3.28 s (no regression); +5 laws; the residuals named honestly (rest 21.5% / beat_rolls 16.2% / decay_walk 15.4% / director_global_passes 10.2% — each its own future row); 2622 passed + 27 failed (the known T1 log-header env caveat, the failure set IDENTICAL to the pristine-code baseline taken this session — zero new) + 1 skipped, ruff+docguard+topology+digest clean; the report iter-362-skipprobe-report.md
-- iter-361 · 2026-10-11 · m4fullrun (R0/R1 riders-only — the owner returned `m4_20261010_170258.zip`: THE FIRST COMPLETE station run of the series — preflight + reference 10/10 + R s1..s10 42 cycles + G 42 + RU 12 + det + package, ZERO crashes, pack v4.3 on the 3080 Ti): THE VERB FIX PROVEN LIVE — s4's fire cascade committed by the REAL door event-by-event (drop_break broken=true → fire_started back_wall → fire_spread woodpile → smoke_rising → location_burned_out t=131 irreversible → flee), census=fields the counted honest divergence exactly as iter-360's GREEN predicted; the arson cy4 divergence is gate-side (live Kev below threshold vs the sandbox's scripted pass — both refuse, no crash). FOURTH byte-identical run: s1..s3 gate_p/itok/census match v4.1 + both v4.2 exactly; det router identical=True digest 962b30a43bdb6363 (the first recorded answers-digest datum; the g half's digest empty — a one-line instrument gap). FULL-CORPUS R PROOFS: 0 inventions on 42 docs + output_tokens=[0] ×42 (0/132 live docs series-wide); med 0.556 s max 0.796 s; the gate sweep monotone 67.7%@0.5 / 87.1%@0.4 / 96.8%@0.3 / 100%@0.2. THE RU BAND — THE HEADLINE TRUST QUESTION ANSWERED: 5/12 full at gate 0.5, EVERY gate-passed row assembled PERFECTLY (5/5 kind+target exact — talk/npc_guard_01, steal/npc_guard_01, move/loc_backyard, take/oil_lamp_01, take/ale_mug_01 — zero assembly errors on Russian); 2 honest rejections (the atmosphere line → census full; the question → not_intent); ru_05 no_pin the documented fixed-policy cost; ALL 5 misses gate_blocked on LOW-AGENCY verbs (look_around 0.423 / wait 0.385 / talk 0.488 / examine 0.410 / rest 0.382 — the block in 0.38–0.49 under the 0.5 line, passed rows 0.588–0.830): a THRESHOLD story, not comprehension; blocked answers carry no action_top3 — a 0.4-threshold run would measure their assembly (3 of 5 above 0.4). THE G CONTROL — the first like-for-like on ONE battery: R full 38.1% vs G 21.4% (×1.8), R max 0.796 s vs G max 2.907 s (mean 1.391 s, the generation tail), G leans on look_around ×4.7 (14 vs 3), G generates ~25 completion tokens while R generates zero. HONEST GAPS: s7 cy0 the router's top action was examine CORRECT (0.308, gate passed) but the answer carried no target → door_error «examine requires a target» → census not_intent (the R-form's target-resolution cost, the door refuses loud); drift flags R 27/42 G 32/42 (the premise-drift status, raw observation); cuda_gate.bands still {}. THE M2/M3 DECISION MATERIAL delivered (iter-361 §G): both routes' full-corpus live numbers on one battery + the Russian-trust column + the threshold knob (0.5 honest default / 0.4 the measured recovery point) — the pack v4.3 has delivered everything iter-357 promised; the next station step is the owner's M2/M3 decisions behind the runtime-promotion gate, not new runs; the report iter-361-m4fullrun-report.md
