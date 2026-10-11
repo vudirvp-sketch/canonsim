@@ -1,55 +1,46 @@
-Iteration: iter-364 (`restsplit` — шаги 3–4 плана
-  сессии владельца: пост-362 `rest` (21.5% h32-профиля) РАЗЛОЖЕН
-  на именованные операции, инструмент расширен нести их (форма
-  iter-346), таблица роста по оси плотности снята, решения M2/M3
-  ЗАПИСАНЫ): полная каллер-атрибуция pstats (пробник сессии, вне
-  репо, Правило 9; канон-нейтральность HELD) — `rest` ≈ 93% ПУТЬ
-  КОММИТА: `knowledge.add` 8.9% (пер-эвентный эпистемический
-  фолд, пер-колл ×6.74 по оси h3→h32 при росте NPC-населения
-  ×3.37) + `schema.validate` 7.7% (пер-эвентная схемная страховка
-  писателя, ×1.04 ПЛОСКО, 780K вызовов = 25 859 первичных +
-  рекурсивный спуск) + обёртки/очередь/дверь 4.8%; ДВА ЛИСТА
-  стали ЧЛЕНАМИ (`commit_validate` + `commit_knowledge_fold`,
-  оба вызваны ТОЛЬКО из `_commit`; закон двойного счёта держит
-  _complete/_commit/log.append/_react/releases ВНЕ — их поддеревья
-  содержат листья, `_react` ре-ентерит `_commit` 6 115 раз),
-  +7 ног таблицы ключ-функций, rest 21.5% → 4.8%, стена
-  неизменна 18.31 с; ТАБЛИЦА РОСТА (обе ступени S=4/10y/seed 7,
-  NPC 49→165): decay_drafts ×11.76 / next_decay_tick ×10.42 /
-  beat_rolls ×8.71 / knowledge.add ×6.74 / urgency_scan ×6.06 /
-  _react ×3.49 / entropy ×2.50 (СУБЛИНЕЙ на душу — самый мягкий
-  популяционный проход) / validate ×1.04; РАНЖИРОВАНИЕ следующей
-  стены измерением: бит-семейство (skip-остаток 33.4 + beat_rolls
-  16.3 + decay_walk 15.5 ≈ 65%, квадратично) > commit_knowledge_fold
-  (8.9%, ×6.7, T3-законы утечки — фальсификаторы) >
-  director_global_passes (10.2%, ×2.5 — кандидат владельца честно
-  переранжирован ТРЕТЬИМ по экспоненте) > commit_validate (7.7%,
-  плоско — никогда не стена); РЕШЕНИЯ ВЛАДЕЛЬЦА M2/M3 записаны
-  (отчёт §F): M3 — R ведущий кандидат M4-корпуса, до
-  runtime-promotion сравнение R vs H НА ОДНОМ КОРПУСЕ; M2 — 0.5
-  консервативный дефолт, 0.4 — отдельный RU-прогон с измерением
-  ЛОЖНО РАЗРЕШЁННЫХ действий; строка m5-station открыта
-  (предусловие — зип m4-пака от владельца). iter-363 (`py31214`)
-  — ОГОВОРКА ОКРУЖЕНИЯ T1 ЗАКРЫТА ФАКТОМ: на золотом
-  интерпретаторе 3.12.14 полный сюит ЗЕЛЁНЫЙ (2649 passed +
-  1 skipped, НОЛЬ ПАДАЕНИЙ; 27 сбоев 3.12.15 — РОВНО только поле
-  `python` log-header, закрыто в обе стороны; свежая
-  кросс-железная точка: Linux x86_64 3.12.14 регенерирует золотые
-  фикстуры владельца побайтово) ·
+Iteration: iter-365 (`m5station` — строка m5-station ОТКРЫТА:
+предусловие выполнено, зип m4-пака v4.3 пришёл в сессию; ПАК M5
+v5.0 ПОСТРОЕН НА БАЗЕ v4.3 ПОСЛОВНО и ВАЛИДИРОВАН ЖИВЬЁМ, полный
+корпус, все стадии): THE H ARM ON THE SAME m4 CORPUS — гибрид
+один-проход формы m3 (грамматика репо, обёрнутая как
+`root ::= verdict-doc "\n\n" prose` с ЗАКОНОМ ТЕРМИНИРОВАННОЙ
+ПРОЗЫ iter-351 D.1; дверь режет по первой пустой строке: JSON-голова
+в ТОТ ЖЕ шлюз, что у G, проза-хвост — записанная поверхность; H0
+temp 0 + H8 temp 0.8-seeded на ТОМ ЖЕ спавне главной, что G) +
+THE RU-0.4 STAGE (12 строк на пороге 0.4, роутер побайтово
+воспроизводим — порог единственная переменная) + THE FALSE-ALLOW
+CENSUS (слова владельца: прирост принятых ≠ надёжность —
+false_allow_kind / false_allow_object (включая форму ru_05:
+золото-текстура закоммичена канон-таргетом) / false_allow_nonintent;
+расхождения полей никогда не маскируются) + R04 (та же машина на
+английском корпусе — цена ручки там, где её польза 87.1%@0.4) +
+дайджесты det g/h (пробел iter-361) + закон соседних паков (движок
+m4-пака рядом — без докачки 650 МБ). ВАЛИДАЦИЯ ЖИВАЯ, полный корпус
+(b11541 + Laya + Qwen3-0.6B; юниты 9/9; все стадии в 3 чанка
+возобновления; хил-лестница живьём): ПАРИТЕТ m4 ДОКАЗАН — R full=6
+(14.3%) ровно строка m4-валидации, G ценз побайтово идентичен,
+RU-классы идентичны; H живьём: 84 гибридных цикла через НАСТОЯЩУЮ
+дверь, закон прозы ДЕРЖИТ (h8 41/42 finish=stop; h0 34/42 — temp-0
+жадные петли 0.6B честно записаны eos_held, не чинятся сэмплером);
+ручка 0.4 живьём (полоса Laya пуста — восстановление вопрос Kev
+станции; ценза атрибутирована верно на каждом классе); det
+router/g identical=True с дайджестами, h identical=False
+(движковый ситтинг-датум, финиши записаны); 4 дефекта инструмента
+найдены и закрыты валидацией. СТАНЦИОННЫЕ ПРОГОНЫ — за владельцем
+(двойной клик, ~10–20 мин, прислать m5_*.zip). Пак: 10 файлов,
+70 135 Б, md5 f7fec7224f855c4ef7cd0bd82183085d, вне репо (Правило
+9) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2649 passed + 1 skipped, ruff clean, docguard clean, topology clean (INV-1..5 untouched, zero schema/log changes; counts from the GOLDEN interpreter 3.12.14 — the iter-363 closure; the sandbox's 3.12.15 shows the known 27 T1 log-header `python`-field failures, the set byte-identical to iter-362's baseline — zero new) ·
+2622 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean (riders-only, zero repo code; the 27 — the known T1 log-header set on the sandbox 3.12.15, byte-identical to iter-362/363's baseline, the GOLDEN 3.12.14 suite fully green per iter-363 — zero new) ·
 Date: 2026-10-11 ·
-Scope: scripts/labrunner.py (the member map +2, the key table +7,
-  the notes + the docstring law 8), tests/test_lab.py (the
-  accounting law's name set + the grown-world teeth), docs/
-  TEST_PLAN.md (§1.1 the iter-363 measured fact), STATUS.md (the
-  header + Next + KI#117 deleted per §5), worklog.md (iter-363 +
-  iter-364, iter-353/354 evicted), docs/TASKS.md (the ledger +2,
-  the m5-station row, the residual-members re-naming), the
-  iter-363 + iter-364 reports — 10 changed/created.
+Scope: ZERO repo code (the pack lives outside per Rule 9);
+  riders: STATUS.md (the header + Next), worklog.md (iter-365,
+  iter-355 evicted), docs/TASKS.md (the m5-station row →
+  delivered-awaiting-the-station-run + the ledger), docs/
+  iterations/iter-365-m5station-report.md (new) — 4 changed/created.
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -142,34 +133,35 @@ deleted earlier per the same law.)
 
 ## Next step
 
-**iter-363 + iter-364 DONE: py31214 (the T1 env caveat CLOSED —
-  the suite fully green on the golden interpreter 3.12.14: 2649
-  passed + 1 skipped, zero failed) + restsplit (the post-362
-  `rest` decomposed: 93% the commit path — knowledge.add 8.9% +
-  schema.validate 7.7% became instrument members, rest 21.5% →
-  4.8%; the density-axis growth table measured; the next-wall
-  ranking forced by exponents: the beat family (quadratic, ~65%)
-  > commit_knowledge_fold (×6.7) > director_global_passes (×2.5,
-  sublinear per capita) > commit_validate (flat); the reports
-  iter-363-py31214-report.md + iter-364-restsplit-report.md).**
-Next: THE OWNER'S TWO IMMEDIATE CALLS — (1) THE M4 PACK ZIP (Rule
-9: the pack lives outside the repo, the sandbox does not carry it;
-its arrival opens the `m5-station` row: the R-vs-H SAME-CORPUS
-battery + the RU-0.4 stage with the falsely-allowed-actions census
-— the owner's recorded M2/M3 decisions iter-364 §F, the instrument
-answer to both); (2) THE NEXT MEASURED-WALL ADMISSION — the
-ranking's head: the beat-machinery family (decay_walk ×11.76 /
-beat_rolls ×8.71 / the scans' gate pass `first_failing` 3.85 s
-residue), the iter-362 transformation class (collective walks +
-O(1) indexes, byte-identity + oracle laws) the proven form;
+**iter-365 DONE: m5station (the m5-station row's agent half — THE
+  M5 PACK v5.0 built on the m4 v4.3 base verbatim + validated live
+  full-corpus CPU-side: the H arm on the same m4 corpus at last (the
+  terminated-prose hybrid, 84 cycles through the real door, the law
+  held) + the RU-0.4 stage with the false-allow census + R04 + the
+  det digests; THE M4 PARITY PROVEN — R/G/RU byte-for-byte the m4
+  validation rows; four instrument defects found and closed; the
+  station runs ride the owner: double-click station_m5_probe.bat,
+  ~10–20 min, send the m5_*.zip back; the report
+  iter-365-m5station-report.md).**
+Next: THE OWNER'S STATION RUN OF M5 (the m5_*.zip back → the
+reading: THE M3 DECISION TABLE (R vs G vs H0/H8 on one corpus, one
+session, one main spawn — the like-for-like iter-361 §G asked for)
++ the false-allow censuses at 0.4 on both languages (the M2 knob's
+cost side) → the M2/M3 decisions behind the runtime-promotion gate)
++ THE NEXT MEASURED-WALL ADMISSION — the ranking's head: the
+beat-machinery family (decay_walk ×11.76 / beat_rolls ×8.71 / the
+scans' gate pass `first_failing` 3.85 s residue), the iter-362
+transformation class (collective walks + O(1) indexes,
+byte-identity + oracle laws) the proven form;
 commit_knowledge_fold second (T3 leak laws the falsifiers);
 director_global_passes third (×2.5, the mildest population walk);
 WITH decider-4b parked (outside the llama.cpp five) and the
-pack-v5 instrument rows (the formalized band sweep
-`cuda_gate.bands`, the det g-digest line) each the owner's call;
-behind them the standing owner calls in order — the replay-UI
-NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
-continuations, `lab-composite-1`.
+pack-v5 instrument rows (the formalized band sweep `cuda_gate.bands`
+— a candidate for the m5 station run's flags, the det g/h digest
+half now closed live) each the owner's call; behind them the
+standing owner calls in order — the replay-UI NOT-EXPOSED row, the
+world track's W8, the frontend P1/P2/P3 continuations,
+`lab-composite-1`.
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
