@@ -1,46 +1,49 @@
-Iteration: iter-365 (`m5station` — строка m5-station ОТКРЫТА:
-предусловие выполнено, зип m4-пака v4.3 пришёл в сессию; ПАК M5
-v5.0 ПОСТРОЕН НА БАЗЕ v4.3 ПОСЛОВНО и ВАЛИДИРОВАН ЖИВЬЁМ, полный
-корпус, все стадии): THE H ARM ON THE SAME m4 CORPUS — гибрид
-один-проход формы m3 (грамматика репо, обёрнутая как
-`root ::= verdict-doc "\n\n" prose` с ЗАКОНОМ ТЕРМИНИРОВАННОЙ
-ПРОЗЫ iter-351 D.1; дверь режет по первой пустой строке: JSON-голова
-в ТОТ ЖЕ шлюз, что у G, проза-хвост — записанная поверхность; H0
-temp 0 + H8 temp 0.8-seeded на ТОМ ЖЕ спавне главной, что G) +
-THE RU-0.4 STAGE (12 строк на пороге 0.4, роутер побайтово
-воспроизводим — порог единственная переменная) + THE FALSE-ALLOW
-CENSUS (слова владельца: прирост принятых ≠ надёжность —
-false_allow_kind / false_allow_object (включая форму ru_05:
-золото-текстура закоммичена канон-таргетом) / false_allow_nonintent;
-расхождения полей никогда не маскируются) + R04 (та же машина на
-английском корпусе — цена ручки там, где её польза 87.1%@0.4) +
-дайджесты det g/h (пробел iter-361) + закон соседних паков (движок
-m4-пака рядом — без докачки 650 МБ). ВАЛИДАЦИЯ ЖИВАЯ, полный корпус
-(b11541 + Laya + Qwen3-0.6B; юниты 9/9; все стадии в 3 чанка
-возобновления; хил-лестница живьём): ПАРИТЕТ m4 ДОКАЗАН — R full=6
-(14.3%) ровно строка m4-валидации, G ценз побайтово идентичен,
-RU-классы идентичны; H живьём: 84 гибридных цикла через НАСТОЯЩУЮ
-дверь, закон прозы ДЕРЖИТ (h8 41/42 finish=stop; h0 34/42 — temp-0
-жадные петли 0.6B честно записаны eos_held, не чинятся сэмплером);
-ручка 0.4 живьём (полоса Laya пуста — восстановление вопрос Kev
-станции; ценза атрибутирована верно на каждом классе); det
-router/g identical=True с дайджестами, h identical=False
-(движковый ситтинг-датум, финиши записаны); 4 дефекта инструмента
-найдены и закрыты валидацией. СТАНЦИОННЫЕ ПРОГОНЫ — за владельцем
-(двойной клик, ~10–20 мин, прислать m5_*.zip). Пак: 10 файлов,
-70 135 Б, md5 f7fec7224f855c4ef7cd0bd82183085d, вне репо (Правило
-9) ·
+Iteration: iter-366 (`m5read` — станционный прогон M5 ПРОЧИТАН:
+владелец вернул m5_20261011_002908.zip, ПЕРВЫЙ ПОЛНЫЙ m5-прогон
+серии — все 9 стадий, ноль крашей, пак v5.0 на 3080 Ti, обе
+модели FULL offload): каждое число m5_report пере-выведено из
+сырых jsonl (окна подсчёта сверены: RU-стены = r_wall_s, input
+med 1531 = окно R+RU; политика false-allow восстановлена из
+записей — 0 расхождений на 54 строках @0.4, @0.5-baseline выведен
+той же политикой) + THE M3 LIKE-FOR-LIKE CLOSED (iter-361 §G):
+R — лидер вердикт-пути (full 16/38.1% ×1.8 над G/H; класс
+target 1 против 8/10; med 0.52 с против 7.31 с ×14;
+output_tokens=[0] ×54; det identical, дайджест 962b30a4… — ПЯТЫЙ
+байт-идентичный R серии; гэп det-g-дайджеста iter-361 ЗАКРЫТ:
+c2e33bd9…) + THE STRUCTURAL LAW, доказанная живьём: ВЕРДИКТ-СЛОЙ
+H0 БАЙТ-ИДЕНТИЧЕН G НА 42/42 ДОКУМЕНТАХ (те же строки, те же
+классы, тот же CLEAN-набор из 10) — ГИБРИД ПОКУПАЕТ ПРОЗУ, НЕ
+КАЧЕСТВО ВЕРДИКТА (275 знаков медианой ценой ×14.9 латентности;
+вердикт-слой H8 неподвижен по температуре) + закон
+терминированной прозы ДЕРЖИТ на станции (41/42 stop обе руки;
+два eos_held — потолок max_tokens 416, вопрос запаса пака v5.1;
+один json_bleed h8 — кодовая ограда в проза-хвосте s4cy1, ДВЕРЬ
+БЕЗОПАСНА: разрез взял голову, ценза full, флаг сработал) + THE
+M2 KNOB LEDGER (полная цена ручки): EN 0.5→0.4 correct 15→20
+(+5), промахи 10→4 (−6), честные отказы 7→4, nonintent-ложные
+4→7, object-ложные 4=4 ИНВАРИАНТЕН (слой сборки, не гейта); RU
+correct 4→6, nonintent ОТСУТСТВУЕТ на обоих порогах; precision
+на проведённых FLAT (EN 60.0→58.8%, RU 80→75 малая выборка) —
+«прирост принятых ≠ надёжность» получает измеренный ответ:
+конверсия промахов ПО БАЗОВОЙ СТАВКЕ, recall куплен без
+отмывания; ПОЛОСЫ gate_p ПЕРЕКРЫВАЮТСЯ (correct-ы 0.412–0.479 vs
+nonintent-ложные 0.442–0.488 чередуются; мёртвая зона
+0.377–0.412) — разделяющего порога НЕТ, structural цена —
+nonintent-семейство, которое гейт ВИДЕТЬ НЕ МОЖЕТ (золото s5/s9
+требует «спроси, не угадывай»); паритет m4 (R ценза
+байт-в-байт, RU классы идентичны, каскад s4 событие-за-событием,
+s7cy0 1:1); изобретения 0/108 документов m5 (серия 0/240);
+cuda_gate.bands всё ещё {} (честная открытая строка) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2622 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean (riders-only, zero repo code; the 27 — the known T1 log-header set on the sandbox 3.12.15, byte-identical to iter-362/363's baseline, the GOLDEN 3.12.14 suite fully green per iter-363 — zero new) ·
+2622 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean (riders-only, zero repo code; the 27 — the known T1 log-header set on the sandbox 3.12.15, byte-identical to iter-362/363/365's baseline, the GOLDEN 3.12.14 suite fully green per iter-363 — zero new) ·
 Date: 2026-10-11 ·
-Scope: ZERO repo code (the pack lives outside per Rule 9);
-  riders: STATUS.md (the header + Next), worklog.md (iter-365,
-  iter-355 evicted), docs/TASKS.md (the m5-station row →
-  delivered-awaiting-the-station-run + the ledger), docs/
-  iterations/iter-365-m5station-report.md (new) — 4 changed/created.
+Scope: ZERO repo code (reading iteration, R0/R1); riders:
+  STATUS.md (the header + Next), worklog.md (iter-366),
+  docs/TASKS.md (the m5-station row → read/closed + the ledger),
+  docs/iterations/iter-366-m5read-report.md (new) — 4 changed/created.
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -133,21 +136,21 @@ deleted earlier per the same law.)
 
 ## Next step
 
-**iter-365 DONE: m5station (the m5-station row's agent half — THE
-  M5 PACK v5.0 built on the m4 v4.3 base verbatim + validated live
-  full-corpus CPU-side: the H arm on the same m4 corpus at last (the
-  terminated-prose hybrid, 84 cycles through the real door, the law
-  held) + the RU-0.4 stage with the false-allow census + R04 + the
-  det digests; THE M4 PARITY PROVEN — R/G/RU byte-for-byte the m4
-  validation rows; four instrument defects found and closed; the
-  station runs ride the owner: double-click station_m5_probe.bat,
-  ~10–20 min, send the m5_*.zip back; the report
-  iter-365-m5station-report.md).**
-Next: THE OWNER'S STATION RUN OF M5 (the m5_*.zip back → the
-reading: THE M3 DECISION TABLE (R vs G vs H0/H8 on one corpus, one
-session, one main spawn — the like-for-like iter-361 §G asked for)
-+ the false-allow censuses at 0.4 on both languages (the M2 knob's
-cost side) → the M2/M3 decisions behind the runtime-promotion gate)
+**iter-366 DONE: m5read (the owner's m5_20261011_002908.zip read
+  — the first FULL m5 run, every number re-derived from the raw
+  records; the M3 like-for-like CLOSED: R the verdict-path leader
+  ×1.8 full-rate / ×14 latency / non-generative / byte-reproducible,
+  H0≡G on 42/42 verdict docs — THE HYBRID BUYS PROSE, NOT VERDICT
+  QUALITY; the M2 knob's full cost ledger: precision flat
+  60.0→58.8%, the bands overlap — no separating threshold; the
+  decision material delivered §E; the report
+  iter-366-m5read-report.md).**
+Next: THE OWNER'S M2/M3 CALLS behind the runtime-promotion gate
+(the material in iter-366 §E: R feeds the intent door + the prose
+a separate surface (H-form one-call or G+narrator — never H as
+the door); 0.5 the honest default / 0.4 the measured recovery
+point at flat precision — a deployment knob with the nonintent
+census as its watch)
 + THE NEXT MEASURED-WALL ADMISSION — the ranking's head: the
 beat-machinery family (decay_walk ×11.76 / beat_rolls ×8.71 / the
 scans' gate pass `first_failing` 3.85 s residue), the iter-362
@@ -155,10 +158,12 @@ transformation class (collective walks + O(1) indexes,
 byte-identity + oracle laws) the proven form;
 commit_knowledge_fold second (T3 leak laws the falsifiers);
 director_global_passes third (×2.5, the mildest population walk);
-WITH decider-4b parked (outside the llama.cpp five) and the
-pack-v5 instrument rows (the formalized band sweep `cuda_gate.bands`
-— a candidate for the m5 station run's flags, the det g/h digest
-half now closed live) each the owner's call; behind them the
+WITH decider-4b parked (outside the llama.cpp five), the
+pack-v5 instrument rows (the formalized band sweep
+`cuda_gate.bands` — still {} in the m5 run, a candidate for the
+next station flags) and the H-prose follow-ups (the 416-token
+max_tokens headroom question; the prose quality itself — the
+aesthetic call) each the owner's call; behind them the
 standing owner calls in order — the replay-UI NOT-EXPOSED row, the
 world track's W8, the frontend P1/P2/P3 continuations,
 `lab-composite-1`.
