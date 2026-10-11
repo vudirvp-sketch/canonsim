@@ -1,49 +1,53 @@
-Iteration: iter-366 (`m5read` — станционный прогон M5 ПРОЧИТАН:
-владелец вернул m5_20261011_002908.zip, ПЕРВЫЙ ПОЛНЫЙ m5-прогон
-серии — все 9 стадий, ноль крашей, пак v5.0 на 3080 Ti, обе
-модели FULL offload): каждое число m5_report пере-выведено из
-сырых jsonl (окна подсчёта сверены: RU-стены = r_wall_s, input
-med 1531 = окно R+RU; политика false-allow восстановлена из
-записей — 0 расхождений на 54 строках @0.4, @0.5-baseline выведен
-той же политикой) + THE M3 LIKE-FOR-LIKE CLOSED (iter-361 §G):
-R — лидер вердикт-пути (full 16/38.1% ×1.8 над G/H; класс
-target 1 против 8/10; med 0.52 с против 7.31 с ×14;
-output_tokens=[0] ×54; det identical, дайджест 962b30a4… — ПЯТЫЙ
-байт-идентичный R серии; гэп det-g-дайджеста iter-361 ЗАКРЫТ:
-c2e33bd9…) + THE STRUCTURAL LAW, доказанная живьём: ВЕРДИКТ-СЛОЙ
-H0 БАЙТ-ИДЕНТИЧЕН G НА 42/42 ДОКУМЕНТАХ (те же строки, те же
-классы, тот же CLEAN-набор из 10) — ГИБРИД ПОКУПАЕТ ПРОЗУ, НЕ
-КАЧЕСТВО ВЕРДИКТА (275 знаков медианой ценой ×14.9 латентности;
-вердикт-слой H8 неподвижен по температуре) + закон
-терминированной прозы ДЕРЖИТ на станции (41/42 stop обе руки;
-два eos_held — потолок max_tokens 416, вопрос запаса пака v5.1;
-один json_bleed h8 — кодовая ограда в проза-хвосте s4cy1, ДВЕРЬ
-БЕЗОПАСНА: разрез взял голову, ценза full, флаг сработал) + THE
-M2 KNOB LEDGER (полная цена ручки): EN 0.5→0.4 correct 15→20
-(+5), промахи 10→4 (−6), честные отказы 7→4, nonintent-ложные
-4→7, object-ложные 4=4 ИНВАРИАНТЕН (слой сборки, не гейта); RU
-correct 4→6, nonintent ОТСУТСТВУЕТ на обоих порогах; precision
-на проведённых FLAT (EN 60.0→58.8%, RU 80→75 малая выборка) —
-«прирост принятых ≠ надёжность» получает измеренный ответ:
-конверсия промахов ПО БАЗОВОЙ СТАВКЕ, recall куплен без
-отмывания; ПОЛОСЫ gate_p ПЕРЕКРЫВАЮТСЯ (correct-ы 0.412–0.479 vs
-nonintent-ложные 0.442–0.488 чередуются; мёртвая зона
-0.377–0.412) — разделяющего порога НЕТ, structural цена —
-nonintent-семейство, которое гейт ВИДЕТЬ НЕ МОЖЕТ (золото s5/s9
-требует «спроси, не угадывай»); паритет m4 (R ценза
-байт-в-байт, RU классы идентичны, каскад s4 событие-за-событием,
-s7cy0 1:1); изобретения 0/108 документов m5 (серия 0/240);
-cuda_gate.bands всё ещё {} (честная открытая строка) ·
+Iteration: iter-367 (`m5correct` — ДОКАЗАТЕЛЬНАЯ КОРРЕКЦИЯ
+iter-366 + решения M2/M3 ЗАПИСАНЫ: контр-проверка владельца
+воспроизведена точно — reply-байты G/H0 37/42, G/H8 30/42,
+исходное «H0≡G на 42/42 байт-идентичны» ЛОЖНО; байтовое
+сравнение при чтении iter-366 НЕ выполнялось — утверждение
+собрано из верных слоёв 42/42 (pinned/входы/золото/CLEAN-набор)
+и ошибочно возведено в байт-закон; построчная ценза 40/42,
+door_outcome 37/42 — тоже не проверялись; закон снят со всех
+носителей (STATUS/TASKS/отчёт iter-366/worklog), KI#118
+открыт-закрыт; чтение «гибрид покупает прозу, не вердикт»
+сохранено как СТАТИСТИЧЕСКОЕ: 37/42 байтов / 40/42 классов /
+full 9=9, различия — маргинальное низко-агентное семейство
+(s1cy2, s7cy4, s9cy1, s9cy4, s10cy5); ценза H8 действительно
+неподвижна по температуре построчно (42/42 — под-утверждение
+верно), байты 32/42; прочие числа iter-366 перепроверены и
+не изменились; R — лидер вердикт-пути (full 16/38.1% ×1.8;
+target 1 против 8/10; med 0.52 с; output_tokens=[0] ×54; det
+identical 962b30a4… — пятый байт-идентичный R; g-дайджест
+c2e33bd9…) + D-250 В DECISIONS (31-я строка поверх капа 30 по
+явному указанию владельца — коллапс исключительный вызов
+владельца, строка счёта стража — видимое состояние): M3 — R у
+двери, проза отдельная поверхность, production-форма остаётся
+L12 template rung (PRESENTATION_SPEC §7), H НЕ продвигается по
+m5 (медиана ~7.3 с ×14; художественное качество прогона не
+оценивалось); M2 — 0.5 дефолт, 0.4 явный recall-oriented
+deployment override (НЕ более надёжный режим; цена: EN correct
+15→20, blocked_miss 10→4, nonintent-ложные 4→7, precision
+60.0→58.8%; разделяющего порога нет; nonintent-мониторинг — не
+защита от ложных допусков); RUNTIME — только по отдельному
+разрешению на promotion ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2622 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean (riders-only, zero repo code; the 27 — the known T1 log-header set on the sandbox 3.12.15, byte-identical to iter-362/363/365's baseline, the GOLDEN 3.12.14 suite fully green per iter-363 — zero new) ·
+2621 passed + 28 failed + 1 skipped, ruff clean, docguard 1 line (the DECISIONS 31-entry count — D-250 the owner's explicit record, the collapse the owner's next call), topology clean, digest parses ·
 Date: 2026-10-11 ·
-Scope: ZERO repo code (reading iteration, R0/R1); riders:
-  STATUS.md (the header + Next), worklog.md (iter-366),
-  docs/TASKS.md (the m5-station row → read/closed + the ledger),
-  docs/iterations/iter-366-m5read-report.md (new) — 4 changed/created.
+Failure classes: 27 = the known T1 log-header env set (the sandbox
+  3.12.15, byte-identical to iter-362/363/365/366's baseline, the
+  GOLDEN 3.12.14 suite fully green per iter-363) + 1 =
+  test_docguard::test_guard_clean_on_the_real_repo, red ON the
+  DECISIONS 31-entry line itself (D-250 the owner's explicit record;
+  clears on the owner's collapse call) — zero other new ·
+Scope: ZERO repo code (R0/R1 riders-only — the correction + the
+  decisions); riders: STATUS.md (the header + KI#118 + Next),
+  worklog.md (iter-367, iter-357 evicted), docs/TASKS.md (the
+  m5-station row corrected + the ledger, iter-357 evicted),
+  docs/DECISIONS.md (D-250, 31/30 — the owner's explicit
+  instruction), docs/iterations/iter-366-m5read-report.md
+  (corrected in place), docs/iterations/iter-367-m5correct-report.md
+  (new) — 6 changed/created.
 
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -103,6 +107,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
+- KI#118 · the iter-366 claim «H0≡G byte-identical on 42/42 verdict docs» was never byte-checked (assembled from true 42/42 layers: pinned/inputs/gold/CLEAN, then wrongly elevated to a byte law); the owner's counter-check 37/42 reproduced exactly; the law withdrawn everywhere · opened 2026-10-11 · CLOSED iter-367 (the correction + the explicit-layer lesson, the report §C)
 
 (KI#117 deleted per AGENTS §5 — closed iter-360, more than two
 iterations ago; the mandatory cleanup this iteration. KI#114/115/116
@@ -136,21 +141,22 @@ deleted earlier per the same law.)
 
 ## Next step
 
-**iter-366 DONE: m5read (the owner's m5_20261011_002908.zip read
-  — the first FULL m5 run, every number re-derived from the raw
-  records; the M3 like-for-like CLOSED: R the verdict-path leader
-  ×1.8 full-rate / ×14 latency / non-generative / byte-reproducible,
-  H0≡G on 42/42 verdict docs — THE HYBRID BUYS PROSE, NOT VERDICT
-  QUALITY; the M2 knob's full cost ledger: precision flat
-  60.0→58.8%, the bands overlap — no separating threshold; the
-  decision material delivered §E; the report
-  iter-366-m5read-report.md).**
-Next: THE OWNER'S M2/M3 CALLS behind the runtime-promotion gate
-(the material in iter-366 §E: R feeds the intent door + the prose
-a separate surface (H-form one-call or G+narrator — never H as
-the door); 0.5 the honest default / 0.4 the measured recovery
-point at flat precision — a deployment knob with the nonintent
-census as its watch)
+**iter-367 DONE: m5correct (the owner's counter-check reproduced
+  exactly — G/H0 37/42, G/H8 30/42; the byte law WITHDRAWN,
+  KI#118; the statistical reading kept with exact numbers; THE
+  M2/M3 OWNER DECISIONS RECORDED in DECISIONS D-250 — R at the
+  door / prose a separate surface / production stays the L12
+  template rung / H not promoted on m5; 0.5 the default / 0.4 the
+  recall-oriented override with its measured cost; runtime only
+  on the owner's separate promotion permission; the report
+  iter-367-m5correct-report.md).**
+Next: THE OWNER'S CALLS — (1) the DECISIONS collapse form (the
+  31st entry D-250 standing over the 30-cap at the owner's
+  explicit record instruction — accept it standing or call the
+  collapse, D-034/D-185); (2) the runtime-promotion permission
+  for R at the door (the decision recorded in D-250, the
+  promotion itself a separate explicit permission — the standing
+  order)
 + THE NEXT MEASURED-WALL ADMISSION — the ranking's head: the
 beat-machinery family (decay_walk ×11.76 / beat_rolls ×8.71 / the
 scans' gate pass `first_failing` 3.85 s residue), the iter-362
@@ -163,7 +169,8 @@ pack-v5 instrument rows (the formalized band sweep
 `cuda_gate.bands` — still {} in the m5 run, a candidate for the
 next station flags) and the H-prose follow-ups (the 416-token
 max_tokens headroom question; the prose quality itself — the
-aesthetic call) each the owner's call; behind them the
+aesthetic call, one half of the H-promotion basis) each the
+owner's call; behind them the
 standing owner calls in order — the replay-UI NOT-EXPOSED row, the
 world track's W8, the frontend P1/P2/P3 continuations,
 `lab-composite-1`.
@@ -222,8 +229,9 @@ world track's W8, the frontend P1/P2/P3 continuations,
    reproducibility datum); the narrator production-form DECIDED
    2026-10-03 (L12 the production form — PRESENTATION_SPEC §7; the
    heavier arm gated behind the contract rows). The remaining owner
-   calls: the M2/M3 DECISIONS (the packet complete — iter-350 §G +
-   iter-361 §G); GET /models/sse the observed load-progress surface —
+   calls: the DECISIONS collapse form (D-250, iter-367) + the R
+   runtime-promotion permission (the M2/M3 decisions themselves
+   RECORDED — D-250, 2026-10-11); GET /models/sse the observed load-progress surface —
    a candidate row when a live consumer names it.
 4. The standing frames: the embodiment options (§6.4 → §6.1 → §6.5 →
    §6.2 per the owner's 2026-09-27 order; §6.3 closed iter-204..210,

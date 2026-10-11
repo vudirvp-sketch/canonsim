@@ -1,4 +1,18 @@
-# iter-366 · m5read — СТАНЦИОННЫЙ ПРОГОН M5 ПРОЧИТАН: like-for-like закрыт (R против G против H0/H8 на одном корпусе, одной сессии, одном спавне главной — то, что просил iter-361 §G), закон структуры ДОКАЗАН ЖИВЬЁМ: вердикт-слой H0 байт-идентичен G на 42/42 документах — гибрид покупает прозу, не качество вердикта; ручка 0.4 получает полный гроссбух цены на обоих языках (precision на проведённых FLAT: 60.0%→58.8% EN), полосы gate_p перекрываются — разделяющего порога в данных нет
+# iter-366 · m5read — СТАНЦИОННЫЙ ПРОГОН M5 ПРОЧИТАН: like-for-like закрыт (R против G против H0/H8 на одном корпусе, одной сессии, одном спавне главной — то, что просил iter-361 §G); чтение структуры откорректировано iter-367: вердикт-слой H0 СООТВЕТСТВУЕТ G ПРИБЛИЖЕННО (37/42 байтов, 40/42 цензы — НЕ байт-закон; исходное «42/42 байт-идентичны» было ошибкой чтения, KI#118); ручка 0.4 получает полный гроссбух цены на обоих языках (precision на проведённых FLAT: 60.0%→58.8% EN), полосы gate_p перекрываются — разделяющего порога в данных нет
+
+> **КОРРЕКЦИЯ iter-367 (2026-10-11, по контр-проверке владельца):**
+> утверждение B.1 «вердикт-слой H0 байт-идентичен G на 42/42 документах»
+> ОПРОВЕРГНУТО сравнением фактических `reply_*.json` (у владельца и в
+> воспроизведении коррекции: G/H0 — 37/42, G/H8 — 30/42).
+> Байтовое сравнение при исходном чтении НЕ ВЫПОЛНЯЛОСЬ: утверждение
+> было собрано из слоёв, действительно совпадающих на 42/42 (pinned,
+> входы say, золото, CLEAN-набор из 10), и ошибочно возведено в
+> байт-закон; построчная ценза (40/42) и door_outcome (37/42) также
+> не проверялись. Закон H0≡G НЕ записан как подтверждённый. Числа
+> B.1/§E/Done исправлены, полная таблица слоёв и разбор — в
+> `iter-367-m5correct-report.md`. Остальные числа отчёта (цензы рук,
+> латентность, проза-гроссбух, М2-таблицы, det, каскад s4) при
+> коррекции перепроверены и остались верными.
 
 **Владелец прислал:** `m5_20261011_002908.zip` — прогон
 `m5_20261011_001111` пака **v5.0** (2026-10-11 00:11, станция
@@ -53,20 +67,31 @@ kind+объект против золота, targetless-на-текстурно�
 
 Три структурных чтения, которых m4 не давал:
 
-**B.1. ВЕРДИКТ-СЛОЙ H0 ≡ G — 42/42 ДОКУМЕНТА БАЙТ-ИДЕНТИЧНЫ.**
-Одни и те же (unit, cycle) строки, те же классы цензы, те же
-door_outcome, `pinned`-документы совпадают на всех 42 циклах;
-CLEAN-подмножества G, H0, H8 — один и тот же список из 10 строк.
-Гибрид один-проход НЕ добавляет вердикту ничего: его JSON-голова
-проходит через тот же шлюз и даёт ту же цензу. Единственный
-продукт лишних ~6.8 с и 84 токенов — проза-хвост (медиана
-275 знаков). **H = G + проза при ×14.9 латентности** (7.31 против
-0.49 с медиан; на G-Gem max 3.28 с против H 32.0/36.3 с —
-генерационный хвост). H8: вердикт-слой неподвижен по температуре
-(ценза в точности H0: full 9 / kind 5 / target 10 / no_pin 7 /
-not_intent 11), выборка двигает только маргинальные door-исходы
-(intent_rejected 8 против 11, take_failed 3 против 1) и поверхность
-прозы.
+**B.1. ВЕРДИКТ-СЛОЙ H0 ≈ G — ПРИБЛИЖЕННОЕ СООТВЕТСТВИЕ, НЕ БАЙТ-ЗАКОН
+(КОРРЕКЦИЯ iter-367; исходная формулировка «42/42 байт-идентичны»
+НЕВЕРНА — KI#118).** Фактические слои на 42 строках одного корпуса:
+reply-документы **G/H0 байт-идентичны на 37/42** (G/H8 — 30/42,
+H0/H8 — 32/42); ценза построчно 40/42 (G/H0 и G/H8 расходятся на
+ одних и тех же 2 строках: s1cy2 kind→target, s7cy4
+not_intent→target); door_outcome 37/42 (G/H8 — 36/42); `pinned`
+42/42, входы (say) 42/42, золото 42/42; CLEAN-подмножества G, H0,
+H8 — один и тот же список из 10 строк, ценза на CLEAN идентична.
+**Пять строк G/H0 с различным вердикт-документом** — маргинальное
+семейство низкой агентности: s1cy2 (look_around→wait), s7cy4
+(no_intent→wait), s9cy1 (look_around→talk), s9cy4
+(look_around→examine/npc_guard_01), s10cy5 (take/oil_lamp_01→
+take/loc_tavern). Чтение «гибрид покупает прозу, не вердикт»
+сохраняется как СТАТИСТИЧЕСКОЕ (88% байт / 95% классов; full-рейт
+9=9, различия не меняют ни одного агрегата выше kind+), но НЕ как
+байт-закон; единственный продукт лишних ~6.8 с и 84 токенов —
+проза-хвост (медиана 275 знаков). **H = G + проза при ×14.9
+латентности** (7.31 против 0.49 с медиан; на G-Gem max 3.28 с
+против H 32.0/36.3 с — генерационный хвост). H8: ценза
+действительно неподвижна по температуре — 42/42 построчно против
+H0 (то под-утверждение верно), но не байты (32/42) и не
+маргинальные door-исходы (39/42; intent_rejected 8 против 11,
+take_failed 3 против 1) — выборка двигает поверхность вердикта и
+прозы, классы оставляя на месте.
 
 **B.2. R — лидер вердикт-пути по всем осям измерения.** Full-рейт
 ×1.8 над G/H (16 против 9); точность таргета ×8–10 (класс
@@ -181,15 +206,17 @@ nonintent-ложных [0.442, 0.442, 0.488] — чередуются; марг�
 one main spawn: R — сильнейшая измеренная строка вердикт-пути
 (full ×1.8, target-точность ×8–10, ×14.9 латентность,
 не-генеративность, побайтовая воспроизводимость). H не добавляет
-вердикту НИЧЕГО (его слой ≡ G, 42/42 байт) — его продукт проза,
-ценой ×15 латентности и просадки target-точности (класс target 10
-против 1 у R). Числа раскладывают архитектуру так: **R кормит
-дверь; проза рассказчика — отдельная поверхность** (H-форма
-один-вызов, если одна реплика за ход дорога, или G+narrator
-двумя вызовами); H-как-дверь проигрывает по каждой вердикт-метрике.
-Лидерство H в батарее m3 РЕШЕНО как корпус-относительное
-(Laya zero-shot на корпусе m3; на корпусе m4 при like-for-like
-построении H добавляет прозу, не вердикт).
+вердикту измеримого качества (его слой ≈ G: 37/42 байтов, 40/42
+классов — статистически, не байт-законом; различия — маргинальное
+низко-агентное семейство) — его продукт проза, ценой ×15
+латентности и просадки target-точности (класс target 10 против 1
+у R). Числа раскладывают архитектуру так: **R кормит дверь; проза
+рассказчика — отдельная поверхность** (H-форма один-вызов, если
+одна реплика за ход дорога, или G+narrator двумя вызовами);
+H-как-дверь проигрывает по каждой вердикт-метрике. Лидерство H в
+батарее m3 РЕШЕНО как корпус-относительное (Laya zero-shot на
+корпусе m3; на корпусе m4 при like-for-like построении H добавляет
+прозу, не вердикт-качество).
 
 **M2 (порог) — measured shape.** 0.5 честный дефолт (correct
 35.7% EN / 33.3% RU; ложные 23.8% / 8.3%); 0.4 измеренная точка
@@ -217,7 +244,11 @@ precision-голодный → 0.5).
   scripts/digest.py` — парсит;
 - чтение верифицировано против сырых записей (каждое число отчёта
   пере-выведено; политика false-allow восстановлена и сошлась
-  0-расхождений на 54 строках @0.4);
+  0-расхождений на 54 строках @0.4) — **с оговоркой коррекции
+  iter-367: байтовое сравнение G/H0/H8 при этом чтении НЕ
+  выполнялось, утверждение B.1 о 42/42 не было проверено и
+  оказалось ложным (KI#118); таблица слоёв и точные числа —
+  iter-367-m5correct-report.md;**
 - самопроверка дельты: список путей == `git status --porcelain
   -uall` против BASE (блок Git ниже);
 - INV-1..5 не тронуты (R0/R1 riders, нулевой код репо).
@@ -247,22 +278,37 @@ riders-only итерация подряд — но это чтение стан�
 
 ## I. Git-блок владельца (§12.3)
 
+> **Откорректировано iter-367:** актуальный блок — в
+> `iter-367-m5correct-report.md` (кумулятивная дельта против BASE
+> `fd420a3`, включает все райдеры iter-366 с внесёнными правками;
+> архив iter-366 заменён архивом iter-367). Блок ниже — исходная
+> форма iter-366, оставлена для истории; фраза commit-message о
+> байт-идентичности H0/G НЕВЕРНА (KI#118, коррекция iter-367).
+
 ```
 cd /c/Users/fallo/OneDrive/Desktop/repo/canonsim
 git status --short
 git add STATUS.md worklog.md docs/TASKS.md docs/iterations/iter-366-m5read-report.md
 git status --short
-git commit -m "iter-366-m5read: THE M5 STATION RUN READ - the owner's m5_20261011_002908.zip (the first FULL m5 run, all 9 stages, zero crashes, pack v5.0 on the 3080 Ti, both models FULL offload): every m5_report number re-derived from the raw jsonl (the census tables, the false-allow censuses, the latency + prose ledgers, the det mini, the s4 event log verbatim - the iter-361 verification standard; the counting windows reconciled: RU walls = r_wall_s, input med 1531 = the R+RU window) + THE M3 LIKE-FOR-LIKE CLOSED (R vs G vs H0/H8 on one corpus, one session, one main spawn - iter-361 §G's ask): R THE VERDICT-PATH LEADER (full 16/38.1% x1.8 over G/H, target class 1 vs 8/10, med 0.52s vs 7.31s x14, output_tokens=[0] x54, det identical digest 962b30a43bdb6363 - the FIFTH byte-identical R run of the series; the iter-361 g-digest gap CLOSED: c2e33bd90d353d2b) + THE STRUCTURAL LAW PROVEN LIVE: H0's verdict layer is BYTE-IDENTICAL to G's on 42/42 documents (same rows, same census classes, same door outcomes, same CLEAN set of 10) - THE HYBRID BUYS PROSE, NOT VERDICT QUALITY (275-ch median tail at x14.9 latency; H8's verdict layer immobile under temp, the sampling moves only marginal door outcomes + the prose surface) + THE TERMINATED-PROSE LAW HELD ON STATION (41/42 stop both arms; the two eos_held rows hit the 416-token max_tokens ceiling - the pack v5.1 headroom question; h8's 1 json_bleed = the fenced protocol echo inside the prose tail on s4 cy1 - THE DOOR SAFE: the split took the head, census full, the flag fired as designed) + THE M2 KNOB'S FULL COST LEDGER (the false-allow censuses + the derived @0.5 baselines, the blocked-miss/blocked-honest split): EN 0.5->0.4 correct 15->20 (+5), misses 10->4 (-6), honest 7->4 (-3), nonintent-false 4->7 (+3), object-false 4=4 INVARIANT (the assembly layer, never the gate); RU correct 4->6, object 1->2, nonintent ABSENT both thresholds; PRECISION ON PASSED FLAT (EN 60.0%->58.8%, RU 80->75 small-n) - the owner's 'the growth of accepted requests does not by itself prove reliability' answered: the knob converts misses into corrects AT THE BASE RATE, no laundering, no degradation, recall bought; THE BANDS OVERLAP (EN recovered-corrects 0.412-0.479 vs nonintent-falses 0.442-0.488 interleaved, the marginal window 5/9 = 55.6% ~ base; the remaining misses all <=0.377, dead zone 0.377-0.412) - NO SEPARATING THRESHOLD EXISTS, the knob is a genuine trade, its only structural cost the nonintent family the gate CANNOT see (the gold's ask-don't-guess demand); the m4 parity (R census byte-identical, RU classes identical, s7cy0 door_error reproduced 1:1, the s4 fire cascade identical event-by-event) + the invention ledger 0/108 m5 docs (0/240 series-wide) + cuda_gate.bands still {} (the honest open row); THE M2/M3 DECISION MATERIAL DELIVERED (R feeds the door, prose is a separate surface - H-as-the-door loses every verdict metric at x15; 0.5 the honest default, 0.4 the measured recovery point with flat precision - a deployment knob, the owner's call behind the runtime-promotion gate); pytest 2622+27(known T1 3.12.15 set)+1, ruff+docguard+topology+digest clean; R0/R1 riders-only, zero repo code, INV-1..5 untouched"
+git commit -m "iter-366-m5read: THE M5 STATION RUN READ - the owner's m5_20261011_002908.zip (the first FULL m5 run, all 9 stages, zero crashes, pack v5.0 on the 3080 Ti, both models FULL offload): every m5_report number re-derived from the raw jsonl (the census tables, the false-allow censuses, the latency + prose ledgers, the det mini, the s4 event log verbatim - the iter-361 verification standard; the counting windows reconciled: RU walls = r_wall_s, input med 1531 = the R+RU window) + THE M3 LIKE-FOR-LIKE CLOSED (R vs G vs H0/H8 on one corpus, one session, one main spawn - iter-361 §G's ask): R THE VERDICT-PATH LEADER (full 16/38.1% x1.8 over G/H, target class 1 vs 8/10, med 0.52s vs 7.31s x14, output_tokens=[0] x54, det identical digest 962b30a43bdb6363 - the FIFTH byte-identical R run of the series; the iter-361 g-digest gap CLOSED: c2e33bd90d353d2b) + [КОРРЕКЦИЯ iter-367: строка про BYTE-IDENTICAL H0/G 42/42 здесь была НЕВЕРНА — фактические reply-байты G/H0 37/42, G/H8 30/42; ценза 40/42; KI#118] + THE TERMINATED-PROSE LAW HELD ON STATION (41/42 stop both arms; the two eos_held rows hit the 416-token max_tokens ceiling - the pack v5.1 headroom question; h8's 1 json_bleed = the fenced protocol echo inside the prose tail on s4 cy1 - THE DOOR SAFE: the split took the head, census full, the flag fired as designed) + THE M2 KNOB'S FULL COST LEDGER (the false-allow censuses + the derived @0.5 baselines, the blocked-miss/blocked-honest split): EN 0.5->0.4 correct 15->20 (+5), misses 10->4 (-6), honest 7->4 (-3), nonintent-false 4->7 (+3), object-false 4=4 INVARIANT (the assembly layer, never the gate); RU correct 4->6, object 1->2, nonintent ABSENT both thresholds; PRECISION ON PASSED FLAT (EN 60.0%->58.8%, RU 80->75 small-n) - the owner's 'the growth of accepted requests does not by itself prove reliability' answered: the knob converts misses into corrects AT THE BASE RATE, no laundering, no degradation, recall bought; THE BANDS OVERLAP (EN recovered-corrects 0.412-0.479 vs nonintent-falses 0.442-0.488 interleaved, the marginal window 5/9 = 55.6% ~ base; the remaining misses all <=0.377, dead zone 0.377-0.412) - NO SEPARATING THRESHOLD EXISTS, the knob is a genuine trade, its only structural cost the nonintent family the gate CANNOT see (the gold's ask-don't-guess demand); the m4 parity (R census byte-identical, RU classes identical, s7cy0 door_error reproduced 1:1, the s4 fire cascade identical event-by-event) + the invention ledger 0/108 m5 docs (0/240 series-wide) + cuda_gate.bands still {} (the honest open row); THE M2/M3 DECISION MATERIAL DELIVERED (R feeds the door, prose is a separate surface - H-as-the-door loses every verdict metric at x15; 0.5 the honest default, 0.4 the measured recovery point with flat precision - a deployment knob, the owner's call behind the runtime-promotion gate); pytest 2622+27(known T1 3.12.15 set)+1, ruff+docguard+topology+digest clean; R0/R1 riders-only, zero repo code, INV-1..5 untouched"
 git push
 ```
 
 ## J. Доставка (§12.2 — оба канала)
 
-- **Дельта-архив** (вложение): `canonsim_iter-366-m5read_
+> **Откорректировано iter-367:** исходная дельта
+> `canonsim_iter-366-m5read_2026-10-11.zip` ЗАМЕНЕНА кумулятивным
+> архивом `canonsim_iter-367-m5correct_2026-10-11.zip` (тот же BASE
+> `fd420a3`, все райдеры iter-366 с правками + DECISIONS + отчёт
+> iter-367). Применять архив iter-367; уже применённая дельта
+> iter-366 просто перекрывается теми же путями.
+
+- **Дельта-архив** (вложение): `canonsim_iter-367-m5correct_
   2026-10-11.zip` против BASE_COMMIT `fd420a3a473ba2dc4947421a
   8c0641f676f27126` — STATUS.md, worklog.md, docs/TASKS.md,
-  docs/iterations/iter-366-m5read-report.md, BASE_COMMIT.txt,
-  DELETED_PATHS.txt (`None`);
+  docs/DECISIONS.md, docs/iterations/iter-366-m5read-report.md
+  (исправлен), docs/iterations/iter-367-m5correct-report.md (новый),
+  BASE_COMMIT.txt, DELETED_PATHS.txt (`None`);
 - tmpfiles-ссылка, md5 и размер — в финальном сообщении сессии.
 
 **Done:** чтение m5-прогона по стандарту iter-361: каждое число
@@ -270,7 +316,9 @@ git push
 оба гроссбуха ценз ложных разрешений верифицированы
 (0-расхождений против записанных fa на 54 строках @04,
 @0.5-baseline выведен той же политикой), м3-таблица решения
-получила три новых структурных чтения (H0≡G 42/42; R лидер всех
+получила три новых структурных чтения (H0≈G — приближённое
+соответствие 37/42 байтов / 40/42 цензы, откорректировано
+iter-367 из исходного ошибочного «42/42»; R лидер всех
 вердикт-осей; закон прозы держит 41/42 с двумя честными
 хвостовыми флагами), м2-ручка получила полный гроссбух цены
 (precision flat, полосы перекрываются, object инвариантен),
@@ -281,7 +329,9 @@ ruff + docguard + topology + digest; T1-оговорка процитирова�
 **Not done:** решения M2/M3 (владелец, за гейтом
 runtime-promotion); формализованный band sweep (`cuda_gate.bands`
 — флаг пака не выполнялся, строка остаётся открытой); эстетка
-прозы не оценивалась.
+прозы не оценивалась; байтовое сравнение G/H0/H8 (выполнено
+владельцем и коррекцией iter-367 — исходное чтение его не
+проводило, KI#118).
 **Next:** вызов владельца M2/M3 по карточкам §E (решения
 распаковывают runtime-promotion: форма R у двери + порог
 развёртывания); за ними в ранжировании iter-364 — строка
@@ -290,4 +340,5 @@ runtime-promotion); формализованный band sweep (`cuda_gate.bands`
 индексы, байт-идентичность + законы оракула), commit_knowledge_fold
 вторым, director_global_passes третьим; стоящие: replay-UI
 NOT-EXPOSED, W8, P1/P2/P3, lab-composite-1.
-**Active KIs:** KI#113 (test_lab, как в STATUS).
+**Active KIs:** KI#113 (test_lab, как в STATUS), KI#118 (закрыт
+iter-367 — коррекция внесена; см. STATUS).
