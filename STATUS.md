@@ -1,33 +1,33 @@
-Iteration: iter-367 (`m5correct` — ДОКАЗАТЕЛЬНАЯ КОРРЕКЦИЯ
-iter-366 + решения M2/M3 ЗАПИСАНЫ: контр-проверка владельца
-воспроизведена точно — reply-байты G/H0 37/42, G/H8 30/42,
-исходное «H0≡G на 42/42 байт-идентичны» ЛОЖНО; байтовое
-сравнение при чтении iter-366 НЕ выполнялось — утверждение
-собрано из верных слоёв 42/42 (pinned/входы/золото/CLEAN-набор)
-и ошибочно возведено в байт-закон; построчная ценза 40/42,
-door_outcome 37/42 — тоже не проверялись; закон снят со всех
-носителей (STATUS/TASKS/отчёт iter-366/worklog), KI#118
-открыт-закрыт; чтение «гибрид покупает прозу, не вердикт»
-сохранено как СТАТИСТИЧЕСКОЕ: 37/42 байтов / 40/42 классов /
-full 9=9, различия — маргинальное низко-агентное семейство
-(s1cy2, s7cy4, s9cy1, s9cy4, s10cy5); ценза H8 действительно
-неподвижна по температуре построчно (42/42 — под-утверждение
-верно), байты 32/42; прочие числа iter-366 перепроверены и
-не изменились; R — лидер вердикт-пути (full 16/38.1% ×1.8;
-target 1 против 8/10; med 0.52 с; output_tokens=[0] ×54; det
-identical 962b30a4… — пятый байт-идентичный R; g-дайджест
-c2e33bd9…) + D-250 В DECISIONS (31-я строка поверх капа 30 по
-явному указанию владельца — коллапс исключительный вызов
-владельца, строка счёта стража — видимое состояние): M3 — R у
-двери, проза отдельная поверхность, production-форма остаётся
-L12 template rung (PRESENTATION_SPEC §7), H НЕ продвигается по
-m5 (медиана ~7.3 с ×14; художественное качество прогона не
-оценивалось); M2 — 0.5 дефолт, 0.4 явный recall-oriented
-deployment override (НЕ более надёжный режим; цена: EN correct
-15→20, blocked_miss 10→4, nonintent-ложные 4→7, precision
-60.0→58.8%; разделяющего порога нет; nonintent-мониторинг — не
-защита от ложных допусков); RUNTIME — только по отдельному
-разрешению на promotion ·
+Iteration: iter-368 (`m6promotion` — ПРОДВИЖЕНИЕ R ИСПОЛНЕНО:
+приказ владельца «разрешаю promotion R» + D-250 M3 → THE M6
+STATION PACK v6.0, БАТАРЕЯ ПО УМОЛЧАНИЮ = ПРОДАКШН-ФОРМА: R у
+двери на профиле --gate 0.5|0.4 (D-250 M2, цена дословно) +
+NARRATE — L12-ШАБЛОН как поверхность прозы (ОТДЕЛЬНАЯ
+поверхность: каждый лог R-юнита через render/chronicle.py, тейл
+дважды с дайджестом — детерминированность L12-звена вживую;
+золотые юниты рядом) + G-якорь + RU + det; H только опционально
+(--stages h, никогда в дефолте), ru04/r04 убраны (ручка --gate
+заменила); ЦЕНЗА ЛОЖНЫХ РАЗРЕШЕНИЙ — ПОСТОЯННЫЙ СТРАЖ на каждой
+строке R/RU; ВАЛИДИРОВАНО ЖИВЬЁМ НА ПОЛНОМ КОРПУСЕ (b11541 +
+Laya + Qwen3-0.6B): все стадии зелёные, ПАРИТЕТ m4/m5 ТОЧНЫЙ (R
+full=6/14.3%, цензы G/RU идентичны), narrate 20/20
+детерминирован, det identical, resume зелёный, юниты 12/12.
+KI#119 ЗАКРЫТ ПРИБОРОМ: логи m5-прогона владельца несут НОЛЬ
+строк CUDA в обоих серверах — прогон шёл на CPU-бенде при
+cuda_gate.bands {} (молчание прибора); чтения «GPU ×6.3»
+(iter-358) и «FULL offload» (iter-361) СНЯТЫ как
+предположения-без-прибора, числа латентности стоят как
+wall-times без метки бенда; решения D-250 НЕ меняются (R-vs-H —
+like-for-like в одной полосе); прибор v6.0 ВЫВОДИТ бенд из логов
+и говорит громко в конце прогона. KI#120 ОТКРЫТ: референс
+никогда не коммитит закреплённые say-ответы (без emit_call —
+дверь отклоняет каждый, ParseError глотается; дрифт-отпечатки
+мерили «мир сдвинулся от premise», НЕ «разошёлся с золотой
+траекторией»; фикс — исключительный вызов владельца, меняет
+смысл колонки по всей серии). m5-зип ЗААРХИВИРОВАН В РЕПО
+(docs/station/archive/ — прямое указание владельца: исходник
+станции при каждом клоне; m6-зип рядом; Правило 9 уступило
+явной инструкции, записано) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
@@ -108,6 +108,8 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
 - KI#118 · the iter-366 claim «H0≡G byte-identical on 42/42 verdict docs» was never byte-checked (assembled from true 42/42 layers: pinned/inputs/gold/CLEAN, then wrongly elevated to a byte law); the owner's counter-check 37/42 reproduced exactly; the law withdrawn everywhere · opened 2026-10-11 · CLOSED iter-367 (the correction + the explicit-layer lesson, the report §C)
+- KI#119 · the m5 station run's band: BOTH server logs carry ZERO CUDA lines (no ggml_cuda_init, no offload, n_threads=8 — the servers never initialized CUDA; the run was the CPU band while cuda_gate.bands honestly read {} — the instrument silent exactly where it should have shouted; the iter-358 «×6.3 GPU» and iter-361 «FULL offload» readings assumption-carried, withdrawn; the latency numbers stand as unlabelled wall-times; the D-250 decisions unaffected — R-vs-H was single-band like-for-like) · opened+CLOSED iter-368 (the v6.0 device gate DERIVES the band from the logs, records the negative verdict, the loud run-end verdict; the m6 station run settles the band by data)
+- KI#120 · the reference never commits the pinned say-replies: run_reference applies them without door.emit_call — the one-call-awaits-one-reply contract refuses each (ParseError swallowed by the tolerant except); the reference logs = setup + narrator beats only (the corpus's gold trajectory, e.g. s4's fire chain per iter-360's GREEN, never ran there); the drift fingerprints measure pristine-premise divergence, never gold-path divergence (the m4/m5 drift numbers stand as measured, their reading narrowed); the fix (emit_call per say-cycle) changes the drift column's meaning series-wide — the owner's exclusive call, never a silent fix · opened 2026-10-11 · OPEN
 
 (KI#117 deleted per AGENTS §5 — closed iter-360, more than two
 iterations ago; the mandatory cleanup this iteration. KI#114/115/116
@@ -141,22 +143,28 @@ deleted earlier per the same law.)
 
 ## Next step
 
-**iter-367 DONE: m5correct (the owner's counter-check reproduced
-  exactly — G/H0 37/42, G/H8 30/42; the byte law WITHDRAWN,
-  KI#118; the statistical reading kept with exact numbers; THE
-  M2/M3 OWNER DECISIONS RECORDED in DECISIONS D-250 — R at the
-  door / prose a separate surface / production stays the L12
-  template rung / H not promoted on m5; 0.5 the default / 0.4 the
-  recall-oriented override with its measured cost; runtime only
-  on the owner's separate promotion permission; the report
-  iter-367-m5correct-report.md).**
-Next: THE OWNER'S CALLS — (1) the DECISIONS collapse form (the
-  31st entry D-250 standing over the 30-cap at the owner's
-  explicit record instruction — accept it standing or call the
-  collapse, D-034/D-185); (2) the runtime-promotion permission
-  for R at the door (the decision recorded in D-250, the
-  promotion itself a separate explicit permission — the standing
-  order)
+**iter-368 DONE: m6promotion (the promotion R executed — THE M6
+  STATION PACK v6.0 delivered + validated live full-corpus
+  CPU-side: the default battery IS the production form — R at the
+  door on the --gate profile + narrate the L12 template rung (the
+  prose a SEPARATE surface, every tale rendered twice with
+  digests) + the false-allow census the standing watch + the band
+  instrument KI#119; H opt-in only; the m4/m5 parity reproduced
+  exactly; the m5 zip archived IN the repo per the owner's
+  instruction; KI#120 the reference finding opened — the owner's
+  call; the report iter-368-m6promotion-report.md).**
+Next: THE M6 STATION RUN rides the owner (double-click
+  station_m6_probe.bat; re-run station_m6_setup.bat first and
+  watch for the «CUDA runtime in place» line — the m5 run was the
+  CPU band by its own logs, KI#119; send the m6_*.zip back with
+  the band verdict from the console tail)
++ THE OWNER'S CALLS — (1) the DECISIONS collapse form (the 31st
+  entry D-250 standing over the 30-cap at the owner's explicit
+  record instruction — accept it standing or call the collapse,
+  D-034/D-185); (2) KI#120's fix form (emit_call in the
+  reference's say-cycles — changes the drift column's meaning
+  series-wide: fix it in a v6.1, keep the pristine-premise
+  reading documented, or retire the drift column)
 + THE NEXT MEASURED-WALL ADMISSION — the ranking's head: the
 beat-machinery family (decay_walk ×11.76 / beat_rolls ×8.71 / the
 scans' gate pass `first_failing` 3.85 s residue), the iter-362
