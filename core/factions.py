@@ -116,6 +116,8 @@ class _FactionSpec:
     intent_fields: Mapping[str, Any]
     requires: tuple[Mapping[str, Any], ...]
     members: tuple[str, ...]
+    stream: str
+    probe: IntentData
 
 
 def _specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
@@ -123,7 +125,11 @@ def _specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
     the walk respects it as given — INV-2 via construction order). The
     members ride the GROUP entity's own declaration order (the group
     record is the membership's single pack-side owner; the runtime
-    `member_of` state door is depth-7's row, never this walk's)."""
+    `member_of` state door is depth-7's row, never this walk's). The
+    parse also builds each entry's STREAM name and gate PROBE (iter-370,
+    the static-resolution family — the urgency twin's own form): both
+    are pure functions of the entry, so the parse-once memo carries
+    them and the per-beat walks never re-derive."""
     config = pack.rules.get("factions")
     if config is None:
         return ()
@@ -132,8 +138,11 @@ def _specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
         for record in pack.entities.get("groups", ())
     }
     specs: list[_FactionSpec] = []
-    for entry in config.get("entries", ()):
+    for seq, entry in enumerate(config.get("entries", ())):
         group = groups[entry["group"]]
+        intent_kind = entry["intent"]["kind"]
+        target = entry["intent"].get("target")
+        fields = dict(entry["intent"].get("fields", {}))
         specs.append(
             _FactionSpec(
                 group=entry["group"],
@@ -141,11 +150,20 @@ def _specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
                 trigger_value=int(entry["trigger_value"]),
                 threshold=int(entry["threshold"]),
                 max_per_beat=int(entry["max_per_beat"]),
-                intent_kind=entry["intent"]["kind"],
-                intent_target=entry["intent"].get("target"),
-                intent_fields=dict(entry["intent"].get("fields", {})),
+                intent_kind=intent_kind,
+                intent_target=target,
+                intent_fields=fields,
                 requires=tuple(entry.get("requires", ())),
                 members=tuple(group.get("members", ())),
+                stream=faction_stream_name(entry["group"], intent_kind),
+                probe=IntentData(
+                    id=sequence_id(FACTION_PREFIX, seq),
+                    kind=intent_kind,
+                    actor=entry["group"],  # D-112: the group IS the actor
+                    target=target,
+                    fields=fields,
+                    based_on_event_seq=0,
+                ),
             )
         )
     return tuple(specs)
@@ -204,19 +222,6 @@ def _member_values(
         if isinstance(value, int) and not isinstance(value, bool):
             values.append(value)
     return values
-
-
-def _build_intent(spec: _FactionSpec, seq: int) -> IntentData:
-    """Materialize an IntentData from a pack spec; the loop stamps the
-    real `based_on_event_seq` at enqueue time."""
-    return IntentData(
-        id=sequence_id(FACTION_PREFIX, seq),
-        kind=spec.intent_kind,
-        actor=spec.group,  # D-112: the group IS the actor — one id
-        target=spec.intent_target,
-        fields=spec.intent_fields,
-        based_on_event_seq=0,
-    )
 
 
 def faction_rolls(
@@ -281,20 +286,16 @@ def faction_scan(
     bar-100 entry with open gates exactly as the urgency twin."""
     streams: dict[str, int] = {}
     rolls: dict[str, int] = {}
-    for seq, spec in enumerate(
-        _specs(pack) if specs is None else specs
-    ):
+    for spec in (_specs(pack) if specs is None else specs):
         if not faction_rolls(spec, projection, locations):
             continue
-        name = faction_stream_name(spec.group, spec.intent_kind)
-        streams[name] = 1
+        streams[spec.stream] = 1
         bar = faction_bar(spec, projection)
         if bar <= 0:
             continue  # rolls, never fires (the cadence law)
         if spec.requires:
-            probe = _build_intent(spec, seq)
             if first_failing(
-                pack, projection, probe, list(spec.requires),
+                pack, projection, spec.probe, spec.requires,
                 facts=(), echoes=(), traits=(), world=world,
             ) is not None:
                 continue  # the gates are shut for the whole stretch
@@ -302,8 +303,8 @@ def faction_scan(
         # first hit IS the minimum over the entries' first hits on the
         # shared stream (the monotonicity law, `first_d100_hit`'s
         # contract)
-        if bar > rolls.get(name, 0):
-            rolls[name] = bar
+        if bar > rolls.get(spec.stream, 0):
+            rolls[spec.stream] = bar
     first = bank.first_d100_hit(rolls, limit)
     return streams, first
 
@@ -353,9 +354,7 @@ def faction_intents(
     default) keeps the standalone parse; the memo is
     byte-identical (the parse is pure)."""
     out: list[IntentData] = []
-    for seq, spec in enumerate(
-        _specs(pack) if specs is None else specs
-    ):
+    for spec in (_specs(pack) if specs is None else specs):
         # the rolling filter — the shared predicate (iter-337): an
         # absent or out-of-zone faction never rolls
         if not faction_rolls(spec, projection, locations):
@@ -366,15 +365,17 @@ def faction_intents(
         )
         # the roll: d100 on the entry's OWN faction-family stream
         # (engine-2's per-entry isolation, D-079) — one draw per walk,
-        # the cadence law; the formula only sets the comparison bar
-        with bank.assure(faction_stream_name(spec.group, spec.intent_kind)):
-            roll = bank.randint(1, 100)
+        # the cadence law; the formula only sets the comparison bar.
+        # iter-370: the draw rides `family_randint` — the fused
+        # assure+randint form (same word, same counter position, same
+        # nesting law — the urgency twin's own change)
+        roll = bank.family_randint(spec.stream, 1, 100)
         if roll > bar:
             continue
-        intent = _build_intent(spec, seq)
+        intent = spec.probe
         if spec.requires:
             failing = first_failing(
-                pack, projection, intent, list(spec.requires),
+                pack, projection, intent, spec.requires,
                 facts=facts, echoes=echoes, traits=traits, world=world,
             )
             if failing is not None:

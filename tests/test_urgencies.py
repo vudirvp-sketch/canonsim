@@ -317,3 +317,32 @@ def test_added_urgency_entry_never_shifts_checks(tmp_path: Path) -> None:
     grown_result = grown_sim.run_playscript(script_)
     assert (tmp_path / "grown.jsonl").read_bytes() == (tmp_path / "base.jsonl").read_bytes()
     assert grown_result.fingerprint == base_result.fingerprint
+
+
+def test_the_parse_memos_match_the_derived_forms() -> None:
+    """iter-370's static-resolution memo: every spec's pre-built STREAM
+    name and gate PROBE equal the per-call derivations they replaced
+    (the f-string name per rolling entry per beat; the fresh probe
+    IntentData per gated entry per stretch) — over every committed
+    pack with urgency entries. The parse-once products are
+    byte-identical by construction; this law pins the construction so
+    the memo can never drift from the derivation it serves."""
+    from core.urgencies import urgency_specs
+
+    for pack_dir in sorted((REPO / "content").iterdir()):
+        pack = load_pack(pack_dir)
+        specs = urgency_specs(pack)
+        entries = pack.rules.get("urgencies", {}).get("entries", ())
+        assert len(specs) == len(entries), pack_dir.name
+        for seq, (spec, entry) in enumerate(zip(specs, entries, strict=True)):
+            assert spec.stream == urgency_stream_name(
+                entry["npc"], entry["intent"]["kind"]
+            ), (pack_dir.name, seq)
+            probe = spec.probe
+            assert probe.id == f"urgency_{seq:04d}"
+            assert probe.kind == entry["intent"]["kind"]
+            assert probe.actor == entry["npc"]
+            assert probe.target == entry["intent"].get("target")
+            assert probe.fields == dict(entry["intent"].get("fields", {}))
+            assert probe.based_on_event_seq == 0
+            assert spec.requires == tuple(entry.get("requires", ()))

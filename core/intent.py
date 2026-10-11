@@ -814,7 +814,7 @@ def first_failing(
     pack: Pack,
     projection: Mapping[str, Mapping[str, Any]],
     intent: IntentData,
-    preconditions: list[Mapping[str, Any]],
+    preconditions: Sequence[Mapping[str, Any]],
     facts: Sequence[Any] = (),
     echoes: Sequence[Any] = (),
     traits: Sequence[Any] = (),

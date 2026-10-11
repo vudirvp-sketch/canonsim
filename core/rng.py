@@ -323,6 +323,42 @@ class RngBank:
         finally:
             self._active, self._assured = prev_active, prev_assured
 
+    def family_randint(self, name: str, lo: int, hi: int) -> int:
+        """One integer draw on a content-addressed FAMILY stream, scoped
+        by NAME instead of the assure/restore context (iter-370, the
+        beat-machinery static-resolution family). The per-beat family
+        walks (urgency/faction) drew through `with bank.assure(...):
+        bank.randint(...)` — one contextmanager round-trip per rolling
+        entry per beat, the measured 3.2 s of profiled h32 wall for
+        939K draw pairs whose scope body is a single call. This fused
+        form draws the SAME word from the SAME counter position and
+        keeps the SAME laws: the stream registers lazily under the
+        family prefixes, and the nesting law stays loud — a foreign
+        name, or a family name drawn while a NON-substantive scope is
+        assured, refuses exactly as `assure` would (the check is
+        `assure`'s own, executed inline). The `_active`/`_assured`
+        routing is untouched — the draw routes by the explicit name,
+        never by scope state, so the counters cannot diverge from the
+        assure form (the oracle law pins the equality: same words,
+        same counts, over crafted streams)."""
+        self._ensure(name)
+        if (
+            self._assured is not None
+            and self._assured != name
+            and not (
+                name.startswith(FAMILY_PREFIXES)
+                and self._assured == SUBSTANTIVE
+            )
+        ):
+            raise RngError(
+                f"cannot draw {name!r} inside an assured {self._assured!r} scope"
+            )
+        if hi < lo:
+            raise ValueError(f"empty range for randint: [{lo}, {hi}]")
+        word = _draw_word(self._keys[name], self._counts[name], self._memo, name)
+        self._counts[name] += 1
+        return lo + word % (hi - lo + 1)
+
     @contextmanager
     def audit(self, name: str = SUBSTANTIVE) -> Iterator[None]:
         """Assert zero draws on `name` inside the scope (DCSS ASSERT_stable)."""

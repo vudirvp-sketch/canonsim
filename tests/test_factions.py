@@ -649,3 +649,33 @@ def test_the_tale_renders_the_faction_line(tmp_path: Path) -> None:
     chronicle = render_chronicle(events, pack, 42)
     assert GROUP_NAME in chronicle
     assert "the guard room" in chronicle  # the anchor renders as {location}
+
+
+def test_the_parse_memos_match_the_derived_forms() -> None:
+    """iter-370's static-resolution memo, the faction twin: every
+    spec's pre-built STREAM name and gate PROBE equal the per-call
+    derivations they replaced — over every committed pack with faction
+    entries (most answer the empty spec set, the unarmed law; their
+    parse still holds the law's shape). The probe's actor is the GROUP
+    entity id (D-112's one-id law), the id sequence `faction_<seq>`."""
+    from core.factions import faction_specs
+    from core.rng import faction_stream_name
+
+    for pack_dir in sorted((REPO / "content").iterdir()):
+        pack = load_pack(pack_dir)
+        specs = faction_specs(pack)
+        config = pack.rules.get("factions") or {}
+        entries = config.get("entries", ())
+        assert len(specs) == len(entries), pack_dir.name
+        for seq, (spec, entry) in enumerate(zip(specs, entries, strict=True)):
+            assert spec.stream == faction_stream_name(
+                entry["group"], entry["intent"]["kind"]
+            ), (pack_dir.name, seq)
+            probe = spec.probe
+            assert probe.id == f"faction_{seq:04d}"
+            assert probe.kind == entry["intent"]["kind"]
+            assert probe.actor == entry["group"]  # D-112: the group IS the actor
+            assert probe.target == entry["intent"].get("target")
+            assert probe.fields == dict(entry["intent"].get("fields", {}))
+            assert probe.based_on_event_seq == 0
+            assert spec.requires == tuple(entry.get("requires", ()))

@@ -58,6 +58,20 @@ class _UrgencySpec:
     - `requires`: optional preconditions (the closed test set in
       `core/intent.py`). An attempt whose preconditions fail stays
       silent — the NPC tried, the world said no.
+    - `stream` / `probe` (iter-370, the static-resolution family): the
+      entry's stream NAME and gate PROBE, pre-built at parse time —
+      pure over immutable pack data, byte-identical by construction.
+      The per-beat walks re-derived both per call: the f-string name
+      per rolling entry per beat and a fresh probe IntentData per
+      gated entry per stretch (939K probe allocations on one h32
+      profile) — the parse-once form is the `urgency_specs` memo's
+      own class (E03), extended from the parse to its products. The
+      probe IS the walk's intent: same id (`urgency_<seq>`), same
+      fields, `based_on_event_seq=0` — the loop stamps the real seq at
+      enqueue time via `dataclasses.replace`, so sharing the frozen
+      object between the scan's gate evaluation and the walk's hit
+      path changes no byte (the sharing law: `IntentData` is frozen
+      and slots — no mutation path exists).
     """
 
     npc: str
@@ -66,23 +80,42 @@ class _UrgencySpec:
     intent_target: str | None
     intent_fields: Mapping[str, Any]
     requires: tuple[Mapping[str, Any], ...]
+    stream: str
+    probe: IntentData
 
 
 def _specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
     """Parse the pack's `urgencies.entries` (load order: pack-declared;
-    the runner respects it as given — INV-2 via sorted() at load)."""
+    the runner respects it as given — INV-2 via sorted() at load). The
+    parse also builds each entry's STREAM name and gate PROBE (the
+    static-resolution family, iter-370): both are pure functions of
+    the entry — `urgency:<npc>:<kind>` and `urgency_<seq>` — so the
+    parse-once form serves every later beat and stretch."""
     config = pack.rules.get("urgencies", {})
     entries = config.get("entries", ())
     specs: list[_UrgencySpec] = []
-    for entry in entries:
+    for seq, entry in enumerate(entries):
+        npc = entry["npc"]
+        intent_kind = entry["intent"]["kind"]
+        fields = dict(entry["intent"].get("fields", {}))
+        target = entry["intent"].get("target")
         specs.append(
             _UrgencySpec(
-                npc=entry["npc"],
+                npc=npc,
                 probability_per_beat=int(entry["probability_per_beat"]),
-                intent_kind=entry["intent"]["kind"],
-                intent_target=entry["intent"].get("target"),
-                intent_fields=dict(entry["intent"].get("fields", {})),
+                intent_kind=intent_kind,
+                intent_target=target,
+                intent_fields=fields,
                 requires=tuple(entry.get("requires", ())),
+                stream=urgency_stream_name(npc, intent_kind),
+                probe=IntentData(
+                    id=sequence_id(URGENCY_PREFIX, seq),
+                    kind=intent_kind,
+                    actor=npc,
+                    target=target,
+                    fields=fields,
+                    based_on_event_seq=0,
+                ),
             )
         )
     return tuple(specs)
@@ -95,7 +128,9 @@ def urgency_specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
     was the measured E03 waste (2.0 parses/beat, iter-328's
     instrument); the parse is pure over immutable pack data, so the
     memo is byte-identical by construction — the same specs, read
-    once instead of per beat."""
+    once instead of per beat. iter-370 extends the same class from
+    the parse to its PRODUCTS: the stream name and the gate probe
+    ride the memoized specs, never re-derived per beat or stretch."""
     return _specs(pack)
 
 
@@ -159,19 +194,15 @@ def urgency_scan(
     time-dependent fold)."""
     streams: dict[str, int] = {}
     rolls: dict[str, int] = {}
-    for seq, spec in enumerate(
-        _specs(pack) if specs is None else specs
-    ):
+    for spec in (_specs(pack) if specs is None else specs):
         if not urgency_rolls(spec, projection, locations):
             continue
-        name = urgency_stream_name(spec.npc, spec.intent_kind)
-        streams[name] = 1
+        streams[spec.stream] = 1
         if spec.probability_per_beat <= 0:
             continue  # rolls, never fires
         if spec.requires:
-            probe = _build_intent(spec, seq)
             if first_failing(
-                pack, projection, probe, list(spec.requires),
+                pack, projection, spec.probe, spec.requires,
                 facts=(), echoes=(), traits=(), world=world,
             ) is not None:
                 continue  # the gates are shut for the whole stretch
@@ -179,23 +210,10 @@ def urgency_scan(
         # stream walk the same words — the max probability's first hit
         # IS the minimum over the entries' first hits (the monotonicity
         # law, `first_d100_hit`'s contract)
-        if spec.probability_per_beat > rolls.get(name, 0):
-            rolls[name] = spec.probability_per_beat
+        if spec.probability_per_beat > rolls.get(spec.stream, 0):
+            rolls[spec.stream] = spec.probability_per_beat
     first = bank.first_d100_hit(rolls, limit)
     return streams, first
-
-
-def _build_intent(spec: _UrgencySpec, seq: int) -> IntentData:
-    """Materialize an IntentData from a pack spec; the loop stamps the
-    real `based_on_event_seq` at enqueue time."""
-    return IntentData(
-        id=sequence_id(URGENCY_PREFIX, seq),
-        kind=spec.intent_kind,
-        actor=spec.npc,
-        target=spec.intent_target,
-        fields=spec.intent_fields,
-        based_on_event_seq=0,
-    )
 
 
 def urgency_intents(
@@ -248,9 +266,7 @@ def urgency_intents(
     ONE shared exits read — an autonomous move along a derived edge
     passes the gate); None is the unarmed default."""
     out: list[IntentData] = []
-    for seq, spec in enumerate(
-        _specs(pack) if specs is None else specs
-    ):
+    for spec in (_specs(pack) if specs is None else specs):
         # the rolling filter — the shared predicate (iter-337): absent,
         # out-of-zone, and caught NPCs never roll
         if not urgency_rolls(spec, projection, locations):
@@ -263,15 +279,17 @@ def urgency_intents(
         # ladders at one added entry) nor another entry's rolls (the
         # single shared urgency stream was measured and refused — the
         # entries coupled by draw position; the per-entry streams buy
-        # permanent add-safety for pack urgency growth)
-        with bank.assure(urgency_stream_name(spec.npc, spec.intent_kind)):
-            roll = bank.randint(1, 100)
+        # permanent add-safety for pack urgency growth). iter-370: the
+        # draw rides `family_randint` — the fused assure+randint form
+        # (same word, same counter position, same nesting law; the
+        # with-scope machinery was the measured per-beat overhead)
+        roll = bank.family_randint(spec.stream, 1, 100)
         if roll > spec.probability_per_beat:
             continue
-        intent = _build_intent(spec, seq)
+        intent = spec.probe
         if spec.requires:
             failing = first_failing(
-                pack, projection, intent, list(spec.requires),
+                pack, projection, intent, spec.requires,
                 facts=facts, echoes=echoes, traits=traits, world=world,
             )
             if failing is not None:

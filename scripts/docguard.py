@@ -19,7 +19,11 @@ What is counted (the AGENTS §6 table, mechanically):
                "### iter-N" detailed-history headings anywhere (the
                three ledgars stay dead — "### bg-N" under Track B is
                that track's live one-liner form, allowed).
-  docs/DECISIONS.md  <= 30 entries — a table row (`| D-…`) or a
+  docs/DECISIONS.md  <= 35 entries (raised from 30 by D-252, the
+               owner's 2026-10-12 research call: the full-repo
+               citation scan found every standing row live-cited,
+               zero removable — the substance law §6.1 applied to the
+               entry dimension) — a table row (`| D-…`) or a
                post-table section (`### D-…`, the D-240..249 era's
                form) each count as 1 (compound-ID family rows count
                as 1); an R3+ row (a `(R3)`/`(R4)`/`(R5)` tag, AGENTS
@@ -164,7 +168,7 @@ WORKLOG_MAX_ENTRIES = 10
 WORKLOG_MIN_LINES = 3
 WORKLOG_MAX_LINES = 5
 LEDGER_MAX = 10
-DECISIONS_MAX = 30
+DECISIONS_MAX = 35
 
 _ENTRY_RE = re.compile(r"^iter-\d+ · \d{4}-\d{2}-\d{2} · ")
 _KI_RE = re.compile(r"^- KI#\d+")

@@ -1,54 +1,59 @@
-Iteration: iter-368 (`m6promotion` — ПРОДВИЖЕНИЕ R ИСПОЛНЕНО:
-приказ владельца «разрешаю promotion R» + D-250 M3 → THE M6
-STATION PACK v6.0, БАТАРЕЯ ПО УМОЛЧАНИЮ = ПРОДАКШН-ФОРМА: R у
-двери на профиле --gate 0.5|0.4 (D-250 M2, цена дословно) +
-NARRATE — L12-ШАБЛОН как поверхность прозы (ОТДЕЛЬНАЯ
-поверхность: каждый лог R-юнита через render/chronicle.py, тейл
-дважды с дайджестом — детерминированность L12-звена вживую;
-золотые юниты рядом) + G-якорь + RU + det; H только опционально
-(--stages h, никогда в дефолте), ru04/r04 убраны (ручка --gate
-заменила); ЦЕНЗА ЛОЖНЫХ РАЗРЕШЕНИЙ — ПОСТОЯННЫЙ СТРАЖ на каждой
-строке R/RU; ВАЛИДИРОВАНО ЖИВЬЁМ НА ПОЛНОМ КОРПУСЕ (b11541 +
-Laya + Qwen3-0.6B): все стадии зелёные, ПАРИТЕТ m4/m5 ТОЧНЫЙ (R
-full=6/14.3%, цензы G/RU идентичны), narrate 20/20
-детерминирован, det identical, resume зелёный, юниты 12/12.
-KI#119 ЗАКРЫТ ПРИБОРОМ: логи m5-прогона владельца несут НОЛЬ
-строк CUDA в обоих серверах — прогон шёл на CPU-бенде при
-cuda_gate.bands {} (молчание прибора); чтения «GPU ×6.3»
-(iter-358) и «FULL offload» (iter-361) СНЯТЫ как
-предположения-без-прибора, числа латентности стоят как
-wall-times без метки бенда; решения D-250 НЕ меняются (R-vs-H —
-like-for-like в одной полосе); прибор v6.0 ВЫВОДИТ бенд из логов
-и говорит громко в конце прогона. KI#120 ОТКРЫТ: референс
-никогда не коммитит закреплённые say-ответы (без emit_call —
-дверь отклоняет каждый, ParseError глотается; дрифт-отпечатки
-мерили «мир сдвинулся от premise», НЕ «разошёлся с золотой
-траекторией»; фикс — исключительный вызов владельца, меняет
-смысл колонки по всей серии). m5-зип ЗААРХИВИРОВАН В РЕПО
-(docs/station/archive/ — прямое указание владельца: исходник
-станции при каждом клоне; m6-зип рядом; Правило 9 уступило
-явной инструкции, записано) ·
+Iteration: iter-370 (`beatmach` — СТАТИЧНОЕ
+  РАЗРЕШЕНИЕ BEAT-МЕХАНИКИ, КЛАСС iter-362, НОЛЬ БАЙТ КАНОНА: на
+  постоянной директиве владельца «продолжай работы… я разрешаю»
+  открыта голова рейтинга iter-364 — семейство beat-механики
+  (skip_probes 33.1% + beat_rolls 16.2% + decay_walk 15.4% профильной
+  стены h32): (a) RngBank.family_randint — СЛИТЫЙ семейный дроу
+  (ассюр+рандинт в одном вызове: машинерия with-скоупа стоила 3.2 с
+  на 939K пар; закон вложенности инлайн, счётчики нетронуты);
+  (b) спеки urgency/faction несут ПРЕДВАРИТЕЛЬНО СОБРАННЫЕ stream +
+  gate-пробу (класс E03-мемо, расширенный с парса на его продукты:
+  939K аллокаций проб и f-строк имён в час; замороженная проба
+  ОБЩАЯ для скана и волка — луп штампует based_on_event_seq через
+  dataclasses.replace, пути мутации нет); (c) decay_axes — статичная
+  таблица осей (prop/rate/sign/ceil(360/rate)), обе decay-прогулки
+  читают её (переразбор конфига, isinstance-цепочка и per-pair
+  scale-подъём исчезли; луп мемоизирует на инициации); (d)
+  first_failing: preconditions честно Sequence (кортежи едут на
+  спеках, 939K list()-копий нет). ВЕРИФИЦИРОВАНО: md5 ЛОГА
+  h32 10y 07e924cb… ИДЕНТИЧЕН до/после (farstead 100y и h3-пара —
+  тоже), события равны всюду, канон-нейтральность HELD; СТЕНА
+  18.58 → 12.51 с (×1.48); профильные члены: urgency_scan 11.19→7.45
+  / urgency_intents 8.13→3.97 / decay_drafts 7.73→3.26 /
+  next_decay_tick 5.40→2.65 с; экспоненты плотности: decay
+  ×11.85→×8.1 / rolls ×8.94→×7.1 / twin ×10.7→×7.8; разреженный
+  конверт без регрессии (0.37→0.33 с); +4 закона-оракула
+  (family_randint == ассюр-форма; таблица decay == линейный разбор
+  по всем шести пакам; мемо-законы urgency/faction); D-253 (R3,
+  полный PCC) записан — 33/35 ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2621 passed + 28 failed + 1 skipped, ruff clean, docguard 1 line (the DECISIONS 31-entry count — D-250 the owner's explicit record, the collapse the owner's next call), topology clean, digest parses ·
-Date: 2026-10-11 ·
+2626 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure set IDENTICAL to the pristine pre-change baseline; +4 new laws) ·
+Date: 2026-10-12 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to iter-362/363/365/366's baseline, the
-  GOLDEN 3.12.14 suite fully green per iter-363) + 1 =
-  test_docguard::test_guard_clean_on_the_real_repo, red ON the
-  DECISIONS 31-entry line itself (D-250 the owner's explicit record;
-  clears on the owner's collapse call) — zero other new ·
-Scope: ZERO repo code (R0/R1 riders-only — the correction + the
-  decisions); riders: STATUS.md (the header + KI#118 + Next),
-  worklog.md (iter-367, iter-357 evicted), docs/TASKS.md (the
-  m5-station row corrected + the ledger, iter-357 evicted),
-  docs/DECISIONS.md (D-250, 31/30 — the owner's explicit
-  instruction), docs/iterations/iter-366-m5read-report.md
-  (corrected in place), docs/iterations/iter-367-m5correct-report.md
-  (new) — 6 changed/created.
-
+  3.12.15, byte-identical to the 362..369 baseline, the GOLDEN
+  3.12.14 suite fully green per iter-363; the failure set diffed
+  EQUAL against the pre-change baseline — zero new) + the
+  test_lab growth/labels law flaked ONCE on the first post-install
+  full-suite run (the KI#113 class; green in isolation, 3 full
+  test_lab retries green, the second full suite green — no new KI,
+  the standing record's class) ·
+Scope: ZERO canon (R3 core, D-253 the PCC row): core/rng.py
+  (+family_randint), core/urgencies.py + core/factions.py (the spec
+  stream/probe memos + the fused draws + the dead _build_intent
+  removal), core/states.py (decay_axes + both walks on the static
+  table + the dead _axis_deltas removal), core/loop.py (the
+  _decay_axes init memo through the three call sites),
+  core/intent.py (the Sequence annotation), tests/test_core.py +
+  tests/test_states.py + tests/test_urgencies.py +
+  tests/test_factions.py (+4 oracle laws), riders: docs/DECISIONS.md
+  (D-253, 33/35), STATUS.md (the header + KI#113 + Next), worklog.md
+  (iter-370, iter-360 evicted), docs/TASKS.md (the ledger, iter-360
+  evicted), docs/iterations/iter-370-beatmach-report.md (new) —
+  14 changed/created (7 code + 4 tests + 3 riders + the report; the
+  soft-cap breach noted — the iter-362 precedent's own count).
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -106,8 +111,7 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 ## Active KIs
 
 - KI#113 · the wall-split accounting law (test_lab) raised
-  AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04
-- KI#118 · the iter-366 claim «H0≡G byte-identical on 42/42 verdict docs» was never byte-checked (assembled from true 42/42 layers: pinned/inputs/gold/CLEAN, then wrongly elevated to a byte law); the owner's counter-check 37/42 reproduced exactly; the law withdrawn everywhere · opened 2026-10-11 · CLOSED iter-367 (the correction + the explicit-layer lesson, the report §C)
+  AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04; the growth/labels law (same file, same class) flaked once at iter-370's first post-install suite run — retries green, the class stands
 - KI#119 · the m5 station run's band: BOTH server logs carry ZERO CUDA lines (no ggml_cuda_init, no offload, n_threads=8 — the servers never initialized CUDA; the run was the CPU band while cuda_gate.bands honestly read {} — the instrument silent exactly where it should have shouted; the iter-358 «×6.3 GPU» and iter-361 «FULL offload» readings assumption-carried, withdrawn; the latency numbers stand as unlabelled wall-times; the D-250 decisions unaffected — R-vs-H was single-band like-for-like) · opened+CLOSED iter-368 (the v6.0 device gate DERIVES the band from the logs, records the negative verdict, the loud run-end verdict; the m6 station run settles the band by data)
 - KI#120 · the reference never commits the pinned say-replies: run_reference applies them without door.emit_call — the one-call-awaits-one-reply contract refuses each (ParseError swallowed by the tolerant except); the reference logs = setup + narrator beats only (the corpus's gold trajectory, e.g. s4's fire chain per iter-360's GREEN, never ran there); the drift fingerprints measure pristine-premise divergence, never gold-path divergence (the m4/m5 drift numbers stand as measured, their reading narrowed); the fix (emit_call per say-cycle) changes the drift column's meaning series-wide — the owner's exclusive call, never a silent fix · opened 2026-10-11 · OPEN
 
@@ -143,29 +147,37 @@ deleted earlier per the same law.)
 
 ## Next step
 
-**iter-368 DONE: m6promotion (the promotion R executed — THE M6
-  STATION PACK v6.0 delivered + validated live full-corpus
-  CPU-side: the default battery IS the production form — R at the
-  door on the --gate profile + narrate the L12 template rung (the
-  prose a SEPARATE surface, every tale rendered twice with
-  digests) + the false-allow census the standing watch + the band
-  instrument KI#119; H opt-in only; the m4/m5 parity reproduced
-  exactly; the m5 zip archived IN the repo per the owner's
-  instruction; KI#120 the reference finding opened — the owner's
-  call; the report iter-368-m6promotion-report.md).**
+**iter-370 DONE: beatmach (the beat-machinery static-resolution
+  family landed — the iter-362 class on the ranking's head: the
+  fused family draw + the spec stream/probe memos + the decay
+  static axis table, ZERO canon bytes (the h32 10y md5 identical;
+  farstead and the h3 pair too); the wall 18.58 → 12.51 s (×1.48),
+  the members urgency_scan 11.19→7.45 / urgency_intents 8.13→3.97 /
+  decay_drafts 7.73→3.26 / next_decay_tick 5.40→2.65 profiled s;
+  the growth exponents decay ×11.85→×8.1 / rolls ×8.94→×7.1; +4
+  oracle laws; D-253 the R3 PCC row — 33/35; the report
+  iter-370-beatmach-report.md).**
 Next: THE M6 STATION RUN rides the owner (double-click
   station_m6_probe.bat; re-run station_m6_setup.bat first and
   watch for the «CUDA runtime in place» line — the m5 run was the
   CPU band by its own logs, KI#119; send the m6_*.zip back with
   the band verdict from the console tail)
-+ THE OWNER'S CALLS — (1) the DECISIONS collapse form (the 31st
-  entry D-250 standing over the 30-cap at the owner's explicit
-  record instruction — accept it standing or call the collapse,
-  D-034/D-185); (2) KI#120's fix form (emit_call in the
++ THE OWNER'S CALLS — KI#120's fix form (emit_call in the
   reference's say-cycles — changes the drift column's meaning
   series-wide: fix it in a v6.1, keep the pristine-premise
-  reading documented, or retire the drift column)
-+ THE NEXT MEASURED-WALL ADMISSION — the ranking's head: the
+  reading documented, or retire the drift column); the DECISIONS
+  cap at 33/35 (D-252's ceiling — the next collapse call at the
+  breach, D-034/D-185)
++ THE NEXT MEASURED-WALL ADMISSION — the new head: first_failing's
+  gate reads inside urgency_scan (7.45 profiled s — the per-stretch
+  per-spec gate evaluations; the candidate form: the gate-answer
+  memo over the frozen state, its invalidation law named first),
+  then commit_knowledge_fold (4.41 s, ×6.7 — T3 leak laws the
+  falsifiers) and director_global_passes (4.99 s, ×2.5); the decay
+  landing index (the heap form — the (npc,axis)→next-fire walk
+  replacement, its staleness/veto laws) the bigger R3 behind them;
+  the beat machinery's residual is the honest per-pair dict reads
+  + arithmetic (population-linear per call, the exponents' floor)
 beat-machinery family (decay_walk ×11.76 / beat_rolls ×8.71 / the
 scans' gate pass `first_failing` 3.85 s residue), the iter-362
 transformation class (collective walks + O(1) indexes,

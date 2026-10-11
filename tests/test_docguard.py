@@ -261,15 +261,16 @@ def test_tasks_ledger_tail_and_history_headings(tmp_path: Path) -> None:
 
 
 def test_decisions_row_cap(tmp_path: Path) -> None:
+    """The entry cap at D-252's raised 35: 36 table rows trip it."""
     root = _mini(tmp_path)
     rows = "\n".join(
-        f"| D-{n:03d} | 2026-01-01 | crafted | why | so |" for n in range(3, 33)
+        f"| D-{n:03d} | 2026-01-01 | crafted | why | so |" for n in range(3, 37)
     )
     _rewrite(root, "docs/DECISIONS.md",
              "| D-002 | 2026-01-02 | the crafted second row | why | so |",
              "| D-002 | 2026-01-02 | the crafted second row | why | so |\n" + rows)
     assert any(
-        "32 entries (32 table rows + 0 post-table sections; cap 30" in v
+        "36 entries (36 table rows + 0 post-table sections; cap 35" in v
         for v in docguard.violations(root)
     )
 
@@ -278,11 +279,11 @@ def test_decisions_section_entries_count_and_pcc(tmp_path: Path) -> None:
     """The iter-310 lesson: a post-table `### D-` section IS an entry —
     the row-regex alone let the cap drift to 40 invisibly while the
     guard reported clean; an R3+ tag in the section form carries the
-    same PCC duty as a table row."""
+    same PCC duty as a table row. The fixture rides D-252's cap 35."""
     root = _mini(tmp_path)
     sections = "\n\n".join(
         f"### D-{n} — the crafted section entry\n\nThe crafted body."
-        for n in range(3, 34)
+        for n in range(3, 39)
     )
     _rewrite(
         root,
@@ -293,7 +294,7 @@ def test_decisions_section_entries_count_and_pcc(tmp_path: Path) -> None:
     )
     found = docguard.violations(root)
     assert any(
-        "33 entries (2 table rows + 31 post-table sections; cap 30" in v
+        "38 entries (2 table rows + 36 post-table sections; cap 35" in v
         for v in found
     )
     # an R3+ tag in the section form without the record — N017
@@ -318,7 +319,7 @@ def test_decisions_section_entries_count_and_pcc(tmp_path: Path) -> None:
     )
     found = docguard.violations(root)
     assert not any("PCC fields" in v for v in found)
-    assert any("33 entries" in v for v in found)
+    assert any("38 entries" in v for v in found)
 
 
 def test_docs_cap_and_the_allowlist(tmp_path: Path) -> None:

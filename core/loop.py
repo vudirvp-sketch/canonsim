@@ -142,7 +142,7 @@ from core.rng import (
     RngBank,
 )
 from core.scheduler import build, decls_from_rules
-from core.states import decay_drafts, next_decay_tick, rotation_resets
+from core.states import decay_axes, decay_drafts, next_decay_tick, rotation_resets
 from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.travel import edge_duration
@@ -324,6 +324,10 @@ class Simulator:
         # once instead of per beat).
         self._urgency_specs = urgency_specs(pack)
         self._faction_specs = faction_specs(pack)
+        # iter-370 (the static-resolution family): the decay walks'
+        # static axis table — the same parse-once memo class (pure
+        # over immutable pack data, byte-identical by construction)
+        self._decay_axes = decay_axes(pack)
         # scale-1-impl, P0.5-A (the E04 fix — iter-328's RED baseline):
         # the beat/macro derived-fold DEMAND — the windowed tests any
         # spec's `requires` gates on, read from the same memo. The
@@ -1545,7 +1549,7 @@ class Simulator:
         landing: int | None = None
         decay_tick = next_decay_tick(
             self._pack, self._projection, self._last_change,
-            beat_tick, locations=locations,
+            beat_tick, locations=locations, axes=self._decay_axes,
         )
         if decay_tick is not None:
             first_beat = self._next_beat_after(max(decay_tick, beat_tick) - 1)
@@ -1678,7 +1682,7 @@ class Simulator:
         # 1) states decay — every NPC whose status.* deltas are non-zero
         for draft in decay_drafts(
             self._pack, self._projection, self._last_change, beat_tick,
-            locations=locations,
+            locations=locations, axes=self._decay_axes,
         ):
             self._commit(replace(
                 draft, cause=self._writer.last_id,
@@ -1870,7 +1874,7 @@ class Simulator:
         # consumer rides the clock's own event)
         for drift in decay_drafts(
             self._pack, self._projection, self._last_change, tick,
-            locations=zones.warm,
+            locations=zones.warm, axes=self._decay_axes,
         ):
             self._commit(
                 replace(

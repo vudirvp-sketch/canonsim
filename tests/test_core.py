@@ -114,6 +114,43 @@ def test_assure_rejects_substantive_inside_urgency_scope() -> None:
                 pass
 
 
+def test_family_randint_is_the_assure_form() -> None:
+    """iter-370's fused family draw == the assure+randint form it
+    replaced, over crafted streams of both hot families: the same
+    words in the same order, the same per-stream counters, the
+    substantive fingerprint untouched (the draws route by name, never
+    by scope state). The nesting law survives the fusion: a family
+    name inside a FOREIGN assured scope refuses exactly as `assure`
+    would, and an unknown name stays loud — the check is assure's own
+    clause, executed inline."""
+    names = [urgency_stream_name(f"npc_{i}", "talk") for i in range(3)]
+    names += [f"faction:grp_{i}:demand" for i in range(2)]
+    fused = RngBank(7)
+    scoped = RngBank(7)
+    with fused.assure(SUBSTANTIVE), scoped.assure(SUBSTANTIVE):
+        for name in names:
+            for _ in range(5):
+                a = fused.family_randint(name, 1, 100)
+                with scoped.assure(name):
+                    b = scoped.randint(1, 100)
+                assert a == b, name
+            assert fused.count(name) == scoped.count(name) == 5
+        # the run scope's own draws interleave identically too
+        for _ in range(3):
+            assert fused.family_randint(SUBSTANTIVE, 1, 6) == scoped.randint(1, 6)
+    assert fused.count(SUBSTANTIVE) == scoped.count(SUBSTANTIVE) == 3
+    assert fused.fingerprint == scoped.fingerprint == 3
+    # the nesting law: a family name inside a foreign assured scope
+    # refuses (the fused form's inline clause == assure's own)
+    bank = RngBank(7)
+    with pytest.raises(RngError, match="cannot draw"):
+        with bank.assure(COSMETIC):
+            bank.family_randint(names[0], 1, 100)
+    # an unknown name stays loud (the lazy-registration tripwire)
+    with pytest.raises(RngError, match="unknown stream"):
+        RngBank(7).family_randint("nope:not_a_family", 1, 100)
+
+
 def test_urgency_streams_register_lazily_and_derive_per_seed() -> None:
     """The per-entry streams register on first use (content-derived,
     never hand-written); the derivation is the standard stream law

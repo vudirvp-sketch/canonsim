@@ -265,3 +265,44 @@ def test_packs_states_rates_lint(tmp_path: Path) -> None:
     (target / "rules.json").write_text(json.dumps(rules))
     with _pytest.raises(PackError, match="reset_on_rotation"):
         load_pack(target)
+
+
+def test_decay_axes_match_the_per_pair_resolution() -> None:
+    """iter-370's static table == the per-pair config resolution the
+    walks previously executed inline — over EVERY committed pack (the
+    linear oracle re-derived here, the pack kind-index law's own
+    form): the same axes in the pack's declaration order, the same
+    pre-built prop names, rates, signs, and the landing formula's own
+    `ceil(360/rate)` constant. A pack without a states block answers
+    the empty table (both walks' vacuity law)."""
+    from collections.abc import Mapping as _Mapping
+
+    from core.states import decay_axes
+
+    for pack_dir in sorted((REPO / "content").iterdir()):
+        pack = load_pack(pack_dir)
+        expected: list[tuple[str, str, int, int, int]] = []
+        for axis, config in pack.rules.get("states", {}).items():
+            if not isinstance(config, _Mapping) or axis == "notes":
+                continue
+            rate_key = (
+                "gain_per_360_ticks_awake" if axis == "fatigue"
+                else "decay_per_360_ticks"
+            )
+            rate = config.get(rate_key)
+            if rate is None:
+                continue
+            rate = int(rate)
+            if rate == 0:
+                continue
+            expected.append(
+                (axis, f"status.{axis}", rate,
+                 1 if axis == "fatigue" else -1, -(-360 // rate))
+            )
+        table = decay_axes(pack)
+        assert [
+            (a.axis, a.prop, a.rate, a.sign, a.elapsed_first) for a in table
+        ] == expected, pack_dir.name
+        # the memo form serves the walks identically: the standalone
+        # resolution IS the parse-once accessor's product
+        assert decay_axes(pack) == table
