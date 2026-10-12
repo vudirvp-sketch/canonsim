@@ -1,38 +1,29 @@
-Iteration: iter-371 (`refemit` — ЗАКРЫТИЕ KI#120 ФИКСОМ В
-  v6.1 + ПОДГОТОВКА СТАНЦИОННОГО ПРОГОНА, вызов владельца
-  «готовь прогон или ki закрывай» (2026-10-12)): THE M6
-  STATION PACK v6.1 — РЕФЕРЕНС КОММИТИТ ЗОЛОТУЮ ТРАЕКТОРИЮ:
-  emit_call в say-циклах run_reference (форма собственного
-  теста парсера репо, test_parser.py — баг с рождения m3
-  воспроизведён живьём ДО патча: все 5 золотых ответов s4
-  отклонены ParseError'ом «no parse call awaits a reply»,
-  лог = setup + narrator, цепочка огня ОТСУТСТВУЕТ — и ПОСЛЕ:
-  15 событий, take → move → drop_break → fire_started →
-  fire_spread → smoke_rising → location_burned_out → flee →
-  intent_rejected, честный отказ мира); DRIFT-КОЛОНКА —
-  НОВЫЙ СМЫСЛ «расхождение с ЗОЛОТОЙ траекторией» (числа
-  m4/m5 остаются в узком чтении «от нетронутой premise»,
-  оба задокументированы; закон пропуска probe-циклов не
-  тронут — руки и референс пропускают одни и те же циклы,
-  apples-to-apples; руки r/g/ru — m5 ПОСЛОВНО, цензус-
-  сравнимость не тронута). ВЕРИФИЦИРОВАНО ЖИВЬЁМ, полный
-  корпус (b11541 ubuntu + Laya + Qwen3-0.6B, md5-pinned
-  доктором): юниты 13/13 (+1 новый: референс коммитит
-  золото — цепочка s4 событие-за-событием, отпечатки
-  растут); смоук все стадии зелёный; ПОЛНЫЙ КОРПУС одним
-  чанком — все стадии done, ПАРИТЕТ m4/m5/v6.0 ТОЧНЫЙ (R
-  full=6/14.3%, G full=4/kind+=16/38.1%/refusals 11, RU
-  kind=6/blocked=3/fp=1/not_intent=1/target=1,
-  output_tokens=[0]×42, inventions 0/42, вход med 841);
-  референс: отпечатки растут с золотом (s4 6→7→8→13→14,
-  s7 до 24 — батч распада wait-720), леджеры несут пины,
-  gold:s4 = 13 строк прозы С КАСКАДОМ (r:s4 — 14);
-  drift-числа нового смысла: R 28/42, G 29/42 (CLEAN R 14,
-  G 13 — «ещё на золотой траектории»); narrate 20/20
-  детерминирован; det router/g identical; бенд-вердикт
-  громкий (CPU — сэндбокс без CUDA, честная строка);
-  v6.1-зип заархивирован в docs/station/archive/ (паттерн
-  m5/m6.0 — исходник станции при каждом клоне) ·
+Iteration: iter-374 (`m6read` — СТАНЦИОННЫЙ ПРОГОН M6
+  ПРОЧИТАН, вызов владельца «продолжай работы… я разрешаю»
+  (2026-10-12): промоушен-серия m4→m6 ЗАВЕРШЕНА — R
+  У ДВЕРИ, продакшн-форма на CUDA-бенде, каждый номер
+  m6_report переприведён из сырья (нуль расхождений,
+  построчные цензы 1:1 на 54 строках); БЕНД-ВОПРОС СЕРИИ
+  ЗАКРЫТ: маркеры -lv 4 в обоих логах (load_backend+
+  device_info+ggml_cuda_init, FULL offload 33/33 и 43/43) ПЛЮС
+  физика (Gemma prefill med 4015/max 4445 tok/s, decode med 68;
+  роутер ≥ 2800 tok/s эффективных внутри стены 0.546 с) —
+  латентности m4/m5/m6 ВСЕГДА были числами CUDA-бенда, KI#119
+  перечитан, показания GPU m4 ВОССТАНОВЛЕНЫ; DRIFT-КОЛОНКА
+  впервые читает ЗОЛОТУЮ траекторию на станции (референс
+  коммитит: s4 6→7→8→13→14, каскад огня 15 событий живьём;
+  R CLEAN 23/42 full 43.5% против G CLEAN 13/42 full 23.1%,
+  R сходит реже 19/42 против 29/42); ДОЗОР ЛЖЕРАЗРЕШЕНИЙ
+  вооружён: EN correct 15/FALSE 10/blocked 17 @0.5 (классы m5
+  точно), RU correct 4/FALSE 1 (ru_05 текстурный пин — константа
+  серии); det роутер identical 962b30a4… — ШЕСТОЙ
+  байт-идентичный R-прогон, g identical c2e33bd9… — второй;
+  narrate 20/20, проза r==gold 7/10 (s4 с каскадом идентична);
+  изобретения 0/42 (0/282 серия), output_tokens [0]×42;
+  INTERLUDE v6.2 (iter-372/373) записан в репо: KI#121 (% в
+  help= ронял argparse — один символ) + KI#122 (ложноотрицание
+  бенд-грепа на b11541 — фикс -lv 4), оба доказаны этим прогоном
+  живьём; строка m6-station ЗАКРЫТА ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
@@ -40,18 +31,15 @@ Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
 2626 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure set IDENTICAL to the pristine pre-change baseline taken this session — zero test_lab flakes on either run) ·
 Date: 2026-10-12 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..370 baseline, the GOLDEN
+  3.12.15, byte-identical to the 362..371 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the failure set diffed
   EQUAL against the pristine pre-change baseline taken this session
   BEFORE any edit — zero new, zero test_lab flakes on either run) ·
-Scope: ZERO repo code (R2 вне репо — пак v6.1; в репо — райдеры и
-  архив): docs/station/archive/canonsim_m6_station_pack_v6.1.zip
-  (новый, 76 897 б, md5 2370f9fcffe01af616d99a11f3c93442),
-  STATUS.md (заголовок + KI#120 CLOSED + KI#119 удалён по §5 +
-  Next), worklog.md (iter-371, iter-361 вытеснен), docs/TASKS.md
-  (строка m6-station → v6.1 + леджер, iter-361 вытеснен),
-  docs/iterations/iter-371-refemit-report.md (новый) — 5
-  изменённых/созданных.
+Scope: ZERO repo code (R0/R1 riders — чтение прогона + запись
+  interlude): docs/iterations/iter-374-m6read-report.md (новый),
+  STATUS.md (заголовок + KI#120 удалён по §5 + KI#121/122 + Next),
+  worklog.md (iter-374, iter-362 вытеснен), docs/TASKS.md (строка
+  m6-station → закрыта + леджер) — 4 изменённых/созданных.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -109,12 +97,14 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 ## Active KIs
 
 - KI#113 · the wall-split accounting law (test_lab) raised
-  AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04; the growth/labels law (same file, same class) flaked once at iter-370's first post-install suite run — retries green, the class stands; iter-371's first post-install run green (no flake)
-- KI#120 · the reference never committed the pinned say-replies (no emit_call — the door refused each, the tolerant except swallowed; the reference logs were setup + narrator only, the gold never ran, the drift measured pristine-premise divergence, never gold-path) · FIXED in the pack v6.1 per the owner's 2026-10-12 «готовь прогон или ki закрывай» call — emit_call in the say-cycles (the parser test's own form), the gold trajectory COMMITS (validated live full-corpus, the arms' parity exact, the drift column reads gold-path divergence, the m4/m5 reading preserved; +1 unit, 13/13) · opened 2026-10-11 · CLOSED iter-371
+  AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04; the growth/labels law (same file, same class) flaked once at iter-370's first post-install suite run — retries green, the class stands; iter-371's and iter-374's post-install runs green (no flake)
+- KI#121 · the --gate help string's literal % crashed argparse's %-expansion (ValueError: unsupported format character, the owner's live report on the v6.1 station attempt) · opened 2026-10-12 · FIXED in the pack v6.2 (58.8% → 58.8%%, one character; zero other bare % in any help=) — proven live by the completed m6 run · CLOSED iter-372/373 (the v6.2 pack sessions; recorded in-repo by iter-374 §0)
+- KI#122 · the band instrument's FALSE NEGATIVE: the v6.0/6.1 «no ggml_cuda_init = cpu» grep discriminated NOTHING on b11541 (device enumeration TRACE-gated, -ngl silent without a backend — the m6 run rode CUDA while the instrument said cpu; the m5 verdict the same class, the m4 GPU readings restored) · opened 2026-10-12 · FIXED in v6.2 (-lv 4 on every spawn, _band_from_log reads load_backend/device_info) — proven live by the m6 markers + physics · CLOSED iter-372/373 (recorded in-repo by iter-374 §0)
 
-(KI#119 deleted per AGENTS §5 — closed iter-368, more than two
-iterations ago; the mandatory cleanup this iteration. KI#117 and
-KI#114/115/116 deleted earlier per the same law.)
+(KI#120 deleted per AGENTS §5 — closed iter-371, more than two
+iterations ago; its live station verification arrived with the m6
+run and is recorded in iter-374's report §D and worklog. KI#119
+deleted at iter-371 per the same law.)
 
 ## FAQ / Pitfalls
 
@@ -144,22 +134,22 @@ KI#114/115/116 deleted earlier per the same law.)
 
 ## Next step
 
-**iter-371 DONE: refemit (KI#120 CLOSED by the v6.1 fix — the
-  reference's say-cycles honor the door's contract, the gold
-  trajectory COMMITS; the drift column reads gold-path divergence
-  with the m4/m5 numbers' narrowed reading preserved; validated
-  live full-corpus: the arms' parity exact, units 13/13, the
-  v6.1 zip archived in docs/station/archive/; the report
-  iter-371-refemit-report.md).**
-Next: THE M6 STATION RUN rides the owner — now on THE v6.1 PACK
-  (double-click station_m6_probe.bat from
-  canonsim_m6_station_pack_v6.1; re-run station_m6_setup.bat
-  first and watch for the «CUDA runtime in place» line — the m5
-  run was the CPU band by its own logs, KI#119's instrument now
-  says the verdict LOUD; send the m6_*.zip back with the band
-  verdict from the console tail; the drift column of THIS run
-  already reads the honest gold-path meaning — no re-run needed
-  after)
+**iter-374 DONE: m6read (the m6 station run READ — every number
+  re-derived from the raw records, zero divergences; the band
+  question closed by markers + physics, the series' latencies were
+  always CUDA-band; the drift column reads the gold trajectory live;
+  the false-allow watch armed with station numbers; the m6-station
+  row CLOSED — the promotion series' evidentiary basis complete;
+  the v6.2 interlude recorded in-repo; the report
+  iter-374-m6read-report.md).**
+Next: THE RUNTIME PROMOTION remains the owner's separate permission
+  (D-250) — its measured basis now COMPLETE (R at the door @0.5 the
+  conservative default, 0.4 the recall override with its measured
+  cost, the false-allow watch armed, the L12 narrate the prose
+  surface, the band instrument honest); owner-side housekeeping:
+  drop canonsim_m6_station_pack_v6.2.zip into docs/station/archive/
+  (the pattern's fourth instance — the pack is the owner's local
+  copy)
 + THE NEXT MEASURED-WALL ADMISSION — the standing head:
   first_failing's gate reads inside urgency_scan (7.45 profiled
   s — the per-stretch per-spec gate evaluations; the candidate
@@ -177,7 +167,8 @@ Next: THE M6 STATION RUN rides the owner — now on THE v6.1 PACK
   (D-252's ceiling — the next collapse call at the breach,
   D-034/D-185); decider-4b parked (outside the llama.cpp five);
   the pack-v5 instrument rows (the formalized band sweep
-  `cuda_gate.bands`) and the H-prose follow-ups (the 416-token
+  `cuda_gate.bands` — NOW EXERCISED LIVE by the m6 run, the row's
+  datum delivered) and the H-prose follow-ups (the 416-token
   max_tokens headroom question; the prose quality itself — the
   aesthetic call, one half of the H-promotion basis); behind
   them the standing owner calls in order — the replay-UI
