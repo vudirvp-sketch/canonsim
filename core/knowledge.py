@@ -72,6 +72,10 @@ __all__ = [
 ]
 
 _IMPORTANCE_RANK: Final[Mapping[str, int]] = {"low": 0, "medium": 1, "high": 2}
+_NO_HELD: Final[Mapping[str, set[str]]] = {}
+"""The unknown-listener stand-in (`saturated`): a knower who holds
+nothing fails every nonempty token subset — the late-born and the
+never-born answer identically, no birth initialization owed."""
 TOLD: Final = "told"  # channel for transfers (EVENT_SCHEMA §3)
 INFERRED: Final = "inferred"  # channel for expectation violations (P2d)
 SALIENCE_RULES: Final = ("importance_then_recency",)  # closed set, v0.1
@@ -100,11 +104,15 @@ class KnowledgeView:
     because event ticks never regress (the writer's own law,
     `core/log.py`'s tick-regression refusal) — a new row either
     extends the last tie-run of its rank or starts a new one.
-    The (teller, listener) NOVELTY COUNT (`_novelty`, maintained
-    with `add` over the inverted token-holder index) answers the
-    saturated teller in O(1): zero novel rows → no walk at all
-    (the whole-knowledge re-ranking per talk was the measured
-    cost, ×9.17 per-call growth)."""
+    The (teller, listener) SATURATED TELLER predicate (iter-375,
+    the commit-path measured wall): the teller holds no row whose
+    token the listener lacks — answered as a SUBSET check of the
+    teller's row-token set against the listener's held tokens
+    (knowledge is append-only, P7 — both halves monotone, so the
+    subset answers the old eager novelty count's zero-test EXACTLY
+    with zero maintenance; the count's O(knowers)-per-record
+    bookkeeping was the commit path's second-strongest density
+    growth, iter-364's ×6.74 — see `saturated`)."""
 
     def __init__(self) -> None:
         self._rows: dict[str, list[_Row]] = {}
@@ -115,31 +123,19 @@ class KnowledgeView:
         # P1b: per knower, per rank, the ordered tie-runs (the ranked
         # order without the sort — see the class docstring).
         self._runs: dict[str, dict[int, list[list[_Row]]]] = {}
-        # P1b: token -> the knowers holding it (the inverted holder
-        # index the novelty bookkeeping walks).
-        self._token_holders: dict[str, set[str]] = {}
-        # P1b: teller -> listener -> the count of the teller's rows
-        # whose token the listener does NOT hold (the O(1) saturated
-        # answer; maintained by `add`, born-correct for late knowers).
-        self._novelty: dict[str, dict[str, int]] = {}
-        # P1b: knower -> token -> how many rows of that token they
-        # hold (the decrement weights for the novelty count).
-        self._rows_by_token: dict[str, dict[str, int]] = {}
+        # iter-375: knower -> the set of tokens they hold rows of (the
+        # append-only law's monotone half — never shrinks). The
+        # saturated-teller predicate reads it as a subset check against
+        # the listener's held tokens (`saturated`); the old eager
+        # (teller, listener) novelty count — O(knowers) per record, its
+        # birth-init, bump, and decrement walks — is gone: its ONLY
+        # consumer was the zero test, and zero-count <=> the subset.
+        self._tokens: dict[str, set[str]] = {}
 
     def add(self, event: EventRecord) -> None:
         """Absorb one committed event's records (acquisition order)."""
         for record in event.knowledge:
             who = record.who
-            # P1b: a knower's FIRST row initializes their novelty
-            # column for every existing teller — the newborn holds
-            # nothing, so every teller's rows count as unheld (the
-            # incremental counts would otherwise miss pre-birth rows)
-            if who not in self._rows:
-                for teller, rows in self._rows.items():
-                    self._novelty.setdefault(teller, {})[who] = len(rows)
-            held_before = (
-                record.knows in self._sources.get(who, {})
-            )
             row = _Row(record=record, importance=event.importance)
             self._rows.setdefault(who, []).append(row)
             self._sources.setdefault(who, {}).setdefault(
@@ -157,31 +153,12 @@ class KnowledgeView:
                 runs[-1].append(row)
             else:
                 runs.append([row])
-            self._rows_by_token.setdefault(who, {}).setdefault(
-                record.knows, 0
-            )
-            self._rows_by_token[who][record.knows] += 1
-            # P1b: the row is novel to every knower who does not hold
-            # its token
-            for listener in self._rows:
-                if listener == who:
-                    continue
-                if record.knows not in self._sources.get(listener, {}):
-                    counts = self._novelty.setdefault(who, {})
-                    counts[listener] = counts.get(listener, 0) + 1
-            # P1b: `who` newly holds the token — every teller's rows
-            # of it leave their novelty counts for `who`
-            if not held_before:
-                for teller in self._token_holders.get(record.knows, ()):
-                    if teller == who:
-                        continue
-                    weight = self._rows_by_token.get(teller, {}).get(
-                        record.knows, 0
-                    )
-                    if weight:
-                        counts = self._novelty.setdefault(teller, {})
-                        counts[who] = counts.get(who, 0) - weight
-            self._token_holders.setdefault(record.knows, set()).add(who)
+            # iter-375: the token set — the saturated predicate's
+            # monotone half (a late-born knower needs no birth init:
+            # their empty held-token set fails every nonempty subset
+            # by construction, exactly the old count's born-correct
+            # full-rows initialization)
+            self._tokens.setdefault(who, set()).add(record.knows)
 
     @classmethod
     def from_events(cls, events: Sequence[EventRecord]) -> KnowledgeView:
@@ -194,6 +171,24 @@ class KnowledgeView:
     def knowers(self) -> tuple[str, ...]:
         """Who holds anything, in first-acquisition order."""
         return tuple(self._rows)
+
+    def saturated(self, teller: str, listener: str) -> bool:
+        """Whether the teller holds NO row whose token the listener
+        lacks (the saturated teller — nothing new to share, T3). The
+        append-only law (P7) makes both halves monotone — the teller's
+        row-token set never shrinks, the listener's held tokens never
+        shrink — so the SUBSET predicate answers the old eager novelty
+        count's zero-test EXACTLY (every row's token held <=> the
+        token set is a subset of the listener's held tokens), re-read
+        fresh here, never maintained. The old count's per-record
+        O(knowers) bookkeeping (birth init + bump + decrement walks,
+        iter-364's second-strongest density growth ×6.74) is gone;
+        the check pays only its readers — C-speed, short-circuiting
+        on the first unheld token in the novel case."""
+        tokens = self._tokens.get(teller)
+        if not tokens:
+            return True  # no rows at all — the blind teller (T3)
+        return tokens <= self._sources.get(listener, _NO_HELD).keys()
 
     def records_of(self, who: str) -> tuple[LoggedKnowledgeRecord, ...]:
         """Everything `who` knows, in acquisition order (their memory)."""
@@ -386,13 +381,14 @@ def _novel_facts(
     """The teller's salient facts the listener does not already hold,
     best first, at most `limit` (dedup by token — a listener never re-learns).
 
-    P1b: the O(1) saturated answer — the (teller, listener) novelty
-    count says ZERO unheld rows, so the walk (a subset of the rows —
-    it additionally excludes one source) can pick nothing; sound
-    because `holds` is monotone (knowledge is append-only, the
-    forgetting vocabulary absent by P7's law) and the count is
-    maintained on the same `add` funnel."""
-    if view._novelty.get(teller, {}).get(listener, 0) == 0:
+    P1b's saturated answer, iter-375's form: the teller's token set
+    being a subset of the listener's held tokens says ZERO unheld
+    rows, so the walk (a subset of the rows — it additionally
+    excludes one source) can pick nothing; sound because `holds` is
+    monotone (knowledge is append-only, the forgetting vocabulary
+    absent by P7's law) and both halves of the subset are fed by the
+    same `add` funnel."""
+    if view.saturated(teller, listener):
         return []
     picks: list[LoggedKnowledgeRecord] = []
     taken: set[str] = set()

@@ -67,7 +67,14 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
 from core.ids import sequence_id
-from core.intent import IntentData, first_failing
+from core.intent import (
+    WINDOWED_TESTS,
+    IntentData,
+    ScanGateMemo,
+    first_failing,
+    pair_values,
+    precondition_read_pairs,
+)
 from core.rng import faction_stream_name
 
 if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
@@ -104,6 +111,12 @@ class _FactionSpec:
       optional precondition gates (the closed test set, the urgency
       family's own discipline: a hit that fails the gates stays
       silent).
+    - `pairs` (iter-375, the gate-answer memo): the DECLARED READ SET
+      of the entry's `requires` (`precondition_read_pairs` — the occ-1
+      read-pairs twin, sorted at parse), or None when the entry is
+      ungated OR any require reads a time-dependent fold (the windowed
+      family — the urgency twin's own law; the scans stay exact under
+      any caller: never memoized, always evaluated fresh).
     """
 
     group: str
@@ -118,6 +131,7 @@ class _FactionSpec:
     members: tuple[str, ...]
     stream: str
     probe: IntentData
+    pairs: tuple[tuple[str, str], ...] | None
 
 
 def _specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
@@ -143,6 +157,15 @@ def _specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
         intent_kind = entry["intent"]["kind"]
         target = entry["intent"].get("target")
         fields = dict(entry["intent"].get("fields", {}))
+        requires = tuple(entry.get("requires", ()))
+        probe = IntentData(
+            id=sequence_id(FACTION_PREFIX, seq),
+            kind=intent_kind,
+            actor=entry["group"],  # D-112: the group IS the actor
+            target=target,
+            fields=fields,
+            based_on_event_seq=0,
+        )
         specs.append(
             _FactionSpec(
                 group=entry["group"],
@@ -153,16 +176,17 @@ def _specs(pack: "Pack") -> tuple[_FactionSpec, ...]:
                 intent_kind=intent_kind,
                 intent_target=target,
                 intent_fields=fields,
-                requires=tuple(entry.get("requires", ())),
+                requires=requires,
                 members=tuple(group.get("members", ())),
                 stream=faction_stream_name(entry["group"], intent_kind),
-                probe=IntentData(
-                    id=sequence_id(FACTION_PREFIX, seq),
-                    kind=intent_kind,
-                    actor=entry["group"],  # D-112: the group IS the actor
-                    target=target,
-                    fields=fields,
-                    based_on_event_seq=0,
+                probe=probe,
+                pairs=(
+                    tuple(sorted(precondition_read_pairs(pack, probe, requires)))
+                    if requires
+                    and not any(
+                        cond.get("test") in WINDOWED_TESTS for cond in requires
+                    )
+                    else None
                 ),
             )
         )
@@ -268,6 +292,7 @@ def faction_scan(
     world: "WorldModel | None" = None,
     specs: "Sequence[_FactionSpec] | None" = None,
     limit: int = 0,
+    gate_memo: ScanGateMemo | None = None,
 ) -> tuple[dict[str, int], int | None]:
     """H9's rolling-set + first-hit scan, the faction twin
     (iter-337 — `core.urgencies.urgency_scan` owns the family's law;
@@ -283,7 +308,13 @@ def faction_scan(
     consumes its roll); ``first_fire`` is the smallest beat offset in
     ``[1, limit]`` at which the walk would enqueue a goal (a hit
     passing the ``requires`` gates), or ``None``; ``1`` answers a
-    bar-100 entry with open gates exactly as the urgency twin."""
+    bar-100 entry with open gates exactly as the urgency twin.
+
+    `gate_memo` (iter-375): the scan-family gate-answer memo — the
+    urgency twin's own law (the key comparison IS the invalidation;
+    `ScanGateMemo`). None (the default) keeps the fresh evaluation."""
+    if gate_memo is not None:
+        gate_memo.bind(pack, world)
     streams: dict[str, int] = {}
     rolls: dict[str, int] = {}
     for spec in (_specs(pack) if specs is None else specs):
@@ -294,10 +325,21 @@ def faction_scan(
         if bar <= 0:
             continue  # rolls, never fires (the cadence law)
         if spec.requires:
-            if first_failing(
-                pack, projection, spec.probe, spec.requires,
-                facts=(), echoes=(), traits=(), world=world,
-            ) is not None:
+            if gate_memo is not None and spec.pairs is not None:
+                key = pair_values(projection, spec.pairs)
+                open_gate = gate_memo.lookup(spec.probe.id, key)
+                if open_gate is None:
+                    open_gate = first_failing(
+                        pack, projection, spec.probe, spec.requires,
+                        facts=(), echoes=(), traits=(), world=world,
+                    ) is None
+                    gate_memo.store(spec.probe.id, key, open_gate)
+            else:
+                open_gate = first_failing(
+                    pack, projection, spec.probe, spec.requires,
+                    facts=(), echoes=(), traits=(), world=world,
+                ) is None
+            if not open_gate:
                 continue  # the gates are shut for the whole stretch
         # the duplicate-(group, kind) fold (iter-362): the max bar's
         # first hit IS the minimum over the entries' first hits on the

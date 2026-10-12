@@ -62,6 +62,7 @@ __all__ = [
     "REJECTION_EVENT",
     "Resolution",
     "RunnerError",
+    "ScanGateMemo",
     "STATIC_TESTS",
     "TEXTURE_FIELD",
     "TEXTURE_SCOPES",
@@ -77,6 +78,7 @@ __all__ = [
     "needs_target",
     "occ_breaking_cause",
     "pack_importance",
+    "pair_values",
     "REJECTION_BOUNDARY_BLOCK",
     "REJECTION_EVENT",
     "requires_for",
@@ -808,6 +810,86 @@ def precondition_read_pairs(
         if handler is not None:
             pairs.update(handler(ctx, cond))
     return frozenset(pairs)
+
+
+# -- the scan-family gate memo (iter-375, the measured-wall head) ------------
+
+
+_NO_PROPS: Final[Mapping[str, Any]] = {}
+"""The absent-entity stand-in for a read pair (an entity or prop that
+exists not reads as None; a later write that creates it changes the
+key, so absence is honestly cacheable — the key comparison sees it)."""
+
+
+def pair_values(
+    projection: Mapping[str, Mapping[str, Any]],
+    pairs: Sequence[tuple[str, str]],
+) -> tuple[Any, ...]:
+    """The memo key: the live projection values at the declared read
+    pairs, in the pairs' own (parse-sorted) order. Pure reads, no
+    allocation beyond the tuple; the values are compared with ==
+    (never hashed — the probe id is the dict key), so list-valued
+    props compare element-wise exactly as `first_failing` would read
+    them."""
+    return tuple(
+        projection.get(entity, _NO_PROPS).get(prop)
+        for entity, prop in pairs
+    )
+
+
+class ScanGateMemo:
+    """The scan-family gate-answer memo (iter-375): over ONE frozen
+    (pack, world) pair, a gate verdict is a function of the
+    projection's values at the spec's declared read pairs ALONE — the
+    occ-1 index law this module owns (projections agreeing on the
+    declared pairs answer `first_failing` identically; the
+    twin-agreement property law falsifies it directly,
+    tests/test_occidx.py). The scan re-reads the pairs every call, so
+    THE KEY COMPARISON IS THE INVALIDATION — no version counters, no
+    commit hooks, no ordering assumptions: a verdict can only move
+    when a read-pair value moved, and the key sees exactly that.
+
+    The (pack, world) identity is stamped at the table's birth and
+    re-checked per scan (`bind` flushes on a different object — both
+    halves are run-frozen by the loop's own laws: the pack loads once,
+    the world is born once at `open`/resume before any beat and never
+    mutated), so the memo is misuse-proof for any future caller
+    pattern. The windowed family never enters: the specs parse their
+    `pairs` as None when a require reads a time-dependent fold (the
+    skip's fold-demand fence made that law at the loop level;
+    `ScanGateMemo` makes it at the family level — a gated pack keeps
+    the exact per-stretch evaluation even under a memo-passing
+    caller)."""
+
+    __slots__ = ("_pack", "_world", "_answers")
+
+    def __init__(self, pack: "Pack", world: "WorldModel | None") -> None:
+        self._pack = pack
+        self._world = world
+        self._answers: dict[str, tuple[tuple[Any, ...], bool]] = {}
+
+    def bind(self, pack: "Pack", world: "WorldModel | None") -> None:
+        """Re-stamp the frozen identity, flushing the table iff either
+        half moved (the first bind over a world born at `open()` is a
+        no-op flush of an empty table; a later flush can only come
+        from a caller the loop never makes — loud-safe, never stale)."""
+        if pack is not self._pack or world is not self._world:
+            self._pack = pack
+            self._world = world
+            self._answers = {}
+
+    def lookup(self, probe_id: str, key: tuple[Any, ...]) -> bool | None:
+        """The memoized verdict for this probe under this key, or None
+        when the key (or the probe) has never been answered."""
+        answer = self._answers.get(probe_id)
+        if answer is None or answer[0] != key:
+            return None
+        return answer[1]
+
+    def store(self, probe_id: str, key: tuple[Any, ...], answer: bool) -> None:
+        """Record the verdict under its key (one live entry per probe:
+        the key is unique within one (pack, world) domain)."""
+        self._answers[probe_id] = (key, answer)
 
 
 def first_failing(

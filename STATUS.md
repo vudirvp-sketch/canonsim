@@ -1,34 +1,26 @@
-Iteration: iter-374 (`m6read` — СТАНЦИОННЫЙ ПРОГОН M6
-  ПРОЧИТАН, вызов владельца «продолжай работы… я разрешаю»
-  (2026-10-12): промоушен-серия m4→m6 ЗАВЕРШЕНА — R
-  У ДВЕРИ, продакшн-форма на CUDA-бенде, каждый номер
-  m6_report переприведён из сырья (нуль расхождений,
-  построчные цензы 1:1 на 54 строках); БЕНД-ВОПРОС СЕРИИ
-  ЗАКРЫТ: маркеры -lv 4 в обоих логах (load_backend+
-  device_info+ggml_cuda_init, FULL offload 33/33 и 43/43) ПЛЮС
-  физика (Gemma prefill med 4015/max 4445 tok/s, decode med 68;
-  роутер ≥ 2800 tok/s эффективных внутри стены 0.546 с) —
-  латентности m4/m5/m6 ВСЕГДА были числами CUDA-бенда, KI#119
-  перечитан, показания GPU m4 ВОССТАНОВЛЕНЫ; DRIFT-КОЛОНКА
-  впервые читает ЗОЛОТУЮ траекторию на станции (референс
-  коммитит: s4 6→7→8→13→14, каскад огня 15 событий живьём;
-  R CLEAN 23/42 full 43.5% против G CLEAN 13/42 full 23.1%,
-  R сходит реже 19/42 против 29/42); ДОЗОР ЛЖЕРАЗРЕШЕНИЙ
-  вооружён: EN correct 15/FALSE 10/blocked 17 @0.5 (классы m5
-  точно), RU correct 4/FALSE 1 (ru_05 текстурный пин — константа
-  серии); det роутер identical 962b30a4… — ШЕСТОЙ
-  байт-идентичный R-прогон, g identical c2e33bd9… — второй;
-  narrate 20/20, проза r==gold 7/10 (s4 с каскадом идентична);
-  изобретения 0/42 (0/282 серия), output_tokens [0]×42;
-  INTERLUDE v6.2 (iter-372/373) записан в репо: KI#121 (% в
-  help= ронял argparse — один символ) + KI#122 (ложноотрицание
-  бенд-грепа на b11541 — фикс -lv 4), оба доказаны этим прогоном
-  живьём; строка m6-station ЗАКРЫТА ·
+Iteration: iter-375 (`scangate` — ПЕРВЫЕ ДВЕ ГОЛОВЫ
+  measured-wall ПОРЯДКА ОТКРЫТЫ по постоянной директиве
+  владельца (2026-10-12): (1) МЕМО ГЕЙТОВ СКАНА — ScanGateMemo
+  в core/intent.py, ключ чтений ЕСТЬ инвалидация (закон occ-1;
+  оконное семейство никогда не мемоизируется — fence стал
+  законом семейства; идентичность (pack, world) смывает
+  таблицу): first_failing в сканах 939K→41K вызовов, hit
+  rate 1.0 (508 ре-эвалов на 10y-логе, зонд вне репо);
+  (2) ЛЕНИВАЯ НАСЫЩЕННОСТЬ — eager-счётчик новизны
+  (teller, listener) (O(знающих) на запись, K×K) УДАЛЁН,
+  zero-тест стал предикатом подмножества токен-множеств
+  (saturated; P7-монотонность — точно, обслуживания ноль):
+  per-call knowledge.add теперь ПОПУЛЯЦИОННО-ПЛОСКИЙ
+  5.0→5.8 мкс h3→h32, datum iter-364 ×6.74 СПИСАН.
+  НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… / farstead
+  100y 4e4f4cf2… — все идентичны до/после; стена h32 13.01
+  →11.14/11.26 с ×1.16; commit_knowledge_fold 4.48→0.25 с
+  профильно ×17.7 ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2626 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure set IDENTICAL to the pristine pre-change baseline taken this session — zero test_lab flakes on either run) ·
+2629 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure set IDENTICAL to the pristine pre-change baseline taken this session BEFORE any edit — zero test_lab flakes on three full runs) ·
 Date: 2026-10-12 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..371 baseline, the GOLDEN
@@ -134,44 +126,39 @@ deleted at iter-371 per the same law.)
 
 ## Next step
 
-**iter-374 DONE: m6read (the m6 station run READ — every number
-  re-derived from the raw records, zero divergences; the band
-  question closed by markers + physics, the series' latencies were
-  always CUDA-band; the drift column reads the gold trajectory live;
-  the false-allow watch armed with station numbers; the m6-station
-  row CLOSED — the promotion series' evidentiary basis complete;
-  the v6.2 interlude recorded in-repo; the report
-  iter-374-m6read-report.md).**
-Next: THE RUNTIME PROMOTION remains the owner's separate permission
-  (D-250) — its measured basis now COMPLETE (R at the door @0.5 the
-  conservative default, 0.4 the recall override with its measured
-  cost, the false-allow watch armed, the L12 narrate the prose
-  surface, the band instrument honest); owner-side housekeeping:
-  drop canonsim_m6_station_pack_v6.2.zip into docs/station/archive/
-  (the pattern's fourth instance — the pack is the owner's local
-  copy)
-+ THE NEXT MEASURED-WALL ADMISSION — the standing head:
-  first_failing's gate reads inside urgency_scan (7.45 profiled
-  s — the per-stretch per-spec gate evaluations; the candidate
-  form: the gate-answer memo over the frozen state, its
-  invalidation law named first), then commit_knowledge_fold
-  (4.41 s, ×6.7 — T3 leak laws the falsifiers) and
-  director_global_passes (4.99 s, ×2.5); the decay landing index
-  (the heap form — the (npc,axis)→next-fire walk replacement,
-  its staleness/veto laws) the bigger R3 behind them; the beat
-  machinery's residual is the honest per-pair dict reads +
-  arithmetic (population-linear per call, the exponents' floor);
-  the iter-362 transformation class (collective walks + O(1)
-  indexes, byte-identity + oracle laws) the proven form
-+ THE OWNER'S STANDING CALLS — the DECISIONS cap at 33/35
-  (D-252's ceiling — the next collapse call at the breach,
-  D-034/D-185); decider-4b parked (outside the llama.cpp five);
-  the pack-v5 instrument rows (the formalized band sweep
-  `cuda_gate.bands` — NOW EXERCISED LIVE by the m6 run, the row's
-  datum delivered) and the H-prose follow-ups (the 416-token
-  max_tokens headroom question; the prose quality itself — the
-  aesthetic call, one half of the H-promotion basis); behind
-  them the standing owner calls in order — the replay-UI
+**iter-375 DONE: scangate (the measured-wall heads #1+#2 — the
+  scan-family gate-answer memo + the lazy saturated-teller
+  predicate, D-254 R3; zero canon bytes: h32/h3/farstead-100y
+  md5 identical; the wall 13.01→11.14 s ×1.16;
+  commit_knowledge_fold 4.48→0.25 s profiled, per-call
+  knowledge.add population-FLAT — the ×6.74 datum retired;
+  first_failing-in-scans 939K→41K calls, hit rate 1.0; +3
+  oracle laws; the report iter-375-scangate-report.md).**
+Next: THE STANDING ORDER'S THIRD HEAD — director_global_passes
+  (5.06 profiled s; per-call entropy 2.0→2.3 µs POPULATION-FLAT,
+  the cum growth is call-count — the candidate form: the
+  suspicion/threat INDEX maintained on the commit path, the
+  iter-362 «O(1) id→kind» class; KI#16's projection-scan law the
+  design constraint), then the decay landing index (the heap
+  form — the (npc,axis)→next-fire walk replacement, its
+  staleness/veto laws) and the rolling-filter memo (the
+  locations-keyed twin of the scan gate memo — urgency_rolls
+  1.70 profiled s / 2.6M calls)
++ THE RUNTIME PROMOTION remains the owner's separate permission
+  (D-250) — its measured basis COMPLETE (unchanged by this
+  iteration: the memo touched zero door/battery paths); owner-side
+  housekeeping: drop canonsim_m6_station_pack_v6.2.zip into
+  docs/station/archive/ (the pattern's fourth instance — the pack
+  is the owner's local copy)
++ THE OWNER'S STANDING CALLS — the DECISIONS cap at 34/35
+  (D-252's ceiling — one row of headroom, the next collapse call
+  at the breach, D-034/D-185); decider-4b parked (outside the
+  llama.cpp five); the pack-v5 instrument rows (the formalized
+  band sweep `cuda_gate.bands` — NOW EXERCISED LIVE by the m6 run,
+  the row's datum delivered) and the H-prose follow-ups (the
+  416-token max_tokens headroom question; the prose quality
+  itself — the aesthetic call, one half of the H-promotion basis);
+  behind them the standing owner calls in order — the replay-UI
   NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
   continuations, `lab-composite-1`.
 

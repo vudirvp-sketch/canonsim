@@ -346,3 +346,113 @@ def test_the_parse_memos_match_the_derived_forms() -> None:
             assert probe.fields == dict(entry["intent"].get("fields", {}))
             assert probe.based_on_event_seq == 0
             assert spec.requires == tuple(entry.get("requires", ()))
+
+
+def _moved_value(current: Any) -> Any:
+    """A type-preserving mutation for the memo battery: same type as
+    the live value, never equal to it (the key must see the move)."""
+    if isinstance(current, str):
+        return f"{current}_moved"
+    if isinstance(current, bool):
+        return not current
+    if isinstance(current, int):
+        return current + 1000
+    if isinstance(current, list):
+        return [*current, "moved"]
+    return "moved"
+
+
+def test_the_scan_gate_memo_is_the_fresh_evaluation() -> None:
+    """iter-375's gate-answer memo law: over one frozen (pack, world)
+    pair, the memoized scan answers EXACTLY the fresh evaluation —
+    the key (the live values at the spec's declared read pairs) IS
+    the invalidation (the occ-1 index law: a gate verdict is a
+    function of the declared pairs' values, the twin-agreement
+    property's own foundation). Mutations OUTSIDE every declared pair
+    never move the memoized answers; mutations INSIDE a declared pair
+    always re-evaluate. The windowed family never memoizes (pairs is
+    None — the skip's fold-demand fence, made law at the family
+    level); a different world object flushes the table (the identity
+    law)."""
+    from core.fold import initial_projection
+    from core.intent import (
+        WINDOWED_TESTS,
+        ScanGateMemo,
+        precondition_read_pairs,
+    )
+    from core.urgencies import urgency_scan, urgency_specs
+
+    farstead = load_pack(REPO / "content" / "farstead_pack")
+    province = load_pack(REPO / "content" / "province_pack")
+
+    # (a) the parse law, over the committed packs: the declared read
+    # set rides every non-windowed gated spec (sorted — the key's
+    # order is a parse constant); the windowed family never memoizes
+    for pack in (farstead, province):
+        specs = urgency_specs(pack)
+        assert any(spec.pairs is not None for spec in specs), (
+            pack.name_version,
+        )
+        for spec in specs:
+            windowed = any(
+                cond.get("test") in WINDOWED_TESTS for cond in spec.requires
+            )
+            if not spec.requires or windowed:
+                assert spec.pairs is None, (pack.name_version, spec.probe.id)
+            else:
+                assert spec.pairs == tuple(sorted(precondition_read_pairs(
+                    pack, spec.probe, spec.requires,
+                ))), (pack.name_version, spec.probe.id)
+
+    # (b) the memo == fresh law over the mutation battery (farstead:
+    # every gated entry non-windowed — the h32 density family's parent)
+    specs = urgency_specs(farstead)
+    gated = [spec for spec in specs if spec.pairs is not None]
+    assert gated
+    read_pairs = {pair for spec in gated for pair in spec.pairs}
+    bank = RngBank(7)
+    memo = ScanGateMemo(farstead, None)
+
+    def fresh(projection: Any) -> Any:
+        return urgency_scan(farstead, projection, bank, specs=specs, limit=400)
+
+    def memoized(projection: Any) -> Any:
+        return urgency_scan(
+            farstead, projection, bank, specs=specs, limit=400,
+            gate_memo=memo,
+        )
+
+    base = initial_projection(farstead.entities)
+
+    def copy_of(projection: Any) -> Any:
+        return {entity: dict(props) for entity, props in projection.items()}
+
+    assert memoized(base) == fresh(base)  # the cold table answers fresh
+    assert memoized(base) == fresh(base)  # the warm table serves the same
+    assert memo._answers  # the battery filled the table
+
+    # the twin-agreement class: pairs NO gated spec declares — the
+    # memoized answers cannot move (the verdict never reads them)
+    outside = sorted(
+        (entity, prop)
+        for entity, props in base.items()
+        for prop in props
+        if (entity, prop) not in read_pairs
+    )
+    assert outside  # the battery is real
+    for entity, prop in outside[:5]:
+        twin = copy_of(base)
+        twin[entity][prop] = _moved_value(twin[entity][prop])
+        assert memoized(twin) == fresh(twin), (entity, prop)
+
+    # the inside mutations: every declared pair the battery reaches
+    # moves — the memo re-evaluates exactly when the key moved
+    for entity, prop in sorted(read_pairs)[:8]:
+        moved = copy_of(base)
+        moved[entity][prop] = _moved_value(moved[entity][prop])
+        assert memoized(moved) == fresh(moved), (entity, prop)
+
+    # the identity law: a different world object flushes the table
+    memo.bind(farstead, object())  # identity only — never dereferenced
+    assert not memo._answers
+    assert memoized(base) == fresh(base)  # the rebound table answers fresh

@@ -119,6 +119,7 @@ from core.intent import (
     TRAIT_TEST,
     IntentData,
     RunnerError,
+    ScanGateMemo,
     action_duration,
     first_failing,
     occ_breaking_cause,
@@ -468,6 +469,13 @@ class Simulator:
             and not self._fold_demand
         )
         self._skip_stats = {"stretches": 0, "skipped": 0, "landings": 0}
+        # iter-375 (the measured-wall head): the scan-family gate-answer
+        # memo — the skip's per-stretch gate re-evaluations served from
+        # the read-pair key when the frozen halves repeat (the key
+        # comparison IS the invalidation; `ScanGateMemo`'s law). Born
+        # with the loop's own pack; the world binds per scan (born once
+        # at open/resume, before any beat — the bind's flush sees to it).
+        self._gate_memo = ScanGateMemo(pack, None)
         # depth-5: the generated world (None for an unarmed pack — the
         # 68a pattern; `open` runs the genesis only when the pack
         # declares the worldgen block)
@@ -1533,16 +1541,20 @@ class Simulator:
         ):
             return beat_tick
         # the rolling sets + the first-fire offsets (zero draws; the
-        # gates evaluated once against the frozen state)
+        # gates evaluated once against the frozen state — iter-375: the
+        # gate answers served from the read-pair memo across stretches,
+        # re-evaluated exactly when a declared pair's value moved)
         u_streams, u_first = urgency_scan(
             self._pack, self._projection, self._bank,
             locations=locations, world=self._world,
             specs=self._urgency_specs, limit=m_stretch,
+            gate_memo=self._gate_memo,
         )
         f_streams, f_first = faction_scan(
             self._pack, self._projection, self._bank,
             locations=locations, world=self._world,
             specs=self._faction_specs, limit=m_stretch,
+            gate_memo=self._gate_memo,
         )
         # the decay landing: the first tick a draft would fire, mapped
         # onto the grid (never past the bound)

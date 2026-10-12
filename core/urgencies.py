@@ -33,7 +33,14 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
 from core.ids import sequence_id
-from core.intent import IntentData, first_failing
+from core.intent import (
+    WINDOWED_TESTS,
+    IntentData,
+    ScanGateMemo,
+    first_failing,
+    pair_values,
+    precondition_read_pairs,
+)
 from core.rng import urgency_stream_name
 
 if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
@@ -72,6 +79,15 @@ class _UrgencySpec:
       object between the scan's gate evaluation and the walk's hit
       path changes no byte (the sharing law: `IntentData` is frozen
       and slots — no mutation path exists).
+    - `pairs` (iter-375, the gate-answer memo): the DECLARED READ SET
+      of the entry's `requires` (`precondition_read_pairs` — the occ-1
+      read-pairs twin, sorted at parse), or None when the entry is
+      ungated OR any require reads a time-dependent fold (the windowed
+      family — the skip's fold-demand fence keeps such packs on the
+      tick-by-tick path, and `None` keeps the scans exact even under a
+      memo-passing caller: never memoized, always evaluated fresh).
+      The parse sorts the pairs once — the memo key's order is a parse
+      constant (INV-2's construction-order discipline).
     """
 
     npc: str
@@ -82,6 +98,7 @@ class _UrgencySpec:
     requires: tuple[Mapping[str, Any], ...]
     stream: str
     probe: IntentData
+    pairs: tuple[tuple[str, str], ...] | None
 
 
 def _specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
@@ -99,6 +116,15 @@ def _specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
         intent_kind = entry["intent"]["kind"]
         fields = dict(entry["intent"].get("fields", {}))
         target = entry["intent"].get("target")
+        requires = tuple(entry.get("requires", ()))
+        probe = IntentData(
+            id=sequence_id(URGENCY_PREFIX, seq),
+            kind=intent_kind,
+            actor=npc,
+            target=target,
+            fields=fields,
+            based_on_event_seq=0,
+        )
         specs.append(
             _UrgencySpec(
                 npc=npc,
@@ -106,15 +132,16 @@ def _specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
                 intent_kind=intent_kind,
                 intent_target=target,
                 intent_fields=fields,
-                requires=tuple(entry.get("requires", ())),
+                requires=requires,
                 stream=urgency_stream_name(npc, intent_kind),
-                probe=IntentData(
-                    id=sequence_id(URGENCY_PREFIX, seq),
-                    kind=intent_kind,
-                    actor=npc,
-                    target=target,
-                    fields=fields,
-                    based_on_event_seq=0,
+                probe=probe,
+                pairs=(
+                    tuple(sorted(precondition_read_pairs(pack, probe, requires)))
+                    if requires
+                    and not any(
+                        cond.get("test") in WINDOWED_TESTS for cond in requires
+                    )
+                    else None
                 ),
             )
         )
@@ -167,6 +194,7 @@ def urgency_scan(
     world: "WorldModel | None" = None,
     specs: "Sequence[_UrgencySpec] | None" = None,
     limit: int = 0,
+    gate_memo: ScanGateMemo | None = None,
 ) -> tuple[dict[str, int], int | None]:
     """H9's rolling-set + first-hit scan (iter-337): the data the
     loop's quiet-beat skip needs from THIS family, drawn from the same
@@ -191,7 +219,18 @@ def urgency_scan(
     cannot move, so ONE gate evaluation serves the whole stretch (the
     loop's fold-demand fence upstream makes this a law, never an
     approximation — no gate of a skip-capable pack reads a
-    time-dependent fold)."""
+    time-dependent fold).
+
+    `gate_memo` (iter-375, the measured-wall head): the scan-family
+    gate-answer memo — across stretches the frozen halves (pack,
+    world, probe, requires) repeat and only the read-pair values
+    move, so the verdict is served from the memo when the key (the
+    live values at the spec's declared pairs) is unchanged and
+    re-evaluated when it moved (the key comparison IS the
+    invalidation; `ScanGateMemo`'s own law). None (the default) keeps
+    the fresh evaluation — every existing caller unchanged."""
+    if gate_memo is not None:
+        gate_memo.bind(pack, world)
     streams: dict[str, int] = {}
     rolls: dict[str, int] = {}
     for spec in (_specs(pack) if specs is None else specs):
@@ -201,10 +240,21 @@ def urgency_scan(
         if spec.probability_per_beat <= 0:
             continue  # rolls, never fires
         if spec.requires:
-            if first_failing(
-                pack, projection, spec.probe, spec.requires,
-                facts=(), echoes=(), traits=(), world=world,
-            ) is not None:
+            if gate_memo is not None and spec.pairs is not None:
+                key = pair_values(projection, spec.pairs)
+                open_gate = gate_memo.lookup(spec.probe.id, key)
+                if open_gate is None:
+                    open_gate = first_failing(
+                        pack, projection, spec.probe, spec.requires,
+                        facts=(), echoes=(), traits=(), world=world,
+                    ) is None
+                    gate_memo.store(spec.probe.id, key, open_gate)
+            else:
+                open_gate = first_failing(
+                    pack, projection, spec.probe, spec.requires,
+                    facts=(), echoes=(), traits=(), world=world,
+                ) is None
+            if not open_gate:
                 continue  # the gates are shut for the whole stretch
         # the duplicate-(npc, kind) fold (iter-362): two entries on one
         # stream walk the same words — the max probability's first hit

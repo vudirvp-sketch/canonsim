@@ -262,12 +262,17 @@ def test_the_bucket_iteration_matches_the_sort(tmp_path: Path) -> None:
             )
 
 
-def test_the_novelty_count_matches_the_walk(tmp_path: Path) -> None:
-    """P1b's count law: the (teller, listener) novelty count is EXACTLY
-    the number of the teller's rows whose token the listener does not
-    hold — zero iff the walk picks nothing (the O(1) short-circuit's
-    soundness), positive iff at least one pick exists with no excluded
-    source. Late-born knowers included (the birth-initialization law)."""
+def test_the_saturation_law_matches_the_walk(tmp_path: Path) -> None:
+    """P1b's saturated-teller law, iter-375's form (the eager novelty
+    count's zero-test, answered as the token-set subset): the teller
+    is saturated EXACTLY when no row of theirs rides a token the
+    listener lacks — the append-only law (P7) makes both halves
+    monotone, so the subset answers the old count's zero-test with
+    zero maintenance. Saturated => the walk picks nothing (the
+    short-circuit's soundness); not saturated => at least one pick
+    exists with no excluded source. Late-born knowers included (the
+    empty held-token set fails every nonempty subset — the old
+    birth-initialization law's answer, by construction now)."""
     from core.knowledge import KnowledgeView, _novel_facts
 
     view = KnowledgeView()
@@ -289,15 +294,53 @@ def test_the_novelty_count_matches_the_walk(tmp_path: Path) -> None:
                 row for row in view._rows.get(teller, ())
                 if not view.holds(listener, row.record.knows)
             ]
-            count = view._novelty.get(teller, {}).get(listener, 0)
-            assert count == len(unheld), (teller, listener, count)
+            saturated = view.saturated(teller, listener)
+            assert saturated == (not unheld), (teller, listener)
             picks = _novel_facts(
                 view, teller, listener, exclude_source="ev_9999", limit=99,
             )
-            if count == 0:
+            if saturated:
                 assert picks == [], (teller, listener)
             else:
                 assert picks, (teller, listener)
+
+
+def test_the_saturation_law_holds_on_a_real_log(tmp_path: Path) -> None:
+    """The saturation law's real-log oracle: a farstead 10y segmented
+    run (telling-heavy — the transfer family's own corpus) replayed
+    through `from_events`, every (teller, listener) pair checked
+    against the brute-force walk (the definition itself, iter-370's
+    linear-oracle form). The eager count is gone; this law is its
+    surviving falsifier, now over real acquisition streams."""
+    from core.knowledge import KnowledgeView
+    from core.log import read_log
+
+    steps = [
+        {"intent": "move", "target": "loc_square"},
+        *[{"intent": "wait", "ticks": 518400}] * 10,
+    ]
+    log_path = tmp_path / "saturation_law.jsonl"
+    sim = Simulator(FARSTEAD, 7, log_path, SCHEMA, commit="0000000")
+    sim.open()
+    sim.run_steps(steps)
+    _header, events = read_log(log_path, SCHEMA)
+    view = KnowledgeView.from_events(events)
+    knowers = view.knowers()
+    assert len(knowers) > 1  # the corpus is real
+    checked = 0
+    for teller in knowers:
+        for listener in knowers:
+            if teller == listener:
+                continue
+            unheld = any(
+                not view.holds(listener, row.record.knows)
+                for row in view._rows.get(teller, ())
+            )
+            assert view.saturated(teller, listener) == (not unheld), (
+                teller, listener,
+            )
+            checked += 1
+    assert checked > 0
 
 
 def test_the_occ_snapshot_walk_equals_the_fold(tmp_path: Path) -> None:

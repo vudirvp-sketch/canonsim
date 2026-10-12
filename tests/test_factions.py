@@ -679,3 +679,74 @@ def test_the_parse_memos_match_the_derived_forms() -> None:
             assert probe.fields == dict(entry["intent"].get("fields", {}))
             assert probe.based_on_event_seq == 0
             assert spec.requires == tuple(entry.get("requires", ()))
+
+
+def test_the_scan_gate_memo_is_the_fresh_evaluation(tmp_path: Path) -> None:
+    """iter-375's gate-answer memo, the faction twin: the declared
+    read set rides the spec (the group's and the target's positions
+    for a same_location gate), the windowed family never memoizes
+    (pairs is None), and the memoized scan answers EXACTLY the fresh
+    evaluation across inside/outside mutations — the urgency twin's
+    own law over the family's ratio-bar walk."""
+    from core.factions import faction_scan, faction_specs
+    from core.intent import ScanGateMemo
+
+    gated_entry = {
+        **ARMED_ENTRY,
+        "intent": {"kind": "muster", "target": "npc_guard_01"},
+        "requires": [
+            {"noun": "actor", "test": "same_location", "with": "target"},
+        ],
+    }
+    # the windowed family's None branch is the urgency law's own pin
+    # (the shared parse mechanism, over the real province pack) — a
+    # second entry here would need a second (group, verb), one goal
+    # per group per verb being the lint's own law
+    _dir, pack = crafted_pack(
+        tmp_path, "gate_memo", entries=[gated_entry],
+        fears=(80, 70),
+    )  # the armed form: the bar computes 100, so the scan actually
+    # evaluates the gates (a valueless membership never fires — the
+    # vacuity law would make the battery vacuous)
+    specs = faction_specs(pack)
+    gated = [spec for spec in specs if spec.pairs is not None]
+    assert len(gated) == 1
+    spec = gated[0]
+    assert spec.pairs == (
+        (spec.group, "position"), (MEMBERS[0], "position"),
+    )  # sorted: the key's order is a parse constant
+
+    bank = RngBank(7)
+    memo = ScanGateMemo(pack, None)
+
+    def fresh(projection: Any) -> Any:
+        return faction_scan(pack, projection, bank, specs=specs, limit=400)
+
+    def memoized(projection: Any) -> Any:
+        return faction_scan(
+            pack, projection, bank, specs=specs, limit=400, gate_memo=memo,
+        )
+
+    base = initial_projection(pack.entities)
+
+    def copy_of(projection: Any) -> Any:
+        return {entity: dict(props) for entity, props in projection.items()}
+
+    assert memoized(base) == fresh(base)  # the cold table answers fresh
+    assert memoized(base) == fresh(base)  # the warm table serves the same
+
+    # the INSIDE mutation: the group walks to the guard (or away) — a
+    # declared pair moved, the memo re-evaluates, both arms agree
+    moved = copy_of(base)
+    moved[spec.group]["position"] = moved[MEMBERS[0]]["position"]
+    assert memoized(moved) == fresh(moved)
+
+    # the OUTSIDE mutation: a position no gated spec declares — the
+    # memoized answers cannot move (the verdict never reads it)
+    outsider = next(
+        entity for entity in moved
+        if entity.startswith("npc_") and entity != MEMBERS[0]
+    )
+    outside = copy_of(moved)
+    outside[outsider]["position"] = f"{outside[outsider]['position']}_moved"
+    assert memoized(outside) == fresh(outside)
