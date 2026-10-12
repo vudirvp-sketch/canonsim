@@ -1,37 +1,35 @@
-Iteration: iter-375 (`scangate` — ПЕРВЫЕ ДВЕ ГОЛОВЫ
-  measured-wall ПОРЯДКА ОТКРЫТЫ по постоянной директиве
-  владельца (2026-10-12): (1) МЕМО ГЕЙТОВ СКАНА — ScanGateMemo
-  в core/intent.py, ключ чтений ЕСТЬ инвалидация (закон occ-1;
-  оконное семейство никогда не мемоизируется — fence стал
-  законом семейства; идентичность (pack, world) смывает
-  таблицу): first_failing в сканах 939K→41K вызовов, hit
-  rate 1.0 (508 ре-эвалов на 10y-логе, зонд вне репо);
-  (2) ЛЕНИВАЯ НАСЫЩЕННОСТЬ — eager-счётчик новизны
-  (teller, listener) (O(знающих) на запись, K×K) УДАЛЁН,
-  zero-тест стал предикатом подмножества токен-множеств
-  (saturated; P7-монотонность — точно, обслуживания ноль):
-  per-call knowledge.add теперь ПОПУЛЯЦИОННО-ПЛОСКИЙ
-  5.0→5.8 мкс h3→h32, datum iter-364 ×6.74 СПИСАН.
-  НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… / farstead
-  100y 4e4f4cf2… — все идентичны до/после; стена h32 13.01
-  →11.14/11.26 с ×1.16; commit_knowledge_fold 4.48→0.25 с
-  профильно ×17.7 ·
+Iteration: iter-377 (`hygiene1` — три точечных фикса ревизии по
+  вызову владельца 2026-10-12 «даю добро на hygiene-1»; D-198:
+  явный запрос = текущая задача; R0, нуль поведения — текст):
+  (1) 4 устаревших пути `workbench/application/inference.py` в
+  комментариях/докстрингах перепинены на пакет (settings.py:30/121
+  + test_inference.py:2 → `inference/`; settings.py:98 →
+  `inference/migration.py` — носитель `migrate_launch_semantics`);
+  (2) TEST_PLAN §9.1: `docs/SCALE_TESTING_LAW.md` + ULT §3/§17.2
+  помечены «both paths inside that EXTERNAL pack, never this
+  repo»; (3) MVP_SCOPE §9: непиненая дословная копия ev_0007
+  заменена указателем на EVENT_SCHEMA §10 — единственный владелец
+  уже закреплён тестом (T0/D-010); развилка «пин или указатель»
+  решена в сторону указателя (D-024: пиненая копия = второй
+  источник истины; вариант A — одной итерацией по вызову) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2629 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure set IDENTICAL to the pristine pre-change baseline taken this session BEFORE any edit — zero test_lab flakes on three full runs) ·
+2629 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure set IDENTICAL to the iter-376 baseline — re-run THIS session AFTER the text fixes; zero flakes) ·
 Date: 2026-10-12 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..371 baseline, the GOLDEN
-  3.12.14 suite fully green per iter-363; the failure set diffed
-  EQUAL against the pristine pre-change baseline taken this session
-  BEFORE any edit — zero new, zero test_lab flakes on either run) ·
-Scope: ZERO repo code (R0/R1 riders — чтение прогона + запись
-  interlude): docs/iterations/iter-374-m6read-report.md (новый),
-  STATUS.md (заголовок + KI#120 удалён по §5 + KI#121/122 + Next),
-  worklog.md (iter-374, iter-362 вытеснен), docs/TASKS.md (строка
-  m6-station → закрыта + леджер) — 4 изменённых/созданных.
+  3.12.15, byte-identical to the 362..376 baseline, the GOLDEN
+  3.12.14 suite fully green per iter-363; re-verified this session
+  after the fixes — zero new, zero flakes) ·
+Scope: R0 text (комментарии/доки, нуль поведения):
+  workbench/application/settings.py (3 комментария),
+  tests/test_inference.py (1 докстринг), docs/TEST_PLAN.md (§9.1,
+  +1 строка), docs/MVP_SCOPE.md (§9, −13 строк) + райдеры:
+  STATUS.md (заголовок + Next), worklog.md (iter-377, iter-365
+  вытеснен), docs/TASKS.md (hygiene-1 → DONE + леджер),
+  docs/iterations/iter-377-hygiene1-report.md (новый) — 8
+  изменённых/созданных.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -126,14 +124,15 @@ deleted at iter-371 per the same law.)
 
 ## Next step
 
-**iter-375 DONE: scangate (the measured-wall heads #1+#2 — the
-  scan-family gate-answer memo + the lazy saturated-teller
-  predicate, D-254 R3; zero canon bytes: h32/h3/farstead-100y
-  md5 identical; the wall 13.01→11.14 s ×1.16;
-  commit_knowledge_fold 4.48→0.25 s profiled, per-call
-  knowledge.add population-FLAT — the ×6.74 datum retired;
-  first_failing-in-scans 939K→41K calls, hit rate 1.0; +3
-  oracle laws; the report iter-375-scangate-report.md).**
+**iter-377 DONE: hygiene-1 (три точечных фикса ревизии по вызову
+  владельца «даю добро на hygiene-1» — R0 текст, нуль поведения:
+  4 устаревших inference.py-пути перепинены на пакет inference/
+  (settings.py:98 → inference/migration.py — носитель
+  migrate_launch_semantics), внешний путь TEST_PLAN §9.1 помечен
+  «both paths inside that EXTERNAL pack», непиненая копия ev_0007
+  в MVP_SCOPE §9 заменена указателем на EVENT_SCHEMA §10 —
+  вариант B развилки по D-024, вариант A остаётся одной итерацией
+  по вызову; the report iter-377-hygiene1-report.md).**
 Next: THE STANDING ORDER'S THIRD HEAD — director_global_passes
   (5.06 profiled s; per-call entropy 2.0→2.3 µs POPULATION-FLAT,
   the cum growth is call-count — the candidate form: the
@@ -143,7 +142,8 @@ Next: THE STANDING ORDER'S THIRD HEAD — director_global_passes
   form — the (npc,axis)→next-fire walk replacement, its
   staleness/veto laws) and the rolling-filter memo (the
   locations-keyed twin of the scan gate memo — urgency_rolls
-  1.70 profiled s / 2.6M calls)
+  1.70 profiled s / 2.6M calls) — the standing order unchanged by
+  the research + hygiene iterations
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE (unchanged by this
   iteration: the memo touched zero door/battery paths); owner-side

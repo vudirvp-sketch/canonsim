@@ -27,7 +27,7 @@ the executable preference, the web-UI surface, the raw extra_args
 escape hatch. The SEMANTIC generation-control values (context,
 GPU placement, flash attention, fit, KV types, the sampler family,
 seed, the chat template, the sampler chain) moved to the inference
-profile store (`workbench/application/inference.py`) — the §19.1
+profile store (`workbench/application/inference/`) — the §19.1
 BASE PROFILE layer. The one-way schema/1 → schema/2 migration lives
 there (`migrate_launch_semantics`, the composition root's own
 boot step — the operator's saved values move verbatim, never a
@@ -95,7 +95,7 @@ DEFAULTS: dict[str, object] = {
 #: The persisted document's schema tag (§15.3's schema-evolution law:
 #: inf-1's Settings ≠ Inference Control split moved the semantic
 #: fields to the inference profile — a schema/1 document migrates
-#: through `workbench/application/inference.py`'s
+#: through `workbench/application/inference/migration.py`'s
 #: `migrate_launch_semantics` at composition boot; a file with a
 #: foreign tag refuses to load, never a guessed mapping).
 SCHEMA = "canonsim.workbench.settings/2"
@@ -118,7 +118,7 @@ class SettingsError(ValueError):
 class LaunchSettings:
     """The typed launch-settings document — the managed spawn's own
     DEPLOYMENT knobs (inf-1's split: the semantic generation controls
-    live in `workbench/application/inference.py`'s profile store —
+    live in the `workbench/application/inference/` profile store —
     Settings ≠ Inference Control, the law's §1).
 
     `llama_server_exe` is a PREFERENCE, not a resolved path: "" means

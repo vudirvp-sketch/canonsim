@@ -1,5 +1,5 @@
 """inf-1/inf-2's claim packet — the llama.cpp semantic inference-
-control layer (`workbench/application/inference.py` + the platform's
+control layer (`workbench/application/inference/` + the platform's
 semantic flag table + the composition wiring + the compiled spawn
 surface).
 

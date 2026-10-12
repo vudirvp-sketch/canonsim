@@ -789,7 +789,8 @@ table only after one claim packet used it (the first-consumer law).
 
 > Source: the owner-maintained research companion
 > (`canonsim_unified_agent_pack` v1.5, `docs/SCALE_TESTING_LAW.md` +
-> ULT §3/§17.2) — absorbed into the repo's verification owner because
+> ULT §3/§17.2 — both paths inside that EXTERNAL pack, never this
+> repo) — absorbed into the repo's verification owner because
 > the queue's next rows (the density-envelope battery, the world
 > track's dense-world horizons) are its named consumers, and the lab
 > reports had already hand-stated its forms (iter-337's "horizon

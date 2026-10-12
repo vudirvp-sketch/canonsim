@@ -193,24 +193,11 @@ while queue not empty:
 
 ## 9. Events
 
-Full contract: `docs/EVENT_SCHEMA.md`. Canonical example (`ev_0007`):
-
-```json
-{ "id": "ev_0007", "t": 412, "type": "pickpocket_failed",
-  "actor": "pc_01", "target": "npc_guard_01", "cause": "ev_0006",
-  "outcome": { "noticed": true },
-  "knowledge": [
-    { "who": "npc_guard_01", "channel": "saw", "fidelity": "partial",
-      "knows": "figure_reaching_for_purse", "at": 412, "source": "ev_0007" },
-    { "who": "npc_barkeep_01", "channel": "heard", "fidelity": "vague",
-      "knows": "noise_by_the_bar", "at": 412, "source": "ev_0007" } ],
-  "state_changes": [
-    { "entity": "npc_guard_01", "prop": "pair.pc_01.suspicion", "from": 0, "to": 25 },
-    { "entity": "pc_01", "prop": "crime_status", "from": "unknown", "to": "suspect" } ],
-  "hooks": ["guard_suspicious_of_pc", "possible_document_check"],
-  "importance": "medium",
-  "provenance": { "seed": 42, "cause_intent": "intent_0006" } }
-```
+Full contract: `docs/EVENT_SCHEMA.md` — its §10 carries the canonical
+example (`ev_0007`, the `pickpocket_failed` event) as the single
+owner, extracted and validated at test time (T0, D-010); this
+section links it, never restates it (D-024 — the unpinned verbatim
+copy removed by hygiene-1/iter-377).
 
 Schema rules (short form; full form in EVENT_SCHEMA.md):
 
