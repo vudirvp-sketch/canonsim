@@ -883,8 +883,11 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     # 0.05 profiled s on h32 10y, per-call 1.0 us, h3->h32 x1.11 —
     # flat); iter-381: the urgency scan's filter loop reads the
     # RollIndex buckets (urgency_rolls absent from a profiled run);
-    # the member's residual is the gate-key builds (the next
-    # standing-order row) + the collective draw walk
+    # iter-382: the gate-key builds ride the ScanGateFold serve path
+    # (pair_values absent from a profiled run — 939K key builds ->
+    # the 159 re-derivations, the honest residue); the member's
+    # residual is the collective draw walk + the serve path's own
+    # three dict reads per gated entry
     "skip_probes": (
         ("core/urgencies.py", "urgency_scan"),
         ("core/factions.py", "faction_scan"),

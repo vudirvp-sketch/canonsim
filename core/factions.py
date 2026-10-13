@@ -70,6 +70,7 @@ from core.ids import sequence_id
 from core.intent import (
     WINDOWED_TESTS,
     IntentData,
+    ScanGateFold,
     ScanGateMemo,
     first_failing,
     pair_values,
@@ -293,6 +294,7 @@ def faction_scan(
     specs: "Sequence[_FactionSpec] | None" = None,
     limit: int = 0,
     gate_memo: ScanGateMemo | None = None,
+    gate_fold: ScanGateFold | None = None,
 ) -> tuple[dict[str, int], int | None]:
     """H9's rolling-set + first-hit scan, the faction twin
     (iter-337 — `core.urgencies.urgency_scan` owns the family's law;
@@ -312,9 +314,22 @@ def faction_scan(
 
     `gate_memo` (iter-375): the scan-family gate-answer memo — the
     urgency twin's own law (the key comparison IS the invalidation;
-    `ScanGateMemo`). None (the default) keeps the fresh evaluation."""
+    `ScanGateMemo`). None (the default) keeps the fresh evaluation.
+
+    `gate_fold` (iter-382): the memo's commit-path twin, the urgency
+    twin's own law — the confirmed probe skips the key build (THE
+    SERVE LAW: the fast path serves exactly the verdict the key
+    compare would, never more); None (the default) keeps the key
+    compare."""
     if gate_memo is not None:
         gate_memo.bind(pack, world)
+    fold = (
+        gate_fold
+        if gate_memo is not None
+        and gate_fold is not None
+        and gate_fold.serves(projection)
+        else None
+    )
     streams: dict[str, int] = {}
     rolls: dict[str, int] = {}
     for spec in (_specs(pack) if specs is None else specs):
@@ -326,14 +341,27 @@ def faction_scan(
             continue  # rolls, never fires (the cadence law)
         if spec.requires:
             if gate_memo is not None and spec.pairs is not None:
-                key = pair_values(projection, spec.pairs)
-                open_gate = gate_memo.lookup(spec.probe.id, key)
+                open_gate = None
+                if fold is not None:
+                    entry = gate_memo.entry_at(spec.probe.id)
+                    if entry is not None and fold.confirmed(
+                        spec.probe.id, spec.pairs, entry
+                    ):
+                        open_gate = gate_memo.answer(spec.probe.id)
                 if open_gate is None:
-                    open_gate = first_failing(
-                        pack, projection, spec.probe, spec.requires,
-                        facts=(), echoes=(), traits=(), world=world,
-                    ) is None
-                    gate_memo.store(spec.probe.id, key, open_gate)
+                    key = pair_values(projection, spec.pairs)
+                    open_gate = gate_memo.lookup(spec.probe.id, key)
+                    if open_gate is None:
+                        open_gate = first_failing(
+                            pack, projection, spec.probe, spec.requires,
+                            facts=(), echoes=(), traits=(), world=world,
+                        ) is None
+                        gate_memo.store(spec.probe.id, key, open_gate)
+                    if fold is not None:
+                        fold.confirm(
+                            spec.probe.id, spec.pairs,
+                            gate_memo.entry_at(spec.probe.id),
+                        )
             else:
                 open_gate = first_failing(
                     pack, projection, spec.probe, spec.requires,

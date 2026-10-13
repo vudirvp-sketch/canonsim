@@ -119,6 +119,7 @@ from core.intent import (
     TRAIT_TEST,
     IntentData,
     RunnerError,
+    ScanGateFold,
     ScanGateMemo,
     action_duration,
     first_failing,
@@ -516,6 +517,23 @@ class Simulator:
         # with the loop's own pack; the world binds per scan (born once
         # at open/resume, before any beat — the bind's flush sees to it).
         self._gate_memo = ScanGateMemo(pack, None)
+        # iter-382 (the standing order's key-build row): the memo's
+        # commit-path twin — the declared read pairs watched on the
+        # commit path (`_commit` folds every state change), the
+        # confirmed probes popping exactly when a pair they read
+        # moves, so the scans skip the per-stretch key builds and serve
+        # the stored verdicts (THE SERVE LAW — the fast path serves
+        # exactly the verdict the key compare would). Born from the
+        # two families' memoizable specs over this projection (the
+        # identity stamp); runtime-only, never in the run state; a
+        # resume re-births from the restored projection.
+        self._gate_fold = ScanGateFold.from_specs(
+            (
+                (spec.probe.id, spec.pairs)
+                for spec in (*self._urgency_specs, *self._faction_specs)
+            ),
+            self._projection,
+        )
         # depth-5: the generated world (None for an unarmed pack — the
         # 68a pattern; `open` runs the genesis only when the pack
         # declares the worldgen block)
@@ -919,6 +937,16 @@ class Simulator:
             # law, the twin law the guarantee)
             sim._roll_index = RollIndex.from_projection(
                 sim._urgency_specs, sim._projection,
+            )
+            # iter-382: the gate fold re-born from the RESTORED
+            # projection (the identity re-stamp; the cold memo re-fills
+            # on the first scan pass — the resume-invisible law)
+            sim._gate_fold = ScanGateFold.from_specs(
+                (
+                    (spec.probe.id, spec.pairs)
+                    for spec in (*sim._urgency_specs, *sim._faction_specs)
+                ),
+                sim._projection,
             )
             sim._director.restore_run_state(cursor["director"])
             sim._bank.restore_state(cursor["bank"])
@@ -1612,12 +1640,13 @@ class Simulator:
             locations=locations, world=self._world,
             specs=self._urgency_specs, limit=m_stretch,
             gate_memo=self._gate_memo, roll_index=self._roll_index,
+            gate_fold=self._gate_fold,
         )
         f_streams, f_first = faction_scan(
             self._pack, self._projection, self._bank,
             locations=locations, world=self._world,
             specs=self._faction_specs, limit=m_stretch,
-            gate_memo=self._gate_memo,
+            gate_memo=self._gate_memo, gate_fold=self._gate_fold,
         )
         # the decay landing: the first tick a draft would fire, mapped
         # onto the grid (never past the bound)
@@ -2335,6 +2364,12 @@ class Simulator:
             # state; the position/caught props are the only verdict
             # movers — the exactness law)
             self._roll_index.apply_change(change.entity, change.prop)
+            # iter-382: the gate fold's commit-path twin — pops every
+            # confirmed probe whose declared read set includes this
+            # pair (the conservative form: the next scan's key compare
+            # decides, a value that flipped back re-hits the stored
+            # key — one wasted build, never a wrong answer)
+            self._gate_fold.apply_change(change.entity, change.prop)
         self._knowledge.add(record)  # derived index (L3)
         self._react(record)  # event-driven reactions (phase0 §3)
         return record

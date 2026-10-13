@@ -27,7 +27,7 @@ machinery the front door runs:
 
 from __future__ import annotations
 
-from collections.abc import Mapping, MutableMapping, Sequence
+from collections.abc import Iterable, Mapping, MutableMapping, Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Final
 
@@ -62,6 +62,7 @@ __all__ = [
     "REJECTION_EVENT",
     "Resolution",
     "RunnerError",
+    "ScanGateFold",
     "ScanGateMemo",
     "STATIC_TESTS",
     "TEXTURE_FIELD",
@@ -890,6 +891,143 @@ class ScanGateMemo:
         """Record the verdict under its key (one live entry per probe:
         the key is unique within one (pack, world) domain)."""
         self._answers[probe_id] = (key, answer)
+
+    def answer(self, probe_id: str) -> bool | None:
+        """The stored verdict WITHOUT the key compare — the fold's
+        fast path reads this (iter-382). None = no live entry (a cold
+        or flushed table): the caller must fall back to the key
+        compare — the None is the backstop, never a verdict."""
+        entry = self._answers.get(probe_id)
+        return None if entry is None else entry[1]
+
+    def entry_at(self, probe_id: str) -> object | None:
+        """The live entry OBJECT at probe_id — identity only, never
+        unpacked: the fold's stamp (iter-382). Every `store` and every
+        `bind` flush replaces the object, so an identity compare
+        detects a replaced entry at zero cost — the fast path can
+        never serve an entry some other caller overwrote."""
+        return self._answers.get(probe_id)
+
+
+class ScanGateFold:
+    """The commit-path twin of the gate memo (iter-382, the standing
+    order's key-build row — iter-375's honest remainder): the memo's
+    key comparison MOVED from the read side to the write side. The
+    scans no longer rebuild each spec's key per stretch (939K
+    `pair_values` on one h32 10y profile, 1.94 profiled s) — the fold
+    watches the declared read pairs on the commit path and pops every
+    confirmed probe a write could invalidate, so the scan serves the
+    stored verdict in O(1) and rebuilds a key exactly when a declared
+    pair of that spec actually moved (the honest residue: iter-375
+    measured 508 re-evaluations on the same 10y log).
+
+    THE SERVE LAW (the class's own discipline): the fold's fast path
+    serves EXACTLY the verdict the key-compare path would — never
+    more. Three gates, all O(1):
+
+    - **the identity gate** — `serves` binds the exact projection
+      object stamped at birth (the SensesIndex/RollIndex form);
+      foreign projections keep the key compare;
+    - **the declared gate** — `confirm` records only a (probe,
+      pairs) the birth declaration knows; `confirmed` matches the
+      spec's own pairs against the record, so a crafted spec with a
+      colliding id keeps the key compare;
+    - **the stamp gate** — the fold records the memo ENTRY OBJECT it
+      validated; any later `store` or flush replaces the object, the
+      identity compare fails, the key compare runs. A replaced entry
+      can never be served stale.
+
+    THE POP LAW (the invalidation grain — the occ-1 index law's write
+    side): every committed write to a declared pair pops the probes
+    that read it (`apply_change`, the conservative form — a value
+    that flips back re-hits the stored key on the next scan and
+    re-confirms, one wasted build, never a wrong answer). INV-1
+    licenses the law: the projection moves only through `_commit`,
+    and `_commit` folds every state change — so "no declared pair of
+    this probe changed since its confirm" is exactly "the stored key
+    still equals the live values" (the occ-1 law then hands the
+    verdict equality: projections agreeing on the declared pairs
+    answer `first_failing` identically).
+
+    Birth reads NO projection values (KI#16's law does not reach
+    here): the fold tracks CHANGE TIMES, never values — the memo
+    (born cold) owns the verdicts, and the first scan pass evaluates
+    everything fresh. Runtime-only and rebuildable — never exported
+    in the run state; a resume re-births from the restored projection
+    and the first pass re-fills the cold memo. Deterministic
+    throughout (INV-2): zero draws, zero clock, the pops are
+    order-independent set semantics."""
+
+    __slots__ = ("_declared", "_readers", "_confirmed", "_bound")
+
+    def __init__(self) -> None:
+        self._declared: dict[str, tuple[tuple[str, str], ...]] = {}
+        self._readers: dict[tuple[str, str], list[str]] = {}
+        self._confirmed: dict[str, tuple[tuple[tuple[str, str], ...], object]] = {}
+        self._bound: "Projection | None" = None
+
+    @classmethod
+    def from_specs(
+        cls,
+        spec_pairs: "Iterable[tuple[str, tuple[tuple[str, str], ...] | None]]",
+        projection: "Projection",
+    ) -> "ScanGateFold":
+        """The birth declaration and the identity stamp. `spec_pairs`:
+        every memoizable spec of every family sharing the memo —
+        (probe id, declared pairs) pairs, the pairs-None specs (ungated
+        or windowed) never entering. Builds the declared map (probe →
+        its pairs — the content gate's own table) and the inverted
+        readers index (pair → the probes whose verdicts read it). No
+        projection read: only the object is stamped."""
+        fold = cls()
+        for probe_id, pairs in spec_pairs:
+            if pairs is None:
+                continue
+            fold._declared[probe_id] = pairs
+            for pair in pairs:
+                fold._readers.setdefault(pair, []).append(probe_id)
+        fold._bound = projection
+        return fold
+
+    def serves(self, projection: "Projection") -> bool:
+        """The identity gate: the scans' fold branch serves ONLY the
+        exact projection object stamped at birth (every other caller
+        keeps the key compare — the memo's own law, untouched)."""
+        return self._bound is not None and self._bound is projection
+
+    def apply_change(self, entity: str, prop: str) -> None:
+        """Fold one committed state change (the `apply_event` twin,
+        called from `_commit` per change): a write to a declared pair
+        pops every confirmed probe that reads it — the conservative
+        form (the value may have flipped back; the next scan's key
+        compare decides, one wasted build at worst, never a wrong
+        answer). Pairs no spec declares pop nothing (the occ-1
+        over-approximation guarantees no verdict reads them)."""
+        for probe_id in self._readers.get((entity, prop), ()):
+            self._confirmed.pop(probe_id, None)
+
+    def confirmed(
+        self, probe_id: str, pairs: tuple[tuple[str, str], ...], entry: object
+    ) -> bool:
+        """O(1): True iff this exact spec (the declared-gate content
+        match) was confirmed against this exact memo entry (the stamp
+        gate) and no declared pair it reads has changed since (the pop
+        law) — the fast path may serve the stored verdict."""
+        record = self._confirmed.get(probe_id)
+        return (
+            record is not None and record[0] == pairs and record[1] is entry
+        )
+
+    def confirm(
+        self, probe_id: str, pairs: tuple[tuple[str, str], ...], entry: object
+    ) -> None:
+        """Record the validation: this spec's memo entry was just read
+        or written against the live projection. Admits only the birth
+        declaration's own (probe, pairs) — a crafted spec with a
+        colliding id never confirms; its stores stay the key-compare
+        path's problem, never the fast path's."""
+        if self._declared.get(probe_id) == pairs:
+            self._confirmed[probe_id] = (pairs, entry)
 
 
 def first_failing(
