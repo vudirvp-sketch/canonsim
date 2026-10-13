@@ -844,8 +844,19 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     # RollIndex buckets (the per-LOCATION rolling set — the predicate's
     # answers pre-folded on the commit path); urgency_rolls is the
     # honest absence in a profiled run now (2.63M calls / 1.67
-    # profiled s on h32 10y before — the filter loop's own weight),
-    # the member's residual is the draws + the gate path
+    # profiled s on h32 10y before — the filter loop's own weight).
+    # iter-383: the draws ride `family_rolls` — ONE door crossing per
+    # beat for the whole rolling set (the whole-set fusion;
+    # family_randint's 939K per-entry calls are the honest absence in
+    # a profiled walk now, 2.43 profiled s before); the member's
+    # residual is the batch's own entropy work (the sha256 blocks +
+    # the word slices + the counter writes) + the gate path. THE
+    # INSTRUMENT NOTE (iter-383's measured bite of law 8's own
+    # caveat): the pre-383 member's profiled share overstated its
+    # WALL price ~5x — cProfile taxes each of the 939K calls, the
+    # interleaved A/B measured the true cut at ~0.2 s of a 7.1 s wall
+    # (x1.03); a per-call residue in a profiled table is NEVER a wall
+    # claim — the unprofiled A/B is the only wall truth
     "beat_rolls": (
         ("core/urgencies.py", "urgency_intents"),
         ("core/factions.py", "faction_intents"),

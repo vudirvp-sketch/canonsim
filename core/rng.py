@@ -359,6 +359,98 @@ class RngBank:
         self._counts[name] += 1
         return lo + word % (hi - lo + 1)
 
+    def family_rolls(
+        self, names: Iterable[str], lo: int, hi: int
+    ) -> list[int]:
+        """The whole-set family draw (iter-383, the beat-machinery
+        static-resolution family's next fusion — iter-370 fused
+        assure+randint into `family_randint`; this fuses the per-beat
+        walk's every entry into ONE door crossing). The measured wall
+        it cuts: 939K single-draw calls on one h32 10y run — the
+        per-call price (the Python call, `_ensure`, the nesting check,
+        the `_draw_word` call) was the beat-machinery member's own
+        body; the entropy work (the sha256 blocks, the word slices)
+        is the minority.
+
+        The SAME laws as the per-entry sequence, fused (the oracle
+        law pins the equality — same words, same counter positions,
+        in the given order):
+
+        - the words: `_draw_word` stays the counter function's single
+          law owner (D-024); this loop is its inline execution — the
+          iter-370 precedent (`family_randint` inlined `assure`'s own
+          check the same way), pinned to the owner by
+          tests/test_batchrolls.py's equality laws, never a second
+          source of truth;
+        - the order: the draws happen in `names` order, one per name,
+          exactly the per-call sequence — a repeated name draws its
+          next positions in sequence (two entries on one stream see
+          consecutive words, same as the per-entry walk);
+        - the nesting law: loud per name, `family_randint`'s own
+          check executed inline — a foreign name, or a family name
+          under a non-substantive assured scope, refuses exactly as
+          the per-call form would. THE DOOR IS ATOMIC: the whole
+          batch validates first (registration + nesting + range), so
+          a refusing batch advances NOTHING — strictly safer than
+          the per-call sequence, whose mid-sequence refusal leaves
+          the earlier names drawn (a refusal is a run-killing error
+          either way; the clean state is the testable law);
+        - the counters: every named stream advances by exactly its
+          occurrence count — the checkpoint (INV-2's counts) never
+          distinguishes the batch from the per-call walk.
+
+        One range for the whole batch (`lo`, `hi`) — both beat
+        callers draw d100; a mixed-range batch has no consumer and
+        no form (AGENTS §2.7's no-generalization law)."""
+        batch = list(names)
+        counts = self._counts
+        # pass 1 — the door: lazy registration (the family law or the
+        # loud refusal), the nesting law per name, the range — all in
+        # the per-call form's own order (ensure, nesting, range), ZERO
+        # draws; a refusing batch advances no counter and no word
+        for name in batch:
+            if name not in counts:
+                self._ensure(name)
+        assured = self._assured
+        if assured is not None:
+            for name in batch:
+                if assured != name and not (
+                    name.startswith(FAMILY_PREFIXES)
+                    and assured == SUBSTANTIVE
+                ):
+                    raise RngError(
+                        f"cannot draw {name!r} inside an assured "
+                        f"{assured!r} scope"
+                    )
+        if hi < lo:
+            raise ValueError(f"empty range for randint: [{lo}, {hi}]")
+        # pass 2 — the draws: `_draw_word`'s own law, inline (the
+        # call overhead was the member's measured body — the fusion's
+        # whole point)
+        keys = self._keys
+        memo = self._memo
+        span = hi - lo + 1
+        out: list[int] = []
+        append = out.append
+        for name in batch:
+            position = counts[name]
+            block_index = position >> _BLOCK_SHIFT
+            cached = memo.get(name)
+            if cached is None or cached[0] != block_index:
+                digest = hashlib.sha256(
+                    f"{keys[name]}:{block_index}".encode()
+                ).digest()
+                cached = (block_index, digest)
+                memo[name] = cached
+            word = position & _WORD_MASK
+            counts[name] = position + 1
+            append(
+                lo + int.from_bytes(
+                    cached[1][8 * word:8 * word + 8], "big"
+                ) % span
+            )
+        return out
+
     @contextmanager
     def audit(self, name: str = SUBSTANTIVE) -> Iterator[None]:
         """Assert zero draws on `name` inside the scope (DCSS ASSERT_stable)."""

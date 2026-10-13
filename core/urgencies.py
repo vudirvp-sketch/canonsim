@@ -551,20 +551,30 @@ def urgency_intents(
             if urgency_rolls(spec, projection, locations)
         ]
     out: list[IntentData] = []
-    for _idx, spec in entries:
-        # the roll: d100 <= probability, on the entry's OWN urgency-family
-        # stream `urgency:<npc>:<kind>` (engine-2, D-079) — canon-relevant
-        # but stream-isolated PER ENTRY, nested inside the run's assured
-        # substantive scope: an added or removed entry shifts neither a
-        # later check draw (the iter-49 measurement flipped 3 corpus
-        # ladders at one added entry) nor another entry's rolls (the
-        # single shared urgency stream was measured and refused — the
-        # entries coupled by draw position; the per-entry streams buy
-        # permanent add-safety for pack urgency growth). iter-370: the
-        # draw rides `family_randint` — the fused assure+randint form
-        # (same word, same counter position, same nesting law; the
-        # with-scope machinery was the measured per-beat overhead)
-        roll = bank.family_randint(spec.stream, 1, 100)
+    if not entries:
+        return out
+    # the roll: d100 <= probability, on the entry's OWN urgency-family
+    # stream `urgency:<npc>:<kind>` (engine-2, D-079) — canon-relevant
+    # but stream-isolated PER ENTRY, nested inside the run's assured
+    # substantive scope: an added or removed entry shifts neither a
+    # later check draw (the iter-49 measurement flipped 3 corpus
+    # ladders at one added entry) nor another entry's rolls (the
+    # single shared urgency stream was measured and refused — the
+    # entries coupled by draw position; the per-entry streams buy
+    # permanent add-safety for pack urgency growth). iter-370: the
+    # draw rides `family_randint` — the fused assure+randint form
+    # (same word, same counter position, same nesting law; the
+    # with-scope machinery was the measured per-beat overhead).
+    # iter-383: the WHOLE SET rides `family_rolls` — one door
+    # crossing for the beat's every rolling entry (the next fusion;
+    # same words, same counter positions, the entries' own order —
+    # the streams are per-entry, so the batch IS the per-call
+    # sequence, fused; the per-call form stays the law's owner and
+    # the tests' oracle)
+    rolls = bank.family_rolls(
+        [spec.stream for _idx, spec in entries], 1, 100
+    )
+    for (_idx, spec), roll in zip(entries, rolls, strict=True):
         if roll > spec.probability_per_beat:
             continue
         intent = spec.probe

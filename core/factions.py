@@ -424,22 +424,36 @@ def faction_intents(
     default) keeps the standalone parse; the memo is
     byte-identical (the parse is pure)."""
     out: list[IntentData] = []
-    for spec in (_specs(pack) if specs is None else specs):
-        # the rolling filter — the shared predicate (iter-337): an
-        # absent or out-of-zone faction never rolls
-        if not faction_rolls(spec, projection, locations):
-            continue
+    # the rolling filter first (iter-383): the shared predicate walks
+    # the specs and collects the entries that will roll — the draws
+    # then cross the door ONCE for the whole set (`family_rolls`,
+    # the urgency twin's own fusion; the filter and the bar compute
+    # draw nothing and the projection is frozen for the walk's
+    # duration, so the collect-then-draw order is the per-entry
+    # order, fused)
+    rolling = [
+        spec
+        for spec in (_specs(pack) if specs is None else specs)
+        if faction_rolls(spec, projection, locations)
+    ]
+    if not rolling:
+        return out
+    # the roll: d100 on the entry's OWN faction-family stream
+    # (engine-2's per-entry isolation, D-079) — one draw per walk,
+    # the cadence law; the formula only sets the comparison bar.
+    # iter-370: the draw rides `family_randint` — the fused
+    # assure+randint form (same word, same counter position, same
+    # nesting law — the urgency twin's own change). iter-383: the
+    # WHOLE SET rides `family_rolls` — one door crossing per walk
+    # (the next fusion; same words, same counter positions, the
+    # rolling order — the per-call form stays the law's owner and
+    # the tests' oracle)
+    rolls = bank.family_rolls([spec.stream for spec in rolling], 1, 100)
+    for spec, roll in zip(rolling, rolls, strict=True):
         values = _member_values(spec, projection)
         bar = faction_probability(
             values, spec.trigger_value, spec.threshold, spec.max_per_beat,
         )
-        # the roll: d100 on the entry's OWN faction-family stream
-        # (engine-2's per-entry isolation, D-079) — one draw per walk,
-        # the cadence law; the formula only sets the comparison bar.
-        # iter-370: the draw rides `family_randint` — the fused
-        # assure+randint form (same word, same counter position, same
-        # nesting law — the urgency twin's own change)
-        roll = bank.family_randint(spec.stream, 1, 100)
         if roll > bar:
             continue
         intent = spec.probe
