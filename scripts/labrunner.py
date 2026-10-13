@@ -854,8 +854,11 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     # OUTSIDE the other entries' — the accounting law's disjointness
     # holds by construction, measured first, never guessed).
     # the story layer's per-beat whole-population pass — the director
-    # stays GLOBAL by law (_run_beat's docstring); entropy's cumtime
-    # covers _global_suspicion + _visible_physical_threats
+    # stays GLOBAL by law (_run_beat's docstring). iter-378: the BOUND
+    # projection reads the commit-path SensesIndex (O(1) per beat), so
+    # entropy's cumtime covers the two scans only on the FALLBACK path
+    # (foreign projections) — the scans are the honest absence in a
+    # profiled run now; the member is entropy's own weight fold
     "director_global_passes": (("core/director.py", "entropy"),),
     # the O(E) projection copy per autonomous intent enqueue (the
     # scale-1-impl P1a snapshot side-table — the copy's own E-price)
@@ -986,6 +989,15 @@ _PROFILE_NOTES: Final = (
     "flat) — the exponent datum for the next-wall ranking; "
     "director.releases' cumtime CONTAINS the entropy member (its "
     "wrapper self-time is the whole rest-side director residue)",
+    "iter-378 (sensesidx): the director's world-sensing terms moved "
+    "to the commit-path SensesIndex fold (seed's per-event twin of "
+    "apply_event, the bound projection's identity gate) — the member "
+    "collapsed 5.07 -> 0.02 profiled s on h32 10y (16.1% -> 0.1%, the "
+    "wall 11.37 -> 9.57 s unprofiled), the two scans now run ONLY on "
+    "the fallback path (absent keys in the profile = the honest zero; "
+    "the twin-agreement law in tests/test_senses.py the equality "
+    "falsifier); the seed-side fold rides _react -> seed (its cost "
+    "sits in the commit path's rest, the buffer seeding's own door)",
 )
 
 

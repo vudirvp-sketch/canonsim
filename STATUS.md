@@ -1,34 +1,49 @@
-Iteration: iter-377 (`hygiene1` — три точечных фикса ревизии по
-  вызову владельца 2026-10-12 «даю добро на hygiene-1»; D-198:
-  явный запрос = текущая задача; R0, нуль поведения — текст):
-  (1) 4 устаревших пути `workbench/application/inference.py` в
-  комментариях/докстрингах перепинены на пакет (settings.py:30/121
-  + test_inference.py:2 → `inference/`; settings.py:98 →
-  `inference/migration.py` — носитель `migrate_launch_semantics`);
-  (2) TEST_PLAN §9.1: `docs/SCALE_TESTING_LAW.md` + ULT §3/§17.2
-  помечены «both paths inside that EXTERNAL pack, never this
-  repo»; (3) MVP_SCOPE §9: непиненая дословная копия ev_0007
-  заменена указателем на EVENT_SCHEMA §10 — единственный владелец
-  уже закреплён тестом (T0/D-010); развилка «пин или указатель»
-  решена в сторону указателя (D-024: пиненая копия = второй
-  источник истины; вариант A — одной итерацией по вызову) ·
+Iteration: iter-378 (`sensesidx` — третья голова стоящего
+  приказа по директиве владельца «продолжай работы… я разрешаю»;
+  R3, D-255; класс iter-362: индекс на пути коммита, нуль
+  канон-байт): ИНДЕКС ЧУВСТВ ДИРЕКТОРА — SensesIndex в
+  core/director.py: сумма подозрения + счёт видимых угроз как
+  СКЛАДКА НА ПУТИ КОММИТА (рождена из initial-проекции
+  пакета — закон целой проекции KI#16 удовлетворён по построению;
+  обновляется в seed на КАЖДОМ событии — двойник apply_event,
+  from_ есть до-значение, арифметика дельт точна); гейт
+  идентичности (закон ScanGateMemo): bind пересканирует + штампует
+  живой объект, releases читает индекс ТОЛЬКО для него — каждая
+  чужая проекция держит сканы побайтово (entropy/channel_entropies
+  — keyword-only senses=None, все прежние вызывающие не тронуты);
+  указатель _is_suspicion_home — единый владелец формы обеих
+  осей; loop.py: bind при construction + после resume-восстанов-
+  ления (пасс реплея уже складывает через seed — перескан честной
+  промывки); индекс НЕ в export_run_state (перестраиваем по логу,
+  закон буфера — старые курсоры валидны). ИЗМЕРЕНО: стена h32 10y
+  11.37 → 9.57/9.49 с (×1.19); член director_global_passes
+  5.07 → 0.02 проф. с (16.1% → 0.1%); entropy per-call cum
+  663 → 3.1 мкс — теперь НЕЗАВИСИМ ОТ ПОПУЛЯЦИИ (datum ×2.50
+  списан); оба скана — честный ноль в профиле; НУЛЬ КАНОН-БАЙТ:
+  h32 07e924cb… / h3 796afbe1… / farstead 4e4f4cf2… идентичны
+  до/после ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2629 passed + 27 failed + 1 skipped, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure set IDENTICAL to the iter-376 baseline — re-run THIS session AFTER the text fixes; zero flakes) ·
-Date: 2026-10-12 ·
+2636 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure list diffed name-by-name against the documented set — zero new; the +7 the new senses laws, all green; the documented +1 skip is env-conditional and does not fire this session) ·
+Date: 2026-10-13 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..376 baseline, the GOLDEN
-  3.12.14 suite fully green per iter-363; re-verified this session
-  after the fixes — zero new, zero flakes) ·
-Scope: R0 text (комментарии/доки, нуль поведения):
-  workbench/application/settings.py (3 комментария),
-  tests/test_inference.py (1 докстринг), docs/TEST_PLAN.md (§9.1,
-  +1 строка), docs/MVP_SCOPE.md (§9, −13 строк) + райдеры:
-  STATUS.md (заголовок + Next), worklog.md (iter-377, iter-365
-  вытеснен), docs/TASKS.md (hygiene-1 → DONE + леджер),
-  docs/iterations/iter-377-hygiene1-report.md (новый) — 8
+  3.12.14 suite fully green per iter-363; the single-char header
+  diff re-confirmed live this session at index 71 — the python
+  field — zero new, zero flakes) ·
+Scope: R3 core (director + loop + tests + labrunner notes +
+  DIRECTOR_SPEC §4 runtime note): core/director.py (SensesIndex
+  + bind + _is_suspicion_home + seed-fold + releases/channel
+  reads), core/loop.py (2 bind call sites), scripts/labrunner.py
+  (the member comment + 1 note), docs/DIRECTOR_SPEC.md (§4),
+  tests/test_senses.py (новый, 7 законов-оракула) + райдеры:
+  STATUS.md (заголовок + Next), worklog.md (iter-378, iter-366
+  вытеснен), docs/TASKS.md (строка density-1 + леджер, iter-366
+  вытеснен), docs/DECISIONS.md (D-255, 35/35 — НА КАПЕ D-252,
+  следующая запись — вызов коллапса владельца),
+  docs/iterations/iter-378-sensesidx-report.md (новый) — 10
   изменённых/созданных.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -88,13 +103,12 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
 
 - KI#113 · the wall-split accounting law (test_lab) raised
   AssertionError ONCE on the session's first post-install suite run; 6 retries green (incl. 4-CPU load) — candidates in the iter-329 report §D · opened 2026-10-04; the growth/labels law (same file, same class) flaked once at iter-370's first post-install suite run — retries green, the class stands; iter-371's and iter-374's post-install runs green (no flake)
-- KI#121 · the --gate help string's literal % crashed argparse's %-expansion (ValueError: unsupported format character, the owner's live report on the v6.1 station attempt) · opened 2026-10-12 · FIXED in the pack v6.2 (58.8% → 58.8%%, one character; zero other bare % in any help=) — proven live by the completed m6 run · CLOSED iter-372/373 (the v6.2 pack sessions; recorded in-repo by iter-374 §0)
-- KI#122 · the band instrument's FALSE NEGATIVE: the v6.0/6.1 «no ggml_cuda_init = cpu» grep discriminated NOTHING on b11541 (device enumeration TRACE-gated, -ngl silent without a backend — the m6 run rode CUDA while the instrument said cpu; the m5 verdict the same class, the m4 GPU readings restored) · opened 2026-10-12 · FIXED in v6.2 (-lv 4 on every spawn, _band_from_log reads load_backend/device_info) — proven live by the m6 markers + physics · CLOSED iter-372/373 (recorded in-repo by iter-374 §0)
 
-(KI#120 deleted per AGENTS §5 — closed iter-371, more than two
-iterations ago; its live station verification arrived with the m6
-run and is recorded in iter-374's report §D and worklog. KI#119
-deleted at iter-371 per the same law.)
+(KI#121 and KI#122 deleted per AGENTS §5 — closed iter-372/373,
+more than two iterations ago; both fixes' live proofs arrived with
+the m6 run and are recorded in-repo by iter-374's report §0 +
+worklog. KI#120 deleted at iter-377, KI#119 at iter-371, per the
+same law.)
 
 ## FAQ / Pitfalls
 
@@ -124,26 +138,24 @@ deleted at iter-371 per the same law.)
 
 ## Next step
 
-**iter-377 DONE: hygiene-1 (три точечных фикса ревизии по вызову
-  владельца «даю добро на hygiene-1» — R0 текст, нуль поведения:
-  4 устаревших inference.py-пути перепинены на пакет inference/
-  (settings.py:98 → inference/migration.py — носитель
-  migrate_launch_semantics), внешний путь TEST_PLAN §9.1 помечен
-  «both paths inside that EXTERNAL pack», непиненая копия ev_0007
-  в MVP_SCOPE §9 заменена указателем на EVENT_SCHEMA §10 —
-  вариант B развилки по D-024, вариант A остаётся одной итерацией
-  по вызову; the report iter-377-hygiene1-report.md).**
-Next: THE STANDING ORDER'S THIRD HEAD — director_global_passes
-  (5.06 profiled s; per-call entropy 2.0→2.3 µs POPULATION-FLAT,
-  the cum growth is call-count — the candidate form: the
-  suspicion/threat INDEX maintained on the commit path, the
-  iter-362 «O(1) id→kind» class; KI#16's projection-scan law the
-  design constraint), then the decay landing index (the heap
-  form — the (npc,axis)→next-fire walk replacement, its
-  staleness/veto laws) and the rolling-filter memo (the
-  locations-keyed twin of the scan gate memo — urgency_rolls
-  1.70 profiled s / 2.6M calls) — the standing order unchanged by
-  the research + hygiene iterations
+**iter-378 DONE: sensesidx (третья голова стоящего приказа —
+  R3, D-255, класс iter-362, нуль канон-байт: SensesIndex —
+  складка подозрения/угроз на пути коммита, гейт идентичности,
+  +7 законов-оракулов; стена h32 11.37→9.57 с, член
+  director_global_passes 5.07→0.02 проф. с, три md5 идентичны;
+  the report iter-378-sensesidx-report.md).**
+Next: THE STANDING ORDER'S REMAINING ROWS, re-ranked by the
+  post-378 measurement — the decay landing index FIRST (the heap
+  form — the (npc,axis)→next-fire walk replacement in
+  next_decay_tick/decay_drafts, its staleness/veto laws; the
+  decay_walk member 3.28 profiled s / 12.3%, the density
+  exponent ×8.1 the strongest residual), then the rolling-filter
+  memo (the locations-keyed twin of the scan gate memo —
+  urgency_rolls 1.70 profiled s / 2.6M calls inside
+  skip_probes 35.6%), then the scan key builds (the 939K
+  pair_values construction — iter-375's honest remainder);
+  commit_validate (14.7%) stays never-the-wall (population-
+  flat)
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE (unchanged by this
   iteration: the memo touched zero door/battery paths); owner-side

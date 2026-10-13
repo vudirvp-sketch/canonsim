@@ -122,6 +122,10 @@ Narrative entropy (P2e): sum of seeded-hook weights + global suspicion
 + visible physical threats — observable state only (L6, never
 knowledge records, never PC internals). Replaces the flat
 `release_after_ticks_without_visible_event` timer of the v0.1 draft.
+Since iter-378 the two world-sensing terms read O(1) per beat through
+`SensesIndex` — the commit-path fold `seed` maintains for the bound
+projection (the scans stay the fallback path's own law and the fold's
+semantic owner; the twin-agreement law the equality falsifier).
 """
 
 from __future__ import annotations
@@ -130,6 +134,7 @@ from collections.abc import Iterator, Mapping
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING, Any, Final, Protocol
 
+from core.fold import initial_projection
 from core.ids import sequence_id
 from core.intent import IntentData
 from core.predicates import evaluate
@@ -159,6 +164,7 @@ __all__ = [
     "entropy",
     "pacing_from_rules",
     "policy_from_rules",
+    "SensesIndex",
 ]
 
 HOOK_PREFIX: Final = "director"
@@ -535,6 +541,18 @@ def pacing_from_rules(rules: Mapping[str, Any]) -> PacingConfig | None:
 # -- entropy (P2e: observable state only, never knowledge records) ------------
 
 
+def _is_suspicion_home(prop: str) -> bool:
+    """The suspicion axis's two projection homes (suspectaxis, iter-69):
+    the flat `relations.suspicion` or a per-target `pair.<figure>.
+    suspicion` record. One mode per pack (the pack lint's no-mixing
+    law); the single owner of the shape — the scan, the index's
+    per-change fold, and the twin-agreement law all read THIS
+    predicate, never re-spelled copies (D-024)."""
+    return prop == "relations.suspicion" or (
+        prop.startswith("pair.") and prop.endswith(".suspicion")
+    )
+
+
 def _threat_states(rules: Mapping[str, Mapping[str, Any]]) -> frozenset[str]:
     """The active-state values of every declared transition layer — the
     value a `<layer>.<spot>` prop holds while the layer spreads (pack
@@ -572,15 +590,98 @@ def _global_suspicion(projection: Mapping[str, Mapping[str, Any]]) -> int:
     senses."""
     total = 0
     for props in projection.values():
-        value = props.get("relations.suspicion")
-        if isinstance(value, int) and not isinstance(value, bool):
-            total += value
         for prop, value in props.items():
-            if not (prop.startswith("pair.") and prop.endswith(".suspicion")):
+            if not _is_suspicion_home(prop):
                 continue
             if isinstance(value, int) and not isinstance(value, bool):
                 total += value
     return total
+
+
+class SensesIndex:
+    """The director's world-senses aggregates (iter-378, the iter-362
+    index class applied to the P2e terms): the global-suspicion sum and
+    the visible-threat count, maintained incrementally ON the commit
+    path instead of re-scanned whole-population per beat — the two
+    O(projection) walks that were the `director_global_passes` wall
+    member (5.07 profiled s on h32 10y, 2 scans x 7,634 landed beats).
+
+    KI#16's law is the design constraint, satisfied by construction:
+    the index is born from the pack-seeded INITIAL projection (the
+    whole projection, seeds included — never the hook-seeding events)
+    and folds EVERY committed event's state changes, the same fold
+    `apply_event` runs on the tracked projection (INV-1's own law:
+    the live projection IS this fold, in the same commit order —
+    `_commit` applies then `_react` seeds, reactions nested in
+    between, so seeds arrive in exactly apply order). A read-side
+    twin of the `(entity, prop) -> tick` and write indexes: pure,
+    deterministic (INV-2 — no streams, no clock), never canon, never
+    exported in the run state (rebuildable by `seed()` over the log,
+    the buffer's own resume law).
+
+    The equality law (the twin-agreement oracle, tests/test_senses.py):
+    `from_projection(p, states)` answers what the scans answer on p,
+    and after any committed-event sequence the fold answers what the
+    scans answer on the folded projection — the falsifier for every
+    edge the fold meets (bool and non-int suspicion values, dotted
+    props entering/leaving the threat states, prop births with
+    `from_ = None`, repeated same-prop changes inside one event)."""
+
+    __slots__ = ("_suspicion", "_threats", "_states")
+
+    def __init__(self, states: frozenset[str]) -> None:
+        self._suspicion = 0
+        self._threats = 0
+        self._states = states
+
+    @classmethod
+    def from_projection(
+        cls,
+        projection: Mapping[str, Mapping[str, Any]],
+        states: frozenset[str],
+    ) -> "SensesIndex":
+        """The birth scan: the whole projection, seeds included (KI#16 —
+        the pack-seeded initial values are sensed exactly like event-
+        written ones; a fold that started from zero would be blind to
+        the pack's declarations). Delegates to the two scan functions —
+        the semantic owners — so the birth form can never drift from
+        the fallback path's own reading (D-024: one owner per fact)."""
+        index = cls(states)
+        index._suspicion = _global_suspicion(projection)
+        index._threats = _visible_physical_threats(projection, states)
+        return index
+
+    def apply_change(self, prop: str, from_: Any, to_: Any) -> None:
+        """Fold one committed state change (the `apply_event` twin: the
+        caller passes the change's own `from_`/`to_`, which the commit
+        door has already validated against the tracked projection —
+        `from_` IS the pre-change value, so the delta arithmetic is
+        exact). The int-not-bool discipline and the dotted-prop threat
+        membership mirror the scans' own tests; values outside the
+        typed families contribute zero on their side (a `None` birth
+        or a string suspicion record never moves the sums)."""
+        if _is_suspicion_home(prop):
+            if isinstance(from_, int) and not isinstance(from_, bool):
+                self._suspicion -= from_
+            if isinstance(to_, int) and not isinstance(to_, bool):
+                self._suspicion += to_
+        if "." in prop:
+            if from_ in self._states:
+                self._threats -= 1
+            if to_ in self._states:
+                self._threats += 1
+
+    @property
+    def suspicion(self) -> int:
+        """The global-suspicion sum (both homes, the scan's exact
+        reading)."""
+        return self._suspicion
+
+    @property
+    def threats(self) -> int:
+        """The visible physical-threat count (dotted props holding a
+        declared transition spot-state)."""
+        return self._threats
 
 
 def entropy(
@@ -588,6 +689,8 @@ def entropy(
     unreleased: Iterator[SeededHook],
     rules: Mapping[str, Mapping[str, Any]],
     beat_tick: int,
+    *,
+    senses: SensesIndex | None = None,
 ) -> int:
     """P2e: sum of seeded-hook EFFECTIVE weights + global suspicion +
     visible physical threats — observable state only (L6). Computed
@@ -595,13 +698,21 @@ def entropy(
     and the beat tick (a drama-1 modifier's `when` predicate may read
     the clock), never from knowledge records or PC internals. The
     stagnation detector releases when this drops below the pack's
-    floor."""
+    floor.
+
+    iter-378: `senses` is the tracked projection's commit-path index
+    (the O(1) form of the two world-sensing terms — the Director
+    passes its fold when the caller handed it the BOUND projection);
+    None (every other caller: direct probes, diagnostics, foreign
+    projections) runs the whole-projection scans — the law unchanged
+    for the fallback path, the twin-agreement law the equality
+    guarantee)."""
+    if senses is None:
+        senses = SensesIndex.from_projection(
+            projection, _threat_states(rules)
+        )
     weights = sum(_resolve_weight(hook, projection, beat_tick) for hook in unreleased)
-    return (
-        weights
-        + _global_suspicion(projection)
-        + _visible_physical_threats(projection, _threat_states(rules))
-    )
+    return weights + senses.suspicion + senses.threats
 
 
 def channel_entropies(
@@ -610,6 +721,8 @@ def channel_entropies(
     unreleased: Iterator[SeededHook],
     rules: Mapping[str, Mapping[str, Any]],
     beat_tick: int,
+    *,
+    senses: SensesIndex | None = None,
 ) -> dict[str, int]:
     """DIR-4: the per-channel entropy map. Each declared channel senses
     its OWN unreleased hook weights (always — at their drama-1 effective
@@ -617,9 +730,13 @@ def channel_entropies(
     world-sensing terms, decomposed per dimension). Hooks in no declared
     channel count toward the TOTAL only (the pacing clock's input,
     unchanged). Deterministic: the channels iterate sorted(), the buffer
-    in construction order (INV-2)."""
-    suspicion = _global_suspicion(projection)
-    threats = _visible_physical_threats(projection, _threat_states(rules))
+    in construction order (INV-2). iter-378: `senses` is the commit-path
+    index for the BOUND projection (the O(1) form); None runs the
+    scans — the fallback path's law unchanged."""
+    if senses is None:
+        senses = SensesIndex.from_projection(
+            projection, _threat_states(rules)
+        )
     totals = {name: 0 for name in sorted(channels)}
     for hook in unreleased:
         if hook.channel in totals:
@@ -627,9 +744,9 @@ def channel_entropies(
     for name in sorted(channels):
         inputs = channels[name].inputs
         if "suspicion" in inputs:
-            totals[name] += suspicion
+            totals[name] += senses.suspicion
         if "physical_threats" in inputs:
-            totals[name] += threats
+            totals[name] += senses.threats
     return totals
 
 
@@ -836,6 +953,23 @@ class Director:
     _arc_last_beat: dict[str, int] = field(  # arc → beat of its previous member release
         default_factory=dict, init=False, repr=False
     )
+    # iter-378 (the senses index): the commit-path fold of the two P2e
+    # world-sensing terms + the identity stamp of the projection it
+    # tracks. The fold updates inside `seed` (every committed event, in
+    # apply order — reactions nested between a commit and its own seed
+    # arrive in exactly apply order, so the fold is the projection's own);
+    # `_bound` is None until `bind` stamps the LIVE projection (the
+    # Simulator at construction and after a resume restore — the honest
+    # flush rescans, never trusting a stale fold), and `releases` reads
+    # the index ONLY for that exact object — any other projection
+    # (tests, probes, foreign callers) gets the whole-projection scans,
+    # the law unchanged (the ScanGateMemo identity law's form).
+    _senses: "SensesIndex | None" = field(
+        default=None, init=False, repr=False
+    )
+    _bound: "Projection | None" = field(
+        default=None, init=False, repr=False
+    )
 
     def __post_init__(self) -> None:
         self._pacing_config = pacing_from_rules(self.pack.rules)
@@ -848,6 +982,32 @@ class Director:
                 for position, tag in enumerate(arc.members):
                     self._tag_arc[tag] = name
                     self._tag_pos[tag] = position
+        # iter-378: the senses fold born from the pack-seeded initial
+        # projection (KI#16 — the whole projection, seeds included; a
+        # fold from zero would be blind to the pack's declarations).
+        # `seed` keeps it exact from here; `bind` re-anchors it on the
+        # live object (the rescan is the honest flush — locally
+        # verifiable, never trusting the caller's word).
+        self._senses = SensesIndex.from_projection(
+            initial_projection(self.pack.entities),
+            _threat_states(self.pack.rules),
+        )
+
+    def bind(self, projection: "Projection") -> None:
+        """Stamp the LIVE projection the senses fold tracks (iter-378,
+        the ScanGateMemo identity law's form): the caller asserts this
+        object is the one every committed event applies to (`Simulator`
+        at construction; the resume door after the restore+replay
+        pass). The rescan IS the point — the flush rebuilds the fold
+        from the projection's own content, so a bind is locally
+        correct wherever it sits after the fold basis is final, never
+        trusting a stale accumulated state. `releases` reads the index
+        only for this exact object; every other projection keeps the
+        whole-projection scans (the law, unchanged)."""
+        self._senses = SensesIndex.from_projection(
+            projection, _threat_states(self.pack.rules)
+        )
+        self._bound = projection
 
     @property
     def hooks(self) -> tuple[SeededHook, ...]:
@@ -874,7 +1034,16 @@ class Director:
         buffer stores data, the effective weight is computed per
         evaluation, never stored). The drama-2 option blocks flatten
         the same way (`_option_specs` — the choice is computed per
-        release, never stored)."""
+        release, never stored).
+
+        iter-378: the event's state changes also fold into the senses
+        index (the `apply_event` twin — `from_` IS the pre-change value
+        the commit door validated, so the delta arithmetic is exact;
+        every committed event passes here, hook-bearing or not, which
+        is KI#16's law satisfied by construction: the fold tracks the
+        WHOLE projection's history, never the hook-seeding events)."""
+        for change in event.state_changes:
+            self._senses.apply_change(change.prop, change.from_, change.to_)
         config = self.pack.rules.get("director", {})
         hook_specs = config.get("hooks", {})
         for tag in event.hooks:
@@ -974,9 +1143,15 @@ class Director:
         # rejecting policy: k+1 identical evaluations per beat). Computed
         # even on an empty buffer: the pacing clock models the world's
         # drama (a burning room is a PEAK with the buffer drained), and
-        # entropy is its only input.
+        # entropy is its only input. iter-378: the BOUND projection's
+        # commit-path fold answers the two world-sensing terms (O(1),
+        # the 2-per-beat whole-population scans gone); any other
+        # projection keeps the scans inside `entropy` — the fallback
+        # path's law, byte-for-byte.
+        senses = self._senses if projection is self._bound else None
         current_entropy = entropy(
-            projection, iter(h for _, h in tension), self.pack.rules, beat_tick
+            projection, iter(h for _, h in tension), self.pack.rules,
+            beat_tick, senses=senses,
         )
         self._advance_pacing(current_entropy)
         if not unreleased:
@@ -1065,6 +1240,7 @@ class Director:
             channel_entropies(
                 self._channels, projection,
                 iter(hook for _, hook in tension), self.pack.rules, beat_tick,
+                senses=senses,
             )
             if self._channels is not None
             else None

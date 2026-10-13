@@ -428,6 +428,13 @@ class Simulator:
         self._director = Director(
             pack=pack, policy=policy_from_rules(pack.rules, director_enabled)
         )
+        # iter-378: the senses fold anchored on the LIVE projection —
+        # every committed event updates the index inside `seed` (the
+        # apply_event twin, in apply order), and `releases` reads it
+        # for this exact object (the identity law; foreign projections
+        # keep the scans). The bind's rescan re-anchors the birth fold
+        # on the Simulator's own initial-projection object.
+        self._director.bind(self._projection)
         self._next_beat = self._first_beat(pack.rules)
         # H9 (iter-337): THE QUIET-BEAT SKIP — the crossing discipline
         # jumps the clock, the bank counters, and the director's beat
@@ -857,6 +864,15 @@ class Simulator:
                         (change.entity, change.prop), []
                     ).append(event_index)
                 sim._director.seed(event)
+            # iter-378: the senses fold re-anchored on the RESTORED
+            # projection — the replay pass above already folded every
+            # event through `seed` (the index rode the buffer rebuild,
+            # the same apply order the fold ran); the bind rescans from
+            # the projection's own content anyway (the honest flush —
+            # locally correct, never trusting the replay), so a resumed
+            # session's beats read the O(1) index exactly like an
+            # uninterrupted run's.
+            sim._director.bind(sim._projection)
             sim._director.restore_run_state(cursor["director"])
             sim._bank.restore_state(cursor["bank"])
             if events and int(cursor["tick"]) < events[-1].t:

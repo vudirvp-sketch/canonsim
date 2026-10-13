@@ -330,6 +330,18 @@ perceiver to the director itself. Replaces the v0.1 draft's flat
 `release_after_ticks_without_visible_event: 90` timer — a tension
 floor sensor, not a boredom timer.
 
+Runtime note (iter-378, the iter-362 index class): the two
+world-sensing terms are answered O(1) per beat by `SensesIndex`
+(`core/director.py`) — a fold born from the pack-seeded initial
+projection and maintained on the commit path (every event's state
+changes, in apply order — KI#16's whole-projection law satisfied by
+the same fold `apply_event` runs). Read only for the bound live
+projection (the Simulator's own object; the identity gate's law);
+every other projection a caller hands `releases` keeps the
+whole-projection scans — the formula above, unchanged. The
+twin-agreement law (`tests/test_senses.py`) is the equality
+falsifier; the scans remain the semantic owners.
+
 ## 5. Release policy (the minimal pair + the pacing clock + the climax
 layer + the multi-channel split)
 
