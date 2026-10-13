@@ -1,58 +1,56 @@
-Iteration: iter-379 (`decayheap` — четвёртая голова стоящего
-  приказа по директиве владельца «продолжай работы… я разрешаю»;
-  R3, D-256; класс iter-362: пул на пути коммита, нуль
-  канон-байт): ИНДЕКС ПРИЗЕМЛЕНИЯ DECAY — DecayIndex в
-  core/states.py: min-кучи ПО ЛОКАЦИЯМ из ячеек (next_fire,
-  npc, prop) над ЖИВЫМИ парами (значение int-не-bool, не
-  запинено на клампе, не caught, в проекции) — ПУЛ КАНДИДАТОВ,
-  не истина: рождён из initial-проекции пака (KI#16, базы из
-  last_change вызывающего — при construction пуст, база 0 —
-  дефолт самого обхода); фолд на пути коммита в _commit
-  (двойник apply_event: событие на оси перекладывает свою
-  пару, position/crime_status — все пары сущности); ЗАКОНЫ
-  УСТАРЕВАНИЯ/ВЕТО: INV-1 ЛИЦЕНЗИРУЕТ устаревание — вся
-  причина (база/значение/пин/позиция/caught) ездит
-  закоммиченным событием, _commit складывает КАЖДОЕ
-  state_change, отброшенная ячейка ВСЕГДА имеет свежего
-  наследника или пара легитимно мертва; валидация НА ВИДУ
-  (фильтры СОБСТВЕННЫЕ обхода против живого состояния —
-  позиция == ключ кучи, свежесть next_fire == base +
-  elapsed_first); перечисление НЕ ПОТРЕБЛЯЕТ (re-push);
-  гейт идентичности serves (штампованные объекты + таблица
-  рождения; чужие держат обходы — обходы остаются
-  семантическими владельцами, формула в _axis_change, обе
-  ветки зовут её); clamp max(…, from_tick) остаётся
-  собственностью next_decay_tick; loop.py: рождение + re-birth
-  при resume (перестраиваем — не в export_run_state).
-  ИЗМЕРЕНО: стена h32 10y 9.59 → 8.08/7.99 с (×1.19); член
-  decay_walk 3.31 → 0.26 проф. с (12.5% → 1.2%, ×12.9;
-  per-call 224.7 → 4.8 мкс); next_decay_tick 2.68 → 0.05 с
-  (×50, 1.0 мкс); ЭКСПОНЕНТА ПЛОТНОСТИ ×8.1 → ×1.85 /
-  ×1.11; НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… /
+Iteration: iter-381 (`rollidx` — пятая голова стоящего приказа
+  по директиве владельца «продолжай работы… я разрешаю»;
+  R3, D-257; класс iter-362: бакеты по локациям, нуль
+  канон-байт): ИНДЕКС РОЛЛИНГ-МНОЖЕСТВА — RollIndex в
+  core/urgencies.py: бакеты ПО ЛОКАЦИЯМ из пар (позиция_спека,
+  спек) над присутствующими, позиционированными, не-пойманными
+  NPC (ответы предиката urgency_rolls, свёрнутые на пути
+  коммита); ЗАКОН ТОЧНОСТИ (вместо законов устаревания
+  DecayIndex-двойника): всякая причина изменения вердикта
+  ездит закоммиченным событием (position — ключ бакета,
+  crime_status — вето; присутствие ИНВАРИАНТНО — гейт двери
+  коммита поднимает на сущности вне сеяной проекции), фолд
+  ПЕРЕПРОИЗВОДИТ членство сущности из ЖИВОГО состояния при
+  каждом таком изменении (снять-если-размещён,
+  положить-если-не-пойман) — ответ после последнего вызова
+  фолда равен ответу предиката на конечном состоянии при
+  ЛЮБОМ порядке изменений внутри события; list.remove мимо —
+  ГРОМКО (реальный разрыв инварианта, никогда молча); ЗАКОН
+  ПОРЯДКА ПАКА (канон): бакеты insort-упорядочены позицией
+  спека — порядок вставки dict'ов скана и последовательность
+  дроу обхода идентичны по построению; гейт идентичности
+  serves (штампованные объекты; чужие держат предикат —
+  семантический владелец, D-024); оба потребителя принимают
+  roll_index=None (дефолт = фильтр, все прежние вызывающие
+  не тронуты); loop.py: рождение + re-birth при resume +
+  фолд в _commit + все три места вызова. ИЗМЕРЕНО: стена
+  h32 10y 8.05 → 7.35/7.48 с (×1.10); профильная стена
+  21.18 → 18.62 с (×1.14); urgency_rolls 1.669 с / 2.63M
+  вызовов → ЧЕСТНЫЙ НОЛЬ в профиле; skip_probes 6.79 → 5.61,
+  beat_rolls 4.02 → 2.83 с; экспонента per-call скана ×7.7 →
+  ×4.50; НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… /
   farstead 4e4f4cf2… идентичны ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2643 passed + 28 failed, ruff clean, docguard 1 line (the D-256 36/35 DECISIONS count — the D-250 precedent state, clears on the owner's collapse call), topology clean, digest parses (28 = 27 the known T1 log-header env set — the failure list diffed name-by-name against the documented set, zero new — + 1 the guard's own DECISIONS 36/35 count line; the +8 the new decay laws, all green; the documented +1 skip is env-conditional and does not fire this session) ·
+2653 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the failure list diffed name-by-name against the pre-change baseline, zero new; the +9 the new roll-index laws, all green; the documented +1 skip is env-conditional and does not fire this session) ·
 Date: 2026-10-13 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..376 baseline, the GOLDEN
+  3.12.15, byte-identical to the 362..380 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
-  diff re-confirmed live this session at index 71 — the python
-  field — zero new, zero flakes) ·
-Scope: R3 core (states + loop + tests + labrunner): core/states.py
-  (DecayIndex + _axis_change + _decay_draft + обе индексные ветки,
-  keyword-only index=None), core/loop.py (рождение при construction +
-  re-birth при resume + фолд в _commit + 3 места вызова),
-  scripts/labrunner.py (комментарии членов + 1 note),
-  tests/test_decayidx.py (новый, 8 законов-оракула) + райдеры:
-  STATUS.md (заголовок + Next), worklog.md (iter-379, iter-367
-  вытеснен), docs/TASKS.md (строка standing-order + леджер, iter-367
-  вытеснен), docs/DECISIONS.md (D-256, 36/35 — НАД КАПОЙ D-252,
-  коллапс — вызов владельца, прецедент D-250),
-  docs/iterations/iter-379-decayheap-report.md (новый) — 10
-  изменённых/созданных.
+  diff at index 71 — the python field — zero new, zero flakes) ·
+Scope: R3 core (urgencies + loop + tests + labrunner):
+  core/urgencies.py (+RollIndex + ветка roll_index в обоих
+  потребителях, keyword-only roll_index=None), core/loop.py
+  (рождение при construction + re-birth при resume + строка фолда
+  в _commit + 3 места вызова), scripts/labrunner.py (комментарии
+  членов), tests/test_rollidx.py (новый, 9 законов-оракула) +
+  райдеры: STATUS.md (заголовок + Next), worklog.md (iter-381,
+  iter-369 вытеснен), docs/TASKS.md (леджер, iter-369 вытеснен),
+  docs/DECISIONS.md (D-257, 34/35 — законно, запас коллапса
+  работает), docs/iterations/iter-381-rollidx-report.md (новый)
+  — 9 изменённых/созданных.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -146,42 +144,41 @@ same law.)
 
 ## Next step
 
-**iter-379 DONE: decayheap (четвёртая голова стоящего приказа —
-  R3, D-256, класс iter-362, нуль канон-байт: DecayIndex —
-  min-кучи по локациям, законы устаревания/вето (INV-1
-  лицензирует), гейт идентичности, +8 законов-оракулов; стена
-  h32 9.59→8.08 с, член decay_walk 3.31→0.26 проф. с (×12.9),
-  next_decay_tick ×50, экспонента плотности ×8.1→×1.85, три
-  md5 идентичны; the report iter-379-decayheap-report.md).**
+**iter-381 DONE: rollidx (пятая голова стоящего приказа — R3,
+  D-257, класс iter-362, нуль канон-байт: RollIndex — бакеты по
+  локациям, закон точности (перепроизводство из живого состояния,
+  порядко-иммунное), закон порядка пака (канон дроу), гейт
+  идентичности, +9 законов-оракулов; стена h32 8.05→7.35 с,
+  urgency_rolls 1.67 с / 2.63M вызовов → ноль в профиле, члены
+  skip_probes 6.79→5.61 / beat_rolls 4.02→2.83 с, три md5
+  идентичны; the report iter-381-rollidx-report.md).**
 Next: THE STANDING ORDER'S REMAINING ROWS, re-ranked by the
-  post-379 measurement — the rolling-filter memo FIRST (the
-  locations-keyed twin of the scan gate memo — urgency_rolls
-  ~1.7 profiled s / 2.6M calls inside skip_probes 32.8%), then
-  the scan key builds (the 939K pair_values construction —
-  iter-375's honest remainder, inside urgency_scan 6.73 s);
-  commit_validate (18.3%) stays never-the-wall (population-
-  flat); beat_rolls 19.4% (urgency_intents 3.97 s) the named
-  third candidate — its walk shares the scan's family shapes
+  post-381 measurement — the scan key builds FIRST (the 939K
+  pair_values construction — iter-375's honest remainder, 1.91
+  profiled s inside urgency_scan 5.55 s; the memo's own key-build
+  cost — a commit-path pair-values fold the candidate form),
+  then first_d100_hit's collective draw walk (2.14 s — already
+  optimal per iter-362, the honest residue); commit_validate
+  (18.2%) stays never-the-wall (population-flat); beat_rolls'
+  draw residue (2.83 s — the family_randint walk itself)
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE (unchanged by this
   iteration: the index touched zero door/battery paths); owner-side
   housekeeping: drop canonsim_m6_station_pack_v6.2.zip into
   docs/station/archive/ (the pattern's fourth instance — the pack
   is the owner's local copy)
-+ THE OWNER'S STANDING CALLS — THE DECISIONS CAP IS BREACHED at
-  36/35 (D-256 recorded under the standing directive naming the
-  row — the second over-cap precedent after D-250; THE COLLAPSE
-  IS THE OWNER'S NEXT EXCLUSIVE CALL, D-034/D-185/D-252; the
-  docguard count line + the +1 guard test the honest visible
-  state until it fires); decider-4b parked (outside the
-  llama.cpp five); the pack-v5 instrument rows (the formalized
-  band sweep `cuda_gate.bands` — NOW EXERCISED LIVE by the m6 run,
-  the row's datum delivered) and the H-prose follow-ups (the
-  416-token max_tokens headroom question; the prose quality
-  itself — the aesthetic call, one half of the H-promotion basis);
-  behind them the standing owner calls in order — the replay-UI
-  NOT-EXPOSED row, the world track's W8, the frontend P1/P2/P3
-  continuations, `lab-composite-1`.
++ THE OWNER'S STANDING CALLS — the DECISIONS collapse EXECUTED
+  (36→33, iter-380, the owner's 2026-10-13 call; D-257 landed
+  LAWFUL at 34/35 — one slot of headroom remains, the next row
+  needs a fresh slot or the owner's call); decider-4b parked
+  (outside the llama.cpp five); the pack-v5 instrument rows (the
+  formalized band sweep `cuda_gate.bands` — NOW EXERCISED LIVE by
+  the m6 run, the row's datum delivered) and the H-prose
+  follow-ups (the 416-token max_tokens headroom question; the
+  prose quality itself — the aesthetic call, one half of the
+  H-promotion basis); behind them the standing owner calls in
+  order — the replay-UI NOT-EXPOSED row, the world track's W8,
+  the frontend P1/P2/P3 continuations, `lab-composite-1`.
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the

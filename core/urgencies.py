@@ -28,8 +28,10 @@ intents use. The world's logic is one mechanism, not two — M5
 
 from __future__ import annotations
 
+from bisect import insort
 from collections.abc import Collection, Mapping, Sequence
 from dataclasses import dataclass
+from itertools import chain
 from typing import TYPE_CHECKING, Any, Final
 
 from core.ids import sequence_id
@@ -49,7 +51,14 @@ if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
     from core.rng import RngBank
     from core.worldgen import WorldModel
 
-__all__ = ["URGENCY_PREFIX", "urgency_rolls", "urgency_intents", "urgency_specs"]
+__all__ = [
+    "URGENCY_PREFIX",
+    "RollIndex",
+    "urgency_rolls",
+    "urgency_intents",
+    "urgency_scan",
+    "urgency_specs",
+]
 
 URGENCY_PREFIX: Final = "urgency"
 
@@ -161,6 +170,161 @@ def urgency_specs(pack: "Pack") -> tuple[_UrgencySpec, ...]:
     return _specs(pack)
 
 
+class RollIndex:
+    """The rolling-set index (iter-381, the standing order's
+    rolling-filter row — the iter-362 index class applied to the
+    family's per-spec filter walk): per-LOCATION buckets of the
+    ``(position, spec)`` pairs whose NPC is present, positioned there,
+    and uncaught — `urgency_rolls`'s own answers, pre-folded on the
+    commit path. The scans and the beat walk read the bucket instead
+    of calling the predicate per spec per call (the measured basis:
+    urgency_rolls 1.67 profiled s / 2.63M calls on h32 10y — the
+    scan 172 filter calls per stretch, the walk 172 per beat, ~72%
+    of them passing).
+
+    THE EXACTNESS LAW (this index's own discipline — the DecayIndex
+    twin's staleness laws replaced by exact maintenance):
+
+    - **Every cause of a rolling-verdict change rides a committed
+      event's state change** — `position` (the bucket key) and
+      `crime_status` (the caught veto). Presence is invariant: the
+      commit door's gate raises on any state change to an entity
+      outside the seed projection, so a spec NPC (a pack entity,
+      seeded) is present for life. The fold re-derives the entity's
+      whole membership from the LIVE bound state on every such
+      change — remove-if-placed, place-iff-uncaught — so the answer
+      after the last fold call of an event equals the predicate's
+      answer on the final state, under ANY change order inside the
+      event (a position change and a caught flip in one event, both
+      orders; repeated same-prop changes — each call is a full
+      re-derivation, the last one wins).
+    - **The buckets are exact, never candidate.** No staleness, no
+      defensive re-filter at read: the bucket IS the predicate's
+      answer for the bound objects (the twin law the falsifier —
+      tests/test_rollidx.py). A `list.remove` miss fails LOUD — a
+      real invariant break, never a silent wrong answer.
+    - **The pack order is the canon law.** The buckets hold
+      ``(spec_position, spec)`` pairs sorted by the spec's position
+      in the birth tuple — the filter form's iteration order (the
+      walk's per-beat draw order — the counter words — and the
+      scan's dict insertion order ride it); the single-location read
+      returns the bucket itself, the None and multi-location reads
+      sort the union (disjoint buckets — one spec sits in exactly
+      one bucket).
+
+    KI#16's law is the birth constraint (the SensesIndex/DecayIndex
+    form): born from the pack-seeded INITIAL projection — the whole
+    projection, seeds included. The identity gate (the
+    ScanGateMemo/SensesIndex/DecayIndex law): `serves` answers True
+    only for the exact projection and specs objects stamped at
+    birth — every foreign caller keeps the predicate (the walks
+    stay the semantic owners, D-024). Deterministic throughout
+    (INV-2): zero draws, zero clock, construction-order birth scan,
+    insort-ordered buckets. Rebuildable from the log (the buffer's
+    law) — never exported in the run state; a resume re-births it
+    from the restored projection."""
+
+    __slots__ = ("_specs", "_spec_idxs", "_buckets", "_where", "_bound")
+
+    def __init__(self, specs: "Sequence[_UrgencySpec]") -> None:
+        self._specs = specs
+        # npc -> its specs' positions in the birth tuple (ascending —
+        # the enumerate order; ≤2 per npc on the committed packs)
+        self._spec_idxs: dict[str, list[int]] = {}
+        for idx, spec in enumerate(specs):
+            self._spec_idxs.setdefault(spec.npc, []).append(idx)
+        self._buckets: dict[Any, list[tuple[int, _UrgencySpec]]] = {}
+        self._where: dict[str, Any] = {}  # npc -> the bucket key (placed)
+        self._bound: "Projection | None" = None
+
+    @classmethod
+    def from_projection(
+        cls,
+        specs: "Sequence[_UrgencySpec]",
+        projection: "Projection",
+    ) -> "RollIndex":
+        """The birth scan AND the identity stamp (the DecayIndex
+        collapsed form: this index never folds a replay — a resume
+        re-births from the restored state). Scans the specs in pack
+        order (INV-2); every present, uncaught NPC's specs land in
+        its position's bucket, insort-ordered by the spec position —
+        the filter form's own iteration order."""
+        index = cls(specs)
+        for idx, spec in enumerate(specs):
+            props = projection.get(spec.npc)
+            if props is None:
+                continue  # foreign projections only — see the class law
+            if props.get("crime_status") == "caught":
+                continue
+            insort(
+                index._buckets.setdefault(props.get("position"), []),
+                (idx, spec),
+            )
+            index._where[spec.npc] = props.get("position")
+        index._bound = projection
+        return index
+
+    def serves(
+        self, projection: "Projection", specs: "Sequence[_UrgencySpec] | None"
+    ) -> bool:
+        """The identity gate: the scans' index branch serves ONLY the
+        exact projection and specs objects stamped at birth (a None
+        or a fresh parse keeps the predicate — the safe fallback for
+        every existing caller)."""
+        return (
+            self._bound is not None
+            and self._bound is projection
+            and specs is not None
+            and specs is self._specs
+        )
+
+    def apply_change(self, entity: str, prop: str) -> None:
+        """Fold one committed state change (the `apply_event` twin,
+        called AFTER the projection apply — the live read is the
+        post-change state). Only `position` and `crime_status` can
+        move a rolling verdict (the exactness law); everything else
+        is a no-op. The re-derivation is exact under any in-event
+        change order: remove-if-placed (wherever the index holds the
+        entity), then place-iff-uncaught at the live position."""
+        if prop != "position" and prop != "crime_status":
+            return
+        idxs = self._spec_idxs.get(entity)
+        if idxs is None or self._bound is None:
+            return
+        if entity in self._where:
+            bucket = self._buckets[self._where.pop(entity)]
+            for idx in idxs:
+                bucket.remove((idx, self._specs[idx]))  # loud on a break
+        props = self._bound.get(entity)
+        if props is None or props.get("crime_status") == "caught":
+            return  # absent (foreign path) or caught: not placed
+        position = props.get("position")
+        bucket = self._buckets.setdefault(position, [])
+        for idx in idxs:
+            insort(bucket, (idx, self._specs[idx]))
+        self._where[entity] = position
+
+    def rolling(
+        self, locations: "Collection[str] | None"
+    ) -> "Sequence[tuple[int, _UrgencySpec]]":
+        """The predicate's answers for the scope, in the filter form's
+        own iteration order (the pack order). The single-location form
+        — the loop's hot path — returns the bucket's own list (zero
+        allocation; read-only by contract: the scans never commit
+        inside). The None and multi-location forms sort the union of
+        the named buckets (disjoint — one spec in exactly one
+        bucket)."""
+        if locations is None:
+            return sorted(chain.from_iterable(self._buckets.values()))
+        if len(locations) == 1:
+            return self._buckets.get(next(iter(locations)), ())
+        out: list[tuple[int, _UrgencySpec]] = []
+        for loc in locations:
+            out.extend(self._buckets.get(loc, ()))
+        out.sort()
+        return out
+
+
 def urgency_rolls(
     spec: "_UrgencySpec",
     projection: "Projection",
@@ -195,6 +359,7 @@ def urgency_scan(
     specs: "Sequence[_UrgencySpec] | None" = None,
     limit: int = 0,
     gate_memo: ScanGateMemo | None = None,
+    roll_index: "RollIndex | None" = None,
 ) -> tuple[dict[str, int], int | None]:
     """H9's rolling-set + first-hit scan (iter-337): the data the
     loop's quiet-beat skip needs from THIS family, drawn from the same
@@ -228,14 +393,33 @@ def urgency_scan(
     live values at the spec's declared pairs) is unchanged and
     re-evaluated when it moved (the key comparison IS the
     invalidation; `ScanGateMemo`'s own law). None (the default) keeps
-    the fresh evaluation — every existing caller unchanged."""
+    the fresh evaluation — every existing caller unchanged.
+
+    `roll_index` (iter-381, the rolling-filter row): the caller's
+    `RollIndex` — the predicate's answers pre-folded on the commit
+    path, served ONLY for the exact bound objects (`serves` — the
+    identity gate; every other caller keeps the per-spec predicate,
+    the semantic owner). The served entries arrive in the filter
+    form's own iteration order — the pack order — so the streams/rolls
+    dict insertion order and the collective walk's answers are
+    identical by construction (the twin law the falsifier)."""
     if gate_memo is not None:
         gate_memo.bind(pack, world)
+    if roll_index is not None and roll_index.serves(projection, specs):
+        entries: Sequence[tuple[int, _UrgencySpec]] = (
+            roll_index.rolling(locations)
+        )
+    else:
+        entries = [
+            (idx, spec)
+            for idx, spec in enumerate(
+                _specs(pack) if specs is None else specs
+            )
+            if urgency_rolls(spec, projection, locations)
+        ]
     streams: dict[str, int] = {}
     rolls: dict[str, int] = {}
-    for spec in (_specs(pack) if specs is None else specs):
-        if not urgency_rolls(spec, projection, locations):
-            continue
+    for _idx, spec in entries:
         streams[spec.stream] = 1
         if spec.probability_per_beat <= 0:
             continue  # rolls, never fires
@@ -276,6 +460,7 @@ def urgency_intents(
     locations: Collection[str] | None = None,
     world: "WorldModel | None" = None,
     specs: "Sequence[_UrgencySpec] | None" = None,
+    roll_index: "RollIndex | None" = None,
 ) -> list[IntentData]:
     """One beat's worth of autonomous NPC intents (P2b). For each
     pack-declared urgency: roll d100 against `probability_per_beat`; on
@@ -314,13 +499,28 @@ def urgency_intents(
     every entry, the unarmed world's per-beat behavior. roads-1:
     `world` threads the generated model for the adjacent_to gate (the
     ONE shared exits read — an autonomous move along a derived edge
-    passes the gate); None is the unarmed default."""
+    passes the gate); None is the unarmed default.
+
+    `roll_index` (iter-381): the caller's `RollIndex` — the rolling
+    filter's answers pre-folded on the commit path, served ONLY for
+    the exact bound objects (the identity gate; every other caller
+    keeps the predicate). The served order is the filter form's own
+    — the pack order — so the per-beat draw sequence (each entry's
+    own stream, the counter words) is identical by construction."""
+    if roll_index is not None and roll_index.serves(projection, specs):
+        entries: Sequence[tuple[int, _UrgencySpec]] = (
+            roll_index.rolling(locations)
+        )
+    else:
+        entries = [
+            (idx, spec)
+            for idx, spec in enumerate(
+                _specs(pack) if specs is None else specs
+            )
+            if urgency_rolls(spec, projection, locations)
+        ]
     out: list[IntentData] = []
-    for spec in (_specs(pack) if specs is None else specs):
-        # the rolling filter — the shared predicate (iter-337): absent,
-        # out-of-zone, and caught NPCs never roll
-        if not urgency_rolls(spec, projection, locations):
-            continue
+    for _idx, spec in entries:
         # the roll: d100 <= probability, on the entry's OWN urgency-family
         # stream `urgency:<npc>:<kind>` (engine-2, D-079) — canon-relevant
         # but stream-isolated PER ENTRY, nested inside the run's assured

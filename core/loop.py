@@ -154,6 +154,7 @@ from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.travel import edge_duration
 from core.urgencies import (
+    RollIndex,
     urgency_intents,
     urgency_scan,
     urgency_specs,
@@ -369,6 +370,19 @@ class Simulator:
         # state (the buffer's law).
         self._decay_index = DecayIndex.from_projection(
             pack, self._projection, self._decay_axes, self._last_change,
+        )
+        # iter-381 (the standing order's rolling-filter row): the
+        # rolling-set index — the urgency family's per-spec filter
+        # (present + positioned + uncaught) pre-folded on the commit
+        # path, read per stretch/beat as a per-LOCATION bucket in the
+        # filter's own pack order. Born from the pack-seeded initial
+        # projection (KI#16), stamped to this projection + this specs
+        # memo (the identity gate — foreign callers keep the
+        # predicate), folded inside `_commit` per state change (the
+        # exactness law lives with the class). Rebuildable from the
+        # log — never exported in the run state (the buffer's law).
+        self._roll_index = RollIndex.from_projection(
+            self._urgency_specs, self._projection,
         )
         # occ-1 (the whole-arm OCC window fix, B7's letter — the
         # STATUS Next item (1)): the WRITE INDEX — (entity, prop) -> the
@@ -898,6 +912,13 @@ class Simulator:
             # the resume-invisible law, the twin law the guarantee)
             sim._decay_index = DecayIndex.from_projection(
                 pack, sim._projection, sim._decay_axes, sim._last_change,
+            )
+            # iter-381: the rolling-set index re-born from the RESTORED
+            # projection (the birth-scan form — the same buckets the
+            # live run's commit-path fold maintains; the resume-invisible
+            # law, the twin law the guarantee)
+            sim._roll_index = RollIndex.from_projection(
+                sim._urgency_specs, sim._projection,
             )
             sim._director.restore_run_state(cursor["director"])
             sim._bank.restore_state(cursor["bank"])
@@ -1590,7 +1611,7 @@ class Simulator:
             self._pack, self._projection, self._bank,
             locations=locations, world=self._world,
             specs=self._urgency_specs, limit=m_stretch,
-            gate_memo=self._gate_memo,
+            gate_memo=self._gate_memo, roll_index=self._roll_index,
         )
         f_streams, f_first = faction_scan(
             self._pack, self._projection, self._bank,
@@ -1760,7 +1781,7 @@ class Simulator:
             self._pack, self._projection, self._bank,
             facts=facts, echoes=beat_echoes, traits=traits,
             locations=locations, world=self._world,
-            specs=self._urgency_specs,
+            specs=self._urgency_specs, roll_index=self._roll_index,
         ):
             self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
         # 2b) faction goals (depth-6) — the small-formula dynamics at
@@ -1950,7 +1971,7 @@ class Simulator:
             self._pack, self._projection, self._bank,
             facts=facts, echoes=echoes, traits=traits,
             locations=zones.warm, world=self._world,
-            specs=self._urgency_specs,
+            specs=self._urgency_specs, roll_index=self._roll_index,
         ):
             self._enqueue_autonomous(intent, entry_tick, assignment_tick=tick)
         # the warm ring's FACTION goals (depth-6) — the same clock's
@@ -2308,6 +2329,12 @@ class Simulator:
             # above, the position/value reads the live projection —
             # both already applied at this point)
             self._decay_index.apply_change(change.entity, change.prop)
+            # iter-381: the rolling-set index's commit-path fold — the
+            # apply_event twin for the per-location buckets (an exact
+            # re-derivation of the entity's membership from the live
+            # state; the position/caught props are the only verdict
+            # movers — the exactness law)
+            self._roll_index.apply_change(change.entity, change.prop)
         self._knowledge.add(record)  # derived index (L3)
         self._react(record)  # event-driven reactions (phase0 §3)
         return record

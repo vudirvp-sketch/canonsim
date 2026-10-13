@@ -839,7 +839,13 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     "occ_refold": (("core/intent.py", "occ_breaking_cause"),),
     # iter-327 member 2: the teller's whole-knowledge re-ranking per talk
     "knowledge_rerank": (("core/knowledge.py", "_novel_facts"),),
-    # the beat's roll machinery (urgency + faction, both clock callers)
+    # the beat's roll machinery (urgency + faction, both clock
+    # callers). iter-381: the LOOP-served urgency walk reads the
+    # RollIndex buckets (the per-LOCATION rolling set — the predicate's
+    # answers pre-folded on the commit path); urgency_rolls is the
+    # honest absence in a profiled run now (2.63M calls / 1.67
+    # profiled s on h32 10y before — the filter loop's own weight),
+    # the member's residual is the draws + the gate path
     "beat_rolls": (
         ("core/urgencies.py", "urgency_intents"),
         ("core/factions.py", "faction_intents"),
@@ -875,8 +881,10 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     # contains the E-flat rng block walk, first_d100_hit). iter-379:
     # next_decay_tick's decay share reads the DecayIndex peek (2.68 ->
     # 0.05 profiled s on h32 10y, per-call 1.0 us, h3->h32 x1.11 —
-    # flat); the member's residual is the urgency/faction scans + the
-    # gate-key builds (the next standing-order rows)
+    # flat); iter-381: the urgency scan's filter loop reads the
+    # RollIndex buckets (urgency_rolls absent from a profiled run);
+    # the member's residual is the gate-key builds (the next
+    # standing-order row) + the collective draw walk
     "skip_probes": (
         ("core/urgencies.py", "urgency_scan"),
         ("core/factions.py", "faction_scan"),
