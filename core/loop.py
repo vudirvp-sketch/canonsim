@@ -143,7 +143,13 @@ from core.rng import (
     RngBank,
 )
 from core.scheduler import build, decls_from_rules
-from core.states import decay_axes, decay_drafts, next_decay_tick, rotation_resets
+from core.states import (
+    DecayIndex,
+    decay_axes,
+    decay_drafts,
+    next_decay_tick,
+    rotation_resets,
+)
 from core.traits import crystallized_traits
 from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
 from core.travel import edge_duration
@@ -351,6 +357,19 @@ class Simulator:
         # latest committed event that changed it — the decay baseline
         # without a per-beat log scan; `_commit` is its only writer
         self._last_change: dict[tuple[str, str], int] = {}
+        # iter-379 (the standing order's decay-landing row): the decay
+        # landing index — the heap form of both decay walks' population
+        # scans (per-location min-heaps of (next_fire, npc, prop) cells
+        # over the LIVE pairs). Born from the pack-seeded initial
+        # projection (KI#16), stamped to this projection + this dict +
+        # the memo table (the identity gate — foreign callers keep the
+        # walks), folded inside `_commit` per state change (the
+        # apply_event twin; the staleness/veto laws live with the
+        # class). Rebuildable from the log — never exported in the run
+        # state (the buffer's law).
+        self._decay_index = DecayIndex.from_projection(
+            pack, self._projection, self._decay_axes, self._last_change,
+        )
         # occ-1 (the whole-arm OCC window fix, B7's letter — the
         # STATUS Next item (1)): the WRITE INDEX — (entity, prop) -> the
         # ascending event indices of EVERY committed write to that pair
@@ -873,6 +892,13 @@ class Simulator:
             # session's beats read the O(1) index exactly like an
             # uninterrupted run's.
             sim._director.bind(sim._projection)
+            # iter-379: the decay landing index re-born from the RESTORED
+            # projection + the folded last_change (the birth-scan form —
+            # the same pool the live run's commit-path fold maintains;
+            # the resume-invisible law, the twin law the guarantee)
+            sim._decay_index = DecayIndex.from_projection(
+                pack, sim._projection, sim._decay_axes, sim._last_change,
+            )
             sim._director.restore_run_state(cursor["director"])
             sim._bank.restore_state(cursor["bank"])
             if events and int(cursor["tick"]) < events[-1].t:
@@ -1578,6 +1604,7 @@ class Simulator:
         decay_tick = next_decay_tick(
             self._pack, self._projection, self._last_change,
             beat_tick, locations=locations, axes=self._decay_axes,
+            index=self._decay_index,
         )
         if decay_tick is not None:
             first_beat = self._next_beat_after(max(decay_tick, beat_tick) - 1)
@@ -1711,6 +1738,7 @@ class Simulator:
         for draft in decay_drafts(
             self._pack, self._projection, self._last_change, beat_tick,
             locations=locations, axes=self._decay_axes,
+            index=self._decay_index,
         ):
             self._commit(replace(
                 draft, cause=self._writer.last_id,
@@ -1903,6 +1931,7 @@ class Simulator:
         for drift in decay_drafts(
             self._pack, self._projection, self._last_change, tick,
             locations=zones.warm, axes=self._decay_axes,
+            index=self._decay_index,
         ):
             self._commit(
                 replace(
@@ -2273,6 +2302,12 @@ class Simulator:
             self._occ_index.setdefault((change.entity, change.prop), []).append(
                 event_index
             )
+            # iter-379: the decay landing index's commit-path fold — the
+            # apply_event twin for the heap pool (re-derives the pairs
+            # this change could move; the base read is the dict line
+            # above, the position/value reads the live projection —
+            # both already applied at this point)
+            self._decay_index.apply_change(change.entity, change.prop)
         self._knowledge.add(record)  # derived index (L3)
         self._react(record)  # event-driven reactions (phase0 §3)
         return record

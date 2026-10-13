@@ -1,49 +1,57 @@
-Iteration: iter-378 (`sensesidx` — третья голова стоящего
+Iteration: iter-379 (`decayheap` — четвёртая голова стоящего
   приказа по директиве владельца «продолжай работы… я разрешаю»;
-  R3, D-255; класс iter-362: индекс на пути коммита, нуль
-  канон-байт): ИНДЕКС ЧУВСТВ ДИРЕКТОРА — SensesIndex в
-  core/director.py: сумма подозрения + счёт видимых угроз как
-  СКЛАДКА НА ПУТИ КОММИТА (рождена из initial-проекции
-  пакета — закон целой проекции KI#16 удовлетворён по построению;
-  обновляется в seed на КАЖДОМ событии — двойник apply_event,
-  from_ есть до-значение, арифметика дельт точна); гейт
-  идентичности (закон ScanGateMemo): bind пересканирует + штампует
-  живой объект, releases читает индекс ТОЛЬКО для него — каждая
-  чужая проекция держит сканы побайтово (entropy/channel_entropies
-  — keyword-only senses=None, все прежние вызывающие не тронуты);
-  указатель _is_suspicion_home — единый владелец формы обеих
-  осей; loop.py: bind при construction + после resume-восстанов-
-  ления (пасс реплея уже складывает через seed — перескан честной
-  промывки); индекс НЕ в export_run_state (перестраиваем по логу,
-  закон буфера — старые курсоры валидны). ИЗМЕРЕНО: стена h32 10y
-  11.37 → 9.57/9.49 с (×1.19); член director_global_passes
-  5.07 → 0.02 проф. с (16.1% → 0.1%); entropy per-call cum
-  663 → 3.1 мкс — теперь НЕЗАВИСИМ ОТ ПОПУЛЯЦИИ (datum ×2.50
-  списан); оба скана — честный ноль в профиле; НУЛЬ КАНОН-БАЙТ:
-  h32 07e924cb… / h3 796afbe1… / farstead 4e4f4cf2… идентичны
-  до/после ·
+  R3, D-256; класс iter-362: пул на пути коммита, нуль
+  канон-байт): ИНДЕКС ПРИЗЕМЛЕНИЯ DECAY — DecayIndex в
+  core/states.py: min-кучи ПО ЛОКАЦИЯМ из ячеек (next_fire,
+  npc, prop) над ЖИВЫМИ парами (значение int-не-bool, не
+  запинено на клампе, не caught, в проекции) — ПУЛ КАНДИДАТОВ,
+  не истина: рождён из initial-проекции пака (KI#16, базы из
+  last_change вызывающего — при construction пуст, база 0 —
+  дефолт самого обхода); фолд на пути коммита в _commit
+  (двойник apply_event: событие на оси перекладывает свою
+  пару, position/crime_status — все пары сущности); ЗАКОНЫ
+  УСТАРЕВАНИЯ/ВЕТО: INV-1 ЛИЦЕНЗИРУЕТ устаревание — вся
+  причина (база/значение/пин/позиция/caught) ездит
+  закоммиченным событием, _commit складывает КАЖДОЕ
+  state_change, отброшенная ячейка ВСЕГДА имеет свежего
+  наследника или пара легитимно мертва; валидация НА ВИДУ
+  (фильтры СОБСТВЕННЫЕ обхода против живого состояния —
+  позиция == ключ кучи, свежесть next_fire == base +
+  elapsed_first); перечисление НЕ ПОТРЕБЛЯЕТ (re-push);
+  гейт идентичности serves (штампованные объекты + таблица
+  рождения; чужие держат обходы — обходы остаются
+  семантическими владельцами, формула в _axis_change, обе
+  ветки зовут её); clamp max(…, from_tick) остаётся
+  собственностью next_decay_tick; loop.py: рождение + re-birth
+  при resume (перестраиваем — не в export_run_state).
+  ИЗМЕРЕНО: стена h32 10y 9.59 → 8.08/7.99 с (×1.19); член
+  decay_walk 3.31 → 0.26 проф. с (12.5% → 1.2%, ×12.9;
+  per-call 224.7 → 4.8 мкс); next_decay_tick 2.68 → 0.05 с
+  (×50, 1.0 мкс); ЭКСПОНЕНТА ПЛОТНОСТИ ×8.1 → ×1.85 /
+  ×1.11; НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… /
+  farstead 4e4f4cf2… идентичны ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2636 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set, the failure list diffed name-by-name against the documented set — zero new; the +7 the new senses laws, all green; the documented +1 skip is env-conditional and does not fire this session) ·
+2643 passed + 28 failed, ruff clean, docguard 1 line (the D-256 36/35 DECISIONS count — the D-250 precedent state, clears on the owner's collapse call), topology clean, digest parses (28 = 27 the known T1 log-header env set — the failure list diffed name-by-name against the documented set, zero new — + 1 the guard's own DECISIONS 36/35 count line; the +8 the new decay laws, all green; the documented +1 skip is env-conditional and does not fire this session) ·
 Date: 2026-10-13 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..376 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff re-confirmed live this session at index 71 — the python
   field — zero new, zero flakes) ·
-Scope: R3 core (director + loop + tests + labrunner notes +
-  DIRECTOR_SPEC §4 runtime note): core/director.py (SensesIndex
-  + bind + _is_suspicion_home + seed-fold + releases/channel
-  reads), core/loop.py (2 bind call sites), scripts/labrunner.py
-  (the member comment + 1 note), docs/DIRECTOR_SPEC.md (§4),
-  tests/test_senses.py (новый, 7 законов-оракула) + райдеры:
-  STATUS.md (заголовок + Next), worklog.md (iter-378, iter-366
-  вытеснен), docs/TASKS.md (строка density-1 + леджер, iter-366
-  вытеснен), docs/DECISIONS.md (D-255, 35/35 — НА КАПЕ D-252,
-  следующая запись — вызов коллапса владельца),
-  docs/iterations/iter-378-sensesidx-report.md (новый) — 10
+Scope: R3 core (states + loop + tests + labrunner): core/states.py
+  (DecayIndex + _axis_change + _decay_draft + обе индексные ветки,
+  keyword-only index=None), core/loop.py (рождение при construction +
+  re-birth при resume + фолд в _commit + 3 места вызова),
+  scripts/labrunner.py (комментарии членов + 1 note),
+  tests/test_decayidx.py (новый, 8 законов-оракула) + райдеры:
+  STATUS.md (заголовок + Next), worklog.md (iter-379, iter-367
+  вытеснен), docs/TASKS.md (строка standing-order + леджер, iter-367
+  вытеснен), docs/DECISIONS.md (D-256, 36/35 — НАД КАПОЙ D-252,
+  коллапс — вызов владельца, прецедент D-250),
+  docs/iterations/iter-379-decayheap-report.md (новый) — 10
   изменённых/созданных.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -138,33 +146,34 @@ same law.)
 
 ## Next step
 
-**iter-378 DONE: sensesidx (третья голова стоящего приказа —
-  R3, D-255, класс iter-362, нуль канон-байт: SensesIndex —
-  складка подозрения/угроз на пути коммита, гейт идентичности,
-  +7 законов-оракулов; стена h32 11.37→9.57 с, член
-  director_global_passes 5.07→0.02 проф. с, три md5 идентичны;
-  the report iter-378-sensesidx-report.md).**
+**iter-379 DONE: decayheap (четвёртая голова стоящего приказа —
+  R3, D-256, класс iter-362, нуль канон-байт: DecayIndex —
+  min-кучи по локациям, законы устаревания/вето (INV-1
+  лицензирует), гейт идентичности, +8 законов-оракулов; стена
+  h32 9.59→8.08 с, член decay_walk 3.31→0.26 проф. с (×12.9),
+  next_decay_tick ×50, экспонента плотности ×8.1→×1.85, три
+  md5 идентичны; the report iter-379-decayheap-report.md).**
 Next: THE STANDING ORDER'S REMAINING ROWS, re-ranked by the
-  post-378 measurement — the decay landing index FIRST (the heap
-  form — the (npc,axis)→next-fire walk replacement in
-  next_decay_tick/decay_drafts, its staleness/veto laws; the
-  decay_walk member 3.28 profiled s / 12.3%, the density
-  exponent ×8.1 the strongest residual), then the rolling-filter
-  memo (the locations-keyed twin of the scan gate memo —
-  urgency_rolls 1.70 profiled s / 2.6M calls inside
-  skip_probes 35.6%), then the scan key builds (the 939K
-  pair_values construction — iter-375's honest remainder);
-  commit_validate (14.7%) stays never-the-wall (population-
-  flat)
+  post-379 measurement — the rolling-filter memo FIRST (the
+  locations-keyed twin of the scan gate memo — urgency_rolls
+  ~1.7 profiled s / 2.6M calls inside skip_probes 32.8%), then
+  the scan key builds (the 939K pair_values construction —
+  iter-375's honest remainder, inside urgency_scan 6.73 s);
+  commit_validate (18.3%) stays never-the-wall (population-
+  flat); beat_rolls 19.4% (urgency_intents 3.97 s) the named
+  third candidate — its walk shares the scan's family shapes
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE (unchanged by this
-  iteration: the memo touched zero door/battery paths); owner-side
+  iteration: the index touched zero door/battery paths); owner-side
   housekeeping: drop canonsim_m6_station_pack_v6.2.zip into
   docs/station/archive/ (the pattern's fourth instance — the pack
   is the owner's local copy)
-+ THE OWNER'S STANDING CALLS — the DECISIONS cap at 34/35
-  (D-252's ceiling — one row of headroom, the next collapse call
-  at the breach, D-034/D-185); decider-4b parked (outside the
++ THE OWNER'S STANDING CALLS — THE DECISIONS CAP IS BREACHED at
+  36/35 (D-256 recorded under the standing directive naming the
+  row — the second over-cap precedent after D-250; THE COLLAPSE
+  IS THE OWNER'S NEXT EXCLUSIVE CALL, D-034/D-185/D-252; the
+  docguard count line + the +1 guard test the honest visible
+  state until it fires); decider-4b parked (outside the
   llama.cpp five); the pack-v5 instrument rows (the formalized
   band sweep `cuda_gate.bands` — NOW EXERCISED LIVE by the m6 run,
   the row's datum delivered) and the H-prose follow-ups (the

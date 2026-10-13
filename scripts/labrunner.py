@@ -844,7 +844,14 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
         ("core/urgencies.py", "urgency_intents"),
         ("core/factions.py", "faction_intents"),
     ),
-    # the NPC x axis decay walk
+    # the NPC x axis decay walk. iter-379: the LOOP-served form reads
+    # the DecayIndex pool (the heap form — the firing enumeration over
+    # the live cells, the per-pair formula still this walk's own); the
+    # member's cumtime is the enumeration + the per-candidate computes,
+    # the population scan gone (3.31 -> 0.26 profiled s on h32 10y;
+    # per-call 224.7 -> 4.8 us, the h3->h32 exponent x8.1 -> x1.85 —
+    # the honest linear core: the firing count itself grows with the
+    # population)
     "decay_walk": (("core/states.py", "decay_drafts"),),
     # iter-346 (density-1's second half): the projection-plane family —
     # the E-scaling members of `rest`, each named by its architectural
@@ -865,7 +872,11 @@ _MEMBER_ENTRIES: Final[Mapping[str, tuple[tuple[str, str], ...]]] = {
     "projection_snapshot": (("core/loop.py", "_snapshot_for"),),
     # the quiet-beat skip's per-stretch population probes (h9's twins —
     # the scans walk every spec against the projection; the cumtime
-    # contains the E-flat rng block walk, first_d100_hit)
+    # contains the E-flat rng block walk, first_d100_hit). iter-379:
+    # next_decay_tick's decay share reads the DecayIndex peek (2.68 ->
+    # 0.05 profiled s on h32 10y, per-call 1.0 us, h3->h32 x1.11 —
+    # flat); the member's residual is the urgency/faction scans + the
+    # gate-key builds (the next standing-order rows)
     "skip_probes": (
         ("core/urgencies.py", "urgency_scan"),
         ("core/factions.py", "faction_scan"),
@@ -998,6 +1009,20 @@ _PROFILE_NOTES: Final = (
     "the twin-agreement law in tests/test_senses.py the equality "
     "falsifier); the seed-side fold rides _react -> seed (its cost "
     "sits in the commit path's rest, the buffer seeding's own door)",
+    "iter-379 (decayheap): the decay landing index — per-location "
+    "min-heaps of (next_fire, npc, prop) cells over the LIVE pairs, "
+    "peeked by next_decay_tick and enumerated by decay_drafts for the "
+    "BOUND objects only (the identity gate; every foreign caller keeps "
+    "the walks — the semantic owners). decay_walk 3.31 -> 0.26 "
+    "profiled s (12.5% -> 1.2%, per-call 224.7 -> 4.8 us), "
+    "next_decay_tick 2.68 -> 0.05 s inside skip_probes (per-call 1.0 "
+    "us); the density exponent x8.1 -> x1.85 (the firing count's own "
+    "linear growth, the honest floor) / x1.11 (flat); the staleness "
+    "discipline is INV-1-licensed (every staleness cause rides a "
+    "committed event, _commit folds every state change — the twin laws "
+    "in tests/test_decayidx.py the falsifiers); the commit-path fold "
+    "rides _commit's per-change loop (its cost sits in the commit "
+    "path's rest, beside last_change/occ_index)",
 )
 
 
