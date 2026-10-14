@@ -1,47 +1,54 @@
-Iteration: iter-385 (`composite1` — первая голова lab-composite-1,
-  единственной OPEN-строки бэклога, по стоящей директиве
-  владельца «продолжай работы, открывай то что сейчас важнее
-  всего сделать, логичнее и качественнее на долгосрок. я
-  разрешаю»; R2 local-add, нуль изменений рантайма): BOUNDARY
-  SURGERY ИСПОЛНЕНА — словарная строка §9.2 получила живого
-  владельца (tests/test_labcomposite.py, 5 законов): граница
-  зависимости ПЕРЕЧИСЛЯЕТСЯ из собственных объявлений структур
-  (фолд гейтов: объявленные паком пары чтения — единственная
-  буквально паковая граница; роллинг-индекс: движки вердикта
-  position/crime_status; индекс распада: оси пака — манифест,
-  никогда тестовая вторая истина); хирургия едет ТОЧНЫМ отрывком
-  порядка фолдов _commit (apply_event → _last_change → decay →
-  roll → gate; писатель/OCC/знание/реакции — у своих законов);
-  НАГРУЗКА — собственные оси конверта плотности (три
-  материализованных профиля, РЕАЛЬНЫЕ годовые прогоны на живом
-  Симуляторе): JUST-OUTSIDE (вне ВСЕХ объявленных границ — ничто
-  не двинулось: ноль поп, бакеты, ответы распада, свёрнутый скан
-  == свежий == до-хирургии — манифест НЕОБХОДИМ), JUST-INSIDE
-  GATE (пара чтения пинает РОВНО своих читателей, ре-дерирует ==
-  fresh, прочие структуры и чужой юнит нетронуты), VERDICT-MOVER
-  (позиция ре-дерирует roll+decay, живое == свежее рождение),
-  AXIS-MOVER (пул распада ре-дерирует один; поп фолда iff
-  манифест объявил) — кросс-структурная дискриминация +
-  кросс-юнитовая локальность (пересечение двух
-  первых-именованных паттернов строки) ·
+Iteration: iter-386 (`hroom` — измеримая половина H-проза-
+  фоллоу-апов, первая отвечаемая работой позиция STATUS Next,
+  по стоящей директиве владельца «продолжай работы, открывай
+  то что сейчас важнее всего сделать, логичнее и качественнее
+  на долгосрок. я разрешаю» + явному разрешению окружения
+  «можешь устанавливать llama.cpp для работы и прочее
+  окружение»; R0/R1 — внешний пак по Правилу 9 + райдеры, нуль
+  строк рантайма репо): ИНСТРУМЕНТ ЗАПАСА ТОКЕНОВ H-ПРОЗЫ —
+  station_hroom v1.0 (исходник:
+  docs/station/archive/canonsim_hroom_pack_v1.0.zip): гибридное
+  ядро m5 ПОСЛОВНО импортом из m6-пака (закон соседних паков),
+  ровно ДВЕ дельты — потолок --cap 832 (естественный конец
+  каждой строки наблюдаем; производственный 416-вид выводится
+  ТОЧНО: поток токенов фиксированного сида потолко-инвариантен
+  до среза) + аддитивные записи (prose_full + head_chars);
+  классификатор потолочных хвостов LOOP/BLEED/BURN/LEGIT;
+  ЖИВАЯ ВАЛИДАЦИЯ ЗУБЬЯМИ на ультралайт-полосе iter-365
+  (llama.cpp b11541 ubuntu-x64 + Qwen3-0.6B-Q4_K_M, CPU): ОБА
+  СЧЁТА ВОСПРОИЗВОДЯТ ДАТУМ iter-365 СЧЁТ В СЧЁТ (h0 34
+  естественных + 8 потолочных [5 LOOP коллапс словаря
+  0.02–0.05 + 3 BURN head-burn]; h8 41 + 1 LOOP) — производный
+  416-вид: НОЛЬ естественных строк над 416 + НОЛЬ LEGIT на
+  обеих руках: 416 — НЕ отсутствующий запас на этой полосе,
+  всякое упирание — вырожденный хвост, который подъём потолка
+  не чинит (класс фикса — ломатель хвостов или
+  принять-и-пометить; цена вырожденной строки ~8× медианы
+  стены); станционная форма одной командой (Gemma-4-E4B)
+  снимает производственное распределение; эстетическая
+  половина H-промоушен-базиса — вызов владельца по тем же
+  prose_full-хвостам ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2676 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the failure list diffed name-by-name against the pre-change baseline: IDENTICAL, zero new, zero flakes; the +5 composite laws all green, each ~0.25 s) ·
-Date: 2026-10-14 ·
+2676 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the failure list diffed name-by-name against the pre-change baseline: IDENTICAL, zero new, zero flakes; zero repo-runtime lines) ·
+Date: 2026-10-15 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..382 baseline, the GOLDEN
+  3.12.15, byte-identical to the 362..385 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
-  diff at index 71 — the python field — zero new, zero flakes) ·
-Scope: R2 local-add (нуль строк рантайма — тесты + реестр +
-  райдеры): tests/test_labcomposite.py (новый, 5 законов),
-  docs/TEST_PLAN.md (§9.2: boundary surgery → живой владелец) +
-  райдеры: STATUS.md (заголовок + Next), worklog.md (iter-385,
-  iter-375 вытеснен), docs/TASKS.md (строка lab-composite-1 →
-  первая голова посажена + леджер, iter-375 вытеснен),
-  docs/iterations/iter-385-composite1-report.md (новый) — 6
-  изменённых/созданных (5 + 1).
+  diff at index 71 — the python field — zero new, zero flakes;
+  re-verified at the iter-386 riders landing) ·
+Scope: R0/R1 (внешний пак Правила 9 + райдеры, нуль строк
+  рантайма репо): docs/iterations/iter-386-hroom-report.md
+  (новый) + docs/station/archive/canonsim_hroom_pack_v1.0.zip
+  (новый — исходник пака, паттерн m5/m6-зипов) + райдеры:
+  STATUS.md (заголовок + Next), worklog.md (iter-386, iter-376
+  вытеснен), docs/TASKS.md (строка hroom-1 + леджер, iter-376
+  вытеснен + круфт-пас трёх станционных строк m4-r/m5/m6 —
+  таблицы у своих отчётов, форма doc-4; устаревшее «awaiting
+  M2/M3» в m4-r → RECORDED D-250) — 5 изменённых/созданных
+  (2 + 3).
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -135,39 +142,39 @@ same law.)
 
 ## Next step
 
-**iter-385 DONE: composite1 (первая голова lab-composite-1 —
-  boundary surgery исполнена, словарная строка §9.2 получила
-  живого владельца tests/test_labcomposite.py: манифест из
-  собственных объявлений структур, хирургия порядком _commit,
-  нагрузка — три профиля конверта плотности на реальных годовых
-  прогонах, 5 законов [необходимость манифеста / поп-точность /
-  дискриминация / кросс-юнитовая локальность]; +5 законов зелёные,
-  2676+27 идентично базлайну, гварды чисты; the report
-  iter-385-composite1-report.md).**
-Next: lab-composite-1 остаётся OPEN — оставшиеся головы ждут
-  потребителей (observer noninterference — CONS-сторона;
-  капсульная половина causal debugging closure;
-  specialized-kernel — нативная строка; promotion ping-pong /
-  adaptive sufficient state — до мезо/мировых строк); THE
-  PERFORMANCE QUEUE stays DRAINED — every residual at its
-  documented floor, a new performance row only on a fresh
-  unprofiled-A/B datum naming it (iter-383's instrument finding,
-  the labrunner note)
-+ THE RUNTIME PROMOTION remains the owner's separate permission
-  (D-250) — its measured basis COMPLETE (this iteration touched
-  zero door/battery paths); owner-side housekeeping: drop
+**iter-386 DONE: hroom (измеримая половина H-проза-фоллоу-апов
+  вооружена — station_hroom v1.0: ядро m5 пословно импортом из
+  m6-пака, две дельты [потолок 832 + аддитивные записи],
+  классификатор LOOP/BLEED/BURN/LEGIT; живая валидация зубьями
+  iter-365 счёт в счёт [h0 34+8, h8 41+1]; производный 416-вид:
+  ноль естественных над 416, ноль LEGIT — 416 не отсутствующий
+  запас на полосе, всякое упирание вырожденный хвост, класс
+  фикса ломатель/принять-и-пометить; the report
+  iter-386-hroom-report.md).**
+Next: H-проза-фоллоу-апы — измеримая половина ЗАКРЫТА
+  инструментом; остаются станционный прогон пака одной командой
+  (README: Gemma-4-E4B — производственное распределение) и
+  эстетическая половина H-промоушен-базиса (the owner's call по
+  тем же prose_full-хвостам) + owner-side housekeeping: drop
   canonsim_m6_station_pack_v6.2.zip into docs/station/archive/
   (the pattern's fourth instance — the pack is the owner's local
   copy)
++ THE RUNTIME PROMOTION remains the owner's separate permission
+  (D-250) — its measured basis COMPLETE
 + THE OWNER'S STANDING CALLS — decider-4b parked (outside the
-  llama.cpp five); the pack-v5 instrument rows (the formalized band
-  sweep `cuda_gate.bands` — NOW EXERCISED LIVE by the m6 run, the
-  row's datum delivered) and the H-prose follow-ups (the 416-token
-  max_tokens headroom question; the prose quality itself — the
-  aesthetic call, one half of the H-promotion basis); behind them
+  llama.cpp five); the pack-v5 instrument rows' datum delivered
+  (cuda_gate.bands exercised LIVE by the m6 run); behind them
   the standing owner calls in order — the replay-UI NOT-EXPOSED
   row, the world track's W8, the frontend P1/P2/P3 continuations,
-  `lab-composite-1`.
+  `lab-composite-1` (остаётся OPEN — оставшиеся головы ждут
+  потребителей: observer noninterference — CONS-сторона;
+  капсульная половина causal debugging closure;
+  specialized-kernel — нативная строка; promotion ping-pong /
+  adaptive sufficient state — до мезо/мировых строк)
++ THE PERFORMANCE QUEUE stays DRAINED — every residual at its
+  documented floor, a new performance row only on a fresh
+  unprofiled-A/B datum naming it (iter-383's instrument finding,
+  the labrunner note).
 
 1. The B1 architectural follow-up (generate-at-T) stays DEFERRED and
    OWNER-GATED — iter-261/262 both found NO promotion evidence (the
@@ -222,10 +229,11 @@ Next: lab-composite-1 остаётся OPEN — оставшиеся голов�
    the 27B one-model run, the narrator arms, the cross-run
    reproducibility datum); the narrator production-form DECIDED
    2026-10-03 (L12 the production form — PRESENTATION_SPEC §7; the
-   heavier arm gated behind the contract rows). The remaining owner
-   calls: the DECISIONS collapse form (D-250, iter-367) + the R
-   runtime-promotion permission (the M2/M3 decisions themselves
-   RECORDED — D-250, 2026-10-11); GET /models/sse the observed load-progress surface —
+   heavier arm gated behind the contract rows); the DECISIONS
+   collapse LANDED (iter-380/384 — 33/35, two slots free). The
+   remaining owner calls: the R runtime-promotion permission (the
+   M2/M3 decisions themselves RECORDED — D-250, 2026-10-11);
+   GET /models/sse the observed load-progress surface —
    a candidate row when a live consumer names it.
 4. The standing frames: the embodiment options (§6.4 → §6.1 → §6.5 →
    §6.2 per the owner's 2026-09-27 order; §6.3 closed iter-204..210,

@@ -30,101 +30,97 @@ TEST_PLAN §9's claim packet)
 
 - `m4-r` — THE M4 R-arm (DELIVERED iter-357 + STATION RUN
   iter-358 + FLAG FIX iter-359 + VERB FIX iter-360 + FULL RUN
-  READ iter-361 — the row is COMPLETE, awaiting the owner's
-  M2/M3 decisions): `canonsim_m4_station_pack` v4.3 — the
+  READ iter-361 — the row COMPLETE, the M2/M3 decisions
+  RECORDED D-250): `canonsim_m4_station_pack` v4.3 — the
   pinned b11541 CUDA installer + the model doctor + the R
   battery + the G control + the RU band + the det + the gate
   sweep. THE FULL RUN (m4_20261010_170258.zip, read iter-361):
-  the FIRST complete station run of the series — zero crashes,
-  the Verb fix proven LIVE (s4's fire cascade committed by the
-  real door: drop_break → fire_started back_wall → fire_spread
-  woodpile → smoke_rising → location_burned_out → flee); the
-  fourth byte-identical run (s1..s3 match v4.1 + both v4.2
-  exactly); 0 inventions / 42 docs + output_tokens=[0] ×42
-  (0/132 series-wide); med 0.556 s; the sweep monotone
-  67.7/87.1/96.8/100%@0.5/0.4/0.3/0.2. THE RU BAND ANSWERED:
-  every gate-passed Russian row assembled PERFECTLY (5/5
-  kind+target); all 5 misses are the gate's 0.38–0.49 threshold
-  on low-agency verbs — comprehension is NOT the problem, the
-  threshold is the knob. THE G CONTROL like-for-like: R full
-  38.1% vs G 21.4%, R max 0.796 s vs G max 2.907 s. The M2/M3
-  decision material: iter-350 §G + iter-361 §G. Detail:
-  iter-357-m4station-report.md + iter-358-m4station-run-report.md
-  + iter-359-m4flags-report.md + iter-360-m4verbfix-report.md +
-  iter-361-m4fullrun-report.md.
+  the FIRST complete station run — zero crashes, the Verb fix
+  proven LIVE (s4's fire cascade through the real door), the
+  fourth byte-identical run, 0 inventions / 42 docs (0/132
+  series-wide), med 0.556 s, the sweep monotone
+  67.7/87.1/96.8/100%@0.5/0.4/0.3/0.2; THE RU BAND: 5/5
+  gate-passed Russian rows assembled PERFECTLY, all misses the
+  0.38–0.49 low-agency threshold — comprehension NOT the
+  problem, the threshold the knob; THE G CONTROL like-for-like:
+  R full 38.1% vs G 21.4%, R max 0.796 s vs G max 2.907 s.
+  Decision material: iter-350 §G + iter-361 §G. Detail: the
+  iter-357..361 reports.
 
 - `m5-station` — DONE (iter-365 the agent half + iter-366 the
-  reading half: the owner returned `m5_20261011_002908.zip` —
-  the FIRST FULL m5 run, all 9 stages, zero crashes, pack v5.0 on
-  the 3080 Ti («both models FULL offload» — CORRECTED iter-368:
-  the logs carry zero CUDA lines, KI#119, the band was CPU; every
-  m5_report number
-  re-derived from the raw jsonl, the false-allow policy
-  reconstructed with 0 divergences). THE M3 LIKE-FOR-LIKE CLOSED
-  (iter-361 §G's ask — one corpus, one session, one main spawn):
-  R the verdict-path leader (full 16/38.1% ×1.8 over G/H; the
-  target class 1 vs 8/10; med 0.52 s vs 7.31 s; output_tokens=[0]
-  ×54; det identical — the FIFTH byte-identical R run; the det-g
-  digest gap closed: c2e33bd90d353d2b) + THE VERDICT-LAYER
-  READING, CORRECTED iter-367 (KI#118 — the owner's counter-check
-  reproduced exactly: reply bytes G/H0 37/42, G/H8 30/42; census
-  40/42, door 37/42; the 42/42 byte-identity claim was never
-  byte-checked and is FALSE; the hybrid MOSTLY preserves the
-  verdict — a statistical reading, never a byte law — and buys
-  prose, not verdict quality); the terminated-prose
-  law held on station (41/42 stop; two eos_held = the 416-token
-  ceiling; h8's 1 json_bleed — the door safe, the flag fired) +
-  THE M2 KNOB LEDGER: EN 0.5→0.4 correct 15→20 / misses 10→4 /
-  nonintent-false 4→7 / object-false 4=4 INVARIANT; RU correct
-  4→6; precision on passed FLAT (60.0→58.8%); the bands OVERLAP —
-  no separating threshold, the structural cost the nonintent
-  family the gate cannot see; the m4 parity (R census
-  byte-identical, the s4 cascade, s7cy0 1:1); inventions 0/108
-  (0/240 series-wide). THE M2/M3 DECISIONS RECORDED (the owner's
-  2026-10-11 call — DECISIONS D-250: R at the door / prose a
-  separate surface / production stays the L12 template rung /
-  H not promoted on m5; 0.5 default / 0.4 the recall-oriented
-  override with its measured cost; runtime only on the separate
-  promotion permission). cuda_gate.bands still {} (the
-  formalized band sweep unexercised — a candidate for the next
-  station flags). Detail: iter-365-m5station-report.md +
-  iter-366-m5read-report.md + iter-367-m5correct-report.md.
+  read + iter-367 the corrected verdict-layer reading; the
+  owner returned `m5_20261011_002908.zip` — the first FULL m5
+  run, 9 stages, zero crashes, every number re-derived with 0
+  divergences, the band CPU per KI#119): THE M3 LIKE-FOR-LIKE
+  CLOSED (iter-361 §G's ask) — R the verdict-path leader (full
+  16/38.1% ×1.8 over G/H, the fifth byte-identical R run); the
+  verdict-layer reading CORRECTED (KI#118: the 42/42
+  byte-identity claim was never byte-checked and is FALSE —
+  the hybrid MOSTLY preserves the verdict, a statistical
+  reading never a byte law, and buys prose, not verdict
+  quality); the terminated-prose law held (41/42 stop; two
+  eos_held = the 416-token ceiling — hroom-1's question); the
+  M2 knob ledger (EN 0.5→0.4 correct 15→20 / misses 10→4 /
+  nonintent-false 4→7 — the bands OVERLAP, no separating
+  threshold); inventions 0/108 (0/240 series-wide). THE M2/M3
+  DECISIONS RECORDED D-250 (R at the door / prose a separate
+  surface / production stays the L12 template rung / H not
+  promoted on m5; runtime only on the separate promotion
+  permission). cuda_gate.bands — the formalized band sweep now
+  EXERCISED LIVE by the m6 run (iter-374, the datum delivered).
+  Detail: the iter-365/366/367 reports.
 
 - `m6-station` — DONE (iter-368 the R-promotion pack + iter-371
   the KI#120 fix + **iter-374 THE STATION RUN READ** — the
   promotion series m4→m6 COMPLETE; the owner's run
-  `m6_20261012_063055.zip` on THE v6.2 PACK (the iter-372/373
-  interlude recorded in-repo by iter-374 §0: KI#121 the argparse
-  `%` crash + KI#122 the band instrument's false negative —
-  both proven live by the run); EVERY m6_report number re-derived
-  from the raw records, ZERO divergences (per-row censuses 1:1
-  on 54 rows; the windows reconciled — input med 1531 = R+RU);
-  THE BAND QUESTION CLOSED: markers -lv 4 in both logs
-  (load_backend/device_info/ggml_cuda_init; FULL offload 33/33 +
-  43/43) + the physics (Gemma prefill med 4015/max 4445 tok/s,
-  decode med 68; the router ≥2800 tok/s inside the 0.546 s wall)
-  — the m4/m5/m6 latencies were ALWAYS the CUDA band, KI#119
-  re-read, the m4 GPU readings RESTORED; R the production form:
-  full 16 (38.1%)/kind+ 21 (50.0%) — EXACTLY m5's numbers, det
-  router identical 962b30a4… the SIXTH byte-identical R run, g
-  c2e33bd9… the second; 0/42 inventions (0/282 series),
-  output_tokens [0]×42; THE DRIFT COLUMN reads the GOLD
-  trajectory live (the reference commits: s4 6→7→8→13→14, the
-  fire cascade 15 events through the real door; R CLEAN 23/42
-  full 43.5% vs G CLEAN 13/42 full 23.1%, R drifts less
-  19/42 vs 29/42); the standing watch armed: EN
-  correct 15/FALSE 10/blocked 17 @0.5 (m5's classes exact), RU
-  correct 4/FALSE 1 (ru_05 the series-constant texture pin);
-  narrate 20/20, r==gold prose 7/10 (s4 cascade identical);
-  station Python 3.14.3 (the log-header env datum). THE
-  RUNTIME PROMOTION remains the owner's separate permission
-  (D-250) — its measured basis now COMPLETE. Owner-side
-  housekeeping: drop the v6.2 zip into docs/station/archive/
-  (the pattern's fourth instance). Detail:
-  iter-368-m6promotion-report.md + iter-371-refemit-report.md +
-  iter-374-m6read-report.md + the packs
-  docs/station/archive/canonsim_m6_station_pack_v6.0.zip and
-  …v6.1.zip (v6.2 — the owner's local copy).
+  `m6_20261012_063055.zip` on THE v6.2 PACK, the iter-372/373
+  interlude recorded in-repo by iter-374 §0 [KI#121 the
+  argparse `%` crash + KI#122 the band instrument's false
+  negative — both proven live by the run]): every m6_report
+  number re-derived from the raw records, ZERO divergences
+  (per-row censuses 1:1 on 54 rows); THE BAND QUESTION CLOSED:
+  the -lv 4 markers in both logs + the physics (Gemma prefill
+  med 4015/max 4445 tok/s, decode med 68; the router ≥2800
+  tok/s inside the 0.546 s wall) — the m4/m5/m6 latencies were
+  ALWAYS the CUDA band, KI#119 re-read, the m4 GPU readings
+  RESTORED; R the production form: full 16 (38.1%)/kind+ 21
+  (50.0%) — EXACTLY m5's numbers, det router identical — the
+  SIXTH byte-identical R run; 0/42 inventions (0/282 series);
+  THE DRIFT COLUMN reads the GOLD trajectory live (R CLEAN
+  23/42 full 43.5% vs G CLEAN 13/42 23.1% — R drifts less
+  19/42 vs 29/42); the standing watch armed (EN
+  correct 15/FALSE 10/blocked 17 @0.5; RU 4/FALSE 1; narrate
+  20/20, r==gold prose 7/10); station Python 3.14.3 (the
+  log-header env datum). THE RUNTIME PROMOTION remains the
+  owner's separate permission (D-250) — its measured basis now
+  COMPLETE. Owner-side housekeeping: drop the v6.2 zip into
+  docs/station/archive/ (the pattern's fourth instance).
+  Detail: the iter-368/371/374 reports + the archived v6.0/
+  v6.1 packs (v6.2 — the owner's local copy).
+
+- `hroom-1` — DONE (iter-386, R0/R1 — the H-prose follow-up's
+  measurable half, the standing «продолжай работы… я разрешаю»
+  directive + the session's llama.cpp environment permission):
+  station_hroom v1.0, the external Rule-9 pack (the source
+  archived at docs/station/archive/canonsim_hroom_pack_v1.0.zip)
+  — the m5 hybrid core VERBATIM by import from the m6 pack
+  (the sibling-pack law), the only two deltas --cap 832 (the
+  production 416 view derived exactly — a fixed-seed token
+  stream is cap-invariant up to the cut) + additive records
+  (prose_full, head_chars); the LOOP/BLEED/BURN/LEGIT
+  ceiling-tail classifier; LIVE-VALIDATED on the iter-365
+  ultralight band (b11541 + Qwen3-0.6B, CPU) with the
+  instrument's teeth — both counts reproducing the iter-365
+  datum exactly (h0 34 natural + 8 = 5 LOOP vocab-collapse +
+  3 BURN head-burns; h8 41 + 1 LOOP); THE 416 VERDICT: zero
+  natural lines over 416, zero LEGIT on either arm — 416 is
+  not the missing headroom on the band, every ceiling-hit a
+  degenerate tail a cap-raise cannot fix (fix class
+  tail-breaking / accept-and-flag; ~8× the arm-median wall);
+  the station run (one command, Gemma-4-E4B) carries the
+  production distribution + the aesthetic half of the
+  H-promotion basis — the owner's call. Detail:
+  iter-386-hroom-report.md.
 
 - `engine-1` — DONE (iter-170 D-192 DECIDED + iter-171..174 the {3-8B, GBNF}
   experiment, move (a) CLOSED + iter-177 D-193 the BUILD LANDING):
@@ -588,6 +584,7 @@ TEST_PLAN §9's claim packet)
   convenience back); zero behavior — text only; the report
   iter-377-hygiene1-report.md
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+- iter-386 · 2026-10-15 · hroom (R0/R1 — the H-prose headroom instrument, the first H-prose follow-up's measurable half; the standing «продолжай работы… я разрешаю» directive + the session's llama.cpp environment call; работа 2026-10-14, райдеры завершены 2026-10-15 после обрыва сессии): station_hroom v1.0, the external Rule-9 pack (the source archived at docs/station/archive/canonsim_hroom_pack_v1.0.zip) — the m5 hybrid core VERBATIM by import from the m6 pack (the sibling-pack law), the only two deltas a raised cap (--cap 832; the production 416 view DERIVED exactly — a fixed-seed token stream is cap-invariant up to the cut) + additive records (prose_full, head_chars); the LOOP/BLEED/BURN/LEGIT ceiling-tail classifier; LIVE VALIDATION on the iter-365 ultralight band (b11541 ubuntu-x64 + Qwen3-0.6B-Q4_K_M, CPU) with teeth — BOTH counts reproducing the iter-365 datum exactly (h0 34 natural + 8 [5 LOOP vocab-collapse 0.02-0.05 + 3 BURN head-burns]; h8 41 + 1 LOOP); the derived 416 view: ZERO natural lines over 416, ZERO LEGIT — 416 is not the missing headroom on the band, every ceiling-hit a degenerate tail a cap-raise cannot fix (fix class tail-breaking/accept-and-flag; ~8× the arm-median wall); the station form one command on Gemma-4-E4B carries the production distribution + the aesthetic half of the H-promotion basis (the owner's call); + the TASKS cruft pass on the three station rows (m4-r/m5/m6 — the measured tables owned by their reports, the doc-4 landing-record form; the stale m4-r "awaiting M2/M3" → RECORDED D-250); repo baseline untouched (2676+27 identical name-by-name, re-verified at landing), ruff+docguard+topology+digest clean; INV-1..5 untouched; the report iter-386-hroom-report.md
 - iter-385 · 2026-10-14 · composite1 (R2 local-add — the first landing of lab-composite-1: boundary surgery made executable, the §9.2 vocabulary-only row's live owner named the same iteration): tests/test_labcomposite.py (NEW — 5 laws: the manifest law, the just-outside necessity, the just-inside gate pop-exactness, the verdict-mover re-derivation, the axis-mover discrimination; three density-envelope profiles, REAL 1y runs, the _commit fold-order excerpt, the cross-structure + cross-unit locality forms) + docs/TEST_PLAN.md (§9.2's boundary-surgery row → its live owner) + riders: STATUS.md (header + Next), worklog.md (iter-385, iter-375 displaced), docs/TASKS.md (the row + the ledger, iter-375 displaced), docs/iterations/iter-385-composite1-report.md (new); 2676 passed + 27 failed (the known T1 env set, IDENTICAL name-by-name, zero new; the +5 laws all green), ruff+docguard+topology+digest clean; INV-1..5 untouched
 - iter-384 · 2026-10-14 · deccollapse3 (R0 riders — КОЛЛАПС DECISIONS 36→33: общая делегация владельца 2026-10-14 «продолжай работы, открывай то что сейчас важнее всего сделать, логичнее и качественнее на долгосрок. я разрешаю» над STATUS Next = THE OWNER'S FIRST CALL; форма iter-380, второй случай): D-257/D-258/D-259 (rollidx/gatefold/batchrolls) свёрнуты в семейную строку D-253/…/D-259 — СЕМЬ голов одного класса под одной директивой; субстанция целыми именами/законами/стенами/членами/md5, семейный PCC шесть полей, разрешимость программно (все D-ID старого файла присутствуют в новом); docguard ЧИСТ 33/35 (ДВА СЛОТА запаса); 2671 passed + 27 failed (дельта = строка гварда в зелёный), ruff+topology+digest чисты; the report iter-384-deccollapse3-report.md
 - iter-383 · 2026-10-13 · batchrolls (R3 core, D-259 the PCC row — the owner's standing «продолжай работы… я разрешаю» + «продолжай работу» directive, the standing order's SEVENTH head — the STATUS Next row's own words: beat_rolls' draw residue FIRST, the fused-batch form; the iter-362 class): БАТЧ-ДРОУ ЦЕЛОГО МНОЖЕСТВА, НУЛЬ КАНОН-БАЙТ — family_rolls (core/rng.py, рядом с family_randint): ДВА ПРОХОДА — дверь (регистрация + закон вложенности по имени + диапазон, порядок per-call формы, нуль дроу) и дроу (закон _draw_word инлайн, прецедент iter-370, оракулы пинуют равенство — не второй источник истины); ЗАКОН АТОМАРНОЙ ДВЕРИ — отказывающий батч не двинул ни одного счётчика; один диапазон на батч; оба обхода collect-then-draw (urgency: роллинг-множество → один батч → фильтр/гейты; faction: фильтр собирает первым, бар после дроу, проекция заморожена — перепорядочивание ЕСТЬ пер-входовой порядок, слитый; zip strict=True); ИЗМЕРЕНО: член beat_rolls 2.860→2.168 проф. с (×1.32, доля 16.3→13.2%), family_randint 939 052→0 в обходе (family_rolls 7 644 вызова cum 1.933 с — сама энтропийная работа), стена перемеченным A/B 7.38→7.18 мед (×1.03; микробенчмарк чистой цены дроу 0.740→0.542 с объясняет срез); НАХОДКА ИНСТРУМЕНТА: профильный остаток ряда завышал цену стены ~×5 — налог cProfile на вызовы, пер-вызовный остаток НИКОГДА не заявление о стене (закон 8 лаба с измеренным зубом, заметка в labrunner); НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… / farstead 4e4f4cf2… идентичны (шесть сравнений, canon_check HELD); +8 законов-оракулов (tests/test_batchrolls.py: равенство, атомарная дверь, диапазон, блок-прыжок, обход-двойник 6 паков, фракционный двойник, реальный лог A/B); 2670+28 (27 известных T1 ИДЕНТИЧНЫ базлайну ДО правок, ноль новых + 1 строка гварда 36/35 — честная запись над капом, прецедент D-256, коллапс владельца; +8 зелёные), ruff+topology+digest clean; СТОЯЩИЙ ПРИКАЗ: очередь производительности исчерпана — каждый остаток на документированном полу (first_d100_hit оптимален, commit_validate плоский, beat_rolls на энтропийном полу); новая строка только по свежему непрофилированному A/B-датуму; the report iter-383-batchrolls-report.md
@@ -597,4 +594,3 @@ TEST_PLAN §9's claim packet)
 - iter-379 · 2026-10-13 · decayheap (R3 core, D-256 the PCC row — the owner's standing «продолжай работы… я разрешаю» directive, the standing order's FOURTH head — the STATUS Next row's own words: the decay landing index FIRST, the heap form; the iter-362 class): ИНДЕКС ПРИЗЕМЛЕНИЯ DECAY, НУЛЬ КАНОН-БАЙТ — DecayIndex (core/states.py): min-кучи ПО ЛОКАЦИЯМ из ячеек (next_fire, npc, prop) над ЖИВЫМИ парами (рождение из initial-проекции — KI#16, базы из last_change; фолд на пути коммита в _commit — двойник apply_event: ось перекладывает свою пару, position/crime_status — все пары сущности); ЗАКОНЫ УСТАРЕВАНИЯ/ВЕТО: INV-1 ЛИЦЕНЗИРУЕТ устаревание (вся причина ездит закоммиченным событием — отброшенная ячейка ВСЕГДА имеет свежего наследника или пара легитимно мертва); валидация НА ВИДУ (фильтры обхода против живого состояния — позиция == ключ кучи, свежесть next_fire); перечисление НЕ ПОТРЕБЛЯЕТ (re-push); гейт идентичности serves (чужие держат обходы — семантические владельцы; формула в _axis_change, обе ветки зовут её; clamp остаётся у next_decay_tick); loop.py: рождение + re-birth при resume; ИЗМЕРЕНО: стена h32 10y 9.59→8.08/7.99 с (×1.19), член decay_walk 3.31→0.26 проф. с (12.5%→1.2%, ×12.9; per-call 224.7→4.8 мкс), next_decay_tick 2.68→0.05 с (×50), ЭКСПОНЕНТА ПЛОТНОСТИ ×8.1→×1.85 (честное линейное ядро — число выстрелов растёт с популяцией) / ×1.11 (next_decay_tick — плоско), разреженный конверт без регрессии (farstead 100y 2.56 с); НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… / farstead 4e4f4cf2… идентичны, canon_check HELD; +8 законов-оракулов (tests/test_decayidx.py: рождение 6 паков + зубы посевов, двойник ПОСЛЕ КАЖДОГО из 17 краёв устаревания, caught-вето, перечисление-не-потребляет, гейт идентичности, реальный лог mid-run/конец + живой пул == свежему рождению, resume); 2643+28 (27 известный T1 набор, множество имён ИДЕНТИЧНО базлайну ДО правок, ноль новых + 1 строка guard-теста: D-256 36/35 — НАД КАПОЙ D-252, коллапс — вызов владельца, прецедент D-250; +8 зелёные), ruff+topology+digest clean; the report iter-379-decayheap-report.md
 - iter-378 · 2026-10-13 · sensesidx (R3 core, D-255 the PCC row — the owner's standing «продолжай работы… я разрешаю» directive, the standing order's THIRD head: director_global_passes; the iter-362 class): ИНДЕКС ЧУВСТВ ДИРЕКТОРА, НУЛЬ КАНОН-БАЙТ — SensesIndex (core/director.py): сумма подозрения (оба дома, единый владелец формы _is_suspicion_home) + счёт видимых угроз как СКЛАДКА НА ПУТИ КОММИТА (рождение из initial-проекции — закон целой проекции KI#16 по построению; apply_change на КАЖДОМ событии в Director.seed — двойник apply_event, from_ есть валидированное до-значение); гейт идентичности (форма ScanGateMemo): bind пересканирует + штампует живой объект, releases читает индекс ТОЛЬКО для него, чужие проекции держат сканы (entropy/channel_entropies keyword-only senses=None — прежние вызывающие не тронуты); loop.py bind при construction + после resume; индекс НЕ в export_run_state (перестраиваем по логу); ИЗМЕРЕНО: стена h32 10y 11.37→9.57/9.49 с (×1.19), член 5.07→0.02 проф. с (16.1%→0.1%), entropy per-call cum 663→3.1 мкс — НЕЗАВИСИМ ОТ ПОПУЛЯЦИИ (datum ×2.50 списан), оба скана честный ноль в профиле; НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… / farstead 4e4f4cf2… идентичны; +7 законов-оракулов (tests/test_senses.py: рождение 6 паков + зубы сидов, двойник-согласие после каждого события по краевому сценарию, гейт идентичности, реальный лог mid-run/конец, resume); 2636+27 (известный T1 набор, ноль новых; +7 зелёные), ruff+docguard+topology+digest clean; DECISIONS 35/35 — НА КАПЕ D-252; the report iter-378-sensesidx-report.md
 - iter-377 · 2026-10-12 · hygiene1 (R0 text — the owner's «даю добро на hygiene-1» call on iter-376's three findings; D-198: the session's explicit request IS the current task): ВСЕ ТРИ ФИКСА РЕВИЗИИ ПОСАЖЕНЫ — (1) 4 устаревших пути `workbench/application/inference.py` в комментариях/докстрингах перепинены на пакет (settings.py:30 → `inference/`, :98 → `inference/migration.py` — носитель `migrate_launch_semantics`, :121 → `inference/`, test_inference.py:2 → `inference/`) — сплит iter-247 теперь отражён во всех живых носителях; (2) TEST_PLAN §9.1: голый `docs/SCALE_TESTING_LAW.md` + ULT §3/§17.2 помечены «both paths inside that EXTERNAL pack, never this repo» (+1 строка); (3) MVP_SCOPE §9: дословная непиненая копия ev_0007 (18 строк) заменена указателем на EVENT_SCHEMA §10 — единственный владелец уже закреплён тестом (T0/D-010), вариант B развилки (D-024: пиненая копия = второй источник истины на тест-механизме; −13 строк, развилка записана в отчёте §B, вариант A остаётся одной итерацией по вызову); 2629+27 (известный T1-набор, множество ИДЕНТИЧНО базлайну iter-376 ДО правок)+1, ruff+docguard+topology+digest clean; the report iter-377-hygiene1-report.md
-- iter-376 · 2026-10-12 · revision (R0 riders — вызов владельца 2026-10-12 «провести ревизию репозитория… мусор, дублирование, расхождения, мёртвые хвосты вроде redot… чисто исследовательская итерация»; D-198: явный запрос сессии = текущая задача): ПОЛНАЯ РЕВИЗИЯ РЕПО — ВЕРДИКТ: ЧИСТО. Заявления STATUS воспроизведены ТОЧНО на свежем клоне (pytest 2629+27+1 байт-в-байт, ruff/docguard/topology/digest чисто); REDOT — ноль артефактов, все 205 упоминаний в 40 файлах в санкционированных носителях (DECISIONS D-244/245, FAQ/NAV-роутинг, переразмещение iter-343, архив); мусор под git НОЛЬ (ни pycache/логов/ignore-пересечений, .git 11 МБ); 23/23 скрипта живы, 0 модулей без импортов, 0 осиротевших фикстур/frontend-файлов, 0 идентичных тел функций, 62/62 путей NAV живы, 6/6 паков потребляются, капы+allowlist чисты, ноль TODO-долга; ТРИ подлинные находки R0 → строка hygiene-1 (4 устаревших inference.py-пути в комментариях settings.py:30/98/121 + test_inference.py:2 — пакет с iter-247; голый внешний путь SCALE_TESTING_LAW в TEST_PLAN §9.1; непиненая дословная копия ev_0007 в MVP_SCOPE §9) + честный леджер ложных срабатываний (sim/ резерв, ssi v1/v2/v3 verbatim, зипы по D-242..248, README-сокращения, ref/-пути внешних репо); 2629+27 (известный T1-набор, перепроверен на нетронутом клоне до правок)+1, ruff+docguard+topology+digest clean; the report iter-376-revision-report.md
