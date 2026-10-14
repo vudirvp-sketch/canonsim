@@ -1,56 +1,41 @@
-Iteration: iter-383 (`batchrolls` — седьмая голова стоящего приказа
-  по директиве владельца «продолжай работы… я разрешаю» /
-  «продолжай работу»; R3, D-259; класс iter-362: нуль канон-байт):
-  БАТЧ-ДРОУ ЦЕЛОГО МНОЖЕСТВА — family_rolls в core/rng.py (следующий
-  шаг слияния после family_randint iter-370): ДВА ПРОХОДА — ДВЕРЬ
-  (регистрация + закон вложенности по имени + диапазон, порядок
-  проверок per-call формы, НУЛЬ дроу) и ДРОУ (закон _draw_word
-  инлайн, прецедент iter-370 — оракульные законы пинуют равенство,
-  не второй источник истины); ЗАКОН АТОМАРНОЙ ДВЕРИ — отказывающий
-  батч не двинул ни одного счётчика; один диапазон на батч (оба
-  бит-вызывателя дроу d100, смешанных диапазонов потребитель нет).
-  Оба обхода collect-then-draw: urgency_intents (роллинг-множество
-  как было → ОДИН батч-дроу → фильтр/гейты по входу),
-  faction_intents (фильтр собирает спеки первым — фильтр и бар
-  ничего не дроу, проекция заморожена на время обхода —
-  перепорядочивание ЕСТЬ пер-входовой порядок, слитый), zip
-  strict=True. ИЗМЕРЕНО: член beat_rolls 2.860 → 2.168 проф. с
-  (×1.32, доля 16.3→13.2%), family_randint 939 052 вызовов → 0 в
-  обходе (family_rolls 7 644 вызова cum 1.933 с — сама
-  энтропийная работа: sha256-блоки + слайсы слов + записи
-  счётчиков), профильная стена 17.85 → 16.76 с; СТЕНА
-  (перемежающийся A/B, дрейф-компенсированный, 4 раунда на руку):
-  старая медиана 7.38 / новая 7.18 с (×1.03) — микробенчмарк
-  чистой цены дроу 0.740 → 0.542 с (×1.36) в точности объясняет
-  срез; НАХОДКА ИНСТРУМЕНТА: профильный остаток ряда (2.79 с)
-  завышал истинную цену стены ~×5 — налог cProfile на 939K
-  вызовов; пер-вызовный остаток в профильной таблице НИКОГДА не
-  заявление о стене — закон 8 лаба теперь с измеренным зубом
-  (заметка в labrunner). НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3
-  796afbe1… / farstead 4e4f4cf2… идентичны (шесть независимых
-  сравнений, canon_check HELD) ·
+Iteration: iter-384 (`deccollapse3` — КОЛЛАПС DECISIONS 36→33,
+  ВТОРОЙ вызов исключительного права: общая делегация владельца
+  2026-10-14 «продолжай работы, открывай то что сейчас важнее
+  всего сделать, логичнее и качественнее на долгосрок. я разрешаю»
+  над STATUS Next, называвшим коллапс THE OWNER'S FIRST CALL —
+  форма iter-380, второй случай): СЕМЕЙНАЯ СТРОКА D-253 РАСШИРЕНА
+  ДО СЕМИ ГОЛОВ — D-257/D-258/D-259 (роллинг-индекс / фолд гейтов
+  / батч-дроу, iters 381/382/383) свёрнуты в компаунд-строку
+  D-253/…/D-259 (один класс iter-362, одна директива, лестница
+  iters 370/375/378/379/381/382/383 — СЕМЬ голов стоящего приказа
+  под одной строкой); субстанция сохранена (именованные системы
+  RollIndex/ScanGateFold/family_rolls, законы точности / pop /
+  serve / атомарной двери, стены и члены всех семи приземлений,
+  все три md5-отпечатка, рейтинг остаточной стены), сжатие D-024
+  (пер-итерационные PCC → один семейный на шесть полей, 39
+  законов счётом + формами — развёрнуто в семи отчётах и git);
+  PCC-поля семейной строки целы (docguard N017 зелёный); леджер
+  коллапсов шапки дополнен (36→33, iter-384); РАЗРЕШИМОСТЬ
+  ПРОГРАММНО: все D-ID старого файла присутствуют в новом, ноль
+  повисших цитат ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2670 passed + 28 failed, ruff clean, docguard 1 line (the D-259 36/35 DECISIONS count — the D-256 precedent state, clears on the owner's collapse call), topology clean, digest parses (28 = 27 the known T1 log-header env set — the failure list diffed name-by-name against the pristine pre-change baseline, ZERO new — + 1 the guard's own DECISIONS 36/35 count line; the +8 the new batch-roll laws, all green) ·
-Date: 2026-10-13 ·
+2671 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the failure list diffed name-by-name against the pre-change baseline: the single delta = the guard's own 36/35 count line WENT GREEN with the fold; zero new, zero flakes) ·
+Date: 2026-10-14 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..382 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
-Scope: R3 core (rng + urgencies + factions + tests):
-  core/rng.py (+family_rolls: дверь + инлайн-дроу, атомарная
-  дверь), core/urgencies.py (collect-then-draw обход),
-  core/factions.py (фракционный двойник), scripts/labrunner.py
-  (комментарий члена + заметка инструмента),
-  tests/test_batchrolls.py (новый, 8 законов-оракула) + райдеры:
-  STATUS.md (заголовок + Next), worklog.md (iter-383, iter-371
-  вытеснен), docs/TASKS.md (леджер, iter-371 вытеснен),
-  docs/DECISIONS.md (D-259, 36/35 — НАД КАПОЙ D-252, форма
-  прецедента D-256, коллапс — вызов владельца),
-  docs/iterations/iter-383-batchrolls-report.md (новый) — 10
-  изменённых/созданных (8 + 2).
+Scope: R0 riders-only (нуль строк кода движка, нуль строк гварда
+  — капа D-252 (35) не тронута, счёт ушёл под неё слиянием
+  строк): docs/DECISIONS.md (коллапс 36→33, 140 122 → 126 181
+  байт, 51 → 47 строк) + райдеры: STATUS.md (заголовок + Next),
+  worklog.md (iter-384, iter-374 вытеснен), docs/TASKS.md
+  (леджер, iter-374 вытеснен),
+  docs/iterations/iter-384-deccollapse3-report.md (новый) — 5
+  изменённых/созданных (4 + 1).
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -144,20 +129,17 @@ same law.)
 
 ## Next step
 
-**iter-383 DONE: batchrolls (седьмая голова стоящего приказа — R3,
-  D-259, нуль канон-байт: family_rolls — батч-дроу целого множества,
-  два прохода [дверь: регистрация + закон вложенности + диапазон,
-  нуль дроу; дроу: закон _draw_word инлайн, прецедент iter-370],
-  закон атомарной двери [отказ не двинул ни одного счётчика], оба
-  обхода collect-then-draw; member beat_rolls 2.860 → 2.168 проф. с,
-  family_randint 939K → 0 в обходе, стена ×1.03 перемеченным A/B
-  [старая 7.38 / новая 7.18 мед], микробенчмарк чистой цены дроу
-  0.740 → 0.542 с; НАХОДКА ИНСТРУМЕНТА: профильный остаток ряда
-  завышал цену стены ~×5 — налог cProfile на вызовы, закон 8 лаба с
-  измеренным зубом; три md5 идентичны; the report
-  iter-383-batchrolls-report.md).**
-Next: THE STANDING ORDER'S PERFORMANCE QUEUE DRAINED — the seventh
-  head closed the last named row; every residual now at its
+**iter-384 DONE: deccollapse3 (КОЛЛАПС DECISIONS 36→33 — общая
+  делегация владельца 2026-10-14 «продолжай работы, открывай то что
+  сейчас важнее всего сделать, логичнее и качественнее на долгосрок.
+  я разрешаю» над STATUS Next, называвшим коллапс THE OWNER'S FIRST
+  CALL; форма iter-380, второй случай: D-257/D-258/D-259 свёрнуты в
+  семейную строку D-253 — СЕМЬ голов одного класса под одной
+  директивой; субстанция целыми именами/законами/стенами/членами/
+  md5, семейный PCC шесть полей, разрешимость программно — все ID
+  старого файла присутствуют в новом; docguard ЧИСТ, 33/35 — ДВА
+  СЛОТА запаса; the report iter-384-deccollapse3-report.md).**
+Next: THE PERFORMANCE QUEUE stays DRAINED — every residual at its
   documented floor: first_d100_hit (2.1 проф. с — already optimal
   per iter-362, the honest residue), commit_validate (22.8% —
   population-flat, never-the-wall), beat_rolls 13.2% (at the
@@ -168,13 +150,6 @@ Next: THE STANDING ORDER'S PERFORMANCE QUEUE DRAINED — the seventh
   own body). A NEW performance row opens only on a fresh
   unprofiled-A/B datum naming it — a profiled share alone is never
   a wall claim (iter-383's instrument finding, the labrunner note)
-+ THE OWNER'S FIRST CALL — THE DECISIONS COLLAPSE: 36/35 OVER the
-  D-252 cap (D-259 landed under the standing directive, the D-256
-  precedent form; docguard RED is the honest visible state, the
-  guard's own count line — clears on the collapse call; the family
-  merge candidates: the standing-order ladder rows D-257/D-258/D-259
-  into the D-253 family row, three same-class heads under one
-  directive — the iter-380 form)
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE (this iteration touched
   zero door/battery paths); owner-side housekeeping: drop
