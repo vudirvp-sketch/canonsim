@@ -1,41 +1,47 @@
-Iteration: iter-384 (`deccollapse3` — КОЛЛАПС DECISIONS 36→33,
-  ВТОРОЙ вызов исключительного права: общая делегация владельца
-  2026-10-14 «продолжай работы, открывай то что сейчас важнее
-  всего сделать, логичнее и качественнее на долгосрок. я разрешаю»
-  над STATUS Next, называвшим коллапс THE OWNER'S FIRST CALL —
-  форма iter-380, второй случай): СЕМЕЙНАЯ СТРОКА D-253 РАСШИРЕНА
-  ДО СЕМИ ГОЛОВ — D-257/D-258/D-259 (роллинг-индекс / фолд гейтов
-  / батч-дроу, iters 381/382/383) свёрнуты в компаунд-строку
-  D-253/…/D-259 (один класс iter-362, одна директива, лестница
-  iters 370/375/378/379/381/382/383 — СЕМЬ голов стоящего приказа
-  под одной строкой); субстанция сохранена (именованные системы
-  RollIndex/ScanGateFold/family_rolls, законы точности / pop /
-  serve / атомарной двери, стены и члены всех семи приземлений,
-  все три md5-отпечатка, рейтинг остаточной стены), сжатие D-024
-  (пер-итерационные PCC → один семейный на шесть полей, 39
-  законов счётом + формами — развёрнуто в семи отчётах и git);
-  PCC-поля семейной строки целы (docguard N017 зелёный); леджер
-  коллапсов шапки дополнен (36→33, iter-384); РАЗРЕШИМОСТЬ
-  ПРОГРАММНО: все D-ID старого файла присутствуют в новом, ноль
-  повисших цитат ·
+Iteration: iter-385 (`composite1` — первая голова lab-composite-1,
+  единственной OPEN-строки бэклога, по стоящей директиве
+  владельца «продолжай работы, открывай то что сейчас важнее
+  всего сделать, логичнее и качественнее на долгосрок. я
+  разрешаю»; R2 local-add, нуль изменений рантайма): BOUNDARY
+  SURGERY ИСПОЛНЕНА — словарная строка §9.2 получила живого
+  владельца (tests/test_labcomposite.py, 5 законов): граница
+  зависимости ПЕРЕЧИСЛЯЕТСЯ из собственных объявлений структур
+  (фолд гейтов: объявленные паком пары чтения — единственная
+  буквально паковая граница; роллинг-индекс: движки вердикта
+  position/crime_status; индекс распада: оси пака — манифест,
+  никогда тестовая вторая истина); хирургия едет ТОЧНЫМ отрывком
+  порядка фолдов _commit (apply_event → _last_change → decay →
+  roll → gate; писатель/OCC/знание/реакции — у своих законов);
+  НАГРУЗКА — собственные оси конверта плотности (три
+  материализованных профиля, РЕАЛЬНЫЕ годовые прогоны на живом
+  Симуляторе): JUST-OUTSIDE (вне ВСЕХ объявленных границ — ничто
+  не двинулось: ноль поп, бакеты, ответы распада, свёрнутый скан
+  == свежий == до-хирургии — манифест НЕОБХОДИМ), JUST-INSIDE
+  GATE (пара чтения пинает РОВНО своих читателей, ре-дерирует ==
+  fresh, прочие структуры и чужой юнит нетронуты), VERDICT-MOVER
+  (позиция ре-дерирует roll+decay, живое == свежее рождение),
+  AXIS-MOVER (пул распада ре-дерирует один; поп фолда iff
+  манифест объявил) — кросс-структурная дискриминация +
+  кросс-юнитовая локальность (пересечение двух
+  первых-именованных паттернов строки) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2671 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the failure list diffed name-by-name against the pre-change baseline: the single delta = the guard's own 36/35 count line WENT GREEN with the fold; zero new, zero flakes) ·
+2676 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the failure list diffed name-by-name against the pre-change baseline: IDENTICAL, zero new, zero flakes; the +5 composite laws all green, each ~0.25 s) ·
 Date: 2026-10-14 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..382 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
-Scope: R0 riders-only (нуль строк кода движка, нуль строк гварда
-  — капа D-252 (35) не тронута, счёт ушёл под неё слиянием
-  строк): docs/DECISIONS.md (коллапс 36→33, 140 122 → 126 181
-  байт, 51 → 47 строк) + райдеры: STATUS.md (заголовок + Next),
-  worklog.md (iter-384, iter-374 вытеснен), docs/TASKS.md
-  (леджер, iter-374 вытеснен),
-  docs/iterations/iter-384-deccollapse3-report.md (новый) — 5
-  изменённых/созданных (4 + 1).
+Scope: R2 local-add (нуль строк рантайма — тесты + реестр +
+  райдеры): tests/test_labcomposite.py (новый, 5 законов),
+  docs/TEST_PLAN.md (§9.2: boundary surgery → живой владелец) +
+  райдеры: STATUS.md (заголовок + Next), worklog.md (iter-385,
+  iter-375 вытеснен), docs/TASKS.md (строка lab-composite-1 →
+  первая голова посажена + леджер, iter-375 вытеснен),
+  docs/iterations/iter-385-composite1-report.md (новый) — 6
+  изменённых/созданных (5 + 1).
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -129,27 +135,24 @@ same law.)
 
 ## Next step
 
-**iter-384 DONE: deccollapse3 (КОЛЛАПС DECISIONS 36→33 — общая
-  делегация владельца 2026-10-14 «продолжай работы, открывай то что
-  сейчас важнее всего сделать, логичнее и качественнее на долгосрок.
-  я разрешаю» над STATUS Next, называвшим коллапс THE OWNER'S FIRST
-  CALL; форма iter-380, второй случай: D-257/D-258/D-259 свёрнуты в
-  семейную строку D-253 — СЕМЬ голов одного класса под одной
-  директивой; субстанция целыми именами/законами/стенами/членами/
-  md5, семейный PCC шесть полей, разрешимость программно — все ID
-  старого файла присутствуют в новом; docguard ЧИСТ, 33/35 — ДВА
-  СЛОТА запаса; the report iter-384-deccollapse3-report.md).**
-Next: THE PERFORMANCE QUEUE stays DRAINED — every residual at its
-  documented floor: first_d100_hit (2.1 проф. с — already optimal
-  per iter-362, the honest residue), commit_validate (22.8% —
-  population-flat, never-the-wall), beat_rolls 13.2% (at the
-  entropy floor — the sha256 blocks + the word slices + the counter
-  writes themselves), the fast-path serve price (already cut ×2.2 —
-  the three-dict-get fusion opens only IF a future row names it),
-  skip_probes' scan loop (the gate serves + the collective walk's
-  own body). A NEW performance row opens only on a fresh
-  unprofiled-A/B datum naming it — a profiled share alone is never
-  a wall claim (iter-383's instrument finding, the labrunner note)
+**iter-385 DONE: composite1 (первая голова lab-composite-1 —
+  boundary surgery исполнена, словарная строка §9.2 получила
+  живого владельца tests/test_labcomposite.py: манифест из
+  собственных объявлений структур, хирургия порядком _commit,
+  нагрузка — три профиля конверта плотности на реальных годовых
+  прогонах, 5 законов [необходимость манифеста / поп-точность /
+  дискриминация / кросс-юнитовая локальность]; +5 законов зелёные,
+  2676+27 идентично базлайну, гварды чисты; the report
+  iter-385-composite1-report.md).**
+Next: lab-composite-1 остаётся OPEN — оставшиеся головы ждут
+  потребителей (observer noninterference — CONS-сторона;
+  капсульная половина causal debugging closure;
+  specialized-kernel — нативная строка; promotion ping-pong /
+  adaptive sufficient state — до мезо/мировых строк); THE
+  PERFORMANCE QUEUE stays DRAINED — every residual at its
+  documented floor, a new performance row only on a fresh
+  unprofiled-A/B datum naming it (iter-383's instrument finding,
+  the labrunner note)
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE (this iteration touched
   zero door/battery paths); owner-side housekeeping: drop
