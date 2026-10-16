@@ -233,10 +233,22 @@ invent them.
 HTTP/SSE/WebSocket are delivery mechanisms; the semantic API is
 application operations. Families: `session.create/get/attach/detach/
 events`, `run.start/get/cancel/stream`, `chat.send`, `prompt.test/
-prompt.compare` `[CONTRACT]`, `execution.get/replay` `[CONTRACT]`,
-`model.list/inspect/load/unload` `[LANDED]`, `simulation.start/step/
-stop` `[CONTRACT]`, `history.query/get` `[CONTRACT]`, `diagnostics.get/
-export` `[CONTRACT]`, `observatory.runs/read` `[LANDED obs-2]`. The
+prompt.compare` `[CONTRACT]`, `execution.get/replay` `[LANDED
+iter-387 — the replay-UI row's app half: execution.get the
+provenance read (lineage replay_of + the direct replays + the frozen
+inputs + the closed artifact, readable from admission);
+execution.replay §10's admission (a TERMINAL execution's frozen
+material re-run as a NEW identity — the lineage-aware derivation
+under the registry lock, the per-original sequence; the replayable
+kinds the run.start kinds + chat.completion over the freeze owner's
+own unfreeze adapter; the live-gate kinds model.load/unload own
+their re-dispatch; the carried deadline re-resolved through the same
+ceiling law; the frozen material post-validation by construction —
+the replay re-runs, never re-validates); run.get's document stays
+the LIFECYCLE read — no lineage field on it]`, `model.list/inspect/
+load/unload` `[LANDED]`, `simulation.start/step/stop` `[CONTRACT]`,
+`history.query/get` `[CONTRACT]`, `diagnostics.get/export`
+`[CONTRACT]`, `observatory.runs/read` `[LANDED obs-2]`. The
 analytical family (`observatory.query | compare | profile | archaeology
 | calibrate`) stays owner-gated capability FAMILIES — OBSERVATORY_LAW
 owns their semantics. Mutations use `client_request_id` idempotency

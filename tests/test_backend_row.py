@@ -907,6 +907,9 @@ def test_backend_registration_closure(tmp_path: Path) -> None:
         "model.list", "model.inspect",
         "chat.send", "model.load", "model.unload",
         "model.states",
+        # iter-387: the execution family — the chat.completion replay
+        # adapter joins exactly when the port wires
+        "execution.get", "execution.replay",
         "session.create", "session.get", "session.attach",
         "session.detach", "session.events", "app.status",
     }

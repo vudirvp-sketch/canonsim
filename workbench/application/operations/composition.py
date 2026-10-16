@@ -82,6 +82,7 @@ from workbench.application.inference import (
 from workbench.application.operations.backend import (
     BackendPortError,
     ModelLoadStates,
+    chat_replay_adapter,
     register_backend_operations,
 )
 from workbench.application.operations.execution import (
@@ -249,6 +250,15 @@ def compose_workbench_operations(
             "the composition wires at least one work kind — an empty "
             "work-kind map has no run family"
         )
+    # The execution family's replay adapters (iter-387): every
+    # run.start kind is pairs-native-replayable by construction; the
+    # chat.completion arm joins when a backend port is wired (the
+    # backend block below); the live-gate kinds (model.load/unload)
+    # stay OUT — their ladder walks live state the replay must not
+    # bypass (their re-dispatch is the user's explicit call).
+    replay_adapters: dict[str, ReplayAdapter] = {
+        name: _kind_replay_adapter(kind) for name, kind in kinds.items()
+    }
 
     gateway.register(
         OperationSpec(
@@ -308,6 +318,9 @@ def compose_workbench_operations(
                 backend,
                 temperature_default=temperature_default,
             )
+            replay_adapters["chat.completion"] = chat_replay_adapter(
+                backend
+            )
             if settings_store is not None:
                 register_settings_operations(
                     gateway,
@@ -345,6 +358,37 @@ def compose_workbench_operations(
             "the observatory seam needs BOTH the runs root and the event "
             "schema — one without the other is a half-wired surface"
         )
+    # The execution family (iter-387 — the app law §8's
+    # execution.get/replay [CONTRACT] row, the replay-UI row's app
+    # half): the provenance read + the replay admission, registered
+    # AFTER the backend block so the adapter map is final.
+    gateway.register(
+        OperationSpec(
+            name="execution.get",
+            kind="READ",
+            handler=_make_execution_get(executions),
+            session_scoped=True,
+            description=(
+                "the execution's provenance read (§10): lineage "
+                "(replay_of + the direct replays) + the frozen inputs "
+                "+ the closed artifact"
+            ),
+        )
+    )
+    gateway.register(
+        OperationSpec(
+            name="execution.replay",
+            kind="MUTATION",
+            handler=_make_execution_replay(executions, replay_adapters),
+            session_scoped=True,
+            description=(
+                "§10's replay admission: re-run a TERMINAL execution's "
+                "frozen material as a NEW execution identity (lineage "
+                "via replay_of — the run.start kinds + chat.completion; "
+                "the live-gate kinds own their re-dispatch)"
+            ),
+        )
+    )
     return WorkbenchOperations(
         models=models,
         executions=executions,
@@ -390,6 +434,16 @@ def _make_run_start(
                 "arguments)"
             )
         kind_pairs = kind.validate_arguments(inner)
+        reserved = sorted(
+            set(kind_pairs) & {"work", "deadline_seconds"}
+        )
+        if reserved:
+            raise _rejected(
+                f"run.start: the work kind's arguments freeze reserved "
+                f"envelope key(s) {reserved} — the envelope vocabulary "
+                "law (iter-387: the replay's envelope strip depends "
+                "on it)"
+            )
         deadline_argument = arguments.get("deadline_seconds")
         if deadline_argument is not None and (
             isinstance(deadline_argument, bool)
@@ -487,6 +541,189 @@ def _make_run_cancel(executions: ExecutionRegistry):
                 }
             )
         return {"execution_id": execution_id, "cancellation": outcome}
+
+    return handler
+
+
+# ------------------------------------------------- the execution family
+
+
+#: One replayable work kind's reconstruction arm (iter-387): the
+#: FROZEN pairs → the work callable the replay launches — hosted by
+#: the kind's own admission site (the module that froze owns the
+#: unfreeze, never a second truth over the format).
+ReplayAdapter = Callable[[Mapping[str, str]], WorkCallable]
+
+
+def _kind_replay_adapter(kind: WorkKind) -> ReplayAdapter:
+    """The run.start kinds' replay adapter: the frozen envelope → the
+    kind's own pairs → the SAME work the original launched
+    (WorkKind.work is pairs-native by signature). The envelope's two
+    reserved keys (work, deadline_seconds) strip; the integrity
+    assertion catches a kind whose own pairs would shadow the
+    envelope's work key — loud at replay, never a silently wrong
+    re-run (run.start's own admission rejects the reserved keys, the
+    same vocabulary law at the owner)."""
+
+    def adapter(frozen_inputs: Mapping[str, str]) -> WorkCallable:
+        if frozen_inputs.get("work") != kind.name:
+            raise RegistryError(
+                f"work kind {kind.name!r} replay: the frozen envelope's "
+                f"work key is {frozen_inputs.get('work')!r} — the kind's "
+                "own pairs shadow the envelope (the run.start freeze law)"
+            )
+        pairs = {
+            key: value
+            for key, value in frozen_inputs.items()
+            if key not in ("work", "deadline_seconds")
+        }
+
+        def replay_work(context: WorkContext) -> Mapping[str, object]:
+            return kind.work(context, pairs)
+
+        return replay_work
+
+    return adapter
+
+
+def _make_execution_get(executions: ExecutionRegistry):
+    """execution.get — the execution family's PROVENANCE read
+    (iter-387, the app law §8/§10): the lineage + the frozen material
+    + the closed artifact. Deliberately NOT run.get's document: the
+    lifecycle read (state/progress/deadline) and the provenance read
+    (lineage/frozen inputs/artifact) are separate families'
+    concerns — the lineage is readable from ADMISSION (before any
+    terminal artifact exists)."""
+
+    def handler(context) -> Mapping[str, object]:
+        arguments = dict(context.arguments)
+        unknown = sorted(set(arguments) - {"execution_id"})
+        if unknown:
+            raise _rejected(
+                f"execution.get: unknown argument(s) {unknown} "
+                "(closed set: ['execution_id'])"
+            )
+        execution_id = arguments.get("execution_id")
+        if not isinstance(execution_id, str) or not execution_id:
+            raise _rejected(
+                "execution.get: execution_id must be a non-empty str"
+            )
+        session_id = context.session.session_id if context.session else ""
+        try:
+            document = executions.document(execution_id, session_id)
+            replay_of, replays = executions.lineage(execution_id, session_id)
+        except RegistryError as exc:
+            raise _rejected(f"execution.get: {exc}") from exc
+        return {
+            "execution_id": document["execution_id"],
+            "operation_id": document["operation_id"],
+            "work": document["work"],
+            "state": document["state"],
+            "terminal": document["terminal"],
+            "replay_of": replay_of,
+            "replays": list(replays),
+            "request_digest": document["request_digest"],
+            "frozen_inputs": document["frozen_inputs"],
+            "artifact": document["artifact"],
+        }
+
+    return handler
+
+
+def _make_execution_replay(
+    executions: ExecutionRegistry,
+    adapters: Mapping[str, ReplayAdapter],
+):
+    """execution.replay — §10's replay admission (iter-387): re-run
+    a TERMINAL execution's frozen material as a NEW execution
+    identity, the new record + artifact linked by replay_of (lineage,
+    never identity reuse). The honest gates, in order: the closed
+    argument set, the session's ownership (the registry's own law),
+    the TERMINAL requirement (an in-flight original rejects — its
+    outcome is not yet truth), the kind's replayability (the
+    live-gate kinds — model.load/unload — own their re-dispatch; the
+    ladder walks live state a replay must not bypass), and the
+    frozen envelope's deadline re-resolution (the same §12 ceiling
+    law path — the carried budget, never a new one). The frozen
+    material is post-validation BY CONSTRUCTION (the §10 freeze at
+    the original's admission) — the replay re-runs, it never
+    re-validates."""
+
+    def handler(context) -> Mapping[str, object]:
+        arguments = dict(context.arguments)
+        unknown = sorted(set(arguments) - {"execution_id"})
+        if unknown:
+            raise _rejected(
+                f"execution.replay: unknown argument(s) {unknown} "
+                "(closed set: ['execution_id'])"
+            )
+        original_id = arguments.get("execution_id")
+        if not isinstance(original_id, str) or not original_id:
+            raise _rejected(
+                "execution.replay: execution_id must be a non-empty str"
+            )
+        session_id = context.session.session_id if context.session else ""
+        try:
+            source = executions.document(original_id, session_id)
+        except RegistryError as exc:
+            raise _rejected(f"execution.replay: {exc}") from exc
+        if not source["terminal"]:
+            raise _rejected(
+                f"execution.replay: execution {original_id!r} is still "
+                f"in flight ({source['state']}) — replay admits only "
+                "terminal executions"
+            )
+        work_kind = str(source["work"])
+        adapter = adapters.get(work_kind)
+        if adapter is None:
+            raise _rejected(
+                f"execution.replay: work kind {work_kind!r} is not "
+                "replayable (the live-gate kinds own their re-dispatch; "
+                f"replayable: {sorted(adapters)})"
+            )
+        frozen = {
+            str(key): str(value)
+            for key, value in source["frozen_inputs"]
+        }
+        raw_seconds = frozen.get("deadline_seconds")
+        if raw_seconds is None:
+            raise _rejected(
+                f"execution.replay: execution {original_id!r}: the "
+                "frozen envelope carries no deadline_seconds (the "
+                "admission freeze law) — the budget cannot re-resolve"
+            )
+        try:
+            seconds = executions.resolve_deadline_seconds(
+                float(raw_seconds)
+            )
+            work = adapter(frozen)
+            new_id = executions.admit(
+                operation_id="execution.replay",
+                session_id=session_id,
+                work_kind=work_kind,
+                frozen_inputs=frozen,
+                deadline_seconds=seconds,
+                replay_of=original_id,
+            )
+        except (RegistryError, ValueError) as exc:
+            raise _rejected(f"execution.replay: {exc}") from exc
+        executions.launch(new_id, work)
+        if context.effects is not None:
+            context.effects.effect(
+                {
+                    "effect": "RUN_REPLAYED",
+                    "execution_id": new_id,
+                    "work": work_kind,
+                    "replay_of": original_id,
+                }
+            )
+        return {
+            "replayed_from": original_id,
+            "execution_id": new_id,
+            "work": work_kind,
+            "deadline_seconds": seconds,
+            "state": "STARTING",
+        }
 
     return handler
 

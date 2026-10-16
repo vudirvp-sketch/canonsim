@@ -44,8 +44,8 @@ TEST_PLAN §9's claim packet)
   0.38–0.49 low-agency threshold — comprehension NOT the
   problem, the threshold the knob; THE G CONTROL like-for-like:
   R full 38.1% vs G 21.4%, R max 0.796 s vs G max 2.907 s.
-  Decision material: iter-350 §G + iter-361 §G. Detail: the
-  iter-357..361 reports.
+  Decision material: iter-350 §G + iter-361 §G (the full
+  measured tables owned by the iter-357..361 reports).
 
 - `m5-station` — DONE (iter-365 the agent half + iter-366 the
   read + iter-367 the corrected verdict-layer reading; the
@@ -119,8 +119,7 @@ TEST_PLAN §9's claim packet)
   tail-breaking / accept-and-flag; ~8× the arm-median wall);
   the station run (one command, Gemma-4-E4B) carries the
   production distribution + the aesthetic half of the
-  H-promotion basis — the owner's call. Detail:
-  iter-386-hroom-report.md.
+  H-promotion basis — the owner's call — iter-386-hroom-report.md.
 
 - `engine-1` — DONE (iter-170 D-192 DECIDED + iter-171..174 the {3-8B, GBNF}
   experiment, move (a) CLOSED + iter-177 D-193 the BUILD LANDING):
@@ -130,8 +129,7 @@ TEST_PLAN §9's claim packet)
   mapping, the provenance manifest; the contract absorbed (CONTRACTS §4);
   the serializer contract PRESENTATION_SPEC's (iter-178). Station
   remainder: TEST_PLAN §8.5's standing gap rows + PRESENTATION_SPEC §7's
-  band (the owner's next engine run). Detail: D-192/D-193 + TECH_NOTES
-  §13/§13.1 + git.
+  band (the owner's next engine run). Detail: D-192/D-193 + TECH_NOTES §13.1 + git.
 - `presentation-1` — DONE (iter-178, the owner's write call on the met
   exit criterion): `docs/PRESENTATION_SPEC.md` — the model-facing
   serializer contract over the stable brief IR (the D-055 pattern's
@@ -256,11 +254,10 @@ TEST_PLAN §9's claim packet)
   arrival, NO network, D-209); wb-11 the transport-chain row (the
   load/unload runs' fast dispatch, the pipe drains, D-210); wb-12
   the token-audit row (theme@0.3 + the chat follow law, D-212). The
-  Redot frontend halves (shell.gd & co.) DELETED at iter-290/D-245 —
-  the web client (`frontend/`, D-244) the active consumer; the
-  exported-Windows-build row PARKED per AGENTS §2.4 (the Redot
-  export form died with the tree; the product form re-scoped to the
-  web client when the owner calls it). Detail: CONTRACTS §5 + git.
+  Redot frontend halves DELETED at iter-290/D-245 — the web client
+  (`frontend/`, D-244) the active consumer; the
+  exported-Windows-build row PARKED per AGENTS §2.4 (re-scoped to
+  the web client when the owner calls it). Detail: CONTRACTS §5 + git.
 - `wb-13+` — the family's forward rows (owner-gated, each fires on
   the owner's call — the brief's §32/§46 ladders: live events +
   reconnect/resync + the idempotency/revision/lease tests at live
@@ -273,11 +270,40 @@ TEST_PLAN §9's claim packet)
   deleted, never a repo file again); visual/UI facts for any wb
   row: `docs/VISUAL_SYSTEM_UI.md` (the surface-driven grammar + the
   token taxonomy + the state matrix, D-211).
+- `replayui-1` — THE APP HALF LANDED (iter-387, R4, D-260 — the
+  standing «продолжай работы… я разрешаю» directive over STATUS
+  Next's standing-calls order, the replay-UI NOT-EXPOSED row named
+  FIRST among the work-answerable calls after iter-386 closed the
+  H-prose measurable half; the acceptance matrix's condition «when
+  application supports replay» FLIPPED SATISFIED): the app law §8's
+  contracted `execution.get/replay` family LIVE — the registry's
+  lineage-aware admission (replay_of on the record from admission,
+  the per-original sequence in the identity derivation under the
+  lock; the original derivation untouched), the provenance read
+  (lineage + the direct children + the frozen inputs + the closed
+  artifact — never a run.get field: the lifecycle/provenance family
+  split), the replay admission's honest gates (closed set, session
+  ownership, TERMINAL-only, kind replayability, the carried deadline
+  re-resolved through the same ceiling law; the frozen material
+  post-validation by construction — the replay re-runs, never
+  re-validates), the replay adapters (the run.start kinds
+  pairs-native; chat.completion over the freeze owner's own
+  unfreeze; the live-gate kinds model.load/unload own their
+  re-dispatch) + run.start's envelope-vocabulary gate at the owner +
+  the RUN_REPLAYED stream effect; +8 laws (tests/test_execops.py —
+  the chat arm carrying the inference-reproducibility datum: the
+  port re-called with the SAME frozen material, the provenance pair
+  collapsing to requested == effective); the topology manifest's
+  three rows synced. THE UI EXPOSURE IS THE ROW'S EXPLICIT
+  REMAINDER — the replay affordance on a terminal turn/run surface
+  + the contracts/validators/client mirror (the row closes when the
+  NOT-EXPOSED acceptance row flips EXPOSED). Detail:
+  iter-387-replayops-report.md + D-260. 
+
 - `ux-1` — DONE (iter-234): the P0 UX minimums over the then-Redot
   shell (deleted D-245) — the string catalog, the motion policy, the
   responsive bootstrap, the keyboard path; the lessons carry to the
-  web client as PRINCIPLES (STATUS FAQ's Redot-era entry). Detail:
-  git.
+  web client as PRINCIPLES (STATUS FAQ's Redot-era entry). Detail: git.
 - `obs-1`/`obs-2` — DONE (iter-235/236): the Observatory frontend
   entry — the IA regions + the interaction grammar (obs-1); the
   read-side seam + the feeds (obs-2: `workbench/observatory_read.py`
@@ -458,47 +484,24 @@ TEST_PLAN §9's claim packet)
   honored: the ONLY new mechanism; no second runner, no second
   schema — the packs consume `load_pack`/`Simulator`/`labrunner`
   as-is, disposable under gitignored `output/`): the settlement =
-  the repeating unit, the committed Tier A fixture the template,
-  every id namespaced `s<i>` with every cross-reference rewritten
-  (the scaffold's law); the knobs = `--settlements` (E: 12·S adults
-  + the player; L: 7·S; K=0 by construction — no inter-unit edges),
-  `--talk-links` (R: the relation web's degree, the AP-11
-  one-goal-per-NPC-per-verb ceiling enforced loud), `--prob-scale`
-  (ρ: the SAMPLED family only — the p=100 crossings stay certain,
-  B6's law); determinism pure (no RNG — same profile → identical
-  bytes); PROFILE.md the transparent axes echo. +7 LAWS
-  (`tests/test_densitypack.py`). **THE FIRST DATUM (iter-345, the
-  locality-control ladder, seeds 7/42, 10y, both protocols, the
-  square anchor)**: E 25→205, L 7→112, the living surface held at
-  one unit — the event stream INVARIANT (segmented
-  1195=1195=1195=1195; whole 899 = 899), **THE BYTE-LEVEL
-  ISOLATION LAW: the S=1 vs S=16 whole logs differ in EXACTLY 10
-  lines — the census digits, every other byte identical**; T1 HELD
-  both ends; the wall 0.43→0.95 s (2.2× on 16× E); §9.1 class
-  LOCAL-SCALE; H2 dead by construction under the LOD, H1
-  1.4-1.5%. **THE SECOND DATUM (iter-346 — the `rest`-member
-  split, the profile instrument's map extension)**: the
-  projection-plane family landed in `_MEMBER_ENTRIES` —
-  `director_global_passes` (entropy's per-beat whole-population
-  pass), `projection_snapshot` (the O(E) state copy per autonomous
-  enqueue), `skip_probes` (h9's population twins), `lod_zone_walk`
-  (the zone computation over L), every entry's call subtree
-  measured DISJOINT from the other entries' (caller attribution;
-  `kind_of` deliberately NOT a member — its O(E) lookups ride
-  occ_refold's/skip_probes' subtrees, the accounting law's
-  boundary); +1 law (`tests/test_lab.py` — the grown-world law:
-  the four members non-zero on a materialized S=4 pack, the
-  partition holds, canon-neutral); the ladder re-measured with the
-  decomposed wall: **director_global_passes 5.4%→31.2% (the
-  E-dominant member — the story layer global by law, its E-price
-  named)**, rest 37.7%→20.7%, per-call ×13.2 (_global_suspicion)
-  / ×6.2 (snapshot) / ×3.7 (decay tick) / ×2.7 (lod) / ×1.01
-  (next_d100_hit — the block walk E-flat as designed); the 100y
-  ladder: the per-call growth ratios ALL ≈×1.0 (no depth-super-
-  linear member), the stream invariant 10863 = 10863 at 100y; the
-  wall S16/S1 = ×2.17 at 10y = ×2.16 at 100y (the E-exponent
-  scale-stable across H). NEXT: `density-2` (the households knob —
-  the warm-ring density, the DENSITY-SCALE arm).
+  the repeating unit, every id namespaced `s<i>` with every
+  cross-reference rewritten; the knobs `--settlements` (E/L, K=0 by
+  construction) / `--talk-links` (R, the AP-11 ceiling enforced
+  loud) / `--prob-scale` (ρ: the SAMPLED family only, B6's law);
+  determinism pure (no RNG — same profile → identical bytes);
+  +7 LAWS (`tests/test_densitypack.py`). THE DATUMS (the locality-
+  control ladder, both protocols, the square anchor): **THE
+  BYTE-LEVEL ISOLATION LAW** (S=1 vs S=16 whole logs differ in
+  EXACTLY the census lines; T1 HELD both ends; the stream invariant
+  1195=1195 at 10y / 10863=10863 at 100y; the wall ×2.17 at 10y =
+  ×2.16 at 100y — the E-exponent scale-stable, §9.1 class
+  LOCAL-SCALE, H1 1.4-1.5%); the `rest`-member split (iter-346:
+  `director_global_passes`/`projection_snapshot`/`skip_probes`/
+  `lod_zone_walk` in `_MEMBER_ENTRIES`, the caller-attribution
+  partition, +1 grown-world law) naming `director_global_passes`
+  the E-dominant member (31.2%). The measured ladders + the
+  per-member walls: the iter-345/346 reports. NEXT: `density-2`
+  (the households knob — the warm-ring density, DENSITY-SCALE).
 - `density-2` — DONE (iter-347 `households`, the owner's standing
   «продолжай работы, открывай важнейшее, на долгосрок» directive;
   the environment permission for the station rows granted the same
@@ -584,6 +587,7 @@ TEST_PLAN §9's claim packet)
   convenience back); zero behavior — text only; the report
   iter-377-hygiene1-report.md
 ### Iteration ledger (one line per iteration; the tail capped at 10 by the doc guard — older lines live in git; per-iteration detail: the D-rows + the owning docs + worklog + git, never restated here, the header's own law)
+- iter-387 · 2026-10-15 · replayops (R4, D-260 the PCC row — the standing «продолжай работы… я разрешаю» directive, the replay-UI NOT-EXPOSED row the FIRST work-answerable standing call after iter-386; the row's app half): the app law §8's `execution.get/replay` [CONTRACT]→[LANDED] — the registry's lineage-aware admit (replay_of on the record, the per-original sequence in the derivation UNDER the lock, the original derivation untouched; the lineage read; the artifact link at the terminal close), backend.py's chat_replay_work/adapter (the unfreeze beside the freeze), composition.py's two handlers + the adapters map (run.start kinds pairs-native, chat.completion via the port, the live-gate kinds OUT) + run.start's reserved-envelope-keys gate + the two registrations, tests/test_execops.py (NEW — 8 laws: the new-identity, the lineage, the gates, the work both arms [the chat reproducibility datum: the port re-called with the SAME frozen material, requested == effective], the idempotency, the RUN_REPLAYED event, the envelope reservation); the registry pins synced (test_operations/test_backend_row), the frontend mirror riders (app_status_composition.json + the About count 21→23, zero frontend source), the topology manifest's three rows synced; 2684 passed + 27 failed (the known T1 env set, the count + family identical to the documented baseline — workbench-layer change, zero canon bytes), ruff+docguard+topology+digest clean, the frontend 256 vitest + tsc + build green; the UI exposure the row's explicit remainder; INV-1..5 untouched; the report iter-387-replayops-report.md
 - iter-386 · 2026-10-15 · hroom (R0/R1 — the H-prose headroom instrument, the first H-prose follow-up's measurable half; the standing «продолжай работы… я разрешаю» directive + the session's llama.cpp environment call; работа 2026-10-14, райдеры завершены 2026-10-15 после обрыва сессии): station_hroom v1.0, the external Rule-9 pack (the source archived at docs/station/archive/canonsim_hroom_pack_v1.0.zip) — the m5 hybrid core VERBATIM by import from the m6 pack (the sibling-pack law), the only two deltas a raised cap (--cap 832; the production 416 view DERIVED exactly — a fixed-seed token stream is cap-invariant up to the cut) + additive records (prose_full, head_chars); the LOOP/BLEED/BURN/LEGIT ceiling-tail classifier; LIVE VALIDATION on the iter-365 ultralight band (b11541 ubuntu-x64 + Qwen3-0.6B-Q4_K_M, CPU) with teeth — BOTH counts reproducing the iter-365 datum exactly (h0 34 natural + 8 [5 LOOP vocab-collapse 0.02-0.05 + 3 BURN head-burns]; h8 41 + 1 LOOP); the derived 416 view: ZERO natural lines over 416, ZERO LEGIT — 416 is not the missing headroom on the band, every ceiling-hit a degenerate tail a cap-raise cannot fix (fix class tail-breaking/accept-and-flag; ~8× the arm-median wall); the station form one command on Gemma-4-E4B carries the production distribution + the aesthetic half of the H-promotion basis (the owner's call); + the TASKS cruft pass on the three station rows (m4-r/m5/m6 — the measured tables owned by their reports, the doc-4 landing-record form; the stale m4-r "awaiting M2/M3" → RECORDED D-250); repo baseline untouched (2676+27 identical name-by-name, re-verified at landing), ruff+docguard+topology+digest clean; INV-1..5 untouched; the report iter-386-hroom-report.md
 - iter-385 · 2026-10-14 · composite1 (R2 local-add — the first landing of lab-composite-1: boundary surgery made executable, the §9.2 vocabulary-only row's live owner named the same iteration): tests/test_labcomposite.py (NEW — 5 laws: the manifest law, the just-outside necessity, the just-inside gate pop-exactness, the verdict-mover re-derivation, the axis-mover discrimination; three density-envelope profiles, REAL 1y runs, the _commit fold-order excerpt, the cross-structure + cross-unit locality forms) + docs/TEST_PLAN.md (§9.2's boundary-surgery row → its live owner) + riders: STATUS.md (header + Next), worklog.md (iter-385, iter-375 displaced), docs/TASKS.md (the row + the ledger, iter-375 displaced), docs/iterations/iter-385-composite1-report.md (new); 2676 passed + 27 failed (the known T1 env set, IDENTICAL name-by-name, zero new; the +5 laws all green), ruff+docguard+topology+digest clean; INV-1..5 untouched
 - iter-384 · 2026-10-14 · deccollapse3 (R0 riders — КОЛЛАПС DECISIONS 36→33: общая делегация владельца 2026-10-14 «продолжай работы, открывай то что сейчас важнее всего сделать, логичнее и качественнее на долгосрок. я разрешаю» над STATUS Next = THE OWNER'S FIRST CALL; форма iter-380, второй случай): D-257/D-258/D-259 (rollidx/gatefold/batchrolls) свёрнуты в семейную строку D-253/…/D-259 — СЕМЬ голов одного класса под одной директивой; субстанция целыми именами/законами/стенами/членами/md5, семейный PCC шесть полей, разрешимость программно (все D-ID старого файла присутствуют в новом); docguard ЧИСТ 33/35 (ДВА СЛОТА запаса); 2671 passed + 27 failed (дельта = строка гварда в зелёный), ruff+topology+digest чисты; the report iter-384-deccollapse3-report.md
@@ -593,4 +597,3 @@ TEST_PLAN §9's claim packet)
 - iter-380 · 2026-10-13 · deccollapse2 (R0 riders — ПРЯМОЙ ВЫЗОВ ВЛАДЕЛЬЦА «можешь коллапс провести»; класс iter-310-deccollapse): КОЛЛАПС DECISIONS 36→33 — четыре строки iter-362-класса (D-253/D-254/D-255/D-256, iters 370/375/378/379 — одна семья: один класс, одна директива, последовательные головы) свёрнуты в ОДНУ компаунд-строку «D-253/D-254/D-255/D-256 | 2026-10-12..13» (субстанция по §6.1 сохранена: системы family_randint/ScanGateMemo/saturated/SensesIndex/DecayIndex, стены 18.58→8.08 с, md5, остаточный рейтинг; деталь — отчёты + git, D-024; семейный PCC цел); леджер шапки дополнен (36→33, вызов владельца); РАЗРЕШИМОСТЬ 256/256 D-ID (диапазоны развёрнуты), ноль повисших; 2644+27 (провалы ИДЕНТИЧНЫ базлайну, строка счёта гварда ушла в зелёный), ruff+docguard (33/35 ЧИСТ)+topology+digest clean; the report iter-380-deccollapse2-report.md
 - iter-379 · 2026-10-13 · decayheap (R3 core, D-256 the PCC row — the owner's standing «продолжай работы… я разрешаю» directive, the standing order's FOURTH head — the STATUS Next row's own words: the decay landing index FIRST, the heap form; the iter-362 class): ИНДЕКС ПРИЗЕМЛЕНИЯ DECAY, НУЛЬ КАНОН-БАЙТ — DecayIndex (core/states.py): min-кучи ПО ЛОКАЦИЯМ из ячеек (next_fire, npc, prop) над ЖИВЫМИ парами (рождение из initial-проекции — KI#16, базы из last_change; фолд на пути коммита в _commit — двойник apply_event: ось перекладывает свою пару, position/crime_status — все пары сущности); ЗАКОНЫ УСТАРЕВАНИЯ/ВЕТО: INV-1 ЛИЦЕНЗИРУЕТ устаревание (вся причина ездит закоммиченным событием — отброшенная ячейка ВСЕГДА имеет свежего наследника или пара легитимно мертва); валидация НА ВИДУ (фильтры обхода против живого состояния — позиция == ключ кучи, свежесть next_fire); перечисление НЕ ПОТРЕБЛЯЕТ (re-push); гейт идентичности serves (чужие держат обходы — семантические владельцы; формула в _axis_change, обе ветки зовут её; clamp остаётся у next_decay_tick); loop.py: рождение + re-birth при resume; ИЗМЕРЕНО: стена h32 10y 9.59→8.08/7.99 с (×1.19), член decay_walk 3.31→0.26 проф. с (12.5%→1.2%, ×12.9; per-call 224.7→4.8 мкс), next_decay_tick 2.68→0.05 с (×50), ЭКСПОНЕНТА ПЛОТНОСТИ ×8.1→×1.85 (честное линейное ядро — число выстрелов растёт с популяцией) / ×1.11 (next_decay_tick — плоско), разреженный конверт без регрессии (farstead 100y 2.56 с); НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… / farstead 4e4f4cf2… идентичны, canon_check HELD; +8 законов-оракулов (tests/test_decayidx.py: рождение 6 паков + зубы посевов, двойник ПОСЛЕ КАЖДОГО из 17 краёв устаревания, caught-вето, перечисление-не-потребляет, гейт идентичности, реальный лог mid-run/конец + живой пул == свежему рождению, resume); 2643+28 (27 известный T1 набор, множество имён ИДЕНТИЧНО базлайну ДО правок, ноль новых + 1 строка guard-теста: D-256 36/35 — НАД КАПОЙ D-252, коллапс — вызов владельца, прецедент D-250; +8 зелёные), ruff+topology+digest clean; the report iter-379-decayheap-report.md
 - iter-378 · 2026-10-13 · sensesidx (R3 core, D-255 the PCC row — the owner's standing «продолжай работы… я разрешаю» directive, the standing order's THIRD head: director_global_passes; the iter-362 class): ИНДЕКС ЧУВСТВ ДИРЕКТОРА, НУЛЬ КАНОН-БАЙТ — SensesIndex (core/director.py): сумма подозрения (оба дома, единый владелец формы _is_suspicion_home) + счёт видимых угроз как СКЛАДКА НА ПУТИ КОММИТА (рождение из initial-проекции — закон целой проекции KI#16 по построению; apply_change на КАЖДОМ событии в Director.seed — двойник apply_event, from_ есть валидированное до-значение); гейт идентичности (форма ScanGateMemo): bind пересканирует + штампует живой объект, releases читает индекс ТОЛЬКО для него, чужие проекции держат сканы (entropy/channel_entropies keyword-only senses=None — прежние вызывающие не тронуты); loop.py bind при construction + после resume; индекс НЕ в export_run_state (перестраиваем по логу); ИЗМЕРЕНО: стена h32 10y 11.37→9.57/9.49 с (×1.19), член 5.07→0.02 проф. с (16.1%→0.1%), entropy per-call cum 663→3.1 мкс — НЕЗАВИСИМ ОТ ПОПУЛЯЦИИ (datum ×2.50 списан), оба скана честный ноль в профиле; НУЛЬ КАНОН-БАЙТ: h32 07e924cb… / h3 796afbe1… / farstead 4e4f4cf2… идентичны; +7 законов-оракулов (tests/test_senses.py: рождение 6 паков + зубы сидов, двойник-согласие после каждого события по краевому сценарию, гейт идентичности, реальный лог mid-run/конец, resume); 2636+27 (известный T1 набор, ноль новых; +7 зелёные), ruff+docguard+topology+digest clean; DECISIONS 35/35 — НА КАПЕ D-252; the report iter-378-sensesidx-report.md
-- iter-377 · 2026-10-12 · hygiene1 (R0 text — the owner's «даю добро на hygiene-1» call on iter-376's three findings; D-198: the session's explicit request IS the current task): ВСЕ ТРИ ФИКСА РЕВИЗИИ ПОСАЖЕНЫ — (1) 4 устаревших пути `workbench/application/inference.py` в комментариях/докстрингах перепинены на пакет (settings.py:30 → `inference/`, :98 → `inference/migration.py` — носитель `migrate_launch_semantics`, :121 → `inference/`, test_inference.py:2 → `inference/`) — сплит iter-247 теперь отражён во всех живых носителях; (2) TEST_PLAN §9.1: голый `docs/SCALE_TESTING_LAW.md` + ULT §3/§17.2 помечены «both paths inside that EXTERNAL pack, never this repo» (+1 строка); (3) MVP_SCOPE §9: дословная непиненая копия ev_0007 (18 строк) заменена указателем на EVENT_SCHEMA §10 — единственный владелец уже закреплён тестом (T0/D-010), вариант B развилки (D-024: пиненая копия = второй источник истины на тест-механизме; −13 строк, развилка записана в отчёте §B, вариант A остаётся одной итерацией по вызову); 2629+27 (известный T1-набор, множество ИДЕНТИЧНО базлайну iter-376 ДО правок)+1, ruff+docguard+topology+digest clean; the report iter-377-hygiene1-report.md

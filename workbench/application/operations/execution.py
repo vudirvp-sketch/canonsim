@@ -308,6 +308,9 @@ class _ExecutionRecord:
     artifact: ExecutionArtifact | None = None
     thread: threading.Thread | None = None
     progress: dict[str, object] | None = None
+    #: The lineage link (§10: replay creates a NEW identity — the
+    #: link is lineage, never identity reuse); None on originals.
+    replay_of: str | None = None
 
 
 class ExecutionRegistry:
@@ -375,41 +378,81 @@ class ExecutionRegistry:
         work_kind: str,
         frozen_inputs: Mapping[str, str],
         deadline_seconds: float | None,
+        *,
+        replay_of: str | None = None,
     ) -> str:
         """Admit one execution (§10: the input freeze happens HERE —
         before any side effect, before the work exists): derive the
         execution identity from the request identity + the frozen
         material, enter ADMITTED, and return the execution_id. A
         duplicate derivation is LOUD (the idempotency layer upstream
-        makes it unreachable in practice — the law holds anyway)."""
+        makes it unreachable in practice — the law holds anyway).
+
+        `replay_of` (iter-387, the execution.replay admission) makes
+        the derivation LINEAGE-AWARE (§10: replay creates a NEW
+        identity — the same frozen material admits as many replays
+        as asked, each its own execution): the digest gains the link
+        + the per-original replay sequence (counted under the lock,
+        so two racing replays of one original derive distinct
+        identities, never a dup-raise). The link must name an EXISTING
+        execution; the ORIGINAL (non-replay) derivation is untouched
+        — byte-identical for every existing caller."""
         seconds = self.resolve_deadline_seconds(deadline_seconds)
         pairs = tuple(sorted(frozen_inputs.items()))
         digest = request_digest(dict(pairs))
-        execution_id = content_digest(
-            json.dumps(
-                {"operation_id": operation_id, "request_digest": digest},
-                sort_keys=True,
-                separators=(",", ":"),
-            )
-        )
         started = self._clock.now_monotonic()
         deadline = OperationDeadline(
             operation_id=operation_id,
             started_monotonic=started,
             deadline_monotonic=started + seconds,
         )
-        record = _ExecutionRecord(
-            execution_id=execution_id,
-            operation_id=operation_id,
-            session_id=session_id,
-            work_kind=work_kind,
-            frozen_inputs=pairs,
-            request_digest_value=digest,
-            state="ADMITTED",
-            deadline=deadline,
-            cancellation=CancellationToken(),
-        )
         with self._lock:
+            if replay_of is None:
+                execution_id = content_digest(
+                    json.dumps(
+                        {
+                            "operation_id": operation_id,
+                            "request_digest": digest,
+                        },
+                        sort_keys=True,
+                        separators=(",", ":"),
+                    )
+                )
+            else:
+                if replay_of not in self._executions:
+                    raise RegistryError(
+                        f"execution {replay_of!r}: no such execution "
+                        "(the replay link)"
+                    )
+                sequence = sum(
+                    1
+                    for record in self._executions.values()
+                    if record.replay_of == replay_of
+                )
+                execution_id = content_digest(
+                    json.dumps(
+                        {
+                            "operation_id": operation_id,
+                            "replay_of": replay_of,
+                            "replay_sequence": sequence,
+                            "request_digest": digest,
+                        },
+                        sort_keys=True,
+                        separators=(",", ":"),
+                    )
+                )
+            record = _ExecutionRecord(
+                execution_id=execution_id,
+                operation_id=operation_id,
+                session_id=session_id,
+                work_kind=work_kind,
+                frozen_inputs=pairs,
+                request_digest_value=digest,
+                state="ADMITTED",
+                deadline=deadline,
+                cancellation=CancellationToken(),
+                replay_of=replay_of,
+            )
             if execution_id in self._executions:
                 raise RegistryError(
                     f"execution {execution_id}: already admitted — one "
@@ -417,6 +460,28 @@ class ExecutionRegistry:
                 )
             self._executions[execution_id] = record
         return execution_id
+
+    def lineage(
+        self, execution_id: str, session_id: str
+    ) -> tuple[str | None, tuple[str, ...]]:
+        """The execution family's lineage read (§10, iter-387 — the
+        execution.get surface's own material, deliberately NOT on
+        run.get's document: the lifecycle read and the provenance
+        read are separate families' concerns): the record's
+        `replay_of` link (from ADMISSION — readable before the
+        terminal artifact exists) + the sorted direct children (the
+        replays OF this execution). The session-ownership law applies
+        — the session's own executions only."""
+        with self._lock:
+            record = self._require_owned_locked(execution_id, session_id)
+            children = tuple(
+                sorted(
+                    child_id
+                    for child_id, child in self._executions.items()
+                    if child.replay_of == execution_id
+                )
+            )
+            return record.replay_of, children
 
     def launch(self, execution_id: str, work: WorkCallable) -> None:
         """Launch the admitted execution: walk STARTING, construct +
@@ -679,6 +744,7 @@ class ExecutionRegistry:
             frozen_inputs=record.frozen_inputs,
             operation_id=record.operation_id,
             diagnostics=tuple(record.diagnostics),
+            replay_of=record.replay_of,
         )
 
     def _require_locked(self, execution_id: str) -> _ExecutionRecord:

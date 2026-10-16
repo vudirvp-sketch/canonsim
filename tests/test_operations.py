@@ -1059,6 +1059,10 @@ def test_composition_registers_five_operations(tmp_path: Path) -> None:
         "run.cancel",
         "model.list",
         "model.inspect",
+        # iter-387: the execution family (the app half of the
+        # replay-UI row — the registry's own ops, always wired)
+        "execution.get",
+        "execution.replay",
         # the wb-4 builtins stay
         "session.create",
         "session.get",

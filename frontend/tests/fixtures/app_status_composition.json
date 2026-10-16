@@ -9,6 +9,8 @@
       "backend.settings",
       "backend.settings.update",
       "chat.send",
+      "execution.get",
+      "execution.replay",
       "inference.read",
       "inference.update",
       "model.inspect",

@@ -1,54 +1,61 @@
-Iteration: iter-386 (`hroom` — измеримая половина H-проза-
-  фоллоу-апов, первая отвечаемая работой позиция STATUS Next,
-  по стоящей директиве владельца «продолжай работы, открывай
-  то что сейчас важнее всего сделать, логичнее и качественнее
-  на долгосрок. я разрешаю» + явному разрешению окружения
-  «можешь устанавливать llama.cpp для работы и прочее
-  окружение»; R0/R1 — внешний пак по Правилу 9 + райдеры, нуль
-  строк рантайма репо): ИНСТРУМЕНТ ЗАПАСА ТОКЕНОВ H-ПРОЗЫ —
-  station_hroom v1.0 (исходник:
-  docs/station/archive/canonsim_hroom_pack_v1.0.zip): гибридное
-  ядро m5 ПОСЛОВНО импортом из m6-пака (закон соседних паков),
-  ровно ДВЕ дельты — потолок --cap 832 (естественный конец
-  каждой строки наблюдаем; производственный 416-вид выводится
-  ТОЧНО: поток токенов фиксированного сида потолко-инвариантен
-  до среза) + аддитивные записи (prose_full + head_chars);
-  классификатор потолочных хвостов LOOP/BLEED/BURN/LEGIT;
-  ЖИВАЯ ВАЛИДАЦИЯ ЗУБЬЯМИ на ультралайт-полосе iter-365
-  (llama.cpp b11541 ubuntu-x64 + Qwen3-0.6B-Q4_K_M, CPU): ОБА
-  СЧЁТА ВОСПРОИЗВОДЯТ ДАТУМ iter-365 СЧЁТ В СЧЁТ (h0 34
-  естественных + 8 потолочных [5 LOOP коллапс словаря
-  0.02–0.05 + 3 BURN head-burn]; h8 41 + 1 LOOP) — производный
-  416-вид: НОЛЬ естественных строк над 416 + НОЛЬ LEGIT на
-  обеих руках: 416 — НЕ отсутствующий запас на этой полосе,
-  всякое упирание — вырожденный хвост, который подъём потолка
-  не чинит (класс фикса — ломатель хвостов или
-  принять-и-пометить; цена вырожденной строки ~8× медианы
-  стены); станционная форма одной командой (Gemma-4-E4B)
-  снимает производственное распределение; эстетическая
-  половина H-промоушен-базиса — вызов владельца по тем же
-  prose_full-хвостам ·
+Iteration: iter-387 (`replayops` — строка replay-UI NOT-EXPOSED,
+  ПЕРВАЯ отвечаемая работой позиция порядка стоящих вызовов STATUS
+  Next после закрытия измеримой половины H-прозы на iter-386, под
+  стоящей директивой владельца «продолжай работы, открывай то что
+  сейчас важнее всего сделать, логичнее и качественнее на долгосрок.
+  я разрешаю» — ПРИЛОЖНАЯ ПОЛОВИНА СТРОКИ: семейство
+  `execution.get/replay` закона приложения §8 посажено ЖИВЬЁМ,
+  условие матрицы приёмки «when application supports replay»
+  перевёрнуто в удовлетворённое; R4, D-260 с PCC): реестр
+  исполнений — линейно-осведомлённый допуск admit(replay_of=…)
+  (деривация identity расширяется ссылкой + на-оригинальной
+  последовательностью под замком — гонящиеся повторы выводят
+  различные identity; исходная деривация не тронута, байт-идентична
+  каждому существующему вызывающему; replay_of на записи с допуска,
+  передаётся в закрытый артефакт) + чтение lineage (ссылка +
+  сортированные прямые дети, с собственного допуска — до
+  артефакта); `execution.get` — чтение ПРОВЕНАНСА (родословная +
+  замороженные входы + артефакт; НИКОГДА поле run.get — развилка
+  семейств lifecycle/provenance, строгая схема фронтенда не
+  тронута); `execution.replay` — допуск повтора с честными гейтами
+  (закрытый сет аргументов, владение сессией, ТОЛЬКО терминальный
+  оригинал, воспроизводимость вида, перенесённый дедлайн через тот
+  же закон потолка; замороженный материал валиден ПОСТРОЕНИЕМ —
+  повтор ПЕРЕЗАПУСКАЕТ, никогда не перевалидирует); адаптеры
+  повтора (вида run.start пары-нативны по подписи WorkKind;
+  chat.completion — анфриз у ХОЗЯИНА фриза (backend.py, никогда
+  вторая истина над форматом); живо-гейтовые вида model.load/unload
+  — ИХ ПЕРЕВЫПУСК, не повтора) + гейт словаря конверта у run.start
+  (зарезервированные ключи конверта отвергаются ГРОМКО у самого
+  владельца) + эффект RUN_REPLAYED в упорядоченный поток; +8
+  законов (tests/test_execops.py — в т.ч. ЧАТ-РУКА НЁСЁТ ДАТУМ
+  ВОСПРОИЗВОДИМОСТИ: порт вызван повторно с ТЕМ ЖЕ замороженным
+  материалом, пара провенанса схлопывается в requested ==
+  effective); UI-экспозиция — ЯВНЫЙ ОСТАТОК СТРОКИ ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2676 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the failure list diffed name-by-name against the pre-change baseline: IDENTICAL, zero new, zero flakes; zero repo-runtime lines) ·
+2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-386 baseline; a workbench-layer change, zero canon bytes) ·
 Date: 2026-10-15 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..385 baseline, the GOLDEN
+  3.12.15, byte-identical to the 362..386 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
-  diff at index 71 — the python field — zero new, zero flakes;
-  re-verified at the iter-386 riders landing) ·
-Scope: R0/R1 (внешний пак Правила 9 + райдеры, нуль строк
-  рантайма репо): docs/iterations/iter-386-hroom-report.md
-  (новый) + docs/station/archive/canonsim_hroom_pack_v1.0.zip
-  (новый — исходник пака, паттерн m5/m6-зипов) + райдеры:
-  STATUS.md (заголовок + Next), worklog.md (iter-386, iter-376
-  вытеснен), docs/TASKS.md (строка hroom-1 + леджер, iter-376
-  вытеснен + круфт-пас трёх станционных строк m4-r/m5/m6 —
-  таблицы у своих отчётов, форма doc-4; устаревшее «awaiting
-  M2/M3» в m4-r → RECORDED D-250) — 5 изменённых/созданных
-  (2 + 3).
+  diff at index 71 — the python field — zero new, zero flakes) ·
+Scope: R4 (D-260 the PCC row): workbench/application/operations/
+  execution.py (replay_of на записи + линейно-осведомлённый admit +
+  lineage-чтение + связь в артефакт), backend.py (chat_replay_work
+  + chat_replay_adapter — анфриз beside the freeze), composition.py
+  (два обработчика + карта адаптеров + регистрации + гейт конверта
+  run.start), tests/test_execops.py (новый, 8 законов) + синхронные
+  райдеры: tests/test_operations.py + tests/test_backend_row.py
+  (пины реестра), frontend/tests/fixtures/app_status_composition.
+  json + Settings.test.tsx (зеркало реестра, счёт 21→23 — нуль
+  строк исходника фронтенда), docs/WORKBENCH_APP_LAW.md (§8
+  [CONTRACT]→[LANDED]), docs/SSI_TOPOLOGY.md (три строки), DECISIONS
+  (D-260, 34/35), STATUS/worklog/TASKS (строка replayui-1 + леджер,
+  iter-377 вытеснен; круфт-пас density-1/wb-2..12/m4-r до 599/600),
+  отчёт итерации — 15 изменённых/созданных.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -71,9 +78,15 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   LANDED + THE BOOT-TIME OBSERVED-SYNC LANDED (iter-309); THE
   STANDING QUEUE DISPOSITIONED + THE DECISIONS COLLAPSE LANDED
   (iter-310, D-250); the §8.5 heartbeat ledger COMPLETE through the
-  27B band (iter-312/313/314 — the station records). The next
-  frontend rows the owner's call: the replay-UI NOT-EXPOSED row;
-  the standing boundaries: a SharedWorker stream transport, Tauri,
+  27B band (iter-312/313/314 — the station records); THE REPLAY-UI
+  ROW'S APP HALF LANDED (iter-387 — the acceptance matrix's
+  condition «when application supports replay» FLIPPED SATISFIED:
+  the app law §8's execution.get/replay family LIVE over the
+  lineage-aware registry admission, D-260; the UI exposure the
+  row's explicit remainder). The next
+  frontend rows the owner's call: the replay-UI EXPOSURE row (the
+  row's second half — the replay affordance + the
+  contracts/validators/client mirror); the standing boundaries: a SharedWorker stream transport, Tauri,
   PWA, the Settings Appearance section (no persisted store) — each
   its own admission (the import form's native file/folder picker
   rides the Tauri row). The world track: W8's remaining rows the
@@ -142,35 +155,48 @@ same law.)
 
 ## Next step
 
-**iter-386 DONE: hroom (измеримая половина H-проза-фоллоу-апов
-  вооружена — station_hroom v1.0: ядро m5 пословно импортом из
-  m6-пака, две дельты [потолок 832 + аддитивные записи],
-  классификатор LOOP/BLEED/BURN/LEGIT; живая валидация зубьями
-  iter-365 счёт в счёт [h0 34+8, h8 41+1]; производный 416-вид:
-  ноль естественных над 416, ноль LEGIT — 416 не отсутствующий
-  запас на полосе, всякое упирание вырожденный хвост, класс
-  фикса ломатель/принять-и-пометить; the report
-  iter-386-hroom-report.md).**
-Next: H-проза-фоллоу-апы — измеримая половина ЗАКРЫТА
-  инструментом; остаются станционный прогон пака одной командой
-  (README: Gemma-4-E4B — производственное распределение) и
-  эстетическая половина H-промоушен-базиса (the owner's call по
-  тем же prose_full-хвостам) + owner-side housekeeping: drop
-  canonsim_m6_station_pack_v6.2.zip into docs/station/archive/
-  (the pattern's fourth instance — the pack is the owner's local
-  copy)
+**iter-387 DONE: replayops (строка replay-UI NOT-EXPOSED —
+  приложная половина: семейство execution.get/replay закона
+  приложения §8 ПОСАЖЕНО ЖИВЬЁМ, D-260/R4 с PCC — линейно-
+  осведомлённый допуск реестра [replay_of на записи с допуска,
+  на-оригинальная последовательность в деривации identity ПОД
+  замком, исходная деривация не тронута], чтение провенанса
+  execution.get [родословная + замороженные входы + артефакт;
+  никогда поле run.get], допуск повтора execution.replay с
+  честными гейтами [терминальный оригинал, воспроизводимость
+  вида, перенесённый дедлайн через тот же закон потолка],
+  адаптеры повтора [run.start вида пары-нативны; chat.completion
+  анфриз у хозяина фриза; load/unload — их перевыпуск], гейт
+  словаря конверта у run.start, эффект RUN_REPLAYED; +8 законов,
+  чат-рука несёт датум воспроизводимости [порт повторно с тем же
+  замороженным материалом, requested == effective]; условие
+  матрицы приёмки «when application supports replay»
+  перевёрнуто; the report iter-387-replayops-report.md).**
+Next: строка replay-UI — UI-ЭКСПОЗИЦИЯ (вторая половина:
+  аффорданс повтора на терминальном ходе/ране + зеркало
+  contracts/validators/client на фронтенде — строка закрывается
+  переводом NOT-EXPOSED строки матрицы приёмки в EXPOSED; каждый
+  ряд — вызов владельца по FRONTEND_UIUX_LAW §25)
++ H-проза: станционный прогон hroom-пака одной командой на
+  станции владельца (README: Gemma-4-E4B — производственное
+  распределение; песочнице не хватает RAM под 5+ ГБ модель без
+  GPU — проверено) + эстетическая половина H-промоушен-базиса
+  (the owner's call по тем же prose_full-хвостам) + owner-side
+  housekeeping: drop canonsim_m6_station_pack_v6.2.zip into
+  docs/station/archive/ (the pattern's fourth instance — the
+  pack is the owner's local copy)
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE
 + THE OWNER'S STANDING CALLS — decider-4b parked (outside the
   llama.cpp five); the pack-v5 instrument rows' datum delivered
   (cuda_gate.bands exercised LIVE by the m6 run); behind them
-  the standing owner calls in order — the replay-UI NOT-EXPOSED
-  row, the world track's W8, the frontend P1/P2/P3 continuations,
-  `lab-composite-1` (остаётся OPEN — оставшиеся головы ждут
-  потребителей: observer noninterference — CONS-сторона;
-  капсульная половина causal debugging closure;
-  specialized-kernel — нативная строка; promotion ping-pong /
-  adaptive sufficient state — до мезо/мировых строк)
+  the standing owner calls in order — the world track's W8, the
+  frontend P1/P2/P3 continuations, `lab-composite-1` (остаётся
+  OPEN — оставшиеся головы ждут потребителей: observer
+  noninterference — CONS-сторона; капсульная половина causal
+  debugging closure; specialized-kernel — нативная строка;
+  promotion ping-pong / adaptive sufficient state — до
+  мезо/мировых строк)
 + THE PERFORMANCE QUEUE stays DRAINED — every residual at its
   documented floor, a new performance row only on a fresh
   unprofiled-A/B datum naming it (iter-383's instrument finding,

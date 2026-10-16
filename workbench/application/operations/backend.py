@@ -121,6 +121,7 @@ from workbench.api.gateway import (
 from workbench.application.operations.execution import (
     ExecutionRegistry,
     RegistryError,
+    WorkCallable,
     WorkContext,
 )
 from workbench.application.operations.lifecycles import (
@@ -144,6 +145,8 @@ __all__ = [
     "BackendPortError",
     "ModelLoadStates",
     "chat_completion_work",
+    "chat_replay_adapter",
+    "chat_replay_work",
     "model_load_work",
     "model_unload_work",
     "register_backend_operations",
@@ -397,6 +400,65 @@ def chat_completion_work(
         }
 
     return work
+
+
+def chat_replay_work(
+    port: BackendPort,
+    frozen_inputs: Mapping[str, str],
+) -> WorkCallable:
+    """The chat.completion replay adapter (iter-387, execution.replay
+    — the re-run arm over the FROZEN pairs). Hosted HERE by law: the
+    module that FREEZES owns the unfreeze (never a second truth over
+    the format) — the messages JSON, the temperature repr, the
+    max_tokens string round-trip exactly (Python's float repr is
+    exact; the frozen material is post-validation by construction,
+    the §10 freeze IS the validated material — the replay never
+    re-validates, it re-runs).
+
+    The replay's temperature rides as the EXPLICIT requested value:
+    a re-run's provenance pair collapses to requested == effective —
+    the honest form (§10: the replay re-runs the EFFECTIVE material;
+    the original's REQUESTED-vs-EFFECTIVE distinction stays recorded
+    on the ORIGINAL's own result document, never re-guessed here)."""
+    try:
+        messages = [
+            {"role": str(item["role"]), "content": str(item["content"])}
+            for item in json.loads(frozen_inputs["messages"])
+        ]
+        temperature = float(frozen_inputs["temperature"])
+        max_tokens = int(frozen_inputs["max_tokens"])
+    except (KeyError, TypeError, ValueError) as exc:
+        raise RegistryError(
+            "chat.completion replay: the frozen inputs do not "
+            f"round-trip ({exc})"
+        ) from exc
+    if not messages:
+        raise RegistryError(
+            "chat.completion replay: the frozen messages are empty"
+        )
+    return chat_completion_work(
+        port,
+        messages,
+        temperature,
+        max_tokens,
+        temperature_requested=temperature,
+    )
+
+
+def chat_replay_adapter(
+    backend: object,
+) -> Callable[[Mapping[str, str]], WorkCallable]:
+    """The composition's wiring wrapper (iter-387): validate the port
+    (the family's own law — the validation happens here, never at the
+    consumer) and return the frozen-pairs → work adapter for
+    execution.replay's chat.completion arm."""
+    require_backend_port(backend)
+    port: BackendPort = backend  # structural — validated above
+
+    def adapter(frozen_inputs: Mapping[str, str]) -> WorkCallable:
+        return chat_replay_work(port, frozen_inputs)
+
+    return adapter
 
 
 def _backend_identity(port: BackendPort) -> dict[str, object]:

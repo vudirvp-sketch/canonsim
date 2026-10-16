@@ -341,8 +341,10 @@ describe("the Settings secondary navigation (iter-301 — the verdict's step 5, 
     expect(identity.textContent).toContain("LOOPBACK");
     expect(identity.textContent).toContain("not required (loopback)");
     // The full registry, verbatim: the honest count + the chips
-    // (the model work kinds ride run.start, never the registry).
-    expect(screen.getByTestId("about-operations-count").textContent).toBe("21 registered");
+    // (the model work kinds ride run.start, never the registry;
+    // iter-387: +execution.get/replay — the app half of the
+    // replay-UI row).
+    expect(screen.getByTestId("about-operations-count").textContent).toBe("23 registered");
     expect(identity.textContent).toContain("chat.send");
     expect(identity.textContent).toContain("model.load");
     expect(identity.textContent).toContain("observatory.read");
