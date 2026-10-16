@@ -1,61 +1,57 @@
-Iteration: iter-387 (`replayops` — строка replay-UI NOT-EXPOSED,
-  ПЕРВАЯ отвечаемая работой позиция порядка стоящих вызовов STATUS
-  Next после закрытия измеримой половины H-прозы на iter-386, под
-  стоящей директивой владельца «продолжай работы, открывай то что
-  сейчас важнее всего сделать, логичнее и качественнее на долгосрок.
-  я разрешаю» — ПРИЛОЖНАЯ ПОЛОВИНА СТРОКИ: семейство
-  `execution.get/replay` закона приложения §8 посажено ЖИВЬЁМ,
-  условие матрицы приёмки «when application supports replay»
-  перевёрнуто в удовлетворённое; R4, D-260 с PCC): реестр
-  исполнений — линейно-осведомлённый допуск admit(replay_of=…)
-  (деривация identity расширяется ссылкой + на-оригинальной
-  последовательностью под замком — гонящиеся повторы выводят
-  различные identity; исходная деривация не тронута, байт-идентична
-  каждому существующему вызывающему; replay_of на записи с допуска,
-  передаётся в закрытый артефакт) + чтение lineage (ссылка +
-  сортированные прямые дети, с собственного допуска — до
-  артефакта); `execution.get` — чтение ПРОВЕНАНСА (родословная +
-  замороженные входы + артефакт; НИКОГДА поле run.get — развилка
-  семейств lifecycle/provenance, строгая схема фронтенда не
-  тронута); `execution.replay` — допуск повтора с честными гейтами
-  (закрытый сет аргументов, владение сессией, ТОЛЬКО терминальный
-  оригинал, воспроизводимость вида, перенесённый дедлайн через тот
-  же закон потолка; замороженный материал валиден ПОСТРОЕНИЕМ —
-  повтор ПЕРЕЗАПУСКАЕТ, никогда не перевалидирует); адаптеры
-  повтора (вида run.start пары-нативны по подписи WorkKind;
-  chat.completion — анфриз у ХОЗЯИНА фриза (backend.py, никогда
-  вторая истина над форматом); живо-гейтовые вида model.load/unload
-  — ИХ ПЕРЕВЫПУСК, не повтора) + гейт словаря конверта у run.start
-  (зарезервированные ключи конверта отвергаются ГРОМКО у самого
-  владельца) + эффект RUN_REPLAYED в упорядоченный поток; +8
-  законов (tests/test_execops.py — в т.ч. ЧАТ-РУКА НЁСЁТ ДАТУМ
-  ВОСПРОИЗВОДИМОСТИ: порт вызван повторно с ТЕМ ЖЕ замороженным
-  материалом, пара провенанса схлопывается в requested ==
-  effective); UI-экспозиция — ЯВНЫЙ ОСТАТОК СТРОКИ ·
+Iteration: iter-388 (`hroomstation` — the owner's EXPLICIT session
+  call «продолжай работы, открывай то что сейчас важнее всего
+  сделать, логичнее и качественнее на долгосрок. я разрешаю» +
+  «подготовь прогон на моей машине: станционный прогон hroom, и
+  вообще всё, что может потребовать тестирования. базу я тебе
+  дам» over the uploaded v6.2 base (D-198: the explicit request
+  IS the current task) — the STATUS Next H-prose line's station
+  half + the v6.2-archive housekeeping row, BOTH closed; R0/R1
+  riders-only, zero repo runtime lines): station_hroom v2.0
+  DELIVERED (the external Rule-9 pack, the source archived at
+  docs/station/archive/canonsim_hroom_pack_v2.0.zip) — v1.0
+  verbatim + three deltas: the BAND WINDOW VERDICT (KI#122's
+  lesson applied to the hroom line — the band DERIVED from the
+  -lv 4 markers in hroom's OWN server log via m6._band_from_log,
+  cuda_visible recorded beside as the precheck datum, the loud
+  run-end finalize, the attach form honestly «not derivable»),
+  the det_h DATUM (the same hybrid call twice per arm — h0 the
+  m6 det-h form verbatim, h8 the seeded arm's own
+  reproducibility; NEVER a gate on the within-call-derived 416
+  view), hroom_units.py (10 pure-half laws: the classifier
+  verdicts + precedence, the loop signature, the derived-view
+  arithmetic, the verdict branches, the band line on four log
+  shapes, the --help render — KI#121's lesson carried onto this
+  parser); LIVE VALIDATION with teeth (the full corpus
+  score-for-score with the iter-365/386 datum: h0 34 natural +
+  8 hits [5 LOOP + 3 BURN], h8 41 + 1 LOOP, the same attractors
+  «A blank line.»×21 / «loc_tavern. The player has looked around
+  the»×9, h8 med 52/max 146 + h0 med 66/p90 114 EXACT, one tail
+  line 265 vs 138 = the 0.6B re-call non-determinism the det
+  datum itself records [h0 identical=False the m5 class, h8
+  identical=True]; the band verdict on the owner's REAL m6 logs
+  reads cuda [load_backend evidence]); the v6.2 zip DROPPED
+  into docs/station/archive/ (md5 9856eba2…, the owner's local
+  copy) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-386 baseline; a workbench-layer change, zero canon bytes) ·
-Date: 2026-10-15 ·
+2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-387 baseline; a docs-and-archives-only change, zero repo runtime bytes) ·
+Date: 2026-10-16 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..386 baseline, the GOLDEN
+  3.12.15, byte-identical to the 362..387 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
-Scope: R4 (D-260 the PCC row): workbench/application/operations/
-  execution.py (replay_of на записи + линейно-осведомлённый admit +
-  lineage-чтение + связь в артефакт), backend.py (chat_replay_work
-  + chat_replay_adapter — анфриз beside the freeze), composition.py
-  (два обработчика + карта адаптеров + регистрации + гейт конверта
-  run.start), tests/test_execops.py (новый, 8 законов) + синхронные
-  райдеры: tests/test_operations.py + tests/test_backend_row.py
-  (пины реестра), frontend/tests/fixtures/app_status_composition.
-  json + Settings.test.tsx (зеркало реестра, счёт 21→23 — нуль
-  строк исходника фронтенда), docs/WORKBENCH_APP_LAW.md (§8
-  [CONTRACT]→[LANDED]), docs/SSI_TOPOLOGY.md (три строки), DECISIONS
-  (D-260, 34/35), STATUS/worklog/TASKS (строка replayui-1 + леджер,
-  iter-377 вытеснен; круфт-пас density-1/wb-2..12/m4-r до 599/600),
-  отчёт итерации — 15 изменённых/созданных.
+Scope: R0/R1 riders-only (zero repo runtime lines):
+  docs/station/archive/canonsim_m6_station_pack_v6.2.zip (the
+  owner's local copy, md5-verified against the upload) +
+  docs/station/archive/canonsim_hroom_pack_v2.0.zip (new — the
+  pack source) + docs/TASKS.md (the hroom-2 row + hroom-1
+  collapsed + the m6 row's drop recorded + the ledger [iter-378
+  displaced] + the cruft pass 602→600) + STATUS.md (header +
+  Next) + worklog.md (iter-388, iter-378 displaced) +
+  docs/iterations/iter-388-hroomstation-report.md — 6
+  changed/created.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -155,36 +151,36 @@ same law.)
 
 ## Next step
 
-**iter-387 DONE: replayops (строка replay-UI NOT-EXPOSED —
-  приложная половина: семейство execution.get/replay закона
-  приложения §8 ПОСАЖЕНО ЖИВЬЁМ, D-260/R4 с PCC — линейно-
-  осведомлённый допуск реестра [replay_of на записи с допуска,
-  на-оригинальная последовательность в деривации identity ПОД
-  замком, исходная деривация не тронута], чтение провенанса
-  execution.get [родословная + замороженные входы + артефакт;
-  никогда поле run.get], допуск повтора execution.replay с
-  честными гейтами [терминальный оригинал, воспроизводимость
-  вида, перенесённый дедлайн через тот же закон потолка],
-  адаптеры повтора [run.start вида пары-нативны; chat.completion
-  анфриз у хозяина фриза; load/unload — их перевыпуск], гейт
-  словаря конверта у run.start, эффект RUN_REPLAYED; +8 законов,
-  чат-рука несёт датум воспроизводимости [порт повторно с тем же
-  замороженным материалом, requested == effective]; условие
-  матрицы приёмки «when application supports replay»
-  перевёрнуто; the report iter-387-replayops-report.md).**
-Next: строка replay-UI — UI-ЭКСПОЗИЦИЯ (вторая половина:
+**iter-388 DONE: hroomstation (явный вызов владельца этой сессии
+  «подготовь прогон на моей машине: станционный прогон hroom, и
+  вообще всё, что может потребовать тестирования. базу я тебе
+  дам» над загруженной v6.2-базой — R0/R1 райдеры, нуль строк
+  рантайма репо): station_hroom v2.0 ДОСТАВЛЕН (внешний пак
+  Правила 9, исходник в docs/station/archive/
+  canonsim_hroom_pack_v2.0.zip) — v1.0 пословно + три дельты
+  [бэнд-окно KI#122 на hroom-линии: бенд из маркеров -lv 4
+  СОБСТВЕННОГО лога сервера, cuda_visible рядом как пречек,
+  громкий финал; det_h-датум: тот же гибридный вызов дважды на
+  руку, никогда не гейтит производный вид 416; hroom_units.py —
+  10 чистых законов, --help-рендер KI#121 перенесён]; живая
+  валидация зубами — полный корпус счёт в счёт с датумом
+  iter-365/386 [h0 34+8: 5 LOOP + 3 BURN; h8 41+1 LOOP; те же
+  аттракторы; h8 med/max и h0 med/p90 точны; одна хвостовая
+  линия 265 против 138 — недетерминизм повторного вызова,
+  который сам det-датум и записывает: h0 False, h8 True]; бэнд
+  на РЕАЛЬНЫХ m6-логах владельца читает cuda; v6.2-зип лёг в
+  архив (md5 сверен); the report iter-388-hroomstation-report.md).**
+Next: СТАНЦИОННЫЙ ПРОГОН HROOM — вызов владельца: одна команда
+  (station_hroom.bat → Gemma-4-E4B → прислать hroom_*.zip) на
+  базе v6.2 рядом; прочтение снимает производственное
+  распределение + закрывает измеримую половину H-промоушен-базиса
+  на производственной полосе; эстетическая половина — вызов
+  владельца по тем же prose_full-хвостам
++ строка replay-UI — UI-ЭКСПОЗИЦИЯ (вторая половина:
   аффорданс повтора на терминальном ходе/ране + зеркало
   contracts/validators/client на фронтенде — строка закрывается
   переводом NOT-EXPOSED строки матрицы приёмки в EXPOSED; каждый
   ряд — вызов владельца по FRONTEND_UIUX_LAW §25)
-+ H-проза: станционный прогон hroom-пака одной командой на
-  станции владельца (README: Gemma-4-E4B — производственное
-  распределение; песочнице не хватает RAM под 5+ ГБ модель без
-  GPU — проверено) + эстетическая половина H-промоушен-базиса
-  (the owner's call по тем же prose_full-хвостам) + owner-side
-  housekeeping: drop canonsim_m6_station_pack_v6.2.zip into
-  docs/station/archive/ (the pattern's fourth instance — the
-  pack is the owner's local copy)
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE
 + THE OWNER'S STANDING CALLS — decider-4b parked (outside the
@@ -256,7 +252,11 @@ Next: строка replay-UI — UI-ЭКСПОЗИЦИЯ (вторая поло�
    reproducibility datum); the narrator production-form DECIDED
    2026-10-03 (L12 the production form — PRESENTATION_SPEC §7; the
    heavier arm gated behind the contract rows); the DECISIONS
-   collapse LANDED (iter-380/384 — 33/35, two slots free). The
+   collapse LANDED (iter-380/384 — 33/35, two slots free); THE
+   STATION HROOM RUN PACK v2.0 DELIVERED (iter-388 — the H-prose
+   station half: the band-window verdict + the det_h datum + the
+   pack's own units, live-validated score-for-score; the owner's
+   one-command run the closing call). The
    remaining owner calls: the R runtime-promotion permission (the
    M2/M3 decisions themselves RECORDED — D-250, 2026-10-11);
    GET /models/sse the observed load-progress surface —
