@@ -1,57 +1,51 @@
-Iteration: iter-388 (`hroomstation` — the owner's EXPLICIT session
-  call «продолжай работы, открывай то что сейчас важнее всего
+Iteration: iter-389 (`hroomrun` — the standing owner directive
+  «продолжай работы, открывай то что сейчас важнее всего
   сделать, логичнее и качественнее на долгосрок. я разрешаю» +
-  «подготовь прогон на моей машине: станционный прогон hroom, и
-  вообще всё, что может потребовать тестирования. базу я тебе
-  дам» over the uploaded v6.2 base (D-198: the explicit request
-  IS the current task) — the STATUS Next H-prose line's station
-  half + the v6.2-archive housekeeping row, BOTH closed; R0/R1
-  riders-only, zero repo runtime lines): station_hroom v2.0
-  DELIVERED (the external Rule-9 pack, the source archived at
-  docs/station/archive/canonsim_hroom_pack_v2.0.zip) — v1.0
-  verbatim + three deltas: the BAND WINDOW VERDICT (KI#122's
-  lesson applied to the hroom line — the band DERIVED from the
-  -lv 4 markers in hroom's OWN server log via m6._band_from_log,
-  cuda_visible recorded beside as the precheck datum, the loud
-  run-end finalize, the attach form honestly «not derivable»),
-  the det_h DATUM (the same hybrid call twice per arm — h0 the
-  m6 det-h form verbatim, h8 the seeded arm's own
-  reproducibility; NEVER a gate on the within-call-derived 416
-  view), hroom_units.py (10 pure-half laws: the classifier
-  verdicts + precedence, the loop signature, the derived-view
-  arithmetic, the verdict branches, the band line on four log
-  shapes, the --help render — KI#121's lesson carried onto this
-  parser); LIVE VALIDATION with teeth (the full corpus
-  score-for-score with the iter-365/386 datum: h0 34 natural +
-  8 hits [5 LOOP + 3 BURN], h8 41 + 1 LOOP, the same attractors
-  «A blank line.»×21 / «loc_tavern. The player has looked around
-  the»×9, h8 med 52/max 146 + h0 med 66/p90 114 EXACT, one tail
-  line 265 vs 138 = the 0.6B re-call non-determinism the det
-  datum itself records [h0 identical=False the m5 class, h8
-  identical=True]; the band verdict on the owner's REAL m6 logs
-  reads cuda [load_backend evidence]); the v6.2 zip DROPPED
-  into docs/station/archive/ (md5 9856eba2…, the owner's local
-  copy) ·
+  the owner's UPLOADED run hroom_20261016_123753.zip: iter-388's
+  closing call ANSWERED — the one-command station run executed
+  on Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M, the
+  reading lifts the production distribution + closes the
+  measurable half of the H-promotion basis on the production
+  strip; R0/R1 riders-only, zero repo runtime lines): THE
+  STATION HROOM RUN READ — every report number recomputed from
+  the raw records score-for-score (an independent ledger
+  arithmetic, all check groups green): cuda band (17
+  load_backend markers in the run's OWN -lv 4 server log,
+  cuda_visible True beside), 84/84 natural stops, max natural
+  ctok 310 — the production cap 416 covers 100% of the natural
+  prose with wide margin, ZERO ceiling hits at 832, ZERO
+  degenerate tails on the production strip (the 0.6B
+  validation's 9 attractor tails were the model class, never
+  the cap); the det datum on cuda: h0 identical=False /
+  h8 identical=True — the SAME shape as the 0.6B strip, a
+  cross-band regularity (the seeded temp-0.8 arm
+  byte-reproduces, temp-0 greedy does not); the verdict half
+  line-by-line identical across the two temp arms (an observed
+  datum of one run under KI#118's statistical framing); the
+  aesthetic half's material delivered for the owner's call (h0
+  42/42 clean, h8 39/42 — three meta-text tails: the s2 HYBRID
+  REPLY FORM re-emission, the s8 CHECKLIST, the s10
+  Self-Correction note — all natural stops, fix class
+  tail-breaking not ceiling); the run zip NOT archived in-repo
+  (INV-5's spirit, the iter-374 precedent) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-387 baseline; a docs-and-archives-only change, zero repo runtime bytes) ·
+2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-388 baseline, captured before the riders and re-verified after; a docs-only reading, zero repo runtime bytes) ·
 Date: 2026-10-16 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..387 baseline, the GOLDEN
+  3.12.15, byte-identical to the 362..388 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
 Scope: R0/R1 riders-only (zero repo runtime lines):
-  docs/station/archive/canonsim_m6_station_pack_v6.2.zip (the
-  owner's local copy, md5-verified against the upload) +
-  docs/station/archive/canonsim_hroom_pack_v2.0.zip (new — the
-  pack source) + docs/TASKS.md (the hroom-2 row + hroom-1
-  collapsed + the m6 row's drop recorded + the ledger [iter-378
-  displaced] + the cruft pass 602→600) + STATUS.md (header +
-  Next) + worklog.md (iter-388, iter-378 displaced) +
-  docs/iterations/iter-388-hroomstation-report.md — 6
-  changed/created.
+  docs/iterations/iter-389-hroomrun-report.md (new — the reading:
+  the production distribution, the det datum, the verdict-half
+  identity, the aesthetic material) + docs/TASKS.md (the hroom-2
+  row closed with the production answer recorded + the ledger,
+  iter-379 displaced, 600/600 after the done-collapse) +
+  STATUS.md (header + the §3 station line + Next) + worklog.md
+  (iter-389, iter-379 displaced) — 4 changed/created.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -151,38 +145,45 @@ same law.)
 
 ## Next step
 
-**iter-388 DONE: hroomstation (явный вызов владельца этой сессии
-  «подготовь прогон на моей машине: станционный прогон hroom, и
-  вообще всё, что может потребовать тестирования. базу я тебе
-  дам» над загруженной v6.2-базой — R0/R1 райдеры, нуль строк
-  рантайма репо): station_hroom v2.0 ДОСТАВЛЕН (внешний пак
-  Правила 9, исходник в docs/station/archive/
-  canonsim_hroom_pack_v2.0.zip) — v1.0 пословно + три дельты
-  [бэнд-окно KI#122 на hroom-линии: бенд из маркеров -lv 4
-  СОБСТВЕННОГО лога сервера, cuda_visible рядом как пречек,
-  громкий финал; det_h-датум: тот же гибридный вызов дважды на
-  руку, никогда не гейтит производный вид 416; hroom_units.py —
-  10 чистых законов, --help-рендер KI#121 перенесён]; живая
-  валидация зубами — полный корпус счёт в счёт с датумом
-  iter-365/386 [h0 34+8: 5 LOOP + 3 BURN; h8 41+1 LOOP; те же
-  аттракторы; h8 med/max и h0 med/p90 точны; одна хвостовая
-  линия 265 против 138 — недетерминизм повторного вызова,
-  который сам det-датум и записывает: h0 False, h8 True]; бэнд
-  на РЕАЛЬНЫХ m6-логах владельца читает cuda; v6.2-зип лёг в
-  архив (md5 сверен); the report iter-388-hroomstation-report.md).**
-Next: СТАНЦИОННЫЙ ПРОГОН HROOM — вызов владельца: одна команда
-  (station_hroom.bat → Gemma-4-E4B → прислать hroom_*.zip) на
-  базе v6.2 рядом; прочтение снимает производственное
-  распределение + закрывает измеримую половину H-промоушен-базиса
-  на производственной полосе; эстетическая половина — вызов
-  владельца по тем же prose_full-хвостам
+**iter-389 DONE: hroomrun (стоящая директива «продолжай работы…
+  я разрешаю» + загруженный владельцем hroom_20261016_123753.zip
+  — тот самый закрывающий вызов iter-388: станционный прогон
+  ВЫПОЛНЕН владельцем одной командой на Gemma-4-E4B Q4_K_M;
+  чтение — R0/R1 райдеры, нуль строк рантайма репо):
+  ПРОИЗВОДСТВЕННОЕ РАСПРЕДЕЛЕНИЕ СНЯТО, ИЗМЕРИМАЯ ПОЛОВИНА
+  H-ПРОМУШЕН-БАЗИСА ЗАКРЫТА НА ПРОИЗВОДСТВЕННОЙ ПОЛОСЕ — каждое
+  число отчёта пересчитано из сырых записей (независимая
+  арифметика леджера, счёт в счёт): бэнд cuda (17 маркеров
+  load_backend в собственном -lv 4-логе сервера, пречек
+  cuda_visible True рядом); 84/84 естественных остановок, max
+  натуральной прозы 310 ctok — потолок 416 покрывает 100% с
+  широким запасом, ноль упираний в 832, ноль вырожденных
+  хвостов на производственной полосе (контраст полос: 9
+  аттрактор-хвостов 0.6B-валидации — класс модели, никогда
+  капа); det-датум на cuda: h0 False / h8 True — та же форма,
+  что на 0.6B-полосе (перекрёстная регулярность; сидированная
+  temp-0.8 рука байт-воспроизводится); verdict-половина
+  построчно идентична между temp-руками (наблюдение одного
+  прогона, рамка KI#118 статистическая); материал эстетической
+  половины доставлен: h0 42/42 чистых, h8 39/42 — три
+  мета-текстовых хвоста (ре-эмиссия HYBRID REPLY FORM s2,
+  чеклист s8, self-нота s10), все натуральные остановки, класс
+  фикса хвостовой, не потолочный (the report
+  iter-389-hroomrun-report.md).**
+Next: ЭСТЕТИЧЕСКАЯ ПОЛОВИНА H-ПРОМУШЕН-БАЗИСА — вызов
+  владельца по prose_full-хвостам (материал доставлен: выжимка
+  iter-389 §A.5 + зип прогона у владельца; измеримая половина
+  закрыта на ОБОИХ полосах — решение H остаётся эстетическим
+  чтением владельца)
 + строка replay-UI — UI-ЭКСПОЗИЦИЯ (вторая половина:
   аффорданс повтора на терминальном ходе/ране + зеркало
   contracts/validators/client на фронтенде — строка закрывается
   переводом NOT-EXPOSED строки матрицы приёмки в EXPOSED; каждый
   ряд — вызов владельца по FRONTEND_UIUX_LAW §25)
 + THE RUNTIME PROMOTION remains the owner's separate permission
-  (D-250) — its measured basis COMPLETE
+  (D-250) — its measured basis COMPLETE (now including the hroom
+  production strip's headroom verdict: no ceiling pressure, the
+  cap 416 standing with wide margin)
 + THE OWNER'S STANDING CALLS — decider-4b parked (outside the
   llama.cpp five); the pack-v5 instrument rows' datum delivered
   (cuda_gate.bands exercised LIVE by the m6 run); behind them
@@ -253,11 +254,16 @@ Next: СТАНЦИОННЫЙ ПРОГОН HROOM — вызов владельц�
    2026-10-03 (L12 the production form — PRESENTATION_SPEC §7; the
    heavier arm gated behind the contract rows); the DECISIONS
    collapse LANDED (iter-380/384 — 33/35, two slots free); THE
-   STATION HROOM RUN PACK v2.0 DELIVERED (iter-388 — the H-prose
-   station half: the band-window verdict + the det_h datum + the
-   pack's own units, live-validated score-for-score; the owner's
-   one-command run the closing call). The
-   remaining owner calls: the R runtime-promotion permission (the
+   STATION HROOM RUN READ
+   (iter-389 — the owner's uploaded hroom_20261016_123753.zip on
+   the v2.0 pack: cuda band, 84/84 natural stops, max natural 310
+   < 416 — wide margin, ZERO ceiling hits at 832 — THE MEASURABLE
+   HALF OF THE H-PROMOTION BASIS CLOSED ON THE PRODUCTION STRIP;
+   det h0 False/h8 True the cross-band regularity; the verdict
+   half line-by-line identical across the temp arms; the
+   aesthetic half's material delivered — the owner's call). The
+   remaining owner calls: the aesthetic half of the H basis, the
+   R runtime-promotion permission (the
    M2/M3 decisions themselves RECORDED — D-250, 2026-10-11);
    GET /models/sse the observed load-progress surface —
    a candidate row when a live consumer names it.
