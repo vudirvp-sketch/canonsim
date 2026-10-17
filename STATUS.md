@@ -1,51 +1,55 @@
-Iteration: iter-389 (`hroomrun` — the standing owner directive
-  «продолжай работы, открывай то что сейчас важнее всего
-  сделать, логичнее и качественнее на долгосрок. я разрешаю» +
-  the owner's UPLOADED run hroom_20261016_123753.zip: iter-388's
-  closing call ANSWERED — the one-command station run executed
-  on Gemma-4-E4B-Uncensored-HauhauCS-Aggressive-Q4_K_M, the
-  reading lifts the production distribution + closes the
-  measurable half of the H-promotion basis on the production
-  strip; R0/R1 riders-only, zero repo runtime lines): THE
-  STATION HROOM RUN READ — every report number recomputed from
-  the raw records score-for-score (an independent ledger
-  arithmetic, all check groups green): cuda band (17
-  load_backend markers in the run's OWN -lv 4 server log,
-  cuda_visible True beside), 84/84 natural stops, max natural
-  ctok 310 — the production cap 416 covers 100% of the natural
-  prose with wide margin, ZERO ceiling hits at 832, ZERO
-  degenerate tails on the production strip (the 0.6B
-  validation's 9 attractor tails were the model class, never
-  the cap); the det datum on cuda: h0 identical=False /
-  h8 identical=True — the SAME shape as the 0.6B strip, a
-  cross-band regularity (the seeded temp-0.8 arm
-  byte-reproduces, temp-0 greedy does not); the verdict half
-  line-by-line identical across the two temp arms (an observed
-  datum of one run under KI#118's statistical framing); the
-  aesthetic half's material delivered for the owner's call (h0
-  42/42 clean, h8 39/42 — three meta-text tails: the s2 HYBRID
-  REPLY FORM re-emission, the s8 CHECKLIST, the s10
-  Self-Correction note — all natural stops, fix class
-  tail-breaking not ceiling); the run zip NOT archived in-repo
-  (INV-5's spirit, the iter-374 precedent) ·
+Iteration: iter-390 (`hroomfix` — THE OWNER'S H8 AESTHETIC
+  VERDICT over the iter-389 production run (the three rejected
+  meta-text tails s2/s8/s10, the preceding prose and the verdict
+  kept, fix class tail-breaking NEVER the ceiling, NEVER the blind
+  after-'---' cut) + the owner's root-cause hypothesis
+  «вероятно это из-за отсутствия системной подсказки» — CONFIRMED
+  IN THE CODE: every H call in the whole m5/m6 chain rode a single
+  user message, no system role anywhere; the closing session call
+  «ты мне мой батник то обнови… все изменения на твоей стороне в
+  песочнице» over the re-uploaded v6.2 base (the iter-388 pattern);
+  R0/R1 riders-only, zero repo runtime lines): station_hroom v2.1
+  DELIVERED (the external Rule-9 pack, the source archived at
+  docs/station/archive/canonsim_hroom_pack_v2.1.zip, handed to the
+  owner) — EXACTLY TWO deltas over v2.0, everything else verbatim,
+  the caps 416/832 untouched: (1) THE H SYSTEM PROMPT (the
+  root-cause half): the role, the task, the shape, the STOP law —
+  after the prose's closing blank line NOTHING (no second verdict,
+  no restated form, no checklist, no self-check, no separator, no
+  commentary); rides EVERY H call, the arms AND the det datum; (2)
+  THE TAIL-BREAK (the safety-net half): the prose cut at the
+  EARLIEST recognized leak marker (## HYBRID REPLY FORM / HYBRID
+  REPLY FORM / JSON Verdict: / *(Self-Correction / Self-Correction
+  / Refinement Note / {"); the '---' fence immediately before the
+  marker goes out WITH the leak, a bare '---' never cuts; the
+  verdict head never touched; the honest records: clean/raw split
+  (prose_raw/tail_cut/tail_marker/tail_cut_text carry the evidence
+  verbatim, clean+cut_text == the whole tail; the json_bleed/
+  protocol_echo flags read the RAW tail; the det datum compares
+  the CLEAN forms) + THE TAIL-BREAK CENSUS in the report; 17/17
+  unit laws (the s2/s8/s10 shapes reproduced as the pack's own
+  tests + the no-blind-cut law + the earliest bound + the call
+  form + the prompt's content law); the live run stays the owner's
+  one command (Gemma-4-E4B, the same corpus) — the hypothesis's
+  falsifiable expectation: clean tails AND tail_cut=0 if the
+  system prompt is the root cause ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-388 baseline, captured before the riders and re-verified after; a docs-only reading, zero repo runtime bytes) ·
-Date: 2026-10-16 ·
+2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-389 baseline, captured before the riders and re-verified after; a docs-only delivery, zero repo runtime bytes) ·
+Date: 2026-10-17 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..388 baseline, the GOLDEN
+  3.12.15, byte-identical to the 362..389 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
 Scope: R0/R1 riders-only (zero repo runtime lines):
-  docs/iterations/iter-389-hroomrun-report.md (new — the reading:
-  the production distribution, the det datum, the verdict-half
-  identity, the aesthetic material) + docs/TASKS.md (the hroom-2
-  row closed with the production answer recorded + the ledger,
-  iter-379 displaced, 600/600 after the done-collapse) +
-  STATUS.md (header + the §3 station line + Next) + worklog.md
-  (iter-389, iter-379 displaced) — 4 changed/created.
+  docs/station/archive/canonsim_hroom_pack_v2.1.zip (new — the
+  pack's source, the m5/m6 chain untouched on disk) +
+  docs/iterations/iter-390-hroomfix-report.md (new) +
+  docs/TASKS.md (the hroom-3 row + the ledger, iter-380 displaced)
+  + STATUS.md (header + Next) + worklog.md (iter-390, iter-380
+  displaced) — 5 changed/created.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -145,36 +149,37 @@ same law.)
 
 ## Next step
 
-**iter-389 DONE: hroomrun (стоящая директива «продолжай работы…
-  я разрешаю» + загруженный владельцем hroom_20261016_123753.zip
-  — тот самый закрывающий вызов iter-388: станционный прогон
-  ВЫПОЛНЕН владельцем одной командой на Gemma-4-E4B Q4_K_M;
-  чтение — R0/R1 райдеры, нуль строк рантайма репо):
-  ПРОИЗВОДСТВЕННОЕ РАСПРЕДЕЛЕНИЕ СНЯТО, ИЗМЕРИМАЯ ПОЛОВИНА
-  H-ПРОМУШЕН-БАЗИСА ЗАКРЫТА НА ПРОИЗВОДСТВЕННОЙ ПОЛОСЕ — каждое
-  число отчёта пересчитано из сырых записей (независимая
-  арифметика леджера, счёт в счёт): бэнд cuda (17 маркеров
-  load_backend в собственном -lv 4-логе сервера, пречек
-  cuda_visible True рядом); 84/84 естественных остановок, max
-  натуральной прозы 310 ctok — потолок 416 покрывает 100% с
-  широким запасом, ноль упираний в 832, ноль вырожденных
-  хвостов на производственной полосе (контраст полос: 9
-  аттрактор-хвостов 0.6B-валидации — класс модели, никогда
-  капа); det-датум на cuda: h0 False / h8 True — та же форма,
-  что на 0.6B-полосе (перекрёстная регулярность; сидированная
-  temp-0.8 рука байт-воспроизводится); verdict-половина
-  построчно идентична между temp-руками (наблюдение одного
-  прогона, рамка KI#118 статистическая); материал эстетической
-  половины доставлен: h0 42/42 чистых, h8 39/42 — три
-  мета-текстовых хвоста (ре-эмиссия HYBRID REPLY FORM s2,
-  чеклист s8, self-нота s10), все натуральные остановки, класс
-  фикса хвостовой, не потолочный (the report
-  iter-389-hroomrun-report.md).**
-Next: ЭСТЕТИЧЕСКАЯ ПОЛОВИНА H-ПРОМУШЕН-БАЗИСА — вызов
-  владельца по prose_full-хвостам (материал доставлен: выжимка
-  iter-389 §A.5 + зип прогона у владельца; измеримая половина
-  закрыта на ОБОИХ полосах — решение H остаётся эстетическим
-  чтением владельца)
+**iter-390 DONE: hroomfix (ЭСТЕТИЧЕСКИЙ ВЕРДИКТ H8 владельца
+  по iter-389 — три мета-хвоста s2/s8/s10 отклонены, проза и
+  вердикт сохранены, класс фикса хвостовой не потолочный, НЕ
+  слепое удаление после «---»; гипотеза первопричины владельца
+  «вероятно из-за отсутствия системной подсказки» ПОДТВЕРЖДЕНА
+  КОДОМ: каждый H-вызов m5/m6 шёл одним user-сообщением —
+  system-роли не было нигде; финальная сессия «ты мне мой
+  батник то обнови… изменения на твоей стороне в песочнице»
+  над переданной снова базой v6.2; R0/R1 райдеры, нуль строк
+  рантайма репо): station_hroom v2.1 ДОСТАВЛЕН (исходник в
+  docs/station/archive/canonsim_hroom_pack_v2.1.zip, выдан
+  владельцу; ровно ДВЕ дельты поверх v2.0, капы 416/832 не
+  тронуты): THE H SYSTEM PROMPT (роль/задача/форма/ЗАКОН
+  ОСТАНОВКИ — в каждый H-вызов, руки И det) + THE TAIL-BREAK
+  (граница — самый ранний распознанный маркер; «---»-ограда
+  перед маркером уходит с хвостом, голый «---» не режется
+  никогда; вердикт не трогается; записи честные: чистая
+  поверхность + сырые улики дословно, флаги по сырому хвосту,
+  det по чистым формам); 17/17 юнитов (s2/s8/s10-формы
+  воспроизведены как тесты пака); БАТНИК station_hroom.bat —
+  v2.1, m6-база не тронута на диске (the report
+  iter-390-hroomfix-report.md).**
+Next: ЖИВОЙ ПРОГОН H8-ФИКСА НА СТАНЦИИ ВЛАДЕЛЬЦА — одна
+  команда station_hroom.bat (Gemma-4-E4B, тот же корпус);
+  прочитать его hroom_*.zip с зубами. Фальсифицируемое
+  ожидание гипотезы: чистые хвосты И tail_cut=0 (обе половины
+  фикса сходятся — системная подсказка и есть первопричина);
+  если модель течёт НОВОЙ формой — НЕ в список маркеров
+  вслепую, сначала вердикт владельца по материалу (оговорка
+  README №1); НЕ сравнимо байт-в-байт с iter-389 (форма
+  вызова изменилась — оговорка README №2)
 + строка replay-UI — UI-ЭКСПОЗИЦИЯ (вторая половина:
   аффорданс повтора на терминальном ходе/ране + зеркало
   contracts/validators/client на фронтенде — строка закрывается
