@@ -1,51 +1,42 @@
-Iteration: iter-392 (`hroomfix2` — ПАК v2.2 ПО ВЕРДИКТУ (б)
-  ВЛАДЕЛЬЦА: «семью подтверждаю» — СТОП-ЛИТЕРАЛИЗАЦИЯ
-  подтверждена, граница отсечения расширена СТРОЧНЫМИ
-  КАНДИДАТАМИ (R0/R1 райдеры, нуль строк рантайма репо,
-  внешний пак Правила 9): station_hroom v2.2 (исходник
-  docs/station/archive/canonsim_hroom_pack_v2.2.zip, md5
-  96ab1a2b9931652efbbfffd2d199b019, выдан владельцу) — РОВНО
-  ОДНА дельта поверх v2.1: ГРАНИЦА = САМАЯ РАННЯЯ ИЗ
-  КАНДИДАТОВ (маркеры v2.1 остаются, включая «{"»: (а)
-  NBSP/пробельная строка перед «STOP»/```json-оградой —
-  граница на самой псевдопустышке (в c3 — сразу после
-  «sawdust.»); (б) строка-«STOP» (после trim, регистр
-  промпта); (в) открывающая ```json-ограда; УЗКО ПО
-  ВЕРДИКТУ: «STOP» в середине строки / псевдопустышка перед
-  обычной прозой / кавычка-строка (после границы) / голая ```
-  / пустая строка — НЕ режут; КАПЫ 416/832, промпт и
-  verdict-половина НЕ ТРОНУТЫ (расхождение 6/42 остаётся
-  под KI#118); hroom_units 17→22 (c3 дословно как тест с
-  пост-законом «в prose нет строк STOP/кавычки/```-ограды»,
-  кандидаты (б)/(в) с earliest сквозь семьи, оба
-  негативных закона владельца) — 22/22 зелёные в читающей
-  песочнице (развёрнутая форма: пак рядом с m6 v6.2, из
-  свежей распаковки зипа); РЕГРЕССИЯ ПЕРЕСЧЁТОМ на сыром
-  hroom_20261017_171144.zip (новый живой прогон НЕ нужен —
-  закон владельца): каркас 84/84 (v2.1 пересчитанный ==
-  записанный clean), 83/83 байт-в-байт прежний clean, c3
-  без остатка (287→261, ровно 26 знаков головы утечки) с
-  кольцом 261+97==358, производные числа идентичны (84/84
-  натуральных, max 120, ноль в 832); README пака: оговорка
-  №1 обновлена (семья подтверждена владельцем, расширение
-  маркеров по вердикту) + md5-слепок трёх файлов ·
+Iteration: iter-393 (`hroomv22run` — ЖИВОЙ ПРОГОН v2.2 ПРОЧИТАН
+  С ЗУБАМИ: закрывающий вызов iter-392 Next, поставленный
+  владельцем ОТДЕЛЬНОЙ СТРОКОЙ, ОТВЕЧЕН — его загруженный
+  hroom_20261018_080252.zip, пак v2.2 на базе v6.2, cuda,
+  Gemma-4-E4B Q4_K_M, одной командой; 94/94 группы пересчёта
+  зелёные, счёт в счёт, граница v2.2 пере-реализована с нуля без
+  импорта пака): ПОДТВЕРЖДЁННАЯ ГРАНИЦА ЗАКРЫТА ВЖИВУЮ БЕЗ
+  ОСТАТКА — h0 42/42 чистых; h8 41/42 + та же линия s8 c3
+  (хвост байт-в-байт улике iter-391 — семья стабильна 2/2 живых
+  прогонов), срез по earliest-кандидату 'blank+STOP' сразу за
+  «sawdust.», кольцо 261+97==358, пост-закон зелёный на всех 84
+  доставленных поверхностях; НОВЫХ форм утечки НЕТ — материал
+  для следующего вердикта не требуется (84/84 чистых впервые в
+  серии); измеримая половина — ТРЕТЬЕ подтверждение (max 120
+  против 416, запас ×3.5, ноль в 832); det — ЧЕТВЁРТАЯ полоса
+  h0-False/h8-True + заострение: обе det-пары байт-в-байт равны
+  iter-391 через сессии сервера (жадный воспроизводится через
+  свежие сессии, расходится внутри одной — наблюдение двух
+  прогонов под KI#118); verdict-половины 6/42 воспроизведены
+  ТОЧНО (no_pin, drift 26/24, цензусы идентичны, спот-чеки
+  байт-в-байт); ЭСТЕТИЧЕСКАЯ ПОЛОВИНА H-ПРОМОУШЕН-БАЗИСА ЗАКРЫТА
+  РЕЗУЛЬТАТОМ полосы — RUNTIME PROMOTION остаётся отдельным
+  разрешением владельца (D-250); run-зип НЕ в репо (дух INV-5) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-391 baseline, captured before the riders and re-verified after; a docs-only delivery, zero repo runtime bytes) ·
-Date: 2026-10-18 ·
+2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-392 baseline, captured before the riders and re-verified after; a docs-only delivery, zero repo runtime bytes) ·
+Date: 2026-10-19 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
-  3.12.15, byte-identical to the 362..391 baseline, the GOLDEN
+  3.12.15, byte-identical to the 362..392 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
 Scope: R0/R1 riders-only (zero repo runtime lines):
-  docs/station/archive/canonsim_hroom_pack_v2.2.zip (new — the
-  pack source) + docs/iterations/iter-392-hroomfix2-report.md
-  (new — the delivery report) + docs/TASKS.md (the hroom-5 row +
-  the hroom-1..4 cruft pass + the ledger, iter-382 displaced,
-  599/600) + STATUS.md (header + Next) + worklog.md (iter-392,
-  iter-382 displaced) — 5 changed/created.
+  docs/iterations/iter-393-hroomv22run-report.md (new — the
+  reading report) + docs/TASKS.md (the hroom-6 row + the
+  hroom-1..5 cruft pass + the ledger, iter-383 displaced,
+  598/600) + STATUS.md (header + Next + §3 station line) +
+  worklog.md (iter-393, iter-383 displaced) — 4 changed/created.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -145,49 +136,53 @@ same law.)
 
 ## Next step
 
-**iter-392 DONE: hroomfix2 (ПАК v2.2 ПО ВЕРДИКТУ (б) —
-  «семью подтверждаю»: СТОП-ЛИТЕРАЛИЗАЦИЯ подтверждена
-  владельцем по улике iter-391 (arm_h8.jsonl / s8 c3 /
-  prose_raw — проверено лично); R0/R1 райдеры, нуль строк
-  рантайма): station_hroom v2.2 (исходник
-  docs/station/archive/canonsim_hroom_pack_v2.2.zip, md5
-  96ab1a2b9931652efbbfffd2d199b019, выдан владельцу) — РОВНО
-  ОДНА дельта поверх v2.1: ГРАНИЦА ОТСЕЧЕНИЯ = САМАЯ РАННЯЯ ИЗ
-  КАНДИДАТОВ (маркеры v2.1 остаются, включая «{"»): (а)
-  псевдопустая NBSP/пробельная строка перед «STOP» или
-  ```json-оградой — граница на самой псевдопустышке (в c3 —
-  сразу после «sawdust.»); (б) строка, равная «STOP» (после
-  trim, регистр как в промпте); (в) открывающая ```json-ограда;
-  НЕГАТИВЫ ПО ВЕРДИКТУ: «STOP» в середине строки / псевдопустышка
-  перед обычной прозой / кавычка-строка (после границы) / голая
-  ``` / пустая строка — никогда; КАПЫ 416/832, системный промпт
-  и verdict-половина НЕ ТРОНУТЫ (расхождение 6/42 остаётся под
-  KI#118); hroom_units 17→22 — 22/22 зелёные в читающей
-  песочнице (развёрнутая форма: пак рядом с m6 v6.2); РЕГРЕССИЯ
-  ПЕРЕСЧЁТОМ на сыром hroom_20261017_171144.zip (новый живой
-  прогон НЕ нужен — закон владельца): каркас 84/84, 83/83
-  байт-в-байт прежний clean, c3 БЕЗ ОСТАТКА (287→261) с
-  замкнутым кольцом 261+97==358, производные числа идентичны
-  (84/84 натуральных, max 120, ноль в 832); README пака:
-  оговорка №1 обновлена (семья подтверждена, расширение маркеров
-  по вердикту) + md5-слепок трёх файлов (the report
-  iter-392-hroomfix2-report.md).**
-Next: ЖИВОЙ ПРОГОН v2.2 НА СТАНЦИИ — ОТДЕЛЬНОЙ СТРОКОЙ (сам
-  владелец так и назвал: «для этой правки не нужен… поставь в
-  Next отдельной строкой»): та же Gemma-4-E4B одной командой
-  station_hroom.bat, зип обратно — чтение закроет подтверждённую
-  границу на новой генерации той же полосы; новая форма утечки
-  = материал для следующего вердикта (оговорка README №1,
-  порядок стоит: вердикт перед фиксом — дважды подряд)
+**iter-393 DONE: hroomv22run (ЖИВОЙ ПРОГОН v2.2 ПРОЧИТАН С
+  ЗУБАМИ — загруженный владельцем hroom_20261018_080252.zip,
+  пак v2.2 на базе v6.2, cuda, Gemma-4-E4B Q4_K_M, одной
+  командой station_hroom.bat; 94/94 групп пересчёта зелёные,
+  счёт в счёт, граница v2.2 пере-реализована с нуля без
+  импорта пака): ПОДТВЕРЖДЁННАЯ ВЛАДЕЛЬЦЕМ ГРАНИЦА ЗАКРЫТА
+  ВЖИВУЮ БЕЗ ОСТАТКА — h0 42/42 чистых; h8 41/42 + та же
+  линия s8 c3 СТОП-литерализации (хвост байт-в-байт улике
+  iter-391 — семья стабильна 2/2 живых прогонов, не флейк),
+  срез по самому раннему кандидату 'blank+STOP' сразу за
+  «sawdust.», кольцо 261+97==358, пост-закон зелёный на всех
+  84 доставленных поверхностях; НОВЫХ форм утечки НЕТ —
+  материал для следующего вердикта не требуется (README №1:
+  порядок «вердикт перед фиксом» держал дважды, теперь
+  держится результатом; 84/84 чистых впервые в серии);
+  измеримая половина — ТРЕТЬЕ подтверждение (84/84
+  натуральных, max 120 против 416 = запас ×3.5, ноль в 832);
+  det — ЧЕТВЁРТАЯ полоса h0-False/h8-True + ЗАОСТРЕНИЕ: обе
+  det-пары байт-в-байт равны парам iter-391 через сессии
+  сервера — жадный temp-0 воспроизводится через свежие
+  сессии, расходясь внутри одной; сама пара детерминирована
+  на этой полосе (наблюдение двух прогонов под KI#118);
+  verdict-половины 6/42 воспроизведены ТОЧНО (все
+  take-с-texture no_pin, pinned==[] на 84, drift 26/24,
+  цензус-распределения идентичны v2.1, спот-чеки прозы
+  байт-в-байт); ЭСТЕТИЧЕСКАЯ ПОЛОВИНА H-ПРОМОУШЕН-БАЗИСА
+  ЗАКРЫТА РЕЗУЛЬТАТОМ полосы — H-СЕМЬЯ ЗАКРЫТА, РАБОЧИХ
+  СТРОК В НЕЙ НЕ ОСТАЛОСЬ (the report
+  iter-393-hroomv22run-report.md).**
+Next: строка replay-UI — UI-ЭКСПОЗИЦИЯ (первая отвечаемая
+  работой позиция очереди; вторая половина строки: аффорданс
+  повтора на терминальном ходе/ране + зеркало
+  contracts/validators/client на фронтенде — строка
+  закрывается переводом NOT-EXPOSED строки матрицы приёмки в
+  EXPOSED; каждый ряд — вызов владельца по FRONTEND_UIUX_LAW
+  §25)
 + строка replay-UI — UI-ЭКСПОЗИЦИЯ (вторая половина:
   аффорданс повтора на терминальном ходе/ране + зеркало
   contracts/validators/client на фронтенде — строка закрывается
   переводом NOT-EXPOSED строки матрицы приёмки в EXPOSED; каждый
   ряд — вызов владельца по FRONTEND_UIUX_LAW §25)
 + THE RUNTIME PROMOTION remains the owner's separate permission
-  (D-250) — its measured basis COMPLETE (now including the hroom
-  production strip's headroom verdict: no ceiling pressure, the
-  cap 416 standing with wide margin)
+  (D-250) — its measured basis COMPLETE AND RE-CONFIRMED (the
+  hroom production strip's headroom verdict: no ceiling pressure,
+  the cap 416 standing with wide margin — measured THREE times;
+  + the v2.2 live read: 84/84 delivered surfaces clean, the
+  confirmed boundary closed live residue-free)
 + THE OWNER'S STANDING CALLS — decider-4b parked (outside the
   llama.cpp five); the pack-v5 instrument rows' datum delivered
   (cuda_gate.bands exercised LIVE by the m6 run); behind them
@@ -280,12 +275,23 @@ Next: ЖИВОЙ ПРОГОН v2.2 НА СТАНЦИИ — ОТДЕЛЬНОЙ С
    markers, the earliest of all bounding the cut; 22/22 units;
    the regression recomputed on the raw zip — 83/83
    byte-in-byte, c3 residue-free with the closed ring; no new
-   live run needed, the v2.2 live run its own Next line). The
-   remaining owner calls: the v2.2 live run on the station, the
-   R runtime-promotion permission (the
-   M2/M3 decisions themselves RECORDED — D-250, 2026-10-11);
-   GET /models/sse the observed load-progress surface —
-   a candidate row when a live consumer names it.
+   live run needed, the v2.2 live run its own Next line) + THE
+   V2.2 LIVE RUN READ (iter-393 — the owner's uploaded
+   hroom_20261018_080252.zip: 94/94 recomputed score-for-score;
+   the confirmed boundary CLOSED LIVE residue-free — the same
+   s8 c3 family (tail byte-identical to iter-391's, stable
+   2/2 live runs) cut at 'blank+STOP', the ring 261+97==358,
+   the post-law green on 84/84 delivered surfaces; NO new leak
+   shape — no new verdict needed; the measurable half a THIRD
+   confirmation; the det datum the FOURTH strip + the
+   cross-session sharpening: both det pairs byte-equal
+   iter-391's across server sessions; the verdict halves 6/42
+   reproduced exactly — the aesthetic half of the
+   H-promotion basis CLOSED BY RESULT on this strip). The
+   remaining owner call: the R runtime-promotion permission
+   (the M2/M3 decisions themselves RECORDED — D-250,
+   2026-10-11); GET /models/sse the observed load-progress
+   surface — a candidate row when a live consumer names it.
 4. The standing frames: the embodiment options (§6.4 → §6.1 → §6.5 →
    §6.2 per the owner's 2026-09-27 order; §6.3 closed iter-204..210,
    its fill row removed), the debt-1 residues, the re-weigh's SALE,
