@@ -101,7 +101,7 @@ committed, KI#87 closed); the debt's economy flow landed iter-162 (debt-1
 built: the accounts + the fold's two flows over the res-1 substrate; the
 separate-track law held — the row rode the engineering queue).
 
-### A3 — Meaning test — DONE (iter-155; the second slice iter-395)
+### A3 — Meaning test — DONE (iter-155; the second slice iter-395; the third iter-396)
 
 One concrete human-life slice run over the existing region — the high-water
 double toll (`ANCHOR_REGION.md` §7.1): the same mechanical event through four
@@ -112,8 +112,18 @@ open" above closed by the step bench's landing). THE SECOND SLICE iter-395
 (`ANCHOR_REGION.md` §7.2, the W8-era content row): the re-weigh's sale — the
 withhold's release through FIVE bounded positions, the distribution's
 substrate MEASURED at the deterministic band (the first slice's own open
-half — the boundary oracle `tests/test_meaningslice2.py`); the live reading
-band stays the slices' shared open half (the owner's future row). The next frontier is W4 (§6).
+half — the boundary oracle `tests/test_meaningslice2.py`). THE THIRD SLICE
+iter-396 (`ANCHOR_REGION.md` §7.3, the owner's batch-test delegation
+«сначала системы/контент, потом один прогон»): the return's claim — the
+recognition claimed at the stair through FIVE bounded positions, the
+register the first two never touched (NON-ECONOMIC — the care's own law),
+the substrate measured (`tests/test_meaningslice3.py`: the proof's
+selective disclosure, the mint's boundary with the actor INCLUDED, the
+absent maps with the mourning token nowhere, the papers' silence — one
+relation leg, zero accounts). The slice corpus COMPLETE at three
+registers (compulsory economic / voluntary economic / non-economic
+care); the live reading band stays the corpus's single future test pass
+over all three (the owner's future row). The next frontier is W4 (§6).
 
 ## 4. Next research only if needed
 
@@ -294,176 +304,65 @@ stack).
 
 ## 7. W5 — Human tests
 
-Run:
-
-- biography;
-- humor;
-- heartbreak.
-
-Use existing region state wherever possible.
+Run: biography; humor; heartbreak — over existing region state wherever
+possible.
 
 **The form and the gate (the owner's decomposition call, 2026-09-22,
-iter-188/189 — the record in `WORLD_TESTS.md` §9's W5 entry):** three
-BOUNDED PROBES, never the annual tale as the human-meaning experiment
-(the tale is a long-horizon chronicler STRESS TEST — its routine flood
-measured and parked, TECH_NOTES §16 / chron-2). Biography: one
-ordinary crisis with its aftermath. Humor: the reader extracts a
-locally natural joke themselves, no presented answer. Heartbreak: a
-loss that changes relation / resource / status / obligation / memory /
-future option. The blind-pass isolation law: the reader material
-carries ONLY committed reader-visible surface — never ANCHOR_REGION,
-authorial interpretations, or intended answers; the author audit and
-the independent reader reading stay separate artifacts. The gate:
-NO new worldbuilding candidates until one clean biography probe runs
-on Garrick / the re-weigh over the canonical standing debt (iter-189's
-charcoalpaper — the outstanding as account state + the lifecycle
-doors); a repeated failure is classified by boundary (canonical fact /
-discovery path / rendering), never "improve the prose".
+iter-188/189):** three BOUNDED PROBES, never the annual tale as the
+human-meaning experiment (the tale is a long-horizon chronicler STRESS
+TEST — its routine flood measured and parked, TECH_NOTES §16 / chron-2).
+Biography: one ordinary crisis with its aftermath. Humor: the reader
+extracts a locally natural joke themselves, no presented answer.
+Heartbreak: a loss that changes relation / resource / status /
+obligation / memory / future option. The blind-pass isolation law: the
+reader material carries ONLY committed reader-visible surface — never
+ANCHOR_REGION, authorial interpretations, or intended answers; the
+author audit and the independent reader reading stay separate
+artifacts. The gate: NO new worldbuilding candidates until one clean
+biography probe runs on Garrick / the re-weigh over the canonical
+standing debt; a repeated failure is classified by boundary (canonical
+fact / discovery path / rendering), never "improve the prose".
 
-**The gate's state after the re-run (iter-191, the record in
-`WORLD_TESTS.md` §9's W5 entry): the rendering-boundary fix LANDED
-(rs-2 — the account-kind gloss on the reader surface, the rs-1
-precedent's own family: the pack's `account_kinds` words, the
-renderer's mapping, the lint's closure) and the biography probe's
-re-run PASSED CLEAN — the reader (glm, n=2, convergent) reconstructed
-the persistent obligation: the standing named a debt, the creditor
-named, the discharge's direction correct; the gate's named condition
-(one clean biography probe) MET — the new-worldbuilding embargo
-lifts.** The humor station has since run TWICE (the record in
-`WORLD_TESTS.md` §9's W5 entry): the first run FAILED at the rendering
-boundary (iter-192, n=2 convergent — the withhold's meaning rendered
-nowhere); the fix's route fired on the owner's continuation call
-(iter-194: rs-3, the bloom kind's account-kind gloss — the rs family's
-third member, rs-2's precedent) and the re-run's MANDATORY BAR MET
-(the mechanism-grounded joke from both readings, the authored taboo
-nailed once — the station PARTIALLY CONFIRMED, the authored residues
-open: the taboo's convergence 1/2, the withhold's own joke
-unextracted, the position-dependence implicit). The covering
-residue's row has since LANDED (iter-199, the owner's continuation
-call over the carried row — the record in `WORLD_TESTS.md` §9's W5
-entry): rs-4 the flow-gloss boundary, the covering connected at its
-own mandatory bar (glm n=2 convergent); the row's measured
-successors: the shave's AGENCY surface and the withhold's
-one-surface contradiction — each a future row's own call, never
-"improve the prose". The heartbreak station's
-DESIGN MATERIAL has since LANDED (iter-203, the owner's queue-order
-call — the record in `WORLD_TESTS.md` §9's W5 entry): the winter
-kin's embodiment as pure pack data, the C03+F02 consult's three gaps
-answered (the kin axis + the bilateral seed, the proof's read, the
-mourning surface), the formation side tested in a committed pack (the
-winter's board climbing the kin axis bilaterally to the recognition
-bar — the first co-presence-formed relation), the claim door the F02
-criterion's mechanical form. The heartbreak station's PROBE RUN has
-since RUN (iter-204, the owner's «давай прогон зонда» call — the record
-in `WORLD_TESTS.md` §9's W5 entry): the trio's last station's first
-measurement FAILED at the rendering boundary on the future-option half
-(the lost future option named by neither glm n=2 reading — the drowned
-generation carried as remembered dead; the memory + recognition +
-world-specificity halves carried n=2 convergent). The owner-called minimal
-rendering FIX has since LANDED and been MEASURED (iter-205 — the
-record in `WORLD_TESTS.md` §9's W5 entry): two template lines
-re-authored (the mourning line carrying the line/duties/holdings
-never-handed-on, the echo line the table-open forward frame — zero
-code, the LOG untouched) and the same probe re-run: the opened-option
-half extracted cleanly once, iter-204's zero-futures mode gone n=2
-(both readings now carrying the inheritance topology), the mandatory
-pair still NOT met at the strict n=2 bar — the dead still not read as
-the futures' own holders (the measured failure mode: the mourning
-line's clause resolves to the inheritance's character, never to the
-dead as the loss's subject); the further fix's route the owner's call
-(never "improve the prose"; the anti-loop law held — the first fix
-attempt only). The owner-called RE-SUBJECTIVATION has since LANDED
-and been MEASURED (iter-206 — the record in `WORLD_TESTS.md` §9's W5
-entry): the mourning line's clause re-subjected ("their own futures
-the flood took down with them, the line, the duties and the holdings
-that were to be theirs" — the dead as the loss's grammatical subject;
-zero code, the LOG untouched) and the same probe re-run: the
-MANDATORY PAIR MET at the strict n=2 bar — the dead read as the
-futures' own holders n=2 convergent (the subject problem solved at
-the LLM band), the opened half 2/2, the station PARTIALLY CONFIRMED
-(the human band open, the discovery-path residues standing). The
-human live band's INSTRUMENT has since been re-established and
-DELIVERED (iter-207 — the owner's option (б) call firing STATUS Next
-step item 1: the two packages regenerated deterministically at seed
-42, byte-identical, every recorded substance shape hit). The HUMAN
-READING since RECEIVED and SCORED (iter-208 — the convergence
-assessment against the pre-set bars CONVERGENT at every mandatory
-bar, n=1 — the single divergence the covering's fund-frame, the
-reading's humor halves beyond the LLM band's own with the
-surface-unequal confound named). The humor's surface-unequal
-confound since RESOLVED (iter-209 — the LLM humor re-measure on the
-rs-6 surface extracted the withhold-riding joke class n=2, the bands
-equalized); the direct coverage probe kit DELIVERED (iter-209) and
-its READING since RECEIVED and CLOSED (iter-210 — the NOT-PROBED
-branch: the fund-frame present directly on the readable surface and
-extracted under the direct question, the iter-208 divergence the
-free-answer form's artifact, the human band's covering bar joining
-the LLM band's — no renderer/prose/pack change). The standing
-decision points are DECIDED (the owner's 2026-09-27 dispositions
-call over the iter-265 report §D's orientation — the full record in
-`WORLD_TESTS.md` §9's W5 entry; the owner's RU deliverable
-`docs/iterations/iter-266-w5-owner-decisions-report.md`): the W5
+**The station's outcome (the landing history's full record:
+`WORLD_TESTS.md` §9's W5 entry — the single owner; the RU reports
+iter-188..210, 266..276):** biography CLEAN (iter-191 — the rs-2
+rendering fix + the clean re-run, the gate's condition MET, the
+embargo lifted); humor carried at the LLM band (iter-192 the rendering
+failure → iter-194 rs-3 → iter-199 rs-4 → iter-209 the surface-unequal
+confound resolved + the direct coverage probe closed NOT-PROBED — the
+residue dispositions below); heartbreak's strict mandatory pair MET at
+both bands (iter-203 the embodiment as pure pack data — the kin axis,
+the proof's read, the mourning surface; iter-204 the probe; iter-205
+the rendering fix; iter-206 the re-subjectivation — the dead as the
+loss's grammatical subject, the LLM band's mandatory pair; iter-207/208
+the live instrument + the owner's reading CONVERGENT at every
+mandatory bar; iter-269/270 the return kit + the live re-read — every
+bar MET, rs-9's causal row + rs-10's dated chain carried in full).
+
+**The standing law from the owner's 2026-09-27 dispositions (the full
+record `WORLD_TESTS.md` §9's W5 entry; the RU deliverable
+`docs/iterations/iter-266-w5-owner-decisions-report.md`):** the W5
 residue list SPLITS by disposition, never one undifferentiated fill.
-CLOSE AS RESIDUE — the fail-then-pass reading and the 40/80
-asymmetry: deliberate unresolved discovery residues, never technical
-debt (DO NOT DELETE, DO NOT EXPLAIN BY DEFAULT; the 40/80 stays
-canonically present, available to downstream consumers, never forced
-into the reader path — a surface would be owed only on proof the
-reader must know the first failure / the asymmetry to understand a
-present state, and none is on record). ADD DISCOVERY SURFACE — the
-runner's grudge story: the minimal causal surface only (standing →
-the remembered incident → why the grudge exists), never the
-biography. ADD TEMPORAL SURFACE — the shave's temporal placement:
-the dated-memory row (the chain earlier season → hunger winter →
-the event → present consequence — the arc's assembly's remaining
-half, the iter-201/202 measured open row; the residue ladder's own
-EVENT → RESIDUE → CARRIER → HOLDER rungs, `WORLD_AUTHORING.md` §8).
-The runner surface since LANDED (iter-267 — the hold's line carrying
-the pack-authored causal row through the knows boundary, the
-mechanism rs-9; `tests/test_grudgesurface.py` the witness). The
-shave temporal surface since LANDED (iter-268 — the withhold's own
-line carrying the dated chain, the mechanism rs-10 the rs-5
-precedent's own form; the glm blind re-reading n=2 convergent, the
-iter-201/202 failure modes gone; `tests/test_shavememory.py` the
-witness). The live band's return + the heartbreak recheck since
-LANDED (iter-269) and the owner's live reading RECEIVED and SCORED
-(iter-270 — every station bar MET at the live band, the strict
-heartbreak pair CARRIED, rs-9's causal row + rs-10's dated chain
-carried in full, the divergence's class RESOLVED: the glm recheck's
-miss the LLM band's own reader-class variance). The station's
-standing order after the reading: the embodiment fill-list (§6.4 →
-§6.1 → §6.5 → §6.2; §6.3 REMOVED — its probe completed
-iter-204..210, ANCHOR_REGION §6.3's row synced) → W6. (Every
-landing's full record: `WORLD_TESTS.md` §9's W5 entry — the single
-owner.)
+CLOSE AS RESIDUE — the fail-then-pass reading and the 40/80 asymmetry:
+deliberate unresolved discovery residues, never technical debt (DO NOT
+DELETE, DO NOT EXPLAIN BY DEFAULT; a surface owed only on proof a
+reader must know them to understand a present state, none on record).
+ADD DISCOVERY SURFACE — the runner's grudge causal row (LANDED iter-267,
+rs-9, `tests/test_grudgesurface.py`). ADD TEMPORAL SURFACE — the shave's
+dated-memory chain (LANDED iter-268, rs-10, `tests/test_shavememory.py`).
 
-The fill rows since LANDED (each with its full record in
-`WORLD_TESTS.md` §9 and its own iteration report — the single
-owners): the §6.4 repricing (iter-271 — the renegotiation door
-landed, the SALE fork honestly recorded); the §6.1 floodpaper
-(iter-272 — the crossing's flood debt to its full lifecycle over
-the account resolver's arm); the §6.5 move release (iter-274,
-moverelease — the departure at its measured iter-263 price,
-honestly paid; a living world is not a loud one; the smoke corpus
-untouched); the §6.2 stepbench (iter-275 — PRESENT / HATCH / NOTCH
-over the existing account substrate, the two-sided band gap
-measured and named as the I0 inventory's first candidate); the
-§6.4 SALE fork RESOLVED (iter-273, settlement — the owner's
-synthesis decision, never the A/B/C pick: the FOURTH VERB
-`settle`, the multi-leg transaction over EXPLICIT owners through
-the same canon door, the sale `sell_bloom` armed over it, the
-grammar wall measured FIRST; no second transaction engine). The
-I0 WORLD IGNITION WITNESS since RUN and CONFIRMED (iter-276 —
-the owner's world-liveness direction, the execution order's fifth
-row: the moving meso over the perturbed keep-Malby edge, the
-five-leg chain measured on existing primitives; the four
-timelines diverging never synchronized; the substrate-limitation
-inventory opened with three named candidates, none yet repeated,
-no machinery promoted). The station's standing order after the
-landing (the owner's 2026-09-27 execution order): the I0 witness
-RUN and CONFIRMED (iter-276 — no new machinery promoted, the
-inventory's candidates awaiting repetition) → W6 genre under the
-resulting evidence (the §8 station law).
+**The fill rows and the ignition witness (each with its full record in
+`WORLD_TESTS.md` §9 and its own iteration report — the single owners):
+the §6.4 repricing (iter-271); the §6.1 floodpaper (iter-272); the
+§6.4 SALE fork RESOLVED by the owner's synthesis (iter-273, settlement
+— the FOURTH VERB `settle`, the multi-leg transaction over EXPLICIT
+owners through the same canon door, no second transaction engine); the
+§6.5 move release (iter-274); the §6.2 stepbench (iter-275 — the
+two-sided band gap the I0 inventory's first candidate); the I0 WORLD
+IGNITION WITNESS RUN and CONFIRMED (iter-276 — the five-leg chain
+measured on existing primitives, the four timelines diverging, no
+machinery promoted, the substrate-limitation inventory opened). The
+station COMPLETE; W6 entered on the owner's explicit call.
 
 ## 8. W6 — Genre tests
 

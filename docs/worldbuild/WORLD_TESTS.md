@@ -2927,6 +2927,74 @@ own class); the LIVE READING BAND OPEN — the owner's future row
 (the W6/W7 reading-band form, both slices' material carried by it).
 The owner's RU report: `docs/iterations/iter-395-meaning2-report.md`.
 
+### CONFIRMED — The third meaning slice: the return's claim, the distribution's substrate measured at the deterministic band — the slice corpus complete at three registers, the reading band now the single pass (2026-10-20, iter-396, the owner's standing delegation «сначала системы запилить/контентом наполнить, потом за 1 раз всё протестировать» — the meaning slices the adjacent systems, the reading band the one-pass test: the corpus filled to its third register BEFORE the band runs)
+
+The W8-audit criterion 1's named gap, deepened again: the THIRD meaning
+slice (`ANCHOR_REGION.md` §7.3 — the return's claim, the recognition
+claimed at the stair; the first slice iter-155's double toll, §7.1; the
+second iter-395's re-weigh's sale, §7.2). The event: the flood-year
+guest's son at the crossing his father wintered at, the proof shown where
+the road can hear (`claim_kinmark`, iter-203's winter kin embodiment —
+the mechanics the winterkin witness's own rows, cited never re-pinned).
+The same mechanical event, FIVE bounded position-maps authored over the
+committed substrate (the claimant, the host, the road's near half, the
+guild's chest, the far road wordless) — the maps' table, the distribution
+finding, and the open half in §7.3 (the single owner, D-024). The
+register the first two slices never touched: NON-ECONOMIC — the
+recognition claimed under the care's own law, the option no other
+mechanism expresses (the compulsory toll of the season's law, the
+voluntary release of the craft's discipline, and now the standing claimed
+of the care's own — three registers, the corpus complete for the band).
+
+THE DISTRIBUTION'S SUBSTRATE MEASURED — `tests/test_meaningslice3.py`,
+five laws, seed 80, the winterkin family's own return walk on the
+COMMITTED pack (the honest fail-then-pass read surface — the family's
+measured instance; no twin patching, the family's walk needs no macro
+crossings). THE PROOF'S SELECTIVE DISCLOSURE: the failed read mints only
+the vague unread marks to the reader (the marks stay marks — wear seen,
+meaning missed); the passed read mints `the_winter_kin` to the reader
+ALONE, the only holder through the read (the leverage gate's own key).
+THE MINT'S BOUNDARY: the claim's knowledge records land on EXACTLY the
+stair's co-present — the keeper, the heir, the claimant (the actor
+INCLUDED: the counter-record spent aloud, the claimant hears his own
+claim — the sale's authorship-exempt actor the deliberate contrast,
+§7.2's convention turned inside out by the register: commerce's hand
+needs no witness to its act, the claim's hand IS the record). THE ABSENT
+MAPS: the whole-log KnowledgeView holds the token on exactly the witness
+set — the camp's seat, the manor's steward, the beam's mistress, the
+Malby crowd, the duty watch, the garrison, the stranger all wordless, no
+ambient spread (the rumor channel its own door, never a leak); the
+mourning token NOWHERE — the claim opens the option, the names stay owed
+(the duty's performance its own beat, never the claim's side effect).
+THE PAPERS' SILENCE (the accounts' divergence, the care register's own
+shape): the claim's own event writes NOTHING (the converse beat — the
+knowledge IS the point); the echo writes exactly ONE relation leg (the
+host's kin 40→80, the acknowledgment's arithmetic, the rarity gate
+intact); ZERO account writes through the band's remainder; the crossing's
+floodpaper TWENTY and the camp's paper SIXTEEN both stand — the notch
+prices care, never coin, held executable at the claim's own moment; the
+claimant's own side stays 40 (the honest state — his own winter not
+spent, no new winter). INV-2: the walk's double-run byte-identical. Zero
+pack change, zero core, zero corpus price (the committed pack itself the
+prism — nothing moved).
+
+THE FINDING, n=3: the meaning lands on five positions — the option
+claimed (the claimant's own door), the purse barred (the host's law), the
+word carried (the road's memory), the paper's silence (the institution's
+boundary), the wordless far road (the boundary's own material) — not on
+one dramatic faction vertex; the third slice CONFIRMS the shape at a
+NON-ECONOMIC event class, the register the first two never touched. The
+substrate's own finding: the sale's material footprint was four account
+legs; the claim's is ONE relation leg and ZERO accounts — the meaning
+distribution's substrate differs in KIND per register (accounts vs
+relations), the frontier's claim deepened at the measured band. VERDICT:
+the deterministic half CONFIRMED; the authored band PARTIALLY CONFIRMED
+(the §7.1/§7.2 form's own class); the LIVE READING BAND OPEN — now the
+corpus's own single test pass over all three slices' material (§7.1
++ §7.2 + §7.3), the owner's future row by his own batch-test directive
+(the W6/W7 form, the owner's live half its own session). The owner's RU
+report: `docs/iterations/iter-396-meaning3-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

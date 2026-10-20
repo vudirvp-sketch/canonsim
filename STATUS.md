@@ -1,51 +1,50 @@
-Iteration: iter-395 (`meaning2` — вторая строка мирового трека
-  W8-эры по делегации владельца «бери что логичнее начать сейчас а
-  не потом» над четырьмя кандидатами STATUS Next: выбор — ГЛАВНЫЙ
-  ПРОБЕЛ АУДИТА готовности (критерий 1), слой смысла тоньше
-  механического — ВТОРОЙ СМЫСЛОВОЙ СРЕЗ §7.2, событие re-weigh's
-  sale, развязка удержания у весов (срез-1 — двойной сбор iter-155
-  §7.1; срез-2 — событие НОВЕЙШЕЙ механики, settlement iter-273,
-  механика процитирована свидетелем, не перепинена): ПЯТЬ
-  ограниченных карт позиций (мастер/сиденье — слово потрачено за
-  стояние долга; весы/Марен — счёт публичен; гильдейская казна/
-  фактор без ворот — долг обслуживаем; переправа/хранительница —
-  груз возвращается, ошибочное чтение цело; дорога ближняя-и-
-  дальняя — ближняя свидетельствует, дальняя безмолвна до слуха) —
-  таблица и находка в ANCHOR_REGION §7.2. ДЕТЕРМИНИРОВАННАЯ
-  ПОЛОВИНА ИЗМЕРЕНА — то, чего срез-1 не имел («the distribution
-  is not yet measured», его собственный вердикт PARTIALLY):
-  tests/test_meaningslice2.py, ПЯТЬ законов, seed 42, macro-480
-  близнец семьи settlement — ГРАНИЦА МИНТА (записи знания ложатся
-  РОВНО на same_location-свидетелей весов: Марен, толпа Малби,
-  сержант НА ПОСТУ — арифметика ротации 1080; актёр освобождён,
-  конвенция авторства reprice/settle-семьи); ОТСУТСТВУЮЩИЕ КАРТЫ
-  (KnowledgeView всего лога держит the_bloom_sold ровно на
-  свидетелях: хранительница НИКОГДА не узнаёт развязку в полосе —
-  карта переправы исполняема: «знает утончение пошлины, никогда
-  причину», материал ошибочного чтения сохранён самой границей;
-  наследник, управляющий, зимний род, чужак — безмолвны; слух —
-  своя дверь, никогда утечка, форма zero-leak на полосе
-  миро-контента); РАСХОЖДЕНИЕ СЧЁТОВ (записи продажи касаются
-  ровно четырёх ног — бумага мастера ШЕСТНАДЦАТЬ НЕ ТРОНУТА:
-  продажа банкует ФОНД, никогда не платит бумагу — «the count
-  prices trust, never coin» §6.4 исполняем; переправа НИКОГДА не
-  написана продажей — связь кусает АРТЕРИЮ (куча тоньше, весы
-  сыты, груз пошлины возвращается), не знание; её монеты — собственный
-  минт потока на пересечениях года); INV-2 (двойной прогон
-  байт-в-байт). НАХОДКА n=2: смысл ложится на ПЯТЬ позиций — не
-  на одну драматическую вершину фракции; срез-2 ПОДТВЕРЖДАЕТ
-  форму среза-1 на материально ином классе события (принудительный
-  сбор по закону сезона против добровольной развязки по дисциплине
-  ремесла). ВЕРДИКТ: детерминированная половина CONFIRMED,
-  авторская полоса PARTIALLY (форма §7.1), ЖИВАЯ ЧИТАЮЩАЯ ПОЛОСА
-  ОТКРЫТА — будущая строка владельца (форма W6/W7-бенда, материал
-  обоих срезов). НУЛЬ ПАК-ДАННЫХ, НУЛЬ ЯДРА, НУЛЕВАЯ ЦЕНА КОРПУСА
-  (крафтовый близнец — ничего коммитнутого не двинулось) ·
+Iteration: iter-396 (`meaning3` — третья строка мирового трека
+  W8-эры по делегации владельца «если системы смежные и их можно
+  в будущем за 1 проход протестировать и оценить => лучше сначала
+  системы запилить/контентом наполнить а уже потом за 1 раз всё
+  протестировать»: применена буквально — смысловые срезы СМЕЖНЫЕ
+  СИСТЕМЫ, живой читающий бенд ЕДИНЫЙ ПРОГОН, корпус наполнен до
+  ТРЕТЬЕГО РЕГИСТРА до бенда; отклонены: бенд сейчас — рано, корпус
+  был не полон; мезо-юниты и стены плавки — за владельческими
+  гейтами; персистентность — последней): ТРЕТИЙ СМЫСЛОВОЙ СРЕЗ §7.3 —
+  ЗАЯВКА ЗИМНЕГО РОДА (`claim_kinmark`, iter-203, механика процитирована
+  свидетелем winterkin, не перепинена) — регистр, которого корпус не
+  нёс: НЕ-ЭКОНОМИЧЕСКИЙ (признание по закону заботы, опция, которую
+  не выражает ни один другой механизм; срез-1 — принудительный сбор
+  по закону сезона, срез-2 — добровольная развязка по дисциплине
+  ремесла): ПЯТЬ ограниченных карт позиций (заявитель — отцовская зима
+  отвечена, своя сторона остаётся 40; хозяйка — кошель закрыт за
+  собственным столом, эхо признания 40→80; ближняя дорога/наследник —
+  переправа перечитана, слово живой носитель; казна — молчание
+  бумаги, ни одной строки для зарубки; дальняя дорога — безмолвна до
+  слуха) — таблица и находка в ANCHOR_REGION §7.3. ДЕТЕРМИНИРОВАННАЯ
+  ПОЛОВИНА ИЗМЕРЕНА — tests/test_meaningslice3.py, ПЯТЬ законов,
+  seed 80 (измеренный инстанс семьи winterkin, честный fail-then-pass
+  прочтения, КОММИТНУТЫЙ ПАК САМ ПРИЗМА — нуль патчей): СЕЛЕКТИВНОЕ
+  РАЗГЛАШЕНИЕ (провал минтит только смутные метки — метки остаются
+  метками; успех — токен ЧИТАТЕЛЮ ОДНОМУ, ключ левередж-гейта,
+  единственный держатель до заявки); ГРАНИЦА МИНТА (записи РОВНО на
+  со-присутствующих лестницы: хозяйка, наследник, ЗАЯВИТЕЛЬ ВКЛЮЧЁН —
+  контр-запись потрачена вслух, нарочитый контраст с освобождённым
+  актёром продажи §7.2); ОТСУТСТВУЮЩИЕ КАРТЫ (лагерь/поместье/рынок/
+  дозор/гарнизон/чужак безмолвны; токен оплакивания НИГДЕ — заявка
+  открывает опцию, имена остаются должны); МОЛЧАНИЕ БУМАГ (событие
+  заявки НЕ ПИШЕТ НИЧЕГО — конверсный бит; эхо — ОДНА нога родства
+  40→80; НОЛЬ записей счетов через остаток полосы; floodpaper 20 и
+  бумага 16 стоят — зарубка ценит заботу, никогда монету; INV-2
+  двойной прогон байт-в-байт). НАХОДКА n=3: смысл на ПЯТИ позициях —
+  форма подтверждена на НЕ-ЭКОНОМИЧЕСКОМ классе события; субстрат
+  распределения различается ПО РОДУ на регистр (продажа — четыре
+  счётные ноги; заявка — одна нога родства, ноль счетов). КОРПУС
+  СРЕЗОВ ЗАВЕРШЁН на трёх регистрах (принудительный экономический /
+  добровольный экономический / не-экономический-забота) — живой
+  читающий бенд теперь ЕДИНЫЙ ПРОГОН по §7.1–§7.3, будущая строка
+  владельца. НУЛЬ ПАК-ДАННЫХ, НУЛЬ ЯДРА, НУЛЕВАЯ ЦЕНА КОРПУСА ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2698 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the row and re-verified after (diff of the FAILED lists: name-for-name equal); +5 meaning2 laws green, zero corpus bytes) ·
+2703 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the row and re-verified after (diff of the FAILED lists: name-for-name equal); +5 meaning3 laws green, zero corpus bytes) ·
 Date: 2026-10-20 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..392 baseline, the GOLDEN
@@ -53,15 +52,19 @@ Failure classes: 27 = the known T1 log-header env set (the sandbox
   diff at index 71 — the python field — zero new, zero flakes) ·
 Scope: R0/R2 doc+witness (one new test file + four worldbuild doc
   riders + state docs, zero core, zero pack):
-  tests/test_meaningslice2.py (NEW — 5 laws) +
-  docs/worldbuild/ANCHOR_REGION.md (§7.2 — the slice: five maps,
-  the n=2 finding, the measured half, the open half) +
+  tests/test_meaningslice3.py (NEW — 5 laws) +
+  docs/worldbuild/ANCHOR_REGION.md (§7.3 — the slice: five maps,
+  the n=3 finding, the measured half, the open half re-pointed to
+  the three slices) +
   docs/worldbuild/WORLD_TESTS.md (§9 — the record) +
-  docs/worldbuild/WORLD_WORKPLAN.md (A3 sync — the second slice +
-  the stale Thornmill line closed by its §7.1/§6.2 owner) +
+  docs/worldbuild/WORLD_WORKPLAN.md (A3 sync — the third slice,
+  the corpus complete at three registers + the §6.1 cruft pass on §7:
+  the W5 landing history compressed to the station law + the outcome +
+  the owner pointers — the file back under the cap 609→498, zero
+  station law cut) +
   docs/worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§6 — the
-  meaning-distribution evidence line) + STATUS.md + worklog.md +
-  docs/TASKS.md + docs/iterations/iter-395-meaning2-report.md —
+  meaning-distribution evidence line n=3) + STATUS.md + worklog.md +
+  docs/TASKS.md + docs/iterations/iter-396-meaning3-report.md —
   9 changed/created.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
@@ -96,9 +99,14 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   contracts/validators/client mirror); the standing boundaries: a SharedWorker stream transport, Tauri,
   PWA, the Settings Appearance section (no persisted store) — each
   its own admission (the import form's native file/folder picker
-  rides the Tauri row). THE WORLD TRACK: iter-395 meaning2
-  LANDED (the owner's standing delegation — the SECOND meaning
-  slice §7.2: the re-weigh's sale, five bounded maps, the
+  rides the Tauri row). THE WORLD TRACK: iter-396 meaning3 LANDED
+  (the owner's batch-test delegation — the THIRD meaning slice §7.3:
+  the return's claim, five bounded maps, the register the corpus
+  never carried (non-economic — the care's own law), the substrate
+  MEASURED, the slice corpus COMPLETE at three registers — the live
+  reading band now the single pass over §7.1–§7.3) + iter-395
+  meaning2 LANDED (the owner's standing delegation — the SECOND
+  meaning slice §7.2: the re-weigh's sale, five bounded maps, the
   distribution's substrate MEASURED at the deterministic band —
   the audit's #1 named gap deepened, the live reading band the
   open half) + iter-394 ironcycle LANDED
@@ -174,24 +182,28 @@ same law.)
 
 ## Next step
 
-**iter-395 DONE: meaning2 (вторая строка мирового трека W8-эры по
-  делегации владельца «бери что логичнее начать сейчас а не потом»:
-  ГЛАВНЫЙ ПРОБЕЛ АУДИТА — ВТОРОЙ СМЫСЛОВОЙ СРЕЗ §7.2, развязка
-  удержания у весов): ПЯТЬ ограниченных карт (сиденье/весы/казна/
-  переправа/дорога) + ДЕТЕРМИНИРОВАННАЯ ПОЛОВИНА ИЗМЕРЕНА
-  (tests/test_meaningslice2.py, 5 законов: граница минта —
-  свидетели весов РОВНО; отсутствующие карты — хранительница
-  никогда не узнаёт развязку, слух своя дверь; расхождение счетов —
-  бумага не тронута, переправа не написана; INV-2) + НАХОДКА n=2
-  (смысл на ПЯТИ позициях, не на вершине фракции; форма среза-1
-  подтверждена на ином классе события). Живая читающая полоса —
-  открытая половина ОБЕИХ срезов, будущая строка владельца
-  (the report iter-395-meaning2-report.md).**
-Next: мировая строка владельца — следующий ряд W8-эры
-  контента якоря по вызову владельца (кандидаты по моему
-  чтению: (1) живой читающий бенд смысловых срезов — ОБА среза
-  §7.1/§7.2 готовы как материал, форма W6/W7 (детерминистическая
-  полоса уже измерена — осталась читающая); (2) до-закрытие
+**iter-396 DONE: meaning3 (третья строка мирового трека W8-эры по
+  делегации владельца «сначала системы/контент, потом один прогон»:
+  ТРЕТИЙ СМЫСЛОВОЙ СРЕЗ §7.3, заявка зимнего рода — не-экономический
+  регистр): ПЯТЬ ограниченных карт (заявитель/хозяйка/наследник/
+  казна/дальняя дорога) + ДЕТЕРМИНИРОВАННАЯ ПОЛОВИНА ИЗМЕРЕНА
+  (tests/test_meaningslice3.py, 5 законов, seed 80 — измеренный
+  инстанс семьи winterkin, коммитнутый пак сам призма: селективное
+  разглашение доказательства; граница минта — со-присутствующие
+  лестницы РОВНО, заявитель ВКЛЮЧЁН; отсутствующие карты — токен
+  оплакивания нигде; молчание бумаг — нуль записей счетов, эхо
+  одна нога родства; INV-2) + НАХОДКА n=3 (смысл на ПЯТИ позициях;
+  форма подтверждена на НЕ-ЭКОНОМИЧЕСКОМ классе; субстрат различается
+  ПО РОДУ на регистр). КОРПУС СРЕЗОВ ЗАВЕРШЁН на трёх регистрах
+  (the report iter-396-meaning3-report.md).**
+Next: мировая строка владельца — ЖИВОЙ ЧИТАЮЩИЙ БЕНД СМЫСЛОВЫХ
+  СРЕЗОВ — теперь первый кандидат по силе: корпус полон на трёх
+  регистрах (§7.1 принудительный экономический / §7.2 добровольный
+  экономический / §7.3 не-экономический-забота), детерминированные
+  половины ВСЕХ ТРЁХ измерены — форма W6/W7 (кит чтения над материалом
+  трёх срезов, пресет-аудит ДО чтений, слепые чтения n=2 + живая
+  половина владельца; ЕДИНЫЙ ПРОГОН по собственной директиве
+  владельца); прочие кандидаты по моему чтению: (2) до-закрытие
   PARTIALLY мезо-юнитов — ЧЕСТНАЯ ОГОВОРКА: материал почти весь
   за гейтами (нотная полоса = двустороннее условие I0-кандидат
   (b), заслонка = PROSE ПО ЗАКОНУ, капа угля = за гейтом
@@ -201,7 +213,8 @@ Next: мировая строка владельца — следующий ря
   (consume-грамматика / строка settle / freightvol re-author),
   каждая своим гейтом; (4) многолетняя персистентность — длинный
   прогон, логичнее ПОСЛЕДНИМ (каждый новый канон-ряд добавляет
-  поверхности остатка));
+  поверхности остатка; после читающего бенда корпус срезов
+  оседает — прогон чище);
   + строка replay-UI — UI-ЭКСПОЗИЦИЯ (первая отвечаемая
   работой позиция инженерной очереди; вторая половина строки:
   аффорданс повтора на терминальном ходе/ране + зеркало

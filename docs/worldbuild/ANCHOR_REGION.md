@@ -1346,6 +1346,74 @@ session"): a real reader at the beam, the five maps' meanings extracted
 blind — the owner's future row, the W6/W7 reading-band form (the
 §7.1/§7.2 material both carried by it).
 
+### 7.3 The third meaning slice (run 2026-10-20, iter-396): the return's claim — the recognition claimed
+
+The event: the flood-year guest's son at the crossing his father wintered at —
+Tork fires `claim_kinmark` at Ketta (iter-203's winter kin embodiment, the F02
+criterion's mechanical form: the leverage-gated door only the proof-holder
+passes). The proof shown where the road can hear — the read's token minted to
+the reader ALONE first, then the claim's public mint at the stair. The first
+slice rode the crossing's economy (the toll — the lowland half's beat); the
+second the camp's (the sale — the hill half's beat); the third rides NEITHER —
+the care register, the edge that binds the estranged halves (the recognition
+claimed under the care's own law, the option no other mechanism expresses —
+the register the economy cannot price). The same mechanical event, five maps
+(WORKING — authored over the committed substrate, the mechanics carried since
+the second slice):
+
+| Position | The same claim means | The bounded map |
+|---|---|---|
+| the claimant (the guest's son) | the father's winter answered — the option no other mechanism expresses; the proof held alone before the showing | knows the_winter_kin exact (the read's selective disclosure, then the public record); does not know the crossing's paper arithmetic — the stores his father's stay ate (eight of the floodpaper twenty) never his question; his own side stays 40 — the honest state, his own winter not spent |
+| the host (the toll-taker) | the purse barred at her own table — the flaw's income forgone (the exclusion rung); the acknowledgment's arithmetic: the recognition answered at the echo | hears the claim (told, exact); knows the flood story and her own accounts; the floodpaper twenty untouched — the claim never the chest's business |
+| the road's near half (the heir at the stair) | the crossing re-read — the exception named where the word had none; the word the claim's living carrier (who answered whom) | hears the claim (told, exact); the pole's second story public at the stair — the payment tallies the flood story, the guest count the winter kin |
+| the guild's chest | the paper's silence — no row for a notch; the claim never the chest's business | knows the paper (both rows — the crossing's floodpaper and the camp's) and never the edge; no account written by the claim or its echo |
+| the far road (the camp, the manor, the market — the wordless) | the claim's fact stays the stair's — the word must ride the road | the master, the steward, the mistress, the crowd, the watch, the garrison, the stranger — no record in the band; the rumor channel its own door, never a leak |
+
+**The distribution finding, n=3:** the meaning lands on five positions —
+the option claimed (the claimant's own door), the purse barred (the host's
+law), the word carried (the road's memory), the paper's silence (the
+institution's boundary), the wordless far road (the boundary's own material)
+— not on one dramatic faction vertex; the third slice confirms the first
+two's shape (§7.1: household survival, labor skimmed, the road's misread,
+the institution's interest; §7.2: the word spent, the count public, the
+interest, the freight returning, the word riding) at a NON-ECONOMIC event
+class: the first a compulsory toll under the season's law, the second a
+voluntary release under the craft's discipline, the third a standing
+claimed under the care's own law — the register the first two never
+touched. The substrate's own finding: the sale's material footprint was
+four account legs (§7.2); the claim's is ONE relation leg and ZERO
+accounts — the meaning distribution's substrate differs in KIND per
+register (accounts vs relations), the frontier's claim deepened at the
+measured band.
+
+**The measured half (the deterministic band, iter-396):** the
+distribution's SUBSTRATE measured — `tests/test_meaningslice3.py` (five
+laws, seed 80, the winterkin family's own return walk — the honest
+fail-then-pass read surface, the family's measured instance): the proof's
+selective disclosure (the failed read minting only the vague unread marks —
+the marks stay marks; the passed read minting the token to the reader
+ALONE, the only holder through the read); the mint's boundary (the claim's
+records landing on EXACTLY the stair's co-present — the keeper, the heir,
+the claimant; the actor INCLUDED, the counter-record spent aloud — the
+sale's authorship-exempt actor the deliberate contrast); the absent maps
+(the whole-log KnowledgeView holding the token on exactly the witness set;
+the camp's seat, the manor, the beam, the crowd, the watch, the garrison,
+the stranger all wordless; the mourning token nowhere — the claim opens
+the option, the names stay owed, the duty's performance its own beat); the
+papers' silence (the claim's own event writing NOTHING — the converse
+beat; the echo exactly one kin leg 40→80; ZERO account writes through the
+band's remainder; the floodpaper twenty and the camp's paper sixteen both
+standing; the claimant's own side staying 40); INV-2 (the walk's
+double-run byte-identical). The door's own mechanics are
+`tests/test_winterkin.py`'s rows — cited, never re-pinned.
+
+**The open half:** the live reading band — the shared open half of ALL
+THREE slices (§7.1/§7.2/§7.3), now the corpus's own single test pass: the
+owner's standing directive «сначала системы/контент, потом один прогон» —
+the slice corpus complete at three registers (compulsory economic /
+voluntary economic / non-economic care), the band runs ONCE over all of it
+(the W6/W7 form, the owner's live half its own session).
+
 ## 8. Current limitations
 
 ### NOT YET PROVEN
