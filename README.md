@@ -1,19 +1,69 @@
 # canonsim
 
-Deterministic canonical simulation core for an LLM-narrator architecture.
-Phase 0 deliverable: **TavernSim v0** — one tavern, a theft, an arson, spreading
-rumors — running as a pure Python simulation with an append-only event log.
-No LLM anywhere near the canon yet.
+**A deterministic, autonomous, data-driven living-world simulation engine
+for persistent, open-ended play through local LLMs.** canonsim generates
+and evolves worlds whose histories emerge from interacting systems, actors,
+resources, institutions, relationships, constraints, knowledge, and
+persistent consequences. Long-term quality target — emergent-history depth
+on the order of the strongest simulation-heavy games (Dwarf Fortress,
+RimWorld, Kenshi): a direction, never a claim about current capability.
 
-> **Simulator produces facts. LLM produces prose. The log stores canon.
-> The mediator holds the boundary.**
+> **Simulator produces facts. LLM produces meaning. The log stores canon.
+> The mediator holds the boundary.** — the thesis (owner: `docs/VISION.md`
+> §1–§2; §6–§7 the honest limits).
 
-North star: a "living world" simulation mode inside
-[Soul-of-Waifu](https://github.com/jofizcd/Soul-of-Waifu) (local-first desktop
-AI companion app) — see `docs/VISION.md` §10. This repo stays frontend-agnostic;
-the dumb-terminal frontend contract is the SoW horizon's (`docs/ROADMAP.md` §6).
+**The engine generates reality; the LLM interprets and narrates it; the
+player participates in it.** Canonical state and history live in an
+append-only event log outside the context window — a prompt is a temporary
+workbench rebuilt from persistent state, never the world's memory, and
+forgetting a fact from the prompt cannot delete it from the world. The
+world advances on its own — actors, institutions, and the environment act
+without a player prompt and without an LLM call for every development —
+and it does not exist to serve the player: player language is input, not
+privileged truth; outcomes are decided by the simulator's rules (the
+mechanical cure for sycophancy). What the architecture cannot fix — model
+prose ceilings, refusals, narration drift — stays an honestly stated
+limit, handled by validation and degradation ladders, never "solved".
 
-## Status
+Who owns what (the product meaning; the binding contracts live with their
+specs — `docs/AGENT_NAVIGATION.md` §3 the map):
+
+| Component | Owns |
+|---|---|
+| Simulator (`core/`) | world rules, causal resolution, autonomous developments, outcomes — the sole canon authority; advances the world with no LLM in the loop |
+| Event log (`core/log.py`, INV-1) | the append-only canonical history; state = fold(log); SQLite, caches, projections, summaries are rebuildable |
+| Mediator & adapters (`brief/` + the sanctioned surfaces, INV-4) | the LLM boundary: intent validation, bounded perspective-correct briefs, narration validation, bounded failure handling — model output is a proposal or a presentation, never a fact |
+| LLM | parse player language into structured intents; narrate authorized state (prose, dialogue, texture); never decide outcomes, invent canon, or grant unauthorized knowledge |
+| Player | an embodied canonical actor under the same world rules as every other actor |
+| Worldbuilding & packs (`content/`, `docs/worldbuild/`) | the setting as data — ontology, laws, entities, institutions; the engine supplies the mechanisms, the pack supplies the world |
+
+The intended cycle (conceptual; ordering, budgets, and failure behavior
+are owned by `docs/BRIEF_SPEC.md`, `docs/PARSER_SPEC.md`,
+`docs/VALIDATION_SPEC.md`, `docs/DIRECTOR_SPEC.md`): retrieve the relevant
+canonical state and history → assemble a bounded brief for the active
+scene and authorized perspective → the LLM narrates the scene, or parses
+player language into a structured intent → validate and resolve the intent
+under the simulator's rules → record consequential changes through the
+event log → advance autonomous world processes → assemble the next brief.
+Repeat without relying on the model holding the conversation history.
+
+**TavernSim v0 — one tavern, a theft, an arson, spreading rumors — is the
+historical phase-0 proof fixture**, not the product: a bounded, LLM-free
+slice that demonstrated the architecture's mechanisms run and read as a
+story. The packs, benchmark corpora, and test scenarios hold the same
+subordinate role — controlled environments in which mechanisms and claims
+are verified. A passed gate proves its stated claim within its measured
+scope; it never establishes that the ambition above is complete or
+delivered.
+
+Delivery horizon (owner: `docs/VISION.md` §10): a "living world"
+simulation mode inside
+[Soul-of-Waifu](https://github.com/jofizcd/Soul-of-Waifu) (local-first
+desktop AI companion app). This repo stays frontend-agnostic; the
+dumb-terminal frontend contract is the SoW horizon's (`docs/ROADMAP.md`
+§6).
+
+## Status — the verified state, not product completion
 
 **The roadmap's phase ladder is COMPLETE — phases 0..6 all CLOSED**
 (`docs/ROADMAP.md` §2 the single owner of closed/open — one-liners
@@ -34,8 +84,17 @@ here, the per-phase evidence in DECISIONS' gate-verdict family):
 - Phase 6 (Packs & worldbuilder) — gate PASS iter-116, D-151: the
   reskin day 14m24s, zero core edits (D-149).
 
+The ladder's closure is the completion of a verification program on
+bounded slices: each gate proves its named mechanisms against its exit
+criteria — none of them establishes the living-world ambition at
+open-ended scale. Vision vs verified state stays explicit:
+`docs/VISION.md` §6–§7 (the limits), `STATUS.md` (the current state +
+next step), `docs/TASKS.md` (the standing backlog), `docs/worldbuild/`
+(the authored world and its active frontier).
+
 **The standing work**: the owner-gated backlog (`docs/TASKS.md`) + the
-world track (`docs/worldbuild/`, D-186) + the Soul-of-Waifu horizon
+web-frontend track (`docs/FRONTEND_WEB_LAW.md`) + the world track
+(`docs/worldbuild/`, D-186) + the Soul-of-Waifu horizon
 (`docs/ROADMAP.md` §6). Track B: bg-2/3/4/7/8/9 DONE, bg-6
 owner-deferred; engine-1 LANDED iter-177 (D-193 — the explicit adapter,
 INV-4's one-module form).
@@ -51,9 +110,13 @@ INV-4's one-module form).
    DELETED (D-245, the owner's «удаляй redot» call) — the git history
    + the archived agent pack preserve the reference material.
 
-Humans: `docs/VISION.md` for the why; `docs/MVP_SCOPE.md` for the phase-0 tech
-spec. Everything here is written for agents first — dense, tabular, no prose
-padding.
+By question class: the product and the why → `docs/VISION.md`; the laws →
+`AGENTS.md` §4 + the owning specs; the current state and next step →
+`STATUS.md`; the authored world and its frontier →
+`docs/worldbuild/README.md` → `docs/worldbuild/WORLD_TRACK_AGENT_CONTEXT.md`.
+
+Humans: `docs/MVP_SCOPE.md` for the phase-0 tech spec. Everything here is
+written for agents first — dense, tabular, no prose padding.
 
 ## Repo map
 
@@ -66,7 +129,7 @@ padding.
 | `docs/` | all specs & plans (the full map: `docs/AGENT_NAVIGATION.md` §1) |
 | `docs/worldbuild/` | the authored-setting surface: world kernel, Resonance, the Sarrow Vale anchor, the authoring doctrine (D-186) |
 | `schemas/` | machine-readable contracts (`event.schema.json`) |
-| `content/` | the five packs — setting as data (tavern, road, province, grim, pressure), loaded + linted by `core/pack.py` (the admission gate; lint bodies in `core/packlint/`) |
+| `content/` | the six packs — setting as data (tavern, road, province, grim, pressure, farstead), loaded + linted by `core/pack.py` (the admission gate; lint bodies in `core/packlint/`) |
 | `core/` | the engine (stdlib-only, D-012; engine-agnostic — INV-4): the event-sourced kernel (log, queue, loop, fold), the RngBank, the knowledge/director/world/social stacks, economy, intent + resolvers, metrics, pack |
 | `render/` | the deterministic renderer: the tracery grammar engine (cosmetic stream) + the chronicle/entity views (pure functions of the log) |
 | `frontend/` | the ACTIVE web client (frontend-1, D-244): React + TypeScript + Vite, Web/PWA-first — the S0 walking skeleton over the existing loopback gateway (`POST /op`, INV-4 untouched: the browser is a gateway client, never a fourth network surface; typed runtime-validated payloads, the virtualized LIVE Trajectory tail, per-tab independent clients; POST-only — no SSE/WebSocket in S0; dev serves via the Vite proxy to `127.0.0.1:8765`) |

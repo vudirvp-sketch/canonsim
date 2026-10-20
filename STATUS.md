@@ -1,71 +1,43 @@
-Iteration: iter-396 (`meaning3` — третья строка мирового трека
-  W8-эры по делегации владельца «если системы смежные и их можно
-  в будущем за 1 проход протестировать и оценить => лучше сначала
-  системы запилить/контентом наполнить а уже потом за 1 раз всё
-  протестировать»: применена буквально — смысловые срезы СМЕЖНЫЕ
-  СИСТЕМЫ, живой читающий бенд ЕДИНЫЙ ПРОГОН, корпус наполнен до
-  ТРЕТЬЕГО РЕГИСТРА до бенда; отклонены: бенд сейчас — рано, корпус
-  был не полон; мезо-юниты и стены плавки — за владельческими
-  гейтами; персистентность — последней): ТРЕТИЙ СМЫСЛОВОЙ СРЕЗ §7.3 —
-  ЗАЯВКА ЗИМНЕГО РОДА (`claim_kinmark`, iter-203, механика процитирована
-  свидетелем winterkin, не перепинена) — регистр, которого корпус не
-  нёс: НЕ-ЭКОНОМИЧЕСКИЙ (признание по закону заботы, опция, которую
-  не выражает ни один другой механизм; срез-1 — принудительный сбор
-  по закону сезона, срез-2 — добровольная развязка по дисциплине
-  ремесла): ПЯТЬ ограниченных карт позиций (заявитель — отцовская зима
-  отвечена, своя сторона остаётся 40; хозяйка — кошель закрыт за
-  собственным столом, эхо признания 40→80; ближняя дорога/наследник —
-  переправа перечитана, слово живой носитель; казна — молчание
-  бумаги, ни одной строки для зарубки; дальняя дорога — безмолвна до
-  слуха) — таблица и находка в ANCHOR_REGION §7.3. ДЕТЕРМИНИРОВАННАЯ
-  ПОЛОВИНА ИЗМЕРЕНА — tests/test_meaningslice3.py, ПЯТЬ законов,
-  seed 80 (измеренный инстанс семьи winterkin, честный fail-then-pass
-  прочтения, КОММИТНУТЫЙ ПАК САМ ПРИЗМА — нуль патчей): СЕЛЕКТИВНОЕ
-  РАЗГЛАШЕНИЕ (провал минтит только смутные метки — метки остаются
-  метками; успех — токен ЧИТАТЕЛЮ ОДНОМУ, ключ левередж-гейта,
-  единственный держатель до заявки); ГРАНИЦА МИНТА (записи РОВНО на
-  со-присутствующих лестницы: хозяйка, наследник, ЗАЯВИТЕЛЬ ВКЛЮЧЁН —
-  контр-запись потрачена вслух, нарочитый контраст с освобождённым
-  актёром продажи §7.2); ОТСУТСТВУЮЩИЕ КАРТЫ (лагерь/поместье/рынок/
-  дозор/гарнизон/чужак безмолвны; токен оплакивания НИГДЕ — заявка
-  открывает опцию, имена остаются должны); МОЛЧАНИЕ БУМАГ (событие
-  заявки НЕ ПИШЕТ НИЧЕГО — конверсный бит; эхо — ОДНА нога родства
-  40→80; НОЛЬ записей счетов через остаток полосы; floodpaper 20 и
-  бумага 16 стоят — зарубка ценит заботу, никогда монету; INV-2
-  двойной прогон байт-в-байт). НАХОДКА n=3: смысл на ПЯТИ позициях —
-  форма подтверждена на НЕ-ЭКОНОМИЧЕСКОМ классе события; субстрат
-  распределения различается ПО РОДУ на регистр (продажа — четыре
-  счётные ноги; заявка — одна нога родства, ноль счетов). КОРПУС
-  СРЕЗОВ ЗАВЕРШЁН на трёх регистрах (принудительный экономический /
-  добровольный экономический / не-экономический-забота) — живой
-  читающий бенд теперь ЕДИНЫЙ ПРОГОН по §7.1–§7.3, будущая строка
-  владельца. НУЛЬ ПАК-ДАННЫХ, НУЛЬ ЯДРА, НУЛЕВАЯ ЦЕНА КОРПУСА ·
+Iteration: iter-397 (`northstar` — продуктовая переориентация
+  корневых входных точек по ЯВНОМУ запросу владельца в активной сессии
+  (D-198 intake: задача «Establish CanonSim's Product North Star and
+  Eliminate Agent Orientation Drift» — правки документации, не
+  предложение): устранён структурный источник повторных недопониманий
+  агентов — тот, кто читал ТОЛЬКО начало README/AGENTS, видел фазу-0
+  фикстуру и «лестницу COMPLETE», но не сам продукт): README.md —
+  продукт теперь ведёт документ (движок живого мира для открытой
+  игры через локальные LLM; граница симулятор/LLM/игрок; автономия
+  мира; контекст — верстак, не память; подчинённая роль TavernSim/
+  паков/корпусов как инструментов верификации; концептуальный цикл
+  со ссылкой на владельцев контрактов; границы доказанного воротами;
+  маршрутизация «по классу вопроса»; заодно устаревшее «five packs»
+  исправлено на шесть (farstead, iter-324)); AGENTS.md §1 — тот же
+  порядок: продукт ДО фикстуры/ворот/бэклога + явное «закрытие
+  лестницы ≠ готовность продукта»; девиз README выровнен с
+  владельцем тезиса (VISION §1 «LLM produces meaning»; дрейфовавшая
+  копия «prose» заменена); ворота и исторические факты сохранены
+  дословно; VISION НЕ тронут (заморожен — противоречий с задачей
+  нет, правка не потребовалась); NAV/ROADMAP/MVP_SCOPE без правок
+  (карта и маршруты точны) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2703 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the row and re-verified after (diff of the FAILED lists: name-for-name equal); +5 meaning3 laws green, zero corpus bytes) ·
+2703 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the row and re-verified after (diff of the FAILED lists: name-for-name equal); doc-only pass — zero test/pack/spec bytes touched) ·
 Date: 2026-10-20 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..392 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
-Scope: R0/R2 doc+witness (one new test file + four worldbuild doc
-  riders + state docs, zero core, zero pack):
-  tests/test_meaningslice3.py (NEW — 5 laws) +
-  docs/worldbuild/ANCHOR_REGION.md (§7.3 — the slice: five maps,
-  the n=3 finding, the measured half, the open half re-pointed to
-  the three slices) +
-  docs/worldbuild/WORLD_TESTS.md (§9 — the record) +
-  docs/worldbuild/WORLD_WORKPLAN.md (A3 sync — the third slice,
-  the corpus complete at three registers + the §6.1 cruft pass on §7:
-  the W5 landing history compressed to the station law + the outcome +
-  the owner pointers — the file back under the cap 609→498, zero
-  station law cut) +
-  docs/worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§6 — the
-  meaning-distribution evidence line n=3) + STATUS.md + worklog.md +
-  docs/TASKS.md + docs/iterations/iter-396-meaning3-report.md —
-  9 changed/created.
+Scope: R0 doc-only (the product-orientation pass over the two
+  root entry points + the protocol riders; zero core, zero pack, zero
+  tests, zero specs): README.md (the product-first opening, the
+  responsibilities table, the conceptual cycle, the fixture subordination,
+  the Status scope statements, the by-question-class routing, the
+  five->six packs fix) + AGENTS.md (§1 — the product North Star before the
+  fixture/gates/backlog) + STATUS.md + worklog.md + docs/TASKS.md (the
+  ledger line; iter-387's line rolled out by the cap) +
+  docs/iterations/iter-397-northstar-report.md — 6 changed/created.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -182,20 +154,15 @@ same law.)
 
 ## Next step
 
-**iter-396 DONE: meaning3 (третья строка мирового трека W8-эры по
-  делегации владельца «сначала системы/контент, потом один прогон»:
-  ТРЕТИЙ СМЫСЛОВОЙ СРЕЗ §7.3, заявка зимнего рода — не-экономический
-  регистр): ПЯТЬ ограниченных карт (заявитель/хозяйка/наследник/
-  казна/дальняя дорога) + ДЕТЕРМИНИРОВАННАЯ ПОЛОВИНА ИЗМЕРЕНА
-  (tests/test_meaningslice3.py, 5 законов, seed 80 — измеренный
-  инстанс семьи winterkin, коммитнутый пак сам призма: селективное
-  разглашение доказательства; граница минта — со-присутствующие
-  лестницы РОВНО, заявитель ВКЛЮЧЁН; отсутствующие карты — токен
-  оплакивания нигде; молчание бумаг — нуль записей счетов, эхо
-  одна нога родства; INV-2) + НАХОДКА n=3 (смысл на ПЯТИ позициях;
-  форма подтверждена на НЕ-ЭКОНОМИЧЕСКОМ классе; субстрат различается
-  ПО РОДУ на регистр). КОРПУС СРЕЗОВ ЗАВЕРШЁН на трёх регистрах
-  (the report iter-396-meaning3-report.md).**
+**iter-397 DONE: northstar (продуктовая переориентация корневых
+  входных точек по явному запросу владельца — D-198 intake): README и
+  AGENTS §1 теперь ведёт продукт, не фикстура — движок живого мира,
+  граница симулятор/LLM/игрок, автономия, «контекст — верстак»,
+  подчинённая роль TavernSim и всех ограниченных сценариев, явное
+  «закрытие лестницы ворот ≠ готовность продукта», маршрутизация по
+  классу вопроса; девиз README выровнен с VISION §1; ворота сохранены
+  дословно; VISION/NAV/ROADMAP не тронуты; нуль строк рантайма (the
+  report iter-397-northstar-report.md).**
 Next: мировая строка владельца — ЖИВОЙ ЧИТАЮЩИЙ БЕНД СМЫСЛОВЫХ
   СРЕЗОВ — теперь первый кандидат по силе: корпус полон на трёх
   регистрах (§7.1 принудительный экономический / §7.2 добровольный

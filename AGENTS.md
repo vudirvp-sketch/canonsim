@@ -7,13 +7,30 @@
 
 ## 1. What this repo is
 
-`canonsim` — a deterministic canonical simulation core (Python, stdlib-first).
-Phase 0 built **TavernSim v0**: one tavern scenario (theft, arson, rumors) that
-runs and reads as a story **without any LLM** — closed iter-6; the roadmap's
-phase ladder is COMPLETE — phases 0..6 all closed (ROADMAP §2 owns the state;
-the standing work: the owner-gated backlog rows + the Soul-of-Waifu horizon).
-North star: a simulation mode
-inside Soul-of-Waifu (`docs/VISION.md` §10).
+`canonsim` — a deterministic, autonomous, data-driven **living-world
+simulation engine** (Python, stdlib-first) for persistent, open-ended play
+through local LLMs: worlds whose histories emerge from interacting systems,
+actors, resources, institutions, relationships, constraints, knowledge, and
+persistent consequences, and that keep operating and accumulating history
+without a player prompt and without an LLM call for every development.
+**The simulator generates reality; the LLM interprets and narrates it; the
+player participates in it** — under the same world rules as every other
+actor, never an omnipotent controller. Thesis, diagnosis, honest limits:
+the frozen `docs/VISION.md` (§1–§2, §6–§8). Long-term quality target
+(ambition, never a capability claim): emergent-history depth on the order
+of Dwarf Fortress / RimWorld / Kenshi.
+
+Bounded artifacts are implementation and verification instruments, never
+the product's identity or final scope. **TavernSim v0** — one tavern
+scenario (theft, arson, rumors) that runs and reads as a story **without
+any LLM**, closed iter-6 — is the phase-0 proof fixture; the packs,
+benchmark corpora, and test scenarios hold the same subordinate role. The
+roadmap's phase ladder is COMPLETE — phases 0..6 all closed (ROADMAP §2
+owns the state) — which proves each gate's stated claim within its
+measured scope **and does NOT mean the product is complete**. The standing
+work: the owner-gated backlog rows + the web-frontend track + the world
+track (`docs/worldbuild/`) + the Soul-of-Waifu delivery horizon
+(`docs/VISION.md` §10).
 
 Two work tracks (`docs/ROADMAP.md` §1):
 
