@@ -1,43 +1,46 @@
-Iteration: iter-397 (`northstar` — продуктовая переориентация
-  корневых входных точек по ЯВНОМУ запросу владельца в активной сессии
-  (D-198 intake: задача «Establish CanonSim's Product North Star and
-  Eliminate Agent Orientation Drift» — правки документации, не
-  предложение): устранён структурный источник повторных недопониманий
-  агентов — тот, кто читал ТОЛЬКО начало README/AGENTS, видел фазу-0
-  фикстуру и «лестницу COMPLETE», но не сам продукт): README.md —
-  продукт теперь ведёт документ (движок живого мира для открытой
-  игры через локальные LLM; граница симулятор/LLM/игрок; автономия
-  мира; контекст — верстак, не память; подчинённая роль TavernSim/
-  паков/корпусов как инструментов верификации; концептуальный цикл
-  со ссылкой на владельцев контрактов; границы доказанного воротами;
-  маршрутизация «по классу вопроса»; заодно устаревшее «five packs»
-  исправлено на шесть (farstead, iter-324)); AGENTS.md §1 — тот же
-  порядок: продукт ДО фикстуры/ворот/бэклога + явное «закрытие
-  лестницы ≠ готовность продукта»; девиз README выровнен с
-  владельцем тезиса (VISION §1 «LLM produces meaning»; дрейфовавшая
-  копия «prose» заменена); ворота и исторические факты сохранены
-  дословно; VISION НЕ тронут (заморожен — противоречий с задачей
-  нет, правка не потребовалась); NAV/ROADMAP/MVP_SCOPE без правок
-  (карта и маршруты точны) ·
+Iteration: iter-398 (`visionfix` — правка замороженного VISION §10 по
+  ЯВНОМУ разрешению владельца в активной сессии (D-198 intake; вызов
+  «конечно вноси если старый вижн не соответствует и ведет вникуда» над
+  опцией E отчёта iter-397, запись D-261): §10 был ПОСЛЕДНИМ семенем
+  дрейфа ориентации — README/AGENTS цитировали «docs/VISION.md §10 —
+  владелец delivery horizon», а сам §10 назывался «North star» и объявлял
+  END STATE режим внутри Soul-of-Waifu (двойной north star; как рабочее
+  направление вёл вникуда — все SoW-строки за гейтом владельца, bg-6
+  «until unavoidable» D-055) + устаревшая оговорка «until the phase-1
+  gate» (гейт закрыт iter-26/D-058)): §10 переименован в «North star and
+  delivery horizon» — north star теперь СОБСТВЕННАЯ траектория глубины
+  движка (эмерджентная глубина истории порядка DF/RimWorld/Kenshi — §9
+  прецеденты; амбиция, никогда заявление о текущей возможности; продукт —
+  движок §1, не отдельный деплой; глубина зарабатывается системой за
+  системой, ни одни ворота/фикстура/закрытие фазы её не устанавливают —
+  корень claim'а качества README/AGENTS по D-024), SoW — ГОРИЗОНТ
+  ДОСТАВКИ (замороженная суть дословно: dumb-terminal, frontend-agnostic,
+  без скользящего окна/авто-суммаризации/keyword-лорбука; оговорка гейта
+  исправлена на явный вызов владельца bg-6/D-055, ROADMAP §6 — SoW-работа
+  до вызова есть scope creep, не рабочее направление репо); якорь §10
+  добавлен в AGENTS/README на строке цели качества; ROADMAP §6
+  синхронизирован («Delivery end state») ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2703 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the row and re-verified after (diff of the FAILED lists: name-for-name equal); doc-only pass — zero test/pack/spec bytes touched) ·
-Date: 2026-10-20 ·
+2703 passed + 27 failed, ruff clean, docguard clean (35/35 at cap — D-261 recorded), topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the row and re-verified after (diff of the FAILED lists: name-for-name equal); doc-only pass — zero test/pack/spec bytes touched) ·
+Date: 2026-10-21 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..392 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
-Scope: R0 doc-only (the product-orientation pass over the two
-  root entry points + the protocol riders; zero core, zero pack, zero
-  tests, zero specs): README.md (the product-first opening, the
-  responsibilities table, the conceptual cycle, the fixture subordination,
-  the Status scope statements, the by-question-class routing, the
-  five->six packs fix) + AGENTS.md (§1 — the product North Star before the
-  fixture/gates/backlog) + STATUS.md + worklog.md + docs/TASKS.md (the
-  ledger line; iter-387's line rolled out by the cap) +
-  docs/iterations/iter-397-northstar-report.md — 6 changed/created.
+Scope: R0 doc-only + the frozen-file revision (the authority
+  blast radius self-declared R4 in D-261 with the PCC record; zero
+  runtime delta): docs/VISION.md (§10 — the north star / delivery horizon
+  split; §1–§9 + §11 byte-identical) + AGENTS.md (§1 — the
+  quality-target VISION §10 anchor) + README.md (the quality-target owner
+  anchor) + docs/ROADMAP.md (§6 — the «Delivery end state» sync) +
+  docs/DECISIONS.md (D-261, 35/35 at cap) + STATUS.md + worklog.md +
+  docs/TASKS.md (the ledger line; iter-388's line rolled out by the cap) +
+  docs/iterations/iter-398-visionfix-report.md — 9 changed/created (the
+  §2.3 soft-limit breach noted in worklog: the frozen-file protocol riders
+  are mandatory — the DECISIONS record + the state docs + the report).
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -154,15 +157,17 @@ same law.)
 
 ## Next step
 
-**iter-397 DONE: northstar (продуктовая переориентация корневых
-  входных точек по явному запросу владельца — D-198 intake): README и
-  AGENTS §1 теперь ведёт продукт, не фикстура — движок живого мира,
-  граница симулятор/LLM/игрок, автономия, «контекст — верстак»,
-  подчинённая роль TavernSim и всех ограниченных сценариев, явное
-  «закрытие лестницы ворот ≠ готовность продукта», маршрутизация по
-  классу вопроса; девиз README выровнен с VISION §1; ворота сохранены
-  дословно; VISION/NAV/ROADMAP не тронуты; нуль строк рантайма (the
-  report iter-397-northstar-report.md).**
+**iter-398 DONE: visionfix (правка замороженного VISION §10 по явному
+  разрешению владельца — D-198 intake, вызов над опцией E отчёта
+  iter-397, запись D-261 с PCC): §10 теперь «North star and delivery
+  horizon» — north star = собственная траектория глубины движка
+  (DF/RimWorld/Kenshi как амбиция, не заявление о возможности; продукт —
+  движок §1), SoW = горизонт доставки (замороженная суть дословно;
+  устаревшая оговорка «phase-1 gate» исправлена на явный вызов владельца
+  bg-6/D-055, ROADMAP §6); якорь §10 в AGENTS/README на строке цели
+  качества; ROADMAP §6 «Delivery end state»; §1–§9 + §11 VISION
+  байт-идентичны; нуль строк рантайма (the report
+  iter-398-visionfix-report.md).**
 Next: мировая строка владельца — ЖИВОЙ ЧИТАЮЩИЙ БЕНД СМЫСЛОВЫХ
   СРЕЗОВ — теперь первый кандидат по силе: корпус полон на трёх
   регистрах (§7.1 принудительный экономический / §7.2 добровольный

@@ -4,9 +4,10 @@
 for persistent, open-ended play through local LLMs.** canonsim generates
 and evolves worlds whose histories emerge from interacting systems, actors,
 resources, institutions, relationships, constraints, knowledge, and
-persistent consequences. Long-term quality target — emergent-history depth
-on the order of the strongest simulation-heavy games (Dwarf Fortress,
-RimWorld, Kenshi): a direction, never a claim about current capability.
+persistent consequences. Long-term quality target (owner: `docs/VISION.md`
+§10) — emergent-history depth on the order of the strongest
+simulation-heavy games (Dwarf Fortress, RimWorld, Kenshi): a direction,
+never a claim about current capability.
 
 > **Simulator produces facts. LLM produces meaning. The log stores canon.
 > The mediator holds the boundary.** — the thesis (owner: `docs/VISION.md`

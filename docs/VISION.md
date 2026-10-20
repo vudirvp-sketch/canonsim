@@ -135,16 +135,25 @@ Stanford Generative Agents (LLM + external memory, but expensive and
 canonless), grammar-constrained decoding (format guarantee). The new hard rule
 we add: **separation of canon and voice.**
 
-## 10. North star
+## 10. North star and delivery horizon
 
-End state: a "living world" simulation mode inside **Soul-of-Waifu** — a
-local-first desktop AI companion app (text/voice chat, Soul Memory, Soul Stage
-RPG engine, desktop agent). The engine repo stays frontend-agnostic; the
-frontend becomes a **dumb terminal**: it renders, the mediator owns the context
-window — no sliding window, no auto-summarization, no keyword lorebook
-injection; a scene panel + event timeline instead of the memory illusion.
-Integration design is out of scope until the phase-1 gate (`docs/ROADMAP.md`
-§6).
+North star: the engine's own depth trajectory — emergent-history depth on
+the order of Dwarf Fortress / RimWorld / Kenshi (§9's precedents). A
+long-term quality target and an ambition, never a claim about current
+capability; the product is the engine (§1), not any single deployment of
+it. Depth is earned system by system; no gate, fixture, or phase closure
+establishes it.
+
+Delivery horizon: a "living world" simulation mode inside
+**Soul-of-Waifu** — a local-first desktop AI companion app (text/voice
+chat, Soul Memory, Soul Stage RPG engine, desktop agent). The engine repo
+stays frontend-agnostic; the frontend becomes a **dumb terminal**: it
+renders, the mediator owns the context window — no sliding window, no
+auto-summarization, no keyword lorebook injection; a scene panel + event
+timeline instead of the memory illusion. Integration design stays out of
+scope until the owner's explicit call (`docs/ROADMAP.md` §6, bg-6/D-055) —
+SoW-specific work before that call is scope creep, never this repo's
+working direction.
 
 ## 11. What this repo deliberately drops from the source concept
 

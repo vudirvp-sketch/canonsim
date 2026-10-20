@@ -17,8 +17,8 @@ without a player prompt and without an LLM call for every development.
 player participates in it** — under the same world rules as every other
 actor, never an omnipotent controller. Thesis, diagnosis, honest limits:
 the frozen `docs/VISION.md` (§1–§2, §6–§8). Long-term quality target
-(ambition, never a capability claim): emergent-history depth on the order
-of Dwarf Fortress / RimWorld / Kenshi.
+(ambition, never a capability claim; VISION §10): emergent-history depth
+on the order of Dwarf Fortress / RimWorld / Kenshi.
 
 Bounded artifacts are implementation and verification instruments, never
 the product's identity or final scope. **TavernSim v0** — one tavern

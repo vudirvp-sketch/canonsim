@@ -93,7 +93,8 @@ A gate is passed only on evidence:
 
 ## 6. Soul-of-Waifu horizon
 
-End state: a simulation mode inside Soul-of-Waifu (`docs/VISION.md` §10).
+Delivery end state: a simulation mode inside Soul-of-Waifu
+(`docs/VISION.md` §10 — the delivery horizon's owner).
 Prerequisites: the mediator protocol specs (BRIEF_SPEC and friends —
 `docs/SPECS_BACKLOG.md`) and the "dumb terminal" frontend contract (the
 frontend renders; the mediator owns the context window). The phase-1
