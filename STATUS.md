@@ -1,47 +1,89 @@
-Iteration: iter-393 (`hroomv22run` — ЖИВОЙ ПРОГОН v2.2 ПРОЧИТАН
-  С ЗУБАМИ: закрывающий вызов iter-392 Next, поставленный
-  владельцем ОТДЕЛЬНОЙ СТРОКОЙ, ОТВЕЧЕН — его загруженный
-  hroom_20261018_080252.zip, пак v2.2 на базе v6.2, cuda,
-  Gemma-4-E4B Q4_K_M, одной командой; 94/94 группы пересчёта
-  зелёные, счёт в счёт, граница v2.2 пере-реализована с нуля без
-  импорта пака): ПОДТВЕРЖДЁННАЯ ГРАНИЦА ЗАКРЫТА ВЖИВУЮ БЕЗ
-  ОСТАТКА — h0 42/42 чистых; h8 41/42 + та же линия s8 c3
-  (хвост байт-в-байт улике iter-391 — семья стабильна 2/2 живых
-  прогонов), срез по earliest-кандидату 'blank+STOP' сразу за
-  «sawdust.», кольцо 261+97==358, пост-закон зелёный на всех 84
-  доставленных поверхностях; НОВЫХ форм утечки НЕТ — материал
-  для следующего вердикта не требуется (84/84 чистых впервые в
-  серии); измеримая половина — ТРЕТЬЕ подтверждение (max 120
-  против 416, запас ×3.5, ноль в 832); det — ЧЕТВЁРТАЯ полоса
-  h0-False/h8-True + заострение: обе det-пары байт-в-байт равны
-  iter-391 через сессии сервера (жадный воспроизводится через
-  свежие сессии, расходится внутри одной — наблюдение двух
-  прогонов под KI#118); verdict-половины 6/42 воспроизведены
-  ТОЧНО (no_pin, drift 26/24, цензусы идентичны, спот-чеки
-  байт-в-байт); ЭСТЕТИЧЕСКАЯ ПОЛОВИНА H-ПРОМОУШЕН-БАЗИСА ЗАКРЫТА
-  РЕЗУЛЬТАТОМ полосы — RUNTIME PROMOTION остаётся отдельным
-  разрешением владельца (D-250); run-зип НЕ в репо (дух INV-5) ·
+Iteration: iter-394 (`ironcycle` — ПЕРВАЯ строка мирового
+  трека по стоящей директиве владельца «давай то что логично и
+  способствует качеству в долгосрок… оно потом должно работать
+  глобально и само по себе без прописывания точечно» — его же
+  анти-скриптовый закон рядом: сабстрат-уровень, никогда
+  точечные триггеры; выбор строки — мой ответ на делегацию:
+  ЧЕТВЁРТОЕ измерённое плечо цикла железа якоря, АНЧОР_REGION
+  §3/§8 «bloom, iron, charcoal as measured scarcity», ВСЁ ПАК-ДАННЫЕ,
+  НУЛЬ ЯДРА — stageb-1 B2/B4 паттерны посажены в якорь): ТРИ
+  рабочих вида на хуторах (wood/ore/charcoal, все сиды НОЛЬ —
+  честная полоса последствий сезона взвешивания) + ДВА
+  ограниченных источника (the_coppice_grows +2/год КАПА 8;
+  the_seam_yields +5/год КАПА 10 — молчание-при-полноте
+  ИЗМЕРЕНО: seam минтит дважды и замолкает навсегда, руда на
+  капе — лицо отстранённого потребителя) + ОДИН рецепт (the_burn:
+  2 wood → 2 charcoal, ОДИН атомарный account_converted, консервация
+  по рецепту по виду) + ОДИН пост мастера (прецедент farmland-кузни:
+  темп — прибытие материала, мягкий отказ — безопасность
+  возмущений; отключённая рука ИЗМЕРЕНА: без поста wood растёт
+  до капы 8 и минт молчит, БЕЗ КРАШЕЙ, коммитнутые петли
+  нетронуты) + запись года мастера (the_burn_set — материал
+  биографического бенда). КОММИТНУТЫЙ РИТМ НЕ ТРОНУТ (пять
+  нош года: удержанные две — поток banking, проданные три —
+  дверь продажи; восхождение кучи и монетные фонды
+  байт-в-байт рядом с новыми поверхностями). НУЛЕВАЯ ЦЕНА
+  КОРПУСА ПО ПОСТРОЕНИЮ И ПОДТВЕРЖДЕНА (потоки — макро-год
+  518400 за горизонтом любого дневного корпуса; пост в полосе
+  молчит — wood сидит ноль; стримы корпусов байт-идентичны,
+  единственный дифф — env-поле python заголовка, семья 27
+  имя-в-имя). ЗАКОН НАБЛЮДЕНИЯ scene-LOD ИЗМЕРЕН (биты ходят по
+  активной зоне: пост мастера стреляет где мир наблюдают —
+  сегментированный близнец с игроком на хуторах честная полоса
+  ремесла; коммитнутый календарный скрипт до хуторов не доходит —
+  горения в том сказе нет ПО ТОМУ ЖЕ ЗАКОНУ). ПИТАНИЕ ПЛАВКИ
+  ЗАСТЕНОЙ — три перво-экспозиционных пробела сабстрата ЗАПИСАНЫ,
+  не маршрутизированы (закон отдельных треков, класс
+  двухсторонней полосы stepbench, ЧЕТВЁРТЫЙ кандидат класса I0):
+  (1) actor-side грамматика consume (consume всегда списывает у
+  интент-актёра — стоки хуторов недостижимы; линт-фальсификатор
+  запинен: крашеный drain-with-holder door отказан на загрузке);
+  (2) байт-запиненное торговое чтение строки settle («X за Y»
+  превращает любую двухвидовую выдачу в ложный обмен — пин
+  продажи; leg-direction-aware строка — строка рендерера);
+  (3) двойной минт рецепта (smelt-рецепт, минтящий bloom,
+  задвоил бы запиненное восхождение кучи freightvol — banking
+  поток единственный писатель кучи, гарант запинен как закон
+  пака). Честные остатки: charcoal накапливается без капы (у
+  выхода рецепта нет source-флоу — растущий стог углубление
+  коммитнутой огнеопасности, топливо ловушки наконец измерено;
+  капа выхода рецепта — будущая строка за гейтом промоушена);
+  принятый лучом bloom БЕЗ потребителя в регионе (взятие конвоя
+  и дальняя цена off-model ПО ЗАМЫСЛУ — открытая строка
+  Географии §4 и первая нога строки cross-region §8). INV-2
+  держит (фингерпринты РАВНЫ через armed/ablated/drop-post —
+  роллы поста на изолированных стримах; остаток
+  участия-в-очереди измерен честно: закон стрипа freightvol
+  миро-масштабен для ПОТОКОВ, пост-В-ДВЕРИ несёт собственную
+  цену очереди — вместо него запинен закон префикса, дивергенция
+  локализована до первого тика двери) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2684 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented iter-392 baseline, captured before the riders and re-verified after; a docs-only delivery, zero repo runtime bytes) ·
-Date: 2026-10-19 ·
+2693 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the riders and re-verified after; +9 ironcycle laws green, zero corpus bytes) ·
+Date: 2026-10-20 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..392 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
-Scope: R0/R1 riders-only (zero repo runtime lines):
-  docs/iterations/iter-393-hroomv22run-report.md (new — the
-  reading report) + docs/TASKS.md (the hroom-6 row + the
-  hroom-1..5 cruft pass + the ledger, iter-383 displaced,
-  598/600) + STATUS.md (header + Next + §3 station line) +
-  worklog.md (iter-393, iter-383 displaced) — 4 changed/created.
+Scope: R2 local-add (pack data + one test witness + riders, zero
+  core lines): content/province_pack/rules.json (economy: 3 kinds,
+  2 bounded flows, 1 recipe; urgencies: 1 post) +
+  content/province_pack/entities.json (the crofts' 3 zero stocks) +
+  content/province_pack/actions.json (burn_the_stacks) +
+  content/province_pack/templates.json (the convert line, 3 kind
+  glosses, 2 flow glosses, 1 knows gloss) + tests/test_ironcycle.py
+  (NEW — 9 laws) + 12 rider widenings (the precedent's form, every
+  pin carrying the ironcycle comment, no claim weakened):
+  freightvol/campaccount/debt1/settlement/floodpaper/charcoalpaper/
+  stepbench/ignition/negative/p1_composition/winterkin/temp1 —
+  19 changed/created.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
   contracts LANDED and OWNER-ACCEPTED AS LAW (S1–S7 + K1–K6 +
-  E1..E6 + Q1–Q7 2026-10-03; P1–P7 + A1–A7 2026-10-04); the
+  E1..E6 + Q1..Q7 2026-10-03; P1–P7 + A1–A7 2026-10-04); the
   implementation rows are NOT standing rows — the owner's «пока не
   открываю» call: each opens on the owner's separate call behind
   the runtime-promotion gate; core-1 stays PARKED (owner-gated
@@ -70,9 +112,16 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   contracts/validators/client mirror); the standing boundaries: a SharedWorker stream transport, Tauri,
   PWA, the Settings Appearance section (no persisted store) — each
   its own admission (the import form's native file/folder picker
-  rides the Tauri row). The world track: W8's remaining rows the
-  owner's call. The ssi family COMPLETE except ssi-5, owner-gated.
-
+  rides the Tauri row). THE WORLD TRACK: iter-394 ironcycle LANDED
+  (the owner's standing directive — the anchor's iron cycle's input
+  half, the §3/§8 row: the bounded yields measured, the burn live,
+  the smelt's feed walled with three recorded substrate gaps, the
+  convoy/off-region terminus the Geography row's own material; the
+  W8-era world-content rows continue on the owner's call). The ssi
+  family COMPLETE except ssi-5, owner-gated. THE H-FAMILY CLOSED
+  at iter-393 (the v2.2 live run residue-free, the aesthetic half
+  closed by result); the RUNTIME PROMOTION stays the owner's
+  separate permission (D-250).
 ## Invariants (one line each — full rules in AGENTS.md §4)
 
 - INV-1 Event sourcing: state changes only via events; the JSONL log is the
@@ -136,47 +185,50 @@ same law.)
 
 ## Next step
 
-**iter-393 DONE: hroomv22run (ЖИВОЙ ПРОГОН v2.2 ПРОЧИТАН С
-  ЗУБАМИ — загруженный владельцем hroom_20261018_080252.zip,
-  пак v2.2 на базе v6.2, cuda, Gemma-4-E4B Q4_K_M, одной
-  командой station_hroom.bat; 94/94 групп пересчёта зелёные,
-  счёт в счёт, граница v2.2 пере-реализована с нуля без
-  импорта пака): ПОДТВЕРЖДЁННАЯ ВЛАДЕЛЬЦЕМ ГРАНИЦА ЗАКРЫТА
-  ВЖИВУЮ БЕЗ ОСТАТКА — h0 42/42 чистых; h8 41/42 + та же
-  линия s8 c3 СТОП-литерализации (хвост байт-в-байт улике
-  iter-391 — семья стабильна 2/2 живых прогонов, не флейк),
-  срез по самому раннему кандидату 'blank+STOP' сразу за
-  «sawdust.», кольцо 261+97==358, пост-закон зелёный на всех
-  84 доставленных поверхностях; НОВЫХ форм утечки НЕТ —
-  материал для следующего вердикта не требуется (README №1:
-  порядок «вердикт перед фиксом» держал дважды, теперь
-  держится результатом; 84/84 чистых впервые в серии);
-  измеримая половина — ТРЕТЬЕ подтверждение (84/84
-  натуральных, max 120 против 416 = запас ×3.5, ноль в 832);
-  det — ЧЕТВЁРТАЯ полоса h0-False/h8-True + ЗАОСТРЕНИЕ: обе
-  det-пары байт-в-байт равны парам iter-391 через сессии
-  сервера — жадный temp-0 воспроизводится через свежие
-  сессии, расходясь внутри одной; сама пара детерминирована
-  на этой полосе (наблюдение двух прогонов под KI#118);
-  verdict-половины 6/42 воспроизведены ТОЧНО (все
-  take-с-texture no_pin, pinned==[] на 84, drift 26/24,
-  цензус-распределения идентичны v2.1, спот-чеки прозы
-  байт-в-байт); ЭСТЕТИЧЕСКАЯ ПОЛОВИНА H-ПРОМОУШЕН-БАЗИСА
-  ЗАКРЫТА РЕЗУЛЬТАТОМ полосы — H-СЕМЬЯ ЗАКРЫТА, РАБОЧИХ
-  СТРОК В НЕЙ НЕ ОСТАЛОСЬ (the report
-  iter-393-hroomv22run-report.md).**
-Next: строка replay-UI — UI-ЭКСПОЗИЦИЯ (первая отвечаемая
-  работой позиция очереди; вторая половина строки: аффорданс
-  повтора на терминальном ходе/ране + зеркало
-  contracts/validators/client на фронтенде — строка
-  закрывается переводом NOT-EXPOSED строки матрицы приёмки в
-  EXPOSED; каждый ряд — вызов владельца по FRONTEND_UIUX_LAW
-  §25)
-+ строка replay-UI — UI-ЭКСПОЗИЦИЯ (вторая половина:
+**iter-394 DONE: ironcycle (ПЕРВАЯ строка мирового трека по
+  стоящей директиве владельца «давай то что логично и
+  способствует качеству в долгосрок… оно потом должно работать
+  глобально и само по себе без прописывания точечно»: якорьская
+  строка §3/§8 «bloom, iron, charcoal as measured scarcity» —
+  ВХОДНАЯ ПОЛОВИНА ЦИКЛА ЖЕЛЕЗА ИЗМЕРЕНА, всё пак-данные, нуль
+  ядра): ТРИ рабочих вида на хуторах (все сиды НОЛЬ — полоса
+  последствий сезона взвешивания) + ДВА ограниченных источника
+  (coppice +2/год капа 8, seam +5/год капа 10 — молчание-при-
+  полномоте ИЗМЕРЕНО: seam минтит дважды и замолкает, руда на
+  капе) + the_burn ЖИВОЙ (2 wood → 2 charcoal, один атомарный
+  account_converted, консервация по рецепту) на посту мастера
+  (прецедент farmland-кузни; отключённая рука измерена: без
+  поста wood растёт до капы и минт молчит, без крашей,
+  коммитнутые петли нетронуты) + the_burn_set (запись года
+  мастера, материал биографии). КОММИТНУТЫЙ РИТМ НЕ ТРОНУТ
+  (восхождение кучи и фонды байт-в-байт). НУЛЕВАЯ ЦЕНА КОРПУСА
+  ПОДТВЕРЖДЕНА (стримы байт-идентичны, env-дифф заголовка —
+  документированная семья 27 имя-в-имя; +9 законов зелёные).
+  ЗАКОН НАБЛЮДЕНИЯ scene-LOD ИЗМЕРЕН (пост стреляет где мир
+  наблюдают; календарный скрипт до хуторов не доходит — горения
+  в том сказе нет по тому же закону). ПИТАНИЕ ПЛАВКИ ЗА СТЕНОЙ —
+  три пробела сабстрата ЗАПИСАНЫ (actor-side грамматика consume;
+  байт-запиненное торговое чтение строки settle; двойной минт
+  рецепта против пина freightvol) — каждый развязка за
+  владельческим гейтом, ЧЕТВЁРТЫЙ кандидат класса I0.
+  Честные остатки: charcoal без капы (углубление коммитнутой
+  огнеопасности — топливо ловушки измерено); принятый лучом
+  bloom без потребителя в регионе (взятие конвоя и дальняя цена
+  off-model по замыслу — материал строк Географии §4 и
+  cross-region §8; the report iter-394-ironcycle-report.md).**
+Next: мировая строка владельца — следующий ряд W8-эры
+  контента якоря по вызову владельца (кандидаты по моему
+  чтению: (1) до-закрытие PARTIALLY мезо-юнитов — notch/hatch
+  ступени, остатки лагеря; (2) второй смысловой срез §7 —
+  слой смысла главный пробел аудита; (3) стены плавки —
+  вызов владельца на одну из трёх развязок (consume-грамматика
+  / строка settle / freightvol re-author), каждая своим
+  гейтом; (4) многолетняя персистентность — длинный прогон);
+  + строка replay-UI — UI-ЭКСПОЗИЦИЯ (первая отвечаемая
+  работой позиция инженерной очереди; вторая половина строки:
   аффорданс повтора на терминальном ходе/ране + зеркало
-  contracts/validators/client на фронтенде — строка закрывается
-  переводом NOT-EXPOSED строки матрицы приёмки в EXPOSED; каждый
-  ряд — вызов владельца по FRONTEND_UIUX_LAW §25)
+  contracts/validators/client на фронтенде; каждый ряд —
+  вызов владельца по FRONTEND_UIUX_LAW §25)
 + THE RUNTIME PROMOTION remains the owner's separate permission
   (D-250) — its measured basis COMPLETE AND RE-CONFIRMED (the
   hroom production strip's headroom verdict: no ceiling pressure,
@@ -222,18 +274,16 @@ Next: строка replay-UI — UI-ЭКСПОЗИЦИЯ (первая отве�
    scope); (J-2 remainder) the knowledge blocks LANDED (the tokens
    minting, the watch-briefing and rumor-cascade consumers live, the
    cascade measured 22→25); (J-3) CLOSED — no row. THE WORLD TRACK
-   after iter-266 — the W5 owner decisions LANDED (the dispositions
-   record: WORKPLAN §7 + WORLD_TESTS §9's W5 entry + the iter-266
-   report's corrected P0 split); the owner's standing order: the
-   runner discovery surface → the shave temporal surface → the live
-   band's return + the heartbreak recheck → the embodiment fill-list
-   rows (§6.4 → §6.1 → §6.5 → §6.2; §6.3 removed — its probe
-   completed iter-204..210) → then W6 genre, the region move, the
-   fenced set. ssi-5
-   stays owner-gated (the N018 evidence law). The owner-side cleanup
-   standing from D-230's third card: delete the doubled
-   `workbench/workbench/runtime/` tree locally (safe — the iter-246
-   root fix landed; the tree regenerates on demand).
+   after iter-394 — the ironcycle row LANDED (the §3/§8 input half
+   measured, the feed's three walls recorded, the off-region
+   terminus named); the standing owner frames unchanged: the
+   embodiment options (the step's notch/hatch, the kin's own), the
+   meaning frontier (§7), the multi-year persistence band; the W8
+   remaining rows the owner's call. ssi-5 stays owner-gated (the
+   N018 evidence law). The owner-side cleanup standing from D-230's
+   third card: delete the doubled `workbench/workbench/runtime/`
+   tree locally (safe — the iter-246 root fix landed; the tree
+   regenerates on demand).
 2. The P1/P2/P3 continuation per FRONTEND_UIUX_LAW §25 (each row on
    the owner's call): obs-3+ — the P3 analytical rungs (timeline
    lanes, compare arms, semantic zoom, cross-highlighting — the
@@ -246,56 +296,21 @@ Next: строка replay-UI — UI-ЭКСПОЗИЦИЯ (первая отве�
    awareness, the session/preset persistence layers,
    LLAMA_CPP_INFERENCE_CONTROL_LAW §21). The exported-Windows-build
    row parked per AGENTS §2.4 — a named row when the owner calls it.
-3. The station side: §8.5's ledger COMPLETE through the 27B band
-   (iter-312/313/314 — the split instrument, the three round-7 rows,
-   the 27B one-model run, the narrator arms, the cross-run
-   reproducibility datum); the narrator production-form DECIDED
-   2026-10-03 (L12 the production form — PRESENTATION_SPEC §7; the
-   heavier arm gated behind the contract rows); the DECISIONS
-   collapse LANDED (iter-380/384 — 33/35, two slots free); THE
-   STATION HROOM RUN READ
-   (iter-389 — the owner's uploaded hroom_20261016_123753.zip on
-   the v2.0 pack: cuda band, 84/84 natural stops, max natural 310
-   < 416 — wide margin, ZERO ceiling hits at 832 — THE MEASURABLE
-   HALF OF THE H-PROMOTION BASIS CLOSED ON THE PRODUCTION STRIP;
-   det h0 False/h8 True the cross-band regularity; the verdict
-   half line-by-line identical across the temp arms; the
-   aesthetic half's material delivered — the owner's call) + THE
-   H8-FIX LIVE RUN READ (iter-391 — the owner's uploaded
-   hroom_20261017_171144.zip on the v2.1 pack: the measurable
-   half RE-CONFIRMED (max 120, margin ×3.5), the three rejected
-   iter-389 leak families ALL GONE, one NEW-shape residual line
-   1/84 (the prompt's own «STOP» literalized + a fenced second
-   JSON; the tail-break caught the JSON, 26 chars of residue
-   kept — the owner's aesthetic verdict per README №1); the det
-   datum the THIRD strip the same shape; the cross-arm verdict
-   identity not reproduced (6/42, the KI#118 frame)) + THE
-   VERDICT (б) DELIVERED (iter-392 — the family CONFIRMED by
-   the owner: pack v2.2, the boundary candidates joined the
-   markers, the earliest of all bounding the cut; 22/22 units;
-   the regression recomputed on the raw zip — 83/83
-   byte-in-byte, c3 residue-free with the closed ring; no new
-   live run needed, the v2.2 live run its own Next line) + THE
-   V2.2 LIVE RUN READ (iter-393 — the owner's uploaded
-   hroom_20261018_080252.zip: 94/94 recomputed score-for-score;
-   the confirmed boundary CLOSED LIVE residue-free — the same
-   s8 c3 family (tail byte-identical to iter-391's, stable
-   2/2 live runs) cut at 'blank+STOP', the ring 261+97==358,
-   the post-law green on 84/84 delivered surfaces; NO new leak
-   shape — no new verdict needed; the measurable half a THIRD
-   confirmation; the det datum the FOURTH strip + the
-   cross-session sharpening: both det pairs byte-equal
-   iter-391's across server sessions; the verdict halves 6/42
-   reproduced exactly — the aesthetic half of the
-   H-promotion basis CLOSED BY RESULT on this strip). The
-   remaining owner call: the R runtime-promotion permission
-   (the M2/M3 decisions themselves RECORDED — D-250,
-   2026-10-11); GET /models/sse the observed load-progress
-   surface — a candidate row when a live consumer names it.
-4. The standing frames: the embodiment options (§6.4 → §6.1 → §6.5 →
-   §6.2 per the owner's 2026-09-27 order; §6.3 closed iter-204..210,
-   its fill row removed), the debt-1 residues, the re-weigh's SALE,
-   the runner's grudge surface (the standing order's first surface),
-   the shave's temporal surface (the standing order's second), the
-   SoW horizon (bg-6, owner-deferred — long-parked per the owner's
-   2026-09-21 call). New rows enter on the owner's call only.
+3. The station side: THE H-FAMILY CLOSED (iter-393 — the v2.2 live
+   run read: the boundary closed live residue-free, the measurable
+   half a third confirmation, the det datum the fourth strip, the
+   aesthetic half CLOSED BY RESULT — 84/84 delivered surfaces clean
+   for the first time in the hroom series); the remaining owner
+   call: the R runtime-promotion permission (the M2/M3 decisions
+   themselves RECORDED — D-250, 2026-10-11); GET /models/sse the
+   observed load-progress surface — a candidate row when a live
+   consumer names it.
+4. The standing frames: the embodiment options (the step's notch
+   record/hatch, the kin's own — per the owner's 2026-09-27 order),
+   the meaning frontier (§7's probes — the audit's #1 named gap),
+   the ironcycle remainders (the smelt's feed walls — each an
+   owner-gated fork; the off-region terminus), the debt-1 residues,
+   the re-weigh's SALE (armed iter-273), the runner's grudge surface
+   (landed), the shave's temporal surface (landed), the SoW horizon
+   (bg-6, owner-deferred — long-parked per the owner's 2026-09-21
+   call). New rows enter on the owner's call only.

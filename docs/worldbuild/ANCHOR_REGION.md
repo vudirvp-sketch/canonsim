@@ -58,8 +58,18 @@ crofts, market, guild and surrounding institutions together.
 
 **Status:** WORKING worldbuilding pillar. The current province pack carries the
 iron vocabulary and actors, and — since iter-162 (debt-1) — one armed economy
-slice (the flood debt's accounts + flows); the full resource cycle (bloom,
-iron, charcoal as measured scarcity) is not yet armed.
+slice (the flood debt's accounts + flows); since iter-394 (ironcycle) the
+production's INPUT half is measured scarcity: the yard's three working stocks
+(wood, ore, charcoal), the two bounded yields (the coppice +2 wood a year
+capped 8; the seam +5 ore a year capped 10 — the every-miss silence at full),
+and the burn LIVE (the cut fired to the stacks as one atomic convert event at
+the master's gated post — the stageb-1 B2/B4 patterns landed in the anchor,
+`tests/test_ironcycle.py` the witness). The smelt's FEED is walled — three
+first-exposure substrate gaps recorded (the consume actor-grammar, the settle
+line's pinned trade reading, the recipe double-mint over the freightvol heap
+— economy.notes the record); the beam's received bloom keeps no in-region
+consumer (the convoy's take off-model by design). The full VALUE cycle's
+remainders ride those honest walls.
 
 ### Feud residue
 
@@ -87,7 +97,7 @@ economic and social experience.
 | Layer | Sarrow Vale surface | Open question / first answers |
 |---|---|---|
 | Geography | river, travel lattice, weir, keep, market, crofts, manor | open: how much of the wider region is economically connected? |
-| Resource | bloom/iron vocabulary, charcoal, river trade | open: how does scarcity become a measured price/flow cycle? (the debt's slice armed iter-162 — accounts + flows, no prices yet; the water's ALLOCATION answered at the authored band, §6.2 — the step law, order before price; the charcoal's half authored §6.4 — the withhold: the supply held before the price, the scarcity's answer at a tilted beam) |
+| Resource | bloom/iron vocabulary, charcoal, river trade | the scarcity MEASURED at the input half (iter-394, ironcycle: the yard's yields as bounded stocks — the coppice/seam caps, the every-miss silence at full — the burn live as one atomic convert, the charcoal's accumulation the fire trap's own deepening); the smelt's feed WALLED (three first-exposure substrate gaps — the consume actor-grammar, the settle line's pinned trade reading, the recipe double-mint; each an owner-gated fork, the I0 inventory's fourth candidate class); the debt's slice armed iter-162 (accounts + flows, no prices — the prices stay authored BY LAW, freightvol's pinned tilt: the beam's price the shave's own surface, never a derived function); the water's ALLOCATION answered at the authored band (§6.2 — the step law, order before price) |
 | Trade | road traffic, market, toll, waybill, guild | answered (§6.1, §6.4): the crossing household carries the flood season's cost, the croft camp the shaved weights — the two named cost-carriers now one coupled system (both papers, one chest: the estrangement's engine) |
 | Institutions | guild, garrison, old families, watch rotation | answered three times: the crossing under the guild's paper (§6.1, the first named meso mediator), the water under the practitioners' step (§6.2 — the step bench, the second meso unit) and the care under the winter kin's recognition (§6.3 — the constructed kinship edge, the third W4 addition: no office, no court, the road's word the holder); the camp's meso half authored (§6.4 — the charcoal debt under the camp's own word, the seat's succession) |
 | Actors | Ketta, Maren, Osgar, Ferra, Garrick, Wilmot, travelers | answered (§6.1, §6.4): both estranged halves pay the guild's paper — the crossing's flood debt, the camp's charcoal debt — each side believing the other the favored one (§6.4: the belief's mechanism — the coupled liabilities the belief misreads) |
@@ -1076,7 +1086,49 @@ pair (the carrier-availability law's own family — the drop lays the
 badge down uncarried, the take re-carries it; no give-verb exists,
 none owed); the crews' recognition mint stays no committed surface
 (iter-185's law unchanged — the paper walks, the badge follows when
-the camp speaks). CANONICAL since iter-189
+the camp speaks). CANONICAL since iter-394
+(ironcycle — the owner's standing directive, «давай то что
+логично и способствует качеству в долгосрок… оно потом должно
+работать глобально и само по себе без прописывания точечно»: the
+iron scarcity cycle's input half, ANCHOR_REGION §3/§8's named row
+— "bloom, iron, charcoal as measured scarcity" — over the
+STANDING primitives, all pack data, zero core): the yard's three
+working stocks (wood — the cut's yield; ore — the seam's
+weathering; charcoal — the stacks' fuel; all seeded EMPTY at the
+weighing aftermath), the two bounded sources (the coppice +2 wood
+a year, capacity 8; the seam +5 ore a year, capacity 10 — the
+every-miss silence at full measured, the walled consumer's own
+face), the burn LIVE (the recipe the_burn: two wood to two
+charcoal at the crofts, ONE atomic account_converted event,
+conservation per recipe per kind — the stageb-1 B2 pattern landed
+in the anchor) fired by the master's gated post (the farmland
+forge precedent: the material's arrival the pacing, the soft
+refusal the perturbation safety, the scene-LOD beat walk the
+observation law), the committed rhythm UNTOUCHED (the burn's
+annual five loads keep their armed dispositions — the withheld two
+the banking flow's, the sold three the sale door's), the master's
+own year-craft record minted (the_burn_set, the biography band's
+own material). THE SMELT'S FEED WALLED — three first-exposure
+substrate gaps recorded, never routed (the separate-track law, the
+stepbench two-sided-band gap's own class): the consume verb's
+actor-side grammar (a consume always drains the intent actor —
+the crofts' stocks unreachable), the settle line's byte-pinned
+trade reading (any two-kind draw renders a false exchange), the
+recipe double-mint (a smelt recipe minting bloom would
+double-mint the freightvol-pinned heap) — each resolution an
+owner-gated fork, the I0 inventory's FOURTH candidate class.
+Honest residues: the charcoal accumulates uncapped (the recipe's
+output has no source-flow cap to ride — the growing stack the
+committed fire trap's own deepening, the trap's fuel measured at
+last); the beam's received bloom keeps no in-region consumer (the
+convoy's take and the far price off-model by design — §4's
+Geography row and the §8 cross-region row's own first leg);
+`tests/test_ironcycle.py` the witness (nine laws: the census, the
+zero corpus price, the craft's measured band — the seam's two
+mints then silence, every burn's legs, the charcoal's monotone
+climb, the withhold unchanged — the tale's lines, the disable
+arm's bounded pile, the two walls' probes, INV-2's both-arms, the
+T1 double-run). CANONICAL since iter-189
 (charcoalpaper — the owner's W5-decomposition call, finding 2: the
 standing debt an upstream world gap): the outstanding principal
 itself (the third account kind `paper`, sixteen on the master — the
@@ -1247,7 +1299,11 @@ the obligation is the steward's household's own).
 
 - full household economics;
 - durable workshop/market meso institutions;
-- a complete iron scarcity cycle in the current province pack;
+- the iron scarcity cycle's REMAINDERS (the input half MEASURED since
+  iter-394 — ironcycle: the bounded yields, the live burn; the honest
+  walls: the smelt's feed (three first-exposure substrate gaps, each an
+  owner-gated fork), the beam's off-region terminus (the convoy's take —
+  the §4 Geography row's own material));
 - all-year consumer use of every calendar surface;
 - a complete world-to-region mapping for the Ancient Network;
 - cross-region trade consequences beyond the anchor.

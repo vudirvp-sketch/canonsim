@@ -173,10 +173,19 @@ def test_the_grammar_wall_was_real() -> None:
         if "account" in a
     ]
     settle_doors = []
+    convert_doors = []
     for door in account_doors:
         block = door["account"]
         if block.get("verb") == "settle":
             settle_doors.append(door)
+            continue
+        # ironcycle (iter-394): the CONVERT form (stageb-1, CONTRACTS
+        # §12 B2) joins the closed census — the block names a DECLARED
+        # recipe, the legs live on the recipe, never inline (the same
+        # grammar-wall family: the recipe's legs the only place a
+        # location's stock drains by an NPC's hand)
+        if block.get("verb") == "convert":
+            convert_doors.append(door)
             continue
         # the closed single-stock form: verb | kind | amount — NO
         # endpoint keys, the from-side implicitly the intent actor
@@ -186,6 +195,11 @@ def test_the_grammar_wall_was_real() -> None:
     assert any(
         leg["from"] == CROFTS for leg in legs
     )  # the ONLY from-side a location owns
+    # ironcycle (iter-394): burn_the_stacks — the province's first
+    # convert door (the recipe legs the second place a location's
+    # stock drains — the B2 pattern landed in the anchor)
+    assert len(convert_doors) == 1
+    assert convert_doors[0]["intent"] == "burn_the_stacks"
 
 
 def test_the_location_actor_is_refused_loud() -> None:
@@ -337,7 +351,11 @@ def test_the_armed_census() -> None:
     malby = next(
         loc for loc in pack.entities["locations"] if loc["id"] == CHEST
     )
-    assert crofts["accounts"] == {"bloom": 4, "coin": 0}
+    # iter-394 (ironcycle): the yard's three working stocks join — all
+    # seeded EMPTY (the weighing aftermath band); the heap + ledger unchanged
+    assert crofts["accounts"] == {
+        "bloom": 4, "coin": 0, "wood": 0, "ore": 0, "charcoal": 0,
+    }
     assert malby["accounts"] == {"coin": 40, "bloom": 0}
     # UNARMED by doctrine: no urgency entry names the door, no hook
     # seeds it — the autonomous runtime never fires it

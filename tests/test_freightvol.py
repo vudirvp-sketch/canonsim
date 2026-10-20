@@ -132,6 +132,21 @@ def _twin(
     calendar["fairs"]["every_ticks"] = 120
     calendar["seasons"]["every_ticks"] = 120
     if not armed:
+        # ironcycle (iter-394): the burn post rides an account door — the
+        # COMPLETE ablation drops the post with the door (an urgency
+        # entry naming a removed action is dead data, the admission
+        # lint's own refusal; the ablation stays load-clean — the
+        # widening the charcoalpaper/settlement doors' own family)
+        removed = {
+            a["intent"] for a in json.loads(
+                (target / "actions.json").read_text(encoding="utf-8")
+            )["actions"] if "account" in a
+        }
+        entries = rules["urgencies"]["entries"]
+        rules["urgencies"]["entries"] = [
+            e for e in entries
+            if (e.get("intent") or {}).get("kind") not in removed
+        ]
         del rules["economy"]
     (target / "rules.json").write_text(
         json.dumps(rules, indent=2), encoding="utf-8"
@@ -219,8 +234,11 @@ def test_the_armed_census() -> None:
     # outstanding's own kind, the standing state's row)
     # iter-272 (floodpaper): the fourth kind; freightvol's own claim
     # (the bloom ledger) unchanged
+    # iter-394 (ironcycle): the yard's three working kinds (wood, ore,
+    # charcoal — the production's input ledger); the bloom ledger
+    # unchanged
     assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
-        "step", "notch"]
+        "step", "notch", "wood", "ore", "charcoal"]
     assert [(f["id"], f["verb"], f["kind"], f["to"], f["amount"],
              f["every"]) for f in economy["flows"]
             if f["kind"] == "bloom"] == [
@@ -231,7 +249,12 @@ def test_the_armed_census() -> None:
     )
     # iter-273 (settlement): the camp's ledger joins the heap — the
     # sale's coin terminus, seeded zero (the heap's own claim unchanged)
-    assert crofts["accounts"] == {"bloom": 4, "coin": 0}
+    # iter-394 (ironcycle): the yard's three working stocks join — all
+    # seeded EMPTY (the weighing aftermath band); the heap + the
+    # ledger unchanged
+    assert crofts["accounts"] == {
+        "bloom": 4, "coin": 0, "wood": 0, "ore": 0, "charcoal": 0,
+    }
     # the DRAIN door ARMED since iter-273 (settlement — the §6.4 fork
     # resolved through the owner's generalized transaction synthesis):
     # the re-weigh's sale `sell_bloom`, the settle verb's two legs (the
@@ -268,23 +291,31 @@ def test_the_armed_census() -> None:
 
 def test_the_withhold_banks_at_the_years_reckoning(tmp_path: Path) -> None:
     """The committed year run: the year crossing fires the turn, then
-    the four flows chained to it in declaration order — the withhold's
+    the flows chained to it in declaration order — the withhold's
     margin FOURTH (after the three coin flows), the shapes exact (actor
     WORLD, the target the crofts, the outcome carrying the flow id +
     kind + amount, the state_changes the heap's climb 4→6, no
     knowledge, no hooks, importance medium), the chain's root the year
-    turn (the consumer-rides-the-clock law)."""
+    turn (the consumer-rides-the-clock law).
+
+    ironcycle (iter-394) widens the crossing: the two bounded sources
+    (the coppice, the seam) join AFTER the withhold — the margin keeps
+    its FOURTH place, the new flows' targets the crofts' yard."""
     events, _pack = _run_script(
         tmp_path, "year.jsonl", 42,
         REPO / "tests" / "playscripts" / "province_calendar.json",
     )
     flows = [e for e in events if e.type == SOURCE_EVENT]
-    assert len(flows) == 4
+    # ironcycle (iter-394): the crossing now carries SIX sources — the
+    # committed four plus the yard's two bounded yields
+    assert len(flows) == 6
     assert [(e.outcome["flow"], e.target) for e in flows] == [
         ("the_toll_nets", KETTA),
         ("the_guild_collects", CHEST),
         ("the_bloom_nets", MASTER),
         ("the_withhold_banks", CROFTS),
+        ("the_coppice_grows", CROFTS),
+        ("the_seam_yields", CROFTS),
     ]
     margin = flows[3]
     assert margin.t == 518400  # the first macro crossing
@@ -434,7 +465,12 @@ def test_the_fingerprint_never_sees_the_economy(tmp_path: Path) -> None:
     armed twin against the COMPLETE ablated twin (the block and all
     four stocks ablated together) — the fingerprints EQUAL (the flows
     draw nothing, pure stock reads) and the event lists identical
-    outside the account events (the delta is the economy alone)."""
+    outside the account events (the delta is the economy alone).
+
+    ironcycle (iter-394) widens the strip's account family: the burn
+    post's CONVERTED events join the SOURCED flows in the
+    economy-only delta (the verb family widened, the law unchanged —
+    the delta is the economy alone)."""
     armed_events, armed = _run_pack(
         _twin(tmp_path, "armed"), tmp_path, "a.jsonl", 42,
         [{"intent": "wait", "ticks": 1500}],
@@ -445,7 +481,8 @@ def test_the_fingerprint_never_sees_the_economy(tmp_path: Path) -> None:
     )
     assert armed.fingerprint == ablated.fingerprint
     strip = lambda es: [  # noqa: E731
-        (e.t, e.type) for e in es if e.type != SOURCE_EVENT
+        (e.t, e.type) for e in es
+        if e.type not in (SOURCE_EVENT, "account_converted")
     ]
     assert strip(armed_events) == strip(ablated_events)
 

@@ -1678,6 +1678,64 @@
       "notes": "the §6.2 NOTCH leg's door (iter-275, the fill row's third member): the beam's reckoning — the dry year's notch cut at the weighing day, the tally staff's count climbing by the beam's own hand (the source verb minting to the actor, the market mistress the run's hand — the weighbeam and the tally staff one carrier). The door's convention, honestly named (the reprice_paper precedent's own form): the beam accepts its OWN reckoning — the actor and the target one hand (the mistress's acceptance; the source mints to the actor, the line's subject the target, so the discipline is identity); the geography STAGING never a gate (the tally an instrument — the reckoning wherever the weighing day finds the beam's hand; the tale stages the beat at the beam, the staff's own route). The HONEST GAP, recorded never routed: the notch's lawful condition is the DRY BAND standing (the second step) — a TWO-SIDED band condition the closed gate vocabulary cannot express (account_at_least reads floors, never ceilings, never exact values: the gate cannot read 'the step at the low band'); the door lands with the acceptance form alone, the band law stays AUTHORED in these notes — the row's first missing causal leg, a named candidate for the I0 witness's substrate-limitation inventory. The witnesses (same_location, exact) learn the_dry_year_notched — the count public as the weighing day's own record. UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it."
     },
     {
+      "intent": "burn_the_stacks",
+      "label": "fire the year's cut",
+      "resolver": "account",
+      "ticks": 6,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_converted"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_crofts"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "holder": "loc_crofts",
+          "test": "account_at_least",
+          "kind": "wood",
+          "value": 2
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "convert",
+        "recipe": "the_burn"
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_burn_set"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the burn crews' door (ironcycle, iter-394 — the ANCHOR_REGION §3/§8 row: the iron scarcity cycle's live production leg, the stageb-1 B2 pattern landed in the anchor): the cut fired to the stacks — the recipe the_burn over the account substrate, ONE atomic account_converted event (two wood to two charcoal at the crofts, conservation per recipe per kind), the crews' hands under the master's rule (the authored assembly's aggregate form: the master orders the burn at his post, the crews execute within the one craft event). The input-leg solvency gate (the KI#15 family, the lint's own law): the yard short of the cut refuses softly — attempts are facts. The geography honest (the crofts the craft's own site — the cut and the burn §6.4's long_light rung); the master's knowledge token the_burn_set his own year-craft's record (the D-088 knower law, the biography band's own material — the witnesses' smoke-surface the C⇄A interlock's AUTHORED edge, never armed here). AUTONOMOUS by design: the master's urgency post fires this door when the coppice's yield stands (the farmland forge precedent — the material's arrival the pacing, the world's own rhythm, never a clock); never in the committed day-scale band (the wood seeds empty — the zero-corpus-price law by construction)."
+    },
+    {
       "intent": "settle_paper",
       "label": "settle",
       "resolver": "account",

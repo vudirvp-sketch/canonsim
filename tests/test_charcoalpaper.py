@@ -176,8 +176,10 @@ def test_the_armed_census() -> None:
     # iter-275 (stepbench): the step + notch kinds — the bench's own
 # rows (the vocabulary now six); iter-272 (floodpaper): the fourth kind;
     # charcoalpaper's own claim (the camp's paper 16) unchanged
+    # iter-394 (ironcycle): the yard's three working kinds join (the
+    # production's input ledger); the paper claim unchanged
     assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
-        "step", "notch"]
+        "step", "notch", "wood", "ore", "charcoal"]
     # no flow touches the paper — the no-amortization law is structural
     assert not [f for f in economy["flows"] if f["kind"] == "paper"]
     master = next(n for n in pack.entities["npcs"] if n["id"] == MASTER)

@@ -201,7 +201,9 @@ def test_the_armed_census() -> None:
     assert len(pack.entities["npcs"]) == 12
     assert rules["budget"]["npcs"] == {"min": 7, "max": 13}
     assert rules["budget"]["templates"]["max"] == 80
-    assert len(pack.templates["events"]) == 76
+    # ironcycle (iter-394): account_converted joins the events vocabulary
+    # (the burn door's own line — the stageb-1 B2 line landed)
+    assert len(pack.templates["events"]) == 77
 
 
 # -- the formation walk (the C03 triple, live) -----------------------------------

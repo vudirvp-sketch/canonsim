@@ -155,8 +155,10 @@ def test_the_armed_census() -> None:
     it)."""
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
+    # iter-394 (ironcycle): the yard's three working kinds join (the
+    # production's input ledger); the crossing's claims unchanged
     assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
-        "step", "notch"]
+        "step", "notch", "wood", "ore", "charcoal"]
     # no flow touches the flood paper — the no-amortization law again
     assert not [f for f in economy["flows"] if f["kind"] == "floodpaper"]
     ketta = next(n for n in pack.entities["npcs"] if n["id"] == KETTA)

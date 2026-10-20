@@ -111,7 +111,9 @@ INSTITUTIONAL_SCRIPT = load_playscript(
 #: autonomous resolutions 384→306, the event total 2376→2269 — the
 #: collapse outweighs the pile). Re-pin only together with a
 #: legitimate pack or engine change that explains the move.
-EVENT_COUNT: int = 2273
+# ironcycle (iter-394): +2 — the composition year's crossing now
+# carries the yard's two bounded sources beside the committed four
+EVENT_COUNT: int = 2275
 AUTONOMOUS_RESOLUTIONS: int = 309  # 233 accepted + 76 rejected (ki114-1-impl's census)
 TALK_COUNT: int = 1
 VIGIL_COUNT: int = 3
@@ -475,9 +477,13 @@ def test_the_macro_year_feeds_the_account_flows(
     events, _ = witness
     sourced = _of(events, "account_sourced")
     flows = {e.outcome["flow"] for e in sourced}
+    # ironcycle (iter-394): the crossing carries the yard's two
+    # bounded sources beside the committed four — the six-flow
+    # crossing, the production's yields riding the same clock
     assert flows == {
         "the_toll_nets", "the_guild_collects",
         "the_bloom_nets", "the_withhold_banks",
+        "the_coppice_grows", "the_seam_yields",
     }
     assert all(e.t == _of(events, "year_turns")[0].t for e in sourced)
 

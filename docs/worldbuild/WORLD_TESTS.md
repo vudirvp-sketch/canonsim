@@ -2799,6 +2799,76 @@ consumer — the workplan §11's expansion rule or the standing
 engineering rows, never this track's to pick). The owner's RU
 report: `docs/iterations/iter-287-readiness-report.md`.
 
+### CONFIRMED — The iron scarcity cycle's input half: the yard's yields as bounded stocks, the burn live, the smelt's feed walled (2026-10-20, iter-394, the owner's standing directive «давай то что логично и способствует качеству в долгосрок… оно потом должно работать глобально и само по себе без прописывания точечно» — the no-scripting constraint the row's own design law: substrate-level pack data over standing primitives, never scene triggers)
+
+The row (ANCHOR_REGION §3/§8's named remainder — "bloom, iron,
+charcoal as measured scarcity"): ALL PACK DATA, ZERO CORE — the
+stageb-1 B2/B4 patterns landed in the anchor, the farstead fixture
+the family precedent. THREE working kinds on the crofts (wood,
+ore, charcoal — all seeded EMPTY at the weighing aftermath: the
+genesis the honest aftermath band, the stocks flow-through
+ledgers); TWO bounded sources (the_coppice_grows +2 wood a year
+CAPACITY 8; the_seam_yields +5 ore a year CAPACITY 10 — the
+every-miss silence at full MEASURED: the seam mints exactly twice
+then goes silent, the ore at its cap, the walled consumer's own
+face); ONE recipe (the_burn: wood 2 → charcoal 2 — ONE atomic
+account_converted event, conservation per recipe per kind) fired
+by ONE gated post (the master's burn, probability 100, the
+material's arrival the pacing — the farmland forge precedent; the
+soft refusal the perturbation safety: the disable arm measured —
+the post removed, the wood piles to the coppice's cap and the mint
+goes silent, NOTHING CRASHES, the committed loops untouched); the
+master's own year-craft record minted (the_burn_set — the
+biography band's own material). THE COMMITTED RHYTHM UNTOUCHED:
+the burn's annual five loads keep their armed dispositions — the
+withheld two the banking flow's, the sold three the sale door's
+(measured: the withhold's climb and the coin funds' reckonings
+byte-identical beside the new surfaces). THE ZERO-CORPUS-PRICE LAW
+HELD BY CONSTRUCTION: the flows ride the macro year (518400 —
+beyond every day-scale corpus script's horizon) and the post's
+requires fail in-band (the wood seeds EMPTY) — the committed
+corpora's event streams byte-identical, the burn never firing in
+the day-scale band (the header's python meta the only diff, the
+documented env family). The scene-LOD observation law measured:
+the master's post fires where the world is watched (the beat walk
+scopes to the active zone — the segmented twin with the player at
+the crofts the craft's honest band; the committed calendar script
+never reaches the crofts, the burn absent from that tale by the
+same law). THE SMELT'S FEED WALLED — the row's own measured
+findings, THREE first-exposure substrate gaps recorded, never
+routed (the separate-track law, the stepbench two-sided-band
+gap's own class, the I0 inventory's FOURTH candidate class): (1)
+the consume verb's actor-side grammar (a consume always drains the
+intent actor — the crofts' stocks unreachable; the lint-level
+falsifier pinned: a crafted drain-with-holder door refused at
+load); (2) the settle line's byte-pinned trade reading (the
+province's '{leg_0} for {leg_1}' renders any two-kind draw as a
+false exchange — the sale's own pin, a leg-direction-aware line a
+renderer row's own call); (3) the recipe double-mint (a smelt
+recipe minting bloom would double-mint the freightvol-pinned
+heap — the banking flow owns the heap's mint, the guard pinned as
+the pack's own law). Honest residues: the charcoal ACCUMULATES
+uncapped (the recipe's output has no source-flow cap to ride — the
+growing stack the committed fire trap's own deepening; a
+recipe-output cap a future row behind the promotion gate); the
+beam's received bloom keeps NO in-region consumer (the convoy's
+take and the far price off-model by design — §4's Geography open
+row and the §8 cross-region row's own first leg); INV-2 held (the
+fingerprints EQUAL across the armed/ablated/drop-post arms — the
+post's rolls ride their own isolated streams; the door-participation
+residue measured honestly: the freightvol strip law's world-scale
+form held for FLOWS alone, a DOOR-side post carries the queue's own
+cost — the prefix law pinned instead, the divergence localized to
+the craft's first door tick). The witness:
+`tests/test_ironcycle.py` (nine laws); the rider widenings the
+precedent's own form (the accounts vocabulary + the crofts' stocks
++ the strip's account family + the twin ablations' post going
+with the door — freightvol/campaccount/debt1/settlement/
+floodpaper/charcoalpaper/stepbench/ignition/negative/p1_composition/
+winterkin/temp1, every widened pin carrying the ironcycle record
+comment, no claim weakened). The owner's RU report:
+`docs/iterations/iter-394-ironcycle-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

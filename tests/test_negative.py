@@ -412,9 +412,13 @@ def test_the_mourning_disappears_the_market_stays_loud(
     # twin's 4 the surviving witness)
     assert _count(twin_events, "wergeld_vigil") == 4
     assert _count(base_events, "wergeld_vigil") == 3
-    assert _count(twin_events, "account_sourced") == 4
-    assert _count(base_events, "account_sourced") == 4
-    assert (len(twin_events), len(base_events)) == (2327, 2273)
+    # ironcycle (iter-394): the composition's crossing now carries the
+    # yard's two bounded sources beside the committed four — both arms
+    # +2 (the flows identical across the mourning ablation, the macro
+    # arm blind to the carrier by construction)
+    assert _count(twin_events, "account_sourced") == 6
+    assert _count(base_events, "account_sourced") == 6
+    assert (len(twin_events), len(base_events)) == (2329, 2275)
 
 
 def test_the_word_unregisters_the_door_dies(tmp_path: Path) -> None:
@@ -489,7 +493,9 @@ def test_the_compression_inventory_events() -> None:
     producible.add("intent_rejected")  # the door's own refusal event
     missing = sorted(set(pack.templates["events"]) - producible)
     assert missing == []
-    assert len(pack.templates["events"]) == 76
+    # ironcycle (iter-394): account_converted joins the producible set
+    # (the burn door's own success event — the stageb-1 B2 line landed)
+    assert len(pack.templates["events"]) == 77
 
 
 def test_the_compression_inventory_meaning_surfaces() -> None:
@@ -552,7 +558,9 @@ def test_the_compression_inventory_meaning_surfaces() -> None:
             assert entry in minted_literals, (
                 f"decorative knows literal: {entry}"
             )
-    assert len(pack.templates["knows"]) == 34
+    # ironcycle (iter-394): the_burn_set joins (the burn door's own
+    # actor-exact mint — the master's year-craft record)
+    assert len(pack.templates["knows"]) == 35
 
 
 def test_the_compression_inventory_entities() -> None:

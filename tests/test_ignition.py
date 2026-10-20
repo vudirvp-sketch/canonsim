@@ -184,7 +184,12 @@ def test_the_i0_census() -> None:
     assert locations[CROFTS]["exits"] == [KEEP]
     assert CHEST in locations[KEEP]["exits"]  # the perturbed edge, standing
     # the material stock on the loop's holders
-    assert locations[CROFTS]["accounts"] == {"bloom": 4, "coin": 0}
+    # iter-394 (ironcycle): the yard's three working stocks join the
+    # crofts — all seeded EMPTY (the weighing aftermath band); the
+    # loop's own claims (the heap, the beam's stock) unchanged
+    assert locations[CROFTS]["accounts"] == {
+        "bloom": 4, "coin": 0, "wood": 0, "ore": 0, "charcoal": 0,
+    }
     assert locations[CHEST]["accounts"] == {"coin": 40, "bloom": 0}
     master = next(n for n in pack.entities["npcs"] if n["id"] == MASTER)
     assert master["accounts"] == {"coin": 3, "paper": 16}  # the claims

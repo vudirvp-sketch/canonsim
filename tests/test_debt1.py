@@ -129,6 +129,20 @@ def _twin(
     calendar["fairs"]["every_ticks"] = 120
     calendar["seasons"]["every_ticks"] = 120
     if not armed:
+        # ironcycle (iter-394): the burn post rides an account door — the
+        # COMPLETE ablation drops the post with the door (an urgency
+        # entry naming a removed action is dead data, the admission
+        # lint's own refusal; the ablation stays load-clean)
+        removed = {
+            a["intent"] for a in json.loads(
+                (target / "actions.json").read_text(encoding="utf-8")
+            )["actions"] if "account" in a
+        }
+        entries = rules["urgencies"]["entries"]
+        rules["urgencies"]["entries"] = [
+            e for e in entries
+            if (e.get("intent") or {}).get("kind") not in removed
+        ]
         del rules["economy"]
     (target / "rules.json").write_text(
         json.dumps(rules, indent=2), encoding="utf-8"
@@ -216,8 +230,10 @@ def test_the_armed_census() -> None:
     # iter-189 (charcoalpaper) again (paper — the outstanding's own
     # kind) — the crossing's coin claims still pinned by their own kind
     # iter-272 (floodpaper): the fourth kind — the §6.1 fill row's arming
+    # iter-394 (ironcycle): the yard's three working kinds join (the
+    # production's input ledger); the crossing's claims unchanged
     assert economy["accounts"] == ["coin", "bloom", "paper", "floodpaper",
-        "step", "notch"]
+        "step", "notch", "wood", "ore", "charcoal"]
     assert [(f["id"], f["verb"], f["to"], f["amount"], f["every"])
             for f in economy["flows"]
             if f["id"] in ("the_toll_nets", "the_guild_collects")] == [
@@ -407,7 +423,9 @@ def test_the_fingerprint_never_sees_the_economy(tmp_path: Path) -> None:
     armed twin against the COMPLETE unarmed twin (the block and the
     stocks ablated together) — the fingerprints EQUAL (the flows draw
     nothing, pure stock reads) and the event lists identical outside
-    the account events (the delta is the economy alone)."""
+    the account events (the delta is the economy alone — the account
+    family widened at ironcycle: the burn post's CONVERTED events
+    join the SOURCED flows in the delta)."""
     armed_events, armed = _run_pack(
         _twin(tmp_path, "armed"), tmp_path, "a.jsonl", 42,
         [{"intent": "wait", "ticks": 1500}],
@@ -418,7 +436,8 @@ def test_the_fingerprint_never_sees_the_economy(tmp_path: Path) -> None:
     )
     assert armed.fingerprint == unarmed.fingerprint
     strip = lambda es: [  # noqa: E731
-        (e.t, e.type) for e in es if e.type != SOURCE_EVENT
+        (e.t, e.type) for e in es
+        if e.type not in (SOURCE_EVENT, "account_converted")
     ]
     assert strip(armed_events) == strip(unarmed_events)
 

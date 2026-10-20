@@ -150,8 +150,11 @@ def test_the_armed_census() -> None:
     pack = load_pack(PACK_DIR)
     economy = pack.rules["economy"]
     # iter-275 (stepbench): the fifth and sixth kinds — the bench's own
+    # iter-394 (ironcycle): the yard's three working kinds join (the
+    # production's input ledger); the bench's claims unchanged
     assert economy["accounts"] == [
         "coin", "bloom", "paper", "floodpaper", "step", "notch",
+        "wood", "ore", "charcoal",
     ]
     # no flow touches the step or the notch — the no-amortization law's
     # own family (the re-setting a practitioner's act, the reckoning the

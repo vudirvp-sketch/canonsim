@@ -436,7 +436,8 @@ def test_b2_b3_the_two_times_separate_under_a_long_wait(
     corpus price — the pre-epoch corpus's 2288/265 died at the
     boundary)."""
     events, result = calendar_run
-    assert result.event_count == 2279, (
+    # ironcycle (iter-394): +2 — the crossing carries the yard's sources
+    assert result.event_count == 2281, (
         f"the corpus shape moved ({result.event_count} != 2279 events) — "
         f"the §16 witness numbers changed, re-pin with the explaining change"
     )
