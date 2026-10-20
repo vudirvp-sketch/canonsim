@@ -101,13 +101,19 @@ committed, KI#87 closed); the debt's economy flow landed iter-162 (debt-1
 built: the accounts + the fold's two flows over the res-1 substrate; the
 separate-track law held — the row rode the engineering queue).
 
-### A3 — Meaning test — DONE (iter-155)
+### A3 — Meaning test — DONE (iter-155; the second slice iter-395)
 
 One concrete human-life slice run over the existing region — the high-water
 double toll (`ANCHOR_REGION.md` §7.1): the same mechanical event through four
 positions (the toll-taker, the hill carrier, the auditor, the guild), each with
 a bounded map. Four of the five meaning probes answered at the authored band;
-the Thornmill family obligation stays open. The next frontier is W4 (§6).
+the Thornmill family obligation ANSWERED iter-164 (§6.2 — the stale "stays
+open" above closed by the step bench's landing). THE SECOND SLICE iter-395
+(`ANCHOR_REGION.md` §7.2, the W8-era content row): the re-weigh's sale — the
+withhold's release through FIVE bounded positions, the distribution's
+substrate MEASURED at the deterministic band (the first slice's own open
+half — the boundary oracle `tests/test_meaningslice2.py`); the live reading
+band stays the slices' shared open half (the owner's future row). The next frontier is W4 (§6).
 
 ## 4. Next research only if needed
 

@@ -202,6 +202,16 @@ The retained measurements that keep being needed (detail:
   + explicit consumer + pack-only embodiment** — no core change was
   required; render contradiction is never a reason to mutate calendar
   canon.
+- **The meaning distribution, n=2 (iter-155/395):** the same mechanical
+  event carries materially different meanings across bounded positions,
+  never on one faction vertex — the first slice the high-water double toll
+  (`ANCHOR_REGION.md` §7.1, four maps), the second the re-weigh's sale
+  (§7.2, five maps — the withhold's release); the second slice's
+  distribution SUBSTRATE measured at the deterministic band (the
+  knowledge-boundary oracle, `tests/test_meaningslice2.py`: the token's
+  holders exactly the witnesses, the paper untouched by the sale, the
+  crossing never written); the live reading band both slices' shared open
+  half — the audit's meaning-layer gap deepened, never closed.
 - **D-236 (temporal contract):** the owner's pick `A2 + B2/B3`, with B1
   `generate-at-T` deferred behind its card's five conditions. The world
   track must not silently reopen this engine contract.

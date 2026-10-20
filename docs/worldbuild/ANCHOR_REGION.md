@@ -1293,6 +1293,59 @@ manor's own household carries the mill fire's debt as the race's keeping — the
 claim held wet at the price of its own tending (the vigil stays faction-level;
 the obligation is the steward's household's own).
 
+### 7.2 The second meaning slice (run 2026-10-20, iter-395): the re-weigh's sale — the withhold's release
+
+The event: one load of the withhold's heap walked to the beam — the master
+fires `sell_bloom` at Malby (iter-273's settlement: the two-legged
+transaction, the load to the beam's receiving stock, three coin the load
+banked into the CAMP's ledger where the tally's notches record it). The
+first slice rode the crossing's economy (the toll — the lowland half's
+beat); the second rides the camp's (the withhold's release — the hill half's
+own beat, the estrangement's engine at its release-moment). The same
+mechanical event, five maps (WORKING — authored over the committed
+substrate, the mechanics added since the first slice):
+
+| Position | The same sale means | The bounded map |
+|---|---|---|
+| the master (the seat) | the word spent for the debt's standing — the honest count made public, the withhold's cover thinner, the fund's three coin banked toward the paper sixteen | knows the debt's size and the shave's arithmetic (his own accounts and acts — no witness record minted, the authorship convention); does not know the crossing's paper's arithmetic — the coupling he misreads |
+| the beam (the market mistress) | the count public at last — "weight is weight, shaved is shaved"; the run's claim answered at the weighbeam, the tally's notch the reckoning's own carrier | knows the trade's weight and the price (`the_bloom_sold`, exact); does not know the camp's debt's size — the factor's book the paper's other half, never hers |
+| the guild's chest (the factor gateless) | the debt serviceable — the paper's standing against the fund's climb; the interest's arithmetic: the bloom walked while the paper stands | knows the paper (both rows) and the beam's price; does not weigh what either bank of the river carries for it — §7.1's own line, held at the second slice |
+| the crossing (the keeper) | the artery's freight returning — the toll's own freight walking again, the loads' weight her thin season's own answer; the misreading intact | knows the toll's rate and the traffic's weight (her own flows); does not know the withhold's release — the sale's fact never the stair's, the thinning's cause never her question |
+| the road (the near half witnesses; the far half wordless) | the bloom walking again — the freight's own sight; the road's word the sale's living carrier | the same_location witnesses know `the_bloom_sold` exact; the far road (the carriers, the heir, the stranger) does not — until the rumor rides, the word stays the beam's |
+
+**The distribution finding, n=2:** the meaning lands on five positions —
+the word spent (the craft's discipline), the count public (the market's
+honesty), the interest (the institution's arithmetic), the freight
+returning (the crossing's misreading), the word riding (the road's
+carrying) — not on one dramatic faction vertex; the second slice CONFIRMS
+the first's shape (§7.1: household survival, labor skimmed, the road's
+misread, the institution's interest) at a materially different event
+class: the first a compulsory toll under the season's law, the second a
+voluntary release under the craft's own discipline.
+
+**The measured half (the deterministic band, iter-395):** the
+distribution's SUBSTRATE measured — `tests/test_meaningslice2.py` (five
+laws, seed 42, the settlement family's own macro-480 twin): the mint's
+boundary (the sale's records land on EXACTLY the beam's same_location
+witnesses — the mistress, the crowd, the duty sergeant; the actor exempt
+by the authorship convention); the absent maps (the whole-log
+KnowledgeView holding the token on exactly the witness set — the keeper,
+the heir, the steward, the winter kin, the stranger all wordless through
+the band, no ambient spread: the rumor channel its own door, never a
+leak); the accounts' divergence (the sale's writes touch exactly the four
+legs — the master's paper sixteen UNTOUCHED: the sale banks the fund,
+never pays the paper, "the count prices trust, never coin" held
+executable; the crossing never written by the sale: the coupling bites
+the artery — the heap thinned, the beam fed — never her knowing); INV-2
+(the twin's double-run byte-identical). The door's own mechanics are
+`tests/test_settlement.py`'s rows — cited, never re-pinned.
+
+**The open half:** the live reading band — the same class as the first
+slice's own remainder ("the distribution is not yet measured on a live
+session"): a real reader at the beam, the five maps' meanings extracted
+blind — the owner's future row, the W6/W7 reading-band form (the
+§7.1/§7.2 material both carried by it).
+
 ## 8. Current limitations
 
 ### NOT YET PROVEN

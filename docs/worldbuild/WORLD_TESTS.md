@@ -2869,6 +2869,64 @@ winterkin/temp1, every widened pin carrying the ironcycle record
 comment, no claim weakened). The owner's RU report:
 `docs/iterations/iter-394-ironcycle-report.md`.
 
+### CONFIRMED — The second meaning slice: the re-weigh's sale, the distribution's substrate measured at the deterministic band (2026-10-20, iter-395, the owner's standing delegation «бери что логичнее начать сейчас а не потом» over the STATUS Next candidates — the audit's #1 named gap chosen: the meaning layer thinner than the mechanical, the second measured slice the row)
+
+The W8-audit criterion 1's named gap, deepened: the SECOND meaning
+slice (`ANCHOR_REGION.md` §7.2 — the re-weigh's sale, the withhold's
+release at the beam; the first slice was iter-155's high-water double
+toll, §7.1). The event: ONE load of the withhold's heap walked to the
+beam (`sell_bloom`, iter-273's settlement door — the mechanics the
+settlement witness's own rows, cited never re-pinned). The same
+mechanical event, FIVE bounded position-maps authored over the
+committed substrate (the master/seat, the beam/mistress, the guild's
+chest/factor-gateless, the crossing/keeper, the road near-and-far) —
+the maps' table, the distribution finding, and the open half in
+§7.2 (the single owner, D-024).
+
+THE DISTRIBUTION'S SUBSTRATE MEASURED — the deterministic half the
+first slice never had (its own partial: "the distribution is not yet
+measured"): `tests/test_meaningslice2.py`, five laws, seed 42, the
+settlement family's own macro-480 twin (the master walked to the beam,
+one sale, a short wait). The MINT'S BOUNDARY: the sale's knowledge
+records land on EXACTLY the beam's same_location witnesses — the
+market mistress, the Malby crowd, and the duty sergeant (the 1080
+rotation's own arithmetic returning him to the market post; the
+watch's map: the sale lawful commerce, the writ never the river's
+iron) — the actor EXEMPT (the authorship convention, the
+reprice/settle family's own form: the initiating hand needs no
+witness record; his knowing rides his accounts). THE ABSENT MAPS:
+the whole-log KnowledgeView holds `the_bloom_sold` on exactly the
+witness set — the keeper NEVER learns the release in the band (the
+crossing's bounded map executable: knows the toll's thinning, never
+its cause — the misreading's material preserved by the boundary
+itself), the heir, the steward, the winter kin, and the stranger all
+wordless, no ambient spread (the rumor channel its own door, never a
+leak — the zero-leak family's form at the world-content band). THE
+ACCOUNTS' DIVERGENCE: the sale's writes touch exactly the four legs'
+holders (the heap, the beam's receiving stock, the chest, the camp's
+ledger) — the master's paper sixteen UNTOUCHED through the sale (the
+debt's standing: the sale banks the fund, never pays the paper —
+"the count prices trust, never coin", the §6.4 boundary held
+executable), and the crossing NEVER written by the sale (the
+coupling bites the artery — the heap thinned, the beam fed, the
+toll's freight returning — never her knowing; her coin's climb the
+toll flow's own mint at the year crossings). INV-2: the twin's
+double-run byte-identical. Zero pack change, zero core, zero corpus
+price (the crafted twin's own law — nothing committed moved).
+
+THE FINDING, n=2: the meaning lands on five positions — the word
+spent (the craft's discipline), the count public (the market's
+honesty), the interest (the institution's arithmetic), the freight
+returning (the crossing's misreading), the word riding (the road's
+carrying) — not on one dramatic faction vertex; the second slice
+CONFIRMS the first's shape at a materially different event class
+(the compulsory toll under the season's law vs the voluntary release
+under the craft's own discipline). VERDICT: the deterministic half
+CONFIRMED; the authored band PARTIALLY CONFIRMED (the §7.1 form's
+own class); the LIVE READING BAND OPEN — the owner's future row
+(the W6/W7 reading-band form, both slices' material carried by it).
+The owner's RU report: `docs/iterations/iter-395-meaning2-report.md`.
+
 ## 10. Test result vocabulary
 
 Use:

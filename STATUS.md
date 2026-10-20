@@ -1,84 +1,68 @@
-Iteration: iter-394 (`ironcycle` — ПЕРВАЯ строка мирового
-  трека по стоящей директиве владельца «давай то что логично и
-  способствует качеству в долгосрок… оно потом должно работать
-  глобально и само по себе без прописывания точечно» — его же
-  анти-скриптовый закон рядом: сабстрат-уровень, никогда
-  точечные триггеры; выбор строки — мой ответ на делегацию:
-  ЧЕТВЁРТОЕ измерённое плечо цикла железа якоря, АНЧОР_REGION
-  §3/§8 «bloom, iron, charcoal as measured scarcity», ВСЁ ПАК-ДАННЫЕ,
-  НУЛЬ ЯДРА — stageb-1 B2/B4 паттерны посажены в якорь): ТРИ
-  рабочих вида на хуторах (wood/ore/charcoal, все сиды НОЛЬ —
-  честная полоса последствий сезона взвешивания) + ДВА
-  ограниченных источника (the_coppice_grows +2/год КАПА 8;
-  the_seam_yields +5/год КАПА 10 — молчание-при-полноте
-  ИЗМЕРЕНО: seam минтит дважды и замолкает навсегда, руда на
-  капе — лицо отстранённого потребителя) + ОДИН рецепт (the_burn:
-  2 wood → 2 charcoal, ОДИН атомарный account_converted, консервация
-  по рецепту по виду) + ОДИН пост мастера (прецедент farmland-кузни:
-  темп — прибытие материала, мягкий отказ — безопасность
-  возмущений; отключённая рука ИЗМЕРЕНА: без поста wood растёт
-  до капы 8 и минт молчит, БЕЗ КРАШЕЙ, коммитнутые петли
-  нетронуты) + запись года мастера (the_burn_set — материал
-  биографического бенда). КОММИТНУТЫЙ РИТМ НЕ ТРОНУТ (пять
-  нош года: удержанные две — поток banking, проданные три —
-  дверь продажи; восхождение кучи и монетные фонды
-  байт-в-байт рядом с новыми поверхностями). НУЛЕВАЯ ЦЕНА
-  КОРПУСА ПО ПОСТРОЕНИЮ И ПОДТВЕРЖДЕНА (потоки — макро-год
-  518400 за горизонтом любого дневного корпуса; пост в полосе
-  молчит — wood сидит ноль; стримы корпусов байт-идентичны,
-  единственный дифф — env-поле python заголовка, семья 27
-  имя-в-имя). ЗАКОН НАБЛЮДЕНИЯ scene-LOD ИЗМЕРЕН (биты ходят по
-  активной зоне: пост мастера стреляет где мир наблюдают —
-  сегментированный близнец с игроком на хуторах честная полоса
-  ремесла; коммитнутый календарный скрипт до хуторов не доходит —
-  горения в том сказе нет ПО ТОМУ ЖЕ ЗАКОНУ). ПИТАНИЕ ПЛАВКИ
-  ЗАСТЕНОЙ — три перво-экспозиционных пробела сабстрата ЗАПИСАНЫ,
-  не маршрутизированы (закон отдельных треков, класс
-  двухсторонней полосы stepbench, ЧЕТВЁРТЫЙ кандидат класса I0):
-  (1) actor-side грамматика consume (consume всегда списывает у
-  интент-актёра — стоки хуторов недостижимы; линт-фальсификатор
-  запинен: крашеный drain-with-holder door отказан на загрузке);
-  (2) байт-запиненное торговое чтение строки settle («X за Y»
-  превращает любую двухвидовую выдачу в ложный обмен — пин
-  продажи; leg-direction-aware строка — строка рендерера);
-  (3) двойной минт рецепта (smelt-рецепт, минтящий bloom,
-  задвоил бы запиненное восхождение кучи freightvol — banking
-  поток единственный писатель кучи, гарант запинен как закон
-  пака). Честные остатки: charcoal накапливается без капы (у
-  выхода рецепта нет source-флоу — растущий стог углубление
-  коммитнутой огнеопасности, топливо ловушки наконец измерено;
-  капа выхода рецепта — будущая строка за гейтом промоушена);
-  принятый лучом bloom БЕЗ потребителя в регионе (взятие конвоя
-  и дальняя цена off-model ПО ЗАМЫСЛУ — открытая строка
-  Географии §4 и первая нога строки cross-region §8). INV-2
-  держит (фингерпринты РАВНЫ через armed/ablated/drop-post —
-  роллы поста на изолированных стримах; остаток
-  участия-в-очереди измерен честно: закон стрипа freightvol
-  миро-масштабен для ПОТОКОВ, пост-В-ДВЕРИ несёт собственную
-  цену очереди — вместо него запинен закон префикса, дивергенция
-  локализована до первого тика двери) ·
+Iteration: iter-395 (`meaning2` — вторая строка мирового трека
+  W8-эры по делегации владельца «бери что логичнее начать сейчас а
+  не потом» над четырьмя кандидатами STATUS Next: выбор — ГЛАВНЫЙ
+  ПРОБЕЛ АУДИТА готовности (критерий 1), слой смысла тоньше
+  механического — ВТОРОЙ СМЫСЛОВОЙ СРЕЗ §7.2, событие re-weigh's
+  sale, развязка удержания у весов (срез-1 — двойной сбор iter-155
+  §7.1; срез-2 — событие НОВЕЙШЕЙ механики, settlement iter-273,
+  механика процитирована свидетелем, не перепинена): ПЯТЬ
+  ограниченных карт позиций (мастер/сиденье — слово потрачено за
+  стояние долга; весы/Марен — счёт публичен; гильдейская казна/
+  фактор без ворот — долг обслуживаем; переправа/хранительница —
+  груз возвращается, ошибочное чтение цело; дорога ближняя-и-
+  дальняя — ближняя свидетельствует, дальняя безмолвна до слуха) —
+  таблица и находка в ANCHOR_REGION §7.2. ДЕТЕРМИНИРОВАННАЯ
+  ПОЛОВИНА ИЗМЕРЕНА — то, чего срез-1 не имел («the distribution
+  is not yet measured», его собственный вердикт PARTIALLY):
+  tests/test_meaningslice2.py, ПЯТЬ законов, seed 42, macro-480
+  близнец семьи settlement — ГРАНИЦА МИНТА (записи знания ложатся
+  РОВНО на same_location-свидетелей весов: Марен, толпа Малби,
+  сержант НА ПОСТУ — арифметика ротации 1080; актёр освобождён,
+  конвенция авторства reprice/settle-семьи); ОТСУТСТВУЮЩИЕ КАРТЫ
+  (KnowledgeView всего лога держит the_bloom_sold ровно на
+  свидетелях: хранительница НИКОГДА не узнаёт развязку в полосе —
+  карта переправы исполняема: «знает утончение пошлины, никогда
+  причину», материал ошибочного чтения сохранён самой границей;
+  наследник, управляющий, зимний род, чужак — безмолвны; слух —
+  своя дверь, никогда утечка, форма zero-leak на полосе
+  миро-контента); РАСХОЖДЕНИЕ СЧЁТОВ (записи продажи касаются
+  ровно четырёх ног — бумага мастера ШЕСТНАДЦАТЬ НЕ ТРОНУТА:
+  продажа банкует ФОНД, никогда не платит бумагу — «the count
+  prices trust, never coin» §6.4 исполняем; переправа НИКОГДА не
+  написана продажей — связь кусает АРТЕРИЮ (куча тоньше, весы
+  сыты, груз пошлины возвращается), не знание; её монеты — собственный
+  минт потока на пересечениях года); INV-2 (двойной прогон
+  байт-в-байт). НАХОДКА n=2: смысл ложится на ПЯТЬ позиций — не
+  на одну драматическую вершину фракции; срез-2 ПОДТВЕРЖДАЕТ
+  форму среза-1 на материально ином классе события (принудительный
+  сбор по закону сезона против добровольной развязки по дисциплине
+  ремесла). ВЕРДИКТ: детерминированная половина CONFIRMED,
+  авторская полоса PARTIALLY (форма §7.1), ЖИВАЯ ЧИТАЮЩАЯ ПОЛОСА
+  ОТКРЫТА — будущая строка владельца (форма W6/W7-бенда, материал
+  обоих срезов). НУЛЬ ПАК-ДАННЫХ, НУЛЬ ЯДРА, НУЛЕВАЯ ЦЕНА КОРПУСА
+  (крафтовый близнец — ничего коммитнутого не двинулось) ·
 Phase: 6 (Packs & worldbuilder) — CLOSED (gate PASS iter-116,
   D-151; the ladder complete 0..6 — the standing work: the
   owner-gated backlog + the web-frontend track + the world track
   + the SoW horizon, ROADMAP §2/§6) ·
-2693 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the riders and re-verified after; +9 ironcycle laws green, zero corpus bytes) ·
+2698 passed + 27 failed, ruff clean, docguard clean, topology clean, digest parses (27 = the known T1 log-header env set — the count + family IDENTICAL to the documented baseline, captured before the row and re-verified after (diff of the FAILED lists: name-for-name equal); +5 meaning2 laws green, zero corpus bytes) ·
 Date: 2026-10-20 ·
 Failure classes: 27 = the known T1 log-header env set (the sandbox
   3.12.15, byte-identical to the 362..392 baseline, the GOLDEN
   3.12.14 suite fully green per iter-363; the single-char header
   diff at index 71 — the python field — zero new, zero flakes) ·
-Scope: R2 local-add (pack data + one test witness + riders, zero
-  core lines): content/province_pack/rules.json (economy: 3 kinds,
-  2 bounded flows, 1 recipe; urgencies: 1 post) +
-  content/province_pack/entities.json (the crofts' 3 zero stocks) +
-  content/province_pack/actions.json (burn_the_stacks) +
-  content/province_pack/templates.json (the convert line, 3 kind
-  glosses, 2 flow glosses, 1 knows gloss) + tests/test_ironcycle.py
-  (NEW — 9 laws) + 12 rider widenings (the precedent's form, every
-  pin carrying the ironcycle comment, no claim weakened):
-  freightvol/campaccount/debt1/settlement/floodpaper/charcoalpaper/
-  stepbench/ignition/negative/p1_composition/winterkin/temp1 —
-  19 changed/created.
+Scope: R0/R2 doc+witness (one new test file + four worldbuild doc
+  riders + state docs, zero core, zero pack):
+  tests/test_meaningslice2.py (NEW — 5 laws) +
+  docs/worldbuild/ANCHOR_REGION.md (§7.2 — the slice: five maps,
+  the n=2 finding, the measured half, the open half) +
+  docs/worldbuild/WORLD_TESTS.md (§9 — the record) +
+  docs/worldbuild/WORLD_WORKPLAN.md (A3 sync — the second slice +
+  the stale Thornmill line closed by its §7.1/§6.2 owner) +
+  docs/worldbuild/WORLD_TRACK_AGENT_CONTEXT.md (§6 — the
+  meaning-distribution evidence line) + STATUS.md + worklog.md +
+  docs/TASKS.md + docs/iterations/iter-395-meaning2-report.md —
+  9 changed/created.
 Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   DONE (iter-318) + scale-1 DONE (iter-319) + speech-1 DONE
   (iter-320) + auth-1 DONE (iter-321) — ALL SIX of the queue's
@@ -112,7 +96,12 @@ Track A: sem-1 DONE (iter-316) + caus-1 DONE (iter-317) + replay-1
   contracts/validators/client mirror); the standing boundaries: a SharedWorker stream transport, Tauri,
   PWA, the Settings Appearance section (no persisted store) — each
   its own admission (the import form's native file/folder picker
-  rides the Tauri row). THE WORLD TRACK: iter-394 ironcycle LANDED
+  rides the Tauri row). THE WORLD TRACK: iter-395 meaning2
+  LANDED (the owner's standing delegation — the SECOND meaning
+  slice §7.2: the re-weigh's sale, five bounded maps, the
+  distribution's substrate MEASURED at the deterministic band —
+  the audit's #1 named gap deepened, the live reading band the
+  open half) + iter-394 ironcycle LANDED
   (the owner's standing directive — the anchor's iron cycle's input
   half, the §3/§8 row: the bounded yields measured, the burn live,
   the smelt's feed walled with three recorded substrate gaps, the
@@ -185,45 +174,34 @@ same law.)
 
 ## Next step
 
-**iter-394 DONE: ironcycle (ПЕРВАЯ строка мирового трека по
-  стоящей директиве владельца «давай то что логично и
-  способствует качеству в долгосрок… оно потом должно работать
-  глобально и само по себе без прописывания точечно»: якорьская
-  строка §3/§8 «bloom, iron, charcoal as measured scarcity» —
-  ВХОДНАЯ ПОЛОВИНА ЦИКЛА ЖЕЛЕЗА ИЗМЕРЕНА, всё пак-данные, нуль
-  ядра): ТРИ рабочих вида на хуторах (все сиды НОЛЬ — полоса
-  последствий сезона взвешивания) + ДВА ограниченных источника
-  (coppice +2/год капа 8, seam +5/год капа 10 — молчание-при-
-  полномоте ИЗМЕРЕНО: seam минтит дважды и замолкает, руда на
-  капе) + the_burn ЖИВОЙ (2 wood → 2 charcoal, один атомарный
-  account_converted, консервация по рецепту) на посту мастера
-  (прецедент farmland-кузни; отключённая рука измерена: без
-  поста wood растёт до капы и минт молчит, без крашей,
-  коммитнутые петли нетронуты) + the_burn_set (запись года
-  мастера, материал биографии). КОММИТНУТЫЙ РИТМ НЕ ТРОНУТ
-  (восхождение кучи и фонды байт-в-байт). НУЛЕВАЯ ЦЕНА КОРПУСА
-  ПОДТВЕРЖДЕНА (стримы байт-идентичны, env-дифф заголовка —
-  документированная семья 27 имя-в-имя; +9 законов зелёные).
-  ЗАКОН НАБЛЮДЕНИЯ scene-LOD ИЗМЕРЕН (пост стреляет где мир
-  наблюдают; календарный скрипт до хуторов не доходит — горения
-  в том сказе нет по тому же закону). ПИТАНИЕ ПЛАВКИ ЗА СТЕНОЙ —
-  три пробела сабстрата ЗАПИСАНЫ (actor-side грамматика consume;
-  байт-запиненное торговое чтение строки settle; двойной минт
-  рецепта против пина freightvol) — каждый развязка за
-  владельческим гейтом, ЧЕТВЁРТЫЙ кандидат класса I0.
-  Честные остатки: charcoal без капы (углубление коммитнутой
-  огнеопасности — топливо ловушки измерено); принятый лучом
-  bloom без потребителя в регионе (взятие конвоя и дальняя цена
-  off-model по замыслу — материал строк Географии §4 и
-  cross-region §8; the report iter-394-ironcycle-report.md).**
+**iter-395 DONE: meaning2 (вторая строка мирового трека W8-эры по
+  делегации владельца «бери что логичнее начать сейчас а не потом»:
+  ГЛАВНЫЙ ПРОБЕЛ АУДИТА — ВТОРОЙ СМЫСЛОВОЙ СРЕЗ §7.2, развязка
+  удержания у весов): ПЯТЬ ограниченных карт (сиденье/весы/казна/
+  переправа/дорога) + ДЕТЕРМИНИРОВАННАЯ ПОЛОВИНА ИЗМЕРЕНА
+  (tests/test_meaningslice2.py, 5 законов: граница минта —
+  свидетели весов РОВНО; отсутствующие карты — хранительница
+  никогда не узнаёт развязку, слух своя дверь; расхождение счетов —
+  бумага не тронута, переправа не написана; INV-2) + НАХОДКА n=2
+  (смысл на ПЯТИ позициях, не на вершине фракции; форма среза-1
+  подтверждена на ином классе события). Живая читающая полоса —
+  открытая половина ОБЕИХ срезов, будущая строка владельца
+  (the report iter-395-meaning2-report.md).**
 Next: мировая строка владельца — следующий ряд W8-эры
   контента якоря по вызову владельца (кандидаты по моему
-  чтению: (1) до-закрытие PARTIALLY мезо-юнитов — notch/hatch
-  ступени, остатки лагеря; (2) второй смысловой срез §7 —
-  слой смысла главный пробел аудита; (3) стены плавки —
-  вызов владельца на одну из трёх развязок (consume-грамматика
-  / строка settle / freightvol re-author), каждая своим
-  гейтом; (4) многолетняя персистентность — длинный прогон);
+  чтению: (1) живой читающий бенд смысловых срезов — ОБА среза
+  §7.1/§7.2 готовы как материал, форма W6/W7 (детерминистическая
+  полоса уже измерена — осталась читающая); (2) до-закрытие
+  PARTIALLY мезо-юнитов — ЧЕСТНАЯ ОГОВОРКА: материал почти весь
+  за гейтами (нотная полоса = двустороннее условие I0-кандидат
+  (b), заслонка = PROSE ПО ЗАКОНУ, капа угля = за гейтом
+  промоушена, bloom без потребителя = off-model по замыслу) —
+  строка открывается только вместе с владельческим гейтом;
+  (3) стены плавки — вызов владельца на одну из трёх развязок
+  (consume-грамматика / строка settle / freightvol re-author),
+  каждая своим гейтом; (4) многолетняя персистентность — длинный
+  прогон, логичнее ПОСЛЕДНИМ (каждый новый канон-ряд добавляет
+  поверхности остатка));
   + строка replay-UI — UI-ЭКСПОЗИЦИЯ (первая отвечаемая
   работой позиция инженерной очереди; вторая половина строки:
   аффорданс повтора на терминальном ходе/ране + зеркало
@@ -274,11 +252,14 @@ Next: мировая строка владельца — следующий ря
    scope); (J-2 remainder) the knowledge blocks LANDED (the tokens
    minting, the watch-briefing and rumor-cascade consumers live, the
    cascade measured 22→25); (J-3) CLOSED — no row. THE WORLD TRACK
-   after iter-394 — the ironcycle row LANDED (the §3/§8 input half
+   after iter-395 — the meaning2 row LANDED (the §7.2 second slice:
+   five maps, the distribution's substrate measured, the live reading
+   band the open half) + the ironcycle row LANDED (the §3/§8 input half
    measured, the feed's three walls recorded, the off-region
    terminus named); the standing owner frames unchanged: the
    embodiment options (the step's notch/hatch, the kin's own), the
-   meaning frontier (§7), the multi-year persistence band; the W8
+   meaning frontier's live reading band (§7.1/§7.2 — the deterministic
+   half landed), the multi-year persistence band; the W8
    remaining rows the owner's call. ssi-5 stays owner-gated (the
    N018 evidence law). The owner-side cleanup standing from D-230's
    third card: delete the doubled `workbench/workbench/runtime/`
@@ -307,7 +288,9 @@ Next: мировая строка владельца — следующий ря
    consumer names it.
 4. The standing frames: the embodiment options (the step's notch
    record/hatch, the kin's own — per the owner's 2026-09-27 order),
-   the meaning frontier (§7's probes — the audit's #1 named gap),
+   the meaning frontier (the audit's #1 named gap — DEEPENED at n=2:
+   §7.1/§7.2's two slices, the deterministic substrate measured
+   iter-395, the live reading band the open half),
    the ironcycle remainders (the smelt's feed walls — each an
    owner-gated fork; the off-region terminus), the debt-1 residues,
    the re-weigh's SALE (armed iter-273), the runner's grudge surface
