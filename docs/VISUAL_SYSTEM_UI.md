@@ -1,0 +1,330 @@
+# VISUAL_SYSTEM_UI.md — The Workbench Visual System and UI Engineering Law
+
+> The owner's 2026-09-26 admission call («нынешний ui - ужасен! поэтому
+> всеми тремя руками и ногами - за!» — full approval of the external
+> 24-section *CanonSim Workbench — Visual System and UI Engineering
+> Agent Instruction* document, delivered with the wb-10 handback).
+> This file is the repo-side LAW distilled from that document — the
+> original text stays with the owner (the D-024/D-200 convenience-copy
+> law: external briefs are never vendored); what lives here is the
+> binding form every visual row obeys. Admission: iter-229, D-211.
+>
+> **Routing law:** every visual/UI question on the Workbench surface
+> routes HERE first. Interaction/IA/selection/epistemic
+> law: `docs/FRONTEND_UIUX_LAW.md` (D-214); application contracts:
+> `docs/WORKBENCH_APP_LAW.md`; Observatory semantics: `docs/OBSERVATORY_LAW.md`;
+> world presentation (the world-side visual layer):
+> `docs/WORLD_PRESENTATION_LAW.md` (D-218). The v5.2 frontend spec stays
+> outside the repo (D-024/D-200); where this law and an external copy
+> disagree, THIS file + the effective-state evidence law
+> (WORKBENCH_APP_LAW §19.1) win.
+
+## 0. The delivery order (the standing resolution)
+
+1. **Functional rows first, visual rows after** — a surface that lies
+   is worse than a surface that is ugly; the owner's live blockers
+   (the wb-11 transport chain) land before any palette does.
+2. **One row per iteration** — the visual program is NOT a standing
+   parallel track; it is a family of owner-gated rows (TASKS wb-12+),
+   each one row, each with its own §5 report. The external document's
+   "program" framing is resolved HERE: the doc is the LAW for each
+   row, never a second schedule.
+3. **The app spec's §18 evidence law wins over "quiet chrome"** — the
+   effective state is NEVER hidden for visual calm (the badge, the
+   status labels, the honest notes stay visible); quiet chrome
+   applies to decoration, never to evidence.
+
+## 1. The grammar: surface-driven, not card-driven
+
+The Workbench UI is a small set of semantic SURFACES (Chat, Models,
+Settings — later: Inference, Prompts, History, Diagnostics,
+Simulation), not a grid of floating cards. The container hierarchy:
+
+```text
+CANVAS            the window's base plane (one per shell)
+SURFACE           one primary work area (exactly one visible)
+CONTAINER         a semantic region INSIDE a surface (list, composer,
+                  toolbar, inspector) — named by its ROLE, never by
+                  its appearance
+CONTENT           the user's material (messages, model rows, values)
+ACTION            a control that does something (button, field)
+```
+
+A container is a rectangle with a ROLE, not a "card" with a shadow.
+No decorative elevation, no fake depth, no rounded-card grids. Depth
+exists ONLY where the OS/platform idiom requires it (menus,
+dialogs) — and the native picker/dialog is preferred over any
+in-engine imitation (the wb-10 law continues).
+
+### 1.1 Spatial, Gestalt and density grammar
+
+Use proximity, similarity, continuity, common region, figure/ground.
+Rules: related items sit closer than unrelated items; component
+internals sit tighter than section boundaries; meaningful ownership
+gets meaningful boundaries; whitespace is STRUCTURAL information;
+stable positions support recognition and expert motor memory. The
+spacing scale is a tunable starting point, not a law:
+`optical 2–4 · component 8–16 · section 24–32 · major 40–64+`.
+Density is task-dependent (reading low/medium · authoring medium ·
+data/diagnostics high + strong hierarchy · expert configuration high +
+progressive disclosure — LAW §11.1 owns the dense-data contract). The
+objective is correct perception, location and manipulation for the
+task — never maximum information per pixel.
+
+## 2. The token taxonomy (one source of truth: the theme)
+
+Every visual decision routes through the semantic token set (the
+taxonomy below — §10's existing law). The deleted Redot theme file
+`workbench/presentation/redot/themes/workbench_theme.tres` was the
+first carrier (D-245 — recovery: git history); the web client
+carries its own token form going forward — LANDED:
+`frontend/src/app/composition/styles.css`'s `:root` (the colors
+iter-297/V1; the typography contract + the radius scale
+iter-304/V2 — the seven-step type scale, the two family stacks,
+the strong weight, the label tracking, RADIUS_S/M/L/PILL; the
+spacing scale iter-307/V3 — SPACE_1..SPACE_10 over §1.1's bands,
+the seventeen organic values consolidated with max drift 2px,
+119/149 usages exact; enforced by the architecture guard's
+V1/V2/V3 scans, a literal outside `:root` is a red test). The
+token names follow the
+role taxonomy:
+
+```text
+CANVAS            background_base
+SURFACE_*         surface planes (panel, bar, sunken rows)
+CONTENT_*         text tiers (primary, secondary, disabled)
+ACTION_*          control surfaces (rest, hover, pressed, disabled)
+BORDER_*          separators and outlines (subtle by default)
+STATE_*           status colors (success, warning, danger, busy)
+AUTHORITY_*       CANONICAL | OBSERVED | DERIVED | UNKNOWN — the
+                  provenance axis (scene_ir's status laws)
+```
+
+Adding a color outside a token is forbidden — a new need names a NEW
+token with a role, lands in the theme, and is consumed by name.
+
+### 2.1 The dimension tokens (metrics are part of layout)
+
+Beyond colors/spacing/styleboxes, the theme carries the SEMANTIC
+DIMENSIONS — raw dimensions scattered through surface code are the
+same violation as raw colors:
+
+```text
+CONTROL_HEIGHT_S / _M / _L      HIT_TARGET_MIN
+ICON_SIZE_S / _M / _L            RADIUS_S / _M / _L
+MOTION_FAST / _STANDARD / _SLOW  FOCUS_RING_WIDTH
+DIVIDER_THICKNESS
+```
+
+The SPACING half is LANDED (iter-307, V3): SPACE_1..SPACE_10 —
+2/4/6/8/10/12/16/20/32/48px, the §1.1 bands (optical 2–4 ·
+component 6–16 · section 20–32 · major 48); every
+padding/margin/gap value in the web client consumes a step by
+name, 0 and auto stay literal (the zero/auto semantics), em/%
+stay legal as contextual ratios.
+
+This is what makes DPI behavior, compact mode, accessibility hit
+targets, responsive layout and visual tuning one-place changes instead
+of per-surface archaeology.
+
+### 2.2 The typography contract
+
+ONE explicit typography contract, before surface count grows:
+
+```text
+UI family · prose family · monospace family · fallback chain
+weight hierarchy · numeric treatment · tabular number treatment
+code/log treatment · Cyrillic support
+```
+
+Font metrics are part of layout, not an afterthought — never design
+fixed widths from English labels alone (the LAW §17 Cyrillic-safe law
+is the binding form; the two share one test).
+
+## 3. Color law: neutral-first, ONE accent
+
+- A neutral ramp carries the whole UI (surfaces, text, borders).
+- Exactly ONE accent color exists; it marks interactive affordances
+  and the live/primary state. It never decorates.
+- Status colors (success/warning/danger/busy) are semantic STATE_*,
+  never a second accent.
+- Color is never the ONLY carrier of state (§4's not-color-only law).
+
+## 4. Not-color-only state (the accessibility invariant)
+
+Every state a user must ACT on is carried by at least TWO of:
+{text label, icon/glyph, position/layout, motion, color}. A state
+carried by color alone is a bug (the §18 matrix below names the
+text/label half for every visual state — the label is mandatory).
+
+## 5. The visual state matrix (every surface's honest states)
+
+Each surface enumerates its states UP FRONT; a state outside the
+matrix is a bug; a matrix state without a visible rendering is a bug.
+The mandatory minimum set (the wb-11 rows already render these
+honestly):
+
+```text
+Chat:      EMPTY | ACTIVE | GENERATING
+Models:    EMPTY | DISCOVERED | ACTIVE | LOADING | FAILED
+Settings:  DEFAULT | EDITING | DISABLED | ERROR
+Inference: OFFLINE (no read yet) | RESOLVED (the states are the
+           server's answer) | REFUSED | TRANSPORT — plus the
+           PER-CONTROL state badge (LLAMA_CPP_INFERENCE_CONTROL_LAW
+           §7's own vocabulary, rendered as TEXT first — never
+           color-only: EFFECTIVE, AUTO, INACTIVE, INEFFECTIVE with
+           the reason visible)
+```
+
+- EMPTY is a REAL state with guidance (what to do next), never a
+  blank void — and never a fabricated sample (nothing fake, §18).
+- LOADING shows live progress where a run exists (the run poll's own
+  note), and the surface stays USABLE while it loads (wb-11's law:
+  no long call ever wedges the UI).
+- FAILED shows the observed CAUSE (§21's diagnostics on the wire),
+  never a bare "error".
+- inf-1's chip law (LLAMA_CPP_INFERENCE_CONTROL_LAW §9): AUTO, an
+  explicit value and DISABLED are three VISUALLY distinct states —
+  the badge text is the primary carrier, the color secondary.
+
+## 6. The transplantation protocol (mechanisms, not looks)
+
+Borrowing from any external UI source is a documented transplant:
+
+```text
+SOURCE        the exact project + file/surface
+TECHNIQUE     what they did, mechanically
+MECHANISM     the underlying rule that makes it work
+INVARIANT     the constraint that must survive the port
+ADAPTATION    what changes for the Workbench's tokens/surfaces
+CONSEQUENCE   what the user gains; what it costs
+```
+
+Looks are never transplanted — a mechanism is. "They use a nice
+blue" is not a mechanism; "the primary action is the only filled
+button in the toolbar" is.
+
+## 7. The reference pack (admission per AGENTS §2.8)
+
+Research donors for the visual rows — MECHANISMS ONLY, no assets, no
+vendored code; licenses checked BEFORE any port:
+
+```text
+Godot Modern/Minimal themes   token structure, theme organization
+ThemeGen                      a THEME TOOL — generates candidates,
+                              never a dependency, never the decision
+                              source (the law: tools don't decide)
+LobeHub / Jan / LM Studio /   chat surface mechanics: composer
+Open WebUI                    behavior, list virtualization, state
+                              notes, settings disclosure
+dot-ui / Iso-Themes           neutral ramp + single-accent systems
+Godot Theme Explorer          token audit/debug mechanics
+editor-icons (Godot)          the icon vocabulary's shape language
+SillyTavern                   LICENSE-SENSITIVE — mechanisms only,
+                              never code, never assets, never look
+```
+
+## 8. The per-row UI report (every visual row closes with one)
+
+```text
+TARGET PROBLEM       the user-facing problem this row solves
+CURRENT PRIMITIVE    what exists today (the honest baseline)
+TRANSFERRED MECHANISM the transplant, per §6's protocol (or "none —
+                     first-party" when no donor)
+INVARIANT            what must NOT change (behavior, wire, tests)
+FILES AFFECTED       the explicit path list
+EXPECTED CONSEQUENCE the user-visible outcome
+REJECT CONDITIONS    what would make the owner reject this row
+VERIFICATION STATE   the proof run (tests + the browser-side capture
+                     evidence where applicable — the web e2e/Playwright
+                     surface; the Redot-era REDOT_EXE packets deleted
+                     at D-245)
+```
+
+## 9. Anti-patterns (rejected on sight)
+
+- Card grids where a surface/list belongs; floating shadows on flat
+  tools.
+- A second accent color; gradient decoration; colored text that is
+  not a link or a state.
+- State by color alone; icon-only actions without tooltips/labels.
+- A fake empty state (samples/fabricated content); a spinner where a
+  truthful progress note exists (the run poll's own words).
+- An in-engine imitation of a native dialog (the picker law).
+- Any UI state that hides the effective truth (§18 wins, §0.3).
+
+## 10. The standing row queue (owner-gated, one row at a time)
+
+The visual rows open ONLY on the owner's call (the wb family's own
+law). Candidates in dependency order — each is ONE row with a §8
+report:
+
+```text
+wb-12  the token audit      — the theme reconciled to §2's taxonomy
+                               (rename/retire, the neutral ramp, the
+                               single accent pinned)
+wb-13  the Models surface   — §5's matrix rendered over the wb-11
+                               run circuits (the LOADING live note,
+                               the FAILED cause, the EMPTY guidance)
+wb-14  the Chat surface     — the message list's semantic containers
+                               + the composer states
+wb-15  the Settings surface — the DEFAULT/EDITING/DISABLED/ERROR
+                               matrix + the disclosure layers
+wb-16+ the later surfaces   — Inference, Prompts, History,
+                               Diagnostics, Simulation (each opens
+                               with its functional row first)
+```
+
+The order is dependency logic, not a schedule — the owner reorders
+freely; a row opens when named. The FRONTEND_UIUX_LAW §25 order
+(iter-233, D-214) re-points the queue's position in the whole-frontend
+plan: the P0 minimums row (ux-1) and the Observatory slice (obs-1)
+run BEFORE indefinite peripheral polish — the visual rows wb-13+
+are the P2 continuation, each still its own owner-gated row here.
+
+## 11. Mandatory companion requirements (the spec-integrity repair)
+
+This file is the VISUAL law owner — one layer of the frontend law,
+never the whole of it. The following requirements are BINDING on
+every visual row and live in their owning law
+(`docs/FRONTEND_UIUX_LAW.md`, admitted iter-233/D-214 over the
+owner's Ultimate Frontend/UI/UX/Visual Architecture pack; the
+D-024/D-200 no-vendoring law). This routing block is the §1 repair
+of the drift the pack diagnosed: the short law was an accidental
+lossy compression of the approved requirements (accessibility,
+keyboard/focus, reduced motion, responsive/DPI, localization were
+materially missing) — an INDEX, never permission to forget:
+
+```text
+Accessibility (WCAG 2.2 + ISO 9241-171:2025 baseline) — LAW §15
+Focus/keyboard contract (order, entry, restoration, Escape)  — LAW §15
+Reduced-motion policy (the static-equivalent law)            — LAW §15
+Responsive/DPI/multi-monitor (viewport classes + min-size)  — LAW §16
+Localization (the _tr boundary + Cyrillic-safe layout)        — LAW §17
+Observatory interaction grammar (selection/context/evidence) — LAW §3..§9
+Verification (static ≠ runtime ≠ task proof + the A–I gates)   — LAW §22
+```
+
+A visual row that satisfies THIS file while violating a companion
+requirement is NOT compliant — the §8 report checks the companion
+set too.
+
+## 12. The two-layer visual identity
+
+The Workbench has TWO visual layers with different registers, sharing
+grammar but not ornaments:
+
+```text
+Workbench chrome      = quiet · precise · instrument-like · restrained
+                       · low-noise · high legibility (THIS LAW's domain)
+CanonSim world        = graphic · material · distinctive · strong
+presentation         · silhouettes · deterministic · illustrated
+                       (WORLD_PRESENTATION_LAW §11's domain)
+```
+
+They may share typography logic, spacing, selection/focus grammar and
+semantic status grammar — not necessarily ornamental treatment.
+Identity comes from semantic geometry, typography, iconography,
+timeline grammar, evidence marks, selection treatment, state notation
+and graphic rhythm — never from fantasy ornaments, glowing magic UI,
+parchment everywhere, ornamental borders or generic game-HUD effects.

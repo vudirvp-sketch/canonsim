@@ -1,0 +1,1088 @@
+"""The deterministic brief assembler (BRIEF-1, phase 1 — `docs/BRIEF_SPEC.md`
+owns the field-level contract; `docs/blueprint/phases.md` §1 owns the donor
+design).
+
+The brief is the mediator's input document: eight typed blocks with token
+budgets, assembled fresh every beat. This module is the LLM-free half —
+**a pure function of (log, ledger)** (the D-042/D-043/D-044 read-side
+family, widened iter-10 by the D-049 determinism quarantine): same log +
+same ledger + same pack → same brief bytes in any process, any call
+order, any `PYTHONHASHSEED`. The ledger is session render state — never
+canon, never replayed; canon replay (T1/T2) never touches it. Unlike the
+chronicle there is **no randomness at all** — every block iterates
+construction order or an explicit sort over deterministic inputs (INV-2);
+the brief carries facts as structured tokens, never prose (L2 — voice
+lives only in the exemplar block). The assembler writes nothing to the
+log (INV-1) and imports no network code (INV-4 — the narrator itself is
+a later, owner-gated iteration).
+
+The knower parameter (scene-1, mode B — BRIEF_SPEC §3.9): mode A
+(knower=None, the player) is the committed corpus shape, byte-identical
+by construction; mode B (knower=<npc>) runs the SAME pipeline for an
+actor — its own perception (scene_delta), its own memory
+(recalled_facts), its own role text and voice (the pack's
+`brief.actors` entry) — the per-NPC brief's leak surface closed by
+construction, the chorus served one knower per call
+(`brief/scene.py::speaking_queue`).
+
+All setting text and every budget number lives in the pack
+(`rules.json::brief`, linted at load — `core/pack.py`); this module knows
+block ids and the eviction order, which are architecture (BRIEF_SPEC §5.2),
+not balance.
+"""
+
+from __future__ import annotations
+
+from collections.abc import Mapping, Sequence
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Final
+
+from brief.ledger import (
+    CONTRADICTED,
+    ENTITY_SCOPE_PREFIX,
+    LIVE_STATUSES,
+    PINNED,
+    LedgerEntry,
+    SceneLedger,
+    current_scene,
+    present_entities,
+    split_scope,
+)
+from brief.since import Reunion, ReunionFold, since_config
+from core.agenda import agenda_view, agenda_views
+from core.drives import drive_demand, drive_specs, echo_modifiers_declared
+from core.echo import echo_scores
+from core.fold import Projection, fold, initial_projection, present_in_order
+from core.intent import TRAIT_TEST
+from core.knowledge import KnowledgeView
+from core.log import EventRecord, read_log
+from core.names import NAME_PROP
+from core.offers import offers
+from core.pack import BRIEF_BLOCK_IDS, Pack
+from core.persona import LOOK_PROP, VOICE_PROP
+from core.psyche import profile_of
+from core.retrieval import word_tokens
+from core.traits import Trait, crystallized_traits
+from render.chronicle import display_name
+
+__all__ = [
+    "Block",
+    "Brief",
+    "actor_entry",
+    "assemble_brief",
+    "beats_crossed",
+    "brief_from_log",
+    "last_beat_tick",
+    "render_brief",
+    "token_count",
+]
+
+# Ascending-priority eviction order for whole-block eviction on total
+# overflow (BRIEF_SPEC §5.2). Directives are NOT in it — never evicted;
+# scene_texture sits between scene_delta and present_entities (current-scene
+# continuity outranks lore; canon-projection structure — the entity cards —
+# outranks narrator-invented texture: canon always outranks texture,
+# D-049), both below voice/options — st-1.
+EVICTABLE_BLOCKS: Final = (
+    "scheduled_lore",
+    "recalled_facts",
+    "scene_delta",
+    "scene_texture",
+    "present_entities",
+    "voice_exemplars",
+    "active_options",
+)
+_TRUNCATED: Final = "[truncated:{n} items dropped]"
+_IMPORTANCE_RANK: Final = {"low": 0, "medium": 1, "high": 2}
+
+
+@dataclass(frozen=True, slots=True)
+class Block:
+    """One assembled block: the item lines that survived, and how many
+    did not (fill law, whole-block eviction — BRIEF_SPEC §5)."""
+
+    block_id: str
+    lines: tuple[str, ...]
+    dropped: int
+
+    def render(self) -> list[str]:
+        """Header + body + the truncation marker when anything dropped."""
+        lines = [f"## {self.block_id}"]
+        lines.extend(self.lines)
+        if self.dropped:
+            lines.append(_TRUNCATED.format(n=self.dropped))
+        return lines
+
+
+@dataclass(frozen=True, slots=True)
+class Brief:
+    """The eight blocks in pipeline order (BRIEF_SPEC §3)."""
+
+    blocks: tuple[Block, ...]
+
+
+# -- the token model (BRIEF_SPEC §4) ------------------------------------------
+
+
+def token_count(text: str) -> int:
+    """Whitespace tokens — the deterministic, dependency-free proxy.
+
+    The real tokenizer arrives with the LLM circuit and must not change
+    committed formats without a spec bump (BRIEF_SPEC §4/§8).
+    """
+    return len(text.split())
+
+
+# -- beat arithmetic (the read-side mirror of core/loop.py's forward law) ------
+
+
+def _beat_offsets(rules: Mapping[str, Any]) -> tuple[int, ...]:
+    """Intraday beat offsets, ascending — `urgencies.beat_ticks` is the
+    single owner of the beat cycle (one beat, three pieces — D-037)."""
+    return tuple(sorted(rules.get("urgencies", {}).get("beat_ticks", ())))
+
+
+def last_beat_tick(rules: Mapping[str, Any], tick: int) -> int | None:
+    """The largest beat tick <= `tick`, or None when no beat crossed yet.
+
+    Beats are the pack's intraday offsets repeated every
+    `time.ticks_per_day`; a beat at t=0 never fires (the loop's day-1
+    edge, `core/loop.py` `_first_beat`) — this is the backward mirror of
+    that forward scheduling law, for the scene-delta window.
+    """
+    offsets = _beat_offsets(rules)
+    day = int(rules["time"]["ticks_per_day"])
+    best: int | None = None
+    for offset in offsets:
+        if offset > 0:
+            if tick >= offset:
+                candidate = offset + ((tick - offset) // day) * day
+                best = candidate if best is None or candidate > best else best
+        elif day <= tick:  # offset == 0: fires from day 1 onward only
+            candidate = (tick // day) * day
+            best = candidate if best is None or candidate > best else best
+    return best
+
+
+def beats_crossed(rules: Mapping[str, Any], tick: int) -> int:
+    """How many beat boundaries lie at or before `tick` (the lore schedule
+    input, BRIEF_SPEC §3.6) — same beat set as `last_beat_tick`."""
+    offsets = _beat_offsets(rules)
+    day = int(rules["time"]["ticks_per_day"])
+    crossed = 0
+    for offset in offsets:
+        if offset > 0:
+            if tick >= offset:
+                crossed += (tick - offset) // day + 1
+        else:
+            crossed += tick // day  # k >= 1 only: the t=0 beat never fires
+    return crossed
+
+
+# -- per-block assembly --------------------------------------------------------
+
+
+def _fill(block_id: str, items: Sequence[str], budget: Mapping[str, Any]) -> Block:
+    """The fill law (BRIEF_SPEC §5.1): take best-first while below the
+    soft target AND the item fits the hard ceiling; everything else
+    counts as dropped. Items are never cut mid-line; the marker is
+    metadata and always renders (silent drops are forbidden)."""
+    soft = int(budget["soft"])
+    hard = int(budget["hard"])
+    taken: list[str] = []
+    tokens = 0
+    dropped = 0
+    for line in items:
+        cost = token_count(line)
+        if tokens < soft and tokens + cost <= hard:
+            taken.append(line)
+            tokens += cost
+        else:
+            dropped += 1
+    return Block(block_id, tuple(taken), dropped)
+
+
+def _born_names(events: Sequence[EventRecord]) -> dict[str, str]:
+    """The event-born names (name-1): one pass over the log, the LAST
+    write per entity wins (the fold's law). The dry display lines read
+    it BEFORE the pack record — canon outranks the authored surface;
+    an unborn generated name falls to the pack record / the dry id."""
+    names: dict[str, str] = {}
+    for event in events:
+        for change in event.state_changes:
+            if change.prop == NAME_PROP:
+                names[change.entity] = str(change.to_)
+    return names
+
+
+def _entity_display(
+    state: Projection, pack: Pack, entity_id: str
+) -> str:
+    """The fold-aware display name over the folded projection (the
+    entity cards — name-1's read surface, the `render/chronicle.py::
+    _born_or_pack` twin): the born name first, else the authored
+    `name`, else the dry id."""
+    born = state.get(entity_id, {}).get(NAME_PROP)
+    if born is not None:
+        return str(born)
+    return display_name(pack, entity_id)
+
+
+def _scene_delta_lines(
+    events: Sequence[EventRecord], pack: Pack, *, knower: str
+) -> list[str]:
+    """What the knower perceived since the last beat, newest first
+    (BRIEF_SPEC §3.2): the knower is the actor or holds a record born on
+    the event (the blind-NPC law — no record, no delta line). Mode A
+    passes the player; mode B passes the actor (scene-1 — the same law,
+    one knower, never a world dump)."""
+    window_start = last_beat_tick(pack.rules, events[-1].t if events else 0)
+    born = _born_names(events)  # name-1: canon names outrank the record
+    lines: list[str] = []
+    for event in reversed(events):  # newest first — recency dominates
+        if window_start is not None and event.t <= window_start:
+            break  # ticks are log-monotonic: older events are past the window too
+        perceived = event.actor == knower or any(
+            record.who == knower for record in event.knowledge
+        )
+        if not perceived:
+            continue
+        line = (
+            f"[t {event.t}] {event.type}: "
+            f"{born.get(event.actor) or display_name(pack, event.actor)}"
+        )
+        if event.target is not None:
+            line += f" -> {born.get(event.target) or display_name(pack, event.target)}"
+        lines.append(line)
+    return lines
+
+
+def _belief_lines(
+    traits: Sequence[Trait], events: Sequence[EventRecord]
+) -> list[str]:
+    """The derived-trait read's item lines (BRIEF_SPEC §3.5, the phase-4
+    clause): one line per crystallized belief, declaration order (the
+    fold's order for one knower) — the belief carries its provenance
+    event ids, the expansion law's demand handle; the cross tick is the
+    threshold crossing (the latest source event's t). Dry ids, never
+    prose: the line is an address into the log, not a narrative."""
+    tick_of = {event.id: event.t for event in events}
+    lines: list[str] = []
+    for trait in traits:
+        cross = max((tick_of.get(sid, 0) for sid in trait.sources), default=0)
+        sources = ", ".join(trait.sources)
+        lines.append(f"- belief {trait.token} (t {cross}, sources: {sources})")
+    return lines
+
+
+def _recalled_fact_lines(
+    events: Sequence[EventRecord], pack: Pack, *, knower: str,
+    query: str | None = None,
+    view: KnowledgeView | None = None,
+) -> list[str]:
+    """The knower's own knowledge, ranked by the Generative-Agents
+    signal shape (BRIEF_SPEC §3.5): recency + importance always, plus
+    relevance when the mediator's query rides the assembly (scene-2,
+    mode B — the token-overlap match of the query's words against the
+    record's `knows` words; `query=None` is mode A's two-signal shape,
+    the committed corpus bytes), deduped by token, capped at
+    `max_items` — and read through the derived-trait lens (leg-2, the
+    phase-4 clause): the knower's crystallized beliefs lead the block
+    as belief lines, and the family records that minted them render
+    nothing raw — the belief is the derived view, the source records
+    stay queryable on demand via the provenance ids (the expansion
+    law, `core/traits.py::expand_trait`). Size O(traits + records),
+    never O(history). Mode A passes the player; mode B passes the
+    actor (scene-1 — the per-NPC brief's leak surface: a record the
+    knower does not hold can never render, by construction — the
+    records ARE the knower's fold)."""
+    config = pack.rules["brief"]["recalled_facts"]
+    current_tick = events[-1].t if events else 0
+    importance_of = {event.id: event.importance for event in events}
+    view = view or KnowledgeView.from_events(events)
+    records = view.records_of(knower)
+    recency_weight = float(config["recency_weight"])
+    importance_weight = float(config["importance_weight"])
+    relevance_weight = float(config["relevance_weight"])
+    query_terms = frozenset(word_tokens(query)) if query else frozenset()
+
+    # leg-2: the fold reads as DATA at the assembly tick (the honest
+    # read-model law shared with the echo); beliefs in declaration
+    # order, the replaced tokens are the crystallized families' own —
+    # evidence is evidence, a held family record never survives its
+    # belief raw (a below-threshold family still renders raw: no belief,
+    # no replacement).
+    beliefs = [
+        trait
+        for trait in crystallized_traits(pack, view, current_tick)
+        if trait.who == knower
+    ]
+    belief_config = pack.rules.get("traits")
+    replaced: set[str] = set()
+    for trait in beliefs:
+        if belief_config is not None:
+            replaced.update(belief_config["beliefs"][trait.token]["family"])
+    lines = _belief_lines(beliefs, events)
+
+    def score(record: Any) -> float:
+        age = current_tick - record.at
+        rank = _IMPORTANCE_RANK[importance_of[record.source]]
+        relevance = (
+            len(query_terms & frozenset(word_tokens(record.knows)))
+            / len(query_terms)
+            if query_terms
+            else 0.0
+        )
+        return (
+            recency_weight / (1 + age)
+            + importance_weight * rank
+            + relevance_weight * relevance
+        )
+
+    ranked = sorted(records, key=score, reverse=True)  # stable: acquisition wins ties
+    seen: set[str] = set()
+    max_items = int(config["max_items"])
+    for record in ranked:
+        if len(lines) >= max_items:
+            break  # the top-k law: belief lines count against the cap
+        if record.knows in seen:
+            continue  # the brief shows what the PC knows, not the learning history
+        if record.knows in replaced:
+            continue  # the belief subsumes its family's raw evidence
+        seen.add(record.knows)
+        lines.append(
+            f"- [t {record.at}, {record.channel}, {record.fidelity}] {record.knows}"
+        )
+    return lines
+
+
+def _lore_lines(pack: Pack, *, beats: int) -> list[str]:
+    """Eligible lore entries, pack declaration order (BRIEF_SPEC §3.6)."""
+    lines: list[str] = []
+    for entry in pack.rules["brief"].get("lore", ()):
+        if int(entry["from_beat"]) <= beats < int(entry["to_beat"]):
+            lines.append(str(entry["text"]))
+    return lines
+
+
+def _option_lines(pack: Pack) -> list[str]:
+    """The pack's action grammar as a choice list, pack order (BRIEF_SPEC
+    §3.7) — the vocabulary, not a precondition-filtered menu: the intent
+    door stays the sole gatekeeper of the possible."""
+    lines: list[str] = []
+    for action in pack.data["actions.json"]["actions"]:
+        fields = [str(field) for field in action.get("fields", ())]
+        signature = (
+            f"{action['intent']}({', '.join(fields)})" if fields else action["intent"]
+        )
+        lines.append(f"- {signature}")
+    return lines
+
+
+def _texture_prefix(entry: LedgerEntry) -> str:
+    """The entity address prefix for one texture line — empty for
+    scene-scoped entries (the scope is the current scene), `<id>: ` for
+    entity-scoped ones. Raw ids, never display names: the scope is an
+    address, not prose (BRIEF_SPEC §3.3)."""
+    split = split_scope(entry.scope)
+    if split is not None and split[0] == ENTITY_SCOPE_PREFIX:
+        return f"{split[1]}: "
+    return ""
+
+
+def _scene_texture_items(
+    events: Sequence[EventRecord], pack: Pack, ledger: SceneLedger
+) -> list[str]:
+    """The 7th block's item lines (BRIEF_SPEC §3.3 — the window law):
+    live (active+pinned) entries whose scope matches the current scene
+    or a present entity, ranked by the identity-or-pinned tier — an
+    entry whose `slot` is pack-declared `identity_slots` ranks WITH
+    `pinned` (tex-1, blueprint §1's identity-persistence resolution:
+    identity must not compete with fresh texture on recency), pinned
+    above identity within the tier — then newest-first with
+    construction-order tie-break (ids allocate in append order, so the
+    index is the tie-break; an empty `identity_slots` reduces the key
+    to the pinned-only law exactly, the D-048 bytes). The per-entity
+    quota walk follows the ranking: at most `per_entity_max_items`
+    lines per entity scope (a chatty entity cannot flood the window —
+    and the tier already put its identity slots first, "identity slot
+    first" by construction), then capped by `max_items`. Both caps are
+    ranking caps, not budget drops (the D-047 law: beyond-cap items
+    render nothing, never dropped, never marked). Tombstones for
+    contradicted entries in the same scope window render newest-first,
+    capped by `tombstone_max_items`, AFTER the live lines (prevention +
+    enforcement both bounded, D-049; tombstones carry no quota — their
+    own cap bounds them, and a refuted identity line is gone).
+    Scene-scoped entries additionally require `t >= scene.from_tick` —
+    texture from an earlier scene at the same location is gone with
+    that scene (a revisit starts empty), even if a stale ledger still
+    holds it live.
+    """
+    config = pack.rules["brief"]["scene_texture"]
+    scene = current_scene(events, pack)
+    state = fold(events, initial_projection(pack.entities))
+    present = present_entities(state, scene.location_id, pack)
+    identity_slots = frozenset(config["identity_slots"])
+    per_entity_cap = int(config["per_entity_max_items"])
+    window: list[tuple[int, LedgerEntry]] = []
+    tombs: list[tuple[int, LedgerEntry]] = []
+    for index, entry in enumerate(ledger.entries):  # construction order
+        split = split_scope(entry.scope)
+        if split is None:
+            continue
+        prefix, target = split
+        if prefix == ENTITY_SCOPE_PREFIX:
+            if target not in present:
+                continue
+        elif target != scene.location_id or entry.t < scene.from_tick:
+            continue
+        if entry.status in LIVE_STATUSES:
+            window.append((index, entry))
+        elif entry.status == CONTRADICTED:
+            tombs.append((index, entry))
+
+    def tier_key(pair: tuple[int, LedgerEntry]) -> tuple[bool, bool, int]:
+        # identity-or-pinned -> pinned -> newest -> construction: the
+        # tier term first (identity joins pinned), pinned within the
+        # tier, then the index descending (newest, the construction
+        # tie-break — the pre-tex-1 key when identity_slots is empty).
+        pinned = pair[1].status == PINNED
+        return (
+            not pinned and pair[1].slot not in identity_slots,
+            not pinned,
+            -pair[0],
+        )
+
+    window.sort(key=tier_key)
+    tombs.sort(key=lambda pair: -pair[0])
+    taken: list[LedgerEntry] = []
+    entity_counts: dict[str, int] = {}
+    for _index, entry in window:
+        split = split_scope(entry.scope)
+        if split is not None and split[0] == ENTITY_SCOPE_PREFIX:
+            count = entity_counts.get(split[1], 0)
+            if count >= per_entity_cap:
+                continue  # the quota: beyond-K entity lines render nothing
+            entity_counts[split[1]] = count + 1
+        taken.append(entry)
+        if len(taken) == int(config["max_items"]):
+            break
+    lines = [
+        f"- [t {entry.t}, {entry.status}] {_texture_prefix(entry)}"
+        f"{entry.slot} = {entry.value}"
+        for entry in taken
+    ]
+    lines.extend(
+        f"- [t {entry.t}, refuted] {_texture_prefix(entry)}"
+        f"{entry.slot} (cause: {entry.cause})"
+        for _index, entry in tombs[: int(config["tombstone_max_items"])]
+    )
+    return lines
+
+
+def _promoted_props(
+    events: Sequence[EventRecord],
+) -> dict[str, list[tuple[str, Any]]]:
+    """Props born by committed promotions (st-1's promoted-prop
+    visibility): an event carrying a texture reference whose
+    state_changes touch the scope target's slot — the D-054 canon-birth
+    shape, the same detection law as `brief/mediator.py::promotions_in`
+    (the mediator's marking scan), read-side output shape
+    `(entity -> [(prop, value)])` in log order. Machine-condition props
+    (`condition`, the `fire.*` layers) are never promotions and never
+    appear here."""
+    out: dict[str, list[tuple[str, Any]]] = {}
+    for event in events:
+        reference = event.outcome.get("texture")
+        if not isinstance(reference, Mapping) or "entry" not in reference:
+            continue
+        split = split_scope(str(reference.get("scope", "")))
+        target = split[1] if split is not None else None
+        for change in event.state_changes:
+            if change.entity == target and change.prop == reference.get("slot"):
+                out.setdefault(change.entity, []).append(
+                    (change.prop, change.to_)
+                )
+    return out
+
+
+def _pair_axis_lines(
+    pack: Pack, state: Any, present: Sequence[str]
+) -> list[str]:
+    """Pairwise relation tokens for present pairs (BRIEF_SPEC §3.8):
+    one line per directed (holder, other) pair that carries pair-map
+    axes — `pair.<other>.<axis>` props on the holder, projection order
+    (construction order — seeds in pack order, event-born axes after).
+    Directed on purpose: A-fears-B and B-trusts-A are different facts
+    (the cross-NPC-consistency home)."""
+    lines: list[str] = []
+    for holder in present:
+        for other in present:
+            if holder == other:
+                continue
+            prefix = f"pair.{other}."
+            axes = [
+                (prop[len(prefix):], value)
+                for prop, value in state[holder].items()
+                if prop.startswith(prefix)
+            ]
+            if not axes:
+                continue
+            rendered = ",".join(f"{axis}={value}" for axis, value in axes)
+            lines.append(f"- pair {holder} -> {other} {rendered}")
+    return lines
+
+
+def _token_value(value: Any) -> str:
+    """One prop value as a scene-line token: JSON-style booleans — the
+    values are JSON-born canon state (the log's own serialization), and
+    Python's `True`/`False` capitals would leak the host language into
+    the narrator's document (bridge-1: the river claims carry booleans;
+    every other scene value is a string or an int, where str() is
+    already the JSON form)."""
+    if value is True:
+        return "true"
+    if value is False:
+        return "false"
+    return str(value)
+
+
+# -- the since-segments (since-1, D-180 — BRIEF_SPEC §3.4's extension) ------
+
+
+def _since_template(
+    template: str, slots: Mapping[str, str]
+) -> str:
+    """Bind one pack template with its slot values — the pack owns the
+    line shape (D4), the slot vocabulary is architecture (L2: dry
+    tokens, the {slot} grammar templates.json already owns)."""
+    out = template
+    for slot, value in slots.items():
+        out = out.replace("{" + slot + "}", value)
+    return out
+
+
+def _since_segments(
+    fold: ReunionFold,
+    entity_id: str,
+    config: Mapping[str, Any],
+) -> str | None:
+    """One entity's since= payload — the pack-templated render of its
+    re-encounter delta (BRIEF_SPEC §3.4): position first, then the prop
+    deltas in pack order, then the heard records newest-first, capped
+    by `max_segments` (the D-047 ranking-cap law: beyond-cap segments
+    render nothing, never a budget drop). None when there is nothing
+    to say (a first meeting, or an apart window that changed nothing
+    the reader could perceive)."""
+    reunion: Reunion | None = fold.reunion(entity_id)
+    if reunion is None:
+        return None
+    templates = config.get("templates", {})
+    labels = {
+        str(entry["prop"]): str(entry["label"])
+        for entry in config.get("props", ())
+    }
+    segments: list[str] = []
+    if reunion.position is not None and "position" in templates:
+        segments.append(
+            _since_template(
+                str(templates["position"]),
+                {
+                    "from": _token_value(reunion.position[0]),
+                    "to": _token_value(reunion.position[1]),
+                },
+            )
+        )
+    if "prop" in templates:
+        for delta in reunion.props:
+            segments.append(
+                _since_template(
+                    str(templates["prop"]),
+                    {
+                        "label": labels[delta.prop],
+                        "from": _token_value(delta.from_),
+                        "to": _token_value(delta.to_),
+                    },
+                )
+            )
+    if "heard" in templates:
+        for record in reunion.heard:
+            segments.append(
+                _since_template(
+                    str(templates["heard"]),
+                    {
+                        "token": record.token,
+                        "channel": record.channel,
+                        "fidelity": record.fidelity,
+                        "t": str(record.at),
+                    },
+                )
+            )
+    capped = segments[: int(config["max_segments"])]
+    return "; ".join(capped) if capped else None
+
+
+def _actor_anchor_line(
+    pack: Pack, state: Projection, npc_id: str,
+    echoes: Sequence[Any] = (),
+) -> str | None:
+    """The actor's own presentation anchors as ONE line at generation
+    distance (agenda-1 P2, iter-421): the card's own segment vocabulary
+    (`voice:`, `look:`, `want:`) repeated at the exemplar block — the
+    donor's measured fact is that a description far from the generation
+    point moves a model ~0 %, so the born person's individuating layer
+    rides directly above the skeletons that must not clamp it. The OWNER
+    of every token stays where it was (the born props + the pack's pools +
+    the archetype want): this is a rendering, never a second source. None
+    when the npc carries no anchor at all (an authored-profile carrier
+    with no pools drawn renders no line)."""
+    props = state.get(npc_id, {})
+    parts: list[str] = []
+    voice = props.get(VOICE_PROP)
+    if isinstance(voice, (list, tuple)) and voice:
+        parts.append("voice: " + ", ".join(str(token) for token in voice))
+    look = props.get(LOOK_PROP)
+    if isinstance(look, (list, tuple)) and look:
+        parts.append("look: " + ", ".join(str(token) for token in look))
+    view = agenda_view(pack, state, npc_id, echoes=echoes)
+    if view is not None and view.want is not None:
+        parts.append("want: " + view.want)
+    return "; ".join(parts) if parts else None
+
+
+def _present_entity_items(
+    events: Sequence[EventRecord], pack: Pack, *, knower: str,
+    state: Projection | None = None,
+    echoes: Sequence[Any] = (),
+    traits: Sequence[Any] = (),
+) -> list[str]:
+    """The 8th block's item lines (BRIEF_SPEC §3.8 — st-1, the entity
+    cards): the room's structural answer to "who is here". A read-side
+    fold — zero new event types; presence is a projection read, the
+    observable surface is pack data. Line order: the scene line, then
+    one dry line per present entity in pack declaration order (carried
+    items fold into their carrier's `carries=` segment instead of a
+    line of their own — they are the carrier's surface, not room
+    fixtures), then the pair lines. `max_entities`/`max_pairs` are
+    ranking caps (D-047 law — beyond-cap items render nothing, never a
+    budget drop).
+
+    since-1 (D-180): the cards' since-segments — "what changed in
+    this entity since the reader last met it" (§3.4's extension) —
+    render as one trailing `since=` segment on the scene line and on
+    each entity card, the re-encounter fold's structured deltas through
+    the pack's templates. KNOWER-PARAMETERIZED (the §3.9 amendment: the
+    cards' structural lines stay shared, the since-segments are the
+    knower's own — the reader's epochs and the reader's records). A
+    pack without `since_lines` never builds the fold — zero segments,
+    the unarmed landing, the committed corpus bytes untouched."""
+    config = pack.rules["brief"]["present_entities"]
+    scene = current_scene(events, pack)
+    if state is None:
+        state = fold(events, initial_projection(pack.entities))
+    present = present_in_order(pack, state, scene.location_id)
+    # agenda-1 P2 (iter-420): the present set's agenda views — ONE drive
+    # parse for the whole scene (the cost law), each present NPC's
+    # dominant drive + want + the door's own status read. A pack with no
+    # profile and no spine answers an empty mapping: zero segments, the
+    # unarmed bytes (the 68a law). quest-1 v0 (iter-435): the SAME parse
+    # feeds the offer board — a failing canon measure row becomes one
+    # `offer=` sentence on the person's card (the board's one owner is
+    # core/offers.py, its text form `Offer.segments`), so the card cannot
+    # name a need or a term the script's read does not.
+    specs = drive_specs(pack, state)
+    views = agenda_views(
+        pack, state, present, echoes=echoes, traits=traits, specs=specs,
+    )
+    board = {
+        offer.npc: offer
+        for offer in offers(
+            pack, state, present, echoes=echoes, traits=traits, specs=specs,
+        )
+    }
+    promoted = _promoted_props(events)
+    since_cfg = since_config(pack)
+    since_fold = (
+        ReunionFold(
+            events,
+            pack,
+            knower,
+            props=[
+                str(entry["prop"]) for entry in since_cfg.get("props", ())
+            ],
+        )
+        if since_cfg is not None
+        else None
+    )
+    lines: list[str] = []
+
+    # bridge-1 (D-116 (1), the scene-line projection pipe): the scene
+    # fields' VALUE SOURCE is the FOLDED PROJECTION — the committed
+    # claims (biome/height/region/river slots) ride world_formed's
+    # state_changes into the fold — with the PACK RECORD the fallback
+    # for unclaimed fields (static architecture). The card law holds:
+    # static surface first (pack-record fields, pack-declared order),
+    # event-born news last (fold-held props — the claims ARE event-born
+    # — then promoted props in log order). A field the fold holds for
+    # the scene location always outranks the record read (an event
+    # re-writing a pack-modeled field renders its canon value, never
+    # the stale birth bytes); a field neither holds renders nothing.
+    # L3: read-side derive, never stored.
+    location_record = pack.entity(scene.location_id)
+    location_props = state[scene.location_id]  # locations always register
+    static_fields: list[tuple[str, Any]] = []
+    born_fields: list[tuple[str, Any]] = []
+    for field in config.get("scene_line_fields", ()):
+        if field in location_props:
+            born_fields.append((field, location_props[field]))
+        elif field in location_record:
+            static_fields.append((field, location_record[field]))
+    scene_props = (
+        *static_fields, *born_fields, *promoted.get(scene.location_id, ())
+    )
+    # since-1: the scene card's own since-segment — "what changed in
+    # this place since the reader last stood here" (the location's
+    # reunion rides the same fold: its epochs are the reader's own
+    # intervals at it). The pre-iter-20 law extends one arm: a scene
+    # with a since-payload renders the line even without pack-declared
+    # fields or promoted props (the re-encounter with the place IS the
+    # content); unarmed packs never reach here — the payload is None.
+    since_scene = (
+        _since_segments(since_fold, scene.location_id, since_cfg)
+        if since_fold is not None
+        else None
+    )
+    if scene_props or since_scene is not None:
+        rendered = " ".join(
+            f"{prop}={_token_value(value)}" for prop, value in scene_props
+        )
+        scene_line = (
+            f"- scene {scene.location_id} "
+            f"({display_name(pack, scene.location_id)})"
+        )
+        if rendered:
+            scene_line += f" {rendered}"
+        if since_scene is not None:
+            scene_line += f" since={since_scene}"
+        lines.append(scene_line)
+
+    marker_specs = [
+        (str(spec["prop"]), spec, str(spec["marker"]))
+        for spec in config["card_markers"]
+    ]
+    for entity_id in present[: int(config["max_entities"])]:
+        props = state[entity_id]
+        if pack.kind_of(entity_id) == "item" and props.get("carrier") is not None:
+            continue  # carried: the carrier's `carries=` segment renders it
+        segments = [f"- {entity_id} ({_entity_display(state, pack, entity_id)})"]
+        # tune-2: the marker table is PROP-PATH keyed with two row kinds —
+        # threshold rows (numeric `min`) and value rows (string `value`),
+        # so `relations.suspicion` and `crime_status` rows are expressible
+        # pack data (the card, not the delta window, is the narrator's
+        # read surface for standing state; the PC's own perception stays
+        # governed by the blind-NPC law in scene_delta).
+        markers = []
+        for prop, spec, marker in marker_specs:
+            value = props.get(prop)
+            if "min" in spec:
+                if (
+                    isinstance(value, int)
+                    and not isinstance(value, bool)
+                    and value >= int(spec["min"])
+                ):
+                    markers.append(marker)
+            elif value is not None and value == spec["value"]:
+                markers.append(marker)
+        if markers:
+            segments.append(f"markers={','.join(markers)}")
+        carries = [
+            item["id"]
+            for item in pack.entities["items"]
+            if state[item["id"]].get("carrier") == entity_id
+        ]
+        if carries:
+            segments.append(f"carries={','.join(carries)}")
+        # agenda-1 P2 (iter-419): the body's born presentation anchors —
+        # the drawn physical facts and voice properties, one token list per
+        # prop, comma-joined in the draw's own order (the pool's
+        # declaration order, INV-2). They render only when the fold holds
+        # them: the anchors are born props (first-commit-wins), never a
+        # record read — the card is the body's fact surface, the
+        # `markers=`/`carries=` family's sibling. A pack arming no anchor
+        # keeps every byte (the unarmed law).
+        for prop in (LOOK_PROP, VOICE_PROP):
+            born = props.get(prop)
+            if isinstance(born, (list, tuple)) and born:
+                segments.append(
+                    f"{prop}=" + ",".join(str(token) for token in born)
+                )
+        # agenda-1 P2: the person's INTENT surface — the dominant drive
+        # with its door read (`drive=<id>:OPEN|SATISFIED|BLOCKED`) and the
+        # want phrase the agenda serves (`want=<phrase>`, the authored
+        # spine first, the archetype's own second — `core/agenda.py` owns
+        # the precedence). Both render only when the read answers: an
+        # NPC with neither a drive nor a want renders nothing (the player,
+        # the unprofiled stranger). The witness for the engine's own
+        # memory law: the model sees NO transcript across beats
+        # (PRESENTATION_SPEC §4), so this line is the only place the
+        # narrator can learn what a present person is after.
+        view = views.get(entity_id)
+        if view is not None:
+            if view.drive is not None and view.status is not None:
+                segments.append(f"drive={view.drive}:{view.status}")
+            if view.want is not None:
+                segments.append(f"want={view.want}")
+        # quest-1 v0 (iter-435): the derived offer, when the person's
+        # dominant drive has a FAILING canon measure row — the terms, the
+        # closeability and the door's own blocker in the board's one text
+        # form (`Offer.segments`). A person with no failing row, no drive
+        # or no profile renders nothing (the 68a unarmed law: the
+        # committed corpus' own cards are the witness).
+        offer = board.get(entity_id)
+        if offer is not None:
+            segments.extend(offer.segments())
+        segments.extend(
+            f"{prop}={value}" for prop, value in promoted.get(entity_id, ())
+        )
+        # since-1: the card's trailing since= segment — the atomic
+        # re-encounter context (one line per entity, the fill law treats
+        # the whole card as one item; the segments beyond max_segments
+        # render nothing — the D-047 ranking-cap law)
+        if since_fold is not None:
+            payload = _since_segments(since_fold, entity_id, since_cfg)
+            if payload is not None:
+                segments.append(f"since={payload}")
+        lines.append(" ".join(segments))
+
+    lines.extend(_pair_axis_lines(pack, state, present)[: int(config["max_pairs"])])
+    return lines
+
+
+def _evict_overflow(
+    assembled: dict[str, Block], total_hard: int
+) -> dict[str, Block]:
+    """Whole-block eviction on total overflow (BRIEF_SPEC §5.2): evict in
+    ascending priority order, directives never; an evicted block renders
+    as its header + marker. Stops as soon as the total fits; an empty
+    block frees nothing and is skipped."""
+    total = sum(token_count(line) for block in assembled.values() for line in block.render())
+    for block_id in EVICTABLE_BLOCKS:
+        if total <= total_hard:
+            break
+        block = assembled[block_id]
+        if not block.lines:
+            continue
+        total -= sum(token_count(line) for line in block.render())
+        evicted = Block(block_id, (), dropped=block.dropped + len(block.lines))
+        assembled[block_id] = evicted
+        total += sum(token_count(line) for line in evicted.render())
+    return assembled
+
+
+def actor_entry(
+    pack: Pack, state: Projection, npc_id: str
+) -> tuple[str, Mapping[str, Any]] | None:
+    """The mode-B role text an npc resolves to, and its ORIGIN (agenda-1 P2,
+    iter-421): `("authored", entry)` when the pack's `brief.actors[npc_id]`
+    row exists — the exact hand-written override — `("archetype", row)` when
+    the npc carries a profile whose archetype has a
+    `brief.archetype_briefs[archetype]` row (the generative default a
+    runtime-born person rides: one authored set per archetype, never a
+    dossier per person), and None when neither resolves (MUTE — the pack's
+    own declaration stays the gate, and a generic default profile is
+    deliberately not invented: a default produces wallpaper and hides the
+    missing content). The authored tier outranks the archetype tier — replace,
+    never merge (two sources competing over one utterance would inflate the
+    block and blur the speaker).
+
+    The resolution is generic key lookup over pack-supplied ids: the engine
+    reads `brief` tables and an archetype id, and contains no setting
+    vocabulary (INV-3). Both gates (`brief/scene.py::speaking_queue` and
+    `assemble_brief`) call THIS function — one resolution law, two consumers.
+    """
+    config = pack.rules["brief"]
+    authored = config.get("actors", {}).get(npc_id)
+    if isinstance(authored, Mapping):
+        return "authored", authored
+    profile = profile_of(pack, state, npc_id)
+    if profile is None:
+        return None
+    entry = config.get("archetype_briefs", {}).get(
+        str(profile.get("archetype"))
+    )
+    if isinstance(entry, Mapping):
+        return "archetype", entry
+    return None
+
+
+def _knower_id(
+    pack: Pack, state: Projection, knower: str | None
+) -> str:
+    """Resolve the brief's knower (scene-1, mode B — BRIEF_SPEC §3.9):
+    `None` is the player (mode A's default, byte-identical by
+    construction); any other id must name a pack NPC (the chorus knower
+    gate — an ambient group holds records but never speaks, an item or
+    location is not a knower at all) that RESOLVES to a role text
+    (`actor_entry`: an authored entry or an archetype profile). An npc with
+    neither is mute — the pack's own declaration is the mode-B gate."""
+    player = pack.player_id()
+    if knower is None or knower == player:
+        return player
+    if pack.kind_of(knower) != "npc":
+        raise ValueError(
+            f"knower {knower!r} is neither the player nor a pack npc "
+            "(the mode-B knower gate — BRIEF_SPEC §3.9)"
+        )
+    if actor_entry(pack, state, knower) is None:
+        raise ValueError(
+            f"knower {knower!r} resolves to no role text — neither a "
+            "brief.actors entry nor a brief.archetype_briefs row for its "
+            "profile's archetype (the pack's own declaration is the mode-B "
+            "gate — BRIEF_SPEC §3.9)"
+        )
+    return knower
+
+
+def assemble_brief(
+    events: Sequence[EventRecord],
+    pack: Pack,
+    ledger: SceneLedger | None = None,
+    *,
+    knower: str | None = None,
+    query: str | None = None,
+) -> Brief:
+    """Assemble the eight blocks from a log + ledger (pure — BRIEF_SPEC
+    §2/§3). `ledger=None` renders an empty scene_texture block (a log
+    without a session ledger — the same bytes as an empty one).
+    `knower=None` assembles mode A (the player's brief — the committed
+    corpus bytes); `knower=<npc>` assembles mode B (the actor brief:
+    scene_delta and recalled_facts read the knower's own perception and
+    memory — the blind-NPC law parameterized, the per-NPC brief's leak
+    surface; directives and voice exemplars come from the pack's
+    `brief.actors` entry — the actor's role and voice, never the
+    narrator's; the scene_texture window, the entity cards, the lore,
+    and the options stay shared — one scene, one grammar, observables
+    only, L6).
+
+    `query` is the mediator's keyword query (scene-2, mode B — §3.5's
+    relevance signal): `None` keeps the two-signal ranking (mode A —
+    the committed corpus bytes, byte-identical by construction); a
+    query string adds the relevance term — the token-overlap match of
+    the query's words against each record's `knows` words (the word
+    view `core.retrieval.word_tokens` owns; rung-independent — the
+    brief's bytes never hinge on a SQLite build's FTS5 presence).
+
+    Deterministic by construction: no RNG, no wall-clock, construction
+    order or explicit sorts only. The pack's lint guarantees the `brief`
+    section shape (`core/pack.py`).
+    """
+    config = pack.rules["brief"]
+    budgets = config["blocks"]
+    # agenda-1 P2 (iter-421): ONE fold for the call — the mode-B resolution
+    # and the entity cards read the same projection (a born actor's profile
+    # is a folded prop; a second fold per call was pure waste).
+    state = fold(events, initial_projection(pack.entities))
+    # agenda-1 P5-unit-2 (iter-427): the ECHO fold — built ONCE per call and
+    # only when a drive declares an echo-sourced modifier (the laziness law:
+    # a pack without one pays nothing, its bytes never move). The entity
+    # cards and the actor anchor line pass the SAME read the beat walk did,
+    # so no surface can name a different dominant drive than the walk acts on.
+    # iter-439 (`drivegoals-1`): a drive `measure` may read the event-driven
+    # fold (`trait_held`) — the card's status and the board must then read
+    # the SAME belief the beat walk read. The view is built when EITHER fold
+    # consumer is declared (the laziness law: an unarmed pack pays nothing),
+    # and the traits fold is computed only when a measure actually reads it.
+    trait_measures = TRAIT_TEST in drive_demand(pack)
+    view = (
+        KnowledgeView.from_events(events)
+        if echo_modifiers_declared(pack) or trait_measures
+        else None
+    )
+    fold_tick = events[-1].t if events else 0
+    echoes = (
+        echo_scores(pack, view, fold_tick)
+        if view is not None
+        else ()
+    )
+    traits = (
+        crystallized_traits(pack, view, fold_tick)
+        if view is not None and trait_measures
+        else ()
+    )
+    knower = _knower_id(pack, state, knower)
+    player_id = pack.player_id()
+    if knower == player_id:
+        directive_lines = [str(line) for line in config["directives"]]
+        exemplar_lines = [str(line) for line in config["voice_exemplars"]]
+    else:  # mode B: the actor's own role text and voice (BRIEF_SPEC §3.9)
+        origin, entry = actor_entry(pack, state, knower)
+        directive_lines = [str(line) for line in entry["directives"]]
+        if origin == "archetype":
+            # the pack's own note on what the skeletons are for — a born
+            # person's role text is shared by every carrier of the
+            # archetype, so the model is TOLD the exemplars are a support,
+            # not a script (iter-421; the owner's no-clamp requirement).
+            note = config.get("skeleton_note")
+            if isinstance(note, str) and note.strip():
+                directive_lines.append(note)
+        exemplar_lines = [str(line) for line in entry["voice_exemplars"]]
+        anchor_line = _actor_anchor_line(pack, state, knower, echoes=echoes)
+        if origin == "archetype" and anchor_line is not None:
+            # the individuating layer at generation distance: the shared
+            # skeletons cannot make one archetype-mate sound unlike the
+            # other, the born anchors can (`_actor_anchor_line`).
+            exemplar_lines = [anchor_line, *exemplar_lines]
+    beats = beats_crossed(pack.rules, events[-1].t if events else 0)
+    texture_ledger = ledger if ledger is not None else SceneLedger()
+
+    items: dict[str, Sequence[str]] = {
+        "directives": directive_lines,
+        "scene_delta": _scene_delta_lines(events, pack, knower=knower),
+        "scene_texture": _scene_texture_items(events, pack, texture_ledger),
+        "present_entities": _present_entity_items(
+            events, pack, knower=knower, state=state, echoes=echoes,
+            traits=traits,
+        ),
+        "recalled_facts": _recalled_fact_lines(
+            events, pack, knower=knower, query=query, view=view
+        ),
+        "scheduled_lore": _lore_lines(pack, beats=beats),
+        "voice_exemplars": exemplar_lines,
+        "active_options": _option_lines(pack),
+    }
+    assembled: dict[str, Block] = {}
+    for block_id in BRIEF_BLOCK_IDS:
+        if block_id == "directives":
+            # Never dropped (BRIEF_SPEC §5.2) — the lint guarantees the
+            # lines fit their own hard budget, so no fill law applies.
+            assembled[block_id] = Block(block_id, tuple(items[block_id]), 0)
+        else:
+            assembled[block_id] = _fill(block_id, items[block_id], budgets[block_id])
+    assembled = _evict_overflow(assembled, int(config["total_hard"]))
+    return Brief(blocks=tuple(assembled[block_id] for block_id in BRIEF_BLOCK_IDS))
+
+
+def render_brief(brief: Brief) -> str:
+    """Render the exact byte format (BRIEF_SPEC §7): `## <block>` headers,
+    one blank line between blocks, trailing newline."""
+    chunks = ["\n".join(block.render()) for block in brief.blocks]
+    return "\n\n".join(chunks) + "\n"
+
+
+def brief_from_log(
+    log_path: Path,
+    pack: Pack,
+    schema: Mapping[str, Any],
+    ledger: SceneLedger | None = None,
+    *,
+    knower: str | None = None,
+    query: str | None = None,
+) -> str:
+    """Read a committed log and render its brief — the golden-fixture
+    byte-identity entry point (same (log, ledger) → same brief bytes);
+    `knower`/`query` pass through to `assemble_brief` (mode B)."""
+    _header, events = read_log(log_path, schema)
+    return render_brief(
+        assemble_brief(events, pack, ledger, knower=knower, query=query)
+    )

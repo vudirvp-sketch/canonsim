@@ -1,0 +1,312 @@
+# VALIDATION_SPEC.md — Validation Contract (Phase 1)
+
+> Trigger fired at phase-1 start (`docs/SPECS_BACKLOG.md` sketch row); written
+> iter-9 from the built LLM-free half, not ahead of it. Single owner of the
+> validator's contract; the mechanism donors are `docs/blueprint/phases.md` §1
+> (the validator + the scene ledger). The intent door stays `INTENT_SCHEMA.md`'s,
+> events stay `docs/EVENT_SCHEMA.md`'s — this doc never restates them. No LLM,
+> no network anywhere in this contract or its code (INV-4 unchanged — the
+> narrator boundary landed agent-in-the-loop, D-055: the narrator is
+> external, the repo stays engine-only). ≤300 lines.
+
+## 1. What the validator is
+
+The validator is the mediator's **deterministic gate between every LLM output
+and canon**: `proposal → check → commit → narrative` (VISION §4 Layer 2). It
+is a pure function of `(proposal, log, pack)` — no RNG, no wall-clock, writes
+nothing (INV-1/INV-2; the D-042 read-side family). The commit step is the
+intent door and ONLY the intent door (D-037): the validator never writes
+canon, never merges, never sanitizes text. The narrative step is the
+narrator's — external since iter-12 (D-055, §7.1).
+
+Scope split inside phase 1:
+
+| Half | Status | Contents |
+|---|---|---|
+| LLM-free (iter-9, this spec's code) | landed | proposal shaping (§3), verdicts (§4), ExpectedVersion OCC (§5), fact-transaction pass-through (§6), regen protocol core (§7), golden-set plumbing (§9) |
+| Live wiring (iter-12, D-055 — agent-in-the-loop) | landed | the response document + session wiring (§7.1), dry-mode rendering (the L12 ladder), the mediator session loop (`cli/mediator.py`; the extraction pass + the runtime inference engine stay deferred, §10) |
+
+## 2. The structural boundary (injection neutralization, D-018)
+
+Mode-A prose is **never a fact proposal**. The validator accepts exactly one
+structured document shape (§3); there is no prose field anywhere in it, so
+**no post-hoc text sanitization exists or is needed** — prompt injection can
+carry instructions, but instructions are not a claim, an intent, or a slot,
+and nothing else crosses this boundary. Shape violations raise `ProposalError`
+loudly: the grammar-constrained emitter (the phase-2 C-parser, or a test
+harness) is the author, and author bugs crash (the loud/soft front-door law).
+Malformed LLM output is the boundary's degradation problem (ladder:
+extraction pass → dry mode, L12), handled BEFORE the validator is called —
+the validator itself never guesses, never repairs, never degrades.
+
+### 2.1 The invented-entity prose floor (iter-66, D-095; the born half, iter-420)
+
+The response document's `prose` (§7.1) is the boundary's one free-text
+field. It is never parsed, never repaired, never read as instructions —
+the §2 law holds unchanged. It carries exactly ONE structural check,
+the closed-world twin of the claim side's `unknown_entity` verdict: a
+capitalized token in unambiguous proper-noun position (non-sentence-
+initial; quotes and line breaks restart the capital law, commas and
+dashes do not) must be a word of the closed world's name vocabulary
+(`brief/scan.py::name_floor` — the pack's own declared names PLUS the
+names the log has BORN, both read directly, never restated; a name born
+by `generated_name` exists from its birth event on, so the static half
+alone refused canon — `prosefloor-3`, found at iter-419 and closed here).
+**Existence, never visibility**: a name may be legally
+narrated off-stage (the world holds what the current call's cards do
+not show) — knowledge-state is the leak suite's instrument (all four
+layers), never this floor's. Violations are dry `REFUSED prose <name>
+(invented_entity)` lines through the §7 ladder verbatim; the floor runs
+at the boundary AFTER the shape gate and BEFORE the proposal/delta
+gates (the cheapest gate first — a hallucinated world is more
+fundamental than a mismatched claim). Sentence-initial capitals are
+exempt by law: English mandates the capital there, and telling a
+fronted common noun from a name requires a dictionary — out of scope
+under the stdlib-only law; the live gap is bg-7's to measure before
+any extension is considered (the surface-section decision rides those
+numbers).
+
+**prosefloor-2 (iter-72, D-104) — the lowercase twin's DETECTION half
+(D-096's routing: the refusal ladder is NOT the work).** The position
+law is blind to lowercase relation/attribute assertions ("the thief's
+brother", "a gift"), so `brief/scan.py` exports two instruments, never
+a gate: `relation_attribute_tokens(prose)` — the lowercase tokens in
+the two unambiguous assertion slots (the determiner-headed copular
+predicate, the 's contraction and up to two lowercase interveners
+included; the possessive tail, the intensifiers own/very skipped; bare
+adjectival predicates are EXCLUDED by declared law — tone-vs-claim
+needs semantics, the sentence-initial exemption's class — and
+capitalized tokens stay out, the name floor's domain) — and
+`modeled_vocabulary(pack)` — the pack's declared English words (display
+names, role words, NPC moods, relation/state axes, the born anchor pools'
+token words; the name manifest reused, trait/knowledge snake_case tokens
+and enum values out). The
+split is the consumer's set arithmetic: grounded / unmodeled — a
+measurement export for bg-8's weaker-engine arm (TEST_PLAN §8.4); a
+future ladder may only ride those numbers, never these. No refusal
+lines, no regen spend, no boundary wiring: the pipeline's bytes are
+untouched by the instrument. The corpus calibration baseline is pinned
+exact in `tests/test_scan.py` — the single owner of the split numbers
+(D-024).
+
+## 3. The proposal document
+
+One document per narrator call, machine-shaped:
+
+| Field | Type | Req | Meaning |
+|---|---|---|---|
+| `expected_event_seq` | int ≥ 0 | yes | the log's event count the proposal was based on — the OCC anchor (§5) |
+| `claims` | list of Claim | no | assertions the prose makes about canon (reverse validation, §4) |
+| `intents` | list of IntentProposal | no | fact proposals for the intent door (§6) |
+
+Claim kinds (closed set — additive kinds are a spec edit, never silent):
+
+| Kind | Fields | Asserts |
+|---|---|---|
+| `state` | `entity`, `prop`, `value` | the projection holds exactly this value |
+| `knowledge` | `who`, `knows` | the knower holds this token (channel/fidelity are render details, never claim fields) |
+| `event` | `event_id`, `type` (optional) | this event exists, with this type |
+
+IntentProposal fields: `kind`, `actor` (required), `target`, `fields`,
+`based_on_event_seq` (INTENT_SCHEMA §2 grammar — the C-parser's target
+shape). Every unknown key, wrong type, or missing required key anywhere in
+the document is a loud `ProposalError`; the document is closed, not
+lenient — that closedness IS the neutralization clause of §2.
+
+## 4. Verdicts (the honest-verdict law, UAP)
+
+Every claim gets one verdict: `supported | contradicted | insufficient_data`.
+**Verdicts are always evaluated against current canon** (the full log); the
+anchor only participates in attribution (§5). Canon is closed-world:
+
+| Claim | supported | contradicted | insufficient_data |
+|---|---|---|---|
+| `state` | projection value == claim | value differs (`value_mismatch`; evidence = current value) or entity unknown (`unknown_entity` — an invented entity is a fabricated fact) | prop not modeled on a known entity (`unmodeled_prop`) |
+| `knowledge` | the index holds the token (evidence = first source event) | token absent (`token_absent` — the blind-NPC law: no record, cannot know), `who` unknown (`unknown_entity`), or `who` is an item/location (`cannot_know`) | never — the knowledge index is complete and decidable |
+| `event` | id found, type matches (if given) | id not in the log (`unknown_event`) or type differs (`event_type_mismatch`, evidence = actual type) | never — the log is the complete event registry |
+
+The honest default: canon never fabricates an opinion it does not hold — a
+prop it does not model is `insufficient_data`, NOT a contradiction (UAP
+INSUFFICIENT_DATA semantics; never invented evidence). Reasons are a closed
+vocabulary (module constant `REASONS`); evidence and causes are structured
+values, never prose.
+
+## 5. ExpectedVersion OCC (stale-version rejection)
+
+The document anchor vs the current log length `M = len(events)`:
+
+- **Fresh** (`anchor == M`): verdicts as §4.
+- **Stale** (`anchor < M`): the proposal is never accepted on its own terms.
+  Every claim is re-validated against current canon; then:
+  - any `contradicted` → **refused**. A claim that held at the anchor and
+    broke since carries `cause` = the first event after the anchor whose
+    application broke it (reason `stale_broken`; the INTENT_SCHEMA §4
+    attribution semantics — first break wins), so the refusal note can say
+    what moved. Knowledge and event claims are append-only in canon and can
+    never flip via staleness — only `state` claims can.
+  - all claims hold → **rebased**: verdicts stand against current canon, the
+    report records `rebased_to = M`, and intents pass through with their own
+    anchors unchanged (the door re-checks — one mechanism, §6).
+- **Future** (`anchor > M`): loud `ProposalError` — a proposal referencing a
+  version that does not exist is an emitter bug, not world data.
+
+## 6. The fact transaction (proposal → check → commit → narrative)
+
+- `intents` are shaped into `IntentData` (loud `ProposalError` on a kind
+  outside the pack's action grammar, unknown fields, missing target —
+  reusing `core.intent.validate_shape`, the same loudness law as playscript
+  steps) and handed to the intent door with their `based_on_event_seq`
+  **unchanged**. The door's own OCC (INTENT_SCHEMA §4) stays the single
+  intent enforcement point: stale-and-broken rejects at completion as a
+  committed `intent_rejected` fact; stale-and-intact proceeds. The validator
+  never pre-merges, never rewrites anchors, never executes.
+- Door rejections are committed events (attempts are facts); mediator-side
+  refusals (§5, §7) are NOT events — nothing happened in the world, the beat
+  just regens. These two refusal families never mix.
+- Texture promotion rides the same door (D-049): the committed event IS the
+  promotion. The withdrawal mirror (a pending texture Intent whose ledger
+  entry retired) is §8's protocol clause.
+
+## 7. The regen protocol (≤2) and the call-budget reconciliation
+
+A refused document (any `contradicted` claim, or a §8 laundering refusal)
+triggers the retry protocol, per beat:
+
+- **Regen** = one narrator re-invocation with the refusal note (the
+  contradicted claims + reasons + causes, dry structured lines riding the
+  next call's directives — D-049). `RegenBudget` caps regens at **2 per
+  beat** (architecture, VISION §4; not pack data).
+- **Exhaustion → dry mode for the beat** (the L12 floor: template/dry line):
+  never a silent drop, never a blocked beat, nothing laundered.
+- **Budget reconciliation** (this spec owns it): VISION §4 fixes two numbers
+  — "max 2 LLM calls per beat on the critical path" and "≤2 regenerations".
+  They bound different quantities. The 2-call law is the **steady state**:
+  the narrator plus at most one auxiliary call — the extraction pass, and
+  only when the inline delta is absent or malformed. The ≤2-regens law is
+  the **retry ceiling**: regens preempt the extraction slot (a regen
+  re-delivers the delta; extraction and a regen never share a beat), so the
+  worst-case beat is 3 calls (narrator + 2 regens) — the bounded, loud
+  exception the steady-state law tolerates. Every regen is counted
+  (`regen_count`, §9), never silent; chronic exhaustion is a narrator or
+  prompt bug, observable, not absorbed.
+
+### 7.1 The response document + the session wiring (iter-12, D-055)
+
+The narrator replies with ONE closed document per call
+(`brief/mediator.py::narrator_response_from_mapping` — the boundary's
+shape gate; the call document's format is `BRIEF_SPEC.md` §7.1's):
+
+| Field | Type | Req | Meaning |
+|---|---|---|---|
+| `prose` | non-empty string | yes | the beat's narrative (shown to the player on accept) |
+| `texture_delta` | the ledger delta document | no | established / retired / refs — the §8 gateway's input |
+| `proposal` | the §3 proposal document | no | claims + intents |
+
+- The deep shape gates (`check_delta_shape`, `proposal_from_mapping`)
+  run AT the boundary, before any gate: malformed output is the
+  ladder's problem (a regen with a `MALFORMED` note; exhaustion → dry
+  mode), never the validator's or the gateway's — they never guess,
+  never repair (§2).
+- The invented-entity prose floor (§2.1) runs at the boundary after
+  the shape gate and before the proposal/delta gates: an invented name
+  refuses the whole document through this section's ladder — same
+  budget, same L12 exhaustion, the REFUSED line riding the
+  re-invocation, never a crash.
+- **A refused document never feeds intents**: delta refusals or
+  contradicted claims regen the WHOLE beat — the re-invocation
+  re-delivers prose, delta and proposal; intents reach the door only on
+  an accepted document. Accepted delta items stay applied across
+  regens (the gateway's idempotent duplicate rule absorbs
+  re-assertions).
+- The narrator is EXTERNAL (D-055): the dev-time engine is the owner's
+  assistant over files — the mediator emits `call_<N>.md`, the operator
+  writes `reply_<N>.json` (gitignored runtime artifacts); no LLM, no
+  network, no runtime dependency in code (INV-4 unchanged).
+- The mediator's noun resolution feeds the door: an intent survives
+  only with a live texture entry (an unresolvable noun never becomes an
+  Intent), a player actor (mode A), and no duplicate entry per document
+  (one promotion per entry per beat — the live-only `mark_promoted`
+  law); everything else is a `WITHDRAWN` note riding the next call,
+  never an event (§8's mirror).
+- The beat order is D-049's: commit → retire_contradicted(window) →
+  sync → assemble/call → reply → delta → intents → `mark_promoted`
+  (`cli/mediator.py` — the orchestration is periphery, D-046; the
+  document layer is `brief/` pure functions).
+- Degradation ladder L12 from day one: narrator → template (the beat's
+  own chronicle lines) → dry log line. Never a blocked beat, never a
+  silent drop (§7).
+- **Accepted beats surface their verdict summary** (iter-13, KI#44): dry
+  `BEAT claims/texture/intents/rebased` lines in `BeatResult.notes` —
+  the honest-verdict law's visibility clause, so a live session can
+  tally the phase-1 exit numbers (invented/unverifiable/rebased/regens
+  per beats, ROADMAP §2; refusals were always visible via the regen
+  notes). Operator output only: these lines never ride the next call's
+  protocol section (only refusals and withdrawals do). A prose-only
+  beat summarizes nothing.
+
+## 8. Scene-ledger protocol clauses (mechanism: blueprint §1, D-048/D-049)
+
+The ledger's LLM-free half landed iter-10 (`brief/ledger.py` — entry
+shape, scene derivation, lifecycle, pinning, the gateway; block/window
+contract `BRIEF_SPEC.md` §3.3). These are the validation-side clauses
+this spec owns:
+
+- **One gateway.** Inline deltas and extraction output pass the SAME
+  checks: scope (shape/target; scene match; entity presence),
+  establishment-time canon overlap (BOTH prop sources — event-born
+  projection props and the pack-modeled fields of the entity record:
+  `exits`, `name`, `mood`, …; iter-11a), laundering (re-asserted
+  contradicted/promoted-away values), unique-slot (the one-object claim
+  is held by every entry status except retirement — live texture,
+  promoted, contradicted; only a narrator-declared retirement releases
+  it; iter-11a), and the idempotent duplicate rule (same (slot, value)
+  in scope = no-op). Refusals use the §7 protocol verbatim — one
+  refusal shape (dry `REFUSED <item> (<reason>)` lines riding the next
+  call's directives), one regen budget.
+- **Texture-OCC mirror.** A pending texture-referencing Intent whose entry
+  retires (contradiction, scene close) is withdrawn by the mediator BEFORE
+  the door could complete it — the mediator-side mirror of intent OCC;
+  withdrawal is not an event (the attempt never reached the world).
+- **Render vs epistemics.** Prose may render NPCs perceiving texture; that
+  creates no knowledge records — mechanical load flows only through
+  committed events. A prose implication of state change is a claim
+  (contradicted → §7), never a ledger job.
+
+## 9. Golden-set plumbing (computed, never LLM-judged)
+
+The golden set is a committed JSON document pinning verdict semantics
+against a committed log — the regression harness the narrator boundary and
+bg-3 reuse:
+
+```json
+{"log": "tests/fixtures/plumbing_smoke_seed42.jsonl",
+ "cases": [{"name": "...", "claim": {"kind": "state", "...": "..."},
+            "expect": "supported"}]}
+```
+
+`load_golden_set` (loud on shape drift) → `run_golden_set(golden, events,
+pack)` → per-case expected-vs-computed diff plus summary counts. Every
+comparison is computed (dict equality over structured verdicts); no LLM
+judges anything, ever. The report carries the harness metrics: `invented`
+(contradicted count) and `unverifiable` (insufficient_data count) — bg-3's
+invented-facts metric and the §7 `regen_count` ride the same numbers.
+The floor's `invented_entity` refusals ride the same notes: the session
+tallies read every refusal family from the same place, no second
+counter exists.
+
+## 10. Deferred (just-in-time — writing these early = scope creep)
+
+| Deferred | Arrives with | Owner |
+|---|---|---|
+| ~~The runtime inference engine (llama.cpp + GBNF) + the C-parser wiring~~ — **LANDED iter-177 (engine-1/D-193)**: the adapter `cli/engine.py` (INV-4's one-module form), the narrator requests' mapping `docs/PRESENTATION_SPEC.md`'s, this spec's §7 ladder mapping the engine's failures UNCHANGED (the regen budget and the L12 floor engine-agnostic) | — | AGENTS §4 (INV-4's standing form) |
+| The LLM-based extraction pass (an inline-delta-absent/malformed auxiliary; the 2-call steady state stands) | a measured need the inline delta + the regens do not cover | blueprint §1 |
+| The C-parser emitting IntentProposal JSON | phase 2 | blueprint §2 |
+| Knowledge-negation claims, fidelity-bearing claims | a real consumer (phase-2 parser disputes) | this spec §3 |
+| Semantic invalidation (a spreading fire kills the candlelight) | narrator delta territory or a later validator pass — never mediator guessing | blueprint §1 |
+
+## 11. Versioning
+
+The validator is a read-side derived artifact (no committed bytes of its
+own); the **committed golden fixture** is test data pinning §4 semantics.
+A verdict-semantics change = a spec edit + a golden-fixture regen in the
+same commit (the BRIEF_SPEC §8 pattern; drift is loud by construction).

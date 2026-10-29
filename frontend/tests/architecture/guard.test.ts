@@ -1,0 +1,447 @@
+/**
+ * The frontend architecture guard — the tooling floor's first row
+ * (FRONTEND_WEB_LAW §11, the dependency-boundary check), landed as
+ * the backend `tests/test_architecture.py`'s parity form: the
+ * conventions that hold by discipline become executable, so a
+ * violation is a RED TEST, never a silent drift. The instrument is
+ * deliberately the existing vitest suite (AGENTS §2.8: existing
+ * mechanism first — dependency-cruiser/eslint-boundaries stay
+ * parked rows for when the import graph outgrows a guard test).
+ *
+ * What is enforced, each row citing its law:
+ *   R1  the network surface (§3/§5, INV-4's client-side mirror):
+ *       `fetch(` exists ONLY in the typed gateway client — the one
+ *       transport adapter; everything else reaches the gateway
+ *       through it, never around it.
+ *   R2  the stream admission (§5): the browser stream adapter
+ *       (api/gateway/stream.ts, admitted iter-306 over the iter-305
+ *       gateway contract) is the ONE home of EventSource; no
+ *       XMLHttpRequest / WebSocket / serviceWorker anywhere in src —
+ *       every further transport opens only through its own gateway
+ *       contract + admission.
+ *   R3  the forbidden stores (§6): no localStorage/sessionStorage/
+ *       BroadcastChannel/indexedDB/caches — each tab is an
+ *       independent client; browser storage is never truth.
+ *   R4  the seam purity (§7): `src/api/**` imports nothing outside
+ *       itself (the gateway seam never depends upward).
+ *   R5  surface independence (§7): a feature never imports another
+ *       feature's internals — surfaces mount through the ONE
+ *       composition root, not through each other.
+ *   R6  state coupling is type-only (§7): features may read
+ *       presentation TYPES from `src/state/**` (`import type`), but
+ *       never runtime-couple to it — surfaces stay portable.
+ *   R7  the ONE composition root (§7): only `src/app/composition/**`
+ *       wires features AND state together.
+ *   R8  the test seam: src never imports from tests.
+ *
+ * The translation floor (FRONTEND_UIUX_LAW §17, the i18n-1 row):
+ *   T1  no raw user-facing text in the MIGRATED surfaces — every
+ *       literal routes through the ONE boundary (`tr`); verbatim
+ *       backend vocabulary (op/field names like `session.attach`,
+ *       `llama_server_exe`) is exempt: it is the contract's own
+ *       closed set, never localized.
+ *
+ * The visual floor (VISUAL_SYSTEM_UI — the token root is the one
+ * source of truth; a literal outside it is drift):
+ *   V1  colors (§2/§3): no raw hex/rgb outside `:root` (iter-297).
+ *   V2  dimensions + typography (§2.1/§2.2): no raw font-size
+ *       (px/rem), font-family stack, numeric font-weight, or
+ *       border-radius px outside `:root` (iter-304 — the seven-step
+ *       type scale, the family stacks, the weight, the radius
+ *       scale; em ratios stay legal as contextual metrics).
+ *   V3  spacing (§1.1/§2.1): no raw px/rem literal in a
+ *       padding/margin/gap declaration outside `:root` (iter-307 —
+ *       the ten-step spacing scale consolidating the seventeen
+ *       organic values; 0 and auto stay literal — the zero/auto
+ *       semantics, exactly like the radius compound's 0; em/% stay
+ *       legal as contextual ratios).
+ *
+ * Scans are CALL-FORM patterns (e.g. `fetch(`, `localStorage.`) so
+ * law-restating docstrings never false-positive — a comment saying
+ * "no component ever sees fetch" is documentation, not usage.
+ */
+import { readdirSync, readFileSync, statSync } from "node:fs";
+import { join, relative, sep } from "node:path";
+import * as ts from "typescript";
+import { describe, expect, it } from "vitest";
+
+// npm scripts always execute with cwd = the package root (frontend/),
+// and the zero-command launcher drives the same npm — so cwd is the
+// deterministic anchor. Fail LOUD if invoked from elsewhere, never
+// silently scan a wrong tree.
+const SRC = join(process.cwd(), "src");
+if (!statSync(SRC, { throwIfNoEntry: false })?.isDirectory()) {
+  throw new Error(
+    `architecture guard: no src/ under ${process.cwd()} — run the suite from frontend/ (npm test)`,
+  );
+}
+
+interface SourceFile {
+  readonly rel: string;
+  readonly text: string;
+  readonly imports: readonly ImportStmt[];
+}
+
+interface ImportStmt {
+  readonly specifier: string;
+  readonly typeOnly: boolean;
+}
+
+function walk(dir: string): string[] {
+  const out: string[] = [];
+  for (const name of readdirSync(dir)) {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) {
+      out.push(...walk(full));
+    } else if (name.endsWith(".ts") || name.endsWith(".tsx")) {
+      out.push(full);
+    }
+  }
+  return out;
+}
+
+/** Parse top-level import/export-from statements (this tree's uniform style). */
+function importsOf(text: string): ImportStmt[] {
+  const out: ImportStmt[] = [];
+  const lines = text.split("\n");
+  let stmt: string[] = [];
+  let open = false;
+  const flush = (): void => {
+    const joined = stmt.join("\n");
+    const spec = /from\s+["']([^"']+)["']/.exec(joined);
+    const sideEffect = /^import\s+["']([^"']+)["']/.exec(stmt[0] ?? "");
+    const specifier = spec?.[1] ?? sideEffect?.[1];
+    if (specifier !== undefined) {
+      out.push({
+        specifier,
+        typeOnly: /^import\s+type\b/.test(stmt[0] ?? ""),
+      });
+    }
+    stmt = [];
+  };
+  for (const line of lines) {
+    if (!open && /^(import|export)\b/.test(line)) {
+      open = true;
+      stmt = [line];
+      if (/from\s+["']/.test(line) || /^import\s+["']/.test(line)) {
+        flush();
+        open = false;
+      }
+    } else if (open) {
+      stmt.push(line);
+      if (/from\s+["']/.test(line)) {
+        flush();
+        open = false;
+      }
+    }
+  }
+  return out;
+}
+
+const FILES: SourceFile[] = walk(SRC).map((full) => {
+  const text = readFileSync(full, "utf8");
+  return {
+    rel: relative(SRC, full).split(sep).join("/"),
+    text,
+    imports: importsOf(text),
+  };
+});
+
+/** Where a relative specifier points, as a src-rooted path ("api/gateway/contracts.ts"). */
+function resolveRel(fromRel: string, specifier: string): string | null {
+  if (!specifier.startsWith(".")) return null; // a bare package specifier (react, zod)
+  const stack = fromRel.split("/").slice(0, -1);
+  for (const part of specifier.split("/")) {
+    if (part === "." || part === "") continue;
+    if (part === "..") stack.pop();
+    else stack.push(part);
+  }
+  return stack.join("/");
+}
+
+function hits(pattern: RegExp): { rel: string; line: number; excerpt: string }[] {
+  const found: { rel: string; line: number; excerpt: string }[] = [];
+  for (const file of FILES) {
+    file.text.split("\n").forEach((line, i) => {
+      if (pattern.test(line)) {
+        found.push({ rel: file.rel, line: i + 1, excerpt: line.trim().slice(0, 90) });
+      }
+    });
+  }
+  return found;
+}
+
+describe("R1 — the network surface: fetch exists ONLY in the typed gateway client (§3/§5)", () => {
+  it("has exactly one fetch site: src/api/gateway/client.ts", () => {
+    const found = hits(/\bfetch\(/);
+    expect(
+      found.map((f) => f.rel),
+      "the transport adapter is the ONLY module that may touch the wire",
+    ).toEqual(["api/gateway/client.ts"]);
+  });
+});
+
+describe("R2 — the stream admission: the SSE adapter is the ONE sanctioned stream transport (§5)", () => {
+  it("EventSource exists ONLY in api/gateway/stream.ts; no XMLHttpRequest / WebSocket / serviceWorker anywhere in src", () => {
+    // The admission order's step 3 landed (iter-306): the browser
+    // stream adapter behind the typed gateway client IS the sanctioned
+    // home of EventSource — one module, exactly like fetch's R1. The
+    // unrequested transports (XMLHttpRequest, WebSocket, a service
+    // worker) stay forbidden until their own gateway contracts +
+    // admissions exist.
+    const eventSourceHits = hits(/\bnew\s+EventSource\b/);
+    expect(
+      eventSourceHits.map((f) => f.rel),
+      "the stream adapter is the ONLY module that may hold a live stream",
+    ).toEqual(["api/gateway/stream.ts"]);
+    const others = hits(/\bnew\s+(XMLHttpRequest|WebSocket)\b|\bserviceWorker\b/);
+    expect(others).toEqual([]);
+  });
+});
+
+describe("R3 — the forbidden browser stores: no storage as truth, no cross-tab bus (§6)", () => {
+  it("has no localStorage / sessionStorage / BroadcastChannel / indexedDB / caches in src", () => {
+    const found = hits(
+      /\blocalStorage\.|\bsessionStorage\.|\bnew\s+BroadcastChannel\b|\bindexedDB\.|\bcaches\./,
+    );
+    expect(found).toEqual([]);
+  });
+});
+
+describe("R4 — the seam purity: src/api never imports upward (§7)", () => {
+  it("api modules import only within src/api (plus bare packages)", () => {
+    const violations: string[] = [];
+    for (const file of FILES.filter((f) => f.rel.startsWith("api/"))) {
+      for (const imp of file.imports) {
+        const target = resolveRel(file.rel, imp.specifier);
+        if (target !== null && !target.startsWith("api/")) {
+          violations.push(`${file.rel} -> ${imp.specifier} (${target})`);
+        }
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("R5 — surface independence: no cross-feature imports (§7)", () => {
+  it("a feature never imports another feature's internals", () => {
+    const violations: string[] = [];
+    for (const file of FILES.filter((f) => f.rel.startsWith("features/"))) {
+      const own = file.rel.split("/")[1];
+      for (const imp of file.imports) {
+        const target = resolveRel(file.rel, imp.specifier);
+        if (target?.startsWith("features/") === true && target.split("/")[1] !== own) {
+          violations.push(`${file.rel} -> ${imp.specifier}`);
+        }
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("R6 — features couple to state ONLY through presentation types (§7)", () => {
+  it("every features -> state import is `import type`", () => {
+    const violations: string[] = [];
+    for (const file of FILES.filter((f) => f.rel.startsWith("features/"))) {
+      for (const imp of file.imports) {
+        const target = resolveRel(file.rel, imp.specifier);
+        if (target?.startsWith("state/") === true && !imp.typeOnly) {
+          violations.push(`${file.rel} -> ${imp.specifier} (a VALUE import)`);
+        }
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("R7 — the ONE composition root (§7)", () => {
+  it("only app/composition wires features AND state together", () => {
+    const violations: string[] = [];
+    for (const file of FILES) {
+      const targets = file.imports.map((imp) => resolveRel(file.rel, imp.specifier));
+      const hasFeatures = targets.some((t) => t?.startsWith("features/") === true);
+      const hasState = targets.some((t) => t?.startsWith("state/") === true);
+      if (hasFeatures && hasState && !file.rel.startsWith("app/composition/")) {
+        violations.push(file.rel);
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("R8 — the test seam: src never imports from tests", () => {
+  it("no src module imports anything outside src (besides bare packages)", () => {
+    const violations: string[] = [];
+    for (const file of FILES) {
+      for (const imp of file.imports) {
+        const target = resolveRel(file.rel, imp.specifier);
+        if (target !== null && (target.startsWith("../") || target === "..")) {
+          violations.push(`${file.rel} -> ${imp.specifier}`);
+        }
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("V1 — the visual floor: color literals live only in the token root (VISUAL_SYSTEM_UI §2/§3)", () => {
+  it("styles.css: no raw hex/rgb colors outside :root (a color is a token, never a literal)", () => {
+    const cssPath = join(SRC, "app", "composition", "styles.css");
+    const css = readFileSync(cssPath, "utf8");
+    const rootStart = css.indexOf(":root");
+    expect(rootStart).toBeGreaterThanOrEqual(0);
+    const rootEnd = css.indexOf("}", rootStart);
+    // The token set itself MAY name colors (that is the one source of truth).
+    const literal = /#[0-9a-fA-F]{3,8}\b|rgba?\(/g;
+    const chunks: readonly (readonly [string, string])[] = [
+      ["before :root", css.slice(0, rootStart)],
+      ["after :root", css.slice(rootEnd + 1)],
+    ];
+    const violations: string[] = [];
+    for (const [where, chunk] of chunks) {
+      const hits = chunk.match(literal);
+      if (hits !== null) {
+        violations.push(`${cssPath} ${where}: ${hits.join(", ")}`);
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("V2 — the dimension floor: typography + radius literals live only in the token root (VISUAL_SYSTEM_UI §2.1/§2.2)", () => {
+  it("styles.css: no raw font-size (px/rem), font-family stack, numeric font-weight, or border-radius px outside :root", () => {
+    const cssPath = join(SRC, "app", "composition", "styles.css");
+    const css = readFileSync(cssPath, "utf8");
+    const rootStart = css.indexOf(":root");
+    expect(rootStart).toBeGreaterThanOrEqual(0);
+    const rootEnd = css.indexOf("}", rootStart);
+    const chunks: readonly (readonly [string, string])[] = [
+      ["before :root", css.slice(0, rootStart)],
+      ["after :root", css.slice(rootEnd + 1)],
+    ];
+    const violations: string[] = [];
+    for (const [where, chunk] of chunks) {
+      // font-size: an ABSOLUTE literal (px/rem) is a token violation;
+      // em/% ratios stay legal (the code element's contextual ratio —
+      // relative metrics, never a scale decision).
+      for (const hit of chunk.match(/font-size:\s*[\d.]+(?:px|rem)/g) ?? []) {
+        violations.push(`${cssPath} ${where}: ${hit}`);
+      }
+      // font-family: a quoted stack is a token violation (the family
+      // contract is :root's --font-body-family / --font-mono).
+      for (const hit of chunk.match(/font-family:\s*"/g) ?? []) {
+        violations.push(`${cssPath} ${where}: ${hit}…"`);
+      }
+      // font-weight: a numeric weight is a token violation (the
+      // weight hierarchy is :root's --weight-*).
+      for (const hit of chunk.match(/font-weight:\s*\d+/g) ?? []) {
+        violations.push(`${cssPath} ${where}: ${hit}`);
+      }
+      // border-radius: a raw px radius is a token violation (0 in a
+      // compound is legal — the square corner's own semantic).
+      for (const hit of chunk.match(/border-radius:\s*[^;]*\d+px[^;]*/g) ?? []) {
+        violations.push(`${cssPath} ${where}: ${hit.trim()}`);
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("T1 — the translation boundary: migrated surfaces render through tr() (FRONTEND_UIUX_LAW §17, i18n-1)", () => {
+  // The migrated surface set (i18n-1 band-1 + band-2: the composition
+  // root, the shell, Settings + About, and the seven band-2 surfaces
+  // — Chat, Models, Inference, Observatory, Trajectory, the session
+  // lifecycle, the gateway probes). A surface joins the list in the
+  // same commit that migrates it.
+  const I18N_SURFACES = [
+    "app/composition/App.tsx",
+    "features/shell/Shell.tsx",
+    "features/settings/Settings.tsx",
+    "features/settings/SettingsAbout.tsx",
+    "features/chat/Chat.tsx",
+    "features/models/Models.tsx",
+    "features/inference/Inference.tsx",
+    "features/observatory/Observatory.tsx",
+    "features/trajectory/Trajectory.tsx",
+    "features/session-lifecycle/SessionLifecycle.tsx",
+    "features/gateway-status/GatewayStatus.tsx",
+  ] as const;
+  // The prose-carrying attributes: a string literal here is
+  // user-facing text (a tooltip, a name, a hint inside a control).
+  const PROSE_ATTRS = new Set(["title", "aria-label", "placeholder"]);
+  // The verbatim-token exemption: the backend's own closed
+  // vocabulary (op names, store field names) is data, never prose —
+  // cataloguing it would mistranslate a contract token. The same
+  // shape guards both JSX text and prose attributes (a tooltip that
+  // names an op is still the op's name).
+  const VERBATIM_TOKEN = /^[a-z0-9_.]+$/;
+
+  it("carries no raw JSX text and no prose attribute literals (verbatim tokens exempt)", () => {
+    const violations: string[] = [];
+    for (const rel of I18N_SURFACES) {
+      const full = join(SRC, ...rel.split("/"));
+      const text = readFileSync(full, "utf8");
+      const source = ts.createSourceFile(full, text, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+      const visit = (node: ts.Node): void => {
+        if (ts.isJsxText(node)) {
+          const visible = node.getText(source).trim();
+          if (visible !== "" && !VERBATIM_TOKEN.test(visible)) {
+            violations.push(`${rel} raw JSX text: "${visible.slice(0, 60)}"`);
+          }
+        }
+        if (ts.isJsxAttribute(node)) {
+          const name = ts.isIdentifier(node.name) ? node.name.text : node.name.getText(source);
+          if (PROSE_ATTRS.has(name)) {
+            const initializer = node.initializer;
+            if (
+              initializer !== undefined &&
+              ts.isStringLiteral(initializer) &&
+              /[a-zA-Z]/.test(initializer.text) &&
+              !VERBATIM_TOKEN.test(initializer.text)
+            ) {
+              violations.push(`${rel} ${name} literal: "${initializer.text.slice(0, 60)}"`);
+            }
+          }
+        }
+        node.forEachChild(visit);
+      };
+      visit(source);
+    }
+    expect(violations).toEqual([]);
+  });
+});
+
+describe("V3 — the spacing floor: padding/margin/gap literals live only in the token root (VISUAL_SYSTEM_UI §1.1/§2.1)", () => {
+  it("styles.css: no raw px/rem in spacing declarations outside :root (a spacing value is a token, never a literal)", () => {
+    const cssPath = join(SRC, "app", "composition", "styles.css");
+    const css = readFileSync(cssPath, "utf8");
+    const rootStart = css.indexOf(":root");
+    expect(rootStart).toBeGreaterThanOrEqual(0);
+    const rootEnd = css.indexOf("}", rootStart);
+    const chunks: readonly (readonly [string, string])[] = [
+      ["before :root", css.slice(0, rootStart)],
+      ["after :root", css.slice(rootEnd + 1)],
+    ];
+    // A spacing declaration: the property carries the layout; its
+    // value must be token references. 0 and auto stay literal (the
+    // zero/auto semantics); em/% ratios stay legal (contextual
+    // metrics, the same form as V2's code-element exception).
+    const decl =
+      /((?:row-gap|column-gap|padding|margin|gap)(?:-(?:top|right|bottom|left))?)\s*:\s*([^;{}]+)/g;
+    const literal = /-?\d+(?:\.\d+)?(?:px|rem)\b/;
+    const violations: string[] = [];
+    for (const [where, chunk] of chunks) {
+      for (const m of chunk.matchAll(decl)) {
+        const value = m[2] ?? "";
+        const hit = literal.exec(value);
+        if (hit !== null) {
+          violations.push(
+            `${cssPath} ${where}: ${m[1]}: …${hit[0]} (in "${value.trim().slice(0, 60)}")`,
+          );
+        }
+      }
+    }
+    expect(violations).toEqual([]);
+  });
+});
+

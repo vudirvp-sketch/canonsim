@@ -1,0 +1,506 @@
+"""T1-province — determinism for the province pack (world-2 L2, slice 1
+iter-118 + slice 2 the cultures half iter-119: the generated surface at
+province scale, the settlements on the travel lattice, the spine
+records, the AP crosswalk's first committed consumer; the two name-1
+phonotactic profiles, the condensation travelers, the cultures block).
+
+Same seed + same playscript + same environment = byte-identical logs,
+measured against the committed golden fixture
+(`tests/fixtures/province_smoke_seed42.jsonl`) — the tavern T1's shape
+(`tests/test_t1_determinism.py`), re-run over the THIRD pack at the
+L2 scale: a pack that is data-only over a 324-site generated surface
+proves the universal-core claim at province scale (zero engine edits,
+the module contract D-142).
+
+The travel-loop pins (the L2 scale claims): the move completions land
+exactly at accept-t + the st-6a DERIVED price (`core/travel.py` —
+integer math over the genesis-frozen WorldModel, draw-free: the
+fingerprint stays 0), the watch rotations fire MID-TRAVEL (D-038 —
+the long legs carry the institution's beats), and the knowledge
+transfer lands strictly INSIDE a leg (the road T1's measured instance
+re-produced at province scale: the duty sergeant briefing his relief
+from the market post, t=3240 inside the Malby → Thornmill leg).
+
+The L2 spine pins (the AP crosswalk's first committed consumer,
+D-148/D-152): the province's NPCs carry spine records whose every
+flaw is consumed by an urgency entry — the pack-ci crosswalk's first
+non-crafted instance.
+
+The cultures pins (slice 2, iter-119): the road traffic condenses at
+the FIRST beat (the load-state origin law — the PC walks into a
+materialized world, the DF precedent), the members' names born on
+their own streams (the drawn names riding the golden bytes), the two
+tongues' posture (lowland soft vs hill hard, the phonotactic claim
+made checkable), the cultures block's committed instance (the AP-8
+prohibition surface's first consumer, the doubly-consumed flaws), and
+the budget re-declare the slice's own honesty.
+"""
+
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+from core.log import read_log
+from core.loop import Simulator, load_playscript
+from core.pack import load_pack
+from core.travel import travel_ticks
+from render.chronicle import render_chronicle
+
+REPO = Path(__file__).resolve().parents[1]
+SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
+GOLDEN = REPO / "tests" / "fixtures" / "province_smoke_seed42.jsonl"
+SCRIPT = load_playscript(REPO / "tests" / "playscripts" / "province_smoke.json")
+PACK_DIR = REPO / "content" / "province_pack"
+
+#: The route the smoke script walks (origin -> destination per move
+#: step): the artery's five legs — the hill gate road, the garrison
+#: road, the town road, the manor road — prices read from the travel
+#: law over the 324-site lattice.
+LEGS: tuple[tuple[str, str], ...] = (
+    ("loc_riverroad", "loc_weirstair"),
+    ("loc_weirstair", "loc_riverroad"),
+    ("loc_riverroad", "loc_keep"),
+    ("loc_keep", "loc_malby"),
+    ("loc_malby", "loc_thornmill"),
+)
+#: The waits between the legs (the script's own data): leg index ->
+#: the wait ticks that follow it (after the weir leg, after the road
+#: leg, and the market-business wait before the manor leg).
+WAITS: dict[int, int] = {0: 30, 1: 15, 3: 600}
+
+
+def run(tmp_path: Path, name: str) -> tuple[bytes, int]:
+    pack = load_pack(PACK_DIR)
+    sim = Simulator(pack, SCRIPT["seed"], tmp_path / name, SCHEMA, commit="0000000")
+    result = sim.run_playscript(SCRIPT)
+    return (tmp_path / name).read_bytes(), result.fingerprint
+
+
+def _events(path: Path) -> list[dict]:
+    return [
+        json.loads(line)
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if "schema_version" not in line
+    ]
+
+
+def test_two_runs_are_byte_identical(tmp_path: Path) -> None:
+    first, fp1 = run(tmp_path, "a.jsonl")
+    second, fp2 = run(tmp_path, "b.jsonl")
+    assert first == second
+    assert fp1 == fp2
+
+
+def test_fresh_run_matches_committed_golden(tmp_path: Path) -> None:
+    fresh, fingerprint = run(tmp_path, "fresh.jsonl")
+    assert fresh == GOLDEN.read_bytes()
+    # edge-priced moves draw nothing (the price is a pure integer
+    # function of pack data + the genesis-frozen model, INV-2-clean by
+    # construction) and this script runs no opposed check — the
+    # substantive stream is never drawn.
+    assert fingerprint == 0
+
+
+# -- the fixture-regeneration guard (TEST_PLAN.md §1.1, the tavern twin) --
+
+
+def _current_schema_version() -> str:
+    schema_id = SCHEMA.get("$id", "")
+    assert "/" in schema_id, (
+        f"schema $id must look like 'canonsim/event/<ver>', got {schema_id!r}"
+    )
+    return schema_id.rsplit("/", 1)[-1]
+
+
+def test_committed_fixture_schema_version_matches_current_schema() -> None:
+    header_line = GOLDEN.read_text(encoding="utf-8").splitlines()[0]
+    header = json.loads(header_line)
+    assert header["schema_version"] == _current_schema_version()
+
+
+def test_fresh_regeneration_byte_diff_against_committed(tmp_path: Path) -> None:
+    fresh, _ = run(tmp_path, "regen.jsonl")
+    committed = GOLDEN.read_bytes()
+    assert fresh == committed, (
+        "province fixture regeneration diverged from the committed fixture — "
+        "a behavior change altered emitted bytes; regenerate the fixture "
+        "(TEST_PLAN.md §3) and commit it with the code change"
+    )
+
+
+def test_different_seed_diverges(tmp_path: Path) -> None:
+    other = dict(SCRIPT, seed=43)
+    sim = Simulator(
+        load_pack(PACK_DIR), 43, tmp_path / "other.jsonl", SCHEMA,
+        commit="0000000",
+    )
+    sim.run_playscript(other)
+    assert (tmp_path / "other.jsonl").read_bytes() != GOLDEN.read_bytes()
+
+
+# -- the travel-loop pins (the L2 scale claims) ------------------------------
+
+
+def test_derived_prices_pin_the_route(tmp_path: Path) -> None:
+    """Every move completion lands exactly at accept-t + travel_ticks:
+    the derived price IS the artery's law — the province walks in
+    hours-to-a-day (600/600/660/360/360 over the lattice), where the
+    road walked in minutes. The expected clock is rebuilt from the
+    travel law + the script's own waits — a price change without a
+    fixture regen fails BOTH here and the regen guard; this test
+    names why."""
+    pack = load_pack(PACK_DIR)
+    sim = Simulator(
+        pack, SCRIPT["seed"], tmp_path / "prices.jsonl", SCHEMA,
+        commit="0000000",
+    )
+    sim.run_playscript(SCRIPT)
+    prices = [
+        travel_ticks(pack.rules, sim.world, origin, destination)
+        for origin, destination in LEGS
+    ]
+    # the province scale: the artery's own weight — the heaviest leg
+    # near twice the road's longest (360; measured 660), the whole
+    # walk more than twice the road's loop (1080; measured 2580) —
+    # the map's 9x growth made mechanical
+    assert max(prices) > 600, prices
+    assert sum(prices) > 2160, prices
+    # the expected completion clock: step 1 accepts at t=0; each later
+    # step accepts at the DRAINED clock (ki114-1-impl: the composition
+    # law — a step feeds only when the queue is empty, so the feed
+    # waits out the previous step's whole drain tail). The measured
+    # feed shifts on the regenerated corpus: +3 after the first leg's
+    # wait (the smelter's ramble rides the tail), +601 after the
+    # second leg (the COMPANION'S OWN WALK drains before the wait —
+    # the escort's leg riding the same log, its own price law pinned
+    # in tests/test_companion.py), +1 before the manor leg (agenda-1
+    # P1, iter-418: the born travellers' look_around attempts join the
+    # drain tail — each tail event is one tick of the composition law,
+    # the declared corpus price); every move's completion still sits
+    # exactly at accept-t + travel_ticks
+    feed_shift = {0: 3, 1: 601, 2: 1, 3: 0}
+    clock = 0
+    expected: list[tuple[int, str]] = []
+    for index, (_origin, destination) in enumerate(LEGS):
+        clock += prices[index]
+        expected.append((clock, destination))
+        clock += WAITS.get(index, 0) + feed_shift.get(index, 0)
+    # iter-157: the companion's own legs ride the same log — the route
+    # pin scopes to the RUNNER's moves (the escort's legs carry their
+    # own price law, pinned in tests/test_companion.py)
+    moves = [
+        (event["t"], event["target"])
+        for event in _events(tmp_path / "prices.jsonl")
+        if event["type"] == "move" and event["actor"] == "pc_01"
+    ]
+    assert moves == expected
+
+
+def test_encounters_fire_mid_travel(tmp_path: Path) -> None:
+    """D-038 at province scale: rotations and the beat axis land
+    strictly INSIDE the long legs' tick windows — the artery's
+    institutions ride the route. The measured instance (the epoch's
+    world): the watch change (the corporal taking the sergeant's
+    post) at t=360, inside the Riverroad -> Weirstair leg
+    (0 -> 600); twice more at 1080 and 1800, inside their own legs."""
+    pack = load_pack(PACK_DIR)
+    sim = Simulator(
+        pack, SCRIPT["seed"], tmp_path / "mid.jsonl", SCHEMA, commit="0000000"
+    )
+    sim.run_playscript(SCRIPT)
+    events = _events(tmp_path / "mid.jsonl")
+    # iter-157: the runner's own legs (the companion rides his own)
+    legs = [
+        (event["t"], event["target"])
+        for event in events
+        if event["type"] == "move" and event["actor"] == "pc_01"
+    ]
+    assert len(legs) == len(LEGS)
+    windows: list[tuple[int, int]] = []
+    accept = 0
+    for index, (complete_t, _destination) in enumerate(legs):
+        windows.append((accept, complete_t))
+        accept = complete_t
+        if index in WAITS:
+            accept += WAITS[index]
+    mid_travel = [
+        event
+        for event in events
+        if event["type"] != "move"
+        and any(start < event["t"] < end for start, end in windows)
+    ]
+    assert mid_travel, (
+        "no encounter fired mid-travel — the travel loop degenerated "
+        "into teleportation (D-038's crossings must ride the queue in "
+        "tick order)"
+    )
+    kinds = {event["type"] for event in mid_travel}
+    assert "watch_change" in kinds or "knowledge_transfer" in kinds
+    # the measured institution (the epoch's world): the watch change
+    # strictly inside a travel window — the road T1's own crossing
+    # law, re-produced at the province's scale; the pre-epoch world's
+    # instance (a mid-travel knowledge_transfer briefing) died with
+    # its worldgen rolls at the epoch boundary (rng-1's recorded
+    # corpus price — the fixture regenerated, the law re-pinned to
+    # the new world's measured instance)
+    changes = [
+        event for event in events if event["type"] == "watch_change"
+    ]
+    assert changes, "the watch change never fired — the post never rotated"
+    assert any(
+        any(start < event["t"] < end for start, end in windows)
+        for event in changes
+    ), "a rotation must land mid-travel (the artery's institution riding the route)"
+
+
+def test_the_genesis_renders_the_province_scale() -> None:
+    """The world_formed line carries the L2 skeleton's own shape: the
+    324-site band (the 200-600 row, phases.md §6), the six armed claim
+    slots (the settlements' grounds), and the chronicle's history
+    lines open the tale (the feud/quarrel collections, 150 years)."""
+    pack = load_pack(PACK_DIR)
+    genesis = pack.rules["worldgen"]
+    sites = (genesis["map"]["extent"] // genesis["map"]["spacing"]) ** 2
+    assert 200 <= sites <= 600, sites
+    assert sites == 324, sites
+    claims = {
+        claim["location"]: claim["slot"]
+        for claim in genesis["claims"]
+    }
+    assert len(claims) == 6, claims
+    # the claim slots the world_formed template binds (its formed arm)
+    events = _events(GOLDEN)
+    formed = [
+        e for e in events
+        if e["type"] == "world_history" and e["outcome"]["kind"] == "world_formed"
+    ]
+    assert len(formed) == 1
+    outcome = formed[0]["outcome"]
+    assert outcome["sites"] == 324
+    assert outcome["years"] == 150
+    assert {claim["slot"] for claim in outcome["claims"]} == {
+        "weir_water", "road_ground", "keep_height", "bank_ground",
+        "croft_hills", "mill_bank",
+    }
+    # the history lines: events_max - 1 = 8 remembered beats (slice 3's
+    # deep feud: 5 -> 9, the cause tree over the same 150 years)
+    history = [
+        e for e in events
+        if e["type"] == "world_history" and "year" in e["outcome"]
+    ]
+    assert len(history) == 8
+
+
+# -- the AP crosswalk's first committed consumer (D-148/D-152) ----------------
+
+
+def test_spine_records_live_and_consumed() -> None:
+    """The province is the first committed pack to carry spine records
+    (PACK_SPEC §6, AP-9): the cast declares the want/need tension with
+    a flaw rooted in a cause, and every flaw is consumed by an urgency
+    entry's flaw key (AP-8) — the crosswalk's first non-crafted
+    instance, the row the lint (iter-117) was built for. iter-157: the
+    crossing household's second hand joins the five (companion-1's
+    arming — the household's first meso unit embodied, ANCHOR_REGION
+    §6.1). iter-203: the winter kin's son joins the six (the W5
+    heartbreak station's design material — the return's carrier, his
+    flaw's consuming beat his own urgency entry, the notch studied
+    again)."""
+    pack = load_pack(PACK_DIR)
+    spines = {
+        npc["id"]: npc["spine"]
+        for npc in pack.entities["npcs"]
+        if "spine" in npc
+    }
+    assert len(spines) == 7, spines
+    flaws = {spine["flaw"] for spine in spines.values()}
+    consumed = {
+        entry["flaw"]
+        for entry in pack.rules["urgencies"]["entries"]
+        if "flaw" in entry
+    }
+    assert flaws == consumed, (
+        f"the declared flaws and the consumed flaws disagree: "
+        f"{flaws ^ consumed}"
+    )
+    # every flaw-consuming entry belongs to the spine's own NPC
+    by_npc = {npc: spine["flaw"] for npc, spine in spines.items()}
+    for entry in pack.rules["urgencies"]["entries"]:
+        if "flaw" in entry:
+            assert by_npc[entry["npc"]] == entry["flaw"], entry
+
+
+def test_the_budget_block_declares_the_skeleton_shape() -> None:
+    """AP-1's first committed consumer: the budget block bounds the
+    pack's own shape (the skeleton declared 6-9 npcs for its
+    seven-strong cast; the cultures slice RE-DECLARED deliberately —
+    10 npcs, 5 items, 6 hooks, 48 template families) — the pack's
+    honesty about its scale, growth inside the bounds or a deliberate
+    re-declare (the block's own law, iter-119's exercise of it)."""
+    pack = load_pack(PACK_DIR)
+    budget = pack.rules["budget"]
+    assert budget["npcs"]["min"] <= len(pack.entities["npcs"]) <= budget["npcs"]["max"]
+    assert budget["items"]["min"] <= len(pack.entities["items"]) <= budget["items"]["max"]
+    hooks = len(pack.rules["director"]["hooks"])
+    assert budget["hooks"]["min"] <= hooks <= budget["hooks"]["max"]
+    templates = len(pack.templates["events"])
+    assert budget["templates"]["min"] <= templates <= budget["templates"]["max"]
+    # the cultures slice's own re-declare: the travelers grow the cast
+    # past the skeleton's max (9) — the honest re-declare, not a silent
+    # outgrowth (AP-1's second arm, exercised); iter-157 grows the cast
+    # again INSIDE the bounds (the companion, 10 -> 11 <= 12); iter-203
+    # grows the cast to twelve (the winter kin's son — the
+    # named-stranger class, the heartbreak station's carrier) and the
+    # ceiling re-declares 12 -> 13 (iter-203: the committed cast at
+    # twelve leaves charcoalpaper's crafted-successor twin no headroom)
+    assert len(pack.entities["npcs"]) == 12
+    assert budget["npcs"] == {"min": 7, "max": 13}
+
+
+# -- the cultures pins (slice 2, iter-119 — D-153's wave plan) -----------------
+
+
+def test_the_road_traffic_condenses_at_the_first_beat() -> None:
+    """The load-state origin law at province scale: the road-traffic
+    group is anchored on the runner's load road, so the FIRST zone
+    computation (the first beat, t=360) materializes it — ONE event
+    carrying each member's canon membership birth PAIRED with the name
+    birth, the personality profile and the two presentation anchors (one
+    member, one block: member_of, then name, psyche, look, voice — the
+    D-054/D-131 shape plus agenda-1 P1/P2), the tombstone marker LAST, the
+    outcome's `names` key listing the drawn names in member order. The
+    tombstone holds: no second condensation ever fires (write-once)."""
+    events = _events(GOLDEN)
+    condensations = [e for e in events if e["type"] == "road_musters"]
+    assert len(condensations) == 1
+    event = condensations[0]
+    assert event["t"] == 360
+    assert event["actor"] == "grp_road_traffic"
+    members = ("npc_drover_01", "npc_peddler_01", "npc_carrier_01")
+    expected_props = [
+        prop
+        for member in members
+        for prop in ("member_of", "name", "psyche", "look", "voice")
+    ] + ["condensed"]
+    expected_entities = [
+        entity
+        for member in members
+        for entity in (member, member, member, member, member)
+    ] + ["grp_road_traffic"]
+    assert [c["prop"] for c in event["state_changes"]] == expected_props
+    assert [c["entity"] for c in event["state_changes"]] == expected_entities
+    assert all(
+        c["from"] is None for c in event["state_changes"]
+    )  # every birth is a first commit
+    assert event["outcome"]["members"] == 3
+    drawn = event["outcome"]["names"]
+    assert len(drawn) == 3 and all(drawn)
+    # the tombstone: the marker wrote True, and no later event touches
+    # the group's members again (write-once, never a redraw)
+    assert event["state_changes"][-1]["to"] is True
+
+
+def test_the_born_names_render_in_the_tale() -> None:
+    """The condensation line carries the drawn names into the tale
+    (the {names?...|...} branch — the road_musters event is
+    story-critical, the medium band): the reader SEES the strangers
+    materialize, the cultures slice's own tale beat."""
+    pack = load_pack(PACK_DIR)
+    _header, events = read_log(GOLDEN, SCHEMA)
+    tale = render_chronicle(events, pack, 42)
+    names = next(
+        e["outcome"]["names"] for e in _events(GOLDEN)
+        if e["type"] == "road_musters"
+    )
+    line = next(
+        text for text in tale.splitlines()
+        if all(name in text for name in names)
+    )
+    assert "artery" in line
+
+
+def test_the_two_tongues_split_their_postures() -> None:
+    """Lowland soft vs hill hard, the phonotactic claim made checkable:
+    the river tongue carries NO stop codas and no consonant clusters,
+    its names run 2-3 syllables (the flowing length); the croft tongue
+    carries stop codas and clustered onsets, its names run 1-2 (the
+    clipped length). The drawn names split accordingly — the two
+    lowland names are longer than the hill name (the corpus's own
+    visible tongue split, seed 42)."""
+    pack = load_pack(PACK_DIR)
+    profiles = pack.rules["names"]["profiles"]
+    lowland, hill = profiles["lowland_soft"], profiles["hill_hard"]
+    stops = {"p", "t", "k", "b", "d", "g"}
+    clusters = {"gr", "kr", "sk", "st", "tr", "br", "dr"}
+    assert not set(lowland["codas"]) & stops
+    assert set(hill["codas"]) & stops
+    assert not set(lowland["onsets"]) & clusters
+    assert set(hill["onsets"]) & clusters
+    assert lowland["syllables"] == [2, 3]
+    assert hill["syllables"] == [1, 2]
+    drawn = next(
+        e["outcome"]["names"] for e in _events(GOLDEN)
+        if e["type"] == "road_musters"
+    )
+    lowland_names, hill_name = drawn[:2], drawn[2]
+    assert all(len(name) > len(hill_name) for name in lowland_names)
+
+
+def test_the_cultures_block_is_the_committed_instance() -> None:
+    """The AP-8 prohibition surface's first committed consumer: two
+    cultures, each keying its own profile (the members' generated_name
+    declarations name it), each carrying its custom vocabulary (every
+    word occurring in the pack's own data), and each prohibition's
+    flaw rooted in a MEMBER's spine — the two flaws are DOUBLY
+    consumed (the urgency entry's behavior + the culture's law over
+    it), the richer arming the crosswalk's third surface lands with."""
+    pack = load_pack(PACK_DIR)
+    cultures = pack.rules["cultures"]
+    assert set(cultures) == {"lowland", "hill"}
+    spines = {
+        npc["id"]: npc["spine"]["flaw"]
+        for npc in pack.entities["npcs"] if "spine" in npc
+    }
+    by_flaw = {flaw: npc for npc, flaw in spines.items()}
+    pack_text = "\n".join(
+        path.read_text(encoding="utf-8") for path in sorted(PACK_DIR.glob("*.json"))
+    )
+    for _culture_id, record in cultures.items():
+        profile = record["name_profile"]
+        assert profile in pack.rules["names"]["profiles"]
+        for member in record["members"]:
+            declaration = next(
+                npc.get("generated_name") for npc in pack.entities["npcs"]
+                if npc["id"] == member
+            )
+            if declaration is not None:
+                assert declaration == profile
+        for word in record["custom_vocabulary"]:
+            pattern = re.compile(
+                rf"(?<![a-zA-Z0-9]){re.escape(word)}(?![a-zA-Z0-9])",
+                re.IGNORECASE,
+            )
+            assert pattern.search(pack_text), word
+        for entry in record["prohibitions"]:
+            flaw = entry["flaw"]
+            holder = by_flaw[flaw]
+            assert holder in record["members"]  # the law roots in the cast
+            # the doubly-consumed shape: the urgency entry consumes it
+            # too (the behavior), the prohibition bounds it (the limit)
+            assert any(
+                u.get("flaw") == flaw
+                for u in pack.rules["urgencies"]["entries"]
+            )
+    # the two laws are the sketch's own pair: the guild's shelter law
+    # (lowland) and the hills' wergeld memory (hill)
+    laws = {
+        culture_id: entry["law"]
+        for culture_id, record in cultures.items()
+        for entry in record["prohibitions"]
+    }
+    assert laws == {
+        "lowland": "the guild's shelter law",
+        "hill": "the hills' wergeld memory",
+    }

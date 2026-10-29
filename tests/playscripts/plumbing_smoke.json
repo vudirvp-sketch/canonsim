@@ -1,0 +1,13 @@
+{
+  "name": "plumbing_smoke",
+  "seed": 42,
+  "pack": "tavern_pack@0.1",
+  "steps": [
+    {"intent": "move", "target": "loc_tavern"},
+    {"intent": "wait", "ticks": 30},
+    {"intent": "move", "target": "loc_backyard"},
+    {"intent": "wait", "ticks": 15},
+    {"intent": "move", "target": "loc_street"},
+    {"intent": "move", "target": "loc_market"}
+  ]
+}

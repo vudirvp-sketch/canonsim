@@ -1,0 +1,35 @@
+[project]
+name = "canonsim"
+version = "0.1.0"
+description = "Deterministic canonical simulation core for an LLM-narrator architecture (phase 0: TavernSim)"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+# The offline chronicler's engine (leg-4, D-093; the owner's explicit §8
+# approval 2026-09-06). NEVER a runtime dependency: scripts/chronicle.py is
+# the only importer, outside the runtime module graph (D-012 — enforced by
+# tests/test_architecture.py::test_runtime_imports_stdlib_only). The
+# chronicler suite skips cleanly without it (tests/test_chronicle.py).
+chronicler = ["duckdb>=1.0"]
+
+[tool.setuptools]
+# Explicit list: flat-layout auto-discovery aborts on multiple top-level dirs
+# (content/, schemas/ are data, not packages). KI#2. core.packlint joined
+# with the D-175 split (roads-1's rider): the admission lint implementation
+# subpackage, imported by core.pack.
+packages = ["core", "core.packlint", "sim", "sim.systems", "render", "brief", "cli", "workbench", "workbench.application", "workbench.application.operations", "workbench.application.inference", "workbench.api", "workbench.platform"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+# A passed test's temp tree is garbage; a failed one's is the evidence.
+tmp_path_retention_policy = "failed"

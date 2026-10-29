@@ -1,0 +1,59 @@
+{
+    "name": "province_composition",
+    "seed": 2,
+    "pack": "province_pack@0.1",
+    "steps": [
+        {
+            "intent": "take",
+            "target": "tallow_lamp_01"
+        },
+        {
+            "intent": "move",
+            "target": "loc_keep"
+        },
+        {
+            "intent": "arson",
+            "target": "loc_keep"
+        },
+        {
+            "intent": "wait",
+            "ticks": 420
+        },
+        {
+            "intent": "move",
+            "target": "loc_malby"
+        },
+        {
+            "intent": "steal",
+            "target": "npc_sergeant_01"
+        },
+        {
+            "intent": "wait",
+            "ticks": 2000
+        },
+        {
+            "intent": "arson",
+            "target": "loc_malby"
+        },
+        {
+            "intent": "wait",
+            "ticks": 720
+        },
+        {
+            "intent": "move",
+            "target": "loc_thornmill"
+        },
+        {
+            "intent": "wait",
+            "ticks": 1440
+        },
+        {
+            "intent": "move",
+            "target": "loc_malby"
+        },
+        {
+            "intent": "wait",
+            "ticks": 519000
+        }
+    ]
+}

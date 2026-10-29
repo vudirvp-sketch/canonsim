@@ -1,0 +1,347 @@
+{
+  "meta": {
+    "pack": "grim_pack",
+    "version": "0.1",
+    "display": "The Three Barrels — the grim line",
+    "notes": "pack-1 (the grim tavern pack): the romance/intimacy/coercion line as PURE PACK DATA on the untouched phase-0 shape (D-030's darkness dial; the PACK_SPEC §7 law). The tavern cast and rooms are the phase-0 originals (MVP_SCOPE §4 owns the ids); the dark line adds the relation axes attraction/intimacy/loyalty (the flat form is toward-the-player, the suspicion precedent's v0.1 mode) and the status axes shame/anger, the maid's pawn ticket (her secret made physical — the read_ticket surface and the steal target), the coin accounts (res-1's first consumer arming: the pc's purse and the tavern's till), and the SPINE records on the two flaw-driven drives (AP-9; every flaw consumed by its urgency's own flaw key, AP-8). The consent split (D-175 (5)): consented/coerced are CANONICAL event facts, never knowledge tokens — the belief half re-words (believes_coerced); the lint owns the split. Every value NOT pinned by MVP_SCOPE is a v0.1 tunable default: pack data, not law (INV-3). Display names in English (D-009)."
+  },
+  "locations": [
+    {
+      "id": "loc_tavern",
+      "name": "Three Barrels tavern",
+      "role": "main scene: bar, tables, back door",
+      "layout": "low_beamed_hall",
+      "exits": ["loc_street", "loc_backyard"],
+      "flammability": "high",
+      "fire_spots": ["main_hall", "back_room", "stairs"],
+      "accounts": {"coin": 30},
+      "notes": "the tavern's TILL — res-1's first consumer account (a location holding coin, the owner-agnostic form); the buy_round transfer lands here, the nightly_takings flow mints to it on the macro cadence"
+    },
+    {
+      "id": "loc_street",
+      "name": "the street outside",
+      "role": "entry point, comings and goings",
+      "layout": "muddy_lane",
+      "exits": ["loc_tavern", "loc_market", "loc_guardroom"],
+      "flammability": "none",
+      "fire_spots": []
+    },
+    {
+      "id": "loc_backyard",
+      "name": "the backyard",
+      "role": "woodpile, quiet corner",
+      "layout": "walled_yard",
+      "exits": ["loc_tavern"],
+      "flammability": "medium",
+      "fire_spots": ["woodpile"]
+    },
+    {
+      "id": "loc_guardroom",
+      "name": "the guardroom",
+      "role": "watch base, off scene",
+      "layout": "stone_room",
+      "exits": ["loc_street"],
+      "flammability": "low",
+      "fire_spots": ["hearth"]
+    },
+    {
+      "id": "loc_market",
+      "name": "the market square",
+      "role": "busy square, rumor hub",
+      "layout": "open_square",
+      "exits": ["loc_street"],
+      "flammability": "none",
+      "fire_spots": []
+    }
+  ],
+  "npcs": [
+    {
+      "id": "pc_01",
+      "name": "the player",
+      "role": "thief down on his luck",
+      "position": "loc_street",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0,
+        "shame": 0,
+        "anger": 0
+      },
+      "relations": {},
+      "pair_relations": [
+        {
+          "with": "npc_drunk_01",
+          "trust": 20,
+          "fear": 25
+        }
+      ],
+      "accounts": {"coin": 6},
+      "crime_status": "unknown",
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "get money, stay free — and the maid's eye, if it can be had honestly or not",
+      "is_player": true,
+      "notes": "the dark line's deciding mind: the court path (flirt, proposition), the corner path (read_ticket her pawn ticket, then proposition_coerce on the minted leverage), or abstain. Six coins to his name — the buy_round gate reads them (res-1's soft arm). The pair home toward the drunkard is the grim history: the cornered know the cornerer."
+    },
+    {
+      "id": "npc_guard_01",
+      "name": "the older guard",
+      "role": "watchman, set in his ways",
+      "position": "loc_tavern",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0,
+        "shame": 0,
+        "anger": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "steady",
+      "goal": "keep the peace, retire quiet",
+      "carries": ["purse_01"],
+      "notes": "the watch pair's senior; the flat suspicion home's per-target pair mode (iter-69b) — his suspicion toward the player is the crime line's reader; carries the purse (the steal target, ev_0007)"
+    },
+    {
+      "id": "npc_guard_02",
+      "name": "the younger guard",
+      "role": "watchman, keen to prove himself",
+      "position": "loc_guardroom",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0,
+        "shame": 0,
+        "anger": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_drunk_01",
+          "fear": 40
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "keen",
+      "goal": "make sergeant",
+      "notes": "the second pair home's owner (the drunkard's size frightens him); the watch rotation's other half"
+    },
+    {
+      "id": "npc_barkeep_01",
+      "name": "the barkeep",
+      "role": "keeps the room, keeps his people",
+      "position": "loc_tavern",
+      "status": {
+        "fatigue": 30,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0,
+        "shame": 0,
+        "anger": 10
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 10
+      },
+      "pair_relations": [
+        {
+          "with": "npc_maid_01",
+          "intimacy": 70
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "watchful",
+      "goal": "the room kept respectable",
+      "carries": ["club_01"],
+      "spine": {
+        "want": "the tavern kept respectable",
+        "need": "to be needed by the people he keeps",
+        "flaw": "possessive of what he keeps",
+        "cause": "built the room back up from nothing twice"
+      },
+      "notes": "the JEALOUSY owner: his pair home toward the maid (intimacy 70, the long bond) is the jealousy gate's read — the flirt reactions and the escalation hook fire through it (D-030's build-slow shape). The flaw rides his check-in urgency (AP-8's consuming surface)."
+    },
+    {
+      "id": "npc_drunk_01",
+      "name": "the drunkard",
+      "role": "witness by accident, suitor by force",
+      "position": "loc_tavern",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 50,
+        "fear": 0,
+        "injury": 0,
+        "shame": 0,
+        "anger": 20
+      },
+      "relations": {
+        "reputation": 40,
+        "trust": 45,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_maid_01",
+          "attraction": 70
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "maudlin",
+      "goal": "the maid's eye, by warmth or by weight",
+      "spine": {
+        "want": "the girl to look at him the way she looks at the door",
+        "need": "to matter to someone before the drink takes the rest",
+        "flaw": "takes what warmth he can by force of leverage",
+        "cause": "widowed young, and the widow's bed went cold"
+      },
+      "notes": "the COERCION owner: the purse-sighting leverage over the player (the steal-failure path, the tavern's own arming) drives his proposition_coerce urgency — the grim line's pressure ON the player. His pair home toward the maid (attraction 70, unanswered) is the second jealousy gate. The flaw rides the coerce urgency (AP-8)."
+    },
+    {
+      "id": "npc_maid_01",
+      "name": "the serving maid",
+      "role": "moves around, sees much, is seen too much",
+      "position": "loc_tavern",
+      "status": {
+        "fatigue": 20,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0,
+        "shame": 10,
+        "anger": 0
+      },
+      "relations": {
+        "reputation": 45,
+        "trust": 50,
+        "fear": 0,
+        "attraction": 45,
+        "intimacy": 10,
+        "loyalty": 55
+      },
+      "pair_relations": [
+        {
+          "with": "npc_barkeep_01",
+          "intimacy": 70
+        },
+        {
+          "with": "npc_drunk_01",
+          "fear": 45,
+          "trust": 15
+        }
+      ],
+      "knowledge": [],
+      "mood": "tired",
+      "goal": "finish the shift, keep the secret",
+      "carries": ["pawn_ticket_01"],
+      "notes": "the dark line's center: the FLAT attraction/intimacy/loyalty are toward the player (the suspicion precedent's v0.1 mode, iter-69) — the flirt ladder's build surface and the proposition answer's gate. Her pawn ticket (scraps pawned for the medicine) is the secret the read_ticket surface mints into leverage. The shame seed (10) is the line's standing weight. No spine record: her tension lives in the goal + the secret data (AP-9's absent-is-silent law — a flaw without a consuming rule is GHOST, and no urgency of hers consumes one)"
+    }
+  ],
+  "items": [
+    {
+      "id": "oil_lamp_01",
+      "name": "the oil lamp",
+      "position": "loc_tavern",
+      "carrier": null,
+      "is_fire_source": true,
+      "breakable": true,
+      "flammability": "none",
+      "notes": "fire source; breakable — the drop_break target that starts the arson chain"
+    },
+    {
+      "id": "purse_01",
+      "name": "the purse",
+      "position": "loc_tavern",
+      "carrier": "npc_guard_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "steal_target": true,
+      "notes": "owned by the older guard; the steal target (ev_0007) — the purse-sighting path that mints the drunkard's leverage over the player"
+    },
+    {
+      "id": "ale_mug_01",
+      "name": "the mug of ale",
+      "position": "loc_tavern",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "none",
+      "use_effect": {
+        "status": "intoxication",
+        "delta": 20
+      },
+      "notes": "intoxication vector — feeds the drunkard's witness quality"
+    },
+    {
+      "id": "club_01",
+      "name": "the club",
+      "position": "loc_tavern",
+      "carrier": "npc_barkeep_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "notes": "barkeep's, under the bar — the jealousy escalation's standing threat, never swung in v0.1"
+    },
+    {
+      "id": "rope_01",
+      "name": "the rope",
+      "position": "loc_backyard",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "medium",
+      "notes": "utility, in the backyard"
+    },
+    {
+      "id": "pawn_ticket_01",
+      "name": "the pawnbroker's ticket",
+      "position": "loc_tavern",
+      "carrier": "npc_maid_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "none",
+      "steal_target": true,
+      "notes": "the maid's secret made physical: the pawnbroker's counterfoil for the kitchen scraps she has been quietly taking (her spine's flaw). The EXAMINE surface — whoever reads it learns scraps_pawned_by_maid, and the secrets registry mints the leverage (the holder guards: any npc kind, subject the maid); the steal_target flag opens the quieter path (lift it, read it at leisure). The dark line's decision hinge: the player's court path never needs it, the corner path begins here."
+    }
+  ],
+  "ambient_entities": [
+    {
+      "id": "npc_market_crowd_01",
+      "name": "the market crowd",
+      "role": "ambient group at the market",
+      "position": "loc_market",
+      "members": [],
+      "group_kind": "crowd",
+      "notes": "the rumor hub's ambient ear — the affair's exposure surface (the telling pair carries what the room knows to the square)"
+    }
+  ]
+}

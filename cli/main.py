@@ -1,0 +1,916 @@
+"""The play interface (`MVP_SCOPE.md` §12 owns the command list;
+`docs/blueprint/phase0.md` §5): the "editor" layer of the four-layer
+split — Python orchestration ON TOP of the JSONL log, never in the
+canon path (the Wesnoth escape-valve precedent).
+
+Batch subcommands (one process, one job) — every command that loads
+a pack takes `--pack <dir>` (the committed tavern pack the default,
+byte-identical; a bad path is refused loudly before any world opens):
+
+    python -m cli play <playscript.json> [--seed N] [--directors on|off]
+                                        [--pack <dir>]
+    python -m cli chronicle <log.jsonl> [--pack <dir>]
+    python -m cli state <entity> <log.jsonl> [--pack <dir>]
+    python -m cli replay <log.jsonl> [--pack <dir>]
+
+Interactive session (no subcommand) — `look` and `wait` are two of the
+16 actions driven as single-step intents through the same front door as
+playscript steps; `play` loads a script into the live session; `narrate`
+drives the mediator beat cycle over an EXTERNAL narrator (the
+agent-in-the-loop door, D-055); `say` hands free text to the EXTERNAL
+parser (phase 2, mode C, D-062). The external operator is the human at
+the files by default; `--engine [URL]` wires the RUNTIME engine
+(llama-server behind the explicit adapter, engine-1/D-193) as that
+operator — the doors and their gates are byte-identical either way
+(the file contract, D-055: the runtime engine reads the same call
+files and writes the same reply files):
+
+    look · wait N · play <script> · narrate [<reply.json> | dry] ·
+    say <text> · say apply <reply.json> · chronicle · state <entity> ·
+    replay <log> · directors on|off · seed [<n>] · help · quit
+
+The session takes the same flags at the top level
+(`python -m cli --pack <dir> ...`), and `--resume <log>` opens the
+session OVER an existing log instead of starting fresh (D-139: one
+continuous run, appended in place — the seed and pack come from the
+log's header, the entropy position from its cursor; interruption is
+not an input, only steps are).
+
+The session is one opened Simulator (`core/loop.py`): every command
+feeds steps through `run_steps` and the world moves only through the
+queue it seeds — the log is one continuous deterministic run. The
+renderer is a pure function of the log (CHRON-1); `chronicle` re-renders
+from the log file, so re-running a command on a longer log keeps every
+earlier line identical. With the chorus armed (mode B, scene-2) an
+accepted player beat hands the present actors' calls one by one —
+reply, dry-skip, or move on (`narrate` again drops the rest).
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+from collections.abc import Sequence
+from pathlib import Path
+
+from brief.gbnf import gbnf_grammar, grammar_fingerprint
+from brief.parser import grammar_snapshot
+from cli.engine import (
+    DEFAULT_ENDPOINT,
+    EngineConfig,
+    EngineError,
+    LlamaServerClient,
+    manifest_row,
+    narrator_messages,
+    write_manifest,
+)
+from cli.mediator import BeatResult, Mediator, MediatorError
+from cli.parser import ParseError, ParserDoor, ParseResult
+from core.checkpoint import CheckpointError
+from core.cursor import CursorError, cursor_path, load_cursor, save_cursor
+from core.director import policy_from_rules
+from core.fold import fold, initial_projection
+from core.log import LogError, next_log_path, read_log
+from core.loop import RunnerError, Simulator, load_playscript
+from core.pack import Pack, PackError, load_pack
+from core.rng import RngError
+from render.chronicle import (
+    RenderError,
+    chronicle_from_log,
+    render_entity_view,
+    render_scene_card,
+    replay_report,
+)
+from render.tracery import GrammarError
+
+REPO = Path(__file__).resolve().parents[1]
+PACK_DIR = REPO / "content" / "tavern_pack"
+SCHEMA_PATH = REPO / "schemas" / "event.schema.json"
+LOGS_DIR = REPO / "logs"
+OUTPUT_DIR = REPO / "output"
+
+_SESSION_HELP = """commands:
+  look              take in the scene (the look_around action)
+  wait N            wait N ticks (the world moves: beats, rotations)
+  play <script>     run a playscript's steps in this session
+  narrate           emit the narrator call (output/mediator/call_NNNN.md)
+                    — with --engine, the engine answers it and the beat
+                    cycle runs to the beat's close (the chorus included)
+  narrate <reply>   apply a narrator reply JSON {prose, texture_delta?,
+                    proposal?} — the beat cycle runs; an accepted player
+                    beat then hands the chorus's actor calls (mode B,
+                    one per present declared NPC — reply, dry, or move on)
+  narrate dry       close the open call without a narrator: an actor
+                    call is skipped (the template rung), the player's
+                    call closes the whole beat
+  say <text>        hand free text to the parser (mode C): emit the
+                    parse call (output/parser/parse_NNNN.md) — with
+                    --engine, the runtime engine answers it (GBNF-
+                    constrained) and the cycle closes in one command
+  say apply <file>  apply the parser's reply JSON {intent | question |
+                    no_intent} — the intent feeds the front door
+  chronicle         print the tale so far (re-rendered from the log)
+  state <entity>    full history + current state of one entity
+  replay <log>      validate + fold another log (T2), report
+  directors on|off  toggle the director's releases (buffer keeps seeding)
+  seed [<n>]        show the seed / restart the session with seed n
+  help              this list
+  quit              end the session (the log stays)"""
+
+
+def _commit_id() -> str:
+    """Short HEAD hash for the log header provenance; `unknown` offline."""
+    try:
+        return subprocess.run(  # noqa: S603 — fixed argv, no user input
+            ["git", "rev-parse", "--short", "HEAD"], cwd=REPO,
+            capture_output=True, text=True, timeout=5, check=True,
+        ).stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        return "unknown"
+
+
+def _load(pack_dir: Path) -> tuple[Pack, dict]:
+    """Load the pack dir (the --pack value, the tavern default) — a path
+    that is not a directory refuses loudly BEFORE any world opens."""
+    if not pack_dir.is_dir():
+        raise PackError(f"pack dir not found: {pack_dir} (pass --pack <dir>)")
+    pack = load_pack(pack_dir)
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    return pack, schema
+
+
+def _session_log(pack: Pack, schema: dict, log_path: Path) -> str:
+    """The chronicle rendered from the session log so far."""
+    return chronicle_from_log(log_path, pack, schema)
+
+
+class Session:
+    """One interactive run: an opened Simulator fed step-by-step.
+
+    The seed is bound at open (the log header is fixed); `seed <n>`
+    closes the current log and starts a fresh run — committed logs are
+    never edited (INV-5), a restart is a new log file.
+
+    iter-106 (D-139): `--resume <log>` opens the session OVER an
+    existing log through `Simulator.resume` — one continuous run,
+    appended in place, byte-identical to the uninterrupted session
+    (resume is invisible to the log). The run cursor is pinned after
+    every command and at close (`_save_cursor` — the drain-boundary
+    law; a mid-drain state is skipped, never saved), so the next
+    `--resume` picks the world up exactly where this one left it. The
+    scene ledger stays session-scoped (D-049): a resumed session opens
+    a fresh one — live texture dies with its session, promoted texture
+    rode events.
+    """
+
+    def __init__(
+        self,
+        pack: Pack,
+        schema: dict,
+        seed: int,
+        logs_dir: Path,
+        director_enabled: bool,
+        resume_log: Path | None = None,
+        engine: EngineConfig | None = None,
+    ) -> None:
+        self._pack = pack
+        self._schema = schema
+        self._logs_dir = logs_dir
+        self._directors_on = director_enabled
+        self._shown_lines = 0  # chronicle lines already printed
+        self._mediator: Mediator | None = None
+        self._parser: ParserDoor | None = None
+        self._resume_info: tuple[int, int] | None = None
+        self._engine = engine
+        self._engine_client: LlamaServerClient | None = None
+        self._engine_props: dict = {}
+        self._engine_manifest: Path | None = None
+        self._engine_grammar_noted = False
+        self._open_call: Path | None = None  # the call awaiting a reply
+        if resume_log is None:
+            self._start(seed)
+        else:
+            self._resume(resume_log)
+
+    def _start(self, seed: int) -> None:
+        self._logs_dir.mkdir(parents=True, exist_ok=True)
+        self._seed = seed
+        self._log_path = next_log_path(self._logs_dir, seed)
+        self._sim = Simulator(
+            self._pack, seed, self._log_path, self._schema,
+            commit=_commit_id(), director_enabled=self._directors_on,
+        )
+        self._sim.open()
+        self._shown_lines = 0
+        self._mediator = None  # the ledger dies with its session (D-049)
+        self._parser = None  # the parser door shares that ledger
+        self._engine_manifest = None  # the manifest is per-log provenance
+        self._engine_props = {}
+        self._engine_grammar_noted = False
+        self._open_call = None  # the beat dies with its session
+
+    @property
+    def seed(self) -> int:
+        return self._seed
+
+    @property
+    def log_path(self) -> Path:
+        return self._log_path
+
+    @property
+    def resumed(self) -> tuple[int, int] | None:
+        """`(event_count, tick)` at the resume point — None for fresh
+        runs (the banner's own data, D-139)."""
+        return self._resume_info
+
+    def close(self) -> None:
+        self._save_cursor()
+        self._sim.close()
+
+    def _resume(self, log_path: Path) -> None:
+        """Open the session over an existing log (D-139): the cursor
+        carries the run's entropy position, the checkpoint fast-path
+        (the operator's `output/checkpoints/<stem>/` artifacts) restores
+        the projection when present. The delta discipline: `shown_lines`
+        starts at the current chronicle's end — a resumed session
+        prints only NEW lines (`chronicle` reads the story back)."""
+        cursor = load_cursor(cursor_path(log_path))
+        self._sim = Simulator.resume(
+            self._pack, log_path, self._schema, cursor,
+            commit=_commit_id(),
+            checkpoints_dir=OUTPUT_DIR / "checkpoints" / log_path.stem,
+        )
+        self._seed = int(cursor["seed"])
+        self._directors_on = bool(cursor["director_enabled"])
+        self._log_path = log_path
+        self._mediator = None  # the ledger dies with its session (D-049)
+        self._parser = None
+        self._engine_manifest = None
+        self._engine_props = {}
+        self._engine_grammar_noted = False
+        self._open_call = None
+        self._resume_info = (int(cursor["event_count"]), int(cursor["tick"]))
+        text = _session_log(self._pack, self._schema, self._log_path)
+        self._shown_lines = len(text.splitlines())
+
+    def _save_cursor(self) -> None:
+        """Pin the run cursor beside the log (only at a clean drain
+        boundary — `Simulator.export_cursor` owns the law and refuses
+        mid-drain; skipping here keeps the last clean pin standing, so
+        a later `--resume` over a log that moved past it refuses
+        loudly instead of guessing entropy)."""
+        if not self._sim.drained:
+            return
+        save_cursor(
+            cursor_path(self._log_path),
+            self._sim.export_cursor(director_enabled=self._directors_on),
+        )
+
+    # -- command dispatch ----------------------------------------------------
+
+    def execute(self, line: str) -> None:
+        """Run one session command; user errors print, the session lives."""
+        parts = line.split()
+        command, args = parts[0].lower(), parts[1:]
+        try:
+            handler = {
+                "help": self._cmd_help,
+                "look": self._cmd_look,
+                "wait": self._cmd_wait,
+                "play": self._cmd_play,
+                "chronicle": self._cmd_chronicle,
+                "state": self._cmd_state,
+                "replay": self._cmd_replay,
+                "directors": self._cmd_directors,
+                "seed": self._cmd_seed,
+                "narrate": self._cmd_narrate,
+                "say": self._cmd_say,
+            }[command]
+        except KeyError:
+            print(f"unknown command {command!r} — try 'help'")
+            return
+        try:
+            handler(args)
+        except (
+            RunnerError, LogError, RenderError, GrammarError,
+            MediatorError, ParseError, ValueError,
+            CheckpointError, CursorError, RngError,
+        ) as exc:
+            print(f"error: {exc}")
+        except FileNotFoundError as exc:
+            print(f"error: {exc}")
+        else:
+            self._save_cursor()
+
+    def _cmd_help(self, args: list[str]) -> None:
+        print(_SESSION_HELP)
+
+    def _cmd_look(self, args: list[str]) -> None:
+        self._run_steps([{"intent": "look_around"}])
+
+    def _cmd_wait(self, args: list[str]) -> None:
+        if len(args) != 1 or not args[0].isdigit():
+            print("usage: wait N (N = tick count)")
+            return
+        self._run_steps([{"intent": "wait", "ticks": int(args[0])}])
+
+    def _cmd_play(self, args: list[str]) -> None:
+        if len(args) != 1:
+            print("usage: play <playscript.json>")
+            return
+        script = load_playscript(Path(args[0]))
+        if script["seed"] != self._seed:
+            print(
+                f"error: playscript seed {script['seed']} != session seed "
+                f"{self._seed} (a session's seed is fixed at open — "
+                f"'seed <n>' starts a new run)"
+            )
+            return
+        if script["pack"] != self._pack.name_version:
+            print(
+                f"error: playscript pack {script['pack']!r} != loaded "
+                f"{self._pack.name_version!r}"
+            )
+            return
+        self._run_steps(list(script["steps"]))
+
+    def _cmd_chronicle(self, args: list[str]) -> None:
+        text = _session_log(self._pack, self._schema, self._log_path)
+        self._shown_lines = len(text.splitlines())
+        print(text, end="")
+
+    def _cmd_state(self, args: list[str]) -> None:
+        if len(args) != 1:
+            print("usage: state <entity_id>")
+            return
+        _, events = read_log(self._log_path, self._schema)
+        projection = fold(events, initial_projection(self._pack.entities))
+        print(
+            render_entity_view(
+                events, projection, self._pack, args[0], seed=self._seed
+            ),
+            end="",
+        )
+
+    def _cmd_replay(self, args: list[str]) -> None:
+        if len(args) != 1:
+            print("usage: replay <log.jsonl>")
+            return
+        report, _ = replay_report(Path(args[0]), self._pack, self._schema)
+        print(report)
+
+    def _cmd_directors(self, args: list[str]) -> None:
+        if args not in (["on"], ["off"]):
+            print("usage: directors on|off")
+            return
+        self._directors_on = args[0] == "on"
+        self._sim.director.policy = policy_from_rules(
+            self._pack.rules, self._directors_on
+        )
+        print(
+            f"director releases {'ON' if self._directors_on else 'OFF'} "
+            f"(the buffer keeps seeding — D-005 hygiene)"
+        )
+
+    def _cmd_seed(self, args: list[str]) -> None:
+        if not args:
+            print(f"session seed: {self._seed} (log: {self._log_path})")
+            return
+        if len(args) != 1 or not args[0].lstrip("-").isdigit():
+            print("usage: seed [<n>]")
+            return
+        new_seed = int(args[0])
+        self._sim.close()
+        self._start(new_seed)
+        print(f"new run: seed {new_seed}, log {self._log_path}")
+
+    # -- the mediator beat cycle (agent-in-the-loop, D-055) -------------------
+
+    def _mediator_or_start(self) -> Mediator:
+        if self._mediator is None:
+            self._mediator = Mediator(
+                self._sim, self._pack, self._schema, self._log_path,
+                OUTPUT_DIR / "mediator",
+            )
+        return self._mediator
+
+    def _cmd_narrate(self, args: list[str]) -> None:
+        mediator = self._mediator_or_start()
+        try:
+            if not args:
+                if self._engine is None:
+                    path = mediator.emit_call()
+                    reply = path.with_name(
+                        path.stem.replace("call", "reply") + ".json"
+                    )
+                    print(f"[narrator call: {path}]")
+                    print(
+                        f"[write a JSON reply {{prose, texture_delta?, proposal?}} "
+                        f"at {reply}, then: narrate {reply}]"
+                    )
+                    self._open_call = path
+                else:
+                    self._narrate_via_engine(mediator)
+            elif args == ["dry"]:
+                result = mediator.dry_close()
+                self._open_call = result.call_path
+                self._print_beat(result)
+            elif len(args) == 1:
+                result = mediator.apply_reply(Path(args[0]))
+                self._open_call = result.call_path
+                self._print_beat(result)
+            else:
+                print("usage: narrate [<reply.json> | dry]")
+        finally:
+            self._shown_lines = mediator.shown_lines
+
+    @staticmethod
+    def _print_beat(result: BeatResult) -> None:
+        who = f"[{result.actor}] " if result.actor else ""
+        if result.status == "accepted":
+            print(f"{who}{result.prose}")
+            for note in result.notes:  # the BEAT summary lines (KI#44)
+                print(f"  {note}")
+            if result.call_path is not None:  # scene-2: the chorus continues
+                print(
+                    f"[chorus: the next actor call awaits — {result.call_path}]"
+                )
+            return
+        if result.status == "regen":
+            print(
+                f"{who}[refused — regen {result.regens_used}/{result.max_regens}; "
+                f"next call: {result.call_path}]"
+            )
+            for note in result.notes:
+                print(f"  {note}")
+            return
+        if result.actor is not None:  # an actor's floor: the template rung
+            print(f"{who}{result.prose}")
+            print(
+                f"[{result.actor} fell to the template rung — the chronicle "
+                f"renders the beat]"
+            )
+        else:
+            print(result.prose)
+            print(
+                f"[dry beat — the L12 floor; regens used "
+                f"{result.regens_used}/{result.max_regens}]"
+            )
+        if result.call_path is not None:
+            print(f"[chorus: the next actor call awaits — {result.call_path}]")
+
+    # -- the parser door (mode C, phase 2 — D-062) -----------------------------
+
+    def _parser_door(self) -> ParserDoor:
+        """The session's mode-C door, sharing the mediator's ledger (one
+        scene ledger per session, D-049: the narrator establishes texture,
+        the player's words reference it)."""
+        if self._parser is None:
+            mediator = self._mediator_or_start()
+            self._parser = ParserDoor(
+                self._sim, self._pack, self._schema, self._log_path,
+                mediator.ledger, OUTPUT_DIR / "parser",
+            )
+        return self._parser
+
+    def _cmd_say(self, args: list[str]) -> None:
+        if not args:
+            print("usage: say <free text> | say apply <reply.json>")
+            return
+        door = self._parser_door()
+        if args[0] == "apply":
+            if len(args) != 2:
+                print("usage: say apply <reply.json>")
+                return
+            result = door.apply_reply(Path(args[1]))
+            self._print_parse(result)
+            return
+        text = " ".join(args)
+        if self._engine is None:
+            path = door.emit_call(text)
+            reply = path.with_name(
+                path.stem.replace("parse", "parse_reply") + ".json"
+            )
+            print(f"[parser call: {path}]")
+            print(
+                f"[write a JSON reply {{intent | question | no_intent}} at {reply}, "
+                f"then: say apply {reply}]"
+            )
+            return
+        self._say_via_engine(door, text)
+
+    def _print_parse(self, result: ParseResult) -> None:
+        """Show the cycle's outcome: an intent feeds the world (fresh
+        chronicle tail + scene card), a question or note surfaces to the
+        player — never a silent drop."""
+        if result.status == "intent":
+            self._print_world_delta()
+            print(
+                f"[parsed intent fed: {result.step['intent']}",
+                f"{result.events} events"
+                + (f", pinned {', '.join(result.pinned)}" if result.pinned else "")
+                + "]"
+            )
+            return
+        if result.status == "question":
+            print(f"[the parser asks: {result.text}]")
+            return
+        print(f"[no intent: {result.text}]")
+
+    # -- the runtime-engine operator cycles (engine-1, D-193) ------------------
+
+    #: The off-grammar re-ask's repair turn: the ParseError's own message
+    #: (the nearest-valid menu riding it, iter-107) is the fuel the engine
+    #: patches toward — the dev-time operator's "fix the reply" automated.
+    _RE_ASK_NOTE = (
+        "Your previous reply was rejected at the boundary:\n{error}\n"
+        "Reply again with ONE JSON object carrying exactly one alternative "
+        "(intent | question | no_intent), on-grammar per the protocol above."
+    )
+
+    def _engine_client_or_first_use(self) -> LlamaServerClient:
+        """The lazy client + the one-time provenance manifest (the D3
+        inference tier): /props read, the model file hashed, the row
+        written to `output/engine/manifest_<log-stem>.json` — a runtime
+        artifact, never canon. An unreachable backend writes a partial
+        row and the session lives on (the ladder owns the rest)."""
+        if self._engine is None:  # pragma: no cover — the callers gate on it
+            raise MediatorError("no engine configured for this session")
+        if self._engine_client is None:
+            self._engine_client = LlamaServerClient(self._engine)
+        if self._engine_manifest is None:
+            print(f"[engine: {self._engine.endpoint} — reading provenance]")
+            try:
+                self._engine_props = self._engine_client.props()
+            except EngineError as exc:
+                print(f"[engine manifest partial ({exc}) — the session continues]")
+                self._engine_props = {}
+            self._engine_manifest = write_manifest(
+                manifest_row(self._engine, self._engine_props),
+                OUTPUT_DIR / "engine",
+                self._log_path.stem,
+            )
+            print(f"[engine manifest: {self._engine_manifest}]")
+        return self._engine_client
+
+    def _engine_note_grammar(self, grammar_id: str) -> None:
+        """Pin the first parse call's grammar id into the manifest (the
+        constraint half of the request identity; per-call ids derive
+        from the log — the manifest anchors the mapping's fingerprint)."""
+        if self._engine is None or self._engine_grammar_noted:
+            return
+        self._engine_grammar_noted = True
+        self._engine_manifest = write_manifest(
+            manifest_row(
+                self._engine, self._engine_props, parse_grammar_id=grammar_id
+            ),
+            OUTPUT_DIR / "engine",
+            self._log_path.stem,
+        )
+
+    def _say_via_engine(self, door: ParserDoor, text: str) -> None:
+        """One parse cycle with the runtime engine as the operator
+        (D-055's frame): emit -> the GBNF-constrained answer -> apply.
+        The failure->ladder mapping (CONTRACTS §4.1 D7): an off-grammar
+        reply re-asks once with the refusal note (the menu's fuel);
+        exhaustion leaves the cycle OPEN — the dev-time door stands
+        (hand-write the reply); an unavailable engine maps onto the same
+        open-cycle rung; the door's own RunnerError (a consumed reply
+        the world refused — the s2c1 class) is TERMINAL: it propagates
+        to the session's error print, nothing re-asks, the world never
+        moved on a shape violation."""
+        engine = self._engine
+        assert engine is not None  # the caller gates on the engine
+        call_path = door.emit_call(text)
+        reply_path = call_path.with_name(
+            call_path.stem.replace("parse", "parse_reply") + ".json"
+        )
+        print(f"[parser call: {call_path}] [engine: {engine.endpoint}]")
+        client = self._engine_client_or_first_use()
+        ledger = self._mediator_or_start().ledger
+        _header, events = read_log(self._log_path, self._schema)
+        grammar = gbnf_grammar(
+            grammar_snapshot(events, self._pack, ledger)
+        )
+        self._engine_note_grammar(grammar_fingerprint(grammar))
+        messages: list[dict[str, str]] = [
+            {"role": "user", "content": call_path.read_text(encoding="utf-8")}
+        ]
+        for attempt in range(engine.re_asks + 1):
+            try:
+                content, finish = client.chat(
+                    messages,
+                    grammar=grammar,
+                    temperature=engine.parse_temperature,
+                    max_tokens=engine.parse_max_tokens,
+                )
+            except EngineError as exc:
+                print(
+                    f"[engine unavailable: {exc} — the cycle stays open; "
+                    f"write a reply at {reply_path}, then: "
+                    f"say apply {reply_path}]"
+                )
+                return
+            reply_path.write_text(content, encoding="utf-8")
+            self._print_engine_reply(reply_path, finish)
+            try:
+                result = door.apply_reply(reply_path)
+            except ParseError as exc:
+                if attempt < engine.re_asks:
+                    print(
+                        f"[off-grammar reply ({exc}) — "
+                        f"re-asking {attempt + 1}/{engine.re_asks}]"
+                    )
+                    messages = [
+                        messages[0],
+                        {"role": "assistant", "content": content},
+                        {
+                            "role": "user",
+                            "content": self._RE_ASK_NOTE.format(error=exc),
+                        },
+                    ]
+                    continue
+                print(
+                    f"[off-grammar after {engine.re_asks} re-ask(s): {exc} "
+                    f"— the cycle stays open; fix {reply_path}, then: "
+                    f"say apply {reply_path}]"
+                )
+                return
+            self._print_parse(result)
+            return
+
+    def _narrate_via_engine(self, mediator: Mediator) -> None:
+        """The narrator beat cycle with the runtime engine as the
+        operator: answer the open call (or emit one), apply, and follow
+        the beat's own ladder — the mediator maps every failure exactly
+        as it does for the human operator (malformed/refused replies
+        spend its <=2 regens; exhaustion falls to the template rung;
+        the chorus advances call by call until the beat closes). An
+        unavailable engine falls to the SAME floor: dry_close (the
+        template rung — never a blocked beat, never a silent drop)."""
+        engine = self._engine
+        assert engine is not None  # the caller gates on the engine
+        client = self._engine_client_or_first_use()
+        if self._open_call is None:
+            self._open_call = mediator.emit_call()
+        while self._open_call is not None:
+            call = self._open_call
+            reply = call.with_name(
+                call.stem.replace("call", "reply") + ".json"
+            )
+            try:
+                content, finish = client.chat(
+                    narrator_messages(call.read_text(encoding="utf-8")),
+                    grammar=None,
+                    temperature=engine.prose_temperature,
+                    max_tokens=engine.prose_max_tokens,
+                )
+            except EngineError as exc:
+                print(f"[engine unavailable: {exc} — the template rung]")
+                result = mediator.dry_close()
+            else:
+                reply.write_text(content, encoding="utf-8")
+                self._print_engine_reply(reply, finish)
+                result = mediator.apply_reply(reply)
+            self._open_call = result.call_path
+            self._print_beat(result)
+
+    @staticmethod
+    def _print_engine_reply(reply: Path, finish: str) -> None:
+        """The operator's trace line: the reply file (the contract —
+        inspectable exactly like a hand-written one) plus the stop
+        reason when it is not a clean stop (I6: engine metadata is
+        operator feedback, never canon)."""
+        note = "" if finish in ("stop", "") else f" [finish_reason: {finish}]"
+        print(f"[engine reply: {reply}{note}]")
+
+    def _print_world_delta(self) -> None:
+        """The fresh chronicle tail + scene card (the shared step-output
+        printer — the world moved)."""
+        text = _session_log(self._pack, self._schema, self._log_path)
+        lines = text.splitlines()
+        for line in lines[self._shown_lines :]:
+            print(line)
+        self._shown_lines = len(lines)
+        _header, events = read_log(self._log_path, self._schema)
+        projection = fold(events, initial_projection(self._pack.entities))
+        print(render_scene_card(projection, self._pack, seed=self._seed))
+
+    # -- the world-touching path ---------------------------------------------
+
+    def _run_steps(self, steps: list[dict]) -> None:
+        """Feed steps, then show the fresh chronicle tail + scene card."""
+        self._sim.run_steps(steps)
+        self._print_world_delta()
+
+
+# -- batch subcommands -------------------------------------------------------
+
+
+def cmd_play(args: argparse.Namespace) -> int:
+    """Run a playscript end-to-end; print the chronicle + final scene."""
+    pack, schema = _load(args.pack)
+    script = load_playscript(Path(args.script))
+    if args.seed is not None:
+        script = dict(script, seed=args.seed)
+    logs_dir = Path(args.logs_dir)
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    log_path = next_log_path(logs_dir, script["seed"])
+    sim = Simulator(
+        pack, script["seed"], log_path, schema, commit=_commit_id(),
+        director_enabled=args.directors != "off",
+    )
+    result = sim.run_playscript(script)
+    text = chronicle_from_log(log_path, pack, schema)
+    print(text, end="")
+    _, events = read_log(log_path, schema)
+    projection = fold(events, initial_projection(pack.entities))
+    print(render_scene_card(projection, pack, seed=script["seed"]))
+    print(f"[log: {log_path} | {result.event_count} events, tick {result.last_tick}]")
+    out_dir = Path(args.out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"chronicle_{log_path.stem}.txt"
+    out_path.write_text(text, encoding="utf-8")
+    print(f"[chronicle saved: {out_path}]")
+    return 0
+
+
+def cmd_chronicle(args: argparse.Namespace) -> int:
+    """Render a log's chronicle (the seed comes from the log header)."""
+    pack, schema = _load(args.pack)
+    print(chronicle_from_log(Path(args.log), pack, schema), end="")
+    return 0
+
+
+def cmd_state(args: argparse.Namespace) -> int:
+    """One entity's full history + current state from a log."""
+    pack, schema = _load(args.pack)
+    header, events = read_log(Path(args.log), schema)
+    projection = fold(events, initial_projection(pack.entities))
+    print(
+        render_entity_view(
+            events, projection, pack, args.entity, seed=int(header["seed"])
+        ),
+        end="",
+    )
+    return 0
+
+
+def cmd_replay(args: argparse.Namespace) -> int:
+    """Validate + fold a log (T0/T2 in one pass); report."""
+    pack, schema = _load(args.pack)
+    report, _ = replay_report(Path(args.log), pack, schema)
+    print(report)
+    return 0
+
+
+def run_session(args: argparse.Namespace) -> int:
+    """The interactive session loop."""
+    pack, schema = _load(args.pack)
+    engine = None
+    if getattr(args, "engine", None) is not None:
+        engine = EngineConfig(
+            endpoint=args.engine,
+            model=args.engine_model,
+            seed=args.seed,
+        )
+    session = Session(
+        pack, schema, args.seed, Path(args.logs_dir),
+        args.directors != "off", resume_log=args.resume, engine=engine,
+    )
+    if session.resumed is not None:
+        events, tick = session.resumed
+        print(
+            f"canonsim — {pack.name_version} | resumed seed {session.seed} | "
+            f"log {session.log_path} ({events} events, tick {tick})\n"
+            f"(the story continues — 'chronicle' reads it back, 'help' lists "
+            f"commands)"
+        )
+    else:
+        print(
+            f"canonsim — {pack.name_version} | seed {session.seed} | "
+            f"log {session.log_path}\n"
+            f"(the world moves when you act or wait — 'help' lists commands)"
+        )
+    try:
+        while True:
+            try:
+                line = input("tick> ").strip()
+            except EOFError:
+                break
+            if not line:
+                continue
+            if line.lower() in ("quit", "exit"):
+                break
+            session.execute(line)
+    except KeyboardInterrupt:
+        print()
+    finally:
+        session.close()
+    print(f"[session log: {session.log_path}]")
+    return 0
+
+
+def _build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="canonsim",
+        description="TavernSim v0 — deterministic canonical simulation "
+        "(the simulator produces facts; the chronicle reads them from "
+        "the log; the optional --engine operator sits outside the canon, "
+        "INV-4's adapter form)",
+    )
+    parser.add_argument(
+        "--seed", type=int, default=42,
+        help="seed for the interactive session (default: 42)",
+    )
+    parser.add_argument(
+        "--engine", nargs="?", const=DEFAULT_ENDPOINT, default=None,
+        metavar="URL",
+        help="wire the runtime engine (llama-server behind the explicit "
+             "adapter, engine-1) as the doors' operator — the optional "
+             "value is the endpoint (default: %(const)s)",
+    )
+    parser.add_argument(
+        "--engine-model", default=None, metavar="STEM",
+        help="the model stem for router-shaped endpoints (rides the "
+             "request's model field; single-server endpoints ignore it)",
+    )
+    parser.add_argument(
+        "--directors", choices=("on", "off"), default="on",
+        help="director releases for the interactive session (default: on)",
+    )
+    parser.add_argument(
+        "--pack", type=Path, default=PACK_DIR,
+        help="pack directory (default: the repo's content/tavern_pack)",
+    )
+    parser.add_argument(
+        "--resume", type=Path, default=None,
+        help="continue an existing session log (the interactive session "
+             "only; the seed and pack come from the log's header + its "
+             "cursor — --seed and --directors are ignored on resume)",
+    )
+    parser.add_argument(
+        "--logs-dir", default=str(LOGS_DIR),
+        help="where run logs are written (default: the repo's logs/)",
+    )
+    sub = parser.add_subparsers(dest="command")
+
+    play = sub.add_parser("play", help="run a playscript end-to-end")
+    play.add_argument("script", type=Path, help="playscript .json path")
+    play.add_argument("--seed", type=int, default=None,
+                      help="override the script's seed")
+    play.add_argument("--directors", choices=("on", "off"), default="on",
+                      help="director releases (default: on)")
+    play.add_argument("--pack", type=Path, default=argparse.SUPPRESS,
+                      help="pack directory (default: content/tavern_pack)")
+    play.add_argument("--logs-dir", default=str(LOGS_DIR))
+    play.add_argument("--out-dir", default=str(OUTPUT_DIR))
+
+    chronicle = sub.add_parser("chronicle", help="render a log's chronicle")
+    chronicle.add_argument("log", type=Path)
+    chronicle.add_argument("--pack", type=Path, default=argparse.SUPPRESS,
+                           help="pack directory (default: content/tavern_pack)")
+
+    state = sub.add_parser("state", help="one entity's history + state")
+    state.add_argument("entity", help="entity id (e.g. purse_01, npc_guard_01)")
+    state.add_argument("log", type=Path)
+    state.add_argument("--pack", type=Path, default=argparse.SUPPRESS,
+                       help="pack directory (default: content/tavern_pack)")
+
+    replay = sub.add_parser("replay", help="validate + fold a log (T2)")
+    replay.add_argument("log", type=Path)
+    replay.add_argument("--pack", type=Path, default=argparse.SUPPRESS,
+                        help="pack directory (default: content/tavern_pack)")
+    return parser
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """CLI entry: subcommand dispatch, interactive session by default."""
+    args = _build_parser().parse_args(argv)
+    if args.resume is not None and args.command is not None:
+        print(
+            "error: --resume is a session flag — pass it without a "
+            "subcommand", file=sys.stderr,
+        )
+        return 1
+    try:
+        if args.command == "play":
+            return cmd_play(args)
+        if args.command == "chronicle":
+            return cmd_chronicle(args)
+        if args.command == "state":
+            return cmd_state(args)
+        if args.command == "replay":
+            return cmd_replay(args)
+        return run_session(args)
+    except (
+        RunnerError, PackError, LogError, RenderError, GrammarError,
+        MediatorError, CheckpointError, CursorError, RngError, ValueError,
+    ) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+    except FileNotFoundError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1

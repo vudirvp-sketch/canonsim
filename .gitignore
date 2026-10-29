@@ -1,0 +1,80 @@
+# Runtime artifacts — never committed (AGENTS.md §7, INV-5)
+logs/
+output/
+
+# Research-intervention scratch (intake-37/D-197): probe runners, mutated
+# pack copies, spike drafts — session-transient, never staged, never
+# archived; the durable residue routes to phases.md §6 / DECISIONS / TASKS
+scratch/
+
+# DF Legends XML exports — runtime data for track B, never committed
+# (df_design.md determinism quarantine: no golden DF fixtures; iter-8e)
+dfworlds/
+
+# JSONL outside tests/fixtures/ is runtime log data (INV-5)
+*.jsonl
+!tests/fixtures/*.jsonl
+
+# Python bytecode, caches, packaging
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+
+# The web client's node artifacts (frontend-1, D-244): the dependency
+# tree is reproducible from package.json + package-lock.json; build
+# output never committed
+frontend/node_modules/
+frontend/dist/
+
+# The Workbench runtime data root (wb-7: the default MODELS_ASSETS dir
+# scripts/workbench_app.py scans — the operator's GGUF files, never committed)
+workbench/runtime/
+
+# The runtime payload lives OUTSIDE the working tree since 2026-10-24 (the
+# cleanup moved the 18.6 GB GGUF pool into the workspace's shared
+# runtime/assets/models/ pool and the 188 MB llama.cpp build into
+# runtime/assets/canonsim/; scripts/workbench_app.py's DEFAULT_MODELS_DIR /
+# DEFAULT_LLAMA_CPP_DIR resolve them, CANONSIM_MODELS_ASSETS /
+# CANONSIM_LLAMA_ROOT override). These rules keep a payload copied back into
+# the tree out of git: a station-pack drop folder, any GGUF body.
+canonsim_*/
+# the hyphen spelling of the same drop folder (measured residue, 2026-10-28)
+canonsim-*/
+*.gguf
+
+# The disposable-sandbox handoff's residue (AGENTS.md §11: the protocol is
+# RETIRED — it left BASE_COMMIT.txt / DELETED_PATHS.txt / MANIFEST.md5 and a
+# stale root TASKS.md here; the live backlog is docs/TASKS.md, the live state
+# STATUS.md). Never committable again.
+BASE_COMMIT.txt
+DELETED_PATHS.txt
+MANIFEST.md5
+/TASKS.md
+
+# Environments & secrets
+.venv/
+.env
+
+# The Windows runner's scratch (2026-10-24 measured fact): %TEMP% is not
+# writable from this shell, so `tempfile.gettempdir()` falls back to the CWD
+# and pytest's temporary roots land in the repo root. Run artifacts, never
+# repo content.
+/pytest-of-*/
+/tmp*
+/.tmp-runner/
+/.check-probe-*/
+
+# The agent skill library's DEPLOYMENT PROJECTION (the 2026-10-13 audit:
+# 62 packages copied from projects/agent-systems/agent-workbench/skills — not
+# repo content, and `git add -A` here would publish the library to the public
+# remote). Re-deployable at will; never committed.
+/.dsh/
+
+# The Playwright smoke's runner artifacts (iter-309, the tooling floor's
+# e2e row): traces/reports/videos never committed — the run IS the report
+frontend/test-results/
+frontend/playwright-report/

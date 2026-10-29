@@ -1,0 +1,12 @@
+{
+  "operation_id": "3187038636b72b0918dddbb37cb5dde41f2cc9bd753b6ca450e85afdaaac3cf9",
+  "result": {
+    "attached": true,
+    "lease_seconds": 30.0,
+    "lease_token": "e4da937d6c8aa07f5b66be54183ee5207f6cb0a28ecd17b2cfd4f383b3c92254"
+  },
+  "revision": 1,
+  "sequence": 2,
+  "session_id": "d9dcca4f7314f1c9adfe66602eb9b8c85830ec8c1561175a7a497876be18007f",
+  "status": "OK"
+}

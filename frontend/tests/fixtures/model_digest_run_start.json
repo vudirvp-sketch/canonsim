@@ -1,0 +1,12 @@
+{
+  "operation_id": "50e6d6a815a5d93a2f3c71e4803d903fb0bee822a4b43495a2a580337dd20a95",
+  "result": {
+    "deadline_seconds": 60.0,
+    "execution_id": "364c11354e465165be8847fdb6174391cd7bf428ee55aa6c85a81328aa97c21b",
+    "work": "model.digest"
+  },
+  "revision": 0,
+  "sequence": 2,
+  "session_id": "435d821dd1ac0504fa460a80c0971ce0e6199df2612a6cb84162264c67c78862",
+  "status": "OK"
+}

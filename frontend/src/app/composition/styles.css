@@ -1,0 +1,1209 @@
+:root {
+  color-scheme: dark;
+  --bg: #101418;
+  --surface: #171d24;
+  --surface-2: #1d242d;
+  --line: #2a333e;
+  --text: #d7dde3;
+  --muted: #8a97a3;
+  --accent: #2dd4bf;
+  --warn: #f0b541;
+  --error: #f0716b;
+  --synthetic: #7c8fa6;
+  /* The HISTORY channel (dual-read): a violet distinct from the LIVE
+     teal accent and from the warn amber. */
+  --history: #a78bfa;
+  /* The CONFIG channel (the Settings world): a calm blue distinct
+     from the LIVE teal, the HISTORY violet, and the warn amber. */
+  --config: #7aa2f7;
+  /* Row mechanics (iter-297, the visual floor's first tokenized set —
+     raw literals are forbidden outside :root, VISUAL_SYSTEM_UI §2):
+     the channel-tinted selection backgrounds are DIMMED forms of the
+     dual-read channel hues (STATE-class rows, never a second
+     interactive accent), the rest is the neutral ramp. */
+  --row-divider: #202832;
+  --row-hover: #232c37;
+  --row-selected-live: #1d3a37;
+  --row-selected-history: #2b2640;
+  --text-mono: #b8c4cf;
+  --border-strong: #3d4a58;
+  /* The typography contract (VISUAL_SYSTEM_UI §2.2 — font metrics are
+     layout; the web client's token form, iter-304): the two family
+     stacks, the seven-step scale, the strong weight, the label
+     tracking. A font size / family / weight / letter-spacing outside
+     this set is a V2 guard violation — a raw literal, never a token
+     by name. The scale consolidates the fourteen organic sizes onto
+     seven steps (the max drift +0.04rem = 0.56px at the 14px root). */
+  --font-body-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, monospace;
+  --font-root: 14px;
+  --font-micro: 0.72rem;
+  --font-meta: 0.78rem;
+  --font-compact: 0.84rem;
+  --font-body: 0.9rem;
+  --font-heading: 0.95rem;
+  --font-heading-l: 1rem;
+  --font-heading-xl: 1.05rem;
+  --weight-strong: 600;
+  --tracking-label: 0.05em;
+  /* The radius scale (§2.1's RADIUS row — a radius is a token, never
+     a raw literal; the pill carries the 999px semantics by name). */
+  --radius-s: 4px;
+  --radius-m: 6px;
+  --radius-l: 8px;
+  --radius-pill: 999px;
+  /* The spacing scale (§1.1's bands — the visual floor's third row,
+     iter-307): ten named steps consolidate the seventeen organic
+     values across the 131 layout-affecting declarations; max drift
+     2px, 119/149 usages exact. A padding/margin/gap literal outside
+     this set is a V3 guard violation. 0 and auto stay literal (the
+     zero/auto semantics); em/% stay legal as contextual ratios. */
+  --space-1: 2px;   /* optical: hairline gaps, chip insets */
+  --space-2: 4px;   /* optical: tight insets, code chips */
+  --space-3: 6px;   /* component inner: dense rows, label pairs */
+  --space-4: 8px;   /* component: controls, list gutters */
+  --space-5: 10px;  /* component: the workhorse inset */
+  --space-6: 12px;  /* component upper: group gaps */
+  --space-7: 16px;  /* section lower: surface padding, grid gaps */
+  --space-8: 20px;  /* section: workspace gutters */
+  --space-9: 32px;  /* section upper: major indents */
+  --space-10: 48px; /* major: scroll breathing room */
+  font-family: var(--font-body-family);
+  font-size: var(--font-root);
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+code {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: 0 var(--space-2);
+}
+button {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: var(--space-2) var(--space-5);
+  font: inherit;
+  cursor: pointer;
+}
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+input,
+select {
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  padding: var(--space-2) var(--space-3);
+  font: inherit;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/* The product chrome (iter-297/D-247): one compact header row — the
+   identity strip's honest state labels stay (VISUAL_SYSTEM_UI §0.3:
+   evidence never hidden for visual calm); engineering prose does not. */
+.app-header {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-7);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+.app-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-7);
+}
+.app-header-row h1 {
+  font-size: var(--font-heading-xl);
+  margin: 0;
+}
+.app-header-row .strip {
+  margin-left: auto;
+}
+.app-header .banner {
+  margin: 0;
+}
+.surface-note {
+  color: var(--muted);
+  margin: var(--space-1) 0 var(--space-3);
+  font-size: var(--font-body);
+}
+.tag {
+  font-size: var(--font-micro);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-4);
+  color: var(--muted);
+  vertical-align: middle;
+  margin-left: var(--space-3);
+}
+.tag-live {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+/* The HISTORY world's own channel (dual-read §4): a distinct hue
+   from the LIVE teal — never a shared "data" color. */
+.tag-history {
+  color: var(--history);
+  border-color: var(--history);
+}
+/* The CONFIG world's own channel: the persisted user-configuration
+   surfaces (Settings) — distinct from LIVE and HISTORY. */
+.tag-config {
+  color: var(--config);
+  border-color: var(--config);
+}
+.freshness-history {
+  color: var(--history);
+  border-color: var(--history);
+}
+
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  align-items: center;
+  color: var(--muted);
+  font-size: var(--font-body);
+}
+.spacer {
+  flex: 1;
+}
+.freshness {
+  font-weight: var(--weight-strong);
+  letter-spacing: var(--tracking-label);
+  font-size: var(--font-meta);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-4);
+}
+.freshness-live {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+/* The stream adapter's honest phase line (iter-306): the live feed's
+   own state, muted — the freshness chip stays the state authority. */
+.stream-phase {
+  color: var(--muted);
+  font-size: var(--font-meta);
+  letter-spacing: var(--tracking-label);
+}
+.freshness-stale {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+.freshness-disconnected {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+}
+@media (max-width: 860px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: var(--space-7) var(--space-7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.surface-header h2 {
+  font-size: var(--font-heading-l);
+  margin: 0;
+}
+.surface-header h3 {
+  font-size: var(--font-heading);
+  margin: var(--space-3) 0 var(--space-1);
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2) var(--space-6);
+  margin: 0;
+  font-size: var(--font-body);
+}
+.status-grid dt {
+  color: var(--muted);
+}
+.status-grid dd {
+  margin: 0;
+}
+.op-chip {
+  display: inline-block;
+  margin: var(--space-1) var(--space-2) var(--space-1) 0;
+}
+
+.banner {
+  border-radius: var(--radius-m);
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--font-body);
+  border: 1px solid var(--line);
+}
+.banner-resync {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+.banner-synthetic {
+  border-color: var(--synthetic);
+  color: var(--synthetic);
+}
+.banner-trim {
+  color: var(--muted);
+}
+.banner-stale {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+.banner-error {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+  font-size: var(--font-body);
+  color: var(--muted);
+}
+
+/* The shell (iter-297/D-247, the IA repair): a vertical product rail
+   + ONE active workspace. The rail carries ONLY approved product
+   routes (FRONTEND_UIUX_LAW §2.1) + the subdued Diagnostics entry —
+   never a feature directory. Only the active surface mounts
+   (boundedness). */
+.shell {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+.shell-rail {
+  flex: none;
+  width: 216px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-6) var(--space-4);
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+  overflow-y: auto;
+}
+.shell-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-left: 2px solid transparent;
+  border-radius: 0 var(--radius-s) var(--radius-s) 0;
+  background: transparent;
+  padding: var(--space-4) var(--space-5);
+  font: inherit;
+  color: var(--text);
+}
+.shell-item:hover:not(:disabled) {
+  border-color: transparent;
+  background: var(--surface-2);
+}
+.shell-item-active {
+  border-left-color: var(--accent);
+  color: var(--accent);
+  background: var(--surface-2);
+}
+/* The pinned product route (Settings) rides the rail's end. */
+.shell-item-pinned {
+  margin-top: auto;
+}
+/* The Diagnostics entry — subdued by law: muted, separated, never a
+   product peer. The proof instruments live behind it. */
+.shell-item-diagnostics {
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  border-left: 2px solid transparent;
+  color: var(--muted);
+  font-size: var(--font-compact);
+}
+.shell-item-diagnostics:hover:not(:disabled) {
+  color: var(--text);
+}
+.shell-item-diagnostics-open {
+  border-left-color: var(--muted);
+  color: var(--text);
+  background: var(--surface-2);
+}
+.shell-workspace {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding: var(--space-7) var(--space-8) var(--space-10);
+}
+.shell-pane {
+  max-width: 980px;
+  margin: 0 auto;
+  min-height: 120px;
+}
+/* The diagnostics area: its own secondary navigation (never the
+   primary rail) + the active diagnostic surface. */
+.diagnostics {
+  max-width: 980px;
+  margin: 0 auto;
+}
+.diagnostics-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-6);
+}
+.diag-tab {
+  font-size: var(--font-compact);
+  padding: var(--space-2) var(--space-6);
+  color: var(--muted);
+}
+.diag-tab-active {
+  border-color: var(--muted);
+  color: var(--text);
+}
+.diagnostics-pane {
+  min-height: 120px;
+}
+.banner-accepted {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.empty,
+.empty-inspector {
+  color: var(--muted);
+  font-size: var(--font-body);
+  margin: var(--space-2) 0;
+}
+
+.vlist {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+}
+.trow {
+  display: grid;
+  grid-template-columns: 70px 190px 1fr 1fr;
+  gap: var(--space-5);
+  align-items: center;
+  padding: 0 var(--space-5);
+  height: 100%;
+  font-size: var(--font-compact);
+  border-bottom: 1px solid var(--row-divider);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.trow:hover {
+  background: var(--row-hover);
+}
+.trow-selected {
+  background: var(--row-selected-live);
+  outline: 1px solid var(--accent);
+}
+.trow-synthetic .cell-type,
+.trow-synthetic .cell-op,
+.trow-synthetic .cell-id {
+  color: var(--synthetic);
+  font-style: italic;
+}
+.cell-seq {
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+.cell-type {
+  color: var(--muted);
+}
+.cell-op,
+.cell-id {
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+.inspector {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  max-height: 220px;
+  overflow: auto;
+}
+.inspector pre {
+  margin: 0;
+  padding: var(--space-5);
+  font-size: var(--font-meta);
+  color: var(--text-mono);
+}
+
+.probe-panel {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-4);
+}
+
+/* The Observatory surface (the HISTORY world) — the runs discovery
+   list + the bounded event window's own table shape. */
+.runs-block h3 {
+  margin: var(--space-2) 0 var(--space-1);
+  font-size: var(--font-heading);
+  font-weight: var(--weight-strong);
+}
+.runs-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.runs-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  font-size: var(--font-body);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+}
+.runs-row:hover {
+  border-color: var(--history);
+}
+.runs-open {
+  padding: var(--space-1) var(--space-5);
+  font-size: var(--font-meta);
+}
+.runs-name {
+  font-family: var(--font-mono);
+  color: var(--history);
+}
+.runs-meta {
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.runs-error {
+  color: var(--warn);
+}
+.orow-header {
+  display: grid;
+  grid-template-columns: 54px 168px 158px 1fr 64px 120px;
+  gap: var(--space-5);
+  padding: 0 var(--space-5);
+  font-size: var(--font-meta);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+}
+.orow-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  max-height: 420px;
+  overflow: auto;
+}
+.orow {
+  display: grid;
+  grid-template-columns: 54px 168px 158px 1fr 64px 120px;
+  gap: var(--space-5);
+  align-items: center;
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--font-compact);
+  border-bottom: 1px solid var(--row-divider);
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.orow:hover {
+  background: var(--row-hover);
+}
+.orow-selected {
+  background: var(--row-selected-history);
+  outline: 1px solid var(--history);
+}
+.orow-high .cell-type,
+.orow-high .cell-kind {
+  color: var(--warn);
+}
+.cell-kind {
+  color: var(--text);
+}
+.cell-actor {
+  color: var(--muted);
+}
+.cell-imp {
+  font-size: var(--font-meta);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  text-align: center;
+  color: var(--muted);
+}
+.cell-imp-high {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+.controls-note {
+  color: var(--muted);
+  font-size: var(--font-meta);
+}
+.probe-list {
+  list-style: none;
+  margin: var(--space-2) 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.probe-record {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-6);
+  font-size: var(--font-compact);
+}
+.probe-label {
+  color: var(--muted);
+}
+.probe-outcome {
+  font-family: var(--font-mono);
+}
+.probe-DELIVERED {
+  color: var(--accent);
+}
+.probe-TRANSPORT {
+  color: var(--error);
+}
+.probe-MISMATCH {
+  color: var(--warn);
+}
+button.probe {
+  border-color: var(--border-strong);
+}
+
+/* The Settings surface (the CONFIG world) — the closed three-field
+   draft form + the read-only compiled command preview. */
+/* The secondary navigation (iter-301): the surface's own concern
+   (§2.1) — the Diagnostics area's in-workspace tab precedent,
+   mirrored; the active section renders below, the inactive one
+   unmounts (the mounting discipline). */
+.settings-sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-7);
+}
+.section-tab {
+  font-size: var(--font-compact);
+  padding: var(--space-2) var(--space-6);
+  color: var(--muted);
+}
+.section-tab-active {
+  border-color: var(--config);
+  color: var(--text);
+}
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.settings-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.settings-field input[type="text"] {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--font-body);
+}
+.settings-label {
+  font-size: var(--font-compact);
+  color: var(--text);
+}
+.settings-label em {
+  color: var(--muted);
+  font-style: normal;
+  font-size: var(--font-meta);
+}
+.preview-block h3 {
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: var(--font-body);
+  font-weight: var(--weight-strong);
+}
+.command-preview {
+  margin: 0;
+  padding: var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  max-height: 180px;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: var(--font-meta);
+  color: var(--text-mono);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* The Chat surface (the conversation world) — the bounded viewport
+   (the near-bottom follow law rides it), the turn bubbles (neutral
+   tokens only: the chat carries no second accent — the channel hues
+   are the dual-read STATE classes), and the composer. */
+.chat-viewport {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  min-height: 220px;
+  max-height: 46vh;
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.chat-turn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.chat-bubble {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-l);
+  padding: var(--space-4) var(--space-5);
+  max-width: 86%;
+}
+.chat-bubble-user {
+  align-self: flex-end;
+  background: var(--surface);
+  border-right: 2px solid var(--border-strong);
+}
+.chat-bubble-assistant {
+  align-self: flex-start;
+  background: var(--surface);
+  border-left: 2px solid var(--border-strong);
+}
+.chat-role {
+  display: block;
+  font-size: var(--font-micro);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--space-2);
+}
+.chat-content {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.chat-provenance {
+  margin: var(--space-3) 0 0;
+  font-size: var(--font-meta);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+.chat-lane {
+  font-size: var(--font-compact);
+}
+.chat-lane .empty {
+  margin: var(--space-1) 0;
+}
+.chat-repoll {
+  margin-left: var(--space-5);
+  font-size: var(--font-meta);
+}
+.chat-composer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.chat-composer textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 64px;
+  font: inherit;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: var(--space-3) var(--space-4);
+}
+.chat-overrides {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+}
+@media (max-width: 860px) {
+  .chat-overrides {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The Inference surface (the generation-control workspace) — the
+   workspace rows (preset / search+advanced / pinned / preview), the
+   chain region, the collapsible categories, and the control rows.
+   Neutral tokens only: the state chips are STATE-class mappings over
+   the existing token set (the resolver's own vocabulary — never a
+   second interactive accent, VISUAL_SYSTEM_UI §2/§3). */
+.workspace-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+  margin: var(--space-4) 0;
+}
+.workspace-row input[type="search"] {
+  flex: 1 1 260px;
+}
+.strip-edit input {
+  width: 11em;
+  padding: var(--space-1) var(--space-3);
+}
+.strip-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  white-space: nowrap;
+  font-size: var(--font-body);
+}
+.preset-preview {
+  flex-basis: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  padding: var(--space-4) var(--space-5);
+}
+.preset-description {
+  margin: 0 0 var(--space-3);
+  color: var(--muted);
+  font-size: var(--font-body);
+}
+.preset-diff {
+  margin: 0 0 var(--space-4);
+  padding-left: var(--space-7);
+  font-size: var(--font-body);
+}
+.preset-diff li {
+  margin: var(--space-1) 0;
+  overflow-wrap: anywhere;
+}
+.pinned-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+.pinned-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.pinned-reveal {
+  border: none;
+  border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+  background: transparent;
+  padding: var(--space-1) var(--space-5);
+  font-size: var(--font-compact);
+}
+.pinned-unpin {
+  border: none;
+  border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+  background: transparent;
+  padding: var(--space-1) var(--space-4);
+  color: var(--muted);
+  font-size: var(--font-compact);
+}
+.chain-region {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  padding: var(--space-4) var(--space-5);
+  margin: var(--space-5) 0;
+}
+.chain-region h3 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-heading);
+}
+.chain-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.chain-member {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-4);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--row-divider);
+}
+.chain-member:last-child {
+  border-bottom: none;
+}
+.chain-member-draft {
+  background: var(--row-hover);
+  border-radius: var(--radius-s);
+  padding: var(--space-2) var(--space-3);
+}
+.chain-order {
+  color: var(--muted);
+  font-size: var(--font-meta);
+  font-family: var(--font-mono);
+}
+.inference-categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+.category-section {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+}
+.category-toggle {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-m) var(--radius-m) 0 0;
+  padding: var(--space-4) var(--space-5);
+}
+.category-toggle:hover:not(:disabled) {
+  border-color: transparent;
+  background: var(--row-hover);
+}
+.category-title {
+  font-weight: var(--weight-strong);
+}
+.category-count {
+  color: var(--muted);
+  font-size: var(--font-meta);
+  margin-left: var(--space-3);
+}
+.control-row {
+  border-top: 1px solid var(--row-divider);
+  padding: var(--space-4) var(--space-5) var(--space-4) var(--space-9);
+  position: relative;
+}
+.control-row-draft {
+  background: var(--row-hover);
+}
+.control-row-revealed {
+  background: var(--row-selected-live);
+  border-radius: var(--radius-s);
+}
+.control-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+.control-name {
+  font-weight: var(--weight-strong);
+}
+.control-flag {
+  font-size: var(--font-meta);
+  color: var(--muted);
+}
+.pin-button {
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  padding: 0 var(--space-2);
+  font-size: var(--font-body);
+}
+.pin-button[aria-pressed="true"] {
+  color: var(--config);
+}
+.control-state {
+  font-size: var(--font-micro);
+  letter-spacing: var(--tracking-label);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  padding: var(--space-1) var(--space-4);
+}
+/* The resolver's state vocabulary as STATE-class token mappings —
+   the honest matrix, never decorative color. */
+.state-effective {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.state-auto {
+  color: var(--config);
+  border-color: var(--config);
+}
+.state-inactive {
+  color: var(--muted);
+}
+.state-ineffective,
+.state-risk,
+.state-experimental {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+.state-conflict {
+  color: var(--error);
+  border-color: var(--error);
+}
+.state-unclassified,
+.state-legacy,
+.state-removed {
+  color: var(--synthetic);
+  border-color: var(--synthetic);
+}
+.control-doc {
+  margin: var(--space-2) 0 var(--space-3);
+  font-size: var(--font-meta);
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.control-editor {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+.control-editor input[type="number"],
+.control-editor input[type="text"] {
+  width: 11em;
+}
+.gpu-layers-editor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.control-reasons {
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-7);
+  font-size: var(--font-meta);
+  color: var(--muted);
+}
+.control-reasons li {
+  margin: var(--space-1) 0;
+  overflow-wrap: anywhere;
+}
+
+/* The Models surface (the model family's mirror) — the §20 discovery
+   rows (the ladder chips are STATE-class mappings over the existing
+   token set: the ladder's own vocabulary, never a second interactive
+   accent), the arrival forms, and the ONE run's closure lane. */
+.models-arrival {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+}
+@media (max-width: 860px) {
+  .models-arrival {
+    grid-template-columns: 1fr;
+  }
+}
+.models-arrival-form {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.models-arrival-form h3 {
+  margin: 0;
+  font-size: var(--font-heading);
+  font-weight: var(--weight-strong);
+}
+.models-arrival-form textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 64px;
+  font-family: var(--font-mono);
+  font-size: var(--font-compact);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: var(--space-3) var(--space-4);
+}
+.models-arrival-form .settings-field input {
+  font-family: var(--font-mono);
+  font-size: var(--font-body);
+}
+.models-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.models-row {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.models-row-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-5);
+}
+.models-name {
+  font-weight: var(--weight-strong);
+  font-family: var(--font-mono);
+  font-size: var(--font-body);
+  overflow-wrap: anywhere;
+}
+.models-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-7);
+  font-size: var(--font-meta);
+  color: var(--muted);
+}
+.models-digest {
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+/* The §20 MODEL ladder's own vocabulary as STATE-class token
+   mappings — the honest matrix, never decorative color: the ACTIVE
+   resting truth carries the LIVE accent; the walked/loading states
+   carry the CONFIG hue; FAILED is the error channel; the untouched
+   discovery states stay muted. */
+.state-ladder-active {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.state-ladder-selected,
+.state-ladder-loading,
+.state-ladder-loaded,
+.state-ladder-validated {
+  color: var(--config);
+  border-color: var(--config);
+}
+.state-ladder-failed {
+  color: var(--error);
+  border-color: var(--error);
+}
+.state-ladder-discovered,
+.state-ladder-unloading,
+.state-ladder-evicted {
+  color: var(--muted);
+}
+.models-run {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* The execution family's UI exposure (iter-400, the replay-UI
+   remainder): the terminal turn's action row, the replay echo's
+   provenance line, and the lineage inspector. Neutral tokens only —
+   the provenance panel is EVIDENCE, never a second accent. */
+.chat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--font-compact);
+}
+.chat-replay-note {
+  margin: 0;
+  font-size: var(--font-meta);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+.provenance-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  background: var(--surface-2);
+  padding: var(--space-4) var(--space-5);
+  max-width: 100%;
+}
+.provenance-panel h4 {
+  margin: 0;
+  font-size: var(--font-heading);
+}
+.frozen-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-meta);
+}
+.frozen-table th,
+.frozen-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--space-1) var(--space-3);
+  border-top: 1px solid var(--row-divider);
+}
+.frozen-table th {
+  color: var(--muted);
+  font-weight: var(--weight-strong);
+  white-space: nowrap;
+}
+.frozen-table td {
+  font-family: var(--font-mono);
+  overflow-wrap: anywhere;
+}
+

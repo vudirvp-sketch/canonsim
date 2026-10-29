@@ -1,0 +1,8 @@
+{
+  "operation_id": "0211063cab2de27df75eaf553aa406acfb140ad10c07d3f98f43010f707d4507",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "chat.send: a session-scoped operation requires session_id"
+  },
+  "status": "REJECTED"
+}

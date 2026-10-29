@@ -1,0 +1,52 @@
+{
+    "name": "province_maintenance",
+    "seed": 42,
+    "pack": "province_pack@0.1",
+    "steps": [
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "wait",
+            "ticks": 518400
+        },
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "wait",
+            "ticks": 518400
+        },
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "wait",
+            "ticks": 518400
+        },
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "wait",
+            "ticks": 518400
+        },
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "wait",
+            "ticks": 518400
+        },
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "move",
+            "target": "loc_keep"
+        },
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "move",
+            "target": "loc_riverroad"
+        },
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "move",
+            "target": "loc_weirstair"
+        },
+        {
+            "actor": "npc_marketmistress_01",
+            "intent": "mend_the_stair",
+            "target": "loc_weirstair"
+        }
+    ]
+}

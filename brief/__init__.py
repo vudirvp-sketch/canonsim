@@ -1,0 +1,82 @@
+"""Brief assembly for the mediator: the deterministic block pipeline +
+the session scene ledger (`docs/BRIEF_SPEC.md` owns the block contract,
+`docs/blueprint/phases.md` §1 the ledger mechanism). Landed iter-8;
+validator iter-9; the scene ledger (7th block) iter-10; the scene
+manager — the chorus queue, mode B's drain order (scene-1) and the
+session-side folds (scene-2: presence re-verification + the keyword
+query) — lives in `brief/scene.py`. The LLM side of the pipeline is a
+later, owner-gated iteration (AGENTS §8)."""
+
+from brief.assembler import (
+    Block,
+    Brief,
+    assemble_brief,
+    beats_crossed,
+    brief_from_log,
+    last_beat_tick,
+    render_brief,
+    token_count,
+)
+from brief.ledger import (
+    ACTIVE,
+    CONTRADICTED,
+    ENTITY_SCOPE_PREFIX,
+    LIVE_STATUSES,
+    PINNED,
+    PROMOTED,
+    REFUSAL_REASONS,
+    RETIRED,
+    SCENE_CLOSE_CAUSE,
+    SCENE_SCOPE_PREFIX,
+    TERMINAL_STATUSES,
+    DeltaError,
+    DeltaReport,
+    LedgerEntry,
+    Refusal,
+    Scene,
+    SceneLedger,
+    SceneSync,
+    current_scene,
+    present_entities,
+    refusal_lines,
+    scenes,
+    split_scope,
+)
+from brief.scene import present_at_scene, recall_query, speaking_queue
+
+__all__ = [
+    "ACTIVE",
+    "Block",
+    "Brief",
+    "CONTRADICTED",
+    "DeltaError",
+    "DeltaReport",
+    "ENTITY_SCOPE_PREFIX",
+    "LedgerEntry",
+    "LIVE_STATUSES",
+    "PINNED",
+    "PROMOTED",
+    "REFUSAL_REASONS",
+    "RETIRED",
+    "Refusal",
+    "SCENE_CLOSE_CAUSE",
+    "SCENE_SCOPE_PREFIX",
+    "Scene",
+    "SceneLedger",
+    "SceneSync",
+    "TERMINAL_STATUSES",
+    "assemble_brief",
+    "beats_crossed",
+    "brief_from_log",
+    "current_scene",
+    "last_beat_tick",
+    "present_at_scene",
+    "present_entities",
+    "recall_query",
+    "refusal_lines",
+    "render_brief",
+    "scenes",
+    "speaking_queue",
+    "split_scope",
+    "token_count",
+]

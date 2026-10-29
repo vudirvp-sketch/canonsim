@@ -1,0 +1,8 @@
+{
+  "operation_id": "c2a7238ded59d70477b2896753d7a34cc731a1c2a9116b6b45094144b27b291b",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "execution.replay: work kind 'model.load' is not replayable (the live-gate kinds own their re-dispatch; replayable: ['chat.completion', 'model.digest', 'model.fetch', 'model.import'])"
+  },
+  "status": "REJECTED"
+}

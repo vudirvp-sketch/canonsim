@@ -1,0 +1,19 @@
+{
+  "operation_id": "aeefd325cf155ecd568ae253233c46f8b7b1ef660e88848a5a6a548933991b64",
+  "result": {
+    "last_sequence": 11,
+    "resync": "RESYNC_REQUIRED",
+    "retained_from": 8,
+    "snapshot": {
+      "attached": true,
+      "created_observed_at": 1000000.0,
+      "event_sequence": 11,
+      "revision": 10,
+      "session_id": "98a285742cf462c518856aa4aba1b7b24e0120703bfa4010b77e7e681b1329cc"
+    }
+  },
+  "revision": 10,
+  "sequence": 11,
+  "session_id": "98a285742cf462c518856aa4aba1b7b24e0120703bfa4010b77e7e681b1329cc",
+  "status": "OK"
+}

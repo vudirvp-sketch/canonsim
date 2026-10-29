@@ -1,0 +1,67 @@
+{
+  "operation_id": "8ca2f325949fc7eca665807a5d54d3a1cb2e80675aad931676f9c025ac2e086a",
+  "result": {
+    "artifact": {
+      "artifact_schema_identity": "canon_execution_artifact@0.1",
+      "backend_identity": null,
+      "capability_snapshot": null,
+      "diagnostics": [
+        "the work raised _ManagedError: [unavailable] cannot spawn 'llama-server': [Errno 2] No such file or directory: 'llama-server' \u2014 pass --llama-server-exe with the actual path (the owner's station: D:\\llama.cpp\\llama-server.exe)"
+      ],
+      "execution_id": "20649469b006c5057ce2d4dd6aa826fa26acc8e9b2fc4832e6c4f386858ecb47",
+      "frozen_inputs": [
+        [
+          "deadline_seconds",
+          "330.0"
+        ],
+        [
+          "logical_name",
+          "probe-model.gguf"
+        ]
+      ],
+      "inference_config": null,
+      "model_identity": null,
+      "operation_id": "32dd740841282e864ee8b5f7638079f63ea970d37aa275ac243e70f30f602e42",
+      "pack_schema_identity": null,
+      "prompt_identity": null,
+      "protocol_identity": null,
+      "replay_of": null,
+      "reproducibility_scope": "SEMANTIC",
+      "request_digest": "9886812d269785d64e3c3ceace490d49a014eb38ecff1ab562b3c2ab5c1afa17",
+      "runtime_identity": null,
+      "seed": null,
+      "status": "FAILED",
+      "tool_authority_state": null
+    },
+    "deadline": {
+      "deadline_monotonic": 2362.520768526,
+      "started_monotonic": 2032.520768526
+    },
+    "diagnostics": [
+      "the work raised _ManagedError: [unavailable] cannot spawn 'llama-server': [Errno 2] No such file or directory: 'llama-server' \u2014 pass --llama-server-exe with the actual path (the owner's station: D:\\llama.cpp\\llama-server.exe)"
+    ],
+    "execution_id": "20649469b006c5057ce2d4dd6aa826fa26acc8e9b2fc4832e6c4f386858ecb47",
+    "failure_type": "_ManagedError",
+    "frozen_inputs": [
+      [
+        "deadline_seconds",
+        "330.0"
+      ],
+      [
+        "logical_name",
+        "probe-model.gguf"
+      ]
+    ],
+    "operation_id": "32dd740841282e864ee8b5f7638079f63ea970d37aa275ac243e70f30f602e42",
+    "progress": null,
+    "request_digest": "9886812d269785d64e3c3ceace490d49a014eb38ecff1ab562b3c2ab5c1afa17",
+    "result": null,
+    "state": "FAILED",
+    "terminal": true,
+    "work": "model.load"
+  },
+  "revision": 0,
+  "sequence": 2,
+  "session_id": "c61c24fcb2b587ebf70042e023af2b91c1faf3d488da8e3b4b66bf2501af4f12",
+  "status": "OK"
+}

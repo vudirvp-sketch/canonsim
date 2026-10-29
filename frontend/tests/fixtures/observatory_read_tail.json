@@ -1,0 +1,129 @@
+{
+  "operation_id": "8ca2f325949fc7eca665807a5d54d3a1cb2e80675aad931676f9c025ac2e086a",
+  "status": "OK",
+  "result": {
+    "run": "run_125_0",
+    "header": {
+      "schema_version": "0.3",
+      "seed": 125,
+      "python": "3.12.14",
+      "commit": "e9efe5b",
+      "pack": "tavern_pack@0.1"
+    },
+    "profile": "CANON_VIEW",
+    "authority": "CANONICAL",
+    "total_events": 56,
+    "window": {
+      "after": "ev_0050",
+      "limit": 50,
+      "events": [
+        {
+          "id": "ev_0051",
+          "t": 1080,
+          "type": "watch_change",
+          "actor": "world",
+          "kind": "watch_change",
+          "importance": "medium",
+          "cause": "ev_0050",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "npc_guard_01",
+              "prop": "position",
+              "from": "loc_guardroom",
+              "to": "loc_tavern"
+            },
+            {
+              "entity": "npc_guard_02",
+              "prop": "position",
+              "from": "loc_tavern",
+              "to": "loc_guardroom"
+            },
+            {
+              "entity": "npc_guard_02",
+              "prop": "status.fatigue",
+              "from": 20,
+              "to": 0
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0052",
+          "t": 1080,
+          "type": "knowledge_transfer",
+          "actor": "npc_guard_02",
+          "kind": "knowledge_transfer",
+          "importance": "medium",
+          "cause": "ev_0051",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 4,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0053",
+          "t": 1080,
+          "type": "status_decayed",
+          "actor": "world",
+          "kind": "status_decayed",
+          "importance": "low",
+          "cause": "ev_0052",
+          "authority": "CANONICAL",
+          "state_changes": [
+            {
+              "entity": "pc_01",
+              "prop": "status.fatigue",
+              "from": 20,
+              "to": 30
+            }
+          ],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125
+          }
+        },
+        {
+          "id": "ev_0054",
+          "t": 1455,
+          "type": "wait",
+          "actor": "pc_01",
+          "kind": "wait",
+          "importance": "low",
+          "cause": "ev_0053",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 0,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "intent_0007"
+          }
+        },
+        {
+          "id": "ev_0055",
+          "t": 1456,
+          "type": "look_around",
+          "actor": "npc_barkeep_01",
+          "kind": "look_around",
+          "importance": "low",
+          "cause": "ev_0054",
+          "authority": "CANONICAL",
+          "state_changes": [],
+          "knowledge_count": 1,
+          "provenance": {
+            "seed": 125,
+            "cause_intent": "director_0001",
+            "cause_hook": "barkeep_wary_sweep",
+            "assignment_tick": 1080
+          }
+        }
+      ],
+      "next_after": null
+    }
+  }
+}

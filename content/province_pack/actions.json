@@ -1,0 +1,2297 @@
+{
+  "meta": {
+    "pack": "province_pack",
+    "version": "0.1",
+    "notes": "the verb set (the tavern/road action contract — the base sixteen plus the province's own: council, hold_vigil, patrol, since iter-161 the flood-story read read_pole and since iter-167 the step-law read read_stair; the engine's closed grammar, every verb pack data; the province nouns live in the knowledge tokens and the hook ids below). The move action keeps the edge-priced travel (st-6a/D-116 (5) — the province runs the TRAVEL main loop, D-146's opening answer: the loop change is the universal-core test)"
+  },
+  "actions": [
+    {
+      "intent": "look_around",
+      "label": "look around",
+      "resolver": "observe",
+      "ticks": 1,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "look_around"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "scene_{location}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "cheap perception of the current location: who/what is present (scene detail deepens with the perception system, iter-3)"
+    },
+    {
+      "intent": "examine",
+      "label": "examine",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "vague info",
+      "events": {
+        "success": "examine",
+        "failure": "examine_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "details_{target}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "vague_details_{target}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "targeted inspection of one entity or spot present in the actor's location"
+    },
+    {
+      "intent": "read_pole",
+      "label": "study",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "the marks stay marks",
+      "events": {
+        "success": "pole_read",
+        "failure": "pole_read_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "punt_pole_01"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_flood_story"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "unread_marks_on_the_pole"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the flood-story recognition read (the pole's embodiment seed, iter-161 — the social-recognition half of WORLD_WORKPLAN §6's candidate 2, the owner's call): the pole is the flood story made physical — the high-water stain, the repair splice, the season tallies on the haft (each fat season's payment notched, a debt's count kept in wood by a family that signs with a blade, not a pen). The close read mints the literal token the_flood_story — the secrets registry's key (the templated-token ineligibility law: a secret's subject is fixed, the literal vocabulary the only legal surface — the grim read_ticket precedent's second instance, the pawn-ticket hinge's shape). The reader who learns the flood story holds the lever at the stair (ANCHOR_REGION §6.1's NEW OPTION rung): the debt named aloud where the road can hear. The field_in read pins the target to the pole (studying any other stave mints nothing). The perception gate is the honest failure surface: a failed read mints only the vague unread marks — wear seen, meaning missed; the acquisition conditions ride the saw channel besides (the unlit stair at night steps the story down to partial — half the tale legible by dark)."
+    },
+    {
+      "intent": "read_stair",
+      "label": "study",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "the steps stay steps",
+      "events": {
+        "success": "stair_read",
+        "failure": "stair_read_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_weirstair"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_step_law"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "unread_steps_on_the_stair"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the step bench's setting verb (stepread, iter-167 — the step's close read, the unit's first embodiment, the owner's continuation call over the embodiment options: WORLD_WORKPLAN §6 candidate 3; the read hinge's third instance — the grim read_ticket first, the pole second): the stair IS the law's own text — the water law lives in stone (the feud's material lesson: the timber law died in the mill's fire), four rungs, the head each names, one shared by three hands (the step law, ANCHOR_REGION §6.2). The close read mints the literal token the_step_law — the ORDER the road never learns from the books (§6.2's knowledge asymmetry: the stranger reads a stingy ferryman, never the order — the books show the toll, not the step; §7.1's stranger row — the road's misread correctable in play, the meaning slice's committed-band widening). The token is deliberately NOT a secret: the step law is the vale's own category (the humor probe's shared-categories proof — the step a category the whole vale owns), public custom held by the practitioners' reading, no lever over any subject — plain knowledge, the brief's recalled facts the read surface (the pole's debt-lever class NOT duplicated: no secrets entry, no cluster, the registry stays two keys). The location-kind target is the hinge family's first non-item read (the stair is the carrier itself, not a thing at the stair — the field_in read pins the target to the weirstair; studying any other stone mints nothing). The perception gate is the honest failure surface: a failed read mints only the vague unread steps — steps seen, order missed. The acquisition conditions ride the saw channel (the unlit weir after dark steps the order down to partial — half the rungs legible by dark). Honest boundary (the substrate gaps stay owner-routed, the separate-track law): the read mints the LAW, never the PRESENT — the phases carry no head (the water level), so the wet step's current standing is authored, not runtime; the stone says what the rungs mean, not what the river does today."
+    },
+    {
+      "intent": "read_tally",
+      "label": "study",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "the notches stay notches",
+      "events": {
+        "success": "tally_read",
+        "failure": "tally_read_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "camp_tally_01"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_camps_word"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "unread_notches_on_the_tally"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the charcoal camp's close read (tallyread, iter-185 — the camp's first embodiment, the owner's continuation call over STATUS's embodiment routing: ANCHOR_REGION §6.4's tally gap, the pole's iter-161 precedent's class; the read hinge's fourth instance — the grim read_ticket first, the pole second, the stair third, the family's second item-kind): the tally-stick is the camp's word made physical — the notch habit's own class, the count cut in wood at the stacks, weight is weight, shaved is shaved (the brief's own directive, the anti-shave discipline's own text). The close read mints the literal token the_camps_word — the re-weigh's proof: the counter-record the guild's book never carried (§6.4's knowledge asymmetry — the crews' count, the crews' alone until the read crosses the boundary; the count public, the withhold harder to keep, the camp's word spent). The token IS a secret — the pole's lever class (NOT the stair's plain-custom boundary): the count is the crews' bounded knowledge, not a category the whole vale owns; the reader who gains it holds the re-weigh's leverage over the master (the debt's named holder, the withhold's keeper), type 'debt' (a claim over the debtor — the counter-record's claim in the debt's reconciliation, the two records meeting), the expiry one full season (129600 — the weighing season's own window, the lever living through the re-weigh; the count prices trust, never coin — the debt's arithmetic untouched, §6.4's own boundary). The field_in read pins the target to the tally-stick (studying any other stave mints nothing); the item-kind target is the pole's own shape (the stair the family's location-kind instance). The perception gate is the honest failure surface: a failed read mints only the vague unread notches — cuts seen, count missed. The acquisition conditions ride the saw channel (the unlit crofts after dark steps the word down to partial — half the notches legible by dark, the drowned country's own light). Honest boundary (the substrate gaps stay owner-routed, the separate-track law): the read mints the WORD, never the PRESENT — the current count is authored, not runtime (the freight's volume surface the other gap's own row), the stick says what the notches mean, not how much sits on the stacks today."
+    },
+    {
+      "intent": "move",
+      "label": "travel to",
+      "resolver": "movement",
+      "ticks": "edge",
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "move"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "adjacent_to",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_left_toward_{target}"
+          },
+          {
+            "who": "destination_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_arrived"
+          },
+          {
+            "who": "actor",
+            "present_at": "destination_location",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "{present}_present"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the travel twin (st-6a, D-116 (5)): movement along the location graph priced by the exits edge — the derived travel price at the accept door (resolve time, L3: derive, never store), the completion enqueued at t + price (beats, rotations and macro crossings still fire mid-travel in tick order, D-038); carried items move with the carrier; the arrival snapshot learns one exact presence token per entity at the destination (st-1). The province's legs are hours-to-a-day (rules.json travel) — the artery's own scale"
+    },
+    {
+      "intent": "talk",
+      "label": "talk",
+      "resolver": "converse",
+      "ticks": {
+        "min": 4,
+        "max": 8
+      },
+      "check": {
+        "kind": "social",
+        "difficulty": 20
+      },
+      "on_failure": "cold shoulder",
+      "events": {
+        "success": "talk",
+        "failure": "talk_rebuffed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "relation_at_least",
+          "axis": "trust",
+          "value": 20
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "told",
+            "fidelity": "exact",
+            "knows": "conversation_with_{target}"
+          },
+          {
+            "who": "target",
+            "channel": "told",
+            "fidelity": "exact",
+            "knows": "conversation_with_{actor}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "told",
+            "fidelity": "vague",
+            "knows": "rebuffed_by_{target}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "social exchange; the trust floor is the relations gate (phase0 §2, Prom Week donor); the seed of rumor transfer — trusted tellers spread faster (iter-3)"
+    },
+    {
+      "intent": "wait",
+      "label": "wait",
+      "resolver": "wait",
+      "ticks": "N",
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "wait"
+      },
+      "requires": [],
+      "fields": [
+        "ticks"
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [
+          "wilmot_grief_ramble",
+          "market_mourns"
+        ],
+        "failure": []
+      },
+      "notes": "advance N ticks; the world moves while the player stands still. content-3 (iter-53, D-082): every committed wait seeds the ambient tag — idle time is the noise floor's domain (D-005: the murmur is seeded at event time, never improvised; the tag is weight 0, so the seeding shifts no entropy anywhere). iter-264 (the §6.5 embodiment legs): the wait ALSO seeds the market's mourns tag — the murmur family's own site (the ignite resolver mints no action hooks, the committed packs' honest boundary recorded in iter-263's §D; the trigger, not the seed, reads the market's state — an unburned Malby arms nothing, the seeded tag stays a dormant fact until the prop trigger finds the ashes)"
+    },
+    {
+      "intent": "take",
+      "label": "take",
+      "resolver": "pickup",
+      "ticks": 2,
+      "check": {
+        "kind": "stealth_vs_observers",
+        "difficulty": 40
+      },
+      "on_failure": "noticed",
+      "events": {
+        "success": "take",
+        "failure": "take_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "uncarried"
+        }
+      ],
+      "fields": [
+        "texture"
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_reaching_for_{target}"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_in_{location}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "texture": {
+        "requires": [
+          {
+            "noun": "texture",
+            "test": "texture_noun"
+          },
+          {
+            "noun": "texture",
+            "test": "same_location",
+            "with": "actor"
+          }
+        ],
+        "knowledge": {
+          "success": [
+            {
+              "who": "actor",
+              "channel": "saw",
+              "fidelity": "exact",
+              "knows": "{actor}_holds_the_{texture_slot}"
+            }
+          ],
+          "failure": [
+            {
+              "who": "same_location",
+              "except": [
+                "actor"
+              ],
+              "channel": "saw",
+              "fidelity": "partial",
+              "knows": "{actor}_reaching_for_the_{texture_slot}"
+            },
+            {
+              "who": "actor",
+              "channel": "saw",
+              "fidelity": "partial",
+              "knows": "{actor}_fumbled_the_{texture_slot}"
+            }
+          ]
+        }
+      },
+      "notes": "picking up an uncarried item present in the location; the stealth check applies only with other entities present (MVP_SCOPE §7 'stealth if owner near'); taking a carried item is steal's job. iter-11: texture-capable (blueprint §1 promotion) — a step carrying the mediator-resolved 'texture' reference takes the texture path: the pack's texture.requires replace the canon ones and a success is the slot's canon birth on the scope target"
+    },
+    {
+      "intent": "drop_break",
+      "label": "drop / break",
+      "resolver": "drop",
+      "ticks": {
+        "min": 1,
+        "max": 2
+      },
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "drop_break"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "carried_by",
+          "who": "actor"
+        }
+      ],
+      "fields": [
+        "near"
+      ],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_in_{location}"
+          },
+          {
+            "who": "adjacent_locations",
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_in_{location}"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "ignition": {
+        "layer": "fire",
+        "item_flag": "is_fire_source"
+      },
+      "notes": "noise on break; a dropped fire source at a flammable spot may ignite (rules.json transitions.fire, chance_on_drop_break — the §3 walkthrough's lamp)"
+    },
+    {
+      "intent": "use",
+      "label": "use",
+      "resolver": "use_item",
+      "ticks": {
+        "min": 2,
+        "max": 6
+      },
+      "check": {
+        "kind": "context",
+        "difficulty": 20
+      },
+      "on_failure": "no effect",
+      "events": {
+        "success": "use",
+        "failure": "use_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "carried_by",
+          "who": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "has_field",
+          "field": "use_effect"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_used_{target}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "{actor}_fumbled_{target}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "context-dependent effect from the item's pack use_effect (ale → intoxication); observers see the use"
+    },
+    {
+      "intent": "steal",
+      "label": "steal",
+      "resolver": "stealth_take",
+      "ticks": 3,
+      "check": {
+        "kind": "stealth_vs_perception",
+        "difficulty": 50
+      },
+      "on_failure": "partial or total failure",
+      "events": {
+        "success": "steal",
+        "failure": "pickpocket_failed",
+        "failure_total": "pickpocket_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "carries_flagged",
+          "flag": "steal_target"
+        }
+      ],
+      "fields": [
+        "method"
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": [
+          {
+            "who": "target",
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "figure_reaching_for_tin"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor",
+              "target"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_at_the_stalls"
+          }
+        ],
+        "failure_total": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "figure_reaching_for_tin"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "noise_at_the_stalls"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": [
+          "sergeant_wary_of_pc",
+          "osgar_walks_the_suspect",
+          "possible_manifest_check",
+          "possible_manifest_check_relief",
+          "maren_feud_sweep"
+        ]
+      },
+      "notes": "pickpocket: opposed stealth vs the target's perception; the target must carry a steal_target item (the pay tin on the duty sergeant — the province's theft family — and since iter-161 the punt pole on the second hand, the verb-gate boundary's unless-arm); failure mints the sighting + the noise tokens (the drift family's members, the suspicion ladder's anchors) and seeds the watcher hooks — and since iter-405 (wt-fill-1's U3) the watch's own round: osGar's suspicion-armed walk seeded with the rest"
+    },
+    {
+      "intent": "distract",
+      "label": "distract",
+      "resolver": "divert",
+      "ticks": 3,
+      "check": {
+        "kind": "social",
+        "difficulty": 40
+      },
+      "on_failure": "ignored",
+      "events": {
+        "success": "distract",
+        "failure": "distract_ignored"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "target",
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "antics_by_{actor}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "target",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "antics_by_{actor}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "shifts target attention (status.attention → distracted, a perception modifier via rules.checks.skills.perception); the 'method: distraction' modifier on steal is the separate in-attempt gambit"
+    },
+    {
+      "intent": "arson",
+      "label": "set fire",
+      "resolver": "ignite",
+      "ticks": 4,
+      "check": null,
+      "on_failure": "abort",
+      "events": {
+        "success": "arson"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "location_of",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "flammability",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "field_nonempty",
+          "field": "fire_spots"
+        },
+        {
+          "noun": "target",
+          "test": "spot_available",
+          "layer": "fire"
+        },
+        {
+          "noun": "actor",
+          "test": "flagged_accessible",
+          "flag": "is_fire_source"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "figure_firing_the_barn"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "figure_fled_the_bank"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "ignition": {
+        "layer": "fire",
+        "item_flag": "is_fire_source"
+      },
+      "notes": "impossible without a usable fire source at a flammable target (T5): the tallow lamp at the tithe barn / the charcoal stacks — the province's arson exposure (the manor's barn the designed target, the crofts' stacks the standing hazard); witnesses mint the sighting pair"
+    },
+    {
+      "intent": "rest",
+      "label": "rest",
+      "resolver": "recuperate",
+      "ticks": 60,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "rest"
+      },
+      "requires": [],
+      "fields": [],
+      "status_effects": [
+        {
+          "status": "fatigue",
+          "delta": -30
+        }
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the fatigue counter-play (tune-1, KI#4: player fatigue was monotonic over long waits — nothing in v0.1 could bring it down). One hour of rest clears 30 fatigue (the 720-tick waits of the canonical day gain 20); resting at fatigue 0 is a legal quiet beat (no state change). The delta lives here beside its action (use_effect precedent); the axis and its gain rate live in rules.json states"
+    },
+    {
+      "intent": "document_check",
+      "label": "demand papers",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception_vs_social",
+        "difficulty": 50
+      },
+      "on_failure": "talked down",
+      "events": {
+        "success": "document_check",
+        "failure": "document_check_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "waybill_unsatisfactory"
+          },
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "waybill_demanded_of_{target}"
+          }
+        ],
+        "failure": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "waybill_demanded_of_{target}"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the manifest demand (the document-check family, iter-43's content-1 — the road's toll papers re-voiced as the half-pay levy's waybill check): perception reads the traveler, social answers for him; the verdict mints the suspicion ladder's papers rung (band 50 + 25 >= arrest 75)"
+    },
+    {
+      "intent": "coerce",
+      "label": "lean on",
+      "resolver": "coerce",
+      "ticks": 3,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "coerce"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "leverage_over",
+          "who": "target"
+        }
+      ],
+      "fields": [],
+      "balance": [
+        {
+          "axis": "trust",
+          "delta": -25
+        },
+        {
+          "axis": "fear",
+          "delta": 25
+        }
+      ],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the leverage spend (social-1b, iter-45, D-074 — the fact cluster's first runtime consumer): the holder plays the card. The door is the leverage test itself (actor.leverage_over — the intent door's first fold-reading precondition; a holder with no live cluster is rejected, a spent or expired cluster likewise — the fold is the only truth); the spend is a NEW EVENT naming the cluster's id in outcome.cluster (never a mutation — the fold kills the cluster at the spend's tick, INV-1), the loop stamping cluster/secret/type from the live fold at commit. The balance (what the cluster buys): the subject's directed pair axes toward the holder shift — trust breaks fast (−25, D-030's darkness-as-data law) and fear spikes (+25) — the v0.1 buy is the relation shift itself; a status/urgency nudge stays recorded-not-built (the first-consumer law). No check: the leverage IS the power (the reveal happens; a resisting subject is the option layer's future, the drama-2 grammar). No knowledge records: the corner is quiet — the room sees nothing, the reaction cascade terminates exactly as leverage_gained's does (the one-hop law's sibling). The compliance (the subject DOING what the holder wants) is P3e psychological-echo territory — never this action. DORMANT in the committed content set: no urgency/director driver carries it (the iter-38 climax-flag pattern — landing one shifts the RNG stream and re-distills the whole corpus; content-4 owns the live call). The subject must be an npc (kind test — pc_01 is one); the actor is whoever holds a live cluster over them"
+    },
+    {
+      "intent": "flee",
+      "label": "flee",
+      "resolver": "flee",
+      "ticks": {
+        "min": 2,
+        "max": 4
+      },
+      "check": {
+        "kind": "evasion_vs_pursuit",
+        "difficulty": 45
+      },
+      "on_failure": "caught",
+      "events": {
+        "success": "flee",
+        "failure": "flee_caught"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "adjacent_to",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_fled_toward_{target}"
+          },
+          {
+            "who": "destination_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "{actor}_arrived_fleeing"
+          }
+        ],
+        "failure": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "{actor}_caught_fleeing"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "exit under pursuit: opposed evasion vs the best pursuit skill present; no potential pursuer → automatic; guards' chase knowledge deepens with the crime system (iter-3): pursuers at the destination see exactly where the runner went"
+    },
+    {
+      "intent": "ramble",
+      "label": "ramble",
+      "resolver": "observe",
+      "ticks": 3,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "ramble"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "rambling_by_{actor}"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the 16th action (content-3, iter-53, D-082 — DIR-4's ambient channel gains its live consumer): an idle audible beat — the actor rambles, the room hears (vague, heard). No check (noise is not communication), no state change, no consequence hooks of its own. The observe resolver is the mechanic (an in-location perception event whose knowledge templates are this pack data); the director's ambient hook is the driver, the parse grammar gains a legal idle verb beside wait/look_around."
+    },
+    {
+      "intent": "council",
+      "label": "council",
+      "resolver": "wait",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "guild_councils"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "partial",
+            "knows": "the_guild_bars_the_stalls"
+          },
+          {
+            "who": "adjacent_locations",
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "the_guild_bars_the_stalls"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the guild's goal verb (the triangle, slice 3): the trade's flinch made public — the stalls bar, the heads come together. A bare story-beat expression (no declared effect of its own; the attribution row is the witness that keeps it alive, PACK_SPEC §5). iter-264 (the §6.5 embodiment legs, the J-2 knowledge leg landed): the public act's honest RESIDUE is knowledge — the co-located hear the barring through the market's own walls (partial), the adjacent towns hear it dimly (vague) — the council's epistemic half armed as pure pack data over the KI#103 wait-resolver minting; the boolean 'barred stalls' flag stays inexpressible and unneeded (the knowledge IS the state, iter-263's measured law — the watch-briefing and rumor-door consumers live)."
+    },
+    {
+      "intent": "hold_vigil",
+      "label": "hold vigil",
+      "resolver": "wait",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "wergeld_vigil"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "heard",
+            "fidelity": "partial",
+            "knows": "the_blood_price_spoken"
+          },
+          {
+            "who": "adjacent_locations",
+            "channel": "heard",
+            "fidelity": "vague",
+            "knows": "the_blood_price_spoken"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the families' goal verb (the triangle, slice 3): the old blood's public act — the wergeld vigil, the blood price spoken aloud again. Bare story beat, the D-160 muster pattern at province scale. iter-264 (the §6.5 embodiment legs, the J-2 knowledge leg landed): the vigil's honest RESIDUE armed as knowledge — Thornmill hears the blood price spoken (partial), Malby through the market walls (vague) — the institutional memory measured live in iter-263's I2 arm (the watch-briefing transfer carrying the tokens to the relief, the deadband's decay-0 law now with its epistemic half); pure pack data, the same KI#103 minting surface as the council's barring."
+    },
+    {
+      "intent": "patrol",
+      "label": "patrol",
+      "resolver": "wait",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "garrison_patrols"
+      },
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the garrison's goal verb (the triangle, slice 3): the half-pay watch walks its frightened round. Bare story beat, the escalation arm's public answer."
+    },
+    {
+      "intent": "reckon_paper",
+      "label": "reckon",
+      "resolver": "account",
+      "ticks": 2,
+      "events": {
+        "success": "account_consumed"
+      },
+      "requires": [
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 16
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 16
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "consume",
+        "kind": "paper",
+        "amount": 16
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_paper_fell"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the charcoal paper's FALL (charcoalpaper, iter-189 — the clearance door, the account resolver's player-scaled arm armed for the first time in this pack): the reckoning at the beam — the strong honest season's fund covering the paper, the paper consumed at the weighing (the row's discharge, the guild's book closing against the burn). THE COVERED-FUND GATE is the fall's own law: the second account_at_least (coin 16 on the actor) means the paper only falls against a fund that covers it — an uncovered fall would be the escape-by-grief path the hills' unlapseable reading forbids, refused softly at the door (attempts are facts). The witnesses (same_location, the market's own people at the weighing) learn the_paper_fell — the vale's word, the debt's fall public as its standing was. The event is story-critical (the tale's line) and the collection follows (render_fund — the scene's lawful order: the fall, then the walk)."
+    },
+    {
+      "intent": "render_fund",
+      "label": "render",
+      "resolver": "account",
+      "ticks": 2,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 16
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 16
+      },
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the fund's COLLECTION (charcoalpaper, iter-189 — the clearance's second half): the fund renders to the chest — the master's covered coin walking to the guild's home at Malby (the weighbeam's town, the factor's book's own street). The geography gate (same_location at loc_malby, the field_in pin) holds the honest walk: the fund travels with the master to the chest. No knowledge block — the guild's own books need no witness (the tale's line and the chest's stock the surface); the fall's beat (reckon_paper) carried the word. The two-beat reckoning is the substrate's honest no-transaction form (the small-alphabet law: one verb, one event) — the reversed order leaves the over-payment state (the fund walked, the paper standing), lawful, never scripted."
+    },
+    {
+      "intent": "pass_the_seat",
+      "label": "hand over",
+      "resolver": "account",
+      "ticks": 2,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 16
+        },
+        {
+          "noun": "target",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 0
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "paper",
+        "amount": 16
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_seat_passed"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the seat's SUCCESSION (charcoalpaper, iter-189 — the transfer door, D-191's turnover application made lawful): the paper walks to the successor — the camp's own reading of the debt (the seat, never the blood; the hills' unlapseable reading turned on the guild's instrument: whoever the camp holds at the burn masters the debt). The receiving-stock gate (account_at_least paper 0 on the target — the value-0 form is the stock's EXISTENCE gate) refuses a target that declares no paper stock SOFTLY (the door's own shape, the KI#15 family); no committed entity declares one — the lived succession waits on the successor's mint (the crews' recognition, no committed surface — the honest residue, a future row's own call). The tally-stick does NOT ride this door (the verb-gate boundary: carried and unflagged, untakeable — the badge's handing-over is the recognition's own mint, iter-185's law); the paper walks, the badge follows when the camp speaks. The witnesses learn the_seat_passed. The frozen-force counterfactual (the guild's book reading a man's name — the debt dying with the master) is the door's own removal: the perturbation arm, ANCHOR_REGION §6.4's record."
+    },
+    {
+      "intent": "trade_at_market",
+      "label": "trade at the stalls",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "spot_available",
+          "layer": "fire"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 2
+        },
+        {
+          "noun": "target",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 0
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 2
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "partial",
+            "knows": "coin_changed_hands_at_{location}"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the market's own COMMERCE (iter-264, the §6.5 embodiment legs — the J-1 trade door landed, the state-to-economy reader): a purchase at the stalls, the buyer's coin walking to the chest at the weighbeam (render_fund's own shape — the transfer's receiving stock the guild's chest, debt-1's location form). THE STALL GATE is the door's own law: spot_available over the fire layer reads the same layer grammar the arson door reads — the commerce closes with the stalls BY CONSTRUCTION (a burned-out Malby refuses the trade softly at the door, attempts are facts; the spots stay in the burning state through the burnout, so the closure never reopens — the irreversibility the fire layer already owns). The honest scale: two coin — the toll's own number, half the guild's yearly take at the chest. UNARMED by doctrine (the census's UNREALIZED band until a witness exercises it): no urgency entry, no faction door — the player's parse verb, the factor's runner buying at the stalls with the house purse (pc_01's coin six). The witnesses see the coin change hands (partial — the market's own people, never the guild's books: the tale's line and the chest's stock the surface, render_fund's own law)."
+    },
+    {
+      "intent": "reprice_paper",
+      "label": "re-price the terms",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_sourced"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 0
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "paper",
+          "value": 16
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "source",
+        "kind": "paper",
+        "amount": 2
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_paper_repriced"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the paper's RENEGOTIATION (iter-271, the §6.4 fill row's first landing — the W5 disposition's honest residue 'the renegotiation stays authored (the guild's re-pricing — the factor gateless, no committed surface)' closed at the account band): the guild's SQUEEZE as live arithmetic — the paper climbing two on the seat (the withheld margin's own number, the coupled liabilities' answer: the camp holds two loads off the beam, the guild prices two paper onto the debt; ONE SALE, TWO CLAIMS' escalation rung). The door's convention, honestly named: the seat re-prices its OWN terms — the actor and the target one hand (the master's acceptance; the source mints to the actor, the line's subject the target, so the discipline is identity — the witness drives them the same), the FACTOR stays gateless as an entity (the guild's agency carried by the terms themselves, the chest's arithmetic the mirror; the runner's own re-pricing power — the audit's arm turned on the master — a future row's own call, never this door). THE STANDING-TERMS GATE is the door's own law: paper at least sixteen on the actor — the renegotiation fires only against the standing debt (a fallen paper has no terms to re-price, refused softly — attempts are facts), and the squeeze may repeat while the terms stand (the debt's compounding the coupled liabilities' own escalation, honest, unchecked by design — the world's arithmetic, never a clock). The reconciliation's DOWN-arm (the tally read moving the terms toward honesty — the shave's margin returned) is the door's own counterfactual, the owner's future row; this door lands the guild's authored direction: the squeeze. The geography is STAGING, never a gate (the paper is an instrument — the guild's word reaches the seat wherever the road finds him; the tale stages the beat at the beam, the errand's own route). UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it. The witnesses (same_location, exact) learn the_paper_repriced — the re-priced terms public as the standing was, the vale reading the squeeze in the same breath as the debt it lands on."
+    },
+    {
+      "intent": "sell_bloom",
+      "label": "sell the withhold at the beam",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_settled"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "test": "account_at_least",
+          "holder": "loc_crofts",
+          "kind": "bloom",
+          "value": 1
+        },
+        {
+          "test": "account_at_least",
+          "holder": "loc_malby",
+          "kind": "coin",
+          "value": 3
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "settle",
+        "legs": [
+          {
+            "from": "loc_crofts",
+            "to": "loc_malby",
+            "kind": "bloom",
+            "amount": 1
+          },
+          {
+            "from": "loc_malby",
+            "to": "loc_crofts",
+            "kind": "coin",
+            "amount": 3
+          }
+        ]
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_bloom_sold"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the re-weigh's SALE (iter-273, the §6.4 fill row's fork RESOLVED through the owner's generalized transaction synthesis — never the price-door-with-residue, never the heap's re-seating, never a location-side drain verb): the withhold's RELEASE as a two-legged settlement over the account resolver's settle arm — ONE load of the heap walked to the beam's receiving stock (bloom loc_crofts to loc_malby, the freight's terminus made a stock) and the price THREE coin the load (campaccount's own arithmetic: the gross nine at three the load) paid from the guild's chest into the CAMP'S LEDGER (coin loc_malby to loc_crofts — banked at the crofts where the tally's notches record it, the rs-10 anchor's own site; the fork's option (b) rejection honored: the heap never re-seated, the ledger's site semantic). The MASTER initiates (the seat's door — the weighing question his own: the bloom brought to the beam or held); the parties are the legs' own holders — the crofts and the market's chest, neither of them the initiator: the owner's class law made arithmetic (a location, an institution's chest, an existing holder may own the resource an action consumes when another actor initiates). The per-leg solvency gates (the HOLDER form — the heap's own gate, the chest's own gate) die softly at the door: attempts are facts. The geography gate rides the render_fund form (the sale at the beam — the target the market town, the master present); the price stays AUTHORED (three the load, never a derived function — the beam's price is the shave's own surface, Maren's flaw, the freightvol law unchanged). Repeatable while the heap stands and the chest covers — the drain the world's own compounding, never a clock (the squeeze's own law). The witnesses (same_location, exact) learn the_bloom_sold — the withhold's release public as its standing was. UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it."
+    },
+    {
+      "intent": "set_the_timbers",
+      "label": "set the timbers to the low band",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_consumed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_weirstair"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "step",
+          "value": 3
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "consume",
+        "kind": "step",
+        "amount": 1
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_timbers_set"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the §6.2 PRESENT leg's door (iter-275, the fill row's third member — the step bench's carrier strengthened through the EXISTING account resolver, never a new water primitive): the re-setting at the season's turn, the TIGHTENING alone armed — the standing quarrel's own direction (the late long_light pressing the second step, the vale's argument made arithmetic: the working head consumed down to the low band). The FLOOR LAW in the gate's own arithmetic: the solvency gate step >= 3 — the tightening only FROM the working head; at the low band the gate refuses softly (the first rung the drought's own, never the hand's — 'never set but by a drought the vale survives, and never unnotched'). The LOOSENING stays authored (the price's recovery an authored future season — the freightvol law's own shape: the flow carries the standing direction, the relief a future row); the FOURTH rung never a setting (the rise's own committed text — the high_water line IS the fourth step). The geography honest: the timbers at the water, the setting at the stair (the render_fund form). The witnesses (same_location, exact) learn the_timbers_set — the standing re-made public as the reading at the stair mints the law. UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it."
+    },
+    {
+      "intent": "cut_the_notch",
+      "label": "cut the dry year's notch",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_sourced"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "npc_marketmistress_01"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "source",
+        "kind": "notch",
+        "amount": 1
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_dry_year_notched"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the §6.2 NOTCH leg's door (iter-275, the fill row's third member): the beam's reckoning — the dry year's notch cut at the weighing day, the tally staff's count climbing by the beam's own hand (the source verb minting to the actor, the market mistress the run's hand — the weighbeam and the tally staff one carrier). The door's convention, honestly named (the reprice_paper precedent's own form): the beam accepts its OWN reckoning — the actor and the target one hand (the mistress's acceptance; the source mints to the actor, the line's subject the target, so the discipline is identity); the geography STAGING never a gate (the tally an instrument — the reckoning wherever the weighing day finds the beam's hand; the tale stages the beat at the beam, the staff's own route). The HONEST GAP, recorded never routed: the notch's lawful condition is the DRY BAND standing (the second step) — a TWO-SIDED band condition the closed gate vocabulary cannot express (account_at_least reads floors, never ceilings, never exact values: the gate cannot read 'the step at the low band'); the door lands with the acceptance form alone, the band law stays AUTHORED in these notes — the row's first missing causal leg, a named candidate for the I0 witness's substrate-limitation inventory. The witnesses (same_location, exact) learn the_dry_year_notched — the count public as the weighing day's own record. UNARMED by doctrine: no urgency entry, no faction door — the census's UNREALIZED band until a witness exercises it."
+    },
+    {
+      "intent": "burn_the_stacks",
+      "label": "fire the year's cut",
+      "resolver": "account",
+      "ticks": 6,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_converted"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_crofts"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "holder": "loc_crofts",
+          "test": "account_at_least",
+          "kind": "wood",
+          "value": 2
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "convert",
+        "recipe": "the_burn"
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_burn_set"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the burn crews' door (ironcycle, iter-394 — the ANCHOR_REGION §3/§8 row: the iron scarcity cycle's live production leg, the stageb-1 B2 pattern landed in the anchor): the cut fired to the stacks — the recipe the_burn over the account substrate, ONE atomic account_converted event (two wood to two charcoal at the crofts, conservation per recipe per kind), the crews' hands under the master's rule (the authored assembly's aggregate form: the master orders the burn at his post, the crews execute within the one craft event). The input-leg solvency gate (the KI#15 family, the lint's own law): the yard short of the cut refuses softly — attempts are facts. The geography honest (the crofts the craft's own site — the cut and the burn §6.4's long_light rung); the master's knowledge token the_burn_set his own year-craft's record (the D-088 knower law, the biography band's own material — the witnesses' smoke-surface the C⇄A interlock's AUTHORED edge, never armed here). AUTONOMOUS by design: the master's urgency post fires this door when the coppice's yield stands (the farmland forge precedent — the material's arrival the pacing, the world's own rhythm, never a clock); never in the committed day-scale band (the wood seeds empty — the zero-corpus-price law by construction)."
+    },
+    {
+      "intent": "settle_paper",
+      "label": "settle",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_consumed"
+      },
+      "requires": [
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "floodpaper",
+          "value": 20
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 20
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "consume",
+        "kind": "floodpaper",
+        "amount": 20
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_floodpaper_fell"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the flood paper's FALL (iter-272, the §6.1 fill row — the crossing's later settlement, the charcoalpaper precedent's reckoning applied to the flood debt): the strong honest season's fund covering the paper, the paper consumed at the reckoning — the crossing clear, the toll its own again. THE COVERED-FUND GATE is the fall's own law (reckon_paper's form): coin 20 on the actor means the paper only falls against a fund that covers it — an uncovered fall would be the debt dying of want, refused softly at the door (attempts are facts); the punt's purchase drawing on the same fund first leaves the fall refused until the surplus re-climbs — ONE COIN, TWO CLAIMS as live door law, the household's own engine. The witnesses (same_location, exact) learn the_floodpaper_fell — the crossing's clearance public as its standing was. The event is story-critical (the account listing's own law). UNARMED by doctrine: no urgency entry, no faction door."
+    },
+    {
+      "intent": "render_toll",
+      "label": "render",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 20
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 20
+      },
+      "knowledge": {
+        "success": [],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the toll fund's COLLECTION (iter-272, the §6.1 fill row — the clearance's second half, render_fund's form at the crossing): the fund renders to the chest — the toll-taker walking her covered coin to the guild's home at Malby (the weighbeam's town, the flood paper's own street). The geography gate (same_location at loc_malby, the field_in pin) holds the honest walk: the fund travels with the toll-taker to the chest. No knowledge block — the guild's own books need no witness (render_fund's own law); the fall's beat (settle_paper) carried the word. The two-beat reckoning is the substrate's honest no-transaction form (one verb, one event) — the reversed order leaves the over-payment state (the fund walked, the paper standing), lawful, never scripted."
+    },
+    {
+      "intent": "pass_paper",
+      "label": "pass the paper",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "floodpaper",
+          "value": 20
+        },
+        {
+          "noun": "target",
+          "test": "account_at_least",
+          "kind": "floodpaper",
+          "value": 0
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "floodpaper",
+        "amount": 20
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_paper_inherited"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the debt's INHERITANCE (iter-272, the §6.1 fill row — the drowned generation's open question answered, the pass_the_seat precedent at the crossing): the flood paper walks to the second hand's declared receiving stock — the debt riding the living line, the pole and the paper one inheritance (the tool already his hand's, the obligation joining it). The receiving-stock gate (account_at_least floodpaper 0 on the target — the value-0 form, the stock's EXISTENCE gate) refuses a target that declares no floodpaper stock SOFTLY (the KI#15 family's door shape); the committed receiving end is npc_secondhand_01 (the crossing's own second hand — the family's line, not the camp's seat: the crossing's answer to the anti-freeze law is the LINE, deliberately not repeated as the camp's craft-seat). The witnesses learn the_paper_inherited. UNARMED by doctrine."
+    },
+    {
+      "intent": "buy_punt",
+      "label": "buy the punt",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_malby"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 12
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 12
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_punt_bought"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the punt's PURCHASE (iter-272, the §6.1 fill row — the punt fund's terminus, the flow vocabulary's no-terminus residue closed): the fund's twelve walked to the boatyard's town — the coin landing at Malby's market ledger (the honest no-entity form for the boatyard's purse: the market's location account, render_toll's own destination shape; a dedicated boatyard entity a future row's own call, never this door's need). THE COVERED-FUND GATE: coin 12 on the actor — the purchase only against the fund that covers it, refused softly otherwise. ONE COIN, TWO CLAIMS at the household's own scale: the punt's twelve and the settlement's twenty drawing on the same thin surplus — Dellan's need fed first leaves the fall refused until the toll re-climbs (the coupling §6.1's unit was authored FOR, now player-scale). The witnesses (same_location, exact) learn the_punt_bought — the household's word, the punt bought back. HONEST RESIDUE: the punt's own item-birth rides the parked entity-birth door (the st-5 family — no committed mechanism births the boat; the purchase's canonical fact is the coin's walk + the witnesses' word, the pole's pair gaining its boat when a future row opens the birth door). UNARMED by doctrine."
+    },
+    {
+      "intent": "share_board",
+      "label": "share the board",
+      "resolver": "converse",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "board_shared"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_winters_board"
+          },
+          {
+            "who": "same_location",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_winters_board"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the shelter law's enactment (iter-203, the winter kin's embodiment — the C03 triple's REPEATED CONSEQUENTIAL CO-PRESENCE factor made a verb): the host shares the winter's board with a co-present guest — the meal at the crossing's table, the stores eaten against the debt (the cost real and one-sided by the law's own design, §6.3's pressure rung; the authored arithmetic the paper twenty's own stores eight — no new account, the debt's price the economy notes' only mirror). The knowledge names the table (the actor AND the co-present — the on_action's witnesses): each sharing is the co-presence REGISTER, the kin climb riding the reaction table (on_action.board_shared — the guests' side +10, the numeric-home law the rarity gate's mechanical half). The ordinary meal prices nothing — the mint needs the stranded season (flood-year class, once a generation); the verb itself is season-blind (the engine content-blind, INV-3 — the rarity is the authored law these notes carry, the protocol walks it). The proof's read and the claim are separate doors (read_kinmark, claim_kinmark) — the board forms, the notch proves, the claim opens. RESOLVER: the converse family (the check-less social beat — the knowledge IS the point: the table's memory the on_action's witnesses read; the wait resolver resolves no knowledge, the goal verbs' own law). The recognition rides the BILATERAL climb (on_action's two entries — the guests' and the host's; the crossing at the bar the state's own pin; the release-hook form parked, the seeding law's constraint recorded in director.notes)."
+    },
+    {
+      "intent": "read_kinmark",
+      "label": "study",
+      "resolver": "inspect",
+      "ticks": 2,
+      "check": {
+        "kind": "perception",
+        "difficulty": 30
+      },
+      "on_failure": "the marks stay marks",
+      "events": {
+        "success": "kinmark_read",
+        "failure": "kinmark_read_failed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "punt_pole_01"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_winter_kin"
+          }
+        ],
+        "failure": [
+          {
+            "who": "actor",
+            "channel": "saw",
+            "fidelity": "vague",
+            "knows": "unread_guest_marks_on_the_haft"
+          }
+        ]
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the proof's read (iter-203, the winter kin's embodiment — §6.3's second gap answered: 'the notch has no committed action; the return's claim would need its own hinge family'): the pole's SECOND story — the read_pole hinge reads the flood story off the payment tallies; this hinge reads the KIN NOTCH, the winter's guests cut into the host's own count (the same blade, the same staff — the notch habit's own class, a people that signs with a blade, not a pen). The read hinge family's FIFTH instance (the grim read_ticket first, the pole second, the stair third, the tally fourth — the pole's second story its own hinge, two marks' classes one staff). The close read mints the literal token the_winter_kin — the secrets registry's fourth key (a CARE debt over the toll-taker: the proof of her house's obligation, the claim's door the only consumer); the templated-token ineligibility law holds (the subject fixed, the literal vocabulary the only legal surface). The perception gate is the honest failure surface (a failed read mints only the vague unread guest marks — wear seen, meaning missed); the field_in read pins the target to the pole (studying any other stave mints nothing); the acquisition conditions ride the saw channel (the unlit stair at night steps the story down to partial — the pole's own law)."
+    },
+    {
+      "intent": "claim_kinmark",
+      "label": "claim",
+      "resolver": "converse",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "kinmark_claimed"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "actor",
+          "test": "leverage_over",
+          "who": "target"
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "channel": "told",
+            "fidelity": "exact",
+            "knows": "the_winter_kin"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the edge's own door (iter-203, the winter kin's embodiment — the F02 criterion's mechanical form, the C03 triple's endogenous relation EXPANDING FUTURE LEGAL OPTIONS): the proof-holder claims the kin notch at the stair — the winter kin's return, the option no other mechanism expresses (§6.3's NEW OPTION rung). THE LEVERAGE GATE is the option's edge: only an actor holding the LIVE the_winter_kin cluster over the TARGET may claim (the who-noun form — the claim's target must itself be the proof's subject, the host; the read's proof the key — a proof-less claimant, or a claim against any other house, is refused SOFTLY at the door, attempts are facts; the claim packet's falsifier walks exactly this). The claim mints the token to every co-present (the road hears — the edge named aloud where the road can hear, the counter-record spent, the tally precedent's own shape) and the on_action echo completes the host's side (her inherited 40 + the acknowledgment's 40 = the bar 80 — the recognition answered, the rarity gate intact: the claim answers the generation-old notch, no new winter). The purse question rides the authored law beside the door (§6.3's exclusion rung — kin-at-the-table never read for coin; the flaw's beat targets the stranger, not kin — the committed coerce entry's own target the boundary, never a new gate). RESOLVER: the converse family (the check-less social beat — the knowledge IS the point: the table's memory the on_action's witnesses read; the wait resolver resolves no knowledge, the goal verbs' own law)."
+    },
+    {
+      "intent": "say_the_names",
+      "label": "mourn",
+      "resolver": "converse",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "the_names_kept"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "item"
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "punt_pole_01"
+          ]
+        }
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "channel": "heard",
+            "fidelity": "exact",
+            "knows": "the_drowned_generation_named"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "the mourning (iter-203, the winter kin's embodiment — §6.3's third gap answered: 'no non-blood grief registration; the constructed kin's mourning would need a seeded entry'): the winter kin's own duty performed — the drowned generation's names said aloud at the crossing's table, the grief given its second holder (the flood year's dead kept by name OUTSIDE the bloodline — the RESIDUE rung's own words; the guest keeps the host line's dead, the widened mourning line). The pole is the count's staff (the field_in read pins the target — the names said over the notch's own home); the co-present hear (the road's word carrying who answered whom — the living-memory law's own carrier). The grief_wakes numeric-home law deliberately NOT ridden (the grievance axis is the feud's own — the wergeld ratio's two houses; the mourning is a NAME-keeping, never a man-price — the seeded-entry gap answered by the token + this beat, the the_flood_story precedent's family). The recognition's enactment rides this beat by PROTOCOL (the playscript drives it once the bilateral climb crosses the bar — the formation walk's own shape; a director-hook release was parked: hooks seed only from committed event tags (D-005) and no resolver mints knowledge and hooks on one success branch — the constraint recorded in director.notes). RESOLVER: the converse family (the check-less social beat — the knowledge IS the point: the table's memory the on_action's witnesses read; the wait resolver resolves no knowledge, the goal verbs' own law)."
+    },
+    {
+      "intent": "mend_the_stair",
+      "label": "mend the stair",
+      "resolver": "account",
+      "ticks": 6,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_converted"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "location"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "loc_weirstair"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "holder": "loc_weirstair",
+          "test": "account_at_least",
+          "kind": "wear",
+          "value": 2
+        },
+        {
+          "holder": "loc_malby",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 3
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "convert",
+        "recipe": "the_mend"
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_stair_mended"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "THE MAINTENANCE OFFICE'S OWN DOOR (wt-fill-1's U2, iter-405 — §6.2's anti-council arbiter cleared: the guild's paper prices MONEY, the crossing's custom prices the SEASON, and neither reads the stair's condition or pays to restore it; no axis, no threshold, no institutional door of its own — the office performs the missing function and nothing else). THE CONDITION IS NOBODY'S LEDGER UNTIL THE OFFICE READS IT (the wear kind's gloss): the year's water adds two at every crossing whether or not anyone watches (`the_stair_wears`, capacity 8 — saturating silence at full, the recorded infrastructure debt), and the office's visit the ONLY reader. The guild's hand walks to the stair and pays from the chest: wear 2 off the crossing + coin 3 out of Malby's ledger, the keeper's coin ONE back for the timbers' setting (the labour's own wage — the office pays for work, never for a paper). The co-present learn the_stair_mended — the mending public, the road may see the guild work for once. Both input gates are the lint's own law (the KI#15 family: refuse at load what would crash at the commit floor); the geography honest (the door's target the stair, the actor required present — the office comes in person, never by letter). HONEST RESIDUE: the step account is NOT touched — the standing head's ladder (three the working head, four the rise, the gloss's own law) has no at_most gate in the substrate and a mend pushing it past three would read as the flood's line: the timbers' RESTORATION rides the wear's clearance, the head stays the keeper's own call (set the timbers, the five-rung ladder's door) — the unit's named boundary, the owner's substrate call, never patched in a fill. UNARMED by doctrine: no urgency entry of its own, no faction door — the office's visit is the playscript's or the director's, never a certain beat (U1's measured lesson: a certain post over a refusing door logs intent noise)."
+    },
+    {
+      "intent": "pay_the_bloom",
+      "label": "pay the smith for the withheld bloom",
+      "resolver": "account",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {
+        "success": "account_transferred"
+      },
+      "requires": [
+        {
+          "noun": "target",
+          "test": "kind",
+          "is": "npc"
+        },
+        {
+          "noun": "target",
+          "test": "field_in",
+          "field": "id",
+          "values": [
+            "npc_smelter_01"
+          ]
+        },
+        {
+          "noun": "target",
+          "test": "same_location",
+          "with": "actor"
+        },
+        {
+          "holder": "loc_crofts",
+          "test": "account_at_least",
+          "kind": "bloom",
+          "value": 1
+        },
+        {
+          "noun": "actor",
+          "test": "account_at_least",
+          "kind": "coin",
+          "value": 3
+        }
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coin",
+        "amount": 3
+      },
+      "knowledge": {
+        "success": [
+          {
+            "who": "same_location",
+            "except": [
+              "actor"
+            ],
+            "channel": "saw",
+            "fidelity": "exact",
+            "knows": "the_bloom_bought"
+          }
+        ],
+        "failure": []
+      },
+      "hooks": {
+        "success": [],
+        "failure": []
+      },
+      "notes": "THE ROAD'S OWN COIN INTO THE CAMP'S FUND (iter-445 — the payment stripe `quest-1` B's receipt named: a player-facing TRANSFER to a PERSON, the one verb class iter-441 M3 measured absent from the whole account vocabulary). The buyer's hand at the stacks: the bloom's own price (coin 3 — the camp's net on the ledger sale, `sell_bloom`'s own leg) paid DIRECTLY to the smith's person, off the weighbeam — the withhold's trade (the spine's flaw: the bloom held back when the price turns, so the master sells to the road that comes to him), and the coin lands in the DEBT FUND the paper's covered-fund gate reads (the smith's coin account, climbing +3 a year toward the charcoal paper sixteen). The goods gate is the honest one: bloom >= 1 at the crofts (`sell_bloom`'s own supply law) — a sale of goods the camp does not hold is dead data. HONEST RESIDUE: the bloom's own movement has NO account to land in (the buyer carries it in his hands; a carried-stock primitive stays the parked door, the `buy_punt` item-birth precedent) — the sale's canonical fact is the COIN'S WALK plus the co-present witnesses' word `the_bloom_bought`, never a phantom leg. The payer's purse is the door's own gate (coin 3 on the actor): the world's same arithmetic for every actor, the player under the same rules (A1), so the act's `helper_verb` read on the smith's debt need offers the READER the payment he can actually make."
+    }
+  ]
+}

@@ -1,0 +1,293 @@
+# EVENT_SCHEMA.md — Event Contract v0
+
+> Paired with `schemas/event.schema.json` (2-place sync, test-enforced: the
+> example in §10 must validate). A breaking change = `schema_version` bump +
+> owner approval (`AGENTS.md` §8).
+
+## 1. Log format
+
+- One JSONL file per run: `logs/run_<seed>_<n>.jsonl` (gitignored).
+- Line 1 = header; then one event per line; append-only.
+- The header carries **no wall-clock timestamp** (determinism, INV-2):
+
+```json
+{"header": true, "schema_version": "0.3", "seed": 42,
+ "python": "3.11.9", "commit": "a1b2c3d", "pack": "tavern_pack@0.1"}
+```
+
+- SQLite is a derived, rebuildable index over the log — never the truth
+  (INV-1). Dropping and re-folding the DB must always be possible.
+
+## 2. Event record
+
+| Field | Type | Req | Meaning |
+|---|---|---|---|
+| `id` | string, `^ev_[0-9]{4,}$` | yes | monotonic, gap-free per run |
+| `t` | integer ≥ 0 | yes | tick when the event fires |
+| `type` | string, snake_case | yes | pack-defined verb |
+| `actor` | entity id | yes | who did it (`world` for world-events) |
+| `target` | entity id | no | direct object |
+| `cause` | event id or null | yes | causal predecessor; intents chain here |
+| `outcome` | object | yes | type-specific payload, pack-defined |
+| `knowledge` | array | yes (may be empty) | knowledge records born here (§3) |
+| `state_changes` | array | yes (may be empty) | state deltas incl. irreversibility (§4) |
+| `hooks` | array of strings | yes (may be empty) | deferred-consequence tags (§5) |
+| `importance` | `low` \| `medium` \| `high` | yes | computed by the pack rule (§6) |
+| `provenance` | object | yes | seed, cause_intent (§7) |
+
+## 3. Knowledge record
+
+| Field | Type | Meaning |
+|---|---|---|
+| `who` | entity id | the knower |
+| `channel` | `saw` \| `heard` \| `told` \| `inferred` | how they learned |
+| `fidelity` | `exact` \| `partial` \| `vague` | information quality |
+| `knows` | string | what they know (structured token, pack vocabulary) |
+| `at` | integer | tick of learning |
+| `source` | event id | where the record came from |
+
+Rules:
+
+- `known_by` is **derived** from `knowledge` records — never stored on the
+  event.
+- **Rumor = knowledge-transfer event.** The teller emits new records for the
+  listener with fidelity decayed one step (`exact → partial → vague`,
+  `channel: told`). Distortion comes from source incompleteness; no separate
+  rumor system.
+- **Rumor drift (A2'', rumordrift):** the telling path may also mutate the
+  token — a pack-declared `knowledge.drift` family (a closed token orbit,
+  one family per token) rolls d100 at the received fidelity's ladder
+  chance on the family's own `drift:<family>` stream; a hit substitutes a
+  sibling token. The outcome's `drifted_from` names the pre-drift token
+  (an outcome payload addition — §11, no bump; present only on an actual
+  drift). Official watch briefings (D-006) never drift — handovers are
+  verbatim.
+- **A lie is a crafted record:** distorted `knows` or misrepresented fidelity —
+  legal data, the foundation for `believes/lies` in phase 4.
+- **Blind-NPC rule:** no record → cannot know, cannot say (T3).
+
+Transfer example — the drunkard at the market:
+
+```json
+{ "id": "ev_0031", "t": 990, "type": "rumor_told",
+  "actor": "npc_drunk_01", "target": "npc_market_crowd_01", "cause": "ev_0029",
+  "outcome": { "accepted": true },
+  "knowledge": [
+    { "who": "npc_market_crowd_01", "channel": "told", "fidelity": "vague",
+      "knows": "figure_at_back_door_last_night", "at": 990, "source": "ev_0031" } ],
+  "state_changes": [], "hooks": ["market_gossip_spreading"],
+  "importance": "low", "provenance": { "seed": 42 } }
+```
+
+## 4. `state_changes`
+
+| Field | Type | Meaning |
+|---|---|---|
+| `entity` | entity id | whose state changed |
+| `prop` | dotted path | which property |
+| `from` / `to` | any | old and new value |
+| `irreversible` | boolean (default false) | never reverts without an explicit counter-event |
+
+Fire has no counter-event: a burned tavern stays burned (T4).
+
+The suspicion home (suspectaxis, iter-69): the crime reactions write the
+knower's axis in ONE of two pack-declared homes — the flat v0.1
+`relations.<axis>` (string-shaped `crime_watch.suspicion_from_knowledge`,
+the suspect implicit: the player) or the per-target
+`pair.<figure>.<axis>` (object-shaped `{source, figure}` — the token
+names its suspect; the status flip and the arrest aim at the figure).
+One mode per pack; the figure must be an npc of the same pack. Since
+iter-69b (suspectaxis-2) the committed pack runs the per-target mode:
+the pair homes are seeded on the watchful NPCs, the flat
+`relations.suspicion` seeding is dropped, and the pack's flat-mode
+readers (the director triggers, the crowd reaction, the card markers)
+are re-declared on the pair home — pack data, the number unchanged.
+
+The lazy scene-detail home (depth-2, iter-75 — the D-054
+texture-promotion law at scene scale): an observation of an ARMED
+scene materializes its pack-declared detail slots as births on the
+LOCATION entity — one `StateChange(location, slot, None → value)` per
+slot, `from` None (canon never modeled it, the lint guarantees), the
+value drawn from the scene's own `scene:<id>:detail` stream
+(first-commit-wins: a canon-held slot is never redrawn —
+re-observation reads canon). The observation event's outcome names
+the births under `materialized` (`[{slot, value}]`, present only when
+something materialized — the drifted_from law); `empty` is just a
+value, so a materialized empty rejects later gold with no special
+casing (`core/detail.py::detail_claim` — the slot_conflict mirror,
+cause-chained to the winning event). Since iter-76 (depth-2b, D-108)
+the committed pack is ARMED — the tavern + the guardroom scenes, the
+knowledge surface of the detail staying the event's own payload
+(zero new knowledge tokens, the templates unchanged).
+
+The generated-name home (name-1, iter-96 — the same D-054 law at
+npc scale, the scene-detail twin): the npc record declares
+`generated_name: <profile>` (the `rules.json::names` phonotactic
+profile — the culture-keyed syllable pools; mutually exclusive with
+an authored `name`), and the CONDENSATION event materializes it as a
+birth on the MEMBER — one `StateChange(member, "name", None →
+drawn)` per unnamed declaring member, drawn from the member's own
+`name:<npc>` stream (first-commit-wins: a canon-held name is never
+redrawn; the projection seeds nothing for `name` — absence IS the
+unborn name). The event's outcome names them under `names` (the flat
+list, member order, present only when something materialized — the
+drifted_from law); a template line binding it must BRANCH on its
+presence (`{names?…|…}`) — a bare `{names}` on a nameless
+condensation is an unknown slot. The drawn name never collides with
+the entity namespace (the bounded collision walk — the id↔display
+mapping stays injective); the display read is fold-first (canon
+outranks the pack record; an unborn generated name renders as its
+dry id). The committed pack declares no profiles — unarmed (the
+68a pattern).
+
+The generated-profile home (agenda-1 P1, iter-418 — the same D-054
+law one slot over, the generated-name twin): the npc record declares
+`generated_psyche: <distribution>` (the `rules.json::psyche`
+distribution — the archetype list, the ± jitter, the extra extremes;
+mutually exclusive with an authored `psyche`), and the CONDENSATION
+event materializes it as a birth on the MEMBER — one `StateChange(
+member, "psyche", None → {archetype, axes})` per declaring member,
+drawn from the member's own `psyche:<npc>` stream (first-commit-wins:
+a canon-held profile is never redrawn; the projection seeds nothing for
+`psyche` — absence IS the unborn profile). The value is a nested
+object (the profile: the archetype id + one int per declared axis), not
+a scalar; the drive ticker reads it from the fold through
+`core/psyche.py::profile_of` (an AUTHORED record profile outranks it).
+No outcome key carries the birth: a profile is read data, never a
+rendered line (the `names` list stays the name birth's own surface).
+
+The ROLE home (agenda-1 P5, iter-426 — the D-054 law one layer over): the
+born profile's `archetype` is the SEED (a fact of birth), and the CURRENT
+role rides its own prop `archetype`, written ONLY by a turning event
+(`rules.json::psyche.turnings` + `psyche.turning_event`) — one
+`StateChange(member, "archetype", None → new)` on the first turn, `old →
+new` after it. Absence means the person still carries the role it was born
+with (canon never modeled it — the birth-home law). The read is ONE law,
+`core.psyche.role_of`: the folded prop first (canon outranks every record),
+the authored `psyche.archetype` second, the born profile's archetype last;
+the drive ticker, the agenda view's want, the entity card and the brief all
+read through it, so a turned person can never show two roles at once. The
+temperament (the profile's five numbers) is never rewritten — the turn
+changes what the person goes after, not who he is made of.
+
+The account home (res-1, iter-146 — the economy substrate,
+`docs/CONTRACTS.md` §2): an entity-declared `accounts` mapping seeds
+`account.<kind>` props (non-negative integers; the `status.`/
+`relations.` family's own seeding shape), and every level change
+rides a `state_changes` entry of ONE of the three verb event types —
+`account_sourced` (declared units enter; actor `world` on the
+aggregate flow path, the acting player on the discrete path),
+`account_transferred` (units move between two accounts; two changes,
+one loss + one gain of the same declared amount),
+`account_consumed` (units leave to a declared sink; one loss). The
+verbs are the ONLY write path (the conservation oracle's law: no
+other event type ever touches an account prop); the flows fire at
+macro crossings — one event per due flow, the D-112 cardinality
+outcome `{flow, kind, amount}`; the levels never carry the
+`irreversible` flag (the irreversibility split: event immutability ≠
+stock immutability — a stock regrowing via a new source event is an
+ordinary event, never a "revert"); the decay pass never touches
+them; and no code path ever writes a negative stock (the `_commit`
+gate's floor — a player-scaled underflow dies soft at the door as
+`intent_rejected`, an aggregate flow underflow fails loud before the
+write). Prices are derived read-side values (`base + per_unit ×
+level` over pack-declared integer weights — never stored, never an
+event). The committed packs declare no economy block — unarmed (the
+68a pattern; the first consumer pack pays the template lines).
+
+## 5. `hooks`
+
+Tags seeded at event time and consumed by the director's buffer. Each hook
+carries triggers (time / place / threshold) defined in pack rules. **Far
+hooks** — usable 10–50 turns later — are first-class citizens, not an
+afterthought.
+
+## 6. `importance` rule
+
+Computed from pack `rules.json`: a function of entities touched +
+irreversibility + far hooks + the story-critical hook (tune-1/D-059:
+pack-listed event types in `importance.story_critical_events` score a
+bonus) → mapped to `low` / `medium` / `high`. Never "by
+feel" — the rule is data, and changing it is a pack change, not a code change.
+
+## 7. `provenance`
+
+`seed` (int, required) + `cause_intent` (intent id, when the event resolves a
+player intent) + `cause_hook` (the deferred-consequence tag a DIRECTOR release
+discharges — iter-107, D-140; accepted and rejected releases both carry it:
+a released attempt is a fact) + `assignment_tick` (int, when the event
+resolves an AUTONOMOUS intent — urgency / faction / director — the
+beat/crossing tick the intent was MINTED at, its semantic origin; temp-1/B3,
+D-236; accepted and rejected resolutions both carry it; player intents never
+do — a playscript step's assignment IS its enqueue tick). An autonomous
+resolution's `cause_intent` names the pack declaration's own identity —
+`urgency_<npc>_<kind>`, `faction_<group>_<kind>`, `drive_<npc>_<drive>`,
+`director_<hook>` — never its position in the pack (probeids-1, iter-436);
+the player's session sequence `intent_<n>` is the one positional form.
+Enough to re-derive
+*why* the event happened: `cause_hook` pairs the release with the event that
+seeded the hook (payoff latency, `core/metrics.py`; the trace family,
+`scripts/mechanics.py`), and `assignment_tick` separates the semantic origin
+from the canonical realization time `event.t` — under B2's deferred-realize
+semantics (the beat-minted intent's door may land far after the beat) the gap
+`event.t - assignment_tick` is the observable deferral latency, a derived
+diagnostic never a new scheduler law: `event.t` stays the one canonical
+timestamp every downstream consumer reads. Model/prompt provenance joins the
+same field family when the LLM circuit arrives (phase 1+). v0.2 (iter-107)
+added `cause_hook` — additive, no migration (old readers ignore the key; the
+header version moved 0.1 → 0.2 per §8's additive law). v0.3 (iter-260)
+added `assignment_tick` — the same additive form over the same precedent.
+
+## 8. Versioning
+
+- `schema_version` is a `"0.x"` string.
+- **Additive** change (new optional field, new enum value for pack reasons) =
+  minor bump.
+- **Breaking** change (rename / remove / retype) = major bump + migration note
+  + owner approval.
+- Committed logs are never migrated in place (INV-5); replay code must
+  understand every committed version.
+
+## 9. Validation
+
+- Every log line validates against `schemas/event.schema.json` (T0, from
+  iter-1). The header line (§1) is validated as a separate shape.
+- The example below is embedded in the test suite as a fixture — docs and
+  schema cannot drift silently.
+
+## 10. Example (canonical — `ev_0007`)
+
+```json
+{ "id": "ev_0007", "t": 412, "type": "pickpocket_failed",
+  "actor": "pc_01", "target": "npc_guard_01", "cause": "ev_0006",
+  "outcome": { "noticed": true },
+  "knowledge": [
+    { "who": "npc_guard_01", "channel": "saw", "fidelity": "partial",
+      "knows": "figure_reaching_for_purse", "at": 412, "source": "ev_0007" },
+    { "who": "npc_barkeep_01", "channel": "heard", "fidelity": "vague",
+      "knows": "noise_by_the_bar", "at": 412, "source": "ev_0007" } ],
+  "state_changes": [
+    { "entity": "npc_guard_01", "prop": "pair.pc_01.suspicion", "from": 0, "to": 25 },
+    { "entity": "pc_01", "prop": "crime_status", "from": "unknown", "to": "suspect" } ],
+  "hooks": ["guard_suspicious_of_pc", "possible_document_check"],
+  "importance": "medium",
+  "provenance": { "seed": 42, "cause_intent": "intent_0006" } }
+```
+
+## 11. Extension policy
+
+Adding an event `type` or an `outcome` payload: pack data, no bump. The
+event `type` vocabulary and per-type `outcome` payload shapes are declared
+by the pack and validated at load (closed per pack — the phase-0 minimum
+lint in `docs/blueprint/phase0.md` §1); a type unknown to the pack fails
+load loudly. Schema-level enums (`channel`, `fidelity`, `importance`) and
+any field in §2–§4 are closed per `schema_version`: touching them = §8
+applies. Type-specific payload fields (the DF Legends `hf_died` →
+`victim_hfid`/`slayer_hfid` shape) live inside the validated `outcome`
+object, never as ad-hoc top-level fields. Multi-parent event groupings
+(DF `event_collections` many-to-many) stay deferred — chron-2 (D-121)
+landed the collection layer as the SINGLE-PARENT encoding: pack-
+declared tier vocabulary (`chronicle.collections`) over the `cause`
+chain (a member's cause names its nearest lower-tier predecessor —
+the grouping recorded at write time, L7), the many-to-many form
+returning only via a D-row on measured need.

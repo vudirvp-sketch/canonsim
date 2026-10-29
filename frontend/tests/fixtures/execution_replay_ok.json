@@ -1,0 +1,14 @@
+{
+  "operation_id": "397e19247098f19d179f400eab8c96a8e3f5cdc99d44d3019cc8d423a70eb949",
+  "result": {
+    "deadline_seconds": 120.0,
+    "execution_id": "43c7149402cc24a7a8056bb6a69009d9dca7ec1673547af833fa592dead46617",
+    "replayed_from": "4efb084e8c522b31e5ee5f76727203c8bfa1435956fcc20504f84fcdd646b7aa",
+    "state": "STARTING",
+    "work": "chat.completion"
+  },
+  "revision": 0,
+  "sequence": 3,
+  "session_id": "5377eb64934d5ac772f7b1d658681745f8bef8ab5d65f819fcbe72dcfdab905a",
+  "status": "OK"
+}

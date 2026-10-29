@@ -1,0 +1,85 @@
+{
+  "operation_id": "33f03219da9dab44d6fbfa18b8131ce542d45249c5edd8f1d6456dc02a18d7fc",
+  "result": {
+    "artifact": {
+      "artifact_schema_identity": "canon_execution_artifact@0.1",
+      "backend_identity": null,
+      "capability_snapshot": null,
+      "diagnostics": [],
+      "execution_id": "183fcf00efb7d76a759cd7cc7b9852f3a7b962611c0f313601e7cb6872f4a412",
+      "frozen_inputs": [
+        [
+          "deadline_seconds",
+          "3600.0"
+        ],
+        [
+          "paths",
+          "[\"/home/z/my-project/capture-roots/models300/source/second-model.gguf\"]"
+        ],
+        [
+          "work",
+          "model.import"
+        ]
+      ],
+      "inference_config": null,
+      "model_identity": null,
+      "operation_id": "78e662d27ab547040817a2798fbdd0a0ab2ae680abc8638fa88ede2046f08e29",
+      "pack_schema_identity": null,
+      "prompt_identity": null,
+      "protocol_identity": null,
+      "replay_of": null,
+      "reproducibility_scope": "SEMANTIC",
+      "request_digest": "0cbe9f07e34678c305741b99e1467d553a51a637cdc5244242350202a5038b2e",
+      "runtime_identity": null,
+      "seed": null,
+      "status": "COMPLETED",
+      "tool_authority_state": null
+    },
+    "deadline": {
+      "deadline_monotonic": 5632.574449946,
+      "started_monotonic": 2032.574449946
+    },
+    "diagnostics": [],
+    "execution_id": "183fcf00efb7d76a759cd7cc7b9852f3a7b962611c0f313601e7cb6872f4a412",
+    "failure_type": null,
+    "frozen_inputs": [
+      [
+        "deadline_seconds",
+        "3600.0"
+      ],
+      [
+        "paths",
+        "[\"/home/z/my-project/capture-roots/models300/source/second-model.gguf\"]"
+      ],
+      [
+        "work",
+        "model.import"
+      ]
+    ],
+    "operation_id": "78e662d27ab547040817a2798fbdd0a0ab2ae680abc8638fa88ede2046f08e29",
+    "progress": {
+      "copied_bytes": 67,
+      "file_count": 1,
+      "file_index": 0,
+      "logical_name": "second-model.gguf",
+      "total_bytes": 67
+    },
+    "request_digest": "0cbe9f07e34678c305741b99e1467d553a51a637cdc5244242350202a5038b2e",
+    "result": {
+      "count": 1,
+      "imported": [
+        {
+          "logical_name": "second-model.gguf",
+          "size_bytes": 67
+        }
+      ]
+    },
+    "state": "COMPLETED",
+    "terminal": true,
+    "work": "model.import"
+  },
+  "revision": 0,
+  "sequence": 4,
+  "session_id": "c61c24fcb2b587ebf70042e023af2b91c1faf3d488da8e3b4b66bf2501af4f12",
+  "status": "OK"
+}

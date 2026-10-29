@@ -1,0 +1,2501 @@
+"""Tick driver + playscript runner (KeeperRL `Model::update` shape,
+`docs/blueprint/phase0.md` §1-§2): pop the next queue entry in
+`(tick, sub_order, actor_id, seq)` order, advance the clock, execute.
+
+The intent front door (INTENT_SCHEMA.md is the contract owner): shape
+errors are loud (`RunnerError` — author bugs); a well-formed but
+world-impossible intent is REJECTED with an `intent_rejected` no-op event
+(cause-chained, never silently dropped). Accepted intents draw their
+duration at accept time and enqueue a SCHEDULED completion carrying
+`based_on_event_seq` — intent OCC. At completion the OCC re-check runs
+first (the projection moved *and* the precondition broke → reject with the
+cause chain to the breaking event), then the opposed check, then the
+resolver; ignitions hand control to the transition engine, whose spread
+pass runs as a self-rescheduling SYSTEM_PASS entry and whose smoke /
+burnout follow-ups run as SEEDED SCHEDULED entries (TIME-1).
+
+The whole run executes under `assure('substantive')` — a cosmetic draw on
+this path is an INV-2 violation made loud (RNG-1). Resolver dispatch is a
+name→callable registry keyed by the pack's `resolver` field (INV-3).
+
+Every event passes the `_commit` gate (D-035): state deltas are validated
+against the projection BEFORE the write, so a resolver bug fails loudly
+while the log stays clean — the append-only truth never receives a draft
+that disagrees with the world it describes (KI#13). The spread pass is a
+per-layer singleton: one pass entry per layer at a time, its cause map
+shared with the ignitions (a second fire while a pass runs merges into it
+instead of forking a parallel pass — parallel passes double the pack's
+chance_per_tick and lose the cause chain, KI#16).
+
+iter-3: `_commit` also feeds the derived knowledge index and dispatches
+the event-driven system reactions (crime first, then the telling) — every
+committed event's records get their reactions, reaction events carry no
+knowledge of their own beyond what legitimately cascades, so the cascade
+terminates. Watch rotations fire when the clock CROSSES a rotation tick
+(never pre-seeded): the swap, the expectation checks (P2d), then the
+briefing (D-006) — each piece cause-chained (phase0 §3).
+maclock-1: the macro-clock crossings join the same discipline (L4
+layered clocks — the third crossing): the positive multiples of the
+pack-declared `time.macro.cadence_ticks`, fired coarsest-first at a
+co-occurring tick (the year turns before the day's rotation, the
+rotation before the beat), each turn ONE event through the canon door
+(the calendar's increments are canon, INV-1 — `core/macro.py` owns the
+primitive).
+weather-1: the ambient family rides the same crossing — the weather
+chain rolls its next state AFTER the turn (`core/weather.py` owns the
+family; the event chained to the turn, the drift's precedent) and its
+SEEDED erosion follow-ups run as SCHEDULED entries (the fire
+shape, TIME-1).
+depth-3: the macro crossing is the scene LOD's WARM cadence — under
+an armed clock the turn carries the cold-background census (the D-112
+count on the aggregate surface), the warm ring's NPCs tick at the
+crossing (drift + goal rolls, `core/lod.py` owns the zones), and the
+beats scope to the ACTIVE scene alone; the unarmed law keeps the
+one-scene world (the whole simulation per-beat, the v0.1 bytes).
+depth-7: the write-side LOD at group scale rides the same discipline
+(`core/groups.py`) — the condensation (a group's anchor crossing into
+the warm/active zones births its members' canon `member_of`, the
+tombstone marker stopping the group's population-tier macro-ticks)
+and the cold background's macro-tick aggregates (one cardinality
+event per cold group per crossing, actor = the group id — D-112's
+one id, all tiers).
+"""
+
+from __future__ import annotations
+
+import json
+from collections.abc import Collection, Mapping, Sequence
+from dataclasses import dataclass, replace
+from pathlib import Path
+from typing import Any
+
+from core.calendar import (
+    calendar_entries,
+    calendar_order,
+    calendar_turn_draft,
+    next_calendar_tick,
+)
+from core.checkpoint import (
+    INDEX_NAME,
+    CheckpointError,
+    load_checkpoint,
+    prefix_digest,
+    read_index,
+)
+from core.clock import Clock
+from core.crime import (
+    arrest_resolution_draft,
+    briefing_draft,
+    iter_suspicion_reactions,
+    next_rotation_tick,
+    rotation_plan,
+)
+from core.cursor import CursorError
+from core.director import Director, policy_from_rules
+from core.drives import (
+    drive_demand,
+    drive_intents,
+    drive_scan,
+    drive_specs,
+    echo_modifiers_declared,
+)
+from core.duties import duty_violation_drafts
+from core.echo import echo_scores
+from core.economy import (
+    flow_drafts,
+    is_account_prop,
+    source_caps,
+    wear_draft,
+)
+from core.factions import (
+    faction_intents,
+    faction_scan,
+    faction_specs,
+)
+from core.fold import Projection, apply_event, fold, initial_projection
+from core.groups import (
+    condensation_drafts,
+    condensation_pending,
+    macro_tick_drafts,
+)
+from core.ids import sequence_id
+from core.intent import (
+    ECHO_TEST,
+    EDGE_TICKS,
+    LEVERAGE_TEST,
+    REJECTION_EVENT,
+    TRAIT_TEST,
+    IntentData,
+    RunnerError,
+    ScanGateFold,
+    ScanGateMemo,
+    action_duration,
+    first_failing,
+    occ_breaking_cause,
+    pack_importance,
+    requires_for,
+    run_check,
+    validate_shape,
+)
+from core.knowledge import KnowledgeView, expectation_drafts, telling_reaction
+from core.leverage import leverage_drafts, live_leverage, spendable_leverage
+from core.lod import COLD_COUNT_KEY, SceneZones, npc_population, scene_zones
+from core.log import EventDraft, EventLogWriter, EventRecord
+from core.macro import macro_turn_draft, next_macro_tick
+from core.onaction import on_action_drafts
+from core.pack import Pack
+from core.psyche import born_declared
+from core.queue import NPC_REACTION, PLAYER_INTENT, SCHEDULED, SYSTEM_PASS, EventQueue
+from core.reflection import reflection_drafts
+from core.resolvers import REGISTRY
+from core.rng import (
+    SUBSTANTIVE,
+    RngBank,
+)
+from core.scheduler import build, decls_from_rules
+from core.states import (
+    DecayIndex,
+    decay_axes,
+    decay_drafts,
+    next_decay_tick,
+    rotation_resets,
+)
+from core.traits import crystallized_traits
+from core.transitions import WORLD, Ignition, follow_up_draft, ignite, spread_tick
+from core.travel import edge_duration
+from core.turning import turning_demand, turning_drafts, turning_pending, turns_declared
+from core.urgencies import (
+    RollIndex,
+    urgency_intents,
+    urgency_scan,
+    urgency_specs,
+)
+from core.weather import (
+    current_weather,
+    erosion_drafts,
+    erosion_due,
+    seasonal_ride,
+    weather_turn_draft,
+)
+from core.worldgen import (
+    WORLDGEN_BLOCK,
+    WorldModel,
+    generate_world,
+    genesis,
+)
+
+__all__ = [
+    "CompletionPayload",
+    "FollowUpPayload",
+    "IntentData",
+    "PassPayload",
+    "REJECTION_EVENT",
+    "RunResult",
+    "RunnerError",
+    "Simulator",
+    "WeatherPayload",
+    "load_playscript",
+]
+
+
+@dataclass(frozen=True, slots=True)
+class CompletionPayload:
+    """An accepted intent pending its SCHEDULED completion (the
+    ACCEPTED state of the intent lifecycle).
+
+    `snapshot` (scale-1-impl, P1a): the projection copy taken at the
+    intent's ENQUEUE — the moment `based_on_event_seq` was stamped —
+    so the OCC attribution walk at completion starts from the exact
+    proposal-point state (the prefix refold replaced by the copy;
+    None when the intent's preconditions carry nothing attributable,
+    the walk's own vacuity, or on paths that never had a
+    stamping-moment copy — the fold stays the exact fallback)."""
+
+    intent: IntentData
+    duration: int
+    based_on_event_seq: int
+    snapshot: "Mapping[str, Mapping[str, Any]] | None" = None
+
+
+@dataclass(frozen=True, slots=True)
+class PassPayload:
+    """A transition layer's spread pass. The per-layer cause map (location
+    → the location's last transition event id) lives on the Simulator
+    (`_pass_causes`) — shared with ignitions so a running pass can chain
+    spreads of a fire it did not seed (KI#16)."""
+
+    system: str
+    layer: str
+
+
+@dataclass(frozen=True, slots=True)
+class FollowUpPayload:
+    """A SEEDED follow-up (smoke / burnout) at its trigger tick."""
+
+    layer: str
+    location: str
+    kind: str
+    cause_id: str
+
+
+@dataclass(frozen=True, slots=True)
+class WeatherPayload:
+    """A SEEDED weather erosion follow-up at its trigger tick (the fire
+    follow-ups' shape over the ambient family's own rule): the rule's event
+    type IS the queue identity (unique per block by lint); the drafts
+    read the fold at fire time — the world's state then, never the
+    state it held at seed time."""
+
+    event_type: str
+    cause_id: str
+
+
+@dataclass(frozen=True, slots=True)
+class RunResult:
+    """What a finished run produced."""
+
+    log_path: Path
+    event_count: int
+    last_tick: int
+    fingerprint: int
+
+
+def load_playscript(path: Path) -> dict[str, Any]:
+    """Load a playscript fixture (seed + ordered intents, MVP_SCOPE §13)."""
+    with path.open(encoding="utf-8") as fh:
+        script: dict[str, Any] = json.load(fh)
+        return script
+
+
+def _instrument_holder(
+    binding: Mapping[str, Any], intent: IntentData
+) -> str:
+    """The wear binding's holder reference (stageb-1, B3): the noun
+    `actor`/`target` resolves through the intent, any other value is
+    an EXPLICIT entity id — the settle leg's own resolution family
+    (`LEG_KEYS`' law, the lint's cross-check on both sides)."""
+    holder = binding["holder"]
+    if holder == "actor":
+        return intent.actor
+    if holder == "target":
+        if intent.target is None:
+            raise RunnerError(
+                f"{intent.kind}: the instrument binding references 'target' "
+                "without a target (the door demands one when the action "
+                "names it — the needs_target law)"
+            )
+        return intent.target
+    return holder
+
+
+class Simulator:
+    """One deterministic run: bank + clock + queue + writer + projection."""
+
+    def __init__(
+        self,
+        pack: Pack,
+        seed: int,
+        log_path: Path,
+        event_schema: Mapping[str, Any],
+        commit: str = "unknown",
+        *,
+        director_enabled: bool = True,
+        append_writer: EventLogWriter | None = None,
+        skip_quiet_beats: bool = True,
+    ) -> None:
+        self._pack = pack
+        self._seed = int(seed)
+        self._bank = RngBank(self._seed)
+        self._clock = Clock.from_rules(dict(pack.rules["time"]))
+        self._queue = EventQueue()
+        # The resume door (iter-106/D-139): a pre-opened APPEND-mode
+        # writer rides in — positioned over an existing log (its own
+        # construction validated every line, T0). `log_path` is ignored
+        # in that case (the writer owns its path); fresh runs keep the
+        # write-mode writer and the header written by `open()`.
+        self._writer = (
+            EventLogWriter(log_path, event_schema)
+            if append_writer is None
+            else append_writer
+        )
+        self._commit_id = commit
+        self._projection = initial_projection(pack.entities)
+        self._initial = initial_projection(pack.entities)
+        self._events: list[EventRecord] = []
+        self._intent_seq = 0
+        self._player_id = pack.player_id()
+        self._schedule = build(decls_from_rules(pack.rules))
+        self._system_order = {
+            decl.name: index for index, decl in enumerate(self._schedule)
+        }
+        # spread-pass state (KI#16): one live pass per layer, causes shared
+        self._pass_causes: dict[str, dict[str, str]] = {}
+        self._pass_live: set[str] = set()
+        # derived knowledge index (L3) + the next watch rotation tick
+        self._knowledge = KnowledgeView()
+        # scale-1-impl, P0.5-B (the E03 fix — iter-328's RED baseline):
+        # the beat machinery's two spec families parsed ONCE here, at
+        # run start, and handed to the family walks via `specs=` — the
+        # per-beat re-parse was the measured waste (2.0 parses/beat,
+        # the faction arm firing even on packs without the block).
+        # The parse is pure over immutable pack data, so the memo is
+        # byte-identical by construction (Q6's law: same specs, read
+        # once instead of per beat).
+        self._urgency_specs = urgency_specs(pack)
+        self._faction_specs = faction_specs(pack)
+        # agenda-1 P0 (iter-417): the drive ticker's parse-once memo —
+        # the same E03 law (pure over immutable pack data, byte-identical
+        # by construction); a pack with no profile parses to the empty
+        # tuple and the walk draws nothing (the inert law).
+        self._drive_specs = drive_specs(pack)
+        # agenda-1 P1 (iter-418): a pack declaring a BORN profile origin
+        # (`generated_psyche`) makes the spec set projection-dependent —
+        # the birth arms a drive mid-run. The flag keeps the parse-once
+        # memo for every pack that has no such declaration (the E03 law
+        # where it still holds: the committed packs without a born
+        # origin pay zero per-beat re-parse).
+        self._psyche_born = born_declared(pack)
+        # agenda-1 P5 (iter-426): a pack declaring ROLE TURNS also makes the
+        # spec set projection-dependent — the role prop rewrites the archetype
+        # the drives bind, so the parse is per beat from the turn on.
+        self._turns_declared = turns_declared(pack)
+        # iter-370 (the static-resolution family): the decay walks'
+        # static axis table — the same parse-once memo class (pure
+        # over immutable pack data, byte-identical by construction)
+        self._decay_axes = decay_axes(pack)
+        # scale-1-impl, P0.5-A (the E04 fix — iter-328's RED baseline):
+        # the beat/macro derived-fold DEMAND — the windowed tests any
+        # spec's `requires` gates on, read from the same memo. The
+        # greedy form computed all three folds on EVERY beat while a
+        # zero-demand pack declares NONE (the measured 5.01 calls/beat
+        # vs 0 gated entries on the Lab fixture); the lazy form
+        # computes each fold only when the
+        # pack declares a consumer for it. Byte-identity: the folds
+        # are pure read-side aggregates that never feed entropy or
+        # canon (L6/EPIST-1 — the iter-45 laziness law's own ground),
+        # so computing one zero times changes no gate's answer when
+        # no gate exists to read it — the door's `_fold_reads` form,
+        # now the clock's own.
+        self._fold_demand: frozenset[str] = (
+            frozenset(
+                cond.get("test")
+                for spec in (*self._urgency_specs, *self._faction_specs)
+                for cond in spec.requires
+            )
+            # agenda-1 P5: the turning rows are fold readers too — without
+            # their demand the lazy triple answers empty and a turn keyed on
+            # a belief could never fire (the silent-dead-gate trap).
+            | turning_demand(pack)
+            # agenda-1 P5-unit-2 (iter-427): an echo-sourced drive modifier
+            # reads the decaying residue into the BAR, so the fold is a
+            # declared consumer of the ticker too — and the same demand
+            # closes the quiet-beat skip's fence (a bar that moves between
+            # events cannot be evaluated once per stretch).
+            | (frozenset((ECHO_TEST,)) if echo_modifiers_declared(pack) else frozenset())
+            # iter-439 (`drivegoals-1`): a drive measure may read the
+            # event-driven fold (`trait_held`) — its demand joins the beat
+            # triple, and the same non-empty demand takes the quiet-beat
+            # skip away (the fence below reads _fold_demand): the bar moves
+            # only when a commit moves it, and a stretch-wide evaluation
+            # would be exact only by proof, never by accident.
+            | drive_demand(pack)
+        ) & frozenset((LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST))
+        # derived last-change index (L3): (entity, prop) -> tick of the
+        # latest committed event that changed it — the decay baseline
+        # without a per-beat log scan; `_commit` is its only writer
+        self._last_change: dict[tuple[str, str], int] = {}
+        # iter-379 (the standing order's decay-landing row): the decay
+        # landing index — the heap form of both decay walks' population
+        # scans (per-location min-heaps of (next_fire, npc, prop) cells
+        # over the LIVE pairs). Born from the pack-seeded initial
+        # projection (KI#16), stamped to this projection + this dict +
+        # the memo table (the identity gate — foreign callers keep the
+        # walks), folded inside `_commit` per state change (the
+        # apply_event twin; the staleness/veto laws live with the
+        # class). Rebuildable from the log — never exported in the run
+        # state (the buffer's law).
+        self._decay_index = DecayIndex.from_projection(
+            pack, self._projection, self._decay_axes, self._last_change,
+        )
+        # iter-381 (the standing order's rolling-filter row): the
+        # rolling-set index — the urgency family's per-spec filter
+        # (present + positioned + uncaught) pre-folded on the commit
+        # path, read per stretch/beat as a per-LOCATION bucket in the
+        # filter's own pack order. Born from the pack-seeded initial
+        # projection (KI#16), stamped to this projection + this specs
+        # memo (the identity gate — foreign callers keep the
+        # predicate), folded inside `_commit` per state change (the
+        # exactness law lives with the class). Rebuildable from the
+        # log — never exported in the run state (the buffer's law).
+        self._roll_index = RollIndex.from_projection(
+            self._urgency_specs, self._projection,
+        )
+        # occ-1 (the whole-arm OCC window fix, B7's letter — the
+        # STATUS Next item (1)): the WRITE INDEX — (entity, prop) -> the
+        # ascending event indices of EVERY committed write to that pair
+        # (the `_last_change` pattern's full-history form; `_commit` is
+        # its only writer, the resume loop its only rebuilder). The OCC
+        # attribution walk rides it to visit ONLY the window events
+        # that write a pair the intent's attributable tests can read
+        # (`core/intent.py::precondition_read_pairs` — the twin table):
+        # the whole protocol's deferred-realize law made the window
+        # [seq, end) horizon-long and the per-event re-check the
+        # measured wall (occ_refold, 81.7% of the whole 100y profiled
+        # wall, iter-335); the index law makes the same walk visit the
+        # writers alone. Byte-transparent by construction: the walk is
+        # read-side only — the A/B equivalence law
+        # (tests/test_occidx.py) is the falsifier.
+        self._occ_index: dict[tuple[str, str], list[int]] = {}
+        # occ-1's honest labels (the cost.skip precedent): calls — the
+        # walk's invocation count; window — the full-walk cost basis
+        # (Σ window sizes); inspected — the events the index path
+        # actually applied; attributed — the non-None answers. The
+        # wall delta IS the datum, never these alone.
+        self._occ_stats: dict[str, int] = {
+            "calls": 0, "window": 0, "inspected": 0, "attributed": 0,
+        }
+        # scale-1-impl, P1a (the OCC attribution snapshot side-table):
+        # intent id -> a FIFO of projection copies, one per enqueue
+        # (the ids REPEAT — the family walks re-enumerate their specs
+        # every beat, so `urgency_0005` mints a thousand times a year;
+        # the FIFO restores the exact pairing: same-id entries pop in
+        # queue order, and the queue's (tick, sub_order, actor, seq)
+        # key makes that the push order — the k-th accept of an id
+        # gets the k-th store, its own stamping-moment copy). Popped
+        # at the accept door and carried on the CompletionPayload;
+        # valid iff taken at the stamp itself; entries for intents
+        # that never pop die with the run (bounded by the queue
+        # depth, not the log).
+        self._occ_snapshots: dict[str, list[Projection]] = {}
+        # stageb-1, B4 — the declared source-flow capacities: (entity,
+        # kind) -> cap, read ONCE here (the P0.5-B parse-once
+        # discipline — pure over immutable pack data). The `_commit`
+        # floor's cap arm reads it: a write landing above a declared
+        # cap refuses LOUD, any verb (B1's "never" arm; the flow's
+        # own mint stays compliant by the min() arithmetic — a
+        # violation is a hand-built draft or a pack bug, never the
+        # flow machinery). An unarmed economy answers {} — no caps,
+        # no floor arm, the 68a pattern.
+        self._source_caps = source_caps(pack.rules)
+        self._next_rotation = next_rotation_tick(
+            pack.rules, self._clock.ticks_per_day, 0
+        )
+        # maclock-1 (L4): the macro-clock's next crossing — None for an
+        # unarmed pack (no `time.macro` block; zero crossings, zero
+        # events, the v0.1 bytes untouched — the 68a pattern). The
+        # crossing state persists across `run_steps` calls like the
+        # rotation and beat cursors (the session law).
+        self._next_macro = next_macro_tick(
+            pack.rules["time"].get("macro"), 0
+        )
+        # the calendar family (maclock-1's middle granularities, the
+        # calendar slice): the sub-year cadences' next crossings, one
+        # cursor per declared entry — an EMPTY dict for an unarmed
+        # pack (no `time.calendar` block; zero crossings, zero events,
+        # the 68a pattern). The same session law: the cursors persist
+        # across `run_steps` calls.
+        self._next_calendar: dict[str, int] = {
+            entry_id: next_calendar_tick(entry, 0)
+            for entry_id, entry in calendar_entries(pack.rules).items()
+        }
+        # iter-4: the director + the beat cycle (decay / urgencies /
+        # entropy). The beat fires at clock crossings (phase boundaries
+        # by default; pack-tunable via `urgencies.beat_ticks` —
+        # DIRECTOR_SPEC §7 owns the beat axis; KI#61).
+        # Director-off keeps the buffer seeding (D-005 hygiene) but
+        # suppresses releases — the T8 A/B baseline.
+        self._director = Director(
+            pack=pack, policy=policy_from_rules(pack.rules, director_enabled)
+        )
+        # iter-378: the senses fold anchored on the LIVE projection —
+        # every committed event updates the index inside `seed` (the
+        # apply_event twin, in apply order), and `releases` reads it
+        # for this exact object (the identity law; foreign projections
+        # keep the scans). The bind's rescan re-anchors the birth fold
+        # on the Simulator's own initial-projection object.
+        self._director.bind(self._projection)
+        self._next_beat = self._first_beat(pack.rules)
+        # H9 (iter-337): THE QUIET-BEAT SKIP — the crossing discipline
+        # jumps the clock, the bank counters, and the director's beat
+        # counter across beats whose machinery would produce NOTHING
+        # (no decay draft, no condensation, no urgency/faction hit with
+        # open gates), landing at the first producing beat or the
+        # stretch's bound. Byte-identical to the tick-by-tick run BY
+        # CONSTRUCTION: a skipped beat commits nothing and consumes
+        # exactly its rolling entries' rolls (+1 each — the counters
+        # advance arithmetically, and the landed beat's first draw
+        # reads the same position both paths would). The skip is the
+        # epoch's structural dividend (rng-1: O(1) access to any draw
+        # position — the pre-epoch bank would have paid O(k) replay
+        # per skipped beat).
+        #
+        # THE CAPABILITY FENCES (all three checked once, here — a
+        # pack that fails any one keeps the exact tick-by-tick path,
+        # zero divergence surface by construction):
+        #   1. the requested arm (`skip_quiet_beats`, the falsifier's
+        #      off-switch — the A/B byte-identity law runs both arms,
+        #      never a semantics choice);
+        #   2. the DIRECTOR IS QUIET: disabled, or the pack declares no
+        #      release hooks — `releases()` then answers [] forever, so
+        #      the pacing clock's beat-count dependence is inert (a
+        #      hook-declaring world under an ENABLED director keeps
+        #      the old path: the pacing phases gate releases on beat
+        #      counts, a named residue, never silently approximated);
+        #   3. THE FOLD DEMAND IS EMPTY: no urgency/faction gate reads
+        #      the time-dependent folds (leverage/echo/trait) — the
+        #      gate verdicts are then frozen between events by
+        #      construction, so ONE evaluation per stretch is exact.
+        #      A gated pack (the per-tick fold verdicts — a leverage
+        #      map expiring, a belief un-crystallizing) keeps the old
+        #      path; modeling the folds' breakpoints is the future row.
+        director_hooks = pack.rules.get("director", {}).get("hooks", ())
+        self._skip_capable = bool(
+            skip_quiet_beats
+            and (not director_enabled or not director_hooks)
+            and not self._fold_demand
+        )
+        self._skip_stats = {"stretches": 0, "skipped": 0, "landings": 0}
+        # iter-375 (the measured-wall head): the scan-family gate-answer
+        # memo — the skip's per-stretch gate re-evaluations served from
+        # the read-pair key when the frozen halves repeat (the key
+        # comparison IS the invalidation; `ScanGateMemo`'s law). Born
+        # with the loop's own pack; the world binds per scan (born once
+        # at open/resume, before any beat — the bind's flush sees to it).
+        self._gate_memo = ScanGateMemo(pack, None)
+        # iter-382 (the standing order's key-build row): the memo's
+        # commit-path twin — the declared read pairs watched on the
+        # commit path (`_commit` folds every state change), the
+        # confirmed probes popping exactly when a pair they read
+        # moves, so the scans skip the per-stretch key builds and serve
+        # the stored verdicts (THE SERVE LAW — the fast path serves
+        # exactly the verdict the key compare would). Born from the
+        # two families' memoizable specs over this projection (the
+        # identity stamp); runtime-only, never in the run state; a
+        # resume re-births from the restored projection.
+        self._gate_fold = ScanGateFold.from_specs(
+            (
+                (spec.probe.id, spec.pairs)
+                for spec in (*self._urgency_specs, *self._faction_specs)
+            ),
+            self._projection,
+        )
+        # depth-5: the generated world (None for an unarmed pack — the
+        # 68a pattern; `open` runs the genesis only when the pack
+        # declares the worldgen block)
+        self._world: WorldModel | None = None
+
+    @property
+    def projection(self) -> Projection:
+        """The runtime incremental projection (STATE-1)."""
+        return self._projection
+
+    @property
+    def world(self) -> WorldModel | None:
+        """The generated world model (depth-5): None for an unarmed
+        pack, else the ordered passes' output — derived, rebuildable
+        from the seed, never truth (L11)."""
+        return self._world
+
+    @property
+    def knowledge(self) -> KnowledgeView:
+        """The runtime knowledge index (L3 — derived, rebuildable from the log)."""
+        return self._knowledge
+
+    @property
+    def director(self) -> Director:
+        """The runtime director (T8 A/B uses director_enabled=False at construction)."""
+        return self._director
+
+    @property
+    def drained(self) -> bool:
+        """Whether the run sits at a clean drain boundary: the queue is
+        empty — every scheduled completion, seeded follow-up and spread
+        pass has fired, the world is settled between player inputs. The
+        cursor's save law (`export_cursor`): a mid-drain state is not
+        resume-able (its pending queue entries are not log-derivable),
+        so the cursor is pinned only here (D-139)."""
+        return not len(self._queue)
+
+    def open(self) -> None:
+        """Write the run header — an incremental session starts here.
+
+        The CLI play loop (`cli/`) opens once, feeds steps through
+        `run_steps` between commands, and closes at exit; the log is one
+        continuous run either way (`run_playscript` is the batch front
+        over the same three doors).
+
+        depth-5: an ARMED pack (the `worldgen` block) runs the genesis
+        here — the ordered passes over the seed, the claims through the
+        gate, then the pre-PC history events committed through the one
+        canon door BEFORE any player step: the PC walks into a running
+        world, the director's buffer pre-seeded (phases.md §5). The
+        first genesis event is the run's run-start event (cause null).
+        chron-2 (L7 — the chain visible at record time): the worldgen
+        owns the CAUSE TREE (the parent map, draft indices — a
+        collection member chains to its nearest lower-tier predecessor,
+        a top-level event to the previous top-level event; the flat
+        form is the linear chain); this loop resolves each parent
+        through the WRITER'S OWN ids as it commits — the id law stays
+        the writer's single owner. The worldgen streams are
+        family-isolated from the
+        substantive canon checks, so the run's canon draws never move —
+        the armed arm's price is the genesis events alone. An unarmed
+        pack answers `(None, (), ())` before any stream touch: zero
+        draws, zero events, the v0.1 bytes untouched by construction.
+        """
+        self._writer.write_header(
+            seed=self._seed, commit=self._commit_id, pack=self._pack.name_version
+        )
+        model, drafts, parents = genesis(
+            self._bank, self._pack.rules, self._events, self._seed
+        )
+        self._world = model
+        if model is None:
+            return
+        with self._bank.assure(SUBSTANTIVE):
+            ids: list[str] = []
+            for draft, parent in zip(drafts, parents, strict=True):
+                record = self._commit(
+                    replace(draft, cause=None if parent < 0 else ids[parent])
+                )
+                ids.append(record.id)
+
+    def run_steps(self, steps: Sequence[Mapping[str, Any]]) -> RunResult:
+        """Feed player steps through the live simulator, each step
+        entering ONLY at a clean drain boundary (KI#114, iter-340: the
+        composition law — ``run_steps([A,B]) == run_steps([A]);
+        run_steps([B])`` and every arbitrary partitioning of the SAME
+        step list; a split, a checkpoint/resume at any boundary and
+        the uninterrupted batch are byte-identical). The feed point is
+        a function of the drained state alone — the queue empty, the
+        clock at the drain's end tick — never of the call structure
+        around it: one intent is fed, the FULL cascade it seeded
+        drains (crossings, reactions, follow-ups, passes, beats), then
+        the next intent enters at the drained clock. Callable
+        repeatedly on one opened Simulator (the session pattern): each
+        call composes with every other by construction. The script
+        advances only at drains, so KI#17 ("an autonomous intent's
+        ending never advances the script") holds vacuously — only the
+        queue's emptiness speaks. Beats, rotations and reactions still
+        fire on clock crossings during entry processing, exactly as in
+        a batch run.
+        """
+        pending = list(steps)
+        if pending:
+            with self._bank.assure(SUBSTANTIVE):
+                while pending:
+                    intent = self._intent_from_step(pending.pop(0))
+                    # P1a: the stamping-moment snapshot, taken at the
+                    # clean boundary — the queue is empty, so no commit
+                    # can ride between the stamp and the copy (one law
+                    # at every feed door, run_steps's own boundary
+                    # included; the mid-drain feed is gone by the
+                    # composition law itself).
+                    snapshot = self._snapshot_for(intent)
+                    if snapshot is not None:
+                        self._occ_snapshots.setdefault(intent.id, []).append(
+                            snapshot
+                        )
+                    self._queue.push(
+                        tick=self._clock.tick,
+                        sub_order=self._step_band(intent),
+                        actor_id=intent.actor, kind="intent", payload=intent,
+                    )
+                    while len(self._queue):
+                        entry = self._queue.pop()
+                        # clock-crossing beats fire before the popped entry —
+                        # rotations (iter-3) AND decay/urgencies/director
+                        # (iter-4) all ride the same crossing discipline,
+                        # never pre-seeded (a run still ends when its
+                        # script's queue drains). Crossings fire in TICK
+                        # ORDER: a beat at T=720 between rotations at T=360
+                        # and T=1080 fires between them, not after both —
+                        # otherwise the log writer's tick-monotonicity
+                        # invariant would reject the out-of-order commit.
+                        while True:
+                            candidates: list[int] = []
+                            if (
+                                self._next_rotation is not None
+                                and self._next_rotation <= entry.tick
+                            ):
+                                candidates.append(self._next_rotation)
+                            if (
+                                self._next_beat is not None
+                                and self._next_beat <= entry.tick
+                            ):
+                                candidates.append(self._next_beat)
+                            if (
+                                self._next_macro is not None
+                                and self._next_macro <= entry.tick
+                            ):
+                                candidates.append(self._next_macro)
+                            # the calendar family's due crossings join the
+                            # same candidate pool (the sub-year cadences)
+                            candidates.extend(
+                                tick
+                                for tick in self._next_calendar.values()
+                                if tick <= entry.tick
+                            )
+                            if not candidates:
+                                break
+                            crossing = min(candidates)
+                            self._clock.advance_to(crossing)
+                            # maclock-1: at a co-occurring tick the COARSEST
+                            # clock fires first (the year turns before the
+                            # season, the season before the fair, the fair
+                            # before the week's turn, the week's turn before
+                            # the day's rotation, the rotation before the
+                            # beat — the calendar contains the year, the year contains the day,
+                            # the day contains the beat); one crossing kind
+                            # per iteration, the equal-tick remaining
+                            # candidates re-loop (the writer's
+                            # tick-monotonicity allows equal ticks).
+                            if crossing == self._next_macro:
+                                self._run_macro(crossing, entry.tick)
+                                self._next_macro = next_macro_tick(
+                                    self._pack.rules["time"].get("macro"),
+                                    crossing,
+                                )
+                            elif crossing in self._next_calendar.values():
+                                self._run_calendar(crossing, entry.tick)
+                            elif crossing == self._next_rotation:
+                                self._run_rotation(crossing)
+                                self._next_rotation = next_rotation_tick(
+                                    self._pack.rules,
+                                    self._clock.ticks_per_day,
+                                    crossing,
+                                )
+                            else:
+                                # H9 (iter-337): the quiet-beat skip —
+                                # jump the clock/counters across the
+                                # stretch's quiet beats, landing at the
+                                # first producing one (or none, when the
+                                # whole stretch is quiet — the loop
+                                # proceeds to the bound's own machinery)
+                                if self._skip_capable:
+                                    crossing = self._skip_quiet_beats(
+                                        crossing, entry.tick
+                                    )
+                                if crossing is not None:
+                                    self._run_beat(crossing, entry.tick)
+                                    self._next_beat = self._next_beat_after(crossing)
+                        self._clock.advance_to(entry.tick)
+                        if entry.kind == "intent":
+                            # the feed door is the drain boundary alone: an
+                            # accepted, rejected or completed intent's own
+                            # lifecycle no longer feeds anything mid-drain
+                            # (the composition law); the next step waits for
+                            # the queue to empty.
+                            self._execute_intent(entry)
+                        elif entry.kind == "completion":
+                            self._complete(entry)
+                        elif entry.kind == "pass":
+                            self._run_pass(entry)
+                        elif entry.kind == "weather":
+                            self._run_weather_follow_up(entry)
+                        else:
+                            self._run_follow_up(entry)
+        return RunResult(
+            log_path=self._writer.path,
+            event_count=self._writer.event_count,
+            last_tick=self._clock.tick,
+            fingerprint=self._bank.fingerprint,
+        )
+
+    def close(self) -> None:
+        """Flush and close the log — the run is over, the log is canon."""
+        self._writer.close()
+
+    def run_playscript(self, script: Mapping[str, Any]) -> RunResult:
+        """Play seed + ordered intents end-to-end; returns the run summary."""
+        for key in ("name", "seed", "pack", "steps"):
+            if key not in script:
+                raise RunnerError(f"playscript missing key {key!r}")
+        if script["seed"] != self._seed:
+            raise RunnerError(
+                f"playscript seed {script['seed']} != simulator seed {self._seed}"
+            )
+        if script["pack"] != self._pack.name_version:
+            raise RunnerError(
+                f"playscript pack {script['pack']!r} != loaded pack "
+                f"{self._pack.name_version!r}"
+            )
+        self.open()
+        try:
+            return self.run_steps(list(script["steps"]))
+        finally:
+            self.close()
+
+    # -- the resume door (iter-106, D-139: resume is invisible to the log)
+
+    def export_cursor(self, *, director_enabled: bool) -> dict[str, Any]:
+        """The run cursor payload (`core/cursor.py` owns the artifact):
+        the run's entropy-and-clock position, pinned at a CLEAN drain
+        boundary — mid-drain is refused loudly (the queue's pending
+        entries are not log-derivable; saving there would promise a
+        resume the artifact cannot honor). Everything the fold rebuilds
+        is deliberately absent: the projection, the knowledge index, the
+        last-change index, the seeded-hook buffer (exactly rebuildable
+        by `Director.seed` over the log), the WorldModel (a pure
+        function of seed + pack config, re-derived at resume). What
+        rides here is ONLY what silent draws and run cursors own: bank
+        positions, director run marks, the clock, the crossing cursors,
+        the intent counter. `director_enabled` is the caller's live
+        policy toggle (the session's own flag — a per-run knob, not
+        canon; the resumed run restores it, D-139)."""
+        if len(self._queue):
+            raise RunnerError(
+                f"the cursor is a drain-boundary artifact: the queue holds "
+                f"{len(self._queue)} pending entries — finish or abandon the "
+                "drain before pinning run state"
+            )
+        return {
+            "seed": self._seed,
+            "pack": self._pack.name_version,
+            "event_count": self._writer.event_count,
+            "prefix_sha256": prefix_digest(
+                self._writer.path, self._writer.event_count
+            ),
+            "tick": self._clock.tick,
+            "next_rotation": self._next_rotation,
+            "next_beat": self._next_beat,
+            "next_macro": self._next_macro,
+            "next_calendar": dict(self._next_calendar),
+            "intent_seq": self._intent_seq,
+            "director_enabled": director_enabled,
+            "bank": self._bank.export_state(),
+            "director": self._director.export_run_state(),
+        }
+
+    @classmethod
+    def resume(
+        cls,
+        pack: Pack,
+        log_path: Path,
+        event_schema: Mapping[str, Any],
+        cursor: Mapping[str, Any],
+        *,
+        commit: str = "unknown",
+        checkpoints_dir: Path | None = None,
+    ) -> "Simulator":
+        """Open a live session over an existing log (the resume door,
+        `phases.md` §7 — owner-gated since iter-80, opened by the
+        owner's iter-106 call; D-139: **resume is invisible to the
+        log** — a session interrupted at a drain boundary and resumed
+        with the same remaining steps is byte-identical to the
+        uninterrupted run; interruption is not an input, only steps
+        are).
+
+        The binding chain, every link loud: the append-mode writer's
+        own read validates the whole log (T0) plus the schema-version
+        and env-pin laws; the cursor must name THIS run (seed, pack)
+        and THIS log exactly (`event_count` + `prefix_sha256` — a log
+        that moved past the cursor, e.g. a mid-drain crash, refuses:
+        the extra events' entropy is unrecoverable and guessing it
+        would be save-scumming, not determinism). The log-derivable
+        state rebuilds from the log — the projection through the
+        checkpoint fast-path when the operator's artifacts exist and
+        anchor cleanly (`_restore_projection`), the indexes and the
+        director buffer by one ordered pass — and the entropy position
+        restores from the cursor (bank positions, director run marks,
+        clock, crossing cursors, intent counter). The WorldModel
+        re-derives through `generate_world` (a pure function of seed +
+        pack config; the genesis commits are already in the log, and
+        the bank's worldgen streams were excluded from the cursor
+        exactly so this rebuild re-draws their original positions).
+
+        A resumed simulator feeds `run_steps` like any session; the
+        batch front (`run_playscript`) is a fresh-run door — its
+        `open()` refuses on an already-written header, loudly.
+        `checkpoints_dir` follows the operator convention
+        (`output/checkpoints/<log_stem>/`, `scripts/checkpoint.py`);
+        absent artifacts are normal operation (the plain fold answers).
+        """
+        writer = EventLogWriter(log_path, event_schema, append=True)
+        try:
+            appended = writer.appended
+            assert appended is not None  # append mode always populates it
+            header, events = appended
+            if cursor["seed"] != header["seed"]:
+                raise CursorError(
+                    f"cursor seed {cursor['seed']!r} != log header seed "
+                    f"{header['seed']!r} — the cursor belongs to another run"
+                )
+            if cursor["pack"] != header["pack"] or header["pack"] != pack.name_version:
+                raise CursorError(
+                    f"cursor pack {cursor['pack']!r} / log header "
+                    f"{header['pack']!r} != loaded pack {pack.name_version!r} "
+                    "— the initial projection would be a lie"
+                )
+            if writer.event_count != cursor["event_count"]:
+                raise CursorError(
+                    f"stale cursor: the log holds {writer.event_count} events, "
+                    f"the cursor pins {cursor['event_count']} — the run moved "
+                    "past the pin (a mid-drain crash or a manual append); the "
+                    "extra events' entropy state is unrecoverable"
+                )
+            digest = prefix_digest(log_path, int(cursor["event_count"]))
+            if digest != cursor["prefix_sha256"]:
+                raise CursorError(
+                    f"cursor prefix digest {cursor['prefix_sha256']!r} != this "
+                    f"log's {digest!r} at the pinned offset — the log or the "
+                    "cursor was edited; refusing to guess"
+                )
+            sim = cls(
+                pack, int(cursor["seed"]), log_path, event_schema,
+                commit=commit, director_enabled=bool(cursor["director_enabled"]),
+                append_writer=writer,
+            )
+            sim._events = list(events)
+            sim._projection = sim._restore_projection(events, checkpoints_dir)
+            for event_index, event in enumerate(events):
+                sim._knowledge.add(event)
+                for change in event.state_changes:
+                    sim._last_change[(change.entity, change.prop)] = event.t
+                    # occ-1: the write index rebuilt from the log — the
+                    # same pairs, the same ascending indices, the
+                    # _commit form's exact twin (a resume is invisible
+                    # to the attribution by construction)
+                    sim._occ_index.setdefault(
+                        (change.entity, change.prop), []
+                    ).append(event_index)
+                sim._director.seed(event)
+            # iter-378: the senses fold re-anchored on the RESTORED
+            # projection — the replay pass above already folded every
+            # event through `seed` (the index rode the buffer rebuild,
+            # the same apply order the fold ran); the bind rescans from
+            # the projection's own content anyway (the honest flush —
+            # locally correct, never trusting the replay), so a resumed
+            # session's beats read the O(1) index exactly like an
+            # uninterrupted run's.
+            sim._director.bind(sim._projection)
+            # iter-379: the decay landing index re-born from the RESTORED
+            # projection + the folded last_change (the birth-scan form —
+            # the same pool the live run's commit-path fold maintains;
+            # the resume-invisible law, the twin law the guarantee)
+            sim._decay_index = DecayIndex.from_projection(
+                pack, sim._projection, sim._decay_axes, sim._last_change,
+            )
+            # iter-381: the rolling-set index re-born from the RESTORED
+            # projection (the birth-scan form — the same buckets the
+            # live run's commit-path fold maintains; the resume-invisible
+            # law, the twin law the guarantee)
+            sim._roll_index = RollIndex.from_projection(
+                sim._urgency_specs, sim._projection,
+            )
+            # iter-382: the gate fold re-born from the RESTORED
+            # projection (the identity re-stamp; the cold memo re-fills
+            # on the first scan pass — the resume-invisible law)
+            sim._gate_fold = ScanGateFold.from_specs(
+                (
+                    (spec.probe.id, spec.pairs)
+                    for spec in (*sim._urgency_specs, *sim._faction_specs)
+                ),
+                sim._projection,
+            )
+            sim._director.restore_run_state(cursor["director"])
+            sim._bank.restore_state(cursor["bank"])
+            if events and int(cursor["tick"]) < events[-1].t:
+                raise CursorError(
+                    f"cursor tick {cursor['tick']} sits behind the log's last "
+                    f"event at t={events[-1].t} — the cursor is a lie about "
+                    "its run"
+                )
+            sim._clock.advance_to(int(cursor["tick"]))
+            for key, attr in (
+                ("next_rotation", "_next_rotation"),
+                ("next_beat", "_next_beat"),
+                ("next_macro", "_next_macro"),
+            ):
+                value = cursor[key]
+                if value is not None and value <= sim._clock.tick:
+                    raise CursorError(
+                        f"cursor {key} = {value} does not sit strictly after "
+                        f"the pinned tick {sim._clock.tick} — the never-regress "
+                        "law is part of the run state"
+                    )
+                setattr(sim, attr, value)
+            # the calendar cursors (the calendar slice): the run's own
+            # pinned state when present, with the same never-regress
+            # law; a cursor pinned BEFORE the family's arming (no key)
+            # RECOMPUTES from the pinned tick instead — the cursors are
+            # pure arithmetic (the positive multiples of the declared
+            # periods), so the recompute IS the uninterrupted run's
+            # own value (the D-139 resume-invisible law), never a drift
+            sim._next_calendar = {}
+            for entry_id, value in (
+                cursor.get("next_calendar") or {}
+            ).items():
+                value = int(value)
+                if value <= sim._clock.tick:
+                    raise CursorError(
+                        f"cursor next_calendar[{entry_id!r}] = {value} does "
+                        "not sit strictly after the pinned tick "
+                        f"{sim._clock.tick} — the never-regress law is part "
+                        "of the run state"
+                    )
+                sim._next_calendar[str(entry_id)] = value
+            for entry_id, entry in calendar_entries(pack.rules).items():
+                sim._next_calendar.setdefault(
+                    entry_id, next_calendar_tick(entry, sim._clock.tick)
+                )
+            sim._intent_seq = int(cursor["intent_seq"])
+            if pack.rules.get(WORLDGEN_BLOCK) is not None:
+                sim._world = generate_world(
+                    sim._bank, pack.rules[WORLDGEN_BLOCK]
+                )
+            return sim
+        except BaseException:
+            writer.close()
+            raise
+
+    def _restore_projection(
+        self,
+        events: Sequence[EventRecord],
+        checkpoints_dir: Path | None,
+    ) -> Projection:
+        """The resume projection: the checkpoint fast-path when the
+        operator's artifacts exist and anchor cleanly (snapshot + tail
+        replay, `phases.md` §5 — `core/checkpoint.py`'s first RUNTIME
+        consumer; the module was built for exactly this door), else the
+        plain fold over the pack-seeded initial projection. Both paths
+        answer the same state (the re-fold law); the checkpoint only
+        cuts the fold cost. Present-but-wrong is LOUD — the anchors
+        have teeth (a foreign index, a mismatched prefix digest, a
+        corrupted artifact); ABSENT is normal operation, never an
+        error."""
+        if checkpoints_dir is None or not (checkpoints_dir / INDEX_NAME).is_file():
+            return fold(events, self._initial)
+        index = read_index(checkpoints_dir)
+        if index.log != self._writer.path.name:
+            raise CheckpointError(
+                f"checkpoint index names log {index.log!r} != "
+                f"{self._writer.path.name!r} — the artifacts are foreign"
+            )
+        if index.pack != self._pack.name_version:
+            raise CheckpointError(
+                f"checkpoint index pack {index.pack!r} != loaded "
+                f"{self._pack.name_version!r} — the snapshots folded a "
+                "different initial projection"
+            )
+        record = index.records[-1]  # sorted by offset: the latest
+        if record.offset > len(events):
+            raise CheckpointError(
+                f"checkpoint offset {record.offset} exceeds the log's "
+                f"{len(events)} events — the artifacts are foreign"
+            )
+        if prefix_digest(self._writer.path, record.offset) != record.prefix_sha256:
+            raise CheckpointError(
+                f"checkpoint prefix digest at offset {record.offset} does not "
+                "match this log — the snapshot or the log drifted"
+            )
+        checkpoint = load_checkpoint(record, checkpoints_dir)
+        return checkpoint.restore(events)
+
+    def _snapshot_for(self, intent: IntentData) -> Projection | None:
+        """P1a's enqueue-time snapshot, taken iff the intent's OCC walk
+        could ever attribute: an action whose attributable
+        preconditions (the non-windowed set) are empty can never fire
+        the walk's first_failing — the snapshot would be dead weight,
+        so None is EXACT (the walk returns None on both paths). The
+        copy is one level deep: the projection's props are scalars
+        (state_changes write ints/strings/bools — the seeding and the
+        resolvers' own discipline), so dict-per-entity captures the
+        state fully."""
+        action = self._pack.action(intent.kind)
+        if action is None:
+            return None  # the door raises before any completion exists
+        attributable = [
+            cond for cond in requires_for(action, intent)
+            if cond.get("test") not in (LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST)
+        ]
+        if not attributable:
+            return None
+        return {
+            entity: dict(props)
+            for entity, props in self._projection.items()
+        }
+
+    def _step_band(self, intent: IntentData) -> int:
+        """The step's sub_order band: PLAYER_INTENT for the player's own
+        steps (mode A — the default, no actor key), NPC_REACTION for an
+        actor step (mode B's reply door — the chorus rides the same band
+        as the autonomous intents, after the player's intents at the
+        same tick, before scheduled completions; D-037's band law)."""
+        if intent.actor == self._player_id:
+            return PLAYER_INTENT
+        return NPC_REACTION
+
+    def _intent_from_step(self, step: Mapping[str, Any]) -> IntentData:
+        kind = step.get("intent")
+        if not isinstance(kind, str):
+            raise RunnerError(f"playscript step missing 'intent': {step!r}")
+        actor = step.get("actor", self._player_id)
+        if actor != self._player_id and (
+            not isinstance(actor, str) or self._pack.kind_of(actor) != "npc"
+        ):
+            raise RunnerError(
+                f"playscript step actor must be a pack npc id, got {actor!r} "
+                f"(the player needs no actor key — mode A's default)"
+            )
+        intent_id = sequence_id("intent", self._intent_seq)
+        self._intent_seq += 1
+        fields = {
+            key: value
+            for key, value in step.items()
+            if key not in ("intent", "target", "actor")
+        }
+        return IntentData(
+            id=intent_id, kind=kind, actor=actor,
+            target=step.get("target"), fields=fields,
+            based_on_event_seq=self._writer.event_count,
+        )
+
+    # -- the intent front door -------------------------------------------------
+
+    def _windowed(self, preconditions: Sequence[Mapping[str, Any]]) -> bool:
+        """Whether the precondition list carries any tick-windowed test
+        (the leverage liveness window, iter-45; the echo decay, iter-46;
+        the trait crystallization, iter-67 — beliefwire): those intents
+        are evaluated against the derived folds read at THE CALLER'S OWN
+        TICK — pure reads, no RNG, no events, computed only when the
+        action asks for them (every other action pays nothing)."""
+        return any(
+            cond.get("test") in (LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST)
+            for cond in preconditions
+        )
+
+    def _fold_reads(
+        self, preconditions: Sequence[Mapping[str, Any]], tick: int
+    ) -> tuple[tuple[Any, ...], tuple[Any, ...], tuple[Any, ...]]:
+        """The lazy fold triple for one evaluation: the live leverage
+        facts, the echo scores, and the crystallized traits, each
+        computed ONLY when the precondition list reads that fold (the
+        iter-45 laziness law — an echo-gated intent never pays the
+        leverage scan, a trait-gated one never pays either, and an
+        ungated one pays nothing), all read at the caller's own tick
+        (the window law — beliefwire, iter-67, joins the family: the
+        fold's answer is per-tick, the counter-block can un-crystallize
+        a belief on records born between evaluations)."""
+        tests = {cond.get("test") for cond in preconditions}
+        facts = (
+            live_leverage(self._pack, self._events, tick)
+            if LEVERAGE_TEST in tests
+            else ()
+        )
+        echoes = (
+            echo_scores(self._pack, self._knowledge, tick)
+            if ECHO_TEST in tests
+            else ()
+        )
+        traits = (
+            crystallized_traits(self._pack, self._knowledge, tick)
+            if TRAIT_TEST in tests
+            else ()
+        )
+        return facts, echoes, traits
+
+    def _clock_fold_reads(
+        self, tick: int
+    ) -> tuple[tuple[Any, ...], tuple[Any, ...], tuple[Any, ...]]:
+        """The CLOCK's lazy fold triple (scale-1-impl, P0.5-A — the
+        E04 fix): each derived fold computed only on the pack's
+        DECLARED gated-entry demand (`_fold_demand`, read once at
+        init from the spec families' own `requires` — the same
+        closed-set discipline the door's `_fold_reads` applies per
+        precondition list, here applied per pack). One computation
+        per tick, shared by the urgency and faction walks (the old
+        greedy form paid `live_leverage` and `crystallized_traits`
+        TWICE per beat — once per family call — with values provably
+        equal, no commit between them; the hoist is value-identical,
+        hence byte-identical)."""
+        facts = (
+            live_leverage(self._pack, self._events, tick)
+            if LEVERAGE_TEST in self._fold_demand
+            else ()
+        )
+        echoes = (
+            echo_scores(self._pack, self._knowledge, tick)
+            if ECHO_TEST in self._fold_demand
+            else ()
+        )
+        traits = (
+            crystallized_traits(self._pack, self._knowledge, tick)
+            if TRAIT_TEST in self._fold_demand
+            else ()
+        )
+        return facts, echoes, traits
+
+    def _execute_intent(self, entry: Any) -> bool:
+        """PROPOSED → ACCEPTED (SCHEDULED) | REJECTED (no-op event).
+        Returns whether the intent was accepted."""
+        intent: IntentData = entry.payload
+        action = self._pack.action(intent.kind)
+        if action is None:
+            raise RunnerError(
+                f"unknown intent {intent.kind!r} (not in the pack's actions)"
+            )
+        # P1a: the enqueue-time snapshot leaves the side-table HERE —
+        # the accept door is the intent's only exit from the queue,
+        # accepted or rejected (a door-rejected intent never completes;
+        # its copy must not linger — the herd's ~45k door-rejects at the
+        # kiloyear would otherwise pin every snapshot for the run). The
+        # FIFO popleft: same-id intents accept in queue order == push
+        # order, so this is THIS intent's own stamping-moment copy
+        occ_snapshot = None
+        fifo = self._occ_snapshots.get(intent.id)
+        if fifo:
+            occ_snapshot = fifo.pop(0)
+            if not fifo:
+                del self._occ_snapshots[intent.id]
+        validate_shape(action, intent)
+        preconditions = requires_for(action, intent)
+        facts, echoes, traits = self._fold_reads(preconditions, entry.tick)
+        failing = first_failing(
+            self._pack, self._projection, intent, preconditions,
+            facts=facts, echoes=echoes, traits=traits,
+            world=self._world,
+        )
+        if failing is not None:
+            self._emit_rejection(
+                intent, entry.tick, reason="precondition", failed_test=failing,
+                cause_id=self._writer.last_id,
+            )
+            return False
+        # st-6a (D-116 (5)): an edge-priced action — travel, the
+        # movement twin — prices its completion through the travel
+        # price law at THIS door (resolve time, L3: derive, never
+        # store): the pack override wins per edge, else the WorldModel
+        # derivation (integer math, no division, draw-free — the
+        # fingerprint never sees a price). The completion entry then
+        # rides the queue like any other: `t + price`, the clock jumps
+        # ahead (day-scale durations queue-cheap, MVP_SCOPE §8), and
+        # beats/rotations/macro crossings still fire mid-travel in tick
+        # order (D-038). A moved projection between accept and
+        # completion is the OCC re-check's own rejection — the price is
+        # committed to the entry here, never re-read at completion.
+        duration = (
+            edge_duration(
+                self._pack.rules, self._world, self._projection, intent
+            )
+            if action["ticks"] == EDGE_TICKS
+            else action_duration(action, self._bank, intent)
+        )
+        self._queue.push(
+            tick=entry.tick + duration, sub_order=SCHEDULED,
+            actor_id=intent.actor, kind="completion",
+            payload=CompletionPayload(
+                intent=intent, duration=duration,
+                based_on_event_seq=intent.based_on_event_seq,
+                # P1a: the enqueue-time copy rides to the completion
+                # (popped at the accept door above — door-rejected
+                # intents discard theirs here, never a lingering ref)
+                snapshot=occ_snapshot,
+            ),
+        )
+        return True
+
+    def _complete(self, entry: Any) -> None:
+        """Completion: OCC re-check → opposed check → resolver → event →
+        world reactions (ignitions, passes, follow-ups).
+
+        iter-45 (social-1b): the OCC re-check is UNCONDITIONAL for
+        intents carrying a tick-windowed test (the leverage window, the
+        echo decay) — the projection is event-driven, but the windows
+        are tick-driven: they can close between accept and completion
+        with no event committed, and the re-check must catch that too
+        (the rejection chains to the last committed event —
+        `occ_breaking_cause` never attributes a window close to an
+        event it did not break). The spend stamping: an intent
+        resolving to the pack-declared `secrets.spend_event` type
+        carries the spent cluster's id, secret and type in its
+        outcome — the log names the fact it consumed (the loop owns the
+        log, so the loop owns the reference; the resolver stays
+        fold-blind — the arrest-resolution precedent for loop-side,
+        event-type-keyed, pack-declared decoration)."""
+        payload: CompletionPayload = entry.payload
+        intent = payload.intent
+        action = self._pack.action(intent.kind)
+        assert action is not None  # validated at the front door
+
+        preconditions = requires_for(action, intent)
+        windowed = self._windowed(preconditions)
+        facts, echoes, traits = self._fold_reads(preconditions, entry.tick)
+        if self._writer.event_count > payload.based_on_event_seq or windowed:
+            failing = first_failing(
+                self._pack, self._projection, intent, preconditions,
+                facts=facts, echoes=echoes, traits=traits,
+                world=self._world,
+            )
+            if failing is not None:
+                cause = occ_breaking_cause(
+                    self._pack, self._events, payload.based_on_event_seq,
+                    intent, self._initial, world=self._world,
+                    # P1a: the enqueue-time snapshot — the walk pays
+                    # the WINDOW [seq, now), never the prefix (the
+                    # resume path and external callers keep the
+                    # fold-from-initial exactness via the default)
+                    start_state=payload.snapshot,
+                    # occ-1: the write index — the walk visits only the
+                    # window's writers of the intent's read pairs (the
+                    # horizon-long whole-arm window's measured fix);
+                    # the honest labels ride the stats surface
+                    changes=self._occ_index,
+                    stats=self._occ_stats,
+                )
+                self._emit_rejection(
+                    intent, entry.tick, reason="projection_moved",
+                    failed_test=failing, cause_id=cause or self._writer.last_id,
+                )
+                return
+
+        check = run_check(self._pack, self._projection, self._bank, intent, action)
+        resolver = REGISTRY.get(action["resolver"])
+        if resolver is None:
+            raise RunnerError(f"unknown resolver key {action['resolver']!r}")
+        resolution = resolver(
+            self._pack, self._projection, self._bank, intent, action,
+            check, entry.tick,
+        )
+
+        entities = {intent.actor}
+        if intent.target is not None:
+            entities.add(intent.target)
+        entities.update(change.entity for change in resolution.state_changes)
+        outcome: dict[str, Any] = {
+            "duration": payload.duration, **resolution.outcome,
+        }
+        spend_type = self._pack.rules.get("secrets", {}).get("spend_event")
+        if spend_type is not None and resolution.event_type == spend_type:
+            if intent.target is None:  # unreachable: the door demands a target
+                raise RunnerError("a leverage spend requires a target npc")
+            fact = spendable_leverage(facts, intent.actor, intent.target)
+            outcome["cluster"] = fact.source
+            outcome["secret"] = fact.secret
+            outcome["type"] = fact.type
+        draft = EventDraft(
+            t=entry.tick,
+            type=resolution.event_type,
+            actor=intent.actor,
+            target=intent.target,
+            cause=self._writer.last_id,  # None only for the run-start event
+            outcome=outcome,
+            knowledge=resolution.knowledge,
+            state_changes=resolution.state_changes,
+            hooks=resolution.hooks,
+            importance=pack_importance(
+                self._pack.rules, entities,
+                irreversible=sum(
+                    1 for change in resolution.state_changes if change.irreversible
+                ),
+                hooks=len(resolution.hooks),
+                event_type=resolution.event_type,
+            ),
+            provenance=self._provenance(intent),
+        )
+        record = self._commit(draft)
+
+        # stageb-1, B3 — the USE-HOOK: an action declaring an
+        # `instrument` binding wears the instrument's stock ON its
+        # successful completion (the use that did the work; a failed
+        # attempt leaves the tool untouched — the attempt is a fact,
+        # the stock is not). ONE consume event chained to whatever
+        # committed last (the chronological-chain law — the
+        # in-commit reactions may precede it, the chain stays
+        # honest); the door already gated solvency (the lint-required
+        # account_at_least precondition — break-at-zero is the LAST
+        # use, below-zero never reaches here). The loop owns the log,
+        # so the loop owns the hook (the spend-stamping precedent's
+        # family — loop-side, action-declared, never a resolver's
+        # business).
+        instrument = action.get("instrument")
+        if isinstance(instrument, Mapping):
+            self._commit(
+                replace(
+                    wear_draft(
+                        self._pack.rules, self._projection, entry.tick,
+                        user=intent.actor,
+                        holder=_instrument_holder(instrument, intent),
+                        kind=instrument["kind"],
+                        amount=int(instrument["amount"]),
+                        used_action=intent.kind,
+                    ),
+                    cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
+
+        for ignition in resolution.ignitions:
+            self._execute_ignition(
+                ignition, entry.tick, intent.actor, record.id
+            )
+
+    def _execute_ignition(
+        self, ignition: Ignition, tick: int, actor: str, cause_id: str
+    ) -> None:
+        """Run a transition ignition: emit the layer's events (cause
+        chained), seed the smoke/burnout follow-ups, start the spread pass.
+        A pass already running for the layer absorbs the new fire (the
+        shared cause map gains the location) — one pass, one chance per
+        tick per spot, one intact cause chain (KI#16). The first layer
+        event chains to the ACTION that ignited (suspectaxis-2: the
+        commit door may run knowledge reactions between the action and
+        the ignition — the fire's cause is the igniting action, never a
+        bystander's suspicion reaction)."""
+        layer_cfg = self._pack.rules["transitions"][ignition.layer]
+        plan = ignite(self._pack, self._projection, tick, ignition, actor)
+        last_id = cause_id
+        started_id: str | None = None
+        for draft in plan.drafts:
+            record = self._commit(
+                replace(draft, cause=last_id, provenance={"seed": self._seed})
+            )
+            last_id = record.id
+            if started_id is None:
+                started_id = record.id
+        if started_id is None:
+            return
+        self._pass_causes.setdefault(ignition.layer, {})[
+            ignition.location
+        ] = started_id
+        for spec in plan.follow_ups:
+            self._queue.push(
+                tick=spec.at_tick, sub_order=SCHEDULED,
+                actor_id=f"{ignition.layer}:{ignition.location}",
+                kind="follow_up",
+                payload=FollowUpPayload(
+                    layer=ignition.layer, location=ignition.location,
+                    kind=spec.kind, cause_id=started_id,
+                ),
+            )
+        if plan.seed_pass and ignition.layer not in self._pass_live:
+            self._pass_live.add(ignition.layer)
+            system = layer_cfg["system"]
+            self._queue.push(
+                tick=tick + 1,
+                sub_order=SYSTEM_PASS + self._system_order[system],
+                actor_id=f"pass:{system}", kind="pass",
+                payload=PassPayload(system=system, layer=ignition.layer),
+            )
+
+    def _run_pass(self, entry: Any) -> None:
+        """One spread pass tick over burning locations; re-enqueues itself
+        while unburning spots remain (the self-rescheduling system pass)."""
+        payload: PassPayload = entry.payload
+        causes = self._pass_causes[payload.layer]
+        result = spread_tick(
+            self._pack, self._projection, self._bank, entry.tick,
+            payload.layer, causes,
+        )
+        for draft in result.drafts:
+            location = draft.target
+            assert location is not None  # the spread emitter targets the location
+            record = self._commit(
+                replace(
+                    draft, cause=causes.get(location),
+                    provenance={"seed": self._seed},
+                )
+            )
+            causes[location] = record.id
+        if result.continue_pass:
+            self._queue.push(
+                tick=entry.tick + 1,
+                sub_order=SYSTEM_PASS + self._system_order[payload.system],
+                actor_id=f"pass:{payload.system}", kind="pass",
+                payload=PassPayload(system=payload.system, layer=payload.layer),
+            )
+        else:
+            self._pass_live.discard(payload.layer)
+
+    def _run_follow_up(self, entry: Any) -> None:
+        """A SEEDED smoke / burnout at its trigger tick (TIME-1)."""
+        payload: FollowUpPayload = entry.payload
+        draft = follow_up_draft(
+            self._pack, self._projection, entry.tick, payload.layer,
+            payload.location, payload.kind, payload.cause_id,
+        )
+        if draft is not None:
+            self._commit(replace(draft, provenance={"seed": self._seed}))
+
+    def _run_weather_follow_up(self, entry: Any) -> None:
+        """A SEEDED weather erosion at its trigger tick (weather-1,
+        TIME-1 — the fire follow-ups' shape): the drafts read the fold
+        NOW (the state the world holds at fire time, never the state it
+        held at seed time — the interim may have told this story
+        already), one event per eroded entity, cause-chained to the
+        seeding weather event. No matches -> nothing commits (the
+        idempotence law: no no-op duplicates in the canon, KI#13's
+        family)."""
+        payload: WeatherPayload = entry.payload
+        for draft in erosion_drafts(
+            self._pack.rules, self._projection, entry.tick,
+            payload.event_type, payload.cause_id,
+        ):
+            self._commit(replace(draft, provenance={"seed": self._seed}))
+
+    # -- the iter-4 beat cycle (decay / urgencies / director releases) --------
+
+    def _scene_zones(self) -> SceneZones | None:
+        """The zone partition under an ARMED macro clock (depth-3, the
+        scene LOD); None under the unarmed law — the one-scene world,
+        the whole simulation per-beat (the v0.1 behavior, zero corpus
+        price by construction — the 68a pattern). The partition is a
+        pure fold view recomputed at each tick it scopes: the PC moves,
+        the zones follow (the LOD tracks the reader)."""
+        if self._next_macro is None:
+            return None
+        return scene_zones(self._pack, self._world, self._projection)
+
+    def _first_beat(self, rules: Mapping[str, Any]) -> int | None:
+        """The first beat tick strictly after 0 (the run-start tick). Beat
+        offsets are pack-declared intraday ticks repeated daily, like
+        watch rotations. None when the pack declares no beats (the
+        urgencies/states/director stay silent — a degenerate config)."""
+        offsets: list[int] = sorted(rules.get("urgencies", {}).get("beat_ticks", ()))
+        if not offsets:
+            return None
+        day = self._clock.ticks_per_day
+        for offset in offsets:
+            if offset > 0:
+                return offset
+        # all offsets are at 0 — the next beat is on day 1
+        return day + offsets[0]
+
+    def _next_beat_after(self, after: int) -> int | None:
+        """The smallest beat tick strictly after `after`. Intraday offsets
+        repeated daily; the rotation's `next_rotation_tick` arithmetic
+        generalised — except the first beat may precede the first
+        rotation (a tick-0 beat belongs to day 1)."""
+        rules = self._pack.rules
+        offsets: list[int] = sorted(rules.get("urgencies", {}).get("beat_ticks", ()))
+        if not offsets:
+            return None
+        day = self._clock.ticks_per_day
+        day_idx = after // day
+        candidates = sorted(
+            d * day + offset
+            for d in (day_idx, day_idx + 1)
+            for offset in offsets
+        )
+        for candidate in candidates:
+            if candidate > after:
+                return candidate
+        raise AssertionError("unreachable: next-day offsets always exceed `after`")
+
+    def _beat_grid_count(self, from_tick: int, to_tick: int) -> int:
+        """H9: the number of beat grid points in [from_tick, to_tick) —
+        the skip's arithmetic over the same daily-offsets grid
+        `_next_beat_after` walks. Pure integer day arithmetic: the
+        points strictly before a tick are (whole days below it) x
+        (offsets per day) plus (this day's offsets below the
+        in-day remainder); a difference of two such counts is the
+        half-open interval's grid population. `from_tick` may be a
+        grid point itself (excluded, half-open); `to_tick` need not be
+        one (the bound is often a rotation/macro/entry tick)."""
+        offsets = sorted(
+            self._pack.rules.get("urgencies", {}).get("beat_ticks", ())
+        )
+        if not offsets:
+            return 0
+        day = self._clock.ticks_per_day
+        per_day = len(offsets)
+
+        def before(tick: int) -> int:
+            days, remainder = divmod(tick, day)
+            below = sum(1 for offset in offsets if offset < remainder)
+            return days * per_day + below
+
+        return before(to_tick) - before(from_tick)
+
+    def _beat_grid_point(self, from_tick: int, offset: int) -> int:
+        """H9: the beat grid point `offset` grid steps after the grid
+        point `from_tick` (both on the grid, offset >= 0 — the scan's
+        beat offsets map onto ticks here). The index arithmetic is the
+        `_beat_grid_count` twin: a grid point's index is the count of
+        points strictly before it."""
+        offsets = sorted(
+            self._pack.rules.get("urgencies", {}).get("beat_ticks", ())
+        )
+        day = self._clock.ticks_per_day
+        per_day = len(offsets)
+        days, remainder = divmod(from_tick, day)
+        index = days * per_day + sum(1 for o in offsets if o < remainder)
+        index += offset
+        return (index // per_day) * day + offsets[index % per_day]
+
+    def _live_drive_specs(self) -> tuple[Any, ...]:
+        """The drive walk's spec set for THIS moment: the static memo when
+        the pack declares no born profile origin (the parse-once law), the
+        projection-aware parse otherwise (agenda-1 P1: a profile born at
+        the condensation arms its drives from the next read on). The skip
+        and the beat both call this against the same projection, so their
+        stream sets can never disagree; a birth always forces the skip to
+        the very next beat (`condensation_pending`), so no counter jump
+        ever straddles one."""
+        if not self._psyche_born and not self._turns_declared:
+            return self._drive_specs
+        return drive_specs(self._pack, self._projection)
+
+    def _skip_quiet_beats(self, beat_tick: int, entry_tick: int) -> int | None:
+        """H9 (iter-337): the quiet-beat skip's landing computation and
+        application for the beat crossing at `beat_tick` — called
+        BEFORE `_run_beat` fires it, with the clock already at
+        `beat_tick` and the state frozen (the last commit/enqueue sits
+        at or before this moment).
+
+        The stretch is [beat_tick, bound) where bound is the next due
+        non-beat crossing (rotation / calendar / macro — all COMMIT,
+        so none is ever skipped past) or the popped entry's tick,
+        whichever comes first. The landing is the first beat in the
+        stretch that would PRODUCE anything — a decay draft (the
+        `next_decay_tick` formula), a condensation draft (the
+        `condensation_pending` twin), or an enqueued urgency/faction
+        intent (the family scans: a roll hit with open gates — the
+        enqueues ride the entry tick, but an enqueue is a world change
+        the door later answers with an event or an `intent_rejected`,
+        never silence). Returns:
+
+        - `beat_tick` — the very first beat produces; no skip (the
+          caller runs `_run_beat` at `beat_tick` as ever);
+        - a later grid tick — `m > 0` quiet beats were skipped (the
+          counters advanced, the clock jumped); the caller runs
+          `_run_beat` at the returned tick;
+        - `None` — the whole stretch is quiet; the counters advanced
+          through `bound`, the beat cursor sits at the first grid
+          point at-or-after it, and the caller must NOT run a beat
+          (the crossing loop proceeds to the bound itself).
+
+        The stats block counts stretches / skipped beats / landings —
+        the operator's honest labels (the labrunner's record), never
+        canon."""
+        bound = entry_tick
+        for due in (
+            self._next_rotation,
+            self._next_macro,
+            *self._next_calendar.values(),
+        ):
+            if due is not None and beat_tick < due <= entry_tick and due < bound:
+                bound = due
+        m_stretch = self._beat_grid_count(beat_tick, bound)
+        if m_stretch <= 0:
+            return beat_tick  # nothing ahead of this beat before the bound
+        zones = self._scene_zones()
+        locations: Collection[str] | None = (
+            None if zones is None else (zones.active,)
+        )
+        # condensation: a pending transition drafts at the very next
+        # computation — the first beat of the stretch materializes it
+        if zones is not None and condensation_pending(
+            self._pack, self._projection, (*zones.warm, zones.active)
+        ):
+            return beat_tick
+        # agenda-1 P5 (iter-426): a role turn CHANGES THE DRIVE SET, so the
+        # skip must land on the very next beat while one is possible — the
+        # birth-class event's law (the condensation twin above): a skipped
+        # beat would straddle the turn and desync the counters.
+        if self._turns_declared:
+            t_facts, t_echoes, t_traits = self._clock_fold_reads(beat_tick)
+            if turning_pending(
+                self._pack, self._projection,
+                facts=t_facts, echoes=t_echoes, traits=t_traits,
+                locations=locations,
+            ):
+                return beat_tick
+        # the rolling sets + the first-fire offsets (zero draws; the
+        # gates evaluated once against the frozen state — iter-375: the
+        # gate answers served from the read-pair memo across stretches,
+        # re-evaluated exactly when a declared pair's value moved)
+        u_streams, u_first = urgency_scan(
+            self._pack, self._projection, self._bank,
+            locations=locations, world=self._world,
+            specs=self._urgency_specs, limit=m_stretch,
+            gate_memo=self._gate_memo, roll_index=self._roll_index,
+            gate_fold=self._gate_fold,
+        )
+        f_streams, f_first = faction_scan(
+            self._pack, self._projection, self._bank,
+            locations=locations, world=self._world,
+            specs=self._faction_specs, limit=m_stretch,
+            gate_memo=self._gate_memo, gate_fold=self._gate_fold,
+        )
+        # agenda-1 P0: the drive family's scan — the same predicate law
+        # (the walk and the skip read ONE predicate/bar pair); no draws.
+        # P1: the spec set follows the live projection (a born profile
+        # arms its drives from the same frozen read).
+        d_streams, d_first = drive_scan(
+            self._pack, self._projection, self._bank,
+            locations=locations, world=self._world,
+            specs=self._live_drive_specs(), limit=m_stretch,
+        )
+        # the decay landing: the first tick a draft would fire, mapped
+        # onto the grid (never past the bound)
+        landing: int | None = None
+        decay_tick = next_decay_tick(
+            self._pack, self._projection, self._last_change,
+            beat_tick, locations=locations, axes=self._decay_axes,
+            index=self._decay_index,
+        )
+        if decay_tick is not None:
+            first_beat = self._next_beat_after(max(decay_tick, beat_tick) - 1)
+            if first_beat is not None and first_beat < bound:
+                landing = first_beat
+        for offset in (u_first, f_first, d_first):
+            if offset is None:
+                continue
+            candidate = self._beat_grid_point(beat_tick, offset - 1)
+            if candidate < bound and (landing is None or candidate < landing):
+                landing = candidate
+        # apply: jump the counters across the skipped beats, then hand
+        # the landing back (or the bound, when the whole stretch is
+        # quiet — the beat cursor moves past it, the crossing loop
+        # proceeds to the bound's own machinery)
+        if landing is not None and landing <= beat_tick:
+            return beat_tick  # the first beat produces — no skip
+        streams = {**u_streams, **f_streams, **d_streams}
+        if landing is None:
+            skipped = m_stretch
+            self._skip_stats["stretches"] += 1
+            self._skip_stats["skipped"] += skipped
+            for name, per_beat in streams.items():
+                self._bank.skip_draws(name, per_beat * skipped)
+            self._director.beat_count += skipped
+            self._next_beat = self._next_beat_after(bound - 1)
+            return None
+        skipped = self._beat_grid_count(beat_tick, landing)
+        if skipped > 0:
+            self._skip_stats["stretches"] += 1
+            self._skip_stats["skipped"] += skipped
+            self._skip_stats["landings"] += 1
+            for name, per_beat in streams.items():
+                self._bank.skip_draws(name, per_beat * skipped)
+            self._director.beat_count += skipped
+            self._clock.advance_to(landing)
+        return landing
+
+    @property
+    def skip_stats(self) -> dict[str, int]:
+        """H9's honest labels: the quiet-beat skip's counters (stretches
+        attempted with >= 1 skipped beat, beats skipped, landings
+        fired after a skip) — read-side bookkeeping for the operator's
+        records; never canon, never the log."""
+        return dict(self._skip_stats)
+
+    @property
+    def occ_stats(self) -> dict[str, int]:
+        """occ-1's honest labels: the OCC attribution walk's counters —
+        calls, window (the full-walk cost basis: the sum of window
+        sizes the old form would pay), inspected (the events the index
+        path actually applied), attributed (the non-None answers). The
+        wall delta is the datum; these name its mechanism (the
+        cost.skip precedent — never quoted alone)."""
+        return dict(self._occ_stats)
+
+    def _condense_groups(self, zones: SceneZones, tick: int) -> None:
+        """depth-7's tier-transition pass (one law, two ride points —
+        the zone recomputations at the beats AND the crossings): the
+        groups whose ANCHOR crossed into the warm ring or the active
+        scene (the PC's approach; the partition follows the reader)
+        and are not yet condensed materialize — ONE event per group
+        carrying the un-born members' canon `member_of` births + the
+        tombstone marker (`core/groups.py` owns the drafts; the
+        materialization precedes every tick the members then ride —
+        the beat machinery below, the warm ring's crossing cadence).
+        name-1: the members' generated names materialize on the same
+        event, drawn on their own `name:<npc>` family streams (the
+        bank rides here for that alone — the tier half stays
+        draw-free). agenda-1 P1: the members' generated profiles
+        materialize on the same event too, on their own `psyche:<npc>`
+        streams — one birth event, one member, every born slot beside
+        the membership. Chained to the writer's last id (the
+        chronological-chain law) and committed through the canon door
+        (INV-1). The load state counts as the origin: a group
+        warm/active at the FIRST computation condenses immediately —
+        the PC walks into a materialized world (the DF precedent)."""
+        for draft in condensation_drafts(
+            self._bank, self._pack, self._projection, tick,
+            locations=(*zones.warm, zones.active),
+        ):
+            self._commit(replace(
+                draft, cause=self._writer.last_id,
+                provenance={"seed": self._seed},
+            ))
+
+    def _run_beat(self, beat_tick: int, entry_tick: int) -> None:
+        """One clock-crossing beat (iter-4): the depth-7 condensation
+        pass (under an armed clock — the tier transitions detected at
+        this zone computation materialize BEFORE the machinery the
+        members then ride), states decay passes, NPC
+        urgencies roll, faction goals roll (depth-6), and the director
+        releases one seeded hook. Each piece rides the commit door —
+        the world never changes outside an event (INV-1). Order
+        matters: the condensation first (the members are canon before
+        they tick), decay second (so the urgency sees the new
+        status), urgencies third (so the director sees their effects
+        in entropy), the director last.
+
+        Decay events are committed at ``beat_tick`` (their canonical
+        tick — the log records them at the beat). Urgency and director
+        Intents are enqueued at ``entry_tick`` (the tick of the entry
+        the loop is currently processing): the entry was already
+        popped, and the queue discipline forbids enqueuing at a tick
+        the clock has already passed (regression). The intents thus
+        fire at the entry's tick — conceptually "after the beat, at
+        the moment the world resumes moving". Under B2's
+        deferred-realize semantics (temp-1, D-236) the beat tick —
+        the intent's SEMANTIC ORIGIN — may sit far behind the landing
+        tick; the origin is stamped into the resolved event's
+        ``provenance.assignment_tick`` (B3), never into the queue
+        discipline or ``event.t``."""
+        # depth-3 (the scene LOD): the beat's zone scoping — under an
+        # armed macro clock the ACTIVE scene alone ticks per-beat (the
+        # PC's location); the unarmed law keeps the whole world
+        # per-beat (the one-scene world, the v0.1 bytes — the filter
+        # is None). The DIRECTOR stays global either way: it is the
+        # story layer (pack-authored hooks, budget 1 per beat), not
+        # the ambient life the LOD throttles — its zone-scoping is
+        # never the clock's consumer business.
+        zones = self._scene_zones()
+        locations: Collection[str] | None = (
+            None if zones is None else (zones.active,)
+        )
+        # 0) depth-7 (the write-side LOD): the condensation pass —
+        # under an armed clock the zone recomputation detects the
+        # tier transitions FIRST (the members' canon births precede
+        # the beat machinery they then ride); the unarmed law has no
+        # tiers at all (the one-scene world — no zones, no
+        # condensation, the v0.1 bytes).
+        if zones is not None:
+            self._condense_groups(zones, beat_tick)
+        # 1) states decay — every NPC whose status.* deltas are non-zero
+        for draft in decay_drafts(
+            self._pack, self._projection, self._last_change, beat_tick,
+            locations=locations, axes=self._decay_axes,
+            index=self._decay_index,
+        ):
+            self._commit(replace(
+                draft, cause=self._writer.last_id,
+                provenance={"seed": self._seed},
+            ))
+        # 2) NPC urgencies — small-formula goal rolls through the intent door;
+        # the derived folds read at the BEAT tick ride the gates (a
+        # leverage-gated urgency stays silent until the holder actually
+        # holds a live cluster — iter-45; an echo-gated one until the
+        # residue clears the bar — iter-46; a trait-gated one until the
+        # belief crystallizes — iter-67, beliefwire; the front door
+        # re-validates at the entry tick with its own reads).
+        # scale-1-impl P0.5-A: the triple computed ONCE per beat on the
+        # pack's declared demand (zero when the pack declares no
+        # gated entries — the E04 fix), shared by both family walks.
+        self._director.next_beat()
+        facts, beat_echoes, traits = self._clock_fold_reads(beat_tick)
+        # 2a) agenda-1 P5 (iter-426): the ROLE TURNS — a person whose
+        # accumulated price crossed a declared bar takes a new role on this
+        # beat, ONE canon event chained to the belief's own source event.
+        # It runs BEFORE the walks below so the same beat's drives, the
+        # agenda view and the brief all read the NEW role through the one
+        # `core.psyche.role_of` (the old role's drives fall silent, the new
+        # one's arm). No entropy: the condition is a threshold over the
+        # fold reads, not a roll.
+        for draft in turning_drafts(
+            self._pack, self._projection,
+            facts=facts, echoes=beat_echoes, traits=traits,
+            cause=self._writer.last_id, tick=beat_tick,
+            locations=locations,
+        ):
+            self._commit(replace(draft, provenance={"seed": self._seed}))
+        for intent in urgency_intents(
+            self._pack, self._projection, self._bank,
+            facts=facts, echoes=beat_echoes, traits=traits,
+            locations=locations, world=self._world,
+            specs=self._urgency_specs, roll_index=self._roll_index,
+        ):
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
+        # 2b) faction goals (depth-6) — the small-formula dynamics at
+        # the urgencies' own cadence: the KeeperRL ratio+threshold bar
+        # computed from the LIVE fold (per-member status axes, D-006),
+        # rolled on the entry's own faction-family stream, through the
+        # SAME front door (D-112's one id: the group entity IS the
+        # actor). The LOD filter scopes by the faction's ANCHOR
+        # position; the collective after the individual (construction
+        # order — INV-2).
+        for intent in faction_intents(
+            self._pack, self._projection, self._bank,
+            facts=facts, echoes=beat_echoes, traits=traits,
+            locations=locations, world=self._world,
+            specs=self._faction_specs,
+        ):
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
+        # 2c) NPC drives (agenda-1 P0, iter-417) — the derived-probability
+        # goal ticker: the profile's weight times the unmet share of the
+        # goal's measure is the bar, ONE draw per drive on its own stream,
+        # and at most ONE intent per NPC per beat (the continuity law: the
+        # strongest hit wins, a tie keeps the declaration order). The spec
+        # set follows the live projection (P1): an NPC whose profile was
+        # born at this very beat's condensation rolls from here on; a pack
+        # arming nobody draws nothing at all (the inert law).
+        for intent in drive_intents(
+            self._pack, self._projection, self._bank,
+            facts=facts, echoes=beat_echoes, traits=traits,
+            locations=locations, world=self._world,
+            specs=self._live_drive_specs(),
+        ):
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
+        # 3) director releases — explicit triggers + stagnation; budget 1
+        for intent in self._director.releases(self._projection, beat_tick):
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=beat_tick)
+
+    def _enqueue_autonomous(
+        self, intent: IntentData, tick: int, *, assignment_tick: int
+    ) -> None:
+        """Enqueue a director or urgency Intent through the same door as a
+        playscript step — band NPC_REACTION (after the player's intents
+        in the same tick) and stamped with the current event_count so
+        OCC re-checks against the live projection. The intent fires at
+        the tick passed by the caller — for beat-born intents that is
+        the popped entry's tick, never the beat tick itself (the queue
+        discipline forbids enqueuing at a tick the clock has already
+        passed; the `_run_beat` docstring owns the rationale). The
+        queue's (tick, sub_order) ordering puts it AFTER same-tick
+        system passes (0..99) and player intents (100..199), BEFORE
+        scheduled completions (300+).
+
+        `assignment_tick` (temp-1/B3, D-236): the beat/crossing tick
+        the intent was MINTED at — stamped onto the intent here (the
+        enqueue door, the `based_on_event_seq` precedent) and carried
+        into the resolved event's `provenance.assignment_tick`. The
+        stamp is provenance only: `tick` (the door tick), the queue
+        discipline, and the completion tick are untouched — under a
+        long wait the two times separate by the whole span, exactly
+        the separation B3 makes observable."""
+        stamped = IntentData(
+            id=intent.id, kind=intent.kind, actor=intent.actor,
+            target=intent.target, fields=dict(intent.fields),
+            based_on_event_seq=self._writer.event_count,
+            origin_hook=intent.origin_hook,
+            assignment_tick=assignment_tick,
+        )
+        # P1a: the stamping-moment copy — taken HERE, at the same
+        # instant based_on_event_seq is stamped above (the snapshot's
+        # validity condition; a later copy would skip the window's
+        # head and mis-attribute). The FIFO append: the id repeats
+        # across beats, the copies pair in queue order
+        snapshot = self._snapshot_for(stamped)
+        if snapshot is not None:
+            self._occ_snapshots.setdefault(stamped.id, []).append(snapshot)
+        self._queue.push(
+            tick=tick, sub_order=NPC_REACTION, actor_id=intent.actor,
+            kind="intent", payload=stamped,
+        )
+
+    def _run_macro(self, tick: int, entry_tick: int) -> None:
+        """One macro-clock crossing (maclock-1, L4; depth-3's consumer,
+        the scene LOD's warm ring): the year turns — ONE event through
+        the canon door, cause-chained to the writer's last id (the
+        chronological-chain law, the rotation's scheduled-beat
+        precedent) — and the turn now carries the COLD CENSUS (the
+        D-112 cardinality shape: the cold background's NPC population
+        as one flat count, its only representation in the log — counts
+        for populations, events for notables). The WARM RING ticks
+        here (the scheduler rule: the crossings are the warm cadence —
+        the active zone keeps the beats): the warm NPCs' decay drafts
+        commit at the crossing tick chained AFTER the turn (the clock's
+        own event opens its crossing; the consumer rides it), and
+        their urgency entries roll at the crossing tick (the gates'
+        fold reads at this tick — the beat's own law) enqueued at the
+        ENTRY tick (the queue discipline: never a tick the clock has
+        passed). depth-6: the warm ring's FACTION goals ride the same
+        crossings (the small formula over the members' live axes, the
+        anchor scoping the ring; the cold zone's factions stay silent —
+        their population-scale representation is depth-7's aggregate
+        machinery). No knowledge on the turn (a world event), no
+        state_changes (the year and the census are derived, L3), no
+        hooks (the director boundary is the consumers' own rows,
+        never the clock's); importance rides the pack's own rule (the
+        story-critical listing decides tale visibility — the tune-1
+        split). depth-7: the write-side LOD rides the crossing in
+        order — the CONDENSATIONS first (the groups whose anchor
+        crossed into the warm ring or the active scene birth their
+        members' canon `member_of`, the materialization preceding
+        every warm tick the members then ride), then the COLD
+        background's MACRO-TICK AGGREGATES (one cardinality event per
+        cold uncondensed group, actor = the group id, chained to the
+        turn — the population tier's only per-group representation;
+        the tombstone silences a condensed group's ticks for good);
+        both draw-free (the counts and the births are pure fold
+        reads, the fingerprint never sees a tier event)."""
+        zones = scene_zones(self._pack, self._world, self._projection)
+        draft = macro_turn_draft(
+            self._pack.rules, tick,
+            counts={
+                COLD_COUNT_KEY: npc_population(
+                    self._pack, self._projection, zones.cold
+                )
+            },
+        )
+        self._commit(
+            replace(
+                draft,
+                cause=self._writer.last_id,
+                provenance={"seed": self._seed},
+            )
+        )
+        # weather-1: the ambient family rides the crossing — the chain
+        # rolls its next state from the fold's current weather, and a
+        # CHANGE commits ONE event chained to the turn (the drift's
+        # precedent: the consumer rides the clock's own event). The
+        # DEFAULT RIDE is the macro year itself: a block declaring no
+        # `seasonal` layer rolls HERE (a block declaring one rolls at
+        # its named sub-year clock's crossings instead —
+        # `_run_calendar`, one roll cadence per family, the pairing
+        # law's substance). The unarmed law: no `weather` block, no
+        # branch (the macro clock may run without the family).
+        if (
+            self._pack.rules.get("weather") is not None
+            and seasonal_ride(self._pack.rules) is None
+        ):
+            self._roll_weather(tick, entry_tick)
+        # depth-7 (the write-side LOD): the tier transitions first —
+        # the condensations ride the crossing's own event, before the
+        # warm ring's machinery (the members materialize, then stir)
+        self._condense_groups(zones, tick)
+        # depth-7: the cold background's macro-tick aggregates — one
+        # cardinality event per cold uncondensed group, chained to the
+        # turn (the consumer rides the clock's own event, the drift's
+        # precedent); the tombstone gates a realized group silent
+        for tick_draft in macro_tick_drafts(
+            self._pack, self._projection, tick, locations=zones.cold,
+        ):
+            self._commit(
+                replace(
+                    tick_draft, cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
+        # res-1: the economy's aggregate flows ride the crossing — one
+        # event per due flow (the D-112 cardinality surface: the amount
+        # the flat count, log growth O(declared flows x macrobeats),
+        # never O(members x ticks)), chained to the turn like every
+        # consumer, draw-free pure stock reads (INV-2-clean — the
+        # fingerprint never sees an economy event). An unarmed economy
+        # block yields nothing (the 68a pattern). The stream is a
+        # GENERATOR (substrate-1's first wall, iter-409): each draft is
+        # built at ITS yield, i.e. AFTER the predecessor's commit, so a
+        # drain co-due with a mint on one stock reads the minted level
+        # (the crossing is a sequence; the old snapshot form desynced
+        # the gate, D-182). The underflow floor's loud arm lives at the
+        # _commit gate: a flow beyond its stock refuses the write and
+        # the run fails loud — the pack's declared graph order is
+        # broken, never silently skipped.
+        for flow_draft in flow_drafts(self._pack.rules, self._projection, tick):
+            self._commit(
+                replace(
+                    flow_draft, cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
+        # the warm ring's status drift, chained to the turn (the
+        # consumer rides the clock's own event)
+        for drift in decay_drafts(
+            self._pack, self._projection, self._last_change, tick,
+            locations=zones.warm, axes=self._decay_axes,
+            index=self._decay_index,
+        ):
+            self._commit(
+                replace(
+                    drift, cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
+        # the warm ring's goal rolls — the gates read at the crossing
+        # tick (the beat's own law), the intents enqueue at the entry
+        # tick (the never-regress law). scale-1-impl P0.5-A: the lazy
+        # triple on the pack's declared demand, one computation shared
+        # by both family walks (the E04 fix — the greedy form paid all
+        # three folds per crossing on every pack).
+        facts, echoes, traits = self._clock_fold_reads(tick)
+        for intent in urgency_intents(
+            self._pack, self._projection, self._bank,
+            facts=facts, echoes=echoes, traits=traits,
+            locations=zones.warm, world=self._world,
+            specs=self._urgency_specs, roll_index=self._roll_index,
+        ):
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=tick)
+        # the warm ring's FACTION goals (depth-6) — the same clock's
+        # crossings, the same door: a faction anchored in the warm ring
+        # rolls its small formula here (the beat machinery minus the
+        # director, exactly as the warm NPCs above; the cold zone's
+        # factions are silent — their population-scale ride is depth-7's
+        # aggregate machinery, never this walk's)
+        for intent in faction_intents(
+            self._pack, self._projection, self._bank,
+            facts=facts, echoes=echoes, traits=traits,
+            locations=zones.warm, world=self._world,
+            specs=self._faction_specs,
+        ):
+            self._enqueue_autonomous(intent, entry_tick, assignment_tick=tick)
+
+    def _run_calendar(self, tick: int, entry_tick: int) -> None:
+        """The sub-year calendar crossings due at `tick` (maclock-1's
+        middle granularities, the calendar slice): ONE canon event per
+        due entry in the DETERMINISTIC order (`calendar_order` —
+        every_ticks DESC then id, the coarsest clock first), each
+        chained to the previous canon id (the chronological-chain law,
+        the macro turn's precedent). No knowledge, no state_changes,
+        no hooks (the clock family's own shape — the year and the day
+        and the phase are derived, L3; the director boundary is the
+        consumers' rows, never the clock's).
+
+        The weather family's SEASONAL RIDE consumes here: when the
+        block's `seasonal.ride` names a due entry, the chain rolls
+        AFTER that entry's own turn (the consumer rides the clock's
+        own event — the drift's precedent, the macro crossing's
+        weather half's twin; the phase-biased weights read the phase
+        the turn just entered — `core/weather.py` owns the roll)."""
+        rules = self._pack.rules
+        entries = calendar_entries(rules)
+        for entry_id in calendar_order(rules):
+            if self._next_calendar.get(entry_id) != tick:
+                continue
+            self._commit(
+                replace(
+                    calendar_turn_draft(rules, entry_id, tick),
+                    cause=self._writer.last_id,
+                    provenance={"seed": self._seed},
+                )
+            )
+            self._next_calendar[entry_id] = next_calendar_tick(
+                entries[entry_id], tick
+            )
+            if seasonal_ride(rules) == entry_id:
+                self._roll_weather(tick, entry_tick)
+
+    def _roll_weather(self, tick: int, entry_tick: int) -> None:
+        """The ambient family's one roll at a crossing it rides (the
+        macro year's by default, a `seasonal.ride` entry's when
+        declared — one roll cadence per family): the chain rolls its
+        next state from the fold's current weather, and a CHANGE
+        commits ONE event chained to the crossing's own turn (the
+        drift's precedent: the consumer rides the clock's own event);
+        the new state's erosion follow-ups seed HERE (the fire
+        follow-ups' shape — SEEDED at event time, SCHEDULED on the
+        queue, the drafts read the fold at fire time). The draw rides
+        the family's own isolated stream (`weather:chain`, the D-079
+        law's seventh member) — the substantive fingerprint never sees
+        a weather roll."""
+        weather_draft = weather_turn_draft(
+            self._pack.rules, self._bank, tick,
+            current_weather(self._pack.rules, self._events),
+        )
+        if weather_draft is None:
+            return
+        weather_record = self._commit(
+            replace(
+                weather_draft,
+                cause=self._writer.last_id,
+                provenance={"seed": self._seed},
+            )
+        )
+        for spec in erosion_due(
+            self._pack.rules,
+            self._projection,
+            str(weather_record.outcome["weather"]),
+        ):
+            # the never-regress law (the queue discipline the warm
+            # ring's intents already ride): a crossing that fires LATE
+            # — a batch of missed crossings before a far entry — seeds
+            # its follow-ups no earlier than the world's resumed tick
+            # (the clock jumps to the entry's tick after the batch; a
+            # tick behind it would be a clock regression at pop). The
+            # deferral bends, the ORDER never does.
+            self._queue.push(
+                tick=max(tick + spec.at_tick, entry_tick),
+                sub_order=SCHEDULED,
+                actor_id=f"weather:{spec.event_type}",
+                kind="weather",
+                payload=WeatherPayload(
+                    event_type=spec.event_type,
+                    cause_id=weather_record.id,
+                ),
+            )
+
+    def _run_rotation(self, tick: int) -> None:
+        """One watch rotation at a crossed tick (phase0 §3): the post swap
+        (positions), the expectation checks (P2d — violations chain to the
+        events that moved the items), then the briefing (D-006 — the
+        outgoing holder's records pass, one fidelity step down). Each piece
+        commits through the canon door, so its reactions cascade."""
+        rotation = self._pack.rules["crime_watch"]["rotation"]
+        changes, outgoing, incoming = rotation_plan(self._pack, self._projection)
+        # KI#19: the pack's `reset_on_rotation` status axes reset for the
+        # participants on the same watch_change event — one committer, one
+        # cause chain ("the relief wakes fresh").
+        changes = changes + rotation_resets(
+            self._pack, self._projection, rotation["participants"]
+        )
+        watch_record = self._commit(
+            EventDraft(
+                t=tick,
+                type=rotation["watch_event"],
+                actor=WORLD,
+                cause=self._writer.last_id,  # a scheduled beat: chronological chain
+                outcome={"outgoing": outgoing, "incoming": incoming},
+                state_changes=changes,
+                importance=pack_importance(
+                    self._pack.rules,
+                    {p for p in (outgoing, incoming) if p is not None},
+                    irreversible=0,
+                    hooks=0,
+                    event_type=rotation["watch_event"],
+                ),
+                provenance={"seed": self._seed},
+            )
+        )
+        for draft in expectation_drafts(
+            self._pack, self._projection, self._knowledge, self._events, tick
+        ):
+            self._commit(replace(draft, provenance={"seed": self._seed}))
+        # agenda-1 P3 (iter-423): the duty memory rides the same clock —
+        # the item expectations above keep their own law, the duties are
+        # the generalized row (a POST held by an archetype's people, not
+        # an item carried by one npc), and both commit through the door.
+        for draft in duty_violation_drafts(
+            self._pack, self._projection, self._knowledge, self._events, tick,
+            clock_event=watch_record.id,
+        ):
+            self._commit(replace(draft, provenance={"seed": self._seed}))
+        briefing = briefing_draft(
+            self._pack, self._knowledge, tick,
+            watch_record.id, outgoing, incoming,
+        )
+        if briefing is not None:
+            self._commit(replace(briefing, provenance={"seed": self._seed}))
+
+    def _react(self, record: EventRecord) -> None:
+        """Event-driven system reactions (phase0 §3), dispatched from the
+        canon door so no call site can forget them: crime first (suspicion,
+        status flip, arrest — chained per knower), then the arrest
+        resolution (iter-4: capture/escape on the attempt), then the
+        telling (the conversation's teller shares their most salient novel
+        fact), then the pack's on_action reactions (drama-3 — appended,
+        never overwriting the systems), then the director buffer seeding.
+        iter-4 also seeds the director's buffer (D-005: every hook
+        is seeded at event time, never invented later)."""
+        for group in iter_suspicion_reactions(
+            self._pack, self._projection, self._knowledge, record
+        ):
+            previous = record.id
+            for draft in group:
+                committed = self._commit(
+                    replace(draft, cause=previous, provenance={"seed": self._seed})
+                )
+                previous = committed.id
+        # iter-4: arrest resolution rides the same commit-door discipline
+        # as the rest of the reactions (D-037) — the attempt is a fact,
+        # the resolution is its completion.
+        arrest = self._pack.rules["crime_watch"]["arrest"].get("event")
+        if record.type == arrest:
+            resolution = arrest_resolution_draft(
+                self._pack, self._projection, self._bank, record
+            )
+            if resolution is not None:
+                self._commit(
+                    replace(resolution, provenance={"seed": self._seed})
+                )
+        telling = telling_reaction(
+            self._pack, self._projection, self._knowledge, self._bank, record
+        )
+        if telling is not None:
+            self._commit(
+                replace(
+                    telling, cause=record.id, provenance={"seed": self._seed}
+                )
+            )
+        # drama-3 (iter-42): the pack's on_action reactions, appended
+        # AFTER the hardcoded systems (the donor's append-not-overwrite
+        # composition — vanilla logic runs, custom entries add, never
+        # replace) and BEFORE the director seeding. Lazy on purpose:
+        # each entry's draft reads the projection as left by the
+        # previously committed reactions (the KI#13 discipline).
+        for draft in on_action_drafts(self._pack, self._projection, record):
+            self._commit(
+                replace(draft, cause=record.id, provenance={"seed": self._seed})
+            )
+        # social-1 (iter-44, P3a): the secrets reaction — a novel knower
+        # of a pack-declared secret mints the leverage fact cluster (the
+        # CK3 add_hook precedent: a hook IS an event). Appended after the
+        # on_action dispatch (the same append composition), before the
+        # director seeding; the drafts carry no knowledge and no hooks,
+        # so the cascade terminates by construction (the one-hop law's
+        # sibling) and the director buffer is untouched (L6).
+        for draft in leverage_drafts(self._pack, self._knowledge, record):
+            self._commit(
+                replace(draft, cause=record.id, provenance={"seed": self._seed})
+            )
+        # leg-3 (iter-57): reflection-on-recurrence — the memory
+        # compaction mint (Generative Agents' reflection, event-sourced:
+        # the higher-level entry is itself an event, originals never
+        # dropped — INV-1; never letta's in-place summarization). A
+        # knower whose family records reach the pack's recurrence
+        # threshold mints ONE reflection event per (knower, insight) per
+        # run (the never-re-reflect gate rides the live view). Appended
+        # after the leverage reaction (the same append composition),
+        # before the director seeding; the drafts carry no hooks and no
+        # state changes, so the cascade terminates by construction and
+        # the entropy is untouched (L6 — a reflection is knowledge-side
+        # canon, never an entropy input).
+        for draft in reflection_drafts(self._pack, self._knowledge, record):
+            self._commit(
+                replace(draft, cause=record.id, provenance={"seed": self._seed})
+            )
+        # iter-4: the director seeds hooks at commit time (D-005). The
+        # release decision fires later, at the beat cycle.
+        self._director.seed(record)
+
+    def _emit_rejection(
+        self,
+        intent: IntentData,
+        tick: int,
+        reason: str,
+        failed_test: str,
+        cause_id: str | None,
+    ) -> None:
+        """REJECTED: a no-op event with a cause chain — the world did not
+        change, but the attempt is canon (phase0 §2)."""
+        draft = EventDraft(
+            t=tick,
+            type=REJECTION_EVENT,
+            actor=intent.actor,
+            target=intent.target,
+            cause=cause_id,
+            outcome={
+                "action": intent.kind, "reason": reason, "failed_test": failed_test,
+            },
+            importance="low",
+            provenance=self._provenance(intent),
+        )
+        self._commit(draft)
+
+    def _provenance(self, intent: IntentData) -> dict[str, Any]:
+        """The intent-side provenance block: the run seed, the intent id,
+        and — for a director-built intent — the discharged hook's tag
+        (`cause_hook`, D-140): the release's causal provenance, pairing
+        the event with the seeding event for payoff latency and the
+        trace family. Rejections carry it too: a released attempt is a
+        fact (the hook discharged, the budget was spent).
+        `assignment_tick` (temp-1/B3, D-236): for an autonomous intent,
+        the beat/crossing tick it was minted at — the SEMANTIC ORIGIN
+        time, recorded separately from the canonical realization time
+        `event.t` (B2's deferred-realize may land the door far after the
+        beat; the gap `event.t - assignment_tick` is the observable
+        deferral latency, a derived diagnostic never a new scheduler
+        law). Accepted and rejected resolutions both carry it: a
+        rejected attempt is still a minted-and-doomed fact. Player
+        intents carry no key — a playscript step's assignment IS its
+        enqueue tick."""
+        provenance: dict[str, Any] = {
+            "seed": self._seed,
+            "cause_intent": intent.id,
+        }
+        if intent.origin_hook is not None:
+            provenance["cause_hook"] = intent.origin_hook
+        if intent.assignment_tick is not None:
+            provenance["assignment_tick"] = intent.assignment_tick
+        return provenance
+
+    def _commit(self, draft: EventDraft) -> EventRecord:
+        """The one door from a draft to the canon (D-035): validate the
+        state deltas against the projection, THEN append, THEN apply.
+        A draft that disagrees with the world fails here — before the
+        write — so the log never holds a desynced event (KI#13);
+        `apply_event`'s own from_-check stays as the post-write net.
+        Progressive semantics: change N is checked against the state as
+        changed by changes 0..N-1 of the same event."""
+        pending: dict[tuple[str, str], Any] = {}
+        for change in draft.state_changes:
+            props = self._projection.get(change.entity)
+            key = (change.entity, change.prop)
+            current = pending.get(key, props.get(change.prop) if props else None)
+            if props is None or current != change.from_:
+                held = props.get(change.prop) if props else None
+                raise ValueError(
+                    f"{draft.type}: state_change {change.entity}.{change.prop} "
+                    f"expected from {change.from_!r} but projection holds {held!r}"
+                )
+            # res-1 (the underflow floor's LOUD arm, CONTRACTS §2 D3):
+            # an account stock never goes below zero — the write refuses
+            # HERE, before the log ever sees it. The player-scaled arm
+            # dies soft at the front door (account_at_least —
+            # intent_rejected, attempts are facts); the aggregate flows
+            # and every other write path (resolvers, hand-built drafts)
+            # fail loud at THIS gate — no code path ever writes a
+            # negative stock.
+            if is_account_prop(change.prop) and (
+                not isinstance(change.to_, int)
+                or isinstance(change.to_, bool)
+                or change.to_ < 0
+            ):
+                raise ValueError(
+                    f"{draft.type}: the account stock "
+                    f"{change.entity}.{change.prop} would write "
+                    f"{change.to_!r} — a stock never goes below zero "
+                    "(the underflow floor, CONTRACTS §2 D3; the "
+                    "player-scaled arm dies soft at the door, the "
+                    "aggregate and every other path fail loud here)"
+                )
+            # stageb-1, B4 — the CAPACITY floor (CONTRACTS §12, B1's
+            # "no write above a declared cap, ever" arm): a stock
+            # with a declared source capacity never exceeds it — the
+            # flow's min() mint keeps the machinery compliant, so a
+            # breach here is a hand-built draft or a pack bug and
+            # fails LOUD, before the log ever sees it (D3's form)
+            cap = self._source_caps.get((change.entity, change.prop[8:]))
+            if (
+                cap is not None
+                and is_account_prop(change.prop)
+                and isinstance(change.to_, int)
+                and not isinstance(change.to_, bool)
+                and change.to_ > cap
+            ):
+                raise ValueError(
+                    f"{draft.type}: the account stock "
+                    f"{change.entity}.{change.prop} would write "
+                    f"{change.to_!r} above its declared capacity {cap} — "
+                    "a capped stock never exceeds its cap (CONTRACTS §12 "
+                    "B4; the flow's min() mint stays compliant, so a "
+                    "breach is a pack bug or a hand-built draft, never "
+                    "the machinery)"
+                )
+            pending[key] = change.to_
+        record = self._writer.append(draft)
+        apply_event(self._projection, record)
+        self._events.append(record)  # in-memory cache: OCC attribution only
+        # the record's own index in _events — the OCC walk's coordinate
+        # system (the walk's candidates are these indices, filtered to
+        # its window and its read pairs)
+        event_index = len(self._events) - 1
+        for change in record.state_changes:
+            self._last_change[(change.entity, change.prop)] = record.t
+            self._occ_index.setdefault((change.entity, change.prop), []).append(
+                event_index
+            )
+            # iter-379: the decay landing index's commit-path fold — the
+            # apply_event twin for the heap pool (re-derives the pairs
+            # this change could move; the base read is the dict line
+            # above, the position/value reads the live projection —
+            # both already applied at this point)
+            self._decay_index.apply_change(change.entity, change.prop)
+            # iter-381: the rolling-set index's commit-path fold — the
+            # apply_event twin for the per-location buckets (an exact
+            # re-derivation of the entity's membership from the live
+            # state; the position/caught props are the only verdict
+            # movers — the exactness law)
+            self._roll_index.apply_change(change.entity, change.prop)
+            # iter-382: the gate fold's commit-path twin — pops every
+            # confirmed probe whose declared read set includes this
+            # pair (the conservative form: the next scan's key compare
+            # decides, a value that flipped back re-hits the stored
+            # key — one wasted build, never a wrong answer)
+            self._gate_fold.apply_change(change.entity, change.prop)
+        self._knowledge.add(record)  # derived index (L3)
+        self._react(record)  # event-driven reactions (phase0 §3)
+        return record

@@ -1,0 +1,52 @@
+{
+    "name": "province_household",
+    "seed": 42,
+    "pack": "province_pack@0.1",
+    "steps": [
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "wait",
+            "ticks": 519000
+        },
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "wait",
+            "ticks": 519000
+        },
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "wait",
+            "ticks": 519000
+        },
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "wait",
+            "ticks": 519000
+        },
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "wait",
+            "ticks": 519000
+        },
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "move",
+            "target": "loc_riverroad"
+        },
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "move",
+            "target": "loc_keep"
+        },
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "move",
+            "target": "loc_malby"
+        },
+        {
+            "actor": "npc_weirkeeper_01",
+            "intent": "buy_punt",
+            "target": "loc_malby"
+        }
+    ]
+}

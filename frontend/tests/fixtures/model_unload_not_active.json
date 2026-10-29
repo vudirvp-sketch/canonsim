@@ -1,0 +1,8 @@
+{
+  "operation_id": "1efebac7b21ddeff752cf44777106dff733e21a55fb36d08d4261a4fa21c901b",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "model.unload: 'probe-model.gguf' is not ACTIVE (state: 'SELECTED') \u2014 nothing active to unload"
+  },
+  "status": "REJECTED"
+}

@@ -1,0 +1,753 @@
+# BRIEF_SPEC.md — Brief Assembly Contract
+
+> Trigger fired at phase-1 start (`docs/SPECS_BACKLOG.md`). Single owner
+> of the brief assembler's contract; the donor design lives in
+> `docs/blueprint/phases.md` §1 (ledger row BRIEF-1), the mechanics in
+> `brief/assembler.py` + `brief/ledger.py` (the scene ledger). Field-level
+> clauses are born just-in-time — §9 lists what is deliberately deferred.
+> ≤600 lines, substance-filtered (`AGENTS.md` §6/§6.1; the original ≤300
+> self-cap had rotted to 389 by iter-55 — KI#70, the header now reads the
+> owning law). No LLM, no network (INV-4; §9).
+
+## 1. What the brief is
+
+The brief is the **mediator's input document**: everything a narrator
+may draw on for one beat, as a sequence of typed blocks. It is
+**O(relevance), never O(history)** (`VISION.md` §5) — bounded by token
+budgets regardless of log length — and assembled fresh every beat from
+the log. The brief carries **facts as structured tokens**; it never
+*describes* style (L2 — voice lives in the exemplar block, facts stay
+dry). `importance` dials creative freedom downstream; the brief itself
+never invents, orders by feel, or drops silently. Scope: the
+deterministic assembler (iter-8); the purity pair is **(log, ledger)**
+since iter-10 (§2/§3.3).
+
+## 2. Determinism & purity (the D-042/D-043/D-044 read-side family)
+
+- `assemble(events, pack, ledger)` is a **pure function of (log, ledger)**
+  (the iter-10 widening, D-049): same log + same ledger + same pack →
+  **same brief bytes** in any process, any call order, any
+  `PYTHONHASHSEED`. `ledger=None` is byte-identical to an empty ledger.
+- The ledger is **session render state, never canon** (the D-049
+  determinism quarantine): auditable (surface/source/cause per entry),
+  never replayable — its inputs include the narrator. Canon replay
+  (T1/T2) never touches it; "zero RNG" is assembler-internal only.
+- The assembler draws **no randomness at all** (unlike the chronicle's
+  cosmetic stream): every block is `sorted()`/construction-order
+  iteration over deterministic inputs (INV-2).
+- The assembler **writes nothing** (INV-1): it reads events, never
+  emits them — a brief pass that emits canon events is the named
+  violation.
+- Dynamic facts are never vector-searched (`TECH_NOTES.md` §6): the
+  recalled-facts block reads the PC's own `knowledge` records
+  (`known_by` as an architectural filter, `VISION.md` §5). Static-lore
+  retrieval (FTS5) is a phase-4 concern (§9).
+- A growing log keeps its brief prefix stable: same prefix → same
+  block items for the same beat window (the window moves with the
+  log's last tick).
+
+## 3. The block pipeline (eight blocks, fixed order)
+
+Assembled and rendered in this order (BRIEF-1; letta block-manager
+layout; voice exemplars near the context end — the live-char
+author's-note geometry; scene_texture at position 3 — current-scene
+continuity outranks recall, D-049; present_entities at position 4 — the
+scene trio completes before recall, st-1):
+
+| # | Block | Source (iter-8/10/15) | Item shape |
+|---|---|---|---|
+| 1 | `directives` | pack `brief.directives` (static lines) | line, verbatim |
+| 2 | `scene_delta` | events in the beat window the PC perceived | `[t <t>] <type>: <actor> -> <target>` |
+| 3 | `scene_texture` | the session ledger's window (live + tombstones) | `- [t <t>, <status>] (<id>: )<slot> = <value>` / `- [t <t>, refuted] ... (cause: <ev>)` |
+| 4 | `present_entities` | the projection's present set + the pair map + promotions + the born presentation anchors + the persona line + the pack's scene-line fields (st-1, iter-20; tune-2: the prop-path `card_markers` table; agenda-1 P2: the `look=`/`voice=` anchor and `drive=`/`want=` persona segments) | `- <id> (<display>)[ markers=<m>][ carries=<ids>][ look=<tokens>][ voice=<tokens>][ drive=<id>:<STATUS>][ want=<phrase>][ <prop>=<v>]` / `- scene <loc> (<display>) <field>=<v>[...] [<prop>=<v>...]` / `- pair <a> -> <b> <axis>=<v>` |
+| 5 | `recalled_facts` | the PC's crystallized beliefs (leg-2, the derived-trait read) + non-family `knowledge` records, ranked | `- belief <token> (t <cross>, sources: <id>, <id>)` / `- [t <at>, <channel>, <fidelity>] <knows>` |
+| 6 | `scheduled_lore` | pack `brief.lore`, beat-window eligible | lore text, verbatim |
+| 7 | `voice_exemplars` | pack `brief.voice_exemplars` (static lines) | line, verbatim |
+| 8 | `active_options` | pack `actions.json` intents + fields | `- <intent>(<field>, ...)` |
+
+### 3.1 Directives
+
+Static mode-role lines, verbatim, pack data. Never dropped, never
+truncated (§5). These will seed the narrator's system prompt at the
+LLM boundary.
+
+### 3.2 Scene delta (the beat-boundary law, D-018)
+
+What the PC perceived **since the last beat** — a delta, never a world
+dump; size bounded O(perception) regardless of log length. Exact
+clauses:
+
+- Window: events with `t > last_beat_tick` — the largest beat tick ≤
+  the log's last event tick (beats = the pack's `urgencies.beat_ticks`
+  offsets repeated every `time.ticks_per_day`, excluding a beat at t=0
+  — the backward mirror of `core/loop.py` `_next_beat_after`). No beat
+  crossed → the window is the whole log (run start).
+- Perceived (the blind-NPC law, T3): the PC is the event's actor, OR
+  the event carries a knowledge record with `who == player_id`. No
+  record → not in the delta.
+- Order: **newest first** (recent-facts-first — recency dominates on
+  12B-class models, live-char).
+- Display names (pack `entities.json`) resolve ids; the line is dry —
+  no prose, no embellishment.
+
+### 3.3 Scene texture (the 7th block — the ledger window, D-048/D-049)
+
+The scene ledger (`brief/ledger.py`; mechanism blueprint §1, protocol
+VALIDATION_SPEC §8) records established texture — the narrator's
+invented details canon never knew. This block is its **windowed
+view**: the ledger never evicts, all boundedness lives here.
+
+- **Window law.** Live (`active`+`pinned`) entries whose scope matches the
+  current scene: `scene:<loc>` with `loc == the current scene's location
+  AND t >= scene.from_tick` (texture from an earlier scene at the same
+  location is gone with that scene — a revisit starts empty, even if a
+  stale ledger still holds it live), or `entity:<id>` whose entity is
+  **present** (positioned at the scene location, or an item carried by a
+  present non-item — the carrier closure; the PC is covered by
+  construction). Presence is a structural projection read.
+- **Ranking (tex-1, iter-62 — blueprint §1's identity-persistence
+  resolution).** The identity-or-pinned tier first: an entry whose
+  `slot` is pack-declared `identity_slots` ranks WITH `pinned` (key:
+  identity-or-pinned → pinned → newest → construction; the slot is a
+  CLASS, never a scope condition — a scene-scoped entry in a declared
+  identity slot ranks in the tier too), pinned above identity within
+  the tier, then newest-first with construction-order tie-break (ids
+  allocate in append order — the index is the tie-break). An empty
+  `identity_slots` reduces the key to the pinned-only law exactly
+  (the D-048 bytes). Capped by `max_items` — a ranking cap, never a
+  budget drop (§3.4's D-047 law: beyond-cap items render nothing,
+  never dropped).
+- **Per-entity quota (tex-1).** At most `per_entity_max_items` lines
+  per entity scope — one chatty entity cannot flood the window. The
+  quota walk follows the ranking, so an entity's identity slots fill
+  its quota first ("identity slot first" by construction — identity
+  cannot become the flooding channel either). Scene scopes carry no
+  quota (the room's texture is the block's core content; `max_items`
+  bounds it); tombstones carry none (their own cap bounds them — a
+  refuted identity line is gone). Beyond-quota lines render nothing,
+  never dropped (the D-047 law). A value >= `max_items` is the
+  documented inert state.
+- **Tombstones.** `contradicted` entries in the same scope window
+  render as short tombstone lines (slot + refuted + the causing
+  event), newest-first, capped by `tombstone_max_items`, AFTER the
+  live lines (prevention + enforcement both bounded, D-049).
+- **Line shapes** (§3 table): raw ids, never display names — the scope
+  is an address, not prose; the `surface` (verbatim introducing prose)
+  is ledger audit data and NEVER renders (L2).
+
+### 3.4 Present entities (the 8th block — st-1, the entity cards)
+
+The quiet-beat fix: a beat with no PC-perceived events still carries
+the structural fact of WHO is present — a read-side fold over the
+projection (`core/fold.py::present_in_order`), zero new event types.
+Closes quiet-beat presence, cross-NPC consistency (A-fears-B rides
+the card, not recall luck), and promoted-prop visibility in one
+mechanism (blueprint §1; the write-side twin is INTENT_SCHEMA §7's
+per-present expansion).
+
+- **Entity lines**: one dry line per present entity in pack declaration
+  order (npcs → ambient → items) — id, display name, then the
+  observable surface, all segments omitted when empty: `markers=`
+  from the pack's `card_markers` table — prop-path keyed with two row
+  kinds (tune-2, D-060): a **threshold row** (`{"prop":
+  "status.fear", "min": 30, "marker": "afraid"}`) renders when the
+  numeric prop meets the min; a **value row** (`{"prop":
+  "crime_status", "value": "suspect", "marker": "suspect"}`)
+  renders on string equality — so `pair.pc_01.suspicion` and
+  `crime_status` rows are expressible pack data and the crime
+  cascade's standing state reads on the cards (iter-17's finding;
+  suspectaxis-2 moved the wary marker to the directed-axis home: the
+  closed marker surface is `status.<axis>` / `relations.<axis>` /
+  `pair.<npc>.<axis>` / `crime_status`, lint-checked — a pair-path row
+  fires on the HOLDER of the pair record, the named npc is the figure);
+  `carries=` the
+  visibly-carried items (an item carried by a present non-item folds
+  into the carrier's segment — it is the carrier's surface, not a
+  room fixture; loose items keep their own lines); promoted props as
+  bare `prop=value` pairs (the D-054 scan: events whose outcome
+  carries a texture reference whose state_changes birth the slot).
+  **agenda-1 P2 (iter-419): the born presentation anchors** — `look=`
+  and `voice=`, the token lists `core/persona.py` draws at the canon
+  birth (2-4 physical facts / 3-4 voice properties from the pack's
+  `rules.json::appearance`/`voice` pools), comma-joined in the pool's
+  declaration order and rendered only when the folded projection holds
+  them (born props, first-commit-wins — a record value is refused at
+  load: the card reads the fold). They are FACTS about a body, never
+  judgements: the narrator draws the attraction, the world stores the
+  scar (`iter-416` §12). The words are grounded in the scan vocabulary
+  (§3.5's manifest reads the pools), so a face the birth produced can
+  be narrated without counting as invention.
+  **agenda-1 P2, the persona line (iter-420): `drive=<id>:<STATUS>` and
+  `want=<phrase>`** — the present person's INTENT surface, the read
+  `core/agenda.py` owns. `drive` is the DOMINANT drive of the ticker's
+  own parse (the strongest current bar — weight × the unmet share; a tie
+  keeps the declaration order, INV-2), its status the DOOR's own
+  evaluator read-only: `SATISFIED` when the measure is fully met (the
+  continuity law — the roll would not fire either), `BLOCKED` when a
+  STATIC precondition of the verb fails now, `OPEN` otherwise (only the
+  CLOCKED tests are excluded — `leverage_over`/`echo_at_least`, whose verdict
+  moves with the clock alone, so a status written once per beat would be
+  stale; the EVENT-DRIVEN fold — `trait_held` — IS read, from the same
+  `traits` read the bar used, iter-439/D-287). `want` is the phrase the
+  pursuit serves: the record's
+  authored `spine.want` FIRST (the author's override — AP-9's field,
+  whose first runtime reader this is), the drawn archetype's own `want`
+  second. A person with a want and no drive renders `want=` alone (the
+  seven authored spines); a person with neither renders nothing (the
+  player, the unprofiled stranger). **Why per-beat, every present
+  person:** the model has NO transcript across calls — no tail, each call
+  document stands alone (PRESENTATION_SPEC §4) — so a fact absent from
+  THIS beat's document does not exist for the narrator. **The budget:**
+  `want` is capped at `WANT_MAX_WORDS` (8) by the pack lint (a card fact
+  riding every present beat is a budget law, not prose taste), and the
+  segments ride the card, whose block has its own hard budget; measured
+  on the province walk prefix — three rich cards, one authored spine — 78
+  of 120 tokens. A pack expecting many profiled NPCs in one scene raises
+  its own `present_entities.hard` (pack data); the cards stay the ONE
+  entity surface (never a second block listing the same people).
+  The epistemics split: the CARD is the narrator's read surface for
+  standing state; the PC's own perception stays governed by the
+  blind-NPC law in scene_delta (§3.2 — `suspicion_changed` rides no
+  knowledge record and never enters the delta window by design).
+- **Scene line**: the pack's `scene_line_fields` (iter-20, D-057) list
+  the location's pack-modeled fields (e.g. `layout`) that render
+  canon-from-birth — static architecture needs no promotion to be
+  narratable, and the gateway's `canon_slot` check already guards these
+  fields against texture (KI#48). **bridge-1 (iter-86, D-116 (1) — the
+  projection pipe): the field's value source is the FOLDED PROJECTION**
+  — a field the scene location's folded projection holds renders its
+  canon value (the armed claims: biome/height/region/river slots ride
+  world_formed's state_changes into the fold; so does any event-written
+  location prop), with the pack record the fallback for UNCLAIMED
+  fields (a field neither holds renders nothing). The card law holds:
+  static surface first (pack-record fields, pack-declared order),
+  event-born news last — the claims ARE event-born (world_formed), so
+  they render after the static fields, before the promoted props in
+  log order. Booleans render JSON-style (`near_river=false` — the
+  values are JSON-born canon state, never the host language's caps).
+  L3: read-side derive, never stored — the pipe costs the canon zero
+  (no runtime byte reads scene_line_fields; the corpus price is the
+  visible claim tokens alone). Promoted props append after them
+  (canon-born scene texture would otherwise vanish from the brief
+  post-promotion — the scene_texture window renders live entries only).
+  A pack that declares no `scene_line_fields` renders the line only
+  when the scene location holds promoted props, or — since-1 — carries
+  a since-segment (the re-encounter with the place IS content; the
+  unarmed pack never reaches the arm).
+- **Pair lines**: one line per DIRECTED (holder, other) present pair
+  carrying pair-map axes (`pair.<other>.<axis>`), projection order —
+  A-fears-B and B-trusts-A are different facts; BOTH parties must be
+  present. Capped by `max_pairs`.
+- **Caps**: `max_entities`/`max_pairs` are ranking caps (the D-047
+  law — beyond-cap items render nothing, never a budget drop); the
+  scene line is structural (≤1, never capped).
+- **Since-segments (since-1, D-180 — the re-encounter delta):** one
+  trailing `since=` segment on the scene line and on each entity card —
+  "what changed in this entity since the reader last met it". The
+  encounter baseline is the per-entity encounter epoch
+  (`brief/since.py::ReunionFold`, the contract's D1): a maximal
+  co-presence interval per (reader, entity) — presence per
+  `core/fold.py::present_entities` (position at the shared location,
+  or the carried-item closure; a location's co-presence is the reader
+  positioned at it), opened by either party's arrival, closed by the
+  break. The delta window is the apart stretch between the previous
+  epoch's end view (the projection immediately before the break event)
+  and the current epoch's start view (immediately after the opening
+  event): apart-window prop changes surface (the pack-listed props,
+  both endpoints known — a prop born while apart stays silent, D3's
+  never-raw-state law), during-co-presence changes never re-surface
+  (scene_delta's own territory), intermediate position hops never
+  render (the endpoint comparison only). The heard family: the
+  READER's records born on events that happened entirely while apart
+  (the break/reunion events' own sightings excluded — the beat
+  window's territory), rendering on the entity the token names. The
+  pack owns the line vocabulary (D4 — `brief.present_entities.
+  since_lines`: `props` prop/label rows, per-family `templates`
+  (`prop` {label}/{from}/{to}, `position` {from}/{to}, `heard`
+  {token}/{channel}/{fidelity}/{t}), `max_segments`); a missing
+  section is the unarmed landing (zero segments, the committed bytes).
+  Segment order: position, then props in pack order, then heard
+  newest-first; `max_segments` is a ranking cap (the D-047 law);
+  the segment rides the card line atomically (the fill law counts the
+  whole card, the truncation marker marks the drop, never a dangling
+  since-only line). KNOWER-PARAMETERIZED (§3.9's amendment).
+
+### 3.5 Recalled facts (the derived-trait read + the three-signal shape)
+
+Top-k over the PC's knowledge read **through the derived-trait lens**
+(the phase-4 clause, leg-2; `core/traits.py` owns the fold): the PC's
+crystallized beliefs render as **belief lines that lead the block**,
+and the family records that minted them render nothing raw — the
+belief is the derived view, the source records stay queryable on
+demand via the provenance ids (`core/traits.py::expand_trait`, the
+expansion law — the source is always queryable, the belief never a
+replacement). Size O(traits + records), never O(history); a
+below-threshold family still renders raw (no belief, no replacement).
+Belief line shape: `- belief <token> (t <cross>, sources: <id>, <id>)`
+— `cross` is the threshold crossing (the latest source event's tick),
+`sources` the contributing records' event ids in acquisition order
+deduped first-seen (an event minting two family records is one
+source). Beliefs render in pack declaration order; belief lines count
+against `max_items` (the top-k law). No pack data beyond
+`rules.json::traits` — the traits block's existence is the gate
+(INV-3).
+
+The surviving raw records rank by the Generative Agents three-signal
+shape (the relevance signal landed with scene-2 — the mediator owns
+the query, §9's deferral closed):
+
+```
+score = recency_weight / (1 + current_tick - record.at)
+      + importance_weight * rank(record.source_event.importance)
+      + relevance_weight * overlap(query, record)
+```
+- `recency_weight`, `importance_weight`, `relevance_weight`,
+  `max_items`: pack data.  `rank`: low=0, medium=1, high=2.
+- `overlap(query, record) = |query_words ∩ knows_words| /
+  |query_words|` over the word view (`core.retrieval.word_tokens` —
+  the ladder's floor semantics, the single owner of the word view;
+  rung-independent by construction: the brief's bytes never hinge on
+  a SQLite build's FTS5 presence).
+- The query is **mode B only**: the knower's fresh-window tokens
+  (`brief/scene.py::recall_query` — the knows tokens the beat window
+  minted for the knower; leak-free by construction, T3's twin). Mode
+  A never queries — the two-signal shape, the committed corpus bytes
+  (any `relevance_weight` is inert there; the zero-regen law).
+- Tie-break: acquisition order (construction order, INV-2).
+- **Dedup by `knows` token**: the best-ranked record per token
+  survives — the brief shows what the PC knows, not the learning
+  history.
+- `max_items` is a **ranking cap** (the top-k of the O(relevance)
+  law), not a budget drop — records beyond it never become block
+  items, and the `[truncated:N]` marker counts budget drops only
+  (§5).
+
+### 3.6 Scheduled static lore
+
+Pack lore entries with a **beat-window schedule**: an entry is
+eligible when `from_beat <= beats_crossed < to_beat`, where
+`beats_crossed` counts beat boundaries ≤ the log's last tick. Order:
+pack declaration order.
+
+### 3.7 Voice exemplars (the voice-isolation law, L2)
+
+Static style lines, verbatim, pack data, injected near the context
+end — the only place style lives; the other seven blocks stay dry.
+
+**agenda-1 P2 (iter-421) — the archetype-resolved actor's block has TWO
+parts.** When the mode-B role text comes from `brief.archetype_briefs`
+(§3.9's generative tier, i.e. a runtime-born person), the block's FIRST
+line is the actor's own ANCHOR LINE — `voice: <voice properties>;
+look: <physical facts>; want: <phrase>` — the born tokens restated at
+generation distance, then the archetype's 1–2 fact-free skeletons. The
+reason is measured, not stylistic: a description far from the generation
+point moves a model ~0 % (the donor's guide), so the only individuating
+channel a born person owns must sit directly above the shared skeletons
+that are not allowed to clamp them. The line is a RENDERING, never a
+second owner: the tokens' owners stay the born props (`core/persona.py`),
+the pack's pools and the archetype `want` (`core/agenda.py`). Authored
+`brief.actors` entries render NO anchor line — their hand-written
+exemplars already carry the voice, and their bytes stay as they were.
+Budget: the anchor line (~15 tokens) rides inside `voice_exemplars`
+(soft 90 / hard 120), which the fill law still bounds.
+
+### 3.8 Active options
+
+The pack's action intents as a grammar-constrained choice list —
+intent name + declared `fields`, pack order. This is the phase-2
+parser's target grammar. **Not precondition-filtered** in iter-8: the
+brief lists the vocabulary; the intent door (INTENT_SCHEMA §1) remains
+the sole gatekeeper of what is actually possible — a listed option the
+world rejects is an `intent_rejected` fact, not a brief bug.
+
+### 3.9 Mode B — the knower parameter (scene-1, iter-60)
+
+The blocks are PC-parameterized by default. `assemble_brief` takes
+`knower=None` (mode A — the player; the committed corpus bytes,
+byte-identical by construction: an explicit player id renders the same
+bytes) or `knower=<npc>` (mode B — one NPC per call, the chorus served
+head-first through `brief/scene.py::speaking_queue`). Mode B runs the
+SAME pipeline with three parameterized halves and four shared ones
+(the since-segments, since-1/D-180, are a parameterized HALF-BLOCK:
+they ride the shared cards as the knower's own — see the shared list
+below):
+
+- **scene_delta** reads the knower's own perception — the blind-NPC
+  law (§3.2) parameterized: the knower is the event's actor or holds
+  a record born on the event. An event nobody told this knower about
+  never renders for it; the empty window after departure is the
+  honest answer, never a leak.
+- **recalled_facts** reads the knower's own memory — its records and
+  its crystallized beliefs (§3.5, the per-knower traits fold). The
+  leak surface is closed by construction: the records ARE the
+  knower's fold, a held-by-another token can never render.
+- **directives** and **voice_exemplars** come from the mode-B ROLE TEXT —
+  the actor's role text and voice, never the narrator's (mode A's static
+  text stays the block's own; the tables are disjoint by lint). The role
+  text RESOLVES through two tiers, in this order (agenda-1 P2, iter-421;
+  one law `brief/assembler.py::actor_entry`, two consumers — the assembly
+  and the chorus):
+
+  1. **`brief.actors[<npc>]`** — the hand-written override (the exact
+     entry; the seven authored NPCs travel here);
+  2. **`brief.archetype_briefs[<archetype>]`** — the GENERATIVE default:
+     the archetype the npc's profile was drawn from (`core/psyche.py::
+     profile_of`), so a runtime-born person speaks from one authored set
+     per archetype instead of a dossier per person. On this tier the
+     system role gains the pack's **`skeleton_note`** as its last line
+     (the pack's own statement that the exemplars are a support, not a
+     script — the owner's no-clamp requirement made explicit), and the
+     voice block gains the anchor line (§3.7);
+  3. **mute** — neither resolves: the call is a loud `ValueError` (a
+     generic default profile is deliberately NOT invented: a default
+     produces wallpaper and hides the missing content).
+
+  The tiers REPLACE, never merge — the authored row wins whole (no note,
+  no anchor line), so two sources never compete over one utterance and
+  the authored bytes stay exactly as they were.
+- **Shared, never parameterized**: `scene_texture` (one ledger per
+  scene — the chorus reads the same texture block, D-049),
+  `present_entities` (the cards are observables, L6 — the room's
+  STRUCTURAL answer is the same for every present party; since-1's
+  amendment, D-180: the cards' since-segments are the knower's own —
+  the reader's epochs and the reader's apart-born records ride the
+  shared card lines as a fourth parameterized half, never a fifth
+  shared one — the segments are memory-vs-observables, recalled_facts'
+  own law, not the room's structural answer),
+  `scheduled_lore` (pack-declared shared background), and
+  `active_options` (the door's grammar, not the knower's).
+
+The **knower gate**: an id that is neither the player nor a pack NPC
+resolving to a role text (§3.9's two tiers) is a loud `ValueError`, never
+a wrong brief — an ambient group holds records but never speaks (the
+knower-gate law's sibling); an item or a location is not a knower at
+all; the player never carries an `actors` entry (mode A owns its
+directives).
+
+The **scene manager** — `brief/scene.py::speaking_queue` — is the
+chorus queue law: the present NPCs at the current scene's location whose
+role text RESOLVES (authored entry or archetype row), pack declaration
+order (INV-2), capped by `brief.chorus.max_actor_calls` per beat; the
+NPCs beyond the cap fall
+to the L12 template rung (their beats already render through the
+chronicle — never a blocked beat). A pack without the `chorus` block
+runs mode B off — the queue is empty, every run byte-identical (the
+pack's own declaration is the gate, INV-3).
+
+**The session wiring (scene-2 — the drain inside the beat cycle).**
+The mediator (`cli/mediator.py`) owns the drain: a beat is the
+player's exchange, then the chorus. On the player's ACCEPT the
+mediator snapshots `speaking_queue` over the post-action log — **the
+beat's own cast, fixed at curtain** (mid-beat arrivals join the NEXT
+beat's chorus; the queue is never re-taken mid-beat) — and drains it
+head-first, one actor call per queued NPC. Each actor exchange is the
+SAME cycle (shape gate → proposal verdicts → texture gateway →
+intents through the door → promotions) with its own regen budget (one
+budget per narrator exchange — the mode-A law preserved exactly) and
+its own **caller gate**: `feedable_intents` keeps a proposal only when
+its actor is the call's own caller (a reply proposes its own caller's
+actions — mode A's caller is the player, mode B's the actor; the
+actor's intents feed the door as actor steps, INTENT_SCHEMA §9). The
+drain's guards, all L12 — never a blocked beat, never a silent drop:
+
+- **live presence re-verification** — each emission re-reads presence
+  (`brief/scene.py::present_at_scene`): an NPC who left the scene
+  mid-drain is skipped (the template rung); a call never goes to an
+  NPC standing elsewhere.
+- **`narrate dry`** on an actor call skips that actor and advances;
+  on the player's call it closes the whole beat (declining the head
+  declines the beat — the chorus never starts).
+- **a bare `narrate`** (the player's next beat) DROPS a pending drain
+  — the unanswered actor calls fall to the template rung (the
+  operator moved on).
+- an exhausted actor budget drops that actor to the template rung
+  with the refusal notes on the result; the drain lives on.
+
+The notes' law is subject-scoped (§7.1): the withdrawal notes minted
+by a reply wait for the NEXT PLAYER call — the actor calls never
+consume them; an actor's own regen refusals ride its own re-emit.
+
+## 4. Token model
+
+- `token_count(text) = len(text.split())` — whitespace tokens. A
+  deterministic, dependency-free proxy; the real tokenizer arrives
+  with the LLM circuit and **must not** change committed formats
+  without a spec bump (§8).
+- A block's token count = the sum over its header + body lines + the
+  truncation marker (if any). The total = the sum over blocks.
+
+## 5. Budgets & the eviction contract
+
+Every block carries a **soft** and a **hard** token budget (pack
+data). Assembly never exceeds a hard budget with content items, and
+never drops silently:
+
+### 5.1 Per-block fill law
+
+Items are taken best-first while BOTH hold:
+
+1. `tokens_so_far < soft` — the fill target: once reached, the block
+   stops wanting more (the item that crosses the target lands whole;
+   items are never cut mid-line);
+2. `tokens_so_far + tokens(item) <= hard` — the ceiling: an item that
+   would bust the hard budget is skipped even below soft (greedy
+   best-fit; a smaller lower-ranked item may still fit).
+
+Every item not taken — soft reached, ceiling skip, or list exhausted —
+counts as **dropped**. A block with dropped items ends with the marker
+line `[truncated:N items dropped]`. The marker is metadata, exempt
+from the hard-budget check (a marker must always fit — hiding
+truncation would be a silent drop).
+
+### 5.2 Whole-block eviction (total overflow)
+
+After per-block assembly, if the total exceeds `brief.total_hard`,
+whole blocks are evicted in ascending priority order:
+
+```
+scheduled_lore -> recalled_facts -> scene_delta -> scene_texture -> present_entities -> voice_exemplars -> active_options
+```
+
+`present_entities` sits between scene_texture and voice_exemplars
+(st-1): canon-projection structure outranks narrator-invented texture
+(canon always outranks texture, D-049), below the voice/options
+core.
+
+**Directives are never evicted.** An evicted block renders as its
+header + `[truncated:N items dropped]` (N = all its items). Eviction
+stops as soon as the total fits; if evicting every evictable block
+still does not fit, what remains renders anyway (the directives law
+outranks the total budget) — the pack lint (§6) exists to make that
+state an authoring error, not a runtime gamble.
+
+### 5.3 Eviction vs compaction
+
+Eviction is inside-beat assembly policy; reflection-on-recurrence is
+periodic compaction between beats (phase 4) — both exist, neither
+substitutes for the other (`phases.md` §1 owns the distinction).
+
+## 6. Pack data (`rules.json::brief`)
+
+One cohesive section — budgets, weights, static text.
+`templates.json` stays the tracery grammar (chronicle prose); the
+brief's static text is mediator data, not chronicle grammar.
+
+```json
+"brief": {
+  "total_hard": 800,
+  "blocks": {
+    "directives":      {"soft": 60, "hard": 80},
+    "scene_delta":     {"soft": 150, "hard": 200},
+    "scene_texture":   {"soft": 100, "hard": 140},
+    "present_entities": {"soft": 90, "hard": 120},
+    "recalled_facts":  {"soft": 180, "hard": 240},
+    "scheduled_lore":  {"soft": 90, "hard": 120},
+    "voice_exemplars": {"soft": 90, "hard": 120},
+    "active_options":  {"soft": 90, "hard": 120}
+  },
+  "recalled_facts": {"max_items": 12, "recency_weight": 1.0,
+                      "importance_weight": 1.0,
+                      "relevance_weight": 1.0},
+  "scene_texture": {"max_items": 8, "tombstone_max_items": 4,
+                      "unique_slots": ["hearth"],
+                      "identity_slots": ["speech_pattern", "look", "mannerism"],
+                      "per_entity_max_items": 2},
+  "present_entities": {"max_entities": 8, "max_pairs": 6,
+                        "scene_line_fields": ["layout", "terrain",
+                                               "world_region", "near_river"],
+                        "card_markers": [
+                          {"prop": "status.intoxication", "min": 30, "marker": "drunk"},
+                          {"prop": "status.fatigue", "min": 30, "marker": "weary"},
+                          {"prop": "status.fear", "min": 30, "marker": "afraid"},
+                          {"prop": "status.injury", "min": 1, "marker": "hurt"},
+                          {"prop": "pair.pc_01.suspicion", "min": 25, "marker": "wary"},
+                          {"prop": "crime_status", "value": "suspect", "marker": "suspect"},
+                          {"prop": "crime_status", "value": "caught", "marker": "caught"}],
+                        "since_lines": {
+                          "props": [{"prop": "status.fear", "label": "fear"}],
+                          "templates": {
+                            "prop": "{label} {from}->{to}",
+                            "position": "last seen at {from}",
+                            "heard": "heard {token} ({channel}, {fidelity})"},
+                          "max_segments": 4}},
+  "directives": ["...", "..."],
+  "lore": [{"id": "...", "text": "...", "from_beat": 0, "to_beat": 3}],
+  "voice_exemplars": ["..."],
+  "chorus": {"max_actor_calls": 2},
+  "skeleton_note": "the pack's own statement of what the exemplar lines are for",
+  "archetype_briefs": {
+    "the_road_wanderer": {
+      "directives": ["...", "..."],
+      "voice_exemplars": ["\"...\"", "\"...\""],
+      "notes": "..."
+    }
+  },
+  "actors": {
+    "npc_guard_01": {
+      "directives": ["...", "..."],
+      "voice_exemplars": ["..."],
+      "notes": "..."
+    }
+  }
+}
+```
+
+Load-time lint (fails loudly, `core/pack.py`): the `blocks` key set is
+exactly the eight block ids; every budget is a positive int with
+`soft <= hard`; `total_hard` a positive int; `directives` a non-empty
+list of strings; every `directives` line fits its own hard budget
+(never-dropped data must fit by construction); `lore` entries carry
+`id` (unique), `text`, `from_beat >= 0 < to_beat` (ints);
+`voice_exemplars` a list of strings; `recalled_facts` weights
+non-negative numbers (`recency_weight`, `importance_weight`, and
+`relevance_weight` — scene-2's third signal, inert without a query),
+`max_items >= 1`; `scene_texture` caps integers
+>= 1, `unique_slots` unique non-empty strings (empty = no globally-
+unique slots; iter-11 ships `["hearth"]` — the hearth is one object);
+`identity_slots` unique non-empty strings (tex-1: empty = no tier
+beyond pinned — the D-048 bytes) and `per_entity_max_items` an
+integer >= 1 (tex-1: the per-entity quota; a value >= `max_items` is
+the documented inert state);
+`present_entities` caps integers >= 1 and a `card_markers` table
+(tune-2, D-060): each row keys `prop` — one of `status.<axis>` (a
+declared states axis), `relations.<axis>` (a declared relations axis),
+or `crime_status` (the closed marker surface) — with EXACTLY ONE of
+`min` (a non-negative int, threshold row) or `value` (a non-empty
+string, value row), and a non-empty `marker` string (marker names are
+pack vocabulary, INV-3); `scene_line_fields` (iter-20) unique non-empty strings, each
+a field of at least one location record or an ARMED claim's slot (bridge-1:
+the pipe's render surface — a typo'd field, or a claim slot without its
+worldgen block, fails at load time; the defensive claims walk runs before
+the worldgen block's own shape lint, the order law). since-1 (D-180):
+`since_lines` is OPTIONAL (a missing section is the unarmed landing —
+zero segments, the committed bytes; the pack's own declaration is the
+arming, INV-3) with a closed key set (`props` / `templates` /
+`max_segments` / `notes`): `max_segments` an integer >= 1 (a zero cap
+is an unarmed pack — declare nothing instead); `props` a list of
+unique `{prop, label}` rows — the prop one of the closed marker
+surface (`status.<axis>`, `relations.<axis>`, `pair.<npc>.<axis>`,
+`crime_status`), a location field, or an armed claim slot (the scene
+card's surface), never `position` (its own template family) — with
+`label` a non-empty string; `templates` a closed family set
+(`prop` / `position` / `heard`), each a non-empty string over its
+closed placeholder set (`prop`: {label}/{from}/{to}; `position`:
+{from}/{to}; `heard`: {token}/{channel}/{fidelity}/{t} — a template
+with no placeholder is a constant, dead data); `props` and the `prop`
+template arm together, and at least one renderable family is
+required (a vocabulary that renders nothing is dead data). The mode-B pair (scene-1, §3.9) plus its generative tier (agenda-1 P2, iter-421): `chorus` is optional with a
+closed key set (`max_actor_calls` an integer >= 1 — a zero cap is a
+block-less pack, declare nothing instead; `notes` prose); `actors` is
+optional, non-empty, keyed by pack NPC id — never the player (mode A
+owns its directives; the tables are disjoint by law) — with a closed
+per-entry key set (`directives` a non-empty string list whose total
+fits the `directives` hard budget — the same construction-fit law for
+never-dropped data; `voice_exemplars` a string list, L2's only home
+for the actor's style; `notes` prose). `archetype_briefs` is optional,
+non-empty, keyed by a DECLARED `psyche.archetypes` id (the table names
+nothing without the block, so its presence without `psyche` is refused),
+each row the SAME closed entry shape as an `actors` row; `skeleton_note`
+is optional prose and present only WITH the table (a note no archetype
+tier reads is dead data, refused), and when both are present each
+archetype row's directives PLUS the note must fit the `directives` hard
+budget (the assembled system role never drops a line — the
+construction-fit law).
+An archetype row whose archetype no distribution draws and no authored
+profile names is INERT VOCABULARY (the archetype table is the vocabulary
+owner; a DISTRIBUTION is the reachability unit — the P0 inert-first
+form), not a refusal. The eviction order (§5.2) is
+architecture, not balance — it
+lives in code, not in the pack.
+
+## 7. Render format (exact bytes)
+
+```
+## <block_id>
+<item line>
+<item line>
+[truncated:N items dropped]
+
+## <block_id>
+...
+```
+
+- Every block renders its `## <block_id>` header; an empty block is
+  the header alone (explicit absence, never omission).
+- Blocks are separated by one blank line; the document ends with a
+  newline. Line shapes per §3. The arrow in scene-delta lines is `->`
+  (ASCII — the brief is machine-facing; the chronicle's `→` is
+  prose-facing).
+- `brief_from_log(path, pack, schema, ledger=None)` reads a committed
+  log and renders its brief — the golden-fixture byte-identity entry
+  point; §8 owns the change discipline.
+
+### 7.1 The narrator call document (iter-12, D-055)
+
+The mediator's narrator call = the brief (§7 bytes, unchanged) + one
+appended protocol section (block geometry — one blank line separator):
+
+```
+## narrator_protocol
+actor: <id>            # mode B only (scene-1): whose beat-projection
+anchor: <len(events) at assembly>
+regen: <used>/<max>
+query: <keywords>      # mode B, scene-2: the relevance signal's text
+retrieval: fact <ref> (<channel>/<fidelity>, <source>)  # the ladder's top rows
+retrieval: lore <ref>
+<note line>            # refusal / withdrawal notes, verbatim, zero or more
+```
+
+`anchor` is the OCC anchor a reply's proposal must carry
+  (`VALIDATION_SPEC.md` §5); `regen` is the per-exchange counter (its
+  §7 — scene-2: one budget per narrator exchange, the mode-A law
+  preserved exactly); notes are the dry refusal lines riding the
+  re-invocation. A pure function
+  of (log, ledger, pack) + the protocol state — same inputs → same bytes
+  (the D-049 quarantine). The reply document's contract is
+  `VALIDATION_SPEC.md` §7.1's. **Mode B (scene-1, §3.9): the actor call
+  is the same document with `knower=<npc>` — the protocol section's
+  first line becomes `actor: <id>` (whose beat-projection the call
+  carries — the operator knows whose voice to speak); mode A's bytes
+  carry no actor line (the player is the narrator's subject by
+  construction — the committed corpus shape, unchanged).**
+
+**Scene-2's protocol lines (mode B only; mode A's bytes carry none of
+them):** `query:` — the keyword query that ranked this actor's memory
+(§3.5's relevance signal, `brief/scene.py::recall_query` — the
+operator sees WHY the records ranked as they did); `retrieval:` — the
+retrieval ladder's top rows for that query (`RetrievalIndex.query`,
+capped at `RETRIEVAL_LINES = 3` — the ladder's first runtime QUERY
+consumer, one index build per actor call, `cli/mediator.py::_emit_actor`):
+dry demand handles, no scores, no prose (L2) — the ORDER carries the
+ranking (the source-outranks law visible); fact rows carry the
+fidelity and the minting event id (the expansion law's handle), lore
+rows the lore id. A pack without a `retrieval` block serves no rows
+(the ladder is the pack's own declaration, INV-3).
+
+**The notes' subject-scoping (scene-2):** the withdrawal notes minted
+by a reply (whose proposals were withdrawn — the caller gate or the
+noun resolution) ride the NEXT PLAYER call — the actor calls never
+consume them (the operator's beat-level feedback channel); an actor's
+own regen refusals ride that actor's re-emit. The committed corpus
+pins this law: the withdrawals surface on the player's next call,
+unchanged by the chorus in between.
+
+## 8. Versioning
+
+The brief is a derived read-side artifact (no committed bytes), so
+there is no `schema_version` to bump. The **format contract** (§7 line
+shapes, §5 marker text) is owned by this spec: a change to rendered
+bytes = a spec edit in the same commit as the code change.
+
+## 9. Deferred (just-in-time — writing these early = scope creep)
+
+| Deferred | Arrives with | Owner |
+|---|---|---|
+| Lore scheduling grammar (probability / cooldown / sticky / range-cascade / `exclude_key`) | the mediator (message cadence) | live-char ref; phases.md §1 |
+| Precondition-filtered active options | the mediator wiring through the intent door | INTENT_SCHEMA §1 |
+| Voice-exemplar refresh cadence (5–10 messages) | the mediator | live-char geometry |
+| Identity-slot tier + per-scope quotas in the scene_texture window ranking (the per-entity exemplar half landed with mode B — §3.9 `actors`) | **landed iter-62** (tex-1: `identity_slots` + `per_entity_max_items` — §3.3/§6; the promotion-door half stays `st-2`, owner-gated) | blueprint §1 |
+| The call budget (head + brief + tail + thinking + output ≤ MECW target) + the transcript-tail contract | **absorbed by `docs/PRESENTATION_SPEC.md` at its write (iter-178, presentation-1 — st-4's owner, one owner never two)** | PRESENTATION_SPEC |
+| Knower-parameterized assembly (an actor-NPC brief over its own KnowledgeView) | **landed iter-60** (`assemble_brief(knower=...)` + `brief/scene.py` the chorus queue — §3.9) | blueprint §1 |
+| Relevance signal (query keyword match) | **landed iter-61** (scene-2: `assemble_brief(query=...)` the third signal + `recall_query` the derivation + the ladder's first runtime query — §3.5/§7.1) | BRIEF_SPEC §3.5 |
+| Static-lore retrieval (FTS5) | **landed iter-59** (`core/retrieval.py`, D-088 — the ladder); **queried by the runtime since iter-61** (the actor calls' `retrieval:` lines — §7.1) | STORE-1 |
+| The runtime inference engine (llama.cpp + GBNF local inference) | **the engine-side half LANDED iter-177 (engine-1/D-193)**: the adapter `cli/engine.py` + the GBNF mapping (PARSER_SPEC §2.1) + the `--engine` door wiring — the call-document mapping contract now `docs/PRESENTATION_SPEC.md`'s (the fourth file-contract instance); the SoW wiring half stays bg-6-gated (ROADMAP §6) | bg-6 (the `SOW_INTEGRATION_SPEC` sketch's trigger — SPECS_BACKLOG; the dev-time narrator remains the external agent door, D-055) |

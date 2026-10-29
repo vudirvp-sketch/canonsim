@@ -1,0 +1,197 @@
+{
+  "meta": {
+    "pack": "pressure_pack",
+    "version": "0.1",
+    "display": "Ashtread — the pressure city",
+    "notes": "pack-4 (the pressure-city pack, the T1 slice — D-147's displacement law over the landed primitives): one district (the Ashtread tenements), one boiler (the machine at the firehole), one gauge (the boiler house's pressure stock — res-1's one-meter read surface), three factions (the objective-function triangle over the same system), one Cooling-Debt chain (the thermal_shock layer: the seams the hard burns shock, the knocking and the collection the deferred cost). ZERO core change by design (INV-3's substance: a pack requires zero engine edits — the gauge rides the account primitive, the closed cycle the macro flows, the debt the transition layer's seeded follow-ups (the erosion shape's own origin), the triangle depth-6's ratio grid, the world's replies the on_action table). The thermometer minus (D-134): NO meter ever renders the debt — the gauge is the only visible number; the cold renders as the residents' axes and the consequences as tale lines. Every value is v0.1 tunable pack data, not law (INV-3). Display names in English (D-009)."
+  },
+  "locations": [
+    {
+      "id": "loc_ashtread",
+      "name": "the Ashtread tenements",
+      "role": "the district: the stairwells, the rented rooms, the cold's own ground",
+      "layout": "brick_blocks",
+      "exits": ["loc_boilerhouse"],
+      "notes": "THE ONE DISTRICT (the T1 slice's scale): the tenements the grid feeds — the tenants' watch anchors here; the warmth reply and the collection's cold reply land on the residents through the adjacency (the pipes carry both). The boiler house's neighbor in the exits graph — the machine and the rooms share one wall."
+    },
+    {
+      "id": "loc_boilerhouse",
+      "name": "the boiler house",
+      "role": "the firehole: the machine, the coal face, the gauge's glass",
+      "layout": "iron_girder_hall",
+      "exits": ["loc_ashtread", "loc_coalyard", "loc_registry"],
+      "accounts": {"coal": 8, "pressure": 40},
+      "account.pressure": 40,
+      "seams": ["main_riser", "east_joint", "crown_seam"],
+      "flags": {"creep_halted": true},
+      "notes": "THE ONE BOILER'S HOUSE — the closed cycle's heart: the coal and pressure stocks (res-1's accounts on a location, the owner-agnostic form), the GAUGE read through the scene line (the anchor field below: the record's birth bytes declare the scene-line legality, the renderer's fold-outranks-record law renders the LIVE stock — integer truth below, one rendered line above, REFERENCES §10's DD/FP law). The SEAMS are the Cooling Debt's stock (the thermal_shock layer's spot field — the fold over the shocked seams IS the aggregate, never a meter); the creep_halted birth flag pins the layer's halt (the shock never spreads seam-to-seam on its own — the debt grows only on hard burns, event-driven and draw-free, the never-regress law by construction: nothing in the pack ever writes a seam back)."
+    },
+    {
+      "id": "loc_coalyard",
+      "name": "the coal yard",
+      "role": "the supply: the carts, the sacks, the yard hand's shift",
+      "layout": "sacked_yard",
+      "exits": ["loc_boilerhouse"],
+      "notes": "the supply end of the spatial half — the haul_coal source mints the cart's load here (the yard's own stock deliberately un-modeled: the coal LEDGER is the scarce surface, not the yard — the honest residue recorded in the rules' economy notes)."
+    },
+    {
+      "id": "loc_registry",
+      "name": "the registry office",
+      "role": "the bench's room: the machine's books, the ration ledger",
+      "layout": "ledger_room",
+      "exits": ["loc_boilerhouse"],
+      "notes": "the regulators' bench anchors here, at the machine's own side door — the knocking carries through the shared wall (the adjacency the dread reply rides)."
+    }
+  ],
+  "npcs": [
+    {
+      "id": "pc_01",
+      "name": "the night hand",
+      "role": "yard hand on the night shift — the operator the district never sees",
+      "position": "loc_coalyard",
+      "status": {"cold": 20, "dread": 10},
+      "relations": {},
+      "accounts": {"coal": 0},
+      "knowledge": [],
+      "mood": "stiff-fingered",
+      "goal": "fill the cart, feed the fire, hold the gauge steady — and get through the night",
+      "is_player": true,
+      "notes": "the displacement's deciding hand: the gentle lever (haul coal, feed the fire — the cost moves to the coal ledger), the desperate one (stoke hard — the cost defers into the machine's bones), or withhold (the cold collects in the rooms). The cart opens empty (res-1's account on the player, the yard's mint through the source verb)."
+    },
+    {
+      "id": "npc_stoker_01",
+      "name": "the elder stoker",
+      "role": "the firehole's senior hand — held the line through the great freeze",
+      "position": "loc_boilerhouse",
+      "status": {"cold": 35, "dread": 20},
+      "relations": {"trust": 55},
+      "pair_relations": [
+        {"with": "pc_01", "trust": 40}
+      ],
+      "knowledge": [],
+      "mood": "raw-throated",
+      "goal": "the rooms warm through the night, whatever it costs",
+      "spine": {
+        "want": "the rooms warm through the night",
+        "need": "to be the one the district thanks when the pipes hold",
+        "flaw": "would burn the machine's own bones to warm a room",
+        "cause": "held the fire line through the great freeze, and buried the two who froze beside him"
+      },
+      "notes": "the CIRCLE's senior (the min-immediate-cold objective's face): his cold seed (35, the tenements' chill in his bones — he sleeps in the rooms he keeps warm) puts the stokers' ratio past the bar at open, honestly hot — the T1 opens mid-crisis. The flaw (AP-9) rides his seam-check urgency (AP-8's consuming surface)."
+    },
+    {
+      "id": "npc_stoker_02",
+      "name": "the young stoker",
+      "role": "the firehole's second hand — quick, and quiet near the glass",
+      "position": "loc_boilerhouse",
+      "status": {"cold": 30, "dread": 15},
+      "relations": {"trust": 50},
+      "knowledge": [],
+      "mood": "watchful",
+      "goal": "learn the machine before it teaches him",
+      "notes": "the circle's junior — his cold at the bar's edge (30, the trigger exactly) is the ratio's honest margin; the dread seed (15) is the machine people's quiet weight."
+    },
+    {
+      "id": "npc_regulator_01",
+      "name": "the chief regulator",
+      "role": "the machine's advocate — twenty years of the books, and the books never lie",
+      "position": "loc_registry",
+      "status": {"cold": 15, "dread": 25},
+      "relations": {"trust": 50},
+      "knowledge": [],
+      "mood": "measured",
+      "goal": "the machine outlives the decade — the debt must not collect",
+      "spine": {
+        "want": "the machine outlives the decade",
+        "need": "to be right about what the knocking means",
+        "flaw": "hears the debt in every knock",
+        "cause": "signed the report that closed the Harrowgate boiler — two days before it burst anyway"
+      },
+      "notes": "the BENCH's senior (the min-20-year-damage objective's face): the antagonist pair's other half — the same system, the other optimization. The dread seed (25) sits under the bar at open (quiet); the knocking's reply (+5 a knock through the shared wall) is the axis's writer — the bench wakes to the debt's early symptom. The flaw rides the seam-listening urgency (AP-8)."
+    },
+    {
+      "id": "npc_regulator_02",
+      "name": "the tally keeper",
+      "role": "the bench's second — chalks the ration, counts the seams, holds the ledger's key",
+      "position": "loc_registry",
+      "status": {"cold": 15, "dread": 25},
+      "relations": {"trust": 50},
+      "accounts": {"coal": 24},
+      "knowledge": [],
+      "mood": "even",
+      "goal": "the ledger balanced, the names entered",
+      "notes": "the bench's junior — the dread twin (25): both members must cross together (the ratio's threshold-50 deadband, the province's wergeld precedent — the bench wakes slowly and together). THE RESERVE'S KEEPER: the ration ledger's twenty-four coal ride HIS account (the group record's closed vocabulary carries no accounts — the entities lint's own law, recorded as the slice's honest finding; the ledger made mechanical as the keeper's own stock, the ration's transfer reading his shelf through the same actor-keyed verb every feed rides). His urgency is the bench's mechanical arm: the echo-gated ration (the knocking's residue — the grim guard's jittery-watcher precedent)."
+    },
+    {
+      "id": "npc_tenant_01",
+      "name": "the widow of the third floor",
+      "role": "the tenements' memory — knows every winter the block has stood, keeps the watch's scuttle",
+      "position": "loc_ashtread",
+      "status": {"cold": 40, "dread": 10},
+      "relations": {"trust": 45},
+      "accounts": {"coal": 6},
+      "knowledge": [],
+      "mood": "thin-shawled",
+      "goal": "the radiator warm enough to sleep by",
+      "notes": "the WATCH's voice (the heat-itself objective — neither the machine nor the ledger, the rooms): the cold seed (40) past the bar at open. THE SCUTTLE'S KEEPER: the watch's six coal ride HER account (the group record's closed vocabulary carries no accounts — the same finding as the reserve; the hoard made mechanical as the widow's own stock, her urgency the watch's own hand at the firehole's hatch — the same feed_the_fire verb the player's cart rides, one door, many roads)."
+    },
+    {
+      "id": "npc_tenant_02",
+      "name": "the cooper",
+      "role": "the second floor's hands — mends barrels, mends patience",
+      "position": "loc_ashtread",
+      "status": {"cold": 45, "dread": 5},
+      "relations": {"trust": 50},
+      "knowledge": [],
+      "mood": "grim",
+      "goal": "the workshop above forty degrees by morning",
+      "notes": "the watch's coldest hand (45) — the ratio's floor; the dread seed (5) near-absent: the rooms' people fear the cold, not the machine."
+    },
+    {
+      "id": "npc_tenant_03",
+      "name": "the night nurse",
+      "role": "the fourth floor's rounds — the block's fevers and chills",
+      "position": "loc_ashtread",
+      "status": {"cold": 40, "dread": 10},
+      "relations": {"trust": 55},
+      "knowledge": [],
+      "mood": "tired",
+      "goal": "her patients through the night",
+      "notes": "the watch's third — the cold seed (40) with the others; the trust home (55) is the district's standing faith in the night shift."
+    }
+  ],
+  "groups": [
+    {
+      "id": "grp_stokers",
+      "name": "the stokers' circle",
+      "position": "loc_boilerhouse",
+      "members": ["npc_stoker_01", "npc_stoker_02"],
+      "notes": "the triangle's fire arm (depth-6, the objective-function pair's first half): MINIMUM IMMEDIATE COLD — the rooms must not freeze tonight. The goal verb is the MECHANICAL stoke_hard (the ignite through the front door, actor = the group, D-112's one-id law): the desperate lever that costs no coal and shocks a seam — the circle burns the machine's bones to warm the rooms, the displacement's temporal half made flesh."
+    },
+    {
+      "id": "grp_regulators",
+      "name": "the regulators' bench",
+      "position": "loc_registry",
+      "members": ["npc_regulator_01", "npc_regulator_02"],
+      "notes": "the triangle's ledger arm (the objective-function pair's second half): MINIMUM 20-YEAR SYSTEMIC DAMAGE — the machine must outlive the decade. The goal verb is the PUBLIC ORDER (convene_the_bench — the province's bare-beat precedent: the ratio crossing the bar is the convening itself, the attribution row the witness); the MECHANICAL arm rides the tally keeper's urgency (the echo-gated ration — the reserve on HIS account, the group record's closed vocabulary carrying no stock by the entities lint's own law). The antagonist pair never negotiates in script: the two objectives diverge over the same system (the boiler's stocks), the member axes (cold vs dread) are the world's own replies, and the coal is finite."
+    },
+    {
+      "id": "grp_tenants",
+      "name": "the tenants' watch",
+      "position": "loc_ashtread",
+      "members": ["npc_tenant_01", "npc_tenant_02", "npc_tenant_03"],
+      "notes": "the triangle's third arm (the pair's frame made a body): THE HEAT ITSELF — neither the machine nor the ledger, the rooms. The goal verb is the PUBLIC PLEA (plead_for_coal — the bare-beat precedent again: the shivering crossing the bar is the plea itself); the MECHANICAL arm rides the widow's urgency (the scuttle on HER account — the same feed_the_fire verb the player's cart rides, one door, many roads)."
+    }
+  ],
+  "items": [
+    {
+      "id": "stoking_iron_01",
+      "name": "the stoking iron",
+      "position": "loc_boilerhouse",
+      "carrier": null,
+      "is_stoking_iron": true,
+      "notes": "the hard burn's source item (the ignite resolver's flagged accessibility — the arson family's shape): the long iron that reaches past the red line. Lies at the firehole by the machine."
+    }
+  ],
+  "ambient_entities": []
+}

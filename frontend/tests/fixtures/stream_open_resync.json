@@ -1,0 +1,14 @@
+{
+  "last_sequence": 7,
+  "mode": "RESYNC",
+  "resync": "RESYNC_REQUIRED",
+  "retained_from": 4,
+  "session_id": "f76e5b3241b9b040b5b3dffff8eb24471bad7b21cbfa07051cea4dc8446792d3",
+  "snapshot": {
+    "attached": true,
+    "created_observed_at": 1790978057.50359,
+    "event_sequence": 7,
+    "revision": 6,
+    "session_id": "f76e5b3241b9b040b5b3dffff8eb24471bad7b21cbfa07051cea4dc8446792d3"
+  }
+}

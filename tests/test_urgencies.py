@@ -1,0 +1,501 @@
+"""iter-4 acceptance — the goal/urge ticker (P2b, D-021): NPC goals →
+occasional autonomous action through the same queue, same tick
+discipline. Small-formula dynamics: a probability roll per beat, an
+intent template, optional preconditions. World acts without the PC by
+construction — M5 (non-PC event share) becomes non-trivially non-zero
+at director-off (T8).
+
+Through-the-door discipline (D-037): urgencies never write canon
+directly. They produce IntentData the loop enqueues; the front door
+validates each one like a playscript step.
+
+iter-49 (content-4, D-078): the drunkard's entry is the coerce driver
+now — the roll is the same draw, the leverage gate decides emission
+(his idle wait is gone with it; the maid and the relief guard carry
+the plain ungated rolls).
+"""
+
+from __future__ import annotations
+
+import json
+import shutil
+from pathlib import Path
+from typing import Any
+
+from core.fold import initial_projection
+from core.leverage import LeverageFact
+from core.log import read_log
+from core.loop import Simulator
+from core.pack import Pack, load_pack
+from core.rng import SUBSTANTIVE, RngBank, urgency_stream_name
+from core.urgencies import urgency_intents
+
+REPO = Path(__file__).resolve().parents[1]
+SCHEMA = json.loads((REPO / "schemas" / "event.schema.json").read_text(encoding="utf-8"))
+PACK = load_pack(REPO / "content" / "tavern_pack")
+
+
+def v01_pack(tmp_path: Path) -> Any:
+    """The v0.1 one-scene twin (the weather-1 arming re-pin): the
+    committed pack minus the macro clock AND its paired weather block
+    (the pairing law drops them together) — the whole simulation
+    per-beat, the beat machinery full-world. The family's beat behavior
+    pins here in isolation; the armed pack's own price (the warm ring
+    waits for crossings no day-scale run reaches) is test_weather's
+    corpus pin."""
+    target = tmp_path / "v01_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["time"].pop("macro", None)
+    rules.pop("weather", None)
+    (target / "rules.json").write_text(
+        json.dumps(rules, indent=2), encoding="utf-8"
+    )
+    # pack-ci (iter-117): the twin's ablation is complete only with the
+    # family's template lines (PACK_SPEC §5 — dead vocabulary otherwise)
+    templates = json.loads(
+        (target / "templates.json").read_text(encoding="utf-8")
+    )
+    for dead_line in ("year_turns", "weather_turns", "smoke_washed_away"):
+        templates["events"].pop(dead_line, None)
+    (target / "templates.json").write_text(
+        json.dumps(templates, indent=2), encoding="utf-8"
+    )
+    return load_pack(target)
+
+TAVERN = [{"intent": "move", "target": "loc_tavern"}]
+
+
+def make_sim(tmp_path: Path, seed: int, name: str = "run.jsonl",
+             pack: Pack = PACK) -> Simulator:
+    return Simulator(pack, seed, tmp_path / name, SCHEMA, commit="0000000")
+
+
+def script(steps: list[dict[str, Any]], seed: int) -> dict[str, Any]:
+    return {"name": "test", "seed": seed, "pack": "tavern_pack@0.1", "steps": steps}
+
+
+def by_type(events: list[Any], event_type: str) -> list[Any]:
+    return [e for e in events if e.type == event_type]
+
+
+# -- the urgency rolls (small-formula dynamics) ------------------------------
+
+
+def _live_fact() -> LeverageFact:
+    """The drunkard's live cluster over the player (the gate's passport)."""
+    return LeverageFact(
+        holder="npc_drunk_01", subject="pc_01",
+        secret="figure_reaching_for_purse", type="blackmail",
+        expires_at=10_000, source="ev_0001",
+    )
+
+
+def test_urgency_roll_hits_and_misses_deterministically() -> None:
+    """The probability roll draws from the substantive stream (canon
+    rolls). Same seed = same sequence of hits/misses — measured through
+    the drunkard's leverage-gated entry (content-4): with a live fact
+    the hits vary by seed; without one the SAME rolls stay silent (the
+    gate filters, the dice are unchanged)."""
+    projection = initial_projection(PACK.entities)
+    projection["pc_01"]["position"] = "loc_tavern"
+    facts = (_live_fact(),)
+    hits_per_seed = []
+    for seed in range(20):
+        bank = RngBank(seed)
+        hits = sum(
+            1 for _ in range(10)
+            for intent in urgency_intents(PACK, projection, bank, facts=facts)
+            if intent.actor == "npc_drunk_01"
+        )
+        hits_per_seed.append(hits)
+    # across 20 seeds, at least one seed has a hit (the probability is 40%)
+    assert any(h > 0 for h in hits_per_seed)
+    # and at least one seed has a miss (the probability is 60% miss)
+    assert any(h < 10 for h in hits_per_seed)
+    # the gate: the same seeds' rolls, no live fact — always silent
+    for seed in range(20):
+        bank = RngBank(seed)
+        silent = urgency_intents(PACK, projection, bank, facts=())
+        assert not any(i.actor == "npc_drunk_01" for i in silent)
+
+
+def test_urgency_skips_actors_absent_from_projection() -> None:
+    """An NPC removed from the projection (arrested, fled) is skipped —
+    the world doesn't roll for the dead."""
+    projection = initial_projection(PACK.entities)
+    del projection["npc_drunk_01"]
+    bank = RngBank(42)
+    intents = urgency_intents(PACK, projection, bank)
+    assert all(i.actor != "npc_drunk_01" for i in intents)
+
+
+def test_urgency_skips_caught_actors() -> None:
+    projection = initial_projection(PACK.entities)
+    projection["pc_01"]["crime_status"] = "caught"  # PC has the field by convention
+    # urgencies target NPCs not the PC; but the same check applies to NPCs
+    projection["npc_drunk_01"]["crime_status"] = "caught"
+    bank = RngBank(42)
+    intents = urgency_intents(PACK, projection, bank)
+    assert all(i.actor != "npc_drunk_01" for i in intents)
+
+
+def test_urgency_intent_carries_pack_template_target_and_fields() -> None:
+    """The IntentData the urgency builds mirrors the pack's intent spec:
+    kind, target (None when not declared), fields. The drunkard's
+    template is the coerce driver's (content-4 — the leverage gate
+    decides emission, never the template); the maid's is the plain
+    wait."""
+    projection = initial_projection(PACK.entities)
+    projection["pc_01"]["position"] = "loc_tavern"
+    facts = (_live_fact(),)
+    for seed in range(50):
+        bank = RngBank(seed)
+        intents = urgency_intents(PACK, projection, bank, facts=facts)
+        drunk_intents = [i for i in intents if i.actor == "npc_drunk_01"]
+        if drunk_intents:
+            intent = drunk_intents[0]
+            assert intent.kind == "coerce"
+            assert intent.target == "pc_01"
+            assert intent.fields == {}
+            assert intent.id.startswith("urgency_")
+            break
+    else:
+        raise AssertionError("no seed produced a drunkard urgency hit in 50 tries")
+    for seed in range(50):
+        bank = RngBank(seed)
+        intents = urgency_intents(PACK, projection, bank)
+        maid_intents = [i for i in intents if i.actor == "npc_maid_01"]
+        if maid_intents:
+            assert maid_intents[0].kind == "wait"
+            assert maid_intents[0].target is None
+            assert maid_intents[0].fields == {"ticks": 1}
+            return
+    raise AssertionError("no seed produced a maid urgency hit in 50 tries")
+
+
+def test_urgency_precondition_failure_silently_skips() -> None:
+    """A roll that hits but whose preconditions fail stays silent — the
+    NPC tried, the world said no. No rejection event (that's the director
+    path's discipline); the world's noise floor absorbs it."""
+    projection = initial_projection(PACK.entities)
+    # the relief guard's urgency requires a flagged_accessible fire source
+    # in the actor's location. The guardroom has no fire source initially.
+    bank = RngBank(42)
+    intents = urgency_intents(PACK, projection, bank)
+    # the relief guard (npc_guard_02) at the guardroom has no fire source
+    # accessible — the precondition fails, no intent emitted for him
+    guard02_intents = [i for i in intents if i.actor == "npc_guard_02"]
+    assert guard02_intents == []
+
+
+# -- the world acts without the PC (T8 prerequisite: ≥1 autonomous chain) -----
+
+
+def test_urgencies_fire_when_player_waits_long_enough(tmp_path: Path) -> None:
+    """A wait longer than the beat cycle produces urgency events. The
+    director is OFF (director_enabled=False) to isolate the urgency
+    contribution to M5 (non-PC event share). Seed 1: the maid's roll
+    hits at a crossed beat — the drunkard's own roll gates on leverage
+    and stays silent without a cluster (content-4)."""
+    sim = make_sim(tmp_path, seed=1, name="run.jsonl")
+    sim.run_playscript(script([{"intent": "wait", "ticks": 1100}], 1))
+    _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
+    # at least one non-PC actor appears in the event log (the urgency
+    # fired the maid, at a crossed beat)
+    non_pc_actors = {e.actor for e in events if e.actor != "pc_01" and e.actor != "world"}
+    assert non_pc_actors  # the world acted without the PC
+
+
+def test_urgency_intent_goes_through_the_front_door(tmp_path: Path) -> None:
+    """Urgency intents run the same PROPOSED → ACCEPTED | REJECTED
+    pipeline as playscript intents — a rejected urgency is a no-op
+    intent_rejected event (the world noticed the attempt). Re-pinned at
+    the weather-1 arming onto the v0.1 one-scene twin (the maid rides
+    the warm ring under the armed LOD — her roll waits for crossings a
+    day-scale run never reaches)."""
+    sim = make_sim(tmp_path, seed=1, name="run.jsonl", pack=v01_pack(tmp_path))
+    sim.run_playscript(script([{"intent": "wait", "ticks": 1100}], 1))
+    _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
+    # at least one non-PC event has cause_intent starting with 'urgency_'
+    autonomous = [
+        e for e in events
+        if e.provenance.get("cause_intent", "").startswith("urgency_")
+    ]
+    # the wait crosses the first beat; some autonomy fired (M5 ≥ 1)
+    assert autonomous
+
+
+def test_urgency_completion_never_advances_the_playscript(tmp_path: Path) -> None:
+    """KI#17 regression: only the PLAYER's step lifecycle feeds the next
+    playscript step. An autonomous (urgency / director) intent ending
+    mid-step must not propose the next step early — the script's ordered
+    steps contract (MVP_SCOPE §13) holds. Probed seed 3 (re-probed at
+    engine-2 — the rolls draw on the urgency stream now, seed 2's maid
+    roll misses): the maid's urgency fires while step 2 (a 50-tick wait)
+    is in flight."""
+    sim = make_sim(tmp_path, seed=3, name="run.jsonl", pack=v01_pack(tmp_path))
+    sim.run_playscript(script([
+        {"intent": "wait", "ticks": 700},
+        {"intent": "wait", "ticks": 50},
+        {"intent": "move", "target": "loc_tavern"},
+    ], 3))
+    _, events = read_log(tmp_path / "run.jsonl", SCHEMA)
+    # an autonomous intent DID fire during the run (the hazard is live)
+    assert any(
+        e.provenance.get("cause_intent", "").startswith("urgency_") for e in events
+    )
+    # the player's own events commit strictly in script order: the move
+    # (step 3) never precedes the 50-tick wait's event (step 2)
+    player_events = [
+        e for e in events
+        if e.provenance.get("cause_intent", "").startswith("intent_")
+    ]
+    order = [e.provenance["cause_intent"] for e in player_events]
+    assert order == [f"intent_{i:04d}" for i in range(len(order))]
+    ticks = [e.t for e in player_events]
+    assert ticks == sorted(ticks)
+    # and no player step's event lands before its predecessor's
+    for earlier, later in zip(player_events, player_events[1:], strict=False):
+        assert later.t >= earlier.t
+
+
+# -- engine-2 (D-079): the per-entry stream split + the add-safety law ----
+
+
+def test_urgency_rolls_count_on_the_entrys_own_stream() -> None:
+    """engine-2: each entry rolls on its OWN urgency-family stream
+    (content-addressed `urgency:<npc>:<kind>`), nested inside the run's
+    assured substantive scope — the rolls advance their own counter and
+    never the fingerprint (the T1 replay identity). All three committed
+    entries roll, hit or miss; the requires gate runs AFTER the roll (a
+    gated miss still consumes the draw)."""
+    projection = initial_projection(PACK.entities)
+    projection["pc_01"]["position"] = "loc_tavern"
+    bank = RngBank(42)
+    with bank.assure(SUBSTANTIVE):
+        before = bank.fingerprint
+        urgency_intents(PACK, projection, bank)
+    assert bank.count(urgency_stream_name("npc_drunk_01", "coerce")) == 1
+    assert bank.count(urgency_stream_name("npc_maid_01", "wait")) == 1
+    assert bank.count(urgency_stream_name("npc_guard_02", "wait")) == 1
+    assert bank.fingerprint == before
+
+
+def test_added_urgency_entry_never_shifts_checks(tmp_path: Path) -> None:
+    """engine-2's headline law: an ADDED urgency entry draws its roll on
+    its OWN stream — the checks' draws (the substantive stream) are
+    untouched AND the other entries' rolls keep their draw positions, so
+    the log is byte-identical when the added entry never fires. The steal
+    (an opposed check) runs AFTER the beats on purpose: six urgency rolls
+    precede its dice, so a surviving draw position proves the streams are
+    decoupled. This is exactly the probe the iter-49 measurement refused:
+    one added p=40 entry flipped 3 corpus check ladders when the rolls
+    shared the substantive stream; the per-entry split buys permanent
+    add-safety for future urgency growth (the pack's table grows past its
+    three slots without a corpus migration)."""
+    import shutil
+
+    target = tmp_path / "grown_pack"
+    shutil.copytree(REPO / "content" / "tavern_pack", target)
+    rules = json.loads((target / "rules.json").read_text(encoding="utf-8"))
+    rules["urgencies"]["entries"].append({
+        "npc": "npc_barkeep_01",
+        "probability_per_beat": 0,
+        "intent": {"kind": "wait", "fields": {"ticks": 1}},
+    })
+    (target / "rules.json").write_text(json.dumps(rules))
+    grown = load_pack(target)  # a valid pack — the lint must pass
+    steps = [
+        {"intent": "wait", "ticks": 720},  # crosses beats 360/720: rolls
+        {"intent": "steal", "target": "npc_guard_01", "method": "distraction"},
+    ]
+    script_ = script(steps, 125)
+    base = make_sim(tmp_path, seed=125, name="base.jsonl")
+    base_result = base.run_playscript(script_)
+    grown_sim = Simulator(grown, 125, tmp_path / "grown.jsonl", SCHEMA, commit="0000000")
+    grown_result = grown_sim.run_playscript(script_)
+    assert (tmp_path / "grown.jsonl").read_bytes() == (tmp_path / "base.jsonl").read_bytes()
+    assert grown_result.fingerprint == base_result.fingerprint
+
+
+def test_the_parse_memos_match_the_derived_forms() -> None:
+    """iter-370's static-resolution memo: every spec's pre-built STREAM
+    name and gate PROBE equal the per-call derivations they replaced
+    (the f-string name per rolling entry per beat; the fresh probe
+    IntentData per gated entry per stretch) — over every committed
+    pack with urgency entries. The parse-once products are
+    byte-identical by construction; this law pins the construction so
+    the memo can never drift from the derivation it serves."""
+    from core.urgencies import urgency_specs
+
+    for pack_dir in sorted((REPO / "content").iterdir()):
+        pack = load_pack(pack_dir)
+        specs = urgency_specs(pack)
+        entries = pack.rules.get("urgencies", {}).get("entries", ())
+        assert len(specs) == len(entries), pack_dir.name
+        for seq, (spec, entry) in enumerate(zip(specs, entries, strict=True)):
+            assert spec.stream == urgency_stream_name(
+                entry["npc"], entry["intent"]["kind"]
+            ), (pack_dir.name, seq)
+            probe = spec.probe
+            assert probe.id == f"urgency_{entry['npc']}_{entry['intent']['kind']}"
+            assert probe.kind == entry["intent"]["kind"]
+            assert probe.actor == entry["npc"]
+            assert probe.target == entry["intent"].get("target")
+            assert probe.fields == dict(entry["intent"].get("fields", {}))
+            assert probe.based_on_event_seq == 0
+            assert spec.requires == tuple(entry.get("requires", ()))
+
+
+def test_the_probe_id_names_the_probe_not_its_ordinal(tmp_path: Path) -> None:
+    """probeids-1 (iter-436): a probe's `cause_intent` is
+    `urgency_<npc>_<kind>` — the entry's declared identity, the roll
+    stream's address in id form, never its position in the walk. The
+    witness: a NEW entry inserted FIRST (the drunkard's ramble) used to
+    renumber every later probe (`urgency_0000 → urgency_0001`); under the
+    content-addressed form the existing labels are unchanged. Uniqueness is
+    per probe by the pack-linted (npc, kind) pair the streams ride; the ids
+    repeat every beat and the OCC snapshot FIFO pairs same-id enqueues in
+    push order (`core/loop.py`)."""
+    from core.urgencies import urgency_specs
+
+    labels = {
+        (spec.npc, spec.intent_kind): spec.probe.id
+        for spec in urgency_specs(PACK)
+    }
+    assert labels[("npc_maid_01", "wait")] == "urgency_npc_maid_01_wait"
+
+    twin = tmp_path / "shifted"
+    shutil.copytree(REPO / "content" / "tavern_pack", twin)
+    path = twin / "rules.json"
+    rules = json.loads(path.read_text(encoding="utf-8"))
+    rules["urgencies"]["entries"].insert(
+        0,
+        {
+            "npc": "npc_drunk_01",
+            "probability_per_beat": 3,
+            "intent": {"kind": "ramble", "fields": {"noun": "the weather"}},
+        },
+    )
+    path.write_text(json.dumps(rules, indent=2), encoding="utf-8")
+
+    shifted = {
+        (spec.npc, spec.intent_kind): spec.probe.id
+        for spec in urgency_specs(load_pack(twin))
+    }
+    for key, label in labels.items():
+        assert shifted[key] == label, "an inserted urgency entry renamed a probe"
+    assert shifted[("npc_drunk_01", "ramble")] == (
+        "urgency_npc_drunk_01_ramble"
+    )
+
+
+def _moved_value(current: Any) -> Any:
+    """A type-preserving mutation for the memo battery: same type as
+    the live value, never equal to it (the key must see the move)."""
+    if isinstance(current, str):
+        return f"{current}_moved"
+    if isinstance(current, bool):
+        return not current
+    if isinstance(current, int):
+        return current + 1000
+    if isinstance(current, list):
+        return [*current, "moved"]
+    return "moved"
+
+
+def test_the_scan_gate_memo_is_the_fresh_evaluation() -> None:
+    """iter-375's gate-answer memo law: over one frozen (pack, world)
+    pair, the memoized scan answers EXACTLY the fresh evaluation —
+    the key (the live values at the spec's declared read pairs) IS
+    the invalidation (the occ-1 index law: a gate verdict is a
+    function of the declared pairs' values, the twin-agreement
+    property's own foundation). Mutations OUTSIDE every declared pair
+    never move the memoized answers; mutations INSIDE a declared pair
+    always re-evaluate. The windowed family never memoizes (pairs is
+    None — the skip's fold-demand fence, made law at the family
+    level); a different world object flushes the table (the identity
+    law)."""
+    from core.fold import initial_projection
+    from core.intent import (
+        WINDOWED_TESTS,
+        ScanGateMemo,
+        precondition_read_pairs,
+    )
+    from core.urgencies import urgency_scan, urgency_specs
+
+    farstead = load_pack(REPO / "content" / "farstead_pack")
+    province = load_pack(REPO / "content" / "province_pack")
+
+    # (a) the parse law, over the committed packs: the declared read
+    # set rides every non-windowed gated spec (sorted — the key's
+    # order is a parse constant); the windowed family never memoizes
+    for pack in (farstead, province):
+        specs = urgency_specs(pack)
+        assert any(spec.pairs is not None for spec in specs), (
+            pack.name_version,
+        )
+        for spec in specs:
+            windowed = any(
+                cond.get("test") in WINDOWED_TESTS for cond in spec.requires
+            )
+            if not spec.requires or windowed:
+                assert spec.pairs is None, (pack.name_version, spec.probe.id)
+            else:
+                assert spec.pairs == tuple(sorted(precondition_read_pairs(
+                    pack, spec.probe, spec.requires,
+                ))), (pack.name_version, spec.probe.id)
+
+    # (b) the memo == fresh law over the mutation battery (farstead:
+    # every gated entry non-windowed — the h32 density family's parent)
+    specs = urgency_specs(farstead)
+    gated = [spec for spec in specs if spec.pairs is not None]
+    assert gated
+    read_pairs = {pair for spec in gated for pair in spec.pairs}
+    bank = RngBank(7)
+    memo = ScanGateMemo(farstead, None)
+
+    def fresh(projection: Any) -> Any:
+        return urgency_scan(farstead, projection, bank, specs=specs, limit=400)
+
+    def memoized(projection: Any) -> Any:
+        return urgency_scan(
+            farstead, projection, bank, specs=specs, limit=400,
+            gate_memo=memo,
+        )
+
+    base = initial_projection(farstead.entities)
+
+    def copy_of(projection: Any) -> Any:
+        return {entity: dict(props) for entity, props in projection.items()}
+
+    assert memoized(base) == fresh(base)  # the cold table answers fresh
+    assert memoized(base) == fresh(base)  # the warm table serves the same
+    assert memo._answers  # the battery filled the table
+
+    # the twin-agreement class: pairs NO gated spec declares — the
+    # memoized answers cannot move (the verdict never reads them)
+    outside = sorted(
+        (entity, prop)
+        for entity, props in base.items()
+        for prop in props
+        if (entity, prop) not in read_pairs
+    )
+    assert outside  # the battery is real
+    for entity, prop in outside[:5]:
+        twin = copy_of(base)
+        twin[entity][prop] = _moved_value(twin[entity][prop])
+        assert memoized(twin) == fresh(twin), (entity, prop)
+
+    # the inside mutations: every declared pair the battery reaches
+    # moves — the memo re-evaluates exactly when the key moved
+    for entity, prop in sorted(read_pairs)[:8]:
+        moved = copy_of(base)
+        moved[entity][prop] = _moved_value(moved[entity][prop])
+        assert memoized(moved) == fresh(moved), (entity, prop)
+
+    # the identity law: a different world object flushes the table
+    memo.bind(farstead, object())  # identity only — never dereferenced
+    assert not memo._answers
+    assert memoized(base) == fresh(base)  # the rebound table answers fresh

@@ -1,0 +1,12 @@
+{
+    "name": "province_stairmend",
+    "seed": 42,
+    "pack": "province_pack@0.1",
+    "steps": [
+        {"intent": "wait", "ticks": 518400},
+        {"intent": "move", "target": "loc_weirstair"},
+        {"intent": "wait", "ticks": 3600},
+        {"intent": "mend_the_stair", "target": "loc_weirstair"},
+        {"intent": "wait", "ticks": 240}
+    ]
+}

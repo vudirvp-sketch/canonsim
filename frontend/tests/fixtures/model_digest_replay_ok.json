@@ -1,0 +1,14 @@
+{
+  "operation_id": "adee0fc8213e297825c522a9d73bd594e0250bcaf21cfc148805cc2ad280ef7c",
+  "result": {
+    "deadline_seconds": 60.0,
+    "execution_id": "ef9d1caccae725c9a6efe8d112bb223859f22b34e05682b550544f0fdd5c1a17",
+    "replayed_from": "364c11354e465165be8847fdb6174391cd7bf428ee55aa6c85a81328aa97c21b",
+    "state": "STARTING",
+    "work": "model.digest"
+  },
+  "revision": 0,
+  "sequence": 3,
+  "session_id": "435d821dd1ac0504fa460a80c0971ce0e6199df2612a6cb84162264c67c78862",
+  "status": "OK"
+}

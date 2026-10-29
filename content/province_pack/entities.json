@@ -1,0 +1,693 @@
+{
+  "meta": {
+    "pack": "province_pack",
+    "version": "0.1",
+    "display": "The Sarrow Vale — the province pack v0.1 (world-2 L2, slices 1-2)",
+    "notes": "world-2 level 2 (iter-118/119): a fantasy province at pack scale — authored pillars over a generated surface (phases.md §6, D-130's sketch; the Qud split). ORIGINAL nouns (the posture tier: the repo's public 2nd setting is original — D-015/REFERENCES §10; the level-1 reskin instrument was the OPEN generic stack, this is not). The skeleton slice (iter-118): the 324-site map, the river-artery lattice, the settlements, the cast WITH spine records (the AP crosswalk's first consumer — D-148/D-152: the first pack to carry spine records gets them lint-checked), the T1 twin. The cultures slice (iter-119): the two name-1 phonotactic profiles (lowland soft vs hill hard — name-1's first committed arming, D-131/D-153), the condensation travelers (the road-traffic group with generated_name members, the reachability law riding condense_event), the custom vocabularies + prohibition sets (the cultures block, belief-as-rules data). The factions triangle, the deep feud history and the calendar are the follow-up slices (the wave plan, TASKS world-2). Every value is pack data, never code (INV-3)."
+  },
+  "locations": [
+    {
+      "id": "loc_riverroad",
+      "name": "the Sarrow road",
+      "role": "the travel spine: journeys start and land here",
+      "layout": "open_road",
+      "exits": [
+        "loc_weirstair",
+        "loc_keep"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "notes": "the valley road between the weir stair and the half-pay keep — the artery's own spine (the road_pack's loc_street shape, the hub the player starts on); open ground, no sight lines into interiors"
+    },
+    {
+      "id": "loc_weirstair",
+      "name": "the weir stair",
+      "role": "the crossing: the Sarrow leaves the hills here, the toll is taken",
+      "layout": "stone_stair",
+      "exits": [
+        "loc_riverroad"
+      ],
+      "flammability": "medium",
+      "fire_spots": [
+        "punt_boathouse"
+      ],
+      "accounts": {
+        "wear": 0
+      },
+      "notes": "Ketta's weir — the road crosses the Sarrow by the stair; the boathouse timbers the only burnable thing on the bank (the flood took the rest). iter-405 (wt-fill-1's U2): the stair's WEAR is live account state — seeded empty at genesis, the year's water adding two at every macro crossing (`the_stair_wears`, capacity 8), the guild's office the only reader (`mend_the_stair` takes two out of the crossing and three out of Malby's chest, returning one step to the keeper's standing head)."
+    },
+    {
+      "id": "loc_keep",
+      "name": "the half-pay keep",
+      "role": "the garrison post: the levy road passes the gate; the relief's rest post",
+      "layout": "watch_keep",
+      "exits": [
+        "loc_riverroad",
+        "loc_malby",
+        "loc_crofts"
+      ],
+      "flammability": "low",
+      "fire_spots": [
+        "hearth"
+      ],
+      "flags": {
+        "lit": true
+      },
+      "notes": "the under-paid garrison on the shoulder above Malby — the watch pair swaps between this rest post and the market duty post (crime_watch.rotation); the hearth the only lit fire in the province's interiors"
+    },
+    {
+      "id": "loc_malby",
+      "name": "Malby, the market town",
+      "role": "the wealth node: the weighbeam, the stalls, the rumor scene (mandatory: this is where hearsay lives)",
+      "layout": "market_square",
+      "exits": [
+        "loc_keep",
+        "loc_thornmill"
+      ],
+      "flammability": "medium",
+      "fire_spots": [
+        "stall_row",
+        "weigh_shed"
+      ],
+      "flags": {
+        "lit": true
+      },
+      "accounts": {
+        "coin": 40,
+        "bloom": 0
+      },
+      "notes": "the bank market on the navigable Sarrow — the seed settlement's continuity (the v0.1 tavern/street/market cluster grown into a town, D-130's polygon); the duty post of the watch pair, the crowd listener lives here; the stall row the market's fire exposure. debt-1 (iter-162): the coin account is the GUILD'S CHEST at the weighbeam — the flood paper's take landing here each year (the grim till's location form; the group entity takes no stock, the finding recorded here and in economy.notes; economy.notes owns the fold's arithmetic) iter-273 (settlement): the bloom stock is the BEAM'S RECEIVING END — the walked loads' terminus (the freight's other side, the honest no-entity form: the market receives the sold load while the chest pays the price; the sale's bloom leg lands here, the price leg at the crofts' own ledger)"
+    },
+    {
+      "id": "loc_crofts",
+      "name": "the smelt crofts",
+      "role": "the iron: the hill folk's bloom fires behind the keep",
+      "layout": "hillcroft_row",
+      "exits": [
+        "loc_keep"
+      ],
+      "flammability": "high",
+      "fire_spots": [
+        "charcoal_stack",
+        "bloom_heap"
+      ],
+      "accounts": {
+        "bloom": 4,
+        "coin": 0,
+        "wood": 0,
+        "ore": 0,
+        "charcoal": 0
+      },
+      "notes": "Garrick's camp — the charcoal stacks are the province's worst fire trap (the smelting camp is a standing hazard by design, mid-grim); the estranged half of the province (the cultures row's hill folk — name-1 profiles ride the follow-up slice); freightvol (iter-187): the bloom account is the HEAP's own ledger — the withhold's held margin (the tally's PRESENT count, the notches' own subject: the read mints the WORD, the ledger carries the volume — two loads a year banked while the price stays fallen, the artery thinner by the same; economy.notes owns the arithmetic — the burn five, the sold three, the held two; the heap's drain the re-weigh's own door, un-armed) iter-273 (settlement): the coin stock is the CAMP'S LEDGER — the sale's price banked where the tally's notches record it (the rs-10 anchor's own site; the master's fund stays his own thin stock — the withdrawal to the fund a future row's own door, never this one's) ironcycle (iter-394): the yard's three working stocks — wood (the cut's yield), ore (the seam's weathering), charcoal (the stacks' fuel) — all seeded EMPTY at the genesis (the weighing season's aftermath: the fat season's cut fired through, the winter's tail spent, the rhythm's feed consumed — ANCHOR_REGION §6.4's year, the honest aftermath band); the stocks are FLOW-THROUGH ledgers (the yield arrives and is consumed within the year's craft — the levels pulse, the events carry the record); the committed rhythm's OWN feed (the smelt's fire and the seam's iron worked by the master's posts — the honest residue: the posts' events join the tale at the year's reckoning; the far price and the convoy's take OFF-MODEL by design, §4's Geography row)"
+    },
+    {
+      "id": "loc_thornmill",
+      "name": "Thornmill, the tithe manor",
+      "role": "the old families' seat: the burned mill, the grief, the tithe barn (the arson target)",
+      "layout": "manor_yard",
+      "exits": [
+        "loc_malby"
+      ],
+      "flammability": "high",
+      "fire_spots": [
+        "tithe_barn",
+        "mill_race_timbers"
+      ],
+      "notes": "the old family's seat — the feud's fire took the mill a generation back (the worldgen chronicle owns the story, the collections: feud/quarrel); the tithe barn the present arson target; unlit — the burned mill stays dark (the acquisition's night-fidelity step, the road's unlit-open-ground law)"
+    }
+  ],
+  "npcs": [
+    {
+      "id": "pc_01",
+      "name": "the factor's runner",
+      "role": "a downstream trading house's errand-audit up-country",
+      "position": "loc_riverroad",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [],
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "audit the convoy debts, be home before the rains",
+      "is_player": true,
+      "accounts": {
+        "coin": 6
+      },
+      "notes": "starts on the artery and walks the province (the smoke script's own walk); crime_status is the crime_watch convention (rules.json crime_watch.status_values); carries the house waybill book (the manifest-check family's target — the document_check demand reads it); the coin purse (iter-264, the §6.5 embodiment legs): six coin of house money — the trade door's walking stock (trade_at_market's solvency gate, the market's own commerce now expressible — the buyer's purse, the guild's chest the receiving end; the honest scale: three stalls-days of buying at the toll's own number)"
+    },
+    {
+      "id": "npc_weirkeeper_01",
+      "name": "Ketta",
+      "role": "the weir keeper, toll-taker of the crossing",
+      "position": "loc_weirstair",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        },
+        {
+          "with": "npc_sergeant_01",
+          "trust": 40
+        },
+        {
+          "with": "npc_winterkin_01",
+          "kin": 40
+        }
+      ],
+      "knowledge": [],
+      "mood": "guarded",
+      "goal": "keep the crossing honest",
+      "spine": {
+        "want": "the crossing kept honest",
+        "need": "the stair's wear cleared",
+        "flaw": "the crossing answers the heaviest purse",
+        "cause": "the flood year drowned the family punt and the savings with it"
+      },
+      "psyche": {
+        "archetype": "the_weir_keeper",
+        "axes": {"openness": 26, "conscientiousness": 74, "extraversion": 48, "agreeableness": 45, "neuroticism": 58}
+      },
+      "carries": [],
+      "accounts": {
+        "coin": 2,
+        "floodpaper": 20,
+        "step": 3,
+        "stores": 0
+      },
+      "notes": "the crossing's toll-keeper — the spine's flaw rides the coerce urgency entry (AP-8's consuming rule: the double toll when a rich-seeming traveler crosses); the punt pole the family's last tool (items). debt-1 (iter-162): the coin account is the household's THIN SURPLUS — the year's net after the guild's standing take (economy.notes owns the fold's arithmetic; the punt fund's climb toward the authored twelve, Dellan's claim on the same coin) floodpaper (iter-272, the §6.1 fill row — the crossing's carrier strengthened: the paper representation → the holder → the inherited obligation → the later settlement, the charcoalpaper precedent's own family, NOT a new debt primitive): the flood debt's OUTSTANDING as live account state — the FOURTH kind `floodpaper` (the flood winter's own paper: the borrowed punt twelve + the stranded season's stores eight, the shelter law's cost through the winter after the flood — never the camp's starved winter, its own dated chain in the kind's gloss); the stock's entity the TOLL-TAKER (the debt's holder-side seat at the crossing, the drowned generation's debt the living hand's now); the lifecycle doors settle_paper / render_toll / pass_paper / buy_punt (actions.json) — the fall against the covered fund, the collection's walk to the chest, the inheritance to the second hand's receiving stock, the punt's purchase at the market town; ONE COIN, TWO CLAIMS made doors: the settlement's twenty and the punt's twelve drawing on the same thin surplus (the household's own engine, §6.1's unit). iter-275 (stepbench, the §6.2 fill row's PRESENT leg): the step stock is the TIMBERS' SETTING in the keeper's hand — the standing head as live account state (three the working head, the long_light default; two the low band's standing, the vale's standing quarrel; one the drought floor — the drought's own, never the hand's; four the rise — the flood's committed line, never a setting at all). The reading at the stair (read_stair, iter-167) mints the LAW; the PRESENT now rides the keeper's stock — the two surfaces meeting at the reader. iter-443 (the offer board's content arming, D-288/D-289): the spine's NEED is now the stair's WEAR — the drive `keep_the_crossing` reads it and names the office's `mend_the_stair` as the third party's closing act (`helper_verb`), so the board offers the reader the act her own hands cannot take; the flood debt stays the spine's CAUSE and the live floodpaper account with its own doors (settle_paper / render_toll / pass_paper / buy_punt) — one need per person, never a second."
+    },
+    {
+      "id": "npc_secondhand_01",
+      "name": "Dellan",
+      "role": "the crossing's second hand, the rope side of the pole",
+      "position": "loc_weirstair",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_weirkeeper_01",
+          "trust": 80
+        },
+        {
+          "with": "pc_01",
+          "trust": 45,
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "steady",
+      "goal": "walk the crossing's road side; the paper that prices it watched for the family",
+      "spine": {
+        "want": "the crossing worked — one on the water, one on the rope",
+        "need": "the punt bought back before the next flood year",
+        "flaw": "the rope side answered the road, not the stair",
+        "cause": "the flood year drowned the family punt and the savings with it"
+      },
+      "carries": [
+        "punt_pole_01"
+      ],
+      "accounts": {
+        "floodpaper": 0
+      },
+      "notes": "the crossing household's grown second hand — ANCHOR_REGION §6.1's first meso unit, the pack embodiment §9 names the engineering side's own (companion-1 + tune-3's arming, iter-157): the pole is two-handed work, one on the water (Ketta's stair), one on the rope (this hand's road leg — the road-side urgency entry IS the rope side's beat). The pair map: kin trust with the toll-taker, a working acquaintance with the runner (the crossing vouches for the road). The spine shares the household's flood cause; the flaw is the road-leg beat's own bend (AP-8: the entry's flaw key consumes it). The no-teleport law: every leg an ordinary move intent through the door — the autonomous road-leg hop when co-located, the paired mode B steps beyond it; lag is a legal world state. floodpaper (iter-272, the §6.1 fill row): the INHERITANCE's receiving stock declared at zero — the value-0 existence gate's form (pass_the_seat's own law): the drowned generation's open question answered at the door, the debt walking to the second hand's line (the pole already his — the pair completed: the tool and the obligation one inheritance)."
+    },
+    {
+      "id": "npc_sergeant_01",
+      "name": "Osgar",
+      "role": "the half-pay watch sergeant, duty post at Malby",
+      "position": "loc_malby",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_corporal_01",
+          "trust": 75
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "alert",
+      "goal": "hold the keep's order",
+      "spine": {
+        "want": "the keep's order held",
+        "need": "the back pay found",
+        "flaw": "the levy bends for whoever feeds it",
+        "cause": "the crown's quartermaster shorted the garrison two winters running"
+      },
+      "carries": [
+        "pay_tin_01"
+      ],
+      "notes": "the duty holder at the market post (the rotation's outgoing; pickpocket target — the pay tin is thin this season, the expectations rule's item); the spine's flaw rides the manifest-demand urgency entry (AP-8: the fed levy leans on strangers' papers)"
+    },
+    {
+      "id": "npc_corporal_01",
+      "name": "Ferra",
+      "role": "Osgar's relief, the keep's gate",
+      "position": "loc_keep",
+      "status": {
+        "fatigue": 0,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_sergeant_01",
+          "trust": 75
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "resting",
+      "goal": "hold the keep's order",
+      "notes": "receives Osgar's knowledge at watch change (transfer event); pair trust 75 — colleagues (P2a, D-020); the pair.pc_01.suspicion home (suspectaxis-2, D-102); the manifest-check relief hook's target (the document-check family's second arm)"
+    },
+    {
+      "id": "npc_marketmistress_01",
+      "name": "Maren",
+      "role": "Malby's market mistress, keeper of the weighbeam",
+      "position": "loc_malby",
+      "status": {
+        "fatigue": 20,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_sergeant_01",
+          "trust": 60
+        },
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        }
+      ],
+      "knowledge": [],
+      "mood": "busy",
+      "goal": "keep the market thriving",
+      "spine": {
+        "want": "Malby's market thriving",
+        "need": "her son's bond covered",
+        "flaw": "the scales tilt for old coin",
+        "cause": "the feud burned her mother's stall and the family credit never recovered"
+      },
+      "carries": [
+        "tally_staff_01"
+      ],
+      "notes": "the wealth node's voice — the spine's flaw rides the talk urgency entry (AP-8: the well-reputed stranger gets her small talk, the scales tilt for old coin); the storm murmur hook's target (weather-1's seeded consequence, the market watching the rain eat the stalls) iter-275 (stepbench, the §6.2 fill row's NOTCH leg): the notch stock is the TALLY STAFF'S COUNT — the dry years' sequence in wood, the beam's reckoning cut at the weighing day (the count opens at the canonical present, the past sequence authored in the kind's gloss; the market's keep-peace stick that also keeps the count — the §6.2 carrier record's own reading)",
+      "accounts": {
+        "notch": 0
+      }
+    },
+    {
+      "id": "npc_smelter_01",
+      "name": "Garrick",
+      "role": "the smelter-master of the crofts",
+      "position": "loc_crofts",
+      "psyche": {
+        "archetype": "the_smelter_master",
+        "axes": {
+          "openness": 40,
+          "conscientiousness": 78,
+          "extraversion": 35,
+          "agreeableness": 42,
+          "neuroticism": 38
+        }
+      },
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0,
+        "grievance": 30
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        },
+        {
+          "with": "npc_marketmistress_01",
+          "trust": 35
+        }
+      ],
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "keep the bloom moving",
+      "spine": {
+        "want": "the bloom-iron respected",
+        "need": "the charcoal debt repaid",
+        "flaw": "the iron hides when prices fall",
+        "cause": "the guild factor shaved the weight two seasons back and the camp starved"
+      },
+      "carries": [
+        "camp_tally_01"
+      ],
+      "accounts": {
+        "coin": 3,
+        "paper": 16
+      },
+      "notes": "the hill folk's voice at the iron camp — the spine's flaw rides the linger urgency entry (AP-8: the bloom held back when the price turns); the charcoal sack is his camp's (items); the tally-stick is the seat's own badge (items — iter-185, tallyread: the count's carrier rides the master, the seat's succession §6.4); campaccount (iter-186): the coin account is the camp's THIN SURPLUS — the withhold's own savings, the debt fund's climb toward the charcoal paper sixteen (economy.notes owns the fold's arithmetic; the gross bloom sale nine splitting as the camp's net three and the row's standing service six, the service folded away by the chest's one-flow law — the paper's fall a discrete event beyond the flows) charcoalpaper (iter-189): the paper stock is the OUTSTANDING PRINCIPAL — the paper sixteen, the starved winter's stores (the guild-held debt against the burn's future, the spine's need made live state; economy.notes owns the arithmetic). The stock rides the SEAT, never the blood: whoever masters the burn masters the debt (the succession door pass_the_seat walks the stock; the tally-stick the badge on the same hand). The fund (coin 3, +3 a year) climbs toward the paper — the fall's own gate (reckon_paper: the paper only falls against a covered fund)."
+    },
+    {
+      "id": "npc_steward_01",
+      "name": "Wilmot",
+      "role": "Thornmill's steward, keeper of a burned name",
+      "position": "loc_thornmill",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 30,
+        "fear": 0,
+        "injury": 0,
+        "grievance": 35
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "pc_01",
+          "suspicion": 0
+        },
+        {
+          "with": "npc_marketmistress_01",
+          "trust": 30
+        }
+      ],
+      "knowledge": [],
+      "mood": "grieving",
+      "goal": "see the mill rebuilt",
+      "spine": {
+        "want": "the family name restored",
+        "need": "the mill rebuilt",
+        "flaw": "grief answers every question first",
+        "cause": "the feud's fire took the mill and the young heir together"
+      },
+      "carries": [],
+      "notes": "the old families' voice — the spine's flaw rides the ramble urgency entry (AP-8: the grief-ramble to no one in particular, the drunk's ambient shape re-voiced mid-grim); intoxication 30 — the grey-brew (the jug, items) feeds his witness quality (the §6 intersection matrix)"
+    },
+    {
+      "id": "npc_drover_01",
+      "role": "a lowland drover, the herd road to the bank market",
+      "position": "loc_riverroad",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [],
+      "knowledge": [],
+      "mood": "road-weary",
+      "goal": "reach the bank market before the stalls close",
+      "generated_name": "lowland_soft",
+      "generated_psyche": "road_folk",
+      "generated_look": "lowland_road",
+      "generated_voice": "lowland_drawl",
+      "notes": "the condensation travelers (the cultures slice, D-153's wave plan): the road traffic's lowland arm — an UNBORN name on the artery, drawn from the lowland_soft profile at the condensation (name-1's first committed arming, D-131; the lazy-depth law: unnamed until the reader's zone warms). No spine, no urgency — the stranger is the population tier until the first beat materializes the group (depth-7, the inn's-strangers shape at province scale); agenda-1 P1 (iter-418): the born profile (generated_psyche road_folk) rides the SAME event — the drive ticker's first armed consumer, tests/test_psyche.py's witness"
+    },
+    {
+      "id": "npc_peddler_01",
+      "role": "a lowland peddler, the pack on the shoulder",
+      "position": "loc_riverroad",
+      "status": {
+        "fatigue": 15,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [],
+      "knowledge": [],
+      "mood": "wary",
+      "goal": "walk the artery before the rains close it",
+      "generated_name": "lowland_soft",
+      "generated_psyche": "road_folk",
+      "generated_look": "lowland_road",
+      "generated_voice": "lowland_drawl",
+      "notes": "the road traffic's second lowland stranger — the traveling trade the guild's shelter law answers to (the cultures block's prohibition rides the lowland record); the unborn name rides the same condensation, its own name stream (the D-079 family law: one stream per declaration, no cross-talk); agenda-1 P1 (iter-418): the born profile on its own psyche stream, the same condensation event"
+    },
+    {
+      "id": "npc_carrier_01",
+      "role": "a hill carrier, the crofts' man on the artery",
+      "position": "loc_riverroad",
+      "status": {
+        "fatigue": 20,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [],
+      "knowledge": [],
+      "mood": "closed",
+      "goal": "walk the bloom to the bank; the wergeld stays named",
+      "generated_name": "hill_hard",
+      "generated_psyche": "road_folk",
+      "generated_look": "hill_road",
+      "generated_voice": "hill_clipped",
+      "notes": "the road traffic's hill arm — the crofts' own tongue on the artery (hill_hard, the clipped hard profile); the goal carries the wergeld word (the hills' prohibition made live on the road, the hill vocabulary's own token); the estranged half of the valley walking beside the lowland pair — one artery, two tongues; agenda-1 P1 (iter-418): the born profile on its own psyche stream (the same condensation event; the hill arm draws its own axes — the two tongues are not the only difference)"
+    },
+    {
+      "id": "npc_winterkin_01",
+      "name": "Tork",
+      "role": "the flood-year guest's son, the crofts' tongue",
+      "position": "loc_crofts",
+      "status": {
+        "fatigue": 10,
+        "intoxication": 0,
+        "fear": 0,
+        "injury": 0
+      },
+      "relations": {
+        "reputation": 50,
+        "trust": 50,
+        "fear": 0
+      },
+      "pair_relations": [
+        {
+          "with": "npc_weirkeeper_01",
+          "kin": 40
+        }
+      ],
+      "knowledge": [],
+      "mood": "resolved",
+      "goal": "the walk to the crossing his father wintered at",
+      "spine": {
+        "want": "his father's winter acknowledged at the crossing",
+        "need": "the drowned generation's names kept by name outside the bloodline",
+        "flaw": "the notch is all he carries of his father",
+        "cause": "the flood year stranded his father's party at the crossing a generation back — the winter's board eaten, the kin notch cut"
+      },
+      "carries": [],
+      "notes": "the winter kin's return carrier (iter-203, the W5 heartbreak station's design material — the C03+F02 consult, intake-36): the flood-year guest's son, a named hill stranger in the crofts' tongue (the condensation's named-stranger class, AUTHORED here — no generated_name, the fixed name the claim's own surface); genesis at the crofts (his people's country — the smoke scripts never visit, the golden corpus byte-untouched); the seeded kin pair (40 both sides, the INHERITED edge — the drowned generation's notch now the toll-taker's holding, the guests' children carrying the same duties; the recognition PENDING — the living memory thinned by the generation, the claim to be re-made at the stair — the bar 80 the mint's own (the on_action arithmetic: four sharings x +10)); the relation form itself is the pack's kin AXIS (rules.relations — the recognized standing's own measure, the §6.3 gap's answer), the formation mechanism (the winter's board) armed beside it (on_action — the C03 triple's pack-authorable form)"
+    }
+  ],
+  "ambient_entities": [
+    {
+      "id": "npc_malby_crowd_01",
+      "name": "the market queue",
+      "kind": "ambient_group",
+      "position": "loc_malby",
+      "knowledge": [],
+      "notes": "passive knowledge-holder and rumor listener (MVP_SCOPE §4.2): the bank crowd at the weighbeam — no goals, no relations, no movement — receives knowledge records only"
+    }
+  ],
+  "items": [
+    {
+      "id": "tallow_lamp_01",
+      "name": "the tallow lamp",
+      "position": "loc_riverroad",
+      "carrier": null,
+      "is_fire_source": true,
+      "breakable": true,
+      "flammability": "none",
+      "notes": "fire source; breakable — the drop_break target that starts the arson chain on the road (the runner's own lamp, the §3 walkthrough shape)"
+    },
+    {
+      "id": "pay_tin_01",
+      "name": "the garrison pay tin",
+      "position": "loc_malby",
+      "carrier": "npc_sergeant_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "steal_target": true,
+      "notes": "Osgar's levy tin, thin this season — the steal target; the expectations rule's item (the inferred-tin-missing ladder's anchor)"
+    },
+    {
+      "id": "brew_jug_01",
+      "name": "the jug of grey-brew",
+      "position": "loc_thornmill",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "none",
+      "use_effect": {
+        "status": "intoxication",
+        "delta": 20
+      },
+      "notes": "the steward's grief-brew — the intoxication vector feeding Wilmot's witness quality (the road's mead-jug shape, re-voiced)"
+    },
+    {
+      "id": "tally_staff_01",
+      "name": "the tally staff",
+      "position": "loc_malby",
+      "carrier": "npc_marketmistress_01",
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "low",
+      "notes": "Maren's market staff, beside the weighbeam (the cudgel analog — the keep-peace of the market town)"
+    },
+    {
+      "id": "charcoal_sack_01",
+      "name": "the charcoal sack",
+      "position": "loc_crofts",
+      "carrier": null,
+      "is_fire_source": false,
+      "breakable": false,
+      "flammability": "medium",
+      "notes": "the crofts' utility sack, by the stacks — the flammable prop at the camp (the road's hawser shape)"
+    },
+    {
+      "id": "punt_pole_01",
+      "name": "the punt pole",
+      "position": "loc_weirstair",
+      "carrier": "npc_secondhand_01",
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "low",
+      "steal_target": true,
+      "notes": "the family's last tool (KI#87's fix: the weirkeeper's note cited it, the items never carried it — committed with the household's second hand, the pack's next engineering touch): the pole is two-handed work — the second hand walks the rope side with it, and the punt it once pushed drowned the flood year (ANCHOR_REGION §6.1's assets: the boathouse, the pole, the custom). Carried: the position contract rides every leg the second hand walks (movement_changes, KI#46's law). iter-161 (the pole's embodiment seeds): the steal_target flag is the verb-gate boundary's unless-arm (WORLD_AUTHORING §8 — carried ⇒ unstealable UNLESS the pack flags it): the pole is liftable unseen from the second hand's shoulder, the player-facing ablation's own gate (the carrier-ablation probe's flagged-theft arm, WORLD_TESTS §7). The flag opens exactly one gate — take stays uncarried-gated, drop_break stays the carrier's own; a successful lift flips the carrier binding to the thief and the road-leg beat then walks the second hand pole-less (the tool's availability a lawful world state)."
+    },
+    {
+      "id": "camp_tally_01",
+      "name": "the tally-stick",
+      "position": "loc_crofts",
+      "carrier": "npc_smelter_01",
+      "is_fire_source": false,
+      "breakable": true,
+      "flammability": "low",
+      "notes": "the camp's own record (iter-185, tallyread — the charcoal camp's first embodiment, ANCHOR_REGION §6.4's tally gap answered at the pack band): the notch habit's own class, a people that signs with a blade — the count cut in wood at the stacks, the anti-shave discipline made physical (weight is weight, shaved is shaved, the brief's own directive). The CARRIER/HOLDER rungs' authored shape: the paper names the master, the camp reads the seat — the tally rides whoever holds the burn (the seat's succession, the handing-over its mint; carried by the master now). The read_tally hinge mints the camp's word to the reader (the re-weigh's proof: the two records meeting). The verb-gate boundary (WORLD_AUTHORING §8): carried and UNFLAGGED — the tally is untakeable and unstealable (the pole's steal_target flag deliberately NOT duplicated: the re-weigh's proof is not pocketable, the count's carrier rides the seat alone); breakable stays the carrier's own (the master's hand the only one that can spend the word entire — the succession's dark option left lawful, never scripted). The present count itself is authored, never runtime (the freight's volume gap stays owner-routed, the separate-track law — the read mints the WORD, never the PRESENT, the read_stair precedent's own boundary)."
+    }
+  ],
+  "groups": [
+    {
+      "id": "grp_road_traffic",
+      "name": "the road traffic",
+      "position": "loc_riverroad",
+      "members": [
+        "npc_drover_01",
+        "npc_peddler_01",
+        "npc_carrier_01"
+      ],
+      "macro_event": "road_counts",
+      "condense_event": "road_musters",
+      "notes": "the condensation travelers (depth-7's first committed arming, the cultures slice): the artery's traffic as ONE group entity — the population tier while cold (road_counts, the cardinality aggregate at the macro crossings), the named strangers when the reader's zone warms (road_musters, the members' canon member_of births + their drawn names). Anchored ON the road the runner starts at: the group is active at the first zone computation and condenses immediately — the PC walks into a materialized world (the DF precedent, the load-state origin law). The members: two lowland tongues and one hill tongue — name-1's profiles consumed by the condensation's own draw"
+    },
+    {
+      "id": "grp_river_guild",
+      "name": "the river guild",
+      "position": "loc_malby",
+      "members": [
+        "npc_marketmistress_01",
+        "npc_weirkeeper_01"
+      ],
+      "notes": "the trade's twin posts (slice 3, the triangle's first arm): the market mistress and the crossing keeper — the weighbeam and the weir, the river trade acting as ONE group entity through the intent door (depth-6's first committed arming, D-112's one-id law). The guild's pressure axis is fear: the trade flinches at danger sooner than any power in the vale (trigger 30, the lowest bar). The cultures block's shelter law is this guild's own declared limit (slice 2, D-154). debt-1 (iter-162): the group itself takes NO stock — the entity lint's closed group vocabulary carries no `accounts` key (the economy lint's owner-agnostic form anticipated group stocks, the entity lint never opened the key — a substrate finding recorded in economy.notes, never patched in a zero-core slice); the guild's CHEST rides the anchor location loc_malby, the grim till's own shape"
+    },
+    {
+      "id": "grp_old_families",
+      "name": "the old families",
+      "position": "loc_thornmill",
+      "members": [
+        "npc_steward_01",
+        "npc_smelter_01"
+      ],
+      "notes": "the feud's two houses (the triangle's second arm): the manor's steward and the crofts' smelter-master — the mill that burned and the bloom that never forgot the blood price. Their pressure axis is grievance, the wergeld's own axis (decay 0 — a man-price once named stays named until paid, the hills' prohibition law). The threshold is 50: with two members, the old blood moves only when BOTH houses grieve — the families' deliberate deadband."
+    },
+    {
+      "id": "grp_garrison",
+      "name": "the half-pay garrison",
+      "position": "loc_keep",
+      "members": [
+        "npc_sergeant_01",
+        "npc_corporal_01"
+      ],
+      "notes": "the crown's shorted watch (the triangle's third arm): the market-post sergeant and the keep's corporal — the rotation pair (crime_watch's own participants), reading the same fear axis as the guild at the trained bar (trigger 50): the merchants flinch first, the watch holds longer, and the escalation ladder between the two thresholds IS the triangle's present-side cascade."
+    }
+  ]
+}

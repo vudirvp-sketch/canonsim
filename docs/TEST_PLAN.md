@@ -1,0 +1,917 @@
+# TEST_PLAN.md — Verification Stack
+
+> Spec written at the iter-6 trigger (`SPECS_BACKLOG.md` row). Formalizes
+> the T0–T8 suite + the M1–M5 metric definitions + the gate protocol.
+> Source of truth for what counts as "the gate passed." Scope: the
+> whole repo's verification vocabulary — the T-suite + metrics + gate
+> protocol (the phase-0 origin), the offline acceptance suites
+> (§6–§7.2), the testproto LLM-integration protocol (§8) + the
+> heartbeat ledger (§8.5), the claim → instrument selection grammar
+> (§9). The T-suite is the invariants made executable (D-031): every
+> INV has at least one test that fails loudly on its violation.
+
+## 1. T-suite (the gate tests — `MVP_SCOPE.md` §14, `phase0.md` §6)
+
+| ID | Name | Owner test(s) | Donor technique folded in |
+|---|---|---|---|
+| T0 | schema | `tests/test_t0_schema.py` | every log line validates; the doc example is the fixture (D-010) |
+| T1 | determinism | `tests/test_t1_determinism.py` | two runs byte-identical **+ RngBank fingerprint equality** (Brogue audit counter) **+ fixture-regeneration guard** (iter-6): a fresh regeneration into a tmp dir diffed against the committed fixtures; a divergence with unchanged `schema_version` = fail. The committed fixture's header `schema_version` must equal the version derived from the current `schemas/event.schema.json` `$id` — a schema bump without a fixture regen fails here. **+ the semantic diff companion layer** (ssi-7/D-229, §1.4): the ids/types/causes/actors/targets + RNG-fingerprint comparison, interpreter/line-ending independent — the cross-environment oracle the env pin excludes; env-pinning stays the law, the layer adds, never replaces |
+| T2 | replay | `tests/test_loop.py::test_t2_fold_equals_runtime_projection` | `fold(log) == state`; the simulator's incremental projection and a fresh fold of the committed log produce equal state (EventStore projection equivalence) |
+| T3 | blind-NPC | `tests/test_knowledge.py` (+ `tests/test_blind.py` — the phase-4 extension, §1.3) | zero knowledge leaks on the suite; UAP motivation-hole crosswalk designs the cases (an NPC with no record for a fact cannot act on it; suspicion-from-absence is illegal without an `inferred`-channel record cause-chained to the trigger event); blind-1 (iter-63) extends the law to the phase-4 surfaces — mode B + retrieval outputs under the zero-leak law |
+| T4 | irreversibility | `tests/test_crime.py`, `tests/test_states.py` | `irreversible` state changes never revert without an explicit counter-event (fire has none — `location_burned_out` clamps the spot to `burned_out` and no later event reverts it; the arrest `caught` value is terminal) |
+| T5 | impossible | `tests/test_loop.py::test_teleport_stays_impossible`, `tests/test_intent.py`, `tests/test_actions.py` | teleport / sourceless arson / absent items / knowing the unseen stays impossible — well-formed but world-impossible intents emit `intent_rejected` no-op events (the world did not change); shape errors raise `RunnerError` loud |
+| T6 | smoke | `tests/test_urgencies.py::test_urgencies_fire_when_player_waits_long_enough` (1100-tick wait crosses the 1000-tick line) | 1000 ticks without exceptions or hangs — the queue drains, every system that fires on a beat fires, the writer closes cleanly |
+| T7 | readability | manual (this iteration's playtest entry in `worklog.md`) | a human retells the chronicle in their own words — the only human judgment in the stack; the tuning knob is the IMPORTANCE RULE's story-critical hook (D-045(b); landed tune-1/iter-27, D-059 — `tale_gate.min_importance` follows the rule, it is not the primary knob) |
+| T8 | director-off | `tests/test_t8_ab.py` (iter-6) | A/B on identical seed + playscript, **single-factor** (live-char one-change rule: only the director flag changes); ≥3 emergent chains without the director. M5 non-PC share is non-zero in the OFF run by construction (D-021 urgencies). |
+
+### 1.1 T1 fixture-regeneration guard (iter-6 specific — `phase0.md` §6)
+
+The guard runs in-pytest (no CI change). T1 executes twice in
+`tests/test_t1_determinism.py`:
+
+1. **byte-identity**: two fresh runs with the same seed + script produce
+   byte-identical logs (the existing `test_two_runs_are_byte_identical`).
+2. **fixture-regeneration**: a fresh run is diffed byte-by-byte against the
+   committed `tests/fixtures/plumbing_smoke_seed42.jsonl` (the existing
+   `test_fresh_run_matches_committed_golden`), AND the committed fixture's
+   header `schema_version` must equal the `$id` version of the current
+   `schemas/event.schema.json`. A schema bump without a fixture regen fails
+   here loudly — the migration procedure (§3 below) is forced, not punted.
+
+**The env caveat closed as a measured fact (iter-363, 2026-10-11):**
+the interpreter pin's meaning — a non-golden interpreter shows T1
+byte-compare failures on the log-header's `python` field ALONE. Both
+directions measured at HEAD `768dfdc`: Python 3.12.15 (the sandbox
+venv) → 2622 passed + 27 failed + 1 skipped, the failure set exactly
+the iter-362 record (every failure's first diff = the patch-version
+character of the header's `python` field); Python 3.12.14 (the golden
+interpreter, uv standalone `cpython-3.12.14-linux-x86_64-gnu`) →
+**2649 passed + 1 skipped, ZERO failed** (2622+27=2649 reconciled —
+every 3.12.15 failure passes on the golden interpreter, no new
+failures). A fresh cross-iron point for the §1.4 law: the Linux x86_64
+standalone build regenerates the owner's Windows-generated goldens
+byte-identically.
+
+### 1.2 T8 emergent chain (the operational definition)
+
+An **emergent chain** is a maximal causal path `ev_n → ev_{n-1} → … → ev_0`
+in the OFF-run log such that:
+
+- `ev_n.actor != pc_01` AND `ev_n.provenance.cause_intent` does NOT start
+  with `director_` (the director did not inject it);
+- the chain walks `cause` links until it reaches a `pc_01`-actor event (the
+  player's own action that seeded the consequence) or a `world`-actor root
+  (a transition-engine ignition seeded by a player action);
+- the chain length is ≥ 2 (one event, then another = not emergence).
+
+Counting is **per qualifying endpoint**: each non-PC, non-director event
+whose backward walk (maximal — it extends to the player root, never
+stops early) traverses ≥ 2 non-PC links counts once. Consecutive
+`status_decayed` events cause-chain to each other (the beat chaining
+rule, D-038/D-041), so one decay cascade contributes several endpoints
+and M3's magnitude is decay-dominated — the ≥3 gate and the M3 ≥ 2
+kill-criterion read directionality, not deduplicated path counts.
+
+The OFF run of the gate playscript (`tests/playscripts/day1_full.json`,
+seed 125) produces ≥ 3 such chains. The full count is reported in
+`worklog.md`; the test asserts the gate minimum (3).
+
+### 1.3 T3's phase-4 extension — the blind-NPC leak suite (blind-1, iter-63)
+
+The phase-4 exit criterion ("0 leaks on the blind-NPC suite",
+`ROADMAP.md` §2) reads T3's zero-leak law over the phase-4 surfaces:
+mode B briefs, the retrieval ladder's outputs, and the live session
+wiring. Owner: `tests/test_blind.py` (the dir-2 instrument precedent);
+the suite core — every declared actor at the selected beat windows —
+stays in `tests/test_scene.py` (scene-1's acceptance pin).
+
+The instrument: pure test-side folds, never the engine's own code
+paths (a checker that shares the checked code cannot catch its bugs).
+Every scene_delta line is backed by a perceived event count-for-count
+(the multiset law — the line's own `(t, type, actor, target)` bytes,
+never a coarse `(t, type)` key); every recalled_facts line (raw or
+belief) maps to the knower's own fold — the raw line's exact
+`(at, channel, fidelity, knows)` quadruple, the belief line's exact
+`(token, sources, cross)` triple (the provenance IS the leak signal,
+not just the token); every retrieval fact row maps to the named
+knower's record. The adversarial form: the omniscient query (every
+`knows` token on the whole log — the query that knows the future) and
+the `knower=None` probe — the known_by boundary must hold under
+maximal input. The teeth law: planted leaks are flagged (crafted
+records + the pinned seed-125 cross-knower divergence) — a checker
+that cannot fail is decoration.
+
+The sweep: the 10-seed day1 family (seeds 120..129, the corpus-price
+witness pattern) + the committed golden fixture, EVERY log prefix
+(any prefix is a legal assembly state — the log is append-only),
+every declared actor + the player; the live drain's every emitted
+call document is verified against its own anchor-addressed prefix
+(`anchor` = the emission-time event count; append-only makes the
+final log's `events[:anchor]` the emission-time log — the document
+carries its own log address): composition byte-exact (the knowledge
+blocks are the document's own knower's assembly, the query line IS
+`recall_query`, the retrieval rows ARE the ladder's top-3) plus the
+leak law independently. Zero leaks measured; the suite runs ~3 s.
+
+### 1.4 T1-sem — the semantic diff layer over T1 (ssi-7/Phase 6, D-229)
+
+The ADDITIONAL verification layer over T1's env-pinned byte-identity —
+never a T1 «bug fix»: env-pinning is a documented decision (§1.1, the
+FAQ's standing pitfall), and this layer answers the question the pin
+excludes — «are these two logs the same run produced under a different
+interpreter, line ending, or commit?» The instrument:
+`scripts/semantic_diff.py LOG_A LOG_B [--fingerprint-left N
+--fingerprint-right N]` (exit 0 = semantically equal, 1 = semantic
+delta, 2 = input error — loud, never a silent skip). The pin:
+`tests/test_semantic_diff.py` (the 22-test claim packet: the
+independence arms, the mutation teeth, the fresh-run↔golden companion).
+
+What the layer compares: the header's SEMANTIC fields
+(`schema_version`/`seed`/`pack`) — a difference is a delta; the event
+stream's parsed content — the anchors id/t/type/actor/target/cause
+headline every delta, deeper fields are named by path
+(`outcome.duration: 4 != 9`), a shorter stream that matches everywhere
+it exists is reported as the append-only prefix relation; and the
+OPTIONAL run-side RngBank fingerprints (both-or-neither — the
+substantive draw count, RNG-1: two streams can carry equal events yet
+already sit at different entropy positions, the latent-divergence axis
+neither byte equality nor event equality can see). What it ignores BY
+DESIGN: the header's `python` and `commit` (environment/provenance
+meta — reported, never failing) and every parse-level difference (line
+endings CRLF/LF/CR, key order, whitespace, BOM).
+
+Independence law (§9's oracle rule): the tool imports NOTHING from
+`core/` — the log reading is re-derived with the stdlib json module
+alone, so the checker never shares the checked implementation's parser
+(§1.3's instrument law). The deep equality is kind-strict across the
+bool/number boundary (`false` != `0`) and numerically tolerant across
+int/float (`4` == `4.0`).
+
+The standing use: verify any freshly generated log against the
+committed golden from ANY interpreter — `python scripts/
+semantic_diff.py tests/fixtures/plumbing_smoke_seed42.jsonl
+<the-new-log.jsonl>` — where T1's byte-compare is meaningful only on
+the generating interpreter (§1.1). T1 itself never changes: the golden
+stays byte-compared on the env pin, the schema_version pin and the
+fixture-regeneration guard untouched.
+
+**The measured cross-iron law (iter-336, the station probe v3
+datum — Win11/Python 3.14.3/Coffee Lake vs Linux/3.12.14/Xeon, HEAD
+`ad79e1f`)**: the event stream is BYTE-IDENTICAL across iron AND
+interpreter — after the `\r` strip every event line matches
+byte-for-byte on all four comparable pairs (2y/100y × whole/segmented;
+the event-stream md5 with the header excluded is identical on each),
+`semantic_diff` exits 0 on all four, and the ENTIRE file-level delta
+decomposes exactly as (number of lines) − 1 on every horizon including
+the kiloyear (+130,327 at 130,327 events): the Windows CRLF newline
+translation (+1 byte per line — text-mode `\n` → `\r\n`, od-dumped,
+zero lone CRs) plus the header's python meta (−1 byte, "3.14.3" vs
+"3.12.14"). The interpreter itself contributes ZERO content bytes —
+the byte-identity T1 verifies is a property of the CONTENT, not of the
+environment; the env pin stays the law for the golden byte-compare,
+and this layer remains the cross-environment oracle (line endings and
+environment meta ignored by design, exactly as measured). Detail: the
+iter-336 report §A.4 (the single owner of the numbers, D-024).
+
+## 2. Metrics M1–M5 (`MVP_SCOPE.md` §15 owns the definitions)
+
+Computed by folding the log — never collected by feel (Mesa
+`DataCollector` is the shape, inverted: the metric is a pure function of
+`(events, projection)`, no per-event hook into the simulator). The
+implementation is `core/metrics.py`; the system classification table lives
+in `content/tavern_pack/rules.json` under `metrics.system_of_type`
+(pack data — INV-3).
+
+| ID | Metric | Computation | Directionality (MVP_SCOPE §15) |
+|---|---|---|---|
+| M1 | cross-system share | for each event, the set of systems touched = the union of systems of the event's `type` + systems of each `state_change.prop` (e.g. `position`, `relations.suspicion`, `status.fatigue`, `fire.<spot>`); share = `len(events_with ≥2 systems) / len(events)` | non-trivial and rising across the slice |
+| M2 | deferred hooks fired | released / seeded, computed on the ON-run log (the OFF run is 0 by construction). **Released** = events whose `provenance.cause_intent` starts with `director_` — a release is the director's dispatch; a world-rejected release still counts as released. **Seeded** = total hook instances (`len(hooks)` summed over events — a multi-hook event counts as multi-seeded). On the gate ON log: 1 released / 2 seeded = 0.5. | non-zero (≥1 release per the cli AB test) |
+| M3 | causal chain length | for each event, walk `cause` links until `null`; depth = chain length. M3 = mean and median depth over all events. | mean ≥ 2 (one event, then another = failure) |
+| M4 | novelty / repetition | (a) share of `(type, actor)` bigram TYPES that recur: `distinct bigrams occurring more than once / distinct bigrams` — the type reading, implemented + test-pinned (`core/metrics.py`, `1/2 = 0.5`; D-233's pick: the historical §2 wording said `repeated_bigrams / total_bigrams`, the occurrence reading — a future experienced-repetition consumer gets a NEW named metric, never a silent redefinition); (b) share of distinct `knows` tokens: `len(distinct knows) / len(knowledge records)`. RimWorld's repetitive-tale problem, measured instead of felt. | novelty share rising (repetition rate low) |
+| M5 | non-PC event share | `len(events where actor != pc_01) / len(events)` — computed on the OFF-run log. "World not player-centered" (Kenshi/RimWorld lesson) made measurable at the director-off gate. | non-zero (≥3 emergent chains by T8 construction) |
+
+### 2.1 Thresholds (set from the measured baseline — D-019)
+
+Direction first, numbers from data. The iter-6 baseline runs the gate
+playscript (`tests/playscripts/day1_full.json`, seed 125) ON and OFF, folds
+each log through `core/metrics.py`, and records the numbers in
+`worklog.md`. The phase-0 exit verdict reads those numbers against the
+directionality targets; honest reporting if a target is missed — the
+kill-criteria (`MVP_SCOPE.md` §16) win over a Green verdict.
+
+## 3. Schema-bump migration procedure (INV-5 discipline)
+
+When `schemas/event.schema.json` or `docs/EVENT_SCHEMA.md` changes
+breaking (rename/remove/retype a field, remove an enum value):
+
+1. Bump `schema_version` in `schemas/event.schema.json` `$id`
+   (`canonsim/event/<ver>`).
+2. Append a migration note to `docs/EVENT_SCHEMA.md` §8 listing the
+   change, the rationale, and the replay-compatibility stance (does
+   replay code understand the old version? the default is no).
+3. Regenerate every committed fixture under `tests/fixtures/` against
+   the new schema; commit the new fixtures together with the schema
+   change in the SAME iteration.
+4. Re-run T1 — the fixture-regeneration guard passes when the
+   committed fixture's `schema_version` equals the current schema `$id`
+   version AND a fresh run still matches the committed bytes.
+
+A breaking schema change WITHOUT fixture regen is the loud failure the
+guard is designed to catch — the alternative is silent drift between
+the schema, the committed fixtures, and the runtime.
+
+## 4. Gate protocol (`ROADMAP.md` §5)
+
+A gate is passed only on evidence. The phase-0 gate runs:
+
+1. **The committed playscripts** — `tests/playscripts/plumbing_smoke.json`
+   (T1/T2 anchor) and `tests/playscripts/day1_full.json` (T8 gate) —
+   with identical seeds (42 and 125 respectively). Director on and off.
+2. **M1/M2** computed on the ON-run; **M3/M4** on both; **M5** on the
+   OFF-run. Numbers in `worklog.md`.
+3. **Director-off A/B run** (T8): single-factor switch, ≥3 emergent
+   chains, the director buffer seeds in both runs (D-005 hygiene).
+4. **Human chronicle read** (T7): the gate author retells the
+   `day1_full` chronicle in their own words, evaluates noise vs signal,
+   and (if needed) tunes the importance rule's story-critical hook
+   (D-045(b)/D-059 — the tale gate follows the rule's split; tune-1
+   landed the initial hook + the medium gate, iter-27).
+5. **Verdict in `worklog.md` + `STATUS.md`**: pass / pass-with-deferred /
+   kill. A kill-criteria hit stops feature work until the ontology is
+   fixed — honestly reported, never averaged away.
+
+## 5. UAP 7-hole crosswalk (motivation design — `docs/ref/uap_audit.md`)
+
+The Universe Audit Protocol's seven motivation holes map onto the
+phase-0 T-suite as test-design rubrics, not as a checklist:
+
+| UAP hole | Phase-0 crosswalk |
+|---|---|
+| motivation | T3 blind-NPC — does the world act only on what an NPC knows? A guard who never saw the theft cannot arrest; the absence of a record is the test. |
+| memory | T2 replay — does `fold(log)` restore the canonical state? A projection that disagrees with its own log fails loudly. |
+| competence | rules-driven behavior — actions draw checks through the same pack data, not a special-case branch per NPC; the drunkard's vague testimony is the intoxication → perception → witness-quality chain by construction. |
+| scale | D-005 buffer — the director's consequence buffer scales by event count, not by world size; the stagnation sensor reads observable state only. |
+| resources | tick queue + per-action duration — the queue key `(tick, sub_order, actor_id)` is the resource model; OCC gates ensure a cancelled action is a new event, not a free one. |
+| ideology | phase-5 factions — out of scope for phase 0 (MVP_SCOPE §2); the crosswalk is forward-looking. |
+| time | tick queue + the beat cycle — rotations and beats ride clock-crossings in tick order (D-038); the queue forbids out-of-order commits. |
+
+The crosswalk lives in `TEST_PLAN.md` (this file). The per-hole
+diagnostics are the donor techniques in §1's donor column — the UAP is
+a design lens, not a runtime component.
+
+## 6. balance-1 harness (KI#4 close) + the DIR-2 pacing A/B (iter-37)
+
+The 1000-sim distribution harness (`scripts/balance_harness.py`,
+committed as a script — D-044; operator tooling per D-046): runs the
+gate playscript (or a variant) 1000
+times across sampled seeds, folds each log through `core/metrics.py`,
+and emits a distribution table for `suspicion` peak per NPC, `fire_spread`
+spot count at burnout, M5 share, and emergent-chain count. Validates
+that `rules.json` thresholds are tuned, not guessed. Uses T1
+determinism (no new infra). Output:
+`output/balance_<N>_seed<S>_<on|off>.txt` (gitignored runtime
+artifact — never committed; a `…_nopacing.txt` suffix marks the
+clock-off arm).
+
+The harness is the iter-6 close of KI#4: it exists, it runs, the
+observations accumulated across iter-2..5 are recorded as concrete
+distributions, not feel. The kill-criteria in `MVP_SCOPE.md` §16
+("Events without consequences", "Knowledge does not affect behavior",
+"The director produces noise instead of causal complications") are
+operationalized as M3 mean ≥ 2, M1 share non-trivial, M2 release
+non-zero.
+
+**The DIR-2 pacing A/B (phase 3, iter-37 — the exit criterion's
+measurement).** `--pacing on|off` (default on; requires
+`--directors on` — a disabled director never consults the clock):
+the on arm runs the committed pack, the off arm runs the same pack
+minus `director.pacing` — a pack without the block runs the v0.1
+minimal pair (the pack's own declaration is the gate, INV-3) —
+materialized once per invocation under the gitignored
+`output/pack_nopacing/` and linted on load. The instrument is
+`core.metrics.eventless_beat_stretches(pack_rules, events, gate=…)` —
+a pure function of the log + pack data (D-042): a **scene event** is an
+event at or above the pack's tale gate (`Grammar.tale_gate`, the
+same gate the chronicle renders by — the importance rule owns the
+signal/noise split); a **beat window** is `(previous_beat, beat]`
+over the `urgencies.beat_ticks` axis the loop actually fires
+(DIRECTOR_SPEC §7; an event at a beat's tick belongs to that beat's
+window; the trailing partial window is dropped). A stretch is a
+maximal run of consecutive eventless windows; the table reports
+`eventless_max_stretch` stats, the quiet-run share, and the
+length histogram — the numbers the phase-3 exit criterion ("a
+scene without an event < N beats", ROADMAP §2) reads at its gate.
+
+> The per-landing re-measurement records (iter-37..58 — every phase-3/4
+> landing's pacing / grammar / content A/B, each naming its pinned unit
+> tests + its D-row) live in git + the D-065..D-093 family rows + TASKS'
+> phase-3/phase-4 backlogs — the single owners. The instrument
+> definitions above and below are the reusable half.
+
+Extended at iter-107 (the risk-synthesis riders — the drama tuning
+turned into data): the table gains three measurement surfaces. The
+**payoff latency** (D-140): `core.metrics.payoff_latencies(events)`
+pairs every director release with its seeding event via
+`provenance.cause_hook` (FIFO per tag — exact under the director's
+`(release_threshold, seeded_at_tick)` pick law; rejected releases
+count, an attempt is a fact), reporting p50/mean/max + the tick
+histogram + the released-run share; `[]` on the OFF arm by
+construction. The **beat tension**: `core.metrics.beat_tension_profile
+(pack_rules, events)` — the same beat-window axis the stretches walk,
+per window the sum of its events' importance weights (low 1 / medium
+2 / high 3, ALL events), the table reporting the per-run mean +
+variance across runs (the flat-drumbeat vs burst-and-quiet rhythm
+stat). The **ablation arm**: `--systems-minus <name>` runs the pack
+minus one mechanic's arming block — block-scoped by necessity (the
+68a law; the systems-table rows are interlocked, not independently
+removable), the removable set MEASURED (lint + 3-seed runs):
+urgencies, weather, on_action, reflection, secrets, factions; the
+director's ablation stays `--directors off`. First pinned finding:
+the urgencies-minus world has no beat axis at all — no tension
+profile, and the beat-driven release cadence dies with the block
+(the whole director loop hangs off `urgencies.beat_ticks`) — pinned
+in tests/test_balance_harness.py. The corpus price: the schema
+version line of the T1 golden fixture alone (the 0.1 → 0.2 additive
+bump, `provenance.cause_hook`), regenerated in the same iteration per
+§3. The blast-radius drift guard for the state vocabulary landed the
+same iteration (tests/test_drift.py — the systems table ⇔ the metrics
+prefix map, the observed corpus pinned).
+
+**The R1 paired-Δ arm (iter-183 — the owner's methodology call over
+the intake-35 M3 argument, D-195; the corpus's CRN verdict CONFIRMED as
+research methodology): `--paired-delta`.** The reporting change alone,
+no new protocol: the flag runs the invocation's arm AND the base arm
+(directors on, pacing on, the committed pack) over the SAME seed range
+in one invocation — the seeds pair by construction (common random
+numbers), so the per-seed Δ cancels the world variance the two marginal
+tables carry. The appended block reports, per scalar metric and per-NPC
+suspicion peak: the paired-Δ distribution (min/p50/mean/max), the agree
+share (the seeds signing with the mean Δ), the effect size d =
+mean(Δ)/s_Δ, and the CRN read — the pair-variance ratio
+s²_Δ/(s²_base + s²_variant) with the arm correlation ρ. The base arm
+itself refuses the flag (nothing to pair against); list-valued metrics
+(the stretch histogram, payoff latency, the tension profile) stay
+marginal — per-run they are distributions, not scalars. The paired
+artifact is `…_<arm>_paired.txt`, separate from the marginal file; the
+two-invocation marginal protocol stays the standing default. Our own
+measured example (the pacing A/B, 40 seeds, base seed 100, iter-183):
+the count/share family sits at 0.010–0.029 (events 0.015, M1 0.015, the
+room's suspicion peaks 0.010) while the causal-chain and repetition
+metrics form the noisy tail (M3_mean 0.171 with ρ 0.833, M4_repetition
+0.228) — pairing buys ~30–100× where the marginal table is structural
+and ~4–6× where it is noisiest: the M3 argument's shape on our own runs
+(the corpus's measured ratios: 0.011–0.039, M3 0.338). Pinned in
+tests/test_balance_harness.py (the refusal, the block's determinism, the
+D-065 single-seed structure-zero form, the M3-noisy-tail ordering).
+
+## 7. leg-4 offline chronicler acceptance (iter-64, D-093)
+
+The mode-F chronicler suite (`tests/test_chronicle.py`; the tool:
+`scripts/chronicle.py`; architecture owner `docs/blueprint/phases.md`
+§4 "Choricler mode F offline"; the donor pattern set
+`docs/ref/duckdb.md`). NOT a gate test — an offline tool's acceptance
+suite, the balance-harness §6 precedent. Runs only with the
+`[chronicler]` extra installed (`pytest.importorskip` — the pure-dev
+env stays green, the module skipped by design).
+
+The laws under test, each by an independent stdlib fold of the same
+log via `core.log.read_log` (the blind-1 instrument law — never the
+checked pipeline's own code):
+
+- **The count gate**: every log line minus the header appears as a
+  row; a line DuckDB cannot serve but the file holds (truncated JSON)
+  = ChronicleError, nothing written. A line-aligned prefix is a legal
+  log (append-only) and archives as its own event count.
+- **The archive is the log**: `events.parquet` ids == read_log ids,
+  order and count; always the twelve canonical columns (typed NULLs
+  for absent fields — a header-only log is handled uniformly).
+- **The window-diff law**: `state_diffs.parquet` == a pure Python
+  LAG fold per (entity, prop) ordered by (t, event id) — `prev_to`,
+  `continuous` (NULL on a state's first change).
+- **The summary cross-check**: every `chronicle.sqlite` table
+  (facts_summary / state_current / type_histogram /
+  knowledge_summary / chronicle_meta) equals the stdlib fold's
+  numbers.
+- **Determinism (INV-2's spirit, offline)**: two full runs — every
+  artifact byte-identical; the manifest is content-derived only (no
+  wall-clock, no absolute paths; the exact key set is pinned).
+- **The write ladder (L12)**: attach and stdlib paths produce
+  logically identical summaries; the manifest's `write_mode` records
+  which ran; `autoinstall_known_extensions=false` — the chronicler
+  never phones home (the ref's offline law, INV-4's spirit).
+- **D-012 executable** (in `tests/test_architecture.py`, runs
+  everywhere): the runtime import graph (core/sim/render/brief/cli)
+  imports only stdlib + local packages + ImportError-guarded optional
+  probes — duckdb or any future third-party root fails loudly.
+
+### 7.1 depth-4 fold-checkpoint acceptance (iter-80, D-114)
+
+The checkpoint suite (`tests/test_checkpoint.py`; mechanism owner
+`core/checkpoint.py`; builder `scripts/checkpoint.py`; design
+`docs/blueprint/phases.md` §5 "Fold checkpoints"). Runs everywhere
+(stdlib only — no extra, unlike §7's `[chronicler]` gate): 1352
+passed + 1 skipped. NOT a gate test — an offline derived-artifact
+family's acceptance suite, the §7 precedent.
+
+The laws under test, the rollback law cross-checked against the LIVE
+runtime projection (the blind-1 instrument — the Simulator's
+incremental state is an evolution path the checkpoint code never
+sees):
+
+- **Rollback = snapshot + tail replay**: restoring at any offset and
+  replaying the tail reproduces the full fold AND the live runtime
+  projection (the three-way agreement); offset 0 is the initial
+  projection; restore is loud on a truncated log, and a tampered
+  snapshot goes loud on the first diverged-prop tail event
+  (apply_event's from_-net, INV-1's own net).
+- **The re-fold law**: verify/verify_all catch a tampered snapshot, a
+  mislabeled offset, an out-of-bounds offset; verify_all is the batch
+  shape (one pass, all offsets) and rejects duplicate offsets.
+- **The anchor teeth** (the anchor lives in the index, never an event
+  in the truth): load_checkpoint rejects an edited artifact (sha
+  mismatch), a missing file, a re-filed offset; read_index rejects
+  unsorted/wrong-keys/bad-digest hand edits; from_bytes rejects every
+  shape drift.
+- **Append-stability** (INV-5): the prefix digest of offset K is
+  unchanged when the log grows; it equals sha256 over the first
+  1+offset raw lines; loud on a short log.
+- **Byte-determinism**: the canonical serialization is exact (sorted
+  compact JSON), two builder runs produce identical artifact + index
+  bytes.
+- **The builder CLI**: default = the single end checkpoint; the
+  cadence law (0, N, 2N, … ∪ the end); pack mismatch and a malformed
+  log exit 1 with nothing written (the count-gate spirit).
+- **The runtime consumer** (iter-106, D-139 — `Simulator.resume`'s
+  fast-path, wired from `tests/test_resume.py`): a resume over
+  artifacts that anchor cleanly restores the projection as snapshot +
+  tail and the resumed log stays byte-identical to the uninterrupted
+  run (the fold path and the checkpoint path answer the same state —
+  the re-fold law, at runtime); a foreign index, a mismatched prefix
+  digest, or a corrupted artifact is loud (exit/raise, nothing
+  guessed); ABSENT artifacts are normal operation — the plain fold,
+  never an error.
+
+### 7.2 depth-5 worldgen acceptance (iter-81, D-115)
+
+The worldgen suite (`tests/test_worldgen.py`; mechanism owner
+`core/worldgen.py`; lint `core/pack.py::_worldgen`; genesis wiring
+`core/loop.py::open`; design `docs/blueprint/phases.md` §5 "Ordered
+generator passes"). Runs everywhere (stdlib only): 1378 passed + 1
+skipped. NOT a gate test — a mechanism family's acceptance suite, the
+§7.1 precedent. The committed pack is UNARMED (the 68a pattern): the
+unarmed arm of every A/B pin is the committed pack itself; the armed
+arm is the crafted twin (the `worldgen` block + the `world_history`
+template line, bands calibrated so seed 42 spans the whole biome
+vocabulary).
+
+The laws under test:
+
+- **The stream law** (the D-079 family's fourth member):
+  `worldgen:<pass>` content-addressed, injective over the closed
+  ":"-free PASS_ORDER, lazily registered, per-seed derived; the
+  closed-set tripwire survives for non-family names; the one legal
+  nesting is inside the assured substantive scope (never the
+  reverse).
+- **The unarmed law**: no block → `(None, ())` before any stream
+  touch (no lazy registration — `count` is a KeyError), zero draws,
+  the committed run stays v0.1 (no genesis events, `world` None).
+- **The integer discipline**: every model value an int in bounds
+  (sites, height 0..9999, moisture, flow) — the Azgaar float-drift
+  refusal made executable.
+- **The pass laws**: same seed → same model, different seed →
+  different; the lattice count (extent//spacing)²; the relax round
+  moves sites in-bounds; the biome vocabulary closed with the
+  coastal rule structural (band-1 + an ocean neighbor); the
+  watershed flow/rivers at the threshold; capitals + nearest-region
+  growth; the chronicle capped (events_max), years ascending inside
+  [1, years], kinds closed, hooks declared.
+- **The claim gate's first legal caller**: commit on an empty log;
+  no_op skipped; slot_conflict refused with the cause chain —
+  world_formed carries ONLY the committed claims, the refused list
+  rides the outcome (never-empty keys only when non-empty).
+- **The genesis integration**: the world forms at open time (before
+  any player step), the first genesis event is the run-start (cause
+  null), the chain is linear, the PC's first event chains to the
+  LAST genesis event; the director's buffer holds exactly the
+  genesis hooks; the claims live in the projection AND replay
+  through the fold (INV-1); NO knowledge records on any genesis
+  event (the DF epistemology-empty discipline); same seed →
+  byte-identical logs; **the isolation law** — the armed arm's
+  substantive fingerprint EQUALS the unarmed arm's (the corpus price
+  of worldgen is the genesis events alone).
+- **The lint + backstop family**: closed vocabularies at every
+  level; the range laws; the template closure (the genesis event
+  type is pack vocabulary); the declared-hook law; the claim
+  double-claim family (modeled slot, scene_detail overlap, duplicate
+  pair, site bounds, unknown location); the runtime backstop
+  (WorldgenError naming the offender — KeyError/IndexError never
+  leak).
+
+## 8. testproto — the intermediate-build LLM-integration protocol (iter-68, D-098)
+
+The fork closed by decomposition, not election: the three candidates
+(bg-7's one-shot probes, the phase-gate heartbeat, the adversarial
+simulacrum) answer three different questions — what the real loop
+does, whether it drifted since the last gate, whether the boundary
+survives the worst case deterministically — so the protocol runs all
+three, over ONE pinned corpus set and ONE metric vocabulary. Protocol
+contract owner: this section; verdict: D-098; live runner: `bg-8`
+(TASKS, owner-gated, tracks bg-7). NOT a gate test — the §6/§7
+acceptance-instrument precedent; nothing executes until bg-8 lands.
+
+### 8.1 The three layers (what each measures — and nothing else)
+
+| Layer | Runs | Measures | Structurally cannot |
+|---|---|---|---|
+| 1 Contract (simulacrum) | in-repo pytest, every commit; INV-4-clean (scripts, never calls) | the boundary under scripted worst-case repliers: the refusal ladder (REFUSED lines, ≤2 regens, the L12 dry floor), the reply gates (shape, closed alternatives, enum/texture-verbatim), the world-answer law (§8.3), injection immunity (the reply is data), OCC/pin/promotion under degraded replies | model quality, distributions, latency, window rot — no model exists here |
+| 2 Live probes (bg-7/bg-8 runner; outside the repo, Rule 9) | on demand; a real engine on real hardware | output distribution (utterance → grammar alternative), refusal/confabulation rates (real denominators), context pressure (brief token distribution vs the ~8–16k effective window, TECH_NOTES §2), latency/hardware fit, the Cyrillic Script Tax | regression protection — a snapshot, not a fence; determinism |
+| 3 Heartbeat (a protocol, not a harness) | each phase gate: Layer 2 re-run over the SAME pins + metrics | the trend line — drift across engine/model/hardware changes | blocking anything: track B never blocks track A (ROADMAP §1); a run that cannot happen records a gap row, the gate proceeds on track-A evidence, the heartbeat is advisory to engine-1 |
+
+The contract-vs-live split: what the boundary decides (gates,
+refusals, no-op facts) is Layer-1-testable without the model; what a
+model emits (mapping quality, rates, pressure, latency) needs the
+live partner. Layer 1's scripts are CALIBRATED from bg-7 transcripts
+(the anti-tautology law: a same-author adversary is the trap reborn).
+
+### 8.2 One corpus, three sources (the anti-trap law)
+
+"Is the corpus a self-diagnosis trap?" — YES by construction (corpus
+and gates share one author) unless the corpus grows from sources that
+author did not see. Three pinned sources, committed data under
+`tests/fixtures/` (replies are fixtures, never calls — INV-4-clean):
+
+1. **Author-declared cases** — the existing families (the 105-case
+   narrator corpus; the 51-utterance parse corpus).
+2. **The deviation corpus** (the owner's 2026-09-07 clarification —
+   off-script play as a first-class protocol member), authored to
+   break the boundary's comfort, never to confirm it:
+3. **Live transcripts re-distilled** — bg-7/bg-8 outputs become new
+   pinned cases; their confabulation shapes calibrate Layer 1.
+
+| Family | Probes | The honest outcome |
+|---|---|---|
+| F1 verb paraphrase | "have a good look at" → examine; "loiter" → wait | a mapped intent or a question |
+| F2 oblique/role nouns | "the barmaid" / Cyrillic "барменша" → the serving maid / the barkeep | semantic mapping or the question — never a guess |
+| F3 invented names | the prose floor's input-side twin (a ghost noun cannot feed, PARSER_SPEC §2) | a disambiguation question or no_intent |
+| F4 unmodeled actions | "dance on the table" — world-touching but no verb exists | question / no_intent — the honest answer family |
+| F5 register noise | Cyrillic, casing, filler — the script-tax family | the gates are script-agnostic; the mapping cost is Layer 2's |
+| F6 injection payloads | instructions inside player text and reply prose | data-not-instruction (VISION §5); refused, never executed |
+
+Growth law: the corpus grows from measured failure, never the author's
+imagination alone. The first measured gap: the grammar snapshot's noun
+surface is the entity name only (PARSER_SPEC §2) — role/alias text is
+pack data the snapshot does not yet carry; the fix (pack-declared
+aliases, engine-generic, INV-3-clean) is a candidate bg-8/engine-1
+landing, routed to the backlog, not ahead of the numbers.
+
+### 8.3 The world-answer law (the living-world metric)
+
+The measurable form of VISION §5 ("player input is data; the world
+answers"): every deviation-corpus utterance that carries world-touching
+intent must end in exactly one of — a committed event (attempts
+included: `intent_rejected` is a fact, PARSER_SPEC §5), a surfaced
+disambiguation question, or a `no_intent` verdict; a silent drop, a
+crash, or an off-grammar leak reaching the player is a measured
+failure with a pinned case. The metric is answer coverage; the target
+rides bg-7's numbers, never a guessed threshold.
+
+### 8.4 The runner boundary (Rule-9 shape)
+
+The repo exports the pins, the metric definitions (this section), the
+prose-surface instruments (`brief/scan.py` — VALIDATION_SPEC §2.1's
+prosefloor-2 clause, iter-72/D-104: `relation_attribute_tokens` +
+`modeled_vocabulary`, the lowercase assertion surface and its
+grounded/unmodeled split — the weaker-engine arm's lowercase-gap
+metric, its calibration baseline pinned in `tests/test_scan.py`), and
+the boundary contracts (PARSER_SPEC, BRIEF_SPEC §7.1, VALIDATION_SPEC
+§7.1); the runner owns the engine, the transcripts, the hardware.
+Transcripts flow back one way — re-distilled into corpus rows (§8.2
+source 3) and TECH_NOTES numbers; the runner never writes repo files.
+Landed bg-8 (D-109): the deviation corpus is a committed pin
+(`tests/fixtures/deviation_corpus.json`, Layer 1's regression teeth in
+`tests/test_deviation.py`) and the heartbeat's first run is the §8.5
+baseline row — the numbers live in TECH_NOTES §11, never restated here.
+
+### 8.5 The heartbeat ledger (Layer 3 — the trend rows)
+
+One row per heartbeat run; a missed family records a gap row, the gate
+proceeds (§8.1 Layer 3's law). The metrics per row: engine_ok, raw gate
+validity → after one re-ask, alternative mix (intent/question/
+no_intent), full intent agreement vs the pins, the refusal-family
+census, the deviation coverage, and the per-component latency
+(iter-107, the risk-synthesis §9 rider — FIRST-CLASS COLUMNS): one
+p50/p95 pair per pipeline component — **tick** (the loop's sim tick),
+**fold** (the log → projection fold), **brief** (the mediator call
+assembly), **parse** (the parser-door cycle, repo-side), **generate**
+(the external engine's call — the runner's own clock, Rule 9). The
+component cut is the latency BUDGET's owner: each future shell engine
+decision reads which component eats the p95, never a single end-to-end
+number that hides it. Numbers' owner: TECH_NOTES; this table carries
+the trend pointers only. The first row carrying the FULL columns:
+engine1-q1p7b (iter-312 — the brief/parse split landed; the runner
+computes p50/p95 with `statistics.quantiles`, n≥4; a smaller n records
+the raw min/median/max with the gap noted).
+
+| Run | Date | Engine | Validity raw → 1 re-ask | Mix i/q/n | Agreement | Latency p50/p95 (tick/fold/brief/parse/generate) | Trend note |
+|---|---|---|---|---|---|---|---|
+| bg-7 | 2026-09-07 | glm-4-plus API | 79.5% → 88.6% | 29/9/6 | 16/30 full | — (gap: the one-shot probes carried no component clock) | the one-shot probes (TECH_NOTES §10) |
+| bg-8 | 2026-09-09 | glm-4-plus API | 84.4% → 93.3% | 32/4/6 | 20/35 full, 35/45 alternative | — (gap: the end-to-end p50 1.1 s / p95 6.3 s recorded, components unmetered — §11) | the baseline row (§11): refusal families DRIFT (unknown-keys → texture-reference), question share halves; deviation coverage 34/34, honest 17/36 |
+| engine1-e4b | 2026-09-21 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF) | 98.0% → 98.0% | 50/0/0 | 15/51 full | tick 2.3/3.2 · fold 0.7/1.1 · brief+parse 1.1/1.6 (one measured column — the door's emit_call; the split the gap) · generate 537/706 ms | the grammar lifts raw validity above both API rows; the mix collapses to all-intent (the aggressive mapper — TECH_NOTES §13.1); the deviation re-distillation: honest 18/36, the first local world-answer leak 33/34 |
+| engine1-q9b | 2026-09-21 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF) | 96.1% → 100% | 21/1/29 | 6/51 full | tick 1.5/4.9 · fold 0.6/0.8 · brief+parse 1.0/1.3 (the same gap) · generate 470/714 ms | the re-ask rescue closes validity; the mix inverts (the cautious assistant declines 29); deviation honest 15/36, coverage 34/34; the gate-valid protocol echo pinned (§13.1) |
+| engine1-q1p7b | 2026-10-03 | Qwen3-1.7B Q4_K_M local (llama-server b11337, GBNF; CPU 2-core sandbox band — not a station row) | 100% → 100% | 51/0/0 | 4/51 full (15 kind / 32 mismatch) | tick 0.3/0.5 · fold 0.8/0.9 · brief 0.9/1.1 · parse 2.7/3.4 · generate 11598/12512 ms | THE SPLIT LANDED (iter-312): the first row with all five columns — brief = emit_call, parse = grammar+gate+wiring minus the tick (the instrument's decomposition: TECH_NOTES §13's iter-312 block); the smallest band yet: the grammar holds raw validity at 100% with ZERO re-asks spent, the mix fully collapses to intents (the most aggressive mapper — 16 look_around guesses; the world refusing 6: 4 intent_rejected + 2 take_failed); the CPU generate dominates (~617-tok prompt at ~92 tok/s); the determinism mini greedy/seeded/cacheless ×3 byte-identical, one across-priming cache flip observed (§13) |
+| engine1-e4b-r7 | 2026-10-03 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station — RTX 3080 Ti, the split instrument's first station deployment) | 100% → 100% (0 re-asks) | 51/0/0 | 11/51 full (19 kind / 21 mismatch) | tick 0.2/0.4 · fold 1.0/1.3 · brief 1.1/1.5 · parse 2.9/4.1 · generate 392.7/492.3 ms | round 4's row re-measured WITH THE SPLIT (the merged brief+parse 1.1/1.6 there — the columns land at that scale); the aggressive-mapper shape holds (mix 50/0/0 → 51/0/0; validity 98→100 raw, zero re-asks); agreement 15→11 full (the instrument difference recorded — §13 round-7); the world refusing 13 (11 intent_rejected + 2 take_failed); the determinism mini ×3 + restart byte-identical, zero cache flips (§13 round-7) |
+| engine1-q9b-r7 | 2026-10-03 | Qwen3.5-9B Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station, the split instrument) | 100% → 100% (0 re-asks) | 21/1/29 | 7/51 full (10 kind / 34 mismatch) | tick 0.2/0.5 (n=21) · fold 0.8/1.9 · brief 1.1/1.4 · parse 2.2/3.5 · generate 501.6/766.6 ms | the cautious-assistant mix reproduced EXACTLY (21/1/29 — round 4's row byte-equal; the temp-0/seed-42 determinism across instruments); validity 96.1→100 raw (round 4's re-ask rescue no longer needed); agreement 6→7 full; the narrator live-beat datum 0/8 at this sitting (§7's re-scope rides this row — §13 round-7) |
+| engine1-px12b-r7 | 2026-10-03 | Prototype-X-12b.i1 Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station, the split instrument) | 100% → 100% (0 re-asks) | 0/11/40 | 0/51 full (9 kind / 42 mismatch) | tick n=0 (zero intents — the honest gap) · fold 0.6/0.7 · brief 1.0/1.1 · parse 1.9/2.0 · generate 438.4/713.3 ms | round 5's live-session model through the battery: the most cautious mapper measured — ZERO intents (11 questions + 40 no_intent declines); the tick column honestly empty (no intents → no ticks); the narrator 0/8 with document-shaped WRONG-shape replies (markdown headers, fenced-json log blocks — §13 round-7) |
+| engine1-q27b-r8 | 2026-10-03 | Qwen3.8-27B-OrcaRouter-GSQ-RCO-IQ3_XXS-v2.1 local (llama-server b11064, GBNF; the owner's GPU station, the split instrument, the tuned 27B form: ctx 16384 · b 512/ub 256 · t 8 · --jinja · the probed draft-mtp pair · KV q8_0 · AUTO placement) | 100% → 100% (0 re-asks) | 31/3/17 | 14/51 full (11 kind / 26 mismatch) | tick 0.2/0.4 (n=31) · fold 0.9/1.3 · brief 1.3/1.7 · parse 2.6/4.5 · generate 3796.5/6109.7 ms | THE LAST STANDING ARM LANDED (round 8, §13): the grammar holds raw validity at the FOURTH band — the size law's fourth point; the mix 31/3/17 sits BETWEEN e4b and q9b — the caution gradient NOT monotone in size (agreement_full 14/51 the highest measured; the 27B more intent-taking than 9B/12B); the MTP draft live (acceptance 0.41–1.00, the bulk 0.65–0.95); the GBNF penalty at 16K q8_0 KV: none (−19.6 ms); the determinism mini ×3 + restart byte-identical at the deepest ctx yet; the one battery_bug — the s8 pinned fixture's PREMISE drift (scene_mismatch: the substrate HELD, the fixture coupled to the engine's prior path — §13 round-8); the same sitting re-ran the three round-7 bands BYTE-EQUAL (the cross-run reproducibility datum) |
+| engine1-e4b-m2 | 2026-10-09 | Gemma-4-E4B Q4_K_M local (llama-server b11064, GBNF; the owner's GPU station — the M2 battery's CONTROL ARM, the §8.5 form byte-for-byte, greedy t0; the autospawn ladder + the TTY model choice, iter-349's pack v2) | 100% → 100% (0 re-asks) | 50/0/1 | 11/51 full (7 kind / 17 target / 1 fields / 14 no_pin / 1 not_intent; CLEAN 4/16, drift 35) | tick 0.2/0.4 · fold 0.0/0.1 (n=10, the probe's own stage) · brief 1.1/1.7 · parse 0.4/0.5 · generate 366.1/489.5 ms | THE e4b-r7 HEADLINE REPRODUCED EXACTLY cross-instrument on the same model × build × station (11/51 full; mix 50/0/1 vs 51/0/0 — one cycle's cross-sitting variance; the finer census the m2 vocabulary + the premise-drift status the r7 instrument didn't carry) — THE M2 BATTERY ANCHORED ON BOTH BANDS (CPU: the q1p7b row on b11500, iter-348; station: e4b-r7 here); the arms B−A/C−A +0/+0; the texture-family datum + the cascade exercised (10 honest surface refusals, LEAK 0) + the determinism mini 6/6 (greedy cold==warm, restart reproduces both — the THIRD build point: b11500's cold≠warm build-specific) — the reading + the M2 decision packet: iter-350's report |
+| engine1-q9b-m3 | 2026-10-09 | Qwen3.5-9B Q4_K_M local (llama-server b11538, GBNF; the owner's station BUT A CPU-ONLY BUILD — zero `ggml_cuda_init`/offload lines in the shipped 406 KB of server logs, prompt 48.8 tok/s · gen 5.78 tok/s; the M3 battery's G CONTROL arm, the §8.5 form byte-for-byte, greedy t0, iter-353's pack v3 double-click; the extractor decider-4b-v2.1 Q8_0 lazy-spawn after Kev-4B failed 20 loads at the GGUF tensor level — the v3 degrade law live) | 100% → 100% (0 re-asks) | 23/1/18 | 9/42 full (6 kind / 1 target / 4 no_pin / 22 not_intent; CLEAN 2/10 — the SAME 10 cycles as h0/h8 with per-cycle IDENTICAL verdicts; drift 32) | the M3 leg vocabulary (this probe carries no five-component split): G parse 16.85/19.39 s · H0 33.70/37.46 · H8 33.88/38.06 · F main 26.77/32.73 + extract 17.74/19.16 · G2 parse 16.59/19.53 + free 23.21/27.81 s | THE BAND DISCOVERY (iter-354): the run was a SECOND CPU POINT at 9B, not the GPU ledger (the m2-station b11064 did 366 ms/call on the same machine — ×46 here at ×2.25 the model; the GPU «tapki» question stays open, one CUDA-build re-run closes it); the M3 census: h0 +4 / h8 +3 RAW ride the 32 drift cycles (the prose channel flips the 9B's verdict behavior — 22 not_intent under the pure JSON grammar vs 12 under the hybrid, mix 23/1/18 vs 40/1/1), f −5 at the decider extractor (37/42 not_intent — the two-model form EXTREMELY extractor-sensitive), g2's "−3" a SUBSET ARTIFACT (zero paired flips vs G on the shared 23 cycles); the order H < G2 < F confirmed on the second CPU point (the single-pass saving +5.93 s GROWS with the model — prompt ≈79% of the call wall; the two-model contention tax +15.4% vs +60% at 4.1 GB); the prose real (407–418 chars p50, temp-0 included) with the NAMED prose-fact divergence class (success narration over take_failed, the f6e fiction-layer laundering, the refuser-bleed on injection cycles) + f6f EXFILTRATION REPRODUCED 1:1 (the free arm's prose dumped the full parse_protocol, 1 639 chars; the grammar arms hold structurally — the third band); determinism cold==warm + restart (the FOURTH build point: b11337 green, b11500 cold≠warm the anomaly, b11064 green, b11538 green) — the reading + the owner's forks: iter-354's report |
+
+Gap rows standing: (none — the ledger complete through the 27B
+band; the M3-extraction battery's station row landed 2026-10-09
+(engine1-q9b-m3 — a CPU-band point pending the CUDA re-run, the
+owner's call); the remaining engine-side call is PRESENTATION_SPEC §7's
+narrator production-form decision, the owner's). Discharged by
+round 8 (iter-314, 2026-10-03 — the owner's second station delivery
+«вот результаты прогона» through the v2 probe — the chosen-model
+instrument, the four-engine sitting, TECH_NOTES §13's round-8
+record): the 27B GBNF parse arm + the one-model-constrained A/B
+(CONTRACTS §4.3 arm a) — the engine1-q27b-r8 row above (raw
+validity 51/51 at the fourth band, the mix 31/3/17, the MTP draft
+live, no GBNF penalty at 16K, the determinism mini + restart
+byte-identical at the deepest ctx, the one battery_bug's root cause
+named — the fixture-premise drift, the substrate held) + the three
+round-7 bands re-run BYTE-EQUAL in the same sitting (the cross-run
+reproducibility datum — the semantic columns' determinism measured
+across runs, not just within) + the router big-switch arm (the
+9B→27B swap 9.0 s at --models-max 1 — no size penalty against the
+small swap) + the narrator 27B arm (0/8 — 32 beats, 96 calls, zero
+accepted cumulative; PRESENTATION_SPEC §7 updated). Discharged in
+part by round 7 (iter-313,
+2026-10-03 — the owner's station delivery through the landed split
+instrument, TECH_NOTES §13's round-7 record): the three full-column
+station rows above (engine1-e4b-r7 / -q9b-r7 / -px12b-r7) + the
+narrator live-beat side of the standing call ANSWERED (0/8 at every
+band — the live-surface floor above 12B, PRESENTATION_SPEC §7
+re-scoped; the 27B one-model run the remaining arm) + the wb-6
+semantics confirmed cross-build (b11064 + b11337). Discharged by
+iter-312 (2026-10-03, the owner's live-row enabler — llama.cpp
+b11337 in the
+documented drop layout, the models through the gateway's own
+model.fetch): the brief/parse component split — the battery's own
+clock over the landed cycle seam (emit → grammar → generate → apply,
+the tick extracted via a delegating run_steps proxy), its numbers the
+engine1-q1p7b row's; the same iteration closed the wb-6 arm live
+(POST /models/load + /models/unload re-verified against a real
+llama-server — the router-mode reality, TECH_NOTES §13's iter-312
+block). Discharged by the engine-1
+runs: the {3–8B, GBNF} arm (both rows), the per-component p50/p95
+columns (both rows), the per-family latency distribution (§13.1 — no
+Cyrillic latency penalty at this band), the grammar's live-backend
+compile check (round 5's live `--engine` session at an off-plan 12B:
+grammar accepted + enforced through the landed wiring — §13.1).
+Discharged by bg-9 (2026-09-21): the API-side prose families (ii)–(v)
+— the rate-limit economics beaten by pacing at the same sandbox API
+class; the second API-side datum, the trend numbers + the instrument's
+honesty notes: TECH_NOTES §10's re-run block.
+
+## 9. Claim → instrument selection grammar (intake-26, iter-138 — research-derived, a routing aid, never a gate)
+
+> Source: the intake-26 block (`docs/blueprint/phases.md` §6 — the routed
+> record and the full lens/prism catalog; D-171). The compact form is
+> adopted here; the catalog is never duplicated (D-024). What this section
+> answers: the repo does not lack verification instruments — it lacked a
+> compact answer to "which existing instrument falsifies THIS claim"
+> (iter-137's audit re-derived its verification form from scratch; the
+> intake family's verdict tables each re-derived the instrument mapping).
+> A **lens** names what property is judged (the question); a **prism**
+> names the controlled perturbation or comparison that reveals it (the
+> experiment). One instrument serves many lenses; one lens may need
+> several prisms. Select the smallest pair that can falsify the claim —
+> never run every test for every change.
+
+**The claim packet** — the reusable verification record for a substantive
+claim; a build row's verification plan rides this form (iter-137's A–H
+ledger is the standing instance of the packet's shape):
+
+```text
+Claim / Problem / Lens(es) / Prism / Scenario + corpus /
+Oracle / Falsifier / Counterexamples /
+Expected evidence / Observed evidence / Epistemic class / Disposition
+```
+
+The **oracle** must be an observable condition tied to the canonical
+substrate (door answers, RNG fingerprints, projection properties — never
+prose). The **falsifier** must state what would make the claim false. A
+plausible description without either is not evidence. The disposition
+vocabulary stays the repo family (CONFIRMED / PARTIALLY CONFIRMED /
+REJECTED / UNRESOLVED / DEFERRED); no numeric quality score — a scalar
+erases the diagnosis the lenses preserve. The packet's **epistemic
+class** is the other axis — the claim's kind as asserted, named before
+verification runs (doc-5, D-198): FACT (directly established by
+evidence) / INFERENCE (a reasoned conclusion from evidence) /
+HYPOTHESIS (plausible but unverified) / PROPOSAL (a possible future
+direction) / UNKNOWN (not presently decidable). The class gates what a
+disposition can license — hypothesis → requirement, proposal →
+architecture, research → implementation, plausibility → proof are the
+forbidden transitions; a surviving HYPOTHESIS or PROPOSAL routes to an
+owner-gated row on the owner's call, never straight into a build. An
+**ablation arm** must
+demonstrably exercise the target subsystem on the run horizon before
+its delta is read — a zero-delta arm over an unexercised subsystem is
+a failed experiment, not zero causal effect (the empty-ablation rule,
+intake-34's measured lesson).
+
+| Claim shape | First prism | Strong follow-up | Standing instruments (the oracle owners) |
+|---|---|---|---|
+| "this creates new depth" | one-knob perturb | composition crossing | balance A/B (§6), M1/M3, the depth battery (the F3 form + the three arms, `phases.md` §6), `divergence_probe.py` (div-1, D-235: the same-seed minimal pair's first-divergence / causal-path / persistence records over the §6 arm family — WHERE the futures diverge and whether it persists, the question the distribution tables cannot answer) |
+| "this is a meaningful player decision" | remove | knowledge restriction / same-seed fork | `--systems-minus`, the door-surface battery, the blind suite (§1.3) |
+| "actors only know permitted facts" | knowledge restriction | stress corpus | blind-NPC suite (§1.3), the deviation corpus (§8.2), `knower` boundaries |
+| "this does not perturb unrelated runs" | same-seed fork | one-knob | T1/T2, `mechanics.py blast`, the RNG fingerprint |
+| "the consequence remains meaningful later" | horizon extension | composition crossing | longrun, eventless stretches, payoff latency (§2) |
+| "this event family is causally live" (a consumer exists — something reads it) | **causal-inertness ablation** (iter-262, D-238): fold the realized log twice — whole vs the family's events removed; an identical final projection + only cause-chain references proves the family INERT (no consumer); a divergent fold names the consumer's chain | the static reference scan (every field that can cite an id: cause/knowledge.source/provenance), the consumer enumeration over the pack (`mechanics.py census --log`'s per-family rows) | the twin-fold scratch discipline (never a committed-log edit — INV-5's read-side corollary: the ablation folds a COPY); the measured instances: the 52 calendar turns + the 5 institutional events of the composition run (both inert — the iter-262 record) |
+| "this system is not dead / not overactive" | horizon extension | same-seed fork / one-knob | pack lint, the balance harness (§6), M1–M5 (§2), the corpus |
+| "this outcome is explainable" | same-seed fork | composition crossing | `mechanics.py trace/why`, the provenance family, drift tables |
+| "this cannot escape its boundary" | stress corpus | independent re-derivation | the validator golden set, pack lint, cap/floor tests, stoplists |
+| "this parameter earns its complexity" | one-knob | remove | the ablation family, the offline one-knob ranking (intake-16's spike record) |
+| "a meaningful semantic change cannot pass silently" | the mutation probe (known mutants applied to a pack copy: lint verdict + golden byte-diff) | the coverage census — `mechanics.py census` (cov-1, D-234: the action-to-consequence forward walk; the realized column is the mutation-escape surface — which paths the committed corpus actually binds) | the admission lint (structural closure only), the per-pack golden byte-diff (path-bound), `mechanics.py blast` |
+| "the composition is real / the chains interact end-to-end" | the integrated witness (ONE run, existing verbs only) | same-seed fork | `tests/test_p1_composition.py` (P1-1, D-237: 16 RELATIONAL oracles over the 2371-event province run — cause→consequence per chain, residue→future-option, assignment→the origin observable, the byte-identical twin), `mechanics.py census --log` (cov-1's runtime arm: the A..H loss localization per family), `mechanics.py timing` (P1-10: the two-times table, the latency distribution, the OCC misses) |
+| "run_steps composes at every clean drain boundary / resume is invisible" (KI#114, ki114-1-impl) | **the 143-check composition falsifier** (`tests/test_composition.py`): every partitioning of the same step list x split + checkpoint-resume-at-every-cut x double-run, byte-compared against the whole run — 5 packs x 2 seeds x the cut lattice + the Lab segmented 3y family; the count pinned BY the law (a lost check fails the shape assert) | the historical repro (farthest seed 7, the 2-segment split — the +16 pinned dead) + the boundary-door witness (every inter-step boundary admits `export_cursor`) + the BASE arm's teeth (45/143 red under any mid-drain feed) | the whole-vs-segmented Lab contract stays a DIFFERENT law (two different player-input sequences — never erased by KI#114; `scripts/labrunner.py` owns it) |
+
+Two standing oracle laws the table carries:
+
+- **Independent re-derivation.** A checker that shares the
+  implementation's mistake is not an oracle. Compute the claimed result
+  by a path that does not share the validated path: runtime projection vs
+  fold/checkpoint refold; live loop vs shadow replay; committed fixture
+  vs re-generated run (the checkpoint/blind/mechanics families' shared
+  lesson — the strongest transferable rule of the corpus).
+- **Order probes are contract-bound.** Perturb an ordering only where the
+  owning spec declares the operations commutative; where order is
+  semantic, the expected result is NOT invariance — derive the oracle
+  from the owning contract first (the D-039 crossing law is the standing
+  instance: co-occurring ticks fire coarsest-first by design; temp-1/A2,
+  D-236, is the second: the wait-slicing oracle is the declared
+  crossing-family scope — count-invariance over status_decayed /
+  watch_change / knowledge_transfer / expectation_violation + the
+  minimal pair's projection/fingerprint invariance — while the door
+  families are contract-FREE with their known divergences PINNED
+  (`tests/test_temp1_contract.py`); full slice equivalence is
+  explicitly NOT the claim, and a divergence that silently disappears
+  is the failure, never the healing).
+- **World-level witnesses pin RELATIONS, never golden snapshots (iter-261's
+  §12 law, D-237 — the third standing instance).** An integrated-world
+  witness asserts the causal RELATIONS — cause exists → consequence
+  exists; residue persists → a future option changes; assignment → the
+  semantic origin stays observable; realization → the canonical event
+  stays deterministic (the byte-identical twin) — over the measured
+  surface as pinned numbers; a whole-world golden JSONL is the forbidden
+  form (a second truth the first content change silently erases). The
+  standing instance: `tests/test_p1_composition.py` over
+  `tests/playscripts/province_composition.json`; the loss localization
+  and the timing surface ride the instruments (`census --log`, `timing`),
+  never a committed log.
+- **Mutation visibility is path-bound (intake-37's measured lesson — the
+  empty-ablation rule's pack-side twin).** The admission lint closes
+  structure (orphan refs, closed enums, intent-contract, template
+  vocabulary), never value semantics; a golden surfaces a semantic
+  change only when the mutated path is exercised on the covered script.
+  A green suite over an unexercised path is not semantic coverage —
+  measured iter-195: a director `release_threshold` and an urgency
+  `probability_per_beat` mutation passed lint AND the tavern golden.
+
+The lenses' own quality bar: the five-part design test (BLUEPRINT §2
+L15 the owner; intake-26 §12 the record) applied to any future lens. A
+matching name is not proof; a useful form with unproven quality stays
+PARTIAL. A new lens or prism enters this
+table only after one claim packet used it (the first-consumer law).
+
+### 9.1 The scale-claim sufficiency law (iter-344 — the unified-pack v1.5 absorption; the standing vocabulary for every scale/asymptotic claim)
+
+> Source: the owner-maintained research companion
+> (`canonsim_unified_agent_pack` v1.5, `docs/SCALE_TESTING_LAW.md` +
+> ULT §3/§17.2 — both paths inside that EXTERNAL pack, never this
+> repo) — absorbed into the repo's verification owner because
+> the queue's next rows (the density-envelope battery, the world
+> track's dense-world horizons) are its named consumers, and the lab
+> reports had already hand-stated its forms (iter-337's "horizon
+> evidence, not dense-world proof"; iter-335's sufficiency hedging).
+> The pack remains the research companion; this section is the
+> executable-claims side, single-owned here (D-024).
+
+**Core law:**
+
+```text
+TEST PASS ≠ SCALE PROOF
+a test proves only the relation exercised by its workload
+a small authored world cannot prove dense-world scalability
+a long horizon cannot substitute for population/relation/causal density
+```
+
+Every non-trivial scale claim declares the smallest useful workload
+tuple — `E` entities · `L` locations · `R` relationship fan-out · `F`
+causal fan-out · `ρ` event density · `K` cross-domain coupling · `H`
+horizon · `Q` query locality (+ `B` branch/checkpoint pressure when
+relevant) — and names which axes were VARIED, which HELD, and which
+were nuisance. `same E ≠ same workload`; `same H ≠ same scale`; `same
+event count ≠ same causal complexity`. A strong locality claim varies
+at least two independent axes (e.g. local cone size + unrelated world
+volume).
+
+**Sufficiency classes** (never silently promoted upward):
+
+```text
+UNEXERCISED    the workload does not exercise the claimed shape
+SEMANTIC-ONLY  correct on real content; density below the claimed envelope
+LOCAL-SCALE    the local cone stressed + unrelated volume varied;
+               target density not reached
+DENSITY-SCALE  the claimed density axes varied with independent controls;
+               survived the oracle/falsifier pair
+TARGET-SCALE   the declared target envelope exercised — a capacity
+               statement for the measured profile/hardware/protocol only
+```
+
+**Oracle tiers** (proof strength matches workload size — the repo
+already lives this: T1 goldens / `semantic_diff` / the Lab's compact
+records; the tier law makes the pairing standing): small = byte-golden
+committed fixtures; medium = semantic equivalence + selected exact
+invariants + deterministic counters (compact fingerprints, not giant
+logs); large = regenerated workload + reference differential +
+invariant/effect summaries + operation counts — a large run never
+compares two independently invented approximations, and "completed" is
+never read as "scaled".
+
+**The minimal scale-claim packet** (rides the §9 claim-packet form;
+the scale-specific fields):
+
+```text
+CLAIM       what is expected to scale / remain bounded
+WORKLOAD    profile, seed, E/L/R/F/ρ/K/H/Q/B
+CONTROL     what stays fixed and why
+ORACLE      the exact semantic relation / reference / invariant
+FALSIFIER   the smallest mutation or adversarial boundary that must fail
+EVIDENCE    operation counts and slopes first; wall/memory where relevant
+SUFFICIENCY UNEXERCISED | SEMANTIC-ONLY | LOCAL-SCALE | DENSITY-SCALE | TARGET-SCALE
+DISPOSITION CONFIRMED | PARTIALLY CONFIRMED | REJECTED | UNRESOLVED | DEFERRED
+```
+
+**Named workload profiles** (the profile vocabulary for scale rows;
+`locality-control` = 1×/10×/100×/1 000× unrelated volume with the
+local query held; `entity-density` = E up, topology/rules fixed;
+`relationship-fanout` = R independent of E; `causal-fanout` = F with
+ρ controlled; `cross-domain-coupling` = K via legitimate family
+interactions; `horizon-density` = H with E/R/F/ρ controlled;
+`mixed-density` = several axes together — late-stage validation,
+never the first diagnostic). Standing classification of the measured
+corpus: the farstead kiloyear family (iter-335/336/337/338) is
+**SEMANTIC-ONLY** — horizon evidence on a sparse authored world; the
+density-envelope battery (the generated Tier A family) has earned the
+repo's first two scale classes — **LOCAL-SCALE** (iter-345/346: the
+locality-control ladder, E 25→205 unrelated volume, the event stream
+invariant + the byte-level isolation law) and **DENSITY-SCALE**
+(iter-347: the households ladder, the cone's own population 12→128
+with the cold volume fixed, the wall's quadratic growth decomposed
+into the named members — skip_probes the dominant term, the
+quiet-skip economy inverting at density; T1/census/material-
+multiset/canon-neutrality all held). No row has earned TARGET-SCALE
+(the declared target envelope — a capacity statement for the measured
+profile/hardware/protocol only). Fixture hardcoding is forbidden as the
+mechanism of generality: scale rows consume profile + seed + counts +
+the existing schema — never hand-written ID herds; and a promoted
+metric must name its intended effect, a sensitivity witness, and a
+known decoy it rejects (metric validity; M1–M5 are liveness evidence,
+never asymptotic proof).
+
+### 9.2 The composite proof-test pattern map (iter-344 — the v1.5 absorption's second parking; pattern NAMES with their live owners, never claims of implementation)
+
+> Source: ULT §17.4.1/§17.5 (v1.5). A composite pattern is a research
+> name for a verification SHAPE; the map's job is two-directional
+> honesty: a pattern WITH a live owner is cited by that owner (never
+> re-built); a pattern WITHOUT one is vocabulary only — saying it is
+> "implemented" without naming the live test/instrument here is a
+> doc-drift bug. New patterns enter only with their first consumer.
+
+| Pattern | The relation it demands | Live owner (or vocabulary-only) |
+|---|---|---|
+| Certificate quiescence | explicit stepping vs jump-to-next-producing-beat — exact result preserved; invalid boundary detected | `tests/test_h9.py` law 1 (the A/B byte-identity pair) + the fences |
+| Derived-index poisoning | delete/stale/poison a derived structure — canon unchanged; stale state rebuilt/rejected | `tests/test_occidx.py` (the twin-agreement property, seeded non-read mutations; the resume rebuild law) |
+| Schedule permutation | equivalent event set under partition/split/resume — commutative class equivalent, ordered class detects | `tests/test_composition.py` (the 143-check lattice; split + resume-at-every-cut) |
+| Mutation adequacy | a meaningful semantic mutation is detected | the mutation probe row above + `mechanics.py census` (cov-1) |
+| Workload-sufficiency gate | the claim's density axes actually exercised | §9.1 (this file — the sufficiency classes) |
+| Reference equivalence | optimized path == reference path for every maintained view | T2 + the OCC A/B attribution-equivalence law; the snapshot-vs-fold law (scale-1-impl) |
+| Replay/resume equivalence | checkpoint+tail == uninterrupted; split == whole | T1/T2 + `tests/test_composition.py` + the Lab `--verify-replay` arm |
+| Locality injection | 1×/10×/100×/1 000× unrelated volume — local query unchanged, local work bounded | **the density-envelope battery's landed datums** (iter-345/346): `tests/test_densitypack.py` law 3 (the K=0 isolation — the cross-unit falsifier) + the locality-control ladder (the event-stream invariance + the byte-level isolation law, iter-345's report §A.3; the wall decomposition's named members = the "local work bounded" half, iter-346's report §A.3) |
+| Boundary surgery | perturb just-outside vs just-inside a declared dependency boundary — outside cannot change the result | **`tests/test_labcomposite.py`** (lab-composite-1's first landing, iter-385 — the manifest enumerated from the structures' own declarations [the gate fold's declared read pairs + the verdict movers + the decay axes, never rebuilt test-side], the surgery riding the `_commit` fold-order excerpt over REAL 1y density-envelope runs, three profiles [the density-1 form / the households warm-ring / the cold-R-ρ axes]; 5 laws: the manifest law, the just-outside necessity, the just-inside gate pop-exactness, the verdict-mover re-derivation, the axis-mover discrimination — the cross-structure + cross-unit locality forms; the OCC read-pair mutations the nearest kin, never re-built) |
+| Promotion ping-pong | coarse↔fine cycles — identity/obligations/conserved quantities do not drift | **vocabulary-only** — a world-track/meso row (representation continuity, CONTRACTS §6/§7's laws) |
+| Observer noninterference | hidden/private changes under a fixed authorized surface leave the authorized result unchanged | **vocabulary-only** — CONS-side assurance grammar; nearest landed kin: the blind suite (§1.3) |
+| Causal debugging closure | fault → first divergence → slice → ablation → minimized capsule | `scripts/divergence_probe.py` (first-divergence/causal-path/persistence) — the capsule-minimization half vocabulary-only |
+| Adaptive sufficient state | removing a candidate field is detected; retaining it preserves declared behavior | **vocabulary-only** — a meso/LOD research row |
+| Specialized-kernel differential | interpreted vs specialized execution — declared state/event/RNG relation preserved | **vocabulary-only** — fires only if a native/batch row ever opens (ULT S8-class) |
+
+The pairing map for future executables (profile → pattern):
+locality-control → locality injection; relationship/causal-fanout →
+boundary surgery; horizon-density → certificate quiescence;
+mixed-density → promotion ping-pong; the generated envelope → causal
+debugging closure. A row that lands one of these patterns names its
+owner here in the same iteration — the map stays the single registry
+of what exists versus what is merely named.
+

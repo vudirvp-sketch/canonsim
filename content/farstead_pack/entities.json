@@ -1,0 +1,487 @@
+{
+  "meta": {
+    "pack": "farstead_pack",
+    "version": "0.1",
+    "display": "Farstead — the Tier A world (the Atomic World Lab fixture)",
+    "notes": "THE TIER A SYNTHETIC FIXTURE (the owner's Atomic World Lab agent pack v1.5, its 02 §12 the smallest-world acceptance target, its 04 §3 Stage B the first entry — lab-2, the TASKS row): one settlement (the green carries the storage + the exchange), four finite sources + slow regrowth flows, one workshop, one road, 12 adults in 3 households, 4 roles (forager / cutter / miner / smith), few items. A MEASUREMENT INSTRUMENT, not an authored setting: every noun is deliberately plain, the L1 material surfaces (source → extraction → stock → ration → meal, the smith's bench → rack arm) are authored over the LANDED primitives only — the settle legs over explicit holders, the transfers through the actor, the consume as the meal's sink, the on_action reply as the fatigue relief. ZERO core change by design (INV-3's substance: the pack is the Lab's fixture through the same admission lint as every committed pack). The honest gaps ride the notes: no conversion primitive (the anvil's rack is a finite pile — ore and wood gate but never become the tool), no wear consumer for tools, no capacity cap on regrowth, the fatigue axis is the composite body deficit (the engine's one growing axis, pinned between rare meals at the LOD's year cadence). Every value is v0.1 tunable pack data, never law. Display names in English (D-009)."
+  },
+  "locations": [
+    {
+      "id": "loc_road",
+      "name": "the Farstead road",
+      "role": "the world's edge: the one road in, the traveler's ground",
+      "layout": "open_road",
+      "exits": [
+        "loc_square"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "notes": "THE ONE ROAD (02 §12's list): the only way in or out. The player's declared position (the surveyor standing at the world's edge, watching) — under the player-relative scene LOD this is the FROZEN-ANCHOR arm: active = the road (nobody but the boy and the traveler), warm = the green alone, every worker beyond COLD. The paired --anchor loc_square arm is the living world; the same pack, two anchors, two different autonomous volumes — the LOD datum the E0 battery measures."
+    },
+    {
+      "id": "loc_square",
+      "name": "the Farstead green",
+      "role": "the settlement: the hearth, the storehouse corner, the exchange",
+      "layout": "village_green",
+      "exits": [
+        "loc_road",
+        "loc_bank",
+        "loc_copse",
+        "loc_outcrop",
+        "loc_spring",
+        "loc_workshop"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "accounts": {
+        "food": 12,
+        "wood": 8,
+        "ore": 4,
+        "water": 16,
+        "tool": 2
+      },
+      "account.food": 12,
+      "notes": "THE SETTLEMENT + THE STORAGE + THE EXCHANGE POINT (three of 02 §12's list in one place — a settlement this small keeps its store on the green): the communal stocks on the location (res-1's owner-agnostic form), the ration draws and the meal served here, the workers' rounds beginning and ending here. THE GRANARY LINE: the account.food anchor field above (the scene-line legality, the pressure pack's gauge precedent) renders the LIVE food stock at the green — the one read surface the settlement's condition rides. The star's hub: every source and the workshop one hop away, the road the seventh door — which is the whole LOD truth of this world: anchored here, everything is active-or-warm and the material cycle runs at the year clock; anchored at the road, the world freezes."
+    },
+    {
+      "id": "loc_bank",
+      "name": "the berry bank",
+      "role": "the food source: the brambles above the water",
+      "layout": "river_bank",
+      "exits": [
+        "loc_square"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "accounts": {
+        "food": 40
+      },
+      "notes": "THE FOOD SOURCE (finite + regrowth): forty measures standing at open, the regrowth flow (+8 a year) the environmental process that refills it (02 §9's preferred form — an environmental process changes an existing source's stock, never a bare spawn). The ungated flow has NO capacity cap — the recorded gap (an unharvested bank accumulates without bound; the honest residue of a substrate without a bounded-source primitive)."
+    },
+    {
+      "id": "loc_copse",
+      "name": "the hazel copse",
+      "role": "the wood source: the standing hazel, the cutters' ground",
+      "layout": "coppice",
+      "exits": [
+        "loc_square"
+      ],
+      "flammability": "medium",
+      "fire_spots": [],
+      "accounts": {
+        "wood": 40
+      },
+      "notes": "THE WOOD SOURCE: forty lengths standing, +6 a year regrowth. The only burnable ground in the world (inert data — the fire family is not armed in this fixture; the value stands for the future ignition row)."
+    },
+    {
+      "id": "loc_outcrop",
+      "name": "the iron outcrop",
+      "role": "the ore source: the rust-stained face above the green",
+      "layout": "rock_face",
+      "exits": [
+        "loc_square"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "accounts": {
+        "ore": 24
+      },
+      "notes": "THE ORE SOURCE: twenty-four measures of bloom in the face, +4 a year (the outcrop weathers fresh ore loose — the slowest of the four regrowth flows; the iron is the scarcest stream, as it should be)."
+    },
+    {
+      "id": "loc_spring",
+      "name": "the cold spring",
+      "role": "the water source: the basin under the bank",
+      "layout": "spring_pool",
+      "exits": [
+        "loc_square"
+      ],
+      "flammability": "none",
+      "fire_spots": [],
+      "accounts": {
+        "water": 60
+      },
+      "notes": "THE WATER SOURCE: sixty measures in the basin, +12 a year (the fastest regrowth — water is the abundant stream). The pail lies here (draw_water's flagged tool)."
+    },
+    {
+      "id": "loc_workshop",
+      "name": "the smith's workshop",
+      "role": "the workshop: the anvil, the bench, the tool rack",
+      "layout": "smithy",
+      "exits": [
+        "loc_square"
+      ],
+      "flammability": "low",
+      "fire_spots": [],
+      "accounts": {
+        "ore": 4,
+        "wood": 6,
+        "tool": 6
+      },
+      "notes": "THE WORKSHOP (02 §12's list): the BENCH (the ore and wood stocks — the inputs the smiths haul from the green's store) and the RACK (six tools standing at open). THE HONEST GAP, authored not hidden: work_the_anvil moves a tool OFF THE RACK while the bench's ore and wood merely GATE — nothing converts inputs into outputs (the settle verb conserves kinds per leg; the substrate has no transformation primitive). The rack is a finite pile: when it empties, the anvil's door rejects softly and the tool arm dies with the finding recorded — the Stage B gate's own measured input (04 §3's narrow-contract list: transformation, manufacture)."
+    }
+  ],
+  "npcs": [
+    {
+      "id": "pc_01",
+      "name": "the surveyor",
+      "role": "the outsider with the instruments — the player, watching",
+      "position": "loc_road",
+      "status": {
+        "fatigue": 10
+      },
+      "relations": {
+        "trust": 50
+      },
+      "knowledge": [],
+      "mood": "patient",
+      "goal": "stand at the world's edge and see what the settlement does on its own",
+      "is_player": true,
+      "notes": "THE PLAYER (the Lab's declared anchor, lab-1's law): the pack's own declared position (the road) is the default E0 arm -- the frozen world, the outside observer; the paired --anchor loc_square arm is the living one. The traveler's rations (food 2, water 2) let him serve a meal or drink his own -- every verb in the pack is player-fireable.",
+      "accounts": {
+        "food": 2,
+        "wood": 0,
+        "ore": 0,
+        "water": 2,
+        "tool": 0
+      }
+    },
+    {
+      "id": "npc_ashen_elder",
+      "name": "Ashen, the elder forager",
+      "role": "forager — the food round's own hand",
+      "position": "loc_bank",
+      "status": {
+        "fatigue": 20
+      },
+      "relations": {
+        "trust": 55
+      },
+      "knowledge": [],
+      "mood": "weathered",
+      "goal": "the green's food corner never empty",
+      "pair_relations": [
+        {
+          "with": "npc_ashen_mate",
+          "trust": 80
+        }
+      ],
+      "notes": "THE FOOD POST (the haunt model — the substrate's own shape): the elder LIVES at the berry bank (the urgency law's one-goal-per-verb means no commute: a worker's move entry has one fixed target, so a round trip is not expressible — the resident-post form is the honest answer, the finding recorded in the pack's notes). His yearly roll: gather (the bank's stock to his hands) + stock (his hands to the green's store THROUGH the spoke — the deposit-through-adjacency, the pressure pack's feed-the-fire law: any room that shares the green's path can hand goods to its store)."
+    },
+    {
+      "id": "npc_ashen_mate",
+      "name": "the hearth-keeper",
+      "role": "forager — the green's hearth and ration table",
+      "position": "loc_square",
+      "status": {
+        "fatigue": 15
+      },
+      "relations": {
+        "trust": 60
+      },
+      "knowledge": [],
+      "mood": "steady",
+      "goal": "one meal on the green every day the store allows",
+      "pair_relations": [
+        {
+          "with": "npc_ashen_elder",
+          "trust": 80
+        }
+      ],
+      "notes": "THE MEAL ROUND (the L1 distribution + consumption edges), FLOAT-BASED: her standing stores (food 2, water 2 -- the hearth's buffer) feed the serves; the ration draw refills them -- three INDEPENDENT verbs where a chain would break under the deferred-realize law (the finding this fixture's own development measured). THE HORN CARRIES: the serves' knowledge names the green AND the adjacent ring -- every spoke one hop from the hearth, so the reply (fatigue -40) lands on the whole settlement. Her rolls are thin (probability 1 a beat): the store empties fast, the draws go quiet until a haul refills it -- the famine shape at the year cadence.",
+      "accounts": {
+        "food": 2,
+        "water": 2
+      }
+    },
+    {
+      "id": "npc_ashen_son",
+      "name": "the water-carrier",
+      "role": "forager — the spring round's own back",
+      "position": "loc_spring",
+      "status": {
+        "fatigue": 25
+      },
+      "relations": {
+        "trust": 50
+      },
+      "knowledge": [],
+      "mood": "quick",
+      "goal": "the pails full and the green's water corner wet",
+      "pair_relations": [
+        {
+          "with": "npc_ashen_elder",
+          "trust": 70
+        }
+      ],
+      "notes": "THE WATER POST: resident at the cold spring (the haunt model), the pail at his feet — the yearly draw (the basin to his hands) + stock (to the green's store through the spoke). The abundant stream: +12 a year regrowth against his 2-a-year draw — the one source nobody can empty at these cadences."
+    },
+    {
+      "id": "npc_ashen_daughter",
+      "name": "Ashen's daughter",
+      "role": "forager — the green's voice among the households",
+      "position": "loc_square",
+      "status": {
+        "fatigue": 10
+      },
+      "relations": {
+        "trust": 55
+      },
+      "knowledge": [],
+      "mood": "watchful",
+      "goal": "hear everything the green hears",
+      "pair_relations": [
+        {
+          "with": "npc_ashen_mate",
+          "trust": 75
+        }
+      ],
+      "notes": "THE GREEN'S VOICE (the social texture): her talk round is the settlement's oral surface — the telling pair carries what the green heard. Resident at the square with her sisters-of-sort; the daughters' directed talk cycle (Ashen to Bourne to Crome to Ashen) keeps every entry's pair unique under the clone law."
+    },
+    {
+      "id": "npc_bourne_elder",
+      "name": "Bourne, the elder cutter",
+      "role": "cutter — the timber round's own axe",
+      "position": "loc_copse",
+      "status": {
+        "fatigue": 30
+      },
+      "relations": {
+        "trust": 50
+      },
+      "knowledge": [],
+      "mood": "blunt",
+      "goal": "the green's wood corner stacked and the bench never cold",
+      "pair_relations": [
+        {
+          "with": "npc_ashen_elder",
+          "trust": 55
+        },
+        {
+          "with": "npc_crome_elder",
+          "trust": 50
+        }
+      ],
+      "notes": "THE TIMBER POST: resident at the hazel copse — the yearly fell (the standing stock to his hands) + stock (to the green's wood corner through the spoke). The households' pact rides his pair bonds (the three elders' triangle — the settlement's whole diplomacy in three edges)."
+    },
+    {
+      "id": "npc_bourne_mate",
+      "name": "the ore-breaker",
+      "role": "miner — the outcrop round's own hammer",
+      "position": "loc_outcrop",
+      "status": {
+        "fatigue": 30
+      },
+      "relations": {
+        "trust": 50
+      },
+      "knowledge": [],
+      "mood": "patient",
+      "goal": "bloom on the green for the smiths' bench",
+      "pair_relations": [
+        {
+          "with": "npc_bourne_elder",
+          "trust": 80
+        }
+      ],
+      "notes": "THE ORE POST: resident at the iron outcrop — the yearly break (the face to her hands) + stock (to the green's ore corner through the spoke). The rarest stream's own hand: the +4-a-year regrowth against her 2-a-year draw, the store's ore curve the E0's scarcity read."
+    },
+    {
+      "id": "npc_bourne_son",
+      "name": "the road-boy",
+      "role": "cutter — the road's edge, watching for travelers",
+      "position": "loc_road",
+      "status": {
+        "fatigue": 15
+      },
+      "relations": {
+        "trust": 45
+      },
+      "knowledge": [],
+      "mood": "restless",
+      "goal": "first to see whoever comes up the road",
+      "pair_relations": [
+        {
+          "with": "npc_bourne_elder",
+          "trust": 65
+        },
+        {
+          "with": "pc_01",
+          "trust": 35
+        }
+      ],
+      "notes": "THE ROAD-WATCH: the settlement's only gaze outward, RESIDENT at the world's edge from the founding (the one-goal-per-verb law leaves no commute to author -- his post IS the road). He talks at whoever stands there (the silent surveyor, in the player-absent runs -- the world acknowledging the observer without authorship; the telling pair rides it, the settlement's first news of the stranger). Under the road anchor he is the ACTIVE world's whole population beside the player -- the frozen world's one living voice; under the green anchor he rolls warm at the year clock with the posts, and his talk gate (co-location with the traveler) fails silent once the surveyor walks to the green. His trust toward the outsider (35) is the only edge that crosses the world's boundary."
+    },
+    {
+      "id": "npc_bourne_daughter",
+      "name": "Bourne's daughter",
+      "role": "cutter — the green's second voice",
+      "position": "loc_square",
+      "status": {
+        "fatigue": 10
+      },
+      "relations": {
+        "trust": 55
+      },
+      "knowledge": [],
+      "mood": "dry",
+      "goal": "the count kept on everyone's comings and goings",
+      "pair_relations": [
+        {
+          "with": "npc_bourne_elder",
+          "trust": 70
+        }
+      ],
+      "notes": "The square's second voice — her talk target (Crome's daughter) her own edge of the daughters' directed cycle (every target unique under the clone law); the smiths' news through the cutters' house."
+    },
+    {
+      "id": "npc_crome_elder",
+      "name": "Crome, the smith",
+      "role": "smith — the anvil's own hand",
+      "position": "loc_workshop",
+      "status": {
+        "fatigue": 25
+      },
+      "relations": {
+        "trust": 55
+      },
+      "knowledge": [],
+      "mood": "deliberate",
+      "goal": "the rack never bare and every edge on the green sharp",
+      "pair_relations": [
+        {
+          "with": "npc_crome_mate",
+          "trust": 80
+        },
+        {
+          "with": "npc_ashen_elder",
+          "trust": 55
+        }
+      ],
+      "notes": "THE ANVIL POST: resident at the workshop, the hammer at his hand — the yearly craft (the rack's tool to his hands; the bench's ore and wood GATE but never drain) + shelve (the tool to the green's store through the spoke). THE CONVERSION GAP'S FACE: the rack is a finite pile (six tools, one a year, no producer) — at these cadences the anvil dies inside the first decade, and the bench's inputs keep flowing to a dead rack: the input-output disconnect visible as data, the Stage B gate's own measured input."
+    },
+    {
+      "id": "npc_crome_mate",
+      "name": "the bloom-hauler",
+      "role": "smith — the ore that reaches the bench",
+      "position": "loc_workshop",
+      "status": {
+        "fatigue": 20
+      },
+      "relations": {
+        "trust": 55
+      },
+      "knowledge": [],
+      "mood": "even",
+      "goal": "the bench's ore corner never bare",
+      "pair_relations": [
+        {
+          "with": "npc_crome_elder",
+          "trust": 80
+        }
+      ],
+      "notes": "THE BENCH'S ORE ARM: resident at the workshop — the yearly pull (the green's ore corner to her hands THROUGH the spoke: the store's bloom travels out to the bench) + bench (her hands to the workshop's ore stock, local). The ore's whole path: outcrop -> green -> bench, every hop one spoke."
+    },
+    {
+      "id": "npc_crome_son",
+      "name": "the apprentice",
+      "role": "smith — the timber that feeds the bench",
+      "position": "loc_square",
+      "status": {
+        "fatigue": 20
+      },
+      "relations": {
+        "trust": 50
+      },
+      "knowledge": [],
+      "mood": "keen",
+      "goal": "carry the wood, keep a share, learn the anvil",
+      "pair_relations": [
+        {
+          "with": "npc_crome_elder",
+          "trust": 70
+        }
+      ],
+      "notes": "THE BENCH'S WOOD ARM (the green-liver): resident at the square — the take (the green's wood corner to his hands, local; fires fast at the beats when the corner holds) + bench (his hands to the workshop's wood stock THROUGH the spoke). The only smith-side hand who lives at the green."
+    },
+    {
+      "id": "npc_crome_daughter",
+      "name": "Crome's daughter",
+      "role": "smith — the workshop door's voice",
+      "position": "loc_square",
+      "status": {
+        "fatigue": 10
+      },
+      "relations": {
+        "trust": 55
+      },
+      "knowledge": [],
+      "mood": "quiet",
+      "goal": "the hammer's rhythm and the green's news",
+      "pair_relations": [
+        {
+          "with": "npc_crome_elder",
+          "trust": 70
+        }
+      ],
+      "notes": "The square's third voice — her talk target (Ashen's daughter) the directed cycle's closing edge; the foragers' news through the smiths' house."
+    }
+  ],
+  "groups": [
+    {
+      "id": "grp_ashen",
+      "name": "the Ashen household",
+      "position": "loc_square",
+      "members": [
+        "npc_ashen_elder",
+        "npc_ashen_mate",
+        "npc_ashen_son",
+        "npc_ashen_daughter"
+      ],
+      "notes": "THE FIRST HOUSEHOLD (the foragers' house): the food round, the hearth, the water round, the green's first voice. Anchored on the green (the active-or-warm side of the world under either anchor — no cold-tier machinery ever fires for it; the tier events stay unarmed, the 68a pattern)."
+    },
+    {
+      "id": "grp_bourne",
+      "name": "the Bourne household",
+      "position": "loc_square",
+      "members": [
+        "npc_bourne_elder",
+        "npc_bourne_mate",
+        "npc_bourne_son",
+        "npc_bourne_daughter"
+      ],
+      "notes": "THE SECOND HOUSEHOLD (the cutters' and the miner's house): the timber round, the ore round, the road-watch, the green's second voice."
+    },
+    {
+      "id": "grp_crome",
+      "name": "the Crome household",
+      "position": "loc_square",
+      "members": [
+        "npc_crome_elder",
+        "npc_crome_mate",
+        "npc_crome_son",
+        "npc_crome_daughter"
+      ],
+      "notes": "THE THIRD HOUSEHOLD (the smiths' house): the anvil round, the bloom round, the bench-timber round, the green's third voice — the workshop's whole supply chain in one family."
+    }
+  ],
+  "items": [
+    {
+      "id": "hammer_01",
+      "name": "the smith's hammer",
+      "position": "loc_workshop",
+      "carrier": null,
+      "is_hammer": true,
+      "notes": "THE ANVIL'S TOOL (the flagged-accessible consumer): lies at the workshop — anyone standing there may work the anvil through it. The fixture's discrete-item surface kept deliberately to two honest tools with real gates."
+    },
+    {
+      "id": "pail_01",
+      "name": "the spring pail",
+      "position": "loc_spring",
+      "carrier": null,
+      "is_pail": true,
+      "notes": "THE SPRING'S TOOL: lies at the basin — the draw_water gate's flag. The water round's honest requirement."
+    }
+  ],
+  "ambient_entities": []
+}

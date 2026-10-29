@@ -1,0 +1,8 @@
+{
+  "operation_id": "2b47295595df68047dc8be93538d62f3628b1b840da41cabebbed5ab47ffeebf",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "model.import: path 'relative/model.gguf' is relative \u2014 the .git/CWD-independence law (app \u00a716) requires absolute paths"
+  },
+  "status": "REJECTED"
+}

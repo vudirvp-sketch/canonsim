@@ -1,0 +1,247 @@
+{
+  "meta": {
+    "pack": "pressure_pack",
+    "version": "0.1",
+    "notes": "pack-4's action set (the T1 slice): the phase-0 base four (look_around, move, talk, wait) plus the pressure levers — haul_coal (res-1's source verb: the yard mints the cart's load), feed_the_fire (the transfer verb: coal lands in the firehole's store from ANY room that shares the machine's wall — the adjacency is the mechanism, the chute and the hatch and the side door), ration_the_coal (the bench's own transfer: four coal, deliberately short — the 20-year objective's measured arm), stoke_hard (the ignite resolver over the thermal_shock layer: the desperate lever — no coal, no check, a seam). The door is one and the roads are many: the player, the tenants and the bench all feed the same fire through the same verb; only hands at the firehole can burn the machine hard. docs/INTENT_SCHEMA.md owns the intent contract and this file's grammar; every check/roll parameter resolves against rules.json checks."
+  },
+  "actions": [
+    {
+      "intent": "look_around",
+      "label": "look around",
+      "resolver": "observe",
+      "ticks": 1,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "look_around"},
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "scene_{location}"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "cheap perception of the current location (the phase-0 shape, unchanged): at the firehole this is the gauge's own glance — the scene line carries the pressure stock, one meter, integer truth."
+    },
+    {
+      "intent": "move",
+      "label": "go to",
+      "resolver": "movement",
+      "ticks": {"min": 2, "max": 4},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "move"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "adjacent_to", "with": "actor"}
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_left_toward_{target}"},
+          {"who": "destination_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "{actor}_arrived"},
+          {"who": "actor", "present_at": "destination_location", "channel": "saw", "fidelity": "exact", "knows": "{present}_present"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "movement along the location graph (the phase-0 shape, unchanged): the night's rounds — yard to firehole, firehole to the tenements' wall."
+    },
+    {
+      "intent": "talk",
+      "label": "talk",
+      "resolver": "converse",
+      "ticks": {"min": 4, "max": 8},
+      "check": {"kind": "social", "difficulty": 20},
+      "on_failure": "cold shoulder",
+      "events": {"success": "talk", "failure": "talk_rebuffed"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "npc"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"noun": "target", "test": "relation_at_least", "axis": "trust", "value": 20}
+      ],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "told", "fidelity": "exact", "knows": "conversation_with_{target}"},
+          {"who": "target", "channel": "told", "fidelity": "exact", "knows": "conversation_with_{actor}"}
+        ],
+        "failure": [
+          {"who": "actor", "channel": "told", "fidelity": "vague", "knows": "rebuffed_by_{target}"}
+        ]
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "social exchange (the phase-0 shape, the trust floor the gate): the district's stairwell talk — the telling pair carries what the walls heard (the rumor line, the displacement's witness stand)."
+    },
+    {
+      "intent": "wait",
+      "label": "wait",
+      "resolver": "wait",
+      "ticks": "N",
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "wait"},
+      "requires": [],
+      "fields": ["ticks"],
+      "knowledge": {"success": [], "failure": []},
+      "hooks": {"success": [], "failure": []},
+      "notes": "advance N ticks (the phase-0 shape): the night hand's shift passes — the world moves while he stands still (the beats, the rolls, the knocks in the walls)."
+    },
+    {
+      "intent": "haul_coal",
+      "label": "haul coal",
+      "resolver": "account",
+      "ticks": {"min": 6, "max": 10},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_sourced"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "source",
+        "kind": "coal",
+        "amount": 5
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "cart_loaded_at_{location}"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "res-1's SOURCE verb, player-scaled (the yard's mint): five coal to the actor's own cart — the events.success restates the engine's verb constant (the load-time cross-check). The yard is the cycle's supply end: the haul is labor, never a contest (check null — the world does not roll against a shovel); the yard's own stock stays un-modeled by design (the ledger is the scarce surface, the seams the true one — the economy block's notes own the residue)."
+    },
+    {
+      "intent": "feed_the_fire",
+      "label": "feed the fire",
+      "resolver": "account",
+      "ticks": {"min": 4, "max": 8},
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_transferred"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "adjacent_to", "with": "actor"},
+        {"noun": "actor", "test": "account_at_least", "kind": "coal", "value": 5}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coal",
+        "amount": 5
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "coal_fed_to_the_firehole"},
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "coal_fed_to_the_firehole"},
+          {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "the_fire_fed_at_the_firehole"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "res-1's TRANSFER verb, player-scaled (the gentle lever): five coal from the actor's stock to the firehole's store — the stabilization whose cost moves in SPACE (the cart or the scuttle empties; the gauge's cycle holds). The ADJACENCY is the mechanism: any room that shares the machine's wall can feed it (the yard's chute, the tenements' hatch, the registry's side door) — the coal lands in the firehole's store through the wall it shares, which is the whole map's truth: the machine has no un-walled side of its own. The room sees the feed, the feeder knows his own act, and the wall hears the fire catch (the three audiences the warmth reply rides). The solvency gate is the underflow floor's soft arm (D3): an empty cart is an intent_rejected attempt, never a negative stock."
+    },
+    {
+      "intent": "ration_the_coal",
+      "label": "release the ration",
+      "resolver": "account",
+      "ticks": 3,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "account_transferred"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "adjacent_to", "with": "actor"},
+        {"noun": "actor", "test": "account_at_least", "kind": "coal", "value": 4}
+      ],
+      "fields": [],
+      "account": {
+        "verb": "transfer",
+        "kind": "coal",
+        "amount": 4
+      },
+      "knowledge": {
+        "success": [
+          {"who": "actor", "channel": "saw", "fidelity": "exact", "knows": "ration_released_for_the_firehole"},
+          {"who": "same_location", "except": ["actor"], "channel": "saw", "fidelity": "partial", "knows": "ration_released_for_the_firehole"},
+          {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "the_fire_fed_at_the_firehole"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "the BENCH'S OWN TRANSFER (the 20-year objective's measured arm): four coal from the reserve — deliberately one short of a full feed, because the bench optimizes the decade, not tonight. The same verb, the same door, the same warmth reply as any feed (one mechanism, many roads); the difference is the AMOUNT and the ACCOUNT it drains — the ration ledger, the group's own stock. The registry shares the machine's wall (the side door): the adjacency is the delivery."
+    },
+    {
+      "intent": "stoke_hard",
+      "label": "stoke hard",
+      "resolver": "ignite",
+      "ticks": 4,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "boiler_run_hard"},
+      "requires": [
+        {"noun": "target", "test": "kind", "is": "location"},
+        {"noun": "target", "test": "same_location", "with": "actor"},
+        {"noun": "target", "test": "spot_available", "layer": "thermal_shock"},
+        {"noun": "actor", "test": "flagged_accessible", "flag": "is_stoking_iron"}
+      ],
+      "fields": [],
+      "ignition": {
+        "layer": "thermal_shock",
+        "item_flag": "is_stoking_iron"
+      },
+      "knowledge": {
+        "success": [
+          {"who": "same_location", "channel": "heard", "fidelity": "exact", "knows": "the_machine_screamed"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "THE DESPERATE LEVER (the displacement's temporal half, the only door into the Cooling-Debt chain): the hard burn — the iron past the red line, the machine squeezed for heat its coal did not buy. No check (the machine always answers — the consent-split precedent's spirit: the world replies, the asker never rolls), no coal (the cost is not paid in space at all: it is DEFERRED INTO TIME — the first unshocked seam takes the shock, irreversible, and the follow-ups seed). The spot_available guard is the honest end (the D-061 door-outcome axis): a machine with no whole seams left is a dead machine — the door rejects, the log records the attempt, failure is canon. The scream is heard exactly by every soul at the firehole, the burner included (no except — the moral cost lands on the hand that chose it; the dread reply rides the record, and the echo's residue rides the token — the stoker's own 30, the machine people's memory of what they did)."
+    },
+    {
+      "intent": "convene_the_bench",
+      "label": "convene the bench",
+      "resolver": "wait",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "the_bench_convenes"},
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "same_location", "except": ["actor"], "channel": "heard", "fidelity": "partial", "knows": "the_bench_convened"},
+          {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "the_bench_convened"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "the bench's goal verb (the province's council precedent — the bare story beat): the ratio crossing the bar IS the convening, the public order made audible through the registry's walls (the machine's side door hears it). The mechanical arm rides the tally keeper's urgency (the echo-gated ration): the order and the release are two surfaces of one objective."
+    },
+    {
+      "intent": "plead_for_coal",
+      "label": "plead for coal",
+      "resolver": "wait",
+      "ticks": 2,
+      "check": null,
+      "on_failure": null,
+      "events": {"success": "the_watch_pleads"},
+      "requires": [],
+      "fields": [],
+      "knowledge": {
+        "success": [
+          {"who": "same_location", "except": ["actor"], "channel": "heard", "fidelity": "partial", "knows": "the_watch_pleaded"},
+          {"who": "adjacent_locations", "channel": "heard", "fidelity": "vague", "knows": "the_watch_pleaded"}
+        ],
+        "failure": []
+      },
+      "hooks": {"success": [], "failure": []},
+      "notes": "the watch's goal verb (the bare-beat precedent again): the shivering crossing the bar is the plea itself — the tenements' public voice at the firehole door (the boiler house hears it through the shared wall: the same adjacency the feeds ride). The mechanical arm rides the widow's urgency (the scuttle's feed)."
+    }
+  ]
+}

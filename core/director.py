@@ -1,0 +1,1595 @@
+"""The director (phase0 §4, MVP_SCOPE §11, D-005, DIRECTOR_SPEC): a
+consequence planner that NEVER improvises. A hook seeded at event time
+sits in a per-run buffer until its trigger fires (time / place /
+threshold) or the stagnation detector releases the lowest-threshold
+hook when narrative entropy drops below the pack's floor.
+
+Phase 3 (DIR-1, the L4D peak/rest donor): the pacing clock — a
+per-run four-state machine (RAMP / PEAK / REST / STAGNATION) over
+narrative entropy, advanced once per beat. REST is the post-climax
+breathing room the flat v0.1 detector lacked: the stagnation path
+releases only OUTSIDE PEAK/REST, so the world is not re-injected the
+beat after a climax. Explicit triggers never consult the clock —
+causality is not pacing (D-005). A pack without `director.pacing`
+runs the v0.1 minimal pair, byte-identically.
+
+Phase 3 (DIR-3, iter-38 — the L4D2 three-intensity rule + the boss-beat
+rule): layered thresholds — an optional third entropy layer
+`director.pacing.climax_floor`, strictly above the peak floor (pack
+lint), and the climax release path. A climax-flagged hook (pack data
+`director.hooks[tag].climax`) releases at the END of a peak — the clock
+in PEAK having held `min_peak_beats`, entropy at the third layer — and
+never from the quiet path (a boss does not spawn because the world is
+boring). The release marks the beat PEAK_CLIMAX (one beat — the boss
+beat itself); the next transition is REST (boss beat + reset). The
+pack's declaration is the gate (INV-3): a pack without `climax_floor`
+runs the iter-36 two-layer clock, byte-identically, and a climax-flagged
+hook without the layer is explicit-trigger-only.
+
+Phase 3 (DIR-4, iter-39 — the L4D multi-channel family): the quiet
+path decomposes per channel. `director.channels` (pack data) declares
+named pacing dimensions — each its own entropy floor plus the
+observable inputs it senses (the closed vocabulary {suspicion,
+physical_threats}; the channel's own unreleased hook weights always
+feed it). A hook opts in per hook (`director.hooks[tag].channel`):
+the quiet gate asks the hook's OWN channel — a quiet social channel
+can inject while the threat channel burns (the multi-channel win the
+single global floor cannot express). The pacing clock stays global
+(one drama arc over TOTAL entropy — PEAK/REST suppress every
+channel); explicit triggers stay ungated (D-005); the budget stays 1
+release per beat across all channels; the climax path ignores
+channels (the boss gate reads total entropy). A pack without
+`director.channels` runs the v0.1 global-floor quiet path,
+byte-identically; a channelless hook keeps that global floor even in
+a channels pack (the per-hook opt-in mirrors the climax flag — a tag
+without the block is dormant vocabulary).
+
+Phase 3 (drama-1, iter-40 — the Paradox event grammar's predicate +
+weight layer; phases.md §3 owns the design): triggers are now JSON
+predicate specs over the projection (`core/predicates.py` owns the
+grammar — the three v0.1 leaf kinds plus compound `all`/`any`/`not`
+forms, an implicit-AND list root, the generalized `prop` leaf). The
+hook weight gains the `weight_multiplier` shape (base +
+modifiers{add|factor, when} — context-sensitive tension: the entropy
+sensor reads the EFFECTIVE weight per beat, a pure function of the
+projection). `first_time_only` (the Wesnoth fire-only-once law) is a
+release policy: once any instance of the tag releases, the tag burns
+for the run — burned instances stay facts in the buffer but stop
+counting toward entropy (tension that can never discharge is noise,
+not tension). A pack with flat int weights and no first_time_only
+runs the v0.1 shapes, byte-identically (the pack's own declaration is
+the gate, INV-3).
+
+Phase 3 (drama-2, iter-41 — the Paradox event grammar's option layer;
+phases.md §3 owns the design): a hook may declare `options` — each an
+availability gate (a drama-1 predicate spec) + an ai_chance-style weight
+(the weight_multiplier shape) + an intent payload override. At release
+the director CHOOSES: gated-off options are unavailable, zero effective
+weights are never picked (the Stellaris factor-0 zero-out), the heaviest
+wins, ties break by declaration order — a PURE function of (pack data,
+projection, beat_tick), no RNG (every director decision stays RNG-free;
+the cross-run variety the donor's weighted draw provides comes from
+world state — the modifiers read the projection). When every option is
+closed the hook cannot release that beat: nothing hits the door, no
+budget is consumed — the hook waits for a world where an option opens.
+The chosen option's payload overrides the base whole-key (Paradox
+options are complete alternative effect branches, not patches). A hook
+without options runs the v0.1 release path byte-identically.
+
+Phase 3 (arc-1, iter-47 — arcs & tension shaping, P3c; the DF
+event_collections / Paradox event-chain precedent, phases.md §3 owns
+the design): `director.arcs` (pack data) declares named release
+CHAINS — an ordered members list of hook tags plus the arc's own
+`min_gap_beats`. The ORDER law: a member tag is a release candidate
+only while it is its arc's CURRENT member (the first member not yet
+released this run); the chain gates candidacy on ALL release paths,
+explicit triggers included (an arc is pack-declared CAUSALITY, not
+pacing — D-005's ungated-explicit law is about the clock). The GAP
+law (the tension-shaping half): the current member may not release
+through the quiet or climax path within `min_gap_beats` beats of the
+arc's previous member's release — the arc's beats march, they do not
+dump; explicit triggers bypass the gap (causality is not pacing — the
+world's own consequences fire mid-gap exactly as they fire mid-rest).
+The entropy mirror: instances of PASSED members (a member whose tag
+already released — the cursor moved past it) stop counting toward
+entropy, the `first_time_only` burn law's twin (one play per arc
+beat; un-dischargeable tension is noise); the current and FUTURE
+members count normally — the seeded buffer's meaning is unchanged (a
+three-member arc fully seeded reads its whole weight until it starts
+marching). The cursor is per-run folded state, like the burn set
+(INV-2: a deterministic function of the release sequence). A pack
+without `director.arcs` runs the v0.1 release path byte-identically
+(the pack's own declaration is the gate, INV-3).
+
+Releases ride the intent door (phase0 §4 "Objective broadcast", D-037):
+a released hook produces an IntentData the loop enqueues through the
+normal queue, validated by the same front door as a playscript step.
+The director never moves actors, changes state, or bypasses the
+Intent→Event front-door. Director-off = the buffer still seeds (D-005
+hygiene), nothing releases (T8 A/B baseline — the world's emergent
+chains come from urgencies + reactions + rotations, not director
+injections).
+
+Per-run scope (D-005): the buffer is per-run (folded from the log);
+policies are pack data (constant across runs with the same pack). The
+director never learns the player (Alien named negative — director
+adaptation state is per-run, never persisted). The pacing clock is
+derived state the same way: a deterministic fold of the per-beat
+entropy sequence, itself a function of the log (INV-2 — same log, same
+clock, same releases; it writes nothing).
+
+Narrative entropy (P2e): sum of seeded-hook weights + global suspicion
++ visible physical threats — observable state only (L6, never
+knowledge records, never PC internals). Replaces the flat
+`release_after_ticks_without_visible_event` timer of the v0.1 draft.
+Since iter-378 the two world-sensing terms read O(1) per beat through
+`SensesIndex` — the commit-path fold `seed` maintains for the bound
+projection (the scans stay the fallback path's own law and the fold's
+semantic owner; the twin-agreement law the equality falsifier).
+"""
+
+from __future__ import annotations
+
+from collections.abc import Iterator, Mapping
+from dataclasses import dataclass, field
+from typing import TYPE_CHECKING, Any, Final, Protocol
+
+from core.fold import initial_projection
+from core.intent import IntentData
+from core.predicates import evaluate
+
+if TYPE_CHECKING:  # pack + projection are duck-typed — no runtime cycle
+    from core.fold import Projection
+    from core.log import EventRecord
+    from core.pack import Pack
+
+__all__ = [
+    "DISABLED",
+    "ARC_KEYS",
+    "CHANNEL_INPUTS",
+    "ArcConfig",
+    "ChannelConfig",
+    "Director",
+    "DirectorPolicy",
+    "EnabledPolicy",
+    "DisabledPolicy",
+    "OptionSpec",
+    "PacingClock",
+    "PacingConfig",
+    "SeededHook",
+    "channel_entropies",
+    "channels_from_rules",
+    "arcs_from_rules",
+    "entropy",
+    "pacing_from_rules",
+    "policy_from_rules",
+    "SensesIndex",
+]
+
+HOOK_PREFIX: Final = "director"
+
+
+@dataclass(frozen=True, slots=True)
+class SeededHook:
+    """One consequence seeded at event time (D-005). The event wrote a
+    hook tag and the pack's `director.hooks` config declared what to do
+    about it. A hook with no explicit trigger is stagnation-only — it
+    releases only when entropy drops below the floor (the
+    lowest-threshold one wins, phase0 §4) — UNLESS it carries the
+    climax flag (DIR-3): a boss hook never releases from the quiet
+    path; its door is the climax layer (or an explicit trigger).
+    Immutable; the Director tracks release state via a separate index
+    set, not by mutating the record (the frozen-ness documents INV-5:
+    a seeded hook is a fact).
+
+    `weight` is the BASE tension (the v0.1 flat int; the drama-1
+    `weight_multiplier` pack shape resolves to base + modifiers at
+    seed time). `weight_modifiers` are the drama-1 multiplier tail:
+    each `{add: N | factor: N, when: <predicate>}` applies in
+    declaration order when its predicate passes — the entropy sensor
+    reads the EFFECTIVE weight (`_resolve_weight`), never the bare
+    base. `first_time_only` burns the tag after its first release
+    (the remaining instances stay facts but never release and never
+    count toward entropy again)."""
+
+    tag: str
+    seeded_by_event: str
+    seeded_at_tick: int
+    weight: int
+    release_threshold: int
+    target_npc: str
+    intent_kind: str
+    intent_target: str | None
+    intent_fields: Mapping[str, Any]
+    trigger: Mapping[str, Any] | None  # a drama-1 predicate spec (core/predicates.py)
+    climax: bool = False  # DIR-3: the boss-beat flag (pack data)
+    channel: str | None = None  # DIR-4: the pacing dimension (pack data)
+    weight_modifiers: tuple[Mapping[str, Any], ...] = ()  # drama-1: the multiplier tail
+    first_time_only: bool = False  # drama-1: the Wesnoth fire-only-once release policy
+    options: tuple["OptionSpec", ...] = ()  # drama-2: the option layer (see OptionSpec)
+
+
+@dataclass(frozen=True, slots=True)
+class OptionSpec:
+    """One declared option of a hook's option layer (drama-2 — the
+    Paradox `option` block adapted: an availability gate + an
+    ai_chance-style weight + a payload override). Frozen pack data
+    flattened at seed time; `_choose_option` computes the pick per
+    release — the buffer never stores a choice (L3: a stored pick would
+    be a projection inside the buffer).
+
+    `trigger` is the availability gate (a drama-1 predicate spec; None =
+    always available). `weight`/`weight_modifiers` are the ai_chance
+    shape (a flat base + the modifier tail; an absent pack weight is
+    base 1, the donor's default; a zero EFFECTIVE weight is never
+    picked — the Stellaris factor-0 zero-out). `intent` is the payload
+    override block `{kind?, target?, fields?}`: each declared key
+    wholly replaces the hook's base payload key (Paradox options are
+    complete alternative effect branches, not patches); None inherits
+    the base payload wholly."""
+
+    trigger: Mapping[str, Any] | None
+    weight: int
+    weight_modifiers: tuple[Mapping[str, Any], ...]
+    intent: Mapping[str, Any] | None
+
+
+class DirectorPolicy(Protocol):
+    """The release gate (phase0 §4 "Multi-channel policies"): the
+    director asks the policy whether a release is permitted at this
+    beat. The minimal pair (Enabled / Disabled) covers T8's A/B
+    baseline. The quiet question split per release path at phase 3:
+    `permit_climax` (DIR-3 — the boss fires at HIGH entropy where the
+    stagnation path fires at LOW; one boolean cannot serve both
+    honestly) and `permit_quiet` (DIR-4 — each channel owns its floor;
+    the global floor cannot serve three pacing dimensions honestly).
+    The pacing clock is Director-side state, not a policy (iter-36);
+    the channel table likewise lives on the Director — the policy only
+    answers."""
+
+    def permit_release(
+        self,
+        explicit_trigger_fires: bool,
+        current_entropy: int,
+    ) -> bool: ...
+
+    def permit_quiet(
+        self, channel: ChannelConfig, channel_entropy: int
+    ) -> bool: ...
+
+    def permit_climax(self) -> bool: ...
+
+
+@dataclass(frozen=True, slots=True)
+class EnabledPolicy:
+    """Default: explicit triggers always release (causal); stagnation
+    releases the lowest-threshold hook when entropy < floor; the climax
+    path is permitted whenever the pacing gates pass (the clock state
+    and the layered threshold decided — the policy only switches the
+    director on or off)."""
+
+    entropy_floor: int
+
+    def permit_release(
+        self, explicit_trigger_fires: bool, current_entropy: int
+    ) -> bool:
+        if explicit_trigger_fires:
+            return True
+        return current_entropy < self.entropy_floor
+
+    def permit_quiet(
+        self, channel: ChannelConfig, channel_entropy: int
+    ) -> bool:
+        """DIR-4: the per-channel quiet question — the channel's entropy
+        against the channel's own floor (each pacing dimension owns its
+        quiet gate; one global floor cannot serve three honestly)."""
+        return channel_entropy < channel.entropy_floor
+
+    def permit_climax(self) -> bool:
+        return True
+
+
+@dataclass(frozen=True, slots=True)
+class DisabledPolicy:
+    """T8 A/B baseline: no releases ever — the boss and every channel
+    included. The buffer still seeds — D-005 hygiene holds (a
+    complication from nowhere is still a bug); A/B measures the delta
+    the director's releases make."""
+
+    def permit_release(
+        self, explicit_trigger_fires: bool, current_entropy: int
+    ) -> bool:
+        return False
+
+    def permit_quiet(
+        self, channel: ChannelConfig, channel_entropy: int
+    ) -> bool:
+        return False
+
+    def permit_climax(self) -> bool:
+        return False
+
+
+DISABLED: Final = DisabledPolicy()
+
+
+def policy_from_rules(rules: Mapping[str, Any], enabled: bool) -> DirectorPolicy:
+    """The pack-configured policy (the single owner of the entropy-floor
+    read — the loop and the CLI `directors on|off` toggle both come here)."""
+    if not enabled:
+        return DISABLED
+    return EnabledPolicy(
+        entropy_floor=int(rules["director"]["stagnation"]["entropy_floor"])
+    )
+
+
+# -- the release channels (DIR-4, phase 3; the L4D multi-channel family) ------
+
+
+CHANNEL_INPUTS: Final = ("suspicion", "physical_threats")
+"""The closed vocabulary of observable P2e terms a channel may bind
+(`director.channels.<name>.inputs`): the entropy formula's two
+world-sensing terms, decomposed per dimension. The channel's own
+unreleased hook weights always feed it — that input is not listable."""
+
+PACING_STATES: Final = ("RAMP", "PEAK", "REST", "STAGNATION", "PEAK_CLIMAX")
+"""The PacingClock's closed state vocabulary (DIR-1/DIR-3) — the resume
+door's `Director.restore_run_state` validates a cursor's clock state
+against it (a hand-built cursor naming an unknown band is loud, the
+closed-envelope family law)."""
+
+
+@dataclass(frozen=True, slots=True)
+class ChannelConfig:
+    """DIR-4 pack data (`director.channels.<name>`): one pacing
+    dimension — the L4D family (Horde / S.I. / Music; the names are the
+    pack's own — this pack instantiates threat / social / ambient).
+    `entropy_floor` is the channel's quiet gate (the stagnation
+    detector's per-channel floor); `inputs` binds the observable terms
+    the channel senses (a subset of CHANNEL_INPUTS). A channel never
+    senses another channel's hooks — the split is the point: a quiet
+    social channel can inject while the threat channel burns."""
+
+    entropy_floor: int
+    inputs: frozenset[str]
+
+
+def channels_from_rules(
+    rules: Mapping[str, Any],
+) -> Mapping[str, ChannelConfig] | None:
+    """The pack's channel declarations (`director.channels`), beside
+    `pacing_from_rules` (the single channels read). None when the pack
+    declares no channels — the v0.1 global-floor quiet path,
+    byte-identical (the pack's own declaration is the gate, INV-3).
+    The channel NAMES are free-form pack data; only the input
+    vocabulary is closed (CHANNEL_INPUTS)."""
+    channels = rules.get("director", {}).get("channels")
+    if channels is None:
+        return None
+    return {
+        str(name): ChannelConfig(
+            entropy_floor=int(spec["entropy_floor"]),
+            inputs=frozenset(spec.get("inputs", ())),
+        )
+        for name, spec in channels.items()
+    }
+
+
+# -- the arc layer (arc-1, phase 3; P3c — the DF event_collections /
+# Paradox event-chain donor, tension shaped as an ordered chain) -------
+
+
+ARC_KEYS: Final = ("members", "min_gap_beats", "notes")
+"""The closed key set of a `director.arcs.<name>` block (pack lint
+owns the shape; an unknown key is a load error, never a silent
+ignore — the option-block precedent)."""
+
+
+@dataclass(frozen=True, slots=True)
+class ArcConfig:
+    """arc-1 pack data (`director.arcs.<name>`): one release chain —
+    the ordered `members` (hook tags; membership is declared HERE
+    ONLY, one-sided — the single owner of the fact, D-024; the hook
+    spec itself carries no arc key) and the chain's own
+    `min_gap_beats` (the tension-shaping floor: the arc's next beat
+    waits at least this many beats after its previous one — the
+    one-per-beat budget already enforces 1, so the lint floor is 2).
+    The names are free-form pack data; the members must name declared
+    hook tags and no tag may ride two arcs (ambiguous order — pack
+    lint refuses both at load)."""
+
+    members: tuple[str, ...]
+    min_gap_beats: int
+
+
+def arcs_from_rules(
+    rules: Mapping[str, Any],
+) -> Mapping[str, ArcConfig] | None:
+    """The pack's arc declarations (`director.arcs`), beside
+    `pacing_from_rules` / `channels_from_rules` (the single arcs
+    read). None when the pack declares no arcs — the v0.1 release
+    path, byte-identical (the pack's own declaration is the gate,
+    INV-3). An EMPTY block is legal and inert: no members, no
+    chains, the same release behavior as absence."""
+    arcs = rules.get("director", {}).get("arcs")
+    if arcs is None:
+        return None
+    return {
+        str(name): ArcConfig(
+            members=tuple(str(tag) for tag in spec["members"]),
+            min_gap_beats=int(spec["min_gap_beats"]),
+        )
+        for name, spec in arcs.items()
+    }
+
+
+# -- the pacing clock (DIR-1, phase 3; the L4D peak/rest donor) ----------------
+
+
+@dataclass(frozen=True, slots=True)
+class PacingConfig:
+    """DIR-1 pack data (`director.pacing` + the stagnation floor): the
+    pacing clock's thresholds and minimum durations. `peak_floor` sits
+    strictly above the stagnation `entropy_floor` (pack lint) — the
+    band between them is normal tension (RAMP); below the floor the
+    clock reads STAGNATION (the detector's own band). `min_peak_beats`
+    / `min_rest_beats` are the L4D `PeakDuration` / `RestMinDuration`
+    anti-flap floors (a spike is a peak, a peak is followed by a rest —
+    neither may flap on a one-beat entropy dip).
+
+    `climax_floor` (DIR-3, iter-38) is the optional third threshold
+    layer — the L4D2 three-intensity rule (a Boss threshold gates a
+    Peak threshold gates a Calm threshold). It sits strictly above
+    `peak_floor` (pack lint); `None` means the pack declares two layers
+    and runs the iter-36 clock, byte-identically."""
+
+    entropy_floor: int
+    peak_floor: int
+    min_peak_beats: int
+    min_rest_beats: int
+    climax_floor: int | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class PacingClock:
+    """The per-run pacing state over narrative entropy (DIR-1; the L4D
+    `TimeSincePeak` / `TimeSinceRest` two-clock shape IS this state
+    machine — REST's `beats_in_state` is time-since-peak, PEAK's is
+    time-since-rest-ended). `beats_in_state` counts the beats held
+    INCLUDING the entering beat. Functional by design: `transition`
+    returns a new clock, the Director holds the current one — a
+    deterministic fold of the per-beat entropy sequence (INV-2).
+
+    States: RAMP (normal tension) · PEAK (entropy at or above the peak
+    floor — the world is loud, the director does not add) · REST
+    (post-peak breathing room, holds `min_rest_beats`) · STAGNATION
+    (entropy below the stagnation floor — the quiet the detector
+    exists to break). Only PEAK and REST suppress releases; the
+    RAMP/STAGNATION split is the observable band name (the policy's
+    floor remains the release authority — one owner per law).
+
+    PEAK_CLIMAX (DIR-3) is the boss beat itself — one beat, entered
+    ONLY by a climax release (never by entropy alone: the state marks
+    the placement of a high-severity hook, not an intensity band),
+    exited to REST unconditionally (boss beat + reset; a still-loud
+    world breaks the rest on the transition after, per the re-spike
+    law)."""
+
+    state: str = "RAMP"
+    beats_in_state: int = 0
+
+    def transition(self, entropy_value: int, config: PacingConfig) -> "PacingClock":
+        """One beat's deterministic transition. PEAK holds its minimum
+        even through an entropy dip (hysteresis); REST is broken early
+        only by the world re-spiking (entropy back at the peak floor) —
+        the director never ends its own rest with a release. The boss
+        beat (PEAK_CLIMAX) ends the peak: the reset is the rest."""
+        if self.state == "PEAK_CLIMAX":
+            return PacingClock("REST", 1)  # boss beat + reset: breathe
+        if self.state == "PEAK":
+            if (
+                entropy_value < config.peak_floor
+                and self.beats_in_state >= config.min_peak_beats
+            ):
+                return PacingClock("REST", 1)  # the peak is over: breathe
+            return PacingClock("PEAK", self.beats_in_state + 1)
+        if self.state == "REST":
+            if entropy_value >= config.peak_floor:
+                return PacingClock("PEAK", 1)  # the world re-spiked: rest over
+            if self.beats_in_state >= config.min_rest_beats:
+                return _quiet_band(entropy_value, config)
+            return PacingClock("REST", self.beats_in_state + 1)
+        # RAMP / STAGNATION — no minimum (the flat band; the policy's
+        # floor, not the clock, is the release authority here)
+        if entropy_value >= config.peak_floor:
+            return PacingClock("PEAK", 1)
+        return _quiet_band(entropy_value, config)
+
+
+def _quiet_band(entropy_value: int, config: PacingConfig) -> PacingClock:
+    """The quiet-band split: below the stagnation floor the clock reads
+    STAGNATION, at or above it RAMP. Observable naming only — both
+    states leave the release decision to the policy."""
+    if entropy_value < config.entropy_floor:
+        return PacingClock("STAGNATION", 1)
+    return PacingClock("RAMP", 1)
+
+
+def pacing_from_rules(rules: Mapping[str, Any]) -> PacingConfig | None:
+    """The pack's pacing declaration (`director.pacing`), beside
+    `policy_from_rules` (the single pacing read). None when the pack
+    declares no pacing — the v0.1 minimal pair, release behavior
+    byte-identical (the pack's own declaration is the gate, INV-3).
+    A pacing block without `climax_floor` declares the two-layer
+    iter-36 clock (climax_floor None — the climax path is off)."""
+    pacing = rules.get("director", {}).get("pacing")
+    if pacing is None:
+        return None
+    stagnation = rules["director"]["stagnation"]
+    return PacingConfig(
+        entropy_floor=int(stagnation["entropy_floor"]),
+        peak_floor=int(pacing["peak_floor"]),
+        min_peak_beats=int(pacing["min_peak_beats"]),
+        min_rest_beats=int(pacing["min_rest_beats"]),
+        climax_floor=(
+            int(pacing["climax_floor"]) if "climax_floor" in pacing else None
+        ),
+    )
+
+
+# -- entropy (P2e: observable state only, never knowledge records) ------------
+
+
+def _is_suspicion_home(prop: str) -> bool:
+    """The suspicion axis's two projection homes (suspectaxis, iter-69):
+    the flat `relations.suspicion` or a per-target `pair.<figure>.
+    suspicion` record. One mode per pack (the pack lint's no-mixing
+    law); the single owner of the shape — the scan, the index's
+    per-change fold, and the twin-agreement law all read THIS
+    predicate, never re-spelled copies (D-024)."""
+    return prop == "relations.suspicion" or (
+        prop.startswith("pair.") and prop.endswith(".suspicion")
+    )
+
+
+def _threat_states(rules: Mapping[str, Mapping[str, Any]]) -> frozenset[str]:
+    """The active-state values of every declared transition layer — the
+    value a `<layer>.<spot>` prop holds while the layer spreads (pack
+    data, D-057; the director never hardcodes a layer vocabulary)."""
+    return frozenset(
+        str(config["spot_state"])
+        for config in rules.get("transitions", {}).values()
+        if isinstance(config, Mapping) and "spot_state" in config
+    )
+
+
+def _visible_physical_threats(
+    projection: Mapping[str, Mapping[str, Any]], states: frozenset[str]
+) -> int:
+    """Count of spreading transition spots across all locations (one per
+    `<layer>.<spot>` prop holding a layer's active-state value)."""
+    threats = 0
+    for props in projection.values():
+        for prop, value in props.items():
+            if "." not in prop:
+                continue
+            if value in states:
+                threats += 1
+    return threats
+
+
+def _global_suspicion(projection: Mapping[str, Mapping[str, Any]]) -> int:
+    """Sum of the suspicion axis across NPCs that hold one, in EITHER
+    home (suspectaxis, iter-69): the flat v0.1 `relations.suspicion` or
+    the per-target `pair.<figure>.suspicion` records. A pack runs one
+    mode and the other home never moves (the pack lint's no-mixing law),
+    so the sum never double-counts; the director senses the axis, not
+    the storage. The player and ambient groups hold neither home by
+    convention — never raised. The aggregate tension the director
+    senses."""
+    total = 0
+    for props in projection.values():
+        for prop, value in props.items():
+            if not _is_suspicion_home(prop):
+                continue
+            if isinstance(value, int) and not isinstance(value, bool):
+                total += value
+    return total
+
+
+class SensesIndex:
+    """The director's world-senses aggregates (iter-378, the iter-362
+    index class applied to the P2e terms): the global-suspicion sum and
+    the visible-threat count, maintained incrementally ON the commit
+    path instead of re-scanned whole-population per beat — the two
+    O(projection) walks that were the `director_global_passes` wall
+    member (5.07 profiled s on h32 10y, 2 scans x 7,634 landed beats).
+
+    KI#16's law is the design constraint, satisfied by construction:
+    the index is born from the pack-seeded INITIAL projection (the
+    whole projection, seeds included — never the hook-seeding events)
+    and folds EVERY committed event's state changes, the same fold
+    `apply_event` runs on the tracked projection (INV-1's own law:
+    the live projection IS this fold, in the same commit order —
+    `_commit` applies then `_react` seeds, reactions nested in
+    between, so seeds arrive in exactly apply order). A read-side
+    twin of the `(entity, prop) -> tick` and write indexes: pure,
+    deterministic (INV-2 — no streams, no clock), never canon, never
+    exported in the run state (rebuildable by `seed()` over the log,
+    the buffer's own resume law).
+
+    The equality law (the twin-agreement oracle, tests/test_senses.py):
+    `from_projection(p, states)` answers what the scans answer on p,
+    and after any committed-event sequence the fold answers what the
+    scans answer on the folded projection — the falsifier for every
+    edge the fold meets (bool and non-int suspicion values, dotted
+    props entering/leaving the threat states, prop births with
+    `from_ = None`, repeated same-prop changes inside one event)."""
+
+    __slots__ = ("_suspicion", "_threats", "_states")
+
+    def __init__(self, states: frozenset[str]) -> None:
+        self._suspicion = 0
+        self._threats = 0
+        self._states = states
+
+    @classmethod
+    def from_projection(
+        cls,
+        projection: Mapping[str, Mapping[str, Any]],
+        states: frozenset[str],
+    ) -> "SensesIndex":
+        """The birth scan: the whole projection, seeds included (KI#16 —
+        the pack-seeded initial values are sensed exactly like event-
+        written ones; a fold that started from zero would be blind to
+        the pack's declarations). Delegates to the two scan functions —
+        the semantic owners — so the birth form can never drift from
+        the fallback path's own reading (D-024: one owner per fact)."""
+        index = cls(states)
+        index._suspicion = _global_suspicion(projection)
+        index._threats = _visible_physical_threats(projection, states)
+        return index
+
+    def apply_change(self, prop: str, from_: Any, to_: Any) -> None:
+        """Fold one committed state change (the `apply_event` twin: the
+        caller passes the change's own `from_`/`to_`, which the commit
+        door has already validated against the tracked projection —
+        `from_` IS the pre-change value, so the delta arithmetic is
+        exact). The int-not-bool discipline and the dotted-prop threat
+        membership mirror the scans' own tests; values outside the
+        typed families contribute zero on their side (a `None` birth
+        or a string suspicion record never moves the sums)."""
+        if _is_suspicion_home(prop):
+            if isinstance(from_, int) and not isinstance(from_, bool):
+                self._suspicion -= from_
+            if isinstance(to_, int) and not isinstance(to_, bool):
+                self._suspicion += to_
+        if "." in prop:
+            if from_ in self._states:
+                self._threats -= 1
+            if to_ in self._states:
+                self._threats += 1
+
+    @property
+    def suspicion(self) -> int:
+        """The global-suspicion sum (both homes, the scan's exact
+        reading)."""
+        return self._suspicion
+
+    @property
+    def threats(self) -> int:
+        """The visible physical-threat count (dotted props holding a
+        declared transition spot-state)."""
+        return self._threats
+
+
+def entropy(
+    projection: Mapping[str, Mapping[str, Any]],
+    unreleased: Iterator[SeededHook],
+    rules: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+    *,
+    senses: SensesIndex | None = None,
+) -> int:
+    """P2e: sum of seeded-hook EFFECTIVE weights + global suspicion +
+    visible physical threats — observable state only (L6). Computed
+    from the projection, the buffer, the pack's transition declarations,
+    and the beat tick (a drama-1 modifier's `when` predicate may read
+    the clock), never from knowledge records or PC internals. The
+    stagnation detector releases when this drops below the pack's
+    floor.
+
+    iter-378: `senses` is the tracked projection's commit-path index
+    (the O(1) form of the two world-sensing terms — the Director
+    passes its fold when the caller handed it the BOUND projection);
+    None (every other caller: direct probes, diagnostics, foreign
+    projections) runs the whole-projection scans — the law unchanged
+    for the fallback path, the twin-agreement law the equality
+    guarantee)."""
+    if senses is None:
+        senses = SensesIndex.from_projection(
+            projection, _threat_states(rules)
+        )
+    weights = sum(_resolve_weight(hook, projection, beat_tick) for hook in unreleased)
+    return weights + senses.suspicion + senses.threats
+
+
+def channel_entropies(
+    channels: Mapping[str, ChannelConfig],
+    projection: Mapping[str, Mapping[str, Any]],
+    unreleased: Iterator[SeededHook],
+    rules: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+    *,
+    senses: SensesIndex | None = None,
+) -> dict[str, int]:
+    """DIR-4: the per-channel entropy map. Each declared channel senses
+    its OWN unreleased hook weights (always — at their drama-1 effective
+    values) plus the inputs it binds (CHANNEL_INPUTS — the P2e
+    world-sensing terms, decomposed per dimension). Hooks in no declared
+    channel count toward the TOTAL only (the pacing clock's input,
+    unchanged). Deterministic: the channels iterate sorted(), the buffer
+    in construction order (INV-2). iter-378: `senses` is the commit-path
+    index for the BOUND projection (the O(1) form); None runs the
+    scans — the fallback path's law unchanged."""
+    if senses is None:
+        senses = SensesIndex.from_projection(
+            projection, _threat_states(rules)
+        )
+    totals = {name: 0 for name in sorted(channels)}
+    for hook in unreleased:
+        if hook.channel in totals:
+            totals[hook.channel] += _resolve_weight(hook, projection, beat_tick)
+    for name in sorted(channels):
+        inputs = channels[name].inputs
+        if "suspicion" in inputs:
+            totals[name] += senses.suspicion
+        if "physical_threats" in inputs:
+            totals[name] += senses.threats
+    return totals
+
+
+def _resolve_weight(
+    hook: SeededHook,
+    projection: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+) -> int:
+    """The hook's EFFECTIVE tension (drama-1): the base weight, then
+    each modifier in declaration order — `{add: N}` adds, `{factor: N}`
+    multiplies and truncates toward zero (deterministic; weights are
+    non-negative by lint so truncation is floor). Only passing
+    modifiers apply; a factor of 0 legally zeroes the weight (the
+    Stellaris zero-out shape — a hook may go quiet without seeding a
+    new fact). Pure (INV-2): same hook + same projection + same tick =
+    the same number, in any process."""
+    return _effective_weight(
+        hook.weight, hook.weight_modifiers, projection, beat_tick
+    )
+
+
+def _effective_weight(
+    weight: int,
+    modifiers: tuple[Mapping[str, Any], ...],
+    projection: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+) -> int:
+    """The shared effective-tension fold (drama-1's `_resolve_weight`
+    body, extracted for drama-2's option weights): base, then each
+    modifier in declaration order when its `when` predicate passes —
+    `add` sums, `factor` multiplies and truncates toward zero; a factor
+    of 0 legally zeroes. Pure (INV-2)."""
+    for modifier in modifiers:
+        if not evaluate(modifier["when"], projection, beat_tick):
+            continue
+        if "add" in modifier:
+            weight += int(modifier["add"])
+        else:
+            weight = int(weight * float(modifier["factor"]))
+    return weight
+
+
+# -- the option layer (drama-2, phase 3; phases.md §3 — the Paradox  ----------
+# -- option mechanics adapted) ------------------------------------------------
+
+
+_BASE_OPTION: Final = OptionSpec(
+    trigger=None, weight=1, weight_modifiers=(), intent=None
+)
+"""The implicit option every option-less hook carries: the base
+payload, always pickable. `_choose_option` answers this for a hook
+with no declared options — never None — so the v0.1 release path is
+byte-identical (the option layer is pure addition, INV-3's
+declaration-is-the-gate law)."""
+
+
+def _choose_option(
+    hook: SeededHook,
+    projection: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+) -> OptionSpec | None:
+    """The option whose payload a release of `hook` carries (drama-2 —
+    the Paradox option mechanics adapted: availability gates +
+    ai_chance-style weighting, a PURE pick). None means the hook cannot
+    release this beat: every declared option is gated off or zeroed
+    out — the deferred-release law (the hook waits for a world where an
+    option opens; nothing hits the door, no budget is consumed).
+
+    The pick: an option's availability gate (`trigger`, a drama-1
+    predicate spec) must pass; a zero EFFECTIVE weight is never picked
+    (the Stellaris factor-0 zero-out); the heaviest effective weight
+    wins, ties break by declaration order (first declared). No RNG —
+    the choice is a pure function of (pack data, projection,
+    beat_tick): every director decision stays RNG-free (the release
+    pick, the threshold tiebreak), and the cross-run variety the
+    donor's weighted DRAW provides comes here from world state (the
+    modifiers read the projection — different runs, different
+    winners)."""
+    if not hook.options:
+        return _BASE_OPTION
+    best: OptionSpec | None = None
+    best_weight = 0
+    for option in hook.options:  # declaration order (INV-2)
+        if option.trigger is not None and not evaluate(
+            option.trigger, projection, beat_tick
+        ):
+            continue  # the availability gate is closed
+        weight = _effective_weight(
+            option.weight, option.weight_modifiers, projection, beat_tick
+        )
+        if weight <= 0:
+            continue  # zeroed out — never picked
+        if weight > best_weight:  # strict: ties keep the earlier declaration
+            best = option
+            best_weight = weight
+    return best
+
+
+def _option_specs(raw: Any) -> tuple[OptionSpec, ...]:
+    """Flatten the pack's option blocks (drama-2) into buffer data: each
+    weight resolves via `_weight_spec` (flat int = base, no tail; the
+    multiplier object flattens to base + modifier list; an ABSENT
+    weight is base 1, the ai_chance default), the availability gate and
+    the payload override block pass through as linted data. The buffer
+    stores data; `_choose_option` computes the pick per release, never
+    stored (L3 — a stored choice would be a projection inside the
+    buffer)."""
+    if raw is None:
+        return ()
+    specs: list[OptionSpec] = []
+    for option in raw:
+        base, modifiers = _weight_spec(option.get("weight", 1))
+        specs.append(
+            OptionSpec(
+                trigger=option.get("trigger"),
+                weight=base,
+                weight_modifiers=modifiers,
+                intent=option.get("intent"),
+            )
+        )
+    return tuple(specs)
+
+
+# -- triggers (time / place / threshold — causal, not stagnation) -------------
+
+
+def _trigger_fires(
+    trigger: Mapping[str, Any] | None,
+    projection: Mapping[str, Mapping[str, Any]],
+    beat_tick: int,
+) -> bool:
+    """A hook's explicit trigger. A hook with `trigger is None` is
+    stagnation-only — its trigger never fires on its own; it relies on
+    the stagnation detector. Otherwise the spec is a drama-1 predicate
+    (core/predicates.py owns the grammar: the three v0.1 leaf kinds —
+    time / place / threshold — evaluate byte-identically to the pre-
+    drama-1 shapes, and compound `all`/`any`/`not` forms are legal pack
+    data since this iteration).
+    """
+    return trigger is not None and evaluate(trigger, projection, beat_tick)
+
+
+def _weight_spec(spec: Any) -> tuple[int, tuple[Mapping[str, Any], ...]]:
+    """Resolve the pack's hook weight (drama-1): a flat non-negative
+    int is the v0.1 form (base, no tail); the multiplier object
+    `{base, modifiers}` flattens to (base, tuple(modifiers)) — the
+    buffer stores the data, `_resolve_weight` computes the effective
+    value per evaluation (a stored effective weight would be a
+    projection inside the buffer — L3's drift hazard). Pack lint owns
+    the shape validation; this resolver only trusts what the lint
+    passed."""
+    if isinstance(spec, int) and not isinstance(spec, bool):
+        return spec, ()
+    return int(spec["base"]), tuple(spec.get("modifiers", ()))
+
+
+# -- the director -----------------------------------------------------------
+
+
+@dataclass
+class Director:
+    """The per-run consequence planner. Holds the seeded-hook buffer and
+    the release budget; the loop calls `seed` at commit time and
+    `releases` at each beat tick. A release produces an IntentData the
+    loop enqueues — the director never writes canon itself (D-037).
+    Since iter-36 it also holds the per-run pacing clock (DIR-1) when
+    the pack declares one; since iter-39 the channel table (DIR-4) —
+    pack data, constant across runs, like the policies. Since iter-40
+    it holds the drama-1 burn set (`first_time_only` tags whose one
+    release already happened — per-run, folded state like the buffer).
+    Since iter-41 the option layer rides the release path: every
+    release resolves its option choice first (`_choose_option` — pure,
+    never stored). Since iter-47 it holds the arc-1 chain state: the
+    pack's arc table (constant, like the channels) plus the per-run
+    cursor (which member each arc is waiting on) and the last-release
+    beat feeding the gap law — folded state, INV-2."""
+
+    pack: "Pack"
+    policy: DirectorPolicy
+    beat_count: int = 0
+    _hooks: list[SeededHook] = field(default_factory=list)
+    _released: set[int] = field(default_factory=set)
+    _burned_tags: set[str] = field(default_factory=set)  # drama-1 first_time_only
+    _npc_last_release_beat: dict[str, int] = field(default_factory=dict)
+    _pacing_config: PacingConfig | None = field(default=None, init=False, repr=False)
+    _pacing: PacingClock | None = field(default=None, init=False, repr=False)
+    _pacing_beat: int = field(default=-1, init=False, repr=False)
+    _channels: Mapping[str, ChannelConfig] | None = field(
+        default=None, init=False, repr=False
+    )
+    _arcs: Mapping[str, ArcConfig] | None = field(
+        default=None, init=False, repr=False
+    )
+    _tag_arc: dict[str, str] = field(  # tag → its arc's name (arc-1)
+        default_factory=dict, init=False, repr=False
+    )
+    _tag_pos: dict[str, int] = field(  # tag → its position in that arc
+        default_factory=dict, init=False, repr=False
+    )
+    _arc_cursor: dict[str, int] = field(  # arc → first member not yet released
+        default_factory=dict, init=False, repr=False
+    )
+    _arc_last_beat: dict[str, int] = field(  # arc → beat of its previous member release
+        default_factory=dict, init=False, repr=False
+    )
+    # iter-378 (the senses index): the commit-path fold of the two P2e
+    # world-sensing terms + the identity stamp of the projection it
+    # tracks. The fold updates inside `seed` (every committed event, in
+    # apply order — reactions nested between a commit and its own seed
+    # arrive in exactly apply order, so the fold is the projection's own);
+    # `_bound` is None until `bind` stamps the LIVE projection (the
+    # Simulator at construction and after a resume restore — the honest
+    # flush rescans, never trusting a stale fold), and `releases` reads
+    # the index ONLY for that exact object — any other projection
+    # (tests, probes, foreign callers) gets the whole-projection scans,
+    # the law unchanged (the ScanGateMemo identity law's form).
+    _senses: "SensesIndex | None" = field(
+        default=None, init=False, repr=False
+    )
+    _bound: "Projection | None" = field(
+        default=None, init=False, repr=False
+    )
+
+    def __post_init__(self) -> None:
+        self._pacing_config = pacing_from_rules(self.pack.rules)
+        if self._pacing_config is not None:
+            self._pacing = PacingClock()
+        self._channels = channels_from_rules(self.pack.rules)
+        self._arcs = arcs_from_rules(self.pack.rules)
+        if self._arcs is not None:
+            for name, arc in self._arcs.items():
+                for position, tag in enumerate(arc.members):
+                    self._tag_arc[tag] = name
+                    self._tag_pos[tag] = position
+        # iter-378: the senses fold born from the pack-seeded initial
+        # projection (KI#16 — the whole projection, seeds included; a
+        # fold from zero would be blind to the pack's declarations).
+        # `seed` keeps it exact from here; `bind` re-anchors it on the
+        # live object (the rescan is the honest flush — locally
+        # verifiable, never trusting the caller's word).
+        self._senses = SensesIndex.from_projection(
+            initial_projection(self.pack.entities),
+            _threat_states(self.pack.rules),
+        )
+
+    def bind(self, projection: "Projection") -> None:
+        """Stamp the LIVE projection the senses fold tracks (iter-378,
+        the ScanGateMemo identity law's form): the caller asserts this
+        object is the one every committed event applies to (`Simulator`
+        at construction; the resume door after the restore+replay
+        pass). The rescan IS the point — the flush rebuilds the fold
+        from the projection's own content, so a bind is locally
+        correct wherever it sits after the fold basis is final, never
+        trusting a stale accumulated state. `releases` reads the index
+        only for this exact object; every other projection keeps the
+        whole-projection scans (the law, unchanged)."""
+        self._senses = SensesIndex.from_projection(
+            projection, _threat_states(self.pack.rules)
+        )
+        self._bound = projection
+
+    @property
+    def hooks(self) -> tuple[SeededHook, ...]:
+        return tuple(self._hooks)
+
+    @property
+    def pacing(self) -> PacingClock | None:
+        """The per-run pacing clock (None when the pack declares no
+        pacing — the v0.1 minimal pair)."""
+        return self._pacing
+
+    def next_beat(self) -> int:
+        """Advance the beat counter; returns the new beat index."""
+        self.beat_count += 1
+        return self.beat_count
+
+    def seed(self, event: "EventRecord") -> None:
+        """Absorb an event's hooks into the buffer (D-005: a complication
+        is seeded at event time, never invented later). Tags the pack
+        does not declare are silently ignored — a hook without a
+        release intent is just a tag, not a deferred consequence. The
+        drama-1 weight spec resolves here (flat int = base, no tail;
+        the multiplier object flattens to base + modifier list — the
+        buffer stores data, the effective weight is computed per
+        evaluation, never stored). The drama-2 option blocks flatten
+        the same way (`_option_specs` — the choice is computed per
+        release, never stored).
+
+        iter-378: the event's state changes also fold into the senses
+        index (the `apply_event` twin — `from_` IS the pre-change value
+        the commit door validated, so the delta arithmetic is exact;
+        every committed event passes here, hook-bearing or not, which
+        is KI#16's law satisfied by construction: the fold tracks the
+        WHOLE projection's history, never the hook-seeding events)."""
+        for change in event.state_changes:
+            self._senses.apply_change(change.prop, change.from_, change.to_)
+        config = self.pack.rules.get("director", {})
+        hook_specs = config.get("hooks", {})
+        for tag in event.hooks:
+            spec = hook_specs.get(tag)
+            if spec is None:
+                continue
+            base, modifiers = _weight_spec(spec["weight"])
+            self._hooks.append(
+                SeededHook(
+                    tag=tag,
+                    seeded_by_event=event.id,
+                    seeded_at_tick=event.t,
+                    weight=base,
+                    release_threshold=int(spec["release_threshold"]),
+                    target_npc=spec["target_npc"],
+                    intent_kind=spec["intent"]["kind"],
+                    intent_target=spec["intent"].get("target"),
+                    intent_fields=dict(spec["intent"].get("fields", {})),
+                    trigger=spec.get("trigger"),
+                    climax=bool(spec.get("climax", False)),
+                    channel=spec.get("channel"),
+                    weight_modifiers=modifiers,
+                    first_time_only=bool(spec.get("first_time_only", False)),
+                    options=_option_specs(spec.get("options")),
+                )
+            )
+
+    def releases(
+        self,
+        projection: "Projection",
+        beat_tick: int,
+    ) -> list[IntentData]:
+        """One beat's worth of releases (phase0 §4): explicit triggers
+        fire causally first; the climax path (DIR-3) checks the boss
+        gate; then the quiet path — per channel since iter-39 (DIR-4):
+        each hook's own channel floor gates it when the pack declares
+        channels and the hook carries a channel; the v0.1 global floor
+        otherwise. Budget: 1 release per beat (the director never
+        spams, across ALL channels — the pick stays the global
+        lowest-threshold tiebreak). A rejected director Intent consumes
+        the budget (per-NPC cooldown follows — recorded, the front door
+        does the rejecting). Dead actors (no projection entry /
+        `crime_status == caught`) are never targeted.
+
+        drama-2 (iter-41): every release resolves its option choice
+        first — a hook whose options are ALL gated off or zeroed out
+        cannot release this beat (nothing hits the door, no budget is
+        consumed; the hook waits for a world where an option opens),
+        and the chosen option's payload overrides the base whole-key.
+        A hook without options runs the v0.1 path byte-identically.
+
+        Reads observable state only (L6): the projection and the
+        seeded-hook buffer — never knowledge records, never PC
+        internals (the entropy law, phases.md/DIRECTOR_SPEC §5). The
+        pacing clock (DIR-1) advances once per beat BEFORE the gates
+        read it; PEAK/REST suppress the quiet path — every channel
+        (the clock reads TOTAL entropy: one drama arc), explicit
+        triggers stay ungated (D-005 — causality is not pacing).
+
+        arc-1 (iter-47): the arc order law gates CANDIDACY on all
+        three paths (a chain is pack-declared causality, not pacing —
+        the clock is not consulted, the chain is); the gap law gates
+        the quiet + climax paths only (it IS pacing — explicit
+        triggers fire mid-gap, D-005). The entropy view mirrors the
+        burn filter: instances of PASSED members stop counting (one
+        play per arc beat — the twin of the first_time_only law).
+        """
+        unreleased = [
+            (idx, hook) for idx, hook in self._unreleased()
+            if hook.tag not in self._burned_tags  # drama-1: a burned tag
+            # never releases again and never counts toward entropy — its
+            # remaining instances are facts (INV-5) but not tension.
+        ]
+        # arc-1: the two views split when the pack declares arcs. The
+        # TENSION view (entropy's input) drops instances of PASSED
+        # members — a member whose tag already released; its remaining
+        # instances are spent facts, the burn law's twin. The CANDIDATE
+        # view (the three release paths' input) keeps only each arc's
+        # CURRENT member — the order law. Without arcs both views are
+        # the burned-tag list itself (the two comprehensions below are
+        # guarded no-ops — the v0.1 hot path is untouched).
+        tension = unreleased
+        eligible = unreleased
+        if self._arcs is not None:
+            tension = [
+                (idx, hook) for idx, hook in unreleased
+                if not self._arc_passed(hook.tag)
+            ]
+            eligible = [
+                (idx, hook) for idx, hook in tension
+                if self._arc_current(hook.tag)
+            ]
+        # Entropy is invariant across this call — nothing mutates the
+        # buffer, the release set, or the projection before an immediate
+        # return — so it is computed once and reused for every policy
+        # check (the eager per-hook recomputation was pure waste under a
+        # rejecting policy: k+1 identical evaluations per beat). Computed
+        # even on an empty buffer: the pacing clock models the world's
+        # drama (a burning room is a PEAK with the buffer drained), and
+        # entropy is its only input. iter-378: the BOUND projection's
+        # commit-path fold answers the two world-sensing terms (O(1),
+        # the 2-per-beat whole-population scans gone); any other
+        # projection keeps the scans inside `entropy` — the fallback
+        # path's law, byte-for-byte.
+        senses = self._senses if projection is self._bound else None
+        current_entropy = entropy(
+            projection, iter(h for _, h in tension), self.pack.rules,
+            beat_tick, senses=senses,
+        )
+        self._advance_pacing(current_entropy)
+        if not unreleased:
+            return []
+        # 1) explicit triggers — causal, fire regardless of entropy
+        # (arc-1: the ORDER law applies — a non-current member's
+        # trigger is held by the chain; the GAP law does not — the
+        # world's own consequences fire mid-gap, D-005)
+        for idx, hook in eligible:
+            if not _trigger_fires(hook.trigger, projection, beat_tick):
+                continue
+            if self._on_cooldown(hook.target_npc):
+                continue
+            if not self._target_alive(projection, hook.target_npc):
+                continue
+            if not self.policy.permit_release(
+                explicit_trigger_fires=True,
+                current_entropy=current_entropy,
+            ):
+                continue
+            option = _choose_option(hook, projection, beat_tick)
+            if option is None:
+                # drama-2: every option is gated off or zeroed out — the
+                # hook cannot release this beat; the next hook in line
+                # gets its chance (nothing hit the door, no budget spent)
+                continue
+            self._mark_released(idx, hook)
+            return [self._intent(hook, option)]
+        # 2) climax release (DIR-3, the L4D2 three-intensity rule + the
+        # boss-beat rule): a climax-flagged hook releases at the END of a
+        # peak — the clock in PEAK having held `min_peak_beats` (the
+        # placement law: boss beats end peaks, never start them), entropy
+        # at the third layer (`climax_floor`, strictly above the peak
+        # floor — pack lint). The release marks the beat PEAK_CLIMAX (one
+        # beat); the next transition is REST — the post-climax breathing
+        # room the clock already defines. The pack's declaration is the
+        # gate (INV-3): no `climax_floor`, no climax path — and a
+        # climax-flagged hook never falls through to the quiet path.
+        if self._climax_gate(current_entropy):
+            candidates = [
+                (idx, hook) for idx, hook in eligible
+                if hook.climax
+                and not self._on_cooldown(hook.target_npc)
+                and self._target_alive(projection, hook.target_npc)
+                and self._arc_gap_open(hook.tag)  # arc-1: the boss beat
+                # respects the chain's spacing too — an arc's beats
+                # march, they do not dump (the gap is pacing, so it
+                # gates this path and the quiet path — never the
+                # explicit one)
+            ]
+            if candidates:
+                candidates.sort(
+                    key=lambda ih: (ih[1].release_threshold, ih[1].seeded_at_tick)
+                )
+                # drama-2: a hook whose options are all closed is not a
+                # candidate — the walk takes the first releasable pick
+                for idx, hook in candidates:
+                    option = _choose_option(hook, projection, beat_tick)
+                    if option is None:
+                        continue
+                    self._mark_released(idx, hook)
+                    assert self._pacing is not None  # the gate passed: pacing exists
+                    self._pacing = PacingClock("PEAK_CLIMAX", 1)  # the boss beat
+                    return [self._intent(hook, option)]
+        # 3) the quiet path (the stagnation family). DIR-4 (iter-39 —
+        # the L4D multi-channel family): the quiet gate is per hook. A
+        # hook carrying a channel the pack declares asks its OWN
+        # channel's floor against that channel's entropy — a quiet
+        # channel can inject while another burns (the multi-channel win
+        # the single global floor cannot express); every other hook
+        # keeps the v0.1 global-floor question (the per-hook opt-in
+        # mirrors the climax flag: a tag without the block is dormant
+        # vocabulary). The clock gate stays global (PEAK/REST suppress
+        # every channel); the pick stays the global lowest-threshold
+        # tiebreak — the budget is one release per beat, all channels.
+        global_quiet = self.policy.permit_release(
+            explicit_trigger_fires=False, current_entropy=current_entropy
+        )
+        if self._channels is None and not global_quiet:
+            return []
+        if self._pacing is not None and self._pacing.state not in (
+            "RAMP", "STAGNATION"
+        ):
+            return []
+        per_channel = (
+            channel_entropies(
+                self._channels, projection,
+                iter(hook for _, hook in tension), self.pack.rules, beat_tick,
+                senses=senses,
+            )
+            if self._channels is not None
+            else None
+        )
+        # arc-1: the tension view feeds the channel entropies too (a
+        # passed member's instances are not tension in ANY entropy —
+        # the mirror is one law, not a global-entropy special case)
+        candidates = [
+            (idx, hook) for idx, hook in eligible
+            if not hook.climax  # the boss never spawns because the world is boring
+            and not self._on_cooldown(hook.target_npc)
+            and self._target_alive(projection, hook.target_npc)
+            and self._quiet_gate(hook, per_channel, global_quiet)
+            and self._arc_gap_open(hook.tag)  # arc-1: the gap law — the
+            # quiet path never dumps two of one arc's beats back to back
+        ]
+        if not candidates:
+            return []
+        # lowest release_threshold wins; ties break by seeding order
+        # (oldest first — far hooks deserve priority, MVP_SCOPE §5).
+        # drama-2: a hook whose options are all closed is not a candidate
+        # — the walk takes the first releasable pick in tiebreak order.
+        candidates.sort(key=lambda ih: (ih[1].release_threshold, ih[1].seeded_at_tick))
+        for idx, hook in candidates:
+            option = _choose_option(hook, projection, beat_tick)
+            if option is None:
+                continue
+            self._mark_released(idx, hook)
+            return [self._intent(hook, option)]
+        return []
+
+    # -- helpers (private) ---------------------------------------------------
+
+    def _quiet_gate(
+        self,
+        hook: SeededHook,
+        per_channel: Mapping[str, int] | None,
+        global_quiet: bool,
+    ) -> bool:
+        """The per-hook quiet gate (DIR-4): the hook's own channel floor
+        when it carries a channel the pack declares; the v0.1 global
+        answer otherwise (channelless, the tag names no declared
+        channel — dormant vocabulary, the climax-flag-without-layer
+        law — or the pack declares no channels). The global question is
+        asked once in `releases`, never per hook."""
+        if (
+            per_channel is not None
+            and hook.channel is not None
+            and hook.channel in per_channel
+        ):
+            assert self._channels is not None  # per_channel set: channels declared
+            return self.policy.permit_quiet(
+                self._channels[hook.channel], per_channel[hook.channel]
+            )
+        return global_quiet
+
+    def _climax_gate(self, current_entropy: int) -> bool:
+        """The layered-threshold release gate (DIR-3): the pack declares
+        the third layer AND the clock is at a peak's end (PEAK having
+        held its minimum) AND entropy sits at the climax layer AND the
+        policy permits the boss path. Note the clock's PEAK_CLIMAX
+        state does not re-open this gate (state != PEAK) — no double
+        boss; a PEAK entry beat below `min_peak_beats` is the peak's
+        start, not its end (the L4D placement law)."""
+        if self._pacing_config is None or self._pacing is None:
+            return False
+        if self._pacing_config.climax_floor is None:
+            return False
+        if self._pacing.state != "PEAK":
+            return False
+        if self._pacing.beats_in_state < self._pacing_config.min_peak_beats:
+            return False
+        if current_entropy < self._pacing_config.climax_floor:
+            return False
+        return self.policy.permit_climax()
+
+    def _advance_pacing(self, current_entropy: int) -> None:
+        """One beat's clock transition — guarded so a repeated
+        `releases()` call inside one beat never double-advances (the
+        loop calls once per beat; unit tests probe repeatedly)."""
+        if self._pacing is None or self._pacing_config is None:
+            return
+        if self._pacing_beat == self.beat_count:
+            return
+        self._pacing_beat = self.beat_count
+        self._pacing = self._pacing.transition(current_entropy, self._pacing_config)
+
+    def _unreleased(self) -> Iterator[tuple[int, SeededHook]]:
+        for idx, hook in enumerate(self._hooks):
+            if idx not in self._released:
+                yield idx, hook
+
+    def _mark_released(self, idx: int, hook: SeededHook) -> None:
+        self._released.add(idx)
+        self._npc_last_release_beat[hook.target_npc] = self.beat_count
+        if hook.first_time_only:
+            # drama-1: the Wesnoth fire-only-once law — the tag burns for
+            # the run; its remaining instances stop counting (releases()
+            # filters them) and never release.
+            self._burned_tags.add(hook.tag)
+        # arc-1: the chain's cursor advances when its CURRENT member
+        # releases — emit-time, the same law the budget and the cooldown
+        # follow (a door rejection still counts: the beat was spent, the
+        # world noticed the attempt). Only the current member can reach
+        # here (the candidacy filter); the position check keeps a manual
+        # _mark_released call honest — a no-op, never a silent cursor
+        # jump.
+        arc = self._tag_arc.get(hook.tag) if self._arcs is not None else None
+        if arc is not None:
+            assert self._arcs is not None
+            cursor = self._arc_cursor.get(arc, 0)
+            members = self._arcs[arc].members
+            if cursor < len(members) and members[cursor] == hook.tag:
+                self._arc_cursor[arc] = cursor + 1
+                self._arc_last_beat[arc] = self.beat_count
+
+    # -- the resume door (iter-106, D-139): the run marks ---------------
+
+    def export_run_state(self) -> dict[str, Any]:
+        """The director's per-run state (the resume door's director half):
+        every scalar, set and map the fold cannot rebuild. The
+        seeded-hook BUFFER is deliberately absent — it is exactly
+        rebuildable by `seed()` over the log's events in order (a hook
+        carves from its event, D-005), and the `_released` indices stay
+        valid against that rebuild. The pack tables (pacing config,
+        channels, arcs) are rules-derived and rebuilt in `__post_init__`.
+        Keys sorted where ordered: the same run state serializes to the
+        same bytes in any process (`core/cursor.py` owns the artifact
+        around this payload)."""
+        pacing: Mapping[str, Any] | None = None
+        if self._pacing is not None:
+            pacing = {
+                "state": self._pacing.state,
+                "beats_in_state": self._pacing.beats_in_state,
+            }
+        return {
+            "beat_count": self.beat_count,
+            "released": sorted(self._released),
+            "burned_tags": sorted(self._burned_tags),
+            "npc_last_release_beat": dict(sorted(self._npc_last_release_beat.items())),
+            "pacing": pacing,
+            "pacing_beat": self._pacing_beat,
+            "arc_cursor": dict(sorted(self._arc_cursor.items())),
+            "arc_last_beat": dict(sorted(self._arc_last_beat.items())),
+        }
+
+    def restore_run_state(self, mapping: Mapping[str, Any]) -> None:
+        """Restore the run marks (the resume door's director half —
+        `Simulator.resume` is the only caller, AFTER the buffer was
+        rebuilt by `seed()` over the log). Loud on any drift: a closed
+        key set, integer/mapping types, the pacing shape agreeing with
+        the pack's own declaration (pacing state without a pacing block,
+        or the reverse, is a cursor from a different pack family), arc
+        cursors without an arc table, and release indices the rebuilt
+        buffer cannot hold (a stale cursor lying about its run)."""
+        expected = {
+            "beat_count", "released", "burned_tags",
+            "npc_last_release_beat", "pacing", "pacing_beat",
+            "arc_cursor", "arc_last_beat",
+        }
+        if set(mapping) != expected:
+            raise ValueError(
+                f"director run-state keys must be {sorted(expected)}, got "
+                f"{sorted(mapping)}"
+            )
+        for key, floor in (
+            ("beat_count", 0), ("pacing_beat", -1),
+        ):
+            value = mapping[key]
+            if not isinstance(value, int) or isinstance(value, bool) or value < floor:
+                raise ValueError(
+                    f"director run-state {key!r} must be an int >= {floor}, "
+                    f"got {value!r}"
+                )
+        released = mapping["released"]
+        if not isinstance(released, list) or not all(
+            isinstance(idx, int) and not isinstance(idx, bool) for idx in released
+        ):
+            raise ValueError(
+                f"director run-state 'released' must be a list of ints, got "
+                f"{released!r}"
+            )
+        if released and max(released) >= len(self._hooks):
+            raise ValueError(
+                f"director run-state claims release index {max(released)} but "
+                f"the rebuilt buffer holds {len(self._hooks)} hooks — the "
+                "cursor is stale or foreign to this log"
+            )
+        burned = mapping["burned_tags"]
+        if not isinstance(burned, list) or not all(
+            isinstance(tag, str) for tag in burned
+        ):
+            raise ValueError(
+                f"director run-state 'burned_tags' must be a list of strings, "
+                f"got {burned!r}"
+            )
+        npc_beats = mapping["npc_last_release_beat"]
+        if not isinstance(npc_beats, Mapping) or not all(
+            isinstance(k, str) and isinstance(v, int) and not isinstance(v, bool)
+            for k, v in npc_beats.items()
+        ):
+            raise ValueError(
+                "director run-state 'npc_last_release_beat' must be a "
+                f"str -> int mapping, got {npc_beats!r}"
+            )
+        pacing = mapping["pacing"]
+        if (pacing is None) != (self._pacing is None):
+            raise ValueError(
+                "director run-state pacing disagrees with the pack's own "
+                "declaration — the cursor comes from a different pack "
+                f"family (cursor: {pacing!r}, pack pacing block: "
+                f"{self._pacing_config is not None})"
+            )
+        if pacing is not None:
+            if (
+                not isinstance(pacing, Mapping)
+                or set(pacing) != {"state", "beats_in_state"}
+                or pacing["state"] not in PACING_STATES
+                or not isinstance(pacing["beats_in_state"], int)
+                or isinstance(pacing["beats_in_state"], bool)
+                or pacing["beats_in_state"] < 0
+            ):
+                raise ValueError(
+                    f"director run-state pacing must be "
+                    f"{{state, beats_in_state}} over {list(PACING_STATES)}, "
+                    f"got {pacing!r}"
+                )
+            self._pacing = PacingClock(
+                state=str(pacing["state"]),
+                beats_in_state=int(pacing["beats_in_state"]),
+            )
+        for key in ("arc_cursor", "arc_last_beat"):
+            table = mapping[key]
+            if not isinstance(table, Mapping) or not all(
+                isinstance(k, str) and isinstance(v, int) and not isinstance(v, bool)
+                for k, v in table.items()
+            ):
+                raise ValueError(
+                    f"director run-state {key!r} must be a str -> int "
+                    f"mapping, got {table!r}"
+                )
+            if table and self._arcs is None:
+                raise ValueError(
+                    f"director run-state {key!r} is non-empty but the pack "
+                    "declares no arcs — the cursor is foreign to this pack"
+                )
+        self.beat_count = int(mapping["beat_count"])
+        self._released = set(released)
+        self._burned_tags = set(burned)
+        self._npc_last_release_beat = dict(npc_beats)
+        self._pacing_beat = int(mapping["pacing_beat"])
+        self._arc_cursor = dict(mapping["arc_cursor"])
+        self._arc_last_beat = dict(mapping["arc_last_beat"])
+
+    # -- the arc laws (arc-1, iter-47) ---------------------------------------
+
+    def _arc_current(self, tag: str) -> bool:
+        """The ORDER law: a member tag is a release candidate only while
+        it is its arc's current member — the first member not yet
+        released this run (the cursor). A completed arc (cursor past the
+        last member) has no current member: its leftover instances are
+        spent facts. A tag in no arc (or a pack without arcs) is always
+        current — the v0.1 law, untouched."""
+        arc = self._tag_arc.get(tag)
+        if arc is None:
+            return True
+        return self._tag_pos[tag] == self._arc_cursor.get(arc, 0)
+
+    def _arc_passed(self, tag: str) -> bool:
+        """The entropy mirror's half of the order law: True when the
+        member's turn already came and went (its position precedes the
+        cursor — one instance of it released, the arc moved on). The
+        remaining instances are spent facts: they never release and stop
+        counting toward entropy (the first_time_only burn law's twin —
+        one play per arc beat). Future members are NOT passed: the
+        buffer's meaning is unchanged, a fully-seeded chain reads its
+        whole weight until it starts marching."""
+        arc = self._tag_arc.get(tag)
+        if arc is None:
+            return False
+        return self._tag_pos[tag] < self._arc_cursor.get(arc, 0)
+
+    def _arc_gap_open(self, tag: str) -> bool:
+        """The GAP law (the tension-shaping half): the current member's
+        beat must sit at least `min_gap_beats` after the arc's previous
+        member's release — the chain's beats march, they do not dump.
+        The first member has no predecessor (the gap never gates it);
+        a tag in no arc is never gated. Consulted by the quiet and
+        climax paths ONLY — explicit triggers fire mid-gap (D-005:
+        causality is not pacing, the exact law that lets the world's
+        own consequences fire mid-rest)."""
+        arc = self._tag_arc.get(tag)
+        if arc is None:
+            return True
+        assert self._arcs is not None
+        last = self._arc_last_beat.get(arc)
+        if last is None:
+            return True
+        return self.beat_count - last >= self._arcs[arc].min_gap_beats
+
+    def _on_cooldown(self, npc: str) -> bool:
+        """Per-NPC cooldown after a release (the MinGapBetweenEncounters
+        analogue). The pack declares the cooldown length in beats."""
+        last = self._npc_last_release_beat.get(npc)
+        if last is None:
+            return False
+        cooldown = int(self.pack.rules["director"]["stagnation"].get(
+            "per_npc_cooldown_beats", 1
+        ))
+        return self.beat_count - last < cooldown
+
+    @staticmethod
+    def _target_alive(projection: "Projection", npc: str) -> bool:
+        """The entropy sensor stops targeting dead actors: an NPC removed
+        from the projection or marked caught is never targeted again."""
+        if npc not in projection:
+            return False
+        return projection[npc].get("crime_status") != "caught"
+
+    def _intent(self, hook: SeededHook, option: OptionSpec) -> IntentData:
+        """Build the IntentData the loop will enqueue (the director never
+        writes canon — it broadcasts an objective through the door). The
+        drama-2 payload merge: the chosen option's intent block overrides
+        the hook's base payload WHOLE-KEY (kind / target / fields each
+        wholly replaced when declared — Paradox options are complete
+        alternative effect branches, not patches); an option without an
+        intent block (and the implicit base option of an option-less
+        hook) carries the base payload unchanged."""
+        kind = hook.intent_kind
+        target = hook.intent_target
+        fields = dict(hook.intent_fields)
+        if option.intent is not None:
+            override = option.intent
+            if "kind" in override:
+                kind = override["kind"]
+            if "target" in override:
+                target = override["target"]
+            if "fields" in override:
+                fields = dict(override["fields"])
+        return IntentData(
+            # probeids-1 (iter-436): the id names the release's DECLARED
+            # identity — the hook tag — never its ordinal. Two seeded
+            # instances of one tag are the same probe repeated (the urgency
+            # family's own law): the OCC snapshot FIFO pairs same-id
+            # enqueues in push order, and the pack's hook table is keyed by
+            # tag, so no two distinct hooks ever share one.
+            id=f"{HOOK_PREFIX}_{hook.tag}",
+            kind=kind,
+            actor=hook.target_npc,
+            target=target,
+            fields=fields,
+            based_on_event_seq=0,  # the loop stamps the current count at enqueue
+            origin_hook=hook.tag,  # D-140: the loop stamps provenance.cause_hook
+        )

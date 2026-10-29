@@ -1,0 +1,80 @@
+{
+  "operation_id": "93b1b8419ae3dde2995ef86a2d0b9860b0c4e585342736d7b191ce6e3f20e3d8",
+  "result": {
+    "artifact": {
+      "artifact_schema_identity": "canon_execution_artifact@0.1",
+      "backend_identity": null,
+      "capability_snapshot": null,
+      "diagnostics": [
+        "the work raised EngineError: [unavailable] http://127.0.0.1:8080 unreachable after 5 tries: <urlopen error [Errno 111] Connection refused>"
+      ],
+      "execution_id": "83fbd6e9838945b4cbbcab43894f9e688d09dbc2fcb1be479456076e257c1a0e",
+      "frozen_inputs": [
+        [
+          "deadline_seconds",
+          "120.0"
+        ],
+        [
+          "max_tokens",
+          "512"
+        ],
+        [
+          "messages",
+          "[{\"content\":\"What is the tavern's mood tonight?\",\"role\":\"user\"}]"
+        ],
+        [
+          "temperature",
+          "0.8"
+        ]
+      ],
+      "inference_config": null,
+      "model_identity": null,
+      "operation_id": "cf7c85fbd1b4e7b47e8d6b44181b9f1a02bd020efc56323af14406454cce6691",
+      "pack_schema_identity": null,
+      "prompt_identity": null,
+      "protocol_identity": null,
+      "replay_of": null,
+      "reproducibility_scope": "SEMANTIC",
+      "request_digest": "e4937d7b075230492cc4b608b88ae93c8017c0bfe687dfaf9e9aee01c9887610",
+      "runtime_identity": null,
+      "seed": null,
+      "status": "FAILED",
+      "tool_authority_state": null
+    },
+    "deadline": {
+      "deadline_monotonic": 2282.105604174,
+      "started_monotonic": 2162.105604174
+    },
+    "diagnostics": [
+      "the work raised EngineError: [unavailable] http://127.0.0.1:8080 unreachable after 5 tries: <urlopen error [Errno 111] Connection refused>"
+    ],
+    "execution_id": "83fbd6e9838945b4cbbcab43894f9e688d09dbc2fcb1be479456076e257c1a0e",
+    "failure_type": "EngineError",
+    "frozen_inputs": [
+      [
+        "deadline_seconds",
+        "120.0"
+      ],
+      [
+        "max_tokens",
+        "512"
+      ],
+      [
+        "messages",
+        "[{\"content\":\"What is the tavern's mood tonight?\",\"role\":\"user\"}]"
+      ],
+      [
+        "temperature",
+        "0.8"
+      ]
+    ],
+    "operation_id": "cf7c85fbd1b4e7b47e8d6b44181b9f1a02bd020efc56323af14406454cce6691",
+    "progress": null,
+    "request_digest": "e4937d7b075230492cc4b608b88ae93c8017c0bfe687dfaf9e9aee01c9887610",
+    "result": null,
+    "state": "FAILED",
+    "terminal": true,
+    "work": "chat.completion"
+  },
+  "status": "OK"
+}

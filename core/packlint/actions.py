@@ -1,0 +1,910 @@
+"""The action/template lint: the intent contract, the knowledge and
+texture blocks, the balance/status_effects shapes, the template closure
+(the D-175 split's actions family)."""
+
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any
+
+from core.economy import CONVERT_EVENT, SETTLE_EVENT, VERB_EVENT_TYPES
+from core.intent import (
+    ACCOUNT_CEILING_TEST,
+    ACCOUNT_TEST,
+    ECHO_TEST,
+    EDGE_TICKS,
+    LEVERAGE_TEST,
+    PRECONDITION_TESTS,
+    REJECTION_BOUNDARY_BLOCK,
+    REJECTION_EVENT,
+    TRAIT_TEST,
+    needs_target,
+)
+from core.packlint.helpers import _NOUNS, _SLOT, _SNAKE_CASE, PackError, _is_int, _require
+from core.packlint.shared import (
+    knowledge_entry,
+    lint_account_ceiling_cond,
+    lint_account_cond,
+    lint_direct_keys,
+    lint_echo_cond,
+    lint_trait_cond,
+)
+from core.resolvers import REGISTRY
+
+
+class ActionsLint:
+    """The domain lint (loaded pack data in, PackError out)."""
+
+    def __init__(self, data: dict[str, Mapping[str, Any]]) -> None:
+        self._data = data
+
+    def _texture_block(self, intent: str, action: Mapping[str, Any]) -> None:
+        """The optional texture block (iter-11, blueprint §1 promotion): the
+        pack declares THIS action texture-capable; its `requires` replace
+        the canon ones for intents carrying a resolved texture reference,
+        its `knowledge` templates render with the texture context (no canon
+        target on that path — the {target} slot is forbidden here)."""
+        block = action.get("texture")
+        if block is None:
+            return
+        where = f"action {intent!r} texture"
+        _require(isinstance(block, Mapping), f"{where}: must be an object")
+        _require(
+            "texture" in action.get("fields", ()),
+            f"{where}: the action must declare 'texture' in its fields",
+        )
+        _require(
+            isinstance(block.get("requires"), list),
+            f"{where}: requires must be a list",
+        )
+        # The texture path carries no canon target: a target-sourced check
+        # would roll against a None defender (a silent nonsense check, not
+        # a crash) — the check must oppose the actor or the environment.
+        checks = self._data["rules.json"]["checks"]
+        check = action.get("check")
+        if check is not None and checks["kinds"][check["kind"]].get(
+            "defender_source"
+        ) == "target":
+            _require(
+                False,
+                f"{where}: check kind {check['kind']!r} defends from the target — "
+                f"the texture path has none (use best_in_location or environment)",
+            )
+        for cond in block["requires"]:
+            _require(
+                cond.get("test") in PRECONDITION_TESTS,
+                f"{where}: unknown precondition test {cond.get('test')!r}",
+            )
+            lint_direct_keys(cond, where)
+            if cond.get("test") == ECHO_TEST:
+                lint_echo_cond(self._data, cond, where)
+            if cond.get("test") == TRAIT_TEST:
+                lint_trait_cond(self._data, cond, where)
+            if cond.get("test") == ACCOUNT_TEST:
+                lint_account_cond(self._data, cond, where)
+            if cond.get("test") == ACCOUNT_CEILING_TEST:
+                lint_account_ceiling_cond(self._data, cond, where)
+            for param in ("noun", "with", "who"):
+                if param in cond:
+                    _require(
+                        cond[param] in _NOUNS,
+                        f"{where}: precondition {param} {cond[param]!r} "
+                        f"must be one of {list(_NOUNS)}",
+                    )
+        for branch, records in block.get("knowledge", {}).items():
+            _require(
+                branch in ("success", "failure", "failure_total"),
+                f"{where}: unknown knowledge branch {branch!r}",
+            )
+            if branch == "failure_total":
+                # _branch decides failure_total from the CANON knowledge
+                # block — without it the texture branch is dead pack data.
+                _require(
+                    "failure_total" in action.get("knowledge", {}),
+                    f"{where}: declares a failure_total branch but the canon "
+                    f"knowledge block does not — _branch can never reach it",
+                )
+            for record in records:
+                knowledge_entry(self._data, intent, record, tuple(block["requires"]))
+                _require(
+                    "target" not in _SLOT.findall(record["knows"]),
+                    f"{where}: knowledge branch {branch!r} uses the {{target}} "
+                    f"slot — the texture path has no canon target "
+                    f"(use {{{{texture_slot}}}})",
+                )
+
+
+    def _actions(self) -> None:
+        actions = self._data["actions.json"]["actions"]
+        templates = self._data["templates.json"]["events"]
+        checks = self._data["rules.json"]["checks"]
+        # iter-200 (the rename-safety closure, the iter-198 T3 measured
+        # failure — TECH_NOTES §17): the declared hook tags the branches
+        # below check membership against. The read is guarded (the KI#77
+        # order law: _director validates the block LATER, so a malformed
+        # director config must read here as no declarations, never a
+        # crash — the worldgen/weather precedents read the table only
+        # after _director has run).
+        director_cfg = self._data["rules.json"].get("director")
+        hook_table = director_cfg.get("hooks", {}) if isinstance(director_cfg, Mapping) else {}
+        declared_hooks = set(hook_table) if isinstance(hook_table, Mapping) else set()
+        intents = [action["intent"] for action in actions]
+        _require(len(intents) == len(set(intents)), "action intents are not unique")
+        for action in actions:
+            intent = action["intent"]
+            _require(
+                bool(_SNAKE_CASE.match(intent)),
+                f"action intent {intent!r} is not snake_case",
+            )
+            resolver = action.get("resolver")
+            _require(
+                isinstance(resolver, str) and resolver in REGISTRY,
+                f"action {intent}: resolver {resolver!r} is not in the registry "
+                f"(known: {sorted(REGISTRY)})",
+            )
+            ticks = action["ticks"]
+            if isinstance(ticks, Mapping):
+                _require(
+                    isinstance(ticks.get("min"), int) and isinstance(ticks.get("max"), int)
+                    and ticks["min"] <= ticks["max"],
+                    f"action {intent}: ticks range malformed: {ticks}",
+                )
+            else:
+                # st-6a (D-116 (5)): "edge" is the fourth legal value —
+                # the duration is the TRAVEL EDGE PRICE (resolve time,
+                # the loop's accept-door branch on EDGE_TICKS). Only
+                # the movement resolver may carry it (the travel action
+                # IS the movement twin with an edge price; an
+                # edge-priced check action is a future row's own
+                # mechanic, never this one's — the status_effects
+                # family law: the block/mode is legal only on its
+                # consuming resolver).
+                _require(
+                    isinstance(ticks, int) or ticks in ("N", EDGE_TICKS),
+                    f"action {intent}: ticks must be int, {{min,max}}, 'N' "
+                    f"or 'edge', got {ticks!r}",
+                )
+                if ticks == EDGE_TICKS:
+                    _require(
+                        resolver == "movement",
+                        f"action {intent}: ticks 'edge' is the movement "
+                        f"family's price mode (the travel action, the "
+                        f"movement twin) — resolver {resolver!r} would "
+                        f"need its own row's mechanic",
+                    )
+            for branch in ("success", "failure", "failure_total"):
+                event_type = action.get("events", {}).get(branch)
+                if event_type is not None:
+                    _require(
+                        event_type in templates,
+                        f"action {intent}: {branch} event {event_type!r} is not in "
+                        f"the template vocabulary (EVENT_SCHEMA §11)",
+                    )
+            check = action.get("check")
+            if check is not None:
+                _require(
+                    check["kind"] in checks["kinds"],
+                    f"action {intent}: unknown check kind {check['kind']!r}",
+                )
+                _require(
+                    isinstance(check.get("difficulty"), int),
+                    f"action {intent}: check difficulty must be an integer",
+                )
+                # KI#88's second arm (closed iter-169): a target-sourced
+                # defender builds its total from the intent's target — the
+                # door demands one only when a precondition references
+                # the noun (needs_target, the door's own predicate). A
+                # targetless intent would reach the check and roll
+                # against the base skill (the silent nonsense roll);
+                # refuse at load what the assert would refuse mid-run.
+                # The texture-block row is the stricter twin: the texture
+                # path replaces the canon requires and carries no target
+                # at all, so it refuses the combination outright.
+                if checks["kinds"][check["kind"]].get(
+                    "defender_source"
+                ) == "target":
+                    _require(
+                        needs_target(action),
+                        f"action {intent}: check kind {check['kind']!r} "
+                        "defends from the target — the action must pin "
+                        "the intent's target with a target-noun "
+                        "precondition (the door demands a target only "
+                        "then; without the pin a targetless intent would "
+                        "roll against the base skill, KI#88)",
+                    )
+            for cond in action.get("requires", ()):
+                _require(
+                    cond.get("test") in PRECONDITION_TESTS,
+                    f"action {intent}: unknown precondition test {cond.get('test')!r}",
+                )
+                # KI#89 (closed iter-169): the directly-indexed key rows —
+                # the five record-reading tests subscript their named
+                # parameters, so a missing key is refused HERE, at load
+                # (the iter-45 leverage `who` family's shared twin).
+                lint_direct_keys(cond, f"action {intent}")
+                # iter-45 (social-1b): the leverage test's `who` is
+                # mandatory — a missing key would KeyError mid-run at the
+                # door (the carried_by family, refused at load instead).
+                if cond.get("test") == LEVERAGE_TEST:
+                    _require(
+                        cond.get("who") in _NOUNS,
+                        f"action {intent}: precondition leverage_over requires "
+                        f"'who' (the entity the noun holds leverage over)",
+                    )
+                # iter-46 (social-2): the echo gate's axis/value must
+                # name the declared vocabulary — a dead gate is refused
+                # at load (the leverage `who` family)
+                if cond.get("test") == ECHO_TEST:
+                    lint_echo_cond(self._data, cond, f"action {intent}")
+                # beliefwire (iter-67): the trait gate's token must name
+                # a declared belief — a token the fold never mints is a
+                # dead gate, refused at load (the echo axis family)
+                if cond.get("test") == TRAIT_TEST:
+                    lint_trait_cond(self._data, cond, f"action {intent}")
+                # res-1 (the economy substrate): the account gate's kind
+                # must name a declared economy account — a kind outside
+                # the vocabulary is a dead gate (the echo axis family)
+                if cond.get("test") == ACCOUNT_TEST:
+                    lint_account_cond(self._data, cond, f"action {intent}")
+                # substrate-1 B (iter-410): the ceiling gate's contract —
+                # the same declared-kind/holder law, compared downward
+                if cond.get("test") == ACCOUNT_CEILING_TEST:
+                    lint_account_ceiling_cond(
+                        self._data, cond, f"action {intent}"
+                    )
+                # pack-2 (iter-29): the spot_available test's layer param
+                # must name a declared transition layer — a typo would
+                # KeyError mid-run (the KI#15 dead-data family, refused
+                # at load instead).
+                if cond.get("test") == "spot_available":
+                    _require(
+                        cond.get("layer") in self._data["rules.json"].get(
+                            "transitions", {}
+                        ),
+                        f"action {intent}: precondition layer "
+                        f"{cond.get('layer')!r} is not a declared transition "
+                        f"layer",
+                    )
+                for param in ("noun", "with", "who"):
+                    if param in cond:
+                        _require(
+                            cond[param] in _NOUNS,
+                            f"action {intent}: precondition {param} {cond[param]!r} "
+                            f"must be one of {list(_NOUNS)}",
+                        )
+            for fields_value in action.get("fields", ()):
+                _require(
+                    isinstance(fields_value, str),
+                    f"action {intent}: fields must be strings",
+                )
+            # events/knowledge branch consistency (KI#15): a resolver can
+            # index events[success] always, events[failure] when the action
+            # carries a check, events[failure_total] when knowledge
+            # declares that branch — a missing key would crash at
+            # completion instead of failing at load.
+            events = action.get("events", {})
+            _require("success" in events, f"action {intent}: events.success is required")
+            if action.get("check") is not None:
+                _require(
+                    "failure" in events,
+                    f"action {intent}: has a check but no events.failure",
+                )
+            if "failure_total" in action.get("knowledge", {}):
+                _require(
+                    "failure_total" in events,
+                    f"action {intent}: knowledge declares failure_total but "
+                    f"events does not — events['failure_total'] would crash "
+                    f"at completion",
+                )
+            for branch, records in action.get("knowledge", {}).items():
+                _require(
+                    branch in ("success", "failure", "failure_total"),
+                    f"action {intent}: unknown knowledge branch {branch!r}",
+                )
+                for record in records:
+                    knowledge_entry(self._data, 
+                        intent, record, tuple(action.get("requires", ()))
+                    )
+                    # The mirror of the texture-block {target} ban: the CANON
+                    # context carries no texture slot (only a texture-path
+                    # intent does) — the template would KeyError mid-run.
+                    _require(
+                        "texture_slot" not in _SLOT.findall(record["knows"]),
+                        f"action {intent}: knowledge branch {branch!r} uses the "
+                        f"{{texture_slot}} slot — only a texture block may "
+                        f"(the canon context has no texture reference)",
+                    )
+            self._texture_block(intent, action)
+            for branch, tags in action.get("hooks", {}).items():
+                _require(
+                    branch in ("success", "failure"),
+                    f"action {intent}: unknown hooks branch {branch!r}",
+                )
+                for tag in tags:
+                    _require(isinstance(tag, str), f"action {intent}: hook tags are strings")
+                    # iter-200: the seeding side of the rename-safety law —
+                    # a tag naming no declared hook is a silent no-op at
+                    # runtime (director.seed's None branch skips it), so a
+                    # rename that misses a seeding site kills the deferred
+                    # consequence invisibly. The worldgen and weather lints
+                    # already refuse their own hook references; the
+                    # actions' branches were the last unchecked surface.
+                    _require(
+                        tag in declared_hooks,
+                        f"action {intent}: hooks[{branch!r}] tag {tag!r} is not "
+                        "a declared director.hooks entry (the runtime ignores "
+                        "unknown tags — the seeded consequence never fires; "
+                        "declare the hook in director.hooks first)",
+                    )
+            ignition = action.get("ignition")
+            if ignition is not None:
+                _require(
+                    ignition.get("layer") in self._data["rules.json"]["transitions"],
+                    f"action {intent}: ignition layer {ignition.get('layer')!r} unknown",
+                )
+                _require(
+                    isinstance(ignition.get("item_flag"), str),
+                    f"action {intent}: ignition item_flag must be a string",
+                )
+            self._status_effects(intent, action)
+            self._balance(intent, action)
+            self._account_block(intent, action)
+            self._instrument_block(intent, action)
+
+    def _balance(self, intent: str, action: Mapping[str, Any]) -> None:
+        """The optional balance block (iter-45, social-1b): the pack
+        declares what a spent leverage cluster BUYS — subject-directed
+        pair-axis shifts ({axis, delta}) the `coerce` resolver applies
+        toward the actor. The status_effects precedent owns the shape:
+        the block lives beside its action, only its resolver consumes
+        it, axes must be real relations axes, deltas non-zero integers
+        (an undeclared axis or a zero delta is dead data — KI#15 family:
+        refuse at load, never a silent no-op at completion)."""
+        balance = action.get("balance")
+        if balance is None:
+            return
+        where = f"action {intent!r} balance"
+        _require(
+            action.get("resolver") == "coerce",
+            f"{where}: only the 'coerce' resolver consumes the block "
+            f"(this action resolves via {action.get('resolver')!r})",
+        )
+        _require(
+            isinstance(balance, list) and balance,
+            f"{where}: must be a non-empty list",
+        )
+        axes = set(self._data["rules.json"].get("relations", {}).get("axes", ()))
+        for effect in balance:
+            _require(isinstance(effect, Mapping), f"{where}: entries must be objects")
+            unknown = sorted(set(effect) - {"axis", "delta"})
+            if unknown:
+                raise PackError(
+                    f"{where}: unknown keys {unknown} (the closed "
+                    "vocabulary: axis | delta)"
+                )
+            axis = effect.get("axis")
+            _require(
+                isinstance(axis, str) and axis in axes,
+                f"{where}: unknown pair axis {axis!r} (not a relations axis)",
+            )
+            delta = effect.get("delta")
+            _require(
+                isinstance(delta, int) and not isinstance(delta, bool) and delta != 0,
+                f"{where}: axis {axis!r} delta must be a non-zero integer",
+            )
+
+
+    def _account_block(self, intent: str, action: Mapping[str, Any]) -> None:
+        """The optional account block (res-1, the economy substrate):
+        the action-declared verb/kind/amount the `account` resolver
+        executes — the player-scaled arm of the economy's verbs through
+        the canon door (the SETTLE form, iter-273, declares LEGS over
+        explicit owners instead — the §6.4 SALE synthesis, its own
+        shape law below). The status_effects/balance precedent owns the
+        shape law: the block lives beside its action, only its resolver
+        consumes it. TWO cross-checks beyond the shape: the pack's
+        `events.success` must RESTATE the verb's engine constant (the
+        emitted type is the engine's — the build's naming pass; the
+        restatement is the load-time cross-check, and the template
+        closure above then covers the verb's line, the arming corpus
+        price), and a transfer/consume must declare the
+        `account_at_least` solvency gate on the actor for the same
+        kind with value >= amount (the underflow floor's soft arm, D3:
+        without the gate an insolvent attempt reaches the resolver and
+        crashes loud at the commit gate mid-run — the KI#15 family,
+        refuse at load what would crash at completion)."""
+        block = action.get("account")
+        if block is None:
+            return
+        where = f"action {intent!r} account"
+        _require(
+            action.get("resolver") == "account",
+            f"{where}: only the 'account' resolver consumes the block "
+            f"(this action resolves via {action.get('resolver')!r})",
+        )
+        _require(
+            isinstance(block, Mapping),
+            f"{where}: must be an object (verb | kind | amount)",
+        )
+        verb = block.get("verb")
+        _require(
+            verb in VERB_EVENT_TYPES,
+            f"{where}.verb {verb!r} is not in the closed vocabulary "
+            f"{sorted(VERB_EVENT_TYPES)}",
+        )
+        if verb == "settle":
+            self._account_settle_block(intent, action, block, where)
+            return
+        if verb == "convert":
+            self._account_convert_block(intent, action, block, where)
+            return
+        unknown = sorted(set(block) - {"verb", "kind", "amount"})
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the closed vocabulary: "
+                "verb | kind | amount — a source mints to the actor and a "
+                "transfer lands on the intent target by construction)"
+            )
+        economy = self._data["rules.json"].get("economy")
+        vocabulary = (
+            economy.get("accounts") if isinstance(economy, Mapping) else None
+        )
+        _require(
+            isinstance(vocabulary, list) and block.get("kind") in vocabulary,
+            f"{where}.kind {block.get('kind')!r} is not in the "
+            "economy.accounts vocabulary (the substrate moves only "
+            "declared stocks — the pairing law)",
+        )
+        _require(
+            _is_int(block.get("amount")) and block["amount"] >= 1,
+            f"{where}.amount must be an integer >= 1 (a zero amount is "
+            "dead data — the vacuity law)",
+        )
+        _require(
+            action.get("events", {}).get("success") == VERB_EVENT_TYPES[verb],
+            f"{where}: events.success must restate the {verb} verb's "
+            f"engine constant {VERB_EVENT_TYPES[verb]!r} (the emitted "
+            "type is the engine's, the naming pass; the restatement is "
+            "the cross-check and carries the template closure)",
+        )
+        if verb in ("transfer", "consume"):
+            gate = next(
+                (
+                    cond for cond in action.get("requires", ())
+                    if isinstance(cond, Mapping)
+                    and cond.get("test") == ACCOUNT_TEST
+                    and cond.get("noun") == "actor"
+                    and cond.get("kind") == block["kind"]
+                ),
+                None,
+            )
+            _require(
+                gate is not None,
+                f"{where}: the {verb} declares no account_at_least "
+                f"solvency gate on the actor for kind {block['kind']!r} — "
+                "an ungated spend would underflow at the commit gate "
+                "(author the precondition: the door rejects insolvent "
+                "attempts softly, attempts are facts)",
+            )
+            assert gate is not None  # the require above
+            _require(
+                _is_int(gate.get("value")) and gate["value"] >= block["amount"],
+                f"{where}: the solvency gate's value must cover the "
+                f"amount (>= {block['amount']}) — a lower gate passes "
+                "insolvent attempts to the commit gate's loud refusal",
+            )
+
+    def _account_convert_block(
+        self, intent: str, action: Mapping[str, Any],
+        block: Mapping[str, Any], where: str,
+    ) -> None:
+        """The convert form (stageb-1, CONTRACTS §12 B2 — the material
+        cycle's transformation edge): the block declares a RECIPE id
+        instead of inline legs — the recipe lives in
+        `economy.recipes` (the flow declaration's own shape family),
+        its INPUT legs drain their holders, its OUTPUT legs produce.
+        The lint's own law (the settle form's twin): the id must name
+        a DECLARED recipe, every input leg must carry its
+        account_at_least solvency gate in the action's requires (the
+        HOLDER form for explicit ids, the noun form for actor/target
+        refs — the KI#15 family, refuse at load what would crash at
+        the commit floor mid-run), and events.success must restate
+        the verb's engine constant (the naming-pass cross-check that
+        carries the template closure — the armed pack pays its own
+        corpus price)."""
+        unknown = sorted(set(block) - {"verb", "recipe"})
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the convert form's "
+                "closed vocabulary: verb | recipe — the legs live on "
+                "the declared recipe, never inline)"
+            )
+        economy = self._data["rules.json"].get("economy")
+        recipes = (
+            economy.get("recipes") if isinstance(economy, Mapping) else None
+        )
+        recipes = recipes if isinstance(recipes, list) else []
+        recipe_id = block.get("recipe")
+        recipe = next(
+            (
+                r for r in recipes
+                if isinstance(r, Mapping) and r.get("id") == recipe_id
+            ),
+            None,
+        )
+        _require(
+            recipe is not None,
+            f"{where}.recipe {recipe_id!r} is not a declared "
+            "economy.recipes id (the conversion binds a declared "
+            "recipe — the flow declaration's own shape family)",
+        )
+        assert recipe is not None  # the require above
+        _require(
+            action.get("events", {}).get("success") == CONVERT_EVENT,
+            f"{where}: events.success must restate the convert verb's "
+            f"engine constant {CONVERT_EVENT!r} (the emitted type is "
+            "the engine's, the naming pass; the restatement is the "
+            "cross-check and carries the template closure)",
+        )
+        for index, leg in enumerate(recipe.get("inputs", ())):
+            leg_where = f"economy.recipes.{recipe_id!r}.inputs[{index}]"
+            holder = leg["holder"]
+            noun = holder in ("actor", "target")
+            gate = next(
+                (
+                    cond for cond in action.get("requires", ())
+                    if isinstance(cond, Mapping)
+                    and cond.get("test") == ACCOUNT_TEST
+                    and cond.get("kind") == leg["kind"]
+                    and (
+                        cond.get("noun") == holder if noun
+                        else cond.get("holder") == holder
+                    )
+                ),
+                None,
+            )
+            _require(
+                gate is not None,
+                f"{where}: the input leg {leg_where} declares no "
+                f"account_at_least solvency gate for {holder!r} kind "
+                f"{leg['kind']!r} — an ungated drain would underflow "
+                "at the commit floor mid-run (author the "
+                "precondition: the door rejects insolvent attempts "
+                "softly, attempts are facts)",
+            )
+            assert gate is not None  # the require above
+            _require(
+                _is_int(gate.get("value")) and gate["value"] >= leg["amount"],
+                f"{where}: the input leg {leg_where}'s solvency gate "
+                f"value must cover the amount (>= {leg['amount']}) — a "
+                "lower gate passes insolvent attempts to the commit "
+                "floor's loud refusal",
+            )
+
+    def _instrument_block(
+        self, intent: str, action: Mapping[str, Any]
+    ) -> None:
+        """The optional instrument block (stageb-1, CONTRACTS §12 B3 —
+        the wear edge's pack half): the action declares the stock its
+        use wears — holder (the noun actor/target or a DECLARED
+        entity declaring the kind), kind (the economy vocabulary),
+        amount (a positive integer per use). The lint's own law (the
+        KI#15 family, both arms): the block REQUIRES its
+        account_at_least solvency gate in the action's requires with
+        value >= amount — break-at-zero is the LAST use (the
+        0-crossing commits), below-zero never reaches the hook (the
+        door refuses softly, attempts are facts). No block, no wear
+        — the unarmed law (the 68a pattern)."""
+        block = action.get("instrument")
+        if block is None:
+            return
+        where = f"action {intent!r} instrument"
+        _require(
+            isinstance(block, Mapping),
+            f"{where}: must be an object (holder | kind | amount)",
+        )
+        unknown = sorted(set(block) - {"holder", "kind", "amount"})
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the closed "
+                "vocabulary: holder | kind | amount)"
+            )
+        economy = self._data["rules.json"].get("economy")
+        vocabulary = (
+            economy.get("accounts") if isinstance(economy, Mapping) else None
+        )
+        _require(
+            isinstance(vocabulary, list) and block.get("kind") in vocabulary,
+            f"{where}.kind {block.get('kind')!r} is not in the "
+            "economy.accounts vocabulary (wear rides declared stocks "
+            "— the pairing law)",
+        )
+        _require(
+            _is_int(block.get("amount")) and block["amount"] >= 1,
+            f"{where}.amount must be an integer >= 1 (a zero wear is "
+            "dead data — the vacuity law)",
+        )
+        holder = block.get("holder")
+        _require(
+            isinstance(holder, str) and bool(holder.strip()),
+            f"{where}.holder must be a non-empty entity id or noun",
+        )
+        noun = holder in ("actor", "target")
+        if not noun:
+            entities = self._data["entities.json"]
+            record = next(
+                (
+                    rec
+                    for category in (
+                        "locations", "npcs", "ambient_entities",
+                        "items", "groups",
+                    )
+                    for rec in entities.get(category, ())
+                    if rec["id"] == holder
+                ),
+                None,
+            )
+            _require(
+                record is not None,
+                f"{where}.holder {holder!r} is not a declared entity",
+            )
+            assert record is not None  # the require above
+            accounts = record.get("accounts")
+            _require(
+                isinstance(accounts, Mapping) and block["kind"] in accounts,
+                f"{where}.holder {holder!r} declares no account of kind "
+                f"{block['kind']!r} — wear rides a declared stock (the "
+                "flow-endpoint law's own shape)",
+            )
+        gate = next(
+            (
+                cond for cond in action.get("requires", ())
+                if isinstance(cond, Mapping)
+                and cond.get("test") == ACCOUNT_TEST
+                and cond.get("kind") == block["kind"]
+                and (
+                    cond.get("noun") == holder if noun
+                    else cond.get("holder") == holder
+                )
+            ),
+            None,
+        )
+        _require(
+            gate is not None,
+            f"{where}: the wear declares no account_at_least solvency "
+            f"gate for {holder!r} kind {block['kind']!r} — without the "
+            "gate a use on an empty stock reaches the hook and "
+            "underflows at the commit floor mid-run (author the "
+            "precondition: break-at-zero is the LAST use, below-zero "
+            "dies softly at the door, attempts are facts)",
+        )
+        assert gate is not None  # the require above
+        _require(
+            _is_int(gate.get("value")) and gate["value"] >= block["amount"],
+            f"{where}: the solvency gate's value must cover the amount "
+            f"(>= {block['amount']}) — a lower gate passes an "
+            "under-wearing use to the commit floor's loud refusal",
+        )
+
+    def _account_settle_block(
+        self, intent: str, action: Mapping[str, Any],
+        block: Mapping[str, Any], where: str,
+    ) -> None:
+        """The settle form (iter-273, the §6.4 SALE synthesis — the
+        owner's generalized transaction: the initiator is not
+        implicitly the owner of every resource consumed): the block
+        declares LEGS over explicit owners instead of the single
+        kind/amount, through the same canon door — no second
+        transaction engine. Every leg: the closed key set
+        from/to/kind/amount, the kind in the economy vocabulary, the
+        amount a positive integer, the from/to one of the nouns
+        actor/target or a DECLARED entity declaring the leg's kind (the
+        flow-endpoint law's own shape — a leg into an undeclared stock
+        is a pack bug, never a materialization), and a PER-LEG
+        solvency gate in the action's requires: the account_at_least
+        precondition naming the leg's from-side (the noun form for
+        actor/target refs, the HOLDER form for explicit ids) with
+        value >= the leg's amount — the KI#15 family's own law, one
+        gate per leg, refuse at load what would crash at the commit
+        gate mid-run."""
+        unknown = sorted(set(block) - {"verb", "legs"})
+        if unknown:
+            raise PackError(
+                f"{where}: unknown keys {unknown} (the settle form's "
+                "closed vocabulary: verb | legs — each leg carries its "
+                "own from/to/kind/amount)"
+            )
+        legs = block.get("legs")
+        _require(
+            isinstance(legs, list) and bool(legs),
+            f"{where}.legs must be a non-empty list of leg objects "
+            "(from | to | kind | amount — the transaction's own parties)",
+        )
+        economy = self._data["rules.json"].get("economy")
+        vocabulary = (
+            economy.get("accounts") if isinstance(economy, Mapping) else None
+        )
+        declared: dict[str, set[str]] = {}
+        for category in (
+            "locations", "npcs", "ambient_entities", "items", "groups",
+        ):
+            for record in self._data["entities.json"].get(category, ()):
+                accounts = record.get("accounts")
+                if isinstance(accounts, Mapping):
+                    declared[record["id"]] = set(accounts)
+        for index, leg in enumerate(legs):
+            leg_where = f"{where}.legs[{index}]"
+            _require(
+                isinstance(leg, Mapping),
+                f"{leg_where}: must be an object (from | to | kind | amount)",
+            )
+            leg_unknown = sorted(set(leg) - {"from", "to", "kind", "amount"})
+            if leg_unknown:
+                raise PackError(
+                    f"{leg_where}: unknown keys {leg_unknown} (the closed "
+                    "vocabulary: from | to | kind | amount)"
+                )
+            _require(
+                isinstance(vocabulary, list) and leg.get("kind") in vocabulary,
+                f"{leg_where}.kind {leg.get('kind')!r} is not in the "
+                "economy.accounts vocabulary (the substrate moves only "
+                "declared stocks — the pairing law)",
+            )
+            _require(
+                _is_int(leg.get("amount")) and leg["amount"] >= 1,
+                f"{leg_where}.amount must be an integer >= 1 (a zero "
+                "amount is dead data — the vacuity law)",
+            )
+            _require(
+                leg["from"] != leg["to"],
+                f"{leg_where}: from and to are the same holder — a "
+                "self-leg is a no-op loop, dead data",
+            )
+            for endpoint in ("from", "to"):
+                ref = leg[endpoint]
+                if ref in ("actor", "target"):
+                    continue  # the noun refs — the door's own resolution
+                holds = declared.get(ref)
+                _require(
+                    holds is not None,
+                    f"{leg_where}.{endpoint} {ref!r} is not a declared "
+                    "entity (the nouns actor/target resolve through the "
+                    "intent; anything else is an explicit entity id)",
+                )
+                assert holds is not None  # the require above
+                _require(
+                    leg["kind"] in holds,
+                    f"{leg_where}.{endpoint} {ref!r} declares no account "
+                    f"of kind {leg['kind']!r} — a leg into an undeclared "
+                    "stock is a pack bug, never a materialization (the "
+                    "flow-endpoint law's own shape)",
+                )
+            ref = leg["from"]
+            gate = next(
+                (
+                    cond for cond in action.get("requires", ())
+                    if isinstance(cond, Mapping)
+                    and cond.get("test") == ACCOUNT_TEST
+                    and cond.get("kind") == leg["kind"]
+                    and (
+                        cond.get("noun") == ref
+                        if ref in ("actor", "target")
+                        else cond.get("holder") == ref
+                    )
+                ),
+                None,
+            )
+            _require(
+                gate is not None,
+                f"{leg_where}: the leg declares no account_at_least "
+                f"solvency gate on its from-side {ref!r} for kind "
+                f"{leg['kind']!r} — an ungated leg would underflow at "
+                "the commit gate (author the precondition: the noun form "
+                "for actor/target refs, the holder form for explicit ids; "
+                "the door rejects insolvent attempts softly, attempts "
+                "are facts)",
+            )
+            assert gate is not None  # the require above
+            _require(
+                _is_int(gate.get("value")) and gate["value"] >= leg["amount"],
+                f"{leg_where}: the solvency gate's value must cover the "
+                f"amount (>= {leg['amount']}) — a lower gate passes "
+                "insolvent attempts to the commit gate's loud refusal",
+            )
+        _require(
+            action.get("events", {}).get("success") == SETTLE_EVENT,
+            f"{where}: events.success must restate the settle verb's "
+            f"engine constant {SETTLE_EVENT!r} (the emitted type is the "
+            "engine's, the naming pass; the restatement is the "
+            "cross-check and carries the template closure)",
+        )
+
+
+    def _status_effects(self, intent: str, action: Mapping[str, Any]) -> None:
+        """The optional status-effects block (tune-1, KI#4): the pack
+        declares the actor's status deltas the `recuperate` resolver
+        applies. The axes must be real `rules.states` axes (an undeclared
+        axis is dead data — the resolver would write a prop nothing
+        reads); the block on any other resolver is dead data the same way
+        (KI#15 family: refuse at load, never crash or silently no-op at
+        completion)."""
+        effects = action.get("status_effects")
+        if effects is None:
+            return
+        where = f"action {intent!r} status_effects"
+        _require(
+            action.get("resolver") == "recuperate",
+            f"{where}: only the 'recuperate' resolver consumes the block "
+            f"(this action resolves via {action.get('resolver')!r})",
+        )
+        _require(isinstance(effects, list) and effects, f"{where}: must be a "
+                 f"non-empty list")
+        states = self._data["rules.json"].get("states", {})
+        for effect in effects:
+            _require(isinstance(effect, Mapping), f"{where}: entries must be objects")
+            axis = effect.get("status")
+            _require(
+                isinstance(axis, str) and axis in states,
+                f"{where}: unknown status axis {axis!r} (not a rules.states axis)",
+            )
+            delta = effect.get("delta")
+            _require(
+                isinstance(delta, int) and not isinstance(delta, bool) and delta != 0,
+                f"{where}: status {axis!r} delta must be a non-zero integer",
+            )
+
+
+    def _templates(self) -> None:
+        templates = self._data["templates.json"]
+        _require("fallback" in templates, "templates: missing fallback line")
+        _require(
+            REJECTION_EVENT in templates["events"],
+            f"templates: the {REJECTION_EVENT!r} line is mandatory (the front door "
+            f"emits it — INTENT_SCHEMA §3)",
+        )
+        for event_type in templates["events"]:
+            _require(
+                bool(_SNAKE_CASE.match(event_type)),
+                f"template event type {event_type!r} is not snake_case",
+            )
+        # rs-13 (iter-286, the W7 named-boundary rendering route): the
+        # rejection-boundary table — GATE name -> the institutional
+        # cause's reader prose, rendered verbatim at the refusal line's
+        # conditional tail. OPTIONAL (the dry fallback law: an unglossed
+        # gate renders the standing refusal line unchanged, the
+        # unarmed packs' bytes untouched); when present: an object
+        # whose keys sit in THIS pack's armed gate vocabulary — the
+        # union of the canon and texture `requires` tests (a gloss for
+        # a gate this pack's door can never refuse at is dead data, the
+        # vacuity law — rs-2's own shape, one granularity at the door)
+        # and whose values are non-empty strings (the refusal line
+        # renders the prose VERBATIM).
+        boundary_table = templates.get(REJECTION_BOUNDARY_BLOCK)
+        if boundary_table is not None:
+            where = f"templates.json::{REJECTION_BOUNDARY_BLOCK}"
+            _require(
+                isinstance(boundary_table, Mapping),
+                f"{where} must be an object (gate name -> reader prose)",
+            )
+            armed: set[str] = set()
+            for action in self._data["actions.json"]["actions"]:
+                for cond in action.get("requires", ()):
+                    if isinstance(cond, Mapping):
+                        armed.add(cond.get("test"))
+                texture = action.get("texture")
+                if isinstance(texture, Mapping):
+                    for cond in texture.get("requires", ()):
+                        if isinstance(cond, Mapping):
+                            armed.add(cond.get("test"))
+            for gate, gloss in boundary_table.items():
+                _require(
+                    gate in armed,
+                    f"{where}: the gate {gate!r} is not armed by any action's "
+                    "requires — a gloss for a gate this pack's door can never "
+                    "refuse at is dead data (the vacuity law)",
+                )
+                _require(
+                    isinstance(gloss, str) and bool(gloss.strip()),
+                    f"{where}: the {gate!r} gloss must be a non-empty string "
+                    "— the refusal line renders it verbatim",
+                )

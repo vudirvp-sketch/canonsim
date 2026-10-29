@@ -1,0 +1,22 @@
+# Line endings are part of this repo's contract, not a platform preference:
+# T1 compares log bytes against the committed fixtures (TEST_PLAN §1.1), and a
+# fixture that flips LF→CRLF on checkout is a different golden. So: everything
+# textual is stored and checked out as LF, and the log/fixture payloads are
+# never converted in either direction. The launcher batch file stays CRLF for
+# cmd.exe; binaries are never inspected.
+* text=auto eol=lf
+
+*.jsonl -text
+tests/fixtures/** -text
+tests/playscripts/** -text
+
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+*.png binary
+*.jpg binary
+*.zip binary
+*.gguf binary
+*.dll binary
+*.exe binary
+*.bin binary

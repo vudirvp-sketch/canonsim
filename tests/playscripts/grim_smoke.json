@@ -1,0 +1,47 @@
+{
+  "name": "grim_smoke",
+  "seed": 42,
+  "pack": "grim_pack@0.1",
+  "steps": [
+    {
+      "intent": "move",
+      "target": "loc_tavern"
+    },
+    {
+      "intent": "flirt",
+      "target": "npc_maid_01"
+    },
+    {
+      "intent": "wait",
+      "ticks": 30
+    },
+    {
+      "intent": "flirt",
+      "target": "npc_maid_01"
+    },
+    {
+      "intent": "buy_round",
+      "target": "loc_tavern"
+    },
+    {
+      "intent": "proposition",
+      "target": "npc_maid_01"
+    },
+    {
+      "intent": "read_ticket",
+      "target": "pawn_ticket_01"
+    },
+    {
+      "intent": "proposition_coerce",
+      "target": "npc_maid_01"
+    },
+    {
+      "intent": "wait",
+      "ticks": 30
+    },
+    {
+      "intent": "move",
+      "target": "loc_street"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "operation_id": "93b1b8419ae3dde2995ef86a2d0b9860b0c4e585342736d7b191ce6e3f20e3d8",
+  "status": "REJECTED",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "observatory.read: observatory: after 'ev_9999' is not an event of run 'run_125_0' (a stale cursor \u2014 re-read from the head)"
+  }
+}

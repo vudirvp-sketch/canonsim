@@ -1,0 +1,8 @@
+{
+  "operation_id": "579fd505fb01a2c93a7d99534b3ea8a13476cc9f7c656fb4b963dd3328fa1620",
+  "rejection": "DOMAIN_REJECTED",
+  "result": {
+    "reason": "run.get: execution 'exec_nonexistent_0000': no such execution"
+  },
+  "status": "REJECTED"
+}

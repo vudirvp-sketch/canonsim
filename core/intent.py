@@ -1,0 +1,1766 @@
+"""The intent contract (INTENT_SCHEMA.md is the doc owner): an Intent is a
+*proposal*, never an event (phase0 §2). This module owns the generic
+machinery the front door runs:
+
+- loud shape validation (author errors raise; the world can never be blamed
+  for a malformed playscript step) vs soft precondition evaluation
+  (a well-formed but world-impossible intent is REJECTED with a no-op
+  event, never silently dropped, never an exception);
+- the closed precondition test set — structured filters, no string
+  expression language (L10); the pack references tests by name (INV-3);
+  the texture path: a texture-capable action's `texture` block replaces the
+  canon `requires` for intents carrying a resolved texture reference (the
+  grammar/vocabulary split, D-049 — the pack owns WHICH actions are
+  texture-capable; the ledger owns which nouns are addressable, and that
+  lives outside core: core stays ledger-blind, the Intent carries the
+  resolved slot as data);
+- opposed checks: skill base + status modifiers + die, from `rules.json`
+  `checks` — every number is pack data;
+- intent OCC (`based_on_event_seq`): cause attribution for the event that
+  broke a precondition between proposal and completion;
+- knowledge-record resolution: audience placeholders + slot templates are
+  pack data; the resolver of record is `core/resolvers.py`; the
+  per-present-target expansion (st-1): an actor-held template with a
+  `present_at` site expands to one record per entity present there —
+  the arrival snapshot's write side (blueprint §5).
+"""
+
+from __future__ import annotations
+
+from collections.abc import Iterable, Mapping, MutableMapping, Sequence
+from dataclasses import dataclass
+from typing import TYPE_CHECKING, Any, Final
+
+from core.clock import phase_of_tick
+from core.fold import Projection, apply_event, fold, present_in_order
+from core.log import (
+    EventRecord,
+    Fidelity,
+    Importance,
+    KnowledgeRecord,
+    StateChange,
+)
+from core.rng import RngBank
+from core.roads import exits as exits_of
+
+if TYPE_CHECKING:  # pack is a duck-typed argument — no runtime cycle with pack.py
+    from core.pack import Pack
+    from core.worldgen import WorldModel
+
+__all__ = [
+    "ACCOUNT_CEILING_TEST",
+    "ACCOUNT_TEST",
+    "ACQUISITION_CHANNELS",
+    "AUDIENCES",
+    "CLOCKED_TESTS",
+    "CheckResult",
+    "ECHO_TEST",
+    "EDGE_TICKS",
+    "EVENT_FOLD_TESTS",
+    "IntentData",
+    "KNOWLEDGE_SLOTS",
+    "LEVERAGE_TEST",
+    "OCC_READ_PAIRS",
+    "PRECONDITION_TESTS",
+    "REJECTION_EVENT",
+    "Resolution",
+    "RunnerError",
+    "ScanGateFold",
+    "ScanGateMemo",
+    "STATIC_TESTS",
+    "TEXTURE_FIELD",
+    "TEXTURE_SCOPES",
+    "TRAIT_TEST",
+    "WINDOWED_TESTS",
+    "acquisition_fidelity",
+    "action_duration",
+    "first_failing",
+    "find_flagged_accessible",
+    "find_flagged_carried",
+    "knowers_at",
+    "location_of",
+    "needs_target",
+    "occ_breaking_cause",
+    "pack_importance",
+    "pair_values",
+    "REJECTION_BOUNDARY_BLOCK",
+    "REJECTION_EVENT",
+    "requires_for",
+    "resolve_knowledge",
+    "run_check",
+    "skill_total",
+    "texture_reference",
+    "texture_scope_target",
+    "validate_shape",
+]
+
+REJECTION_EVENT: Final = "intent_rejected"  # pack vocabulary (lint-checked)
+
+#: `templates.json::rejection_boundaries` — the named-boundary table
+#: (rs-13, iter-286, the W7 named-boundary rendering route over
+#: iter-284's boundary (a)): precondition GATE name -> the reader prose
+#: naming the refusal's INSTITUTIONAL cause — which authority the
+#: refusing gate speaks for (`leverage_over`'s own row: the registry as
+#: the leverage authority, the minted word). The pack owns the words;
+#: the renderer owns the mapping
+#: (`render/chronicle.py::gloss_rejection_boundary`, the rs-2/rs-4
+#: family's own shape); the pack lint owns the refusal
+#: (`core/packlint/actions.py::_templates` — a gloss for a gate this
+#: pack never arms is dead data, the vacuity law). The block name's
+#: single owner is HERE, the rejection's own module, so the lint and
+#: the renderer import one constant (D-024) — never a second copy.
+REJECTION_BOUNDARY_BLOCK: Final = "rejection_boundaries"
+
+#: The action `ticks` mode whose duration is the TRAVEL EDGE PRICE
+#: (st-6a, D-116 (5) — travel as a separate action, never a weighted
+#: move): an action declaring `ticks: "edge"` prices its completion
+#: through `core/travel.py::travel_ticks` at the accept door — the
+#: loop owns the branch (this module must not import core.travel:
+#: core.travel -> core.worldgen -> core.intent is a load cycle). The
+#: sentinel lives here because the `ticks` vocabulary is this module's
+#: (action_duration + the pack lint read it); the movement resolver
+#: family is the only legal consumer (the pack lint refuses the mode
+#: on any other resolver — an edge-priced check action is a future
+#: row's own mechanic, never this one's).
+EDGE_TICKS: Final = "edge"
+
+#: The intent door's first leverage test (social-1b, iter-45): the actor
+#: holds live leverage over `who`. The name is this module's vocabulary
+#: (the closed test set's owner); `core/leverage.py` reads it for the
+#: spend machinery — the import direction stays one-way (leverage →
+#: intent), so the facts themselves are duck-typed below.
+LEVERAGE_TEST: Final = "leverage_over"
+
+#: The intent door's echo test (social-2, iter-46): the noun entity's
+#: psychological residue on `axis` is at least `value` — the P2b
+#: behavior gate over the per-NPC valence fold. Same discipline as the
+#: leverage test: the scores arrive as duck-typed data
+#: (`core.echo.echo_scores` read at the caller's own tick); this module
+#: never imports `core.echo` (the import direction stays one-way).
+ECHO_TEST: Final = "echo_at_least"
+
+#: The intent door's trait test (beliefwire, iter-67 — the v0.2
+#: refinement family, D-095): the noun entity HOLDS the declared belief
+#: token — the crystallized-trait fold read at the caller's own tick.
+#: A GATE, never a probability multiplier (D-095's own law): the test
+#: answers pass/fail and touches no roll, no score, no weight — the
+#: roll is the urgency's own stream, the belief only filters. Same
+#: discipline as the leverage/echo pair: the traits arrive as
+#: duck-typed data (`core.traits.crystallized_traits`, the `Trait`
+#: who/token pair); this module never imports `core.traits` (the
+#: import direction stays one-way; the owning module owns the type).
+TRAIT_TEST: Final = "trait_held"
+
+#: The intent door's account test (res-1, the economy substrate): the
+#: noun entity's account of `kind` holds at least `value` units — the
+#: underflow floor's SOFT arm (CONTRACTS §2 D3: a player-scaled
+#: spend/transfer beyond the stock dies at the front door as an
+#: `intent_rejected` no-op — attempts are facts, the loud/soft line).
+#: The stock read is the projection's `account.<kind>` prop (the
+#: seeding family's inline prefix — `core/economy.py` owns the
+#: writer-side vocabulary; the import would cycle economy -> intent
+#: -> fold). A missing stock IS a failed gate (the honest answer,
+#: never an error — you cannot spend what does not exist).
+#: iter-273 (the §6.4 SALE synthesis): the HOLDER form — the gate may
+#: name an EXPLICIT entity id (`holder`) instead of the noun, the
+#: settle legs' from-side gates over existing holders (a location, a
+#: group, an institution's chest) whose stocks the noun grammar
+#: cannot reach; the lint cross-checks the holder names a declared
+#: entity declaring the kind's account, and the noun vocabulary
+#: stays closed (exactly one of noun/holder per gate).
+ACCOUNT_TEST: Final = "account_at_least"
+
+#: The CEILING twin (substrate-1 B, iter-410): the same account read
+#: compared DOWNWARD — the holder's stock is at most `value`. The closed
+#: test set carried floors only (a spend's solvency), so a ladder's HEAD
+#: (how many rungs a stock may accumulate before a restoration or an
+#: upgrade door refuses) rode authorial discipline: the maintenance
+#: unit's measured lower bound, iter-405. Same naming forms as the floor
+#: — the noun's resolved entity or an explicit `holder` id, exactly one
+#: — and a missing stock FAILS the gate (the floor family's honest
+#: answer: an entity that declares no stock cannot satisfy a gate naming
+#: it; a silent pass would let a dead gate arm an action, and the lint's
+#: declared-kind cross-check keeps that shape out of linted packs).
+ACCOUNT_CEILING_TEST: Final = "account_at_most"
+
+#: The tick-windowed precondition family — tests whose truth reads a
+#: DERIVED FOLD at the caller's own tick (the leverage liveness window,
+#: the echo decay, the trait crystallization): the fold is a read model
+#: over the log, never reconstructible inside the projection-only
+#: attribution fold. Three laws ride this name: the reads are fresh at
+#: every evaluation (never stale, never cached), the OCC re-check runs
+#: UNCONDITIONAL for intents carrying one (the fold's answer can move
+#: between accept and completion — the counter-block can un-crystallize
+#: a belief on later records, the windows close by time), and
+#: `occ_breaking_cause` excludes them (a fold move never attributes a
+#: breaking event the log does not hold; the rejection chains to the
+#: last committed event — the caller's fallback). The family SPLITS at the
+#: clock just below (`CLOCKED_TESTS` / `EVENT_FOLD_TESTS`): the consumers
+#: that need a canon-movable read (a drive `measure`, a card status, the
+#: offer board) take the event-driven half only.
+WINDOWED_TESTS: Final = (LEVERAGE_TEST, ECHO_TEST, TRAIT_TEST)
+
+#: The windowed family SPLIT AT THE CLOCK (iter-439, `drivegoals-1`): the
+#: tests whose verdict moves with the CLOCK ALONE — the leverage liveness
+#: window and the echo residue's decay. Neither may enter a drive `measure`
+#: or a card status: the quiet-beat skip evaluates a bar ONCE per stretch
+#: against the frozen projection, and a clock-driven verdict would desync
+#: that arithmetic (`core/drives.py::drive_bar`'s consumers), while a
+#: status written at one tick would be stale at the next.
+CLOCKED_TESTS: Final = (LEVERAGE_TEST, ECHO_TEST)
+
+#: The windowed family's EVENT-DRIVEN half (iter-439): a verdict that moves
+#: only when canon commits. `trait_held` reads the knowledge records' own
+#: birth ticks (`core/traits.py::crystallized_traits`), so between two
+#: events it is CONSTANT — a bar or a status built on it moves exactly when
+#: an event moved. That is why it is a legal drive `measure`
+#: (`core/packlint/psyche.py::_measure`) and a legal card status, and the
+#: clocked pair above never becomes either.
+EVENT_FOLD_TESTS: Final = (TRAIT_TEST,)
+
+#: The intent field carrying a resolved texture reference (INTENT_SCHEMA §2;
+#: blueprint §1 D-049: the mediator resolves noun -> live entry BEFORE the
+#: door, so the Intent carries the resolved slot as data and core never
+#: sees the ledger).
+TEXTURE_FIELD: Final = "texture"
+#: The texture-reference scope prefixes — the same pair the ledger's
+#: `split_scope` owns (brief/ledger.py); restated here only as the intent
+#: field's shape contract (core may not import brief — D-031).
+TEXTURE_SCOPES: Final = ("scene:", "entity:")
+
+
+class RunnerError(RuntimeError):
+    """Run-time violation: unknown intent, malformed step, broken contract."""
+
+
+@dataclass(frozen=True, slots=True)
+class IntentData:
+    """One playscript intent: a proposal, not yet an event (INTENT_SCHEMA §2).
+
+    `origin_hook` (iter-107, D-140): the deferred-consequence tag this
+    intent discharges, when the DIRECTOR built it — None for every
+    player-authored intent. The loop stamps it into the released event's
+    `provenance.cause_hook` (EVENT_SCHEMA §7), pairing each release with
+    its seeding event for the payoff-latency metric (`core/metrics.py`)
+    and the causal-provenance family (`scripts/mechanics.py trace/why`).
+
+    `assignment_tick` (temp-1/B3, D-236): the tick the intent was MINTED
+    in the semantic pipeline — the beat/crossing tick an autonomous
+    (urgency / faction / director) intent was rolled at. None for every
+    player-authored intent (a playscript step's assignment IS its enqueue
+    tick). The loop stamps it into the resolved event's
+    `provenance.assignment_tick` (EVENT_SCHEMA §7), which records the
+    semantic origin SEPARATELY from the canonical realization time
+    `event.t` — under B2's deferred-realize semantics the door may land
+    the intent far after the beat that minted it, and both times are now
+    observable. Provenance only: the queue discipline, the door tick,
+    the completion tick, and `event.t` are untouched (the temp-1 card's
+    no-runtime-change law).
+    """
+
+    id: str
+    kind: str
+    actor: str
+    target: str | None
+    fields: Mapping[str, Any]
+    based_on_event_seq: int = 0
+    origin_hook: str | None = None
+    assignment_tick: int | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class CheckResult:
+    """One opposed check resolution (INTENT_SCHEMA §5). `margin` is the
+    defender's lead (>= 0 on failure); `total_failure` marks the margin
+    band `rules.checks.failure_margin` and above."""
+
+    passed: bool
+    margin: int
+    attacker_total: int
+    defender_total: int
+    defender_id: str | None
+    total_failure: bool = False
+
+
+@dataclass(frozen=True, slots=True)
+class Resolution:
+    """A resolver's decision at completion: which event to emit and what
+    the world looks like afterwards. `ignitions` are world reactions the
+    loop executes after the primary event (transition layers)."""
+
+    event_type: str
+    outcome: Mapping[str, Any]
+    knowledge: tuple[KnowledgeRecord, ...] = ()
+    state_changes: tuple[StateChange, ...] = ()
+    hooks: tuple[str, ...] = ()
+    ignitions: tuple[Any, ...] = ()  # transition.Ignition (type-avoided: no cycle)
+
+
+# -- shape validation (loud) -------------------------------------------------
+
+
+def _carries_texture(intent: IntentData) -> bool:
+    return TEXTURE_FIELD in intent.fields
+
+
+def texture_reference(intent: IntentData) -> Mapping[str, Any]:
+    """The resolved texture reference from the intent's `texture` field:
+    `{entry, scope, slot, value}` — the mediator's noun-resolution output.
+
+    Loud on a malformed reference (the emitter is the mediator or a
+    playscript author, and author bugs crash): every key a non-empty
+    string, the scope one of the two ledger prefixes. Returns the mapping
+    as-is when well-formed; core NEVER checks ledger liveness — the
+    withdrawal mirror (VALIDATION_SPEC §8) owns that, mediator-side.
+    """
+    value = intent.fields.get(TEXTURE_FIELD)
+    if not isinstance(value, Mapping):
+        raise RunnerError(
+            f"{intent.kind}: field 'texture' must be the mediator's resolved "
+            f"reference object, got {value!r}"
+        )
+    missing = {"entry", "scope", "slot", "value"} - set(value)
+    if missing:
+        raise RunnerError(
+            f"{intent.kind}: texture reference missing keys {sorted(missing)}"
+        )
+    for key in ("entry", "scope", "slot", "value"):
+        if not isinstance(value[key], str) or not value[key].strip():
+            raise RunnerError(
+                f"{intent.kind}: texture reference {key} must be a non-empty "
+                f"string, got {value[key]!r}"
+            )
+    if not value["scope"].startswith(TEXTURE_SCOPES):
+        raise RunnerError(
+            f"{intent.kind}: texture scope must be 'scene:<id>' or 'entity:<id>', "
+            f"got {value['scope']!r}"
+        )
+    if not value["scope"].split(":", 1)[1].strip():
+        raise RunnerError(
+            f"{intent.kind}: texture scope target is empty in {value['scope']!r}"
+        )
+    return value
+
+
+def texture_scope_target(pack: Pack, intent: IntentData) -> str:
+    """The canon entity id a texture-referencing intent acts on: the scope
+    target (a location for scene scope, any other entity for entity scope).
+    Loud when the target is not a known pack entity — the promotion's canon
+    birth lands ON this entity, so it must exist."""
+    reference = texture_reference(intent)
+    target = str(reference["scope"]).split(":", 1)[1]
+    if pack.kind_of(target) is None:
+        raise RunnerError(
+            f"{intent.kind}: texture scope target {target!r} is not a known entity"
+        )
+    return target
+
+
+def requires_for(
+    action: Mapping[str, Any], intent: IntentData
+) -> list[Mapping[str, Any]]:
+    """The precondition list this intent evaluates against: the action's
+    `texture` block when the intent carries a resolved texture reference
+    and the action declares itself texture-capable; the canon `requires`
+    otherwise (blueprint §1 — the PACK owns which actions are texture-
+    capable; validate_shape guarantees the pair is consistent)."""
+    if _carries_texture(intent) and action.get("texture") is not None:
+        return list(action["texture"].get("requires", ()))
+    return list(action.get("requires", ()))
+
+
+def needs_target(action: Mapping[str, Any]) -> bool:
+    """Whether the action's canon `requires` reference the noun `target`
+    (any condition value — noun | with | who): the door then demands the
+    intent carry one (INTENT_SCHEMA §2). The single source of the
+    predicate: `validate_shape` reads it at the door, and the pack lint's
+    target-sourced check row reads it at load (KI#88's second arm, closed
+    iter-169) — the door and the lint agree by construction, never by
+    restatement."""
+    return any(
+        value == "target"
+        for cond in action.get("requires", ())
+        for value in cond.values()
+    )
+
+
+def validate_shape(action: Mapping[str, Any], intent: IntentData) -> None:
+    """Author errors are loud: unknown fields, missing target where the
+    preconditions need one, a texture reference on a non-texture action or
+    a malformed one on a texture-capable action. World impossibility is
+    NOT checked here."""
+    allowed = set(action.get("fields", ()))
+    extras = set(intent.fields) - allowed
+    if extras:
+        raise RunnerError(
+            f"{intent.kind} takes no step fields {sorted(extras)}; "
+            f"allowed: {sorted(allowed)}"
+        )
+    if _carries_texture(intent):
+        if action.get("texture") is None:
+            raise RunnerError(
+                f"{intent.kind} is not texture-capable (no pack 'texture' block)"
+            )
+        texture_reference(intent)  # loud shape gate
+        if intent.target is not None:
+            raise RunnerError(
+                f"{intent.kind}: the texture path carries the resolved reference, "
+                f"not a target (got target {intent.target!r}) — an intent is one "
+                f"path, never both"
+            )
+        return  # the texture block's requires reference no canon target
+    if needs_target(action) and intent.target is None:
+        raise RunnerError(f"{intent.kind} requires a target")
+
+
+def action_duration(
+    action: Mapping[str, Any], bank: RngBank, intent: IntentData
+) -> int:
+    """Duration at accept time: fixed int, a drawn range, or the caller's
+    'ticks' field for the 'N' actions (MVP_SCOPE §7). The EDGE_TICKS mode
+    never reaches here — the loop's accept door prices it through
+    `core/travel.py::travel_ticks` (the edge price needs the rules, the
+    world model and the live projection, none of which are this helper's);
+    reaching this branch means a caller bypassed the door and gets the
+    loud refusal instead of a misleading 'positive integer ticks field'
+    error."""
+    ticks = action["ticks"]
+    if ticks == EDGE_TICKS:
+        raise RunnerError(
+            f"{intent.kind}: the edge-priced ticks mode resolves through "
+            "core/travel.py::travel_ticks at the accept door (the loop's "
+            "branch), never action_duration"
+        )
+    if isinstance(ticks, Mapping):
+        return bank.randint(ticks["min"], ticks["max"])
+    if isinstance(ticks, int):
+        return ticks
+    value = intent.fields.get("ticks")  # ticks == "N"
+    if not isinstance(value, int) or isinstance(value, bool) or value < 1:
+        raise RunnerError(
+            f"{intent.kind} requires a positive integer 'ticks' step field, got {value!r}"
+        )
+    return value
+
+
+# -- preconditions (soft; the closed test set, INV-3) ------------------------
+
+
+class _Ctx:
+    """Evaluation context: pack + projection + the intent's nouns + the
+    live leverage facts (iter-45), echo scores (iter-46), and the
+    crystallized traits (beliefwire, iter-67) + the generated world
+    (roads-1: the adjacent_to read goes through the ONE shared exits
+    read — the derived half needs the WorldModel; None is the unarmed
+    law, correct wherever the authored half alone is asked). All the
+    fold reads are the caller's own AT THE CALLER'S OWN TICK —
+    the door at the entry tick, the urgency gate at the beat, the OCC
+    re-check at completion: a tick-windowed precondition must be re-read
+    at every evaluation, never cached. All duck-typed (holder/subject,
+    who/axis/score, and who/token attributes) — core.intent never
+    imports core.leverage, core.echo, or core.traits (the import
+    direction is one-way; the owning modules own the fold types)."""
+
+    def __init__(
+        self,
+        pack: Pack,
+        projection: Mapping[str, Mapping[str, Any]],
+        intent: IntentData,
+        facts: Sequence[Any] = (),
+        echoes: Sequence[Any] = (),
+        traits: Sequence[Any] = (),
+        world: "WorldModel | None" = None,
+    ) -> None:
+        self.pack = pack
+        self.projection = projection
+        self.intent = intent
+        self.facts = facts
+        self.echoes = echoes
+        self.traits = traits
+        self.world = world
+
+    def entity(self, noun: str) -> str:
+        if noun == "actor":
+            return self.intent.actor
+        if noun == "target":
+            if self.intent.target is None:
+                raise RunnerError(f"precondition references {noun!r} without a target")
+            return self.intent.target
+        if noun == "texture":
+            # The texture noun resolves to the reference's scope target —
+            # the canon entity the promotion lands on (blueprint §1).
+            return texture_scope_target(self.pack, self.intent)
+        raise RunnerError(f"unknown noun {noun!r} (actor | target | texture)")
+
+    def record(self, noun: str) -> Mapping[str, Any]:
+        """The pack record of a resolved noun — never None (the pack's
+        orphan-reference lint at load is the protection)."""
+        record = self.pack.entity(self.entity(noun))
+        assert record is not None  # the pack's orphan-reference lint (load)
+        return record
+
+
+def location_of(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], entity_id: str
+) -> str:
+    """The location an entity is at; a location is at itself."""
+    if pack.kind_of(entity_id) == "location":
+        return entity_id
+    position: str = projection[entity_id]["position"]
+    return position
+
+
+def _test_kind(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    return bool(ctx.pack.kind_of(ctx.entity(cond["noun"])) == cond["is"])
+
+
+def _test_same_location(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    left = location_of(ctx.pack, ctx.projection, ctx.entity(cond["noun"]))
+    right = location_of(ctx.pack, ctx.projection, ctx.entity(cond["with"]))
+    return left == right
+
+
+def _test_adjacent_to(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    noun_location = location_of(ctx.pack, ctx.projection, ctx.entity(cond["noun"]))
+    base = location_of(ctx.pack, ctx.projection, ctx.entity(cond["with"]))
+    # roads-1: the ONE shared exits read — the authored record when
+    # non-empty (the pack wins), else the roads pass's derived edges
+    # (the move door's validation is the contract's named consumer).
+    return noun_location in exits_of(ctx.pack, ctx.world, base)
+
+
+def _test_location_of(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    noun = ctx.entity(cond["noun"])
+    return ctx.pack.kind_of(noun) == "location" and noun == location_of(
+        ctx.pack, ctx.projection, ctx.entity(cond["with"])
+    )
+
+
+def _test_flag(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    return bool(ctx.record(cond["noun"]).get(cond["flag"]))
+
+
+def _test_field_in(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    return ctx.record(cond["noun"]).get(cond["field"]) in cond["values"]
+
+
+def _test_field_nonempty(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    value = ctx.record(cond["noun"]).get(cond["field"])
+    return isinstance(value, list) and len(value) > 0
+
+
+def _test_carries_flagged(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    return (
+        find_flagged_carried(
+            ctx.pack, ctx.projection, ctx.entity(cond["noun"]), cond["flag"]
+        )
+        is not None
+    )
+
+
+def _test_flagged_accessible(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    return (
+        find_flagged_accessible(
+            ctx.pack, ctx.projection, ctx.entity(cond["noun"]), cond["flag"]
+        )
+        is not None
+    )
+
+
+def _relation_pair_key(ctx: _Ctx, cond: Mapping[str, Any]) -> str | None:
+    """The OTHER party of a relation gate's actor-specific read
+    (substrate-1 C, iter-411): the gate's `with` noun when it names one
+    (an urgency post reading the ACTOR's own attitude toward its target),
+    else the intent's actor (the door family: the noun's attitude toward
+    whoever acts on it). None when the other party IS the noun — a
+    self-relation is the seeded axis's business, never a pair key."""
+    noun = ctx.entity(cond["noun"])
+    other = ctx.entity(cond["with"]) if "with" in cond else ctx.entity("actor")
+    if other == noun:
+        return None
+    return other
+
+
+def _test_relation_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's relation floor (v0.1, re-based at substrate-1 C,
+    iter-411): the noun entity's score on `axis` toward the OTHER party
+    is at least `value`. ONE read law over the TWO stores the substrate
+    had kept apart:
+
+    - `pair.<other>.<axis>` — the ACTOR-SPECIFIC impression the coerce
+      balance writes (`core/resolvers.py::_coerce`), keyed by the party
+      the attitude is held toward;
+    - `relations.<axis>` — the seeded, actor-agnostic baseline.
+
+    PRECEDENCE: a present pair value OVERRIDES the seed (the specific,
+    newer impression beats the generic disposition — higher AND lower:
+    a coerce that sours a seeded trust must be able to close a door).
+    Both absent is the family's honest False. The `other` is the gate's
+    `with` noun when declared, else the intent's actor (the door
+    family's "toward the actor" law); a self-relation reads the seed
+    alone."""
+    entity = ctx.entity(cond["noun"])
+    props = ctx.projection[entity]
+    current: Any = None
+    other = _relation_pair_key(ctx, cond)
+    if other is not None:
+        specific = props.get(f"pair.{other}.{cond['axis']}")
+        if isinstance(specific, int) and not isinstance(specific, bool):
+            current = specific
+    if current is None:
+        current = props.get(f"relations.{cond['axis']}")
+    return (
+        isinstance(current, int)
+        and not isinstance(current, bool)
+        and current >= cond["value"]
+    )
+
+
+def _test_carried_by(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    item = ctx.entity(cond["noun"])
+    return ctx.projection[item].get("carrier") == ctx.entity(cond["who"])
+
+
+def _test_uncarried(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    return ctx.projection[ctx.entity(cond["noun"])].get("carrier") is None
+
+
+def _test_has_field(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    return cond["field"] in ctx.record(cond["noun"])
+
+
+def _test_texture_noun(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The texture-noun test (INTENT_SCHEMA §3): the intent carries a
+    well-formed resolved reference whose scope target is a known entity.
+    Ledger liveness is deliberately NOT tested — core is ledger-blind; the
+    mediator resolved the noun against live entries and the withdrawal
+    mirror owns mid-flight retirement (VALIDATION_SPEC §8)."""
+    texture_scope_target(ctx.pack, ctx.intent)  # loud on malformed/unknown
+    return True
+
+
+def _test_leverage_over(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's first leverage test (social-1b, iter-45): the
+    noun entity holds live leverage over `who` — some fact in the
+    caller-supplied fold pairs them. The facts arrive as data (the
+    caller's `live_leverage` read at its own tick); with no facts the
+    test fails — nobody holds leverage over anyone, the door rejects.
+    The pack lint requires the `who` param (a missing key would KeyError
+    mid-run — the KI#15 family)."""
+    return any(
+        fact.holder == ctx.entity(cond["noun"])
+        and fact.subject == ctx.entity(cond["who"])
+        for fact in ctx.facts
+    )
+
+
+def _test_echo_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's echo test (social-2, iter-46): the noun entity's
+    residue on `axis` is at least `value` — a score in the
+    caller-supplied fold (read at the caller's own tick). With no
+    scores the test fails — a silent world carries no residue, the
+    behavior does not fire (the honest answer, never an error: a
+    missing pair IS zero). The pack lint requires `axis` declared in
+    the echo table and `value` within the scale (dead vocabulary is
+    refused at load — the KI#15 family)."""
+    return any(
+        score.who == ctx.entity(cond["noun"])
+        and score.axis == cond["axis"]
+        and score.score >= cond["value"]
+        for score in ctx.echoes
+    )
+
+
+def _test_trait_held(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's trait test (beliefwire, iter-67): the noun
+    entity holds the declared belief token — some trait in the
+    caller-supplied fold pairs them (the crystallized-trait read at the
+    caller's own tick). With no traits supplied the test fails — nobody
+    holds any belief, the door rejects (the honest answer, never an
+    error: an entity that is not a knower holds no beliefs — a missing
+    knower IS an unheld trait). A GATE, never a multiplier: the test
+    answers pass/fail and reads no roll, no score, no weight (D-095's
+    own law). The pack lint requires the `token` param to name a
+    declared belief (a missing key would KeyError mid-run — the KI#15
+    family)."""
+    return any(
+        trait.who == ctx.entity(cond["noun"]) and trait.token == cond["token"]
+        for trait in ctx.traits
+    )
+
+
+def _test_account_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's account test (res-1): the holder entity's
+    `account.<kind>` stock is at least `value` — a projection read at
+    the caller's own tick (the door at entry, the OCC re-check at
+    completion — a spent-down stock between accept and completion is
+    the re-check's own soft rejection). The holder is the NOUN form's
+    resolved entity, or — iter-273's holder form — the EXPLICIT entity
+    id the gate names directly (the settle legs' from-side over
+    existing holders the noun grammar cannot reach; the noun
+    vocabulary stays closed). A missing stock fails the gate (an
+    entity that declares no account of the kind holds nothing of it —
+    never an error, the `relation_at_least` family's own shape)."""
+    entity = (
+        cond["holder"] if "holder" in cond else ctx.entity(cond["noun"])
+    )
+    level = ctx.projection[entity].get(f"account.{cond['kind']}")
+    return isinstance(level, int) and not isinstance(level, bool) and level >= cond["value"]
+
+
+def _test_account_at_most(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """The intent door's account CEILING (substrate-1 B, iter-410): the
+    holder's `account.<kind>` stock is at MOST `value` — the floor's
+    twin, reading the same projection at the caller's own tick (the door
+    at entry, the OCC re-check at completion — a stock that grew between
+    accept and completion is the re-check's own soft rejection). The
+    naming forms follow `account_at_least` exactly: the noun's resolved
+    entity, or the EXPLICIT entity id the gate names (the holder form).
+    A missing stock fails the gate (the family's honest answer — an
+    entity that declares no stock cannot satisfy a gate naming it; the
+    lint cross-checks the declared kinds, so the shape is unreachable
+    for linted packs)."""
+    entity = (
+        cond["holder"] if "holder" in cond else ctx.entity(cond["noun"])
+    )
+    level = ctx.projection[entity].get(f"account.{cond['kind']}")
+    return (
+        isinstance(level, int)
+        and not isinstance(level, bool)
+        and level <= cond["value"]
+    )
+
+
+def _test_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> bool:
+    """pack-2 (iter-29, D-061): the noun (a location) holds at least one
+    spot of the pack-declared transition layer that is NOT in the layer's
+    `spot_state` — the exact condition the ignite resolver keys on when
+    it picks its spot, so the door check and the resolver agree by
+    construction. Igniting a destroyed or fully-burning location is a
+    door rejection, never a no-ignition success that pretends the world
+    changed. The layer's vocabulary (`spot_field`, `spot_state`) is pack
+    data — core stays layer-blind (INV-3)."""
+    layer_cfg = ctx.pack.rules["transitions"][cond["layer"]]
+    location = ctx.entity(cond["noun"])
+    spots = ctx.record(cond["noun"]).get(layer_cfg["spot_field"], [])
+    props = ctx.projection[location]
+    prefix = f"{cond['layer']}."
+    return any(
+        props.get(f"{prefix}{spot}") != layer_cfg["spot_state"] for spot in spots
+    )
+
+
+PRECONDITION_TESTS: Final[Mapping[str, Any]] = {
+    "kind": _test_kind,
+    "same_location": _test_same_location,
+    "adjacent_to": _test_adjacent_to,
+    "location_of": _test_location_of,
+    "flag": _test_flag,
+    "field_in": _test_field_in,
+    "field_nonempty": _test_field_nonempty,
+    "carries_flagged": _test_carries_flagged,
+    "flagged_accessible": _test_flagged_accessible,
+    "relation_at_least": _test_relation_at_least,
+    "carried_by": _test_carried_by,
+    "uncarried": _test_uncarried,
+    "has_field": _test_has_field,
+    "texture_noun": _test_texture_noun,
+    "spot_available": _test_spot_available,
+    "leverage_over": _test_leverage_over,
+    "echo_at_least": _test_echo_at_least,
+    "trait_held": _test_trait_held,
+    "account_at_least": _test_account_at_least,
+    "account_at_most": _test_account_at_most,
+}
+
+
+# -- the OCC attribution read-set twin (occ-1, B7's letter) ------------------
+#
+# The whole-arm window fix: `occ_breaking_cause` walks the window
+# [seq, end) applying one event at a time and re-checking the
+# preconditions — O(window) per rejected completion, and the whole
+# protocol's deferred-realize law makes that window horizon-long
+# (iter-335's decomposition: occ_refold 81.7% of the profiled wall at
+# 100y). The index law that collapses it: a precondition test's
+# verdict is a function of the projection pairs it reads (plus
+# pack/world/intent data, all constant through one walk — both paths
+# evaluate through the same live objects), so an event that writes
+# NONE of those pairs cannot flip any verdict, and the walk may visit
+# only the events that DO. These handlers declare those pairs — the
+# TWIN of the test family above, next to it, never a second truth:
+# the twin-agreement property law (tests/test_occidx.py) falsifies
+# the over-approximation directly (two projections agreeing on the
+# declared pairs but mutated elsewhere answer first_failing
+# identically), and the A/B equivalence law falsifies the whole walk
+# end-to-end on every committed pack family.
+
+
+def _pairs_same_location(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    return {
+        (ctx.entity(cond["noun"]), "position"),
+        (ctx.entity(cond["with"]), "position"),
+    }
+
+
+def _pairs_adjacent_to(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the exits read rides the world model (roads-1) — static through a
+    # walk; the projection reads are the two positions alone
+    return _pairs_same_location(ctx, cond)
+
+
+def _pairs_location_of(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the noun side is a kind read (pack-static); the with side is the
+    # one position read
+    return {(ctx.entity(cond["with"]), "position")}
+
+
+def _pairs_carries_flagged(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the flag itself is read off the PACK record (static); the scan's
+    # projection read is each item's carrier
+    return {(item["id"], "carrier") for item in ctx.pack.entities["items"]}
+
+
+def _pairs_flagged_accessible(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the noun's position (the location the items must lie in) plus
+    # every item's carrier and position — the scan's whole surface
+    pairs = {(ctx.entity(cond["noun"]), "position")}
+    for item in ctx.pack.entities["items"]:
+        pairs.add((item["id"], "carrier"))
+        pairs.add((item["id"], "position"))
+    return pairs
+
+
+def _pairs_relation_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the re-based read (substrate-1 C, iter-411) touches BOTH stores: the
+    # actor-specific pair (when the gate names another party) and the
+    # seeded axis — the over-approximation law's own shape
+    noun = ctx.entity(cond["noun"])
+    pairs = {(noun, f"relations.{cond['axis']}")}
+    other = _relation_pair_key(ctx, cond)
+    if other is not None:
+        pairs.add((noun, f"pair.{other}.{cond['axis']}"))
+    return pairs
+
+
+def _pairs_carried_by(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    return {(ctx.entity(cond["noun"]), "carrier")}
+
+
+def _pairs_uncarried(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    return _pairs_carried_by(ctx, cond)
+
+
+def _pairs_account_at_least(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the holder form names the entity directly (iter-273); the noun
+    # form resolves through the intent — one vocabulary either way
+    holder = cond["holder"] if "holder" in cond else ctx.entity(cond["noun"])
+    return {(holder, f"account.{cond['kind']}")}
+
+
+def _pairs_account_at_most(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the ceiling reads exactly the floor's pair (one stock, one prop) —
+    # delegated, never a second declaration of the same read
+    return _pairs_account_at_least(ctx, cond)
+
+
+def _pairs_spot_available(ctx: _Ctx, cond: Mapping[str, Any]) -> set[tuple[str, str]]:
+    # the spot list rides the PACK record (static), so the spot pairs
+    # are known at declaration time; the layer's vocabulary is pack
+    # data — core stays layer-blind (INV-3)
+    layer_cfg = ctx.pack.rules["transitions"][cond["layer"]]
+    noun = ctx.entity(cond["noun"])
+    spots = ctx.record(cond["noun"]).get(layer_cfg["spot_field"], [])
+    return {(noun, f"{cond['layer']}.{spot}") for spot in spots}
+
+
+OCC_READ_PAIRS: Final[Mapping[str, Any]] = {
+    "same_location": _pairs_same_location,
+    "adjacent_to": _pairs_adjacent_to,
+    "location_of": _pairs_location_of,
+    "carries_flagged": _pairs_carries_flagged,
+    "flagged_accessible": _pairs_flagged_accessible,
+    "relation_at_least": _pairs_relation_at_least,
+    "carried_by": _pairs_carried_by,
+    "uncarried": _pairs_uncarried,
+    "account_at_least": _pairs_account_at_least,
+    "account_at_most": _pairs_account_at_most,
+    "spot_available": _pairs_spot_available,
+}
+"""The attribution read-set table: test name -> the handler declaring
+the projection pairs its verdict can read. ABSENT names read no
+projection pair at all (the static family below) or are never
+attributed (the windowed family, `WINDOWED_TESTS`). COMPLETENESS IS
+LAW (tests/test_occidx.py): every name in `PRECONDITION_TESTS` is
+exactly one of — a table entry, a static name, or a windowed name; a
+new test declares its pairs here or joins the static tuple, never
+neither."""
+
+STATIC_TESTS: Final = (
+    "kind", "flag", "field_in", "field_nonempty", "has_field", "texture_noun",
+)
+"""The pack-static family: tests whose reads ride the PACK records,
+the intent's own frozen data, or nothing at all — a projection write
+can never flip them, so they contribute no read pair. `flag`/
+`field_in`/`field_nonempty`/`has_field` read `ctx.record` (the pack
+declaration, not the projection); `kind` reads `pack.kind_of`;
+`texture_noun` reads the intent's own reference. Whether any of
+those surfaces mutates mid-run is moot for attribution: both walk
+forms evaluate through the same live objects, so their verdicts move
+together — the index law needs only the PROJECTION reads."""
+
+
+def precondition_read_pairs(
+    pack: "Pack",
+    intent: IntentData,
+    preconditions: Sequence[Mapping[str, Any]],
+) -> frozenset[tuple[str, str]]:
+    """The projection pairs the given preconditions' verdicts can ever
+    read — the OCC attribution twin (occ-1). An OVER-APPROXIMATION by
+    construction (scanning tests declare the whole scanned surface);
+    the walk that visits only writers of these pairs is exact BECAUSE
+    a verdict is a function of these pairs' values. The windowed
+    family is skipped (never attributed); the static family declares
+    nothing. Unknown test names are not raised here — the walk's own
+    `first_failing` raises on them, and the shortcut path always
+    calls it at least once, so loudness is preserved by construction.
+    """
+    ctx = _Ctx(pack, {}, intent)  # entity resolution only — no projection reads
+    pairs: set[tuple[str, str]] = set()
+    for cond in preconditions:
+        handler = OCC_READ_PAIRS.get(cond.get("test"))
+        if handler is not None:
+            pairs.update(handler(ctx, cond))
+    return frozenset(pairs)
+
+
+# -- the scan-family gate memo (iter-375, the measured-wall head) ------------
+
+
+_NO_PROPS: Final[Mapping[str, Any]] = {}
+"""The absent-entity stand-in for a read pair (an entity or prop that
+exists not reads as None; a later write that creates it changes the
+key, so absence is honestly cacheable — the key comparison sees it)."""
+
+
+def pair_values(
+    projection: Mapping[str, Mapping[str, Any]],
+    pairs: Sequence[tuple[str, str]],
+) -> tuple[Any, ...]:
+    """The memo key: the live projection values at the declared read
+    pairs, in the pairs' own (parse-sorted) order. Pure reads, no
+    allocation beyond the tuple; the values are compared with ==
+    (never hashed — the probe id is the dict key), so list-valued
+    props compare element-wise exactly as `first_failing` would read
+    them."""
+    return tuple(
+        projection.get(entity, _NO_PROPS).get(prop)
+        for entity, prop in pairs
+    )
+
+
+class ScanGateMemo:
+    """The scan-family gate-answer memo (iter-375): over ONE frozen
+    (pack, world) pair, a gate verdict is a function of the
+    projection's values at the spec's declared read pairs ALONE — the
+    occ-1 index law this module owns (projections agreeing on the
+    declared pairs answer `first_failing` identically; the
+    twin-agreement property law falsifies it directly,
+    tests/test_occidx.py). The scan re-reads the pairs every call, so
+    THE KEY COMPARISON IS THE INVALIDATION — no version counters, no
+    commit hooks, no ordering assumptions: a verdict can only move
+    when a read-pair value moved, and the key sees exactly that.
+
+    The (pack, world) identity is stamped at the table's birth and
+    re-checked per scan (`bind` flushes on a different object — both
+    halves are run-frozen by the loop's own laws: the pack loads once,
+    the world is born once at `open`/resume before any beat and never
+    mutated), so the memo is misuse-proof for any future caller
+    pattern. The windowed family never enters: the specs parse their
+    `pairs` as None when a require reads a time-dependent fold (the
+    skip's fold-demand fence made that law at the loop level;
+    `ScanGateMemo` makes it at the family level — a gated pack keeps
+    the exact per-stretch evaluation even under a memo-passing
+    caller)."""
+
+    __slots__ = ("_pack", "_world", "_answers")
+
+    def __init__(self, pack: "Pack", world: "WorldModel | None") -> None:
+        self._pack = pack
+        self._world = world
+        self._answers: dict[str, tuple[tuple[Any, ...], bool]] = {}
+
+    def bind(self, pack: "Pack", world: "WorldModel | None") -> None:
+        """Re-stamp the frozen identity, flushing the table iff either
+        half moved (the first bind over a world born at `open()` is a
+        no-op flush of an empty table; a later flush can only come
+        from a caller the loop never makes — loud-safe, never stale)."""
+        if pack is not self._pack or world is not self._world:
+            self._pack = pack
+            self._world = world
+            self._answers = {}
+
+    def lookup(self, probe_id: str, key: tuple[Any, ...]) -> bool | None:
+        """The memoized verdict for this probe under this key, or None
+        when the key (or the probe) has never been answered."""
+        answer = self._answers.get(probe_id)
+        if answer is None or answer[0] != key:
+            return None
+        return answer[1]
+
+    def store(self, probe_id: str, key: tuple[Any, ...], answer: bool) -> None:
+        """Record the verdict under its key (one live entry per probe:
+        the key is unique within one (pack, world) domain)."""
+        self._answers[probe_id] = (key, answer)
+
+    def answer(self, probe_id: str) -> bool | None:
+        """The stored verdict WITHOUT the key compare — the fold's
+        fast path reads this (iter-382). None = no live entry (a cold
+        or flushed table): the caller must fall back to the key
+        compare — the None is the backstop, never a verdict."""
+        entry = self._answers.get(probe_id)
+        return None if entry is None else entry[1]
+
+    def entry_at(self, probe_id: str) -> object | None:
+        """The live entry OBJECT at probe_id — identity only, never
+        unpacked: the fold's stamp (iter-382). Every `store` and every
+        `bind` flush replaces the object, so an identity compare
+        detects a replaced entry at zero cost — the fast path can
+        never serve an entry some other caller overwrote."""
+        return self._answers.get(probe_id)
+
+
+class ScanGateFold:
+    """The commit-path twin of the gate memo (iter-382, the standing
+    order's key-build row — iter-375's honest remainder): the memo's
+    key comparison MOVED from the read side to the write side. The
+    scans no longer rebuild each spec's key per stretch (939K
+    `pair_values` on one h32 10y profile, 1.94 profiled s) — the fold
+    watches the declared read pairs on the commit path and pops every
+    confirmed probe a write could invalidate, so the scan serves the
+    stored verdict in O(1) and rebuilds a key exactly when a declared
+    pair of that spec actually moved (the honest residue: iter-375
+    measured 508 re-evaluations on the same 10y log).
+
+    THE SERVE LAW (the class's own discipline): the fold's fast path
+    serves EXACTLY the verdict the key-compare path would — never
+    more. Three gates, all O(1):
+
+    - **the identity gate** — `serves` binds the exact projection
+      object stamped at birth (the SensesIndex/RollIndex form);
+      foreign projections keep the key compare;
+    - **the declared gate** — `confirm` records only a (probe,
+      pairs) the birth declaration knows; `confirmed` matches the
+      spec's own pairs against the record, so a crafted spec with a
+      colliding id keeps the key compare;
+    - **the stamp gate** — the fold records the memo ENTRY OBJECT it
+      validated; any later `store` or flush replaces the object, the
+      identity compare fails, the key compare runs. A replaced entry
+      can never be served stale.
+
+    THE POP LAW (the invalidation grain — the occ-1 index law's write
+    side): every committed write to a declared pair pops the probes
+    that read it (`apply_change`, the conservative form — a value
+    that flips back re-hits the stored key on the next scan and
+    re-confirms, one wasted build, never a wrong answer). INV-1
+    licenses the law: the projection moves only through `_commit`,
+    and `_commit` folds every state change — so "no declared pair of
+    this probe changed since its confirm" is exactly "the stored key
+    still equals the live values" (the occ-1 law then hands the
+    verdict equality: projections agreeing on the declared pairs
+    answer `first_failing` identically).
+
+    Birth reads NO projection values (KI#16's law does not reach
+    here): the fold tracks CHANGE TIMES, never values — the memo
+    (born cold) owns the verdicts, and the first scan pass evaluates
+    everything fresh. Runtime-only and rebuildable — never exported
+    in the run state; a resume re-births from the restored projection
+    and the first pass re-fills the cold memo. Deterministic
+    throughout (INV-2): zero draws, zero clock, the pops are
+    order-independent set semantics."""
+
+    __slots__ = ("_declared", "_readers", "_confirmed", "_bound")
+
+    def __init__(self) -> None:
+        self._declared: dict[str, tuple[tuple[str, str], ...]] = {}
+        self._readers: dict[tuple[str, str], list[str]] = {}
+        self._confirmed: dict[str, tuple[tuple[tuple[str, str], ...], object]] = {}
+        self._bound: "Projection | None" = None
+
+    @classmethod
+    def from_specs(
+        cls,
+        spec_pairs: "Iterable[tuple[str, tuple[tuple[str, str], ...] | None]]",
+        projection: "Projection",
+    ) -> "ScanGateFold":
+        """The birth declaration and the identity stamp. `spec_pairs`:
+        every memoizable spec of every family sharing the memo —
+        (probe id, declared pairs) pairs, the pairs-None specs (ungated
+        or windowed) never entering. Builds the declared map (probe →
+        its pairs — the content gate's own table) and the inverted
+        readers index (pair → the probes whose verdicts read it). No
+        projection read: only the object is stamped."""
+        fold = cls()
+        for probe_id, pairs in spec_pairs:
+            if pairs is None:
+                continue
+            fold._declared[probe_id] = pairs
+            for pair in pairs:
+                fold._readers.setdefault(pair, []).append(probe_id)
+        fold._bound = projection
+        return fold
+
+    def serves(self, projection: "Projection") -> bool:
+        """The identity gate: the scans' fold branch serves ONLY the
+        exact projection object stamped at birth (every other caller
+        keeps the key compare — the memo's own law, untouched)."""
+        return self._bound is not None and self._bound is projection
+
+    def apply_change(self, entity: str, prop: str) -> None:
+        """Fold one committed state change (the `apply_event` twin,
+        called from `_commit` per change): a write to a declared pair
+        pops every confirmed probe that reads it — the conservative
+        form (the value may have flipped back; the next scan's key
+        compare decides, one wasted build at worst, never a wrong
+        answer). Pairs no spec declares pop nothing (the occ-1
+        over-approximation guarantees no verdict reads them)."""
+        for probe_id in self._readers.get((entity, prop), ()):
+            self._confirmed.pop(probe_id, None)
+
+    def confirmed(
+        self, probe_id: str, pairs: tuple[tuple[str, str], ...], entry: object
+    ) -> bool:
+        """O(1): True iff this exact spec (the declared-gate content
+        match) was confirmed against this exact memo entry (the stamp
+        gate) and no declared pair it reads has changed since (the pop
+        law) — the fast path may serve the stored verdict."""
+        record = self._confirmed.get(probe_id)
+        return (
+            record is not None and record[0] == pairs and record[1] is entry
+        )
+
+    def confirm(
+        self, probe_id: str, pairs: tuple[tuple[str, str], ...], entry: object
+    ) -> None:
+        """Record the validation: this spec's memo entry was just read
+        or written against the live projection. Admits only the birth
+        declaration's own (probe, pairs) — a crafted spec with a
+        colliding id never confirms; its stores stay the key-compare
+        path's problem, never the fast path's."""
+        if self._declared.get(probe_id) == pairs:
+            self._confirmed[probe_id] = (pairs, entry)
+
+
+def first_failing(
+    pack: Pack,
+    projection: Mapping[str, Mapping[str, Any]],
+    intent: IntentData,
+    preconditions: Sequence[Mapping[str, Any]],
+    facts: Sequence[Any] = (),
+    echoes: Sequence[Any] = (),
+    traits: Sequence[Any] = (),
+    world: "WorldModel | None" = None,
+) -> str | None:
+    """The first failing condition as '<noun>.<test>', or None when the
+    intent is executable. Soft: callers record a no-op rejection event.
+    The caller passes the list from `requires_for` — canon or texture per
+    the intent's path — and, when the list carries a tick-windowed test
+    (`WINDOWED_TESTS`), the matching fold read at the caller's own tick
+    (the leverage facts, the echo scores, and/or the crystallized
+    traits — the window law: a tick-driven precondition is never
+    evaluated on stale reads). roads-1: `world` threads the generated
+    model for the adjacent_to read (the ONE shared exits read); None is
+    the unarmed default — correct wherever the authored half alone
+    is asked (the committed packs author non-empty exits everywhere,
+    so the derived half never changes their answers)."""
+    ctx = _Ctx(
+        pack, projection, intent, facts, echoes, traits, world
+    )
+    for cond in preconditions:
+        test = PRECONDITION_TESTS.get(cond["test"])
+        if test is None:
+            raise RunnerError(f"unknown precondition test {cond['test']!r}")
+        if not test(ctx, cond):
+            # iter-273: the holder form's rejections name the explicit
+            # holder (the noun grammar's own string, one vocabulary)
+            name = cond.get("noun") or cond.get("holder", "?")
+            return f"{name}.{cond['test']}"
+    return None
+
+
+# -- flagged-item lookups (shared by preconditions and resolvers) -------------
+
+
+def find_flagged_carried(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], holder: str, flag: str
+) -> str | None:
+    """The first item (pack order) carried by `holder` whose pack record
+    carries `flag` — the steal target lookup."""
+    for item in pack.entities["items"]:
+        if projection[item["id"]].get("carrier") == holder and item.get(flag):
+            item_id: str = item["id"]
+            return item_id
+    return None
+
+
+def find_flagged_accessible(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], entity_id: str,
+    flag: str,
+) -> str | None:
+    """The first flagged item the entity carries or that lies in its
+    location — the fire-source availability lookup."""
+    location = location_of(pack, projection, entity_id)
+    for item in pack.entities["items"]:
+        if not item.get(flag):
+            continue
+        if projection[item["id"]].get("carrier") == entity_id:
+            found: str = item["id"]
+            return found
+        if projection[item["id"]]["position"] == location:
+            found = item["id"]
+            return found
+    return None
+
+
+# -- opposed checks (every number is pack data) -------------------------------
+
+
+def _modifier_value(mod: Mapping[str, Any], value: Any) -> int:
+    """One status-modifier entry (rules.checks.skills.<skill>.status_modifiers):
+    per_10_points | flat (nonzero numeric) | flat_at_least+flat | flat_when+flat."""
+    if "per_10_points" in mod and isinstance(value, (int, float)):
+        per_10: int = mod["per_10_points"]
+        return int(value // 10) * per_10
+    if "flat_when" in mod:
+        when_bonus: int = mod["flat"]
+        return when_bonus if value == mod["flat_when"] else 0
+    if "flat_at_least" in mod and isinstance(value, (int, float)):
+        at_least_bonus: int = mod["flat"]
+        return at_least_bonus if value >= mod["flat_at_least"] else 0
+    if "flat" in mod and isinstance(value, (int, float)) and value != 0:
+        flat: int = mod["flat"]
+        return flat
+    return 0
+
+
+def skill_total(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], entity_id: str,
+    skill: str,
+) -> int:
+    """Skill base plus status modifiers — system 5 feeding checks (EPIST-1:
+    modifiers ride the perceiver's own status, never another entity's)."""
+    checks = pack.rules["checks"]
+    config = checks["skills"][skill]
+    total: int = config["base"]
+    for axis, mod in sorted(config.get("status_modifiers", {}).items()):
+        value = projection.get(entity_id, {}).get(f"status.{axis}")
+        if value is not None:
+            total += _modifier_value(mod, value)
+    return total
+
+
+def _best_in_location(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], actor: str,
+    skill: str,
+) -> str | None:
+    """The strongest opposing entity (npc or ambient group, never an item)
+    at the actor's location, excluding the actor; ties break by pack order."""
+    location = projection[actor]["position"]
+    best_id: str | None = None
+    best_total = -1
+    for group in ("npcs", "ambient_entities"):
+        for record in pack.entities[group]:
+            entity_id = record["id"]
+            if entity_id == actor or projection[entity_id]["position"] != location:
+                continue
+            total = skill_total(pack, projection, entity_id, skill)
+            if total > best_total:
+                best_id, best_total = entity_id, total
+    return best_id
+
+
+def run_check(
+    pack: Pack,
+    projection: Mapping[str, Mapping[str, Any]],
+    bank: RngBank,
+    intent: IntentData,
+    action: Mapping[str, Any],
+) -> CheckResult | None:
+    """Resolve the action's opposed check; None = no check (or no opposing
+    entity — automatic). Draws come from the active (substantive) stream."""
+    spec = action.get("check")
+    if spec is None:
+        return None
+    checks = pack.rules["checks"]
+    kind = checks["kinds"][spec["kind"]]
+    die: int = checks["die"]
+    margin_rule: int = checks["failure_margin"]
+
+    attacker = skill_total(pack, projection, intent.actor, kind["attack"])
+    attacker_total = attacker + bank.randint(1, die)
+
+    defender_id: str | None = None
+    defender = int(spec["difficulty"])
+    source = kind["defender_source"]
+    if source == "target":
+        defender_id = intent.target
+        # Loud over the silent nonsense roll (KI#88's second arm, closed
+        # iter-169): a target-sourced check on a targetless intent would
+        # roll against the base skill. The lint now requires the action
+        # to pin the target with a target-noun precondition (needs_target
+        # — the door's own predicate), so the door raises first on every
+        # committed path; the assert stays the runtime backstop.
+        assert defender_id is not None
+        defender = skill_total(pack, projection, defender_id, kind["defend"])
+    elif source == "best_in_location":
+        defender_id = _best_in_location(
+            pack, projection, intent.actor, kind["defend"]
+        )
+        if defender_id is None:
+            return None  # nobody to oppose — the attempt is unopposed
+        defender = skill_total(pack, projection, defender_id, kind["defend"])
+    elif source != "environment":
+        raise RunnerError(f"unknown defender_source {source!r}")
+
+    defender_total = defender + bank.randint(1, die)
+    method = intent.fields.get("method")
+    if method is not None:
+        if method not in checks["methods"]:
+            raise RunnerError(f"unknown method {method!r} (rules.checks.methods)")
+        defender_total += checks["methods"][method]["defender_modifier"]
+
+    passed = attacker_total > defender_total  # tie -> defender (pack rule)
+    margin = defender_total - attacker_total
+    return CheckResult(
+        passed=passed,
+        margin=margin,
+        attacker_total=attacker_total,
+        defender_total=defender_total,
+        defender_id=defender_id,
+        total_failure=not passed and margin >= margin_rule,
+    )
+
+
+# -- intent OCC (based_on_event_seq, phase0 §2) --------------------------------
+
+
+def occ_breaking_cause(
+    pack: Pack,
+    events: list[EventRecord],
+    based_on_event_seq: int,
+    intent: IntentData,
+    initial: Projection,
+    world: "WorldModel | None" = None,
+    *,
+    start_state: "Mapping[str, Mapping[str, Any]] | None" = None,
+    changes: "Mapping[tuple[str, str], Sequence[int]] | None" = None,
+    stats: "MutableMapping[str, int] | None" = None,
+) -> str | None:
+    """The event id whose application first broke a precondition after the
+    intent was proposed; None when nothing broke it. One forward fold from
+    the proposal point (test-path machinery reused for attribution only):
+    `fold` is a strict left fold over `apply_event`, so folding the prefix
+    once and then applying one event at a time visits exactly the states
+    the per-index refold used to rebuild — at O(events), not O(w·events).
+
+    `start_state` (scale-1-impl, P1a — the wall fix's first member):
+    the caller's ENQUEUE-TIME snapshot of the projection — by
+    construction exactly `fold(events[:based_on_event_seq], initial)`
+    (the live projection at the moment the intent's
+    `based_on_event_seq` was stamped, the T2 law's own equality), so
+    the walk applies only the WINDOW [seq, end) — the prefix refold
+    was the measured quadratic member (occ_refold, 27–29% of the
+    100y profiled wall, per-call ×9.5–9.7 growth, iter-327/328).
+    None (the default) keeps the fold-from-initial form — the resume
+    path and external callers stay exact (a snapshot whose seq is
+    NOT the stamping moment would SKIP the [seq, snapshot) events,
+    so the loop only ever passes one taken at the stamp itself).
+    The snapshot is copied here: the walk mutates its state, and a
+    public function never mutates a caller's structure (the fold
+    path's own discipline).
+
+    `changes` (occ-1 — the whole-arm window fix, B7's letter): the
+    caller's WRITE INDEX, `(entity, prop) -> the ascending event
+    indices of every committed write to that pair` (the Simulator's
+    `_occ_index`, maintained at `_commit`, rebuilt at resume — the
+    `_last_change` pattern's full-history form). Given, the walk
+    visits ONLY the window events that write a pair the intent's
+    attributable tests can read (`precondition_read_pairs` — the
+    twin table): an event writing none of those pairs cannot flip a
+    verdict, so the first breaking event is necessarily among the
+    writers (the index law; the A/B equivalence law in
+    tests/test_occidx.py is the falsifier — every index answer equals
+    the full walk's on every call). The visited state carries the
+    SNAPSHOT's values outside the read set — by design: no test
+    reads them, and writes there are skipped — so the from_-check is
+    kept only ON the read pairs (the index law's own net: on a
+    complete index it can never fire; a firing means the index and
+    the log disagree). The one shortcut: when the verdict ALREADY
+    fails at the walk's starting state and the first window event is
+    not itself a writer, the full walk answers events[seq].id —
+    the verdict is constant up to the first writer, so the shortcut
+    is exact. None (the default) keeps the exact full walk — the
+    external callers and the resume path.
+
+    `stats` (occ-1): the caller's observation surface — the walk
+    counts itself into the mutable mapping (`calls`, `window` — the
+    full walk's cost basis, `inspected` — the events actually
+    applied, `attributed`). The counting changes nothing: the walk
+    stays a pure function of its declared inputs."""
+    action = pack.action(intent.kind)
+    preconditions = requires_for(action, intent) if action else []
+    # Window preconditions (the tick-windowed family: the leverage
+    # liveness window, the echo decay) never attribute a breaking
+    # EVENT: their failure is tick-driven (the window closes by time,
+    # not by an application). They are excluded from the attribution
+    # fold — a window-close rejection chains to the last committed
+    # event (the caller's fallback), never falsely to the first event
+    # after the proposal (iter-45, social-1b; generalized to the family
+    # at iter-46, social-2).
+    attributable = [
+        cond for cond in preconditions if cond.get("test") not in WINDOWED_TESTS
+    ]
+    if not attributable:
+        # the walk's own vacuity: first_failing over an empty list is
+        # None at every step, so the full walk returns None — paying
+        # neither the prefix fold nor the snapshot copy for it is
+        # EXACT (the empty-snapshot intents' `_snapshot_for` already
+        # answers None on this same condition; the two agree by
+        # construction, never by restatement — both read this test)
+        return None
+    if start_state is not None:
+        state: Projection = {
+            entity: dict(props) for entity, props in start_state.items()
+        }
+    else:
+        state = fold(events[:based_on_event_seq], initial)
+    if stats is not None:
+        window = max(0, len(events) - based_on_event_seq)
+        stats["calls"] = stats.get("calls", 0) + 1
+        stats["window"] = stats.get("window", 0) + window
+    if changes is not None:
+        return _indexed_window_walk(
+            pack, events, based_on_event_seq, intent, state, attributable,
+            changes, world, stats=stats,
+        )
+    inspected = 0
+    for idx in range(based_on_event_seq, len(events)):
+        apply_event(state, events[idx])
+        inspected += 1
+        if first_failing(
+            pack, state, intent, attributable, world=world
+        ) is not None:
+            if stats is not None:
+                stats["inspected"] = stats.get("inspected", 0) + inspected
+                stats["attributed"] = stats.get("attributed", 0) + 1
+            return events[idx].id
+    if stats is not None:
+        stats["inspected"] = stats.get("inspected", 0) + inspected
+    return None
+
+
+def _indexed_window_walk(
+    pack: Pack,
+    events: list[EventRecord],
+    based_on_event_seq: int,
+    intent: IntentData,
+    state: Projection,
+    attributable: list[Mapping[str, Any]],
+    changes: "Mapping[tuple[str, str], Sequence[int]]",
+    world: "WorldModel | None",
+    *,
+    stats: "MutableMapping[str, int] | None" = None,
+) -> str | None:
+    """The occ-1 walk over the write index's candidates only — the exact
+    twin of the full window walk (`occ_breaking_cause`'s loop form),
+    never a second semantics: same answer, by the index law, on every
+    input the A/B equivalence law measured. `state` is the walk's own
+    copy (the snapshot copy or the prefix fold — already private to
+    the caller's walk, mutated here)."""
+    read_pairs = precondition_read_pairs(pack, intent, attributable)
+    candidates = sorted(
+        {
+            index
+            for pair in read_pairs
+            for index in changes.get(pair, ())
+            if based_on_event_seq <= index < len(events)
+        }
+    )
+    # the verdict before the first writer equals the starting state's
+    # verdict: the full walk answers events[seq].id when that verdict
+    # already fails and the first window event is not itself a writer
+    # (a writer at seq can repair it — then the loop below evaluates
+    # exactly the states the full walk does)
+    if first_failing(pack, state, intent, attributable, world=world) is not None:
+        if not candidates or candidates[0] != based_on_event_seq:
+            if stats is not None:
+                stats["attributed"] = stats.get("attributed", 0) + (
+                    1 if based_on_event_seq < len(events) else 0
+                )
+            return (
+                events[based_on_event_seq].id
+                if based_on_event_seq < len(events)
+                else None
+            )
+    inspected = 0
+    for idx in candidates:
+        event = events[idx]
+        for change in event.state_changes:
+            props = state.get(change.entity)
+            if props is None:
+                raise ValueError(
+                    f"{event.id}: state_change touches unknown entity "
+                    f"{change.entity!r}"
+                )
+            if (change.entity, change.prop) in read_pairs and props.get(
+                change.prop
+            ) != change.from_:
+                raise ValueError(
+                    f"{event.id}: {change.entity}.{change.prop} expected from "
+                    f"{change.from_!r} but the attribution window holds "
+                    f"{props.get(change.prop)!r} — the read-set index and "
+                    "the log disagree (occ-1's net; the index law is "
+                    "broken, never the pack)"
+                )
+            props[change.prop] = change.to_
+        inspected += 1
+        if first_failing(
+            pack, state, intent, attributable, world=world
+        ) is not None:
+            if stats is not None:
+                stats["inspected"] = stats.get("inspected", 0) + inspected
+                stats["attributed"] = stats.get("attributed", 0) + 1
+            return event.id
+    if stats is not None:
+        stats["inspected"] = stats.get("inspected", 0) + inspected
+    return None
+
+
+# -- the pack importance rule (MVP_SCOPE §9 — never by feel) -------------------
+
+
+def pack_importance(
+    rules: Mapping[str, Any],
+    entities: set[str],
+    irreversible: int,
+    hooks: int,
+    event_type: str,
+) -> Importance:
+    """Score = entities-touched + irreversibility + far hooks + the
+    story-critical hook, mapped through the pack's thresholds. One rule
+    for action events and world events. The story-critical hook (tune-1,
+    D-045(b)/D-059): event types the pack lists in
+    `importance.story_critical_events` score their bonus — the rule, not
+    the tale gate, owns the signal/noise split (a gate raise alone would
+    cut story events the dumb rule scores low: a clean steal, a watch
+    change)."""
+    score_rule = rules["importance"]["score"]
+    thresholds = rules["importance"]["thresholds"]
+    score = 0
+    if len(entities) >= 2:
+        score += score_rule["entities_touched_at_least_2"]
+    score += score_rule["irreversible_state_change"] * (1 if irreversible else 0)
+    score += score_rule["per_far_hook"] * hooks
+    if event_type in rules["importance"].get("story_critical_events", ()):
+        score += score_rule["story_critical_event"]
+    if score >= thresholds["high"]:
+        return "high"
+    if score >= thresholds["medium"]:
+        return "medium"
+    return "low"
+
+
+# -- knowledge-record resolution (audiences + slot templates) ------------------
+
+AUDIENCES: Final = (
+    "actor",
+    "target",
+    "same_location",
+    "adjacent_locations",
+    "destination_location",  # movement sightings at the arrival end (iter-3)
+)
+KNOWLEDGE_SLOTS: Final = (
+    "actor", "target", "location", "cause_actor",
+    "texture_slot",  # the promoted texture's slot (iter-11; INTENT_SCHEMA §10
+    # — additive slots are pack/code growth, no bump)
+    "present",  # one present target per expansion record (st-1; only legal
+    # with a `present_at` site — the pack lint pins the pairing)
+)
+# Where a per-present-target expansion may look (st-1, INTENT_SCHEMA §7):
+# the actor's own location (completion time, pre-change) or the action's
+# destination location. Pack data picks; core stays generic.
+PRESENT_SITES: Final = ("location", "destination_location")
+
+
+def knowers_at(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], location: str
+) -> list[str]:
+    """Knowledge-holders at a location: npcs and ambient groups (pack order);
+    items never know."""
+    knowers: list[str] = []
+    for group in ("npcs", "ambient_entities"):
+        for record in pack.entities[group]:
+            if projection[record["id"]]["position"] == location:
+                knowers.append(record["id"])
+    return knowers
+
+
+def _expansion_site(
+    record: Mapping[str, Any], pack: Pack, ctx: Mapping[str, Any]
+) -> str:
+    """The location a per-present-target expansion iterates (st-1,
+    INTENT_SCHEMA §7): `destination_location` resolves against the
+    action's target (location-kind, same law as the audience — the pack
+    lint pre-checks the precondition), `location` against the actor's
+    own position at completion time, pre-change."""
+    site = record["present_at"]
+    if site == "destination_location":
+        destination = ctx["target"]
+        if pack.kind_of(destination) != "location":
+            raise RunnerError(
+                f"knowledge expansion 'present_at=destination_location' resolves "
+                f"against a location target, got {destination!r}"
+            )
+        return str(destination)
+    return str(ctx["location"])
+
+
+# depth-1 (D-105): the ambient channels an acquisition condition may
+# degrade — told/inferred have no acquisition surface (transfer rides the
+# fidelity chain, inference is internal; both stay single-owner).
+ACQUISITION_CHANNELS: Final = ("saw", "heard")
+
+
+def acquisition_fidelity(
+    pack: Pack, projection: Mapping[str, Mapping[str, Any]], channel: str, site: str,
+    tick: int, fidelity: Fidelity,
+) -> Fidelity:
+    """Birth fidelity after the pack's acquisition conditions (depth-1,
+    D-105; `phases.md` §5 the design owner — the D-096 gap: continuous
+    acquisition CONDITIONS feeding birth fidelity, pack data in
+    rules.json, mechanics here in the perception path, never a second
+    knowledge store). Each armed condition that fails at the EVENT SITE
+    steps the record down the fidelity chain, floor-sticking — the
+    documented twin of `decay_fidelity`'s walk (D-007's ladder; inlined
+    because intent.py sits below knowledge.py in the import graph — the
+    transfer law stays the ladder's single owner). Conditions read the
+    EMISSION side (the site's smoke, the site's darkness); the observer's
+    own state rides the perception checks' status modifiers — the
+    existing law, single owner. An absent or empty block answers the
+    base fidelity: v0.1 bytes, the pack's own declaration is the arming
+    (the 68a pattern; the reader of the block is the pack lint,
+    `core/pack.py::_acquisition`)."""
+    config = pack.rules.get("position_visibility", {}).get("acquisition")
+    if not config or channel not in ACQUISITION_CHANNELS:
+        return fidelity
+    steps = 0
+    for condition in config.get(channel, ()):  # pack order — deterministic
+        site_state = projection.get(site, {})
+        if "when_flag" in condition:
+            if site_state.get(condition["when_flag"]) == condition["is"]:
+                steps += int(condition["steps"])
+        else:  # phase_in — the lint pins exactly one kind per condition
+            phase = phase_of_tick(pack.rules["time"], tick)
+            if phase in condition["phase_in"]:
+                exempt = condition.get("unless_flag")
+                if exempt is None or not site_state.get(exempt):
+                    steps += int(condition["steps"])
+    if not steps:
+        return fidelity
+    chain: Sequence[Fidelity] = pack.rules["knowledge"]["fidelity_chain"]
+    return chain[min(chain.index(fidelity) + steps, len(chain) - 1)]
+
+
+def resolve_knowledge(
+    records: list[Mapping[str, Any]],
+    pack: Pack,
+    projection: Mapping[str, Mapping[str, Any]],
+    ctx: Mapping[str, Any],
+    tick: int,
+) -> tuple[KnowledgeRecord, ...]:
+    """Turn pack knowledge templates into records: audience placeholders
+    resolve to entity ids, `knows` slots fill from `ctx` (a missing slot
+    fails loudly — the pack lint pre-checks the closed slot set). A
+    template with a `present_at` site takes the per-present-target
+    expansion branch instead: the audience stays `actor`, and the
+    template emits ONE record per entity present at the site (pack
+    declaration order, the actor itself excluded) — the arrival
+    snapshot's write side (blueprint §5; st-1)."""
+    resolved: list[KnowledgeRecord] = []
+    for record in records:
+        if "present_at" in record:
+            site = _expansion_site(record, pack, ctx)
+            fidelity = acquisition_fidelity(
+                pack, projection, record["channel"], site, tick,
+                record["fidelity"],
+            )
+            template_ctx = dict(ctx)
+            for target_id in present_in_order(pack, projection, site):
+                if target_id == ctx["actor"]:
+                    continue  # the arriver knows their own presence
+                template_ctx["present"] = target_id
+                resolved.append(
+                    KnowledgeRecord(
+                        who=ctx["actor"],
+                        channel=record["channel"],
+                        fidelity=fidelity,
+                        knows=record["knows"].format_map(template_ctx),
+                        at=tick,
+                    )
+                )
+            continue
+        audience = record["who"]
+        if audience == "actor":
+            who_ids = [ctx["actor"]]
+        elif audience == "target":
+            who_ids = [ctx["target"]]
+        elif audience == "same_location":
+            who_ids = knowers_at(pack, projection, ctx["location"])
+        elif audience == "adjacent_locations":
+            who_ids = []
+            location_record = pack.entity(ctx["location"])
+            assert location_record is not None  # a linted location id (the site noun)
+            exits = location_record["exits"]
+            for adjacent in exits:  # pack exit order — deterministic
+                who_ids.extend(knowers_at(pack, projection, adjacent))
+        elif audience == "destination_location":
+            destination = ctx["target"]
+            if pack.kind_of(destination) != "location":
+                raise RunnerError(
+                    f"knowledge audience 'destination_location' resolves against a "
+                    f"location target, got {destination!r}"
+                )
+            who_ids = knowers_at(pack, projection, destination)
+        else:
+            raise RunnerError(f"unknown knowledge audience {audience!r}")
+        # depth-1: the event site the conditions read — the origin for
+        # actor/target/same/adjacent audiences (the emission side), the
+        # destination for destination_location (same resolution the
+        # audience itself just passed).
+        site = (
+            str(ctx["target"])
+            if audience == "destination_location"
+            else str(ctx["location"])
+        )
+        fidelity = acquisition_fidelity(
+            pack, projection, record["channel"], site, tick,
+            record["fidelity"],
+        )
+        knows = record["knows"].format_map(ctx)
+        except_ids = {
+            ctx[token]
+            for token in record.get("except", ())  # actor | target | cause_actor
+            if ctx.get(token) is not None
+        }
+        for who in who_ids:
+            if who in except_ids:
+                continue
+            resolved.append(
+                KnowledgeRecord(
+                    who=who,
+                    channel=record["channel"],
+                    fidelity=fidelity,
+                    knows=knows,
+                    at=tick,
+                )
+            )
+    return tuple(resolved)

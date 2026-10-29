@@ -1,0 +1,77 @@
+{
+  "operation_id": "8ca2f325949fc7eca665807a5d54d3a1cb2e80675aad931676f9c025ac2e086a",
+  "result": {
+    "artifact": {
+      "artifact_schema_identity": "canon_execution_artifact@0.1",
+      "backend_identity": null,
+      "capability_snapshot": null,
+      "diagnostics": [
+        "the work raised EngineError: [unavailable] http://127.0.0.1:8080 unreachable after 5 tries: <urlopen error [WinError 10061] \u041f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435 \u043d\u0435 \u0443\u0441\u0442\u0430\u043d\u043e\u0432\u043b\u0435\u043d\u043e, \u0442.\u043a. \u043a\u043e\u043d\u0435\u0447\u043d\u044b\u0439 \u043a\u043e\u043c\u043f\u044c\u044e\u0442\u0435\u0440 \u043e\u0442\u0432\u0435\u0440\u0433 \u0437\u0430\u043f\u0440\u043e\u0441 \u043d\u0430 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u0435>"
+      ],
+      "execution_id": "4efb084e8c522b31e5ee5f76727203c8bfa1435956fcc20504f84fcdd646b7aa",
+      "frozen_inputs": [
+        [
+          "deadline_seconds",
+          "120.0"
+        ],
+        [
+          "max_tokens",
+          "512"
+        ],
+        [
+          "messages",
+          "[{\"content\":\"What is the tavern's mood tonight?\",\"role\":\"user\"}]"
+        ],
+        [
+          "temperature",
+          "0.8"
+        ]
+      ],
+      "inference_config": null,
+      "model_identity": null,
+      "operation_id": "af85d1148f20e8e9715e9ecaac70f7770ec429fe6a5033adb68b5bf4562d810e",
+      "pack_schema_identity": null,
+      "prompt_identity": null,
+      "protocol_identity": null,
+      "replay_of": null,
+      "reproducibility_scope": "SEMANTIC",
+      "request_digest": "e4937d7b075230492cc4b608b88ae93c8017c0bfe687dfaf9e9aee01c9887610",
+      "runtime_identity": null,
+      "seed": null,
+      "status": "FAILED",
+      "tool_authority_state": null
+    },
+    "execution_id": "4efb084e8c522b31e5ee5f76727203c8bfa1435956fcc20504f84fcdd646b7aa",
+    "frozen_inputs": [
+      [
+        "deadline_seconds",
+        "120.0"
+      ],
+      [
+        "max_tokens",
+        "512"
+      ],
+      [
+        "messages",
+        "[{\"content\":\"What is the tavern's mood tonight?\",\"role\":\"user\"}]"
+      ],
+      [
+        "temperature",
+        "0.8"
+      ]
+    ],
+    "operation_id": "af85d1148f20e8e9715e9ecaac70f7770ec429fe6a5033adb68b5bf4562d810e",
+    "replay_of": null,
+    "replays": [
+      "43c7149402cc24a7a8056bb6a69009d9dca7ec1673547af833fa592dead46617"
+    ],
+    "request_digest": "e4937d7b075230492cc4b608b88ae93c8017c0bfe687dfaf9e9aee01c9887610",
+    "state": "FAILED",
+    "terminal": true,
+    "work": "chat.completion"
+  },
+  "revision": 0,
+  "sequence": 3,
+  "session_id": "5377eb64934d5ac772f7b1d658681745f8bef8ab5d65f819fcbe72dcfdab905a",
+  "status": "OK"
+}

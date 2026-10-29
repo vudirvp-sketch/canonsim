@@ -1,0 +1,456 @@
+"""The cross-domain shared lints (the D-175 split): the action
+knowledge-entry walker (read by the actions and the transitions lints)
+and the echo/trait cond linters (read by the actions, urgencies and
+factions lints) — the only _Lint methods with callers in more than one
+family, hoisted here as plain functions over the loaded pack data."""
+
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, Final
+
+from core.intent import (
+    ACCOUNT_CEILING_TEST,
+    ACCOUNT_TEST,
+    AUDIENCES,
+    KNOWLEDGE_SLOTS,
+    PRESENT_SITES,
+)
+from core.packlint.helpers import _EXCEPT_TOKENS, _SLOT, _is_int, _require
+
+
+def knowledge_entry(
+    data: dict[str, Mapping[str, Any]], action_intent: str, record: Mapping[str, Any],
+    requires: tuple[Mapping[str, Any], ...] = (),
+) -> None:
+    knowledge = data["rules.json"]["knowledge"]
+    where = f"action {action_intent!r} knowledge"
+    _require(record["who"] in AUDIENCES, f"{where}: unknown audience {record['who']!r}")
+    _require(
+        record["channel"] in knowledge["channels"],
+        f"{where}: unknown channel {record['channel']!r}",
+    )
+    _require(
+        record["fidelity"] in knowledge["fidelity_chain"],
+        f"{where}: unknown fidelity {record['fidelity']!r}",
+    )
+    if record["who"] == "destination_location":
+        # resolves against the target location: the action must pin the
+        # target's kind to location (movement sighting audiences)
+        _require(
+            any(
+                cond.get("noun") == "target"
+                and cond.get("test") == "kind"
+                and cond.get("is") == "location"
+                for cond in requires
+            ),
+            f"{where}: audience 'destination_location' requires a "
+            f"target-kind-location precondition",
+        )
+    if "present_at" in record:
+        # The per-present-target expansion (st-1, INTENT_SCHEMA §7): the
+        # audience stays `actor` (KI#43's law — this is a `knows`
+        # expansion, NOT an audience kind), the site is a closed set,
+        # and the {present} slot must actually be used — a site without
+        # the slot would emit N identical records.
+        _require(
+            record["who"] == "actor",
+            f"{where}: a 'present_at' expansion requires who == 'actor' "
+            f"(the audience stays actor — INTENT_SCHEMA §7)",
+        )
+        _require(
+            record["present_at"] in PRESENT_SITES,
+            f"{where}: unknown present_at site {record['present_at']!r} "
+            f"(must be one of {list(PRESENT_SITES)})",
+        )
+        _require(
+            not record.get("except"),
+            f"{where}: 'except' has no meaning on a 'present_at' "
+            f"expansion (the audience is the actor alone)",
+        )
+        _require(
+            "present" in _SLOT.findall(record["knows"]),
+            f"{where}: 'present_at' declared but the knows template "
+            f"{record['knows']!r} lacks the {{present}} slot",
+        )
+        if record["present_at"] == "destination_location":
+            _require(
+                any(
+                    cond.get("noun") == "target"
+                    and cond.get("test") == "kind"
+                    and cond.get("is") == "location"
+                    for cond in requires
+                ),
+                f"{where}: 'present_at=destination_location' requires a "
+                f"target-kind-location precondition",
+            )
+    elif "present" in _SLOT.findall(record["knows"]):
+        # the mirror: the {present} slot has no semantics without a
+        # site — the closed-slot lint alone would pass it
+        _require(
+            False,
+            f"{where}: the {{present}} slot requires a 'present_at' "
+            f"expansion site on the record",
+        )
+    for token in record.get("except", ()):
+        _require(
+            token in _EXCEPT_TOKENS,
+            f"{where}: unknown except token {token!r}",
+        )
+    for slot in _SLOT.findall(record["knows"]):
+        _require(
+            slot in KNOWLEDGE_SLOTS,
+            f"{where}: unknown slot {{{slot}}} in {record['knows']!r}",
+        )
+
+
+def _knows_templates(data: Mapping[str, Mapping[str, Any]]) -> list[str]:
+    """Every `knows` template the pack declares across the birth sites:
+    action knowledge templates (all branches + the texture path),
+    expectation rules and duties, and transition-layer knowledge entries.
+    The reaction systems (telling, crime) only TRANSFER existing tokens, so
+    this IS the birth vocabulary."""
+    templates: list[str] = []
+
+    def _take(entry: Any) -> None:
+        knows = entry.get("knows") if isinstance(entry, Mapping) else None
+        if isinstance(knows, str):
+            templates.append(knows)
+
+    for action in data["actions.json"]["actions"]:
+        knowledge = action.get("knowledge", {})
+        if isinstance(knowledge, Mapping):
+            for branch in knowledge.values():
+                if isinstance(branch, list):
+                    for entry in branch:
+                        _take(entry)
+        texture = action.get("texture", {})
+        if isinstance(texture, Mapping):
+            for branch in texture.get("knowledge", {}).values():
+                if isinstance(branch, list):
+                    for entry in branch:
+                        _take(entry)
+    rules = data["rules.json"]
+    for rule in rules.get("expectations", {}).get("rules", ()):
+        if isinstance(rule, Mapping):
+            _take(rule)
+    # agenda-1 P3 (iter-423): the duty rows are a birth site too — a lapse
+    # mints the row's `knows` token, so the census reads them.
+    for rule in rules.get("expectations", {}).get("duties", ()):
+        if isinstance(rule, Mapping):
+            _take(rule)
+    for config in rules.get("transitions", {}).values():
+        if isinstance(config, Mapping):
+            for entry in config.get("knowledge", {}).values():
+                _take(entry)
+    return templates
+
+
+def literal_knows_tokens(data: Mapping[str, Mapping[str, Any]]) -> set[str]:
+    """Every knowledge token the pack can mint as a literal string: the
+    `knows` values declared without slot braces across the three birth
+    sites. Templated values (containing `{`) are excluded here — a
+    secret's subject is a fixed entity, and a templated token's subject
+    varies with the world (`mintable_knows_tokens` is the expansion twin
+    for a consumer whose law IS reachability)."""
+    return {
+        knows for knows in _knows_templates(data) if "{" not in knows
+    }
+
+
+#: The entity groups a knowledge slot can name (the declared id space).
+_SLOT_ENTITY_GROUPS: Final = (
+    "npcs", "locations", "items", "ambient_entities",
+)
+
+
+def _slot_values(
+    data: Mapping[str, Mapping[str, Any]],
+) -> dict[str, tuple[str, ...]]:
+    """The declared value set of each knowledge slot an expansion can fill:
+    the string ids of the pack's entities, by the slot's own semantics
+    (`core/intent.py::KNOWLEDGE_SLOTS`). A slot whose value set is not an
+    enumerable id space — `texture_slot`, a ledger slot name — is ABSENT:
+    a template carrying it is not expanded (the conservative half)."""
+    entities = data["entities.json"]
+    ids: dict[str, list[str]] = {}
+    for group in _SLOT_ENTITY_GROUPS:
+        for record in entities.get(group, ()):
+            if isinstance(record, Mapping) and isinstance(record.get("id"), str):
+                ids.setdefault(group, []).append(str(record["id"]))
+    everyone = tuple(
+        entity_id
+        for group in _SLOT_ENTITY_GROUPS
+        for entity_id in ids.get(group, ())
+    )
+    people = tuple(ids.get("npcs", ()))
+    return {
+        "actor": people,
+        "cause_actor": people,
+        "location": tuple(ids.get("locations", ())),
+        "target": everyone,
+        "present": everyone,
+    }
+
+
+def _expand_knows(
+    knows: str, values: Mapping[str, tuple[str, ...]]
+) -> set[str]:
+    """One templated `knows` value expanded over the declared slot values
+    (cartesian product, declaration order). A slot with no enumerable value
+    set expands to nothing — the token stays unproven, never invented."""
+    pieces = _SLOT.split(knows)  # text, slot, text, slot, ..., text
+    slots = pieces[1::2]
+    if not slots or any(slot not in values for slot in slots):
+        return set()
+    out = {pieces[0]}
+    for index, slot in enumerate(slots):
+        out = {
+            prefix + value for prefix in out for value in values[slot]
+        }
+        out = {prefix + pieces[2 + index * 2] for prefix in out}
+    return out
+
+
+def mintable_knows_tokens(data: Mapping[str, Mapping[str, Any]]) -> set[str]:
+    """Every knowledge token the pack can REALLY mint: the literal
+    vocabulary plus the templated `knows` values expanded over the declared
+    entity ids (iter-439, `drivegoals-1`). A traits family may name the
+    concrete tokens a slot template produces — `scene_{location}` mints one
+    token per declared location id — which the literal-only vocabulary
+    cannot see; the traits lint's law is REACHABILITY ("no token nobody can
+    ever learn"), and that law wants this set. The consumers whose law is a
+    FIXED subject (secrets, echo, the knowledge families) keep
+    `literal_knows_tokens`."""
+    values = _slot_values(data)
+    tokens = literal_knows_tokens(data)
+    for knows in _knows_templates(data):
+        if "{" in knows:
+            tokens |= _expand_knows(knows, values)
+    return tokens
+
+
+def lint_echo_cond(data: dict[str, Mapping[str, Any]], cond: Mapping[str, Any], where: str) -> None:
+    """The echo_at_least precondition contract, shared by the action
+    and urgency `requires` lints: `axis` must name a declared echo
+    axis and `value` must sit strictly above the scale floor and at
+    or below the ceiling — outside those bounds the gate can never
+    pass (score clamps into the scale) or never fails (always above
+    the floor), dead vocabulary either way, refused at load."""
+    echo_cfg = data["rules.json"].get("echo")
+    axes: set[str] = set()
+    if isinstance(echo_cfg, Mapping):
+        for spec in echo_cfg.get("tokens", {}).values():
+            if isinstance(spec, Mapping):
+                axes.update(spec.get("axes", ()))
+    _require(
+        bool(axes) and cond.get("axis") in axes,
+        f"{where}: precondition echo_at_least requires 'axis' naming "
+        "a declared echo axis (the fold scores only the declared "
+        "vocabulary — anything else is dead data)",
+    )
+    assert isinstance(echo_cfg, Mapping)  # non-empty axes imply the block
+    lo, hi = echo_cfg["scale"]
+    _require(
+        _is_int(cond.get("value")) and lo < cond["value"] <= hi,
+        f"{where}: precondition echo_at_least value must be an "
+        f"integer in {lo + 1}..{hi} (the score clamps to the scale — "
+        "outside it the gate is dead vocabulary)",
+    )
+
+
+def lint_trait_cond(
+    data: dict[str, Mapping[str, Any]], cond: Mapping[str, Any], where: str
+) -> None:
+    """The trait_held precondition contract (beliefwire, iter-67),
+    shared by the action and urgency `requires` lints: `token` must
+    name a declared belief in `rules.json::traits.beliefs` — the
+    fold only answers tokens the block declares, anything else is a
+    dead gate (the echo_at_least axis family: dead vocabulary is
+    refused at load, never silently always-False). A pack without a
+    traits block carrying a trait gate is the same refusal — the
+    gate names vocabulary nobody minted."""
+    beliefs = data["rules.json"].get("traits", {}).get("beliefs", {})
+    _require(
+        cond.get("token") in beliefs,
+        f"{where}: precondition trait_held requires 'token' naming a "
+        "declared traits.beliefs belief (the fold answers only the "
+        "declared vocabulary — anything else is dead data)",
+    )
+
+
+def _lint_account_cond(
+    data: dict[str, Mapping[str, Any]],
+    cond: Mapping[str, Any],
+    where: str,
+    *,
+    test: str,
+) -> None:
+    """The shared account-gate contract (res-1's floor, substrate-1 B's
+    ceiling — iter-410), used by the action, urgency, faction and
+    texture `requires` lints: `kind` must name a declared
+    economy.accounts kind and `value` a non-negative integer — the door
+    reads only declared stocks, a kind outside the vocabulary is a dead
+    gate (the echo_at_least axis family: dead vocabulary is refused at
+    load, never silently always-False). Both tests share ONE shape
+    because both read the SAME prop; only the comparison differs (the
+    door evaluator's own half: `_test_account_at_least` /
+    `_test_account_at_most`).
+
+    iter-273 (the §6.4 SALE synthesis): the HOLDER form — the gate may
+    name an EXPLICIT entity id (`holder`) instead of the noun, the
+    settle legs' from-side gates over existing holders the closed
+    noun grammar cannot reach. Exactly one of noun/holder per gate
+    (both is ambiguous, neither is no gate); the holder must name a
+    declared entity that DECLARES the kind's account (the flow-
+    endpoint cross-check's own law — a gate on an undeclared stock is
+    dead data)."""
+    economy = data["rules.json"].get("economy")
+    vocabulary = (
+        economy.get("accounts") if isinstance(economy, Mapping) else None
+    )
+    _require(
+        isinstance(vocabulary, list) and cond.get("kind") in vocabulary,
+        f"{where}: precondition {test} requires 'kind' naming "
+        "a declared economy.accounts kind (the door reads only the "
+        "declared stocks — anything else is dead data)",
+    )
+    _require(
+        _is_int(cond.get("value")) and cond["value"] >= 0,
+        f"{where}: precondition {test} value must be a "
+        "non-negative integer",
+    )
+    if "holder" not in cond:
+        return  # the noun form — the door's own resolution
+    _require(
+        "noun" not in cond,
+        f"{where}: precondition {test} carries both 'noun' and "
+        "'holder' — exactly one holder naming form per gate (the noun "
+        "resolves through the intent, the holder names the entity)",
+    )
+    declared: dict[str, set[str]] = {}
+    for category in (
+        "locations", "npcs", "ambient_entities", "items", "groups",
+    ):
+        for record in data["entities.json"].get(category, ()):
+            accounts = record.get("accounts")
+            if isinstance(accounts, Mapping):
+                declared[record["id"]] = set(accounts)
+    holder = cond["holder"]
+    holds = declared.get(holder)
+    _require(
+        holds is not None,
+        f"{where}: precondition {test} holder {holder!r} is "
+        "not a declared entity",
+    )
+    assert holds is not None  # the require above
+    _require(
+        cond["kind"] in holds,
+        f"{where}: precondition {test} holder {holder!r} "
+        f"declares no account of kind {cond['kind']!r} — a gate on an "
+        "undeclared stock is dead data (the flow-endpoint law's own "
+        "shape)",
+    )
+
+
+def lint_account_cond(
+    data: dict[str, Mapping[str, Any]], cond: Mapping[str, Any], where: str
+) -> None:
+    """The `account_at_least` precondition (res-1, the economy
+    substrate's FLOOR family) — the shared contract above."""
+    _lint_account_cond(data, cond, where, test=ACCOUNT_TEST)
+
+
+def lint_account_ceiling_cond(
+    data: dict[str, Mapping[str, Any]], cond: Mapping[str, Any], where: str
+) -> None:
+    """The `account_at_most` precondition (substrate-1 B, iter-410 — the
+    CEILING family): the same contract, compared downward. A ladder's
+    head now has an instrument instead of authorial discipline."""
+    _lint_account_cond(data, cond, where, test=ACCOUNT_CEILING_TEST)
+
+
+_DIRECT_INDEXED_KEYS: Final[Mapping[str, Mapping[str, str]]] = {
+    # condparams-1 (iter-434): the CLOSED table — every test whose
+    # evaluator subscribes a parameter is a row here. `noun` is the
+    # precondition grammar's subject: every test except the account pair
+    # (which has the holder form and its own lint) and `texture_noun`
+    # (the reference names its own scope) resolves `ctx.entity(cond["noun"])`,
+    # so a noun-less cond is a mid-run KeyError at the door, never dead
+    # data. The echo/trait rows carry only `noun`: their `axis`/`value`
+    # and `token` stay the echo/trait lints' own message (D-024 — one
+    # owner per parameter).
+    "kind": {"noun": "string", "is": "string"},
+    "same_location": {"noun": "string", "with": "string"},
+    "adjacent_to": {"noun": "string", "with": "string"},
+    "location_of": {"noun": "string", "with": "string"},
+    "flag": {"noun": "string", "flag": "string"},
+    "carries_flagged": {"noun": "string", "flag": "string"},
+    "flagged_accessible": {"noun": "string", "flag": "string"},
+    "field_in": {"noun": "string", "field": "string", "values": "list"},
+    "field_nonempty": {"noun": "string", "field": "string"},
+    "has_field": {"noun": "string", "field": "string"},
+    "uncarried": {"noun": "string"},
+    "carried_by": {"noun": "string", "who": "string"},
+    "leverage_over": {"noun": "string", "who": "string"},
+    "relation_at_least": {"noun": "string", "axis": "string", "value": "int"},
+    "spot_available": {"noun": "string", "layer": "string"},
+    "echo_at_least": {"noun": "string"},
+    "trait_held": {"noun": "string"},
+}
+"""The directly-indexed cond keys (KI#89, closed iter-169; completed
+iter-434 by `condparams-1`): the tests whose parameters the door
+subscripts (`cond[key]`, never `.get`) — the key is a lint-required
+parameter, presence plus the type the door consumes. The lint family's
+single table: the same cond shape is refused identically wherever a
+`requires` list is declared. `flag` joined with `turninglint-1`
+(iter-431); `condparams-1` (iter-434) closed the class: the earlier
+table held only the six record-reading tests, so a `same_location`
+without `with`, a `kind` without `is`, a `relation_at_least` without
+`axis`/`value` or any test without its `noun` loaded green and raised
+`KeyError` mid-run (measured on a copy of the committed pack, iter-433
+§8)."""
+
+
+def lint_direct_keys(cond: Mapping[str, Any], where: str) -> None:
+    """The directly-indexed key rows (KI#89, closed iter-169; completed by
+    `condparams-1`, iter-434), shared by the action, urgency, faction,
+    texture and psyche-turn `requires` lints (the lint_echo_cond
+    family): every record/parameter-reading test subscripts its named
+    parameters — a cond that loads without one KeyErrors mid-run at the
+    door or the beat gate (the iter-45 leverage `who` family: refuse at
+    load what would crash at completion). Non-emptiness rides the same
+    row: an empty flag or field name, or an empty `values` set, is dead
+    vocabulary (the gate can never pass — the echo bounds family's own
+    law); a non-int `value` is the int arm's shape error."""
+    test = cond.get("test")
+    if not isinstance(test, str):
+        return  # the caller's unknown-test row owns the refusal
+    spec = _DIRECT_INDEXED_KEYS.get(test)
+    if spec is None:
+        return
+    for key, kind in spec.items():
+        value = cond.get(key)
+        if kind == "string":
+            _require(
+                isinstance(value, str) and value,
+                f"{where}: precondition {test} requires '{key}' — a "
+                f"non-empty string the door indexes directly (a missing "
+                f"or empty key is a load-time refusal, never a mid-run "
+                f"KeyError)",
+            )
+        elif kind == "int":
+            _require(
+                _is_int(value),
+                f"{where}: precondition {test} requires '{key}' — an "
+                f"integer the door compares directly (a missing or "
+                f"non-integer key is a load-time refusal, never a mid-run "
+                f"KeyError)",
+            )
+        else:
+            _require(
+                isinstance(value, list) and value,
+                f"{where}: precondition {test} requires '{key}' — a "
+                f"non-empty list (an empty one is dead vocabulary: the "
+                f"gate can never pass)",
+            )
